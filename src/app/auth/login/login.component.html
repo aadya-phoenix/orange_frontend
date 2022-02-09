@@ -1,0 +1,82 @@
+<div class="main_body">
+  <div class="main_box" style="position: relative">
+    <div
+      class="text-center"
+      style="position: absolute; top: -63px; border: 0; right: 0; left: 0"
+    >
+      <img
+        src="https://www.orange.com/themes/theme_boosted/Master_Logo_RGB.png"
+        alt="logo"
+      />
+    </div>
+    <div class="form-field">
+      <h4 class="text-center mb-3" style="font-size: 40px">
+        <b>Login</b>
+      </h4>
+      <form [formGroup]="loginForm">
+        <div class="form-group">
+          <label style="font-weight: 600">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Username"
+            formControlName="email"
+          />
+
+          <div *ngIf="f.email?.touched && f.email?.invalid">
+            <p *ngIf="f.email.errors?.required" class="errMsg">
+              <small> *Username is required</small>
+            </p>
+
+            <p *ngIf="f.email.errors?.pattern" class="errMsg">
+              <small>Email address is invalid</small>
+            </p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label style="font-weight: 600">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="*********"
+            formControlName="password"
+          />
+          <div *ngIf="f.password?.touched && f.password?.invalid">
+            <p *ngIf="f.password.errors?.required" class="errMsg">
+              <small>*Password is required</small>
+            </p>
+            <p *ngIf="f.password.errors?.minlength" class="errMsg">
+              <small> Password should be minimum 8</small>
+            </p>
+            <p *ngIf="f.password.errors?.maxlength" class="errMsg">
+              <small> Password should not exceed 20</small>
+            </p>
+
+            <p
+              class="errMsg"
+              *ngIf="
+                !f.password.errors?.minlength &&
+                !f.password.errors?.maxlength &&
+                f.password.hasError('passwordStrength')
+              "
+            >
+              <small>{{ f.password.errors?.passwordStrength }}</small>
+            </p>
+          </div>
+        </div>
+        <a href="" class="forgot_css mb-2" style="font-weight: 600"
+          >Forgot Password?</a
+        >
+        <!-- </a> -->
+        <a
+          class="btn btn-default btn_login"
+          value="Click Me"
+          onclick="this.style.backgroundColor = '#ff7900'; this.style.color = '#FFF';"
+          (click)="login()"
+          >Login</a
+        >
+        <!-- </a> -->
+      </form>
+    </div>
+  </div>
+</div>
