@@ -6,23 +6,24 @@ import { PasswordStrengthValidator } from '../password-strength.validators';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
+  
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
   public registerForm!: FormGroup;
-  constructor(private authService:AuthenticationService) {}
+  constructor(private authService: AuthenticationService) {}
 
   ngOnInit(): void {
     const emailregexp = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
     const nameregexp = '^[a-zA-Z ]{2,10}$';
     this.registerForm = new FormGroup({
-      firstName: new FormControl('', [
+      first_name: new FormControl('', [
         Validators.required,
-        Validators.pattern(nameregexp)
+        Validators.pattern(nameregexp),
       ]),
-      lastName: new FormControl('', [
+      last_name: new FormControl('', [
         Validators.required,
-        Validators.pattern(nameregexp)
+        Validators.pattern(nameregexp),
       ]),
       email: new FormControl('', [
         Validators.required,
@@ -33,7 +34,7 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(20),
-        PasswordStrengthValidator
+        PasswordStrengthValidator,
       ]),
     });
   }
@@ -44,11 +45,14 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.registerForm.valid) {
-      this.authService.register(this.registerForm.value).subscribe((res:any)=>{
-        console.log(res)
-      },(err:any)=>{
-        console.log(err)
-      })
+      this.authService.register(this.registerForm.value).subscribe(
+        (res: any) => {
+          console.log(res);
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
       console.log(this.registerForm.value);
     } else {
       this.registerForm.markAllAsTouched();

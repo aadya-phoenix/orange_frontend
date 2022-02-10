@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  baseUrl:'https://api.com/'
+  baseUrl:'https://orangeapi.mindscroll.info/',
+  apiVersion:'v4',
+  clientId:'1',
+  clientSecret:'daBIcLqqwIOYrtdSJ6xT5i6omb75LSB5XCRhG9eG'
 };
 
 /*
