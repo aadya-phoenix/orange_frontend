@@ -40,7 +40,13 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.loginForm.value).subscribe(
         (res: any) => {
           console.log(res);
-          this.router.navigate(['/dashboard'])
+          if(res){
+            
+            localStorage.setItem('loginDetails',JSON.stringify(res))
+            this.router.navigate(['/dashboard']);
+
+          }
+          
         },
         (err: any) => {
           console.log(err);

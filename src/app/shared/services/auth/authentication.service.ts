@@ -13,7 +13,7 @@ export class AuthenticationService {
   constructor(private http: HttpService) {}
 
   register(data: any) {
-    const url = `${this.basePath}api/${this.apiVersion}/register`;
+    const url = `/api/${this.apiVersion}/register`;
     console.log(data);
     return this.http.post(url, data);
   }
@@ -25,13 +25,13 @@ export class AuthenticationService {
     };
     let grantObj = { grant_type: 'password' };
     let totalObj = { ...grantObj, ...clienSecret, ...data };
-    const url = `${this.basePath}oauth/token`;
+    const url = `/oauth/token`;
     console.log(data);
     return this.http.post(url, totalObj);
   }
 
   getLoginDetails() {
-    return { access_token: 'dfdfdff', token_type: 'Bearer' };
+    return JSON.parse(localStorage.getItem("loginDetails") || '{}')
   }
 
   logOut() {}

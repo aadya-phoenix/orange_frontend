@@ -1,6 +1,21 @@
   {
-    "/": {
-      "target": "https://orangeapi.mindscroll.info/",
-      "secure": true
+    "/api/*": {
+      "target": "https://orangeapi.mindscroll.info/api",
+      "secure": true,
+      "pathRewrite": {"^/api" : ""},
+      "changeOrigin":true,
+      "logLevel": "debug"
+    },
+      
+    "/oauth/*": {
+      "target": "https://orangeapi.mindscroll.info/oauth",
+      "secure": true,
+      "pathRewrite": {"^/oauth" : ""},
+      "changeOrigin":true,
+      "logLevel": "debug"
     }
+  
   }
+
+
+

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { PasswordStrengthValidator } from '../password-strength.validators';
 
@@ -11,7 +12,7 @@ import { PasswordStrengthValidator } from '../password-strength.validators';
 })
 export class RegisterComponent implements OnInit {
   public registerForm!: FormGroup;
-  constructor(private authService: AuthenticationService) {}
+  constructor(private authService: AuthenticationService,private router:Router) {}
 
   ngOnInit(): void {
     const emailregexp = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
@@ -48,6 +49,9 @@ export class RegisterComponent implements OnInit {
       this.authService.register(this.registerForm.value).subscribe(
         (res: any) => {
           console.log(res);
+          if(res){
+            this.router.navigate(['/login'])
+          }
         },
         (err: any) => {
           console.log(err);
