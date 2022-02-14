@@ -5,6 +5,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [InputfieldDirective, HeaderComponent, SidebarComponent],
@@ -15,7 +16,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SidebarComponent,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    //NgSelectModule
   ],
   providers: [],
 })

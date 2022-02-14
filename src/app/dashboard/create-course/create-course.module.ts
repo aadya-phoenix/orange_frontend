@@ -5,6 +5,7 @@ import { CreateNewCourseComponent } from './create-new-course/create-new-course.
 import { CreateCourseRoutingModule } from './create-course-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 
@@ -13,7 +14,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     CreateCourseRoutingModule,
-    SharedModule
+    SharedModule,
+    NgSelectModule
   ]
 })
 export class CreateCourseModule { }
