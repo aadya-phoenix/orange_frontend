@@ -1,815 +1,171 @@
-<aside id="left-panel" class="left-panel">
+<!-- <aside id="left-panel" class="left-panel">
   <app-sidebar></app-sidebar>
-</aside>
+</aside> -->
 <!-- <app-header></app-header> -->
 <div id="right-panel" class="right-panel">
   <!-- Header-->
   <app-header></app-header>
   <!-- /header -->
   <!-- Header-->
-  <div class="breadcrumbs">
-    <div class="col-sm-4">
-      <div class="page-header float-left">
-        <div class="page-title">
-          <h1>Create New Course</h1>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-8">
-      <div class="page-header float-right">
-        <div class="page-title">
-          <ol class="breadcrumb text-right">
-            <li><a [routerLink]="['/dashboard']">Dashboard</a></li>
-            <li>
-              <a [routerLink]="['/dashboard/cources']">Courses</a>
-            </li>
-            <li><a >Create New Course</a></li>
-          </ol>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="breadcrumbs " style="background-color: #fbfbf7;padding: 9px 9px 20px 9px;">
+    <div class="col-sm-1.5">
+        <div class="page-header float-left " style="background:transparent;">
+            <div class="page-title d-flex ">
+                <img src="../../../../assets/images/creatnew.png" style="width: 60px;">
 
-  <div class="content mt-3">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card">
-          <div class="card-header">
-            <strong class="card-title">New Request</strong>
-          </div>
-          <form [formGroup]="createCourceForm">
-            <div class="card-body card-block">
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Title<span style="color: red">*</span></label
-                    >
-                    <input
-                      type="text "
-                      id="company "
-                      placeholder="Enter Title"
-                      class="form-control"
-                      formControlName="title"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Training hours/duration (HH:MM)
-                      <span style="color: red">*</span></label
-                    ><input
-                      type="text "
-                      id="company "
-                      placeholder="EnterTraining hours/duration (HH:MM)
-                                        "
-                      formControlName="duration"
-                      class="form-control"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-              </div>
-              <!--row-->
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Select learning type<span style="color: red"
-                        >*</span
-                      ></label
-                    ><select
-                      name="select "
-                      id="select "
-                      class="form-control"
-                      formControlName="learning_type"
-                      (change)="selectLearning()"
-                    >
-                      <option value="0">Please select</option>
-                      <option value="ILT and vILT training">
-                        ILT and vILT training
-                      </option>
-                      <option value="Video-based training">
-                        Video-based training
-                      </option>
-                      <option value="Material-Based Training">
-                        Material-Based Training
-                      </option>
-                      <option value="Curriculum">
-                        Curriculum (Learning Path)
-                      </option>
-                      <option value="Web-based training">
-                        Web-based training (SCORM)
-                      </option>
-                      <option value="Playlist">Playlist</option>
-                    </select>
-                  </div>
-                </div>
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Description <span style="color: red">*</span></label
-                    ><input
-                      type="text "
-                      id="company "
-                      placeholder="Enter Description "
-                      class="form-control"
-                      formControlName="description"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-              </div>
-              <!--row-->
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label">
-                      Objectives<span style="color: red">*</span></label
-                    ><input
-                      type="text "
-                      id="company "
-                      placeholder="Enter Objectives "
-                      class="form-control"
-                      formControlName="objective"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label">
-                      Resources
-                      <!-- <span style="color: red">*</span> -->
-                    </label>
-                    <input
-                      type="file"
-                      id="company "
-                      placeholder="Enter Resources "
-                      class="form-control"
-                      formControlName="resource"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-              </div>
-              <!--row-->
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label">
-                      Manager Approval<span style="color: red">*</span></label
-                    ><select
-                      name="select "
-                      id="select "
-                      class="form-control"
-                      formControlName="manager_approval"
-                    >
-                      <option value="0">Please select</option>
-                      <option value="1 ">Option #1</option>
-                      <option value="2 ">Option #2</option>
-                      <option value="3 ">Option #3</option>
-                    </select>
-                  </div>
-                </div>
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Level<span style="color: red">*</span></label
-                    ><select
-                      name="select "
-                      id="select "
-                      class="form-control"
-                      formControlName="level"
-                    >
-                      <option value="0 ">Please select</option>
-                      <option value="1 ">Option #1</option>
-                      <option value="2 ">Option #2</option>
-                      <option value="3 ">Option #3</option>
-                    </select>
-                  </div>
-                </div>
-                <!--col-->
-              </div>
-              <!--row-->
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Does this course integrate digital ?<span
-                        style="color: red"
-                        >*</span
-                      ></label
-                    ><select
-                      name="select "
-                      id="select "
-                      class="form-control"
-                      formControlName="digital"
-                    >
-                      <option value="0 ">Please select</option>
-                      <option value="1 ">Option #1</option>
-                      <option value="2 ">Option #2</option>
-                      <option value="3 ">Option #3</option>
-                    </select>
-                  </div>
-                </div>
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Certification<span style="color: red">*</span></label
-                    ><select
-                      name="select "
-                      id="select "
-                      class="form-control"
-                      formControlName="certification"
-                    >
-                      <option value="0 ">Please select</option>
-                      <option value="1 ">Option #1</option>
-                      <option value="2 ">Option #2</option>
-                      <option value="3 ">Option #3</option>
-                    </select>
-                  </div>
-                </div>
-                <!--col-->
-              </div>
-              <!--row-->
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Certification expiry type<span style="color: red"
-                        >*</span
-                      ></label
-                    ><select
-                      name="select "
-                      id="select "
-                      class="form-control"
-                      formControlName="certification_expiry_type"
-                    >
-                      <option value="0 ">Please select</option>
-                      <option value="1 ">Option #1</option>
-                      <option value="2 ">Option #2</option>
-                      <option value="3 ">Option #3</option>
-                    </select>
-                  </div>
-                </div>
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Validity period<span style="color: red">*</span></label
-                    ><select
-                      name="select "
-                      id="select "
-                      class="form-control"
-                      formControlName="validity_period"
-                    >
-                      <option
-                        value="0
-                                        "
-                      >
-                        Please select
-                      </option>
-                      <option value="1 ">Option #1</option>
-                      <option value="2 ">Option #2</option>
-                      <option value="3 ">Option #3</option>
-                    </select>
-                  </div>
-                </div>
-                <!--col-->
-              </div>
-              <!--row-->
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Purchase order required?
-                      <!-- <span style="color: red"
-                        >*</span> -->
-                  </label
-                    ><select
-                      name="select "
-                      id="select "
-                      class="form-control"
-                      formControlName="purchase_order"
-                    >
-                      <option value="0 ">Please select</option>
-                      <option value="1 ">Option #1</option>
-                      <option value="2 ">Option #2</option>
-                      <option value="3 ">Option #3</option>
-                    </select>
-                  </div>
-                </div>
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Subject<span style="color: red">*</span></label
-                    ><select
-                      name="select "
-                      id="select "
-                      class="form-control"
-                      formControlName="subject"
-                    >
-                      <option
-                        value="0
-                                        "
-                      >
-                        Please select
-                      </option>
-                      <option value="1">
-                        Content and Multimedia - Content
-                      </option>
-                      <option value="2">
-                        Content and Multimedia - Multimedia
-                      </option>
-                      <option value="3">
-                        Customers and Marketing - Consulting
-                      </option>
-                      <option value="4">
-                        Customers and Marketing - Customer service & sales BtoB
-                      </option>
-                      <option value="5">
-                        Customers and Marketing - Sales and Customer Relations
-                        B2C
-                      </option>
-                      <option value="6">
-                        Customers and Marketing - Customer Service and Wholesale
-                        Sale
-                      </option>
-                      <option value="7">
-                        Customers and Marketing - Marketing
-                      </option>
-                      <option value="8">
-                        Customers and Marketing - Presales B2B
-                      </option>
-                      <option value="9">
-                        Digital Learning Group - New way of working at Orange
-                      </option>
-                      <option value="10">
-                        Digital Learning Group - Orange corporate culture
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <!--col-->
-              </div>
-              <!--row-->
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >External vendor name
-                      <span style="color: red">*</span></label
-                    ><input
-                      type="text "
-                      id="company "
-                      placeholder="Enter External vendor name "
-                      class="form-control"
-                      formControlName="external_vendor"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Email of Training Contact
-                      <span style="color: red">*</span></label
-                    ><input
-                      type="text "
-                      id="company "
-                      placeholder="Enter Email of Training Contact "
-                      class="form-control"
-                      formControlName="email_training_contact"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-              </div>
-              <!-- row -->
 
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Additional Comment(s)
-                      <!-- <span style="color: red">*</span> -->
-                      </label
-                    ><input
-                      type="text "
-                      id="company "
-                      placeholder="Additional comments "
-                      class="form-control"
-                      formControlName="external_vendor"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >For whoom? <span style="color: red">*</span></label
-                    ><input
-                      type="text "
-                      id="company "
-                      placeholder="For whoom? "
-                      class="form-control"
-                      formControlName="email_training_contact"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-              </div>
 
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Prerequisite 
-                      <!-- <span style="color: red">*</span> -->
-                      </label
-                    ><input
-                      type="text "
-                      id="company "
-                      placeholder="Prerequisite "
-                      class="form-control"
-                      formControlName="external_vendor"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Email of Content Owner
-                      <span style="color: red">*</span></label
-                    ><input
-                      type="text "
-                      id="company "
-                      placeholder="Email of Content Owner"
-                      class="form-control"
-                      formControlName="email_training_contact"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-              </div>
-
-              <!-- row -->
-              <!--row-->
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Delivery Method<span style="color: red">*</span></label
-                    ><select
-                      name="select "
-                      id="select "
-                      class="form-control"
-                      formControlName="delivery_method"
-                    >
-                      <option value="0 ">Please select</option>
-                      <option value="1 ">Option #1</option>
-                      <option value="2 ">Option #2</option>
-                      <option value="3 ">Option #3</option>
-                    </select>
-                  </div>
-                </div>
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Keywords<span style="color: red">* </span></label
-                    ><input
-                      type="text "
-                      id="company "
-                      placeholder="Enter Keywords "
-                      class="form-control"
-                      formControlName="keyword"
-                    />
-                  </div>
-                </div>
-              </div>
-              <!--row-->
-              <div class="row">
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Cost of Training<span style="color: red">* </span></label
-                    ><input
-                      type="text "
-                      id="company "
-                      placeholder="Enter Cost of Training "
-                      class="form-control"
-                      formControlName="cost_of_training"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Learn more
-                      <!-- <span style="color: red">* </span> -->
-                      </label
-                    ><input
-                      type="text "
-                      id="company "
-                      placeholder="Learn more "
-                      class="form-control"
-                      formControlName="learn_more"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-              </div>
-              <!--row-->
-
-              <div class="row">
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Free field content
-                      <!-- <span style="color: red"
-                        >*
-                      </span> -->
-                      </label
-                    ><input
-                      type="text "
-                      id="company "
-                      placeholder="Free field content "
-                      class="form-control"
-                      formControlName="cost_of_training"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Provide the link to your video
-                      <!-- <span style="color: red"
-                        >*
-                      </span> -->
-                      </label
-                    ><input
-                      type="text "
-                      id="company "
-                      placeholder="Provide the link to your video "
-                      class="form-control"
-                      formControlName="learn_more"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-              </div>
-
-              <!--row-->
-
-              <div class="row">
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Date of first session<span style="color: red"
-                        >*
-                      </span></label
-                    ><input
-                      type="date"
-                      id="company "
-                      placeholder="Date of first session "
-                      class="form-control"
-                      formControlName="cost_of_training"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Expiry Date
-                      <span style="color: red">* </span>
-                      </label
-                    ><input
-                      type="date"
-                      id="company "
-                      placeholder="Expiry Date "
-                      class="form-control"
-                      formControlName="learn_more"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-              </div>
-
-              <!--row-->
-
-              <div class="row">
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Learner Guidelines
-                      <!-- <span style="color: red"
-                        >*
-                      </span> -->
-                      </label
-                    ><input
-                      type="text "
-                      id="company "
-                      placeholder="Learner Guidelines "
-                      class="form-control"
-                      formControlName="cost_of_training"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Title of the additional free text field
-                      <!-- <span
-                        style="color: red"
-                        >*
-                      </span> -->
-                      </label
-                    ><input
-                      type="text "
-                      id="company "
-                      placeholder="Title of the additional free text field "
-                      class="form-control"
-                      formControlName="learn_more"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-              </div>
-
-              <!--row-->
-
-              <div class="row">
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Expiry Date
-                      <!-- <span style="color: red">* </span> -->
-                      </label
-                    ><input
-                      type="date"
-                      id="company "
-                      placeholder="Learner Guidelines "
-                      class="form-control"
-                      formControlName="cost_of_training"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Entity/Business area<span style="color: red"
-                        >*
-                      </span></label
-                    >
-
-                    <select
-                      name="select "
-                      id="select "
-                      class="form-control"
-                      formControlName="manager_approval"
-                    >
-                      <option value="0">Please select</option>
-                      <option value="1 ">Option #1</option>
-                      <option value="2 ">Option #2</option>
-                      <option value="3 ">Option #3</option>
-                    </select>
-
-                    <!-- <input
-                            type="text "
-                            id="company "
-                            placeholder="Title of the additional free text field "
-                            class="form-control"
-                            formControlName="learn_more"
-                          /> -->
-                    <!-- <select class="form-control">
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                          </select> -->
-                  </div>
-                </div>
-                <!--col-->
-              </div>
-
-              <!--row-->
-
-              <div class="row">
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Email of the preferred Instructor<span style="color: red"
-                        >*
-                      </span></label
-                    >
-                    <!-- <input
-                            type="text "
-                            id="company "
-                            placeholder="Email of the preferred Instructor "
-                            class="form-control"
-                            formControlName="cost_of_training"
-                          /> -->
-                    <select
-                      name="select "
-                      id="select "
-                      class="form-control"
-                      formControlName="manager_approval"
-                    >
-                      <option value="0">Please select</option>
-                      <option value="1 ">Option #1</option>
-                      <option value="2 ">Option #2</option>
-                      <option value="3 ">Option #3</option>
-                    </select>
-                  </div>
-                </div>
-                <!--col-->
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >Training provided by<span style="color: red"
-                        >*
-                      </span></label
-                    >
-                    <!-- <input
-                            type="text "
-                            id="company "
-                            placeholder="Training provided by "
-                            class="form-control"
-                            formControlName="learn_more"
-                          /> -->
-                    <select
-                      name="select "
-                      id="select "
-                      class="form-control"
-                      formControlName="manager_approval"
-                    >
-                      <option value="0">Please select</option>
-                      <option value="1 ">Option #1</option>
-                      <option value="2 ">Option #2</option>
-                      <option value="3 ">Option #3</option>
-                    </select>
-                  </div>
-                </div>
-                <!--col-->
-              </div>
-
-              <!--row-->
-
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="company " class="form-control-label"
-                      >URL
-                      <!-- <span style="color: red">*</span> -->
-                      </label
-                    ><input
-                      type="text "
-                      id="company "
-                      placeholder="Enter URL "
-                      class="form-control"
-                      formControlName="url"
-                    />
-                  </div>
-                </div>
-                <!--col-->
-              </div>
-              <!--row-->
             </div>
-          </form>
-
-          <div class="card-footer">
-            <button
-              type="submit"
-              class="btn btn-primary btn-sm"
-              (click)="createNewCource()"
-            >
-              <i class="fa fa-dot-circle-o"></i> Submit
-            </button>
-            <button type="reset" class="btn btn-danger btn-sm">
-              <i class="fa fa-ban"></i> Cancel
-            </button>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
+    <div class="col-sm-6" style="margin-left: -30px;">
+        <div class="page-header float-left " style="background:transparent;">
+            <div class="page-title ">
+                <div class="d-flex flex-column">
+                    <span style="font-size: 20px;">Create new course
+                    </span>
+                    <span style="color: #aba3a3;font-size: 13px;">People Development & Learning Strives on Providing you with the best customer
+                    service we can drive</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-5 float-right">
+        <div class="page-header float-right " style="background:transparent;">
+            <div class="page-title d-flex ">
+                <ol class="breadcrumb text-right " style="background:transparent;">
+                    <li>
+                        <a [routerLink]="['/dashboard']">
+                            <i class="fa fa-home" style="color: #5161ce;"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/dashboard']" style="color: #5161ce;">Dashboard</a>
+                    </li>
+                    <li><a [routerLink]="['/dashboard/cources']">Create new Course</a></li>
+
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" style="padding: 0.45rem 1.25rem;background-color: #fff;">
+                        <div>
+                            <img src="../../../../assets/images/form.png" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; margin-right: 5px;">
+                            <span>Complete this form and click on the submit button</span>
+                            <a href="" class="float-right view_overall">View overall request status
+                                <i class="fa fa-indent" aria-hidden="true" style="color: grey;"></i></a>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+        <!-- .animated -->
+    </div>
+    <!-- .content -->
+
+
+
+</div>
+
+<div class="content mt-1">
+    <div class="animated fadeIn">
+        <div class="row">
+
+            <div class="col-md-12">
+                <span class="indicate_css"><span style="color: red;">*</span>Indicates required field</span>
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group ">
+                                    <label class=" form-control-label ">Email <i class="fa fa-info-circle" aria-hidden="true"></i></label>
+                                    <input type="email " placeholder="Enter Email" class="form-control form_width"></div>
+                            </div>
+                            <!--colend-->
+                            <div class="col-sm-6">
+                                <div class="form-group ">
+                                    <label class=" form-control-label ">Email <i class="fa fa-info-circle" aria-hidden="true"></i></label>
+                                    <input type="email " placeholder="Enter Email" class="form-control form_width"></div>
+                            </div>
+                            <!--colend-->
+                        </div>
+                        <!--row-->
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group ">
+                                    <label class=" form-control-label ">Select <i class="fa fa-info-circle" aria-hidden="true"></i></label>
+                                    <select class="form-control  form_width">
+<option>option 1</option>
+<option>option 2</option>
+<option>option 3</option>
+<option>option 4</option>
+<option>option 5</option>
+</select></div>
+                            </div>
+                            <!--colend-->
+                            <div class="col-sm-6">
+                                <div class="form-group ">
+                                    <label class=" form-control-label ">Select <i class="fa fa-info-circle" aria-hidden="true"></i></label>
+                                    <select class="form-control  form_width">
+<option>option 1</option>
+<option>option 2</option>
+<option>option 3</option>
+<option>option 4</option>
+<option>option 5</option>
+</select></div>
+                            </div>
+                            <!--colend-->
+                        </div>
+                        <!--row-->
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group ">
+                                    <label class=" form-control-label ">Password <i class="fa fa-info-circle" aria-hidden="true"></i></label>
+                                    <input type="text " placeholder="Enter ********" class="form-control form_width"></div>
+                            </div>
+                            <!--colend-->
+                            <div class="col-sm-6">
+                                <div class="form-group ">
+                                    <label class=" form-control-label ">Password <i class="fa fa-info-circle" aria-hidden="true"></i></label>
+                                    <input type="text " placeholder="Enter *******" class="form-control form_width"></div>
+                            </div>
+                            <!--colend-->
+                        </div>
+                        <!--row-->
+
+                    </div>
+                    <div class="card-footer d-flex justify-content-start">
+                        <button class="btn btn-default submit-css">
+                        Submit</button>
+                        <!-- </button> -->
+                        <button class="btn btn-default view-css ml-1" style="background :grey; 
+                        color:#fff">
+                       Save as draft</button>
+                        <!-- </button> -->
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- .animated -->
+    </div>
+    <!-- .content -->
+
+
+
+</div>
   <!-- .content -->
 </div>
