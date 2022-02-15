@@ -1,0 +1,1135 @@
+<!-- <aside id="left-panel" class="left-panel">
+  <app-sidebar></app-sidebar>
+</aside> -->
+<!-- <app-header></app-header> -->
+<div id="right-panel" class="right-panel">
+    <!-- Header-->
+    <app-header></app-header>
+    <!-- /header -->
+    <!-- Header-->
+    <div class="breadcrumbs" style="background-color: #fbfbf7; padding: 9px 9px 20px 9px">
+        <div class="col-sm-1.5">
+            <div class="page-header float-left" style="background: transparent">
+                <div class="page-title d-flex">
+                    <img src="../../../../assets/images/creatnew.png" style="width: 60px" />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6" style="margin-left: -30px">
+            <div class="page-header float-left" style="background: transparent">
+                <div class="page-title">
+                    <div class="d-flex flex-column">
+                        <span style="font-size: 20px">Create new course </span>
+                        <span style="color: #aba3a3; font-size: 14px"><b style="color: #000">Instructor-Led (ILT)</b>-Instructor-Led
+              Training is face to face training delivered in a classroom.<b
+                style="color: #000"
+                >Virtual Instructor-Led Training(vILT)-</b
+              >virtual instrutor-Led Training(vILT)is delivered remotely</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-5 float-right">
+      <div class="page-header float-right" style="background: transparent">
+        <div class="page-title d-flex">
+          <ol class="breadcrumb text-right" style="background: transparent">
+            <li>
+              <a href="# ">
+                <i class="fa fa-home" style="color: #5161ce"></i>
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/dashboard']" style="color: #5161ce"
+                >Dashboard</a
+              >
+            </li>
+            <li>
+              <a [routerLink]="['/dashboard/cources']">Create new Course</a>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content mt-3">
+    <div class="animated fadeIn">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div
+              class="card-header"
+              style="padding: 0.45rem 1.25rem; background-color: #fff"
+            >
+              <div>
+                <img
+                  src="../../../../assets/images/form.png"
+                  style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px"
+                  class="mr-2"
+                />
+                <span>Complete this form and click on the submit button</span>
+                        <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  View overall request status<i
+                    class="fa fa-indent ml-1"
+                    aria-hidden="true"
+                    style="color: grey"
+                  ></i>
+                </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .animated -->
+</div>
+<!-- .content -->
+</div>
+
+<div class="content mt-1">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <span class="indicate_css"><span style="color: red">*</span>Indicates required field</span>
+                <div class="card">
+                    <form [formGroup]="createCourceForm">
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Title <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Do provide an attractive, catchy and clear learning activity title (max 100 characters). Example: 7 Habits of Highly Effective People. Don’t use prefixes such as ‘OBS’ or abbreviations such as ‘ops’. Don’t make references to session location or target "
+                          ></i
+                        ></a>
+                      </label>
+                                        <input type="text " placeholder="Enter Title" class="form-control form_width" formControlName="title" />
+                                    </div>
+                                </div>
+                                <!--colend-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Training hours/duration (HH:MM) <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Please indicate the learning activity duration in hours : minutes."
+                          ></i
+                        ></a>
+                      </label>
+                                        <input type="text " placeholder="Enter Training hours/duration (HH:MM) " class="form-control form_width" formControlName="duration" />
+                                    </div>
+                                </div>
+                                <!--colend-->
+                            </div>
+                            <!--row-->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Select learning type <span style="color: red">*</span></label>
+                                        <select class="form-control form_width" name="list " id="list " accesskey="target" formControlName="learning_type">
+                        <option value="">Select learning type</option>
+                        <option value="ILT and vILT training">ILT and vILT training</option>
+                        <option value="Video-based training">
+                          Video-based training
+                        </option>
+                        <option value="Material-Based Training">
+                          Material-Based Training
+                        </option>
+                        <option value="Currriculum ">
+                          Curriculum (Learning Path)
+                        </option>
+                        <option value="webbased training">
+                          Web-based training (SCORM)
+                        </option>
+                        <option value="Playlist">Playlist</option>
+                      </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Who can see my course?
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Null"
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <select class="form-control form_width" formControlName="who_see_course">
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                      </select>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                            </div>
+                            <!--row end-->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Description <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="1-3 meaningful sentences describing the content of the learning activity (this field doesnâ€™t accept bullet points)"
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <textarea class="form-control form_width" rows="3" placeholder="Enter Description" formControlName="description">
+                      </textarea>
+                                    </div>
+                                </div>
+
+                                <!--colend-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Objectives <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="List 1-5 objectives describing what the learner will be able to do at the end of the course."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <textarea class="form-control form_width" rows="3" placeholder="Enter Objectives" formControlName="objective">
+                      </textarea>
+                                    </div>
+                                </div>
+
+                                <!--colend-->
+                            </div>
+                            <!--row-->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Resources
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Additional complementary material for learners can be attached to this learning activity. If required, browse and upload material here - file types are limited to doc, docx, xls, xlsx, ppt, pptx, pps, pdf, txt, rtf, gif, jpg, jpeg, and jpe"
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <div class="upload_field">
+                                            <input type="file" id="exampleInputFile" formControlName="resource" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Manager Approval <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Please indicate if learners require manager approval to register for this course."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <select class="form-control form_width" formControlName="manager_approval">
+                        <option value="">Please select</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                            </div>
+                            <!--row-->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Level <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Indicates the level of the content taught and to which audience the Event is directed."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <select class="form-control form_width" formControlName="level">
+                        <option value="">Please select level</option>
+                        <option
+                          *ngFor="let level of cctLevel"
+                          [value]="level.id"
+                        >
+                          {{ level.name }}
+                        </option>
+                      </select>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Does this course integrate digital ? <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Indicates whether the event includes a digital element or not.For vILT Courses, please toggle Yes to select."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <select class="form-control form_width" formControlName="digital">
+                        <option value="">Please select</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                            </div>
+                            <!--row-->
+
+
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Purchase order required?
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Indicates whether the course requires a Purchase Order to be raised or not."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <select class="form-control form_width" formControlName="purchase_order">
+                        <option value="">Please select</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Subject <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Select the category in which you want your learning activity to appear in the Orange Learning catalog."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <!-- <select class="form-control form_width">
+                        <option value="">Please select subject</option>
+                        <option *ngFor="let cctSubject of cctSubjects">
+                          {{ cctSubject.name }}
+                        </option>
+                      </select> -->
+
+                                        <ng-select placeholder="please select subject" [items]="cctSubjects" bindLabel="name" bindValue="id" formControlName="subject">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                            </div>
+                            <!--row-->
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Email of Training Contact <span style="color: red">* </span>
+
+                        <a >
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Email of the person to contact for any questions about this course."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <input type="text " placeholder="Enter Email of Training Contact" class="form-control form_width" formControlName="email_training_contact" />
+                                    </div>
+                                </div>
+                                <!--colend-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Delivery Method <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Please select the delivery method"
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <select class="form-control form_width" formControlName="delivery_method">
+                        <option value="">Please select delivery method</option>
+                        <option
+                          *ngFor="let delivery of deliveryMethod"
+                          [value]="delivery.id"
+                        >
+                          {{ delivery.name }}
+                        </option>
+                      </select>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                            </div>
+                            <!--row-->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Keywords <span style="color: red">* </span>
+
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="If required, provide specific keywords or abbreviations to help learners search for this learning activity. Words that already appear in the title and/or description field are automatically searchable via the Orange Learning global search."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <input type="text " placeholder="Enter Keywords" class="form-control form_width" formControlName="keyword" />
+                                    </div>
+                                </div>
+                                <!--colend-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Cost of Training <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="The cost of training delivered by an external instructor will be advertised as a cost per participant on the basis of 10 participants per session. The final cost will vary according to the number of participants.
+Example: A session costing a total of 2000 Euros will be advertised as a cost of 200 Euros per participant. If the final number of participants is 8, the final cost per participant will be 250 Euros. If the final number of participants is 12, the final cost per participant will be 166,50 Euros.<br>
+Your Training Coordinator will update training costs on Orange Learning if required."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <input type="text " placeholder="Enter Cost of Training" class="form-control form_width" formControlName="cost_of_training" />
+                                    </div>
+                                </div>
+                                <!--colend-->
+                            </div>
+                            <!--row-->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Learn more
+
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="If you wish, add a link enabling users to access additional information about the program."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <input type="text " placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more" />
+                                    </div>
+                                </div>
+                                <!--colend-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">URL
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Null"
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <input type="text " placeholder="Enter URL" class="form-control form_width" formControlName="url" />
+                                    </div>
+                                </div>
+                                <!--colend-->
+                            </div>
+                            <!--row-->
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Provide the link to your video
+
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="If required, you can include an embedded video such as YouTube, Dailymotion or Video on Demand FT."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <input type="text" placeholder="Enter Provide the link to your video" class="form-control form_width" formControlName="who_see_course" />
+                                    </div>
+                                </div>
+                                <!--colend-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Date of first session <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Please indicate the date of your first session (minimum 6 days from receipt of correctly completed publication requests).</br>
+Note: 3-5 working days are required for the learning object to be available in the Orange Learning catalog. An additional 3-5 working days are required for the corresponding session to be created."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <input type="date" class="form-control form_width" formControlName="first_session_date" />
+                                    </div>
+                                </div>
+                                <!--colend-->
+                            </div>
+                            <!--row-->
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Expiry Date
+
+                        <a >
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Provide the date on which this learning object will no longer be valid. If the expiry date is unknown your learning object will be available in the Orange Learning catalog as follows: ILT & vILT with active sessions = no expiry date; ILT & vILT with no sessions = 12 months; online courses, videos, materials, tests = 2 years."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <input type="date" class="form-control form_width" formControlName="expiry_date" />
+                                    </div>
+                                </div>
+                                <!--colend-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Title of the additional free text field
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Title of the additional free text field"
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <input type="text" placeholder="Enter Title of the additional free text field" class="form-control form_width" formControlName="title_additional" />
+                                    </div>
+                                </div>
+                                <!--colend-->
+                            </div>
+                            <!--row-->
+
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Expiry Date <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Select the shelf-life of your course. Your course will remain visible in the Orange Learning catalog for this period. At the end of this period, your course will be AUTOMATICALLY DEACTIVATED and WILL NO LONGER BE VISIBLE in the Orange Learning catalog. If you need to extend the shelf-life of your course BEFORE IT EXPIRES, please contact your Regional Operations Coordinator."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <select class="form-control form_width" formControlName="expiry_date">
+                        <option value="">Please Select expiry</option>
+                        <option
+                          *ngFor="let cctExpiry of cctExpiryperiod"
+                          [value]="cctExpiry.id"
+                        >
+                          {{ cctExpiry.name }}
+                        </option>
+                      </select>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Email of Content Owner <span style="color: red">* </span>
+
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Email of the person responsible for the course content (course description, objectives and other details)."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <input type="email " placeholder="Enter Email of Content Owner" class="form-control form_width" formControlName="email_content_owner" />
+                                    </div>
+                                </div>
+                                <!--colend-->
+                            </div>
+                            <!--row-->
+
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Entity/Business area <span style="color: red">* </span>
+                        <a >
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Enter your organizational hierarchy as it appears in the Group Directory, for example: <b>Orange/OBS/EQUANT/HR/PEOPLE DEV</b> "
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <select class="form-control form_width" formControlName="entity_business_area">
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                      </select>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Email of the preferred Instructor
+
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Email of the Instructors who have the knowledge required to deliver the course (maximum 5 Instructors).
+Prerequisite: An Instructor must already have the Instructor (INS) role in Orange Learning to be assigned as a preferred Instructor.
+If a preferred Instructor does not already have the Instructor (INS) role in Orange Learning, please submit a 'Request for back office role' in PD&L Tools before submitting your CCT.
+If the event is delivered by an external supplier, please select 'External' from the list."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <select class="form-control form_width" formControlName="email_preffered_instructor">
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                      </select>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                            </div>
+                            <!--row-->
+
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Training provided by <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="If the training is provided by the Sales Academy, please select 'IB Sales Academy'. Otherwise, select 'Orange Business Services'"
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <select class="form-control form_width" formControlName="training_provided_by">
+                        <option value="">Please select any</option>
+                        <option
+                          *ngFor="let vendor of vendorType"
+                          [value]="vendor.vendor_name"
+                        >
+                          {{ vendor.name }}
+                        </option>
+                      </select>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Available Languages <span style="color: red">* </span>
+
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Null"
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <select class="form-control form_width" formControlName="available_language">
+                        <option value="">Please select language</option>
+                        <option
+                          *ngFor="let language of availableLanguages"
+                          [value]="language.id"
+                        >
+                          {{ language.name }}
+                        </option>
+                      </select>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                            </div>
+                            <!--row-->
+
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Additional Comment(s)
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <textarea class="form-control form_width" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
+                      </textarea>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">For Whom? <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Define the target audience for whom the course is designed."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <textarea class="form-control form_width" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
+                      </textarea>
+                                    </div>
+                                </div>
+                                <!--colend-->
+
+                            </div>
+                            <!--row-->
+                            <div class="row">
+
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Prerequisite
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Your prerequisites can be one or more existing learning objects in the Orange Learning catalog. If so, please provide the full course titles of the prerequisite learning objects as they appear on Orange Learning. Alternatively your prerequisites can appear simply as a short free text paragraph. Leave blank if there are no prerequisites."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <textarea class="form-control form_width" rows="3" placeholder="Enter Prerequisite" formControlName="prerequisite">
+                      </textarea>
+                                    </div>
+                                </div>
+
+                                <!--colend-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Free field content
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title=""
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <textarea class="form-control form_width" rows="3" placeholder="Enter Free field content" formControlName="free_field_content">
+                      </textarea>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                            </div>
+                            <!--row-->
+                            <div class="row">
+
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Learner Guidelines
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="If required, you can add 1-5 complementary guidelines for learners to help them with their learning experience. Example:  Further Reading: For further information, click on the Learn More link to go to the dedicated sub-space on Plazza."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <textarea class="form-control form_width" rows="3" placeholder="Enter Learner Guidelines" formControlName="learner_guideline">
+                      </textarea>
+                                    </div>
+                                </div>
+
+                                <!--colend-->
+                            </div>
+                            <!--row-->
+
+                        </div>
+                        <div class="card-bdoy">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Certification <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Indicates whether the event leads to a certification or not."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <select class="form-control form_width" (change)="certificationTyupe($event)" formControlName="certification">
+                        <option value="">Please select</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                                <div class="col-sm-6" *ngIf="showCertificateExpiry">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Certification expiry type <span style="color: red">* </span>
+                        <a >
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="If you selected Yes in the Certification field, please select the type of certification and expiry date."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <select class="form-control form_width" formControlName="certification_expiry_type">
+                        <option value="">Please select option</option>
+                        <option
+                          *ngFor="let cctExpiry of cctExpiryType"
+                          [value]="cctExpiry.id"
+                        >
+                          {{ cctExpiry.name }}
+                        </option>
+                      </select>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                                <div class="col-sm-6" *ngIf="showCertificateExpiry">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Validity period <span style="color: red">* </span>
+
+                        <a >
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="If you selected Yes in the Certification field, please select how long the certification is valid."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <select class="form-control form_width" formControlName="validity_period">
+                        <option value="">Please select validity</option>
+                        <option
+                          *ngFor="let validity of validityPeriod"
+                          [value]="validity.id"
+                        >
+                          {{ validity.name }}
+                        </option>
+                      </select>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                            </div>
+                            <!--row-->
+                        </div>
+                        <div class="card-bdoy">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">External vendor <span style="color: red">* </span>
+
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Select Yes, if the course is provided by an external vendor."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <select class="form-control form_width" formControlName="external_vendor" (change)="externalVendor($event)">
+                        <option value="">Please select externalvendor</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                                <div class="col-sm-6" *ngIf="externalVendorname">
+                                    <div class="form-group">
+                                        <!-- <label class="form-control-label"
+                        >External vendor
+
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Select Yes, if the course is provided by an external vendor."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                      <select class="form-control form_width" formControlName="who_see_course">
+                        <option value="">Please select externalvendor</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select> -->
+                                        <label class="form-control-label">External vendor name <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Please provide the name of the external vendor."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <input type="text " placeholder="External vendor name" class="form-control form_width" formControlName="external_vendor" />
+                                    </div>
+                                </div>
+                                <!--colend-->
+                            </div>
+                            <!--row end-->
+                        </div>
+                    </form>
+                    <div class="card-footer d-flex justify-content-start">
+                        <button class="btn btn-default submit-css" (click)="createNewCource()">
+                Submit
+              </button>
+                        <!-- </button> -->
+                        <button class="btn btn-default view-css ml-1" style="background :grey ;
+              color:#fff">
+                Save as draft
+              </button>
+                        <!-- </button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .animated -->
+    </div>
+    <!-- .content -->
+</div>
+<!-- .content -->
+<div class="collapse" id="collapseExample">
+    <div class="card card-body req_status-card">
+        <div class="card_header">
+            <p>Overall request Status</p>
+            <i class="fa fa-times fa_cross" aria-hidden="true" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
+        </div>
+        <div class="row ml-1">
+            <div class="col-sm-2 dash_wid">
+                <div class="card">
+                    <div class="card-body body_padidng">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib">
+                                <i class="fa fa-sticky-note-o fa-icons-des"></i>
+                            </div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">
+                                    <p>Draft</p>
+                                </div>
+                                <div class="stat-digit number_css">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--coled-->
+            <div class="col-sm-2 dash_wid">
+                <div class="card">
+                    <div class="card-body body_padidng">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib">
+                                <i class="fa fa-pencil-square-o fa-icons-des" aria-hidden="true" style="background: #9164cd"></i>
+                            </div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">
+                                    <p>Submitted</p>
+                                </div>
+                                <div class="stat-digit number_css">2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--coled-->
+            <div class="col-sm-2 dash_wid">
+                <div class="card">
+                    <div class="card-body body_padidng">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib">
+                                <i class="fa fa-pencil-square-o fa-icons-des" aria-hidden="true" style="background: #ffd800"></i>
+                            </div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">
+                                    <p>Pending</p>
+                                </div>
+                                <div class="stat-digit number_css">2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--coled-->
+            <div class="col-sm-2 dash_wid">
+                <div class="card">
+                    <div class="card-body body_padidng">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib">
+                                <i class="fa fa-pencil-square-o fa-icons-des" aria-hidden="true" style="background: #50be87"></i>
+                            </div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">
+                                    <p>Closed</p>
+                                </div>
+                                <div class="stat-digit number_css">2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--coled-->
+            <div class="col-sm-2 dash_wid">
+                <div class="card">
+                    <div class="card-body body_padidng">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib">
+                                <i class="fa fa-pencil-square-o fa-icons-des" aria-hidden="true" style="background: #ffb4e6"></i>
+                            </div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">
+                                    <p>Rejected</p>
+                                </div>
+                                <div class="stat-digit number_css">2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--coled-->
+        </div>
+        <!--ROW END-->
+    </div>
+</div>
+</div>
