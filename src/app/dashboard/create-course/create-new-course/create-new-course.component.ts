@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 
@@ -10,7 +16,7 @@ import { CourcesService } from 'src/app/shared/services/cources/cources.service'
 })
 export class CreateNewCourseComponent implements OnInit {
   public createCourceForm!: FormGroup;
-  showCollapse:boolean = true;
+  showCollapse: boolean = true;
 
   public cctLevel = [
     {
@@ -479,53 +485,84 @@ export class CreateNewCourseComponent implements OnInit {
     { id: 9, name: 'Spanish(Spain)' },
   ];
 
-  constructor(private fb: FormBuilder, private courceService: CourcesService,private router:Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private courceService: CourcesService,
+    private router: Router
+  ) {}
   public showCertificateExpiry: boolean = false;
-  public externalVendorname:boolean = false;
+  public externalVendorname: boolean = false;
 
   ngOnInit(): void {
     this.createCourceForm = this.fb.group({
-      title: new FormControl('',[Validators.required]),
-      duration: new FormControl('',[Validators.required]),
-      learning_type: new FormControl('',[Validators.required]),
-      description: new FormControl('',[Validators.required]),
-      objective: new FormControl('',[Validators.required]),
+      title: new FormControl('', [Validators.required]),
+      duration: new FormControl('', [Validators.required]),
+      learning_type: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+      objective: new FormControl('', [Validators.required]),
       resource: new FormControl(''),
-      manager_approval: new FormControl('',[Validators.required]),
-      level: new FormControl('',[Validators.required]),
-      digital: new FormControl('',[Validators.required]),
-      certification: new FormControl('',[Validators.required]),
-      certification_expiry_type: this.showCertificateExpiry ?  new FormControl(''): new FormControl('', [Validators.required]),
-      validity_period: this.showCertificateExpiry ? new FormControl(''): new FormControl('', [Validators.required]),
+      manager_approval: new FormControl('', [Validators.required]),
+      level: new FormControl('', [Validators.required]),
+      digital: new FormControl('', [Validators.required]),
+      certification: new FormControl('', [Validators.required]),
+      certification_expiry_type: this.showCertificateExpiry
+        ? new FormControl('')
+        : new FormControl('', [Validators.required]),
+      validity_period: this.showCertificateExpiry
+        ? new FormControl('')
+        : new FormControl('', [Validators.required]),
       purchase_order: new FormControl(''),
-      subject: new FormControl('',[Validators.required]),
-      external_vendor: new FormControl('',[Validators.required]),
-      email_training_contact: new FormControl('',[Validators.required]),
-      delivery_method: new FormControl('',[Validators.required]),
-      keyword: new FormControl('',[Validators.required]),
-      cost_of_training: new FormControl('',[Validators.required]),
+      subject: new FormControl('', [Validators.required]),
+      external_vendor: new FormControl('', [Validators.required]),
+      email_training_contact: new FormControl('', [Validators.required]),
+      delivery_method: new FormControl('', [Validators.required]),
+      keyword: new FormControl('', [Validators.required]),
+      cost_of_training: new FormControl('', [Validators.required]),
       learn_more: new FormControl(''),
       url: new FormControl(''),
       additional_comment: new FormControl(''),
-      for_whoom:new FormControl('',[Validators.required]),
-      prerequisite:new FormControl(''),
-      free_field_content:new FormControl(''),
-      first_session_date:new FormControl('',[Validators.required]),
-      expiry_date:new FormControl('',[Validators.required]),
-      learner_guideline:new FormControl(''),
-      title_additional:new FormControl(''),
-      email_content_owner:new FormControl(''),
-      entity_business_area:new FormControl('',[Validators.required]),
-      email_preffered_instructor:new FormControl('',[Validators.required]),
-      training_provided_by:new FormControl('',[Validators.required]),
-      available_language:new FormControl('',[Validators.required]),
-      who_see_course:new FormControl(''),
+      for_whoom: new FormControl('', [Validators.required]),
+      prerequisite: new FormControl(''),
+      free_field_content: new FormControl(''),
+      first_session_date: new FormControl('', [Validators.required]),
+      expiry_date: new FormControl('', [Validators.required]),
+      learner_guideline: new FormControl(''),
+      title_additional: new FormControl(''),
+      email_content_owner: new FormControl(''),
+      entity_business_area: new FormControl('', [Validators.required]),
+      email_preffered_instructor: new FormControl('', [Validators.required]),
+      training_provided_by: new FormControl('', [Validators.required]),
+      available_language: new FormControl('', [Validators.required]),
+      who_see_course: new FormControl(''),
+      external_vendor_name: new FormControl('', [Validators.required]),
+      learnerguidearray: this.fb.array([]),
     });
+    this.addLearnerGuideline();
   }
 
   get f() {
     return this.createCourceForm.controls;
   }
+
+  get t() {
+    return this.f.learnerguidearray as FormArray;
+  }
+
+  addMorelearnerGuideline() {
+    return this.fb.group({
+      name: new FormControl(''),
+    });
+  }
+
+  addLearnerGuideline() {
+    console.log(this.t);
+    return this.t.push(this.addMorelearnerGuideline());
+  }
+
+  removeLearnerGuideline(i: any) {
+    this.t.removeAt(i);
+  }
+
   selectLearning() {
     // this.createCourceForm.setValue({
     //   name:new FormControl('Test')
@@ -539,7 +576,7 @@ export class CreateNewCourseComponent implements OnInit {
         (res: any) => {
           console.log(res);
           if (res) {
-            this.router.navigate(['/dashboard/cources'])
+            this.router.navigate(['/dashboard/cources']);
           }
         },
         (err: any) => {
@@ -551,25 +588,28 @@ export class CreateNewCourseComponent implements OnInit {
       console.log(this.createCourceForm.value);
     }
   }
+  saveasDraft() {
+    console.log(this.createCourceForm.value);
+  }
 
   certificationTyupe(event: any) {
     if (event.target.value == 'yes') {
       this.showCertificateExpiry = true;
-      console.log(this.createCourceForm.value)
+      console.log(this.createCourceForm.value);
     } else {
       this.showCertificateExpiry = false;
     }
   }
 
-  externalVendor(event:any){
-    if(event.target.value="yes"){
+  externalVendor(event: any) {
+    if ((event.target.value = 'yes')) {
       this.externalVendorname = true;
-    }else{
+    } else {
       this.externalVendorname = false;
     }
   }
 
-  isshowOverallmenu(){
-    this.showCollapse= !this.showCollapse;
+  isshowOverallmenu() {
+    this.showCollapse = !this.showCollapse;
   }
 }

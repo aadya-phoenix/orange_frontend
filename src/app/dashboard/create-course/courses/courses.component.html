@@ -80,7 +80,7 @@
                                           <i class="fa fa-pencil-square-o fa-icons-des" aria-hidden="true" style="background:#9164cd"></i>
                                           <p>Submitted</p>
                                       </div>
-                                      <span class="number_css">2</span>
+                                      <span class="number_css">{{courcesList ? courcesList.length: ''}}</span>
                                   </div>
 
                               </div>
@@ -91,7 +91,7 @@
                                           <i class="fa fa-pencil-square-o fa-icons-des" aria-hidden="true" style="background: #ffd800;"></i>
                                           <p>Pending</p>
                                       </div>
-                                      <span class="number_css">2</span>
+                                      <span class="number_css">0</span>
                                   </div>
                               </div>
                               <!--coled-->
@@ -101,7 +101,7 @@
                                           <i class="fa fa-pencil-square-o fa-icons-des" aria-hidden="true" style="background: #50be87;"></i>
                                           <p>Closed</p>
                                       </div>
-                                      <span class="number_css">2</span>
+                                      <span class="number_css">0</span>
                                   </div>
                               </div>
                               <!--coled-->
@@ -111,7 +111,7 @@
                                           <i class="fa fa-pencil-square-o fa-icons-des" aria-hidden="true" style="background: #ffb4e6;"></i>
                                           <p>Rejected</p>
                                       </div>
-                                      <span class="number_css">2</span>
+                                      <span class="number_css">0</span>
                                   </div>
                               </div>
                               <!--coled-->
@@ -170,10 +170,10 @@
                               <tbody>
                                   <tr *ngFor="let cource of courcesList">
                                       <th>{{cource.id}}</th>
-                                      <td>xyz</td>
+                                      <td>{{getUserprofile && getUserprofile.first_name ? getUserprofile.first_name : '-'}}</td>
                                       <!-- <td>xyz</td> -->
                                       <td>{{cource.learning_type? cource.learning_type : '-'}}</td>
-                                      <td>xyz</td>
+                                      <td>ROC</td>
                                       <td>{{cource.created_at | date:'short'}}</td>
                                       <td>{{cource.updated_at | date:'short'}}</td>
                                       <td><button class="btn btn-xs btn-success ">Pending</button></td>

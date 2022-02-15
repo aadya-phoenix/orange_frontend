@@ -42,7 +42,7 @@
         <div class="page-title d-flex">
           <ol class="breadcrumb text-right" style="background: transparent">
             <li>
-              <a href="# ">
+              <a [routerLink]="['/dashboard']">
                 <i class="fa fa-home" style="color: #5161ce"></i>
               </a>
             </li>
@@ -112,37 +112,6 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label>Select learning type <span style="color: red">*</span></label>
-                      <select
-                        class="form-control form_width"
-                        name="list "
-                        id="list "
-                        accesskey="target"
-                        formControlName="learning_type"
-                      >
-                        <option value="">Select learning type</option>
-                        <option value="Ilt.html ">ILT and vILT training</option>
-                        <option value="videobase.html ">
-                          Video-based training
-                        </option>
-                        <option value="material.html ">
-                          Material-Based Training
-                        </option>
-                        <option value="Currriculum.html ">
-                          Curriculum (Learning Path)
-                        </option>
-                        <option value="webbased.html ">
-                          Web-based training (SCORM)
-                        </option>
-                        <option value="Playlist.html ">Playlist</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <!--row end-->
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
                       <label class="form-control-label"
                         >Title <span style="color: red">* </span>
                         <a href="">
@@ -167,7 +136,8 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label class="form-control-label"
-                        >Training hours/duration (HH:MM) <span style="color: red">* </span>
+                        >Training hours/duration (HH:MM)
+                        <span style="color: red">* </span>
                         <a href="">
                           <i
                             class="fa fa-info-circle info_circle"
@@ -189,6 +159,71 @@
                   <!--colend-->
                 </div>
                 <!--row-->
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label
+                        >Select learning type
+                        <span style="color: red">*</span></label
+                      >
+                      <select
+                        class="form-control form_width"
+                        name="list "
+                        id="list "
+                        accesskey="target"
+                        formControlName="learning_type"
+                      >
+                        <option value="">Select learning type</option>
+                        <option value="ILT and vILT training">
+                          ILT and vILT training
+                        </option>
+                        <option value="Video-based training">
+                          Video-based training
+                        </option>
+                        <option value="Material-Based Training">
+                          Material-Based Training
+                        </option>
+                        <option value="Currriculum ">
+                          Curriculum (Learning Path)
+                        </option>
+                        <option value="webbased training">
+                          Web-based training (SCORM)
+                        </option>
+                        <option value="Playlist">Playlist</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="form-control-label"
+                        >Who can see my course?
+                        <a>
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Null"
+                          >
+                          </i>
+                        </a>
+                      </label>
+                      <select
+                        class="form-control form_width"
+                        formControlName="who_see_course"
+                      >
+                        <option value="">Please select</option>
+                        <option value="1">option 1</option>
+                        <option value="2">option 2</option>
+                        <option value="3">option 3</option>
+                        <option value="">option 4</option>
+                        <option value="4">option 5</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--colend-->
+                </div>
+                <!--row end-->
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
@@ -332,7 +367,8 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label class="form-control-label"
-                        >Does this course integrate digital ? <span style="color: red">* </span>
+                        >Does this course integrate digital ?
+                        <span style="color: red">* </span>
                         <a href="">
                           <i
                             class="fa fa-info-circle info_circle"
@@ -356,149 +392,6 @@
                   </div>
                   <!--colend-->
                 </div>
-                <!--row-->
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label class="form-control-label"
-                        >Certification <span style="color: red">* </span>
-                        <a href="">
-                          <i
-                            class="fa fa-info-circle info_circle"
-                            aria-hidden="true"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Indicates whether the event leads to a certification or not."
-                          >
-                          </i>
-                        </a>
-                      </label>
-                      <select
-                        class="form-control form_width"
-                        (change)="certificationTyupe($event)"
-                        formControlName="certification"
-                      >
-                        <option value="">Please select</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                      </select>
-                    </div>
-                  </div>
-                  <!--colend-->
-                  <div class="col-sm-6" *ngIf="showCertificateExpiry">
-                    <div class="form-group">
-                      <label class="form-control-label"
-                        >Certification expiry type <span style="color: red">* </span>
-                        <a >
-                          <i
-                            class="fa fa-info-circle info_circle"
-                            aria-hidden="true"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="If you selected Yes in the Certification field, please select the type of certification and expiry date."
-                          >
-                          </i>
-                        </a>
-                      </label>
-                      <select
-                        class="form-control form_width"
-                        formControlName="certification_expiry_type"
-                      >
-                        <option value="">Please select option</option>
-                        <option
-                          *ngFor="let cctExpiry of cctExpiryType"
-                          [value]="cctExpiry.id"
-                        >
-                          {{ cctExpiry.name }}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                  <!--colend-->
-                </div>
-                <!--row-->
-                <div class="row">
-                  <div class="col-sm-6" *ngIf="showCertificateExpiry">
-                    <div class="form-group">
-                      <label class="form-control-label"
-                        >Validity period <span style="color: red">* </span>
-
-                        <a >
-                          <i
-                            class="fa fa-info-circle info_circle"
-                            aria-hidden="true"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="If you selected Yes in the Certification field, please select how long the certification is valid."
-                          >
-                          </i>
-                        </a>
-                      </label>
-                      <select
-                        class="form-control form_width"
-                        formControlName="validity_period"
-                      >
-                        <option value="">Please select validity</option>
-                        <option
-                          *ngFor="let validity of validityPeriod"
-                          [value]="validity.id"
-                        >
-                          {{ validity.name }}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                  <!--colend-->
-                  
-                 <!-- <div class="col-sm-6">
-                    <div class="form-group">
-                       <label class="form-control-label"
-                        >External vendor name <span style="color: red">* </span>
-                        <a href="">
-                          <i
-                            class="fa fa-info-circle info_circle"
-                            aria-hidden="true"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Please provide the name of the external vendor."
-                          >
-                          </i>
-                        </a>
-                      </label>
-                      <input
-                        type="text "
-                        placeholder="External vendor name"
-                        class="form-control form_width"
-                        formControlName="external_vendor"
-                      />
-                    </div>
-                  </div> -->
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label class="form-control-label"
-                        >External vendor <span style="color: red">* </span>
-
-                        <a href="">
-                          <i
-                            class="fa fa-info-circle info_circle"
-                            aria-hidden="true"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Select Yes, if the course is provided by an external vendor."
-                          >
-                          </i>
-                        </a>
-                      </label>
-                      <select class="form-control form_width" formControlName="external_vendor" (change)="externalVendor($event)">
-                        <option value="">Please select externalvendor</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                      </select>
-                    </div>
-                  </div>
-                  <!--colend-->
-                </div>
-
                 <!--row-->
 
                 <div class="row">
@@ -544,11 +437,11 @@
                         </a>
                       </label>
                       <!-- <select class="form-control form_width">
-                        <option value="">Please select subject</option>
-                        <option *ngFor="let cctSubject of cctSubjects">
-                          {{ cctSubject.name }}
-                        </option>
-                      </select> -->
+                      <option value="">Please select subject</option>
+                      <option *ngFor="let cctSubject of cctSubjects">
+                        {{ cctSubject.name }}
+                      </option>
+                    </select> -->
 
                       <ng-select
                         placeholder="please select subject"
@@ -556,7 +449,6 @@
                         bindLabel="name"
                         bindValue="id"
                         formControlName="subject"
-                        
                       >
                       </ng-select>
                     </div>
@@ -569,9 +461,10 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label class="form-control-label"
-                        >Email of Training Contact <span style="color: red">* </span>
+                        >Email of Training Contact
+                        <span style="color: red">* </span>
 
-                        <a >
+                        <a>
                           <i
                             class="fa fa-info-circle info_circle"
                             aria-hidden="true"
@@ -759,7 +652,8 @@ Your Training Coordinator will update training costs on Orange Learning if requi
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label class="form-control-label"
-                        >Date of first session <span style="color: red">* </span>
+                        >Date of first session
+                        <span style="color: red">* </span>
                         <a href="">
                           <i
                             class="fa fa-info-circle info_circle"
@@ -772,7 +666,11 @@ Note: 3-5 working days are required for the learning object to be available in t
                           </i>
                         </a>
                       </label>
-                      <input type="date" class="form-control form_width" formControlName="first_session_date"/>
+                      <input
+                        type="date"
+                        class="form-control form_width"
+                        formControlName="first_session_date"
+                      />
                     </div>
                   </div>
                   <!--colend-->
@@ -785,7 +683,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                       <label class="form-control-label"
                         >Expiry Date
 
-                        <a >
+                        <a>
                           <i
                             class="fa fa-info-circle info_circle"
                             aria-hidden="true"
@@ -796,7 +694,11 @@ Note: 3-5 working days are required for the learning object to be available in t
                           </i>
                         </a>
                       </label>
-                      <input type="date" class="form-control form_width" formControlName="expiry_date"/>
+                      <input
+                        type="date"
+                        class="form-control form_width"
+                        formControlName="expiry_date"
+                      />
                     </div>
                   </div>
                   <!--colend-->
@@ -828,49 +730,6 @@ Note: 3-5 working days are required for the learning object to be available in t
                 <!--row-->
 
                 <div class="row">
-                  <div class="col-sm-6" *ngIf="externalVendorname">
-                    <div class="form-group">
-                      <!-- <label class="form-control-label"
-                        >External vendor
-
-                        <a href="">
-                          <i
-                            class="fa fa-info-circle info_circle"
-                            aria-hidden="true"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Select Yes, if the course is provided by an external vendor."
-                          >
-                          </i>
-                        </a>
-                      </label>
-                      <select class="form-control form_width" formControlName="who_see_course">
-                        <option value="">Please select externalvendor</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                      </select> -->
-                      <label class="form-control-label"
-                        >External vendor name <span style="color: red">* </span>
-                        <a href="">
-                          <i
-                            class="fa fa-info-circle info_circle"
-                            aria-hidden="true"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Please provide the name of the external vendor."
-                          >
-                          </i>
-                        </a>
-                      </label>
-                      <input
-                        type="text "
-                        placeholder="External vendor name"
-                        class="form-control form_width"
-                        formControlName="external_vendor"
-                      />
-                    </div>
-                  </div>
-                  <!--colend-->
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label class="form-control-label"
@@ -886,7 +745,10 @@ Note: 3-5 working days are required for the learning object to be available in t
                           </i>
                         </a>
                       </label>
-                      <select class="form-control form_width" formControlName="expiry_date">
+                      <select
+                        class="form-control form_width"
+                        formControlName="expiry_date"
+                      >
                         <option value="">Please Select expiry</option>
                         <option
                           *ngFor="let cctExpiry of cctExpiryperiod"
@@ -898,14 +760,11 @@ Note: 3-5 working days are required for the learning object to be available in t
                     </div>
                   </div>
                   <!--colend-->
-                </div>
-                <!--row-->
-
-                <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label class="form-control-label"
-                        >Email of Content Owner <span style="color: red">* </span>
+                        >Email of Content Owner
+                        <span style="color: red">* </span>
 
                         <a href="">
                           <i
@@ -927,11 +786,15 @@ Note: 3-5 working days are required for the learning object to be available in t
                     </div>
                   </div>
                   <!--colend-->
+                </div>
+                <!--row-->
+
+                <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label class="form-control-label"
                         >Entity/Business area <span style="color: red">* </span>
-                        <a >
+                        <a>
                           <i
                             class="fa fa-info-circle info_circle"
                             aria-hidden="true"
@@ -942,7 +805,10 @@ Note: 3-5 working days are required for the learning object to be available in t
                           </i>
                         </a>
                       </label>
-                      <select class="form-control form_width" formControlName="entity_business_area">
+                      <select
+                        class="form-control form_width"
+                        formControlName="entity_business_area"
+                      >
                         <option>option 1</option>
                         <option>option 2</option>
                         <option>option 3</option>
@@ -952,10 +818,6 @@ Note: 3-5 working days are required for the learning object to be available in t
                     </div>
                   </div>
                   <!--colend-->
-                </div>
-                <!--row-->
-
-                <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label class="form-control-label"
@@ -975,7 +837,10 @@ If the event is delivered by an external supplier, please select 'External' from
                           </i>
                         </a>
                       </label>
-                      <select class="form-control form_width" formControlName="email_preffered_instructor">
+                      <select
+                        class="form-control form_width"
+                        formControlName="email_preffered_instructor"
+                      >
                         <option>option 1</option>
                         <option>option 2</option>
                         <option>option 3</option>
@@ -985,6 +850,10 @@ If the event is delivered by an external supplier, please select 'External' from
                     </div>
                   </div>
                   <!--colend-->
+                </div>
+                <!--row-->
+
+                <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label class="form-control-label"
@@ -1000,7 +869,10 @@ If the event is delivered by an external supplier, please select 'External' from
                           </i>
                         </a>
                       </label>
-                      <select class="form-control form_width" formControlName="training_provided_by">
+                      <select
+                        class="form-control form_width"
+                        formControlName="training_provided_by"
+                      >
                         <option value="">Please select any</option>
                         <option
                           *ngFor="let vendor of vendorType"
@@ -1012,10 +884,6 @@ If the event is delivered by an external supplier, please select 'External' from
                     </div>
                   </div>
                   <!--colend-->
-                </div>
-                <!--row-->
-
-                <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label class="form-control-label"
@@ -1032,7 +900,10 @@ If the event is delivered by an external supplier, please select 'External' from
                           </i>
                         </a>
                       </label>
-                      <select class="form-control form_width" formControlName="available_language">
+                      <select
+                        class="form-control form_width"
+                        formControlName="available_language"
+                      >
                         <option value="">Please select language</option>
                         <option
                           *ngFor="let language of availableLanguages"
@@ -1044,33 +915,9 @@ If the event is delivered by an external supplier, please select 'External' from
                     </div>
                   </div>
                   <!--colend-->
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label class="form-control-label"
-                        >Who can see my course?
-                        <a href="">
-                          <i
-                            class="fa fa-info-circle info_circle"
-                            aria-hidden="true"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Null"
-                          >
-                          </i>
-                        </a>
-                      </label>
-                      <select class="form-control form_width" formControlName="who_see_course">
-                        <option>option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
-                        <option>option 5</option>
-                      </select>
-                    </div>
-                  </div>
-                  <!--colend-->
                 </div>
                 <!--row-->
+
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
@@ -1096,8 +943,6 @@ If the event is delivered by an external supplier, please select 'External' from
                       </textarea>
                     </div>
                   </div>
-
-                  <!--colend-->
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label class="form-control-label"
@@ -1180,11 +1025,16 @@ If the event is delivered by an external supplier, please select 'External' from
                 </div>
                 <!--row-->
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
+                  <div
+                    class="col-sm-6"
+                    formArrayName="learnerguidearray"
+                    *ngFor="let learner of t.controls; let i = index"
+                  >
+                    <div class="form-group row align-items-center" [formGroupName]="i">
+                      <div class="col-md-9 pr-0">
                       <label class="form-control-label"
                         >Learner Guidelines
-                        <a href="">
+                        <a>
                           <i
                             class="fa fa-info-circle info_circle"
                             aria-hidden="true"
@@ -1196,18 +1046,204 @@ If the event is delivered by an external supplier, please select 'External' from
                         </a>
                       </label>
                       <textarea
-                        class="form-control form_width"
+                        class="form-control form_width w-100"
                         rows="3"
                         placeholder="Enter Learner Guidelines"
-                        formControlName="learner_guideline"
+                        formControlName="name"
                       >
                       </textarea>
+                     </div>
+                      <div class="addmore col-md-2">
+                        <button
+                        class="btn btn-primary"
+                        (click)="addLearnerGuideline()"
+                      >
+                        <i class="fa fa-plus"></i>
+                      </button>
+                      <button
+                        class="btn btn-danger"
+                        *ngIf="i > 0"
+                        (click)="removeLearnerGuideline(i)"
+                      >
+                        <i class="fa fa-trash"></i>
+                      </button>
+                      </div>
+                     
                     </div>
+                  
                   </div>
 
                   <!--colend-->
                 </div>
                 <!--row-->
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="form-control-label"
+                        >Certification <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Indicates whether the event leads to a certification or not."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                      <select
+                        class="form-control form_width"
+                        (change)="certificationTyupe($event)"
+                        formControlName="certification"
+                      >
+                        <option value="">Please select</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--colend-->
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="form-control-label"
+                        >External vendor <span style="color: red">* </span>
+
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Select Yes, if the course is provided by an external vendor."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                      <select
+                        class="form-control form_width"
+                        formControlName="external_vendor"
+                        (change)="externalVendor($event)"
+                      >
+                        <option value="">Please select externalvendor</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--colend-->
+                </div>
+                <!--row-->
+
+                <div class="row">
+                  <div class="col-sm-6" *ngIf="showCertificateExpiry">
+                    <div class="form-group">
+                      <label class="form-control-label"
+                        >Certification expiry type
+                        <span style="color: red">* </span>
+                        <a>
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="If you selected Yes in the Certification field, please select the type of certification and expiry date."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                      <select
+                        class="form-control form_width"
+                        formControlName="certification_expiry_type"
+                      >
+                        <option value="">Please select option</option>
+                        <option
+                          *ngFor="let cctExpiry of cctExpiryType"
+                          [value]="cctExpiry.id"
+                        >
+                          {{ cctExpiry.name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--colend-->
+                  <div class="col-sm-6" *ngIf="showCertificateExpiry">
+                    <div class="form-group">
+                      <label class="form-control-label"
+                        >Validity period <span style="color: red">* </span>
+
+                        <a>
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="If you selected Yes in the Certification field, please select how long the certification is valid."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                      <select
+                        class="form-control form_width"
+                        formControlName="validity_period"
+                      >
+                        <option value="">Please select validity</option>
+                        <option
+                          *ngFor="let validity of validityPeriod"
+                          [value]="validity.id"
+                        >
+                          {{ validity.name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--colend-->
+
+                  <div class="col-sm-6" *ngIf="externalVendorname">
+                    <div class="form-group">
+                      <!-- <label class="form-control-label"
+                    >External vendor
+
+                    <a href="">
+                      <i
+                        class="fa fa-info-circle info_circle"
+                        aria-hidden="true"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Select Yes, if the course is provided by an external vendor."
+                      >
+                      </i>
+                    </a>
+                  </label>
+                  <select class="form-control form_width" formControlName="who_see_course">
+                    <option value="">Please select externalvendor</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select> -->
+                      <label class="form-control-label"
+                        >External vendor name <span style="color: red">* </span>
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Please provide the name of the external vendor."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                      <input
+                        type="text "
+                        placeholder="External vendor name"
+                        class="form-control form_width"
+                        formControlName="external_vendor_name"
+                      />
+                    </div>
+                  </div>
+                  <!--colend-->
+                </div>
+                <!--row end-->
               </div>
             </form>
             <div class="card-footer d-flex justify-content-start">
@@ -1218,8 +1254,10 @@ If the event is delivered by an external supplier, please select 'External' from
                 Submit
               </button>
               <!-- </button> -->
-              <button class="btn btn-default view-css ml-1" style="background :grey ;
-              color:#fff">
+              <button
+                class="btn btn-default view-css ml-1"
+                style="background: grey; color: #fff"
+              >
                 Save as draft
               </button>
               <!-- </button> -->

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 
 @Component({
@@ -9,10 +10,21 @@ import { CourcesService } from 'src/app/shared/services/cources/cources.service'
 export class CoursesComponent implements OnInit {
 
   public courcesList:any;
-  public page=1
-  constructor(private courceService: CourcesService) {}
+  public page=1;
+  getUserprofile:any;
+  constructor(private courceService: CourcesService,private authService:AuthenticationService) {}
+
+  getProfile(){
+    this.authService.getProfileDetails().subscribe((res:any)=>{
+      console.log(res);
+      this.getUserprofile = res.data;
+    },(err:any)=>{
+      console.log(err)
+    })
+  }
 
   ngOnInit(): void {
+    this.getProfile();
     this.courceService.getCources().subscribe(
       (res: any) => {
         console.log(res);
