@@ -6,9 +6,10 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { PriceDirective } from './directives/price.directive';
 
 @NgModule({
-  declarations: [InputfieldDirective, HeaderComponent, SidebarComponent],
+  declarations: [InputfieldDirective, HeaderComponent, SidebarComponent,PriceDirective],
   imports: [CommonModule, FormsModule, ReactiveFormsModule,NgbModule],
   exports: [
     InputfieldDirective,
@@ -17,6 +18,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    PriceDirective,
     //NgSelectModule
   ],
   providers: [],

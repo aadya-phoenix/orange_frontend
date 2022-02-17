@@ -16,6 +16,9 @@ import { CourcesService } from 'src/app/shared/services/cources/cources.service'
 })
 export class CreateNewCourseComponent implements OnInit {
   public createCourceForm!: FormGroup;
+  public commonCreateCourceForm!: FormGroup;
+  public iltandViltForm!: FormGroup;
+  public materialbasedForm!: FormGroup;
   showCollapse: boolean = true;
 
   public cctLevel = [
@@ -492,19 +495,32 @@ export class CreateNewCourseComponent implements OnInit {
   ) {}
   public showCertificateExpiry: boolean = false;
   public externalVendorname: boolean = false;
-  public learnerGuidearray:any =[];
-  public learningType:any ='ILT and vILT training';
+  public learnerGuidearray: any = [];
+  public learningType: any = 'ILT and vILT training';
 
   ngOnInit(): void {
     this.createCourceForm = this.fb.group({
+      //common
       title: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
-      learning_type: new FormControl('ILT and vILT training', [Validators.required]),
+      learning_type: new FormControl('ILT and vILT training', [
+        Validators.required,
+      ]),
       description: new FormControl('', [Validators.required]),
-      objective: new FormControl('', [Validators.required]),
       resource: new FormControl(''),
-      manager_approval: new FormControl('', [Validators.required]),
+      objective: new FormControl('', [Validators.required]),
       level: new FormControl('', [Validators.required]),
+      subject: new FormControl([Validators.required]),
+      additional_comment: new FormControl(''),
+      prerequisite: new FormControl(''),
+      keyword: new FormControl('', [Validators.required]),
+      email_content_owner: new FormControl('', [Validators.required]),
+      training_provided_by: new FormControl('', [Validators.required]),
+      available_language: new FormControl('', [Validators.required]),
+      //common
+
+      //ilt and vilt
+      manager_approval: new FormControl('', [Validators.required]),
       digital: new FormControl('', [Validators.required]),
       certification: new FormControl('', [Validators.required]),
       certification_expiry_type: this.showCertificateExpiry
@@ -513,37 +529,109 @@ export class CreateNewCourseComponent implements OnInit {
       validity_period: this.showCertificateExpiry
         ? new FormControl('')
         : new FormControl('', [Validators.required]),
+      external_vendor_name: new FormControl('', [Validators.required]),
       purchase_order: new FormControl(''),
-      subject: new FormControl( [Validators.required]),
-      external_vendor: new FormControl('', [Validators.required]),
       email_training_contact: new FormControl('', [Validators.required]),
       delivery_method: new FormControl('', [Validators.required]),
-      keyword: new FormControl('', [Validators.required]),
+      for_whoom: new FormControl('', [Validators.required]),
       cost_of_training: new FormControl('', [Validators.required]),
       learn_more: new FormControl(''),
-      url: new FormControl(''),
-      additional_comment: new FormControl(''),
-      for_whoom: new FormControl('', [Validators.required]),
-      prerequisite: new FormControl(''),
       free_field_content: new FormControl(''),
+      url: new FormControl(''),
+      //s need to add
+      provide_video_link: new FormControl(''),
+      //e need to add
       first_session_date: new FormControl('', [Validators.required]),
       expiry_date: new FormControl('', [Validators.required]),
       title_additional: new FormControl(''),
-      email_content_owner: new FormControl(''),
+      external_vendor: new FormControl('', [Validators.required]),
+
       entity_business_area: new FormControl('', [Validators.required]),
       email_preffered_instructor: new FormControl('', [Validators.required]),
+
+      who_see_course: new FormControl(''),
+
+      // learner_guideline: new FormControl(''),
+      learnerguidearray: this.fb.array([]),
+      //ilt and vilt
+    });
+    //common form
+    this.commonCreateCourceForm = this.fb.group({
+      title: new FormControl('', [Validators.required]),
+      duration: new FormControl('', [Validators.required]),
+      learning_type: new FormControl('ILT and vILT training', [
+        Validators.required,
+      ]),
+      description: new FormControl('', [Validators.required]),
+      resource: new FormControl(''),
+      objective: new FormControl('', [Validators.required]),
+      level: new FormControl('', [Validators.required]),
+      subject: new FormControl([Validators.required]),
+      additional_comment: new FormControl(''),
+      prerequisite: new FormControl(''),
+      keyword: new FormControl('', [Validators.required]),
+      email_content_owner: new FormControl('', [Validators.required]),
       training_provided_by: new FormControl('', [Validators.required]),
       available_language: new FormControl('', [Validators.required]),
-      who_see_course: new FormControl(''),
-      external_vendor_name: new FormControl('', [Validators.required]),
-      learner_guideline: new FormControl(''),
-      learnerguidearray: this.fb.array([]),
+
+      //no field 
+      //email_training_contact:new FormControl('')
+
     });
+
+    //ilt and vilt
+    this.iltandViltForm = this.fb.group({
+      manager_approval: new FormControl('', [Validators.required]),
+      digital: new FormControl('', [Validators.required]),
+      certification: new FormControl('', [Validators.required]),
+      certification_expiry_type: this.showCertificateExpiry
+        ? new FormControl('')
+        : new FormControl('', [Validators.required]),
+      validity_period: this.showCertificateExpiry
+        ? new FormControl('')
+        : new FormControl('', [Validators.required]),
+      external_vendor_name: new FormControl('', [Validators.required]),
+      purchase_order: new FormControl(''),
+      email_training_contact: new FormControl('', [Validators.required]),
+      delivery_method: new FormControl('', [Validators.required]),
+      for_whoom: new FormControl('', [Validators.required]),
+      cost_of_training: new FormControl('', [Validators.required]),
+      learn_more: new FormControl(''),
+      free_field_content: new FormControl(''),
+      url: new FormControl(''),
+      //s need to add
+      provide_video_link: new FormControl(''),
+      //e need to add
+      first_session_date: new FormControl('', [Validators.required]),
+      expiry_date: new FormControl('', [Validators.required]),
+      title_additional: new FormControl(''),
+      external_vendor: new FormControl('', [Validators.required]),
+
+      entity_business_area: new FormControl('', [Validators.required]),
+      email_preffered_instructor: new FormControl('', [Validators.required]),
+
+      who_see_course: new FormControl(''),
+
+      // learner_guideline: new FormControl(''),
+      learnerguidearray: this.fb.array([]),
+      //ilt and vilt
+
+
+    });
+
+    this.materialbasedForm = this.fb.group({
+      //material based
+      material_source: new FormControl(''),
+      material_expiry_date: new FormControl(''),
+      material_url: new FormControl(''),
+      //material
+    });
+
     this.addLearnerGuideline();
   }
 
   get f() {
-    return this.createCourceForm.controls;
+    return this.iltandViltForm.controls;
   }
 
   get t() {
@@ -572,20 +660,133 @@ export class CreateNewCourseComponent implements OnInit {
     // })
   }
 
+
+  //create ilt vilt form
+  createNewCourceIlt(){
+    let learnerguidearr = this.iltandViltForm.value.learnerguidearray;
+    let localarr: any = [];
+    learnerguidearr.map((arrayres: any) => {
+      if (arrayres.name) {
+        localarr.push(arrayres.name);
+      } else {
+        localarr.push(arrayres);
+      }
+    });
+    this.learnerGuidearray = localarr;
+    this.iltandViltForm.value.learnerguidearray = this.learnerGuidearray;
+    console.log(this.learnerGuidearray);
+    let savetype = { action: 'submit' };
+    let totalObj = { ...this.iltandViltForm.value, ...savetype,...this.commonCreateCourceForm.value };
+    if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
+      this.courceService.createCource(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            this.router.navigate(['/dashboard/cources']);
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.createCourceForm.markAllAsTouched();
+      console.log(this.learnerGuidearray);
+      console.log(totalObj);
+    }
+
+  }
+
+  //draft ilt and vilt
+  saveasDraftIlt() {
+    let learnerguidearr = this.iltandViltForm.value.learnerguidearray;
+    let localarr: any = [];
+    learnerguidearr.map((arrayres: any) => {
+      if (arrayres.name) {
+        localarr.push(arrayres.name);
+      } else {
+        localarr.push(arrayres);
+      }
+    });
+    this.learnerGuidearray = localarr;
+    this.iltandViltForm.value.learnerguidearray = this.learnerGuidearray;
+    let savetype = { action: 'draft' };
+    let totalObj = { ...this.iltandViltForm.value, ...savetype };
+    console.log(this.learnerGuidearray);
+    if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
+      console.log(totalObj);
+      //console.log(this.createCourceForm.value);
+      this.courceService.createCource(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            this.router.navigate(['/dashboard/cources']);
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.createCourceForm.markAllAsTouched();
+      console.log(this.learnerGuidearray);
+      console.log(totalObj);
+    }
+  }
+
+
+
+
   createNewCource() {
     let learnerguidearr = this.createCourceForm.value.learnerguidearray;
-     let localarr:any =[]; 
-    learnerguidearr.map((arrayres:any)=>{
-      if(arrayres.name){
-      localarr.push(arrayres.name)}
-      else{
-        localarr.push(arrayres)
+    let localarr: any = [];
+    learnerguidearr.map((arrayres: any) => {
+      if (arrayres.name) {
+        localarr.push(arrayres.name);
+      } else {
+        localarr.push(arrayres);
       }
-    })
+    });
     this.learnerGuidearray = localarr;
-    this.createCourceForm.value.learnerguidearray=this.learnerGuidearray;
-    console.log(this.learnerGuidearray)
+    this.createCourceForm.value.learnerguidearray = this.learnerGuidearray;
+    console.log(this.learnerGuidearray);
+    let savetype = { action: 'submit' };
+    let totalObj = { ...this.createCourceForm.value, ...savetype };
     if (this.createCourceForm.valid) {
+      this.courceService.createCource(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            this.router.navigate(['/dashboard/cources']);
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.createCourceForm.markAllAsTouched();
+      console.log(this.learnerGuidearray);
+      console.log(totalObj);
+    }
+  }
+  saveasDraft() {
+    let learnerguidearr = this.createCourceForm.value.learnerguidearray;
+    let localarr: any = [];
+    learnerguidearr.map((arrayres: any) => {
+      if (arrayres.name) {
+        localarr.push(arrayres.name);
+      } else {
+        localarr.push(arrayres);
+      }
+    });
+    this.learnerGuidearray = localarr;
+    this.createCourceForm.value.learnerguidearray = this.learnerGuidearray;
+    let savetype = { action: 'draft' };
+    let totalObj = { ...this.createCourceForm.value, ...savetype };
+    console.log(this.learnerGuidearray);
+    if (this.createCourceForm.valid) {
+      console.log(totalObj);
       console.log(this.createCourceForm.value);
       this.courceService.createCource(this.createCourceForm.value).subscribe(
         (res: any) => {
@@ -600,27 +801,9 @@ export class CreateNewCourseComponent implements OnInit {
       );
     } else {
       this.createCourceForm.markAllAsTouched();
-      console.log(this.learnerGuidearray)
-      console.log(this.createCourceForm.value);
+      console.log(this.learnerGuidearray);
+      console.log(totalObj);
     }
-  }
-  saveasDraft() {
-    debugger
-    let learnerguidearr = this.createCourceForm.value.learnerguidearray;
-    let localarr:any =[]; 
-   learnerguidearr.map((arrayres:any)=>{
-     if(arrayres.name){
-     localarr.push(arrayres.name)
-    }    
-     else{
-       localarr.push(arrayres)
-     }
-   })
-   this.learnerGuidearray = localarr;
-   console.log(localarr);
-   console.log(this.learnerGuidearray)
-   this.createCourceForm.value.learnerguidearray=this.learnerGuidearray;
-    console.log(this.createCourceForm.value);
   }
 
   certificationTyupe(event: any) {
@@ -644,8 +827,8 @@ export class CreateNewCourseComponent implements OnInit {
     this.showCollapse = !this.showCollapse;
   }
 
-  getlearningType(event:any){
+  getlearningType(event: any) {
     console.log(event.target.value);
-    this.learningType = event.target.value
+    this.learningType = event.target.value;
   }
 }
