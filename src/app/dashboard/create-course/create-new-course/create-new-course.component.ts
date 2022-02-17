@@ -492,12 +492,14 @@ export class CreateNewCourseComponent implements OnInit {
   ) {}
   public showCertificateExpiry: boolean = false;
   public externalVendorname: boolean = false;
+  public learnerGuidearray:any =[];
+  public learningType:any ='ILT and vILT training';
 
   ngOnInit(): void {
     this.createCourceForm = this.fb.group({
       title: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
-      learning_type: new FormControl('', [Validators.required]),
+      learning_type: new FormControl('ILT and vILT training', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       objective: new FormControl('', [Validators.required]),
       resource: new FormControl(''),
@@ -512,7 +514,7 @@ export class CreateNewCourseComponent implements OnInit {
         ? new FormControl('')
         : new FormControl('', [Validators.required]),
       purchase_order: new FormControl(''),
-      subject: new FormControl('', [Validators.required]),
+      subject: new FormControl( [Validators.required]),
       external_vendor: new FormControl('', [Validators.required]),
       email_training_contact: new FormControl('', [Validators.required]),
       delivery_method: new FormControl('', [Validators.required]),
@@ -526,7 +528,6 @@ export class CreateNewCourseComponent implements OnInit {
       free_field_content: new FormControl(''),
       first_session_date: new FormControl('', [Validators.required]),
       expiry_date: new FormControl('', [Validators.required]),
-      learner_guideline: new FormControl(''),
       title_additional: new FormControl(''),
       email_content_owner: new FormControl(''),
       entity_business_area: new FormControl('', [Validators.required]),
@@ -535,6 +536,7 @@ export class CreateNewCourseComponent implements OnInit {
       available_language: new FormControl('', [Validators.required]),
       who_see_course: new FormControl(''),
       external_vendor_name: new FormControl('', [Validators.required]),
+      learner_guideline: new FormControl(''),
       learnerguidearray: this.fb.array([]),
     });
     this.addLearnerGuideline();
@@ -561,6 +563,7 @@ export class CreateNewCourseComponent implements OnInit {
 
   removeLearnerGuideline(i: any) {
     this.t.removeAt(i);
+    // this.learnerGuidearray.splice(i,1)
   }
 
   selectLearning() {
@@ -570,6 +573,18 @@ export class CreateNewCourseComponent implements OnInit {
   }
 
   createNewCource() {
+    let learnerguidearr = this.createCourceForm.value.learnerguidearray;
+     let localarr:any =[]; 
+    learnerguidearr.map((arrayres:any)=>{
+      if(arrayres.name){
+      localarr.push(arrayres.name)}
+      else{
+        localarr.push(arrayres)
+      }
+    })
+    this.learnerGuidearray = localarr;
+    this.createCourceForm.value.learnerguidearray=this.learnerGuidearray;
+    console.log(this.learnerGuidearray)
     if (this.createCourceForm.valid) {
       console.log(this.createCourceForm.value);
       this.courceService.createCource(this.createCourceForm.value).subscribe(
@@ -585,10 +600,26 @@ export class CreateNewCourseComponent implements OnInit {
       );
     } else {
       this.createCourceForm.markAllAsTouched();
+      console.log(this.learnerGuidearray)
       console.log(this.createCourceForm.value);
     }
   }
   saveasDraft() {
+    debugger
+    let learnerguidearr = this.createCourceForm.value.learnerguidearray;
+    let localarr:any =[]; 
+   learnerguidearr.map((arrayres:any)=>{
+     if(arrayres.name){
+     localarr.push(arrayres.name)
+    }    
+     else{
+       localarr.push(arrayres)
+     }
+   })
+   this.learnerGuidearray = localarr;
+   console.log(localarr);
+   console.log(this.learnerGuidearray)
+   this.createCourceForm.value.learnerguidearray=this.learnerGuidearray;
     console.log(this.createCourceForm.value);
   }
 
@@ -611,5 +642,10 @@ export class CreateNewCourseComponent implements OnInit {
 
   isshowOverallmenu() {
     this.showCollapse = !this.showCollapse;
+  }
+
+  getlearningType(event:any){
+    console.log(event.target.value);
+    this.learningType = event.target.value
   }
 }
