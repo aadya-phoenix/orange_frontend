@@ -592,10 +592,11 @@ export class CreateNewCourseComponent implements OnInit {
         : new FormControl('', [Validators.required]),
       external_vendor_name: new FormControl('', [Validators.required]),
       purchase_order: new FormControl(''),
-      email_training_contact: new FormControl('', [Validators.required]),
+     // email_training_contact: new FormControl('', [Validators.required]),
       delivery_method: new FormControl('', [Validators.required]),
       for_whoom: new FormControl('', [Validators.required]),
-      cost_of_training: new FormControl('', [Validators.required]),
+      cost_of_training: new FormControl(''),
+      // cost_of_training: new FormControl('', [Validators.required]),
       learn_more: new FormControl(''),
       free_field_content: new FormControl(''),
       url: new FormControl(''),
@@ -690,11 +691,14 @@ export class CreateNewCourseComponent implements OnInit {
         }
       );
     } else {
-      this.createCourceForm.markAllAsTouched();
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.iltandViltForm.markAllAsTouched();
       console.log(this.learnerGuidearray);
       console.log(totalObj);
     }
-
+    console.log(this.commonCreateCourceForm.valid)
+    console.log(this.iltandViltForm.valid)
+    console.log(this.iltandViltForm.invalid)
   }
 
   //draft ilt and vilt
@@ -728,7 +732,8 @@ export class CreateNewCourseComponent implements OnInit {
         }
       );
     } else {
-      this.createCourceForm.markAllAsTouched();
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.iltandViltForm.markAllAsTouched();
       console.log(this.learnerGuidearray);
       console.log(totalObj);
     }
