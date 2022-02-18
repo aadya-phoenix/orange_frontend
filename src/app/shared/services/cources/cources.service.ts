@@ -17,6 +17,7 @@ export class CourcesService {
 
   getCources() {
     const url = `/api/${this.apiVersion}/course`;
+    const urllive=`${this.basePath}api/${this.apiVersion}/course`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
@@ -24,6 +25,7 @@ export class CourcesService {
 
   createCource(data: any) {
     const url = `/api/${this.apiVersion}/course/create`;
+    const urllive=`${this.basePath}api/${this.apiVersion}/course/create`;
     return this.http.post(url, data).pipe(catchError(this.Errorhandling));
   }
 

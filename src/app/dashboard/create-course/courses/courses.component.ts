@@ -23,8 +23,26 @@ export class CoursesComponent implements OnInit {
     })
   }
 
+  getRoles(){
+    this.authService.getRoles().subscribe((res:any)=>{
+      console.log(res);
+    },(err:any)=>{
+      console.log(err)
+    })
+  }
+
+  getUserRoles(){
+    this.authService.getUserRoles().subscribe((res:any)=>{
+      console.log(res);
+    },(err:any)=>{
+      console.log(err)
+    })
+  }
+
   ngOnInit(): void {
     this.getProfile();
+    this.getRoles();
+    this.getUserRoles();
     this.courceService.getCources().subscribe(
       (res: any) => {
         console.log(res);

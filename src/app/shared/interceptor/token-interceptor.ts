@@ -24,7 +24,6 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     const loginDetails: any = this.authService.getLoginDetails();
-    console.log(loginDetails)
     let token = '';
     let tokenType = '';
     if (loginDetails && loginDetails.access_token) {
@@ -32,8 +31,6 @@ export class TokenInterceptor implements HttpInterceptor {
       tokenType = loginDetails.token_type;
     }
     let setHeader = {};
-    console.log(request.url);
-    console.log(!request.url.includes('/oauth/token'))
     if (
       !request.url.includes('/oauth/token') &&
       !request.url.includes('/register')
@@ -53,8 +50,8 @@ export class TokenInterceptor implements HttpInterceptor {
             if (error.error && error.error.text) {
             }
           } else {
-            this.authService.logOut();
-           // this.router.navigate(['/login']);
+            //this.authService.logOut();
+           
           }
         }
         // if (error.error && error.error.text) {
