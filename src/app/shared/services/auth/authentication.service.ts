@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -13,7 +14,7 @@ export class AuthenticationService {
   public apiVersion = environment.apiVersion;
   public clientId = environment.clientId;
   public clientSecret = environment.clientSecret;
-  constructor(private http: HttpService) {}
+  constructor(private http: HttpService,private router:Router) {}
 
   register(data: any) {
     const url = `/api/${this.apiVersion}/register`;
@@ -44,7 +45,11 @@ export class AuthenticationService {
       .pipe(catchError(this.Errorhandling));
   }
 
-  logOut() {}
+  logOut() {
+    localStorage.clear();
+    console.log('sdsds')
+    this.router.navigate(['/login'])
+  }
 
   Errorhandling(err: HttpErrorResponse) {
     if (err.error instanceof ErrorEvent) {

@@ -10,6 +10,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authService:AuthenticationService) { }
   public showUserMenu:boolean=false;
+  getprofileDetails:any;
 
   ngOnInit(): void {
     this.getUserprofile();
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
   getUserprofile(){
     this.authService.getProfileDetails().subscribe((res:any)=>{
       console.log(res);
+      this.getprofileDetails = res.data;
     },(err:any)=>{
       console.log(err)
     })
@@ -25,6 +27,11 @@ export class HeaderComponent implements OnInit {
 
   userMenu(){
     this.showUserMenu = !this.showUserMenu;
+  }
+
+  logout(){
+    console.log('he')
+    this.authService.logOut();
   }
 
 }
