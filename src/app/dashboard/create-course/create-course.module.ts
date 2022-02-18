@@ -6,11 +6,13 @@ import { CreateCourseRoutingModule } from './create-course-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { CourseDetailComponent } from './course-detail/course-detail.component';
+import { ViewHistoryComponent } from './view-history/view-history.component';
 
 
 
 @NgModule({
-  declarations: [CoursesComponent, CreateNewCourseComponent],
+  declarations: [CoursesComponent, CreateNewCourseComponent, CourseDetailComponent, ViewHistoryComponent],
   imports: [
     CommonModule,
     CreateCourseRoutingModule,

@@ -48,6 +48,14 @@ export class AuthenticationService {
       .pipe(catchError(this.Errorhandling));
   }
 
+  getProfileDetailsfromlocal(){
+    return JSON.parse(localStorage.getItem('profileDetails') || '{}');
+  }
+
+  getRolefromlocal(){
+    return JSON.parse(localStorage.getItem('role') || '{}')
+  }
+
   getRoles() {
     const url = `/api/${this.apiVersion}/roles`;
     const urllive=`${this.basePath}api/${this.apiVersion}/roles`;

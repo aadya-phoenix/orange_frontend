@@ -11,7 +11,10 @@ import { PasswordStrengthValidator } from '../password-strength.validators';
 })
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
-  constructor(private authService: AuthenticationService,private router:Router) {}
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     const emailregexp = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
@@ -25,8 +28,7 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(20),
-        PasswordStrengthValidator
-
+        PasswordStrengthValidator,
       ]),
     });
   }
@@ -36,17 +38,30 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    let allroles;
+    let roleObj: any;
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe(
         (res: any) => {
           console.log(res);
-          if(res){
-            
-            localStorage.setItem('loginDetails',JSON.stringify(res))
+          if (res) {
+            localStorage.setItem('loginDetails', JSON.stringify(res));
             this.router.navigate(['/dashboard']);
-
+            this.authService.getProfileDetails().subscribe((profile) => {
+              console.log(profile);
+              this.authService.getRoles().subscribe((res: any) => {
+                allroles = res.data;
+                allroles.find((currentrole: any) => {
+                  if (currentrole.id === profile.data.role_id) {
+                    roleObj = currentrole;
+                  }
+                });
+                console.log(roleObj);
+                localStorage.setItem('role', JSON.stringify(roleObj));
+              });
+              localStorage.setItem('profileDetails', JSON.stringify(profile));
+            });
           }
-          
         },
         (err: any) => {
           console.log(err);
