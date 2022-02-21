@@ -33,7 +33,7 @@
               </a>
             </li>
             <li>
-              <a [routerLink]="['/dashboard']" style="color: #5161ce"
+              <a [routerLink]="['/dashboard']" style="color: #ff7900"
                 >Dashboard</a
               >
             </li>
@@ -57,18 +57,15 @@
               style="padding: 0.75rem 1.25rem; background-color: #fff"
             >
               <div>
-                <img
+                <img src="../../../../assets/images/formm.png" class="ml-2" style="width: 40px;">
+                <!-- <img
                   src="../../../../assets/images/form.png"
                   style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px"
                   class="mr-2"
-                />
-                <span>Complete this form and click on the submit button</span>
+                /> -->
+                <span class="comlte_css">Complete this form and click on the submit button</span>
                         <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                  View overall request status<i
-                    class="fa fa-indent ml-1"
-                    aria-hidden="true"
-                    style="color: grey"
-                  ></i>
+                  View overall request status<img src="../../../../assets/images/Viewreq.png" class="ml-2" style="width: 40px;">
                 </a>
                     </div>
                 </div>
@@ -88,9 +85,9 @@
                 <form [formGroup]="commonCreateCourceForm">
                     <div class="card" *ngIf="learningType != 'Playlist'">
                         <div class="card-header">
-                            <button class="btn btn-primary btn_common">
+                            <!-- <button class="btn btn-primary btn_common">
                   Common Fields
-                </button>
+                </button> -->
                         </div>
                         <!-- <form [formGroup]="createCourceForm"> -->
                         <div class="card-body">
@@ -969,7 +966,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                                     <div class="form-group">
                                         <label class="form-control-label">External vendor <span style="color: red">* </span>
 
-                        <a href="">
+                        <a >
                           <i
                             class="fa fa-info-circle info_circle"
                             aria-hidden="true"
@@ -1112,6 +1109,9 @@ Note: 3-5 working days are required for the learning object to be available in t
                                     </tr>
                                 </thead>
                             </table>
+
+
+
                             <p style="color: #000">
                                 <b>Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
                             </p>
@@ -2323,102 +2323,92 @@ Note: 3-5 working days are required for the learning object to be available in t
 <!-- .content -->
 <div class="collapse" id="collapseExample">
     <div class="card card-body req_status-card">
-        <div class="card_header">
+        <div class="card_header reqst_header">
+            <i class="fa fa-minus" aria-hidden="true"></i>
             <p>Overall request Status</p>
             <i class="fa fa-times fa_cross" aria-hidden="true" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
         </div>
-        <div class="row ml-1">
+        <div class="row ml-1 mr-1" data-aos="fade-right">
             <div class="col-sm-2 dash_wid">
-                <div class="card">
-                    <div class="card-body body_padidng">
-                        <div class="stat-widget-one">
-                            <div class="stat-icon dib">
-                                <i class="fa fa-sticky-note-o fa-icons-des"></i>
-                            </div>
-                            <div class="stat-content dib">
-                                <div class="stat-text">
-                                    <p>Draft</p>
-                                </div>
-                                <div class="stat-digit number_css">0</div>
-                            </div>
+                <div class="alig_dashicon">
+                    <div>
+                        <div class="fa-icons-des" style="background-color:transparent;">
+                            <img src="../../../../assets/images/icon/draftsbl.png">
+
                         </div>
+
+                        <p>Draft</p>
+                        <span class="number_css">0</span>
                     </div>
+
+                </div>
+
+            </div>
+            <!--coled-->
+            <div class="col-sm-2 dash_wid">
+                <div class="alig_dashicon">
+                    <div>
+                        <div class="fa-icons-des" style="background-color:transparent;">
+                            <img src="../../../../assets/images/icon/closedbl.png">
+
+                        </div>
+
+                        <p>Submitted</p>
+                        <span class="number_css">1</span>
+                    </div>
+
+                </div>
+
+            </div>
+            <!--coled-->
+            <div class="col-sm-2 dash_wid">
+                <div class="alig_dashicon">
+                    <div>
+                        <div class="fa-icons-des" style="background-color:transparent;">
+                            <img src="../../../../assets/images/icon/pendingbl.png">
+
+                        </div>
+
+                        <p>Pending</p>
+                        <span class="number_css">0</span>
+                    </div>
+
                 </div>
             </div>
             <!--coled-->
             <div class="col-sm-2 dash_wid">
-                <div class="card">
-                    <div class="card-body body_padidng">
-                        <div class="stat-widget-one">
-                            <div class="stat-icon dib">
-                                <i class="fa fa-pencil-square-o fa-icons-des" aria-hidden="true" style="background: #9164cd"></i>
-                            </div>
-                            <div class="stat-content dib">
-                                <div class="stat-text">
-                                    <p>Submitted</p>
-                                </div>
-                                <div class="stat-digit number_css">2</div>
-                            </div>
+                <div class="alig_dashicon">
+                    <div>
+                        <div class="fa-icons-des" style="background-color:transparent;">
+                            <img src="../../../../assets/images/icon/checkbl.png">
+
                         </div>
+
+                        <p>Closed</p>
+                        <span class="number_css">0</span>
                     </div>
+
                 </div>
             </div>
             <!--coled-->
             <div class="col-sm-2 dash_wid">
-                <div class="card">
-                    <div class="card-body body_padidng">
-                        <div class="stat-widget-one">
-                            <div class="stat-icon dib">
-                                <i class="fa fa-pencil-square-o fa-icons-des" aria-hidden="true" style="background: #ffd800"></i>
-                            </div>
-                            <div class="stat-content dib">
-                                <div class="stat-text">
-                                    <p>Pending</p>
-                                </div>
-                                <div class="stat-digit number_css">2</div>
-                            </div>
+                <div class="alig_dashicon">
+                    <div>
+                        <div class="fa-icons-des" style="background-color:transparent;">
+                            <img src="../../../../assets/images/icon/rejectbl.png">
+
                         </div>
+
+                        <p>Rejected</p>
+                        <span class="number_css">0</span>
                     </div>
+
                 </div>
             </div>
             <!--coled-->
-            <div class="col-sm-2 dash_wid">
-                <div class="card">
-                    <div class="card-body body_padidng">
-                        <div class="stat-widget-one">
-                            <div class="stat-icon dib">
-                                <i class="fa fa-pencil-square-o fa-icons-des" aria-hidden="true" style="background: #50be87"></i>
-                            </div>
-                            <div class="stat-content dib">
-                                <div class="stat-text">
-                                    <p>Closed</p>
-                                </div>
-                                <div class="stat-digit number_css">2</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--coled-->
-            <div class="col-sm-2 dash_wid">
-                <div class="card">
-                    <div class="card-body body_padidng">
-                        <div class="stat-widget-one">
-                            <div class="stat-icon dib">
-                                <i class="fa fa-pencil-square-o fa-icons-des" aria-hidden="true" style="background: #ffb4e6"></i>
-                            </div>
-                            <div class="stat-content dib">
-                                <div class="stat-text">
-                                    <p>Rejected</p>
-                                </div>
-                                <div class="stat-digit number_css">2</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--coled-->
+
         </div>
+        <!--ROW END-->
         <!--ROW END-->
     </div>
 </div>

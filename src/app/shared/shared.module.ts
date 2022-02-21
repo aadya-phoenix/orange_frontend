@@ -10,7 +10,7 @@ import { PriceDirective } from './directives/price.directive';
 
 @NgModule({
   declarations: [InputfieldDirective, HeaderComponent, SidebarComponent,PriceDirective],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule,NgbModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule,NgbModule,],
   exports: [
     InputfieldDirective,
     HeaderComponent,

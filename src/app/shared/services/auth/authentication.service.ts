@@ -14,10 +14,11 @@ export class AuthenticationService {
   public apiVersion = environment.apiVersion;
   public clientId = environment.clientId;
   public clientSecret = environment.clientSecret;
-  constructor(private http: HttpService,private router:Router) {}
+  constructor(private http: HttpService, private router: Router) {}
 
   register(data: any) {
     const url = `/api/${this.apiVersion}/register`;
+    const urllive=`${this.basePath}register`;
     console.log(data);
     return this.http.post(url, data);
   }
@@ -30,6 +31,7 @@ export class AuthenticationService {
     let grantObj = { grant_type: 'password' };
     let totalObj = { ...grantObj, ...clienSecret, ...data };
     const url = `/oauth/token`;
+    const urllive=`${this.basePath}oauth/token`;
     console.log(data);
     return this.http.post(url, totalObj);
   }
@@ -40,15 +42,40 @@ export class AuthenticationService {
 
   getProfileDetails() {
     const url = `api/${this.apiVersion}/profile`;
+    const urllive=`${this.basePath}api/${this.apiVersion}/profile`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
+  getProfileDetailsfromlocal(){
+    return JSON.parse(localStorage.getItem('profileDetails') || '{}');
+  }
+
+  getRolefromlocal(){
+    return JSON.parse(localStorage.getItem('role') || '{}')
+  }
+
+  getRoles() {
+    const url = `/api/${this.apiVersion}/roles`;
+    const urllive=`${this.basePath}api/${this.apiVersion}/roles`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.Errorhandling));
+  }
+
+  getUserRoles(){
+    const url =`/api/${this.apiVersion}/role-users`;
+    const urllive=`${this.basePath}api/${this.apiVersion}/role-users`;
+    return this.http
+    .get(url, this.http.headers)
+    .pipe(catchError(this.Errorhandling));
+  }
+
   logOut() {
     localStorage.clear();
-    console.log('sdsds')
-    this.router.navigate(['/login'])
+    console.log('sdsds');
+    this.router.navigate(['/login']);
   }
 
   Errorhandling(err: HttpErrorResponse) {

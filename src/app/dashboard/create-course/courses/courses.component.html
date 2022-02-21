@@ -39,9 +39,9 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" style="color: #5161ce;">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" style="color: #ff7901;">Dashboard</a>
                         </li>
-                        <li><a [routerLink]="['/dashboard/cources/']">Create new Course</a></li>
+                        <li><a [routerLink]="['/dashboard/cources/']" style="color: #ff7901;">Create new Course</a></li>
 
                     </ol>
                 </div>
@@ -57,18 +57,20 @@
                     <div class="card">
                         <div class="card-header" style="padding: 0.45rem 1.25rem;background-color: #fff;">
                             <div>
-                                <span class="card-title">Overall request Status</span>
+                                <span class="card-title card_overall">Overall request Status</span>
                                 <a href="" class="btn btn-default float-right view_all">View All</a>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row" data-aos="fade-right">
                                 <div class="col-sm-2 dash_wid">
                                     <div class="alig_dashicon">
                                         <div>
-                                            <div class="fa-icons-des" style="background:#00b0f0">
+                                            <div class="fa-icons-des" style="background-color: #00b0f0;">
                                                 <img src="../../../../assets/images/icon/drafts.png">
+
                                             </div>
+
                                             <p>Draft</p>
                                         </div>
                                         <span class="number_css">0</span>
@@ -79,8 +81,9 @@
                                 <div class="col-sm-2 dash_wid">
                                     <div class="alig_dashicon">
                                         <div>
-                                            <div class="fa-icons-des" style="background:#a885d8">
-                                                <img src="../../../../assets/images/icon/close.png">
+                                            <div class="fa-icons-des" style="background-color: #9164cd;">
+                                                <img src="../../../../assets/images/icon/closed.png">
+
                                             </div>
 
                                             <p>Submitted</p>
@@ -93,8 +96,9 @@
                                 <div class="col-sm-2 dash_wid">
                                     <div class="alig_dashicon">
                                         <div>
-                                            <div class="fa-icons-des" style="background:#ffd800">
+                                            <div class="fa-icons-des" style="background-color: #ffd800;">
                                                 <img src="../../../../assets/images/icon/pending.png">
+
                                             </div>
 
                                             <p>Pending</p>
@@ -106,8 +110,9 @@
                                 <div class="col-sm-2 dash_wid">
                                     <div class="alig_dashicon">
                                         <div>
-                                            <div class="fa-icons-des" style="background:#50be87">
+                                            <div class="fa-icons-des" style="background-color: #50be87;">
                                                 <img src="../../../../assets/images/icon/check.png">
+
                                             </div>
 
                                             <p>Closed</p>
@@ -119,8 +124,9 @@
                                 <div class="col-sm-2 dash_wid">
                                     <div class="alig_dashicon">
                                         <div>
-                                            <div class="fa-icons-des" style="background:#ba7c97">
+                                            <div class="fa-icons-des" style="background-color: #ba7c97;">
                                                 <img src="../../../../assets/images/icon/reject.png">
+
                                             </div>
 
                                             <p>Rejected</p>
@@ -157,12 +163,12 @@
         <div class="animated fadeIn">
             <div class="row">
 
-                <div class="col-md-12">
+                <div class="col-md-12" *ngIf="getUserrole.id ===2">
                     <div class="card">
                         <div class="card-header">
                             <div>
                                 <i class="fa fa-table fa_table" aria-hidden="true"></i>
-                                <span class="card-title card-title-text">Easy dynamic table</span>
+                                <span class="card-title card-title-text card_overall">Easy dynamic table</span>
                                 <i class="fa fa-align-justify float-right fa_table" aria-hidden="true"></i>
                             </div>
                         </div>
@@ -172,25 +178,31 @@
                                     <tr>
                                         <th>Request Id</th>
                                         <th>Requester Name</th>
+
                                         <th>Activity Type</th>
                                         <!-- <th>Sent To</th> -->
                                         <th>Sent To</th>
                                         <th>Created Date</th>
                                         <th>Last Modified</th>
+                                        <th>
+                                            View History
+                                        </th>
                                         <th>Status</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let cource of courcesList">
-                                        <th>{{cource.id}}</th>
-                                        <td>{{getUserprofile && getUserprofile.first_name ? getUserprofile.first_name : '-'}}</td>
+                                        <th>{{cource.request_id}}</th>
+                                        <td>{{cource && cource.user_name ? cource.user_name : '-'}}</td>
+
                                         <!-- <td>xyz</td> -->
                                         <td>{{cource.learning_type? cource.learning_type : '-'}}</td>
                                         <td>ROC</td>
                                         <td>{{cource.created_at | date:'short'}}</td>
                                         <td>{{cource.updated_at | date:'short'}}</td>
-                                        <td><button class="btn btn-xs btn-success ">Pending</button></td>
+                                        <td> <i class="fa fa-eye view" aria-hidden="true" (click)="openModal(cource)"></i> </td>
+                                        <td><button class="btn btn-xs btn-success" style="font-size: 0.8rem;">Pending</button></td>
                                     </tr>
                                     <!-- <tr>
                                       <th>2</th>
@@ -242,6 +254,102 @@
                                       <td>xyz</td>
                                       <td><button class="btn btn-xs btn-success ">Pending</button></td>
                                   </tr> -->
+
+
+                                </tbody>
+                            </table>
+
+                            <!-- <ngb-pagination [collectionSize]="70" [(page)]="page" [boundaryLinks]="true"></ngb-pagination> -->
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12" *ngIf="getUserrole.id ===3">
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <i class="fa fa-table fa_table" aria-hidden="true"></i>
+                                <span class="card-title card-title-text">Latest Requests</span>
+                                <i class="fa fa-align-justify float-right fa_table" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Request Id</th>
+                                        <th>Requester Name</th>
+                                        <th>Activity Type</th>
+                                        <!-- <th>Sent To</th> -->
+                                        <th>Sent To</th>
+                                        <th>Created Date</th>
+                                        <th>Last Modified</th>
+                                        <th>Status</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let cource of courcesList">
+                                        <th>{{cource.request_id}}</th>
+                                        <td>{{cource && cource.user_name ? cource.user_name : '-'}}</td>
+                                        <!-- <td>xyz</td> -->
+                                        <td>{{cource.learning_type? cource.learning_type : '-'}}</td>
+                                        <td>ROC</td>
+                                        <td>{{cource.created_at | date:'short'}}</td>
+                                        <td>{{cource.updated_at | date:'short'}}</td>
+                                        <td><button class="btn btn-xs btn-success ">Pending</button></td>
+                                    </tr>
+                                    <!-- <tr>
+                                    <th>2</th>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td><button class="btn btn-xs btn-success ">Pending</button></td>
+                                </tr>
+                                <tr>
+                                    <th>3</th>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td><button class="btn btn-xs btn-success ">Pending</button></td>
+                                </tr>
+                                <tr>
+                                    <th>4</th>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td><button class="btn btn-xs btn-success " style="background: #a885d9; ">Approve</button></td>
+                                </tr>
+                                <tr>
+                                    <th>5</th>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td><button class="btn btn-xs btn-success " style="background: #a885d9; ">Approve</button></td>
+                                </tr>
+                                <tr>
+                                    <th>6</th>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td>xyz</td>
+                                    <td><button class="btn btn-xs btn-success ">Pending</button></td>
+                                </tr> -->
 
 
                                 </tbody>
