@@ -23,16 +23,16 @@ export class CoursesComponent implements OnInit {
     this.getUserrole = this.authService.getRolefromlocal();
   }
 
-  openModal(cource:any) {
+  openModal(cource: any) {
     const modalRef = this.modalService.open(ViewHistoryComponent, {
       centered: true,
-      size: 'md',
+      size: 'lg',
       windowClass: 'alert-popup',
     });
-    modalRef.componentInstance.props ={
-      title:'View History',
-      data:cource
-    }
+    modalRef.componentInstance.props = {
+      title: 'View History',
+      data: cource,
+    };
   }
 
   ngOnInit(): void {
