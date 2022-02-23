@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 
 
@@ -23,6 +24,7 @@ export class UpdateCourceComponent implements OnInit {
   public materialbasedForm!: FormGroup;
   showCollapse: boolean = true;
   routergetdata:any;
+  getUserrole:any;
 
   public cctLevel = [
     {
@@ -494,7 +496,8 @@ export class UpdateCourceComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private courceService: CourcesService,
-    private router: Router
+    private router: Router,
+    private authService:AuthenticationService
   ) {
     this.routergetdata = this.router.getCurrentNavigation()?.extras.state;
     if(!this.routergetdata){
@@ -506,9 +509,15 @@ export class UpdateCourceComponent implements OnInit {
   public learnerGuidearray: any = [];
   public learningType: any = 'ILT and vILT training';
 
+  getRole(){
+    this.getUserrole = this.authService.getRolefromlocal();
+    //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
+  }
+
   ngOnInit(): void {
 
     console.log(this.routergetdata)
+    this.getRole();
     this.createCourceForm = this.fb.group({
       //common
       title: new FormControl('', [Validators.required]),
@@ -636,6 +645,7 @@ export class UpdateCourceComponent implements OnInit {
     });
 
     this.commonCreateCourceForm.patchValue(this.routergetdata);
+    this.commonCreateCourceForm.controls['learning_type'].disable();
     this.iltandViltForm.patchValue(this.routergetdata);
     if(this.routergetdata.external_vendor=='yes'){
       this.externalVendorname = true;
@@ -645,8 +655,8 @@ export class UpdateCourceComponent implements OnInit {
     if(this.routergetdata.certification == 'yes'){
       this.showCertificateExpiry = true;
     }
-    this.commonCreateCourceForm.patchValue({subject:this.routergetdata.subject})
-    // console.log(this.routergetdata.subject)
+    this.commonCreateCourceForm.patchValue({subject: parseInt(this.routergetdata.subject)})
+    //console.log(this.routergetdata.subject);
     
     this.addLearnerGuideline();
   }

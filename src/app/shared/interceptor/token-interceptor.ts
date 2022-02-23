@@ -37,6 +37,17 @@ export class TokenInterceptor implements HttpInterceptor {
     ) {
       setHeader = {
         Authorization: `${tokenType} ${token}`,
+        'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+        
+      };
+    }
+    else{
+      setHeader = {
+        'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
       };
     }
     const modified = request.clone({

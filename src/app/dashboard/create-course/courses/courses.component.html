@@ -208,6 +208,20 @@
               >
                 <thead>
                   <tr>
+                    <td colspan="5"></td>
+                    <td colspan="3">
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="search"
+                        [(ngModel)]="searchText"
+                        autocomplete="off"
+                        placeholder="&#61442;  Search here by requester name or Activity type"
+                      />
+                    </td>
+                  </tr>
+
+                  <tr>
                     <th>Request Id</th>
                     <th>Requester Name</th>
 
@@ -216,12 +230,12 @@
                     <th>Sent To</th>
                     <th>Created Date</th>
                     <th>Last Modified</th>
-                    <th>View History</th>
+                    <th width="130">View History</th>
                     <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let cource of courcesList">
+                  <tr *ngFor="let cource of courcesList | filter: searchText">
                     <th>{{ cource.request_id }}</th>
                     <td>
                       {{ cource && cource.user_name ? cource.user_name : "-" }}
@@ -234,7 +248,7 @@
                     <td>ROC</td>
                     <td>{{ cource.created_at | date: "short" }}</td>
                     <td>{{ cource.updated_at | date: "short" }}</td>
-                    <td>
+                    <td align="center">
                       <i
                         class="fa fa-eye view"
                         aria-hidden="true"
@@ -315,7 +329,10 @@
           </div>
         </div>
 
-        <div class="col-md-12" *ngIf="getUserrole.id === 3">
+        <div
+          class="col-md-12"
+          *ngIf="getUserrole.id === 3 || getUserrole.id === 4"
+        >
           <div class="card">
             <div class="card-header">
               <div>
@@ -345,7 +362,10 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let cource of courcesList" (click)="getRequest(cource)">
+                  <tr
+                    *ngFor="let cource of courcesList"
+                    (click)="getRequest(cource)"
+                  >
                     <th>{{ cource.request_id }}</th>
                     <td>
                       {{ cource && cource.user_name ? cource.user_name : "-" }}

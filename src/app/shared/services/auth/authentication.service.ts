@@ -1,9 +1,10 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { EncryptionService } from '../encrypt-decrypt/encryption.service';
 import { HttpService } from '../http/http.service';
 
 @Injectable({
@@ -14,7 +15,11 @@ export class AuthenticationService {
   public apiVersion = environment.apiVersion;
   public clientId = environment.clientId;
   public clientSecret = environment.clientSecret;
-  constructor(private http: HttpService, private router: Router) {}
+
+  
+
+  constructor(private http: HttpService, private router: Router,private encrypt:EncryptionService) {}
+
 
   register(data: any) {
     const url = `/api/${this.apiVersion}/register`;
@@ -53,7 +58,10 @@ export class AuthenticationService {
   }
 
   getRolefromlocal(){
+    let role = JSON.parse(localStorage.getItem('role') || '{}')
+
     return JSON.parse(localStorage.getItem('role') || '{}')
+    //return this.encrypt.decryptUsingAES256(role)
   }
 
   getRoles() {
