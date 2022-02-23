@@ -216,16 +216,16 @@
                         name="search"
                         [(ngModel)]="searchText"
                         autocomplete="off"
-                        placeholder="&#61442;  Search here by requester name or Activity type"
+                        placeholder="Search here by requester name or Activity type"
                       />
                     </td>
                   </tr>
 
                   <tr>
-                    <th>Request Id</th>
+                    <th sortable="id" (sort)="onSort($event)">Request Id</th>
                     <th>Requester Name</th>
 
-                    <th>Activity Type</th>
+                    <th sortable="learning_type" (sort)="onSort($event)">Activity Type</th>
                     <!-- <th>Sent To</th> -->
                     <th>Sent To</th>
                     <th>Created Date</th>
@@ -351,6 +351,19 @@
               >
                 <thead>
                   <tr>
+                    <td colspan="5"></td>
+                    <td colspan="3">
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="search"
+                        [(ngModel)]="searchText"
+                        autocomplete="off"
+                        placeholder="Search here by requester name or Activity type"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
                     <th>Request Id</th>
                     <th>Requester Name</th>
                     <th>Activity Type</th>
@@ -363,7 +376,7 @@
                 </thead>
                 <tbody>
                   <tr
-                    *ngFor="let cource of courcesList"
+                    *ngFor="let cource of courcesList | filter: searchText"
                     (click)="getRequest(cource)"
                   >
                     <th>{{ cource.request_id }}</th>

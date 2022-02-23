@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateNewCourseComponent } from '../create-new-course/create-new-course.component';
 import { ViewHistoryComponent } from '../view-history/view-history.component';
 import { Router } from '@angular/router';
+import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
 
 @Component({
   selector: 'app-courses',
@@ -17,12 +18,17 @@ export class CoursesComponent implements OnInit {
   getUserprofile: any;
   getUserrole: any;
   collectionSize: any;
-  searchText:any;
+  searchText: any;
+  public compare = (v1: string | number, v2: string | number) =>
+    v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+
+  @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
+
   constructor(
     private courceService: CourcesService,
     private authService: AuthenticationService,
     private modalService: NgbModal,
-    private router:Router
+    private router: Router
   ) {
     this.getUserrole = this.authService.getRolefromlocal();
     //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
@@ -46,8 +52,26 @@ export class CoursesComponent implements OnInit {
     maxSize: 2,
   };
 
+  onSort({ column, direction }: any) {
+    this.headers.forEach((header) => {
+      if (header.sortable !== column) {
+        header.direction = '';
+      }
+    });
+
+    if (direction === '' || column === '') {
+      this.courcesList = this.courcesList;
+    } else {
+      this.courcesList = [...this.courcesList].sort((a, b) => {
+        const res = this.compare(a[column], b[column]);
+        return direction === 'asc' ? res : -res;
+      });
+    }
+  }
+
   refreshCourses() {
-    console.log(this.service.page)
+    console.log(this.service.page);
+    console.log(this.service.pageSize);
     this.courceService.getCources().subscribe(
       (res: any) => {
         console.log(res);
@@ -62,9 +86,11 @@ export class CoursesComponent implements OnInit {
     );
   }
 
-  getRequest(cource:any){
-    this.router.navigateByUrl('/dashboard/cources/request-detail',{state:cource});
-    console.log(cource)
+  getRequest(cource: any) {
+    this.router.navigateByUrl('/dashboard/cources/request-detail', {
+      state: cource,
+    });
+    console.log(cource);
   }
 
   ngOnInit(): void {
