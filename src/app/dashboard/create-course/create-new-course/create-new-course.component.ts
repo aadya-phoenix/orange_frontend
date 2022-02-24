@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class CreateNewCourseComponent implements OnInit {
   public commonCreateCourceForm!: FormGroup;
   public iltandViltForm!: FormGroup;
   public materialbasedForm!: FormGroup;
-  public currriculumForm!:FormGroup;
+  public currriculumForm!: FormGroup;
   showCollapse: boolean = true;
 
   public cctLevel = [
@@ -488,12 +489,17 @@ export class CreateNewCourseComponent implements OnInit {
     { id: 8, name: 'Slovak (Slovakia)' },
     { id: 9, name: 'Spanish(Spain)' },
   ];
+  getUserrole: any; //to get user role
 
   constructor(
     private fb: FormBuilder,
     private courceService: CourcesService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private authService: AuthenticationService
+  ) {
+    this.getUserrole = this.authService.getRolefromlocal();
+    //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
+  }
   public showCertificateExpiry: boolean = false;
   public externalVendorname: boolean = false;
   public learnerGuidearray: any = [];
@@ -616,19 +622,24 @@ export class CreateNewCourseComponent implements OnInit {
       // learner_guideline: new FormControl(''),
       learnerguidearray: this.fb.array([]),
       //ilt and vilt
+
+      regionalCordinator:
+        this.getUserrole.id === 2
+          ? new FormControl('', [Validators.required])
+          : new FormControl(''),
     });
 
     this.materialbasedForm = this.fb.group({
       //material based
-      subject:new FormControl(''),
-      learn_more:new FormControl(''),
-      resource:new FormControl(''),
-      who_see_course:new FormControl(''),
-      expiry_date:new FormControl(''),
-      title_additional:new FormControl(''),
-      free_field_content:new FormControl(''),
-      for_whoom:new FormControl(''),
-      validity_period:new FormControl(''),
+      subject: new FormControl(),
+      learn_more: new FormControl(''),
+      resource: new FormControl(''),
+      who_see_course: new FormControl(''),
+      expiry_date: new FormControl(''),
+      title_additional: new FormControl(''),
+      free_field_content: new FormControl(''),
+      for_whoom: new FormControl(''),
+      validity_period: new FormControl(''),
       material_source: new FormControl(''),
       material_expiry_date: new FormControl(''),
       material_url: new FormControl(''),
@@ -636,17 +647,17 @@ export class CreateNewCourseComponent implements OnInit {
     });
 
     this.currriculumForm = this.fb.group({
-      email_of_curriculum_owner:new FormControl(''),
-      title_additional:new FormControl(''),
-      free_field_content:new FormControl(''),
-      learn_more:new FormControl(''),
-      expiry_date:new FormControl(''),
-      who_see_course:new FormControl(''),
-      for_whoom:new FormControl(''),
-      validity_period:new FormControl(''),
-      
+      email_of_curriculum_owner: new FormControl(''),
+      title_additional: new FormControl(''),
+      free_field_content: new FormControl(''),
+      learn_more: new FormControl(''),
+      expiry_date: new FormControl(''),
+      who_see_course: new FormControl(''),
+      for_whoom: new FormControl(''),
+      validity_period: new FormControl(''),
+
       learnerguidearray: this.fb.array([]),
-    })
+    });
 
     this.addLearnerGuideline();
     this.addLearnerGuidelinetocurriculum();
@@ -656,24 +667,22 @@ export class CreateNewCourseComponent implements OnInit {
     return this.iltandViltForm.controls;
   }
 
- 
   get t() {
     return this.f.learnerguidearray as FormArray;
   }
 
-
-  get currriculum(){
+  get currriculum() {
     return this.currriculumForm.controls;
   }
 
-  get curriculumArray(){
+  get curriculumArray() {
     return this.currriculum.learnerguidearray as FormArray;
   }
 
   addMorelearnerGuideline() {
     return this.fb.group({
       learnerguide_line: new FormControl(''),
-      learnerguide_line_description:new FormControl('')
+      learnerguide_line_description: new FormControl(''),
     });
   }
 
@@ -691,7 +700,7 @@ export class CreateNewCourseComponent implements OnInit {
     // this.learnerGuidearray.splice(i,1)
   }
 
-  removeLearnerGuidelinetocurriculum(i:any){
+  removeLearnerGuidelinetocurriculum(i: any) {
     this.curriculumArray.removeAt(i);
   }
   selectLearning() {
@@ -702,7 +711,7 @@ export class CreateNewCourseComponent implements OnInit {
 
   //create ilt vilt form
   createNewCourceIlt() {
-  //  let learnerguidearr = this.iltandViltForm.value.learnerguidearray;
+    //  let learnerguidearr = this.iltandViltForm.value.learnerguidearray;
     //let localarr: any = [];
     // learnerguidearr.map((arrayres: any) => {
     //   if (arrayres.name) {
@@ -850,13 +859,9 @@ export class CreateNewCourseComponent implements OnInit {
     }
   }
 
-
-  curriculumSubmit(){
-    console.log(this.currriculumForm.value)
+  curriculumSubmit() {
+    console.log(this.currriculumForm.value);
   }
-
-
-
 
   certificationTyupe(event: any) {
     if (event.target.value == 'yes') {
