@@ -2,29 +2,112 @@ body {
     font-family: Helvetica;
 }
 
-.nav-pills .nav-link {
-    background-color: transparent;
-    height: 40px;
+.tabbed {
     width: 100%;
-    color: #000;
-    text-align: center;
-    background-image: url(../../assets/images/whitewidth.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    min-width: 400px;
+    margin: 20px auto;
+    margin-bottom: 20px;
+    border-bottom: 4px solid #000;
+    overflow: hidden;
+    transition: border 250ms ease;
 }
 
-.nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
-    background-image: url(../../assets/images/orangewidth.png);
-    background-color: transparent;
-    height: 40px;
-    width: 100%;
+.tabbed ul {
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    float: left;
+    padding-left: 48px;
+    list-style-type: none;
+}
+
+.tabbed.round ul li a {
+    border-radius: 8px 8px 0 0;
+}
+
+.tabbed ul li a {
+    display: block;
+    float: right;
+    padding: 10px 24px 8px;
+    background-color: #fff;
+    margin-right: 46px;
+    z-index: 2;
+    position: relative;
+    cursor: pointer;
+    color: #777;
+    text-transform: uppercase;
+    font: 600 13px/20px roboto, "Open Sans", Helvetica, sans-serif;
+    transition: all 250ms ease;
+}
+
+.tabbed.round ul li a:before {
+    border-radius: 0 8px 0 0;
+}
+
+.tabbed ul li a:before {
+    right: -24px;
+    transform: skew(30deg, 0deg);
+    box-shadow: rgb(0 0 0 / 10%) 3px 2px 5px, inset rgb(255 255 255 / 9%) -1px 0;
+}
+
+.tabbed ul li a:before,
+.tabbed ul li a:after {
+    display: block;
+    content: " ";
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 44px;
+    background-color: #fff;
+    transition: all 250ms ease;
+}
+
+.tabbed.round ul li a:after {
+    border-radius: 8px 0 0 0;
+}
+
+.tabbed ul li a:after {
+    left: -24px;
+    transform: skew(-30deg, 0deg);
+    box-shadow: rgb(0 0 0 / 10%) -3px 2px 5px, inset rgb(255 255 255 / 9%) 1px 0;
+}
+
+.tabbed ul li a:before,
+.tabbed ul li a:after {
+    display: block;
+    content: " ";
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 44px;
+    background-color: #fff;
+    transition: all 250ms ease;
+}
+
+.tabbed ul li a.active,
+.tabbed ul li a.active:before,
+.tabbed ul li a.active:after {
+    background-color: #ff6600;
     color: #fff;
-    text-align: center;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+}
+
+.tabbed ul li a.active {
+    z-index: 3;
+    background-color: #ff6600 !important;
+}
+
+.tabbed ul li a {
+    color: #00000075;
+    background-color: #fff;
+    padding: 0;
+    display: inline;
+    padding: 10px 30px 8px;
+}
+
+.tabbed.round ul li a span {
+    position: relative;
+    z-index: 4;
+    text-transform: none;
 }
 
 .nav-item_p :active {
@@ -91,21 +174,18 @@ body {
     padding: 24px 9px;
     text-align: center;
     height: 124px;
-    margin-top: -22px;
-}
-
-.nav-pills {
-    border-bottom: 4px solid;
+    margin-top: -12px;
 }
 
 .create_course {
     font-size: 17px;
     color: #ff7900;
+    font-weight: 600;
 }
 
 .p__text_divcss {
     font-size: 13px;
-    color: #333;
+    color: #000;
     font-weight: 600;
     width: 248px;
     margin: auto;
