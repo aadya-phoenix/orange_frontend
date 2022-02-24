@@ -173,25 +173,26 @@
               </div>
             </div>
             <div class="card-body">
+                <div class="d-flex justify-content-between align-content-center mt-1 mb-2 ml-2 mr-2">
+                            <div class="d-flex align-content-center">
+                                <p style="font-size: 14px;color:#000">Show </p>
+                                <p class="counter_css ml-1 mr-1">10 <i class="fa fa-sort" aria-hidden="true"></i> </p>
+                                <p style="font-size: 14px;color:#000">entries
+                                </p>
+                            </div>
+                            <div _ngcontent-cue-c109="" class="d-flex">
+                                <label _ngcontent-cue-c109="" class="mt-2 mr-1">Search:</label>
+                                <input _ngcontent-cue-c109="" type="text" name="search" autocomplete="off" placeholder=" " class="form-control ng-untouched ng-pristine ng-valid " ng-reflect-name="search ">
+
+                            </div>
+                        </div>
               <div class="table-responsive">
               <table
                 id="bootstrap-data-table-export"
                 class="table table-striped table-bordered"
               >
                 <thead>
-                  <tr>
-                    <td colspan="5"></td>
-                    <td colspan="3">
-                      <input
-                        class="form-control"
-                        type="text"
-                        name="search"
-                        [(ngModel)]="searchText"
-                        autocomplete="off"
-                        placeholder="Search here by requester name or Activity type"
-                      />
-                    </td>
-                  </tr>
+                 
 
                   <tr>
                     <th sortable="id" (sort)="onSort($event)">Request Id</th>
@@ -203,12 +204,13 @@
                     <th>Created Date</th>
                     <th>Last Modified</th>
                     <th width="130">View History</th>
+                    <th>Status</th>
                    
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let cource of courcesList | filter: searchText">
-                    <th>{{ cource.request_id }}</th>
+                    <td>{{ cource.request_id }}</td>
                     <td>
                       {{ cource && cource.user_name ? cource.user_name : "-" }}
                     </td>
@@ -228,6 +230,7 @@
                         (click)="openModal(cource)"
                       ></i>
                     </td>
+                    <td><button class="btn btn-success">Pending</button></td>
                    
                   </tr>
                   <!-- <tr>
@@ -321,38 +324,40 @@
 
                             </div>
                         </div>
-                        <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                            <thead>
+                        <div class="table-responsive">
+                            <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                <thead>
 
-                                <tr style="font-size: 15px;">
-                                    <th>Request Id</th>
-                                    <th>Requester Name</th>
-                                    <th>Activity Type</th>
-                                    <!-- <th>Sent To</th> -->
-                                    <th>Sent To</th>
-                                    <th>Created Date</th>
-                                    <th>Last Modified</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let cource of courcesList | filter: searchText" (click)="getRequest(cource)">
-                                    <th>{{ cource.request_id }}</th>
-                                    <td>
-                                        {{ cource && cource.user_name ? cource.user_name : "-" }}
-                                    </td>
-                                    <!-- <td>xyz</td> -->
-                                    <td>
-                                        {{ cource.learning_type ? cource.learning_type : "-" }}
-                                    </td>
-                                    <td>ROC</td>
-                                    <td>{{ cource.created_at | date: "short" }}</td>
-                                    <td>{{ cource.updated_at | date: "short" }}</td>
-                                    <td>
-                                        <button class="btn btn-xs btn-success">Pending</button>
-                                    </td>
-                                </tr>
-                                <!-- <tr>
+                                    <tr style="font-size: 15px;">
+                                        <th>Request Id</th>
+                                        <th>Requester Name</th>
+                                        <th>Activity Type</th>
+                                        <!-- <th>Sent To</th> -->
+                                        <th>Sent To</th>
+                                        <th>Created Date</th>
+                                        <th>Last Modified</th>
+                                        <th>Status</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let cource of courcesList | filter: searchText" (click)="getRequest(cource)">
+                                        <td>{{ cource.request_id }}</td>
+                                        <td>
+                                            {{ cource && cource.user_name ? cource.user_name : "-" }}
+                                        </td>
+                                        <!-- <td>xyz</td> -->
+                                        <td>
+                                            {{ cource.learning_type ? cource.learning_type : "-" }}
+                                        </td>
+                                        <td>ROC</td>
+                                        <td>{{ cource.created_at | date: "short" }}</td>
+                                        <td>{{ cource.updated_at | date: "short" }}</td>
+                                        <td><button class="btn btn-success pending_creat_course">
+                                          <img src="../../../../assets/images/icon/pending_img.png" class="mr-1" style="width: 20px;"/>Pending</button></td>
+
+                                    </tr>
+                                    <!-- <tr>
                                     <th>2</th>
                                     <td>xyz</td>
                                     <td>xyz</td>
@@ -402,8 +407,9 @@
                                     <td>xyz</td>
                                     <td><button class="btn btn-xs btn-success ">Pending</button></td>
                                 </tr> -->
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
 
                         <ngb-pagination [collectionSize]="collectionSize" [(page)]="service.page" (pageChange)="refreshCourses()" [maxSize]="service.maxSize" [pageSize]="service.pageSize" [boundaryLinks]="true"></ngb-pagination>
                     </div>
