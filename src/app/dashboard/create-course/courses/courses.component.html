@@ -3,24 +3,17 @@
   </aside> -->
 <!-- <app-header></app-header> -->
 <div id="right-panel" class="right-panel">
-  <!-- Header-->
-  <app-header></app-header>
+    <!-- Header-->
+    <app-header></app-header>
 
-  <div
-    class="breadcrumbs"
-    style="background-color: #fbfbf7; padding: 9px 9px 20px 9px"
-  >
-    <div class="col-sm-6">
-      <div class="page-header float-left" style="background: transparent">
-        <div class="page-title d-flex">
-          <img
-            src="../../../../assets/images/creatnew.png"
-            style="width: 60px"
-          />
-          <div class="d-flex flex-column ml-4">
-            <span style="font-size: 20px">Create new course </span>
-            <span style="color: #aba3a3; font-size: 13px"
-              >People Development & Learning Strives on Providing you with the
+    <div class="breadcrumbs" style="background-color: #fbfbf7; padding: 9px 9px 20px 9px">
+        <div class="col-sm-6">
+            <div class="page-header float-left" style="background: transparent">
+                <div class="page-title d-flex">
+                    <img src="../../../../assets/images/creatnew.png" style="width: 60px" />
+                    <div class="d-flex flex-column ml-4">
+                        <span style="font-size: 20px">Create new course </span>
+                        <span style="color: #aba3a3; font-size: 13px">People Development & Learning Strives on Providing you with the
               best customer service we can drive</span
             >
           </div>
@@ -60,7 +53,8 @@
           <div class="card">
             <div
               class="card-header"
-              style="padding: 0.45rem 1.25rem; background-color: #fff"
+              style="padding: 0.45rem 1.25rem; background-color: #fff;border-bottom: 1px solid #00000008;
+"
             >
               <div>
                 <span class="card-title card_overall"
@@ -86,109 +80,94 @@
                       <p>Draft</p>
                     </div>
                     <span class="number_css">0</span>
-                  </div>
+                    </div>
                 </div>
                 <!--coled-->
                 <div class="col-sm-2 dash_wid">
-                  <div class="alig_dashicon">
-                    <div>
-                      <div
-                        class="fa-icons-des"
-                        style="background-color: #9164cd"
-                      >
-                        <img src="../../../../assets/images/icon/closed.png" />
-                      </div>
+                    <div class="alig_dashicon">
+                        <div>
+                            <div class="fa-icons-des" style="background-color: #9164cd">
+                                <img src="../../../../assets/images/icon/closed.png" />
+                            </div>
 
-                      <p>Submitted</p>
-                    </div>
-                    <span class="number_css">{{
+                            <p>Submitted</p>
+                        </div>
+                        <span class="number_css">{{
                       courcesList ? courcesList.length : ""
                     }}</span>
-                  </div>
+                    </div>
                 </div>
                 <!--coled-->
                 <div class="col-sm-2 dash_wid" *ngIf="getUserrole.id != 2">
-                  <div class="alig_dashicon">
-                    <div>
-                      <div
-                        class="fa-icons-des"
-                        style="background-color: #ffd800"
-                      >
-                        <img src="../../../../assets/images/icon/pending.png" />
-                      </div>
+                    <div class="alig_dashicon">
+                        <div>
+                            <div class="fa-icons-des" style="background-color: #ffd800">
+                                <img src="../../../../assets/images/icon/pending.png" />
+                            </div>
 
-                      <p>Pending</p>
+                            <p>Pending</p>
+                        </div>
+                        <span class="number_css">0</span>
                     </div>
-                    <span class="number_css">0</span>
-                  </div>
                 </div>
                 <!--coled-->
                 <div class="col-sm-2 dash_wid">
-                  <div class="alig_dashicon">
-                    <div>
-                      <div
-                        class="fa-icons-des"
-                        style="background-color: #50be87"
-                      >
-                        <img src="../../../../assets/images/icon/check.png" />
-                      </div>
+                    <div class="alig_dashicon">
+                        <div>
+                            <div class="fa-icons-des" style="background-color: #50be87">
+                                <img src="../../../../assets/images/icon/check.png" />
+                            </div>
 
-                      <p>Closed</p>
+                            <p>Closed</p>
+                        </div>
+                        <span class="number_css">0</span>
                     </div>
-                    <span class="number_css">0</span>
-                  </div>
                 </div>
                 <!--coled-->
                 <div class="col-sm-2 dash_wid">
-                  <div class="alig_dashicon">
-                    <div>
-                      <div
-                        class="fa-icons-des"
-                        style="background-color: #ba7c97"
-                      >
-                        <img src="../../../../assets/images/icon/reject.png" />
-                      </div>
+                    <div class="alig_dashicon">
+                        <div>
+                            <div class="fa-icons-des" style="background-color: #ba7c97">
+                                <img src="../../../../assets/images/icon/reject.png" />
+                            </div>
 
-                      <p>Rejected</p>
+                            <p>Rejected</p>
+                        </div>
+                        <span class="number_css">0</span>
                     </div>
-                    <span class="number_css">0</span>
-                  </div>
                 </div>
                 <!--coled-->
-              </div>
-              <!--ROW END-->
             </div>
-            <div class="card-footer d-flex justify-content-center">
-              <button class="btn btn-default view-css">
+            <!--ROW END-->
+        </div>
+        <div class="card-footer d-flex justify-content-center" style="border-top: 1px solid #00000008;
+">
+            <button class="btn btn-default view-css">
                 <i class="fa fa-bar-chart" aria-hidden="true"></i> View complete
                 report
               </button>
-              <!-- </button> -->
-              <button
-                class="btn btn-default view-css ml-1"
-                [routerLink]="['/dashboard/cources/create-cource']"
-              >
+            <!-- </button> -->
+            <button class="btn btn-default view-css ml-1" [routerLink]="['/dashboard/cources/create-cource']">
                 + New request
               </button>
-              <!-- </button> -->
-            </div>
-          </div>
+            <!-- </button> -->
         </div>
-      </div>
-      <!-- .animated -->
     </div>
-    <!-- .content -->
-  </div>
-  <div class="content mt-3">
+</div>
+</div>
+<!-- .animated -->
+</div>
+<!-- .content -->
+</div>
+<div class="content mt-3">
     <div class="animated fadeIn">
-      <div class="row">
-        <div class="col-md-12" *ngIf="getUserrole.id === 2">
-          <div class="card">
-            <div class="card-header">
-              <div>
-                <i class="fa fa-table fa_table" aria-hidden="true"></i>
-                <span class="card-title card-title-text card_overall"
-                  >Easy dynamic table</span
+        <div class="row">
+            <div class="col-md-12" *ngIf="getUserrole.id === 2">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <i class="fa fa-table fa_table" aria-hidden="true"></i>
+                            <span class="card-title card-title-text card_overall">Easy dynamic table</span
                 >
                 <i
                   class="fa fa-align-justify float-right fa_table"
@@ -267,7 +246,7 @@
                           (click)="openModal(cource)"
                         ></i>
                       </td>
-                      <td><button class="btn btn-success">Pending</button></td>
+                      <td><button class="btn btn-default pend_css">Pending</button></td>
                     </tr>
                     <!-- <tr>
                                       <th>2</th>
@@ -343,26 +322,20 @@
               <div>
                 <i class="fa fa-table fa_table" aria-hidden="true"></i>
                 <span class="card-title card-title-text">Latest Requests</span>
-                <i
-                  class="fa fa-align-justify float-right fa_table"
-                  aria-hidden="true"
-                ></i>
-              </div>
-            </div>
-            <div class="card-body">
-              <div
-                class="d-flex justify-content-between align-content-center mt-1 mb-2 ml-2 mr-2"
-              >
-                <div class="d-flex align-content-center">
-                  <p style="font-size: 14px; color: #000">Show</p>
-                  <p class="counter_css ml-1 mr-1">
-                    10 <i class="fa fa-sort" aria-hidden="true"></i>
-                  </p>
-                  <p style="font-size: 14px; color: #000">entries</p>
-                </div>
-                <div _ngcontent-cue-c109="" class="d-flex">
-                  <label _ngcontent-cue-c109="" class="mt-2 mr-1"
-                    >Search:</label
+                            <i class="fa fa-align-justify float-right fa_table" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-content-center mt-1 mb-2 ml-2 mr-2">
+                            <div class="d-flex align-content-center">
+                                <p style="font-size: 14px; color: #000">Show</p>
+                                <p class="counter_css ml-1 mr-1">
+                                    10 <i class="fa fa-sort" aria-hidden="true"></i>
+                                </p>
+                                <p style="font-size: 14px; color: #000">entries</p>
+                            </div>
+                            <div _ngcontent-cue-c109="" class="d-flex">
+                                <label _ngcontent-cue-c109="" class="mt-2 mr-1">Search:</label
                   >
                   <input
                     _ngcontent-cue-c109=""
@@ -411,7 +384,7 @@
                       <td>ROC</td>
                       <td>{{ cource.created_at | date: "short" }}</td>
                       <td>{{ cource.updated_at | date: "short" }}</td>
-                      <td><button class="btn btn-success" style="font-size: 0.8rem;">
+                      <td><button class="btn btn-default pend_css">
                         Pending</button></td>
                     </tr>
                     <!-- <tr>
