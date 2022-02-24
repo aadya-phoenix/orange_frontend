@@ -7,10 +7,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PriceDirective } from './directives/price.directive';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [InputfieldDirective, HeaderComponent, SidebarComponent,PriceDirective],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule,NgbModule,],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule,NgbModule,Ng2SearchPipeModule],
   exports: [
     InputfieldDirective,
     HeaderComponent,
@@ -19,6 +20,7 @@ import { PriceDirective } from './directives/price.directive';
     ReactiveFormsModule,
     NgbModule,
     PriceDirective,
+    Ng2SearchPipeModule,
     //NgSelectModule
   ],
   providers: [],

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
+import { EncryptionService } from 'src/app/shared/services/encrypt-decrypt/encryption.service';
 import { PasswordStrengthValidator } from '../password-strength.validators';
 
 @Component({
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
   constructor(
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private encrypt:EncryptionService
   ) {}
 
   ngOnInit(): void {
@@ -26,9 +28,9 @@ export class LoginComponent implements OnInit {
       ]),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(20),
-        PasswordStrengthValidator,
+        // Validators.minLength(8),
+        // Validators.maxLength(20),
+        // PasswordStrengthValidator,
       ]),
     });
   }
@@ -57,7 +59,8 @@ export class LoginComponent implements OnInit {
                   }
                 });
                 console.log(roleObj);
-                localStorage.setItem('role', JSON.stringify(roleObj));
+                localStorage.setItem('role',JSON.stringify(roleObj));
+               // localStorage.setItem('role',JSON.stringify(this.encrypt.encryptUsingAES256(roleObj)));
               });
               localStorage.setItem('profileDetails', JSON.stringify(profile));
             });

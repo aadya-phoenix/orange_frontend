@@ -513,6 +513,7 @@
                         formControlName="learning_type"
                         (change)="getlearningType($event)"
                         style="width: 89%"
+                        
                       >
                         <!-- <option value="">Select learning type</option> -->
                         <option value="ILT and vILT training">
@@ -1350,12 +1351,23 @@ Note: 3-5 working days are required for the learning object to be available in t
               </div>
               <!-- </form> -->
               <div class="card-footer d-flex justify-content-start">
-                <button
+                <!-- <button
                   class="btn btn-default submit-css"
                   (click)="createNewCourceIlt()"
                 >
                   Submit
-                </button>
+                </button> -->
+                <button
+                class="btn btn-default submit-css mr-1"
+                *ngIf="getUserrole.id === 3"
+              >
+                Transfer to Publisher
+              </button>
+                <button
+                class="btn btn-default submit-css"
+              >
+                Publish
+              </button>
                 <!-- </button> -->
                 <button
                   class="btn btn-default view-css ml-1"

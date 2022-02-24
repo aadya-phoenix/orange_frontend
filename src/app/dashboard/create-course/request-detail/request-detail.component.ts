@@ -18,6 +18,7 @@ export class RequestDetailComponent implements OnInit {
   }
   getRole(){
     this.getUserrole = this.authService.getRolefromlocal();
+    //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
   }
 
   updateCource(){

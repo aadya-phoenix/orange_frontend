@@ -85,14 +85,15 @@
                 <form [formGroup]="commonCreateCourceForm">
                     <div class="card" *ngIf="learningType != 'Playlist'">
                         <div class="card-header">
+                            <strong _ngcontent-jet-c125=""> Course Details </strong>
                             <!-- <button class="btn btn-primary btn_common">
                   Common Fields
                 </button> -->
                         </div>
                         <!-- <form [formGroup]="createCourceForm"> -->
-                        <div class="card-body">
+                        <div class="card-body card_width">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <label class="form-control-label">Title <span style="color: red">* </span>
                         <a href="">
@@ -142,7 +143,7 @@
                         </a>
                       </label>
                                         <div class="upload_field">
-                                            <input type="file" id="exampleInputFile" formControlName="resource" style="width: 77%" />
+                                            <input type="file" id="exampleInputFile" formControlName="resource" class="upload_css" />
                                         </div>
                                     </div>
                                 </div>
@@ -223,7 +224,7 @@
 </option>
 </select> -->
 
-                                        <ng-select placeholder="please select subject" [items]="cctSubjects" bindLabel="name" bindValue="id" formControlName="subject">
+                                        <ng-select placeholder="Please select subject" [items]="cctSubjects" bindLabel="name" bindValue="id" formControlName="subject" style="width: 100%;">
                                         </ng-select>
                                     </div>
                                 </div>
@@ -336,7 +337,7 @@
                           </i>
                         </a>
                       </label>
-                                        <textarea class="form-control form_width" rows="3" placeholder="Enter Objectives" formControlName="objective">
+                                        <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Objectives" formControlName="objective">
                       </textarea>
                                     </div>
                                 </div>
@@ -355,7 +356,7 @@
                           </i>
                         </a>
                       </label>
-                                        <textarea class="form-control form_width" rows="3" placeholder="Enter Prerequisite" formControlName="prerequisite">
+                                        <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Prerequisite" formControlName="prerequisite">
                       </textarea>
                                     </div>
                                 </div>
@@ -377,7 +378,7 @@
                           </i>
                         </a>
                       </label>
-                                        <textarea class="form-control form_width" rows="3" placeholder="Enter Description" formControlName="description">
+                                        <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Description" formControlName="description">
                       </textarea>
                                     </div>
                                 </div>
@@ -398,7 +399,7 @@
                           </i>
                         </a>
                       </label>
-                                        <textarea class="form-control form_width" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
+                                        <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
                       </textarea>
                                     </div>
                                 </div>
@@ -408,13 +409,13 @@
                         <span style="color: red">*</span></label
                       >
                       <select
-                        class="form-control"
+                        class="form-control form_width"
                         name="list "
                         id="list "
                         accesskey="target"
                         formControlName="learning_type"
                         (change)="getlearningType($event)"
-                        style="width: 89%"
+                        
                       >
                         <!-- <option value="">Select learning type</option> -->
                         <option value="ILT and vILT training">
@@ -434,6 +435,7 @@
                         </option>
                         <option value="Playlist">Playlist</option>
                       </select>
+                  
                     </div>
                   </div>
                   <!--colend-->
@@ -486,7 +488,7 @@
                           </i>
                         </a>
                       </label>
-                                        <textarea class="form-control form_width" rows="3" placeholder="Enter Description" formControlName="description">
+                                        <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Description" formControlName="description">
                       </textarea>
                                     </div>
                                 </div>
@@ -507,7 +509,7 @@
                           </i>
                         </a>
                       </label>
-                                        <textarea class="form-control form_width" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
+                                        <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
                       </textarea>
                                     </div>
                                 </div>
@@ -912,7 +914,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                           </i>
                         </a>
                       </label>
-                                        <textarea class="form-control form_width" rows="3" placeholder="Enter Free field content" formControlName="free_field_content">
+                                        <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Free field content" formControlName="free_field_content">
                       </textarea>
                                     </div>
                                 </div>
@@ -931,7 +933,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                           </i>
                         </a>
                       </label>
-                                        <textarea class="form-control form_width" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
+                                        <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
                       </textarea>
                                     </div>
                                 </div>
@@ -1087,7 +1089,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                             </div>
                             <!--row end-->
 
-                            <table class="table table-bordered" style="width: 37.6%">
+                            <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th scope="col">Learner Guidelines</th>
@@ -1095,7 +1097,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                                     </tr>
                                     <tr formArrayName="learnerguidearray" *ngFor="let learner of t.controls; let i = index">
                                         <td [formGroupName]="i">
-                                            <textarea class="form-control form_width w-100" rows="3" placeholder="Enter Learner Guidelines" formControlName="name">
+                                            <textarea class="form-control form_width-textarea w-100" rows="3" placeholder="Enter Learner Guidelines" formControlName="name">
                         </textarea>
                                         </td>
                                         <td>
@@ -1301,7 +1303,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                    <textarea class="form-control form_width" rows="3" placeholder="Enter Free field content" formControlName="free_field_content">
+                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Free field content" formControlName="free_field_content">
                     </textarea>
                                 </div>
                             </div>
@@ -1324,7 +1326,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                    <textarea class="form-control form_width" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
+                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
                     </textarea>
                                 </div>
                             </div>
@@ -1343,7 +1345,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                    <textarea class="form-control form_width" rows="3" placeholder="Enter Curriculum content" formControlName="for_whoom">
+                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Curriculum content" formControlName="for_whoom">
                     </textarea>
                                 </div>
                             </div>
@@ -1351,7 +1353,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </div>
                         <!--row-->
 
-                        <table class="table table-bordered" style="width: 37.6%">
+                        <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th scope="col">Learner Guidelines</th>
@@ -1359,7 +1361,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                                 </tr>
                                 <tr formArrayName="learnerguidearray" *ngFor="let learner of t.controls; let i = index">
                                     <td [formGroupName]="i">
-                                        <textarea class="form-control form_width w-100" rows="3" placeholder="Enter Learner Guidelines" formControlName="name">
+                                        <textarea class="form-control form_width-textarea w-100" rows="3" placeholder="Enter Learner Guidelines" formControlName="name">
                       </textarea>
                                     </td>
                                     <td>
@@ -1589,7 +1591,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                    <textarea class="form-control form_width" rows="3" placeholder="Enter Free field content" formControlName="free_field_content">
+                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Free field content" formControlName="free_field_content">
                     </textarea>
                                 </div>
                             </div>
@@ -1609,7 +1611,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                    <textarea class="form-control form_width" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
+                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
                     </textarea>
                                 </div>
                             </div>
@@ -1632,7 +1634,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                    <textarea class="form-control form_width" rows="3" placeholder="Enter Curriculum content" formControlName="for_whoom">
+                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Curriculum content" formControlName="for_whoom">
                     </textarea>
                                 </div>
                             </div>
@@ -1759,7 +1761,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                             </div>
                         </div>
 
-                        <table class="table table-bordered" style="width: 37.6%">
+                        <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th scope="col">Learner Guidelines</th>
@@ -1767,7 +1769,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                                 </tr>
                                 <tr formArrayName="learnerguidearray" *ngFor="let learner of t.controls; let i = index">
                                     <td [formGroupName]="i">
-                                        <textarea class="form-control form_width w-100" rows="3" placeholder="Enter Learner Guidelines" formControlName="name">
+                                        <textarea class="form-control form_width-textarea w-100" rows="3" placeholder="Enter Learner Guidelines" formControlName="name">
                       </textarea>
                                     </td>
                                     <td>
@@ -1882,7 +1884,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                    <textarea class="form-control form_width" rows="3" placeholder="Enter Prerequisite" formControlName="prerequisite">
+                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Prerequisite" formControlName="prerequisite">
                     </textarea>
                                 </div>
                             </div>
@@ -2409,6 +2411,12 @@ Note: 3-5 working days are required for the learning object to be available in t
 
         </div>
         <!--ROW END-->
+        <div class="view-comple-req_div">
+            <button class="btn btn-primary view-comple-req">
+              <img src="../../../../assets/images/icon/viewrewall.png" style="width: 28px;">View Complete Request
+
+</button>
+        </div>
         <!--ROW END-->
     </div>
 </div>

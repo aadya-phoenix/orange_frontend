@@ -17,6 +17,7 @@ export class CoursesComponent implements OnInit {
   getUserprofile: any;
   getUserrole: any;
   collectionSize: any;
+  searchText:any;
   constructor(
     private courceService: CourcesService,
     private authService: AuthenticationService,
@@ -24,6 +25,7 @@ export class CoursesComponent implements OnInit {
     private router:Router
   ) {
     this.getUserrole = this.authService.getRolefromlocal();
+    //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
   }
 
   openModal(cource: any) {

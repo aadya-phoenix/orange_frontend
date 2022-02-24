@@ -13,7 +13,10 @@ export class CourcesService {
   public apiVersion = environment.apiVersion;
   public clientId = environment.clientId;
   public clientSecret = environment.clientSecret;
-  constructor(private http: HttpService) {}
+  public headers = new Headers({})
+  constructor(private http: HttpService) {
+    this.headers.append('Access-Control-Allow-Origin', '*')
+  }
 
   getCources() {
     const url = `/api/${this.apiVersion}/course`;
