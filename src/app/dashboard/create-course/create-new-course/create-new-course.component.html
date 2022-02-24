@@ -1,17 +1,11 @@
 <div id="right-panel" class="right-panel">
     <app-header></app-header>
     <div class="breadcrumbs" style="background-color: #fbfbf7; padding: 9px 9px 20px 9px">
-        <div class="col-sm-1.5">
+        <div class="col-sm-6">
             <div class="page-header float-left" style="background: transparent">
                 <div class="page-title d-flex">
                     <img src="../../../../assets/images/creatnew.png" style="width: 60px" />
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6" style="margin-left: -30px">
-            <div class="page-header float-left" style="background: transparent">
-                <div class="page-title">
-                    <div class="d-flex flex-column">
+                    <div class="d-flex flex-column ml-4">
                         <span style="font-size: 20px">Create new course </span>
                         <span style="color: #aba3a3; font-size: 14px"><b style="color: #000">Instructor-Led (ILT)</b>-Instructor-Led
               Training is face to face training delivered in a classroom.<b
@@ -20,21 +14,21 @@
               >virtual instrutor-Led Training(vILT)is delivered remotely</span
             >
           </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="col-sm-5 float-right">
-      <div class="page-header float-right" style="background: transparent">
-        <div class="page-title d-flex">
-          <ol class="breadcrumb text-right" style="background: transparent">
-            <li>
-              <a [routerLink]="['/dashboard']">
-                <i class="fa fa-home" style="color: #5161ce"></i>
-              </a>
-            </li>
-            <li>
-              <a [routerLink]="['/dashboard']" style="color: #ff7900"
-                >Dashboard</a
+       
+        <div class="col-sm-5 float-right">
+            <div class="page-header float-right" style="background: transparent">
+                <div class="page-title d-flex">
+                    <ol class="breadcrumb text-right" style="background: transparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home" style="color: #5161ce"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard']" style="color: #ff7900">Dashboard</a
               >
             </li>
             <li>
@@ -56,7 +50,8 @@
               class="card-header"
               style="padding: 0.75rem 1.25rem; background-color: #fff"
             >
-              <div>
+              <div class="view_img_shoe_res">
+                <div>
                 <img src="../../../../assets/images/formm.png" class="ml-2" style="width: 40px;">
                 <!-- <img
                   src="../../../../assets/images/form.png"
@@ -64,15 +59,16 @@
                   class="mr-2"
                 /> -->
                 <span class="comlte_css">Complete this form and click on the submit button</span>
-                        <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    </div>
+                    <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                   View overall request status<img src="../../../../assets/images/Viewreq.png" class="ml-2" style="width: 40px;">
                 </a>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- .animated -->
+</div>
+<!-- .animated -->
 </div>
 <!-- .content -->
 </div>
@@ -440,7 +436,11 @@
                   </div>
                   <!--colend-->
                 </div>
-              </div>
+             
+
+			  
+			  
+			  </div>
               <!--cardbdoy-->
               <!-- </form> -->
             </div>
@@ -1092,16 +1092,20 @@ Note: 3-5 working days are required for the learning object to be available in t
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Learner Guidelines</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col">Learner Guidelines </th>
+                                        <th scope="col">Learner Guidelines Description</th>
+                                        <th scope="col" style="width: 12px;">Action</th>
                                     </tr>
                                     <tr formArrayName="learnerguidearray" *ngFor="let learner of t.controls; let i = index">
                                         <td [formGroupName]="i">
-                                            <textarea class="form-control form_width-textarea w-100" rows="3" placeholder="Enter Learner Guidelines" formControlName="name">
+                                            <input type="text " placeholder="Enter Learner Guidelines" class="form-control form_width" formControlName="" />
+                                        </td>
+                                        <td [formGroupName]="i">
+                                            <textarea class="form-control form_width-textarea w-100" rows="3" placeholder="Enter Learner Guidelines Description" formControlName="name">
                         </textarea>
                                         </td>
                                         <td>
-                                            <button class="btn btn-success mr-2" (click)="addLearnerGuideline()">
+                                            <button class="btn btn-success mr-2 mb-1" (click)="addLearnerGuideline()">
                           +
                         </button>
                                             <button class="btn btn-danger" *ngIf="i > 0" (click)="removeLearnerGuideline(i)">
@@ -1113,10 +1117,59 @@ Note: 3-5 working days are required for the learning object to be available in t
                             </table>
 
 
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Request to RegionalTraining Cordinator <span style="color: red">* </span>
 
+                        <a>
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="If you selected Yes in the Certification field, please select how long the certification is valid."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                        <select class="form-control form_width" formControlName="validity_period">
+                        <option value="">Please select </option>
+                        <option
+                          *ngFor="let validity of validityPeriod"
+                          [value]="validity.id"
+                        >
+                          {{ validity.name }}
+                        </option>
+                      </select>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                            </div>
                             <p style="color: #000">
-                                <b>Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
+
+                                <b style="color:#ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
+
+
+
                             </p>
+                            <p style="color: #000">
+
+                                <b style="color:#ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the <b style="color:#ff7900">Middle East and Africa</b>.region from the list,who is the backup for
+                                Asia Pacificregion
+
+
+
+                            </p>
+                            <p style="color: #000">
+
+                                <b style="color:#ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color:#ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b>                                region.
+
+
+
+                            </p>
+
+
                         </div>
                         <!-- </form> -->
                         <div class="card-footer d-flex justify-content-start">
@@ -1356,16 +1409,22 @@ Note: 3-5 working days are required for the learning object to be available in t
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col">Learner Guidelines</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col">Learner Guidelines </th>
+                                    <th scope="col">Learner Guidelines Description</th>
+                                    <th scope="col" style="width: 12px;">Action</th>
+
                                 </tr>
                                 <tr formArrayName="learnerguidearray" *ngFor="let learner of t.controls; let i = index">
+                                    <td [formGroupName]="i">
+                                        <input type="text " placeholder="Enter Learner Guidelines" class="form-control form_width" formControlName="" />
+                                    </td>
+
                                     <td [formGroupName]="i">
                                         <textarea class="form-control form_width-textarea w-100" rows="3" placeholder="Enter Learner Guidelines" formControlName="name">
                       </textarea>
                                     </td>
                                     <td>
-                                        <button class="btn btn-success mr-2" (click)="addLearnerGuideline()">
+                                        <button class="btn btn-success mr-2 mb-1" (click)="addLearnerGuideline()">
                         +
                       </button>
                                         <button class="btn btn-danger" *ngIf="i > 0" (click)="removeLearnerGuideline(i)">
@@ -1375,6 +1434,57 @@ Note: 3-5 working days are required for the learning object to be available in t
                                 </tr>
                             </thead>
                         </table>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-control-label">Request to RegionalTraining Cordinator <span style="color: red">* </span>
+
+                        <a>
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="If you selected Yes in the Certification field, please select how long the certification is valid."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                    <select class="form-control form_width" formControlName="validity_period">
+                        <option value="">Please select </option>
+                        <option
+                          *ngFor="let validity of validityPeriod"
+                          [value]="validity.id"
+                        >
+                          {{ validity.name }}
+                        </option>
+                      </select>
+                                </div>
+                            </div>
+                            <!--colend-->
+                        </div>
+                        <p style="color: #000">
+
+                            <b style="color:#ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
+
+
+
+                        </p>
+                        <p style="color: #000">
+
+                            <b style="color:#ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the <b style="color:#ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
+                            Pacificregion
+
+
+
+                        </p>
+                        <p style="color: #000">
+
+                            <b style="color:#ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color:#ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b> region.
+
+
+
+                        </p>
                     </div>
                     <!-- </form> -->
                     <div class="card-footer d-flex justify-content-start">
@@ -1764,16 +1874,21 @@ Note: 3-5 working days are required for the learning object to be available in t
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col">Learner Guidelines</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col">Learner Guidelines </th>
+                                    <th scope="col">Learner Guidelines Description</th>
+                                    <th scope="col" style="width: 12px;">Action</th>
                                 </tr>
                                 <tr formArrayName="learnerguidearray" *ngFor="let learner of t.controls; let i = index">
+
+                                    <td [formGroupName]="i">
+                                        <input type="text " placeholder="Enter Learner Guidelines" class="form-control form_width" formControlName="" />
+                                    </td>
                                     <td [formGroupName]="i">
                                         <textarea class="form-control form_width-textarea w-100" rows="3" placeholder="Enter Learner Guidelines" formControlName="name">
                       </textarea>
                                     </td>
                                     <td>
-                                        <button class="btn btn-success mr-2" (click)="addLearnerGuideline()">
+                                        <button class="btn btn-success mr-2 mb-1" (click)="addLearnerGuideline()">
                         +
                       </button>
                                         <button class="btn btn-danger" *ngIf="i > 0" (click)="removeLearnerGuideline(i)">
@@ -1783,6 +1898,61 @@ Note: 3-5 working days are required for the learning object to be available in t
                                 </tr>
                             </thead>
                         </table>
+
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-control-label">Request to RegionalTraining Cordinator <span style="color: red">* </span>
+
+                        <a>
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="If you selected Yes in the Certification field, please select how long the certification is valid."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                    <select class="form-control form_width" formControlName="validity_period">
+                        <option value="">Please select </option>
+                        <option
+                          *ngFor="let validity of validityPeriod"
+                          [value]="validity.id"
+                        >
+                          {{ validity.name }}
+                        </option>
+                      </select>
+                                </div>
+                            </div>
+                            <!--colend-->
+                        </div>
+                        <p style="color: #000">
+
+                            <b style="color:#ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
+
+
+
+                        </p>
+                        <p style="color: #000">
+
+                            <b style="color:#ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the <b style="color:#ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
+                            Pacificregion
+
+
+
+                        </p>
+                        <p style="color: #000">
+
+                            <b style="color:#ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color:#ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b> region.
+
+
+
+                        </p>
+
+
                     </div>
                     <!-- </form> -->
                     <div class="card-footer d-flex justify-content-start">
@@ -1890,6 +2060,58 @@ Note: 3-5 working days are required for the learning object to be available in t
                             </div>
                         </div>
                         <!--row end-->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-control-label">Request to RegionalTraining Cordinator <span style="color: red">* </span>
+
+                        <a>
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="If you selected Yes in the Certification field, please select how long the certification is valid."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                    <select class="form-control form_width" formControlName="validity_period">
+                        <option value="">Please select </option>
+                        <option
+                          *ngFor="let validity of validityPeriod"
+                          [value]="validity.id"
+                        >
+                          {{ validity.name }}
+                        </option>
+                      </select>
+                                </div>
+                            </div>
+                            <!--colend-->
+                        </div>
+                        <p style="color: #000">
+
+                            <b style="color:#ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
+
+
+
+                        </p>
+                        <p style="color: #000">
+
+                            <b style="color:#ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the <b style="color:#ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
+                            Pacificregion
+
+
+
+                        </p>
+                        <p style="color: #000">
+
+                            <b style="color:#ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color:#ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b> region.
+
+
+
+                        </p>
+
                     </div>
                     <!-- </form> -->
                     <div class="card-footer d-flex justify-content-start">
@@ -2082,6 +2304,58 @@ Note: 3-5 working days are required for the learning object to be available in t
                             <!--colend-->
                         </div>
                         <!--row end-->
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-control-label">Request to RegionalTraining Cordinator <span style="color: red">* </span>
+
+                        <a>
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="If you selected Yes in the Certification field, please select how long the certification is valid."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                    <select class="form-control form_width" formControlName="validity_period">
+                        <option value="">Please select </option>
+                        <option
+                          *ngFor="let validity of validityPeriod"
+                          [value]="validity.id"
+                        >
+                          {{ validity.name }}
+                        </option>
+                      </select>
+                                </div>
+                            </div>
+                            <!--colend-->
+                        </div>
+                        <p style="color: #000">
+
+                            <b style="color:#ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
+
+
+
+                        </p>
+                        <p style="color: #000">
+
+                            <b style="color:#ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the <b style="color:#ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
+                            Pacificregion
+
+
+
+                        </p>
+                        <p style="color: #000">
+
+                            <b style="color:#ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color:#ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b> region.
+
+
+
+                        </p>
                     </div>
                     <!-- </form> -->
                     <div class="card-footer d-flex justify-content-start">
@@ -2300,6 +2574,59 @@ Note: 3-5 working days are required for the learning object to be available in t
                             </div>
                             <!--colend-->
                         </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-control-label">Request to RegionalTraining Cordinator <span style="color: red">* </span>
+
+                        <a>
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="If you selected Yes in the Certification field, please select how long the certification is valid."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                    <select class="form-control form_width" formControlName="validity_period">
+                        <option value="">Please select </option>
+                        <option
+                          *ngFor="let validity of validityPeriod"
+                          [value]="validity.id"
+                        >
+                          {{ validity.name }}
+                        </option>
+                      </select>
+                                </div>
+                            </div>
+                            <!--colend-->
+                        </div>
+                        <p style="color: #000">
+
+                            <b style="color:#ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
+
+
+
+                        </p>
+                        <p style="color: #000">
+
+                            <b style="color:#ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the <b style="color:#ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
+                            Pacificregion
+
+
+
+                        </p>
+                        <p style="color: #000">
+
+                            <b style="color:#ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color:#ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b> region.
+
+
+
+                        </p>
+
+
                     </div>
                     <!-- </form> -->
                     <div class="card-footer d-flex justify-content-start">
