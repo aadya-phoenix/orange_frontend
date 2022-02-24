@@ -40,9 +40,9 @@
               </a>
             </li>
             <li>
-              <a href="# " style="color: #5161ce">Dashboard</a>
+              <a [routerLink]="['/dashboard/']" style="color: #5161ce">Dashboard</a>
             </li>
-            <li><a href="# ">Create new Course</a></li>
+            <li><a [routerLink]="['/dashboard/cources/']">Create new Course</a></li>
           </ol>
         </div>
       </div>
@@ -87,11 +87,18 @@
               <div class="d-flex justify-content-center">
                 <button
                   class="btn btn-primary btn_requst"
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                  (click)="open(content)"
+                 *ngIf="getUserrole.id == 4"
                 >
                   <img src="../../../../assets/images/publish.png" />Publish
+                </button>
+
+                <button
+                  class="btn btn-primary btn_requst ml-2"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                  *ngIf="getUserrole.id == 3"
+                >
+                  <img src="../../../../assets/images/publish.png" />Transfer to Publisher
                 </button>
 
                 <button
@@ -321,8 +328,8 @@
     style="margin-top: 250px"
   >
 
-  <ng-template #content let-modal>
-    <div class="modal-dialog modal-lg" role="document">
+  <!-- <ng-template #content let-modal> -->
+    <div class="modal-dialog modal-lg" role="document" >
       <div class="modal-content">
         <div class="modal-body">
           <div class="row">
@@ -345,12 +352,12 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             Close
           </button>
-          <button type="button" class="btn btn-primary btn_requst">
+          <button type="button" class="btn btn-primary btn_requst" (click)="saveChange()">
             Save changes
           </button>
         </div>
       </div>
     </div>
-</ng-template>
+<!-- </ng-template> -->
   </div>
 </div>

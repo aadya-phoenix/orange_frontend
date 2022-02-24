@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
-import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ModalDismissReasons, NgbModal, } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-request-detail',
@@ -17,6 +17,10 @@ export class RequestDetailComponent implements OnInit {
     if(!this.routegetdata){
       this.router.navigateByUrl('/dashboard/cources');
     }
+  }
+
+  saveChange(){
+    console.log('save')
   }
 
   open(content:any) {

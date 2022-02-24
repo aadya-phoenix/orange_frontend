@@ -19,6 +19,7 @@ export class CreateNewCourseComponent implements OnInit {
   public commonCreateCourceForm!: FormGroup;
   public iltandViltForm!: FormGroup;
   public materialbasedForm!: FormGroup;
+  public currriculumForm!:FormGroup;
   showCollapse: boolean = true;
 
   public cctLevel = [
@@ -619,26 +620,60 @@ export class CreateNewCourseComponent implements OnInit {
 
     this.materialbasedForm = this.fb.group({
       //material based
+      subject:new FormControl(''),
+      learn_more:new FormControl(''),
+      resource:new FormControl(''),
+      who_see_course:new FormControl(''),
+      expiry_date:new FormControl(''),
+      title_additional:new FormControl(''),
+      free_field_content:new FormControl(''),
+      for_whoom:new FormControl(''),
+      validity_period:new FormControl(''),
       material_source: new FormControl(''),
       material_expiry_date: new FormControl(''),
       material_url: new FormControl(''),
       //material
     });
 
+    this.currriculumForm = this.fb.group({
+      email_of_curriculum_owner:new FormControl(''),
+      title_additional:new FormControl(''),
+      free_field_content:new FormControl(''),
+      learn_more:new FormControl(''),
+      expiry_date:new FormControl(''),
+      who_see_course:new FormControl(''),
+      for_whoom:new FormControl(''),
+      validity_period:new FormControl(''),
+      
+      learnerguidearray: this.fb.array([]),
+    })
+
     this.addLearnerGuideline();
+    this.addLearnerGuidelinetocurriculum();
   }
 
   get f() {
     return this.iltandViltForm.controls;
   }
 
+ 
   get t() {
     return this.f.learnerguidearray as FormArray;
   }
 
+
+  get currriculum(){
+    return this.currriculumForm.controls;
+  }
+
+  get curriculumArray(){
+    return this.currriculum.learnerguidearray as FormArray;
+  }
+
   addMorelearnerGuideline() {
     return this.fb.group({
-      name: new FormControl(''),
+      learnerguide_line: new FormControl(''),
+      learnerguide_line_description:new FormControl('')
     });
   }
 
@@ -647,11 +682,18 @@ export class CreateNewCourseComponent implements OnInit {
     return this.t.push(this.addMorelearnerGuideline());
   }
 
+  addLearnerGuidelinetocurriculum() {
+    return this.curriculumArray.push(this.addMorelearnerGuideline());
+  }
+
   removeLearnerGuideline(i: any) {
     this.t.removeAt(i);
     // this.learnerGuidearray.splice(i,1)
   }
 
+  removeLearnerGuidelinetocurriculum(i:any){
+    this.curriculumArray.removeAt(i);
+  }
   selectLearning() {
     // this.createCourceForm.setValue({
     //   name:new FormControl('Test')
@@ -660,17 +702,17 @@ export class CreateNewCourseComponent implements OnInit {
 
   //create ilt vilt form
   createNewCourceIlt() {
-    let learnerguidearr = this.iltandViltForm.value.learnerguidearray;
-    let localarr: any = [];
-    learnerguidearr.map((arrayres: any) => {
-      if (arrayres.name) {
-        localarr.push(arrayres.name);
-      } else {
-        localarr.push(arrayres);
-      }
-    });
-    this.learnerGuidearray = localarr;
-    this.iltandViltForm.value.learnerguidearray = this.learnerGuidearray;
+  //  let learnerguidearr = this.iltandViltForm.value.learnerguidearray;
+    //let localarr: any = [];
+    // learnerguidearr.map((arrayres: any) => {
+    //   if (arrayres.name) {
+    //     localarr.push(arrayres.name);
+    //   } else {
+    //     localarr.push(arrayres);
+    //   }
+    // });
+    // this.learnerGuidearray = localarr;
+    // this.iltandViltForm.value.learnerguidearray = this.learnerGuidearray;
     console.log(this.learnerGuidearray);
     let savetype = { action: 'submit' };
     let totalObj = {
@@ -703,17 +745,17 @@ export class CreateNewCourseComponent implements OnInit {
 
   //draft ilt and vilt
   saveasDraftIlt() {
-    let learnerguidearr = this.iltandViltForm.value.learnerguidearray;
-    let localarr: any = [];
-    learnerguidearr.map((arrayres: any) => {
-      if (arrayres.name) {
-        localarr.push(arrayres.name);
-      } else {
-        localarr.push(arrayres);
-      }
-    });
-    this.learnerGuidearray = localarr;
-    this.iltandViltForm.value.learnerguidearray = this.learnerGuidearray;
+    // let learnerguidearr = this.iltandViltForm.value.learnerguidearray;
+    // let localarr: any = [];
+    // learnerguidearr.map((arrayres: any) => {
+    //   if (arrayres.name) {
+    //     localarr.push(arrayres.name);
+    //   } else {
+    //     localarr.push(arrayres);
+    //   }
+    // });
+    // this.learnerGuidearray = localarr;
+    // this.iltandViltForm.value.learnerguidearray = this.learnerGuidearray;
     let savetype = { action: 'draft' };
     let totalObj = { ...this.iltandViltForm.value, ...savetype };
     console.log(this.learnerGuidearray);
@@ -807,6 +849,14 @@ export class CreateNewCourseComponent implements OnInit {
       console.log(totalObj);
     }
   }
+
+
+  curriculumSubmit(){
+    console.log(this.currriculumForm.value)
+  }
+
+
+
 
   certificationTyupe(event: any) {
     if (event.target.value == 'yes') {
