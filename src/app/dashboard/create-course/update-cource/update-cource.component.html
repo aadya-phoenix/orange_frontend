@@ -47,55 +47,28 @@
     </div>
   </div>
 </div>
-<div class="content mt-3">
-  <div class="animated fadeIn">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div
-            class="card-header"
-            style="padding: 0.75rem 1.25rem; background-color: #fff"
-          >
-            <div>
-              <img src="../../../../assets/images/formm.png" class="ml-2" style="width: 40px;">
-              <!-- <img
-                src="../../../../assets/images/form.png"
-                style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px"
-                class="mr-2"
-              /> -->
-              <span class="comlte_css">Complete this form and click on the submit button</span>
-                      <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                View overall request status<img src="../../../../assets/images/Viewreq.png" class="ml-2" style="width: 40px;">
-              </a>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-  <!-- .animated -->
-</div>
-<!-- .content -->
-</div>
+
 <!-- <form [formGroup]="createCourceForm"> -->
 <div class="content mt-1">
   <div class="animated fadeIn">
-      <div class="row">
-          <div class="col-md-12">
-              <span class="indicate_css"><span style="color: red">*</span>Indicates required field</span>
-              <form [formGroup]="commonCreateCourceForm">
-                  <div class="card" *ngIf="learningType != 'Playlist'">
-                      <div class="card-header">
-                          <strong _ngcontent-jet-c125=""> Course Details </strong>
-                          <!-- <button class="btn btn-primary btn_common">
+    <div class="row">
+      <div class="col-md-12">
+        <span class="indicate_css mt-2"
+          ><span style="color: red">*</span>Indicates required field</span>
+                      <form [formGroup]="commonCreateCourceForm">
+                          <div class="card" *ngIf="learningType != 'Playlist'">
+                              <div class="card-header">
+                                  <strong> Update Course Details </strong>
+                                  <!-- <button class="btn btn-primary btn_common">
                 Common Fields
               </button> -->
-                      </div>
-                      <!-- <form [formGroup]="createCourceForm"> -->
-                      <div class="card-body card_width">
-                          <div class="row">
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Title <span style="color: red">* </span>
+                              </div>
+                              <!-- <form [formGroup]="createCourceForm"> -->
+                              <div class="card-body">
+                                  <div class="row">
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Title <span style="color: red">* </span>
                       <a href="">
                         <i
                           class="fa fa-info-circle info_circle"
@@ -106,13 +79,13 @@
                         ></i
                       ></a>
                     </label>
-                                      <input type="text " placeholder="Enter Title" class="form-control form_width" formControlName="title" />
-                                  </div>
-                              </div>
-                              <!--colend-->
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Training hours/duration (HH:MM)
+                                              <input type="text " placeholder="Enter Title" class="form-control form_width" formControlName="title" />
+                                          </div>
+                                      </div>
+                                      <!--colend-->
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Training hours/duration (HH:MM)
                       <span style="color: red">* </span>
                       <a href="">
                         <i
@@ -124,13 +97,13 @@
                         ></i
                       ></a>
                     </label>
-                                      <input type="text " placeholder="Enter Training hours/duration (HH:MM) " class="form-control form_width" formControlName="duration" />
-                                  </div>
-                              </div>
-                              <!--colend-->
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Resources
+                                              <input type="text " placeholder="Enter Training hours/duration (HH:MM) " class="form-control form_width" formControlName="duration" />
+                                          </div>
+                                      </div>
+                                      <!--colend-->
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Resources
                       <a href="">
                         <i
                           class="fa fa-info-circle info_circle"
@@ -142,15 +115,15 @@
                         </i>
                       </a>
                     </label>
-                                      <div class="upload_field">
-                                          <input type="file" id="exampleInputFile" formControlName="resource" class="upload_css" />
+                                              <div class="upload_field">
+                                                  <input type="file" id="exampleInputFile" formControlName="resource" style="width: 77%" />
+                                              </div>
+                                          </div>
                                       </div>
-                                  </div>
-                              </div>
-                              <!--colend-->
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Available Languages <span style="color: red">* </span>
+                                      <!--colend-->
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Available Languages <span style="color: red">* </span>
 
                       <a href="">
                         <i
@@ -163,7 +136,7 @@
                         </i>
                       </a>
                     </label>
-                                      <select class="form-control form_width" formControlName="available_language">
+                                              <select class="form-control form_width" formControlName="available_language">
                       <option value="">Please select language</option>
                       <option
                         *ngFor="let language of availableLanguages"
@@ -172,13 +145,13 @@
                         {{ language.name }}
                       </option>
                     </select>
-                                  </div>
-                              </div>
-                              <!--colend-->
-                              <!--colend-->
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Level <span style="color: red">* </span>
+                                          </div>
+                                      </div>
+                                      <!--colend-->
+                                      <!--colend-->
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Level <span style="color: red">* </span>
                       <a href="">
                         <i
                           class="fa fa-info-circle info_circle"
@@ -190,7 +163,7 @@
                         </i>
                       </a>
                     </label>
-                                      <select class="form-control form_width" formControlName="level">
+                                              <select class="form-control form_width" formControlName="level">
                       <option value="">Please select level</option>
                       <option
                         *ngFor="let level of cctLevel"
@@ -199,41 +172,39 @@
                         {{ level.name }}
                       </option>
                     </select>
-                                  </div>
-                              </div>
-                              <!--colend-->
+                                          </div>
+                                      </div>
+                                      <!--colend-->
 
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Subject <span style="color: red">* </span>
-      <a href="">
-        <i
-          class="fa fa-info-circle info_circle"
-          aria-hidden="true"
-          data-toggle="tooltip"
-          data-placement="top"
-          title="Select the category in which you want your learning activity to appear in the Orange Learning catalog."
-        >
-        </i>
-      </a>
-    </label>
-                                      <!-- <select class="form-control form_width">
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Subject <span style="color: red">* </span>
+                      <a href="">
+                        <i
+                          class="fa fa-info-circle info_circle"
+                          aria-hidden="true"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Select the category in which you want your learning activity to appear in the Orange Learning catalog."
+                        >
+                        </i>
+                      </a>
+                    </label>
+                                              <!-- <select class="form-control form_width">
 <option value="">Please select subject</option>
 <option *ngFor="let cctSubject of cctSubjects">
 {{ cctSubject.name }}
 </option>
 </select> -->
 
-                                      <ng-select placeholder="Please select subject" [items]="cctSubjects" bindLabel="name" bindValue="id" formControlName="subject" style="width: 100%;">
-                                      </ng-select>
-                                  </div>
-                              </div>
+                                              <ng-select placeholder="please select subject" [items]="cctSubjects" bindLabel="name" bindValue="id" formControlName="subject">
+                                              </ng-select>
+                                          </div>
+                                      </div>
 
-
-
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Keywords <span style="color: red">* </span>
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Keywords <span style="color: red">* </span>
 
                       <a href="">
                         <i
@@ -246,14 +217,14 @@
                         </i>
                       </a>
                     </label>
-                                      <input type="text " placeholder="Enter Keywords" class="form-control form_width" formControlName="keyword" />
-                                  </div>
-                              </div>
-                              <!--colend-->
-                              <!---Removing email-->
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Email of Content  Owner
+                                              <input type="text " placeholder="Enter Keywords" class="form-control form_width" formControlName="keyword" />
+                                          </div>
+                                      </div>
+                                      <!--colend-->
+                                      <!---Removing email-->
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Email of Content Owner
                       <span style="color: red">* </span>
 
                       <a>
@@ -267,11 +238,11 @@
                         </i>
                       </a>
                     </label>
-                                      <input type="text " placeholder="Enter Email of Training Contact" class="form-control form_width" formControlName="email_content_owner" />
-                                  </div>
-                              </div>
+                                              <input type="text " placeholder="Enter Email of Training Contact" class="form-control form_width" formControlName="email_content_owner" />
+                                          </div>
+                                      </div>
 
-                              <!-- <div class="col-sm-6">
+                                      <!-- <div class="col-sm-6">
                   <div class="form-group">
                     <label class="form-control-label"
                       >Email of Training Contact
@@ -296,10 +267,10 @@
                     />
                   </div>
                 </div> -->
-                              <!--colend-->
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Training provided by <span style="color: red">* </span>
+                                      <!--colend-->
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Training provided by <span style="color: red">* </span>
                       <a href="">
                         <i
                           class="fa fa-info-circle info_circle"
@@ -311,7 +282,7 @@
                         </i>
                       </a>
                     </label>
-                                      <select class="form-control form_width" formControlName="training_provided_by">
+                                              <select class="form-control form_width" formControlName="training_provided_by">
                       <option value="">Please select any</option>
                       <option
                         *ngFor="let vendor of vendorType"
@@ -320,12 +291,12 @@
                         {{ vendor.name }}
                       </option>
                     </select>
-                                  </div>
-                              </div>
-                              <!--colend-->
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Objectives <span style="color: red">* </span>
+                                          </div>
+                                      </div>
+                                      <!--colend-->
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Objectives <span style="color: red">* </span>
                       <a href="">
                         <i
                           class="fa fa-info-circle info_circle"
@@ -337,14 +308,14 @@
                         </i>
                       </a>
                     </label>
-                                      <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Objectives" formControlName="objective">
+                                              <textarea class="form-control form_width" rows="3" placeholder="Enter Objectives" formControlName="objective">
                     </textarea>
-                                  </div>
-                              </div>
+                                          </div>
+                                      </div>
 
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Prerequisite
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Prerequisite
                       <a href="">
                         <i
                           class="fa fa-info-circle info_circle"
@@ -356,16 +327,16 @@
                         </i>
                       </a>
                     </label>
-                                      <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Prerequisite" formControlName="prerequisite">
+                                              <textarea class="form-control form_width" rows="3" placeholder="Enter Prerequisite" formControlName="prerequisite">
                     </textarea>
-                                  </div>
-                              </div>
+                                          </div>
+                                      </div>
 
-                              <!--colend-->
+                                      <!--colend-->
 
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Description <span style="color: red">* </span>
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Description <span style="color: red">* </span>
                       <a>
                         <i
                           class="fa fa-info-circle info_circle"
@@ -378,15 +349,15 @@
                         </i>
                       </a>
                     </label>
-                                      <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Description" formControlName="description">
+                                              <textarea class="form-control form_width" rows="3" placeholder="Enter Description" formControlName="description">
                     </textarea>
-                                  </div>
-                              </div>
-                              <!--colend-->
+                                          </div>
+                                      </div>
+                                      <!--colend-->
 
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Additional Comment(s)
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Additional Comment(s)
                       <a href="">
                         <i
                           class="fa fa-info-circle info_circle"
@@ -399,22 +370,23 @@
                         </i>
                       </a>
                     </label>
-                                      <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
+                                              <textarea class="form-control form_width" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
                     </textarea>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <label>Select learning type
+                                          </div>
+                                      </div>
+                                      <div class="col-sm-12">
+                                          <div class="form-group">
+                                              <label>Select learning type
                       <span style="color: red">*</span></label
                     >
                     <select
-                      class="form-control form_width"
+                      class="form-control"
                       name="list "
                       id="list "
                       accesskey="target"
                       formControlName="learning_type"
                       (change)="getlearningType($event)"
+                      style="width: 89%"
                       
                     >
                       <!-- <option value="">Select learning type</option> -->
@@ -435,27 +407,21 @@
                       </option>
                       <option value="Playlist">Playlist</option>
                     </select>
-                
                   </div>
                 </div>
                 <!--colend-->
               </div>
-           
-
-      
-      
-      </div>
+            </div>
             <!--cardbdoy-->
             <!-- </form> -->
           </div>
 
           <div class="card" *ngIf="learningType == 'Playlist'">
             <!-- <form [formGroup]="createCourceForm"> -->
-              <div class="card-header">
-                <strong _ngcontent-jet-c125=""> Course Details </strong>
-                <!-- <button class="btn btn-primary btn_common">
-      Common Fields
-    </button> -->
+            <div class="card-header">
+              <button class="btn btn-primary btn_common">
+                Common Fields
+              </button>
             </div>
             <div class="card-body">
               <div class="row">
@@ -473,14 +439,14 @@
                         ></i
                       ></a>
                     </label>
-                                      <input type="text " placeholder="Enter Title" class="form-control form_width" formControlName="title" />
-                                  </div>
-                              </div>
-                              <!--colend-->
+                                              <input type="text " placeholder="Enter Title" class="form-control form_width" formControlName="title" />
+                                          </div>
+                                      </div>
+                                      <!--colend-->
 
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Description <span style="color: red">* </span>
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Description <span style="color: red">* </span>
                       <a>
                         <i
                           class="fa fa-info-circle info_circle"
@@ -493,15 +459,15 @@
                         </i>
                       </a>
                     </label>
-                                      <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Description" formControlName="description">
+                                              <textarea class="form-control form_width" rows="3" placeholder="Enter Description" formControlName="description">
                     </textarea>
-                                  </div>
-                              </div>
-                              <!--colend-->
+                                          </div>
+                                      </div>
+                                      <!--colend-->
 
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Additional Comment(s)
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Additional Comment(s)
                       <a href="">
                         <i
                           class="fa fa-info-circle info_circle"
@@ -514,13 +480,13 @@
                         </i>
                       </a>
                     </label>
-                                      <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
+                                              <textarea class="form-control form_width" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
                     </textarea>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <label>Select learning type
+                                          </div>
+                                      </div>
+                                      <div class="col-sm-12">
+                                          <div class="form-group">
+                                              <label>Select learning type
                       <span style="color: red">*</span></label
                     >
                     <select
@@ -582,17 +548,17 @@
                         </i>
                       </a>
                     </label>
-                                      <select class="form-control form_width" formControlName="manager_approval">
+                                              <select class="form-control form_width" formControlName="manager_approval">
                       <option value="">Please select</option>
                       <option value="yes">Yes</option>
                       <option value="no">No</option>
                     </select>
-                                  </div>
-                              </div>
-                              <!--colend-->
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Who can see my course?
+                                          </div>
+                                      </div>
+                                      <!--colend-->
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Who can see my course?
                       <a>
                         <i
                           class="fa fa-info-circle info_circle"
@@ -604,7 +570,7 @@
                         </i>
                       </a>
                     </label>
-                                      <select class="form-control form_width" formControlName="who_see_course">
+                                              <select class="form-control form_width" formControlName="who_see_course">
                       <option value="">Please select</option>
                       <option value="1">option 1</option>
                       <option value="2">option 2</option>
@@ -612,16 +578,16 @@
                       <option value="">option 4</option>
                       <option value="4">option 5</option>
                     </select>
+                                          </div>
+                                      </div>
+                                      <!--colend-->
                                   </div>
-                              </div>
-                              <!--colend-->
-                          </div>
-                          <!--row end-->
+                                  <!--row end-->
 
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Does this course integrate digital ?
+                                  <div class="row">
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Does this course integrate digital ?
                       <span style="color: red">* </span>
                       <a href="">
                         <i
@@ -634,17 +600,17 @@
                         </i>
                       </a>
                     </label>
-                                      <select class="form-control form_width" formControlName="digital">
+                                              <select class="form-control form_width" formControlName="digital">
                       <option value="">Please select</option>
                       <option value="yes">Yes</option>
                       <option value="no">No</option>
                     </select>
-                                  </div>
-                              </div>
-                              <!--colend-->
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Purchase order required?
+                                          </div>
+                                      </div>
+                                      <!--colend-->
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Purchase order required?
                       <a href="">
                         <i
                           class="fa fa-info-circle info_circle"
@@ -656,21 +622,21 @@
                         </i>
                       </a>
                     </label>
-                                      <select class="form-control form_width" formControlName="purchase_order">
+                                              <select class="form-control form_width" formControlName="purchase_order">
                       <option value="">Please select</option>
                       <option value="yes">Yes</option>
                       <option value="no">No</option>
                     </select>
+                                          </div>
+                                      </div>
+                                      <!--colend-->
                                   </div>
-                              </div>
-                              <!--colend-->
-                          </div>
-                          <!--row-->
+                                  <!--row-->
 
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Delivery Method <span style="color: red">* </span>
+                                  <div class="row">
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Delivery Method <span style="color: red">* </span>
                       <a href="">
                         <i
                           class="fa fa-info-circle info_circle"
@@ -682,7 +648,7 @@
                         </i>
                       </a>
                     </label>
-                                      <select class="form-control form_width" formControlName="delivery_method">
+                                              <select class="form-control form_width" formControlName="delivery_method">
                       <option value="">Please select delivery method</option>
                       <option
                         *ngFor="let delivery of deliveryMethod"
@@ -691,12 +657,12 @@
                         {{ delivery.name }}
                       </option>
                     </select>
-                                  </div>
-                              </div>
-                              <!--colend-->
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Email of the preferred Instructor
+                                          </div>
+                                      </div>
+                                      <!--colend-->
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Email of the preferred Instructor
 
                       <a href="">
                         <i
@@ -712,23 +678,23 @@ If the event is delivered by an external supplier, please select 'External' from
                         </i>
                       </a>
                     </label>
-                                      <select class="form-control form_width" formControlName="email_preffered_instructor">
+                                              <select class="form-control form_width" formControlName="email_preffered_instructor">
                       <option>option 1</option>
                       <option>option 2</option>
                       <option>option 3</option>
                       <option>option 4</option>
                       <option>option 5</option>
                     </select>
+                                          </div>
+                                      </div>
+                                      <!--colend-->
                                   </div>
-                              </div>
-                              <!--colend-->
-                          </div>
-                          <!--row-->
+                                  <!--row-->
 
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Learn more
+                                  <div class="row">
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Learn more
 
                       <a href="">
                         <i
@@ -741,13 +707,13 @@ If the event is delivered by an external supplier, please select 'External' from
                         </i>
                       </a>
                     </label>
-                                      <input type="text " placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more" />
-                                  </div>
-                              </div>
-                              <!--colend-->
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">URL
+                                              <input type="text " placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more" />
+                                          </div>
+                                      </div>
+                                      <!--colend-->
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">URL
                       <a href="">
                         <i
                           class="fa fa-info-circle info_circle"
@@ -759,17 +725,17 @@ If the event is delivered by an external supplier, please select 'External' from
                         </i>
                       </a>
                     </label>
-                                      <input type="text " placeholder="Enter URL" class="form-control form_width" formControlName="url" />
+                                              <input type="text " placeholder="Enter URL" class="form-control form_width" formControlName="url" />
+                                          </div>
+                                      </div>
+                                      <!--colend-->
                                   </div>
-                              </div>
-                              <!--colend-->
-                          </div>
-                          <!--row-->
+                                  <!--row-->
 
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Provide the link to your video
+                                  <div class="row">
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Provide the link to your video
 
                       <a href="">
                         <i
@@ -782,13 +748,13 @@ If the event is delivered by an external supplier, please select 'External' from
                         </i>
                       </a>
                     </label>
-                                      <input type="text" placeholder="Enter Provide the link to your video" class="form-control form_width" formControlName="who_see_course" />
-                                  </div>
-                              </div>
-                              <!--colend-->
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Date of first session
+                                              <input type="text" placeholder="Enter Provide the link to your video" class="form-control form_width" formControlName="who_see_course" />
+                                          </div>
+                                      </div>
+                                      <!--colend-->
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Date of first session
                       <span style="color: red">* </span>
                       <a href="">
                         <i
@@ -802,17 +768,17 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                      <input type="date" class="form-control form_width" formControlName="first_session_date" />
+                                              <input type="date" class="form-control form_width" formControlName="first_session_date" />
+                                          </div>
+                                      </div>
+                                      <!--colend-->
                                   </div>
-                              </div>
-                              <!--colend-->
-                          </div>
-                          <!--row-->
+                                  <!--row-->
 
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Expiry Date
+                                  <div class="row">
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Expiry Date
 
                       <a>
                         <i
@@ -825,13 +791,13 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                      <input type="date" class="form-control form_width" formControlName="expiry_date" />
-                                  </div>
-                              </div>
-                              <!--colend-->
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Title of the additional free text field
+                                              <input type="date" class="form-control form_width" formControlName="expiry_date" />
+                                          </div>
+                                      </div>
+                                      <!--colend-->
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Title of the additional free text field
                       <a href="">
                         <i
                           class="fa fa-info-circle info_circle"
@@ -843,17 +809,17 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                      <input type="text" placeholder="Enter Title of the additional free text field" class="form-control form_width" formControlName="title_additional" />
+                                              <input type="text" placeholder="Enter Title of the additional free text field" class="form-control form_width" formControlName="title_additional" />
+                                          </div>
+                                      </div>
+                                      <!--colend-->
                                   </div>
-                              </div>
-                              <!--colend-->
-                          </div>
-                          <!--row-->
+                                  <!--row-->
 
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Expiry Date <span style="color: red">* </span>
+                                  <div class="row">
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Expiry Date <span style="color: red">* </span>
                       <a href="">
                         <i
                           class="fa fa-info-circle info_circle"
@@ -865,7 +831,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                      <select class="form-control form_width" formControlName="expiry_date">
+                                              <select class="form-control form_width" formControlName="expiry_date">
                       <option value="">Please Select expiry</option>
                       <option
                         *ngFor="let cctExpiry of cctExpiryperiod"
@@ -874,12 +840,12 @@ Note: 3-5 working days are required for the learning object to be available in t
                         {{ cctExpiry.name }}
                       </option>
                     </select>
-                                  </div>
-                              </div>
-                              <!--colend-->
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Entity/Business area <span style="color: red">* </span>
+                                          </div>
+                                      </div>
+                                      <!--colend-->
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Entity/Business area <span style="color: red">* </span>
                       <a>
                         <i
                           class="fa fa-info-circle info_circle"
@@ -891,23 +857,23 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                      <select class="form-control form_width" formControlName="entity_business_area">
+                                              <select class="form-control form_width" formControlName="entity_business_area">
                       <option>option 1</option>
                       <option>option 2</option>
                       <option>option 3</option>
                       <option>option 4</option>
                       <option>option 5</option>
                     </select>
+                                          </div>
+                                      </div>
+                                      <!--colend-->
                                   </div>
-                              </div>
-                              <!--colend-->
-                          </div>
-                          <!--row-->
+                                  <!--row-->
 
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Free field content
+                                  <div class="row">
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Free field content
                       <a href="">
                         <i
                           class="fa fa-info-circle info_circle"
@@ -919,14 +885,14 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                      <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Free field content" formControlName="free_field_content">
+                                              <textarea class="form-control form_width" rows="3" placeholder="Enter Free field content" formControlName="free_field_content">
                     </textarea>
-                                  </div>
-                              </div>
-                              <!--colend-->
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">For Whom? <span style="color: red">* </span>
+                                          </div>
+                                      </div>
+                                      <!--colend-->
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">For Whom? <span style="color: red">* </span>
                       <a href="">
                         <i
                           class="fa fa-info-circle info_circle"
@@ -938,18 +904,18 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                      <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
+                                              <textarea class="form-control form_width" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
                     </textarea>
+                                          </div>
+                                      </div>
+                                      <!--colend-->
                                   </div>
-                              </div>
-                              <!--colend-->
-                          </div>
-                          <!--row-->
+                                  <!--row-->
 
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Certification <span style="color: red">* </span>
+                                  <div class="row">
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Certification <span style="color: red">* </span>
                       <a href="">
                         <i
                           class="fa fa-info-circle info_circle"
@@ -961,19 +927,19 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                      <select class="form-control form_width" (change)="certificationType($event)" formControlName="certification">
+                                              <select class="form-control form_width" (change)="certificationType($event)" formControlName="certification">
                       <option value="">Please select</option>
                       <option value="yes">Yes</option>
                       <option value="no">No</option>
                     </select>
-                                  </div>
-                              </div>
-                              <!--colend-->
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">External vendor <span style="color: red">* </span>
+                                          </div>
+                                      </div>
+                                      <!--colend-->
+                                      <div class="col-sm-6">
+                                          <div class="form-group">
+                                              <label class="form-control-label">External vendor <span style="color: red">* </span>
 
-                      <a >
+                      <a>
                         <i
                           class="fa fa-info-circle info_circle"
                           aria-hidden="true"
@@ -984,21 +950,21 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                      <select class="form-control form_width" formControlName="external_vendor" (change)="externalVendor($event)">
+                                              <select class="form-control form_width" formControlName="external_vendor" (change)="externalVendor($event)">
                       <option value="">Please select externalvendor</option>
                       <option value="yes">Yes</option>
                       <option value="no">No</option>
                     </select>
+                                          </div>
+                                      </div>
+                                      <!--colend-->
                                   </div>
-                              </div>
-                              <!--colend-->
-                          </div>
-                          <!--row-->
+                                  <!--row-->
 
-                          <div class="row">
-                              <div class="col-sm-6" *ngIf="showCertificateExpiry">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Certification expiry type
+                                  <div class="row">
+                                      <div class="col-sm-6" *ngIf="showCertificateExpiry">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Certification expiry type
                       <span style="color: red">* </span>
                       <a>
                         <i
@@ -1011,7 +977,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                      <select class="form-control form_width" formControlName="certification_expiry_type">
+                                              <select class="form-control form_width" formControlName="certification_expiry_type">
                       <option value="">Please select option</option>
                       <option
                         *ngFor="let cctExpiry of cctExpiryType"
@@ -1020,12 +986,12 @@ Note: 3-5 working days are required for the learning object to be available in t
                         {{ cctExpiry.name }}
                       </option>
                     </select>
-                                  </div>
-                              </div>
-                              <!--colend-->
-                              <div class="col-sm-6" *ngIf="externalVendorname">
-                                  <div class="form-group">
-                                      <!-- <label class="form-control-label"
+                                          </div>
+                                      </div>
+                                      <!--colend-->
+                                      <div class="col-sm-6" *ngIf="externalVendorname">
+                                          <div class="form-group">
+                                              <!-- <label class="form-control-label"
         >External vendor
 
         <a href="">
@@ -1044,7 +1010,7 @@ Note: 3-5 working days are required for the learning object to be available in t
         <option value="yes">Yes</option>
         <option value="no">No</option>
       </select> -->
-                                      <label class="form-control-label">External vendor name <span style="color: red">* </span>
+                                              <label class="form-control-label">External vendor name <span style="color: red">* </span>
                       <a href="">
                         <i
                           class="fa fa-info-circle info_circle"
@@ -1056,17 +1022,17 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                      <input type="text " placeholder="External vendor name" class="form-control form_width" formControlName="external_vendor_name" />
+                                              <input type="text " placeholder="External vendor name" class="form-control form_width" formControlName="external_vendor_name" />
+                                          </div>
+                                      </div>
+                                      <!--colend-->
                                   </div>
-                              </div>
-                              <!--colend-->
-                          </div>
-                          <!--row-->
+                                  <!--row-->
 
-                          <div class="row">
-                              <div class="col-sm-6" *ngIf="showCertificateExpiry">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Validity period <span style="color: red">* </span>
+                                  <div class="row">
+                                      <div class="col-sm-6" *ngIf="showCertificateExpiry">
+                                          <div class="form-group">
+                                              <label class="form-control-label">Validity period <span style="color: red">* </span>
 
                       <a>
                         <i
@@ -1079,7 +1045,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </i>
                       </a>
                     </label>
-                                      <select class="form-control form_width" formControlName="validity_period">
+                                              <select class="form-control form_width" formControlName="validity_period">
                       <option value="">Please select validity</option>
                       <option
                         *ngFor="let validity of validityPeriod"
@@ -1088,120 +1054,74 @@ Note: 3-5 working days are required for the learning object to be available in t
                         {{ validity.name }}
                       </option>
                     </select>
+                                          </div>
+                                      </div>
+                                      <!--colend-->
                                   </div>
-                              </div>
-                              <!--colend-->
-                          </div>
-                          <!--row end-->
+                                  <!--row end-->
 
-                          <table class="table table-bordered">
-                              <thead>
-                                  <tr>
-                                      <th scope="col">Learner Guidelines </th>
-                                      <th scope="col">Learner Guidelines Description</th>
-                                      <th scope="col" style="width: 12px;">Action</th>
-                                  </tr>
-                                  <tr formArrayName="learnerguidearray" *ngFor="let learner of t.controls; let i = index">
-                                      <td [formGroupName]="i">
-                                          <input type="text " placeholder="Enter Learner Guidelines" class="form-control form_width" formControlName="" />
-                                      </td>
-                                      <td [formGroupName]="i">
-                                          <textarea class="form-control form_width-textarea w-100" rows="3" placeholder="Enter Learner Guidelines Description" formControlName="name">
+                                  <table class="table table-bordered" style="width: 37.6%">
+                                      <thead>
+                                          <tr>
+                                              <th scope="col">Learner Guidelines</th>
+                                              <th scope="col">Action</th>
+                                          </tr>
+                                          <tr formArrayName="learnerguidearray" *ngFor="let learner of t.controls; let i = index">
+                                              <td [formGroupName]="i">
+                                                  <textarea class="form-control form_width w-100" rows="3" placeholder="Enter Learner Guidelines" formControlName="name">
                       </textarea>
-                                      </td>
-                                      <td>
-                                          <button class="btn btn-success mr-2 mb-1" (click)="addLearnerGuideline()">
+                                              </td>
+                                              <td>
+                                                  <button class="btn btn-success mr-2" (click)="addLearnerGuideline()">
                         +
                       </button>
-                                          <button class="btn btn-danger" *ngIf="i > 0" (click)="removeLearnerGuideline(i)">
+                                                  <button class="btn btn-danger" *ngIf="i > 0" (click)="removeLearnerGuideline(i)">
                         <i class="fa fa-trash"></i>
                       </button>
-                                      </td>
-                                  </tr>
-                              </thead>
-                          </table>
+                                              </td>
+                                          </tr>
+                                      </thead>
+                                  </table>
 
-
-                          <div class="row">
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Request to RegionalTraining Cordinator <span style="color: red">* </span>
-
-                      <a>
-                        <i
-                          class="fa fa-info-circle info_circle"
-                          aria-hidden="true"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="If you selected Yes in the Certification field, please select how long the certification is valid."
-                        >
-                        </i>
-                      </a>
-                    </label>
-                                      <select class="form-control form_width" formControlName="validity_period">
-                      <option value="">Please select </option>
-                      <option
-                        *ngFor="let validity of validityPeriod"
-                        [value]="validity.id"
-                      >
-                        {{ validity.name }}
-                      </option>
-                    </select>
-                                  </div>
+                                  <p style="color: #000">
+                                      <b>Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
+                                  </p>
                               </div>
-                              <!--colend-->
-                          </div>
-                          <p style="color: #000">
-
-                              <b style="color:#ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
-
-
-
-                          </p>
-                          <p style="color: #000">
-
-                              <b style="color:#ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the <b style="color:#ff7900">Middle East and Africa</b>.region from the list,who is the backup for
-                              Asia Pacificregion
-
-
-
-                          </p>
-                          <p style="color: #000">
-
-                              <b style="color:#ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color:#ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b>                                region.
-
-
-
-                          </p>
-
-
-                      </div>
-                      <!-- </form> -->
-                      <div class="card-footer d-flex justify-content-start">
-                          <button class="btn btn-default submit-css" (click)="createNewCourceIlt()">
+                              <!-- </form> -->
+                              <div class="card-footer d-flex justify-content-start">
+                                  <!-- <button
+                class="btn btn-default submit-css"
+                (click)="createNewCourceIlt()"
+              >
                 Submit
-              </button>
-                          <!-- </button> -->
-                          <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff" (click)="saveasDraftIlt()">
+              </button> -->
+                                  <button class="btn btn-default submit-css mr-1" *ngIf="getUserrole.id === 3">
+              Transfer to Publisher
+            </button>
+                                  <button class="btn btn-default submit-css">
+              Publish
+            </button>
+                                  <!-- </button> -->
+                                  <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff" (click)="saveasDraftIlt()">
                 Save as draft
               </button>
-                          <!-- </button> -->
-                      </div>
-                  </div>
-              </form>
-              <!--ILT and vILT-->
+                                  <!-- </button> -->
+                              </div>
+                          </div>
+                      </form>
+                      <!--ILT and vILT-->
 
-              <!--Currriculum-->
-              <div class="card" *ngIf="learningType == 'Currriculum'">
-                  <!-- <form [formGroup]="createCourceForm"> -->
-                  <div class="card-header">
-                      <strong> Currriculum </strong>
-                  </div>
-                  <div class="card-body">
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Email of Curriculum Owner
+                      <!--Currriculum-->
+                      <div class="card" *ngIf="learningType == 'Currriculum'">
+                          <!-- <form [formGroup]="createCourceForm"> -->
+                          <div class="card-header">
+                              <strong> Currriculum </strong>
+                          </div>
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Email of Curriculum Owner
                     <span style="color: red">* </span>
                     <a href="">
                       <i
@@ -1213,13 +1133,13 @@ Note: 3-5 working days are required for the learning object to be available in t
                       ></i
                     ></a>
                   </label>
-                                  <input type="email " placeholder="Enter Email of Curriculum Owner " class="form-control form_width" formControlName="duration" />
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Learn more
+                                          <input type="email " placeholder="Enter Email of Curriculum Owner " class="form-control form_width" formControlName="duration" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Learn more
 
                     <a href="">
                       <i
@@ -1232,16 +1152,16 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <input type="text " placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more" />
+                                          <input type="text " placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
 
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Learn more
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Learn more
 
                     <a href="">
                       <i
@@ -1254,13 +1174,13 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <input type="text " placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more" />
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Provide the link to your video
+                                          <input type="text " placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Provide the link to your video
 
                     <a href="">
                       <i
@@ -1273,17 +1193,17 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <input type="text" placeholder="Enter Provide the link to your video" class="form-control form_width" formControlName="who_see_course" />
+                                          <input type="text" placeholder="Enter Provide the link to your video" class="form-control form_width" formControlName="who_see_course" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
-                      <!--row end-->
+                              <!--row end-->
 
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Expiry Date
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Expiry Date
 
                     <a>
                       <i
@@ -1296,13 +1216,13 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <input type="date" class="form-control form_width" formControlName="expiry_date" />
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Title of the additional free text field
+                                          <input type="date" class="form-control form_width" formControlName="expiry_date" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Title of the additional free text field
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -1314,17 +1234,17 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <input type="text" placeholder="Enter Title of the additional free text field" class="form-control form_width" formControlName="title_additional" />
+                                          <input type="text" placeholder="Enter Title of the additional free text field" class="form-control form_width" formControlName="title_additional" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
-                      <!--row end-->
+                              <!--row end-->
 
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Who can see my course?
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Who can see my course?
                     <a>
                       <i
                         class="fa fa-info-circle info_circle"
@@ -1336,7 +1256,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <select class="form-control form_width" formControlName="who_see_course">
+                                          <select class="form-control form_width" formControlName="who_see_course">
                     <option value="">Please select</option>
                     <option value="1">option 1</option>
                     <option value="2">option 2</option>
@@ -1344,12 +1264,12 @@ Note: 3-5 working days are required for the learning object to be available in t
                     <option value="">option 4</option>
                     <option value="4">option 5</option>
                   </select>
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Free field content
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Free field content
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -1361,18 +1281,18 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Free field content" formControlName="free_field_content">
+                                          <textarea class="form-control form_width" rows="3" placeholder="Enter Free field content" formControlName="free_field_content">
                   </textarea>
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
-                      <!--row end-->
+                              <!--row end-->
 
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">For Whom? <span style="color: red">* </span>
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">For Whom? <span style="color: red">* </span>
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -1384,14 +1304,14 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
+                                          <textarea class="form-control form_width" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
                   </textarea>
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Curriculum content <span style="color: red">* </span>
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Curriculum content <span style="color: red">* </span>
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -1403,119 +1323,62 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Curriculum content" formControlName="for_whoom">
+                                          <textarea class="form-control form_width" rows="3" placeholder="Enter Curriculum content" formControlName="for_whoom">
                   </textarea>
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
-                      <!--row-->
+                              <!--row-->
 
-                      <table class="table table-bordered">
-                          <thead>
-                              <tr>
-                                  <th scope="col">Learner Guidelines </th>
-                                  <th scope="col">Learner Guidelines Description</th>
-                                  <th scope="col" style="width: 12px;">Action</th>
-
-                              </tr>
-                              <tr formArrayName="learnerguidearray" *ngFor="let learner of t.controls; let i = index">
-                                  <td [formGroupName]="i">
-                                      <input type="text " placeholder="Enter Learner Guidelines" class="form-control form_width" formControlName="" />
-                                  </td>
-
-                                  <td [formGroupName]="i">
-                                      <textarea class="form-control form_width-textarea w-100" rows="3" placeholder="Enter Learner Guidelines" formControlName="name">
+                              <table class="table table-bordered" style="width: 37.6%">
+                                  <thead>
+                                      <tr>
+                                          <th scope="col">Learner Guidelines</th>
+                                          <th scope="col">Action</th>
+                                      </tr>
+                                      <tr formArrayName="learnerguidearray" *ngFor="let learner of t.controls; let i = index">
+                                          <td [formGroupName]="i">
+                                              <textarea class="form-control form_width w-100" rows="3" placeholder="Enter Learner Guidelines" formControlName="name">
                     </textarea>
-                                  </td>
-                                  <td>
-                                      <button class="btn btn-success mr-2 mb-1" (click)="addLearnerGuideline()">
+                                          </td>
+                                          <td>
+                                              <button class="btn btn-success mr-2" (click)="addLearnerGuideline()">
                       +
                     </button>
-                                      <button class="btn btn-danger" *ngIf="i > 0" (click)="removeLearnerGuideline(i)">
+                                              <button class="btn btn-danger" *ngIf="i > 0" (click)="removeLearnerGuideline(i)">
                       <i class="fa fa-trash"></i>
                     </button>
-                                  </td>
-                              </tr>
-                          </thead>
-                      </table>
-                      <div class="row">
-                          <div class="col-sm-12">
-                              <div class="form-group">
-                                  <label class="form-control-label">Request to RegionalTraining Cordinator <span style="color: red">* </span>
-
-                      <a>
-                        <i
-                          class="fa fa-info-circle info_circle"
-                          aria-hidden="true"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="If you selected Yes in the Certification field, please select how long the certification is valid."
-                        >
-                        </i>
-                      </a>
-                    </label>
-                                  <select class="form-control form_width" formControlName="validity_period">
-                      <option value="">Please select </option>
-                      <option
-                        *ngFor="let validity of validityPeriod"
-                        [value]="validity.id"
-                      >
-                        {{ validity.name }}
-                      </option>
-                    </select>
-                              </div>
+                                          </td>
+                                      </tr>
+                                  </thead>
+                              </table>
                           </div>
-                          <!--colend-->
-                      </div>
-                      <p style="color: #000">
-
-                          <b style="color:#ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
-
-
-
-                      </p>
-                      <p style="color: #000">
-
-                          <b style="color:#ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the <b style="color:#ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
-                          Pacificregion
-
-
-
-                      </p>
-                      <p style="color: #000">
-
-                          <b style="color:#ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color:#ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b> region.
-
-
-
-                      </p>
-                  </div>
-                  <!-- </form> -->
-                  <div class="card-footer d-flex justify-content-start">
-                      <button class="btn btn-default submit-css" (click)="createNewCource()">
+                          <!-- </form> -->
+                          <div class="card-footer d-flex justify-content-start">
+                              <button class="btn btn-default submit-css" (click)="createNewCource()">
               Submit
             </button>
-                      <!-- </button> -->
-                      <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff">
+                              <!-- </button> -->
+                              <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff">
               Save as draft
             </button>
-                      <!-- </button> -->
-                  </div>
-              </div>
-              <!--Currriculum-->
+                              <!-- </button> -->
+                          </div>
+                      </div>
+                      <!--Currriculum-->
 
-              <!--Material-Based Training-->
-              <div class="card" *ngIf="learningType == 'Material-Based Training'">
-                  <!-- <form [formGroup]="createCourceForm"> -->
-                  <div class="card-header">
-                      <strong> Material Based Training </strong>
-                  </div>
-                  <div class="card-body">
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Subject <span style="color: red">* </span>
+                      <!--Material-Based Training-->
+                      <div class="card" *ngIf="learningType == 'Material-Based Training'">
+                          <!-- <form [formGroup]="createCourceForm"> -->
+                          <div class="card-header">
+                              <strong> Material Based Training </strong>
+                          </div>
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Subject <span style="color: red">* </span>
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -1527,21 +1390,21 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <!-- <select class="form-control form_width">
+                                          <!-- <select class="form-control form_width">
           <option value="">Please select subject</option>
           <option *ngFor="let cctSubject of cctSubjects">
             {{ cctSubject.name }}
           </option>
         </select> -->
 
-                                  <ng-select placeholder="please select subject" [items]="cctSubjects" bindLabel="name" bindValue="id" formControlName="subject">
-                                  </ng-select>
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Material Source
+                                          <ng-select placeholder="please select subject" [items]="cctSubjects" bindLabel="name" bindValue="id" formControlName="subject">
+                                          </ng-select>
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Material Source
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -1553,17 +1416,17 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <div class="upload_field">
-                                      <input type="file" id="exampleInputFile" formControlName="resource" style="width: 77%" />
+                                          <div class="upload_field">
+                                              <input type="file" id="exampleInputFile" formControlName="resource" style="width: 77%" />
+                                          </div>
+                                      </div>
                                   </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Learn more
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Learn more
 
                     <a href="">
                       <i
@@ -1576,13 +1439,13 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <input type="text " placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more" />
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Learn more
+                                          <input type="text " placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Learn more
 
                     <a href="">
                       <i
@@ -1595,17 +1458,17 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <input type="text " placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more" />
+                                          <input type="text " placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
-                      <!--row end-->
+                              <!--row end-->
 
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Provide the link to your video
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Provide the link to your video
 
                     <a href="">
                       <i
@@ -1618,13 +1481,13 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <input type="text" placeholder="Enter Provide the link to your video" class="form-control form_width" formControlName="who_see_course" />
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Expiry Date
+                                          <input type="text" placeholder="Enter Provide the link to your video" class="form-control form_width" formControlName="who_see_course" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Expiry Date
 
                     <a>
                       <i
@@ -1637,17 +1500,17 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <input type="date" class="form-control form_width" formControlName="expiry_date" />
+                                          <input type="date" class="form-control form_width" formControlName="expiry_date" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
-                      <!--row end-->
+                              <!--row end-->
 
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Title of the additional free text field
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Title of the additional free text field
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -1659,13 +1522,13 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <input type="text" placeholder="Enter Title of the additional free text field" class="form-control form_width" formControlName="title_additional" />
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Who can see my course?
+                                          <input type="text" placeholder="Enter Title of the additional free text field" class="form-control form_width" formControlName="title_additional" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Who can see my course?
                     <a>
                       <i
                         class="fa fa-info-circle info_circle"
@@ -1677,7 +1540,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <select class="form-control form_width" formControlName="who_see_course">
+                                          <select class="form-control form_width" formControlName="who_see_course">
                     <option value="">Please select</option>
                     <option value="1">option 1</option>
                     <option value="2">option 2</option>
@@ -1685,16 +1548,16 @@ Note: 3-5 working days are required for the learning object to be available in t
                     <option value="">option 4</option>
                     <option value="4">option 5</option>
                   </select>
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
-                      <!--row end-->
+                              <!--row end-->
 
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Free field content
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Free field content
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -1706,15 +1569,15 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Free field content" formControlName="free_field_content">
+                                          <textarea class="form-control form_width" rows="3" placeholder="Enter Free field content" formControlName="free_field_content">
                   </textarea>
-                              </div>
-                          </div>
-                          <!--colend-->
+                                      </div>
+                                  </div>
+                                  <!--colend-->
 
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">For Whom? <span style="color: red">* </span>
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">For Whom? <span style="color: red">* </span>
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -1726,18 +1589,18 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
+                                          <textarea class="form-control form_width" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
                   </textarea>
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
-                      <!--row-->
+                              <!--row-->
 
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Curriculum content <span style="color: red">* </span>
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Curriculum content <span style="color: red">* </span>
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -1749,14 +1612,14 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Curriculum content" formControlName="for_whoom">
+                                          <textarea class="form-control form_width" rows="3" placeholder="Enter Curriculum content" formControlName="for_whoom">
                   </textarea>
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6" *ngIf="showCertificateExpiry">
-                              <div class="form-group">
-                                  <label class="form-control-label">Certification expiry type
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6" *ngIf="showCertificateExpiry">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Certification expiry type
                     <span style="color: red">* </span>
                     <a>
                       <i
@@ -1769,7 +1632,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <select class="form-control form_width" formControlName="certification_expiry_type">
+                                          <select class="form-control form_width" formControlName="certification_expiry_type">
                     <option value="">Please select option</option>
                     <option
                       *ngFor="let cctExpiry of cctExpiryType"
@@ -1778,15 +1641,15 @@ Note: 3-5 working days are required for the learning object to be available in t
                       {{ cctExpiry.name }}
                     </option>
                   </select>
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
-                      <!--row-->
-                      <div class="row">
-                          <div class="col-sm-6" *ngIf="externalVendorname">
-                              <div class="form-group">
-                                  <!-- <label class="form-control-label"
+                              <!--row-->
+                              <div class="row">
+                                  <div class="col-sm-6" *ngIf="externalVendorname">
+                                      <div class="form-group">
+                                          <!-- <label class="form-control-label"
         >External vendor
 
         <a href="">
@@ -1805,7 +1668,7 @@ Note: 3-5 working days are required for the learning object to be available in t
         <option value="yes">Yes</option>
         <option value="no">No</option>
       </select> -->
-                                  <label class="form-control-label">External vendor name <span style="color: red">* </span>
+                                          <label class="form-control-label">External vendor name <span style="color: red">* </span>
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -1817,13 +1680,13 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <input type="text " placeholder="External vendor name" class="form-control form_width" formControlName="external_vendor_name" />
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6" *ngIf="showCertificateExpiry">
-                              <div class="form-group">
-                                  <label class="form-control-label">Validity period <span style="color: red">* </span>
+                                          <input type="text " placeholder="External vendor name" class="form-control form_width" formControlName="external_vendor_name" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6" *ngIf="showCertificateExpiry">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Validity period <span style="color: red">* </span>
 
                     <a>
                       <i
@@ -1836,7 +1699,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <select class="form-control form_width" formControlName="validity_period">
+                                          <select class="form-control form_width" formControlName="validity_period">
                     <option value="">Please select validity</option>
                     <option
                       *ngFor="let validity of validityPeriod"
@@ -1845,15 +1708,15 @@ Note: 3-5 working days are required for the learning object to be available in t
                       {{ validity.name }}
                     </option>
                   </select>
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
-                      <!--row end-->
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Material Source<span style="color: red">* </span>
+                              <!--row end-->
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Material Source<span style="color: red">* </span>
 
                     <a href="">
                       <i
@@ -1866,124 +1729,64 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <div>
-                                      <input type="radio" id="html" name="fav_language" value="HTML" class="mr-1" />
-                                      <label>Yes</label>
-                                      <input type="radio" id="html" name="fav_language" value="HTML" class="mr-1" />
-                                      <label>No</label>
+                                          <div>
+                                              <input type="radio" id="html" name="fav_language" value="HTML" class="mr-1" />
+                                              <label>Yes</label>
+                                              <input type="radio" id="html" name="fav_language" value="HTML" class="mr-1" />
+                                              <label>No</label>
+                                          </div>
+                                      </div>
                                   </div>
                               </div>
-                          </div>
-                      </div>
 
-                      <table class="table table-bordered">
-                          <thead>
-                              <tr>
-                                  <th scope="col">Learner Guidelines </th>
-                                  <th scope="col">Learner Guidelines Description</th>
-                                  <th scope="col" style="width: 12px;">Action</th>
-                              </tr>
-                              <tr formArrayName="learnerguidearray" *ngFor="let learner of t.controls; let i = index">
-
-                                  <td [formGroupName]="i">
-                                      <input type="text " placeholder="Enter Learner Guidelines" class="form-control form_width" formControlName="" />
-                                  </td>
-                                  <td [formGroupName]="i">
-                                      <textarea class="form-control form_width-textarea w-100" rows="3" placeholder="Enter Learner Guidelines" formControlName="name">
+                              <table class="table table-bordered" style="width: 37.6%">
+                                  <thead>
+                                      <tr>
+                                          <th scope="col">Learner Guidelines</th>
+                                          <th scope="col">Action</th>
+                                      </tr>
+                                      <tr formArrayName="learnerguidearray" *ngFor="let learner of t.controls; let i = index">
+                                          <td [formGroupName]="i">
+                                              <textarea class="form-control form_width w-100" rows="3" placeholder="Enter Learner Guidelines" formControlName="name">
                     </textarea>
-                                  </td>
-                                  <td>
-                                      <button class="btn btn-success mr-2 mb-1" (click)="addLearnerGuideline()">
+                                          </td>
+                                          <td>
+                                              <button class="btn btn-success mr-2" (click)="addLearnerGuideline()">
                       +
                     </button>
-                                      <button class="btn btn-danger" *ngIf="i > 0" (click)="removeLearnerGuideline(i)">
+                                              <button class="btn btn-danger" *ngIf="i > 0" (click)="removeLearnerGuideline(i)">
                       <i class="fa fa-trash"></i>
                     </button>
-                                  </td>
-                              </tr>
-                          </thead>
-                      </table>
-
-
-                      <div class="row">
-                          <div class="col-sm-12">
-                              <div class="form-group">
-                                  <label class="form-control-label">Request to RegionalTraining Cordinator <span style="color: red">* </span>
-
-                      <a>
-                        <i
-                          class="fa fa-info-circle info_circle"
-                          aria-hidden="true"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="If you selected Yes in the Certification field, please select how long the certification is valid."
-                        >
-                        </i>
-                      </a>
-                    </label>
-                                  <select class="form-control form_width" formControlName="validity_period">
-                      <option value="">Please select </option>
-                      <option
-                        *ngFor="let validity of validityPeriod"
-                        [value]="validity.id"
-                      >
-                        {{ validity.name }}
-                      </option>
-                    </select>
-                              </div>
+                                          </td>
+                                      </tr>
+                                  </thead>
+                              </table>
                           </div>
-                          <!--colend-->
-                      </div>
-                      <p style="color: #000">
-
-                          <b style="color:#ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
-
-
-
-                      </p>
-                      <p style="color: #000">
-
-                          <b style="color:#ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the <b style="color:#ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
-                          Pacificregion
-
-
-
-                      </p>
-                      <p style="color: #000">
-
-                          <b style="color:#ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color:#ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b> region.
-
-
-
-                      </p>
-
-
-                  </div>
-                  <!-- </form> -->
-                  <div class="card-footer d-flex justify-content-start">
-                      <button class="btn btn-default submit-css" (click)="createNewCource()">
+                          <!-- </form> -->
+                          <div class="card-footer d-flex justify-content-start">
+                              <button class="btn btn-default submit-css" (click)="createNewCource()">
               Submit
             </button>
-                      <!-- </button> -->
-                      <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff">
+                              <!-- </button> -->
+                              <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff">
               Save as draft
             </button>
-                      <!-- </button> -->
-                  </div>
-              </div>
-              <!--Material-Based Training-->
+                              <!-- </button> -->
+                          </div>
+                      </div>
+                      <!--Material-Based Training-->
 
-              <!--Video-based training-->
-              <div class="card" *ngIf="learningType == 'Video-based training'">
-                  <!-- <form [formGroup]="createCourceForm"> -->
-                  <div class="card-header">
-                      <strong>Video-based training </strong>
-                  </div>
-                  <div class="card-body">
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Expiry Date
+                      <!--Video-based training-->
+                      <div class="card" *ngIf="learningType == 'Video-based training'">
+                          <!-- <form [formGroup]="createCourceForm"> -->
+                          <div class="card-header">
+                              <strong>Video-based training </strong>
+                          </div>
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Expiry Date
 
                     <a>
                       <i
@@ -1996,13 +1799,13 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <input type="date" class="form-control form_width" formControlName="expiry_date" />
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Upload video status <span style="color: red">* </span>
+                                          <input type="date" class="form-control form_width" formControlName="expiry_date" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Upload video status <span style="color: red">* </span>
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -2014,21 +1817,21 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <select class="form-control form_width" formControlName="level">
+                                          <select class="form-control form_width" formControlName="level">
                     <option value="">Please select level</option>
                     <option *ngFor="let level of cctLevel" [value]="level.id">
                       {{ level.name }}
                     </option>
                   </select>
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
 
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Email of Content Owner
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Email of Content Owner
                     <span style="color: red">* </span>
 
                     <a href="">
@@ -2042,13 +1845,13 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <input type="email " placeholder="Enter Email of Content Owner" class="form-control form_width" formControlName="email_content_owner" />
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Uploaded video URL
+                                          <input type="email " placeholder="Enter Email of Content Owner" class="form-control form_width" formControlName="email_content_owner" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Uploaded video URL
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -2059,91 +1862,39 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Prerequisite" formControlName="prerequisite">
+                                          <textarea class="form-control form_width" rows="3" placeholder="Enter Prerequisite" formControlName="prerequisite">
                   </textarea>
+                                      </div>
+                                  </div>
                               </div>
+                              <!--row end-->
                           </div>
-                      </div>
-                      <!--row end-->
-                      <div class="row">
-                          <div class="col-sm-12">
-                              <div class="form-group">
-                                  <label class="form-control-label">Request to RegionalTraining Cordinator <span style="color: red">* </span>
-
-                      <a>
-                        <i
-                          class="fa fa-info-circle info_circle"
-                          aria-hidden="true"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="If you selected Yes in the Certification field, please select how long the certification is valid."
-                        >
-                        </i>
-                      </a>
-                    </label>
-                                  <select class="form-control form_width" formControlName="validity_period">
-                      <option value="">Please select </option>
-                      <option
-                        *ngFor="let validity of validityPeriod"
-                        [value]="validity.id"
-                      >
-                        {{ validity.name }}
-                      </option>
-                    </select>
-                              </div>
-                          </div>
-                          <!--colend-->
-                      </div>
-                      <p style="color: #000">
-
-                          <b style="color:#ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
-
-
-
-                      </p>
-                      <p style="color: #000">
-
-                          <b style="color:#ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the <b style="color:#ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
-                          Pacificregion
-
-
-
-                      </p>
-                      <p style="color: #000">
-
-                          <b style="color:#ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color:#ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b> region.
-
-
-
-                      </p>
-
-                  </div>
-                  <!-- </form> -->
-                  <div class="card-footer d-flex justify-content-start">
-                      <button class="btn btn-default submit-css" (click)="createNewCource()">
+                          <!-- </form> -->
+                          <div class="card-footer d-flex justify-content-start">
+                              <button class="btn btn-default submit-css" (click)="createNewCource()">
               Submit
             </button>
-                      <!-- </button> -->
-                      <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff">
+                              <!-- </button> -->
+                              <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff">
               Save as draft
             </button>
-                      <!-- </button> -->
-                  </div>
-              </div>
-              <!--Video-based training-->
+                              <!-- </button> -->
+                          </div>
+                      </div>
+                      <!--Video-based training-->
 
-              <!--Playlist-->
+                      <!--Playlist-->
 
-              <div class="card" *ngIf="learningType == 'Playlist'">
-                  <!-- <form [formGroup]="createCourceForm"> -->
-                  <div class="card-header">
-                      <strong>Playlist </strong>
-                  </div>
-                  <div class="card-body">
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Playlist url <span style="color: red">* </span>
+                      <div class="card" *ngIf="learningType == 'Playlist'">
+                          <!-- <form [formGroup]="createCourceForm"> -->
+                          <div class="card-header">
+                              <strong>Playlist </strong>
+                          </div>
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Playlist url <span style="color: red">* </span>
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -2155,13 +1906,13 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <input type="text " placeholder="Enter Playlist url" class="form-control form_width" formControlName="url" />
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Number of learning objects
+                                          <input type="text " placeholder="Enter Playlist url" class="form-control form_width" formControlName="url" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Number of learning objects
                     <span style="color: red">* </span>
                     <a href="">
                       <i
@@ -2174,16 +1925,16 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <input type="text " placeholder="Enter Number of learning objects" class="form-control form_width" formControlName="url" />
+                                          <input type="text " placeholder="Enter Number of learning objects" class="form-control form_width" formControlName="url" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
 
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Email of playlist creator
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Email of playlist creator
                     <span style="color: red">* </span>
                     <a href="">
                       <i
@@ -2196,13 +1947,13 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <input type="text " placeholder="Enter Email of playlist creator" class="form-control form_width" formControlName="url" />
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Is the target audience of your Playlist from one region
+                                          <input type="text " placeholder="Enter Email of playlist creator" class="form-control form_width" formControlName="url" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Is the target audience of your Playlist from one region
                     only? <span style="color: red">* </span>
                     <a href="">
                       <i
@@ -2215,21 +1966,21 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <select class="form-control form_width" formControlName="level">
+                                          <select class="form-control form_width" formControlName="level">
                     <option value="">Please select level</option>
                     <option *ngFor="let level of cctLevel" [value]="level.id">
                       {{ level.name }}
                     </option>
                   </select>
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
 
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Region of Target Audience
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Region of Target Audience
                     <span style="color: red">* </span>
                     <a href="">
                       <i
@@ -2246,18 +1997,18 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <select class="form-control form_width" formControlName="level">
+                                          <select class="form-control form_width" formControlName="level">
                     <option value="">Please select level</option>
                     <option *ngFor="let level of cctLevel" [value]="level.id">
                       {{ level.name }}
                     </option>
                   </select>
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Target audience <span style="color: red">* </span>
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Target audience <span style="color: red">* </span>
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -2271,21 +2022,21 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <select class="form-control form_width" formControlName="level">
+                                          <select class="form-control form_width" formControlName="level">
                     <option value="">Please select level</option>
                     <option *ngFor="let level of cctLevel" [value]="level.id">
                       {{ level.name }}
                     </option>
                   </select>
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
 
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">OBS employees in specific Functions/Divisions
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">OBS employees in specific Functions/Divisions
                     <span style="color: red">* </span>
                     <a href="">
                       <i
@@ -2298,95 +2049,43 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <select class="form-control form_width" formControlName="level">
+                                          <select class="form-control form_width" formControlName="level">
                     <option value="">Please select level</option>
                     <option *ngFor="let level of cctLevel" [value]="level.id">
                       {{ level.name }}
                     </option>
                   </select>
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
+                              <!--row end-->
                           </div>
-                          <!--colend-->
-                      </div>
-                      <!--row end-->
-
-                      <div class="row">
-                          <div class="col-sm-12">
-                              <div class="form-group">
-                                  <label class="form-control-label">Request to RegionalTraining Cordinator <span style="color: red">* </span>
-
-                      <a>
-                        <i
-                          class="fa fa-info-circle info_circle"
-                          aria-hidden="true"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="If you selected Yes in the Certification field, please select how long the certification is valid."
-                        >
-                        </i>
-                      </a>
-                    </label>
-                                  <select class="form-control form_width" formControlName="validity_period">
-                      <option value="">Please select </option>
-                      <option
-                        *ngFor="let validity of validityPeriod"
-                        [value]="validity.id"
-                      >
-                        {{ validity.name }}
-                      </option>
-                    </select>
-                              </div>
-                          </div>
-                          <!--colend-->
-                      </div>
-                      <p style="color: #000">
-
-                          <b style="color:#ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
-
-
-
-                      </p>
-                      <p style="color: #000">
-
-                          <b style="color:#ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the <b style="color:#ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
-                          Pacificregion
-
-
-
-                      </p>
-                      <p style="color: #000">
-
-                          <b style="color:#ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color:#ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b> region.
-
-
-
-                      </p>
-                  </div>
-                  <!-- </form> -->
-                  <div class="card-footer d-flex justify-content-start">
-                      <button class="btn btn-default submit-css" (click)="createNewCource()">
+                          <!-- </form> -->
+                          <div class="card-footer d-flex justify-content-start">
+                              <button class="btn btn-default submit-css" (click)="createNewCource()">
               Submit
             </button>
-                      <!-- </button> -->
-                      <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff">
+                              <!-- </button> -->
+                              <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff">
               Save as draft
             </button>
-                      <!-- </button> -->
-                  </div>
-              </div>
-              <!--Playlist-->
+                              <!-- </button> -->
+                          </div>
+                      </div>
+                      <!--Playlist-->
 
-              <!--Webbased Training-->
-              <div class="card" *ngIf="learningType == 'webbased training'">
-                  <!-- <form [formGroup]="createCourceForm"> -->
-                  <div class="card-header">
-                      <strong>Web-based training</strong>
-                  </div>
-                  <div class="card-body">
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Does this course integrate digital ?
+                      <!--Webbased Training-->
+                      <div class="card" *ngIf="learningType == 'webbased training'">
+                          <!-- <form [formGroup]="createCourceForm"> -->
+                          <div class="card-header">
+                              <strong>Web-based training</strong>
+                          </div>
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Does this course integrate digital ?
                     <span style="color: red">* </span>
                     <a href="">
                       <i
@@ -2399,17 +2098,17 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <select class="form-control form_width" formControlName="digital">
+                                          <select class="form-control form_width" formControlName="digital">
                     <option value="">Please select</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                   </select>
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Purchase order required?
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Purchase order required?
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -2421,22 +2120,22 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <select class="form-control form_width" formControlName="purchase_order">
+                                          <select class="form-control form_width" formControlName="purchase_order">
                     <option value="">Please select</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                   </select>
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
 
-                      <!--row-->
+                              <!--row-->
 
-                      <div class="row">
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">Certification <span style="color: red">* </span>
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Certification <span style="color: red">* </span>
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -2448,17 +2147,17 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <select class="form-control form_width" (change)="certificationType($event)" formControlName="certification">
+                                          <select class="form-control form_width" (change)="certificationType($event)" formControlName="certification">
                     <option value="">Please select</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                   </select>
-                              </div>
-                          </div>
-                          <!--colend-->
-                          <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label class="form-control-label">External vendor <span style="color: red">* </span>
+                                      </div>
+                                  </div>
+                                  <!--colend-->
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label class="form-control-label">External vendor <span style="color: red">* </span>
 
                     <a href="">
                       <i
@@ -2471,21 +2170,21 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <select class="form-control form_width" formControlName="external_vendor" (change)="externalVendor($event)">
+                                          <select class="form-control form_width" formControlName="external_vendor" (change)="externalVendor($event)">
                     <option value="">Please select externalvendor</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                   </select>
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
-                      <!--row-->
+                              <!--row-->
 
-                      <div class="row">
-                          <div class="col-sm-6" *ngIf="showCertificateExpiry">
-                              <div class="form-group">
-                                  <label class="form-control-label">Certification expiry type
+                              <div class="row">
+                                  <div class="col-sm-6" *ngIf="showCertificateExpiry">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Certification expiry type
                     <span style="color: red">* </span>
                     <a>
                       <i
@@ -2498,7 +2197,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <select class="form-control form_width" formControlName="certification_expiry_type">
+                                          <select class="form-control form_width" formControlName="certification_expiry_type">
                     <option value="">Please select option</option>
                     <option
                       *ngFor="let cctExpiry of cctExpiryType"
@@ -2507,13 +2206,13 @@ Note: 3-5 working days are required for the learning object to be available in t
                       {{ cctExpiry.name }}
                     </option>
                   </select>
-                              </div>
-                          </div>
-                          <!--colend-->
+                                      </div>
+                                  </div>
+                                  <!--colend-->
 
-                          <div class="col-sm-6" *ngIf="externalVendorname">
-                              <div class="form-group">
-                                  <!-- <label class="form-control-label"
+                                  <div class="col-sm-6" *ngIf="externalVendorname">
+                                      <div class="form-group">
+                                          <!-- <label class="form-control-label"
           >External vendor
 
           <a href="">
@@ -2532,7 +2231,7 @@ Note: 3-5 working days are required for the learning object to be available in t
           <option value="yes">Yes</option>
           <option value="no">No</option>
         </select> -->
-                                  <label class="form-control-label">External vendor name <span style="color: red">* </span>
+                                          <label class="form-control-label">External vendor name <span style="color: red">* </span>
                     <a href="">
                       <i
                         class="fa fa-info-circle info_circle"
@@ -2544,16 +2243,16 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <input type="text " placeholder="External vendor name" class="form-control form_width" formControlName="external_vendor_name" />
+                                          <input type="text " placeholder="External vendor name" class="form-control form_width" formControlName="external_vendor_name" />
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
-                          </div>
-                          <!--colend-->
-                      </div>
-                      <!--row end-->
-                      <div class="row">
-                          <div class="col-sm-6" *ngIf="showCertificateExpiry">
-                              <div class="form-group">
-                                  <label class="form-control-label">Validity period <span style="color: red">* </span>
+                              <!--row end-->
+                              <div class="row">
+                                  <div class="col-sm-6" *ngIf="showCertificateExpiry">
+                                      <div class="form-group">
+                                          <label class="form-control-label">Validity period <span style="color: red">* </span>
 
                     <a>
                       <i
@@ -2566,7 +2265,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </i>
                     </a>
                   </label>
-                                  <select class="form-control form_width" formControlName="validity_period">
+                                          <select class="form-control form_width" formControlName="validity_period">
                     <option value="">Please select validity</option>
                     <option
                       *ngFor="let validity of validityPeriod"
@@ -2575,182 +2274,110 @@ Note: 3-5 working days are required for the learning object to be available in t
                       {{ validity.name }}
                     </option>
                   </select>
+                                      </div>
+                                  </div>
+                                  <!--colend-->
                               </div>
                           </div>
-                          <!--colend-->
-                      </div>
-                      <div class="row">
-                          <div class="col-sm-12">
-                              <div class="form-group">
-                                  <label class="form-control-label">Request to RegionalTraining Cordinator <span style="color: red">* </span>
-
-                      <a>
-                        <i
-                          class="fa fa-info-circle info_circle"
-                          aria-hidden="true"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="If you selected Yes in the Certification field, please select how long the certification is valid."
-                        >
-                        </i>
-                      </a>
-                    </label>
-                                  <select class="form-control form_width" formControlName="validity_period">
-                      <option value="">Please select </option>
-                      <option
-                        *ngFor="let validity of validityPeriod"
-                        [value]="validity.id"
-                      >
-                        {{ validity.name }}
-                      </option>
-                    </select>
-                              </div>
-                          </div>
-                          <!--colend-->
-                      </div>
-                      <p style="color: #000">
-
-                          <b style="color:#ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
-
-
-
-                      </p>
-                      <p style="color: #000">
-
-                          <b style="color:#ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the <b style="color:#ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
-                          Pacificregion
-
-
-
-                      </p>
-                      <p style="color: #000">
-
-                          <b style="color:#ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color:#ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b> region.
-
-
-
-                      </p>
-
-
-                  </div>
-                  <!-- </form> -->
-                  <div class="card-footer d-flex justify-content-start">
-                      <button class="btn btn-default submit-css" (click)="createNewCource()">
+                          <!-- </form> -->
+                          <div class="card-footer d-flex justify-content-start">
+                              <button class="btn btn-default submit-css" (click)="createNewCource()">
               Submit
             </button>
-                      <!-- </button> -->
-                      <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff">
+                              <!-- </button> -->
+                              <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff">
               Save as draft
             </button>
-                      <!-- </button> -->
+                              <!-- </button> -->
+                          </div>
+                      </div>
+                      <!--Webbased Training-->
                   </div>
               </div>
-              <!--Webbased Training-->
+              <!-- .animated -->
+          </div>
+          <!-- .content -->
+      </div>
+
+      <!-- </form> -->
+      <!-- .content -->
+      <div class="collapse" id="collapseExample">
+          <div class="card card-body req_status-card">
+              <div class="card_header reqst_header">
+                  <i class="fa fa-minus" aria-hidden="true"></i>
+                  <p>Overall request Status</p>
+                  <i class="fa fa-times fa_cross" aria-hidden="true" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
+              </div>
+              <div class="row ml-1 mr-1" data-aos="fade-right">
+                  <div class="col-sm-2 dash_wid">
+                      <div class="alig_dashicon">
+                          <div>
+                              <div class="fa-icons-des" style="background-color: transparent">
+                                  <img src="../../../../assets/images/icon/draftsbl.png" />
+                              </div>
+
+                              <p>Draft</p>
+                              <span class="number_css">0</span>
+                          </div>
+                      </div>
+                  </div>
+                  <!--coled-->
+                  <div class="col-sm-2 dash_wid">
+                      <div class="alig_dashicon">
+                          <div>
+                              <div class="fa-icons-des" style="background-color: transparent">
+                                  <img src="../../../../assets/images/icon/closedbl.png" />
+                              </div>
+
+                              <p>Submitted</p>
+                              <span class="number_css">1</span>
+                          </div>
+                      </div>
+                  </div>
+                  <!--coled-->
+                  <div class="col-sm-2 dash_wid">
+                      <div class="alig_dashicon">
+                          <div>
+                              <div class="fa-icons-des" style="background-color: transparent">
+                                  <img src="../../../../assets/images/icon/pendingbl.png" />
+                              </div>
+
+                              <p>Pending</p>
+                              <span class="number_css">0</span>
+                          </div>
+                      </div>
+                  </div>
+                  <!--coled-->
+                  <div class="col-sm-2 dash_wid">
+                      <div class="alig_dashicon">
+                          <div>
+                              <div class="fa-icons-des" style="background-color: transparent">
+                                  <img src="../../../../assets/images/icon/checkbl.png" />
+                              </div>
+
+                              <p>Closed</p>
+                              <span class="number_css">0</span>
+                          </div>
+                      </div>
+                  </div>
+                  <!--coled-->
+                  <div class="col-sm-2 dash_wid">
+                      <div class="alig_dashicon">
+                          <div>
+                              <div class="fa-icons-des" style="background-color: transparent">
+                                  <img src="../../../../assets/images/icon/rejectbl.png" />
+                              </div>
+
+                              <p>Rejected</p>
+                              <span class="number_css">0</span>
+                          </div>
+                      </div>
+                  </div>
+                  <!--coled-->
+              </div>
+              <!--ROW END-->
+              <!--ROW END-->
           </div>
       </div>
-      <!-- .animated -->
   </div>
-  <!-- .content -->
-</div>
-
-<!-- </form> -->
-<!-- .content -->
-<div class="collapse" id="collapseExample">
-  <div class="card card-body req_status-card">
-      <div class="card_header reqst_header">
-
-          <p>Overall request Status</p>
-          <i class="fa fa-times fa_cross mr-2" aria-hidden="true" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
-      </div>
-      <div class="row ml-1 mr-1" data-aos="fade-right">
-          <div class="col-sm-2 dash_wid">
-              <div class="alig_dashicon">
-                  <div>
-                      <div class="fa-icons-des" style="background-color:transparent;">
-                          <img src="../../../../assets/images/icon/draftsbl.png">
-
-                      </div>
-
-                      <p>Draft</p>
-                      <span class="number_css">0</span>
-                  </div>
-
-              </div>
-
-          </div>
-          <!--coled-->
-          <div class="col-sm-2 dash_wid">
-              <div class="alig_dashicon">
-                  <div>
-                      <div class="fa-icons-des" style="background-color:transparent;">
-                          <img src="../../../../assets/images/icon/closedbl.png">
-
-                      </div>
-
-                      <p>Submitted</p>
-                      <span class="number_css">1</span>
-                  </div>
-
-              </div>
-
-          </div>
-          <!--coled-->
-          <div class="col-sm-2 dash_wid">
-              <div class="alig_dashicon">
-                  <div>
-                      <div class="fa-icons-des" style="background-color:transparent;">
-                          <img src="../../../../assets/images/icon/pendingbl.png">
-
-                      </div>
-
-                      <p>Pending</p>
-                      <span class="number_css">0</span>
-                  </div>
-
-              </div>
-          </div>
-          <!--coled-->
-          <div class="col-sm-2 dash_wid">
-              <div class="alig_dashicon">
-                  <div>
-                      <div class="fa-icons-des" style="background-color:transparent;">
-                          <img src="../../../../assets/images/icon/checkbl.png">
-
-                      </div>
-
-                      <p>Closed</p>
-                      <span class="number_css">0</span>
-                  </div>
-
-              </div>
-          </div>
-          <!--coled-->
-          <div class="col-sm-2 dash_wid">
-              <div class="alig_dashicon">
-                  <div>
-                      <div class="fa-icons-des" style="background-color:transparent;">
-                          <img src="../../../../assets/images/icon/rejectbl.png">
-
-                      </div>
-
-                      <p>Rejected</p>
-                      <span class="number_css">0</span>
-                  </div>
-
-              </div>
-          </div>
-          <!--coled-->
-
-      </div>
-      <!--ROW END-->
-      <div class="view-comple-req_div">
-          <button class="btn btn-primary view-comple-req">
-            <img src="../../../../assets/images/icon/viewrewall.png" style="width: 28px;">View Complete Request
-
-</button>
-      </div>
-      <!--ROW END-->
-  </div>
-</div>
-</div>
-<!--end-->
+  <!--end-->
