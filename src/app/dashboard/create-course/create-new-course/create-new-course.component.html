@@ -1157,26 +1157,27 @@ Note: 3-5 working days are required for the learning object to be available in t
                         class="form-control form_width"
                         formControlName="regionalCordinator"
                       >
-                        <option value="">Please select</option>
-                        <option
-                          *ngFor="let validity of validityPeriod"
-                          [value]="validity.id"
-                        >
-                          {{ validity.name }}
-                        </option>
+                        <option value="">Please select ROC</option>
+                       <option value="asia_pacific">Asia Pacific</option>
+                       <option value="russia">Russia</option>
+                       <option value="middle_east_africa">Middle East and Africa</option>
+                       <option value="europe">Europe</option>
+                       <option valaue="america">America</option>
+                      
+                  
                       </select>
                                             </div>
                                         </div>
                                         <!--colend-->
                                     </div>
-                                    <p style="color: #000">
+                                    <p style="color: #000" *ngIf="getUserrole.id ==2">
                                         <b style="color: #ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
                                     </p>
-                                    <p style="color: #000">
+                                    <p style="color: #000" *ngIf="getUserrole.id !=2">
                                         <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
                                         <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
                                     </p>
-                                    <p style="color: #000">
+                                    <p style="color: #000" *ngIf="getUserrole.id !=2">
                                         <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b>                                        region.
                                     </p>
                                 </div>

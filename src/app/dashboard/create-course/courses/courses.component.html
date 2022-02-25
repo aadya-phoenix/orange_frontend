@@ -312,22 +312,33 @@
 			   <p style="font-size: 14px; color: #000">Showing 1 entries</p>
 			  </div><!--pageina-->
 			    <div class="pagintion_ child">
-			   <ul class="pagination">
+			   <!-- <ul class="pagination">
     <li><a href="#" style="color: #333;">Prev</a></li>
     <li class="active"><a href="#">1</a></li>
   
     <li><a href="#">Next</a></li>
-  </ul>
+  </ul> -->
+
+  <ngb-pagination
+  [collectionSize]="collectionSize"
+  [(page)]="service.page"
+  (pageChange)="refreshCourses()"
+  [maxSize]="service.maxSize"
+  [pageSize]="service.pageSize"
+  
+  class="pagination"
+>
+<ng-template ngbPaginationPrevious>Prev</ng-template>
+<ng-template ngbPaginationNext>Next</ng-template>
+<ng-template ngbPaginationEllipsis>...</ng-template>
+<ng-template ngbPaginationNumber let-page style="color: #333;">{{ page }}</ng-template>
+</ngb-pagination>
+
+
 			  </div><!--pageina-->
 			  </div><!--pageina-->
-              <ngb-pagination
-                [collectionSize]="collectionSize"
-                [(page)]="service.page"
-                (pageChange)="refreshCourses()"
-                [maxSize]="service.maxSize"
-                [pageSize]="service.pageSize"
-                [boundaryLinks]="true"
-              ></ngb-pagination>
+        <!-- [boundaryLinks]="true" -->
+
             </div>
           </div>
         </div>
@@ -465,14 +476,46 @@
                 </table>
               </div>
 
-              <ngb-pagination
+              <div class="pagintion_ parent d-flex justify-content-between ml-2 mr-2">
+                <div class="pagintion_ child">
+                <p style="font-size: 14px; color: #000">Showing 1 entries</p>
+               </div><!--pageina-->
+                 <div class="pagintion_ child">
+                <!-- <ul class="pagination">
+           <li><a href="#" style="color: #333;">Prev</a></li>
+           <li class="active"><a href="#">1</a></li>
+         
+           <li><a href="#">Next</a></li>
+         </ul> -->
+       
+         <ngb-pagination
+         [collectionSize]="collectionSize"
+         [(page)]="service.page"
+         (pageChange)="refreshCourses()"
+         [maxSize]="service.maxSize"
+         [pageSize]="service.pageSize"
+         
+         class="pagination"
+       >
+       <ng-template ngbPaginationPrevious>Prev</ng-template>
+       <ng-template ngbPaginationNext>Next</ng-template>
+       <ng-template ngbPaginationEllipsis>...</ng-template>
+       <ng-template ngbPaginationNumber let-page style="color: #333;">{{ page }}</ng-template>
+       </ngb-pagination>
+       
+       
+               </div><!--pageina-->
+               </div>
+
+
+              <!-- <ngb-pagination
                 [collectionSize]="collectionSize"
                 [(page)]="service.page"
                 (pageChange)="refreshCourses()"
                 [maxSize]="service.maxSize"
                 [pageSize]="service.pageSize"
                 [boundaryLinks]="true"
-              ></ngb-pagination>
+              ></ngb-pagination> -->
             </div>
           </div>
         </div>

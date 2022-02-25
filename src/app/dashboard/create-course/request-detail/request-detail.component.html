@@ -58,7 +58,7 @@
                 />
                 <p class="mt-3 ml-2 view-re_css">
                   <span>View Request</span>
-                        <span class="cc-text_css">( CCT2577 ) - </span>
+                        <span class="cc-text_css">( {{routegetdata.request_id}} ) - </span>
                         <span style="color: #ff7900">Request Status</span>
                         </p>
                     </div>
@@ -89,7 +89,7 @@
                             <button class="btn btn-primary btn_requst ml-2" (click)="updateCource()">
                   <img src="../../../../assets/images/update.png" />Update
                 </button>
-                            <button class="btn btn-primary btn_requst ml-2">
+                            <button class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#rejectModal">
                   <img src="../../../../assets/images/reject.png" />Reject
                 </button>
                         </div>
@@ -101,7 +101,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
-                            <button class="btn btn-primary btn_requst ml-2">
+                            <button class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#publishRequest">
                   <img src="../../../../assets/images/trans.png" />Transfer to
                   other ROC
                 </button>
@@ -130,7 +130,7 @@
                                     <div class="pl-3 border_user">
                                         <div class="form-group mt-3">
                                             <p class="user_span_text">Request Number</p>
-                                            <label class="label_text">CCT12345 </label>
+                                            <label class="label_text">{{routegetdata.request_id}}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -325,4 +325,79 @@
     </div>
     <!-- </ng-template> -->
 </div>
+
+
+<div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 250px;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="font-size: 14px;color: #ff7900;">Reject Request</h4>
+
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Comments</label>
+                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Your Comments">
+              </textarea>
+                        </div>
+                    </div>
+                    <!--col end-->
+
+                </div>
+                <!--row-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary btn_requst">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="publishRequest" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 50px;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="font-size: 14px;color: #ff7900;">Transfer the requet to other ROCR</h4>
+
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Regional Operation Coordinator</label>
+                            <select class="form-control form_width" formControlName="training_provided_by">
+                <option value="">Please select any</option>
+                <option>Asia Pacific</option>
+                <!-- <option
+                  *ngFor="let vendor of vendorType"
+                  [value]="vendor.vendor_name"
+                >
+                  {{ vendor.name }}
+                </option> -->
+              </select>
+                        </div>
+                    </div>
+                    <!--col end-->
+
+                </div>
+                <!--row-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary btn_requst">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 </div>

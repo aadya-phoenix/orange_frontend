@@ -767,6 +767,21 @@ export class CreateNewCourseComponent implements OnInit {
     });
   }
 
+
+  getFormValidationErrors1() {
+    Object.keys(this.commonCreateCourceForm.controls).forEach((key) => {
+      const controlErrors: any = this.commonCreateCourceForm.get(key)?.errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach((keyError) => {
+          console.log(
+            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ',
+            controlErrors[keyError]
+          );
+        });
+      }
+    });
+  }
+
   //draft ilt and vilt
   saveasDraftIlt() {
     // let learnerguidearr = this.iltandViltForm.value.learnerguidearray;
@@ -781,8 +796,8 @@ export class CreateNewCourseComponent implements OnInit {
     // this.learnerGuidearray = localarr;
     // this.iltandViltForm.value.learnerguidearray = this.learnerGuidearray;
     let savetype = { action: 'draft' };
-    let totalObj = { ...this.iltandViltForm.value, ...savetype };
-    console.log(this.learnerGuidearray);
+    let totalObj = { ...this.iltandViltForm.value, ...savetype,...this.commonCreateCourceForm.value };
+    //console.log(this.learnerGuidearray);
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
       console.log(totalObj);
       //console.log(this.createCourceForm.value);
@@ -802,6 +817,8 @@ export class CreateNewCourseComponent implements OnInit {
       this.iltandViltForm.markAllAsTouched();
       console.log(this.learnerGuidearray);
       console.log(totalObj);
+      this.getFormValidationErrors();
+      this.getFormValidationErrors1()
     }
   }
 

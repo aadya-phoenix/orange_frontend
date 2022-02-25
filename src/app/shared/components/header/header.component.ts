@@ -8,7 +8,11 @@ import { AuthenticationService } from '../../services/auth/authentication.servic
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private authService:AuthenticationService) { }
+  getUserrole:any;
+  constructor(private authService:AuthenticationService) { 
+    this.getUserrole = this.authService.getRolefromlocal();
+    //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
+  }
   public showUserMenu:boolean=false;
   getprofileDetails:any;
 
