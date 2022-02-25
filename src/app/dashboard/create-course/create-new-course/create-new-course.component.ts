@@ -4,6 +4,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -22,6 +23,11 @@ export class CreateNewCourseComponent implements OnInit {
   public materialbasedForm!: FormGroup;
   public currriculumForm!: FormGroup;
   showCollapse: boolean = true;
+  public showCertificateExpiry: boolean = false;
+  public externalVendorname: boolean = false;
+  showVendor: boolean = false;
+  public learnerGuidearray: any = [];
+  public learningType: any = 'ILT and vILT training';
 
   public cctLevel = [
     {
@@ -500,10 +506,8 @@ export class CreateNewCourseComponent implements OnInit {
     this.getUserrole = this.authService.getRolefromlocal();
     //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
   }
-  public showCertificateExpiry: boolean = false;
-  public externalVendorname: boolean = false;
-  public learnerGuidearray: any = [];
-  public learningType: any = 'ILT and vILT training';
+
+  
 
   ngOnInit(): void {
     this.createCourceForm = this.fb.group({
@@ -590,13 +594,9 @@ export class CreateNewCourseComponent implements OnInit {
       manager_approval: new FormControl('', [Validators.required]),
       digital: new FormControl('', [Validators.required]),
       certification: new FormControl('', [Validators.required]),
-      certification_expiry_type: this.showCertificateExpiry
-        ? new FormControl('')
-        : new FormControl('', [Validators.required]),
-      validity_period: this.showCertificateExpiry
-        ? new FormControl('')
-        : new FormControl('', [Validators.required]),
-      external_vendor_name: new FormControl('', [Validators.required]),
+      certification_expiry_type:  new FormControl(''),
+      validity_period:  new FormControl(''),
+      external_vendor_name:  new FormControl(''),
       purchase_order: new FormControl(''),
       // email_training_contact: new FormControl('', [Validators.required]),
       delivery_method: new FormControl('', [Validators.required]),
@@ -626,7 +626,7 @@ export class CreateNewCourseComponent implements OnInit {
       regionalCordinator:
         this.getUserrole.id === 2
           ? new FormControl('', [Validators.required])
-          : new FormControl(''),
+          : new FormControl(),
     });
 
     this.materialbasedForm = this.fb.group({
@@ -749,7 +749,22 @@ export class CreateNewCourseComponent implements OnInit {
     }
     console.log(this.commonCreateCourceForm.valid);
     console.log(this.iltandViltForm.valid);
-    console.log(this.iltandViltForm.invalid);
+    console.log(this.iltandViltForm.errors);
+    this.getFormValidationErrors();
+  }
+
+  getFormValidationErrors() {
+    Object.keys(this.iltandViltForm.controls).forEach((key) => {
+      const controlErrors: any = this.iltandViltForm.get(key)?.errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach((keyError) => {
+          console.log(
+            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ',
+            controlErrors[keyError]
+          );
+        });
+      }
+    });
   }
 
   //draft ilt and vilt
@@ -863,20 +878,29 @@ export class CreateNewCourseComponent implements OnInit {
     console.log(this.currriculumForm.value);
   }
 
-  certificationTyupe(event: any) {
+  certificationType(event: any) {
     if (event.target.value == 'yes') {
       this.showCertificateExpiry = true;
       console.log(this.createCourceForm.value);
+      this.iltandViltForm.get('certification_expiry_type')?.setValidators(Validators.required);
+      this.iltandViltForm.get('validity_period')?.setValidators(Validators.required)
+      
     } else {
       this.showCertificateExpiry = false;
+      this.iltandViltForm.get('certification_expiry_type')?.clearValidators();
+      this.iltandViltForm.get('validity_period')?.clearValidators()
     }
   }
 
   externalVendor(event: any) {
-    if ((event.target.value = 'yes')) {
+    if (event.target.value == 'yes') {
       this.externalVendorname = true;
+      this.showVendor = true;
+     this.iltandViltForm.get('external_vendor_name')?.setValidators(Validators.required)
     } else {
       this.externalVendorname = false;
+      this.showVendor = false;
+      this.iltandViltForm.get('external_vendor_name')?.clearValidators();
     }
   }
 
