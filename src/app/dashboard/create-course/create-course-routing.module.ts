@@ -6,6 +6,7 @@ import { CoursesComponent } from './courses/courses.component';
 import { CreateNewCourseComponent } from './create-new-course/create-new-course.component';
 import { RequestDetailComponent } from './request-detail/request-detail.component';
 import { UpdateCourceComponent } from './update-cource/update-cource.component';
+import { ViewCourseDetailsComponent } from './view-course-details/view-course-details.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
     {path:'create-cource',component:CreateNewCourseComponent,canActivate:[AuthenticationServiceGuard]},
     {path:'request-detail',component:RequestDetailComponent,canActivate:[AuthorizationServiceGuard]},
     {path:'edit-cource',component:UpdateCourceComponent,canActivate:[AuthorizationServiceGuard]},
+    {path:'view-details',component:ViewCourseDetailsComponent,canActivate:[AuthenticationServiceGuard]}
 ];
 
 @NgModule({

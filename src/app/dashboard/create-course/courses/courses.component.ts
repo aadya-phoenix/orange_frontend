@@ -2,7 +2,6 @@ import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CreateNewCourseComponent } from '../create-new-course/create-new-course.component';
 import { ViewHistoryComponent } from '../view-history/view-history.component';
 import { Router } from '@angular/router';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';

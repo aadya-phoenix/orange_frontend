@@ -212,7 +212,7 @@
                         <option value="">Please select level</option>
                         <option
                           *ngFor="let level of cctLevel"
-                          [value]="level.id"
+                          [value]="level.name"
                         >
                           {{ level.name }}
                         </option>
@@ -331,7 +331,7 @@
                         <option value="">Please select any</option>
                         <option
                           *ngFor="let vendor of vendorType"
-                          [value]="vendor.vendor_name"
+                          [value]="vendor.name"
                         >
                           {{ vendor.name }}
                         </option>
@@ -1155,16 +1155,10 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </label>
                       <select
                         class="form-control form_width"
-                        formControlName="regionalCordinator"
+                        formControlName="regional_cordinator"
                       >
                         <option value="">Please select ROC</option>
-                       <option value="asia_pacific">Asia Pacific</option>
-                       <option value="russia">Russia</option>
-                       <option value="middle_east_africa">Middle East and Africa</option>
-                       <option value="europe">Europe</option>
-                       <option valaue="america">America</option>
-                      
-                  
+                        <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">{{cordinator?.name}}</option>
                       </select>
                                             </div>
                                         </div>

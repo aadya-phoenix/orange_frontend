@@ -11,6 +11,8 @@ import { ModalDismissReasons, NgbModal, } from "@ng-bootstrap/ng-bootstrap";
 export class RequestDetailComponent implements OnInit {
   getUserrole:any;
   routegetdata:any;
+  publisherList:any=[];
+  otherRocsList:any=[];
   closeResult = "";
   constructor(private authService:AuthenticationService,private router:Router,private modalService:NgbModal) { 
     this.routegetdata = this.router.getCurrentNavigation()?.extras.state;
@@ -21,6 +23,26 @@ export class RequestDetailComponent implements OnInit {
 
   saveChange(){
     console.log('save')
+  }
+
+  getPublisher(){
+    this.authService.getUserRoles().subscribe((res:any)=>{
+      console.log(res);
+      this.publisherList = res.data['4'];
+      console.log(this.publisherList)
+    },(err:any)=>{
+      console.log(err)
+    })
+  }
+
+  transferOtherroc(){
+    this.authService.getUserRoles().subscribe((res:any)=>{
+      console.log(res);
+      this.otherRocsList = res.data['3'];
+      console.log(this.otherRocsList)
+    },(err:any)=>{
+      console.log(err)
+    })
   }
 
   open(content:any) {

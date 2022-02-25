@@ -9,11 +9,12 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ViewHistoryComponent } from './view-history/view-history.component';
 import { RequestDetailComponent } from './request-detail/request-detail.component';
 import { UpdateCourceComponent } from './update-cource/update-cource.component';
+import { ViewCourseDetailsComponent } from './view-course-details/view-course-details.component';
 
 
 
 @NgModule({
-  declarations: [CoursesComponent, CreateNewCourseComponent, ViewHistoryComponent, RequestDetailComponent, UpdateCourceComponent],
+  declarations: [CoursesComponent, CreateNewCourseComponent, ViewHistoryComponent, RequestDetailComponent, UpdateCourceComponent, ViewCourseDetailsComponent],
   imports: [
     CommonModule,
     CreateCourseRoutingModule,
