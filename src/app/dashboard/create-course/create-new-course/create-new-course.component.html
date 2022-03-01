@@ -1,17 +1,11 @@
 <div id="right-panel" class="right-panel">
     <app-header></app-header>
     <div class="breadcrumbs" style="background-color: #fbfbf7; padding: 9px 9px 20px 9px">
-        <div class="col-sm-1.5">
+        <div class="col-sm-6">
             <div class="page-header float-left" style="background: transparent">
                 <div class="page-title d-flex">
-                    <img src="../../../../assets/images/creatnew.png" style="width: 60px" />
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6" style="margin-left: -30px">
-            <div class="page-header float-left" style="background: transparent">
-                <div class="page-title">
-                    <div class="d-flex flex-column">
+                    <img src="../../../../assets/images/creatnew.png" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-4">
                         <span style="font-size: 20px">Create new course </span>
                         <span style="color: #aba3a3; font-size: 14px"><b style="color: #000">Instructor-Led (ILT)</b>-Instructor-Led
               Training is face to face training delivered in a classroom.<b
@@ -23,10 +17,11 @@
                 </div>
             </div>
         </div>
-       
+      
+
         <div class="col-sm-5 float-right">
             <div class="page-header float-right" style="background: transparent">
-                <div class="page-title d-flex">
+                <div class="page-title d-flex end_just">
                     <ol class="breadcrumb text-right" style="background: transparent">
                         <li>
                             <a [routerLink]="['/dashboard']">
@@ -56,50 +51,42 @@
               class="card-header"
               style="padding: 0.75rem 1.25rem; background-color: #fff"
             >
-              <div>
-                <img
-                  src="../../../../assets/images/formm.png"
-                  class="ml-2"
-                  style="width: 40px"
-                />
+              <div class="d-flex justify-content-between media_creat_couse_col">
+                <div class="d-flex">
+                <img src="../../../../assets/images/formm.png" class="ml-2" style="width: 40px"/>
                 <!-- <img
                 src="../../../../assets/images/form.png"
                 style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px"
                 class="mr-2"
               /> -->
-                <span class="comlte_css"
-                  >Complete this form and click on the submit button</span
-                >
+                <span class="comlte_css" >Complete this form and click on the submit button</span >
+                  </div>
                 <a
                   class="float-right view_overall"
                   data-toggle="collapse"
                   href="#collapseExample"
                   role="button"
-                  aria-expanded="false"
-                  aria-controls="collapseExample"
-                >
-                  View overall request status<img
+aria-expanded="false" aria-controls="collapseExample" > View overall request status<img
                     src="../../../../assets/images/Viewreq.png"
                     class="ml-2"
                     style="width: 40px"
                   />
                 </a>
-              </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <!-- .animated -->
     </div>
-    <!-- .content -->
-  </div>
-  <!-- <form [formGroup]="createCourceForm"> -->
-  <div class="content mt-1">
+</div>
+<!-- .animated -->
+</div>
+<!-- .content -->
+</div>
+<!-- <form [formGroup]="createCourceForm"> -->
+<div class="content mt-1">
     <div class="animated fadeIn">
-      <div class="row">
-        <div class="col-md-12">
-          <span class="indicate_css"
-            ><span style="color: red">*</span>Indicates required field</span>
+        <div class="row">
+            <div class="col-md-12">
+                <span class="indicate_css"><span style="color: red">*</span>Indicates required field</span>
                         <form [formGroup]="commonCreateCourceForm">
                             <div class="card" *ngIf="learningType != 'Playlist'">
                                 <div class="card-header">
@@ -1130,16 +1117,15 @@ Note: 3-5 working days are required for the learning object to be available in t
                                                     <button class="btn btn-danger" *ngIf="i > 0" (click)="removeLearnerGuideline(i)">
                           <i class="fa fa-trash"></i>
                         </button>
-                      </td>
-                    </tr>
-                  </thead>
-                </table>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                    </table>
 
-                <div class="row" *ngIf="getUserrole.id ===2">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <label class="form-control-label"
-                        >Request to RegionalTraining Cordinator
+                                    <div class="row" *ngIf="getUserrole.id ===2">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Request to RegionalTraining Cordinator
                         <span style="color: red">* </span>
 
                         <a>
@@ -1153,10 +1139,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                           </i>
                         </a>
                       </label>
-                      <select
-                        class="form-control form_width"
-                        formControlName="regional_cordinator"
-                      >
+                                                <select class="form-control form_width" formControlName="regional_cordinator">
                         <option value="">Please select ROC</option>
                         <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">{{cordinator?.name}}</option>
                       </select>

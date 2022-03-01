@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
 
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="transfer.css">
+    <link rel="stylesheet" href="Transfersecond.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
@@ -423,63 +423,255 @@
 
         <div class="content mt-3">
             <div class="animated fadeIn">
+
                 <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-content-center">
-                            <strong>Badges </strong>
-                            <div _ngcontent-cue-c109="" class="d-flex">
-                                <label _ngcontent-cue-c109="" class="mt-2 mr-1">Search:</label>
-                                <input _ngcontent-cue-c109="" type="text" name="search" autocomplete="off" placeholder=" " class="form-control ng-untouched ng-pristine ng-valid " ng-reflect-name="search ">
+                    <div class="card-body">
+                        <div class="Requs_btn_inl">
+                            <div class="Requs_btn_inl-child">
+                                <button class=" btn btn-default btn_requst " data-toggle="modal " data-target="#publishModal " *ngIf="getUserrole.id==4 ">
+                  <i class="fa fa-plus mr-1" aria-hidden="true"></i>Add
+                </button>
+
+                                <button class="btn btn-default btn_requst ml-2 " data-toggle="modal " data-target="#exampleModal " *ngIf="getUserrole.id==3 " (click)="getPublisher() ">
+                  <i class="fa fa-edit mr-1" aria-hidden="true"></i>Edit
+                
+                </button>
+
+                                <button class="btn btn-default btn_requst ml-2 " (click)="updateCource() ">
+                 <i class="fa fa-floppy-o mr-1" aria-hidden="true"></i>Save
+                </button>
+                                <button class="btn btn-default btn_requst ml-2 " data-toggle="modal " data-target="#rejectModal ">
+                 <i class="fa fa-trash mr-1" aria-hidden="true"></i>Delete
+                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--colensd-->
+                </div>
+
+                <div class="row ">
+                    <div class="col-md-12 ">
+                        <div class="card ">
+                            <div class=" ">
+                                <div class="row ">
+                                    <div class="col-sm-12 ">
+                                        <div class="user_image ">
+                                            <i class="fa fa-user-o " aria-hidden="true "></i>
+                                        </div>
+                                        <p class="text-center user_info ">User Information</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body ">
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Username
+
+                        
+                      </label>
+                                            <input type="text " placeholder="Enter Username" class="form-control form_width" />
+                                        </div>
+                                    </div>
+                                    <!--colend-->
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Password</label>
+                                            <p>No Password set.</p>
+                                            <label class="form-control-label">Row Password are not stored, so there is no way to see
+                                                this user's password,but you can change the password using this form
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!--colend-->
+                                </div>
+                                <!--row end-->
 
                             </div>
+                            <!--colensd-->
                         </div>
-                    </div>
-                    <div class="card-body ">
-                        <div class="d-flex justify-content-between align-content-between">
-                            <button class="btn btn-primary select-all "><img src="images/tarns.png" style="width: 27px;" class="mr-2">Transfrer Role</button>
-                            <button class="btn btn-primary select-all ">Select All</button>
+                        <div class="card">
+                            <div class="card-header ">
+                                <span class="card-title card-title-text">Personal Information</span>
+
+                            </div>
+
+                            <div class="card-body ">
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label class="">First and last name</label>
+                                        <div class="input-group">
+
+
+
+                                            <input type="text " placeholder="Enter Firstname" class="form-control form_width" />
+                                            <input type="text " placeholder="Enter Lastname" class="form-control form_width" />
+                                        </div>
+
+                                    </div>
+                                    <!--colend-->
+
+                                    <div class="col-sm-6 mt-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Email </label>
+                                            <input type="text " placeholder="Enter Username" class="form-control form_width" />
+                                        </div>
+                                    </div>
+                                    <!--colend-->
+                                </div>
+                                <!--row end-->
+
+                            </div>
+                            <!--colensd-->
                         </div>
-                        <table class="table table-bordered ">
-                            <thead>
-                                <tr>
-                                    <th scope="col ">Usename<i class="fa fa-long-arrow-up arrow_css" aria-hidden="true"></i>
-                                        <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i></th>
-                                    <th scope="col ">Email<i class="fa fa-long-arrow-up arrow_css" aria-hidden="true"></i>
-                                        <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i></th>
-                                    <th scope="col ">First Name<i class="fa fa-long-arrow-up arrow_css" aria-hidden="true"></i>
-                                        <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i></th>
-                                    <th scope="col ">Last Name<i class="fa fa-long-arrow-up arrow_css" aria-hidden="true"></i>
-                                        <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i></th>
-                                    <th scope="col " style="width: 40px;white-space: nowrap; ">Is Staff</th>
-                                    <th scope="col " style="width: 20px; ">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row ">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td class="text-center">
-                                        <i class="fa fa-times-circle-o" aria-hidden="true" style="color: red;"></i></td>
-                                    <td class="text-center "><input type="checkbox"></td>
-                                </tr>
+                        <div class="card">
+                            <div class="card-header ">
+                                <div class="dis_inline_trans_header">
+                                    <span class="card-title card-title-text">Permissions</span>
+                                    <div class="d-flex">
+                                        <div class="mr-3">
+                                            <input type="checkbox" class="tran_chekbox">
+                                            <lable class="trans_chk-label">Is Active</lable>
+                                        </div>
+                                        <div class="mr-md-3">
+                                            <input type="checkbox" class="tran_chekbox">
+                                            <lable class="trans_chk-label">Is Staff</lable>
+                                        </div>
+                                        <div class="mr-3">
+                                            <input type="checkbox" class="tran_chekbox">
+                                            <lable class="trans_chk-label">Is Superuser</lable>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="card-body">
 
-                            </tbody>
-                        </table>
-                        <!-- Button trigger modal -->
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Available user permissions
+                                            </div>
+                                            <div class="card-body card-height">
 
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <button class="btn btn-secondary" type="button" id="button-addon1"> <i class="fa fa-search" aria-hidden="true"></i></button>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                                </div>
+                                                <div class="">
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
 
-                        <!-- Modal -->
+                                                </div>
 
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="text-center">
+                                                    <button class="btn btn-default trans_choose">Choose All</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--colend-->
+                                    <div class="col-sm-0.1 d-flex">
+                                        <div class="d-flex flex-column justify-content-center align-items-center">
+                                            <i class="fa fa-arrow-circle-left mb-3" aria-hidden="true"></i>
+                                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Chosen user permissions<i class="fa fa-question" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="card-body card-height">
+                                                <div class="">
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+                                                    <p class="card-text">Special title treatment</p>
+
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="text-center">
+                                                    <button class="btn btn-default trans_choose">Remove All</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--colend-->
+
+                                    <!--colend-->
+                                </div>
+                                <!--row end-->
+                                <p>Specific permssions for this user Hold down 'Control' or 'Command' on a Mac,to select more then one
+                                </p>
+
+                            </div>
+                            <!--colensd-->
+                        </div>
+                        <div class="card">
+                            <div class="card-header ">
+                                <span class="card-title card-title-text">Important Dates</span>
+
+                            </div>
+
+                            <div class="card-body ">
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Last Login</span>
+                                            </div>
+                                            <input type="date" aria-label="First name" class="form-control">
+                                            <input type="date" aria-label="Last name" class="form-control">
+                                        </div>
+                                    </div>
+                                    <!--colend-->
+
+                                </div>
+                                <!--row end-->
+                                <p class="mt-2">Note: you are 5.5 hours ahead of several time.
+                                </p>
+
+                            </div>
+                            <!--colensd-->
+                        </div>
                     </div>
                 </div>
+                <!-- .animated -->
             </div>
             <!-- .content -->
-
-
-
         </div>
 
         <!-- /#right-panel -->
@@ -512,5 +704,7 @@
 <script>
     AOS.init();
 </script>
+
+</html>
 
 </html>

@@ -124,11 +124,6 @@
     border-color: #3f6ad8;
 }
 
-.arrow_css {
-    float: right;
-    color: grey;
-}
-
 .pend_css {
     background-color: transparent;
     border-color: #000;
@@ -179,32 +174,47 @@ tbody tr {
     background-color: #db6852;
     border-color: #db6852;
 }
+
 ::ng-deep {
-.pagination li{
-    font-size: 14px;
-    a{
-        color: #db6852;
-    &:hover{
-        color: #db6852;
+    .pagination li {
+        font-size: 14px;
+        a {
+            color: #db6852;
+            &:hover {
+                color: #db6852;
+            }
+            &:focus,
+            &:focus-visible {
+                box-shadow: none !important;
+            }
+        }
     }
-    &:focus,&:focus-visible{
-        box-shadow: none!important;
+    .pagination li.active a {
+        background-color: #db6852 !important;
+        border-color: #db6852 !important;
     }
+    .searc_dislp_inlin {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
-}
-.pagination li.active a{
-    background-color: #db6852!important;
-    border-color: #db6852!important;
 }
 
-}
 @media (max-width: 768px) {
     .page-title {
         margin-top: 10px;
+    }
+    .searc_dislp_inlin {
+        display: flex;
+        align-items: baseline;
+        flex-direction: column;
     }
     .dash_wid {
         flex: 0 0 100%;
         max-width: 100%;
         margin-bottom: 10px;
+    }
+    .Course_icon_parent {
+        flex-direction: column;
     }
 }
