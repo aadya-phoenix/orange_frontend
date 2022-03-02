@@ -76,38 +76,7 @@ export class CreateNewCourseComponent implements OnInit {
     },
   ];
 
-  public validityPeriod: any = [
-    {
-      id: 1,
-      name: 'Not Applicable',
-      status: 1,
-    },
-    {
-      id: 2,
-      name: '6 months',
-      status: 1,
-    },
-    {
-      id: 3,
-      name: '1 year',
-      status: 1,
-    },
-    {
-      id: 4,
-      name: '2 years',
-      status: 1,
-    },
-    {
-      id: 5,
-      name: '3 year',
-      status: 1,
-    },
-    {
-      id: 6,
-      name: '5 year',
-      status: 1,
-    },
-  ];
+  public validityPeriod: any ;
 
   public vendorType: any;
   public cctSubjects: any;
@@ -520,11 +489,25 @@ export class CreateNewCourseComponent implements OnInit {
     );
   }
 
+  getValidityPeriod(){
+    this.courceService.getValidityperiod().subscribe(
+      (res: any) => {
+        this.validityPeriod = res.data;
+        console.log(this.validityPeriod);
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+  
+
   ngOnInit(): void {
     this.getCordinators();
     this.getvendorType();
     this.getLevel();
     this.getSubjects();
+    this.getValidityPeriod();
 
     //common form
     this.commonCreateCourceForm = this.fb.group({
@@ -546,7 +529,7 @@ export class CreateNewCourseComponent implements OnInit {
       available_language: new FormControl('', [Validators.required]),
 
       //no field
-      //email_training_contact:new FormControl('')
+      email_training_contact:new FormControl('',[Validators.required])
     });
 
     //ilt and vilt
@@ -567,7 +550,8 @@ export class CreateNewCourseComponent implements OnInit {
       free_field_content: new FormControl(''),
       url: new FormControl(''),
       //s need to add
-      provide_video_link: new FormControl(''),
+      //provide_video_link: new FormControl(''),
+      video_link:new FormControl(''),
       //e need to add
       first_session_date: new FormControl('', [Validators.required]),
       expiry_date: new FormControl('', [Validators.required]),
@@ -580,7 +564,7 @@ export class CreateNewCourseComponent implements OnInit {
       who_see_course: new FormControl(''),
 
       // learner_guideline: new FormControl(''),
-      learnerguidearray: this.fb.array([]),
+      guidelines: this.fb.array([]),
       //ilt and vilt
 
       regional_cordinator:
@@ -630,7 +614,7 @@ export class CreateNewCourseComponent implements OnInit {
   }
 
   get t() {
-    return this.f.learnerguidearray as FormArray;
+    return this.f.guidelines as FormArray;
   }
 
   get currriculum() {
@@ -643,8 +627,8 @@ export class CreateNewCourseComponent implements OnInit {
 
   addMorelearnerGuideline() {
     return this.fb.group({
-      learnerguide_line: new FormControl(''),
-      learnerguide_line_description: new FormControl(''),
+      title: new FormControl(''),
+      description: new FormControl(''),
     });
   }
 
@@ -687,7 +671,7 @@ export class CreateNewCourseComponent implements OnInit {
   //create ilt vilt form
   createNewCourceIlt() {
     console.log(this.learnerGuidearray);
-    let savetype = { action: 'submit' };
+    let savetype = { status: 'pending' };
     let totalObj = {
       ...this.iltandViltForm.value,
       ...savetype,
@@ -716,7 +700,7 @@ export class CreateNewCourseComponent implements OnInit {
 
   //draft ilt and vilt
   saveasDraftIlt() {
-    let savetype = { action: 'draft' };
+    let savetype = { status: 'draft' };
     let totalObj = {
       ...this.iltandViltForm.value,
       ...savetype,

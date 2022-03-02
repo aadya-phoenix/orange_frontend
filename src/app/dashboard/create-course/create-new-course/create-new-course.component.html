@@ -274,7 +274,7 @@ aria-expanded="false" aria-controls="collapseExample" > View overall request sta
                                             </div>
                                         </div>
 
-                                        <!-- <div class="col-sm-6">
+                                        <div class="col-sm-6">
                   <div class="form-group">
                     <label class="form-control-label"
                       >Email of Training Contact
@@ -298,7 +298,7 @@ aria-expanded="false" aria-controls="collapseExample" > View overall request sta
                       formControlName="email_training_contact"
                     />
                   </div>
-                </div> -->
+                </div>
                                         <!--colend-->
                                         <div class="col-sm-6">
                                             <div class="form-group">
@@ -783,7 +783,7 @@ If the event is delivered by an external supplier, please select 'External' from
                           </i>
                         </a>
                       </label>
-                                                <input type="text" placeholder="Enter Provide the link to your video" class="form-control form_width" formControlName="who_see_course" />
+                                                <input type="text" placeholder="Enter Provide the link to your video" class="form-control form_width" formControlName="video_link" />
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1102,12 +1102,12 @@ Note: 3-5 working days are required for the learning object to be available in t
                                                 <th scope="col">Learner Guidelines Description</th>
                                                 <th scope="col" style="width: 12px">Action</th>
                                             </tr>
-                                            <tr formArrayName="learnerguidearray" *ngFor="let learner of t.controls; let i = index">
+                                            <tr formArrayName="guidelines" *ngFor="let learner of t.controls; let i = index">
                                                 <td [formGroupName]="i">
-                                                    <input type="text " placeholder="Enter Learner Guidelines" class="form-control form_width" formControlName="learnerguide_line" />
+                                                    <input type="text " placeholder="Enter Learner Guidelines" class="form-control form_width" formControlName="title" />
                                                 </td>
                                                 <td [formGroupName]="i">
-                                                    <textarea class="form-control form_width-textarea w-100" rows="3" placeholder="Enter Learner Guidelines Description" formControlName="learnerguide_line_description">
+                                                    <textarea class="form-control form_width-textarea w-100" rows="3" placeholder="Enter Learner Guidelines Description" formControlName="description">
                         </textarea>
                                                 </td>
                                                 <td>
