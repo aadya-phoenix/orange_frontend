@@ -10,9 +10,22 @@ import { PriceDirective } from './directives/price.directive';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgbdSortableHeader } from './directives/sorting.directive';
 
+
+
 @NgModule({
-  declarations: [InputfieldDirective, HeaderComponent, SidebarComponent,PriceDirective,NgbdSortableHeader],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule,NgbModule,Ng2SearchPipeModule],
+  declarations: [
+    InputfieldDirective,
+    HeaderComponent,
+    SidebarComponent,
+    PriceDirective,
+    NgbdSortableHeader,
+  ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    Ng2SearchPipeModule,NgbModule,
+  ],
   exports: [
     InputfieldDirective,
     HeaderComponent,
@@ -22,7 +35,7 @@ import { NgbdSortableHeader } from './directives/sorting.directive';
     NgbModule,
     PriceDirective,
     Ng2SearchPipeModule,
-    NgbdSortableHeader
+    NgbdSortableHeader,
     //NgSelectModule
   ],
   providers: [],
