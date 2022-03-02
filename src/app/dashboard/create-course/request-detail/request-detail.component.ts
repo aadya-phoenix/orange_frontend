@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { ModalDismissReasons, NgbModal, } from "@ng-bootstrap/ng-bootstrap";
+import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 
 @Component({
   selector: 'app-request-detail',
@@ -13,8 +14,10 @@ export class RequestDetailComponent implements OnInit {
   routegetdata:any;
   publisherList:any=[];
   otherRocsList:any=[];
+  selectedotherRoc:any;
+  selectedPublisher:any;
   closeResult = "";
-  constructor(private authService:AuthenticationService,private router:Router,private modalService:NgbModal) { 
+  constructor(private authService:AuthenticationService,private router:Router,private modalService:NgbModal,private courseService:CourcesService) { 
     this.routegetdata = this.router.getCurrentNavigation()?.extras.state;
     if(!this.routegetdata){
       this.router.navigateByUrl('/dashboard/cources');
@@ -76,6 +79,47 @@ export class RequestDetailComponent implements OnInit {
   updateCource(){
     this.router.navigateByUrl('/dashboard/cources/edit-cource',{state:this.routegetdata})
   }
+
+
+  reject(){
+    let statusobj = { course_id:this.routegetdata.id ,status:'reject'}
+    this.courseService.changeStatus(statusobj).subscribe((res:any)=>{
+      console.log(res);
+      this.router.navigate(['/dashboard/cources']);
+    },(err:any)=>{
+      console.log(err)
+    })
+  }
+
+  getRoc(event:any){
+    this.selectedotherRoc = event.target.value;
+    console.log(this.selectedotherRoc)
+
+  }
+
+  getPublisherselected(event:any){
+  this.selectedPublisher = event.target.value;
+  console.log(this.selectedPublisher)
+  }
+
+  transferOtherRoc(){
+    let transferobj ={ course_id:this.routegetdata.id ,transfer_id:this.selectedotherRoc};
+    this.courseService.courseTransfer(transferobj).subscribe((res:any)=>{
+      console.log(res)
+    },(err:any)=>{
+      console.log(err)
+    })
+  }
+
+  transfertoPublisher(){
+    let transferobj ={ course_id:this.routegetdata.id ,transfer_id:this.selectedPublisher};
+    this.courseService.courseTransfer(transferobj).subscribe((res:any)=>{
+      console.log(res)
+    },(err:any)=>{
+      console.log(err)
+    })
+  }
+
   ngOnInit(): void {
     console.log(this.routegetdata);
 
