@@ -22,6 +22,7 @@ export class RequestDetailComponent implements OnInit {
     if(!this.routegetdata){
       this.router.navigateByUrl('/dashboard/cources');
     }
+    
   }
 
   saveChange(){

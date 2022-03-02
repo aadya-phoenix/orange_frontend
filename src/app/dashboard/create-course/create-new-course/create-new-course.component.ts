@@ -534,7 +534,7 @@ export class CreateNewCourseComponent implements OnInit {
       objective: new FormControl('', [Validators.required]),
       level: new FormControl('', [Validators.required]),
       subject: new FormControl([Validators.required]),
-      additional_comment: new FormControl(''),
+     // additional_comment: new FormControl(''),
       prerequisite: new FormControl(''),
       keyword: new FormControl('', [Validators.required]),
       email_content_owner: new FormControl('', [Validators.required]),
@@ -575,6 +575,7 @@ export class CreateNewCourseComponent implements OnInit {
       email_preffered_instructor: new FormControl('', [Validators.required]),
 
       who_see_course: new FormControl(''),
+      additional_comment: new FormControl(''),
 
       // learner_guideline: new FormControl(''),
       guidelines: this.fb.array([]),
@@ -730,7 +731,7 @@ export class CreateNewCourseComponent implements OnInit {
           if (res) {
             //this.router.navigate(['/dashboard/cources']);
             this.router.navigateByUrl('/dashboard/cources/view-details', {
-              state: totalObj,
+              state: res.data,
             });
           }
         },

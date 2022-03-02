@@ -336,8 +336,8 @@ export class UpdateCourceComponent implements OnInit {
 
 
   getFormValidationErrors() {
-    Object.keys(this.iltandViltForm.controls).forEach((key) => {
-      const controlErrors: any = this.iltandViltForm.get(key)?.errors;
+    Object.keys(this.commonCreateCourceForm.controls).forEach((key) => {
+      const controlErrors: any = this.commonCreateCourceForm.get(key)?.errors;
       if (controlErrors != null) {
         Object.keys(controlErrors).forEach((keyError) => {
           console.log(

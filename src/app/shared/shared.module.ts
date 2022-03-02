@@ -24,7 +24,8 @@ import { NgbdSortableHeader } from './directives/sorting.directive';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    Ng2SearchPipeModule,NgbModule,
+    Ng2SearchPipeModule,
+    //NgbModule,
   ],
   exports: [
     InputfieldDirective,
@@ -32,7 +33,7 @@ import { NgbdSortableHeader } from './directives/sorting.directive';
     SidebarComponent,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule,
+    //NgbModule,
     PriceDirective,
     Ng2SearchPipeModule,
     NgbdSortableHeader,
