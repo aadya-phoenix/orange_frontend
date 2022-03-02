@@ -29,6 +29,8 @@ export class CreateNewCourseComponent implements OnInit {
   public learningType: any = 'ILT and vILT training';
 
   public cctLevel: any;
+  coursesList:any;
+  courseLength:any;
 
   public cctExpiryperiod: any = [
     {
@@ -500,6 +502,16 @@ export class CreateNewCourseComponent implements OnInit {
       }
     );
   }
+
+  getTotalCourse(){
+    this.courceService.getCources().subscribe((res:any)=>{
+      this.coursesList = res.data;
+      this.courseLength =this.coursesList.length
+      console.log(res);
+    },(err:any)=>{
+      console.log(err);
+    })
+  }
   
 
   ngOnInit(): void {
@@ -508,6 +520,7 @@ export class CreateNewCourseComponent implements OnInit {
     this.getLevel();
     this.getSubjects();
     this.getValidityPeriod();
+    this.getTotalCourse();
 
     //common form
     this.commonCreateCourceForm = this.fb.group({
@@ -682,7 +695,10 @@ export class CreateNewCourseComponent implements OnInit {
         (res: any) => {
           console.log(res);
           if (res) {
-            this.router.navigate(['/dashboard/cources']);
+           // this.router.navigate(['/dashboard/cources']);
+           this.router.navigateByUrl('/dashboard/cources/view-details', {
+            state: res.data,
+          });
           }
         },
         (err: any) => {
@@ -712,7 +728,10 @@ export class CreateNewCourseComponent implements OnInit {
         (res: any) => {
           console.log(res);
           if (res) {
-            this.router.navigate(['/dashboard/cources']);
+            //this.router.navigate(['/dashboard/cources']);
+            this.router.navigateByUrl('/dashboard/cources/view-details', {
+              state: totalObj,
+            });
           }
         },
         (err: any) => {
