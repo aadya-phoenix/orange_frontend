@@ -74,27 +74,30 @@
             <div class="card-body">
                 <div class="Requs_btn_inl">
                     <div class="Requs_btn_inl-child">
-                        <button class=" btn btn-primary btn_requst " data-toggle="modal " data-target="#publishModal " *ngIf="getUserrole.id==4 ">
-                  <img src="../../../../assets/images/publish.png " />Publish
-                </button>
 
-                        <button class="btn btn-primary btn_requst ml-2 " data-toggle="modal " data-target="#exampleModal " *ngIf="getUserrole.id==3 " (click)="getPublisher() ">
-                  <img src="../../../../assets/images/publish.png " />Transfer to
-                  Publisher
-                </button>
+                        <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#publishModal" *ngIf="getUserrole.id==4 ">
+  <img src="../../../../assets/images/publish.png " />Publish
+</button>
+
+
+                        <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#exampleModal" *ngIf="getUserrole.id==3 " (click)="getPublisher() ">
+  <img src="../../../../assets/images/publish.png " /> Transfer to  Publisher
+</button>
+
 
                         <button class="btn btn-primary btn_requst ml-2 " (click)="updateCource() ">
                   <img src="../../../../assets/images/update.png " />Update
                 </button>
-                        <button class="btn btn-primary btn_requst ml-2 " data-toggle="modal " data-target="#rejectModal ">
-                  <img src="../../../../assets/images/reject.png " />Reject
-                </button>
+                        <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#rejectModal" *ngIf="getUserrole.id==3 " (click)="getPublisher() ">
+   <img src="../../../../assets/images/reject.png " />Reject
+</button>
+
                     </div>
                     <div class="Requs_btn_inl-child1">
-                        <button class="btn btn-primary btn_requst ml-2 " data-toggle="modal " data-target="#publishRequest " (click)="transferOtherroc() ">
-                  <img src="../../../../assets/images/trans.png " />Transfer to
-                  other ROC
-                </button>
+                        <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#publishRequest" (click)="transferOtherroc() ">
+     <img src="../../../../assets/images/trans.png " />Transfer to other ROC
+</button>
+
                     </div>
                 </div>
             </div>
@@ -376,27 +379,7 @@
 <!-- /#right-panel -->
 
 <!-- Right Panel -->
-
-<script src="vendors/jquery/dist/jquery.min.js "></script>
-<script src="vendors/popper.js/dist/umd/popper.min.js "></script>
-<script src="vendors/bootstrap/dist/js/bootstrap.min.js "></script>
-<script src="assets/js/main.js "></script>
-
-<script src="vendors/datatables.net/js/jquery.dataTables.min.js "></script>
-<script src="vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js "></script>
-<script src="vendors/datatables.net-buttons/js/dataTables.buttons.min.js "></script>
-<script src="vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js "></script>
-<script src="vendors/jszip/dist/jszip.min.js "></script>
-<script src="vendors/pdfmake/build/pdfmake.min.js "></script>
-<script src="vendors/pdfmake/build/vfs_fonts.js "></script>
-<script src="vendors/datatables.net-buttons/js/buttons.html5.min.js "></script>
-<script src="vendors/datatables.net-buttons/js/buttons.print.min.js "></script>
-<script src="vendors/datatables.net-buttons/js/buttons.colVis.min.js "></script>
-<script src="assets/js/init-scripts/data-table/datatables-init.js "></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js "></script>
-
-<div class="modal fade " id="exampleModal " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel " aria-hidden="true " style="margin-top: 250px ">
-    <!-- <ng-template #content let-modal> -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 250px ">
     <div class="modal-dialog modal-lg " role="document ">
         <div class="modal-content ">
             <div class="modal-body ">
@@ -414,20 +397,15 @@
                 </div>
                 <!--row-->
             </div>
-            <div class="modal-footer ">
-                <button type="button " class="btn btn-secondary " data-dismiss="modal ">
-            Close
-          </button>
-                <button type="button " class="btn btn-primary btn_requst " data-dismiss="modal " (click)="saveChange() ">
-            Save changes
-          </button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
     <!-- </ng-template> -->
 </div>
-
-<div class="modal fade " id="rejectModal " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel " aria-hidden="true " style="margin-top: 250px ">
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 250px ">
     <div class="modal-dialog modal-lg " role="document ">
         <div class="modal-content ">
             <div class="modal-header ">
@@ -447,19 +425,15 @@
                 </div>
                 <!--row-->
             </div>
-            <div class="modal-footer ">
-                <button type="button " class="btn btn-secondary " data-dismiss="modal ">
-            Close
-          </button>
-                <button type="button " class="btn btn-primary btn_requst ">
-            Save changes
-          </button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade " id="publishRequest " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel " aria-hidden="true " style="margin-top: 250px ">
+<div class="modal fade" id="publishRequest" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 250px ">
     <div class="modal-dialog modal-lg " role="document ">
         <div class="modal-content ">
             <div class="modal-header ">
@@ -502,12 +476,7 @@
     </div>
 </div>
 
-
-
-
-
-
-<div class="modal fade " id="publishModal " tabindex="-1 " role="dialog " aria-labelledby="publishModal " aria-hidden="true " style="margin-top: 50px; ">
+<div class="modal fade" id="publishModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 50px ">
     <div class="modal-dialog modal-lg " role="document ">
         <div class="modal-content ">
             <div class="modal-header ">
@@ -549,6 +518,17 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
 
 
 </div>
