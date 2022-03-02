@@ -98,9 +98,10 @@ aria-expanded="false" aria-controls="collapseExample" > View overall request sta
                                 <!-- <form [formGroup]="createCourceForm"> -->
                                 <div class="card-body card_width">
                                     <div class="row">
-                                        <div class="col-sm-11">
-                                            <div class="form-group">
-                                                <label class="form-control-label">Title <span style="color: red">* </span>
+                                        <div class="col-sm-12">
+                                            <div class="d-flex">
+                                                <div class="form-group" style="width: 100%;">
+                                                    <label class="form-control-label">Title <span style="color: red">* </span>
                         <a href="">
                           <i
                             class="fa fa-info-circle info_circle"
@@ -111,20 +112,21 @@ aria-expanded="false" aria-controls="collapseExample" > View overall request sta
                           ></i
                         ></a>
                       </label>
-                                                <input type="text " placeholder="Enter Title" class="form-control form_width" formControlName="title" />
+                                                    <input type="text " placeholder="Enter Title" class="form-control form_width" formControlName="title" />
+                                                </div>
+
+                                                <div>
+                                                    <a href="" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column align-items-end">
+                                                        <img src="https://img.icons8.com/ios/50/000000/globe--v1.png" class="langu_css" />
+
+                                                    </a>
+                                                </div>
                                             </div>
+                                            <!--colend-->
                                         </div>
                                         <!--colend-->
 
-                                        <div class="col-sm-1">
-                                            <div>
-                                                <a href="" data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column align-items-end">
-                                                    <img src="https://img.icons8.com/external-xnimrodx-lineal-xnimrodx/64/000000/external-language-translation-and-language-xnimrodx-lineal-xnimrodx.png" class="langu_css" />
-                                                    <span style="font-size:11px;">Change Language</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <!--colend-->
+
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">Training hours/duration (HH:MM)
@@ -397,25 +399,28 @@ aria-expanded="false" aria-controls="collapseExample" > View overall request sta
                                         </div>
                                         <!--colend-->
 
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label">Additional Comment(s)
-                        <a href="">
-                          <i
-                            class="fa fa-info-circle info_circle"
-                            aria-hidden="true"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            data-container="body"
-                            ngbTooltip="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog."
-                          >
-                          </i>
-                        </a>
-                      </label>
-                                                <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
-                      </textarea>
-                                            </div>
-                                        </div>
+                                        <!-- <div class="col-sm-6"> -->
+                                        <!-- <div class="form-group"> -->
+                                        <!-- <label class="form-control-label">Additional Comment(s) -->
+                                        <!-- <a href=""> -->
+                                        <!-- <i -->
+                                        <!-- class="fa fa-info-circle info_circle" -->
+                                        <!-- aria-hidden="true" -->
+                                        <!-- data-toggle="tooltip" -->
+                                        <!-- data-placement="top" -->
+                                        <!-- data-container="body" -->
+                                        <!-- ngbTooltip="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog." -->
+                                        <!-- > -->
+                                        <!-- </i> -->
+                                        <!-- </a> -->
+                                        <!-- </label> -->
+                                        <!-- <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment"> -->
+                                        <!-- </textarea> -->
+                                        <!-- </div> -->
+                                        <!-- </div> -->
+
+
+
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Select learning type
@@ -571,7 +576,8 @@ aria-expanded="false" aria-controls="collapseExample" > View overall request sta
           </form>
           <!--ILT and vILT-->
           <form [formGroup]="iltandViltForm">
-            <div class="card" *ngIf="learningType == 'ILT and vILT training'">
+		  <div *ngIf="learningType == 'ILT and vILT training'">
+            <div class="card">
               <!-- <form [formGroup]="createCourceForm"> -->
               <div class="card-header">
                 <strong> ILT and VILT Training </strong>
@@ -1132,6 +1138,34 @@ Note: 3-5 working days are required for the learning object to be available in t
                                         </thead>
                                     </table>
 
+
+                                </div>
+                                <!-- </form> -->
+
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Additional Comment(s)
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            data-container="body"
+                            ngbTooltip="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                                <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
+                      </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row" *ngIf="getUserrole.id ===2">
                                         <div class="col-sm-12">
                                             <div class="form-group">
@@ -1168,24 +1202,25 @@ Note: 3-5 working days are required for the learning object to be available in t
                                         <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b>                                        region.
                                     </p>
                                 </div>
-                                <!-- </form> -->
                                 <div class="card-footer d-flex justify-content-start">
-                                    <button class="btn btn-default submit-css" (click)="createNewCourceIlt()">
+                                    <button class="btn btn-primary" (click)="createNewCourceIlt()">
                   Submit
                 </button>
                                     <!-- </button> -->
-                                    <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff" (click)="saveasDraftIlt()">
+                                    <button class="btn btn-secondary ml-1" (click)="saveasDraftIlt()">
                   Save as draft
                 </button>
                                     <!-- </button> -->
                                 </div>
                             </div>
-                        </form>
-                        <!--ILT and vILT-->
+                    </div>
+                    </form>
+                    <!--ILT and vILT-->
 
-                        <!--Currriculum-->
-                        <form [formGroup]="currriculumForm">
-                            <div class="card" *ngIf="learningType == 'Currriculum'">
+                    <!--Currriculum-->
+                    <form [formGroup]="currriculumForm">
+                        <div *ngIf="learningType == 'Currriculum'">
+                            <div class="card">
                                 <!-- <form [formGroup]="createCourceForm"> -->
                                 <div class="card-header">
                                     <strong> Currriculum </strong>
@@ -1434,6 +1469,35 @@ Note: 3-5 working days are required for the learning object to be available in t
                                             </tr>
                                         </thead>
                                     </table>
+
+                                </div>
+                                <!-- </form> -->
+
+                            </div>
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Additional Comment(s)
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            data-container="body"
+                            ngbTooltip="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                                <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
+                      </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
@@ -1475,24 +1539,27 @@ Note: 3-5 working days are required for the learning object to be available in t
                                         <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b>                                        region.
                                     </p>
                                 </div>
-                                <!-- </form> -->
                                 <div class="card-footer d-flex justify-content-start">
-                                    <button class="btn btn-primary submit-css" (click)="curriculumSubmit()">
+                                    <button class="btn btn-primary" (click)="curriculumSubmit()">
                   Submit
                 </button>
                                     <!-- </button> -->
-                                    <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff">
+                                    <button class="btn btn-secondary ml-1">
                   Save as draft
                 </button>
                                     <!-- </button> -->
                                 </div>
-                            </div>
-                        </form>
-                        <!--Currriculum-->
 
-                        <!--Material-Based Training-->
-                        <form [formGroup]="materialbasedForm">
-                            <div class="card" *ngIf="learningType == 'Material-Based Training'">
+                            </div>
+                        </div>
+
+                    </form>
+                    <!--Currriculum-->
+
+                    <!--Material-Based Training-->
+                    <form [formGroup]="materialbasedForm">
+                        <div *ngIf="learningType == 'Material-Based Training'">
+                            <div class="card">
                                 <!-- <form [formGroup]="createCourceForm"> -->
                                 <div class="card-header">
                                     <strong> Material Based Training </strong>
@@ -1909,6 +1976,34 @@ Note: 3-5 working days are required for the learning object to be available in t
                 </thead>
               </table> -->
 
+
+                                </div>
+                                <!-- </form> -->
+
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Additional Comment(s)
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            data-container="body"
+                            ngbTooltip="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                                <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
+                      </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
@@ -1952,23 +2047,24 @@ Note: 3-5 working days are required for the learning object to be available in t
                                         <b style="color: #ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b> region.
                                     </p>
                                 </div>
-                                <!-- </form> -->
                                 <div class="card-footer d-flex justify-content-start">
-                                    <button class="btn btn-default submit-css" (click)="createNewCource()">
+                                    <button class="btn btn-primary" (click)="createNewCource()">
                 Submit
               </button>
                                     <!-- </button> -->
-                                    <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff">
+                                    <button class="btn btn-secondary ml-1">
                 Save as draft
               </button>
                                     <!-- </button> -->
                                 </div>
                             </div>
-                        </form>
-                        <!--Material-Based Training-->
+                        </div>
+                    </form>
+                    <!--Material-Based Training-->
 
-                        <!--Video-based training-->
-                        <div class="card" *ngIf="learningType == 'Video-based training'">
+                    <!--Video-based training-->
+                    <div *ngIf="learningType == 'Video-based training'">
+                        <div class="card">
                             <!-- <form [formGroup]="createCourceForm"> -->
                             <div class="card-header">
                                 <strong>Video-based training </strong>
@@ -2059,6 +2155,35 @@ Note: 3-5 working days are required for the learning object to be available in t
                                     </div>
                                 </div>
                                 <!--row end-->
+
+                            </div>
+                            <!-- </form> -->
+
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Additional Comment(s)
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            data-container="body"
+                            ngbTooltip="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
+                      </textarea>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
@@ -2102,23 +2227,22 @@ Note: 3-5 working days are required for the learning object to be available in t
                                     <b style="color: #ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b> region.
                                 </p>
                             </div>
-                            <!-- </form> -->
                             <div class="card-footer d-flex justify-content-start">
-                                <button class="btn btn-default submit-css" (click)="createNewCource()">
+                                <button class="btn btn-primary" (click)="createNewCource()">
                 Submit
               </button>
                                 <!-- </button> -->
-                                <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff">
+                                <button class="btn btn-secondary ml-1">
                 Save as draft
               </button>
                                 <!-- </button> -->
                             </div>
                         </div>
                         <!--Video-based training-->
-
-                        <!--Playlist-->
-
-                        <div class="card" *ngIf="learningType == 'Playlist'">
+                    </div>
+                    <!--Playlist-->
+                    <div *ngIf="learningType == 'Playlist'">
+                        <div class="card">
                             <!-- <form [formGroup]="createCourceForm"> -->
                             <div class="card-header">
                                 <strong>Playlist </strong>
@@ -2294,6 +2418,35 @@ Note: 3-5 working days are required for the learning object to be available in t
                                 </div>
                                 <!--row end-->
 
+
+                            </div>
+                            <!-- </form> -->
+
+                        </div>
+                        <!--Playlist-->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Additional Comment(s)
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            data-container="body"
+                            ngbTooltip="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
+                      </textarea>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
@@ -2337,22 +2490,22 @@ Note: 3-5 working days are required for the learning object to be available in t
                                     <b style="color: #ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b> region.
                                 </p>
                             </div>
-                            <!-- </form> -->
                             <div class="card-footer d-flex justify-content-start">
-                                <button class="btn btn-default submit-css" (click)="createNewCource()">
+                                <button class="btn btn-primary" (click)="createNewCource()">
                 Submit
               </button>
                                 <!-- </button> -->
-                                <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff">
+                                <button class="btn btn-secondary ml-1">
                 Save as draft
               </button>
                                 <!-- </button> -->
                             </div>
                         </div>
-                        <!--Playlist-->
+                    </div>
 
-                        <!--Webbased Training-->
-                        <div class="card" *ngIf="learningType == 'webbased training'">
+                    <!--Webbased Training-->
+                    <div *ngIf="learningType == 'webbased training'">
+                        <div class="card">
                             <!-- <form [formGroup]="createCourceForm"> -->
                             <div class="card-header">
                                 <strong>Web-based training</strong>
@@ -2554,6 +2707,35 @@ Note: 3-5 working days are required for the learning object to be available in t
                                     </div>
                                     <!--colend-->
                                 </div>
+
+                            </div>
+                            <!-- </form> -->
+
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Additional Comment(s)
+                        <a href="">
+                          <i
+                            class="fa fa-info-circle info_circle"
+                            aria-hidden="true"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            data-container="body"
+                            ngbTooltip="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog."
+                          >
+                          </i>
+                        </a>
+                      </label>
+                                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
+                      </textarea>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
@@ -2597,134 +2779,165 @@ Note: 3-5 working days are required for the learning object to be available in t
                                     <b style="color: #ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b> region.
                                 </p>
                             </div>
-                            <!-- </form> -->
                             <div class="card-footer d-flex justify-content-start">
-                                <button class="btn btn-default submit-css" (click)="createNewCource()">
+                                <button class="btn btn-primary" (click)="createNewCource()">
                 Submit
               </button>
                                 <!-- </button> -->
-                                <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff">
+                                <button class="btn btn-secondary ml-1">
                 Save as draft
               </button>
                                 <!-- </button> -->
                             </div>
                         </div>
-                        <!--Webbased Training-->
                     </div>
+                    <!--Webbased Training-->
                 </div>
-                <!-- .animated -->
             </div>
-            <!-- .content -->
+            <!-- .animated -->
         </div>
-
-        <!-- </form> -->
         <!-- .content -->
-        <div class="collapse" id="collapseExample">
-            <div class="card card-body req_status-card">
-                <div class="card_header reqst_header">
-                    <p>Overall request Status</p>
-                    <i class="fa fa-times fa_cross mr-2" aria-hidden="true" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
+    </div>
+
+    <!-- </form> -->
+    <!-- .content -->
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body req_status-card">
+            <div class="card_header reqst_header">
+                <p>Overall request Status</p>
+                <i class="fa fa-times fa_cross mr-2" aria-hidden="true" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
+            </div>
+            <div class="row ml-1 mr-1" data-aos="fade-right">
+                <div class="col-sm-2 dash_wid">
+                    <div class="alig_dashicon">
+                        <div>
+                            <div class="fa-icons-des" style="background-color: transparent">
+                                <img src="../../../../assets/images/icon/draftsbl.png" />
+                            </div>
+
+                            <p>Draft</p>
+                            <span class="number_css">0</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="row ml-1 mr-1" data-aos="fade-right">
-                    <div class="col-sm-2 dash_wid">
-                        <div class="alig_dashicon">
-                            <div>
-                                <div class="fa-icons-des" style="background-color: transparent">
-                                    <img src="../../../../assets/images/icon/draftsbl.png" />
-                                </div>
-
-                                <p>Draft</p>
-                                <span class="number_css">0</span>
+                <!--coled-->
+                <div class="col-sm-2 dash_wid">
+                    <div class="alig_dashicon">
+                        <div>
+                            <div class="fa-icons-des" style="background-color: transparent">
+                                <img src="../../../../assets/images/icon/closedbl.png" />
                             </div>
+
+                            <p>Submitted</p>
+                            <span class="number_css">1</span>
                         </div>
                     </div>
-                    <!--coled-->
-                    <div class="col-sm-2 dash_wid">
-                        <div class="alig_dashicon">
-                            <div>
-                                <div class="fa-icons-des" style="background-color: transparent">
-                                    <img src="../../../../assets/images/icon/closedbl.png" />
-                                </div>
-
-                                <p>Submitted</p>
-                                <span class="number_css">1</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--coled-->
-                    <div class="col-sm-2 dash_wid">
-                        <div class="alig_dashicon">
-                            <div>
-                                <div class="fa-icons-des" style="background-color: transparent">
-                                    <img src="../../../../assets/images/icon/pendingbl.png" />
-                                </div>
-
-                                <p>Pending</p>
-                                <span class="number_css">0</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--coled-->
-                    <div class="col-sm-2 dash_wid">
-                        <div class="alig_dashicon">
-                            <div>
-                                <div class="fa-icons-des" style="background-color: transparent">
-                                    <img src="../../../../assets/images/icon/checkbl.png" />
-                                </div>
-
-                                <p>Closed</p>
-                                <span class="number_css">0</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--coled-->
-                    <div class="col-sm-2 dash_wid">
-                        <div class="alig_dashicon">
-                            <div>
-                                <div class="fa-icons-des" style="background-color: transparent">
-                                    <img src="../../../../assets/images/icon/rejectbl.png" />
-                                </div>
-
-                                <p>Rejected</p>
-                                <span class="number_css">0</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--coled-->
                 </div>
-                <!--ROW END-->
-                <div class="view-comple-req_div">
-                    <button class="btn btn-primary view-comple-req justify-content-center" style="color: #fff;">
+                <!--coled-->
+                <div class="col-sm-2 dash_wid">
+                    <div class="alig_dashicon">
+                        <div>
+                            <div class="fa-icons-des" style="background-color: transparent">
+                                <img src="../../../../assets/images/icon/pendingbl.png" />
+                            </div>
+
+                            <p>Pending</p>
+                            <span class="number_css">0</span>
+                        </div>
+                    </div>
+                </div>
+                <!--coled-->
+                <div class="col-sm-2 dash_wid">
+                    <div class="alig_dashicon">
+                        <div>
+                            <div class="fa-icons-des" style="background-color: transparent">
+                                <img src="../../../../assets/images/icon/checkbl.png" />
+                            </div>
+
+                            <p>Closed</p>
+                            <span class="number_css">0</span>
+                        </div>
+                    </div>
+                </div>
+                <!--coled-->
+                <div class="col-sm-2 dash_wid">
+                    <div class="alig_dashicon">
+                        <div>
+                            <div class="fa-icons-des" style="background-color: transparent">
+                                <img src="../../../../assets/images/icon/rejectbl.png" />
+                            </div>
+
+                            <p>Rejected</p>
+                            <span class="number_css">0</span>
+                        </div>
+                    </div>
+                </div>
+                <!--coled-->
+            </div>
+            <!--ROW END-->
+            <div class="view-comple-req_div">
+                <button class="btn btn-primary view-comple-req justify-content-center" style="color: #fff;">
           <img
             src="../../../../assets/images/icon/viewrewall.png"
             style="width: 28px"
           />View Complete Request
         </button>
+            </div>
+            <!--ROW END-->
+        </div>
+    </div>
+</div>
+<!--end-->
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: #ff7900;">Translate</h5>
+                <!-- Boosted mod: using visually hidden text instead of aria-label -->
+
+            </div>
+            <div class="modal-body modal_height">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="form-control-label">Arabic
+                        
+                      </label>
+                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
+                      </textarea>
+                        </div>
+                    </div>
+                    <!--colend-->
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="form-control-label">Dutch(the Netherland)
+                        
+                      </label>
+                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
+                      </textarea>
+                        </div>
+                    </div>
+                    <!--colend-->
+
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="form-control-label">English
+                        
+                      </label>
+                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
+                      </textarea>
+                        </div>
+                    </div>
+                    <!--colend-->
                 </div>
-                <!--ROW END-->
+                <!--ocl-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
-    <!--end-->
-
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <!-- Boosted mod: using visually hidden text instead of aria-label -->
-                    <button type="button" class="close" data-dismiss="modal">
-          <span class="sr-only">Close live modal demo</span>
-        </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
