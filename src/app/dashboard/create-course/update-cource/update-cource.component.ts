@@ -10,25 +10,27 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 
-
 @Component({
   selector: 'app-update-cource',
   templateUrl: './update-cource.component.html',
-  styleUrls: ['./update-cource.component.scss']
+  styleUrls: ['./update-cource.component.scss'],
 })
 export class UpdateCourceComponent implements OnInit {
-
+  routergetdata: any;
   public createCourceForm!: FormGroup;
   public commonCreateCourceForm!: FormGroup;
   public iltandViltForm!: FormGroup;
   public materialbasedForm!: FormGroup;
-  showCollapse: boolean = true;
-  routergetdata:any;
-  getUserrole:any;
+  public currriculumForm!: FormGroup;
+  public showCertificateExpiry: boolean = false;
+  public externalVendorname: boolean = false;
+  showVendor: boolean = false;
+  public learnerGuidearray: any = [];
+  public learningType: any = '1';
 
   public cctLevel: any;
-  coursesList:any;
-  courseLength:any;
+  coursesList: any;
+  courseLength: any;
 
   public cctExpiryperiod: any = [
     {
@@ -48,90 +50,44 @@ export class UpdateCourceComponent implements OnInit {
     },
   ];
 
-  public cctExpiryType: any = [
-    {
-      id: 1,
-      name: 'None',
-      status: 1,
-    },
-    {
-      id: 2,
-      name: 'Internal certification-with expire date',
-      status: 1,
-    },
-    {
-      id: 3,
-      name: 'Internal certification-with no expire date',
-      status: 1,
-    },
-    {
-      id: 4,
-      name: 'External certification-with expire date',
-      status: 1,
-    },
-    {
-      id: 5,
-      name: 'External certification-with no expire date',
-      status: 1,
-    },
-  ];
+  public cctExpiryType: any;
 
-  public validityPeriod: any ;
+  public validityPeriod: any;
 
   public vendorType: any;
   public cctSubjects: any;
-   public deliveryMethod = [
-    {
-      id: 1,
-      name: 'Face-to-face',
-      status: 1,
-    },
-    {
-      id: 2,
-      name: 'CoopNet virtual classroom',
-      status: 1,
-    },
-    {
-      id: 3,
-      name: 'Virtual classroom (other than CoopNet)',
-      status: 1,
-    },
-  ];
+  public entityList: any;
 
-  public availableLanguages = [
-    { id: 1, name: 'Arabic' },
-    { id: 2, name: 'Dutch (The Netherlands)' },
-    { id: 3, name: 'English (US)' },
-    { id: 4, name: 'French (France)' },
-    { id: 5, name: 'Polish (Poland)' },
-    { id: 6, name: 'Romanian (Romania)' },
-    { id: 7, name: 'Russian (Russia)' },
-    { id: 8, name: 'Slovak (Slovakia)' },
-    { id: 9, name: 'Spanish(Spain)' },
-  ];
+  public deliveryMethod: any;
+  public whocanSee: any;
+  public preferedInstructor: any;
+
+  public availableLanguages: any;
+  public learningTypes: any;
+
+  getUserrole: any; //to get user role
   public cordinatorsList: any = [];
+  draftRequests: any = [];
+  pendingRequests: any = [];
+  rejectedRequests: any = [];
+  closedRequests: any = [];
 
   constructor(
     private fb: FormBuilder,
     private courceService: CourcesService,
     private router: Router,
-    private authService:AuthenticationService
+    private authService: AuthenticationService
   ) {
     this.routergetdata = this.router.getCurrentNavigation()?.extras.state;
-    if(!this.routergetdata){
+    if (!this.routergetdata) {
       this.router.navigateByUrl('/dashboard/cources');
     }
   }
-  public showCertificateExpiry: boolean = false;
-  public externalVendorname: boolean = false;
-  public learnerGuidearray: any = [];
-  public learningType: any = 'ILT and vILT training';
 
-  getRole(){
+  getRole() {
     this.getUserrole = this.authService.getRolefromlocal();
     //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
   }
-
 
   getCordinators() {
     this.courceService.getregionalCordinator().subscribe(
@@ -181,7 +137,7 @@ export class UpdateCourceComponent implements OnInit {
     );
   }
 
-  getValidityPeriod(){
+  getValidityPeriod() {
     this.courceService.getValidityperiod().subscribe(
       (res: any) => {
         this.validityPeriod = res.data;
@@ -193,14 +149,119 @@ export class UpdateCourceComponent implements OnInit {
     );
   }
 
-  getTotalCourse(){
-    this.courceService.getCources().subscribe((res:any)=>{
-      this.coursesList = res.data;
-      this.courseLength =this.coursesList.length
-      console.log(res);
-    },(err:any)=>{
-      console.log(err);
-    })
+  getEntitylist() {
+    this.courceService.getEntitylist().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.entityList = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
+  getDeliveryMethod() {
+    this.courceService.getDeliveryMethod().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.deliveryMethod = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
+  getWhocansee() {
+    this.courceService.whoSeeCourse().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.whocanSee = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
+  //prefered instructor
+  getPreferedInstructor() {
+    this.courceService.getpreferedInstructor().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.preferedInstructor = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
+  //get Languages
+  getLanguages() {
+    this.courceService.getLanguages().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.availableLanguages = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
+  //getLearning type
+  getLearningType() {
+    this.courceService.getLearningType().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.learningTypes = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
+  //get Expirytype
+  getExpiryType() {
+    this.courceService.getExpiryType().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.cctExpiryType = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
+  getTotalCourse() {
+    this.courceService.getCources().subscribe(
+      (res: any) => {
+        this.coursesList = res.data;
+        this.courseLength = this.coursesList.length;
+        this.coursesList.map((course: any) => {
+          if (course.status === 'pending') {
+            this.pendingRequests.push(course);
+          }
+          if (course.status === 'reject') {
+            this.rejectedRequests.push(course);
+          }
+          if (course.status === 'draft') {
+            this.draftRequests.push(course);
+          }
+          if (course.status === 'close') {
+            this.closedRequests.push(course);
+          }
+        });
+        console.log(res);
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -210,23 +271,28 @@ export class UpdateCourceComponent implements OnInit {
     this.getSubjects();
     this.getValidityPeriod();
     this.getTotalCourse();
+    this.getEntitylist();
+    this.getDeliveryMethod();
+    this.getWhocansee();
+    this.getPreferedInstructor();
+    this.getLanguages();
+    this.getLearningType();
+    this.getExpiryType();
 
-    console.log(this.routergetdata)
+    console.log(this.routergetdata);
     this.getRole();
 
     //common form
     this.commonCreateCourceForm = this.fb.group({
       title: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
-      learning_type: new FormControl('ILT and vILT training', [
-        Validators.required,
-      ]),
+      learning_type: new FormControl('1', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       resource: new FormControl(''),
       objective: new FormControl('', [Validators.required]),
       level: new FormControl('', [Validators.required]),
       subject: new FormControl([Validators.required]),
-      additional_comment: new FormControl(''),
+      // additional_comment: new FormControl(''),
       prerequisite: new FormControl(''),
       keyword: new FormControl('', [Validators.required]),
       email_content_owner: new FormControl('', [Validators.required]),
@@ -234,7 +300,7 @@ export class UpdateCourceComponent implements OnInit {
       available_language: new FormControl('', [Validators.required]),
 
       //no field
-      email_training_contact:new FormControl('',[Validators.required])
+      email_training_contact: new FormControl('', [Validators.required]),
     });
 
     //ilt and vilt
@@ -256,7 +322,7 @@ export class UpdateCourceComponent implements OnInit {
       url: new FormControl(''),
       //s need to add
       //provide_video_link: new FormControl(''),
-      video_link:new FormControl(''),
+      video_link: new FormControl(''),
       //e need to add
       first_session_date: new FormControl('', [Validators.required]),
       expiry_date: new FormControl('', [Validators.required]),
@@ -267,6 +333,7 @@ export class UpdateCourceComponent implements OnInit {
       email_preffered_instructor: new FormControl('', [Validators.required]),
 
       who_see_course: new FormControl(''),
+      additional_comment: new FormControl(''),
 
       // learner_guideline: new FormControl(''),
       guidelines: this.fb.array([]),
@@ -287,19 +354,21 @@ export class UpdateCourceComponent implements OnInit {
     });
 
     this.commonCreateCourceForm.patchValue(this.routergetdata);
-    this.commonCreateCourceForm.controls['learning_type'].disable();
+    this.commonCreateCourceForm.controls['learning_type'].disable({onlySelf: true});
     this.iltandViltForm.patchValue(this.routergetdata);
-    if(this.routergetdata.external_vendor=='yes'){
+    if (this.routergetdata.external_vendor == 'yes') {
       this.externalVendorname = true;
-    }else{
+    } else {
       this.externalVendorname = false;
     }
-    if(this.routergetdata.certification == 'yes'){
+    if (this.routergetdata.certification == 'yes') {
       this.showCertificateExpiry = true;
     }
-    this.commonCreateCourceForm.patchValue({subject: parseInt(this.routergetdata.subject)})
+    this.commonCreateCourceForm.patchValue({
+      subject: parseInt(this.routergetdata.subject),
+    });
     //console.log(this.routergetdata.subject);
-    
+
     this.addLearnerGuideline();
   }
 
@@ -334,7 +403,6 @@ export class UpdateCourceComponent implements OnInit {
     // })
   }
 
-
   getFormValidationErrors() {
     Object.keys(this.commonCreateCourceForm.controls).forEach((key) => {
       const controlErrors: any = this.commonCreateCourceForm.get(key)?.errors;
@@ -350,27 +418,15 @@ export class UpdateCourceComponent implements OnInit {
   }
 
   //create ilt vilt form
-  publish() {
-    console.log('publish')
-
-    // let learnerguidearr = this.iltandViltForm.value.learnerguidearray;
-    // let localarr: any = [];
-    // learnerguidearr.map((arrayres: any) => {
-    //   if (arrayres.name) {
-    //     localarr.push(arrayres.name);
-    //   } else {
-    //     localarr.push(arrayres);
-    //   }
-    // });
-    // this.learnerGuidearray = localarr;
-    // this.iltandViltForm.value.learnerguidearray = this.learnerGuidearray;
-    let courseid = { course_id:this.routergetdata.id}
-    let savetype = { status : 'publish' };
+  createNewCourceIlt() {
+    let courseid = { course_id: this.routergetdata.id };
+    let savetype = { status: 'pending' };
     let totalObj = {
       ...this.iltandViltForm.value,
       ...savetype,
       ...this.commonCreateCourceForm.value,
-      ...courseid
+      ...courseid,
+      ...{learning_type:this.routergetdata.learning_type}
     };
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.updateCourse(totalObj).subscribe(
@@ -388,31 +444,23 @@ export class UpdateCourceComponent implements OnInit {
     } else {
       this.commonCreateCourceForm.markAllAsTouched();
       this.iltandViltForm.markAllAsTouched();
-      this.getFormValidationErrors()
-      console.log(totalObj);
+      this.getFormValidationErrors();
     }
-
   }
 
   //draft ilt and vilt
   saveasDraftIlt() {
-    // let learnerguidearr = this.iltandViltForm.value.learnerguidearray;
-    // let localarr: any = [];
-    // learnerguidearr.map((arrayres: any) => {
-    //   if (arrayres.name) {
-    //     localarr.push(arrayres.name);
-    //   } else {
-    //     localarr.push(arrayres);
-    //   }
-    // });
-    // this.learnerGuidearray = localarr;
-    // this.iltandViltForm.value.learnerguidearray = this.learnerGuidearray;
     let savetype = { status: 'draft' };
-    let totalObj = { ...this.iltandViltForm.value, ...savetype };
-    console.log(this.learnerGuidearray);
+    let courseid = { course_id: this.routergetdata.id };
+    let totalObj = {
+      ...this.iltandViltForm.value,
+      ...savetype,
+      ...courseid,
+      ...this.commonCreateCourceForm.value,
+      ...{learning_type:this.routergetdata.learning_type}
+    };
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
       console.log(totalObj);
-      //console.log(this.createCourceForm.value);
       this.courceService.createCource(totalObj).subscribe(
         (res: any) => {
           console.log(res);
@@ -504,26 +552,35 @@ export class UpdateCourceComponent implements OnInit {
     if (event.target.value == 'yes') {
       this.showCertificateExpiry = true;
       console.log(this.createCourceForm.value);
+      this.iltandViltForm
+        .get('certification_expiry_type')
+        ?.setValidators(Validators.required);
+      this.iltandViltForm
+        .get('validity_period')
+        ?.setValidators(Validators.required);
     } else {
       this.showCertificateExpiry = false;
+      this.iltandViltForm.get('certification_expiry_type')?.clearValidators();
+      this.iltandViltForm.get('validity_period')?.clearValidators();
     }
   }
 
   externalVendor(event: any) {
-    if ((event.target.value = 'yes')) {
+    if (event.target.value == 'yes') {
       this.externalVendorname = true;
+      this.showVendor = true;
+      this.iltandViltForm
+        .get('external_vendor_name')
+        ?.setValidators(Validators.required);
     } else {
       this.externalVendorname = false;
+      this.showVendor = false;
+      this.iltandViltForm.get('external_vendor_name')?.clearValidators();
     }
-  }
-
-  isshowOverallmenu() {
-    this.showCollapse = !this.showCollapse;
   }
 
   getlearningType(event: any) {
     console.log(event.target.value);
     this.learningType = event.target.value;
   }
-
 }

@@ -64,39 +64,57 @@
             ><span style="color: red">*</span>Indicates required field</span
           >
           <form [formGroup]="commonCreateCourceForm">
-            <div class="card" *ngIf="learningType != 'Playlist'">
+            <div class="card" *ngIf="learningType != '6'">
               <div class="card-header">
                 <strong _ngcontent-jet-c125=""> Course Details </strong>
                 <!-- <button class="btn btn-primary btn_common">
-                Common Fields
-              </button> -->
+              Common Fields
+            </button> -->
               </div>
               <!-- <form [formGroup]="createCourceForm"> -->
               <div class="card-body card_width">
                 <div class="row">
                   <div class="col-sm-12">
-                    <div class="form-group">
-                      <label class="form-control-label"
-                        >Title <span style="color: red">* </span>
-                        <a href="">
-                          <i
-                            class="fa fa-info-circle info_circle"
-                            aria-hidden="true"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            ngbTooltip="Do provide an attractive, catchy and clear learning activity title (max 100 characters). Example: 7 Habits of Highly Effective People. Don’t use prefixes such as ‘OBS’ or abbreviations such as ‘ops’. Don’t make references to session location or target "
-                          ></i
-                        ></a>
-                      </label>
-                      <input
-                        type="text "
-                        placeholder="Enter Title"
-                        class="form-control form_width"
-                        formControlName="title"
-                      />
+                    <div class="d-flex">
+                      <div class="form-group" style="width: 100%">
+                        <label class="form-control-label"
+                          >Title <span style="color: red">* </span>
+                          <a href="">
+                            <i
+                              class="fa fa-info-circle info_circle"
+                              aria-hidden="true"
+                              data-toggle="tooltip"
+                              data-placement="top"
+                              ngbTooltip="Do provide an attractive, catchy and clear learning activity title (max 100 characters). Example: 7 Habits of Highly Effective People. Don’t use prefixes such as ‘OBS’ or abbreviations such as ‘ops’. Don’t make references to session location or target "
+                            ></i
+                          ></a>
+                        </label>
+                        <input
+                          type="text "
+                          placeholder="Enter Title"
+                          class="form-control form_width"
+                          formControlName="title"
+                        />
+                      </div>
+
+                      <div>
+                        <a
+                          href=""
+                          data-toggle="modal"
+                          data-target="#exampleModal"
+                          class="d-flex flex-column align-items-end"
+                        >
+                          <img
+                            src="https://img.icons8.com/ios/50/000000/globe--v1.png"
+                            class="langu_css"
+                          />
+                        </a>
+                      </div>
                     </div>
+                    <!--colend-->
                   </div>
                   <!--colend-->
+
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label class="form-control-label"
@@ -289,7 +307,7 @@
                       </label>
                       <input
                         type="text "
-                        placeholder="Enter Email of Training Contact"
+                        placeholder="Email of Content Owner"
                         class="form-control form_width"
                         formControlName="email_content_owner"
                       />
@@ -431,31 +449,26 @@
                   </div>
                   <!--colend-->
 
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label class="form-control-label"
-                        >Additional Comment(s)
-                        <a href="">
-                          <i
-                            class="fa fa-info-circle info_circle"
-                            aria-hidden="true"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            data-container="body"
-                            ngbTooltip="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog."
-                          >
-                          </i>
-                        </a>
-                      </label>
-                      <textarea
-                        class="form-control form_width-textarea"
-                        rows="3"
-                        placeholder="Enter Additional Comment(s)"
-                        formControlName="additional_comment"
-                      >
-                      </textarea>
-                    </div>
-                  </div>
+                  <!-- <div class="col-sm-6"> -->
+                  <!-- <div class="form-group"> -->
+                  <!-- <label class="form-control-label">Additional Comment(s) -->
+                  <!-- <a href=""> -->
+                  <!-- <i -->
+                  <!-- class="fa fa-info-circle info_circle" -->
+                  <!-- aria-hidden="true" -->
+                  <!-- data-toggle="tooltip" -->
+                  <!-- data-placement="top" -->
+                  <!-- data-container="body" -->
+                  <!-- ngbTooltip="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog." -->
+                  <!-- > -->
+                  <!-- </i> -->
+                  <!-- </a> -->
+                  <!-- </label> -->
+                  <!-- <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment"> -->
+                  <!-- </textarea> -->
+                  <!-- </div> -->
+                  <!-- </div> -->
+
                   <div class="col-sm-12">
                     <div class="form-group">
                       <label
@@ -469,9 +482,11 @@
                         accesskey="target"
                         formControlName="learning_type"
                         (change)="getlearningType($event)"
+                        
                       >
                         <!-- <option value="">Select learning type</option> -->
-                        <option value="ILT and vILT training">
+                        <option *ngFor="let learning of learningTypes" [value]="learning.id">{{learning.name}}</option>
+                        <!-- <option value="ILT and vILT training">
                           ILT and vILT training
                         </option>
                         <option value="Video-based training">
@@ -486,7 +501,7 @@
                         <option value="webbased training">
                           Web-based training (SCORM)
                         </option>
-                        <option value="Playlist">Playlist</option>
+                        <option value="Playlist">Playlist</option> -->
                       </select>
                     </div>
                   </div>
@@ -497,13 +512,13 @@
               <!-- </form> -->
             </div>
 
-            <div class="card" *ngIf="learningType == 'Playlist'">
+            <div class="card" *ngIf="learningType == '6'">
               <!-- <form [formGroup]="createCourceForm"> -->
               <div class="card-header">
                 <strong _ngcontent-jet-c125=""> Course Details </strong>
                 <!-- <button class="btn btn-primary btn_common">
-      Common Fields
-    </button> -->
+    Common Fields
+  </button> -->
               </div>
               <div class="card-body">
                 <div class="row">
@@ -599,7 +614,8 @@
                         style="width: 89%"
                       >
                         <!-- <option value="">Select learning type</option> -->
-                        <option value="ILT and vILT training">
+                        <option *ngFor="let learning of learningTypes" [value]="learning.id">{{learning.name}}</option>
+                        <!-- <option value="ILT and vILT training">
                           ILT and vILT training
                         </option>
                         <option value="Video-based training">
@@ -614,7 +630,7 @@
                         <option value="webbased training">
                           Web-based training (SCORM)
                         </option>
-                        <option value="Playlist">Playlist</option>
+                        <option value="Playlist">Playlist</option> -->
                       </select>
                     </div>
                   </div>
@@ -623,11 +639,14 @@
               </div>
               <!--ILT and vILT-->
             </div>
+
+            
           </form>
           <!--ILT and vILT-->
           <form [formGroup]="iltandViltForm">
-            <div class="card" *ngIf="learningType == 'ILT and vILT training'">
-              <!-- <form [formGroup]="createCourceForm"> -->
+            <div *ngIf="learningType == '1'">
+              <div class="card">
+                <!-- <form [formGroup]="createCourceForm"> -->
                 <div class="card-header">
                   <strong> ILT and VILT Training </strong>
                 </div>
@@ -679,18 +698,14 @@
                           formControlName="who_see_course"
                         >
                           <option value="">Please select</option>
-                          <option value="1">option 1</option>
-                          <option value="2">option 2</option>
-                          <option value="3">option 3</option>
-                          <option value="">option 4</option>
-                          <option value="4">option 5</option>
+                         <option *ngFor="let whosee of whocanSee" [value]="whosee.id"> {{whosee.name}}</option>
                         </select>
                       </div>
                     </div>
                     <!--colend-->
                   </div>
                   <!--row end-->
-  
+
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
@@ -747,7 +762,7 @@
                     <!--colend-->
                   </div>
                   <!--row-->
-  
+
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
@@ -768,7 +783,9 @@
                           class="form-control form_width"
                           formControlName="delivery_method"
                         >
-                          <option value="">Please select delivery method</option>
+                          <option value="">
+                            Please select delivery method
+                          </option>
                           <option
                             *ngFor="let delivery of deliveryMethod"
                             [value]="delivery.id"
@@ -783,7 +800,7 @@
                       <div class="form-group">
                         <label class="form-control-label"
                           >Email of the preferred Instructor
-  
+
                           <a href="">
                             <i
                               class="fa fa-info-circle info_circle"
@@ -791,9 +808,9 @@
                               data-toggle="tooltip"
                               data-placement="top"
                               title="Email of the Instructors who have the knowledge required to deliver the course (maximum 5 Instructors).
-  Prerequisite: An Instructor must already have the Instructor (INS) role in Orange Learning to be assigned as a preferred Instructor.
-  If a preferred Instructor does not already have the Instructor (INS) role in Orange Learning, please submit a 'Request for back office role' in PD&L Tools before submitting your CCT.
-  If the event is delivered by an external supplier, please select 'External' from the list."
+Prerequisite: An Instructor must already have the Instructor (INS) role in Orange Learning to be assigned as a preferred Instructor.
+If a preferred Instructor does not already have the Instructor (INS) role in Orange Learning, please submit a 'Request for back office role' in PD&L Tools before submitting your CCT.
+If the event is delivered by an external supplier, please select 'External' from the list."
                             >
                             </i>
                           </a>
@@ -802,24 +819,22 @@
                           class="form-control form_width"
                           formControlName="email_preffered_instructor"
                         >
-                          <option>option 1</option>
-                          <option>option 2</option>
-                          <option>option 3</option>
-                          <option>option 4</option>
-                          <option>option 5</option>
+                          <option value="">Please select Instructor</option>
+                          <option *ngFor="let instructor of preferedInstructor" [value]="instructor.id">{{instructor.name}}</option>
+                          
                         </select>
                       </div>
                     </div>
                     <!--colend-->
                   </div>
                   <!--row-->
-  
+
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label class="form-control-label"
                           >Learn more
-  
+
                           <a href="">
                             <i
                               class="fa fa-info-circle info_circle"
@@ -866,13 +881,13 @@
                     <!--colend-->
                   </div>
                   <!--row-->
-  
+
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label class="form-control-label"
                           >Provide the link to your video
-  
+
                           <a href="">
                             <i
                               class="fa fa-info-circle info_circle"
@@ -888,7 +903,7 @@
                           type="text"
                           placeholder="Enter Provide the link to your video"
                           class="form-control form_width"
-                          formControlName="video_link"
+                          formControlName="who_see_course"
                         />
                       </div>
                     </div>
@@ -905,7 +920,7 @@
                               data-toggle="tooltip"
                               data-placement="top"
                               title="Please indicate the date of your first session (minimum 6 days from receipt of correctly completed publication requests).</br>
-  Note: 3-5 working days are required for the learning object to be available in the Orange Learning catalog. An additional 3-5 working days are required for the corresponding session to be created."
+Note: 3-5 working days are required for the learning object to be available in the Orange Learning catalog. An additional 3-5 working days are required for the corresponding session to be created."
                             >
                             </i>
                           </a>
@@ -920,13 +935,13 @@
                     <!--colend-->
                   </div>
                   <!--row-->
-  
+
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label class="form-control-label"
                           >Expiry Date
-  
+
                           <a>
                             <i
                               class="fa fa-info-circle info_circle"
@@ -972,7 +987,7 @@
                     <!--colend-->
                   </div>
                   <!--row-->
-  
+
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
@@ -1007,7 +1022,8 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label class="form-control-label"
-                          >Entity/Business area <span style="color: red">* </span>
+                          >Entity/Business area
+                          <span style="color: red">* </span>
                           <a>
                             <i
                               class="fa fa-info-circle info_circle"
@@ -1023,18 +1039,15 @@
                           class="form-control form_width"
                           formControlName="entity_business_area"
                         >
-                          <option>option 1</option>
-                          <option>option 2</option>
-                          <option>option 3</option>
-                          <option>option 4</option>
-                          <option>option 5</option>
+                          <option value="">Please select any</option>
+                          <option *ngFor="let entity of entityList" [value]="entity.id">{{entity.division}}</option>
                         </select>
                       </div>
                     </div>
                     <!--colend-->
                   </div>
                   <!--row-->
-  
+
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
@@ -1088,7 +1101,7 @@
                     <!--colend-->
                   </div>
                   <!--row-->
-  
+
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
@@ -1121,7 +1134,7 @@
                       <div class="form-group">
                         <label class="form-control-label"
                           >External vendor <span style="color: red">* </span>
-  
+
                           <a>
                             <i
                               class="fa fa-info-circle info_circle"
@@ -1147,7 +1160,7 @@
                     <!--colend-->
                   </div>
                   <!--row-->
-  
+
                   <div class="row">
                     <div class="col-sm-6" *ngIf="showCertificateExpiry">
                       <div class="form-group">
@@ -1183,26 +1196,27 @@
                     <div class="col-sm-6" *ngIf="externalVendorname">
                       <div class="form-group">
                         <!-- <label class="form-control-label"
-          >External vendor
-  
-          <a href="">
-            <i
-              class="fa fa-info-circle info_circle"
-              aria-hidden="true"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Select Yes, if the course is provided by an external vendor."
-            >
-            </i>
-          </a>
-        </label>
-        <select class="form-control form_width" formControlName="who_see_course">
-          <option value="">Please select externalvendor</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select> -->
+      >External vendor
+
+      <a href="">
+        <i
+          class="fa fa-info-circle info_circle"
+          aria-hidden="true"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Select Yes, if the course is provided by an external vendor."
+        >
+        </i>
+      </a>
+    </label>
+    <select class="form-control form_width" formControlName="who_see_course">
+      <option value="">Please select externalvendor</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select> -->
                         <label class="form-control-label"
-                          >External vendor name <span style="color: red">* </span>
+                          >External vendor name
+                          <span style="color: red">* </span>
                           <a href="">
                             <i
                               class="fa fa-info-circle info_circle"
@@ -1225,13 +1239,13 @@
                     <!--colend-->
                   </div>
                   <!--row-->
-  
+
                   <div class="row">
                     <div class="col-sm-6" *ngIf="showCertificateExpiry">
                       <div class="form-group">
                         <label class="form-control-label"
                           >Validity period <span style="color: red">* </span>
-  
+
                           <a>
                             <i
                               class="fa fa-info-circle info_circle"
@@ -1260,7 +1274,7 @@
                     <!--colend-->
                   </div>
                   <!--row end-->
-  
+
                   <table class="table table-bordered">
                     <thead>
                       <tr>
@@ -1307,14 +1321,45 @@
                       </tr>
                     </thead>
                   </table>
-  
+                </div>
+                <!-- </form> -->
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          >Additional Comment(s)
+                          <a href="">
+                            <i
+                              class="fa fa-info-circle info_circle"
+                              aria-hidden="true"
+                              data-toggle="tooltip"
+                              data-placement="top"
+                              data-container="body"
+                              ngbTooltip="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog."
+                            >
+                            </i>
+                          </a>
+                        </label>
+                        <textarea
+                          class="form-control form_width-textarea"
+                          rows="3"
+                          placeholder="Enter Additional Comment(s)"
+                          formControlName="additional_comment"
+                        >
+                        </textarea>
+                      </div>
+                    </div>
+                  </div>
                   <div class="row" *ngIf="getUserrole.id === 2">
                     <div class="col-sm-12">
                       <div class="form-group">
                         <label class="form-control-label"
                           >Request to RegionalTraining Cordinator
                           <span style="color: red">* </span>
-  
+
                           <a>
                             <i
                               class="fa fa-info-circle info_circle"
@@ -1345,49 +1390,39 @@
                   <p style="color: #000" *ngIf="getUserrole.id == 2">
                     <b style="color: #ff7900">Note</b>: The cost will not be
                     displayed on the course page in the Orange Learning catalog.
-                    The training cost will only be displayed in the corresponding
-                    session(s) of the course.
+                    The training cost will only be displayed in the
+                    corresponding session(s) of the course.
                   </p>
                   <p style="color: #000" *ngIf="getUserrole.id != 2">
                     <b style="color: #ff7900">Note</b>: The Training coordinator
-                    of Asia Pacific region in unavailable.Therefore,please select
-                    the
+                    of Asia Pacific region in unavailable.Therefore,please
+                    select the
                     <b style="color: #ff7900">Middle East and Africa</b>.region
                     from the list,who is the backup for Asia Pacificregion
                   </p>
                   <p style="color: #000" *ngIf="getUserrole.id != 2">
                     <b style="color: #ff7900">Note</b>: The Training Coordinator
-                    of <b>Russia</b> Region is unavailable.Therefore,please select
-                    the <b style="color: #ff7900">Europe</b> region from the list,
-                    who is the backup for <b>Russia</b> region.
+                    of <b>Russia</b> Region is unavailable.Therefore,please
+                    select the <b style="color: #ff7900">Europe</b> region from
+                    the list, who is the backup for <b>Russia</b> region.
                   </p>
                 </div>
-              <!-- </form> -->
-              <div class="card-footer d-flex justify-content-start">
-                <!-- <button
-                class="btn btn-default submit-css"
-                (click)="createNewCourceIlt()"
-              >
-                Submit
-              </button> -->
-                <button
-                  class="btn btn-default submit-css mr-1"
-                  *ngIf="getUserrole.id === 3"
-                >
-                  Transfer to Publisher
-                </button>
-                <button
-                  class="btn btn-default submit-css"
-                  *ngIf="getUserrole.id === 4 || getUserrole.id === 3"
-                  (click)="publish()"
-                >
-                  Publish
-                </button>
-                <!-- </button> -->
-                <!-- <button class="btn btn-default view-css ml-1" style="background: grey; color: #fff" (click)="saveasDraftIlt()">
-                Save as draft
-              </button> -->
-                <!-- </button> -->
+                <div class="card-footer d-flex justify-content-start">
+                  <button
+                    class="btn btn-primary"
+                    (click)="createNewCourceIlt()"
+                  >
+                    Submit
+                  </button>
+                  <!-- </button> -->
+                  <button
+                    class="btn btn-secondary ml-1"
+                    (click)="saveasDraftIlt()"
+                  >
+                    Save as draft
+                  </button>
+                  <!-- </button> -->
+                </div>
               </div>
             </div>
           </form>

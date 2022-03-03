@@ -449,6 +449,8 @@ export class CreateNewCourseComponent implements OnInit {
       ...savetype,
       ...this.commonCreateCourceForm.value,
     };
+    console.log(this.commonCreateCourceForm.value)
+    return
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.createCource(totalObj).subscribe(
         (res: any) => {
