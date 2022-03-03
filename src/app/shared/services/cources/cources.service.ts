@@ -32,6 +32,21 @@ export class CourcesService {
     return this.http.post(url, data).pipe(catchError(this.Errorhandling));
   }
 
+  updateCourse(data:any){
+    const url = `api/${this.apiVersion}/course/update`;
+    return this.http.post(url,data).pipe(catchError(this.Errorhandling));
+  }
+
+  changeStatus(data:any){
+    const url = `api/${this.apiVersion}/course/status`;
+    return this.http.post(url,data).pipe(catchError(this.Errorhandling));
+  }
+
+  courseTransfer(data:any){
+    const url = `api/${this.apiVersion}/course/transfer`;
+    return this.http.post(url,data).pipe(catchError(this.Errorhandling));
+  }
+
 //   /api/v4/cct-level
 // /api/v4/cct-validity-period
 // /api/v4/cct-vendor-type

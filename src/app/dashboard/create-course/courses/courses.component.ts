@@ -18,6 +18,10 @@ export class CoursesComponent implements OnInit {
   getUserrole: any;
   collectionSize: any;
   searchText: any;
+  draftRequests:any =[];
+  pendingRequests:any=[];
+  rejectedRequests:any=[];
+  closedRequests:any=[];
   public compare = (v1: string | number, v2: string | number) =>
     v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
@@ -68,6 +72,10 @@ export class CoursesComponent implements OnInit {
     }
   }
 
+  getrecords(data:any){
+    this.courcesList = data;
+  }
+
   refreshCourses() {
     console.log(this.service.page);
     console.log(this.service.pageSize);
@@ -77,6 +85,21 @@ export class CoursesComponent implements OnInit {
         if (res.status == 1 && res.message == 'Success') {
           this.courcesList = res.data;
           this.collectionSize = this.courcesList.length;
+          this.courcesList.map((course:any)=>{
+            if(course.status === 'pending'){
+              this.pendingRequests.push(course)
+            }
+            if(course.status === 'reject'){
+              this.rejectedRequests.push(course)
+            }
+            if(course.status === 'draft'){
+              this.draftRequests.push(course)
+            }
+            if(course.status === 'close'){
+              this.closedRequests.push(course)
+            }
+      
+          })
         }
       },
       (err: any) => {
@@ -95,5 +118,7 @@ export class CoursesComponent implements OnInit {
   ngOnInit(): void {
     // console.log(this.getUserrole);
     this.refreshCourses();
+
+    
   }
 }
