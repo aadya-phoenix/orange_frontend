@@ -21,7 +21,7 @@ export class ViewCourseDetailsComponent implements OnInit {
     let profileDetails = this.authService.getProfileDetailsfromlocal()
     this.profileDetails = profileDetails.data;
     if(!this.routegetdata){
-      this.router.navigateByUrl('/dashboard/cources');
+    //  this.router.navigateByUrl('/dashboard/cources');
     }
   }
 
