@@ -26,7 +26,7 @@ export class CreateNewCourseComponent implements OnInit {
   public externalVendorname: boolean = false;
   showVendor: boolean = false;
   public learnerGuidearray: any = [];
-  public learningType: any = 'ILT and vILT training';
+  public learningType: any = '1';
 
   public cctLevel: any;
   coursesList:any;
@@ -50,388 +50,55 @@ export class CreateNewCourseComponent implements OnInit {
     },
   ];
 
-  public cctExpiryType: any = [
-    {
-      id: 1,
-      name: 'None',
-      status: 1,
-    },
-    {
-      id: 2,
-      name: 'Internal certification-with expire date',
-      status: 1,
-    },
-    {
-      id: 3,
-      name: 'Internal certification-with no expire date',
-      status: 1,
-    },
-    {
-      id: 4,
-      name: 'External certification-with expire date',
-      status: 1,
-    },
-    {
-      id: 5,
-      name: 'External certification-with no expire date',
-      status: 1,
-    },
-  ];
+  public cctExpiryType: any ;
+  // = [
+  //   {
+  //     id: 1,
+  //     name: 'None',
+  //     status: 1,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Internal certification-with expire date',
+  //     status: 1,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'Internal certification-with no expire date',
+  //     status: 1,
+  //   },
+  //   {
+  //     id: 4,
+  //     name: 'External certification-with expire date',
+  //     status: 1,
+  //   },
+  //   {
+  //     id: 5,
+  //     name: 'External certification-with no expire date',
+  //     status: 1,
+  //   },
+  // ];
 
   public validityPeriod: any ;
 
   public vendorType: any;
   public cctSubjects: any;
-  // = [
-  //   {
-  //     id: 1,
-  //     name: 'Content and Multimedia - Content',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Content and Multimedia - Multimedia',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'Customers and Marketing - Consulting',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 4,
-  //     name: 'Customers and Marketing - Customer service & sales BtoB',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 5,
-  //     name: 'Customers and Marketing - Sales and Customer Relations B2C',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 6,
-  //     name: 'Customers and Marketing - Customer Service and Wholesale Sale',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 7,
-  //     name: 'Customers and Marketing - Marketing',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 8,
-  //     name: 'Customers and Marketing - Presales B2B',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 9,
-  //     name: 'Digital Learning Group - New way of working at Orange',
-  //     status: 0,
-  //   },
-  //   {
-  //     id: 10,
-  //     name: 'Digital Learning Group - Orange corporate culture',
-  //     status: 0,
-  //   },
-  //   {
-  //     id: 11,
-  //     name: 'Innovation - Internet of things',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 12,
-  //     name: 'Innovation - Patents and Promoting Innovation',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 13,
-  //     name: 'Innovation - Design and User Experience',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 14,
-  //     name: 'Management - Other trainings on management',
-  //     status: 0,
-  //   },
-  //   {
-  //     id: 15,
-  //     name: 'Management - Country/Entity - Specific training',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 16,
-  //     name: 'Management - Individual Development',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 17,
-  //     name: 'Management - Team Development',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 18,
-  //     name: 'Network IT and Cybersecurity - 5G',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 19,
-  //     name: 'Network IT and Cybersecurity - Cloud and Network Virtualization',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 20,
-  //     name: 'Network IT and Cybersecurity - Customer and Network Interventions',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 21,
-  //     name: 'Network IT and Cybersecurity - Cybersecurity',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 22,
-  //     name: 'Network IT and Cybersecurity - Data and AI',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 23,
-  //     name: 'Network IT and Cybersecurity - Design',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 24,
-  //     name: 'Network  IT and Cybersecurity - Health and Safety for Technical jobs',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 25,
-  //     name: 'Network IT and Cybersecurity - Equipments and Services Integration',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 26,
-  //     name: 'Network IT and Cybersecurity - Network Engineering',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 27,
-  //     name: 'Network IT and Cybersecurity - IT Services',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 28,
-  //     name: 'Network IT and Cybersecurity - Network Deployment',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 29,
-  //     name: 'Network IT and Cybersecurity - Operations Network Supervision and Maintenance',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 30,
-  //     name: 'Network IT and Cybersecurity - Software Development',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 31,
-  //     name: 'Network IT and Cybersecurity - Software Packages',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 32,
-  //     name: 'Network IT and Cybersecurity - Support and IT technical assistance',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 33,
-  //     name: 'Support - Finance  Controlling and Accounting',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 34,
-  //     name: 'Support - Assistants',
-  //     status: 0,
-  //   },
-  //   {
-  //     id: 35,
-  //     name: 'Support - Communication',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 36,
-  //     name: 'Support - Controlling',
-  //     status: 0,
-  //   },
-  //   {
-  //     id: 37,
-  //     name: 'Support - Finance',
-  //     status: 0,
-  //   },
-  //   {
-  //     id: 38,
-  //     name: 'Support - Human Resources',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 39,
-  //     name: 'Support - Legal and Regulatory',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 40,
-  //     name: 'Support - Real Estate  Logistics and Facility Management',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 41,
-  //     name: 'Support â€“ Purchase',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 42,
-  //     name: 'Support - Real Estate',
-  //     status: 0,
-  //   },
-  //   {
-  //     id: 43,
-  //     name: 'Support - Regulation lobbying',
-  //     status: 0,
-  //   },
-  //   {
-  //     id: 44,
-  //     name: 'Support - Risk management',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 45,
-  //     name: 'Support - Supply chain',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 46,
-  //     name: 'Transversal skills - Group Culture',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 47,
-  //     name: 'Transversal skills - Career Development',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 48,
-  //     name: 'Transversal skills - Diversity handicap awareness',
-  //     status: 0,
-  //   },
-  //   {
-  //     id: 49,
-  //     name: 'Transversal skills - Intergenerational & knowledge transfer',
-  //     status: 0,
-  //   },
-  //   {
-  //     id: 50,
-  //     name: 'Transversal skills - Languages',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 51,
-  //     name: 'Transversal skills - New hire welcome Group culture intercultural',
-  //     status: 0,
-  //   },
-  //   {
-  //     id: 52,
-  //     name: 'Transversal skills - Digital Culture and Collaborative tools',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 53,
-  //     name: '"Transversal skills - Agility and Project Management',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 54,
-  //     name: 'Transversal skills - Personal and Professional Development',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 55,
-  //     name: 'Transversal skills - Corporate Social Responsibility and Diversity',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 56,
-  //     name: 'Transversal skills - Quality Processes and Audits',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 57,
-  //     name: 'Transversal skills - Quality of Work Life',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 58,
-  //     name: 'Transversal skills - Transmission of Knowledge',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 59,
-  //     name: 'Transversal skills - Ethics and Compliance',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 60,
-  //     name: 'Credit Risk Analysis',
-  //     status: 0,
-  //   },
-  //   {
-  //     id: 61,
-  //     name: 'Management - Orange Campus - Collective issues',
-  //     status: 0,
-  //   },
-  //   {
-  //     id: 62,
-  //     name: 'Management - Orange Campus - Individual development',
-  //     status: 0,
-  //   },
-  //   {
-  //     id: 63,
-  //     name: 'Transversal skills - Professional efficiency and personal development',
-  //     status: 0,
-  //   },
-  // ];
+  public entityList:any;
 
-  public deliveryMethod = [
-    {
-      id: 1,
-      name: 'Face-to-face',
-      status: 1,
-    },
-    {
-      id: 2,
-      name: 'CoopNet virtual classroom',
-      status: 1,
-    },
-    {
-      id: 3,
-      name: 'Virtual classroom (other than CoopNet)',
-      status: 1,
-    },
-  ];
+  public deliveryMethod:any;
+  public whocanSee:any;
+  public preferedInstructor:any;
 
-  public availableLanguages = [
-    { id: 1, name: 'Arabic' },
-    { id: 2, name: 'Dutch (The Netherlands)' },
-    { id: 3, name: 'English (US)' },
-    { id: 4, name: 'French (France)' },
-    { id: 5, name: 'Polish (Poland)' },
-    { id: 6, name: 'Romanian (Romania)' },
-    { id: 7, name: 'Russian (Russia)' },
-    { id: 8, name: 'Slovak (Slovakia)' },
-    { id: 9, name: 'Spanish(Spain)' },
-  ];
+  public availableLanguages :any
+  public learningTypes:any;
+
   getUserrole: any; //to get user role
   public cordinatorsList: any = [];
-
+  draftRequests:any =[];
+  pendingRequests:any=[];
+  rejectedRequests:any=[];
+  closedRequests:any=[];
+  
   constructor(
     private fb: FormBuilder,
     private courceService: CourcesService,
@@ -503,10 +170,94 @@ export class CreateNewCourseComponent implements OnInit {
     );
   }
 
+  getEntitylist(){
+    this.courceService.getEntitylist().subscribe((res:any)=>{
+      console.log(res);
+      this.entityList = res.data;
+    },(err:any)=>{
+      console.log(err)
+    })
+  }
+
+  getDeliveryMethod(){
+    this.courceService.getDeliveryMethod().subscribe((res:any)=>{
+      console.log(res);
+      this.deliveryMethod = res.data;
+    },(err:any)=>{
+      console.log(err)
+    })
+  }
+
+  getWhocansee(){
+    this.courceService.whoSeeCourse().subscribe((res:any)=>{
+      console.log(res);
+      this.whocanSee = res.data;
+    },(err:any)=>{
+      console.log(err);
+    })
+  }
+
+  //prefered instructor
+  getPreferedInstructor(){
+    this.courceService.getpreferedInstructor().subscribe((res:any)=>{
+      console.log(res);
+      this.preferedInstructor = res.data;
+    },(err:any)=>{
+      console.log(err)
+    })
+  }
+
+  //get Languages
+  getLanguages(){
+    this.courceService.getLanguages().subscribe((res:any)=>{
+      console.log(res);
+      this.availableLanguages = res.data;
+    },(err:any)=>{
+      console.log(err)
+    })
+  }
+
+  //getLearning type
+  getLearningType(){
+    this.courceService.getLearningType().subscribe((res:any)=>{
+      console.log(res);
+      this.learningTypes = res.data;
+    },(err:any)=>{
+      console.log(err)
+    })
+  }
+
+  //get Expirytype
+  getExpiryType(){
+    this.courceService.getExpiryType().subscribe((res:any)=>{
+      console.log(res);
+      this.cctExpiryType = res.data;
+    },(err:any)=>{
+      console.log(err)
+    })
+  }
+
+
+
   getTotalCourse(){
     this.courceService.getCources().subscribe((res:any)=>{
       this.coursesList = res.data;
-      this.courseLength =this.coursesList.length
+      this.courseLength =this.coursesList.length;
+      this.coursesList.map((course:any)=>{
+        if(course.status === 'pending'){
+          this.pendingRequests.push(course)
+        }
+        if(course.status === 'reject'){
+          this.rejectedRequests.push(course)
+        }
+        if(course.status === 'draft'){
+          this.draftRequests.push(course)
+        }
+        if(course.status === 'close'){
+          this.closedRequests.push(course)
+        }
+  
+      })
       console.log(res);
     },(err:any)=>{
       console.log(err);
@@ -521,12 +272,19 @@ export class CreateNewCourseComponent implements OnInit {
     this.getSubjects();
     this.getValidityPeriod();
     this.getTotalCourse();
+    this.getEntitylist();
+    this.getDeliveryMethod();
+    this.getWhocansee();
+    this.getPreferedInstructor();
+    this.getLanguages();
+    this.getLearningType();
+    this.getExpiryType();
 
     //common form
     this.commonCreateCourceForm = this.fb.group({
       title: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
-      learning_type: new FormControl('ILT and vILT training', [
+      learning_type: new FormControl('1', [
         Validators.required,
       ]),
       description: new FormControl('', [Validators.required]),

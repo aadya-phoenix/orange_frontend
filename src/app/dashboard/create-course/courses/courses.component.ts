@@ -22,6 +22,7 @@ export class CoursesComponent implements OnInit {
   pendingRequests:any=[];
   rejectedRequests:any=[];
   closedRequests:any=[];
+  allCourses:any;
   public compare = (v1: string | number, v2: string | number) =>
     v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
@@ -84,6 +85,7 @@ export class CoursesComponent implements OnInit {
         console.log(res);
         if (res.status == 1 && res.message == 'Success') {
           this.courcesList = res.data;
+          this.allCourses = this.courcesList;
           this.collectionSize = this.courcesList.length;
           this.courcesList.map((course:any)=>{
             if(course.status === 'pending'){
