@@ -103,10 +103,11 @@ export class RequestDetailComponent implements OnInit {
   console.log(this.selectedPublisher)
   }
 
-  transferOtherRoc(){
+  transfertoOtherRoc(){
     let transferobj ={ course_id:this.routegetdata.id ,transfer_id:this.selectedotherRoc};
     this.courseService.courseTransfer(transferobj).subscribe((res:any)=>{
-      console.log(res)
+      console.log(res);
+      this.router.navigate(['/dashboard/cources']);
     },(err:any)=>{
       console.log(err)
     })
@@ -115,7 +116,8 @@ export class RequestDetailComponent implements OnInit {
   transfertoPublisher(){
     let transferobj ={ course_id:this.routegetdata.id ,transfer_id:this.selectedPublisher};
     this.courseService.courseTransfer(transferobj).subscribe((res:any)=>{
-      console.log(res)
+      console.log(res);
+      this.router.navigate(['/dashboard/cources']);
     },(err:any)=>{
       console.log(err)
     })
