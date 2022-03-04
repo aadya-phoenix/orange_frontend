@@ -85,7 +85,7 @@
                 </div>
                 <!--coled-->
                 <div class="Course_icon_child">
-                    <div class="alig_dashicon" (click)="getrecords(allCourses)">
+                    <div class="alig_dashicon" >
                         <div>
                             <div class="fa-icons-des" style="background-color: #a885db">
                                 <img src="../../../../assets/images/icon/closed.png" />
@@ -93,9 +93,7 @@
 
                             <p>Submitted</p>
                         </div>
-                        <span class="number_css">{{
-                      collectionSize ? collectionSize : ""
-                    }}</span>
+                        <span class="number_css">{{pendingRequests && pendingRequests.length ? pendingRequests.length : '0'}}</span>
                     </div>
                 </div>
                 <!--coled-->
@@ -171,10 +169,11 @@
                             <i class="fa fa-table fa_table" aria-hidden="true "></i>
                             <span class="card-title card-title-text card_overall">Easy dynamic table</span
                 >
-                <i
+                <!-- <i
                   class="fa fa-align-justify float-right fa_table"
                   aria-hidden="true "
-                ></i>
+                ></i> -->
+                <button (click)="getrecords(allCourses)" class="fa fa-align-justify float-right fa_table">View all</button>
               </div>
             </div>
             <div class="card-body">
@@ -371,7 +370,8 @@
                         <div>
                             <i class="fa fa-table fa_table" aria-hidden="true "></i>
                             <span class="card-title card-title-text">Latest Requests</span>
-                            <i class="fa fa-align-justify float-right fa_table" aria-hidden="true "></i>
+                            <!-- <i class="fa fa-align-justify float-right fa_table" aria-hidden="true "></i> -->
+                            <button (click)="getrecords(allCourses)" class="fa fa-align-justify float-right fa_table">View all</button>
                         </div>
                     </div>
                     <div class="card-body">

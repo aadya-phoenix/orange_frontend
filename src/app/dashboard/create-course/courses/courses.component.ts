@@ -38,16 +38,22 @@ export class CoursesComponent implements OnInit {
     //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
   }
 
-  openModal(cource: any) {
-    const modalRef = this.modalService.open(ViewHistoryComponent, {
-      centered: true,
-      size: 'lg',
-      windowClass: 'alert-popup',
-    });
-    modalRef.componentInstance.props = {
-      title: 'View History',
-      data: cource,
-    };
+  openModal(course: any) {
+    this.courceService.courseDetail({course_id:course.id}).subscribe((res:any)=>{
+      console.log(res);
+      if(res && res.status==1){
+        const modalRef = this.modalService.open(ViewHistoryComponent, {
+          centered: true,
+          size: 'lg',
+          windowClass: 'alert-popup',
+        });
+        modalRef.componentInstance.props = {
+          title: 'View History',
+          data: res.data,
+        };
+      }
+    })
+   
   }
 
   service: any = {

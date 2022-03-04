@@ -9,13 +9,15 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class ViewHistoryComponent implements OnInit {
   @Input() props: any;
   constructor(private modalService:NgbActiveModal) { }
+  public courseHistory:any;
 
   ngOnInit(): void {
     this.setDialogProps(this.props)
   }
 
   setDialogProps(dialogdata:any){
-    console.log(dialogdata)
+    this.courseHistory = dialogdata.data;
+    console.log(this.courseHistory);
   }
 
 }

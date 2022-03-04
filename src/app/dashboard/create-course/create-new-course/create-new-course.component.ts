@@ -31,6 +31,7 @@ export class CreateNewCourseComponent implements OnInit {
   public cctLevel: any;
   coursesList:any;
   courseLength:any;
+  notification:boolean = false;
 
   public cctExpiryperiod: any = [
     {
