@@ -277,7 +277,7 @@
                           aria-hidden="true "
                         ></i>
                       </th>
-                      <th width="130 ">View History</th>
+                      <!-- <th width="130 ">View History</th> -->
                       <th class="text-center">Status</th>
                       <th class="text-center">Actions</th>
                     </tr>
@@ -298,38 +298,43 @@
                       <td>ROC</td>
                       <td>{{ cource.created_at | date: "short" }}</td>
                       <td>{{ cource.updated_at | date: "short" }}</td>
-                      <td align="center ">
+                      <!-- <td align="center ">
                         <i 
                           class="fa fa-eye view"
                           aria-hidden="true "
                           (click)="openModal(cource)"
                         ></i>
-                      </td>
+                      </td> -->
                       <td  class="text-center">
-                        <button class="btn btn-secondary pend_css">
-                          {{ cource && cource.status ? cource.status : 'Pending'}}
-                        </button>
-                      </td>
-                      <td class="text-center">
-                        <div >
-                          <!-- <button [disabled]="cource.status !='draft'" (click)="editRequest(cource)" class="btn btn-secondary mr-1">Edit</button>
-                          <button [disabled]="cource.status !='draft'" (click)="deleteRequest(cource)" class="btn btn-secondary mr-1">Delete</button> -->
-                          <button (click)="copyRequest(cource)" class="btn btn-secondary"><i class="fa fa-files-o" aria-hidden="true"></i></button>
-                        </div>
-                      </td>
+                        <button class="btn btn-primary pend_css">
+                          <span *ngIf="!cource.status">
+                            Pending
+                          </span>
+                            <span *ngIf="cource.status">
+                          {{  cource.status | titlecase   }}
+                        </span>
+                            </button>
+                            </td>
+                            <td class="text-center">
+                                <div>
+                                    <button *ngIf="cource.status=='draft'" (click)="editRequest(cource)" class="btn btn-success mr-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                    <button *ngIf="cource.status=='draft'" (click)="deleteRequest(cource)" class="btn btn-danger mr-1"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    <button *ngIf="cource.status=='pending'" (click)="copyRequest(cource)" class="btn btn-primary mr-1"><i class="fa fa-files-o" aria-hidden="true"></i></button>
+                                    <button *ngIf="cource.status=='pending' || cource.status=='closed' || cource.status=='reject'" (click)="openModal(cource)" class="btn btn-info">
+                                      <i class="fa fa-eye view"aria-hidden="true "></i></button>
+                                </div>
+                            </td>
 
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div
-                class="pagintion_ parent d-flex justify-content-between ml-2 mr-2"
-              >
-                <div class="pagintion_ child">
-                  <p style="font-size: 14px; color: #000">Showing 1 entries</p>
-                </div>
-                <div class="pagintion_ child">
-                  <!-- <ngb-pagination
+                            </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                        <div class="pagintion_ parent d-flex justify-content-between ml-2 mr-2">
+                            <div class="pagintion_ child">
+                                <p style="font-size: 14px; color: #000">Showing 1 entries</p>
+                            </div>
+                            <div class="pagintion_ child">
+                                <!-- <ngb-pagination
                     [collectionSize]="collectionSize "
                     [(page)]="service.page "
                     (pageChange)="refreshCourses() "
@@ -347,21 +352,18 @@
                       >{{ page }}</ng-template
                     >
                   </ngb-pagination> -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
 
-        <div
-          class="col-md-12"
-          *ngIf="getUserrole.id === 3 || getUserrole.id === 4"
-        >
-          <div class="card">
-            <div class="card-header" style="background-color: #fff">
-              <div>
-                <i class="fa fa-table fa_table" aria-hidden="true "></i>
-                <span class="card-title card-title-text">Latest Requests</span>
+            <div class="col-md-12" *ngIf="getUserrole.id === 3 || getUserrole.id === 4">
+                <div class="card">
+                    <div class="card-header" style="background-color: #fff">
+                        <div>
+                            <i class="fa fa-table fa_table" aria-hidden="true "></i>
+                            <span class="card-title card-title-text">Latest Requests</span>
                             <i class="fa fa-align-justify float-right fa_table" aria-hidden="true "></i>
                         </div>
                     </div>
@@ -463,30 +465,44 @@
                         ></i>
                       </th>
                       <th  class="text-center">Status</th>
+                      <th  class="text-center">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr
                       *ngFor="let course of courcesList | filter: searchText"
-                      (click)="getRequest(course)"
+                      
                     >
-                      <td>{{ course.request_id }}</td>
-                      <td>
+                      <td (click)="getRequest(course)">{{ course.request_id }}</td>
+                      <td (click)="getRequest(course)">
                         {{
                           course && course.user_name ? course.user_name : "- "
                         }}
                       </td>
                       <!-- <td>xyz</td> -->
-                      <td>
+                      <td (click)="getRequest(course)">
                         {{ course.learning_type ? course.learning_type : "- " }}
                       </td>
-                      <td>ROC</td>
-                      <td>{{ course.created_at | date: "short" }}</td>
-                      <td>{{ course.updated_at | date: "short" }}</td>
+                      <td (click)="getRequest(course)">ROC</td>
+                      <td (click)="getRequest(course)">{{ course.created_at | date: "short" }}</td>
+                      <td (click)="getRequest(course)">{{ course.updated_at | date: "short" }}</td>
                       <td  class="text-center">
                         <button class="btn btn-secondary pend_css">
-                         {{course && course.status ? course.status :'-'}}
+                          <span *ngIf="!course.status">
+                            Pending
+                          </span>
+                          <span *ngIf="course.status">
+                          {{  course.status | titlecase   }}
+                        </span>
                         </button>
+                      </td>
+                      <td class="text-center">
+                        <div >
+                          <button *ngIf="course.status=='draft'"  (click)="editRequest(course)" class="btn btn-secondary mr-1">Edit</button>
+                          <button *ngIf="course.status=='draft'" (click)="deleteRequest(course)" class="btn btn-secondary mr-1">Delete</button>
+                          <button *ngIf="course.status=='pending'" (click)="copyRequest(course)" class="btn btn-secondary"><i class="fa fa-files-o" aria-hidden="true"></i></button>
+                          <button *ngIf="course.status=='pending' || course.status=='closed' || course.status=='reject'" (click)="openModal(course)">View History</button>
+                        </div>
                       </td>
                     </tr>
                   </tbody>
