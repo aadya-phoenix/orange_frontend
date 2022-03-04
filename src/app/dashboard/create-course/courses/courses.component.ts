@@ -80,6 +80,10 @@ export class CoursesComponent implements OnInit {
   refreshCourses() {
     console.log(this.service.page);
     console.log(this.service.pageSize);
+    this.pendingRequests=[];
+    this.rejectedRequests=[];
+    this.draftRequests=[];
+    this.closedRequests=[];
     this.courceService.getCources().subscribe(
       (res: any) => {
         console.log(res);
@@ -125,11 +129,24 @@ export class CoursesComponent implements OnInit {
   }
 
   deleteRequest(course:any){
-    console.log(course)
+    console.log(course);
+    this.courceService.deleteCourse({course_id :course.id}).subscribe((res:any)=>{
+      console.log(res);
+      this.refreshCourses();
+    },(err:any)=>{
+      console.log(err)
+    })
   }
 
   copyRequest(course:any){
-    console.log(course)
+    console.log(course);
+    this.courceService.copyCourse({course_id :course.id}).subscribe((res:any)=>{
+      console.log(res);
+      this.refreshCourses();
+    },(err:any)=>{
+      console.log(err)
+    })
+
   }
 
   ngOnInit(): void {
