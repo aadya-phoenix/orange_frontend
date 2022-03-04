@@ -145,7 +145,7 @@
             <!--ROW END-->
         </div>
         <div class="card-footer d-flex justify-content-center" style="border-top: 1px solid #00000008">
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" *ngIf="getUserrole.id != 2">
                 <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> View
                 complete report
               </button>
@@ -282,6 +282,7 @@
                       </th>
                       <th width="130 ">View History</th>
                       <th class="text-center">Status</th>
+                      <th class="text-center">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -301,7 +302,7 @@
                       <td>{{ cource.created_at | date: "short" }}</td>
                       <td>{{ cource.updated_at | date: "short" }}</td>
                       <td align="center ">
-                        <i
+                        <i 
                           class="fa fa-eye view"
                           aria-hidden="true "
                           (click)="openModal(cource)"
@@ -309,9 +310,17 @@
                       </td>
                       <td  class="text-center">
                         <button class="btn btn-secondary pend_css">
-                          Pending
+                          {{ cource && cource.status ? cource.status : 'pending'}}
                         </button>
                       </td>
+                      <td class="text-center">
+                        <div >
+                          <button [disabled]="cource.status !='draft'" (click)="editRequest(cource)">Edit</button>
+                          <button [disabled]="cource.status !='draft'" (click)="deleteRequest(cource)">Delete</button>
+                          <button (click)="copyRequest(cource)">Copy</button>
+                        </div>
+                      </td>
+
                     </tr>
                   </tbody>
                 </table>

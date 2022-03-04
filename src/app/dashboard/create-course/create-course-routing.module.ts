@@ -13,7 +13,7 @@ const routes: Routes = [
     {path:'',component:CoursesComponent,canActivate:[AuthenticationServiceGuard]},
     {path:'create-cource',component:CreateNewCourseComponent,canActivate:[AuthenticationServiceGuard]},
     {path:'request-detail',component:RequestDetailComponent,canActivate:[AuthorizationServiceGuard]},
-    {path:'edit-cource',component:UpdateCourceComponent,canActivate:[AuthorizationServiceGuard]},
+    {path:'edit-cource',component:UpdateCourceComponent,canActivate:[AuthenticationServiceGuard]},
     {path:'view-details',component:ViewCourseDetailsComponent,canActivate:[AuthenticationServiceGuard]}
 ];
 

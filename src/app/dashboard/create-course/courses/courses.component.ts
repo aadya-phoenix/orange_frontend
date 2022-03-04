@@ -117,6 +117,21 @@ export class CoursesComponent implements OnInit {
     console.log(cource);
   }
 
+  editRequest(course:any){
+    this.router.navigateByUrl('/dashboard/cources/edit-cource', {
+      state: course,
+    });
+    console.log(course)
+  }
+
+  deleteRequest(course:any){
+    console.log(course)
+  }
+
+  copyRequest(course:any){
+    console.log(course)
+  }
+
   ngOnInit(): void {
     // console.log(this.getUserrole);
     this.refreshCourses();
