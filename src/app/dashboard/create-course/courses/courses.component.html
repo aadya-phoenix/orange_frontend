@@ -307,14 +307,20 @@
                       </td>
                       <td  class="text-center">
                         <button class="btn btn-secondary pend_css">
-                          {{ cource && cource.status ? cource.status : 'pending'}}
+                          <span *ngIf="!cource.status">
+                            Pending
+                          </span>
+                          <span *ngIf="cource.status">
+                          {{  cource.status | titlecase   }}
+                        </span>
                         </button>
                       </td>
                       <td class="text-center">
                         <div >
-                          <!-- <button [disabled]="cource.status !='draft'" (click)="editRequest(cource)" class="btn btn-secondary mr-1">Edit</button>
-                          <button [disabled]="cource.status !='draft'" (click)="deleteRequest(cource)" class="btn btn-secondary mr-1">Delete</button> -->
-                          <button (click)="copyRequest(cource)" class="btn btn-secondary"><i class="fa fa-files-o" aria-hidden="true"></i></button>
+                          <button *ngIf="cource.status=='draft'"  (click)="editRequest(cource)" class="btn btn-secondary mr-1">Edit</button>
+                          <button *ngIf="cource.status=='draft'" (click)="deleteRequest(cource)" class="btn btn-secondary mr-1">Delete</button>
+                          <button *ngIf="cource.status=='pending'" (click)="copyRequest(cource)" class="btn btn-secondary"><i class="fa fa-files-o" aria-hidden="true"></i></button>
+                          <button *ngIf="cource.status=='pending' || cource.status=='closed' || cource.status=='reject'" (click)="openModal(cource)">View History</button>
                         </div>
                       </td>
 
@@ -463,30 +469,44 @@
                         ></i>
                       </th>
                       <th  class="text-center">Status</th>
+                      <th  class="text-center">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr
                       *ngFor="let course of courcesList | filter: searchText"
-                      (click)="getRequest(course)"
+                      
                     >
-                      <td>{{ course.request_id }}</td>
-                      <td>
+                      <td (click)="getRequest(course)">{{ course.request_id }}</td>
+                      <td (click)="getRequest(course)">
                         {{
                           course && course.user_name ? course.user_name : "- "
                         }}
                       </td>
                       <!-- <td>xyz</td> -->
-                      <td>
+                      <td (click)="getRequest(course)">
                         {{ course.learning_type ? course.learning_type : "- " }}
                       </td>
-                      <td>ROC</td>
-                      <td>{{ course.created_at | date: "short" }}</td>
-                      <td>{{ course.updated_at | date: "short" }}</td>
+                      <td (click)="getRequest(course)">ROC</td>
+                      <td (click)="getRequest(course)">{{ course.created_at | date: "short" }}</td>
+                      <td (click)="getRequest(course)">{{ course.updated_at | date: "short" }}</td>
                       <td  class="text-center">
                         <button class="btn btn-secondary pend_css">
-                         {{course && course.status ? course.status :'-'}}
+                          <span *ngIf="!course.status">
+                            Pending
+                          </span>
+                          <span *ngIf="course.status">
+                          {{  course.status | titlecase   }}
+                        </span>
                         </button>
+                      </td>
+                      <td class="text-center">
+                        <div >
+                          <button *ngIf="course.status=='draft'"  (click)="editRequest(course)" class="btn btn-secondary mr-1">Edit</button>
+                          <button *ngIf="course.status=='draft'" (click)="deleteRequest(course)" class="btn btn-secondary mr-1">Delete</button>
+                          <button *ngIf="course.status=='pending'" (click)="copyRequest(course)" class="btn btn-secondary"><i class="fa fa-files-o" aria-hidden="true"></i></button>
+                          <button *ngIf="course.status=='pending' || course.status=='closed' || course.status=='reject'" (click)="openModal(course)">View History</button>
+                        </div>
                       </td>
                     </tr>
                   </tbody>
