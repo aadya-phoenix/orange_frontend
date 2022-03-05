@@ -10,6 +10,7 @@ export class ViewHistoryComponent implements OnInit {
   @Input() props: any;
   constructor(private modalService:NgbActiveModal) { }
   public courseHistory:any;
+  public courseDetail:any;
 
   ngOnInit(): void {
     this.setDialogProps(this.props)
@@ -17,6 +18,7 @@ export class ViewHistoryComponent implements OnInit {
 
   setDialogProps(dialogdata:any){
     this.courseHistory = dialogdata.data;
+    this.courseDetail = dialogdata.data1;
     console.log(this.courseHistory);
   }
 

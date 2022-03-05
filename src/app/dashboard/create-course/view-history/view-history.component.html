@@ -5,8 +5,8 @@
     <div class="card-body">
         <h5 class="card-title" style="font-size: 0.9rem;">
             <b>Be a Memorable Spaker(Coaching)-Non CoopNet Virtual Classroom:
-</b>{{courseHistory.learning_type}}
-            <b>({{courseHistory.request_id}})</b></h5>
+</b>{{courseDetail.learning_type}}
+            <b>({{courseDetail.request_id}})</b></h5>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -19,18 +19,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr *ngFor="let history of courseHistory">
                     <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>{{ courseHistory.updated_at | date: "short"}}</td>
+                    <td>{{ history && history.transfer_by_name ? history.transfer_by_name : history.action_by_name}}</td>
+                    <td>{{history && history.transfer_by_name ? history.transfer_to_name : '-'}}</td>
+                    <td>{{ history.updated_at | date: "short"}}</td>
                     <td>
                         <!-- <button class="btn btn-success" style="font-size: 0.8rem;">{{courseHistory.status | titlecase}}</button> -->
-                        {{courseHistory.status | titlecase}}
+                        {{history.status | titlecase}}
                     </td>
                     <td>
-                        <span *ngIf="courseHistory.status=='pending'">-</span>
-                        <span *ngIf="courseHistory.status=='reject'">{{courseHistory.reject_comment}}</span>
+                        <span *ngIf="history.status !='reject'">-</span>
+                        <span *ngIf="history.status =='reject'">{{history.status_comment}}</span>
                     </td>
                 </tr>
                 <!-- <tr>

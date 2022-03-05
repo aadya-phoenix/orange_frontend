@@ -136,6 +136,19 @@
                     </div>
                 </div>
                 <!--coled-->
+                <div class="Course_icon_child">
+                    <div class="alig_dashicon" (click)="getrecords(allCourses)">
+                        <div>
+                            <div class="fa-icons-des" style="background-color: #085ebd">
+                                <img src="../../../../assets/images/icon/viewall.png" />
+                            </div>
+
+                            <p>View</p>
+                        </div>
+                        <span class="number_css">{{allCourses && allCourses.length ? allCourses.length : '0' }}</span>
+                    </div>
+                </div>
+                <!--coled-->
             </div>
             <!--ROW END-->
         </div>
@@ -173,7 +186,7 @@
                   class="fa fa-align-justify float-right fa_table"
                   aria-hidden="true "
                 ></i> -->
-                <button (click)="getrecords(allCourses)" class="fa fa-align-justify float-right fa_table">View all</button>
+                <!-- <button (click)="getrecords(allCourses)" class="fa fa-align-justify float-right fa_table">View all</button> -->
               </div>
             </div>
             <div class="card-body">
@@ -294,7 +307,9 @@
                       <td>
                         {{ cource.learning_type ? cource.learning_type : "- " }}
                       </td>
-                      <td>ROC</td>
+                      <td>
+                        {{cource && cource.transfer_user_id ? cource.transfer_user_id : 'ROC'}}
+                      </td>
                       <td>{{ cource.created_at | date: "short" }}</td>
                       <td>{{ cource.updated_at | date: "short" }}</td>
                       <!-- <td align="center ">
@@ -305,14 +320,14 @@
                         ></i>
                       </td> -->
                       <td  class="text-center">
-                        <button class="btn btn-primary pend_css">
+                      
                           <span *ngIf="!cource.status">
                             Pending
                           </span>
-                            <span *ngIf="cource.status">
+                            <span *ngIf="cource.status" style="color:#ffd200">
                           {{  cource.status | titlecase   }}
                         </span>
-                            </button>
+
                             </td>
                             <td class="text-center">
                                 <div>
@@ -371,7 +386,7 @@
                             <i class="fa fa-table fa_table" aria-hidden="true "></i>
                             <span class="card-title card-title-text">Latest Requests</span>
                             <!-- <i class="fa fa-align-justify float-right fa_table" aria-hidden="true "></i> -->
-                            <button (click)="getrecords(allCourses)" class="fa fa-align-justify float-right fa_table">View all</button>
+                            <!-- <button (click)="getrecords(allCourses)" class="fa fa-align-justify float-right fa_table">View all</button> -->
                         </div>
                     </div>
                     <div class="card-body">
@@ -490,18 +505,18 @@
                       <td (click)="getRequest(course)">
                         {{ course.learning_type ? course.learning_type : "- " }}
                       </td>
-                      <td (click)="getRequest(course)">ROC</td>
+                      <td (click)="getRequest(course)">{{course && course.transfer_user_id ? course.transfer_user_id : 'ROC'}}</td>
                       <td (click)="getRequest(course)">{{ course.created_at | date: "short" }}</td>
                       <td (click)="getRequest(course)">{{ course.updated_at | date: "short" }}</td>
                       <td  class="text-center">
-                        <button class="btn btn-primary pend_css">
+                       
                           <span *ngIf="!course.status">
                             Pending
                           </span>
-                          <span *ngIf="course.status">
+                          <span *ngIf="course.status" style="color:#ffd200">
                           {{  course.status | titlecase   }}
                         </span>
-                        </button>
+                      
                       </td>
                       <td class="text-center">
                         <div >

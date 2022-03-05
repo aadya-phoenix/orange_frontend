@@ -62,6 +62,11 @@ export class CourcesService {
     return this.http.get(url,this.http.headers).pipe(catchError(this.Errorhandling))
   }
 
+  courseHistory(data:any){
+    const url =`api/${this.apiVersion}/course/${data}/history`;
+    return this.http.get(url,this.http.headers).pipe(catchError(this.Errorhandling))
+  }
+
   // /api/v4/cct-level
   // /api/v4/cct-validity-period
   // /api/v4/cct-vendor-type

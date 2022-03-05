@@ -17,6 +17,7 @@ export class RequestDetailComponent implements OnInit {
   selectedotherRoc:any;
   selectedPublisher:any;
   closeResult = "";
+  rejectcomment:any;
   constructor(private authService:AuthenticationService,private router:Router,private modalService:NgbModal,private courseService:CourcesService) { 
     this.routegetdata = this.router.getCurrentNavigation()?.extras.state;
     if(!this.routegetdata){
@@ -83,7 +84,7 @@ export class RequestDetailComponent implements OnInit {
 
 
   reject(){
-    let statusobj = { course_id:this.routegetdata.id ,status:'reject'}
+    let statusobj = { course_id:this.routegetdata.id ,status:'reject',status_comment:this.rejectcomment}
     this.courseService.changeStatus(statusobj).subscribe((res:any)=>{
       console.log(res);
       this.router.navigate(['/dashboard/cources']);
