@@ -24,8 +24,14 @@
                     <td>Mark</td>
                     <td>Otto</td>
                     <td>{{ courseHistory.updated_at | date: "short"}}</td>
-                    <td><button class="btn btn-success" style="font-size: 0.8rem;">{{courseHistory.status | titlecase}}</button></td>
-                    <td>@mdo</td>
+                    <td>
+                        <!-- <button class="btn btn-success" style="font-size: 0.8rem;">{{courseHistory.status | titlecase}}</button> -->
+                        {{courseHistory.status | titlecase}}
+                    </td>
+                    <td>
+                        <span *ngIf="courseHistory.status=='pending'">-</span>
+                        <span *ngIf="courseHistory.status=='reject'">{{courseHistory.reject_comment}}</span>
+                    </td>
                 </tr>
                 <!-- <tr>
                     <th scope="row">1</th>

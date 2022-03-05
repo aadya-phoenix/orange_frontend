@@ -39,7 +39,7 @@ export class CoursesComponent implements OnInit {
   }
 
   openModal(course: any) {
-    this.courceService.courseDetail({course_id:course.id}).subscribe((res:any)=>{
+    this.courceService.courseDetail(course.id).subscribe((res:any)=>{
       console.log(res);
       if(res && res.status==1){
         const modalRef = this.modalService.open(ViewHistoryComponent, {

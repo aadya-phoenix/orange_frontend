@@ -58,8 +58,8 @@ export class CourcesService {
   }
 
   courseDetail(data:any){
-    const url =`api/${this.apiVersion}/course/detail`;
-    return this.http.post(url,data).pipe(catchError(this.Errorhandling))
+    const url =`api/${this.apiVersion}/course/${data}/detail`;
+    return this.http.get(url,this.http.headers).pipe(catchError(this.Errorhandling))
   }
 
   // /api/v4/cct-level
