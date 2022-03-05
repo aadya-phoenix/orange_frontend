@@ -442,9 +442,9 @@ export class CreateNewCourseComponent implements OnInit {
     });
   }
   //create ilt vilt form
-  createNewCourceIlt() {
+  createNewCourceIlt(status:any) {
     console.log(this.learnerGuidearray);
-    let savetype = { status: 'pending' };
+    let savetype = { status: status };
     let totalObj = {
       ...this.iltandViltForm.value,
       ...savetype,
