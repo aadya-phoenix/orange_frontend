@@ -250,6 +250,8 @@ export class CreateNewCourseComponent implements OnInit {
     })
   }
   getpublisherData(){
+
+  
     this.getPublisher();
   }
 
@@ -611,15 +613,12 @@ export class CreateNewCourseComponent implements OnInit {
   }
 
   transfertoPublishData(){
-    console.log(this.stringArray)
-    console.log(this.learnerGuidearray);
     let savetype = { status: 'pending' };
-    let publisher ={ transfer_user_id:this.selectedPublisherId}
     let totalObj = {
       ...this.iltandViltForm.value,
       ...savetype,
       ...this.commonCreateCourceForm.value,
-      ...publisher
+     
     };
     console.log(this.commonCreateCourceForm.value)
     console.log(totalObj)
@@ -629,9 +628,13 @@ export class CreateNewCourseComponent implements OnInit {
           console.log(res);
           if (res) {
            // this.router.navigate(['/dashboard/cources']);
-           this.router.navigateByUrl('/dashboard/cources/view-details', {
-            state: res.data,
-          });
+            let transferobj ={ course_id:res.data.id ,transfer_id:this.selectedPublisherId};
+            this.courceService.courseTransfer(transferobj).subscribe((res:any)=>{
+              console.log(res);
+              this.router.navigate(['/dashboard/cources']);
+            },(err:any)=>{
+              console.log(err)
+            })
           }
         },
         (err: any) => {
@@ -645,6 +648,9 @@ export class CreateNewCourseComponent implements OnInit {
       console.log(totalObj);
     }
     this.getFormValidationErrors();
+
+
+   
   }
   
 

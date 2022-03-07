@@ -499,21 +499,29 @@ export class UpdateCourceComponent implements OnInit {
   transfertoPublishData(){
     let courseid = { course_id: this.routergetdata.id };
     let savetype = { status: 'pending' };
-    let publisher = {trasfer_user_id:this.selectedPublisherId}
+    //let publisher = {trasfer_user_id:this.selectedPublisherId}
     let totalObj = {
       ...this.iltandViltForm.value,
       ...savetype,
       ...this.commonCreateCourceForm.value,
       ...courseid,
       ...{learning_type:this.routergetdata.learning_type},
-      ...publisher
+
     };
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
           console.log(res);
           if (res) {
-            this.router.navigate(['/dashboard/cources']);
+            debugger
+           // this.router.navigate(['/dashboard/cources']);
+            let transferobj ={ course_id:this.routergetdata.id ,transfer_id:this.selectedPublisherId};
+            this.courceService.courseTransfer(transferobj).subscribe((res:any)=>{
+              console.log(res);
+              this.router.navigate(['/dashboard/cources']);
+            },(err:any)=>{
+              console.log(err)
+            })
           }
         },
         (err: any) => {
