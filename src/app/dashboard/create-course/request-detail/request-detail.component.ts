@@ -16,6 +16,7 @@ export class RequestDetailComponent implements OnInit {
   otherRocsList:any=[];
   selectedotherRoc:any;
   selectedPublisher:any;
+  objectarray:any=[];
   closeResult = "";
   rejectcomment:any;
   constructor(private authService:AuthenticationService,private router:Router,private modalService:NgbModal,private courseService:CourcesService) { 
@@ -126,6 +127,9 @@ export class RequestDetailComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.routegetdata);
+    let arr1 = this.routegetdata.objective;
+    this.objectarray = arr1.split('• ')
+    console.log(arr1.split('• '))
 
     this.getRole();
   }
