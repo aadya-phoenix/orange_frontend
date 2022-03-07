@@ -1410,21 +1410,23 @@ Note: 3-5 working days are required for the learning object to be available in t
                 <div class="card-footer d-flex justify-content-start">
                   <button
                     class="btn btn-primary"
-                    (click)="createNewCourceIlt()"
+                    (click)="createNewCourceIlt('pending')"
                   >
                     Submit
                   </button>
                   <!-- </button> -->
                   <button
                     class="btn btn-secondary ml-1"
-                    (click)="saveasDraftIlt()"
+                    (click)="createNewCourceIlt('draft')"
                   >
                     Save as draft
                   </button>
 
                   <button *ngIf="getUserrole.id === 3"
                     class="btn btn-secondary ml-1"
-                    (click)="saveasDraftIlt()"
+                    (click)="getpublisher()"
+                    data-toggle="modal"
+                    data-target="#transfertoPublisher"
                   >
                     Transfer to Publisher
                   </button>
@@ -3008,3 +3010,32 @@ Note: 3-5 working days are required for the learning object to be available in t
   </div>
 </div>
 <!--end-->
+
+<!--Pop ups-->
+<!----Transfer to publisher-->
+<div class="modal fade" id="transfertoPublisher" tabindex="-1" aria-labelledby="transfertoPublisherLabel" aria-hidden="true" style="margin-top: 250px ">
+  <div class="modal-dialog modal-lg " role="document ">
+      <div class="modal-content ">
+          <div class="modal-body ">
+              <div class="row ">
+                  <div class="col-sm-12 ">
+                      <div class="form-group ">
+                          <label>Transfer to Publisher</label>
+                          <select name="select " id="select " class="form-control " (change)="getPublisherselected($event)">
+                <option value="0 ">Please select</option>
+                <option *ngFor="let publisher of publisherList" [value]="publisher.id">{{publisher.first_name}}</option>
+              </select>
+                      </div>
+                  </div>
+                  <!--col end-->
+              </div>
+              <!--row-->
+          </div>
+          <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+              <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="transfertoPublishData()">Submit</button>
+          </div>
+      </div>
+  </div>
+  <!-- </ng-template> -->
+</div>

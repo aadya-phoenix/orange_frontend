@@ -72,6 +72,8 @@ export class UpdateCourceComponent implements OnInit {
   pendingRequests: any = [];
   rejectedRequests: any = [];
   closedRequests: any = [];
+  publisherList:any=[];
+  selectedPublisherId:any;
 
   constructor(
     private fb: FormBuilder,
@@ -238,6 +240,16 @@ export class UpdateCourceComponent implements OnInit {
     );
   }
 
+  getPublisher(){
+    this.authService.getUserRoles().subscribe((res:any)=>{
+      console.log(res);
+      this.publisherList = res.data['4'];
+      console.log(this.publisherList)
+    },(err:any)=>{
+      console.log(err)
+    })
+  }
+
   getTotalCourse() {
     this.courceService.getCources().subscribe(
       (res: any) => {
@@ -263,6 +275,10 @@ export class UpdateCourceComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  getpublisher(){
+    this.getPublisher();
   }
 
   ngOnInit(): void {
@@ -419,9 +435,9 @@ export class UpdateCourceComponent implements OnInit {
   }
 
   //create ilt vilt form
-  createNewCourceIlt() {
+  createNewCourceIlt(status:any) {
     let courseid = { course_id: this.routergetdata.id };
-    let savetype = { status: 'pending' };
+    let savetype = { status: status };
     let totalObj = {
       ...this.iltandViltForm.value,
       ...savetype,
@@ -477,6 +493,38 @@ export class UpdateCourceComponent implements OnInit {
       this.commonCreateCourceForm.markAllAsTouched();
       this.iltandViltForm.markAllAsTouched();
       console.log(totalObj);
+    }
+  }
+
+  transfertoPublishData(){
+    let courseid = { course_id: this.routergetdata.id };
+    let savetype = { status: 'pending' };
+    let publisher = {trasfer_user_id:this.selectedPublisherId}
+    let totalObj = {
+      ...this.iltandViltForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+      ...courseid,
+      ...{learning_type:this.routergetdata.learning_type},
+      ...publisher
+    };
+    if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
+      this.courceService.updateCourse(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            this.router.navigate(['/dashboard/cources']);
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+      console.log(totalObj);
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.iltandViltForm.markAllAsTouched();
+      this.getFormValidationErrors();
     }
   }
 
@@ -583,5 +631,10 @@ export class UpdateCourceComponent implements OnInit {
   getlearningType(event: any) {
     console.log(event.target.value);
     this.learningType = event.target.value;
+  }
+
+  getPublisherselected(event:any){
+    console.log(event.target.value);
+    this.selectedPublisherId = event.target.value;
   }
 }

@@ -9,6 +9,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { PriceDirective } from './directives/price.directive';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgbdSortableHeader } from './directives/sorting.directive';
+import { BulletpointsDirective } from './directives/bulletpoints.directive';
 
 
 
@@ -19,6 +20,7 @@ import { NgbdSortableHeader } from './directives/sorting.directive';
     SidebarComponent,
     PriceDirective,
     NgbdSortableHeader,
+    BulletpointsDirective,
   ],
   imports: [
     CommonModule,
@@ -37,6 +39,7 @@ import { NgbdSortableHeader } from './directives/sorting.directive';
     PriceDirective,
     Ng2SearchPipeModule,
     NgbdSortableHeader,
+    BulletpointsDirective,
     //NgSelectModule
   ],
   providers: [],

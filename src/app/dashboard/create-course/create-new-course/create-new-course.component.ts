@@ -52,34 +52,6 @@ export class CreateNewCourseComponent implements OnInit {
   ];
 
   public cctExpiryType: any ;
-  // = [
-  //   {
-  //     id: 1,
-  //     name: 'None',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Internal certification-with expire date',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'Internal certification-with no expire date',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 4,
-  //     name: 'External certification-with expire date',
-  //     status: 1,
-  //   },
-  //   {
-  //     id: 5,
-  //     name: 'External certification-with no expire date',
-  //     status: 1,
-  //   },
-  // ];
-
   public validityPeriod: any ;
 
   public vendorType: any;
@@ -99,6 +71,9 @@ export class CreateNewCourseComponent implements OnInit {
   pendingRequests:any=[];
   rejectedRequests:any=[];
   closedRequests:any=[];
+  stringArray:any =[];
+  publisherList:any=[];
+  selectedPublisherId:any;
   
   constructor(
     private fb: FormBuilder,
@@ -238,6 +213,16 @@ export class CreateNewCourseComponent implements OnInit {
     })
   }
 
+  getPublisher(){
+    this.authService.getUserRoles().subscribe((res:any)=>{
+      console.log(res);
+      this.publisherList = res.data['4'];
+      console.log(this.publisherList)
+    },(err:any)=>{
+      console.log(err)
+    })
+  }
+
 
 
   getTotalCourse(){
@@ -264,7 +249,9 @@ export class CreateNewCourseComponent implements OnInit {
       console.log(err);
     })
   }
-  
+  getpublisherData(){
+    this.getPublisher();
+  }
 
   ngOnInit(): void {
     this.getCordinators();
@@ -280,6 +267,7 @@ export class CreateNewCourseComponent implements OnInit {
     this.getLanguages();
     this.getLearningType();
     this.getExpiryType();
+    
 
     //common form
     this.commonCreateCourceForm = this.fb.group({
@@ -443,6 +431,7 @@ export class CreateNewCourseComponent implements OnInit {
   }
   //create ilt vilt form
   createNewCourceIlt(status:any) {
+    console.log(this.stringArray)
     console.log(this.learnerGuidearray);
     let savetype = { status: status };
     let totalObj = {
@@ -615,4 +604,48 @@ export class CreateNewCourseComponent implements OnInit {
     console.log(event.target.value);
     this.learningType = event.target.value;
   }
+
+  getPublisherselected(event:any){
+    console.log(event.target.value);
+    this.selectedPublisherId = event.target.value;
+  }
+
+  transfertoPublishData(){
+    console.log(this.stringArray)
+    console.log(this.learnerGuidearray);
+    let savetype = { status: 'pending' };
+    let publisher ={ transfer_user_id:this.selectedPublisherId}
+    let totalObj = {
+      ...this.iltandViltForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+      ...publisher
+    };
+    console.log(this.commonCreateCourceForm.value)
+    console.log(totalObj)
+    if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
+      this.courceService.createCource(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+           // this.router.navigate(['/dashboard/cources']);
+           this.router.navigateByUrl('/dashboard/cources/view-details', {
+            state: res.data,
+          });
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.iltandViltForm.markAllAsTouched();
+      console.log(this.learnerGuidearray);
+      console.log(totalObj);
+    }
+    this.getFormValidationErrors();
+  }
+  
+
 }
