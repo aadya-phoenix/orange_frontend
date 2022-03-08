@@ -146,7 +146,7 @@
                           data-toggle="modal"
                           data-target="#titleModal"
                           class="d-flex flex-column align-items-end"
-                          (click)="addtitlemultilanguage()"
+                        
                         >
                           <img
                             src="../../../../assets/images/icon/lang.png"
@@ -790,7 +790,7 @@
                             </option>
                           </select>
                         </div>
-                        <div>
+                        <!-- <div>
                           <a
                              
                             data-toggle="modal"
@@ -802,7 +802,7 @@
                               class="langu_css"
                             />
                           </a>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                     <!--colend-->
@@ -1217,7 +1217,8 @@ Note: 3-5 working days are required for the learning object to be available in t
                     </div>
                     <!--colend-->
                     <div class="col-sm-6">
-                      <div class="form-group">
+                      <div class="d-flex align-items-center">
+                      <div class="form-group" style="width: 100%;">
                         <label class="form-control-label"
                           >For Whom? <span style="color: red">* </span>
                           <a  >
@@ -1238,7 +1239,22 @@ Note: 3-5 working days are required for the learning object to be available in t
                           formControlName="for_whoom"
                         >
                         </textarea>
+                       
                       </div>
+                      <div>
+                        <a
+                           
+                          data-toggle="modal"
+                          data-target="#exampleModal"
+                          class="d-flex flex-column align-items-end"
+                        >
+                          <img
+                            src="../../../../assets/images/icon/lang.png"
+                            class="langu_css"
+                          />
+                        </a>
+                      </div>
+                    </div>
                     </div>
                     <!--colend-->
                   </div>
@@ -3794,15 +3810,16 @@ Note: 3-5 working days are required for the learning object to be available in t
       <div class="modal-body modal_height">
         <form [formGroup]="commonCreateCourceForm">
         <div class="row">
-          <div class="col-sm-12" formArrayName="title1" *ngFor="let language of availableLanguages ; let i =index;">
+          <div class="col-sm-12"  formArrayName="title"  *ngFor="let language of commonCreateCourceForm.controls.title?.controls;let i =index;">
             <div class="form-group">
               <div [formGroupName]="i">
-              <label class="form-control-label">{{language.name}} </label>
+              <label class="form-control-label"> {{availableLanguages[i].name}}</label>
               <textarea
                 class="form-control form_width-textarea"
                 rows="3"
                 placeholder="Enter"
-                [formControlName]="language.slug"
+               
+                formControlName="value"
               >
               </textarea>
             </div>
@@ -3823,7 +3840,7 @@ Note: 3-5 working days are required for the learning object to be available in t
         >
           Cancel
         </button>
-        <button type="button" class="btn btn-primary" (click)="gettitlelanguage()">Submit</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="gettitlelanguage()">Submit</button>
       </div>
     </div>
   </div>

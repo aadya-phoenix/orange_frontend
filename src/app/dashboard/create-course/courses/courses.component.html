@@ -319,7 +319,7 @@
                       {{ cource.title ? (cource.title | titlecase) : "- " }}
                     </td>
                     <td>
-                      {{ cource.learning_type ? cource.learning_type : "- " }}
+                      {{ cource.learning_type_name ? cource.learning_type_name : "- " }}
                     </td>
                     <td>
                       {{cource && cource.transfer_user_id ? cource.transfer_user_name : '-'}}
@@ -532,7 +532,7 @@
                       {{ course.title ? (course.title | titlecase) : "- " }}
                     </td>
                     <td (click)="getRequest(course)">
-                      {{ course.learning_type ? course.learning_type : "- " }}
+                      {{ course.learning_type_name ? course.learning_type_name : "- " }}
                     </td>
                     <td (click)="getRequest(course)">{{course && course.transfer_user_id ? course.transfer_user_name : 'ROC'}}</td>
                     <td (click)="getRequest(course)">{{ course.created_at | date: "short" }}</td>

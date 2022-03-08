@@ -256,6 +256,7 @@ export class CreateNewCourseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const emailregexp = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
     this.getCordinators();
     this.getvendorType();
     this.getLevel();
@@ -273,8 +274,9 @@ export class CreateNewCourseComponent implements OnInit {
 
     //common form
     this.commonCreateCourceForm = this.fb.group({
-      title1: this.fb.array([]),
-      title: new FormControl('', [Validators.required]),
+      title1: new FormArray([]),
+      title: new FormArray([]),
+      //title: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
       learning_type: new FormControl('1', [
         Validators.required,
@@ -287,12 +289,12 @@ export class CreateNewCourseComponent implements OnInit {
      // additional_comment: new FormControl(''),
       prerequisite: new FormControl(''),
       keyword: new FormControl('', [Validators.required]),
-      email_content_owner: new FormControl('', [Validators.required]),
+      email_content_owner: new FormControl('', [Validators.required,Validators.pattern(emailregexp)]),
       training_provided_by: new FormControl('', [Validators.required]),
       available_language: new FormControl('', [Validators.required]),
 
       //no field
-      email_training_contact:new FormControl('',[Validators.required])
+      email_training_contact:new FormControl('',[Validators.required,Validators.pattern(emailregexp)])
     });
 
     //ilt and vilt
@@ -373,7 +375,7 @@ export class CreateNewCourseComponent implements OnInit {
 
     this.addLearnerGuideline();
     this.addLearnerGuidelinetocurriculum();
-    this.pushtoTitlearray();
+   this.pushtoTitlearray();
     console.log(this.commonCreateCourceForm.value)
   }
 
@@ -386,9 +388,9 @@ export class CreateNewCourseComponent implements OnInit {
 
   }
 
-  get titlearray(){
-    return this.commonFormtitle.title1 as FormArray;
-  }
+  // get titlearray(){
+  //   return this.commonFormtitle.title1 as FormArray;
+  // }
 
   get t() {
     return this.f.guidelines as FormArray;
@@ -411,10 +413,24 @@ export class CreateNewCourseComponent implements OnInit {
         let i=0;
         let languageData :any=[];
       for(let index in languages){
-   i++
-   languageData.push(this.commonCreateCourceForm.addControl('title12', this.fb.group(['George Michael', 'Aretha Franklin','dfgdfgdfg'])));
-      };
-      console.log(this.commonCreateCourceForm.value)
+      
+
+                        const languageLength =  this.commonCreateCourceForm.controls.title  as FormArray
+                        languageLength.push(this.fb.group({name: [languages[index].slug], value:'' }))
+                        
+                      //  }
+  
+   
+  };
+  // for(let i=0;i<languageData.length;i++){
+
+  // }
+  //  this.titlearray.push(
+  //   this.fb.group({languageData })
+  //   )
+      console.log(this.commonCreateCourceForm)
+      console.log('languageData',languageData)
+     
      // this.titlearray.push(languageData)
  
      
@@ -496,15 +512,34 @@ export class CreateNewCourseComponent implements OnInit {
   //create ilt vilt form
   createNewCourceIlt(status:any) {
     console.log(this.stringArray)
-    console.log(this.learnerGuidearray);
+    console.log(this.learnerGuidearray);     
     let savetype = { status: status };
     let totalObj = {
       ...this.iltandViltForm.value,
       ...savetype,
       ...this.commonCreateCourceForm.value,
     };
+    let titlearray:any=[];
+    let titleForm:any;
+    let obj:any;
+    titleForm =this.commonCreateCourceForm.value.title;
+    for(let index in titleForm){
+      //debugger
+
+      if(titleForm[index].value !=''){
+       obj ={ }
+      // this.commonCreateCourceForm.t
+        titlearray.push(titleForm[index].name , titleForm[index].value);
+        console.log(titlearray)
+        console.log(titleForm[index].value);
+      }
+    }
+   // this.commonCreateCourceForm.value.title=[{name:'test'}];
+   // this.commonCreateCourceForm.patchValue({description:'fdgdg'}) ;
+   // this.commonCreateCourceForm.patchValue({title:'fdgdg'}) 
     console.log(this.commonCreateCourceForm.value)
- 
+   
+    
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.createCource(totalObj).subscribe(
         (res: any) => {
@@ -641,14 +676,14 @@ export class CreateNewCourseComponent implements OnInit {
 
   certificationType(event: any) {
     if (event.target.value == 'yes') {
+     // alert('hi')
       this.showCertificateExpiry = true;
-      console.log(this.createCourceForm.value);
       this.iltandViltForm
         .get('certification_expiry_type')
         ?.setValidators(Validators.required);
       this.iltandViltForm
         .get('validity_period')
-        ?.setValidators(Validators.required);
+        ?.setValidators(Validators.required);        
     } else {
       this.showCertificateExpiry = false;
       this.iltandViltForm.get('certification_expiry_type')?.clearValidators();
