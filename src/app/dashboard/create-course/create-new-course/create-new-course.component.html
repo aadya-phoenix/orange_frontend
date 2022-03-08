@@ -534,7 +534,7 @@
                                         </div>
                                         <!--colend-->
 
-                                        <div class="col-sm-6">
+                                        <!-- <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">Additional Comment(s)
                         <a  >
@@ -552,20 +552,20 @@
                                                 <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
                       </textarea>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label>Select learning type
                         <span style="color: red">*</span></label
                       >
                       <select
-                        class="form-control"
+                        class="form-control form_width"
                         name="list "
                         id="list "
                         accesskey="target"
                         formControlName="learning_type"
                         (change)="getlearningType($event)"
-                        style="width: 89%"
+                        
                       >
                         <!-- <option value="">Select learning type</option> -->
                         <option
@@ -657,11 +657,7 @@
                             </option>
                           </select>
                                                 </div>
-                                                <div>
-                                                    <a data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column align-items-end">
-                                                        <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
-                                                    </a>
-                                                </div>
+
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -979,8 +975,9 @@ Note: 3-5 working days are required for the learning object to be available in t
                                         </div>
                                         <!--colend-->
                                         <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label">For Whom? <span style="color: red">* </span>
+                                            <div class="d-flex align-items-center">
+                                                <div class="form-group" style="width: 100%;;">
+                                                    <label class="form-control-label">For Whom? <span style="color: red">* </span>
                           <a  >
                             <i
                               class="fa fa-info-circle info_circle"
@@ -992,8 +989,15 @@ Note: 3-5 working days are required for the learning object to be available in t
                             </i>
                           </a>
                         </label>
-                                                <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
+                                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
                         </textarea>
+
+                                                </div>
+                                                <div>
+                                                    <a data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column align-items-end">
+                                                        <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1438,8 +1442,9 @@ Note: 3-5 working days are required for the learning object to be available in t
 
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label">For Whom? <span style="color: red">* </span>
+                                            <div class="d-flex align-items-center">
+                                                <div class="form-group" style="width: 100%;">
+                                                    <label class="form-control-label">For Whom? <span style="color: red">* </span>
                           <a  >
                             <i
                               class="fa fa-info-circle info_circle"
@@ -1451,8 +1456,15 @@ Note: 3-5 working days are required for the learning object to be available in t
                             </i>
                           </a>
                         </label>
-                                                <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
+                                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
                         </textarea>
+
+                                                </div>
+                                                <div>
+                                                    <a data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column align-items-end">
+                                                        <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1639,9 +1651,21 @@ Note: 3-5 working days are required for the learning object to be available in t
                             </i>
                           </a>
                         </label>
-                                                <div class="upload_field">
-                                                    <input type="file" id="exampleInputFile" formControlName="resource" style="width: 77%" />
+                                                <div class="form_width">
+                                                    <input type="radio" id="html" name="fav_language" value="HTML" class="mr-1">
+                                                    <label>URL</label>
+                                                    <input type="radio" id="html" name="fav_language" value="HTML" class="ml-2 mr-1">
+                                                    <label>Uploaded Material </label>
                                                 </div>
+                                                <div class="form-group mt-1">
+                                                    <label class="form-control-label">URL </label>
+                                                    <input type="text " placeholder="Enter URL" class="form-control form_width" formControlName="learn_more" />
+                                                </div>
+                                                <div class="form-group mt-1">
+                                                    <label class="form-control-label">Uploaded Material </label>
+                                                    <input type="file" id="exampleInputFile" formControlName="resource" class="form-control" />
+                                                </div>
+
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1937,7 +1961,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                                         <!--colend-->
                                     </div>
                                     <!--row end-->
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">Material Source<span style="color: red">* </span>
@@ -1961,7 +1985,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <!-- <table class="table table-bordered">
               <thead>
@@ -2944,16 +2968,15 @@ Note: 3-5 working days are required for the learning object to be available in t
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label class="form-control-label">Arabic </label>
-                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
-              </textarea>
+
+                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter ..."></textarea>
                         </div>
                     </div>
                     <!--colend-->
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label class="form-control-label">Dutch(the Netherland) </label>
-                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
-              </textarea>
+                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter ..."></textarea>
                         </div>
                     </div>
                     <!--colend-->
@@ -2961,24 +2984,21 @@ Note: 3-5 working days are required for the learning object to be available in t
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label class="form-control-label">English (US)</label>
-                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
-              </textarea>
+                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter ..."></textarea>
                         </div>
                     </div>
                     <!--colend-->
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label class="form-control-label"> French (France) </label>
-                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
-              </textarea>
+                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter ..."></textarea>
                         </div>
                     </div>
                     <!--colend-->
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label class="form-control-label"> Polish (Poland) </label>
-                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
-              </textarea>
+                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter ..."></textarea>
                         </div>
                     </div>
                     <!--colend-->
@@ -2986,7 +3006,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label class="form-control-label"> Romanian (Romania) </label>
-                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
+                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter.....">
               </textarea>
                         </div>
                     </div>
@@ -2994,7 +3014,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label class="form-control-label"> Russian (Russia) </label>
-                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
+                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter.....">
               </textarea>
                         </div>
                     </div>
@@ -3002,7 +3022,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label class="form-control-label"> Slovak (Slovakia) </label>
-                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
+                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter.....">
               </textarea>
                         </div>
                     </div>
@@ -3011,7 +3031,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label class="form-control-label"> Spanish(Spain) </label>
-                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
+                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter.....">
               </textarea>
                         </div>
                     </div>
@@ -3046,8 +3066,8 @@ Note: 3-5 working days are required for the learning object to be available in t
                     <div class="col-sm-12" *ngFor="let language of availableLanguages">
                         <div class="form-group">
                             <label class="form-control-label">{{language.name}} </label>
-                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
-              </textarea>
+                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter ..."></textarea>
+
                         </div>
                     </div>
                     <!--colend-->
@@ -3120,3 +3140,9 @@ Note: 3-5 working days are required for the learning object to be available in t
     </div>
     <!-- </ng-template> -->
 </div>
+
+<script>
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
