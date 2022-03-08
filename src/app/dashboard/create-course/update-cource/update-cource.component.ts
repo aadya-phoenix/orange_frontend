@@ -74,7 +74,7 @@ export class UpdateCourceComponent implements OnInit {
   closedRequests: any = [];
   publisherList:any=[];
   selectedPublisherId:any;
-
+  profileDetails:any;
   constructor(
     private fb: FormBuilder,
     private courceService: CourcesService,
@@ -250,6 +250,10 @@ export class UpdateCourceComponent implements OnInit {
     })
   }
 
+  getprofileDetails(){
+  this.profileDetails = this.authService.getProfileDetailsfromlocal();
+  }
+
   getTotalCourse() {
     this.courceService.getCources().subscribe(
       (res: any) => {
@@ -295,7 +299,8 @@ export class UpdateCourceComponent implements OnInit {
     this.getLanguages();
     this.getLearningType();
     this.getExpiryType();
-
+    this.getprofileDetails();
+    console.log(this.profileDetails)
     console.log(this.routergetdata);
     this.getRole();
 
@@ -522,6 +527,38 @@ export class UpdateCourceComponent implements OnInit {
             },(err:any)=>{
               console.log(err)
             })
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+      console.log(totalObj);
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.iltandViltForm.markAllAsTouched();
+      this.getFormValidationErrors();
+    }
+  }
+
+  publishCourse(status:any){
+    let courseid = { course_id: this.routergetdata.id };
+    let savetype = { status: status };
+    let transferobj = {transfer_user_id:this.profileDetails.data.id}
+    let totalObj = {
+      ...this.iltandViltForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+      ...courseid,
+      ...transferobj,
+      ...{learning_type:this.routergetdata.learning_type}
+    };
+    if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
+      this.courceService.updateCourse(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            this.router.navigate(['/dashboard/cources']);
           }
         },
         (err: any) => {

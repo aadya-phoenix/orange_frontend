@@ -122,10 +122,19 @@ export class CoursesComponent implements OnInit {
   }
 
   getRequest(cource: any) {
-    this.router.navigateByUrl('/dashboard/cources/request-detail', {
-      state: cource,
-    });
-    console.log(cource);
+    debugger
+    this.courceService.courseDetail(cource.id).subscribe((res:any)=>{
+      console.log(res);
+      let coursedetail = res.data;
+      let username =  { user_name : cource.user_name}
+      this.router.navigateByUrl('/dashboard/cources/request-detail', {
+        state: {...coursedetail,...username},
+      });
+    },(err:any)=>{
+      console.log(err)
+    })
+   
+   
   }
 
   editRequest(course:any){
