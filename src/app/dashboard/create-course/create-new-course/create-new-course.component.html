@@ -146,6 +146,7 @@
                           data-toggle="modal"
                           data-target="#titleModal"
                           class="d-flex flex-column align-items-end"
+                          (click)="addtitlemultilanguage()"
                         >
                           <img
                             src="../../../../assets/images/icon/lang.png"
@@ -1161,7 +1162,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                             </i>
                           </a>
                         </label>
-                        <select
+                        <!-- <select
                           class="form-control form_width"
                           formControlName="entity_business_area"
                         >
@@ -1172,7 +1173,17 @@ Note: 3-5 working days are required for the learning object to be available in t
                           >
                             {{ entity.division }}
                           </option>
-                        </select>
+                        </select> -->
+
+                        <ng-select
+                        placeholder="Please select Entity"
+                        [items]="entityList"
+                        bindLabel="division"
+                        bindValue="id"
+                        formControlName="entity_business_area"
+                        style="width: 100%"
+                      >
+                      </ng-select>
                       </div>
                     </div>
                     <!--colend-->
@@ -3781,22 +3792,27 @@ Note: 3-5 working days are required for the learning object to be available in t
         <!-- Boosted mod: using visually hidden text instead of aria-label -->
       </div>
       <div class="modal-body modal_height">
+        <form [formGroup]="commonCreateCourceForm">
         <div class="row">
-          <div class="col-sm-12" *ngFor="let language of availableLanguages">
+          <div class="col-sm-12" formArrayName="title1" *ngFor="let language of availableLanguages ; let i =index;">
             <div class="form-group">
+              <div [formGroupName]="i">
               <label class="form-control-label">{{language.name}} </label>
               <textarea
                 class="form-control form_width-textarea"
                 rows="3"
                 placeholder="Enter"
+                [formControlName]="language.slug"
               >
               </textarea>
+            </div>
             </div>
           </div>
           <!--colend-->
        
           <!--colend-->
         </div>
+      </form>
         <!--ocl-->
       </div>
       <div class="modal-footer">
@@ -3807,7 +3823,7 @@ Note: 3-5 working days are required for the learning object to be available in t
         >
           Cancel
         </button>
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary" (click)="gettitlelanguage()">Submit</button>
       </div>
     </div>
   </div>
@@ -3860,7 +3876,7 @@ Note: 3-5 working days are required for the learning object to be available in t
               <!--row-->
           </div>
           <div class="modal-footer">
-              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createNewCourceIlt('publish')">Publish</button>
           </div>
       </div>

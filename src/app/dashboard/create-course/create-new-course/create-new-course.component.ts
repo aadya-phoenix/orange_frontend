@@ -273,6 +273,7 @@ export class CreateNewCourseComponent implements OnInit {
 
     //common form
     this.commonCreateCourceForm = this.fb.group({
+      title1: this.fb.array([]),
       title: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
       learning_type: new FormControl('1', [
@@ -320,7 +321,7 @@ export class CreateNewCourseComponent implements OnInit {
       title_additional: new FormControl(''),
       external_vendor: new FormControl('', [Validators.required]),
 
-      entity_business_area: new FormControl('', [Validators.required]),
+      entity_business_area: new FormControl( [Validators.required]),
       email_preffered_instructor: new FormControl('', [Validators.required]),
 
       who_see_course: new FormControl(''),
@@ -335,6 +336,8 @@ export class CreateNewCourseComponent implements OnInit {
           ? new FormControl('', [Validators.required])
           : new FormControl(),
     });
+
+
 
     //material based
     this.materialbasedForm = this.fb.group({
@@ -370,10 +373,21 @@ export class CreateNewCourseComponent implements OnInit {
 
     this.addLearnerGuideline();
     this.addLearnerGuidelinetocurriculum();
+    this.pushtoTitlearray();
+    console.log(this.commonCreateCourceForm.value)
   }
 
   get f() {
     return this.iltandViltForm.controls;
+  }
+
+  get commonFormtitle(){
+    return this.commonCreateCourceForm.controls;
+
+  }
+
+  get titlearray(){
+    return this.commonFormtitle.title1 as FormArray;
   }
 
   get t() {
@@ -386,6 +400,54 @@ export class CreateNewCourseComponent implements OnInit {
 
   get curriculumArray() {
     return this.currriculum.learnerguidearray as FormArray;
+  }
+
+  addtitlemultilanguage():any {
+    //debugger
+    this.courceService.getLanguages().subscribe((res:any)=>{
+      console.log('language',res);
+      console.log('rawvalue',this.commonCreateCourceForm)
+      let languages = res.data;
+        let i=0;
+        let languageData :any=[];
+      for(let index in languages){
+   i++
+   languageData.push(this.commonCreateCourceForm.addControl('title12', this.fb.group(['George Michael', 'Aretha Franklin','dfgdfgdfg'])));
+      };
+      console.log(this.commonCreateCourceForm.value)
+     // this.titlearray.push(languageData)
+ 
+     
+    },(err:any)=>{
+      console.log(err)
+    })
+    
+    //return this.commonCreateCourceForm.addControl('test',new FormControl('fdfd'))
+    // return this.fb.group({
+    //   title: new FormControl(''),
+    //   description: new FormControl(''),
+    // });
+  }
+
+  pushtoTitlearray(){
+    return this.addtitlemultilanguage()
+    // this.courceService.getLanguages().subscribe((res:any)=>{
+    //   console.log(res);
+    //   let languages = res.data;
+    //   for(let index in languages){
+    //     this.titlearray.push(this.fb.group({
+          
+    //     }))
+    //    // return this.commonCreateCourceForm.addControl(`${this.availableLanguages[index].slug}`,this.fb.control('',[Validators.required]))
+    //   }
+    // },(err:any)=>{
+    //   console.log(err)
+    // })
+    
+  }
+
+  gettitlelanguage(){
+    console.log(this.commonCreateCourceForm.value)
   }
 
   addMorelearnerGuideline() {
@@ -448,9 +510,12 @@ export class CreateNewCourseComponent implements OnInit {
         (res: any) => {
           console.log(res);
           if (res) {
+            let statedata = res.data;
+            let saveobj = { issave:true};
+            let stateobj = {...statedata,...saveobj}
            // this.router.navigate(['/dashboard/cources']);
-           this.router.navigateByUrl('/dashboard/cources/view-details', {
-            state: res.data,
+           this.router.navigateByUrl('/dashboard/cources/request-detail', {
+            state: stateobj,
           });
           }
         },
@@ -481,9 +546,12 @@ export class CreateNewCourseComponent implements OnInit {
         (res: any) => {
           console.log(res);
           if (res) {
+            let statedata = res.data;
+            let saveobj = { issave:true};
+            let stateobj = {...statedata,...saveobj}
             //this.router.navigate(['/dashboard/cources']);
-            this.router.navigateByUrl('/dashboard/cources/view-details', {
-              state: res.data,
+            this.router.navigateByUrl('/dashboard/cources/request-detail', {
+              state: saveobj,
             });
           }
         },
@@ -628,10 +696,20 @@ export class CreateNewCourseComponent implements OnInit {
           console.log(res);
           if (res) {
            // this.router.navigate(['/dashboard/cources']);
+           let coreseres = res.data;
             let transferobj ={ course_id:res.data.id ,transfer_id:this.selectedPublisherId};
             this.courceService.courseTransfer(transferobj).subscribe((res:any)=>{
               console.log(res);
-              this.router.navigate(['/dashboard/cources']);
+              
+              // this.router.navigate(['/dashboard/cources']);
+
+              let statedata = coreseres;
+              let saveobj = { issave:true};
+              let stateobj = {...statedata,...saveobj}
+             // this.router.navigate(['/dashboard/cources']);
+             this.router.navigateByUrl('/dashboard/cources/request-detail', {
+              state: stateobj})
+
             },(err:any)=>{
               console.log(err)
             })
