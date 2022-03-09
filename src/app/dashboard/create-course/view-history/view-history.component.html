@@ -1,6 +1,7 @@
-<div class="card">
+<div class="card" *ngIf="modalType=='viewhistory'">
     <div class="card-header" style="color: #ff7901;">
-        View History
+        <!-- View History -->
+        {{title}}
     </div>
     <div class="card-body">
         <h5 class="card-title" style="font-size: 0.9rem;">
@@ -45,5 +46,27 @@
 
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="card" *ngIf="modalType =='copy'">
+    <div class="card-header" style="color: #ff7901;">
+        {{title}}
+    </div>
+    <div class="card-body">
+        <div class="card-body">
+            <button class="btn btn-primary" (click)="copyRequest()">Yes</button>
+            <button class="btn btn-secondary" (click)="onClose()">No</button>
+         </div>
+    </div>
+</div>
+
+<div class="card" *ngIf="modalType =='delete'">
+    <div class="card-header" style="color: #ff7901;">
+        {{title}}
+    </div>
+    <div class="card-body">
+       <button class="btn btn-primary" (click)="deleteRequest()">Yes</button>
+       <button class="btn btn-secondary" (click)="onClose()">No</button>
     </div>
 </div>
