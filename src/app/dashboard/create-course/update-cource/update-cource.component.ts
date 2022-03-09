@@ -85,6 +85,7 @@ export class UpdateCourceComponent implements OnInit {
     if (!this.routergetdata) {
       this.router.navigateByUrl('/dashboard/cources');
     }
+    console.log(this.routergetdata)
   }
 
   getRole() {
@@ -543,11 +544,11 @@ export class UpdateCourceComponent implements OnInit {
 
   publishCourse(status:any){
     let courseid = { course_id: this.routergetdata.id };
-    let savetype = { status: status };
+    let savetype = this.routergetdata.copy ? {status:'publish'} : {};
     let transferobj = {transfer_user_id:this.profileDetails.data.id}
     let totalObj = {
       ...this.iltandViltForm.value,
-      // ...savetype,
+      ...savetype,
       ...this.commonCreateCourceForm.value,
       ...courseid,
       // ...transferobj,

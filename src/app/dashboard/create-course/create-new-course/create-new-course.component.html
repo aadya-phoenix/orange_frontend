@@ -190,7 +190,11 @@
                           </i>
                         </a>
                       </label>
-                                                    <select class="form-control form_width" formControlName="available_language">
+                      <ng-select placeholder="Please select language" [multiple]="true" [items]="availableLanguages" bindLabel="name" bindValue="id" formControlName="available_language" style="width: 100%">
+                      </ng-select>
+
+
+                                                    <!-- <select class="form-control form_width" formControlName="available_language">
                         <option value="">Please select language</option>
                         <option
                           *ngFor="let language of availableLanguages"
@@ -198,7 +202,7 @@
                         >
                           {{ language.name }}
                         </option>
-                      </select>
+                      </select> -->
                                                 </div>
                                             </div>
                                             <!--colend-->

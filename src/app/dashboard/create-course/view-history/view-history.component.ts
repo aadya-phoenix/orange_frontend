@@ -44,9 +44,10 @@ export class ViewHistoryComponent implements OnInit {
     this.courseService.copyCourse({course_id :this.copyDeletecourse.id}).subscribe((res:any)=>{
      console.log(res);
      let dataobj = res.data;
-     let iscopyy=
+     let iscopyy={copy:true};
+     let totalObj = {...res.data,...iscopyy}
      this.router.navigateByUrl('/dashboard/cources/edit-cource', {
-      state: res.data,
+      state: totalObj,
     });
      this.onClose();
    },(err:any)=>{
