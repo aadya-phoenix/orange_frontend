@@ -274,7 +274,7 @@ export class CreateNewCourseComponent implements OnInit {
 
     //common form
     this.commonCreateCourceForm = this.fb.group({
-      title1: new FormArray([]),
+      //title1: new FormArray([]),
       title: new FormArray([]),
       //title: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
@@ -445,6 +445,8 @@ export class CreateNewCourseComponent implements OnInit {
     // });
   }
 
+  get titlecontrol() {         return (<FormArray>this.commonCreateCourceForm.get('title')).controls;     }
+
   pushtoTitlearray(){
     return this.addtitlemultilanguage()
     // this.courceService.getLanguages().subscribe((res:any)=>{
@@ -523,18 +525,25 @@ export class CreateNewCourseComponent implements OnInit {
     let titleForm:any;
     let obj:any;
     titleForm =this.commonCreateCourceForm.value.title;
-    for(let index in titleForm){
-      //debugger
-
-      if(titleForm[index].value !=''){
-       obj ={ }
-      // this.commonCreateCourceForm.t
-        titlearray.push(titleForm[index].name , titleForm[index].value);
-        console.log(titlearray)
-        console.log(titleForm[index].value);
+    for(let i=0;i<this.commonCreateCourceForm.value.title.length;i++){
+      if(this.commonCreateCourceForm.value.title[i].value !=''){
+        titlearray.push({[`${this.commonCreateCourceForm.value.title[i].name}`]: this.commonCreateCourceForm.value.title[i].value})
       }
     }
-   // this.commonCreateCourceForm.value.title=[{name:'test'}];
+    console.log('titleForm',titlearray)
+    // for(let index in titleForm){
+    //   //debugger
+
+    //   if(titleForm[index].value !=''){
+    //   //  obj ={ }
+    //   // this.commonCreateCourceForm.t
+    //     titlearray.push({[`${titleForm[index].slug}`]: titleForm[index].value});
+       
+    //     console.log(titleForm[index].value);
+    //   }
+    // }
+    // console.log(titlearray)
+   this.commonCreateCourceForm.value.title=titlearray;
    // this.commonCreateCourceForm.patchValue({description:'fdgdg'}) ;
    // this.commonCreateCourceForm.patchValue({title:'fdgdg'}) 
     console.log(this.commonCreateCourceForm.value)
