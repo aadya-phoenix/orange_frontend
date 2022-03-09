@@ -656,11 +656,13 @@
                             </i>
                           </a>
                         </label>
-                                                    <select class="form-control form_width" formControlName="manager_approval">
+                        <ng-select placeholder="Please select"  [items]="yesNo" bindLabel="name" bindValue="id" formControlName="manager_approval" style="width: 100%">
+                        </ng-select>
+                                                    <!-- <select class="form-control form_width" formControlName="manager_approval">
                           <option value="">Please select</option>
                           <option value="yes">Yes</option>
                           <option value="no">No</option>
-                        </select>
+                        </select> -->
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -679,7 +681,10 @@
                               </i>
                             </a>
                           </label>
-                                                        <select class="form-control form_width" formControlName="who_see_course">
+                          <ng-select placeholder="Please select"  [items]="whocanSee" bindLabel="name" bindValue="id" formControlName="who_see_course" style="width: 100%">
+                          </ng-select>
+
+                                                        <!-- <select class="form-control form_width" formControlName="who_see_course">
                             <option value="">Please select</option>
                             <option
                               *ngFor="let whosee of whocanSee"
@@ -687,7 +692,7 @@
                             >
                               {{ whosee.name }}
                             </option>
-                          </select>
+                          </select> -->
                                                     </div>
                                                     <!-- <div>
                           <a
@@ -721,11 +726,13 @@
                             </i>
                           </a>
                         </label>
-                                                    <select class="form-control form_width" formControlName="digital">
+                        <ng-select placeholder="Please select"  [items]="yesNo" bindLabel="name" bindValue="id" formControlName="digital" style="width: 100%">
+                        </ng-select>
+                                                    <!-- <select class="form-control form_width" formControlName="digital">
                           <option value="">Please select</option>
                           <option value="yes">Yes</option>
                           <option value="no">No</option>
-                        </select>
+                        </select> -->
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -743,11 +750,13 @@
                             </i>
                           </a>
                         </label>
-                                                    <select class="form-control form_width" formControlName="purchase_order">
+                        <ng-select placeholder="Please select"  [items]="yesNo" bindLabel="name" bindValue="id" formControlName="purchase_order" style="width: 100%">
+                        </ng-select>
+                                                    <!-- <select class="form-control form_width" formControlName="purchase_order">
                           <option value="">Please select</option>
                           <option value="yes">Yes</option>
                           <option value="no">No</option>
-                        </select>
+                        </select> -->
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -767,7 +776,7 @@
                           </a>
                         </label>
 
-                        <ng-select placeholder="Please select Delivery method"  [items]="deliveryMethod" bindLabel="name" bindValue="name" formControlName="delivery_method" style="width: 100%">
+                        <ng-select placeholder="Please select Delivery method"  [items]="deliveryMethod" bindLabel="name" bindValue="id" formControlName="delivery_method" style="width: 100%">
                         </ng-select>
 
                                                     <!-- <select class="form-control form_width" formControlName="delivery_method">
@@ -1076,11 +1085,13 @@ Note: 3-5 working days are required for the learning object to be available in t
                             </i>
                           </a>
                         </label>
-                                                    <select class="form-control form_width" (change)="certificationType($event)" formControlName="certification">
+                        <ng-select placeholder="Please select" (change)="certificationType($event)"  [items]="yesNo" bindLabel="name" bindValue="id" formControlName="certification" style="width: 100%">
+                        </ng-select>
+                                                    <!-- <select class="form-control form_width" (change)="certificationType($event)" formControlName="certification">
                           <option value="">Please select</option>
                           <option value="yes">Yes</option>
                           <option value="no">No</option>
-                        </select>
+                        </select> -->
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -1099,11 +1110,15 @@ Note: 3-5 working days are required for the learning object to be available in t
                             </i>
                           </a>
                         </label>
-                                                    <select class="form-control form_width" formControlName="external_vendor" (change)="externalVendor($event)">
+
+                        <ng-select placeholder="Please select" (change)="externalVendor($event)"  [items]="yesNo" bindLabel="name" bindValue="id" formControlName="external_vendor" style="width: 100%">
+                        </ng-select>
+
+                                                    <!-- <select class="form-control form_width" formControlName="external_vendor" (change)="externalVendor($event)">
                           <option value="">Please select externalvendor</option>
                           <option value="yes">Yes</option>
                           <option value="no">No</option>
-                        </select>
+                        </select> -->
                                                 </div>
                                             </div>
                                             <!--colend-->

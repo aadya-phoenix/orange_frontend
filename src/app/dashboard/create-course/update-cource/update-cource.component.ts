@@ -50,6 +50,10 @@ export class UpdateCourceComponent implements OnInit {
       status: 1,
     },
   ];
+  public yesNo: any = [
+    { id: 'yes', name: 'Yes' },
+    { id: 'no', name: 'No' },
+  ];
 
   public cctExpiryType: any;
 
@@ -73,6 +77,7 @@ export class UpdateCourceComponent implements OnInit {
   rejectedRequests: any = [];
   closedRequests: any = [];
   publisherList:any=[];
+  stringArray: any = [];
   selectedPublisherId:any;
   profileDetails:any;
   constructor(
@@ -287,6 +292,7 @@ export class UpdateCourceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const emailregexp = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
     this.getCordinators();
     this.getvendorType();
     this.getLevel();
@@ -307,36 +313,44 @@ export class UpdateCourceComponent implements OnInit {
 
     //common form
     this.commonCreateCourceForm = this.fb.group({
+      title1: new FormArray([]),
+      //title: new FormArray([]),
       title: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
       learning_type: new FormControl('1', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       resource: new FormControl(''),
       objective: new FormControl('', [Validators.required]),
-      level: new FormControl('', [Validators.required]),
+      level: new FormControl([Validators.required]),
       subject: new FormControl([Validators.required]),
       // additional_comment: new FormControl(''),
       prerequisite: new FormControl(''),
       keyword: new FormControl('', [Validators.required]),
-      email_content_owner: new FormControl('', [Validators.required]),
-      training_provided_by: new FormControl('', [Validators.required]),
-      available_language: new FormControl('', [Validators.required]),
+      email_content_owner: new FormControl('', [
+        Validators.required,
+        Validators.pattern(emailregexp),
+      ]),
+      training_provided_by: new FormControl([Validators.required]),
+      available_language: new FormControl([Validators.required]),
 
       //no field
-      email_training_contact: new FormControl('', [Validators.required]),
+      email_training_contact: new FormControl('', [
+        Validators.required,
+        Validators.pattern(emailregexp),
+      ]),
     });
 
     //ilt and vilt
     this.iltandViltForm = this.fb.group({
-      manager_approval: new FormControl('', [Validators.required]),
-      digital: new FormControl('', [Validators.required]),
-      certification: new FormControl('', [Validators.required]),
+      manager_approval: new FormControl([Validators.required]),
+      digital: new FormControl( [Validators.required]),
+      certification: new FormControl( [Validators.required]),
       certification_expiry_type: new FormControl(''),
       validity_period: new FormControl(''),
       external_vendor_name: new FormControl(''),
-      purchase_order: new FormControl(''),
+      purchase_order: new FormControl(),
       // email_training_contact: new FormControl('', [Validators.required]),
-      delivery_method: new FormControl('', [Validators.required]),
+      delivery_method: new FormControl([Validators.required]),
       for_whoom: new FormControl('', [Validators.required]),
       cost_of_training: new FormControl(''),
       // cost_of_training: new FormControl('', [Validators.required]),
@@ -350,12 +364,12 @@ export class UpdateCourceComponent implements OnInit {
       first_session_date: new FormControl('', [Validators.required]),
       expiry_date: new FormControl('', [Validators.required]),
       title_additional: new FormControl(''),
-      external_vendor: new FormControl('', [Validators.required]),
+      external_vendor: new FormControl( [Validators.required]),
 
-      entity_business_area: new FormControl('', [Validators.required]),
-      email_preffered_instructor: new FormControl('', [Validators.required]),
+      entity_business_area: new FormControl([Validators.required]),
+      email_preffered_instructor: new FormControl([Validators.required]),
 
-      who_see_course: new FormControl(''),
+      who_see_course: new FormControl(),
       additional_comment: new FormControl(''),
 
       // learner_guideline: new FormControl(''),
@@ -377,6 +391,7 @@ export class UpdateCourceComponent implements OnInit {
     });
 
     this.commonCreateCourceForm.patchValue(this.routergetdata);
+    console.log('patch',this.routergetdata)
     this.commonCreateCourceForm.controls['learning_type'].disable({onlySelf: true});
     this.iltandViltForm.patchValue(this.routergetdata);
     if (this.routergetdata.external_vendor == 'yes') {
