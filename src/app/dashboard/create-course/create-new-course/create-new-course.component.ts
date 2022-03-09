@@ -274,9 +274,9 @@ export class CreateNewCourseComponent implements OnInit {
 
     //common form
     this.commonCreateCourceForm = this.fb.group({
-      //title1: new FormArray([]),
-      title: new FormArray([]),
-      //title: new FormControl('', [Validators.required]),
+      title1: new FormArray([]),
+      //title: new FormArray([]),
+      title: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
       learning_type: new FormControl('1', [
         Validators.required,
@@ -415,7 +415,7 @@ export class CreateNewCourseComponent implements OnInit {
       for(let index in languages){
       
 
-                        const languageLength =  this.commonCreateCourceForm.controls.title  as FormArray
+                        const languageLength =  this.commonCreateCourceForm.controls.title1  as FormArray
                         languageLength.push(this.fb.group({name: [languages[index].slug], value:'' }))
                         
                       //  }
@@ -445,7 +445,7 @@ export class CreateNewCourseComponent implements OnInit {
     // });
   }
 
-  get titlecontrol() {         return (<FormArray>this.commonCreateCourceForm.get('title')).controls;     }
+  get titlecontrol() {         return (<FormArray>this.commonCreateCourceForm.get('title1')).controls;     }
 
   pushtoTitlearray(){
     return this.addtitlemultilanguage()
@@ -524,10 +524,10 @@ export class CreateNewCourseComponent implements OnInit {
     let titlearray:any=[];
     let titleForm:any;
     let obj:any;
-    titleForm =this.commonCreateCourceForm.value.title;
-    for(let i=0;i<this.commonCreateCourceForm.value.title.length;i++){
-      if(this.commonCreateCourceForm.value.title[i].value !=''){
-        titlearray.push({[`${this.commonCreateCourceForm.value.title[i].name}`]: this.commonCreateCourceForm.value.title[i].value})
+    titleForm =this.commonCreateCourceForm.value.title1;
+    for(let i=0;i<this.commonCreateCourceForm.value.title1.length;i++){
+      if(this.commonCreateCourceForm.value.title1[i].value !=''){
+        titlearray.push({[`${this.commonCreateCourceForm.value.title1[i].name}`]: this.commonCreateCourceForm.value.title1[i].value})
       }
     }
     console.log('titleForm',titlearray)
@@ -543,7 +543,7 @@ export class CreateNewCourseComponent implements OnInit {
     //   }
     // }
     // console.log(titlearray)
-   this.commonCreateCourceForm.value.title=titlearray;
+   this.commonCreateCourceForm.value.title1=titlearray;
    // this.commonCreateCourceForm.patchValue({description:'fdgdg'}) ;
    // this.commonCreateCourceForm.patchValue({title:'fdgdg'}) 
     console.log(this.commonCreateCourceForm.value)

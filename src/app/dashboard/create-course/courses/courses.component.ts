@@ -165,7 +165,7 @@ export class CoursesComponent implements OnInit {
 
     const modalRef = this.modalService.open(ViewHistoryComponent, {
       centered: true,
-      size: 'lg',
+      size: 'sm',
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
@@ -190,7 +190,7 @@ export class CoursesComponent implements OnInit {
 
     const modalRef = this.modalService.open(ViewHistoryComponent, {
       centered: true,
-      size: 'lg',
+      size: 'sm',
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
