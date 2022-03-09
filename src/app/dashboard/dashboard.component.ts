@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CourcesService } from '../shared/services/cources/cources.service';
 
 @Component({
@@ -9,7 +10,14 @@ import { CourcesService } from '../shared/services/cources/cources.service';
 export class DashboardComponent implements OnInit {
   pendingRequests: any = [];
   courcesList: any;
-  constructor(private courseService: CourcesService) {}
+  constructor(private courseService: CourcesService,private router:Router) {}
+
+  navigatetoPending(status:any){
+    let statusobj = { status :status};
+    this.router.navigateByUrl('/dashboard/cources', {
+      state: statusobj,
+    });
+  }
 
   getpendingCourses() {
     this.pendingRequests = [];

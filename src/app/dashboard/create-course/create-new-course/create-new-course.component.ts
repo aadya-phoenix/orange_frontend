@@ -29,9 +29,9 @@ export class CreateNewCourseComponent implements OnInit {
   public learningType: any = '1';
 
   public cctLevel: any;
-  coursesList: any;
-  courseLength: any;
-  notification: boolean = false;
+  coursesList:any;
+  courseLength:any;
+  notification:boolean = false;
 
   public cctExpiryperiod: any = [
     {
@@ -51,30 +51,30 @@ export class CreateNewCourseComponent implements OnInit {
     },
   ];
 
-  public cctExpiryType: any;
-  public validityPeriod: any;
+  public cctExpiryType: any ;
+  public validityPeriod: any ;
 
   public vendorType: any;
   public cctSubjects: any;
-  public entityList: any;
+  public entityList:any;
 
-  public deliveryMethod: any;
-  public whocanSee: any;
-  public preferedInstructor: any;
+  public deliveryMethod:any;
+  public whocanSee:any;
+  public preferedInstructor:any;
 
-  public availableLanguages: any;
-  public learningTypes: any;
+  public availableLanguages :any
+  public learningTypes:any;
 
   getUserrole: any; //to get user role
   public cordinatorsList: any = [];
-  draftRequests: any = [];
-  pendingRequests: any = [];
-  rejectedRequests: any = [];
-  closedRequests: any = [];
-  stringArray: any = [];
-  publisherList: any = [];
-  selectedPublisherId: any;
-
+  draftRequests:any =[];
+  pendingRequests:any=[];
+  rejectedRequests:any=[];
+  closedRequests:any=[];
+  stringArray:any =[];
+  publisherList:any=[];
+  selectedPublisherId:any;
+  
   constructor(
     private fb: FormBuilder,
     private courceService: CourcesService,
@@ -134,7 +134,7 @@ export class CreateNewCourseComponent implements OnInit {
     );
   }
 
-  getValidityPeriod() {
+  getValidityPeriod(){
     this.courceService.getValidityperiod().subscribe(
       (res: any) => {
         this.validityPeriod = res.data;
@@ -146,134 +146,112 @@ export class CreateNewCourseComponent implements OnInit {
     );
   }
 
-  getEntitylist() {
-    this.courceService.getEntitylist().subscribe(
-      (res: any) => {
-        console.log(res);
-        this.entityList = res.data;
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
+  getEntitylist(){
+    this.courceService.getEntitylist().subscribe((res:any)=>{
+      console.log(res);
+      this.entityList = res.data;
+    },(err:any)=>{
+      console.log(err)
+    })
   }
 
-  getDeliveryMethod() {
-    this.courceService.getDeliveryMethod().subscribe(
-      (res: any) => {
-        console.log(res);
-        this.deliveryMethod = res.data;
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
+  getDeliveryMethod(){
+    this.courceService.getDeliveryMethod().subscribe((res:any)=>{
+      console.log(res);
+      this.deliveryMethod = res.data;
+    },(err:any)=>{
+      console.log(err)
+    })
   }
 
-  getWhocansee() {
-    this.courceService.whoSeeCourse().subscribe(
-      (res: any) => {
-        console.log(res);
-        this.whocanSee = res.data;
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
+  getWhocansee(){
+    this.courceService.whoSeeCourse().subscribe((res:any)=>{
+      console.log(res);
+      this.whocanSee = res.data;
+    },(err:any)=>{
+      console.log(err);
+    })
   }
 
   //prefered instructor
-  getPreferedInstructor() {
-    this.courceService.getpreferedInstructor().subscribe(
-      (res: any) => {
-        console.log(res);
-        this.preferedInstructor = res.data;
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
+  getPreferedInstructor(){
+    this.courceService.getpreferedInstructor().subscribe((res:any)=>{
+      console.log(res);
+      this.preferedInstructor = res.data;
+    },(err:any)=>{
+      console.log(err)
+    })
   }
 
   //get Languages
-  getLanguages() {
-    this.courceService.getLanguages().subscribe(
-      (res: any) => {
-        console.log(res);
-        this.availableLanguages = res.data;
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
+  getLanguages(){
+    this.courceService.getLanguages().subscribe((res:any)=>{
+      console.log(res);
+      this.availableLanguages = res.data;
+    },(err:any)=>{
+      console.log(err)
+    })
   }
 
   //getLearning type
-  getLearningType() {
-    this.courceService.getLearningType().subscribe(
-      (res: any) => {
-        console.log(res);
-        this.learningTypes = res.data;
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
+  getLearningType(){
+    this.courceService.getLearningType().subscribe((res:any)=>{
+      console.log(res);
+      this.learningTypes = res.data;
+    },(err:any)=>{
+      console.log(err)
+    })
   }
 
   //get Expirytype
-  getExpiryType() {
-    this.courceService.getExpiryType().subscribe(
-      (res: any) => {
-        console.log(res);
-        this.cctExpiryType = res.data;
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
+  getExpiryType(){
+    this.courceService.getExpiryType().subscribe((res:any)=>{
+      console.log(res);
+      this.cctExpiryType = res.data;
+    },(err:any)=>{
+      console.log(err)
+    })
   }
 
-  getPublisher() {
-    this.authService.getUserRoles().subscribe(
-      (res: any) => {
-        console.log(res);
-        this.publisherList = res.data['4'];
-        console.log(this.publisherList);
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
+  getPublisher(){
+    this.authService.getUserRoles().subscribe((res:any)=>{
+      console.log(res);
+      this.publisherList = res.data['4'];
+      console.log(this.publisherList)
+    },(err:any)=>{
+      console.log(err)
+    })
   }
 
-  getTotalCourse() {
-    this.courceService.getCources().subscribe(
-      (res: any) => {
-        this.coursesList = res.data;
-        this.courseLength = this.coursesList.length;
-        this.coursesList.map((course: any) => {
-          if (course.status === 'pending') {
-            this.pendingRequests.push(course);
-          }
-          if (course.status === 'reject') {
-            this.rejectedRequests.push(course);
-          }
-          if (course.status === 'draft') {
-            this.draftRequests.push(course);
-          }
-          if (course.status === 'close') {
-            this.closedRequests.push(course);
-          }
-        });
-        console.log(res);
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
+
+
+  getTotalCourse(){
+    this.courceService.getCources().subscribe((res:any)=>{
+      this.coursesList = res.data;
+      this.courseLength =this.coursesList.length;
+      this.coursesList.map((course:any)=>{
+        if(course.status === 'pending'){
+          this.pendingRequests.push(course)
+        }
+        if(course.status === 'reject'){
+          this.rejectedRequests.push(course)
+        }
+        if(course.status === 'draft'){
+          this.draftRequests.push(course)
+        }
+        if(course.status === 'close'){
+          this.closedRequests.push(course)
+        }
+  
+      })
+      console.log(res);
+    },(err:any)=>{
+      console.log(err);
+    })
   }
-  getpublisherData() {
+  getpublisherData(){
+
+  
     this.getPublisher();
   }
 
@@ -292,34 +270,31 @@ export class CreateNewCourseComponent implements OnInit {
     this.getLanguages();
     this.getLearningType();
     this.getExpiryType();
+    
 
     //common form
     this.commonCreateCourceForm = this.fb.group({
-      title1: new FormArray([]),
-      //title: new FormArray([]),
-      title: new FormControl('', [Validators.required]),
+      //title1: new FormArray([]),
+      title: new FormArray([]),
+      //title: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
-      learning_type: new FormControl('1', [Validators.required]),
+      learning_type: new FormControl('1', [
+        Validators.required,
+      ]),
       description: new FormControl('', [Validators.required]),
       resource: new FormControl(''),
       objective: new FormControl('', [Validators.required]),
       level: new FormControl('', [Validators.required]),
       subject: new FormControl([Validators.required]),
-      // additional_comment: new FormControl(''),
+     // additional_comment: new FormControl(''),
       prerequisite: new FormControl(''),
       keyword: new FormControl('', [Validators.required]),
-      email_content_owner: new FormControl('', [
-        Validators.required,
-        Validators.pattern(emailregexp),
-      ]),
+      email_content_owner: new FormControl('', [Validators.required,Validators.pattern(emailregexp)]),
       training_provided_by: new FormControl('', [Validators.required]),
       available_language: new FormControl('', [Validators.required]),
 
       //no field
-      email_training_contact: new FormControl('', [
-        Validators.required,
-        Validators.pattern(emailregexp),
-      ]),
+      email_training_contact:new FormControl('',[Validators.required,Validators.pattern(emailregexp)])
     });
 
     //ilt and vilt
@@ -341,14 +316,14 @@ export class CreateNewCourseComponent implements OnInit {
       url: new FormControl(''),
       //s need to add
       //provide_video_link: new FormControl(''),
-      video_link: new FormControl(''),
+      video_link:new FormControl(''),
       //e need to add
       first_session_date: new FormControl('', [Validators.required]),
       expiry_date: new FormControl('', [Validators.required]),
       title_additional: new FormControl(''),
       external_vendor: new FormControl('', [Validators.required]),
 
-      entity_business_area: new FormControl([Validators.required]),
+      entity_business_area: new FormControl( [Validators.required]),
       email_preffered_instructor: new FormControl('', [Validators.required]),
 
       who_see_course: new FormControl(''),
@@ -363,6 +338,8 @@ export class CreateNewCourseComponent implements OnInit {
           ? new FormControl('', [Validators.required])
           : new FormControl(),
     });
+
+
 
     //material based
     this.materialbasedForm = this.fb.group({
@@ -398,16 +375,17 @@ export class CreateNewCourseComponent implements OnInit {
 
     this.addLearnerGuideline();
     this.addLearnerGuidelinetocurriculum();
-    this.pushtoTitlearray();
-    console.log(this.commonCreateCourceForm.value);
+   this.pushtoTitlearray();
+    console.log(this.commonCreateCourceForm.value)
   }
 
   get f() {
     return this.iltandViltForm.controls;
   }
 
-  get commonFormtitle() {
+  get commonFormtitle(){
     return this.commonCreateCourceForm.controls;
+
   }
 
   // get titlearray(){
@@ -426,40 +404,40 @@ export class CreateNewCourseComponent implements OnInit {
     return this.currriculum.learnerguidearray as FormArray;
   }
 
-  addtitlemultilanguage(): any {
+  addtitlemultilanguage():any {
     //debugger
-    this.courceService.getLanguages().subscribe(
-      (res: any) => {
-        console.log('language', res);
-        console.log('rawvalue', this.commonCreateCourceForm);
-        let languages = res.data;
-        let i = 0;
-        let languageData: any = [];
-        for (let index in languages) {
-          const languageLength = this.commonCreateCourceForm.controls
-            .title1 as FormArray;
-          languageLength.push(
-            this.fb.group({ name: [languages[index].slug], value: '' })
-          );
+    this.courceService.getLanguages().subscribe((res:any)=>{
+      console.log('language',res);
+      console.log('rawvalue',this.commonCreateCourceForm)
+      let languages = res.data;
+        let i=0;
+        let languageData :any=[];
+      for(let index in languages){
+      
 
-          //  }
-        }
-        // for(let i=0;i<languageData.length;i++){
+                        const languageLength =  this.commonCreateCourceForm.controls.title  as FormArray
+                        languageLength.push(this.fb.group({name: [languages[index].slug], value:'' }))
+                        
+                      //  }
+  
+   
+  };
+  // for(let i=0;i<languageData.length;i++){
 
-        // }
-        //  this.titlearray.push(
-        //   this.fb.group({languageData })
-        //   )
-        console.log(this.commonCreateCourceForm);
-        console.log('languageData', languageData);
-
-        // this.titlearray.push(languageData)
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
-
+  // }
+  //  this.titlearray.push(
+  //   this.fb.group({languageData })
+  //   )
+      console.log(this.commonCreateCourceForm)
+      console.log('languageData',languageData)
+     
+     // this.titlearray.push(languageData)
+ 
+     
+    },(err:any)=>{
+      console.log(err)
+    })
+    
     //return this.commonCreateCourceForm.addControl('test',new FormControl('fdfd'))
     // return this.fb.group({
     //   title: new FormControl(''),
@@ -467,28 +445,27 @@ export class CreateNewCourseComponent implements OnInit {
     // });
   }
 
-  get title1control() {
-    return (<FormArray>this.commonCreateCourceForm.get('title1')).controls;
-  }
+  get titlecontrol() {         return (<FormArray>this.commonCreateCourceForm.get('title')).controls;     }
 
-  pushtoTitlearray() {
-    return this.addtitlemultilanguage();
+  pushtoTitlearray(){
+    return this.addtitlemultilanguage()
     // this.courceService.getLanguages().subscribe((res:any)=>{
     //   console.log(res);
     //   let languages = res.data;
     //   for(let index in languages){
     //     this.titlearray.push(this.fb.group({
-
+          
     //     }))
     //    // return this.commonCreateCourceForm.addControl(`${this.availableLanguages[index].slug}`,this.fb.control('',[Validators.required]))
     //   }
     // },(err:any)=>{
     //   console.log(err)
     // })
+    
   }
 
-  gettitlelanguage() {
-    console.log(this.commonCreateCourceForm.value);
+  gettitlelanguage(){
+    console.log(this.commonCreateCourceForm.value)
   }
 
   addMorelearnerGuideline() {
@@ -535,47 +512,55 @@ export class CreateNewCourseComponent implements OnInit {
     });
   }
   //create ilt vilt form
-  createNewCourceIlt(status: any) {
-    console.log(this.stringArray);
-    console.log(this.learnerGuidearray);
+  createNewCourceIlt(status:any) {
+    console.log(this.stringArray)
+    console.log(this.learnerGuidearray);     
     let savetype = { status: status };
     let totalObj = {
       ...this.iltandViltForm.value,
       ...savetype,
       ...this.commonCreateCourceForm.value,
     };
-    let titlearray: any = [];
-    let titleForm: any;
-    let obj: any;
-    titleForm = this.commonCreateCourceForm.value.title;
+    let titlearray:any=[];
+    let titleForm:any;
+    let obj:any;
+    titleForm =this.commonCreateCourceForm.value.title;
+    for(let i=0;i<this.commonCreateCourceForm.value.title.length;i++){
+      if(this.commonCreateCourceForm.value.title[i].value !=''){
+        titlearray.push({[`${this.commonCreateCourceForm.value.title[i].name}`]: this.commonCreateCourceForm.value.title[i].value})
+      }
+    }
+    console.log('titleForm',titlearray)
     // for(let index in titleForm){
     //   //debugger
 
     //   if(titleForm[index].value !=''){
-    //    obj ={ }
+    //   //  obj ={ }
     //   // this.commonCreateCourceForm.t
-    //     titlearray.push(titleForm[index].name , titleForm[index].value);
-    //     console.log(titlearray)
+    //     titlearray.push({[`${titleForm[index].slug}`]: titleForm[index].value});
+       
     //     console.log(titleForm[index].value);
     //   }
     // }
-    // this.commonCreateCourceForm.value.title=[{name:'test'}];
-    // this.commonCreateCourceForm.patchValue({description:'fdgdg'}) ;
-    // this.commonCreateCourceForm.patchValue({title:'fdgdg'})
-    console.log(this.commonCreateCourceForm.value);
-
+    // console.log(titlearray)
+   this.commonCreateCourceForm.value.title=titlearray;
+   // this.commonCreateCourceForm.patchValue({description:'fdgdg'}) ;
+   // this.commonCreateCourceForm.patchValue({title:'fdgdg'}) 
+    console.log(this.commonCreateCourceForm.value)
+   
+    
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.createCource(totalObj).subscribe(
         (res: any) => {
           console.log(res);
           if (res) {
             let statedata = res.data;
-            let saveobj = { issave: true };
-            let stateobj = { ...statedata, ...saveobj };
-            // this.router.navigate(['/dashboard/cources']);
-            this.router.navigateByUrl('/dashboard/cources/request-detail', {
-              state: stateobj,
-            });
+            let saveobj = { issave:true};
+            let stateobj = {...statedata,...saveobj}
+           // this.router.navigate(['/dashboard/cources']);
+           this.router.navigateByUrl('/dashboard/cources/request-detail', {
+            state: stateobj,
+          });
           }
         },
         (err: any) => {
@@ -606,8 +591,8 @@ export class CreateNewCourseComponent implements OnInit {
           console.log(res);
           if (res) {
             let statedata = res.data;
-            let saveobj = { issave: true };
-            let stateobj = { ...statedata, ...saveobj };
+            let saveobj = { issave:true};
+            let stateobj = {...statedata,...saveobj}
             //this.router.navigate(['/dashboard/cources']);
             this.router.navigateByUrl('/dashboard/cources/request-detail', {
               state: saveobj,
@@ -700,14 +685,14 @@ export class CreateNewCourseComponent implements OnInit {
 
   certificationType(event: any) {
     if (event.target.value == 'yes') {
-      // alert('hi')
+     // alert('hi')
       this.showCertificateExpiry = true;
       this.iltandViltForm
         .get('certification_expiry_type')
         ?.setValidators(Validators.required);
       this.iltandViltForm
         .get('validity_period')
-        ?.setValidators(Validators.required);
+        ?.setValidators(Validators.required);        
     } else {
       this.showCertificateExpiry = false;
       this.iltandViltForm.get('certification_expiry_type')?.clearValidators();
@@ -734,49 +719,44 @@ export class CreateNewCourseComponent implements OnInit {
     this.learningType = event.target.value;
   }
 
-  getPublisherselected(event: any) {
+  getPublisherselected(event:any){
     console.log(event.target.value);
     this.selectedPublisherId = event.target.value;
   }
 
-  transfertoPublishData() {
+  transfertoPublishData(){
     let savetype = { status: 'pending' };
     let totalObj = {
       ...this.iltandViltForm.value,
       ...savetype,
       ...this.commonCreateCourceForm.value,
+     
     };
-    console.log(this.commonCreateCourceForm.value);
-    console.log(totalObj);
+    console.log(this.commonCreateCourceForm.value)
+    console.log(totalObj)
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.createCource(totalObj).subscribe(
         (res: any) => {
           console.log(res);
           if (res) {
-            // this.router.navigate(['/dashboard/cources']);
-            let coreseres = res.data;
-            let transferobj = {
-              course_id: res.data.id,
-              transfer_id: this.selectedPublisherId,
-            };
-            this.courceService.courseTransfer(transferobj).subscribe(
-              (res: any) => {
-                console.log(res);
+           // this.router.navigate(['/dashboard/cources']);
+           let coreseres = res.data;
+            let transferobj ={ course_id:res.data.id ,transfer_id:this.selectedPublisherId};
+            this.courceService.courseTransfer(transferobj).subscribe((res:any)=>{
+              console.log(res);
+              
+              // this.router.navigate(['/dashboard/cources']);
 
-                // this.router.navigate(['/dashboard/cources']);
+              let statedata = coreseres;
+              let saveobj = { issave:true};
+              let stateobj = {...statedata,...saveobj}
+             // this.router.navigate(['/dashboard/cources']);
+             this.router.navigateByUrl('/dashboard/cources/request-detail', {
+              state: stateobj})
 
-                let statedata = coreseres;
-                let saveobj = { issave: true };
-                let stateobj = { ...statedata, ...saveobj };
-                // this.router.navigate(['/dashboard/cources']);
-                this.router.navigateByUrl('/dashboard/cources/request-detail', {
-                  state: stateobj,
-                });
-              },
-              (err: any) => {
-                console.log(err);
-              }
-            );
+            },(err:any)=>{
+              console.log(err)
+            })
           }
         },
         (err: any) => {
@@ -790,5 +770,10 @@ export class CreateNewCourseComponent implements OnInit {
       console.log(totalObj);
     }
     this.getFormValidationErrors();
+
+
+   
   }
+  
+
 }

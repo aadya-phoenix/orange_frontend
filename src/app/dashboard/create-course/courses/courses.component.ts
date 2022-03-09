@@ -23,6 +23,7 @@ export class CoursesComponent implements OnInit {
   rejectedRequests:any=[];
   closedRequests:any=[];
   allCourses:any;
+  routegetdata:any;
   public compare = (v1: string | number, v2: string | number) =>
     v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
@@ -36,6 +37,14 @@ export class CoursesComponent implements OnInit {
   ) {
     this.getUserrole = this.authService.getRolefromlocal();
     //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
+    this.routegetdata = this.router.getCurrentNavigation()?.extras.state;
+    if(!this.routegetdata){
+      this.router.navigateByUrl('/dashboard/cources');
+    }
+    else{
+      this.allCourses = this.pendingRequests;
+    }
+    
   }
 
   openModal(course: any) {
@@ -97,6 +106,13 @@ export class CoursesComponent implements OnInit {
         if (res.status == 1 && res.message == 'Success') {
           this.courcesList = res.data;
           this.allCourses = this.courcesList;
+          if( this.routegetdata && this.routegetdata.status){
+            console.log('this.routegetdata',this.routegetdata)
+            console.log('this.cou',this.courcesList.filter((course:any)=>course.status == this.routegetdata.status))
+            this.courcesList =this.courcesList.filter((course:any)=>course.status ==this.routegetdata.status)
+          }
+          
+
           this.collectionSize = this.courcesList.length;
           this.courcesList.map((course:any)=>{
             if(course.status === 'pending'){
@@ -167,6 +183,7 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.getUserrole);
+    console.log(this.routegetdata)
     this.refreshCourses();
 
     
