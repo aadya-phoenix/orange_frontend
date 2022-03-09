@@ -3,7 +3,7 @@
     <app-header></app-header>
     <!-- /header -->
     <!-- Header-->
-    <div class="breadcrumbs" style="background-color: #fbfbf7; padding: 9px 9px 20px 9px">
+    <div class="breadcrumbs" style="background-color: #fbfbf7; padding: 9px 9px 9px 9px">
         <div class="col-sm-6">
             <div class="page-header float-left" style="background: transparent">
                 <div class="page-title d-flex align-items-center">
@@ -48,9 +48,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header" style="padding: 0.45rem 1.25rem; background-color: #fff">
-                            <div class="d-flex">
-                                <img src="../../../../assets/images/formm.png" class="ml-2" style="width: 40px" />
+                        <div class="card-header" style="padding: 0rem 1.25rem !important; background-color: #fff">
+                            <div class="d-flex align-items-center">
+                                <img src="../../../../assets/images/formm.png" class="ml-2" style="height: 34px" />
                                 <p class="mt-3 ml-2 view-re_css">
                                     <span>View Request</span>
                         <span class="cc-text_css">( {{ routegetdata.request_id }} ) -
@@ -67,34 +67,34 @@
 <!-- .content -->
 </div>
 
-<div class="content mt-3">
+<div class="content">
     <div class="animated fadeIn">
 
         <div class="card" *ngIf="getUserrole.id !=2 && !routegetdata.issave">
-            <div class="card-body">
-                <div class="Requs_btn_inl">
-                    <div class="Requs_btn_inl-child">
+            <div class="card-body" style="padding: 0.45rem 1.25rem !important;">
+                <div class=" Requs_btn_inl ">
+                    <div class="Requs_btn_inl-child ">
 
-                        <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#publishModal" *ngIf="getUserrole.id==4 ">
+                        <button type="button " class="btn btn-primary btn_requst ml-2 " data-toggle="modal " data-target="#publishModal " *ngIf="getUserrole.id==4 ">
   <img src="../../../../assets/images/publish.png " />Publish
 </button>
 
 
-                        <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#exampleModal" *ngIf="getUserrole.id==3 " (click)="getPublisher() ">
+                        <button type="button " class="btn btn-primary btn_requst ml-2 " data-toggle="modal " data-target="#exampleModal " *ngIf="getUserrole.id==3 " (click)="getPublisher() ">
   <img src="../../../../assets/images/publish.png " /> Transfer to  Publisher
 </button>
-
+                        <button type="button " class="btn btn-primary btn_requst ml-2 " data-toggle="modal " data-target="#rejectModal " *ngIf="getUserrole.id==3 || getUserrole.id==4 " (click)="getPublisher() ">
+   <img src="../../../../assets/images/reject.png " />Reject
+</button>
 
                         <button class="btn btn-primary btn_requst ml-2 " (click)="updateCource() ">
                   <img src="../../../../assets/images/update.png " />Update
                 </button>
-                        <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#rejectModal" *ngIf="getUserrole.id==3 || getUserrole.id==4" (click)="getPublisher() ">
-   <img src="../../../../assets/images/reject.png " />Reject
-</button>
+
 
                     </div>
-                    <div class="Requs_btn_inl-child1" *ngIf="getUserrole.id==3">
-                        <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#transferotherRoc" (click)="transferOtherroc() ">
+                    <div class="Requs_btn_inl-child1 " *ngIf="getUserrole.id==3 ">
+                        <button type="button " class="btn btn-primary btn_requst ml-2 " data-toggle="modal " data-target="#transferotherRoc " (click)="transferOtherroc() ">
      <img src="../../../../assets/images/trans.png " />Transfer to other ROC
 </button>
 
@@ -411,7 +411,7 @@
 <!-- /#right-panel -->
 
 <!-- Right Panel -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 250px ">
+<div class="modal fade " id="exampleModal " tabindex="-1 " aria-labelledby="exampleModalLabel " aria-hidden="true " style="margin-top: 250px ">
     <div class="modal-dialog modal-lg " role="document ">
         <div class="modal-content ">
             <div class="modal-body ">
@@ -419,9 +419,9 @@
                     <div class="col-sm-12 ">
                         <div class="form-group ">
                             <label>Transfer to Publisher</label>
-                            <select name="select " id="select " class="form-control " (change)="getPublisherselected($event)">
+                            <select name="select " id="select " class="form-control " (change)="getPublisherselected($event) ">
                   <option value="0 ">Please select</option>
-                  <option *ngFor="let publisher of publisherList " [value]="publisher.id">{{publisher.first_name}}</option>
+                  <option *ngFor="let publisher of publisherList " [value]="publisher.id ">{{publisher.first_name}}</option>
                 </select>
                         </div>
                     </div>
@@ -429,15 +429,15 @@
                 </div>
                 <!--row-->
             </div>
-            <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="transfertoPublisher()">Submit</button>
+            <div class="modal-footer ">
+                <!-- <button type="button " class="btn btn-secondary " data-dismiss="modal ">Close</button> -->
+                <button type="button " class="btn btn-primary " data-dismiss="modal " (click)="transfertoPublisher() ">Submit</button>
             </div>
         </div>
     </div>
     <!-- </ng-template> -->
 </div>
-<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 250px ">
+<div class="modal fade " id="rejectModal " tabindex="-1 " aria-labelledby="exampleModalLabel " aria-hidden="true " style="margin-top: 250px ">
     <div class="modal-dialog modal-lg " role="document ">
         <div class="modal-content ">
             <div class="modal-header ">
@@ -449,7 +449,7 @@
                     <div class="col-sm-12 ">
                         <div class="form-group ">
                             <label>Comments</label>
-                            <textarea class="form-control form_width-textarea" [(ngModel)]="rejectcomment" rows="3 " placeholder="Enter Your Comments ">
+                            <textarea class="form-control form_width-textarea " [(ngModel)]="rejectcomment " rows="3 " placeholder="Enter Your Comments ">
                 </textarea>
                         </div>
                     </div>
@@ -457,15 +457,15 @@
                 </div>
                 <!--row-->
             </div>
-            <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="reject()">Submit</button>
+            <div class="modal-footer ">
+                <!-- <button type="button " class="btn btn-secondary " data-dismiss="modal ">Close</button> -->
+                <button type="button " class="btn btn-primary " data-dismiss="modal " (click)="reject() ">Submit</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="transferotherRoc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 250px ">
+<div class="modal fade " id="transferotherRoc " tabindex="-1 " aria-labelledby="exampleModalLabel " aria-hidden="true " style="margin-top: 250px ">
     <div class="modal-dialog modal-lg " role="document ">
         <div class="modal-content ">
             <div class="modal-header ">
@@ -479,9 +479,9 @@
                     <div class="col-sm-12 ">
                         <div class="form-group ">
                             <label>Regional Operation Coordinator</label>
-                            <select class="form-control form_width " (change)="getRoc($event)">
+                            <select class="form-control form_width " (change)="getRoc($event) ">
                   <option value=" ">Please select any</option>
-                  <option *ngFor="let otherroc of otherRocsList" [value]="otherroc.id">{{otherroc.first_name}}</option>
+                  <option *ngFor="let otherroc of otherRocsList " [value]="otherroc.id ">{{otherroc.first_name}}</option>
                   <!-- <option>Asia Pacific</option> -->
                   <!-- <option
                   *ngFor="let vendor of vendorType "
@@ -497,10 +497,10 @@
                 <!--row-->
             </div>
             <div class="modal-footer ">
-                <!-- <button type="button " class="btn btn-secondary" data-dismiss="modal">
+                <!-- <button type="button " class="btn btn-secondary " data-dismiss="modal ">
             Close
           </button> -->
-                <button type="button" data-dismiss="modal" (click)="transfertoOtherRoc()" class="btn btn-primary btn_requst ">
+                <button type="button " data-dismiss="modal " (click)="transfertoOtherRoc() " class="btn btn-primary btn_requst ">
             Submit
           </button>
             </div>
@@ -508,7 +508,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="publishModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 50px ">
+<div class="modal fade " id="publishModal " tabindex="-1 " aria-labelledby="exampleModalLabel " aria-hidden="true " style="margin-top: 50px ">
     <div class="modal-dialog modal-lg " role="document ">
         <div class="modal-content ">
             <div class="modal-header ">

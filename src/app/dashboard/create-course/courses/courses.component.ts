@@ -176,7 +176,7 @@ export class CoursesComponent implements OnInit {
     modalRef.componentInstance.passEntry.subscribe((res: any) => {
       this.refreshCourses();
     });
-
+    this.routegetdata='';
     // console.log(course);
     // this.courceService.deleteCourse({course_id :course.id}).subscribe((res:any)=>{
     //   console.log(res);
@@ -201,6 +201,7 @@ export class CoursesComponent implements OnInit {
     modalRef.componentInstance.passEntry.subscribe((res: any) => {
       this.refreshCourses();
     });
+    this.routegetdata='';
     // console.log(course);
     // this.courceService.copyCourse({course_id :course.id}).subscribe((res:any)=>{
     //   console.log(res);
