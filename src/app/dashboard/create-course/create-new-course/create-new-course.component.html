@@ -190,7 +190,7 @@
                           </i>
                         </a>
                       </label>
-                      <ng-select placeholder="Please select language" [multiple]="true" [items]="availableLanguages" bindLabel="name" bindValue="id" formControlName="available_language" style="width: 100%">
+                      <ng-select placeholder="Please select language"  [items]="availableLanguages" bindLabel="name" bindValue="id" formControlName="available_language" style="width: 100%">
                       </ng-select>
 
 
@@ -221,7 +221,10 @@
                           </i>
                         </a>
                       </label>
-                                                    <select class="form-control form_width" formControlName="level">
+                      <ng-select placeholder="Please select level"  [items]="cctLevel" bindLabel="name" bindValue="id" formControlName="level" style="width: 100%">
+                      </ng-select>
+
+                                                    <!-- <select class="form-control form_width" formControlName="level">
                         <option value="">Please select level</option>
                         <option
                           *ngFor="let level of cctLevel"
@@ -229,7 +232,7 @@
                         >
                           {{ level.name }}
                         </option>
-                      </select>
+                      </select> -->
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -334,7 +337,11 @@
                           </i>
                         </a>
                       </label>
-                                                    <select class="form-control form_width" formControlName="training_provided_by">
+
+                      <ng-select placeholder="Please select training provided"  [items]="vendorType" bindLabel="name" bindValue="name" formControlName="training_provided_by" style="width: 100%">
+                      </ng-select>
+
+                                                    <!-- <select class="form-control form_width" formControlName="training_provided_by">
                         <option value="">Please select any</option>
                         <option
                           *ngFor="let vendor of vendorType"
@@ -342,7 +349,7 @@
                         >
                           {{ vendor.name }}
                         </option>
-                      </select>
+                      </select> -->
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -759,7 +766,11 @@
                             </i>
                           </a>
                         </label>
-                                                    <select class="form-control form_width" formControlName="delivery_method">
+
+                        <ng-select placeholder="Please select Delivery method"  [items]="deliveryMethod" bindLabel="name" bindValue="name" formControlName="delivery_method" style="width: 100%">
+                        </ng-select>
+
+                                                    <!-- <select class="form-control form_width" formControlName="delivery_method">
                           <option value="">
                             Please select delivery method
                           </option>
@@ -769,7 +780,7 @@
                           >
                             {{ delivery.name }}
                           </option>
-                        </select>
+                        </select> -->
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -794,7 +805,9 @@ If the event is delivered by an external supplier, please select 'External' from
                             </i>
                           </a>
                         </label>
-                                                    <select class="form-control form_width" formControlName="email_preffered_instructor">
+                        <ng-select placeholder="Please select Instructor"  [items]="preferedInstructor" bindLabel="email_id" bindValue="email_id" formControlName="email_preffered_instructor" style="width: 100%">
+                        </ng-select>
+                                                    <!-- <select class="form-control form_width" formControlName="email_preffered_instructor">
                           <option value="">Please select Instructor</option>
                           <option
                             *ngFor="let instructor of preferedInstructor"
@@ -802,7 +815,7 @@ If the event is delivered by an external supplier, please select 'External' from
                           >
                             {{ instructor.email_id }}
                           </option>
-                        </select>
+                        </select> -->
                                                 </div>
                                             </div>
                                             <!--colend-->

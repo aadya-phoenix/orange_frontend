@@ -284,14 +284,14 @@ export class CreateNewCourseComponent implements OnInit {
       description: new FormControl('', [Validators.required]),
       resource: new FormControl(''),
       objective: new FormControl('', [Validators.required]),
-      level: new FormControl('', [Validators.required]),
+      level: new FormControl( [Validators.required]),
       subject: new FormControl([Validators.required]),
      // additional_comment: new FormControl(''),
       prerequisite: new FormControl(''),
       keyword: new FormControl('', [Validators.required]),
       email_content_owner: new FormControl('', [Validators.required,Validators.pattern(emailregexp)]),
-      training_provided_by: new FormControl('', [Validators.required]),
-      available_language: new FormControl('', [Validators.required]),
+      training_provided_by: new FormControl( [Validators.required]),
+      available_language: new FormControl( [Validators.required]),
 
       //no field
       email_training_contact:new FormControl('',[Validators.required,Validators.pattern(emailregexp)])
@@ -307,7 +307,7 @@ export class CreateNewCourseComponent implements OnInit {
       external_vendor_name: new FormControl(''),
       purchase_order: new FormControl(''),
       // email_training_contact: new FormControl('', [Validators.required]),
-      delivery_method: new FormControl('', [Validators.required]),
+      delivery_method: new FormControl( [Validators.required]),
       for_whoom: new FormControl('', [Validators.required]),
       cost_of_training: new FormControl(''),
       // cost_of_training: new FormControl('', [Validators.required]),
@@ -324,7 +324,7 @@ export class CreateNewCourseComponent implements OnInit {
       external_vendor: new FormControl('', [Validators.required]),
 
       entity_business_area: new FormControl( [Validators.required]),
-      email_preffered_instructor: new FormControl('', [Validators.required]),
+      email_preffered_instructor: new FormControl([Validators.required]),
 
       who_see_course: new FormControl(''),
       additional_comment: new FormControl(''),
