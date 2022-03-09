@@ -127,7 +127,7 @@
                                                 </div>
 
                                                 <div>
-                                                    <a href="" data-toggle="modal" data-target="#titleModal" class="d-flex flex-column align-items-end" (click)="addtitlemultilanguage()">
+                                                    <a href="" data-toggle="modal" data-target="#titleModal" class="d-flex flex-column align-items-end">
                                                         <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
                                                     </a>
                                                 </div>
@@ -656,11 +656,19 @@
                             </option>
                           </select>
                                                 </div>
-                                                <div>
-                                                    <a data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column align-items-end">
-                                                        <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
-                                                    </a>
-                                                </div>
+                                                <!-- <div>
+                          <a
+                             
+                            data-toggle="modal"
+                            data-target="#exampleModal"
+                            class="d-flex flex-column align-items-end"
+                          >
+                            <img
+                              src="../../../../assets/images/icon/lang.png"
+                              class="langu_css"
+                            />
+                          </a>
+                        </div> -->
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1005,8 +1013,9 @@ Note: 3-5 working days are required for the learning object to be available in t
                                         </div>
                                         <!--colend-->
                                         <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label">For Whom? <span style="color: red">* </span>
+                                            <div class="d-flex align-items-center">
+                                                <div class="form-group" style="width: 100%;">
+                                                    <label class="form-control-label">For Whom? <span style="color: red">* </span>
                           <a  >
                             <i
                               class="fa fa-info-circle info_circle"
@@ -1018,8 +1027,15 @@ Note: 3-5 working days are required for the learning object to be available in t
                             </i>
                           </a>
                         </label>
-                                                <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
+                                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
                         </textarea>
+
+                                                </div>
+                                                <div>
+                                                    <a data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column align-items-end">
+                                                        <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -3079,11 +3095,11 @@ Note: 3-5 working days are required for the learning object to be available in t
             <div class="modal-body modal_height">
                 <form [formGroup]="commonCreateCourceForm">
                     <div class="row">
-                        <div class="col-sm-12" formArrayName="title1" *ngFor="let language of availableLanguages ; let i =index;">
+                        <div class="col-sm-12" formArrayName="title1" *ngFor="let language of title1control;let i =index;">
                             <div class="form-group">
                                 <div [formGroupName]="i">
-                                    <label class="form-control-label">{{language.name}} </label>
-                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter" [formControlName]="language.slug">
+                                    <label class="form-control-label"> {{availableLanguages[i].name}}</label>
+                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter" formControlName="value">
               </textarea>
                                 </div>
                             </div>
@@ -3099,7 +3115,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                 <button type="button" class="btn btn-secondary cancel_button" data-dismiss="modal">
           Cancel
         </button>
-                <button type="button" class="btn btn-primary" (click)="gettitlelanguage()">Submit</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="gettitlelanguage()">Submit</button>
             </div>
         </div>
     </div>

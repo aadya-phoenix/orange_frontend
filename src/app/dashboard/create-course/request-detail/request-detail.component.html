@@ -55,7 +55,7 @@
                                     <span>View Request</span>
                         <span class="cc-text_css">( {{ routegetdata.request_id }} ) -
                   </span>
-                        <span style="color: #ff7900">Request Status</span>
+                        <span style="color: #ff7900">Request Status - {{ routegetdata.status }}</span>
                         </p>
                     </div>
                 </div>
@@ -134,8 +134,8 @@
                                 <div class="col-sm-4 ">
                                     <div class="pl-3 border_user ">
                                         <div class="form-group mt-3 ">
-                                            <p class="user_span_text ">Request Name</p>
-                                            <label class="label_text ">{{routegetdata.user_name}}
+                                            <p class="user_span_text ">Requester Name</p>
+                                            <label class="label_text ">{{routegetdata.user_id}}
                         </label>
                                         </div>
                                     </div>
@@ -358,6 +358,38 @@
                                         <div class="form-group mt-3 ">
                                             <p class="user_span_text ">For Whoom ? </p>
                                             <label class="label_text ">{{routegetdata.for_whoom ? routegetdata.for_whoom : '-'}}
+                        </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 ">
+                                    <div class="pl-3 border_user ">
+                                        <div class="form-group mt-3 ">
+                                            <p class="user_span_text ">Email of content owner ? </p>
+                                            <label class="label_text ">{{routegetdata.email_content_owner ? routegetdata.email_content_owner : '-'}}
+                        </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-sm-4 ">
+                                    <div class="pl-3 border_user ">
+                                        <div class="form-group mt-3 ">
+                                            <p class="user_span_text ">Email of preffered Instructor ? </p>
+                                            <label class="label_text ">{{routegetdata.email_preffered_instructor ? routegetdata.email_preffered_instructor : '-'}}
+                        </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 ">
+                                    <div class="pl-3 border_user ">
+                                        <div class="form-group mt-3 ">
+                                            <p class="user_span_text ">Email of training contact ? </p>
+                                            <label class="label_text ">{{routegetdata.email_training_contact ? routegetdata.email_training_contact : '-'}}
                         </label>
                                         </div>
                                     </div>
