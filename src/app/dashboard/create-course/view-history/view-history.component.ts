@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 
@@ -10,7 +11,7 @@ import { CourcesService } from 'src/app/shared/services/cources/cources.service'
 export class ViewHistoryComponent implements OnInit {
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
-  constructor(private modalService:NgbActiveModal,private courseService:CourcesService) { }
+  constructor(private modalService:NgbActiveModal,private courseService:CourcesService,private router:Router) { }
   public courseHistory:any;
   public courseDetail:any;
   public modalType:any;
@@ -42,6 +43,11 @@ export class ViewHistoryComponent implements OnInit {
   copyRequest(){
     this.courseService.copyCourse({course_id :this.copyDeletecourse.id}).subscribe((res:any)=>{
      console.log(res);
+     let dataobj = res.data;
+     let iscopyy=
+     this.router.navigateByUrl('/dashboard/cources/edit-cource', {
+      state: res.data,
+    });
      this.onClose();
    },(err:any)=>{
      console.log(err)
