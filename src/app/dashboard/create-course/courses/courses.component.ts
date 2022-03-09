@@ -20,10 +20,13 @@ export class CoursesComponent implements OnInit {
   searchText: any;
   draftRequests:any =[];
   pendingRequests:any=[];
+  usersubmitRequests:any=[];
   rejectedRequests:any=[];
   closedRequests:any=[];
+  submittedRequests:any=[]
   allCourses:any;
   routegetdata:any;
+  getprofileDetails:any;
   public compare = (v1: string | number, v2: string | number) =>
     v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
@@ -37,6 +40,7 @@ export class CoursesComponent implements OnInit {
   ) {
     this.getUserrole = this.authService.getRolefromlocal();
     //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
+    this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.routegetdata = this.router.getCurrentNavigation()?.extras.state;
     if(!this.routegetdata){
       this.router.navigateByUrl('/dashboard/cources');
@@ -44,6 +48,7 @@ export class CoursesComponent implements OnInit {
     else{
       this.allCourses = this.pendingRequests;
     }
+    console.log(this.getprofileDetails)
     
   }
 
@@ -116,8 +121,14 @@ export class CoursesComponent implements OnInit {
 
           this.collectionSize = this.courcesList.length;
           this.courcesList.map((course:any)=>{
-            if(course.status === 'pending'){
+            if(course.status === 'pending' && course.user_id != this.getprofileDetails.data.id){
               this.pendingRequests.push(course)
+            }
+            if(course.status === 'pending'){
+              this.usersubmitRequests.push(course)
+            }
+            if(course.status === 'pending' && course.user_id == this.getprofileDetails.data.id){
+              this.submittedRequests.push(course)
             }
             if(course.status === 'reject'){
               this.rejectedRequests.push(course)
@@ -139,7 +150,6 @@ export class CoursesComponent implements OnInit {
   }
 
   getRequest(cource: any) {
-    debugger
     this.courceService.courseDetail(cource.id).subscribe((res:any)=>{
       console.log(res);
       let coursedetail = res.data;
@@ -165,7 +175,7 @@ export class CoursesComponent implements OnInit {
 
     const modalRef = this.modalService.open(ViewHistoryComponent, {
       centered: true,
-      size: 'lg',
+      size: 'sm',
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
@@ -190,7 +200,7 @@ export class CoursesComponent implements OnInit {
 
     const modalRef = this.modalService.open(ViewHistoryComponent, {
       centered: true,
-      size: 'lg',
+      size: 'sm',
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {

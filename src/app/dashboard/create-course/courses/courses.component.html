@@ -92,8 +92,21 @@
                             </div>
                         </div>
                         <!--coled-->
-                        <div class="Course_icon_child">
-                            <div class="alig_dashicon" (click)="getrecords(pendingRequests)">
+                        <div class="Course_icon_child" *ngIf="getUserrole.id == 2">
+                          <div class="alig_dashicon" (click)="getrecords(usersubmitRequests)">
+                              <div>
+                                  <div class="fa-icons-des" style="background-color: #a885db">
+                                      <img src="../../../../assets/images/icon/closed.png" />
+                                  </div>
+
+                                  <p>Submitted</p>
+                              </div>
+                              <span class="number_css">{{usersubmitRequests && usersubmitRequests.length ? usersubmitRequests.length : '0'}}</span>
+                          </div>
+                      </div>
+
+                        <div class="Course_icon_child" *ngIf="getUserrole.id != 2">
+                            <div class="alig_dashicon" (click)="getrecords(submittedRequests)">
                                 <div>
                                     <div class="fa-icons-des" style="background-color: #a885db">
                                         <img src="../../../../assets/images/icon/closed.png" />
@@ -101,7 +114,7 @@
 
                                     <p>Submitted</p>
                                 </div>
-                                <span class="number_css">{{pendingRequests && pendingRequests.length ? pendingRequests.length : '0'}}</span>
+                                <span class="number_css">{{submittedRequests && submittedRequests.length ? pendingRequests.length : '0'}}</span>
                             </div>
                         </div>
                         <!--coled-->
@@ -256,24 +269,24 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let cource of courcesList | filter: searchText" class="text-center bac_hover-table">
-                                        <td>{{ cource.request_id }}</td>
-                                        <td>
+                                        <td (click)="getRequest(cource)">{{ cource.request_id }}</td>
+                                        <td (click)="getRequest(cource)">
                                             {{ cource && cource.user_name ? cource.user_name : "- " }}
                                         </td>
 
                                         <!-- <td>xyz</td> -->
-                                        <td>
+                                        <td (click)="getRequest(cource)">
                                             {{ cource.title ? (cource.title | titlecase) : "- " }}
                                         </td>
-                                        <td>
+                                        <td (click)="getRequest(cource)">
                                             {{ cource.learning_type_name ? cource.learning_type_name : "- " }}
                                         </td>
-                                        <td>
+                                        <td (click)="getRequest(cource)">
                                             {{cource && cource.transfer_user_id ? cource.transfer_user_name : '-'}}
                                         </td>
                                          
-                                        <td>{{ cource.created_at | date: "short" }}</td>
-                                        <td>{{ cource.updated_at | date: "short" }}</td>
+                                        <td (click)="getRequest(cource)">{{ cource.created_at | date: "short" }}</td>
+                                        <td (click)="getRequest(cource)">{{ cource.updated_at | date: "short" }}</td>
                                         <!-- <td align="center ">
                       <i 
                         class="fa fa-eye view"
@@ -488,7 +501,7 @@
                     <td (click)="getRequest(course)">
                       {{ course.learning_type_name ? course.learning_type_name : "- " }}
                     </td>
-                    <td (click)="getRequest(course)">{{course && course.transfer_user_id ? course.transfer_user_name : 'ROC'}}</td>
+                    <td (click)="getRequest(course)">{{course && course.transfer_user_id ? course.transfer_user_name : '-'}}</td>
                     <td (click)="getRequest(course)">{{ course.created_at | date: "short" }}</td>
                     <td (click)="getRequest(course)">{{ course.updated_at | date: "short" }}</td>
                      <td >

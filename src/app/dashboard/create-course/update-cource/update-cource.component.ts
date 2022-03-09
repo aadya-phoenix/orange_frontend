@@ -547,12 +547,13 @@ export class UpdateCourceComponent implements OnInit {
     let transferobj = {transfer_user_id:this.profileDetails.data.id}
     let totalObj = {
       ...this.iltandViltForm.value,
-      ...savetype,
+      // ...savetype,
       ...this.commonCreateCourceForm.value,
       ...courseid,
-      ...transferobj,
+      // ...transferobj,
       ...{learning_type:this.routergetdata.learning_type}
     };
+    console.log(totalObj)
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
