@@ -59,7 +59,8 @@ export class CoursesComponent implements OnInit {
         modalRef.componentInstance.props = {
           title: 'View History',
           data: res.data,
-          data1:course
+          data1:course,
+          type:'viewhistory'
         };
       }
     })
@@ -161,23 +162,53 @@ export class CoursesComponent implements OnInit {
   }
 
   deleteRequest(course:any){
-    console.log(course);
-    this.courceService.deleteCourse({course_id :course.id}).subscribe((res:any)=>{
-      console.log(res);
+
+    const modalRef = this.modalService.open(ViewHistoryComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      title: 'Delete Request',
+      data3:course,
+      type:'delete'
+    };
+    modalRef.componentInstance.passEntry.subscribe((res: any) => {
       this.refreshCourses();
-    },(err:any)=>{
-      console.log(err)
-    })
+    });
+    this.routegetdata='';
+    // console.log(course);
+    // this.courceService.deleteCourse({course_id :course.id}).subscribe((res:any)=>{
+    //   console.log(res);
+    //   this.refreshCourses();
+    // },(err:any)=>{
+    //   console.log(err)
+    // })
   }
 
   copyRequest(course:any){
-    console.log(course);
-    this.courceService.copyCourse({course_id :course.id}).subscribe((res:any)=>{
-      console.log(res);
+
+    const modalRef = this.modalService.open(ViewHistoryComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      title: 'Copy Request',
+      data3:course,
+      type:'copy'
+    };
+    modalRef.componentInstance.passEntry.subscribe((res: any) => {
       this.refreshCourses();
-    },(err:any)=>{
-      console.log(err)
-    })
+    });
+    this.routegetdata='';
+    // console.log(course);
+    // this.courceService.copyCourse({course_id :course.id}).subscribe((res:any)=>{
+    //   console.log(res);
+    //   this.refreshCourses();
+    // },(err:any)=>{
+    //   console.log(err)
+    // })
 
   }
 

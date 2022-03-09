@@ -25,8 +25,9 @@ export class DashboardComponent implements OnInit {
     this.courseService.getCources().subscribe(
       (res: any) => {
         console.log(res);
+        this.courcesList = res.data;
         if (res.status == 1 && res.message == 'Success') {
-          this.courcesList = res.data;
+          
 
           this.courcesList.map((course: any) => {
             if (course.status === 'pending') {
