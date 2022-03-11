@@ -26,8 +26,9 @@ export class CreateNewCourseComponent implements OnInit {
   public externalVendorname: boolean = false;
   showVendor: boolean = false;
   public learnerGuidearray: any = [];
-  public learningType: any = '1';
-
+  public learningType: any = '';
+  public learningTypeSelected: any = '0';
+  public selectedLanguages: any = [];
   public cctLevel: any;
   coursesList: any;
   courseLength: any;
@@ -303,7 +304,7 @@ export class CreateNewCourseComponent implements OnInit {
       //title: new FormArray([]),
       title: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
-      learning_type: new FormControl('1', [Validators.required]),
+      learning_type: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       resource: new FormControl(''),
       objective: new FormControl('', [Validators.required]),
