@@ -146,15 +146,9 @@
                         </i>
                       </a>
                     </label>
-                                              <select class="form-control form_width" formControlName="available_language">
-                      <option value="">Please select language</option>
-                      <option
-                        *ngFor="let language of availableLanguages"
-                        [value]="language.id"
-                      >
-                        {{ language.name }}
-                      </option>
-                    </select>
+                                              <ng-select placeholder="Please select language"  [items]="availableLanguages" bindLabel="name" bindValue="id" [multiple]=true
+					  formControlName="available_language" style="width: 100%"  [(ngModel)]="selectedLanguages">
+                      </ng-select>
                                           </div>
                                       </div>
                                       <!--colend-->

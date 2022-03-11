@@ -27,7 +27,7 @@ export class UpdateCourceComponent implements OnInit {
   showVendor: boolean = false;
   public learnerGuidearray: any = [];
   public learningType: any = '1';
-
+  public selectedLanguages:any = [];
   public cctLevel: any;
   coursesList: any;
   courseLength: any;
@@ -90,6 +90,7 @@ export class UpdateCourceComponent implements OnInit {
     if (!this.routergetdata) {
       this.router.navigateByUrl('/dashboard/cources');
     }
+	this.selectedLanguages = JSON.parse(this.routergetdata['available_language']);
     console.log(this.routergetdata)
   }
 

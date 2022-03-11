@@ -309,7 +309,7 @@ export class CreateNewCourseComponent implements OnInit {
       objective: new FormControl('', [Validators.required]),
       level: new FormControl([Validators.required]),
       subject: new FormControl([Validators.required]),
-      // additional_comment: new FormControl(''),
+      additional_comment: new FormControl(''),
       prerequisite: new FormControl(''),
       keyword: new FormControl('', [Validators.required]),
       email_content_owner: new FormControl('', [
@@ -317,7 +317,7 @@ export class CreateNewCourseComponent implements OnInit {
         Validators.pattern(emailregexp),
       ]),
       training_provided_by: new FormControl([Validators.required]),
-      available_language: new FormControl([Validators.required]),
+      available_language: new FormControl('',[Validators.required]),
 
       //no field
       email_training_contact: new FormControl('', [
@@ -832,4 +832,30 @@ export class CreateNewCourseComponent implements OnInit {
     }
     this.getFormValidationErrors();
   }
+  
+  
+  
+	getallFormValidationErrors(formObj: FormGroup, name:any) {
+		console.log("name = "+name);
+		if(formObj){
+			Object.keys(formObj.controls).forEach(key => {
+				if(key){
+		  const controlErrors: ValidationErrors = formObj.get(key).errors;
+		  if (controlErrors != null) {
+				Object.keys(controlErrors).forEach(keyError => {
+				  console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+				});
+			  }
+				}
+			});
+	}
+  }
+	validateforms(){
+		console.log("working");
+		this.getallFormValidationErrors(this.commonCreateCourceForm, 'commonCreateCourceForm');
+		this.getallFormValidationErrors(this.iltandViltForm, 'iltandViltForm');
+		this.getallFormValidationErrors(this.materialbasedForm, 'materialbasedForm');
+		this.getallFormValidationErrors(this.currriculumForm, 'currriculumForm');
+
+	}
 }
