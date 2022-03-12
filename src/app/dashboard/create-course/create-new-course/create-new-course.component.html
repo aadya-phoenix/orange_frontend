@@ -530,7 +530,7 @@
                         </form>
                         <!--ILT and vILT-->
                         <form [formGroup]="iltandViltForm">
-                            <div *ngIf="learningType == '1'">
+                            <div [style.display]="(learningType == 1) ? 'block' : 'none' ">
                                 <div class="card">
                                     <!-- <form [formGroup]="createCourceForm"> -->
                                     <div class="card-header">
@@ -1192,7 +1192,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                           </a>
                         </label>
                                                     <select class="form-control form_width" formControlName="regional_cordinator">
-                          <option value="">Please select ROC</option>
+                          <option value="">Regional Operation Coordinator</option>
                           <option
                             *ngFor="let cordinator of cordinatorsList"
                             [value]="cordinator.id"
@@ -1204,6 +1204,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                                             </div>
                                             <!--colend-->
                                         </div>
+										
                                         <p style="color: #000" *ngIf="getUserrole.id == 2">
                                             <b style="color: #ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
                                         </p>
@@ -1241,7 +1242,7 @@ Note: 3-5 working days are required for the learning object to be available in t
 
                         <!--Currriculum-->
                         <form [formGroup]="currriculumForm">
-                            <div *ngIf="learningType == '4'">
+                            <div  [style.display]="(learningType == 4) ? 'block' : 'none' ">
                                 <div class="card">
                                     <!-- <form [formGroup]="createCourceForm"> -->
                                     <div class="card-header">
@@ -1548,9 +1549,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                                             </div>
                                             <!--colend-->
                                         </div>
-                                        <p style="color: #000">
-                                            <b style="color: #ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
-                                        </p>
+                                        
                                         <p style="color: #000">
                                             <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
                                             <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
@@ -1565,7 +1564,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                     Submit
                   </button>
                                         <!-- </button> -->
-                                        <button class="btn btn-secondary ml-1">Save as draft</button>
+                                        <button class="btn btn-secondary ml-1" (click)="createNewCourceIlt('draft')">Save as draft</button>
                                         <!-- </button> -->
                                     </div>
                                 </div>
@@ -1575,7 +1574,7 @@ Note: 3-5 working days are required for the learning object to be available in t
 
                         <!--Material-Based Training-->
                         <form [formGroup]="materialbasedForm">
-                            <div *ngIf="learningType == '3'">
+                            <div  [style.display]="(learningType == 3) ? 'block' : 'none' ">
                                 <div class="card">
                                     <!-- <form [formGroup]="createCourceForm"> -->
                                     <div class="card-header">
@@ -1583,7 +1582,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <!--<div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label class="form-control-label">Subject <span style="color: red">* </span>
                           <a  >
@@ -1597,17 +1596,17 @@ Note: 3-5 working days are required for the learning object to be available in t
                             </i>
                           </a>
                         </label>
-                                                    <!-- <select class="form-control form_width">
+                                                    <select class="form-control form_width">
         <option value="">Please select subject</option>
         <option *ngFor="let cctSubject of cctSubjects">
           {{ cctSubject.name }}
         </option>
-      </select> -->
+      </select>
 
                                                     <ng-select placeholder="please select subject" [items]="cctSubjects" bindLabel="name" bindValue="id" formControlName="subject">
                                                     </ng-select>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                             <!--colend-->
                                             <div class="col-sm-6">
                                                 <div class="form-group">
@@ -1630,296 +1629,13 @@ Note: 3-5 working days are required for the learning object to be available in t
                                             </div>
                                             <!--colend-->
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">Learn more
-
-                          <a  >
-                            <i
-                              class="fa fa-info-circle info_circle"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="top"
-                              title="If you wish, add a link enabling users to access additional information about the program."
-                            >
-                            </i>
-                          </a>
-                        </label>
-                                                    <input type="text " placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more" />
-                                                </div>
-                                            </div>
-                                            <!--colend-->
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">Learn more
-
-                          <a  >
-                            <i
-                              class="fa fa-info-circle info_circle"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="top"
-                              title="If you wish, add a link enabling users to access additional information about the program."
-                            >
-                            </i>
-                          </a>
-                        </label>
-                                                    <input type="text " placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more" />
-                                                </div>
-                                            </div>
-                                            <!--colend-->
-                                        </div>
+                                        
                                         <!--row end-->
 
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">Provide the link to your video
-
-                          <a  >
-                            <i
-                              class="fa fa-info-circle info_circle"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="top"
-                              title="If required, you can include an embedded video such as YouTube, Dailymotion or Video on Demand FT."
-                            >
-                            </i>
-                          </a>
-                        </label>
-                                                    <input type="text" placeholder="Enter Provide the link to your video" class="form-control form_width" formControlName="who_see_course" />
-                                                </div>
-                                            </div>
-                                            <!--colend-->
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">Expiry Date
-
-                          <a>
-                            <i
-                              class="fa fa-info-circle info_circle"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="top"
-                              title="Provide the date on which this learning object will no longer be valid. If the expiry date is unknown your learning object will be available in the Orange Learning catalog as follows: ILT & vILT with active sessions = no expiry date; ILT & vILT with no sessions = 12 months; online courses, videos, materials, tests = 2 years."
-                            >
-                            </i>
-                          </a>
-                        </label>
-                                                    <input type="date" class="form-control form_width" formControlName="expiry_date" />
-                                                </div>
-                                            </div>
-                                            <!--colend-->
-                                        </div>
                                         <!--row end-->
 
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">Title of the additional free text field
-                          <a  >
-                            <i
-                              class="fa fa-info-circle info_circle"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="top"
-                              title="Title of the additional free text field"
-                            >
-                            </i>
-                          </a>
-                        </label>
-                                                    <input type="text" placeholder="Enter Title of the additional free text field" class="form-control form_width" formControlName="title_additional" />
-                                                </div>
-                                            </div>
-                                            <!--colend-->
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">Who can see my course?
-                          <a>
-                            <i
-                              class="fa fa-info-circle info_circle"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="top"
-                              title="Null"
-                            >
-                            </i>
-                          </a>
-                        </label>
-                                                    <select class="form-control form_width" formControlName="who_see_course">
-                          <option value="">Please select</option>
-                          <option value="1">option 1</option>
-                          <option value="2">option 2</option>
-                          <option value="3">option 3</option>
-                          <option value="">option 4</option>
-                          <option value="4">option 5</option>
-                        </select>
-                                                </div>
-                                            </div>
-                                            <!--colend-->
-                                        </div>
                                         <!--row end-->
 
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">Free field content
-                          <a  >
-                            <i
-                              class="fa fa-info-circle info_circle"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="top"
-                              title=""
-                            >
-                            </i>
-                          </a>
-                        </label>
-                                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Free field content" formControlName="free_field_content">
-                        </textarea>
-                                                </div>
-                                            </div>
-                                            <!--colend-->
-
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">For Whom? <span style="color: red">* </span>
-                          <a  >
-                            <i
-                              class="fa fa-info-circle info_circle"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="top"
-                              title="Define the target audience for whom the course is designed."
-                            >
-                            </i>
-                          </a>
-                        </label>
-                                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
-                        </textarea>
-                                                </div>
-                                            </div>
-                                            <!--colend-->
-                                        </div>
-                                        <!--row-->
-
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">Curriculum content <span style="color: red">* </span>
-                          <a  >
-                            <i
-                              class="fa fa-info-circle info_circle"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="top"
-                              title="Indicate the titles of existing learning objects as they appear on Orange Learning which should be attached to the curriculum structure."
-                            >
-                            </i>
-                          </a>
-                        </label>
-                                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Curriculum content" formControlName="for_whoom">
-                        </textarea>
-                                                </div>
-                                            </div>
-                                            <!--colend-->
-                                            <div class="col-sm-6" *ngIf="showCertificateExpiry">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">Certification expiry type
-                          <span style="color: red">* </span>
-                          <a>
-                            <i
-                              class="fa fa-info-circle info_circle"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="top"
-                              title="If you selected Yes in the Certification field, please select the type of certification and expiry date."
-                            >
-                            </i>
-                          </a>
-                        </label>
-                                                    <select class="form-control form_width" formControlName="certification_expiry_type">
-                          <option value="">Please select option</option>
-                          <option
-                            *ngFor="let cctExpiry of cctExpiryType"
-                            [value]="cctExpiry.id"
-                          >
-                            {{ cctExpiry.name }}
-                          </option>
-                        </select>
-                                                </div>
-                                            </div>
-                                            <!--colend-->
-                                        </div>
-                                        <!--row-->
-                                        <div class="row">
-                                            <div class="col-sm-6" *ngIf="externalVendorname">
-                                                <div class="form-group">
-                                                    <!-- <label class="form-control-label"
-      >External vendor
-
-      <a href="">
-        <i
-          class="fa fa-info-circle info_circle"
-          aria-hidden="true"
-          data-toggle="tooltip"
-          data-placement="top"
-          title="Select Yes, if the course is provided by an external vendor."
-        >
-        </i>
-      </a>
-    </label>
-    <select class="form-control form_width" formControlName="who_see_course">
-      <option value="">Please select externalvendor</option>
-      <option value="yes">Yes</option>
-      <option value="no">No</option>
-    </select> -->
-                                                    <label class="form-control-label">External vendor name
-                          <span style="color: red">* </span>
-                          <a  >
-                            <i
-                              class="fa fa-info-circle info_circle"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="top"
-                              title="Please provide the name of the external vendor."
-                            >
-                            </i>
-                          </a>
-                        </label>
-                                                    <input type="text " placeholder="External vendor name" class="form-control form_width" formControlName="external_vendor_name" />
-                                                </div>
-                                            </div>
-                                            <!--colend-->
-                                            <div class="col-sm-6" *ngIf="showCertificateExpiry">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">Validity period <span style="color: red">* </span>
-
-                          <a>
-                            <i
-                              class="fa fa-info-circle info_circle"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="top"
-                              title="If you selected Yes in the Certification field, please select how long the certification is valid."
-                            >
-                            </i>
-                          </a>
-                        </label>
-                                                    <select class="form-control form_width" formControlName="validity_period">
-                          <option value="">Please select validity</option>
-                          <option
-                            *ngFor="let validity of validityPeriod"
-                            [value]="validity.id"
-                          >
-                            {{ validity.name }}
-                          </option>
-                        </select>
-                                                </div>
-                                            </div>
-                                            <!--colend-->
-                                        </div>
                                         <!--row end-->
                                         <div class="row">
                                             <div class="col-sm-6">
@@ -2049,9 +1765,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                                             </div>
                                             <!--colend-->
                                         </div>
-                                        <p style="color: #000">
-                                            <b style="color: #ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
-                                        </p>
+                                        
                                         <p style="color: #000">
                                             <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
                                             <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
@@ -2066,7 +1780,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                     Submit
                   </button>
                                         <!-- </button> -->
-                                        <button class="btn btn-secondary ml-1">Save as draft</button>
+                                        <button class="btn btn-secondary ml-1" (click)="createNewCourceIlt('draft')">Save as draft</button>
                                         <!-- </button> -->
                                     </div>
                                 </div>
@@ -2075,7 +1789,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                         <!--Material-Based Training-->
 
                         <!--Video-based training-->
-                        <div *ngIf="learningType == '2'">
+                        <div  [style.display]="(learningType == 2) ? 'block' : 'none' ">
                             <div class="card">
                                 <!-- <form [formGroup]="createCourceForm"> -->
                                 <div class="card-header">
@@ -2083,7 +1797,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <!--<div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">Expiry Date
 
@@ -2100,9 +1814,9 @@ Note: 3-5 working days are required for the learning object to be available in t
                       </label>
                                                 <input type="date" class="form-control form_width" formControlName="expiry_date" />
                                             </div>
-                                        </div>
+                                        </div>-->
                                         <!--colend-->
-                                        <div class="col-sm-6">
+                                        <!--<div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">Upload video status <span style="color: red">* </span>
                         <a  >
@@ -2126,7 +1840,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                         </option>
                       </select>
                                             </div>
-                                        </div>
+                                        </div>-->
                                         <!--colend-->
                                     </div>
 
@@ -2227,9 +1941,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                                         </div>
                                         <!--colend-->
                                     </div>
-                                    <p style="color: #000">
-                                        <b style="color: #ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
-                                    </p>
+                                    
                                     <p style="color: #000">
                                         <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
                                         <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
@@ -2243,14 +1955,14 @@ Note: 3-5 working days are required for the learning object to be available in t
                   Submit
                 </button>
                                     <!-- </button> -->
-                                    <button class="btn btn-secondary ml-1">Save as draft</button>
+                                    <button class="btn btn-secondary ml-1" (click)="createNewCourceIlt('draft')">Save as draft</button>
                                     <!-- </button> -->
                                 </div>
                             </div>
                             <!--Video-based training-->
                         </div>
                         <!--Playlist-->
-                        <div *ngIf="learningType == '6'">
+                        <div  [style.display]="(learningType == 6) ? 'block' : 'none' ">
                             <div class="card">
                                 <!-- <form [formGroup]="createCourceForm"> -->
                                 <div class="card-header">
@@ -2495,9 +2207,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                                         </div>
                                         <!--colend-->
                                     </div>
-                                    <p style="color: #000">
-                                        <b style="color: #ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
-                                    </p>
+                                    
                                     <p style="color: #000">
                                         <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
                                         <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
@@ -2511,14 +2221,14 @@ Note: 3-5 working days are required for the learning object to be available in t
                   Submit
                 </button>
                                     <!-- </button> -->
-                                    <button class="btn btn-secondary ml-1">Save as draft</button>
+                                    <button class="btn btn-secondary ml-1" (click)="createNewCourceIlt('draft')">Save as draft</button>
                                     <!-- </button> -->
                                 </div>
                             </div>
                         </div>
 
                         <!--Webbased Training-->
-                        <div *ngIf="learningType == '5'">
+                        <div  [style.display]="(learningType == 5) ? 'block' : 'none' ">
                             <div class="card">
                                 <!-- <form [formGroup]="createCourceForm"> -->
                                 <div class="card-header">
@@ -2778,9 +2488,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                                         </div>
                                         <!--colend-->
                                     </div>
-                                    <p style="color: #000">
-                                        <b style="color: #ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
-                                    </p>
+                                    
                                     <p style="color: #000">
                                         <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
                                         <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
@@ -2794,7 +2502,7 @@ Note: 3-5 working days are required for the learning object to be available in t
                   Submit
                 </button>
                                     <!-- </button> -->
-                                    <button class="btn btn-secondary ml-1">Save as draft</button>
+                                    <button class="btn btn-secondary ml-1" (click)="createNewCourceIlt('draft')">Save as draft</button>
                                     <!-- </button> -->
                                 </div>
                             </div>

@@ -10,7 +10,7 @@ import {
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
-
+const emailregexp = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
 @Component({
   selector: 'app-create-new-course',
   templateUrl: './create-new-course.component.html',
@@ -33,7 +33,131 @@ export class CreateNewCourseComponent implements OnInit {
   coursesList: any;
   courseLength: any;
   notification: boolean = false;
-
+  public requiredFields:any = {"1":			{"common":
+							{"title":[Validators.required],
+							"duration":[Validators.required],
+							"learning_type":[Validators.required],
+							"description":[Validators.required],
+							"objective":[Validators.required],
+							"level":[Validators.required],
+							"subject":[Validators.required],
+							"keyword":[Validators.required],
+							"email":[Validators.required,Validators.pattern(emailregexp)],
+							"certification_expiry_type":[Validators.required],
+							"validity_period":[Validators.required],
+							"external_vendor_name":[Validators.required],
+							"training_provided_by":[Validators.required],
+							"available_language":[Validators.required],
+							"email_training_contact":[Validators.required,Validators.pattern(emailregexp)]			
+						}, 
+						'each': {"manager_approval":[Validators.required],
+							"digital":[Validators.required],
+							"certification":[Validators.required],
+							"delivery_method":[Validators.required],
+							"for_whoom":[Validators.required],
+							"first_session_date":[Validators.required],
+							"expiry_date":[Validators.required],
+							"external_vendor":[Validators.required],
+							"entity_business_area":[Validators.required],
+							"email_preffered_instructor":[Validators.required],
+							'regional_cordinator': [Validators.required]
+  }},
+						'2':
+						{'common':
+							{"title":[Validators.required],
+							"duration":[Validators.required],
+							"learning_type":[Validators.required],
+							"description":[Validators.required],
+							"objective":[Validators.required],
+							"level":[Validators.required],
+							"subject":[Validators.required],
+							"keyword":[Validators.required],
+							"email":[Validators.required,Validators.pattern(emailregexp)],
+							"training_provided_by":[Validators.required],
+							"available_language":[Validators.required],
+							"email_training_contact":[Validators.required,Validators.pattern(emailregexp)]			
+						}, 
+						'each': {"url":[Validators.required]}},
+						'3':
+						{'common':
+							{"title":[Validators.required],
+							"duration":[Validators.required],
+							"learning_type":[Validators.required],
+							"description":[Validators.required],
+							"objective":[Validators.required],
+							"level":[Validators.required],
+							"subject":[Validators.required],
+							"keyword":[Validators.required],
+							"email":[Validators.required,Validators.pattern(emailregexp)],
+							"training_provided_by":[Validators.required],
+							"available_language":[Validators.required],
+							"email_training_contact":[Validators.required,Validators.pattern(emailregexp)]			
+						}, 
+						'each': {"material_resource":[Validators.required],
+							"url":[Validators.required]
+						}},
+						'4':
+						{'common':
+							{"title":[Validators.required],
+							"duration":[Validators.required],
+							"learning_type":[Validators.required],
+							"description":[Validators.required],
+							"objective":[Validators.required],
+							"level":[Validators.required],
+							"subject":[Validators.required],
+							"keyword":[Validators.required],
+							"email":[Validators.required,Validators.pattern(emailregexp)],
+							"training_provided_by":[Validators.required],
+							"available_language":[Validators.required],
+							"email_training_contact":[Validators.required,Validators.pattern(emailregexp)]			
+						}, 
+						'each': {"manager_approval":[Validators.required],
+							"digital":[Validators.required],
+							"certification":[Validators.required],
+							"delivery_method":[Validators.required],
+							"for_whoom":[Validators.required],
+							"first_session_date":[Validators.required],
+							"expiry_date":[Validators.required],
+							"external_vendor":[Validators.required],
+							"entity_business_area":[Validators.required],
+							"email_preffered_instructor":[Validators.required],
+							'regional_cordinator': [Validators.required]
+						}},'5':
+						{'common':
+							{"title":[Validators.required],
+							"duration":[Validators.required],
+							"learning_type":[Validators.required],
+							"description":[Validators.required],
+							"objective":[Validators.required],
+							"level":[Validators.required],
+							"subject":[Validators.required],
+							"keyword":[Validators.required],
+							"email":[Validators.required,Validators.pattern(emailregexp)],
+							"training_provided_by":[Validators.required],
+							"available_language":[Validators.required],
+									
+						}, 
+						'each': {
+							"digital":[Validators.required],
+							"certification":[Validators.required],
+							"delivery_method":[Validators.required],
+							"for_whoom":[Validators.required],
+							"first_session_date":[Validators.required],
+							"expiry_date":[Validators.required],
+							"external_vendor":[Validators.required],
+							"external_vendor_name":[Validators.required],
+							"email_training_contact":[Validators.required,Validators.pattern(emailregexp)],
+							'validity_period': [Validators.required]
+						}},'6':
+						{'common':
+							{"title":[Validators.required],
+							"description":[Validators.required],		
+						}, 
+						'each': {"url":[Validators.required],
+							"source_upload":[Validators.required]
+						}
+					}
+						};
   public cctExpiryperiod: any = [
     {
       id: 1,
@@ -215,6 +339,7 @@ export class CreateNewCourseComponent implements OnInit {
 
   //getLearning type
   getLearningType() {
+
     this.courceService.getLearningType().subscribe(
       (res: any) => {
         console.log(res);
@@ -283,7 +408,7 @@ export class CreateNewCourseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const emailregexp = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
+    
     this.getCordinators();
     this.getvendorType();
     this.getLevel();
@@ -329,15 +454,15 @@ export class CreateNewCourseComponent implements OnInit {
 
     //ilt and vilt
     this.iltandViltForm = this.fb.group({
-      manager_approval: new FormControl([Validators.required]),
-      digital: new FormControl([Validators.required]),
-      certification: new FormControl([Validators.required]),
-      certification_expiry_type: new FormControl(''),
-      validity_period: new FormControl(''),
-      external_vendor_name: new FormControl(''),
+      manager_approval: new FormControl('',[Validators.required]),
+      digital: new FormControl('',[Validators.required]),
+      certification: new FormControl('',[Validators.required]),
+      certification_expiry_type: new FormControl('',[Validators.required]),
+      validity_period: new FormControl('',[Validators.required]),
+      external_vendor_name: new FormControl('',[Validators.required]),
       purchase_order: new FormControl(),
       // email_training_contact: new FormControl('', [Validators.required]),
-      delivery_method: new FormControl([Validators.required]),
+      delivery_method: new FormControl('',[Validators.required]),
       for_whoom: new FormControl('', [Validators.required]),
       cost_of_training: new FormControl(''),
       // cost_of_training: new FormControl('', [Validators.required]),
@@ -574,13 +699,26 @@ export class CreateNewCourseComponent implements OnInit {
     //   }
     // }
     // console.log(titlearray)
-    this.commonCreateCourceForm.value.title1 = titlearray;
+    this.commonCreateCourceForm.value.title = titlearray;
     // this.commonCreateCourceForm.patchValue({description:'fdgdg'}) ;
     // this.commonCreateCourceForm.patchValue({title:'fdgdg'})
     console.log(this.commonCreateCourceForm.value);
+let abc = this.iltandViltForm.controls;
+let c = Object.keys(abc);
+for(let x in c){
+	console.log(c[x]);
+if(this.iltandViltForm.get(c[x]).value == 'Other'){
+    this.iltandViltForm.get(c[x]).validator = <any>Validators.compose([Validators.required]);               
 
+} else {                
+    this.iltandViltForm.get(c[x]).clearValidators();               
+}
+this.iltandViltForm.get(c[x]).updateValueAndValidity(); 
+
+}
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
-      this.courceService.createCource(totalObj).subscribe(
+		console.log(totalObj);
+     /* this.courceService.createCource(totalObj).subscribe(
         (res: any) => {
           console.log(res);
           if (res) {
@@ -596,7 +734,7 @@ export class CreateNewCourseComponent implements OnInit {
         (err: any) => {
           console.log(err);
         }
-      );
+      );*/
     } else {
       this.commonCreateCourceForm.markAllAsTouched();
       this.iltandViltForm.markAllAsTouched();
@@ -774,6 +912,14 @@ export class CreateNewCourseComponent implements OnInit {
   getlearningType(event: any) {
     console.log(event.target.value);
     this.learningType = event.target.value;
+	let selectedLid = this.requiredFields[this.learningType];
+	for(let x in this.requiredFields){
+		if(x == selectedLid){
+			
+		} else {
+			
+		}
+	}
   }
 
   getPublisherselected(event: any) {
