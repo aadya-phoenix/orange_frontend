@@ -10,11 +10,12 @@ import { ViewHistoryComponent } from './view-history/view-history.component';
 import { RequestDetailComponent } from './request-detail/request-detail.component';
 import { UpdateCourceComponent } from './update-cource/update-cource.component';
 import { ViewCourseDetailsComponent } from './view-course-details/view-course-details.component';
+import { ViewCompleteReportComponent } from './view-complete-report/view-complete-report.component';
 
 
 
 @NgModule({
-  declarations: [CoursesComponent, CreateNewCourseComponent, ViewHistoryComponent, RequestDetailComponent, UpdateCourceComponent, ViewCourseDetailsComponent],
+  declarations: [CoursesComponent, CreateNewCourseComponent, ViewHistoryComponent, RequestDetailComponent, UpdateCourceComponent, ViewCourseDetailsComponent, ViewCompleteReportComponent],
   imports: [
     CommonModule,
     CreateCourseRoutingModule,

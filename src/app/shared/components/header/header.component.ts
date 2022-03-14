@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/auth/authentication.service';
 
 @Component({
@@ -9,7 +10,8 @@ import { AuthenticationService } from '../../services/auth/authentication.servic
 export class HeaderComponent implements OnInit {
 
   getUserrole:any;
-  constructor(private authService:AuthenticationService) { 
+  constructor(private authService:AuthenticationService,
+    private router:Router) { 
     this.getUserrole = this.authService.getRolefromlocal();
     //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
   }

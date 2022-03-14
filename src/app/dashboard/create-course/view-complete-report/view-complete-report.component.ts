@@ -1,0 +1,288 @@
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
+import { CourcesService } from 'src/app/shared/services/cources/cources.service';
+import { ViewHistoryComponent } from '../view-history/view-history.component';
+import * as XLSX from 'xlsx';
+
+@Component({
+  selector: 'app-view-complete-report',
+  templateUrl: './view-complete-report.component.html',
+  styleUrls: ['./view-complete-report.component.scss']
+})
+export class ViewCompleteReportComponent implements OnInit {
+
+  public filterForm!: FormGroup;
+  public courcesList: any;
+  public filteredCourseList:any;
+  public learningTypes: any;
+  public roles:any;
+  public roleUsers:any;
+  public departments:any;
+  collectionSize: any;
+  draftRequests:any =[];
+  pendingRequests:any=[];
+  closedRequests:any=[];
+  rejectedRequests:any=[];
+  usersubmitRequests:any=[];
+  allCourses:any;
+  routegetdata:any;
+  getUserrole: any;
+  getprofileDetails:any;
+  rocObj:any=[];
+  publisherObj:any=[];
+  flagVar:boolean=false;
+  addDate:any;
+
+  fileName = 'ExcelSheet.xlsx' ;
+  
+
+  public compare = (v1: string | number, v2: string | number) =>
+  v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+
+  @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
+  
+  constructor(
+    private fb: FormBuilder,
+    private courceService: CourcesService,
+    private authService: AuthenticationService,
+    private modalService: NgbModal,
+    private router: Router
+    ) {
+      this.getUserrole = this.authService.getRolefromlocal();
+
+      this.routegetdata = this.router.getCurrentNavigation()?.extras.state;
+       /*  if(!this.routegetdata){
+          this.router.navigateByUrl('/dashboard/cources');
+        }
+        else{
+          this.allCourses = this.pendingRequests;
+        } */
+     }
+
+  ngOnInit(): void {
+    this.refreshCourses();
+    this.getLearningType();
+    this.getRoles();
+    this.getDepartments();
+    this.filterForm= this.fb.group({
+      start_date: new FormControl('', []),
+      end_date: new FormControl('', []),
+      reporting_period: new FormControl('', []),
+      learning_type: new FormControl('', [Validators.required]),
+      status: new FormControl('', [Validators.required]),
+      department: new FormControl('', [Validators.required]),
+      roc: new FormControl('', [Validators.required]),
+      publisher: new FormControl('', [Validators.required]),
+     //custom_date:new FormControl('', [Validators.required]),
+    });
+  }
+
+  refreshCourses(){
+    this.pendingRequests=[];
+    this.rejectedRequests=[];
+    this.draftRequests=[];
+    this.closedRequests=[];
+    this.courceService.getCources().subscribe(
+      (res: any) => {
+        console.log(res);
+        if (res.status == 1 && res.message == 'Success') {
+          this.courcesList = res.data;
+          this.allCourses = this.courcesList;
+          if( this.routegetdata && this.routegetdata.status){
+            console.log('this.routegetdata',this.routegetdata)
+            console.log('this.cou',this.courcesList.filter((course:any)=>course.status == this.routegetdata.status))
+            this.courcesList =this.courcesList.filter((course:any)=>course.status ==this.routegetdata.status)
+          }
+          
+
+          this.collectionSize = this.courcesList.length;
+          this.courcesList.map((course:any)=>{
+            if(course.status === 'pending' && course.user_id != this.getprofileDetails.data.id){
+              this.pendingRequests.push(course)
+            }
+            if(course.status === 'pending'){
+              this.usersubmitRequests.push(course)
+            }
+            if(course.status === 'submit'){
+              this.rejectedRequests.push(course)
+            }
+            if(course.status === 'reject'){
+              this.rejectedRequests.push(course)
+            }
+            if(course.status === 'draft'){
+              this.draftRequests.push(course)
+            }
+            if(course.status === 'close'){
+              this.closedRequests.push(course)
+            }
+      
+          });
+        }
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
+  onSort({ column, direction }: any) {
+    this.headers.forEach((header) => {
+      if (header.sortable !== column) {
+        header.direction = '';
+      }
+    });
+
+    if (direction === '' || column === '') {
+      this.courcesList = this.courcesList;
+    } else {
+      this.courcesList = [...this.courcesList].sort((a, b) => {
+        const res = this.compare(a[column], b[column]);
+        return direction === 'asc' ? res : -res;
+      });
+    }
+  }
+
+  getrecords(data:any){
+    this.courcesList = data;
+  }
+
+  //getLearning type
+  getLearningType() {
+
+    this.courceService.getLearningType().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.learningTypes = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
+  getRoles(){
+    this.courceService.getRole().subscribe((res: any) => {
+      console.log("roles are",res);
+      this.roles = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+    });
+    this.courceService.getRoleUsers().subscribe((res: any) => {
+      console.log("res data is ",res.data);
+       console.log("res data is ",res.data[2]);
+      //this.rocObj = res.data[2].map((x:any)=>x.id==3);
+      for(let item of res.data[2]){
+        if (item.role_id==3){
+          console.log(item);
+          this.rocObj.push(item);
+        }
+        else if(item.role_id==4){
+          this.publisherObj.push(item);
+        }
+      }
+      for(let item of res.data[3]){
+        if (item.role_id==3){
+          console.log(item);
+          this.rocObj.push(item);
+        }
+        else if(item.role_id==4){
+          this.publisherObj.push(item);
+        }
+      }
+      for(let item of res.data[4]){
+        if (item.role_id==3){
+          console.log(item);
+          this.rocObj.push(item);
+        }
+        else if(item.role_id==4){
+          this.publisherObj.push(item);
+        }
+      }
+      console.log("roc is",this.rocObj);
+      console.log("publisher is",this.publisherObj);
+      },
+      (err: any) => {
+        console.log(err);
+    });
+
+  }
+  getDepartments(){
+    this.courceService.getpreferedInstructor().subscribe(
+      (res: any) => {
+        let depart = res.data.map((x:any)=>x.department_description);
+        console.log("this.departments",depart);
+       // this.departments = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
+  applyFilter(){
+    console.log("apply call");
+    if(this.filterForm.value.reporting_period){
+     this.filterForm.value.start_date = '';
+     this.filterForm.value.end_date = '';
+    }
+    let totalObj = {
+      ...this.filterForm.value
+    };
+    console.log("obhjj",totalObj);
+    if (this.filterForm.valid) {
+      console.log("api call");
+      this.courceService.getCourseFilter(totalObj).subscribe((res: any) => {
+        console.log("filtered",res);
+        if (res.status == 1 && res.message == 'Success') {
+        this.filteredCourseList = res.data;
+        this.flagVar = true;
+        }},
+        (err: any) => {
+          console.log(err);
+        });
+    }
+    else {
+      this.filterForm.markAllAsTouched();
+    }
+  }
+
+  openModal(course: any){
+    this.courceService.courseHistory(course.id).subscribe((res:any)=>{
+      console.log(res);
+      if(res && res.status==1){
+        const modalRef = this.modalService.open(ViewHistoryComponent, {
+          centered: true,
+          size: 'lg',
+          windowClass: 'alert-popup',
+        });
+        modalRef.componentInstance.props = {
+          title: 'View History',
+          data: res.data,
+          data1:course,
+          type:'viewhistory'
+        };
+      }
+    })
+  }
+
+  reset(){
+    this.refreshCourses();
+    this.getLearningType();
+    this.flagVar = false;
+  }
+  exportToExcel():void{
+    console.log("excel call");
+   let element = document.getElementById("excel-table");
+   const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+   const wb: XLSX.WorkBook = XLSX.utils.book_new();
+   XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+   XLSX.writeFile(wb, this.fileName);
+  }
+
+}
