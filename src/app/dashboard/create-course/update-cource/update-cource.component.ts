@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -16,22 +16,34 @@ import { CourcesService } from 'src/app/shared/services/cources/cources.service'
   styleUrls: ['./update-cource.component.scss'],
 })
 export class UpdateCourceComponent implements OnInit {
+  @ViewChild('chkurl') chkurl!: ElementRef<HTMLElement>;
+  @ViewChild('chkupload') chkupload!: ElementRef<HTMLElement>;
   routergetdata: any;
   public createCourceForm!: FormGroup;
   public commonCreateCourceForm!: FormGroup;
   public iltandViltForm!: FormGroup;
+  public videobasedForm!: FormGroup;
   public materialbasedForm!: FormGroup;
   public currriculumForm!: FormGroup;
+  public webbasedForm!: FormGroup;
+  public playlistForm!: FormGroup;
   public showCertificateExpiry: boolean = false;
+  public showCertificateExpiry_Curriculum: boolean = false;
+  public showCertificateExpiry_Webbased: boolean = false;
   public externalVendorname: boolean = false;
+  public externalVendorname_Webbased: boolean = false;
+  public materialsourceurl: boolean = false;
+  public materialsourceupload: boolean = false;  
   showVendor: boolean = false;
+  showVendor_Webbased: boolean = false;
   public learnerGuidearray: any = [];
-  public learningType: any = '1';
+  public learningType: any = '';
   public selectedLanguages:any = [];
   public cctLevel: any;
   coursesList: any;
   courseLength: any;
-  notifications:boolean =false;
+  notifications: boolean = false;
+  public subjectId: any;
 
   public cctExpiryperiod: any = [
     {
@@ -79,19 +91,79 @@ export class UpdateCourceComponent implements OnInit {
   publisherList:any=[];
   stringArray: any = [];
   selectedPublisherId:any;
-  profileDetails:any;
+  profileDetails: any;
+  showtitle: any;
+  showobjective: any;
+  showdescription: any;
+
+  showCurriculumEmail: any;
+  showCurriculumLink: any;
+  showCurriculumFreeText: any;
+  showCurriculumContent: any;
+  showCurriculumForWhom: any;
+  showCurriculumLearnMore: any;
+  showCurriculumWhoSee: any;
+
+  showMaterialURLchecked: boolean = false;
+  showMaterialUploadchecked: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private courceService: CourcesService,
     private router: Router,
     private authService: AuthenticationService
   ) {
+
     this.routergetdata = this.router.getCurrentNavigation()?.extras.state;
     if (!this.routergetdata) {
       this.router.navigateByUrl('/dashboard/cources');
     }
-	this.selectedLanguages = JSON.parse(this.routergetdata['available_language']);
+    this.selectedLanguages = JSON.parse(this.routergetdata['available_language']);
+    this.subjectId = Number(this.routergetdata['subject']);
     console.log(this.routergetdata)
+    this.showtitle = this.routergetdata.title.toString().replace('"', '').replace('"', '');
+    this.showobjective = this.routergetdata.objective.toString().replace('"', '').replace('"', '');
+    this.showdescription = this.routergetdata.description.toString().replace('"', '').replace('"', '');
+    if (this.routergetdata.learning_type == "1") {
+      
+    }
+    else if (this.routergetdata.learning_type == "2") {
+      
+    }
+    else if (this.routergetdata.learning_type == "3") {
+      if (this.routergetdata.video_link != "") {
+        
+
+
+        let el: HTMLElement = this.chkurl.nativeElement;
+        el.click();
+        
+        this.showMaterialURLchecked = true;
+        this.showMaterialUploadchecked = false;
+      }
+      else {
+        let el: HTMLElement = this.chkupload.nativeElement;
+        el.click();
+        this.showMaterialURLchecked = false;
+        this.showMaterialUploadchecked = true;
+      }
+
+    }
+    else if (this.routergetdata.learning_type == "4") {
+      this.showCurriculumEmail = this.routergetdata.email_preffered_instructor
+      this.showCurriculumLink = this.routergetdata.video_link
+      this.showCurriculumFreeText = this.routergetdata.title_additional
+      this.showCurriculumContent = this.routergetdata.external_vendor_name
+      this.showCurriculumLearnMore = this.routergetdata.learn_more.toString().replace('"', '').replace('"', '')
+      this.showCurriculumForWhom = this.routergetdata.for_whoom.toString().replace('"', '').replace('"', '')
+      this.showCurriculumWhoSee = this.routergetdata.who_see_course
+    }
+    else if (this.routergetdata.learning_type == "5") {
+      
+    }
+    else if (this.routergetdata.learning_type == "6") {
+      
+    }
   }
 
   getRole() {
@@ -293,6 +365,7 @@ export class UpdateCourceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     const emailregexp = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
     this.getCordinators();
     this.getvendorType();
@@ -311,14 +384,14 @@ export class UpdateCourceComponent implements OnInit {
     console.log(this.profileDetails)
     console.log(this.routergetdata);
     this.getRole();
-
+    this.learningType = this.routergetdata.learning_type;
     //common form
     this.commonCreateCourceForm = this.fb.group({
       title1: new FormArray([]),
       //title: new FormArray([]),
       title: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
-      learning_type: new FormControl('1', [Validators.required]),
+      learning_type: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       resource: new FormControl(''),
       objective: new FormControl('', [Validators.required]),
@@ -343,15 +416,15 @@ export class UpdateCourceComponent implements OnInit {
 
     //ilt and vilt
     this.iltandViltForm = this.fb.group({
-      manager_approval: new FormControl([Validators.required]),
-      digital: new FormControl( [Validators.required]),
-      certification: new FormControl( [Validators.required]),
-      certification_expiry_type: new FormControl(''),
-      validity_period: new FormControl(''),
-      external_vendor_name: new FormControl(''),
+      manager_approval: new FormControl('',[Validators.required]),
+      digital: new FormControl('',[Validators.required]),
+      certification: new FormControl('',[Validators.required]),
+      certification_expiry_type: new FormControl('', [Validators.required]),
+      validity_period: new FormControl('', [Validators.required]),
+      external_vendor_name: new FormControl('', [Validators.required]),
       purchase_order: new FormControl(),
       // email_training_contact: new FormControl('', [Validators.required]),
-      delivery_method: new FormControl([Validators.required]),
+      delivery_method: new FormControl('',[Validators.required]),
       for_whoom: new FormControl('', [Validators.required]),
       cost_of_training: new FormControl(''),
       // cost_of_training: new FormControl('', [Validators.required]),
@@ -365,16 +438,16 @@ export class UpdateCourceComponent implements OnInit {
       first_session_date: new FormControl('', [Validators.required]),
       expiry_date: new FormControl('', [Validators.required]),
       title_additional: new FormControl(''),
-      external_vendor: new FormControl( [Validators.required]),
+      external_vendor: new FormControl('',[Validators.required]),
 
-      entity_business_area: new FormControl([Validators.required]),
-      email_preffered_instructor: new FormControl([Validators.required]),
+      entity_business_area: new FormControl('',[Validators.required]),
+      email_preffered_instructor: new FormControl('',[Validators.required]),
 
       who_see_course: new FormControl(),
       additional_comment: new FormControl(''),
 
       // learner_guideline: new FormControl(''),
-      guidelines: this.fb.array([]),
+      learner_guideline: this.fb.array([]),
       //ilt and vilt
 
       regional_cordinator:
@@ -383,18 +456,109 @@ export class UpdateCourceComponent implements OnInit {
           : new FormControl(),
     });
 
+    //video based
+    this.videobasedForm = this.fb.group({
+      video_link: new FormControl(''),
+      email_preffered_instructor: new FormControl('', [Validators.required,
+        Validators.pattern(emailregexp)]),
+      regional_cordinator:
+        this.getUserrole.id === 2
+          ? new FormControl('', [Validators.required])
+          : new FormControl()
+    });
+
     this.materialbasedForm = this.fb.group({
       //material based
-      material_source: new FormControl(''),
-      material_expiry_date: new FormControl(''),
-      material_url: new FormControl(''),
+      video_link: new FormControl('', [Validators.required]),
+      url: new FormControl('', [Validators.required]),
+      regional_cordinator:
+        this.getUserrole.id === 2
+          ? new FormControl('', [Validators.required])
+          : new FormControl()
       //material
+    });
+
+    //curriculum
+    this.currriculumForm = this.fb.group({
+      email_preffered_instructor: new FormControl('', [Validators.required,
+        Validators.pattern(emailregexp)]),
+      digital: new FormControl('', [Validators.required]),
+      certification: new FormControl('', [Validators.required]),
+      certification_expiry_type: new FormControl('', [Validators.required]),
+      validity_period: new FormControl('', [Validators.required]),
+      learn_more: new FormControl(''),
+      video_link: new FormControl(''),
+      title_additional: new FormControl(''),
+      external_vendor_name: new FormControl(''),
+      free_field_content: new FormControl(''),
+      expiry_date: new FormControl(''),
+      who_see_course: new FormControl(''),
+      url: new FormControl('', [Validators.required]),
+      for_whoom: new FormControl('', [Validators.required]),
+      learner_guideline: this.fb.array([]),
+      regional_cordinator:
+        this.getUserrole.id === 2
+          ? new FormControl('', [Validators.required])
+          : new FormControl()
+    });
+    this.webbasedForm = this.fb.group({
+      email_preffered_instructor: new FormControl('', [Validators.required,
+      Validators.pattern(emailregexp)]),
+      digital: new FormControl('', [Validators.required]),
+      certification: new FormControl('', [Validators.required]),
+      certification_expiry_type: new FormControl('', [Validators.required]),
+      validity_period: new FormControl('', [Validators.required]),
+      external_vendor: new FormControl('', [Validators.required]),
+      external_vendor_name: new FormControl('', [Validators.required]),
+      purchase_order: new FormControl(''),
+      regional_cordinator:
+        this.getUserrole.id === 2
+          ? new FormControl('', [Validators.required])
+          : new FormControl()
+    });
+    this.playlistForm = this.fb.group({
+      for_whoom: new FormControl('', [Validators.required,
+      Validators.pattern(emailregexp)]),
+      url: new FormControl('', [Validators.required]),
+      video_link: new FormControl('', [Validators.required]),
+      level: new FormControl('', [Validators.required]),
+      who_see_course: new FormControl('', [Validators.required]),
+      free_field_content: new FormControl('', [Validators.required]),
+      email_preffered_instructor: new FormControl('', [Validators.required]),
+      regional_cordinator:
+        this.getUserrole.id === 2
+          ? new FormControl('', [Validators.required])
+          : new FormControl()
     });
 
     this.commonCreateCourceForm.patchValue(this.routergetdata);
     console.log('patch',this.routergetdata)
-    this.commonCreateCourceForm.controls['learning_type'].disable({onlySelf: true});
-    this.iltandViltForm.patchValue(this.routergetdata);
+    this.commonCreateCourceForm.controls['learning_type'].disable({ onlySelf: true });
+    this.routergetdata.title.toString().replace('"', '').replace('"', '');
+    
+    if (this.learningType == "1") {
+      this.iltandViltForm.patchValue(this.routergetdata);
+    }
+    else if (this.learningType == "2") {
+      this.videobasedForm.patchValue(this.routergetdata);
+    }
+    else if (this.learningType == "3") {
+      this.materialbasedForm.patchValue(this.routergetdata);
+    }
+    else if (this.learningType == "4") {
+      this.currriculumForm.patchValue(this.routergetdata);
+    }
+    else if (this.learningType == "5") {
+      this.webbasedForm.patchValue(this.routergetdata);
+    }
+    else if (this.learningType == "6") {
+      this.playlistForm.patchValue(this.routergetdata);
+    }
+    console.log(this.routergetdata);
+
+    this.commonCreateCourceForm.value.subject = this.routergetdata.subject;
+
+    
     if (this.routergetdata.external_vendor == 'yes') {
       this.externalVendorname = true;
     } else {
@@ -403,9 +567,12 @@ export class UpdateCourceComponent implements OnInit {
     if (this.routergetdata.certification == 'yes') {
       this.showCertificateExpiry = true;
     }
-    this.commonCreateCourceForm.patchValue({
-      subject: parseInt(this.routergetdata.subject),
-    });
+    //this.commonCreateCourceForm.patchValue({
+    //  //subject: Number(this.routergetdata.subject),
+    //});
+    
+
+    //this.subjectId = this.routergetdata.subject;
     //console.log(this.routergetdata.subject);
 
     this.addLearnerGuideline();
@@ -416,9 +583,15 @@ export class UpdateCourceComponent implements OnInit {
   }
 
   get t() {
-    return this.f.guidelines as FormArray;
+    return this.f.learner_guideline as FormArray;
+  }
+  get currriculum() {
+    return this.currriculumForm.controls;
   }
 
+  get curriculumArray() {
+    return this.currriculum.learner_guideline as FormArray;
+  }
   addMorelearnerGuideline() {
     return this.fb.group({
       title: new FormControl(''),
@@ -430,12 +603,16 @@ export class UpdateCourceComponent implements OnInit {
     console.log(this.t);
     return this.t.push(this.addMorelearnerGuideline());
   }
-
+  addLearnerGuidelinetocurriculum() {
+    return this.curriculumArray.push(this.addMorelearnerGuideline());
+  }
   removeLearnerGuideline(i: any) {
     this.t.removeAt(i);
     // this.learnerGuidearray.splice(i,1)
   }
-
+  removeLearnerGuidelinetocurriculum(i: any) {
+    this.curriculumArray.removeAt(i);
+  }
   selectLearning() {
     // this.createCourceForm.setValue({
     //   name:new FormControl('Test')
@@ -467,7 +644,11 @@ export class UpdateCourceComponent implements OnInit {
       ...courseid,
       ...{learning_type:this.routergetdata.learning_type}
     };
+    this.getFormValidationErrors();
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
+      if (totalObj.learning_type == null || totalObj.learning_type == "") {
+        totalObj.learning_type = this.learningType.toString();
+      }
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
           console.log(res);
@@ -482,8 +663,386 @@ export class UpdateCourceComponent implements OnInit {
       console.log(totalObj);
     } else {
       this.commonCreateCourceForm.markAllAsTouched();
-      this.iltandViltForm.markAllAsTouched();
-      this.getFormValidationErrors();
+      this.iltandViltForm.markAllAsTouched();      
+    }
+    //if (status == "draft") {
+    //  this.saveasDraftIlt();
+    //}
+    //else {
+    //  if (totalObj.learning_type == null || totalObj.learning_type == "") {
+    //    totalObj.learning_type = this.learningType.toString();
+    //  }
+      
+    //  this.courceService.updateCourse(totalObj).subscribe(
+    //    (res: any) => {
+    //      console.log(res);
+    //      if (res) {
+    //        this.router.navigate(['/dashboard/cources']);
+    //      }
+    //    },
+    //    (err: any) => {
+    //      console.log(err);
+    //    }
+    //  );
+    //}
+  }
+  //get Video validation erros
+  getFormValidationErrors_Video() {
+    Object.keys(this.videobasedForm.controls).forEach((key) => {
+      const controlErrors: any = this.videobasedForm.get(key)?.errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach((keyError) => {
+          console.log(
+            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ',
+            controlErrors[keyError]
+          );
+        });
+      }
+    });
+  }
+  //create Video vilt form
+  createNewCourceVideo(status: any) {
+    console.log(this.stringArray);
+    console.log(this.learnerGuidearray);
+    let savetype = { status: status };
+    let totalObj = {
+      ...this.videobasedForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+    };
+    let titlearray: any = [];
+    let titleForm: any;
+    let obj: any;
+    titleForm = this.commonCreateCourceForm.value.title1;
+    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
+      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+        titlearray.push({
+          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
+            this.commonCreateCourceForm.value.title1[i].value,
+        });
+      }
+    }
+    console.log('titleForm', titlearray);
+
+    this.commonCreateCourceForm.value.title = titlearray;
+    console.log(this.commonCreateCourceForm.value);
+
+    this.getFormValidationErrors();
+    if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
+      console.log(totalObj);
+      if (totalObj.learning_type == null || totalObj.learning_type == "") {
+        totalObj.learning_type = this.learningType.toString();
+      }
+      this.courceService.createCource(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            let statedata = res.data;
+            let saveobj = { issave: true };
+            let stateobj = { ...statedata, ...saveobj };
+            // this.router.navigate(['/dashboard/cources']);
+            this.router.navigateByUrl('/dashboard/cources/request-detail', {
+              state: stateobj,
+            });
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.videobasedForm.markAllAsTouched();
+      console.log(this.learnerGuidearray);
+      console.log(totalObj);
+    }
+  }
+
+  //get Material validation erros
+  getFormValidationErrors_Material() {
+    Object.keys(this.materialbasedForm.controls).forEach((key) => {
+      const controlErrors: any = this.materialbasedForm.get(key)?.errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach((keyError) => {
+          console.log(
+            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ',
+            controlErrors[keyError]
+          );
+        });
+      }
+    });
+  }
+  //create Material form
+  createNewCourceMaterial(status: any) {
+    console.log(this.stringArray);
+    console.log(this.learnerGuidearray);
+    let savetype = { status: status };
+    let totalObj = {
+      ...this.materialbasedForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+    };
+    let titlearray: any = [];
+    let titleForm: any;
+    let obj: any;
+    titleForm = this.commonCreateCourceForm.value.title1;
+    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
+      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+        titlearray.push({
+          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
+            this.commonCreateCourceForm.value.title1[i].value,
+        });
+      }
+    }
+    console.log('titleForm', titlearray);
+
+    this.commonCreateCourceForm.value.title = titlearray;
+    console.log(this.commonCreateCourceForm.value);
+
+    this.getFormValidationErrors_Material();
+    if (this.materialbasedForm.valid && this.commonCreateCourceForm.valid) {
+      console.log(totalObj);
+      if (totalObj.learning_type == null || totalObj.learning_type == "") {
+        totalObj.learning_type = this.learningType.toString();
+      }
+      this.courceService.createCource(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            let statedata = res.data;
+            let saveobj = { issave: true };
+            let stateobj = { ...statedata, ...saveobj };
+            // this.router.navigate(['/dashboard/cources']);
+            this.router.navigateByUrl('/dashboard/cources/request-detail', {
+              state: stateobj,
+            });
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.materialbasedForm.markAllAsTouched();
+      console.log(this.learnerGuidearray);
+      console.log(totalObj);
+    }
+  }
+
+  //get Currriculum validation erros
+  getFormValidationErrors_Currriculum() {
+    Object.keys(this.currriculumForm.controls).forEach((key) => {
+      const controlErrors: any = this.currriculumForm.get(key)?.errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach((keyError) => {
+          console.log(
+            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ',
+            controlErrors[keyError]
+          );
+        });
+      }
+    });
+  }
+  //create Currriculum form
+  createNewCourceCurrriculum(status: any) {
+    console.log(this.stringArray);
+    console.log(this.learnerGuidearray);
+    let savetype = { status: status };
+    let totalObj = {
+      ...this.currriculumForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+    };
+    let titlearray: any = [];
+    let titleForm: any;
+    let obj: any;
+    titleForm = this.commonCreateCourceForm.value.title1;
+    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
+      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+        titlearray.push({
+          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
+            this.commonCreateCourceForm.value.title1[i].value,
+        });
+      }
+    }
+    console.log('titleForm', titlearray);
+
+    this.commonCreateCourceForm.value.title = titlearray;
+    console.log(this.commonCreateCourceForm.value);
+
+    this.getFormValidationErrors_Currriculum();
+    if (this.currriculumForm.valid && this.commonCreateCourceForm.valid) {
+      console.log(totalObj);
+      if (totalObj.learning_type == null || totalObj.learning_type == "") {
+        totalObj.learning_type = this.learningType.toString();
+      }
+      this.courceService.createCource(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            let statedata = res.data;
+            let saveobj = { issave: true };
+            let stateobj = { ...statedata, ...saveobj };
+            // this.router.navigate(['/dashboard/cources']);
+            this.router.navigateByUrl('/dashboard/cources/request-detail', {
+              state: stateobj,
+            });
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.currriculumForm.markAllAsTouched();
+      console.log(this.learnerGuidearray);
+      console.log(totalObj);
+    }
+  }
+
+  //get Webbased validation erros
+  getFormValidationErrors_Webbased() {
+    Object.keys(this.webbasedForm.controls).forEach((key) => {
+      const controlErrors: any = this.webbasedForm.get(key)?.errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach((keyError) => {
+          console.log(
+            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ',
+            controlErrors[keyError]
+          );
+        });
+      }
+    });
+  }
+  //create Webbased form
+  createNewCourceWebbased(status: any) {
+    console.log(this.stringArray);
+    console.log(this.learnerGuidearray);
+    let savetype = { status: status };
+    let totalObj = {
+      ...this.webbasedForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+    };
+    let titlearray: any = [];
+    let titleForm: any;
+    let obj: any;
+    titleForm = this.commonCreateCourceForm.value.title1;
+    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
+      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+        titlearray.push({
+          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
+            this.commonCreateCourceForm.value.title1[i].value,
+        });
+      }
+    }
+    console.log('titleForm', titlearray);
+
+    this.commonCreateCourceForm.value.title = titlearray;
+    console.log(this.commonCreateCourceForm.value);
+
+    this.getFormValidationErrors_Webbased();
+    if (this.webbasedForm.valid && this.commonCreateCourceForm.valid) {
+      console.log(totalObj);
+      if (totalObj.learning_type == null || totalObj.learning_type == "") {
+        totalObj.learning_type = this.learningType.toString();
+      }
+      this.courceService.createCource(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            let statedata = res.data;
+            let saveobj = { issave: true };
+            let stateobj = { ...statedata, ...saveobj };
+            // this.router.navigate(['/dashboard/cources']);
+            this.router.navigateByUrl('/dashboard/cources/request-detail', {
+              state: stateobj,
+            });
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.webbasedForm.markAllAsTouched();
+      console.log(this.learnerGuidearray);
+      console.log(totalObj);
+    }
+  }
+
+  //get Playlist validation erros
+  getFormValidationErrors_Playlist() {
+    Object.keys(this.playlistForm.controls).forEach((key) => {
+      const controlErrors: any = this.playlistForm.get(key)?.errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach((keyError) => {
+          console.log(
+            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ',
+            controlErrors[keyError]
+          );
+        });
+      }
+    });
+  }
+  //create Webbased form
+  createNewCourcePlaylist(status: any) {
+    console.log(this.stringArray);
+    console.log(this.learnerGuidearray);
+    let savetype = { status: status };
+    let totalObj = {
+      ...this.playlistForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+    };
+    let titlearray: any = [];
+    let titleForm: any;
+    let obj: any;
+    titleForm = this.commonCreateCourceForm.value.title1;
+    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
+      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+        titlearray.push({
+          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
+            this.commonCreateCourceForm.value.title1[i].value,
+        });
+      }
+    }
+    console.log('titleForm', titlearray);
+
+    this.commonCreateCourceForm.value.title = titlearray;
+    console.log(this.commonCreateCourceForm.value);
+
+    this.getFormValidationErrors_Playlist();
+    if (this.playlistForm.valid) {
+      console.log(totalObj);
+      if (totalObj.learning_type == null || totalObj.learning_type == "") {
+        totalObj.learning_type = this.learningType.toString();
+      }
+      this.courceService.createCource(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            let statedata = res.data;
+            let saveobj = { issave: true };
+            let stateobj = { ...statedata, ...saveobj };
+            // this.router.navigate(['/dashboard/cources']);
+            this.router.navigateByUrl('/dashboard/cources/request-detail', {
+              state: stateobj,
+            });
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.playlistForm.markAllAsTouched();
+      console.log(this.learnerGuidearray);
+      console.log(totalObj);
     }
   }
 
@@ -498,6 +1057,9 @@ export class UpdateCourceComponent implements OnInit {
       ...this.commonCreateCourceForm.value,
       ...{learning_type:this.routergetdata.learning_type}
     };
+    if (totalObj.learning_type == null || totalObj.learning_type == "") {
+      totalObj.learning_type = this.learningType.toString();
+    }    
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
       console.log(totalObj);
       this.courceService.createCource(totalObj).subscribe(
@@ -676,7 +1238,40 @@ export class UpdateCourceComponent implements OnInit {
       this.iltandViltForm.get('validity_period')?.clearValidators();
     }
   }
+  certificationType_Curriculum(event: any) {
+    console.log(event.id);
+    if (event.id == 'yes') {
+      this.showCertificateExpiry_Curriculum = true;
+      this.currriculumForm
+        .get('certification_expiry_type')
+        ?.setValidators(Validators.required);
+      this.currriculumForm
+        .get('validity_period')
+        ?.setValidators(Validators.required);
+    } else {
+      this.showCertificateExpiry_Curriculum = false;
+      this.currriculumForm.get('certification_expiry_type')?.clearValidators();
+      this.currriculumForm.get('validity_period')?.clearValidators();
+    }
 
+  }
+  certificationType_Webbased(event: any) {
+    console.log(event.id);
+    if (event.id == 'yes') {
+      this.showCertificateExpiry_Webbased = true;
+      this.webbasedForm
+        .get('certification_expiry_type')
+        ?.setValidators(Validators.required);
+      this.webbasedForm
+        .get('validity_period')
+        ?.setValidators(Validators.required);
+    } else {
+      this.showCertificateExpiry_Webbased = false;
+      this.webbasedForm.get('certification_expiry_type')?.clearValidators();
+      this.webbasedForm.get('validity_period')?.clearValidators();
+    }
+
+  }
   externalVendor(event: any) {
     if (event.target.value == 'yes') {
       this.externalVendorname = true;
@@ -690,8 +1285,39 @@ export class UpdateCourceComponent implements OnInit {
       this.iltandViltForm.get('external_vendor_name')?.clearValidators();
     }
   }
+  externalVendor_Webbased(event: any) {
+    if (event.id == 'yes') {
+      this.externalVendorname_Webbased = true;
+      this.showVendor_Webbased = true;
+      this.webbasedForm
+        .get('external_vendor_name')
+        ?.setValidators(Validators.required);
+    } else {
+      this.externalVendorname_Webbased = false;
+      this.showVendor_Webbased = false;
+      this.webbasedForm.get('external_vendor_name')?.clearValidators();
+    }
 
-  getlearningType(event: any) {
+  }
+  getmaterialsource(event: any) {
+    if (event == 'Url') {
+      this.materialsourceurl = true;
+      this.materialsourceupload = false;
+      this.iltandViltForm
+        .get('url')
+        ?.setValidators(Validators.required);
+      this.iltandViltForm.get('video_link')?.clearValidators();
+    } else {
+      this.materialsourceurl = false;
+      this.materialsourceupload = true;
+      this.iltandViltForm
+        .get('video_link')
+        ?.setValidators(Validators.required);
+      this.iltandViltForm.get('url')?.clearValidators();
+    }
+  }
+
+  get_learningType(event: any) {
     console.log(event.target.value);
     this.learningType = event.target.value;
   }
