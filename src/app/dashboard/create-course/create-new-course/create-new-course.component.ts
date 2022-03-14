@@ -1432,17 +1432,17 @@ export class CreateNewCourseComponent implements OnInit {
     if (event == 'Url') {
       this.materialsourceurl = true;
       this.materialsourceupload = false;
-      this.iltandViltForm
+      this.materialbasedForm
         .get('url')
         ?.setValidators(Validators.required);
-      this.iltandViltForm.get('video_link')?.clearValidators();
+      this.materialbasedForm.get('video_link')?.clearValidators();
     } else {
       this.materialsourceurl = false;
       this.materialsourceupload = true;
-      this.iltandViltForm
+      this.materialbasedForm
         .get('video_link')
         ?.setValidators(Validators.required);
-      this.iltandViltForm.get('url')?.clearValidators();
+      this.materialbasedForm.get('url')?.clearValidators();
     }
   }
 
