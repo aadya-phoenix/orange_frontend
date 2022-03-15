@@ -1,23 +1,16 @@
 <div id="right-panel" class="right-panel">
-  <!-- Header-->
-  <app-header></app-header>
-  <!-- /header -->
-  <!-- Header-->
-  <div
-    class="breadcrumbs"
-    style="background-color: #fbfbf7; padding: 9px 9px 9px 9px"
-  >
-    <div class="col-sm-6">
-      <div class="page-header float-left" style="background: transparent">
-        <div class="page-title d-flex align-items-center">
-          <img
-            src="../../../../assets/images/creatnew.png"
-            class="home_Css_img"
-          />
-          <div class="d-flex flex-column ml-3">
-            <span style="font-size: 20px" class="mb-1">Create new course </span>
-            <span style="color: #aba3a3; font-size: 13px"
-              >People Development & Learning Strives on Providing you with the
+    <!-- Header-->
+    <app-header></app-header>
+    <!-- /header -->
+    <!-- Header-->
+    <div class="breadcrumbs" style="background-color: #fbfbf7; padding: 9px 9px 9px 9px">
+        <div class="col-sm-6">
+            <div class="page-header float-left" style="background: transparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/creatnew.png" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span style="font-size: 20px" class="mb-1">Create new course </span>
+                        <span style="color: #aba3a3; font-size: 13px">People Development & Learning Strives on Providing you with the
               best customer service we can drive</span
             >
           </div>
@@ -66,11 +59,9 @@
                 />
                 <p class="mt-3 ml-2 view-re_css">
                   <span>View Request</span>
-                  <span class="cc-text_css"
-                    >( {{ routegetdata.request_id }} ) -
+                        <span class="cc-text_css">( {{ routegetdata.request_id }} ) -
                   </span>
-                  <span style="color: #ff7900"
-                    >Request Status - {{ routegetdata.status | titlecase }}</span
+                        <span style="color: #ff7900">Request Status - {{ routegetdata.status | titlecase }}</span
                   >
                 </p>
               </div>
@@ -83,7 +74,7 @@
     <!-- .content -->
   </div>
 
-  <div class="content mt-3">
+  <div class="content">
     <div class="animated fadeIn">
       <div class="card" *ngIf="getUserrole.id != 2 && !routegetdata.issave">
         <div class="card-body">
@@ -162,484 +153,334 @@
               <div class="container-fluid animate__fadeInDown">
                 <div class="row">
                   <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Request Number</p>
-                        <label class="label_text">{{
+                    <div class="form-group">
+<label for="exampleInputEmail1">Request Number</label>
+<input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
                           routegetdata.request_id
-                        }}</label>
-                      </div>
-                    </div>
+                        }}">
+</div>
+                    
                   </div>
                   <!--cole dn-->
                   <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Requester Name</p>
-                        <label class="label_text"
-                          >{{
+                    <div class="form-group">
+<label for="exampleInputEmail1">Requester Name</label>
+<input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
                             routegetdata.user_name
                               ? routegetdata.user_name
                               : routegetdata.user_id
-                          }}
-                        </label>
-                      </div>
-                    </div>
+                          }}">
+</div>
+                    
                   </div>
                   <!--cole dn-->
                   <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Training Title</p>
-                        <label class="label_text"
-                          >{{
+                      <div class="form-group">
+<label for="exampleInputEmail1">Learning Type</label>
+<input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
+                            routegetdata.learning_type_name
+                              ? routegetdata.learning_type_name
+                              : routegetdata.learning_type
+                          }}">
+</div>
+                    
+                  </div>
+                  <!--cole dn-->
+               
+                  <div class="col-sm-4">
+                      <div class="form-group">
+<label for="exampleInputEmail1">Title</label>
+<span class="form-control form_width" id="exampleInputEmail1" disabled >{{
                             routegetdata.title
                               ? (routegetdata.title | titlecase)
                               : "-"
-                          }}
-                        </label>
-                      </div>
+                          }}</span>
                     </div>
-                  </div>
-                  <!--cole dn-->
+
                 </div>
-                <!--row end-->
-                <div class="row">
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Training Duration</p>
-                        <label class="label_text"
-                          >{{ routegetdata.duration }}
-                        </label>
-                      </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Training Provided By</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.training_provided_by }}</span>
                     </div>
-                  </div>
-                  <!--cole dn-->
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Description</p>
-                        <label class="label_text"
-                          >{{ routegetdata.description }}
-                        </label>
-                      </div>
+
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Training Duration</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.duration }}</span>
                     </div>
-                  </div>
-                  <!--cole dn-->
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Level</p>
-                        <label class="label_text"
-                          >{{
+
+                </div>
+                <!--cole dn-->
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Description</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.description }}</span>
+                    </div>
+
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Objective</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.objective }}</span>
+                    </div>
+
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Subject</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.subject_name }}</span>
+                    </div>
+
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Available Language</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
+                            routegetdata.available_language_name
+                              ? routegetdata.available_language_name
+                              : "-"
+                          }}</span>
+                    </div>
+
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Level</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
                             routegetdata.level_name
                               ? routegetdata.level_name
                               : routegetdata.level
-                          }}
-                        </label>
-                      </div>
+                          }}</span>
                     </div>
-                  </div>
-                  <!--cole dn-->
-                </div>
-                <!--row end-->
-                <div class="row mb-2">
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Manage Approval</p>
-                        <label class="label_text">
-                          {{
-                            routegetdata.manager_approval
-                              ? (routegetdata.manager_approval | titlecase)
-                              : "-"
-                          }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <!--cole dn-->
 
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">
-                          Does this course integrate digital?
-                        </p>
-                        <label class="label_text">
-                          {{
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email of content owner</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.email_content_owner }}</span>
+                    </div>
+
+                </div>
+                <!--cole dn-->
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email of training contact</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
+                            routegetdata.email_training_contact
+                              ? routegetdata.email_training_contact
+                              : "-"
+                          }}</span>
+                    </div>
+
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Prerequisite</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
+                            routegetdata.prerequisite
+                              ? routegetdata.prerequisite
+                              : "-"
+                          }}</span>
+                    </div>
+
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Delivery Method</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
+                            routegetdata.delivery_method_name
+                              ? routegetdata.delivery_method_name
+                              : routegetdata.delivery_method
+                          }}</span>
+                    </div>
+
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Does this course integrate digital?</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
                             routegetdata.digital
                               ? (routegetdata.digital | titlecase)
                               : "-"
-                          }}
-                        </label>
-                      </div>
+                          }}</span>
                     </div>
-                  </div>
-                  <!--cole dn-->
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Certification</p>
-                        <label class="label_text">
-                          {{
+
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Purchase order required</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
+                            routegetdata.purchase_order
+                              ? (routegetdata.purchase_order | titlecase)
+                              : "-"
+                          }}</span>
+                    </div>
+
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Manage Approval</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
+                            routegetdata.manager_approval
+                              ? (routegetdata.manager_approval | titlecase)
+                              : "-"
+                          }}</span>
+                    </div>
+
+                </div>
+                <!--cole dn-->
+
+
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Who can see?</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
+                            routegetdata.who_see_course_name
+                              ? (routegetdata.who_see_course_name | titlecase)
+                              : "-"
+                          }}</span>
+                    </div>
+
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">  Email of preffered Instructor ?</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
+                            routegetdata.email_training_contact
+                              ? routegetdata.email_training_contact
+                              : "-"
+                          }}</span>
+                    </div>
+
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Certification</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>                          {{
                             routegetdata.certification
                               ? (routegetdata.certification | titlecase)
                               : "-"
-                          }}
-                        </label>
-                      </div>
+                          }}</span>
                     </div>
-                  </div>
 
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">
-                          Certification Expiry type name
-                        </p>
-                        <label class="label_text">
-                          {{
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">  Certification Expiry type name</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled> {{
                             routegetdata.certification_expiry_type_name
                               ? (routegetdata.certification_expiry_type_name
                                 | titlecase)
                               : "-"
-                          }}
-                        </label>
-                      </div>
+                          }}</span>
                     </div>
-                  </div>
 
-                  <!-- <div class="row mb-2 "> -->
-
-                  <!--cole dn-->
-
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Purchase order required</p>
-                        <label class="label_text">
-                          {{
-                            routegetdata.purchase_order
-                              ? (routegetdata.purchase_order | titlecase)
-                              : "-"
-                          }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!--cole dn-->
-
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Learning Type</p>
-                        <label class="label_text"
-                          >{{
-                            routegetdata.learning_type_name
-                              ? routegetdata.learning_type_name
-                              : routegetdata.learning_type
-                          }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!--cole dn-->
-
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Email of content owner</p>
-                        <label class="label_text"
-                          >{{ routegetdata.email_content_owner }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Training Provided By</p>
-                        <label class="label_text"
-                          >{{ routegetdata.training_provided_by }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Created At</p>
-                        <label class="label_text"
-                          >{{ routegetdata.created_at | date: "short" }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Subject</p>
-                        <label class="label_text"
-                          >{{ routegetdata.subject_name }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Updated At</p>
-                        <label class="label_text"
-                          >{{ routegetdata.updated_at | date: "short" }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Objective</p>
-                        <label class="label_text"
-                          >{{ routegetdata.objective }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Prerequisite</p>
-                        <label class="label_text"
-                          >{{
-                            routegetdata.prerequisite
-                              ? routegetdata.prerequisite
-                              : "-"
-                          }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">For Whoom ?</p>
-                        <label class="label_text"
-                          >{{
-                            routegetdata.for_whoom
-                              ? routegetdata.for_whoom
-                              : "-"
-                          }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Email of content owner ?</p>
-                        <label class="label_text"
-                          >{{
-                            routegetdata.email_content_owner
-                              ? routegetdata.email_content_owner
-                              : "-"
-                          }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">
-                          Email of preffered Instructor ?
-                        </p>
-                        <label class="label_text"
-                          >{{
-                            routegetdata.email_preffered_instructor
-                              ? routegetdata.email_preffered_instructor
-                              : "-"
-                          }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Email of training contact</p>
-                        <label class="label_text"
-                          >{{
-                            routegetdata.email_training_contact
-                              ? routegetdata.email_training_contact
-                              : "-"
-                          }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Available Language</p>
-                        <label class="label_text"
-                          >{{
-                            routegetdata.available_language_name
-                              ? routegetdata.available_language_name
-                              : "-"
-                          }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Delivery Method</p>
-                        <label class="label_text"
-                          >{{
-                            routegetdata.delivery_method_name
-                              ? routegetdata.delivery_method_name
-                              : routegetdata.delivery_method
-                          }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">External Vendor</p>
-                        <label class="label_text">
-                          {{
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">External Vendor</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
                             routegetdata.external_vendor
                               ? (routegetdata.external_vendor | titlecase)
                               : "-"
-                          }}
-                        </label>
-                      </div>
+                          }}</span>
                     </div>
-                  </div>
 
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">External Vendor name</p>
-                        <label class="label_text"
-                          >{{
-                            routegetdata.external_vendor_name
-                              ? (routegetdata.external_vendor_name | titlecase)
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">External Vendor name</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
+                            routegetdata.external_vendor
+                              ? (routegetdata.external_vendor | titlecase)
                               : "-"
-                          }}
-                        </label>
-                      </div>
+                          }}</span>
                     </div>
-                  </div>
 
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Regional Cordinator Name</p>
-                        <label class="label_text"
-                          >{{
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">For Whom ?</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
+                            routegetdata.for_whoom
+                              ? routegetdata.for_whoom
+                              : "-"
+                          }}</span>
+                    </div>
+
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Updated At</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.updated_at | date: "short" }}</span>
+                    </div>
+
+                </div>
+                <!--cole dn-->
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Regional Cordinator Name</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
                             routegetdata.regional_cordinator_name
                               ? (routegetdata.regional_cordinator_name
                                 | titlecase)
                               : "-"
-                          }}
-                        </label>
-                      </div>
+                          }}</span>
                     </div>
-                  </div>
 
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Who can see?</p>
-                        <label class="label_text"
-                          >{{
-                            routegetdata.who_see_course_name
-                              ? (routegetdata.who_see_course_name | titlecase)
-                              : "-"
-                          }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  
-                  <div class="col-sm-4">
-                    <div class="pl-3 border_user">
-                      <div class="form-group mt-3">
-                        <p class="user_span_text">Video Link</p>
-                        <label class="label_text"
-                          >{{
-                            routegetdata.video_link
-                              ? (routegetdata.video_link )
-                              : "-"
-                          }}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- </div> -->
-
-                  <!--cole dn-->
                 </div>
-                <!--row end-->
-
-                <!--row end-->
-              </div>
+                <!--cole dn-->
+                <!--cole dn-->
             </div>
-            <!--colensd-->
-          </div>
-        </div>
-      </div>
-      <!-- .animated -->
-    </div>
-    <!-- .content -->
-  </div>
-  <!-- /#right-panel -->
+            <!--row end-->
 
-  <!-- Right Panel -->
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-    style="margin-top: 250px"
-  >
+            <!--row end-->
+        </div>
+    </div>
+    <!--colensd-->
+</div>
+</div>
+</div>
+<!-- .animated -->
+</div>
+<!-- .content -->
+</div>
+<!-- /#right-panel -->
+
+<!-- Right Panel -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 250px">
     <div class="modal-dialog modal-lg" role="document ">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="form-group">
-                <label>Transfer to Publisher</label>
-                <select
-                  name="select "
-                  id="select "
-                  class="form-control"
-                  (change)="getPublisherselected($event)"
-                >
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Transfer to Publisher</label>
+                            <select name="select " id="select " class="form-control" (change)="getPublisherselected($event)">
                   <option value="0 ">Please select</option>
                   <option
                     *ngFor="let publisher of publisherList"
@@ -648,99 +489,67 @@
                     {{ publisher.first_name }}
                   </option>
                 </select>
-              </div>
+                        </div>
+                    </div>
+                    <!--col end-->
+                </div>
+                <!--row-->
             </div>
-            <!--col end-->
-          </div>
-          <!--row-->
-        </div>
-        <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-dismiss="modal"
-            (click)="transfertoPublisher()"
-          >
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="transfertoPublisher()">
             Submit
           </button>
+            </div>
         </div>
-      </div>
     </div>
     <!-- </ng-template> -->
-  </div>
-  <div
-    class="modal fade"
-    id="rejectModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-    style="margin-top: 250px"
-  >
+</div>
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 250px">
     <div class="modal-dialog modal-lg" role="document ">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 style="font-size: 14px; color: #ff7900">Reject Request</h4>
-        </div>
-
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="form-group">
-                <label>Comments</label>
-                <textarea
-                  class="form-control form_width-textarea"
-                  [(ngModel)]="rejectcomment"
-                  rows="3 "
-                  placeholder="Enter Your Comments "
-                >
-                </textarea>
-              </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="font-size: 14px; color: #ff7900">Reject Request</h4>
             </div>
-            <!--col end-->
-          </div>
-          <!--row-->
-        </div>
-        <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-dismiss="modal"
-            (click)="reject()"
-          >
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Comments</label>
+                            <textarea class="form-control form_width-textarea" [(ngModel)]="rejectcomment" rows="3 " placeholder="Enter Your Comments ">
+                </textarea>
+                        </div>
+                    </div>
+                    <!--col end-->
+                </div>
+                <!--row-->
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="reject()">
             Submit
           </button>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  <div
-    class="modal fade"
-    id="transferotherRoc"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-    style="margin-top: 250px"
-  >
+<div class="modal fade" id="transferotherRoc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 250px">
     <div class="modal-dialog modal-lg" role="document ">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 style="font-size: 14px; color: #ff7900">
-            Transfer the requet to other ROC
-          </h4>
-        </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="font-size: 14px; color: #ff7900">
+                    Transfer the requet to other ROC
+                </h4>
+            </div>
 
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="form-group">
-                <label>Regional Operation Coordinator</label>
-                <select
-                  class="form-control form_width"
-                  (change)="getRoc($event)"
-                >
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Regional Operation Coordinator</label>
+                            <select class="form-control form_width" (change)="getRoc($event)">
                   <option value=" ">Please select any</option>
                   <option
                     *ngFor="let otherroc of otherRocsList"
@@ -756,93 +565,69 @@
                   {{ vendor.name }}
                 </option> -->
                 </select>
-              </div>
+                        </div>
+                    </div>
+                    <!--col end-->
+                </div>
+                <!--row-->
             </div>
-            <!--col end-->
-          </div>
-          <!--row-->
-        </div>
-        <div class="modal-footer">
-          <!-- <button type="button " class="btn btn-secondary" data-dismiss="modal">
+            <div class="modal-footer">
+                <!-- <button type="button " class="btn btn-secondary" data-dismiss="modal">
             Close
           </button> -->
-          <button
-            type="button"
-            data-dismiss="modal"
-            (click)="transfertoOtherRoc()"
-            class="btn btn-primary btn_requst"
-          >
+                <button type="button" data-dismiss="modal" (click)="transfertoOtherRoc()" class="btn btn-primary btn_requst">
             Submit
           </button>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  <div
-    class="modal fade"
-    id="publishModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-    style="margin-top: 50px"
-  >
+<div class="modal fade" id="publishModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 50px">
     <div class="modal-dialog modal-lg" role="document ">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 style="font-size: 14px; color: #ff7900">Publish Request</h4>
-        </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="font-size: 14px; color: #ff7900">Publish Request</h4>
+            </div>
 
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="form-group">
-                <label>Comments</label>
-                <textarea
-                  class="form-control form_width-textarea"
-                  rows="3 "
-                  placeholder="Enter Your Comments "
-                >
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Comments</label>
+                            <textarea class="form-control form_width-textarea" rows="3 " placeholder="Enter Your Comments ">
                 </textarea>
-              </div>
+                        </div>
+                    </div>
+                    <!--col end-->
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Orange Learning Intrance URL(SSO)</label>
+                            <input type="text " placeholder="Enter Orange Learning Intrance URL(SSO) " class="form-control form_width" />
+                        </div>
+                    </div>
+                    <!--col end-->
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Orange Learning Internet URL</label>
+                            <input type="text " placeholder="Enter Orange Learning Internet URL " class="form-control form_width" />
+                        </div>
+                    </div>
+                    <!--col end-->
+                </div>
+                <!--row-->
             </div>
-            <!--col end-->
-            <div class="col-sm-12">
-              <div class="form-group">
-                <label>Orange Learning Intrance URL(SSO)</label>
-                <input
-                  type="text "
-                  placeholder="Enter Orange Learning Intrance URL(SSO) "
-                  class="form-control form_width"
-                />
-              </div>
-            </div>
-            <!--col end-->
-            <div class="col-sm-12">
-              <div class="form-group">
-                <label>Orange Learning Internet URL</label>
-                <input
-                  type="text "
-                  placeholder="Enter Orange Learning Internet URL "
-                  class="form-control form_width"
-                />
-              </div>
-            </div>
-            <!--col end-->
-          </div>
-          <!--row-->
-        </div>
-        <div class="modal-footer">
-          <!-- <button type="button " class="btn btn-secondary " data-dismiss="modal ">Close</button> -->
-          <button type="button" class="btn btn-primary btn_requst">
+            <div class="modal-footer">
+                <!-- <button type="button " class="btn btn-secondary " data-dismiss="modal ">Close</button> -->
+                <button type="button" class="btn btn-primary btn_requst">
             Submit
           </button>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  <!-- Button trigger modal -->
+<!-- Button trigger modal -->
 
-  <!-- Modal -->
+<!-- Modal -->
 </div>

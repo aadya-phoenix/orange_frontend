@@ -188,7 +188,7 @@
                                 </div>
                             </div>
 
-                            <div class="card-body">
+                            <div class="card-body card-boy-padd">
 
 
 
@@ -286,9 +286,9 @@
 
                 <div class="card">
                     <div class="card-header" style=" padding: 0.45rem 1.25rem; background-color: #fff;border-bottom: 1px solid #00000008;color:#000">
-                        <div>
-                            <span class="card-title card_overall">View All Request request Status</span>
-                            <span class=" float-right card_overall1">Showing 1 to 50 of 2,4407items.</span>
+                        <div class="body_header_view">
+                            <span class="card_overall">View All Request request Status</span>
+                            <span class="  card_overall1">Showing 1 to 50 of 2,4407items.</span>
                         </div>
                     </div>
                     <div class="card-body">
@@ -299,69 +299,71 @@
                             <button class="btn btn-primary" style="font-size: 11px;"><i class="fa fa-refresh mr-1"
                                     aria-hidden="true" (click)="reset()" ></i>Reset</button>
                         </div>
-                        <table id="excel-table" class="table table-bordered">
-                            <thead>
-                                <tr style="white-space: nowrap;font-size: 12px;">
-                                    <th scope="col">#</th>
-                                    <th sortable="id " (sort)="onSort($event)" scope="col">Request Id</th>
-                                    <th *ngIf="getUserrole.id != 2" scope="col">History</th>
-                                    <th sortable="handle" (sort)="onSort($event)" scope="col" style="width: 10%;">Status</th>
-                                    <th sortable="training_title" (sort)="onSort($event)" scope="col">Traning Title</th>
-                                    <th sortable="request_email" (sort)="onSort($event)" scope="col">Request Email</th>
-                                    <th sortable="activity_type" (sort)="onSort($event)" scope="col">Send To</th>
-                                    <th scope="col" style="width: 10%;">Activity Type</th>
-                                    <th sortable="created_at" (sort)="onSort($event)" scope="col">Create Date</th>
-                                    <th *ngIf="getUserrole.id != 2" sortable="roc_name" (sort)="onSort($event)" scope="col">ROC Name</th>
-                                    <th *ngIf="getUserrole.id != 2" sortable="request_date " (sort)="onSort($event)" scope="col">Request Date</th>
-                                    <th *ngIf="getUserrole.id != 2" sortable="process_date" (sort)="onSort($event)" scope="col">Process Date</th>
-                                    <th *ngIf="getUserrole.id != 2" sortable="roc_response_time " (sort)="onSort($event)" scope="col">ROC response time</th>
-                                    <th sortable="publisher_name" (sort)="onSort($event)" scope="col">Publisher Name</th>
-                                    <th sortable="last_modified" (sort)="onSort($event)" scope="col">Last Modified</th>
-                                </tr>
-                            </thead>
-                            <tbody *ngIf="flagVar == false">
-                                <tr *ngFor="let cource of courcesList;let i =index;">
-                                    <td scope="row">{{i+1}}</td>
-                                    <td>{{ cource.request_id }}</td>
-                                    <td *ngIf="getUserrole.id != 2"> <a *ngIf="cource.status=='pending' || cource.status=='closed' || cource.status=='reject'" (click)="openModal(cource)" class="text-primary">
+                        <div class="table-responsive">
+                            <table id="excel-table" class="table table-bordered">
+                                <thead>
+                                    <tr style="white-space: nowrap;font-size: 12px;">
+                                        <th scope="col">#</th>
+                                        <th sortable="id " (sort)="onSort($event)" scope="col">Request Id</th>
+                                        <th *ngIf="getUserrole.id != 2" scope="col">History</th>
+                                        <th sortable="handle" (sort)="onSort($event)" scope="col" style="width: 10%;">Status</th>
+                                        <th sortable="training_title" (sort)="onSort($event)" scope="col">Traning Title</th>
+                                        <th sortable="request_email" (sort)="onSort($event)" scope="col">Request Email</th>
+                                        <th sortable="activity_type" (sort)="onSort($event)" scope="col">Send To</th>
+                                        <th scope="col" style="width: 10%;">Activity Type</th>
+                                        <th sortable="created_at" (sort)="onSort($event)" scope="col">Create Date</th>
+                                        <th *ngIf="getUserrole.id != 2" sortable="roc_name" (sort)="onSort($event)" scope="col">ROC Name</th>
+                                        <th *ngIf="getUserrole.id != 2" sortable="request_date " (sort)="onSort($event)" scope="col">Request Date</th>
+                                        <th *ngIf="getUserrole.id != 2" sortable="process_date" (sort)="onSort($event)" scope="col">Process Date</th>
+                                        <th *ngIf="getUserrole.id != 2" sortable="roc_response_time " (sort)="onSort($event)" scope="col">ROC response time</th>
+                                        <th sortable="publisher_name" (sort)="onSort($event)" scope="col">Publisher Name</th>
+                                        <th sortable="last_modified" (sort)="onSort($event)" scope="col">Last Modified</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="flagVar == false">
+                                    <tr *ngFor="let cource of courcesList;let i =index;">
+                                        <td scope="row">{{i+1}}</td>
+                                        <td>{{ cource.request_id }}</td>
+                                        <td *ngIf="getUserrole.id != 2"> <a *ngIf="cource.status=='pending' || cource.status=='closed' || cource.status=='reject'" (click)="openModal(cource)" class="text-primary">
                                         View
                                        </a></td>
-                                    <td>{{ cource.status }}</td>
-                                    <td>{{ cource.title}}</td>
-                                    <td>{{ cource.email_content_owner}}</td>
-                                    <td>{{cource.transfer_user_name}}</td>
-                                    <td>{{ cource.learning_type_name}}</td>
-                                    <td>{{ cource.created_at}}</td>
-                                    <td *ngIf="getUserrole.id != 2">{{ cource.regional_cordinator}}</td>
-                                    <td *ngIf="getUserrole.id != 2">{{ cource.created_at}}</td>
-                                    <td *ngIf="getUserrole.id != 2"></td>
-                                    <td *ngIf="getUserrole.id != 2"></td>
-                                    <td></td>
-                                    <td>{{cource.updated_at}}</td>
-                                </tr>
-                            </tbody>
-                            <tbody *ngIf="flagVar">
-                                <tr *ngFor="let cource of filteredCourseList;let i =index;">
-                                    <td scope="row">{{i+1}}</td>
-                                    <td>{{ cource.request_id }}</td>
-                                    <td> <a *ngIf="cource.status=='pending' || cource.status=='closed' || cource.status=='reject'" (click)="openModal(cource)" class="text-primary">
+                                        <td>{{ cource.status }}</td>
+                                        <td>{{ cource.title}}</td>
+                                        <td>{{ cource.email_content_owner}}</td>
+                                        <td>{{cource.transfer_user_name}}</td>
+                                        <td>{{ cource.learning_type_name}}</td>
+                                        <td>{{ cource.created_at}}</td>
+                                        <td *ngIf="getUserrole.id != 2">{{ cource.regional_cordinator}}</td>
+                                        <td *ngIf="getUserrole.id != 2">{{ cource.created_at}}</td>
+                                        <td *ngIf="getUserrole.id != 2"></td>
+                                        <td *ngIf="getUserrole.id != 2"></td>
+                                        <td></td>
+                                        <td>{{cource.updated_at}}</td>
+                                    </tr>
+                                </tbody>
+                                <tbody *ngIf="flagVar">
+                                    <tr *ngFor="let cource of filteredCourseList;let i =index;">
+                                        <td scope="row">{{i+1}}</td>
+                                        <td>{{ cource.request_id }}</td>
+                                        <td> <a *ngIf="cource.status=='pending' || cource.status=='closed' || cource.status=='reject'" (click)="openModal(cource)" class="text-primary">
                                         View
                                        </a></td>
-                                    <td>{{ cource.status }}</td>
-                                    <td>{{ cource.title}}</td>
-                                    <td>{{ cource.email_content_owner}}</td>
-                                    <td>{{cource.transfer_user_name}}</td>
-                                    <td>{{ cource.learning_type_name}}</td>
-                                    <td>{{ cource.created_at}}</td>
-                                    <td>{{ cource.regional_cordinator}}</td>
-                                    <td>{{ cource.created_at}}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>{{cource.updated_at}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                        <td>{{ cource.status }}</td>
+                                        <td>{{ cource.title}}</td>
+                                        <td>{{ cource.email_content_owner}}</td>
+                                        <td>{{cource.transfer_user_name}}</td>
+                                        <td>{{ cource.learning_type_name}}</td>
+                                        <td>{{ cource.created_at}}</td>
+                                        <td>{{ cource.regional_cordinator}}</td>
+                                        <td>{{ cource.created_at}}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>{{cource.updated_at}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
 
