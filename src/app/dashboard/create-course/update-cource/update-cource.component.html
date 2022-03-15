@@ -384,7 +384,7 @@
                       <label class="form-control-label">
                         Title <span style="color: red">* </span>
                         <a href="">
-                          <i class="fa fa-info-circle info_circle"  aria-hidden="true" data-toggle="tooltip"
+                          <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
                              ngbTooltip="Do provide an attractive, catchy and clear learning activity title (max 100 characters). Example: 7 Habits of Highly Effective People. Don’t use prefixes such as ‘OBS’ or abbreviations such as ‘ops’. Don’t make references to session location or target "></i>
                         </a>
@@ -558,7 +558,7 @@
                             </i>
                           </a>
                         </label>
-                        <select class="form-control form_width" formControlName="who_see_course">
+                        <select class="form-control form_width" [(ngModel)]="showILTWhoSee" formControlName="who_see_course">
                           <option value="">Please select</option>
                           <option *ngFor="let whosee of whocanSee" [value]="whosee.id"> {{whosee.name}}</option>
                         </select>
@@ -585,13 +585,10 @@
                             </i>
                           </a>
                         </label>
-                        <select class="form-control form_width" formControlName="email_preffered_instructor">
-                          <option value="">Please select Instructor</option>
-                          <option *ngFor="let instructor of preferedInstructor" [value]="instructor.email_id">
-                            {{instructor.email_id}}
-                          </option>
-
-                        </select>
+                        <ng-select placeholder="Please select Instructor" [(ngModel)]="showILTEmail" [items]="preferedInstructor"
+                                   bindLabel="email_id" bindValue="email_id" formControlName="email_preffered_instructor"
+                                   style="width: 100%">
+                        </ng-select>
                       </div>
                     </div>
                     <!--colend-->
@@ -638,7 +635,7 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label class="form-control-label">
-                          Expiry Date <span style="color: red">* </span>
+                          Expiry Type <span style="color: red">* </span>
                           <a href="">
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                                data-placement="top"
@@ -646,7 +643,7 @@
                             </i>
                           </a>
                         </label>
-                        <select class="form-control form_width" formControlName="expiry_date">
+                        <select class="form-control form_width" formControlName="expiry_date_type">
                           <option value="">Please Select expiry</option>
                           <option *ngFor="let cctExpiry of cctExpiryperiod" [value]="cctExpiry.id">
                             {{ cctExpiry.name }}
@@ -667,7 +664,7 @@
                             </i>
                           </a>
                         </label>
-                        <select class="form-control form_width" formControlName="entity_business_area">
+                        <select class="form-control form_width" [(ngModel)]="showILTEntity" formControlName="entity_business_area">
                           <option value="">Please select any</option>
                           <option *ngFor="let entity of entityList" [value]="entity.id">{{entity.division}}</option>
                         </select>
@@ -771,7 +768,7 @@
                             </i>
                           </a>
                         </label>
-                        <input type="text" placeholder="External vendor name" class="form-control form_width"
+                        <input type="text" [(ngModel)]="showILTVendorName" placeholder="External vendor name" class="form-control form_width"
                                formControlName="external_vendor_name" />
                       </div>
                     </div>
@@ -829,7 +826,7 @@
                             </i>
                           </a>
                         </label>
-                        <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?"
+                        <textarea class="form-control form_width-textarea" [(ngModel)]="showILTForWhom" rows="3" placeholder="Enter For Whom?"
                                   formControlName="for_whoom">
                       </textarea>
                       </div>
@@ -853,7 +850,7 @@
                             </i>
                           </a>
                         </label>
-                        <input type="text" placeholder="Enter Learn more" class="form-control form_width"
+                        <input type="text" placeholder="Enter Learn more" [(ngModel)]="showILTLearnMore" class="form-control form_width"
                                formControlName="learn_more" />
                       </div>
                     </div>
@@ -895,7 +892,7 @@
                           </a>
                         </label>
                         <input type="text" placeholder="Enter Title of the additional free text field"
-                               class="form-control form_width" formControlName="title_additional" />
+                               class="form-control form_width" [(ngModel)]="showILTtitleAdditional" formControlName="title_additional" />
                       </div>
                     </div>
                     <!--colend-->
@@ -971,7 +968,7 @@
                             </i>
                           </a>
                         </label>
-                        <select class="form-control form_width" formControlName="regional_cordinator">
+                        <select class="form-control form_width" [(ngModel)]="showILTRegional" formControlName="regional_cordinator">
                           <option value="">Please select ROC</option>
                           <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">
                             {{ cordinator?.name }}
@@ -1003,16 +1000,25 @@
                     Submit
                   </button>
                   <!-- </button> -->
-                  <button class="btn btn-secondary ml-1" (click)="createNewCourceIlt('draft')">
+                  <button *ngIf="getUserrole.id == 2" class="btn btn-secondary ml-1" (click)="createNewCourceIlt('draft')">
                     Save as draft
                   </button>
 
-                  <button *ngIf="getUserrole.id === 3" class="btn btn-primary ml-1" (click)="getpublisher()"
+                  <button *ngIf="getUserrole.id === 3" style="height:30px;width:150px" class="btn btn-primary ml-1" (click)="getPublisher()"
                           data-toggle="modal" data-target="#transfertoPublisher">
                     Transfer to Publisher
                   </button>
 
-                  <button *ngIf="getUserrole.id === 4" data-toggle="modal" data-target="#publish"
+                  <button type="button" style="height:30px;width:150px"
+                          class="btn btn-primary btn_requst ml-2"
+                          data-toggle="modal"
+                          data-target="#rejectModal"
+                          *ngIf="getUserrole.id == 3 || getUserrole.id == 4"
+                          (click)="getPublisher()">
+                    <img src="../../../../assets/images/reject.png " style="height:20px;width:20px" />Reject
+                  </button>
+
+                  <button *ngIf="getUserrole.id === 4" style="height:30px;width:150px" data-toggle="modal" data-target="#publish"
                           class="btn btn-primary ml-1">
                     Publish
                   </button>
@@ -1338,72 +1344,91 @@
                   </thead>
                 </table>
               </div>
-            </form>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <label class="form-control-label">
-                      Additional Comment(s)
-                      <a>
-                        <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                           data-placement="top" data-container="body"
-                           title="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog.">
-                        </i>
-                      </a>
-                    </label>
-                    <textarea class="form-control form_width-textarea" rows="3"
-                              placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
+
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label class="form-control-label">
+                        Additional Comment(s)
+                        <a>
+                          <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                             data-placement="top" data-container="body"
+                             title="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog.">
+                          </i>
+                        </a>
+                      </label>
+                      <textarea class="form-control form_width-textarea" rows="3"
+                                placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
                         </textarea>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <label class="form-control-label">
-                      Request to RegionalTraining Cordinator
-                      <span style="color: red">* </span>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label class="form-control-label">
+                        Request to RegionalTraining Cordinator
+                        <span style="color: red">* </span>
 
-                      <a>
-                        <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                           data-placement="top"
-                           title="If you selected Yes in the Certification field, please select how long the certification is valid.">
-                        </i>
-                      </a>
-                    </label>
-                    <select class="form-control form_width" formControlName="regional_cordinator">
-                      <option value="">Please select ROC</option>
-                      <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">
-                        {{ cordinator?.name }}
-                      </option>
-                    </select>
+                        <a>
+                          <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                             data-placement="top"
+                             title="If you selected Yes in the Certification field, please select how long the certification is valid.">
+                          </i>
+                        </a>
+                      </label>
+                      <select class="form-control form_width" [(ngModel)]="showCurriculumRegional" formControlName="regional_cordinator">
+                        <option value="">Please select ROC</option>
+                        <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">
+                          {{ cordinator?.name }}
+                        </option>
+                      </select>
+                    </div>
                   </div>
+                  <!--colend-->
                 </div>
-                <!--colend-->
-              </div>
 
-              <p style="color: #000">
-                <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in
-                unavailable.Therefore,please select the
-                <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
-                Pacificregion
-              </p>
-              <p style="color: #000">
-                <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is
-                unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who
-                is the backup for
-                <b>Russia</b> region.
-              </p>
-            </div>
+                <p style="color: #000">
+                  <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in
+                  unavailable.Therefore,please select the
+                  <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
+                  Pacificregion
+                </p>
+                <p style="color: #000">
+                  <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is
+                  unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who
+                  is the backup for
+                  <b>Russia</b> region.
+                </p>
+              </div>
+            </form>
             <div class="card-footer d-flex justify-content-start">
-              <button class="btn btn-primary" (click)="createNewCourceCurrriculum('pending')">
+              <button *ngIf="getUserrole.id === 2" class="btn btn-primary" (click)="createNewCourceCurrriculum('pending')">
                 Submit
               </button>
               <!-- </button> -->
-              <button class="btn btn-secondary ml-1" (click)="createNewCourceCurrriculum('draft')">
+              <button *ngIf="getUserrole.id === 2" class="btn btn-secondary ml-1" (click)="createNewCourceCurrriculum('draft')">
                 Save as
                 draft
+              </button>
+              <button *ngIf="getUserrole.id === 3" style="height:30px;width:150px" class="btn btn-primary ml-1" (click)="getPublisher()"
+                      data-toggle="modal" data-target="#transfertoPublisher">
+                Transfer to Publisher
+              </button>
+
+              <button type="button" style="height:30px;width:150px"
+                      class="btn btn-primary btn_requst ml-2"
+                      data-toggle="modal"
+                      data-target="#rejectModal"
+                      *ngIf="getUserrole.id == 3 || getUserrole.id == 4"
+                      (click)="getPublisher()">
+                <img src="../../../../assets/images/reject.png " style="height:20px;width:20px" />Reject
+              </button>
+
+              <button *ngIf="getUserrole.id === 4" style="height:30px;width:150px" data-toggle="modal" data-target="#publish"
+                      class="btn btn-primary ml-1">
+                Publish
               </button>
               <!-- </button> -->
             </div>
@@ -1411,7 +1436,7 @@
           <!--Currriculum-->
           <!--Material-Based Training-->
           <div class="card" *ngIf="learningType == '3'">
-            
+
             <div class="card">
               <form [formGroup]="materialbasedForm">
                 <div class="card-header">
@@ -1553,17 +1578,35 @@
                 is the backup for
                 <b>Russia</b> region.
               </p>
-           
-                <div class="card-footer d-flex justify-content-start">
-                  <button class="btn btn-primary" (click)="createNewCourceMaterial('pending')">
-                    Submit
-                  </button>
-                  <!-- </button> -->
-                  <button class="btn btn-secondary ml-1" (click)="createNewCourceMaterial('draft')">Save as draft</button>
-                  <!-- </button> -->
-                </div>
+
+              <div class="card-footer d-flex justify-content-start">
+                <button *ngIf="getUserrole.id === 2" class="btn btn-primary" (click)="createNewCourceMaterial('pending')">
+                  Submit
+                </button>
+                <!-- </button> -->
+                <button *ngIf="getUserrole.id === 2" class="btn btn-secondary ml-1" (click)="createNewCourceMaterial('draft')">Save as draft</button>
+                <!-- </button> -->
+                <button *ngIf="getUserrole.id === 3" style="height:30px;width:150px" class="btn btn-primary ml-1" (click)="getPublisher()"
+                        data-toggle="modal" data-target="#transfertoPublisher">
+                  Transfer to Publisher
+                </button>
+
+                <button type="button" style="height:30px;width:150px"
+                        class="btn btn-primary btn_requst ml-2"
+                        data-toggle="modal"
+                        data-target="#rejectModal"
+                        *ngIf="getUserrole.id == 3 || getUserrole.id == 4"
+                        (click)="getPublisher()">
+                  <img src="../../../../assets/images/reject.png " style="height:20px;width:20px" />Reject
+                </button>
+
+                <button *ngIf="getUserrole.id === 4" style="height:30px;width:150px" data-toggle="modal" data-target="#publish"
+                        class="btn btn-primary ml-1">
+                  Publish
+                </button>
               </div>
-            
+            </div>
+
           </div>
           <!--Material-Based Training-->
           <!--Video-based training-->
@@ -1657,70 +1700,89 @@
                 </div>
                 <!--row end-->
               </div>
-            </form>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <label class="form-control-label">
-                      Additional Comment(s)
-                      <a>
-                        <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                           data-placement="top" data-container="body"
-                           title="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog.">
-                        </i>
-                      </a>
-                    </label>
-                    <textarea class="form-control form_width-textarea" rows="3"
-                              placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
+
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label class="form-control-label">
+                        Additional Comment(s)
+                        <a>
+                          <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                             data-placement="top" data-container="body"
+                             title="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog.">
+                          </i>
+                        </a>
+                      </label>
+                      <textarea class="form-control form_width-textarea" rows="3"
+                                placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
                       </textarea>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <label class="form-control-label">
-                      Request to RegionalTraining Cordinator
-                      <span style="color: red">* </span>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label class="form-control-label">
+                        Request to RegionalTraining Cordinator
+                        <span style="color: red">* </span>
 
-                      <a>
-                        <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                           data-placement="top"
-                           title="If you selected Yes in the Certification field, please select how long the certification is valid.">
-                        </i>
-                      </a>
-                    </label>
-                    <select class="form-control form_width" formControlName="regional_cordinator">
-                      <option value="">Please select ROC</option>
-                      <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">
-                        {{ cordinator?.name }}
-                      </option>
-                    </select>
+                        <a>
+                          <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                             data-placement="top"
+                             title="If you selected Yes in the Certification field, please select how long the certification is valid.">
+                          </i>
+                        </a>
+                      </label>
+                      <select class="form-control form_width" formControlName="regional_cordinator">
+                        <option value="">Please select ROC</option>
+                        <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">
+                          {{ cordinator?.name }}
+                        </option>
+                      </select>
+                    </div>
                   </div>
+                  <!--colend-->
                 </div>
-                <!--colend-->
-              </div>
 
-              <p style="color: #000">
-                <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in
-                unavailable.Therefore,please select the
-                <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
-                Pacificregion
-              </p>
-              <p style="color: #000">
-                <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is
-                unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who
-                is the backup for <b>Russia</b> region.
-              </p>
-            </div>
+                <p style="color: #000">
+                  <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in
+                  unavailable.Therefore,please select the
+                  <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
+                  Pacificregion
+                </p>
+                <p style="color: #000">
+                  <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is
+                  unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who
+                  is the backup for <b>Russia</b> region.
+                </p>
+              </div>
+            </form>
             <div class="card-footer d-flex justify-content-start">
-              <button class="btn btn-primary" (click)="createNewCourceVideo('pending')">
+              <button *ngIf="getUserrole.id === 2" class="btn btn-primary" (click)="createNewCourceVideo('pending')">
                 Submit
               </button>
               <!-- </button> -->
-              <button class="btn btn-secondary ml-1" (click)="createNewCourceVideo('draft')">Save as draft</button>
+              <button *ngIf="getUserrole.id === 2" class="btn btn-secondary ml-1" (click)="createNewCourceVideo('draft')">Save as draft</button>
               <!-- </button> -->
+              <button *ngIf="getUserrole.id === 3" style="height:30px;width:150px" class="btn btn-primary ml-1" (click)="getPublisher()"
+                      data-toggle="modal" data-target="#transfertoPublisher">
+                Transfer to Publisher
+              </button>
+
+              <button type="button" style="height:30px;width:150px"
+                      class="btn btn-primary btn_requst ml-2"
+                      data-toggle="modal"
+                      data-target="#rejectModal"
+                      *ngIf="getUserrole.id == 3 || getUserrole.id == 4"
+                      (click)="getPublisher()">
+                <img src="../../../../assets/images/reject.png " style="height:20px;width:20px" />Reject
+              </button>
+
+              <button *ngIf="getUserrole.id === 4" style="height:30px;width:150px" data-toggle="modal" data-target="#publish"
+                      class="btn btn-primary ml-1">
+                Publish
+              </button>
             </div>
           </div>
           <!--Video-based training-->
@@ -1935,12 +1997,30 @@
               </div>
             </form>
             <div class="card-footer d-flex justify-content-start">
-              <button class="btn btn-primary" (click)="createNewCourcePlaylist('pending')">
+              <button *ngIf="getUserrole.id === 2" class="btn btn-primary" (click)="createNewCourcePlaylist('pending')">
                 Submit
               </button>
               <!-- </button> -->
-              <button class="btn btn-secondary ml-1" (click)="createNewCourcePlaylist('draft')">Save as draft</button>
+              <button *ngIf="getUserrole.id === 2" class="btn btn-secondary ml-1" (click)="createNewCourcePlaylist('draft')">Save as draft</button>
               <!-- </button> -->
+              <button *ngIf="getUserrole.id === 3" style="height:30px;width:150px" class="btn btn-primary ml-1" (click)="getPublisher()"
+                      data-toggle="modal" data-target="#transfertoPublisher">
+                Transfer to Publisher
+              </button>
+
+              <button type="button" style="height:30px;width:150px"
+                      class="btn btn-primary btn_requst ml-2"
+                      data-toggle="modal"
+                      data-target="#rejectModal"
+                      *ngIf="getUserrole.id == 3 || getUserrole.id == 4"
+                      (click)="getPublisher()">
+                <img src="../../../../assets/images/reject.png " style="height:20px;width:20px" />Reject
+              </button>
+
+              <button *ngIf="getUserrole.id === 4" style="height:30px;width:150px" data-toggle="modal" data-target="#publish"
+                      class="btn btn-primary ml-1">
+                Publish
+              </button>
             </div>
           </div>
           <!--Playlist-->
@@ -2133,70 +2213,89 @@
                 </div>
                 <!--row end-->
               </div>
-            </form>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <label class="form-control-label">
-                      Additional Comment(s)
-                      <a>
-                        <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                           data-placement="top" data-container="body"
-                           title="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog.">
-                        </i>
-                      </a>
-                    </label>
-                    <textarea class="form-control form_width-textarea" rows="3"
-                              placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
+
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label class="form-control-label">
+                        Additional Comment(s)
+                        <a>
+                          <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                             data-placement="top" data-container="body"
+                             title="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog.">
+                          </i>
+                        </a>
+                      </label>
+                      <textarea class="form-control form_width-textarea" rows="3"
+                                placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
                       </textarea>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <label class="form-control-label">
-                      Request to RegionalTraining Cordinator
-                      <span style="color: red">* </span>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label class="form-control-label">
+                        Request to RegionalTraining Cordinator
+                        <span style="color: red">* </span>
 
-                      <a>
-                        <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                           data-placement="top"
-                           title="If you selected Yes in the Certification field, please select how long the certification is valid.">
-                        </i>
-                      </a>
-                    </label>
-                    <select class="form-control form_width" formControlName="regional_cordinator">
-                      <option value="">Please select ROC</option>
-                      <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">
-                        {{ cordinator?.name }}
-                      </option>
-                    </select>
+                        <a>
+                          <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                             data-placement="top"
+                             title="If you selected Yes in the Certification field, please select how long the certification is valid.">
+                          </i>
+                        </a>
+                      </label>
+                      <select class="form-control form_width" formControlName="regional_cordinator">
+                        <option value="">Please select ROC</option>
+                        <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">
+                          {{ cordinator?.name }}
+                        </option>
+                      </select>
+                    </div>
                   </div>
+                  <!--colend-->
                 </div>
-                <!--colend-->
-              </div>
 
-              <p style="color: #000">
-                <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in
-                unavailable.Therefore,please select the
-                <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
-                Pacificregion
-              </p>
-              <p style="color: #000">
-                <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is
-                unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who
-                is the backup for <b>Russia</b> region.
-              </p>
-            </div>
+                <p style="color: #000">
+                  <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in
+                  unavailable.Therefore,please select the
+                  <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
+                  Pacificregion
+                </p>
+                <p style="color: #000">
+                  <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is
+                  unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who
+                  is the backup for <b>Russia</b> region.
+                </p>
+              </div>
+            </form>
             <div class="card-footer d-flex justify-content-start">
-              <button class="btn btn-primary" (click)="createNewCourceWebbased('pending')">
+              <button *ngIf="getUserrole.id === 2" class="btn btn-primary" (click)="createNewCourceWebbased('pending')">
                 Submit
               </button>
               <!-- </button> -->
-              <button class="btn btn-secondary ml-1" (click)="createNewCourceWebbased('draft')">Save as draft</button>
+              <button *ngIf="getUserrole.id === 2" class="btn btn-secondary ml-1" (click)="createNewCourceWebbased('draft')">Save as draft</button>
               <!-- </button> -->
+              <button *ngIf="getUserrole.id === 3" style="height:30px;width:150px" class="btn btn-primary ml-1" (click)="getPublisher()"
+                      data-toggle="modal" data-target="#transfertoPublisher">
+                Transfer to Publisher
+              </button>
+
+              <button type="button" style="height:30px;width:150px"
+                      class="btn btn-primary btn_requst ml-2"
+                      data-toggle="modal"
+                      data-target="#rejectModal"
+                      *ngIf="getUserrole.id == 3 || getUserrole.id == 4"
+                      (click)="getPublisher()">
+                <img src="../../../../assets/images/reject.png " style="height:20px;width:20px" />Reject
+              </button>
+
+              <button *ngIf="getUserrole.id === 4" style="height:30px;width:150px" data-toggle="modal" data-target="#publish"
+                      class="btn btn-primary ml-1">
+                Publish
+              </button>
             </div>
           </div>
           <!--Webbased Training-->
@@ -2293,7 +2392,7 @@
 <!--Pop ups-->
 <!----Transfer to publisher-->
 <div class="modal fade" id="transfertoPublisher" tabindex="-1" aria-labelledby="transfertoPublisherLabel"
-     aria-hidden="true" style="margin-top: 250px ">
+     aria-hidden="true" style="margin-top: 50px ">
   <div class="modal-dialog modal-lg " role="document ">
     <div class="modal-content ">
       <div class="modal-body ">
@@ -2323,7 +2422,104 @@
   <!-- </ng-template> -->
 </div>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="color: #ff7900">
+          Translate
+        </h5>
+        <!-- Boosted mod: using visually hidden text instead of aria-label -->
+      </div>
+      <div class="modal-body modal_height">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="form-control-label">Arabic 123</label>
+              <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
+              </textarea>
+            </div>
+          </div>
+          <!--colend-->
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="form-control-label">Dutch(the Netherland) </label>
+              <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
+              </textarea>
+            </div>
+          </div>
+          <!--colend-->
 
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="form-control-label">English (US)</label>
+              <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
+              </textarea>
+            </div>
+          </div>
+          <!--colend-->
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="form-control-label"> French (France) </label>
+              <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
+              </textarea>
+            </div>
+          </div>
+          <!--colend-->
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="form-control-label"> Polish (Poland) </label>
+              <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
+              </textarea>
+            </div>
+          </div>
+          <!--colend-->
+
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="form-control-label"> Romanian (Romania) </label>
+              <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
+              </textarea>
+            </div>
+          </div>
+          <!--colend-->
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="form-control-label"> Russian (Russia) </label>
+              <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
+              </textarea>
+            </div>
+          </div>
+          <!--colend-->
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="form-control-label"> Slovak (Slovakia) </label>
+              <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
+              </textarea>
+            </div>
+          </div>
+          <!--colend-->
+
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="form-control-label"> Spanish(Spain) </label>
+              <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
+              </textarea>
+            </div>
+          </div>
+          <!--colend-->
+        </div>
+        <!--ocl-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary cancel_button" data-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!----Tile popup-->
 <div class="modal fade" id="titleModal" tabindex="-1" aria-labelledby="titleModal" aria-hidden="true">
   <div class="modal-dialog">
@@ -2335,24 +2531,29 @@
         <!-- Boosted mod: using visually hidden text instead of aria-label -->
       </div>
       <div class="modal-body modal_height">
-        <div class="row">
-          <div class="col-sm-12" *ngFor="let language of availableLanguages">
-            <div class="form-group">
-              <label class="form-control-label">{{language.name}} </label>
-              <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
-            </textarea>
+        <form [formGroup]="commonCreateCourceForm">
+          <div class="row">
+            <div class="col-sm-12" formArrayName="title1" *ngFor="let language of titlecontrol;let i =index;">
+              <div class="form-group">
+                <div [formGroupName]="i">
+                  <label class="form-control-label"> {{availableLanguages[i].name}}</label>
+                  <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter"
+                            formControlName="value">
+              </textarea>
+                </div>
+              </div>
             </div>
+            <!--colend-->
+            <!--colend-->
           </div>
-          <!--colend-->
-          <!--colend-->
-        </div>
+        </form>
         <!--ocl-->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary cancel_button" data-dismiss="modal">
           Cancel
         </button>
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="gettitlelanguage()">Submit</button>
       </div>
     </div>
   </div>
@@ -2360,18 +2561,36 @@
 
 <!-- publish -->
 <div class="modal fade" id="publish" tabindex="-1" aria-labelledby="publishLabel" aria-hidden="true"
-     style="margin-top: 250px ">
+     style="margin-top: 50px ">
   <div class="modal-dialog modal-lg " role="document ">
     <div class="modal-content ">
-      <div class="modal-body ">
-        <div class="row ">
-          <div class="col-sm-12 ">
-            <div class="form-group ">
-              <label>Publish</label>
-              <!-- <select name="select " id="select " class="form-control " (change)="getPublisherselected($event)">
-                <option value="0 ">Please select</option>
-                <option *ngFor="let publisher of publisherList" [value]="publisher.id">{{publisher.first_name}}</option>
-              </select> -->
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label>Comments</label>
+              <textarea class="form-control form_width-textarea"
+                        rows="3 "
+                        placeholder="Enter Your Comments ">
+                </textarea>
+            </div>
+          </div>
+          <!--col end-->
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label>Orange Learning Intrance URL(SSO)</label>
+              <input type="text "
+                     placeholder="Enter Orange Learning Intrance URL(SSO) "
+                     class="form-control form_width" />
+            </div>
+          </div>
+          <!--col end-->
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label>Orange Learning Internet URL</label>
+              <input type="text "
+                     placeholder="Enter Orange Learning Internet URL "
+                     class="form-control form_width" />
             </div>
           </div>
           <!--col end-->
@@ -2388,4 +2607,47 @@
     </div>
   </div>
   <!-- </ng-template> -->
+</div>
+
+
+<!--Reject-->
+<div class="modal fade"
+     id="rejectModal"
+     tabindex="-1"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true"
+     style="margin-top: 50px">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 style="font-size: 14px; color: #ff7900">Reject Request</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label>Comments</label>
+              <textarea class="form-control form_width-textarea"
+                        [(ngModel)]="rejectcomment"
+                        rows="3 "
+                        placeholder="Enter Your Comments ">
+                </textarea>
+            </div>
+          </div>
+          <!--col end-->
+        </div>
+        <!--row-->
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+        <button type="button"
+                class="btn btn-primary"
+                data-dismiss="modal"
+                (click)="reject()">
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

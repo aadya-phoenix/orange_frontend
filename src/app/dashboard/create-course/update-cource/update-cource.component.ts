@@ -44,6 +44,7 @@ export class UpdateCourceComponent implements OnInit {
   notifications: boolean = false;
   public subjectId: any;
 
+
   public cctExpiryperiod: any = [
     {
       id: 1,
@@ -102,13 +103,23 @@ export class UpdateCourceComponent implements OnInit {
   showCurriculumForWhom: any;
   showCurriculumLearnMore: any;
   showCurriculumWhoSee: any;
+  showCurriculumRegional: any;
 
   showMaterialURLchecked: boolean = false;
   showMaterialUploadchecked: boolean = false;
 
+  showILTWhoSee: any;
+  showILTEmail: any;
+  showILTForWhom: any;
+  showILTLearnMore: any;
+  showILTtitleAdditional: any;
+  showILTEntity: any;
+  showILTVendorName: any;
+  showILTRegional: any;
+
   public showPlaylistTargetAudience: any;
   showPlaylistEmail: any;
-
+  rejectcomment: any;
   constructor(
     private fb: FormBuilder,
     private courceService: CourcesService,
@@ -127,7 +138,27 @@ export class UpdateCourceComponent implements OnInit {
     this.showobjective = this.routergetdata.objective.toString().replace('"', '').replace('"', '');
     this.showdescription = this.routergetdata.description.toString().replace('"', '').replace('"', '');
     if (this.routergetdata.learning_type == "1") {
-      
+      this.showILTWhoSee = this.routergetdata.who_see_course
+      this.showILTEmail = this.routergetdata.email_preffered_instructor
+      this.showILTLearnMore = this.routergetdata.learn_more == null ? "" : this.routergetdata.learn_more.toString().replace('"', '').replace('"', '')
+      this.showILTForWhom = this.routergetdata.for_whoom.toString().replace('"', '').replace('"', '')
+      this.showILTtitleAdditional = this.routergetdata.title_additional
+      this.showILTEntity = Number(this.routergetdata.entity_business_area)
+      //this.showILTExiryType = Number(this.routergetdata.entity_business_area)
+      this.showILTRegional = Number(this.routergetdata.regional_cordinator)
+      this.showILTVendorName = this.routergetdata.external_vendor_name
+      if (this.routergetdata.certification == "yes") {
+        this.showCertificateExpiry = true
+      }
+      else {
+        this.showCertificateExpiry = false
+      }
+      if (this.routergetdata.external_vendor == "yes") {
+        this.externalVendorname = true
+      }
+      else {
+        this.externalVendorname = false
+      }
     }
     else if (this.routergetdata.learning_type == "2") {
       
@@ -157,6 +188,7 @@ export class UpdateCourceComponent implements OnInit {
       this.showCurriculumLearnMore = this.routergetdata.learn_more.toString().replace('"', '').replace('"', '')
       this.showCurriculumForWhom = this.routergetdata.for_whoom.toString().replace('"', '').replace('"', '')
       this.showCurriculumWhoSee = this.routergetdata.who_see_course
+      this.showCurriculumRegional = Number(this.routergetdata.regional_cordinator)
       if (this.routergetdata.certification == "yes") {
         this.showCertificateExpiry_Curriculum = true
       }
@@ -179,7 +211,7 @@ export class UpdateCourceComponent implements OnInit {
       }
     }
     else if (this.routergetdata.learning_type == "6") {
-      this.showPlaylistTargetAudience = this.routergetdata['level']
+      this.showPlaylistTargetAudience = this.routergetdata['level'] == "1" ? "yes" : "no";
       this.showPlaylistEmail = this.routergetdata.for_whoom.toString().replace('"', '').replace('"', '') 
     }
   }
@@ -455,6 +487,7 @@ export class UpdateCourceComponent implements OnInit {
       //e need to add
       first_session_date: new FormControl('', [Validators.required]),
       expiry_date: new FormControl('', [Validators.required]),
+      expiry_date_type: new FormControl('', [Validators.required]),
       title_additional: new FormControl(''),
       external_vendor: new FormControl('',[Validators.required]),
 
@@ -555,7 +588,8 @@ export class UpdateCourceComponent implements OnInit {
     });
 
     this.commonCreateCourceForm.patchValue(this.routergetdata);
-    console.log('patch',this.routergetdata)
+    console.log('patch', this.routergetdata)
+    this.pushtoTitlearray();
     this.commonCreateCourceForm.controls['learning_type'].disable({ onlySelf: true });
     this.routergetdata.title.toString().replace('"', '').replace('"', '');
     
@@ -593,7 +627,7 @@ export class UpdateCourceComponent implements OnInit {
     }
     console.log(this.routergetdata);
 
-    this.commonCreateCourceForm.value.subject = this.routergetdata.subject;
+    //this.commonCreateCourceForm.value.subject = this.routergetdata.subject;
 
     
     if (this.routergetdata.external_vendor == 'yes') {
@@ -613,6 +647,7 @@ export class UpdateCourceComponent implements OnInit {
     //console.log(this.routergetdata.subject);
 
     this.addLearnerGuideline();
+   
   }
 
   get f() {
@@ -669,19 +704,52 @@ export class UpdateCourceComponent implements OnInit {
       }
     });
   }
-
+  getFormValidationErrors_ILT() {
+    Object.keys(this.iltandViltForm.controls).forEach((key) => {
+      const controlErrors: any = this.iltandViltForm.get(key)?.errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach((keyError) => {
+          console.log(
+            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ',
+            controlErrors[keyError]
+          );
+        });
+      }
+    });
+  }
   //create ilt vilt form
-  createNewCourceIlt(status:any) {
+  createNewCourceIlt(status: any) {
+    console.log(this.stringArray);
+    console.log(this.learnerGuidearray);
     let courseid = { course_id: this.routergetdata.id };
     let savetype = { status: status };
     let totalObj = {
       ...this.iltandViltForm.value,
       ...savetype,
       ...this.commonCreateCourceForm.value,
-      ...courseid,
-      ...{learning_type:this.routergetdata.learning_type}
+      ...courseid
     };
-    this.getFormValidationErrors();
+    let titlearray: any = [];
+    let titleForm: any;
+    let obj: any;
+    titleForm = this.commonCreateCourceForm.value.title1;
+    //alert(this.commonCreateCourceForm.value.title1.length)
+    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
+      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+        titlearray.push({
+          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
+            this.commonCreateCourceForm.value.title1[i].value,
+        });
+      }
+    }
+    console.log('titleForm', titlearray);
+    if (titlearray.length == 0) {
+      titlearray.push({ "english": this.commonCreateCourceForm.value.title });
+    }
+    this.commonCreateCourceForm.value.title = titlearray;
+    console.log(this.commonCreateCourceForm.value);
+
+    this.getFormValidationErrors_ILT();
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
       if (totalObj.learning_type == null || totalObj.learning_type == "") {
         totalObj.learning_type = this.learningType.toString();
@@ -690,7 +758,13 @@ export class UpdateCourceComponent implements OnInit {
         (res: any) => {
           console.log(res);
           if (res) {
-            this.router.navigate(['/dashboard/cources']);
+            let statedata = this.routergetdata;
+            let saveobj = { issave: true, ...courseid };
+            let stateobj = { ...statedata, ...saveobj };
+            // this.router.navigate(['/dashboard/cources']);
+            this.router.navigateByUrl('/dashboard/cources/request-detail', {
+              state: stateobj,
+            });
           }
         },
         (err: any) => {
@@ -741,11 +815,13 @@ export class UpdateCourceComponent implements OnInit {
   createNewCourceVideo(status: any) {
     console.log(this.stringArray);
     console.log(this.learnerGuidearray);
+    let courseid = { course_id: this.routergetdata.id };
     let savetype = { status: status };
     let totalObj = {
       ...this.videobasedForm.value,
       ...savetype,
       ...this.commonCreateCourceForm.value,
+      ...courseid
     };
     let titlearray: any = [];
     let titleForm: any;
@@ -760,12 +836,14 @@ export class UpdateCourceComponent implements OnInit {
       }
     }
     console.log('titleForm', titlearray);
-
+    if (titlearray.length == 0) {
+      titlearray.push({ "english": this.commonCreateCourceForm.value.title });
+    }
     this.commonCreateCourceForm.value.title = titlearray;
     console.log(this.commonCreateCourceForm.value);
 
-    this.getFormValidationErrors();
-    if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
+    this.getFormValidationErrors_Video();
+    if (this.videobasedForm.valid && this.commonCreateCourceForm.valid) {
       console.log(totalObj);
       if (totalObj.learning_type == null || totalObj.learning_type == "") {
         totalObj.learning_type = this.learningType.toString();
@@ -774,9 +852,10 @@ export class UpdateCourceComponent implements OnInit {
         (res: any) => {
           console.log(res);
           if (res) {
-            let statedata = res.data;
-            let saveobj = { issave: true };
+            let statedata = this.routergetdata;
+            let saveobj = { issave: true, ...courseid };
             let stateobj = { ...statedata, ...saveobj };
+            console.log(stateobj);
             // this.router.navigate(['/dashboard/cources']);
             this.router.navigateByUrl('/dashboard/cources/request-detail', {
               state: stateobj,
@@ -813,11 +892,13 @@ export class UpdateCourceComponent implements OnInit {
   createNewCourceMaterial(status: any) {
     console.log(this.stringArray);
     console.log(this.learnerGuidearray);
+    let courseid = { course_id: this.routergetdata.id };
     let savetype = { status: status };
     let totalObj = {
       ...this.materialbasedForm.value,
       ...savetype,
       ...this.commonCreateCourceForm.value,
+      ...courseid
     };
     let titlearray: any = [];
     let titleForm: any;
@@ -832,7 +913,9 @@ export class UpdateCourceComponent implements OnInit {
       }
     }
     console.log('titleForm', titlearray);
-
+    if (titlearray.length == 0) {
+      titlearray.push({ "english": this.commonCreateCourceForm.value.title });
+    }
     this.commonCreateCourceForm.value.title = titlearray;
     console.log(this.commonCreateCourceForm.value);
 
@@ -846,9 +929,10 @@ export class UpdateCourceComponent implements OnInit {
         (res: any) => {
           console.log(res);
           if (res) {
-            let statedata = res.data;
-            let saveobj = { issave: true };
+            let statedata = this.routergetdata;
+            let saveobj = { issave: true, ...courseid };
             let stateobj = { ...statedata, ...saveobj };
+            console.log(stateobj);
             // this.router.navigate(['/dashboard/cources']);
             this.router.navigateByUrl('/dashboard/cources/request-detail', {
               state: stateobj,
@@ -885,11 +969,13 @@ export class UpdateCourceComponent implements OnInit {
   createNewCourceCurrriculum(status: any) {
     console.log(this.stringArray);
     console.log(this.learnerGuidearray);
+    let courseid = { course_id: this.routergetdata.id };
     let savetype = { status: status };
     let totalObj = {
       ...this.currriculumForm.value,
       ...savetype,
       ...this.commonCreateCourceForm.value,
+      ...courseid
     };
     let titlearray: any = [];
     let titleForm: any;
@@ -904,7 +990,9 @@ export class UpdateCourceComponent implements OnInit {
       }
     }
     console.log('titleForm', titlearray);
-
+    if (titlearray.length == 0) {
+      titlearray.push({ "english": this.commonCreateCourceForm.value.title });
+    }
     this.commonCreateCourceForm.value.title = titlearray;
     console.log(this.commonCreateCourceForm.value);
 
@@ -918,9 +1006,11 @@ export class UpdateCourceComponent implements OnInit {
         (res: any) => {
           console.log(res);
           if (res) {
-            let statedata = res.data;
-            let saveobj = { issave: true };
+            console.log(res);
+            let statedata = this.routergetdata;
+            let saveobj = { issave: true, ...courseid };
             let stateobj = { ...statedata, ...saveobj };
+            console.log(stateobj);
             // this.router.navigate(['/dashboard/cources']);
             this.router.navigateByUrl('/dashboard/cources/request-detail', {
               state: stateobj,
@@ -957,11 +1047,13 @@ export class UpdateCourceComponent implements OnInit {
   createNewCourceWebbased(status: any) {
     console.log(this.stringArray);
     console.log(this.learnerGuidearray);
+    let courseid = { course_id: this.routergetdata.id };
     let savetype = { status: status };
     let totalObj = {
       ...this.webbasedForm.value,
       ...savetype,
       ...this.commonCreateCourceForm.value,
+      ...courseid
     };
     let titlearray: any = [];
     let titleForm: any;
@@ -976,7 +1068,9 @@ export class UpdateCourceComponent implements OnInit {
       }
     }
     console.log('titleForm', titlearray);
-
+    if (titlearray.length == 0) {
+      titlearray.push({ "english": this.commonCreateCourceForm.value.title });
+    }
     this.commonCreateCourceForm.value.title = titlearray;
     console.log(this.commonCreateCourceForm.value);
 
@@ -990,9 +1084,10 @@ export class UpdateCourceComponent implements OnInit {
         (res: any) => {
           console.log(res);
           if (res) {
-            let statedata = res.data;
-            let saveobj = { issave: true };
+            let statedata = this.routergetdata;
+            let saveobj = { issave: true, ...courseid };
             let stateobj = { ...statedata, ...saveobj };
+            console.log(stateobj);
             // this.router.navigate(['/dashboard/cources']);
             this.router.navigateByUrl('/dashboard/cources/request-detail', {
               state: stateobj,
@@ -1029,11 +1124,13 @@ export class UpdateCourceComponent implements OnInit {
   createNewCourcePlaylist(status: any) {
     console.log(this.stringArray);
     console.log(this.learnerGuidearray);
+    let courseid = { course_id: this.routergetdata.id };
     let savetype = { status: status };
     let totalObj = {
       ...this.playlistForm.value,
       ...savetype,
       ...this.commonCreateCourceForm.value,
+      ...courseid
     };
     let titlearray: any = [];
     let titleForm: any;
@@ -1048,7 +1145,9 @@ export class UpdateCourceComponent implements OnInit {
       }
     }
     console.log('titleForm', titlearray);
-
+    if (titlearray.length == 0) {
+      titlearray.push({ "english": this.commonCreateCourceForm.value.title });
+    }
     this.commonCreateCourceForm.value.title = titlearray;
     console.log(this.commonCreateCourceForm.value);
 
@@ -1062,9 +1161,10 @@ export class UpdateCourceComponent implements OnInit {
         (res: any) => {
           console.log(res);
           if (res) {
-            let statedata = res.data;
-            let saveobj = { issave: true };
+            let statedata = this.routergetdata;
+            let saveobj = { issave: true, ...courseid };
             let stateobj = { ...statedata, ...saveobj };
+            console.log(stateobj);
             // this.router.navigate(['/dashboard/cources']);
             this.router.navigateByUrl('/dashboard/cources/request-detail', {
               state: stateobj,
@@ -1117,7 +1217,27 @@ export class UpdateCourceComponent implements OnInit {
     }
   }
 
-  transfertoPublishData(){
+  transfertoPublishData() {
+    if (this.routergetdata.learning_type == "1") {
+      this.transfertoPublishData_ILT()
+    }
+    else if (this.routergetdata.learning_type == "2") {
+      this.transfertoPublishData_Video()
+    }
+    else if (this.routergetdata.learning_type == "3") {
+      this.transfertoPublishData_Material()
+    }
+    else if (this.routergetdata.learning_type == "4") {
+      this.transfertoPublishData_Curriculum()
+    }
+    else if (this.routergetdata.learning_type == "5") {
+      this.transfertoPublishData_Webbased()
+    }
+    else if (this.routergetdata.learning_type == "6") {
+      this.transfertoPublishData_Playlist()
+    }
+  }
+  transfertoPublishData_ILT() {
     let courseid = { course_id: this.routergetdata.id };
     let savetype = { status: 'pending' };
     //let publisher = {trasfer_user_id:this.selectedPublisherId}
@@ -1129,6 +1249,7 @@ export class UpdateCourceComponent implements OnInit {
       ...{learning_type:this.routergetdata.learning_type},
 
     };
+    this.getFormValidationErrors_ILT();
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
@@ -1153,29 +1274,261 @@ export class UpdateCourceComponent implements OnInit {
     } else {
       this.commonCreateCourceForm.markAllAsTouched();
       this.iltandViltForm.markAllAsTouched();
-      this.getFormValidationErrors();
+      
     }
   }
-
-  publishCourse(status:any){
+  transfertoPublishData_Video() {
     let courseid = { course_id: this.routergetdata.id };
-    let savetype = this.routergetdata.copy ? {status:'publish'} : {};
-    let transferobj = {transfer_user_id:this.profileDetails.data.id}
+    let savetype = { status: 'pending' };
+    //let publisher = {trasfer_user_id:this.selectedPublisherId}
+    let totalObj = {
+      ...this.videobasedForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+      ...courseid,
+      ...{ learning_type: this.routergetdata.learning_type },
+
+    };
+    this.getFormValidationErrors_Video();
+    if (this.videobasedForm.valid && this.commonCreateCourceForm.valid) {
+      this.courceService.updateCourse(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            debugger
+            // this.router.navigate(['/dashboard/cources']);
+            let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId };
+            this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
+              console.log(res);
+              this.router.navigate(['/dashboard/cources']);
+            }, (err: any) => {
+              console.log(err)
+            })
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+      console.log(totalObj);
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.videobasedForm.markAllAsTouched();
+
+    }
+  }
+  transfertoPublishData_Material() {
+    let courseid = { course_id: this.routergetdata.id };
+    let savetype = { status: 'pending' };
+    //let publisher = {trasfer_user_id:this.selectedPublisherId}
+    let totalObj = {
+      ...this.materialbasedForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+      ...courseid,
+      ...{ learning_type: this.routergetdata.learning_type },
+
+    };
+    this.getFormValidationErrors_Material();
+    if (this.materialbasedForm.valid && this.commonCreateCourceForm.valid) {
+      this.courceService.updateCourse(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            debugger
+            // this.router.navigate(['/dashboard/cources']);
+            let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId };
+            this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
+              console.log(res);
+              this.router.navigate(['/dashboard/cources']);
+            }, (err: any) => {
+              console.log(err)
+            })
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+      console.log(totalObj);
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.materialbasedForm.markAllAsTouched();
+
+    }
+  }
+  transfertoPublishData_Curriculum() {
+    let courseid = { course_id: this.routergetdata.id };
+    let savetype = { status: 'pending' };
+    //let publisher = {trasfer_user_id:this.selectedPublisherId}
+    let totalObj = {
+      ...this.currriculumForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+      ...courseid,
+      ...{ learning_type: this.routergetdata.learning_type },
+
+    };
+    this.getFormValidationErrors_Currriculum();
+    if (this.currriculumForm.valid && this.commonCreateCourceForm.valid) {
+      this.courceService.updateCourse(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            debugger
+            // this.router.navigate(['/dashboard/cources']);
+            let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId };
+            this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
+              console.log(res);
+              this.router.navigate(['/dashboard/cources']);
+            }, (err: any) => {
+              console.log(err)
+            })
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+      console.log(totalObj);
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.currriculumForm.markAllAsTouched();
+
+    }
+  }
+  transfertoPublishData_Webbased() {
+    let courseid = { course_id: this.routergetdata.id };
+    let savetype = { status: 'pending' };
+    //let publisher = {trasfer_user_id:this.selectedPublisherId}
+    let totalObj = {
+      ...this.webbasedForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+      ...courseid,
+      ...{ learning_type: this.routergetdata.learning_type },
+
+    };
+    this.getFormValidationErrors_Webbased();
+    if (this.webbasedForm.valid && this.commonCreateCourceForm.valid) {
+      this.courceService.updateCourse(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            debugger
+            // this.router.navigate(['/dashboard/cources']);
+            let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId };
+            this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
+              console.log(res);
+              this.router.navigate(['/dashboard/cources']);
+            }, (err: any) => {
+              console.log(err)
+            })
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+      console.log(totalObj);
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.webbasedForm.markAllAsTouched();
+
+    }
+  }
+  transfertoPublishData_Playlist() {
+    let courseid = { course_id: this.routergetdata.id };
+    let savetype = { status: 'pending' };
+    //let publisher = {trasfer_user_id:this.selectedPublisherId}
+    let totalObj = {
+      ...this.playlistForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+      ...courseid,
+      ...{ learning_type: this.routergetdata.learning_type },
+
+    };
+    this.getFormValidationErrors_Playlist();
+    if (this.playlistForm.valid && this.commonCreateCourceForm.valid) {
+      this.courceService.updateCourse(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            debugger
+            // this.router.navigate(['/dashboard/cources']);
+            let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId };
+            this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
+              console.log(res);
+              this.router.navigate(['/dashboard/cources']);
+            }, (err: any) => {
+              console.log(err)
+            })
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+      console.log(totalObj);
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.playlistForm.markAllAsTouched();
+
+    }
+  }
+  publishCourse(status: any) {
+    if (this.routergetdata.learning_type == "1") {
+      this.publishCourse_ILT(status)
+    }
+    else if (this.routergetdata.learning_type == "2") {
+      this.publishCourse_Video(status)
+    }
+    else if (this.routergetdata.learning_type == "3") {
+      this.publishCourse_Material(status)
+    }
+    else if (this.routergetdata.learning_type == "4") {
+      this.publishCourse_Curriculum(status)
+    }
+    else if (this.routergetdata.learning_type == "5") {
+      this.publishCourse_Webbased(status)
+    }
+    else if (this.routergetdata.learning_type == "6") {
+      this.publishCourse_Playlist(status)
+    }
+  }
+  publishCourse_ILT(status: any) {
+    let courseid = { course_id: this.routergetdata.id };
+    let savetype = { status: 'pending' };
+    //let publisher = {trasfer_user_id:this.selectedPublisherId}
     let totalObj = {
       ...this.iltandViltForm.value,
       ...savetype,
       ...this.commonCreateCourceForm.value,
       ...courseid,
-      // ...transferobj,
-      ...{learning_type:this.routergetdata.learning_type}
+      ...{ learning_type: this.routergetdata.learning_type },
+
     };
-    console.log(totalObj)
+    this.getFormValidationErrors_ILT();
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
           console.log(res);
           if (res) {
-            this.router.navigate(['/dashboard/cources']);
+            debugger
+            // this.router.navigate(['/dashboard/cources']);
+            let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId, status: 'publish' };
+            this.courceService.courceStatus(transferobj).subscribe(
+              (res: any) => {
+                console.log(res);
+                if (res) {
+                  this.router.navigate(['/dashboard/cources']);
+                }
+              },
+              (err: any) => {
+                console.log(err);
+              }
+            );
           }
         },
         (err: any) => {
@@ -1186,10 +1539,267 @@ export class UpdateCourceComponent implements OnInit {
     } else {
       this.commonCreateCourceForm.markAllAsTouched();
       this.iltandViltForm.markAllAsTouched();
-      this.getFormValidationErrors();
+
+    }
+    //alert("kunal");
+    //let courseid = { course_id: this.routergetdata.id, status: 'publish' };
+    //let savetype = this.routergetdata.copy ? {status:'publish'} : {};
+    //let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId, status: 'publish' };
+    //let totalObj = {
+    //  ...this.iltandViltForm.value,
+    //  ...savetype,
+    //  ...this.commonCreateCourceForm.value,
+    //  ...courseid,
+    //  // ...transferobj,
+    //  ...{learning_type:this.routergetdata.learning_type}
+    //};
+
+    //console.log(totalObj)
+    //this.getFormValidationErrors_ILT();
+    //if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
+    //  this.courceService.courceStatus(transferobj).subscribe(
+    //    (res: any) => {
+    //      console.log(res);
+    //      if (res) {
+    //        this.router.navigate(['/dashboard/cources']);
+    //      }
+    //    },
+    //    (err: any) => {
+    //      console.log(err);
+    //    }
+    //  );
+    //  console.log(totalObj);
+    //} else {
+    //  this.commonCreateCourceForm.markAllAsTouched();
+    //  this.iltandViltForm.markAllAsTouched();
+      
+    //}
+  }
+  publishCourse_Video(status: any) {
+    let courseid = { course_id: this.routergetdata.id };
+    let savetype = { status: 'pending' };
+    //let publisher = {trasfer_user_id:this.selectedPublisherId}
+    let totalObj = {
+      ...this.videobasedForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+      ...courseid,
+      ...{ learning_type: this.routergetdata.learning_type },
+
+    };
+    this.getFormValidationErrors_Video();
+    if (this.videobasedForm.valid && this.commonCreateCourceForm.valid) {
+      this.courceService.updateCourse(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            debugger
+            // this.router.navigate(['/dashboard/cources']);
+            let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId, status: 'publish' };
+            this.courceService.courceStatus(transferobj).subscribe(
+              (res: any) => {
+                console.log(res);
+                if (res) {
+                  this.router.navigate(['/dashboard/cources']);
+                }
+              },
+              (err: any) => {
+                console.log(err);
+              }
+            );
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+      console.log(totalObj);
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.videobasedForm.markAllAsTouched();
+
     }
   }
+  publishCourse_Material(status: any) {
+    let courseid = { course_id: this.routergetdata.id };
+    let savetype = { status: 'pending' };
+    //let publisher = {trasfer_user_id:this.selectedPublisherId}
+    let totalObj = {
+      ...this.materialbasedForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+      ...courseid,
+      ...{ learning_type: this.routergetdata.learning_type },
 
+    };
+    this.getFormValidationErrors_Material();
+    if (this.materialbasedForm.valid && this.commonCreateCourceForm.valid) {
+      this.courceService.updateCourse(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            debugger
+            // this.router.navigate(['/dashboard/cources']);
+            let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId, status: 'publish' };
+            this.courceService.courceStatus(transferobj).subscribe(
+              (res: any) => {
+                console.log(res);
+                if (res) {
+                  this.router.navigate(['/dashboard/cources']);
+                }
+              },
+              (err: any) => {
+                console.log(err);
+              }
+            );
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+      console.log(totalObj);
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.materialbasedForm.markAllAsTouched();
+
+    }
+  }
+  publishCourse_Curriculum(status: any) {
+    let courseid = { course_id: this.routergetdata.id };
+    let savetype = { status: 'pending' };
+    //let publisher = {trasfer_user_id:this.selectedPublisherId}
+    let totalObj = {
+      ...this.currriculumForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+      ...courseid,
+      ...{ learning_type: this.routergetdata.learning_type },
+
+    };
+    this.getFormValidationErrors_Currriculum();
+    if (this.currriculumForm.valid && this.commonCreateCourceForm.valid) {
+      this.courceService.updateCourse(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            debugger
+            // this.router.navigate(['/dashboard/cources']);
+            let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId, status: 'publish' };
+            this.courceService.courceStatus(transferobj).subscribe(
+              (res: any) => {
+                console.log(res);
+                if (res) {
+                  this.router.navigate(['/dashboard/cources']);
+                }
+              },
+              (err: any) => {
+                console.log(err);
+              }
+            );
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+      console.log(totalObj);
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.currriculumForm.markAllAsTouched();
+
+    }
+  }
+  publishCourse_Webbased(status: any) {
+    let courseid = { course_id: this.routergetdata.id };
+    let savetype = { status: 'pending' };
+    //let publisher = {trasfer_user_id:this.selectedPublisherId}
+    let totalObj = {
+      ...this.webbasedForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+      ...courseid,
+      ...{ learning_type: this.routergetdata.learning_type },
+
+    };
+    this.getFormValidationErrors_Webbased();
+    if (this.webbasedForm.valid && this.commonCreateCourceForm.valid) {
+      this.courceService.updateCourse(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            debugger
+            // this.router.navigate(['/dashboard/cources']);
+            let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId, status: 'publish' };
+            this.courceService.courceStatus(transferobj).subscribe(
+              (res: any) => {
+                console.log(res);
+                if (res) {
+                  this.router.navigate(['/dashboard/cources']);
+                }
+              },
+              (err: any) => {
+                console.log(err);
+              }
+            );
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+      console.log(totalObj);
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.webbasedForm.markAllAsTouched();
+
+    }
+  }
+  publishCourse_Playlist(status: any) {
+    let courseid = { course_id: this.routergetdata.id };
+    let savetype = { status: 'pending' };
+    //let publisher = {trasfer_user_id:this.selectedPublisherId}
+    let totalObj = {
+      ...this.playlistForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+      ...courseid,
+      ...{ learning_type: this.routergetdata.learning_type },
+
+    };
+    this.getFormValidationErrors_Playlist();
+    if (this.playlistForm.valid && this.commonCreateCourceForm.valid) {
+      this.courceService.updateCourse(totalObj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            debugger
+            // this.router.navigate(['/dashboard/cources']);
+            let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId, status: 'publish' };
+            this.courceService.courceStatus(transferobj).subscribe(
+              (res: any) => {
+                console.log(res);
+                if (res) {
+                  this.router.navigate(['/dashboard/cources']);
+                }
+              },
+              (err: any) => {
+                console.log(err);
+              }
+            );
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      );
+      console.log(totalObj);
+    } else {
+      this.commonCreateCourceForm.markAllAsTouched();
+      this.playlistForm.markAllAsTouched();
+
+    }
+  }
   createNewCource() {
     let learnerguidearr = this.createCourceForm.value.learnerguidearray;
     let localarr: any = [];
@@ -1363,4 +1973,84 @@ export class UpdateCourceComponent implements OnInit {
     console.log(event.target.value);
     this.selectedPublisherId = event.target.value;
   }
+  reject() {
+    let statusobj = { course_id: this.routergetdata.id, status: 'reject', status_comment: this.rejectcomment }
+    this.courceService.changeStatus(statusobj).subscribe((res: any) => {
+      console.log(res);
+      this.router.navigate(['/dashboard/cources']);
+    }, (err: any) => {
+      console.log(err)
+    })
+  }
+  gettitlelanguage() {
+    console.log(this.commonCreateCourceForm.value);
+  }
+
+  get titlecontrol() {
+    return (<FormArray>this.commonCreateCourceForm.get('title1')).controls;
+  }
+  addtitlemultilanguage(): any {
+    //debugger
+    let titlearraylist: any = [];
+    this.courceService.getLanguages().subscribe(
+      (res: any) => {
+        console.log('language', res);
+        console.log('rawvalue', this.commonCreateCourceForm);
+        let languages = res.data;
+        let i = 0;
+        let languageData: any = [];
+        //this.titlearraylist = Array.from(this.routergetdata.title).forEach(function (element) {
+        //  console.log(element)
+        //})
+        titlearraylist = JSON.parse('{"arabic":"sdsd"}')
+        console.log(titlearraylist)
+        for (let index in languages) {
+          console.log(titlearraylist[languages[index]])
+          const languageLength = this.commonCreateCourceForm.controls
+            .title1 as FormArray; 
+          let x: any;
+          languageLength.push(
+            this.fb.group({ name: [languages[index].slug], value: titlearraylist.find((e: { name: string; }) => e.name === languages[index].slug) })
+          );
+
+          //  }
+        }
+        // for(let i=0;i<languageData.length;i++){
+
+        // }
+        //  this.titlearray.push(
+        //   this.fb.group({languageData })
+        //   )
+        console.log(this.commonCreateCourceForm);
+        console.log('languageData', languageData);
+
+        // this.titlearray.push(languageData)
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+
+    //return this.commonCreateCourceForm.addControl('test',new FormControl('fdfd'))
+    // return this.fb.group({
+    //   title: new FormControl(''),
+    //   description: new FormControl(''),
+    // });
+  }
+  pushtoTitlearray() {
+    return this.addtitlemultilanguage();
+    // this.courceService.getLanguages().subscribe((res:any)=>{
+    //   console.log(res);
+    //   let languages = res.data;
+    //   for(let index in languages){
+    //     this.titlearray.push(this.fb.group({
+
+    //     }))
+    //    // return this.commonCreateCourceForm.addControl(`${this.availableLanguages[index].slug}`,this.fb.control('',[Validators.required]))
+    //   }
+    // },(err:any)=>{
+    //   console.log(err)
+    // })
+  }
+
 }
