@@ -12,7 +12,7 @@ import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive'
   styleUrls: ['./courses.component.scss'],
 })
 export class CoursesComponent implements OnInit {
-  public courcesList: any;
+  public courcesList: any=[];
   public page = 1;
   getUserprofile: any;
   getUserrole: any;
@@ -26,7 +26,10 @@ export class CoursesComponent implements OnInit {
   submittedRequests:any=[]
   allCourses:any;
   routegetdata:any;
-  getprofileDetails:any;
+  getprofileDetails: any;
+  coursedata: any=[];
+  i: number = 0;
+  j: number = 0;
   public compare = (v1: string | number, v2: string | number) =>
     v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
@@ -100,6 +103,7 @@ export class CoursesComponent implements OnInit {
   }
 
   refreshCourses() {
+    
     console.log(this.service.page);
     console.log(this.service.pageSize);
     this.pendingRequests=[];
@@ -110,36 +114,68 @@ export class CoursesComponent implements OnInit {
       (res: any) => {
         console.log(res);
         if (res.status == 1 && res.message == 'Success') {
-          this.courcesList = res.data;
+          this.i = 0;
+          this.j = 0;
+          this.coursedata = res.data;
+          for (this.i = 0; this.i < this.coursedata.length; this.i++) {
+            console.log(this.coursedata[this.i].request_id)
+            if (this.coursedata[this.i].request_id != "" && this.coursedata[this.i].request_id != null) {
+              this.courcesList[this.j] = this.coursedata[this.i]
+
+              if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
+                this.pendingRequests.push(this.coursedata[this.i])
+              }
+              if (this.coursedata[this.i].status === 'pending') {
+                this.usersubmitRequests.push(this.coursedata[this.i])
+              }
+              if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].user_id == this.getprofileDetails.data.id) {
+                this.submittedRequests.push(this.coursedata[this.i])
+              }
+              if (this.coursedata[this.i].status === 'reject') {
+                this.rejectedRequests.push(this.coursedata[this.i])
+              }
+              if (this.coursedata[this.i].status === 'draft') {
+                this.draftRequests.push(this.coursedata[this.i])
+              }
+              if (this.coursedata[this.i].status === 'publish') {
+                this.closedRequests.push(this.coursedata[this.i])
+              }
+
+              this.j = this.j + 1;
+            }
+          }
           this.allCourses = this.courcesList;
+          console.log(this.allCourses);
           if( this.routegetdata && this.routegetdata.status){
             console.log('this.routegetdata',this.routegetdata)
             console.log('this.cou',this.courcesList.filter((course:any)=>course.status == this.routegetdata.status))
-            this.courcesList =this.courcesList.filter((course:any)=>course.status ==this.routegetdata.status)
+            this.courcesList = this.courcesList.filter((course: any) => course.status == this.routegetdata.status)
+
           }
           
 
           this.collectionSize = this.courcesList.length;
-          this.courcesList.map((course:any)=>{
-            if(course.status === 'pending' && course.user_id != this.getprofileDetails.data.id){
-              this.pendingRequests.push(course)
-            }
-            if(course.status === 'pending'){
-              this.usersubmitRequests.push(course)
-            }
-            if(course.status === 'pending' && course.user_id == this.getprofileDetails.data.id){
-              this.submittedRequests.push(course)
-            }
-            if(course.status === 'reject'){
-              this.rejectedRequests.push(course)
-            }
-            if(course.status === 'draft'){
-              this.draftRequests.push(course)
-            }
-            if(course.status === 'close'){
-              this.closedRequests.push(course)
-            }
-      
+          this.courcesList.map((course: any) => {
+            
+            //if(course.status === 'pending' && course.user_id != this.getprofileDetails.data.id){
+            //  this.pendingRequests.push(course)
+            //}
+            //if(course.status === 'pending'){
+            //  this.usersubmitRequests.push(course)
+            //}
+            //if(course.status === 'pending' && course.user_id == this.getprofileDetails.data.id){
+            //  this.submittedRequests.push(course)
+            //}
+            //if(course.status === 'reject'){
+            //  this.rejectedRequests.push(course)
+            //}
+            //if(course.status === 'draft'){
+            //  this.draftRequests.push(course)
+            //}
+            //if(course.status === 'publish'){
+            //  this.closedRequests.push(course)
+            //}
+            console.log(this.draftRequests)
           })
         }
       },

@@ -689,7 +689,7 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label class="form-control-label">
-                          Expiry Date <span style="color: red">* </span>
+                          Expiry Type <span style="color: red">* </span>
                           <a>
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                                data-placement="top"
@@ -697,7 +697,7 @@
                             </i>
                           </a>
                         </label>
-                        <select class="form-control form_width" formControlName="expiry_date">
+                        <select class="form-control form_width" formControlName="expiry_type">
                           <option value="">Please Select expiry</option>
                           <option *ngFor="let cctExpiry of cctExpiryperiod" [value]="cctExpiry.id">
                             {{ cctExpiry.name }}
@@ -1617,56 +1617,56 @@
           <!--Material-Based Training-->
           <!--Video-based training-->
           <div [style.display]="(learningType == 2) ? 'block' : 'none' ">
-            <div class="card">
-              <form [formGroup]="videobasedForm">
+            <form [formGroup]="videobasedForm">
+              <div class="card">
                 <div class="card-header">
                   <strong>Video-based training </strong>
                 </div>
                 <div class="card-body">
                   <div class="row">
                     <!--<div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label">Expiry Date
-                        <a>
-                          <i
-                            class="fa fa-info-circle info_circle"
-                            aria-hidden="true"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Provide the date on which this learning object will no longer be valid. If the expiry date is unknown your learning object will be available in the Orange Learning catalog as follows: ILT & vILT with active sessions = no expiry date; ILT & vILT with no sessions = 12 months; online courses, videos, materials, tests = 2 years."
-                          >
-                          </i>
-                        </a>
-                      </label>
-                                                <input type="date" class="form-control form_width" formControlName="expiry_date" />
-                                            </div>
-                                        </div>-->
+                                <div class="form-group">
+                                    <label class="form-control-label">Expiry Date
+            <a>
+              <i
+                class="fa fa-info-circle info_circle"
+                aria-hidden="true"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Provide the date on which this learning object will no longer be valid. If the expiry date is unknown your learning object will be available in the Orange Learning catalog as follows: ILT & vILT with active sessions = no expiry date; ILT & vILT with no sessions = 12 months; online courses, videos, materials, tests = 2 years."
+              >
+              </i>
+            </a>
+          </label>
+                                    <input type="date" class="form-control form_width" formControlName="expiry_date" />
+                                </div>
+                            </div>-->
                     <!--colend-->
                     <!--<div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label">Upload video status <span style="color: red">* </span>
-                        <a  >
-                          <i
-                            class="fa fa-info-circle info_circle"
-                            aria-hidden="true"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="NULL"
-                          >
-                          </i>
-                        </a>
-                      </label>
-                                                <select class="form-control form_width" formControlName="level">
-                        <option value="">Please select level</option>
-                        <option
-                          *ngFor="let level of cctLevel"
-                          [value]="level.id"
-                        >
-                          {{ level.name }}
-                        </option>
-                      </select>
-                                            </div>
-                                        </div>-->
+                                <div class="form-group">
+                                    <label class="form-control-label">Upload video status <span style="color: red">* </span>
+            <a  >
+              <i
+                class="fa fa-info-circle info_circle"
+                aria-hidden="true"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="NULL"
+              >
+              </i>
+            </a>
+          </label>
+                                    <select class="form-control form_width" formControlName="level">
+            <option value="">Please select level</option>
+            <option
+              *ngFor="let level of cctLevel"
+              [value]="level.id"
+            >
+              {{ level.name }}
+            </option>
+          </select>
+                                </div>
+                            </div>-->
                     <!--colend-->
                   </div>
 
@@ -1707,81 +1707,82 @@
                   </div>
                   <!--row end-->
                 </div>
-              </form>
-            </div>
 
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <label class="form-control-label">
-                        Additional Comment(s)
-                        <a>
-                          <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                             data-placement="top" data-container="body"
-                             title="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog.">
-                          </i>
-                        </a>
-                      </label>
-                      <textarea class="form-control form_width-textarea" rows="3"
-                                placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
+              </div>
+
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label class="form-control-label">
+                          Additional Comment(s)
+                          <a>
+                            <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                               data-placement="top" data-container="body"
+                               title="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog.">
+                            </i>
+                          </a>
+                        </label>
+                        <textarea class="form-control form_width-textarea" rows="3"
+                                  placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
                       </textarea>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <label class="form-control-label">
-                        Request to RegionalTraining Cordinator
-                        <span style="color: red">* </span>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label class="form-control-label">
+                          Request to RegionalTraining Cordinator
+                          <span style="color: red">* </span>
 
-                        <a>
-                          <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                             data-placement="top"
-                             title="If you selected Yes in the Certification field, please select how long the certification is valid.">
-                          </i>
-                        </a>
-                      </label>
-                      <select class="form-control form_width" formControlName="regional_cordinator">
-                        <option value="">Please select ROC</option>
-                        <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">
-                          {{ cordinator?.name }}
-                        </option>
-                      </select>
+                          <a>
+                            <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                               data-placement="top"
+                               title="If you selected Yes in the Certification field, please select how long the certification is valid.">
+                            </i>
+                          </a>
+                        </label>
+                        <select class="form-control form_width" formControlName="regional_cordinator">
+                          <option value="">Please select ROC</option>
+                          <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">
+                            {{ cordinator?.name }}
+                          </option>
+                        </select>
+                      </div>
                     </div>
+                    <!--colend-->
                   </div>
-                  <!--colend-->
-                </div>
 
-                <p style="color: #000">
-                  <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in
-                  unavailable.Therefore,please select the
-                  <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
-                  Pacificregion
-                </p>
-                <p style="color: #000">
-                  <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is
-                  unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who
-                  is the backup for <b>Russia</b> region.
-                </p>
+                  <p style="color: #000">
+                    <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in
+                    unavailable.Therefore,please select the
+                    <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
+                    Pacificregion
+                  </p>
+                  <p style="color: #000">
+                    <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is
+                    unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who
+                    is the backup for <b>Russia</b> region.
+                  </p>
+                </div>
+                <div class="card-footer d-flex justify-content-start">
+                  <button class="btn btn-primary" (click)="createNewCourceVideo('pending')">
+                    Submit
+                  </button>
+                  <!-- </button> -->
+                  <button class="btn btn-secondary ml-1" (click)="createNewCourceVideo('draft')">Save as draft</button>
+                  <!-- </button> -->
+                </div>
               </div>
-              <div class="card-footer d-flex justify-content-start">
-                <button class="btn btn-primary" (click)="createNewCourceVideo('pending')">
-                  Submit
-                </button>
-                <!-- </button> -->
-                <button class="btn btn-secondary ml-1" (click)="createNewCourceVideo('draft')">Save as draft</button>
-                <!-- </button> -->
-              </div>
-            </div>
+            </form>
             <!--Video-based training-->
           </div>
           <!--Playlist-->
           <div [style.display]="(learningType == 6) ? 'block' : 'none' ">
-            <div class="card">
-              <form [formGroup]="playlistForm">
+            <form [formGroup]="playlistForm">
+              <div class="card">
                 <div class="card-header">
                   <strong>Playlist </strong>
                 </div>
@@ -1930,81 +1931,83 @@
                   </div>
                   <!--row end-->
                 </div>
-              </form>
-            </div>
-            <!--Playlist-->
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <label class="form-control-label">
-                        Additional Comment(s)
-                        <a>
-                          <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                             data-placement="top" data-container="body"
-                             title="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog.">
-                          </i>
-                        </a>
-                      </label>
-                      <textarea class="form-control form_width-textarea" rows="3"
-                                placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
+
+              </div>
+              <!--Playlist-->
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label class="form-control-label">
+                          Additional Comment(s)
+                          <a>
+                            <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                               data-placement="top" data-container="body"
+                               title="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog.">
+                            </i>
+                          </a>
+                        </label>
+                        <textarea class="form-control form_width-textarea" rows="3"
+                                  placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
                       </textarea>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <label class="form-control-label">
-                        Request to RegionalTraining Cordinator
-                        <span style="color: red">* </span>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label class="form-control-label">
+                          Request to RegionalTraining Cordinator
+                          <span style="color: red">* </span>
 
-                        <a>
-                          <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                             data-placement="top"
-                             title="If you selected Yes in the Certification field, please select how long the certification is valid.">
-                          </i>
-                        </a>
-                      </label>
-                      <select class="form-control form_width" formControlName="regional_cordinator">
-                        <option value="">Please select ROC</option>
-                        <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">
-                          {{ cordinator?.name }}
-                        </option>
-                      </select>
+                          <a>
+                            <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                               data-placement="top"
+                               title="If you selected Yes in the Certification field, please select how long the certification is valid.">
+                            </i>
+                          </a>
+                        </label>
+                        <select class="form-control form_width" formControlName="regional_cordinator">
+                          <option value="">Please select ROC</option>
+                          <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">
+                            {{ cordinator?.name }}
+                          </option>
+                        </select>
+                      </div>
                     </div>
+                    <!--colend-->
                   </div>
-                  <!--colend-->
-                </div>
 
-                <p style="color: #000">
-                  <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in
-                  unavailable.Therefore,please select the
-                  <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
-                  Pacificregion
-                </p>
-                <p style="color: #000">
-                  <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is
-                  unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who
-                  is the backup for <b>Russia</b> region.
-                </p>
+                  <p style="color: #000">
+                    <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in
+                    unavailable.Therefore,please select the
+                    <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
+                    Pacificregion
+                  </p>
+                  <p style="color: #000">
+                    <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is
+                    unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who
+                    is the backup for <b>Russia</b> region.
+                  </p>
+                </div>
+                <div class="card-footer d-flex justify-content-start">
+                  <button class="btn btn-primary" (click)="createNewCourcePlaylist('pending')">
+                    Submit
+                  </button>
+                  <!-- </button> -->
+                  <button class="btn btn-secondary ml-1" (click)="createNewCourcePlaylist('draft')">Save as draft</button>
+                  <!-- </button> -->
+                </div>
               </div>
-              <div class="card-footer d-flex justify-content-start">
-                <button class="btn btn-primary" (click)="createNewCourcePlaylist('pending')">
-                  Submit
-                </button>
-                <!-- </button> -->
-                <button class="btn btn-secondary ml-1" (click)="createNewCourcePlaylist('draft')">Save as draft</button>
-                <!-- </button> -->
-              </div>
-            </div>
+            </form>
           </div>
 
           <!--Webbased Training-->
           <div [style.display]="(learningType == 5) ? 'block' : 'none' ">
-            <div class="card">
-              <form [formGroup]="webbasedForm">
+            <form [formGroup]="webbasedForm">
+              <div class="card">
+
                 <div class="card-header">
                   <strong>Web-based training</strong>
                 </div>
@@ -2133,23 +2136,23 @@
                     <div class="col-sm-6" *ngIf="externalVendorname_Webbased">
                       <div class="form-group">
                         <!-- <label class="form-control-label"
-                          >External vendor
-                          <a href="">
-                            <i
-                              class="fa fa-info-circle info_circle"
-                              aria-hidden="true"
-                              data-toggle="tooltip"
-                              data-placement="top"
-                              title="Select Yes, if the course is provided by an external vendor."
-                            >
-                            </i>
-                          </a>
-                        </label>
-                        <select class="form-control form_width" formControlName="who_see_course">
-                          <option value="">Please select externalvendor</option>
-                          <option value="yes">Yes</option>
-                          <option value="no">No</option>
-                        </select> -->
+              >External vendor
+              <a href="">
+                <i
+                  class="fa fa-info-circle info_circle"
+                  aria-hidden="true"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Select Yes, if the course is provided by an external vendor."
+                >
+                </i>
+              </a>
+            </label>
+            <select class="form-control form_width" formControlName="who_see_course">
+              <option value="">Please select externalvendor</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select> -->
                         <label class="form-control-label">
                           External vendor name
                           <span style="color: red">* </span>
@@ -2192,74 +2195,75 @@
                   </div>
                   <!--row end-->
                 </div>
-              </form>
-            </div>
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <label class="form-control-label">
-                        Additional Comment(s)
-                        <a>
-                          <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                             data-placement="top" data-container="body"
-                             title="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog.">
-                          </i>
-                        </a>
-                      </label>
-                      <textarea class="form-control form_width-textarea" rows="3"
-                                placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
+
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label class="form-control-label">
+                          Additional Comment(s)
+                          <a>
+                            <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                               data-placement="top" data-container="body"
+                               title="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog.">
+                            </i>
+                          </a>
+                        </label>
+                        <textarea class="form-control form_width-textarea" rows="3"
+                                  placeholder="Enter Additional Comment(s)" formControlName="additional_comment">
                       </textarea>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <label class="form-control-label">
-                        Request to RegionalTraining Cordinator
-                        <span style="color: red">* </span>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label class="form-control-label">
+                          Request to RegionalTraining Cordinator
+                          <span style="color: red">* </span>
 
-                        <a>
-                          <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                             data-placement="top"
-                             title="If you selected Yes in the Certification field, please select how long the certification is valid.">
-                          </i>
-                        </a>
-                      </label>
-                      <select class="form-control form_width" formControlName="validity_period">
-                        <option value="">Please select</option>
-                        <option *ngFor="let validity of validityPeriod" [value]="validity.id">
-                          {{ validity.name }}
-                        </option>
-                      </select>
+                          <a>
+                            <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                               data-placement="top"
+                               title="If you selected Yes in the Certification field, please select how long the certification is valid.">
+                            </i>
+                          </a>
+                        </label>
+                        <select class="form-control form_width" formControlName="validity_period">
+                          <option value="">Please select</option>
+                          <option *ngFor="let validity of validityPeriod" [value]="validity.id">
+                            {{ validity.name }}
+                          </option>
+                        </select>
+                      </div>
                     </div>
+                    <!--colend-->
                   </div>
-                  <!--colend-->
-                </div>
 
-                <p style="color: #000">
-                  <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in
-                  unavailable.Therefore,please select the
-                  <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
-                  Pacificregion
-                </p>
-                <p style="color: #000">
-                  <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is
-                  unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who
-                  is the backup for <b>Russia</b> region.
-                </p>
+                  <p style="color: #000">
+                    <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in
+                    unavailable.Therefore,please select the
+                    <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia
+                    Pacificregion
+                  </p>
+                  <p style="color: #000">
+                    <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is
+                    unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who
+                    is the backup for <b>Russia</b> region.
+                  </p>
+                </div>
+                <div class="card-footer d-flex justify-content-start">
+                  <button class="btn btn-primary" (click)="createNewCourceWebbased('pending')">
+                    Submit
+                  </button>
+                  <!-- </button> -->
+                  <button class="btn btn-secondary ml-1" (click)="createNewCourceWebbased('draft')">Save as draft</button>
+                  <!-- </button> -->
+                </div>
               </div>
-              <div class="card-footer d-flex justify-content-start">
-                <button class="btn btn-primary" (click)="createNewCourceWebbased('pending')">
-                  Submit
-                </button>
-                <!-- </button> -->
-                <button class="btn btn-secondary ml-1" (click)="createNewCourceWebbased('draft')">Save as draft</button>
-                <!-- </button> -->
-              </div>
-            </div>
+            </form>
           </div>
           <!--Webbased Training-->
         </div>
@@ -2398,7 +2402,7 @@
         <div class="row">
           <div class="col-sm-12">
             <div class="form-group">
-              <label class="form-control-label">Arabic </label>
+              <label class="form-control-label">Arabic 123</label>
               <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter">
               </textarea>
             </div>
