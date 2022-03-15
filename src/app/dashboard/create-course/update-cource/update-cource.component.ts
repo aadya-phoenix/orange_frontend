@@ -16,8 +16,7 @@ import { CourcesService } from 'src/app/shared/services/cources/cources.service'
   styleUrls: ['./update-cource.component.scss'],
 })
 export class UpdateCourceComponent implements OnInit {
-  @ViewChild('chkurl') chkurl!: ElementRef<HTMLElement>;
-  @ViewChild('chkupload') chkupload!: ElementRef<HTMLElement>;
+  
   routergetdata: any;
   public createCourceForm!: FormGroup;
   public commonCreateCourceForm!: FormGroup;
@@ -107,6 +106,9 @@ export class UpdateCourceComponent implements OnInit {
   showMaterialURLchecked: boolean = false;
   showMaterialUploadchecked: boolean = false;
 
+  public showPlaylistTargetAudience: any;
+  showPlaylistEmail: any;
+
   constructor(
     private fb: FormBuilder,
     private courceService: CourcesService,
@@ -131,21 +133,19 @@ export class UpdateCourceComponent implements OnInit {
       
     }
     else if (this.routergetdata.learning_type == "3") {
-      if (this.routergetdata.video_link != "") {
-        
-
-
-        let el: HTMLElement = this.chkurl.nativeElement;
-        el.click();
-        
+      if (this.routergetdata.url != "") {
         this.showMaterialURLchecked = true;
+        this.materialsourceurl = true;
         this.showMaterialUploadchecked = false;
+        this.materialsourceupload = false;
+        
       }
       else {
-        let el: HTMLElement = this.chkupload.nativeElement;
-        el.click();
         this.showMaterialURLchecked = false;
+        this.materialsourceurl = false;
         this.showMaterialUploadchecked = true;
+        this.materialsourceupload = true;
+       
       }
 
     }
@@ -157,12 +157,30 @@ export class UpdateCourceComponent implements OnInit {
       this.showCurriculumLearnMore = this.routergetdata.learn_more.toString().replace('"', '').replace('"', '')
       this.showCurriculumForWhom = this.routergetdata.for_whoom.toString().replace('"', '').replace('"', '')
       this.showCurriculumWhoSee = this.routergetdata.who_see_course
+      if (this.routergetdata.certification == "yes") {
+        this.showCertificateExpiry_Curriculum = true
+      }
+      else {
+        this.showCertificateExpiry_Curriculum = false
+      }
     }
     else if (this.routergetdata.learning_type == "5") {
-      
+      if (this.routergetdata.certification == "yes") {
+        this.showCertificateExpiry_Webbased = true
+      }
+      else {
+        this.showCertificateExpiry_Webbased = false
+      }
+      if (this.routergetdata.external_vendor == "yes") {
+        this.externalVendorname_Webbased = true
+      }
+      else {
+        this.externalVendorname_Webbased = false
+      }
     }
     else if (this.routergetdata.learning_type == "6") {
-      
+      this.showPlaylistTargetAudience = this.routergetdata['level']
+      this.showPlaylistEmail = this.routergetdata.for_whoom.toString().replace('"', '').replace('"', '') 
     }
   }
 
@@ -459,6 +477,7 @@ export class UpdateCourceComponent implements OnInit {
     //video based
     this.videobasedForm = this.fb.group({
       video_link: new FormControl(''),
+      additional_comment: new FormControl(''),
       email_preffered_instructor: new FormControl('', [Validators.required,
         Validators.pattern(emailregexp)]),
       regional_cordinator:
@@ -470,6 +489,7 @@ export class UpdateCourceComponent implements OnInit {
     this.materialbasedForm = this.fb.group({
       //material based
       video_link: new FormControl('', [Validators.required]),
+      additional_comment: new FormControl(''),
       url: new FormControl('', [Validators.required]),
       regional_cordinator:
         this.getUserrole.id === 2
@@ -483,6 +503,7 @@ export class UpdateCourceComponent implements OnInit {
       email_preffered_instructor: new FormControl('', [Validators.required,
         Validators.pattern(emailregexp)]),
       digital: new FormControl('', [Validators.required]),
+      additional_comment: new FormControl(''),
       certification: new FormControl('', [Validators.required]),
       certification_expiry_type: new FormControl('', [Validators.required]),
       validity_period: new FormControl('', [Validators.required]),
@@ -503,7 +524,8 @@ export class UpdateCourceComponent implements OnInit {
     });
     this.webbasedForm = this.fb.group({
       email_preffered_instructor: new FormControl('', [Validators.required,
-      Validators.pattern(emailregexp)]),
+        Validators.pattern(emailregexp)]),
+      additional_comment: new FormControl(''),
       digital: new FormControl('', [Validators.required]),
       certification: new FormControl('', [Validators.required]),
       certification_expiry_type: new FormControl('', [Validators.required]),
@@ -518,17 +540,18 @@ export class UpdateCourceComponent implements OnInit {
     });
     this.playlistForm = this.fb.group({
       for_whoom: new FormControl('', [Validators.required,
-      Validators.pattern(emailregexp)]),
+        Validators.pattern(emailregexp)]),
+      additional_comment: new FormControl(''),
       url: new FormControl('', [Validators.required]),
       video_link: new FormControl('', [Validators.required]),
       level: new FormControl('', [Validators.required]),
       who_see_course: new FormControl('', [Validators.required]),
       free_field_content: new FormControl('', [Validators.required]),
       email_preffered_instructor: new FormControl('', [Validators.required]),
-      regional_cordinator:
-        this.getUserrole.id === 2
-          ? new FormControl('', [Validators.required])
-          : new FormControl()
+      regional_cordinator: new FormControl('', [Validators.required])
+        //this.getUserrole.id === 2
+        //  ? new FormControl('', [Validators.required])
+        //  : new FormControl('')
     });
 
     this.commonCreateCourceForm.patchValue(this.routergetdata);
@@ -544,6 +567,20 @@ export class UpdateCourceComponent implements OnInit {
     }
     else if (this.learningType == "3") {
       this.materialbasedForm.patchValue(this.routergetdata);
+      if (this.routergetdata.url != "") {
+        
+        this.materialbasedForm
+          .get('url')
+          ?.setValidators(Validators.required);
+        this.materialbasedForm.get('video_link')?.clearValidators();
+      }
+      else {
+        
+        this.materialbasedForm
+          .get('video_link')
+          ?.setValidators(Validators.required);
+        this.materialbasedForm.get('url')?.clearValidators();
+      }
     }
     else if (this.learningType == "4") {
       this.currriculumForm.patchValue(this.routergetdata);
@@ -733,7 +770,7 @@ export class UpdateCourceComponent implements OnInit {
       if (totalObj.learning_type == null || totalObj.learning_type == "") {
         totalObj.learning_type = this.learningType.toString();
       }
-      this.courceService.createCource(totalObj).subscribe(
+      this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
           console.log(res);
           if (res) {
@@ -805,7 +842,7 @@ export class UpdateCourceComponent implements OnInit {
       if (totalObj.learning_type == null || totalObj.learning_type == "") {
         totalObj.learning_type = this.learningType.toString();
       }
-      this.courceService.createCource(totalObj).subscribe(
+      this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
           console.log(res);
           if (res) {
@@ -877,7 +914,7 @@ export class UpdateCourceComponent implements OnInit {
       if (totalObj.learning_type == null || totalObj.learning_type == "") {
         totalObj.learning_type = this.learningType.toString();
       }
-      this.courceService.createCource(totalObj).subscribe(
+      this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
           console.log(res);
           if (res) {
@@ -949,7 +986,7 @@ export class UpdateCourceComponent implements OnInit {
       if (totalObj.learning_type == null || totalObj.learning_type == "") {
         totalObj.learning_type = this.learningType.toString();
       }
-      this.courceService.createCource(totalObj).subscribe(
+      this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
           console.log(res);
           if (res) {
@@ -1021,7 +1058,7 @@ export class UpdateCourceComponent implements OnInit {
       if (totalObj.learning_type == null || totalObj.learning_type == "") {
         totalObj.learning_type = this.learningType.toString();
       }
-      this.courceService.createCource(totalObj).subscribe(
+      this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
           console.log(res);
           if (res) {
@@ -1303,17 +1340,17 @@ export class UpdateCourceComponent implements OnInit {
     if (event == 'Url') {
       this.materialsourceurl = true;
       this.materialsourceupload = false;
-      this.iltandViltForm
+      this.materialbasedForm
         .get('url')
         ?.setValidators(Validators.required);
-      this.iltandViltForm.get('video_link')?.clearValidators();
+      this.materialbasedForm.get('video_link')?.clearValidators();
     } else {
       this.materialsourceurl = false;
       this.materialsourceupload = true;
-      this.iltandViltForm
+      this.materialbasedForm
         .get('video_link')
         ?.setValidators(Validators.required);
-      this.iltandViltForm.get('url')?.clearValidators();
+      this.materialbasedForm.get('url')?.clearValidators();
     }
   }
 

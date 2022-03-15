@@ -10,6 +10,7 @@ import { PriceDirective } from './directives/price.directive';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgbdSortableHeader } from './directives/sorting.directive';
 import { BulletpointsDirective } from './directives/bulletpoints.directive';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -27,6 +28,7 @@ import { BulletpointsDirective } from './directives/bulletpoints.directive';
     FormsModule,
     ReactiveFormsModule,
     Ng2SearchPipeModule,
+    RouterModule
     //NgbModule,
   ],
   exports: [

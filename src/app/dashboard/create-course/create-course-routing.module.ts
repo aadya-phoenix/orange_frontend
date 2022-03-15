@@ -6,12 +6,14 @@ import { CoursesComponent } from './courses/courses.component';
 import { CreateNewCourseComponent } from './create-new-course/create-new-course.component';
 import { RequestDetailComponent } from './request-detail/request-detail.component';
 import { UpdateCourceComponent } from './update-cource/update-cource.component';
+import { ViewCompleteReportComponent } from './view-complete-report/view-complete-report.component';
 import { ViewCourseDetailsComponent } from './view-course-details/view-course-details.component';
 
 
 const routes: Routes = [
     {path:'',component:CoursesComponent,canActivate:[AuthenticationServiceGuard]},
     {path:'create-cource',component:CreateNewCourseComponent,canActivate:[AuthenticationServiceGuard]},
+    {path:'view-complete-report',component:ViewCompleteReportComponent,canActivate:[AuthenticationServiceGuard]},
     {path:'request-detail',component:RequestDetailComponent,canActivate:[AuthenticationServiceGuard]},
     {path:'edit-cource',component:UpdateCourceComponent,canActivate:[AuthenticationServiceGuard]},
     {path:'view-details',component:ViewCourseDetailsComponent,canActivate:[AuthenticationServiceGuard]}
