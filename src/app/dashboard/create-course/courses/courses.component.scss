@@ -46,11 +46,17 @@
 
 .corse_title {}
 
+.sub-child-dashicon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .alig_dashicon p {
     text-align: center;
     color: #ff7900;
-    font-weight: 500;
-    font-size: 12px;
+    font-weight: 600;
+    font-size: 14px;
     margin-bottom: 0px;
     cursor: pointer;
 }
@@ -172,6 +178,14 @@
     margin: auto;
 }
 
+.form-control {
+    height: 1.9rem;
+}
+
+.card-header {
+    padding: 0.45rem 1.25rem !important;
+}
+
 .pending {
     color: #000 !important;
     background: #ffd200;
@@ -204,7 +218,7 @@
 }
 
 .bac_hover-table:hover {
-    background-color: #80808054;
+    background-color: #e5e5e5;
 }
 
 .text-primary {
@@ -233,62 +247,19 @@ tbody tr {
     border-radius: 0.25rem;
 }
 
-.pagination>li>a,
-.pagination>li>span {
-    position: relative;
-    float: left;
-    padding: 4px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #db6852;
-    text-decoration: none;
-    background-color: #fff;
-    border: 1px solid #ddd;
+.searc_dislp_inlin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.pagination>li:first-child>a,
-.pagination>li:first-child>span {
-    margin-left: 0;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+.pagination {
+    margin: 0px !important;
 }
 
-.pagination>.active>a,
-.pagination>.active>a:focus,
-.pagination>.active>a:hover,
-.pagination>.active>span,
-.pagination>.active>span:focus,
-.pagination>.active>span:hover {
-    z-index: 3;
-    color: #fff;
-    cursor: default;
-    background-color: #db6852;
-    border-color: #db6852;
-}
-
-::ng-deep {
-    .pagination li {
-        font-size: 14px;
-        a {
-            color: #db6852;
-            &:hover {
-                color: #db6852;
-            }
-            &:focus,
-            &:focus-visible {
-                box-shadow: none !important;
-            }
-        }
-    }
-    .pagination li.active a {
-        background-color: #db6852 !important;
-        border-color: #db6852 !important;
-    }
-    .searc_dislp_inlin {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+.re_id {
+    color: #ff7901;
+    font-weight: 600 !important;
 }
 
 @media (max-width: 768px) {
@@ -306,12 +277,17 @@ tbody tr {
         margin-bottom: 10px;
     }
     .Course_icon_parent {
-        flex-direction: column;
+        display: inline;
     }
     .status_med_di {
         display: flex;
     }
     .overall_css {
         flex-direction: column;
+    }
+    .Course_icon_child {
+        width: 33%;
+        float: left;
+        margin-top: 10px;
     }
 }
