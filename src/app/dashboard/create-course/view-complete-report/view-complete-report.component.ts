@@ -16,7 +16,7 @@ import * as XLSX from 'xlsx';
 export class ViewCompleteReportComponent implements OnInit {
 
   public filterForm!: FormGroup;
-  public courcesList: any;
+  public courcesList: any=[];
   public filteredCourseList:any;
   public learningTypes: any;
   public roles:any;
@@ -27,6 +27,7 @@ export class ViewCompleteReportComponent implements OnInit {
   pendingRequests:any=[];
   closedRequests:any=[];
   rejectedRequests:any=[];
+  submittedRequests:any=[];
   usersubmitRequests:any=[];
   allCourses:any;
   routegetdata:any;
@@ -36,6 +37,9 @@ export class ViewCompleteReportComponent implements OnInit {
   publisherObj:any=[];
   flagVar:boolean=false;
   addDate:any;
+  coursedata: any=[];
+  i: number = 0;
+  j: number = 0;
 
   fileName = 'ExcelSheet.xlsx' ;
   
@@ -53,7 +57,7 @@ export class ViewCompleteReportComponent implements OnInit {
     private router: Router
     ) {
       this.getUserrole = this.authService.getRolefromlocal();
-
+      this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
       this.routegetdata = this.router.getCurrentNavigation()?.extras.state;
        /*  if(!this.routegetdata){
           this.router.navigateByUrl('/dashboard/cources');
@@ -81,53 +85,88 @@ export class ViewCompleteReportComponent implements OnInit {
     });
   }
 
-  refreshCourses(){
-    this.pendingRequests=[];
-    this.rejectedRequests=[];
-    this.draftRequests=[];
-    this.closedRequests=[];
-    this.courceService.getCources().subscribe(
-      (res: any) => {
-        console.log(res);
-        if (res.status == 1 && res.message == 'Success') {
-          this.courcesList = res.data;
-          this.allCourses = this.courcesList;
-          if( this.routegetdata && this.routegetdata.status){
-            console.log('this.routegetdata',this.routegetdata)
-            console.log('this.cou',this.courcesList.filter((course:any)=>course.status == this.routegetdata.status))
-            this.courcesList =this.courcesList.filter((course:any)=>course.status ==this.routegetdata.status)
-          }
-          
-
-          this.collectionSize = this.courcesList.length;
-          this.courcesList.map((course:any)=>{
-            if(course.status === 'pending' && course.user_id != this.getprofileDetails.data.id){
-              this.pendingRequests.push(course)
-            }
-            if(course.status === 'pending'){
-              this.usersubmitRequests.push(course)
-            }
-            if(course.status === 'submit'){
-              this.rejectedRequests.push(course)
-            }
-            if(course.status === 'reject'){
-              this.rejectedRequests.push(course)
-            }
-            if(course.status === 'draft'){
-              this.draftRequests.push(course)
-            }
-            if(course.status === 'close'){
-              this.closedRequests.push(course)
-            }
-      
-          });
-        }
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
-  }
+  refreshCourses() {
+    // console.log(this.service.page);
+    // console.log(this.service.pageSize);
+     this.pendingRequests=[];
+     this.rejectedRequests=[];
+     this.draftRequests=[];
+     this.closedRequests=[];
+     this.courceService.getCources().subscribe(
+       (res: any) => {
+         console.log(res);
+         if (res.status == 1 && res.message == 'Success') {
+           this.i = 0;
+           this.j = 0;
+           this.coursedata = res.data;
+           for (this.i = 0; this.i < this.coursedata.length; this.i++) {
+             console.log(this.coursedata[this.i].request_id)
+             if (this.coursedata[this.i].request_id != "" && this.coursedata[this.i].request_id != null) {
+               this.courcesList[this.j] = this.coursedata[this.i]
+ 
+               if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
+                 this.pendingRequests.push(this.coursedata[this.i])
+               }
+               if (this.coursedata[this.i].status === 'pending') {
+                 this.usersubmitRequests.push(this.coursedata[this.i])
+               }
+               if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].user_id == this.getprofileDetails.data.id) {
+                 this.submittedRequests.push(this.coursedata[this.i])
+               }
+               if (this.coursedata[this.i].status === 'reject') {
+                 this.rejectedRequests.push(this.coursedata[this.i])
+               }
+               if (this.coursedata[this.i].status === 'draft') {
+                 this.draftRequests.push(this.coursedata[this.i])
+               }
+               if (this.coursedata[this.i].status === 'publish') {
+                 this.closedRequests.push(this.coursedata[this.i])
+               }
+ 
+               this.j = this.j + 1;
+             }
+           }
+           this.allCourses = this.courcesList;
+           console.log(this.allCourses);
+           if( this.routegetdata && this.routegetdata.status){
+             console.log('this.routegetdata',this.routegetdata)
+             console.log('this.cou',this.courcesList.filter((course:any)=>course.status == this.routegetdata.status))
+             this.courcesList = this.courcesList.filter((course: any) => course.status == this.routegetdata.status)
+ 
+           }
+           
+ 
+           this.collectionSize = this.courcesList.length;
+           this.courcesList.map((course: any) => {
+             console.log(this.draftRequests)
+           })
+             
+             //if(course.status === 'pending' && course.user_id != this.getprofileDetails.data.id){
+             //  this.pendingRequests.push(course)
+             //}
+             //if(course.status === 'pending'){
+             //  this.usersubmitRequests.push(course)
+             //}
+             //if(course.status === 'pending' && course.user_id == this.getprofileDetails.data.id){
+             //  this.submittedRequests.push(course)
+             //}
+             //if(course.status === 'reject'){
+             //  this.rejectedRequests.push(course)
+             //}
+             //if(course.status === 'draft'){
+             //  this.draftRequests.push(course)
+             //}
+             //if(course.status === 'publish'){
+             //  this.closedRequests.push(course)
+             //}
+            
+         }
+       },
+       (err: any) => {
+         console.log(err);
+       }
+     );
+   }
 
   onSort({ column, direction }: any) {
     this.headers.forEach((header) => {

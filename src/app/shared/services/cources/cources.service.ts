@@ -176,6 +176,46 @@ export class CourcesService {
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
+    //role
+    getRole(){
+      const url = `/api/${this.apiVersion}/roles`;
+      const urllive = `${this.basePath}api/${this.apiVersion}/roles`;
+      return this.http
+        .get(url, this.http.headers)
+        .pipe(catchError(this.Errorhandling));
+    }
+  
+    //role-users
+     getRoleUsers(){
+      const url = `/api/${this.apiVersion}/role-users`;
+      const urllive = `${this.basePath}api/${this.apiVersion}/role-users`;
+      return this.http
+        .get(url, this.http.headers)
+        .pipe(catchError(this.Errorhandling));
+     }
+   //complete-report-filter
+     getCourseFilter(data:any){
+      const url = `/api/${this.apiVersion}/course/filter`;
+      const urllive = `${this.basePath}api/${this.apiVersion}/course/filter`;
+      return this.http.post(url, data).pipe(catchError(this.Errorhandling));  
+     }
+  
+     //departments
+     getDepartments(){
+      const url = `/api/${this.apiVersion}/department_description`;
+      const urllive = `${this.basePath}api/${this.apiVersion}/department_description`;
+      return this.http
+        .get(url, this.http.headers)
+        .pipe(catchError(this.Errorhandling));
+     }
+  
+     //assign backup
+     assignBackup(id:any){
+      const url = `/api/${this.apiVersion}/user/transfer`;
+      const urllive = `${this.basePath}api/${this.apiVersion}/user/transfer`;
+      return this.http.post(url, id).pipe(catchError(this.Errorhandling));  
+     }
+     
 
   Errorhandling(err: HttpErrorResponse) {
     if (err.error instanceof ErrorEvent) {

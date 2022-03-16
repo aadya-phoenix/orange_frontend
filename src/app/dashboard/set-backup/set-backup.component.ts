@@ -11,6 +11,7 @@ export class SetBackupComponent implements OnInit {
   public rocObj: any;
   userName:any;
   userEmail:any;
+  id:any;
 
   constructor(private courseService: CourcesService) { }
 
@@ -25,29 +26,37 @@ export class SetBackupComponent implements OnInit {
   }
 
   getUser(event: any){
-   console.log("id is",event.target.value);
-   let id = event.target.value;
+   //console.log("id is",event.target.value);
+   this.id = event.target.value;
    this.courseService.getRoleUsers().subscribe((res: any) => {
     console.log("res data is ",res.data);
     for(let item of res.data[2]){
-      if (item.region_id==id){
+      if (item.region_id==this.id){
         this.userEmail  = item.email;
         this.userName = item.first_name+" "+item.last_name;
       }
     };
     for(let item of res.data[3]){
-      if (item.region_id==id){
+      if (item.region_id==this.id){
         this.userEmail  = item.email;
         this.userName = item.first_name+" "+item.last_name;
       }
     };
     for(let item of res.data[4]){
-      if (item.region_id==id){
+      if (item.region_id==this.id){
         this.userEmail  = item.email;
         this.userName = item.first_name+" "+item.last_name;
       }
     };
    });
+  }
+  assign(){
+    console.log("id is ",this.id);
+    this.courseService.assignBackup(this.id).subscribe(res=>{
+      console.log("assign backup",res.data);
+    },err=>{
+      console.log(err);
+    });
   }
 
 }
