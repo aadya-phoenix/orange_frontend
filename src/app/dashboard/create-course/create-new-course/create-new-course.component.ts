@@ -477,6 +477,7 @@ export class CreateNewCourseComponent implements OnInit {
       delivery_method: new FormControl('',[Validators.required]),
       for_whoom: new FormControl('', [Validators.required]),
 	  forWhomArr: new FormArray([]),
+	  learnMoreArr: new FormArray([]),
       cost_of_training: new FormControl(''),
       // cost_of_training: new FormControl('', [Validators.required]),
       learn_more: new FormControl(''),
@@ -634,6 +635,7 @@ export class CreateNewCourseComponent implements OnInit {
           const descriptionFormArr = this.commonCreateCourceForm.controls.descriptionArr as FormArray;
           const objectiveFormArr = this.commonCreateCourceForm.controls.objectiveArr as FormArray;
           const forWhomFormArr = this.iltandViltForm.controls.forWhomArr as FormArray;
+          const learnMoreFormArr = this.iltandViltForm.controls.learnMoreArr as FormArray;
 		  
           languageLength.push(
             this.fb.group({ name: [languages[index].slug], value: '' })
@@ -645,6 +647,9 @@ export class CreateNewCourseComponent implements OnInit {
             this.fb.group({ name: [languages[index].slug], value: '' })
           );		  
 		  forWhomFormArr.push(
+            this.fb.group({ name: [languages[index].slug], value: '' })
+          );
+		  learnMoreFormArr.push(
             this.fb.group({ name: [languages[index].slug], value: '' })
           );
           //  }
@@ -753,6 +758,7 @@ export class CreateNewCourseComponent implements OnInit {
     let descriptionarray: any = [];
     let objectivearray: any = [];
     let for_whomarray: any = [];
+    let learn_morearray: any = [];
     let titleForm: any;
     let obj: any;
     titleForm = this.commonCreateCourceForm.value.titleArr;
@@ -783,8 +789,16 @@ export class CreateNewCourseComponent implements OnInit {
 	    for (let i = 0; i < this.iltandViltForm.value.forWhomArr.length; i++) {
       if (this.iltandViltForm.value.forWhomArr[i].value != '') {
         for_whomarray.push({
-          [`${this.iltandViltForm.value.titleArr[i].name}`]:
+          [`${this.iltandViltForm.value.forWhomArr[i].name}`]:
             this.iltandViltForm.value.forWhomArr[i].value,
+        });
+      }
+    }
+	for (let i = 0; i < this.iltandViltForm.value.learnMoreArr.length; i++) {
+      if (this.iltandViltForm.value.learnMoreArr[i].value != '') {
+        learn_morearray.push({
+          [`${this.iltandViltForm.value.learnMoreArr[i].name}`]:
+            this.iltandViltForm.value.learnMoreArr[i].value,
         });
       }
     }
@@ -794,7 +808,8 @@ export class CreateNewCourseComponent implements OnInit {
     this.commonCreateCourceForm.value.description	= descriptionarray;
     this.commonCreateCourceForm.value.objective = objectivearray;
     this.commonCreateCourceForm.value.title = titlearray;
-	//this.iltandViltForm.value.for_whoom = for_whomarray;
+	this.iltandViltForm.value.for_whoom = for_whomarray;
+	this.iltandViltForm.value.for_whoom = for_whomarray;
     // this.commonCreateCourceForm.patchValue({description:'fdgdg'}) ;
     // this.commonCreateCourceForm.patchValue({title:'fdgdg'})
     console.log(this.commonCreateCourceForm.value);

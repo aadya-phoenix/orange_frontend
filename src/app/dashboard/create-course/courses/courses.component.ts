@@ -119,7 +119,7 @@ export class CoursesComponent implements OnInit {
           this.coursedata = res.data;
           for (this.i = 0; this.i < this.coursedata.length; this.i++) {
             console.log(this.coursedata[this.i].request_id);
-			this.coursedata[this.i]['titleByLang'] = this.courceService.getTText('english', this.coursedata[this.i]['title']);
+			this.coursedata[this.i]['titleByLang'] = this.courceService.getTText(this.coursedata[this.i]['title']);
             if (this.coursedata[this.i].request_id != "" && this.coursedata[this.i].request_id != null) {
               this.courcesList[this.j] = this.coursedata[this.i]
 

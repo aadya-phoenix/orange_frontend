@@ -13,6 +13,7 @@ export class CourcesService {
   public apiVersion = environment.apiVersion;
   public clientId = environment.clientId;
   public clientSecret = environment.clientSecret;
+  public lang = environment.lang;
   public headers = new Headers({});
   constructor(private http: HttpService) {
     this.headers.append('Access-Control-Allow-Origin', '*');
@@ -225,17 +226,37 @@ export class CourcesService {
     }
     return throwError('Please try again later.');
   }
-  getTText(lang:string, displayText: any){
+  getTText(displayText: any){
   var dText = "";
+  var langSelected = localStorage.getItem("lang");
+  if(langSelected == undefined){
+	langSelected = this.lang;
+  }
 	if(typeof displayText == "string"){
-		let displayArr = JSON.parse(displayText);
-		for(let i = 0; i<displayArr.length; i++){
-			if(displayArr[i][lang] != undefined){
-			dText = displayArr[i][lang];
+		if(displayText.includes("[{")){
+			let displayArr = JSON.parse(displayText);
+			for(let i = 0; i<displayArr.length; i++){
+				if(displayArr[i][langSelected] != undefined){
+				dText = displayArr[i][langSelected];
+				}
 			}
+		} else {
+		if(displayText.includes('"')){
+			return displayText.substring(1, displayText.length-1);
+			} else 
+			return displayText;
 		}
 	} else {
 	
+	}
+	return dText;
+  }
+  getTexttoArray(displayText: any){
+  var dText = [];
+	if(typeof displayText == "string"){
+		if(displayText.includes("[{")){
+			dText = JSON.parse(displayText);
+		}
 	}
 	return dText;
   }

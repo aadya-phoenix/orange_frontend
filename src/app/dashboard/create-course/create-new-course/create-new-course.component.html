@@ -879,7 +879,7 @@
                                                     <input type="text" placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more" />
                                                 </div>
                                                 <div>
-                                                    <a data-toggle="modal" data-target="#exampleModal" class="d-flex flex-column align-items-end">
+                                                    <a data-toggle="modal" data-target="#learnMoreModal" class="d-flex flex-column align-items-end">
                                                         <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
                                                     </a>
                                                 </div>
@@ -2270,6 +2270,44 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="learnMoreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: #ff7900">
+                    Translate
+                </h5>
+                <!-- Boosted mod: using visually hidden text instead of aria-label -->
+            </div>
+            <div class="modal-body modal_height">
+                <form [formGroup]="iltandViltForm">
+                    <div class="row">
+                        <div class="col-sm-12" formArrayName="learnMoreArr" *ngFor="let language of titlecontrol;let i =index;">
+                            <div class="form-group">
+                                <div [formGroupName]="i">
+                                    <label class="form-control-label"> {{availableLanguages[i].name}}</label>
+                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter" formControlName="value"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!--colend-->
+                        <!--colend-->
+                    </div>
+                </form>
+                <!--ocl-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cancel_button" data-dismiss="modal">
+          Cancel
+        </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="gettitlelanguage()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 <div class="modal fade" id="commonDescription" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -21,6 +21,12 @@ export class RequestDetailComponent implements OnInit {
   rejectcomment:any;
   constructor(private authService:AuthenticationService,private router:Router,private modalService:NgbModal,private courseService:CourcesService) { 
     this.routegetdata = this.router.getCurrentNavigation()?.extras.state;
+				this.routegetdata['titleByLang'] = this.courseService.getTText(this.routegetdata['title']);
+				this.routegetdata['descriptionByLang'] = this.courseService.getTText(this.routegetdata['description']);
+				this.routegetdata['objectiveByLang'] = this.courseService.getTText(this.routegetdata['objective']);
+				this.routegetdata['learn_moreByLang'] = this.courseService.getTText(this.routegetdata['learn_more']);
+				this.routegetdata['for_whomByLang'] = this.courseService.getTText(this.routegetdata['for_whom']);
+
     if(!this.routegetdata){
       this.router.navigateByUrl('/dashboard/cources');
     }
@@ -128,8 +134,9 @@ export class RequestDetailComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.routegetdata);
     let arr1 = this.routegetdata.objective;
-    this.objectarray = arr1.split('• ')
-    console.log(arr1.split('• '))
+	console.log(arr1);
+    this.objectarray = [];//arr1.split('• ')
+    //console.log(arr1.split('• '))
 
     this.getRole();
   }
