@@ -225,4 +225,18 @@ export class CourcesService {
     }
     return throwError('Please try again later.');
   }
+  getTText(lang:string, displayText: any){
+  var dText = "";
+	if(typeof displayText == "string"){
+		let displayArr = JSON.parse(displayText);
+		for(let i = 0; i<displayArr.length; i++){
+			if(displayArr[i][lang] != undefined){
+			dText = displayArr[i][lang];
+			}
+		}
+	} else {
+	
+	}
+	return dText;
+  }
 }

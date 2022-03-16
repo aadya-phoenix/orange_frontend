@@ -435,7 +435,9 @@ export class CreateNewCourseComponent implements OnInit {
 
     //common form
     this.commonCreateCourceForm = this.fb.group({
-      title1: new FormArray([]),
+      titleArr: new FormArray([]),
+      descriptionArr: new FormArray([]),
+      objectiveArr: new FormArray([]),
       //title: new FormArray([]),
       title: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
@@ -474,6 +476,7 @@ export class CreateNewCourseComponent implements OnInit {
       // email_training_contact: new FormControl('', [Validators.required]),
       delivery_method: new FormControl('',[Validators.required]),
       for_whoom: new FormControl('', [Validators.required]),
+	  forWhomArr: new FormArray([]),
       cost_of_training: new FormControl(''),
       // cost_of_training: new FormControl('', [Validators.required]),
       learn_more: new FormControl(''),
@@ -601,7 +604,7 @@ export class CreateNewCourseComponent implements OnInit {
   }
 
   // get titlearray(){
-  //   return this.commonFormtitle.title1 as FormArray;
+  //   return this.commonFormtitle.titleArr as FormArray;
   // }
 
   get t() {
@@ -626,12 +629,24 @@ export class CreateNewCourseComponent implements OnInit {
         let i = 0;
         let languageData: any = [];
         for (let index in languages) {
-          const languageLength = this.commonCreateCourceForm.controls
-            .title1 as FormArray;
+		console.log(languages[index]);
+          const languageLength = this.commonCreateCourceForm.controls.titleArr as FormArray;
+          const descriptionFormArr = this.commonCreateCourceForm.controls.descriptionArr as FormArray;
+          const objectiveFormArr = this.commonCreateCourceForm.controls.objectiveArr as FormArray;
+          const forWhomFormArr = this.iltandViltForm.controls.forWhomArr as FormArray;
+		  
           languageLength.push(
             this.fb.group({ name: [languages[index].slug], value: '' })
           );
-
+			descriptionFormArr.push(
+            this.fb.group({ name: [languages[index].slug], value: '' })
+          );
+		  objectiveFormArr.push(
+            this.fb.group({ name: [languages[index].slug], value: '' })
+          );		  
+		  forWhomFormArr.push(
+            this.fb.group({ name: [languages[index].slug], value: '' })
+          );
           //  }
         }
         // for(let i=0;i<languageData.length;i++){
@@ -658,7 +673,7 @@ export class CreateNewCourseComponent implements OnInit {
   }
 
   get titlecontrol() {
-    return (<FormArray>this.commonCreateCourceForm.get('title1')).controls;
+    return (<FormArray>this.commonCreateCourceForm.get('titleArr')).controls;
   }
 
   pushtoTitlearray() {
@@ -735,31 +750,51 @@ export class CreateNewCourseComponent implements OnInit {
       ...this.commonCreateCourceForm.value,
     };
     let titlearray: any = [];
+    let descriptionarray: any = [];
+    let objectivearray: any = [];
+    let for_whomarray: any = [];
     let titleForm: any;
     let obj: any;
-    titleForm = this.commonCreateCourceForm.value.title1;
-    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
-      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+    titleForm = this.commonCreateCourceForm.value.titleArr;
+    for (let i = 0; i < this.commonCreateCourceForm.value.titleArr.length; i++) {
+      if (this.commonCreateCourceForm.value.titleArr[i].value != '') {
         titlearray.push({
-          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
-            this.commonCreateCourceForm.value.title1[i].value,
+          [`${this.commonCreateCourceForm.value.titleArr[i].name}`]:
+            this.commonCreateCourceForm.value.titleArr[i].value,
+        });
+      }
+    }
+	    for (let i = 0; i < this.commonCreateCourceForm.value.descriptionArr.length; i++) {
+      if (this.commonCreateCourceForm.value.descriptionArr[i].value != '') {
+        descriptionarray.push({
+          [`${this.commonCreateCourceForm.value.descriptionArr[i].name}`]:
+            this.commonCreateCourceForm.value.descriptionArr[i].value,
+        });
+      }
+    }
+	    for (let i = 0; i < this.commonCreateCourceForm.value.objectiveArr.length; i++) {
+      if (this.commonCreateCourceForm.value.objectiveArr[i].value != '') {
+        objectivearray.push({
+          [`${this.commonCreateCourceForm.value.objectiveArr[i].name}`]:
+            this.commonCreateCourceForm.value.objectiveArr[i].value,
+        });
+      }
+    }
+	    for (let i = 0; i < this.iltandViltForm.value.forWhomArr.length; i++) {
+      if (this.iltandViltForm.value.forWhomArr[i].value != '') {
+        for_whomarray.push({
+          [`${this.iltandViltForm.value.titleArr[i].name}`]:
+            this.iltandViltForm.value.forWhomArr[i].value,
         });
       }
     }
     console.log('titleForm', titlearray);
-    // for(let index in titleForm){
-    //   //debugger
-
-    //   if(titleForm[index].value !=''){
-    //   //  obj ={ }
-    //   // this.commonCreateCourceForm.t
-    //     titlearray.push({[`${titleForm[index].slug}`]: titleForm[index].value});
-
-    //     console.log(titleForm[index].value);
-    //   }
-    // }
-    // console.log(titlearray)
+    
     this.commonCreateCourceForm.value.title = titlearray;
+    this.commonCreateCourceForm.value.description	= descriptionarray;
+    this.commonCreateCourceForm.value.objective = objectivearray;
+    this.commonCreateCourceForm.value.title = titlearray;
+	//this.iltandViltForm.value.for_whoom = for_whomarray;
     // this.commonCreateCourceForm.patchValue({description:'fdgdg'}) ;
     // this.commonCreateCourceForm.patchValue({title:'fdgdg'})
     console.log(this.commonCreateCourceForm.value);
@@ -792,9 +827,9 @@ export class CreateNewCourseComponent implements OnInit {
             let saveobj = { issave: true };
             let stateobj = { ...statedata, ...saveobj };
             // this.router.navigate(['/dashboard/cources']);
-            this.router.navigateByUrl('/dashboard/cources/request-detail', {
+            /*this.router.navigateByUrl('/dashboard/cources/request-detail', {
               state: stateobj,
-            });
+            });*/
           }
         },
         (err: any) => {
@@ -869,19 +904,49 @@ export class CreateNewCourseComponent implements OnInit {
       ...this.commonCreateCourceForm.value,
     };
     let titlearray: any = [];
+    let descriptionarray: any = [];
+    let objectivearray: any = [];
+    let for_whomarray: any = [];
     let titleForm: any;
     let obj: any;
-    titleForm = this.commonCreateCourceForm.value.title1;
-    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
-      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+    titleForm = this.commonCreateCourceForm.value.titleArr;
+    for (let i = 0; i < this.commonCreateCourceForm.value.titleArr.length; i++) {
+      if (this.commonCreateCourceForm.value.titleArr[i].value != '') {
         titlearray.push({
-          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
-            this.commonCreateCourceForm.value.title1[i].value,
+          [`${this.commonCreateCourceForm.value.titleArr[i].name}`]:
+            this.commonCreateCourceForm.value.titleArr[i].value,
+        });
+      }
+    }
+	    for (let i = 0; i < this.commonCreateCourceForm.value.descriptionArr.length; i++) {
+      if (this.commonCreateCourceForm.value.descriptionArr[i].value != '') {
+        descriptionarray.push({
+          [`${this.commonCreateCourceForm.value.descriptionArr[i].name}`]:
+            this.commonCreateCourceForm.value.descriptionArr[i].value,
+        });
+      }
+    }
+	    for (let i = 0; i < this.commonCreateCourceForm.value.objectiveArr.length; i++) {
+      if (this.commonCreateCourceForm.value.objectiveArr[i].value != '') {
+        objectivearray.push({
+          [`${this.commonCreateCourceForm.value.objectiveArr[i].name}`]:
+            this.commonCreateCourceForm.value.objectiveArr[i].value,
+        });
+      }
+    }
+	    for (let i = 0; i < this.iltandViltForm.value.forWhomArr.length; i++) {
+      if (this.iltandViltForm.value.forWhomArr[i].value != '') {
+        for_whomarray.push({
+          [`${this.iltandViltForm.value.titleArr[i].name}`]:
+            this.iltandViltForm.value.forWhomArr[i].value,
         });
       }
     }
     console.log('titleForm', titlearray);
     
+    this.commonCreateCourceForm.value.title = titlearray;
+    this.commonCreateCourceForm.value.description	= descriptionarray;
+    this.commonCreateCourceForm.value.objective = objectivearray;
     this.commonCreateCourceForm.value.title = titlearray;
     console.log(this.commonCreateCourceForm.value);
     
@@ -943,12 +1008,12 @@ export class CreateNewCourseComponent implements OnInit {
     let titlearray: any = [];
     let titleForm: any;
     let obj: any;
-    titleForm = this.commonCreateCourceForm.value.title1;
-    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
-      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+    titleForm = this.commonCreateCourceForm.value.titleArr;
+    for (let i = 0; i < this.commonCreateCourceForm.value.titleArr.length; i++) {
+      if (this.commonCreateCourceForm.value.titleArr[i].value != '') {
         titlearray.push({
-          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
-            this.commonCreateCourceForm.value.title1[i].value,
+          [`${this.commonCreateCourceForm.value.titleArr[i].name}`]:
+            this.commonCreateCourceForm.value.titleArr[i].value,
         });
       }
     }
@@ -1015,12 +1080,12 @@ export class CreateNewCourseComponent implements OnInit {
     let titlearray: any = [];
     let titleForm: any;
     let obj: any;
-    titleForm = this.commonCreateCourceForm.value.title1;
-    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
-      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+    titleForm = this.commonCreateCourceForm.value.titleArr;
+    for (let i = 0; i < this.commonCreateCourceForm.value.titleArr.length; i++) {
+      if (this.commonCreateCourceForm.value.titleArr[i].value != '') {
         titlearray.push({
-          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
-            this.commonCreateCourceForm.value.title1[i].value,
+          [`${this.commonCreateCourceForm.value.titleArr[i].name}`]:
+            this.commonCreateCourceForm.value.titleArr[i].value,
         });
       }
     }
@@ -1087,12 +1152,12 @@ export class CreateNewCourseComponent implements OnInit {
     let titlearray: any = [];
     let titleForm: any;
     let obj: any;
-    titleForm = this.commonCreateCourceForm.value.title1;
-    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
-      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+    titleForm = this.commonCreateCourceForm.value.titleArr;
+    for (let i = 0; i < this.commonCreateCourceForm.value.titleArr.length; i++) {
+      if (this.commonCreateCourceForm.value.titleArr[i].value != '') {
         titlearray.push({
-          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
-            this.commonCreateCourceForm.value.title1[i].value,
+          [`${this.commonCreateCourceForm.value.titleArr[i].name}`]:
+            this.commonCreateCourceForm.value.titleArr[i].value,
         });
       }
     }
@@ -1159,12 +1224,12 @@ export class CreateNewCourseComponent implements OnInit {
     let titlearray: any = [];
     let titleForm: any;
     let obj: any;
-    titleForm = this.commonCreateCourceForm.value.title1;
-    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
-      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+    titleForm = this.commonCreateCourceForm.value.titleArr;
+    for (let i = 0; i < this.commonCreateCourceForm.value.titleArr.length; i++) {
+      if (this.commonCreateCourceForm.value.titleArr[i].value != '') {
         titlearray.push({
-          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
-            this.commonCreateCourceForm.value.title1[i].value,
+          [`${this.commonCreateCourceForm.value.titleArr[i].name}`]:
+            this.commonCreateCourceForm.value.titleArr[i].value,
         });
       }
     }
