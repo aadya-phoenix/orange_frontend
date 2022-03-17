@@ -135,7 +135,11 @@
                         </a>
                       </label>
                                             <textarea class="form-control form_width-textarea" [(ngModel)]="showdescription" rows="3" placeholder="Enter Description" formControlName="description">
-                    </textarea>
+                    </textarea><div>
+                                                        <a href="" data-toggle="modal" data-target="#commonDescription" class="d-flex flex-column align-items-end">
+                                                            <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                                                        </a>
+                                                    </div>
                                         </div>
                                     </div>
                                     <!--colend-->
@@ -151,7 +155,12 @@
                         </a>
                       </label>
                                             <textarea class="form-control form_width-textarea" [(ngModel)]="showobjective" rows="3" placeholder="Enter Objectives" formControlName="objective">
-                    </textarea>
+                    </textarea>                                                    
+													<div>
+                                                        <a href="" data-toggle="modal" data-target="#commonObjective" class="d-flex flex-column align-items-end">
+                                                            <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                                                        </a>
+                                                    </div>
                                         </div>
                                     </div>
                                     <!--colend-->
@@ -778,7 +787,11 @@
                           </a>
                         </label>
                                                 <textarea class="form-control form_width-textarea" [(ngModel)]="showILTForWhom" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom">
-                      </textarea>
+                      </textarea><div>
+                                                    <a data-toggle="modal" data-target="#forWhomModal" class="d-flex flex-column align-items-end">
+                                                        <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -797,6 +810,11 @@
                         </label>
                                                 <input type="text" placeholder="Enter Learn more" [(ngModel)]="showILTLearnMore" class="form-control form_width" formControlName="learn_more" />
                                             </div>
+											<div>
+                                                    <a data-toggle="modal" data-target="#learnMoreModal" class="d-flex flex-column align-items-end">
+                                                        <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                                                    </a>
+                                                </div>
                                         </div>
                                         <!--colend-->
                                         <!-- <div class="col-sm-6">
@@ -2335,7 +2353,7 @@
             <div class="modal-body modal_height">
                 <form [formGroup]="commonCreateCourceForm">
                     <div class="row">
-                        <div class="col-sm-12" formArrayName="title1" *ngFor="let language of titlecontrol;let i =index;">
+                        <div class="col-sm-12" formArrayName="titleArr" *ngFor="let language of titlecontrol;let i =index;">
                             <div class="form-group">
                                 <div [formGroupName]="i">
                                     <label class="form-control-label"> {{availableLanguages[i].name}}</label>
@@ -2429,6 +2447,155 @@
                 <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="reject()">
           Submit
         </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="commonDescription" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: #ff7900">
+                    Translate
+                </h5>
+                <!-- Boosted mod: using visually hidden text instead of aria-label -->
+            </div>
+            <div class="modal-body modal_height">
+                <form [formGroup]="commonCreateCourceForm">
+                    <div class="row">
+                        <div class="col-sm-12" formArrayName="descriptionArr" *ngFor="let language of titlecontrol;let i =index;">
+                            <div class="form-group">
+                                <div [formGroupName]="i">
+                                    <label class="form-control-label"> {{availableLanguages[i].name}}</label>
+                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter" formControlName="value"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!--colend-->
+                        <!--colend-->
+                    </div>
+                </form>
+                <!--ocl-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cancel_button" data-dismiss="modal">
+          Cancel
+        </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="gettitlelanguage()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="commonObjective" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="color: #ff7900">
+                    Translate
+                </h5>
+                <!-- Boosted mod: using visually hidden text instead of aria-label -->
+            </div>
+            <div class="modal-body modal_height">
+                <form [formGroup]="commonCreateCourceForm">
+                    <div class="row">
+                        <div class="col-sm-12" formArrayName="objectiveArr" *ngFor="let language of titlecontrol;let i =index;">
+                            <div class="form-group">
+                                <div [formGroupName]="i">
+                                    <label class="form-control-label"> {{availableLanguages[i].name}}</label>
+                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter" formControlName="value"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!--colend-->
+                        <!--colend-->
+                    </div>
+                </form>
+                <!--ocl-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cancel_button" data-dismiss="modal">
+          Cancel
+        </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="gettitlelanguage()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="learnMoreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: #ff7900">
+                    Translate
+                </h5>
+                <!-- Boosted mod: using visually hidden text instead of aria-label -->
+            </div>
+            <div class="modal-body modal_height">
+                <form [formGroup]="iltandViltForm">
+                    <div class="row">
+                        <div class="col-sm-12" formArrayName="learnMoreArr" *ngFor="let language of titlecontrol;let i =index;">
+                            <div class="form-group">
+                                <div [formGroupName]="i">
+                                    <label class="form-control-label"> {{availableLanguages[i].name}}</label>
+                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter" formControlName="value"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!--colend-->
+                        <!--colend-->
+                    </div>
+                </form>
+                <!--ocl-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cancel_button" data-dismiss="modal">
+          Cancel
+        </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="gettitlelanguage()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="forWhomModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: #ff7900">
+                    Translate
+                </h5>
+                <!-- Boosted mod: using visually hidden text instead of aria-label -->
+            </div>
+            <div class="modal-body modal_height">
+                <form [formGroup]="iltandViltForm">
+                    <div class="row">
+                        <div class="col-sm-12" formArrayName="forWhomArr" *ngFor="let language of titlecontrol;let i =index;">
+                            <div class="form-group">
+                                <div [formGroupName]="i">
+                                    <label class="form-control-label"> {{availableLanguages[i].name}}</label>
+                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter" formControlName="value"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!--colend-->
+                        <!--colend-->
+                    </div>
+                </form>
+                <!--ocl-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cancel_button" data-dismiss="modal">
+          Cancel
+        </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="gettitlelanguage()">Submit</button>
             </div>
         </div>
     </div>

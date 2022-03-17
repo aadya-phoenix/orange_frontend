@@ -134,14 +134,14 @@ export class UpdateCourceComponent implements OnInit {
     this.selectedLanguages = JSON.parse(this.routergetdata['available_language']);
     this.subjectId = Number(this.routergetdata['subject']);
     console.log(this.routergetdata)
-    this.showtitle = this.routergetdata.title.toString().replace('"', '').replace('"', '');
-    this.showobjective = this.routergetdata.objective.toString().replace('"', '').replace('"', '');
-    this.showdescription = this.routergetdata.description.toString().replace('"', '').replace('"', '');
+    this.showtitle = this.courceService.getTText(this.routergetdata.title);
+    this.showobjective = this.courceService.getTText(this.routergetdata.objective);
+    this.showdescription = this.courceService.getTText(this.routergetdata.description)
     if (this.routergetdata.learning_type == "1") {
       this.showILTWhoSee = this.routergetdata.who_see_course
       this.showILTEmail = this.routergetdata.email_preffered_instructor
-      this.showILTLearnMore = this.routergetdata.learn_more == null ? "" : this.routergetdata.learn_more.toString().replace('"', '').replace('"', '')
-      this.showILTForWhom = this.routergetdata.for_whoom.toString().replace('"', '').replace('"', '')
+      this.showILTLearnMore = this.courceService.getTText(this.routergetdata.learn_more);
+      this.showILTForWhom = this.courceService.getTText(this.routergetdata.for_whoom.toString());
       this.showILTtitleAdditional = this.routergetdata.title_additional
       this.showILTEntity = Number(this.routergetdata.entity_business_area)
       //this.showILTExiryType = Number(this.routergetdata.entity_business_area)
@@ -437,7 +437,9 @@ export class UpdateCourceComponent implements OnInit {
     this.learningType = this.routergetdata.learning_type;
     //common form
     this.commonCreateCourceForm = this.fb.group({
-      title1: new FormArray([]),
+      titleArr: new FormArray([]),
+      descriptionArr: new FormArray([]),
+      objectiveArr: new FormArray([]),
       //title: new FormArray([]),
       title: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
@@ -476,6 +478,8 @@ export class UpdateCourceComponent implements OnInit {
       // email_training_contact: new FormControl('', [Validators.required]),
       delivery_method: new FormControl('',[Validators.required]),
       for_whoom: new FormControl('', [Validators.required]),
+	  	  forWhomArr: new FormArray([]),
+	  learnMoreArr: new FormArray([]),
       cost_of_training: new FormControl(''),
       // cost_of_training: new FormControl('', [Validators.required]),
       learn_more: new FormControl(''),
@@ -730,18 +734,49 @@ export class UpdateCourceComponent implements OnInit {
       ...courseid
     };
     let titlearray: any = [];
+    let descriptionarray: any = [];
+    let objectivearray: any = [];
+    let for_whomarray: any = [];
     let titleForm: any;
     let obj: any;
-    titleForm = this.commonCreateCourceForm.value.title1;
-    //alert(this.commonCreateCourceForm.value.title1.length)
-    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
-      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+    titleForm = this.commonCreateCourceForm.value.titleArr;
+    for (let i = 0; i < this.commonCreateCourceForm.value.titleArr.length; i++) {
+      if (this.commonCreateCourceForm.value.titleArr[i].value != '') {
         titlearray.push({
-          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
-            this.commonCreateCourceForm.value.title1[i].value,
+          [`${this.commonCreateCourceForm.value.titleArr[i].name}`]:
+            this.commonCreateCourceForm.value.titleArr[i].value,
         });
       }
     }
+	    for (let i = 0; i < this.commonCreateCourceForm.value.descriptionArr.length; i++) {
+      if (this.commonCreateCourceForm.value.descriptionArr[i].value != '') {
+        descriptionarray.push({
+          [`${this.commonCreateCourceForm.value.descriptionArr[i].name}`]:
+            this.commonCreateCourceForm.value.descriptionArr[i].value,
+        });
+      }
+    }
+	    for (let i = 0; i < this.commonCreateCourceForm.value.objectiveArr.length; i++) {
+      if (this.commonCreateCourceForm.value.objectiveArr[i].value != '') {
+        objectivearray.push({
+          [`${this.commonCreateCourceForm.value.objectiveArr[i].name}`]:
+            this.commonCreateCourceForm.value.objectiveArr[i].value,
+        });
+      }
+    }
+	    for (let i = 0; i < this.iltandViltForm.value.forWhomArr.length; i++) {
+      if (this.iltandViltForm.value.forWhomArr[i].value != '') {
+        for_whomarray.push({
+          [`${this.iltandViltForm.value.titleArr[i].name}`]:
+            this.iltandViltForm.value.forWhomArr[i].value,
+        });
+      }
+    }
+    console.log('titleForm', titlearray);
+    
+    this.commonCreateCourceForm.value.title = titlearray;
+    this.commonCreateCourceForm.value.description	= descriptionarray;
+    this.commonCreateCourceForm.value.objective = objectivearray;
     console.log('titleForm', titlearray);
     if (titlearray.length == 0) {
       titlearray.push({ "english": this.commonCreateCourceForm.value.title });
@@ -826,12 +861,12 @@ export class UpdateCourceComponent implements OnInit {
     let titlearray: any = [];
     let titleForm: any;
     let obj: any;
-    titleForm = this.commonCreateCourceForm.value.title1;
-    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
-      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+    titleForm = this.commonCreateCourceForm.value.titleArr;
+    for (let i = 0; i < this.commonCreateCourceForm.value.titleArr.length; i++) {
+      if (this.commonCreateCourceForm.value.titleArr[i].value != '') {
         titlearray.push({
-          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
-            this.commonCreateCourceForm.value.title1[i].value,
+          [`${this.commonCreateCourceForm.value.titleArr[i].name}`]:
+            this.commonCreateCourceForm.value.titleArr[i].value,
         });
       }
     }
@@ -903,12 +938,12 @@ export class UpdateCourceComponent implements OnInit {
     let titlearray: any = [];
     let titleForm: any;
     let obj: any;
-    titleForm = this.commonCreateCourceForm.value.title1;
-    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
-      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+    titleForm = this.commonCreateCourceForm.value.titleArr;
+    for (let i = 0; i < this.commonCreateCourceForm.value.titleArr.length; i++) {
+      if (this.commonCreateCourceForm.value.titleArr[i].value != '') {
         titlearray.push({
-          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
-            this.commonCreateCourceForm.value.title1[i].value,
+          [`${this.commonCreateCourceForm.value.titleArr[i].name}`]:
+            this.commonCreateCourceForm.value.titleArr[i].value,
         });
       }
     }
@@ -980,12 +1015,12 @@ export class UpdateCourceComponent implements OnInit {
     let titlearray: any = [];
     let titleForm: any;
     let obj: any;
-    titleForm = this.commonCreateCourceForm.value.title1;
-    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
-      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+    titleForm = this.commonCreateCourceForm.value.titleArr;
+    for (let i = 0; i < this.commonCreateCourceForm.value.titleArr.length; i++) {
+      if (this.commonCreateCourceForm.value.titleArr[i].value != '') {
         titlearray.push({
-          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
-            this.commonCreateCourceForm.value.title1[i].value,
+          [`${this.commonCreateCourceForm.value.titleArr[i].name}`]:
+            this.commonCreateCourceForm.value.titleArr[i].value,
         });
       }
     }
@@ -1058,12 +1093,12 @@ export class UpdateCourceComponent implements OnInit {
     let titlearray: any = [];
     let titleForm: any;
     let obj: any;
-    titleForm = this.commonCreateCourceForm.value.title1;
-    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
-      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+    titleForm = this.commonCreateCourceForm.value.titleArr;
+    for (let i = 0; i < this.commonCreateCourceForm.value.titleArr.length; i++) {
+      if (this.commonCreateCourceForm.value.titleArr[i].value != '') {
         titlearray.push({
-          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
-            this.commonCreateCourceForm.value.title1[i].value,
+          [`${this.commonCreateCourceForm.value.titleArr[i].name}`]:
+            this.commonCreateCourceForm.value.titleArr[i].value,
         });
       }
     }
@@ -1135,12 +1170,12 @@ export class UpdateCourceComponent implements OnInit {
     let titlearray: any = [];
     let titleForm: any;
     let obj: any;
-    titleForm = this.commonCreateCourceForm.value.title1;
-    for (let i = 0; i < this.commonCreateCourceForm.value.title1.length; i++) {
-      if (this.commonCreateCourceForm.value.title1[i].value != '') {
+    titleForm = this.commonCreateCourceForm.value.titleArr;
+    for (let i = 0; i < this.commonCreateCourceForm.value.titleArr.length; i++) {
+      if (this.commonCreateCourceForm.value.titleArr[i].value != '') {
         titlearray.push({
-          [`${this.commonCreateCourceForm.value.title1[i].name}`]:
-            this.commonCreateCourceForm.value.title1[i].value,
+          [`${this.commonCreateCourceForm.value.titleArr[i].name}`]:
+            this.commonCreateCourceForm.value.titleArr[i].value,
         });
       }
     }
@@ -1987,11 +2022,15 @@ export class UpdateCourceComponent implements OnInit {
   }
 
   get titlecontrol() {
-    return (<FormArray>this.commonCreateCourceForm.get('title1')).controls;
+    return (<FormArray>this.commonCreateCourceForm.get('titleArr')).controls;
   }
   addtitlemultilanguage(): any {
     //debugger
     let titlearraylist: any = [];
+    let descriptionarraylist: any = [];
+    let objectivearraylist: any = [];
+    let for_whomarraylist: any = [];
+    let learn_morearraylist: any = [];
     this.courceService.getLanguages().subscribe(
       (res: any) => {
         console.log('language', res);
@@ -2002,17 +2041,62 @@ export class UpdateCourceComponent implements OnInit {
         //this.titlearraylist = Array.from(this.routergetdata.title).forEach(function (element) {
         //  console.log(element)
         //})
-        titlearraylist = JSON.parse('{"arabic":"sdsd"}')
+        titlearraylist = this.courceService.getTexttoArray(this.routergetdata.title);
+        descriptionarraylist = this.courceService.getTexttoArray(this.routergetdata.description);
+        objectivearraylist = this.courceService.getTexttoArray(this.routergetdata.objective);
+        for_whomarraylist = this.courceService.getTexttoArray(this.routergetdata.for_whoom);
+        learn_morearraylist = this.courceService.getTexttoArray(this.routergetdata.learn_more);
+
         console.log(titlearraylist)
         for (let index in languages) {
-          console.log(titlearraylist[languages[index]])
           const languageLength = this.commonCreateCourceForm.controls
-            .title1 as FormArray; 
-          let x: any;
+            .titleArr as FormArray; 
+          const desclength = this.commonCreateCourceForm.controls
+            .descriptionArr as FormArray;           
+		const objlength = this.commonCreateCourceForm.controls
+            .objectiveArr as FormArray;    
+          const forwhomlength = this.iltandViltForm.controls
+            .forWhomArr as FormArray;           
+		const learnmorelength = this.iltandViltForm.controls
+            .learnMoreArr as FormArray;   
+		var defaultValue = "";
+		  var selectText = titlearraylist.find((e:any, inc:any) => {		  
+		  return e[languages[index].slug]});
           languageLength.push(
-            this.fb.group({ name: [languages[index].slug], value: titlearraylist.find((e: { name: string; }) => e.name === languages[index].slug) })
+            this.fb.group({ name: [languages[index].slug], value: selectText[languages[index].slug] })
           );
-
+		  selectText = descriptionarraylist.find((e:any, inc:any) => {		  
+		  return e[languages[index].slug]});
+		  if(selectText != undefined){
+			defaultValue = selectText[languages[index].slug]
+		  }
+          desclength.push(
+            this.fb.group({ name: [languages[index].slug], value: defaultValue })
+          );
+		  selectText = objectivearraylist.find((e:any, inc:any) => {		  
+		  return e[languages[index].slug]});
+		  		  if(selectText != undefined){
+			defaultValue = selectText[languages[index].slug]
+		  }
+          objlength.push(
+            this.fb.group({ name: [languages[index].slug], value: defaultValue })
+          );
+		  		  selectText = for_whomarraylist.find((e:any, inc:any) => {		  
+		  return e[languages[index].slug]});
+		  		  if(selectText != undefined){
+			defaultValue = selectText[languages[index].slug]
+		  }
+          forwhomlength.push(
+            this.fb.group({ name: [languages[index].slug], value: defaultValue })
+          );
+		  		  selectText = learn_morearraylist.find((e:any, inc:any) => {		  
+		  return e[languages[index].slug]});
+		  		  if(selectText != undefined){
+			defaultValue = selectText[languages[index].slug]
+		  }
+          learnmorelength.push(
+            this.fb.group({ name: [languages[index].slug], value: defaultValue })
+          );
           //  }
         }
         // for(let i=0;i<languageData.length;i++){
