@@ -141,7 +141,7 @@ export class UpdateCourceComponent implements OnInit {
       this.showILTWhoSee = this.routergetdata.who_see_course
       this.showILTEmail = this.routergetdata.email_preffered_instructor
       this.showILTLearnMore = this.courceService.getTText(this.routergetdata.learn_more);
-      this.showILTForWhom = this.courceService.getTText(this.routergetdata.for_whoom.toString());
+      this.showILTForWhom = this.courceService.getTText(this.routergetdata.for_whoom);
       this.showILTtitleAdditional = this.routergetdata.title_additional
       this.showILTEntity = Number(this.routergetdata.entity_business_area)
       //this.showILTExiryType = Number(this.routergetdata.entity_business_area)
@@ -595,7 +595,6 @@ export class UpdateCourceComponent implements OnInit {
     console.log('patch', this.routergetdata)
     this.pushtoTitlearray();
     this.commonCreateCourceForm.controls['learning_type'].disable({ onlySelf: true });
-    this.routergetdata.title.toString().replace('"', '').replace('"', '');
     
     if (this.learningType == "1") {
       this.iltandViltForm.patchValue(this.routergetdata);
@@ -707,6 +706,18 @@ export class UpdateCourceComponent implements OnInit {
         });
       }
     });
+	
+	    Object.keys(this.iltandViltForm.controls).forEach((key) => {
+      const controlErrors: any = this.iltandViltForm.get(key)?.errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach((keyError) => {
+          console.log(
+            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ',
+            controlErrors[keyError]
+          );
+        });
+      }
+    });
   }
   getFormValidationErrors_ILT() {
     Object.keys(this.iltandViltForm.controls).forEach((key) => {
@@ -723,20 +734,17 @@ export class UpdateCourceComponent implements OnInit {
   }
   //create ilt vilt form
   createNewCourceIlt(status: any) {
+  this.getFormValidationErrors();
     console.log(this.stringArray);
     console.log(this.learnerGuidearray);
     let courseid = { course_id: this.routergetdata.id };
     let savetype = { status: status };
-    let totalObj = {
-      ...this.iltandViltForm.value,
-      ...savetype,
-      ...this.commonCreateCourceForm.value,
-      ...courseid
-    };
+
     let titlearray: any = [];
     let descriptionarray: any = [];
     let objectivearray: any = [];
     let for_whomarray: any = [];
+    let learn_morearray: any = [];
     let titleForm: any;
     let obj: any;
     titleForm = this.commonCreateCourceForm.value.titleArr;
@@ -767,8 +775,16 @@ export class UpdateCourceComponent implements OnInit {
 	    for (let i = 0; i < this.iltandViltForm.value.forWhomArr.length; i++) {
       if (this.iltandViltForm.value.forWhomArr[i].value != '') {
         for_whomarray.push({
-          [`${this.iltandViltForm.value.titleArr[i].name}`]:
+          [`${this.iltandViltForm.value.forWhomArr[i].name}`]:
             this.iltandViltForm.value.forWhomArr[i].value,
+        });
+      }
+    }
+		    for (let i = 0; i < this.iltandViltForm.value.learnMoreArr.length; i++) {
+      if (this.iltandViltForm.value.learnMoreArr[i].value != '') {
+        learn_morearray.push({
+          [`${this.iltandViltForm.value.learnMoreArr[i].name}`]:
+            this.iltandViltForm.value.learnMoreArr[i].value,
         });
       }
     }
@@ -777,15 +793,27 @@ export class UpdateCourceComponent implements OnInit {
     this.commonCreateCourceForm.value.title = titlearray;
     this.commonCreateCourceForm.value.description	= descriptionarray;
     this.commonCreateCourceForm.value.objective = objectivearray;
+    this.iltandViltForm.value.for_whoom	= for_whomarray;
+    this.iltandViltForm.value.learn_more	= learn_morearray;
     console.log('titleForm', titlearray);
     if (titlearray.length == 0) {
       titlearray.push({ "english": this.commonCreateCourceForm.value.title });
     }
-    this.commonCreateCourceForm.value.title = titlearray;
     console.log(this.commonCreateCourceForm.value);
-
+    let totalObj = {
+      ...this.iltandViltForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+      ...courseid
+    };
+	console.log(totalObj);
     this.getFormValidationErrors_ILT();
+		          console.log("this.iltandViltForm.valid = "+this.iltandViltForm.valid);
+	          console.log("this.commonCreateCourceForm.valid = "+this.commonCreateCourceForm.valid);
+
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
+	          console.log("valid");
+
       if (totalObj.learning_type == null || totalObj.learning_type == "") {
         totalObj.learning_type = this.learningType.toString();
       }
@@ -808,6 +836,7 @@ export class UpdateCourceComponent implements OnInit {
       );
       console.log(totalObj);
     } else {
+	console.log("invalid");
       this.commonCreateCourceForm.markAllAsTouched();
       this.iltandViltForm.markAllAsTouched();      
     }
@@ -2062,9 +2091,13 @@ export class UpdateCourceComponent implements OnInit {
 		var defaultValue = "";
 		  var selectText = titlearraylist.find((e:any, inc:any) => {		  
 		  return e[languages[index].slug]});
+		  	  if(selectText != undefined){
+			defaultValue = selectText[languages[index].slug]
+		  }
           languageLength.push(
-            this.fb.group({ name: [languages[index].slug], value: selectText[languages[index].slug] })
+            this.fb.group({ name: [languages[index].slug], value: defaultValue })
           );
+		  defaultValue = "";
 		  selectText = descriptionarraylist.find((e:any, inc:any) => {		  
 		  return e[languages[index].slug]});
 		  if(selectText != undefined){
@@ -2073,6 +2106,7 @@ export class UpdateCourceComponent implements OnInit {
           desclength.push(
             this.fb.group({ name: [languages[index].slug], value: defaultValue })
           );
+		  defaultValue = "";
 		  selectText = objectivearraylist.find((e:any, inc:any) => {		  
 		  return e[languages[index].slug]});
 		  		  if(selectText != undefined){
@@ -2081,6 +2115,7 @@ export class UpdateCourceComponent implements OnInit {
           objlength.push(
             this.fb.group({ name: [languages[index].slug], value: defaultValue })
           );
+		  defaultValue = "";
 		  		  selectText = for_whomarraylist.find((e:any, inc:any) => {		  
 		  return e[languages[index].slug]});
 		  		  if(selectText != undefined){
@@ -2089,6 +2124,7 @@ export class UpdateCourceComponent implements OnInit {
           forwhomlength.push(
             this.fb.group({ name: [languages[index].slug], value: defaultValue })
           );
+		  defaultValue = "";
 		  		  selectText = learn_morearraylist.find((e:any, inc:any) => {		  
 		  return e[languages[index].slug]});
 		  		  if(selectText != undefined){

@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import {Observable}  from 'rxjs/Observable';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/throttleTime';
+import 'rxjs/add/observable/fromEvent';
+import { Subscription } from 'rxjs/Subscription';
+
 import {
   FormArray,
   FormBuilder,
@@ -17,6 +24,10 @@ const emailregexp = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
   styleUrls: ['./create-new-course.component.scss'],
 })
 export class CreateNewCourseComponent implements OnInit {
+  formCtrlSub: Subscription;
+  isImageSaved:any;
+  totalObjnew: any = {};
+  public cardImageBase64:any = "";
   public createCourceForm!: FormGroup;
   public commonCreateCourceForm!: FormGroup;
   public iltandViltForm!: FormGroup;
@@ -42,6 +53,8 @@ export class CreateNewCourseComponent implements OnInit {
   coursesList: any;
   courseLength: any;
   notification: boolean = false;
+  public lang;
+  public imageError: string = null;
   public requiredFields:any = {"1":			{"common":
 							{"title":[Validators.required],
 							"duration":[Validators.required],
@@ -222,6 +235,7 @@ export class CreateNewCourseComponent implements OnInit {
   ) {
     this.getUserrole = this.authService.getRolefromlocal();
     //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
+	this.lang = environment.lang;
   }
 
   //get regional cordinators
@@ -439,12 +453,15 @@ export class CreateNewCourseComponent implements OnInit {
       descriptionArr: new FormArray([]),
       objectiveArr: new FormArray([]),
       //title: new FormArray([]),
-      title: new FormControl('', [Validators.required]),
+      title: new FormControl(''),
+      title_single: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
       learning_type: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
+      description_single: new FormControl('', [Validators.required]),
+      description: new FormControl(''),
       resource: new FormControl(''),
-      objective: new FormControl('', [Validators.required]),
+      objective_single: new FormControl('', [Validators.required]),
+      objective: new FormControl(''),
       level: new FormControl([Validators.required]),
       subject: new FormControl([Validators.required]),
       //additional_comment: new FormControl(''),
@@ -456,14 +473,50 @@ export class CreateNewCourseComponent implements OnInit {
       ]),
       training_provided_by: new FormControl([Validators.required]),
       available_language: new FormControl('',[Validators.required]),
-
       //no field
       email_training_contact: new FormControl('', [
         Validators.required,
         Validators.pattern(emailregexp),
       ]),
     });
-
+	this.languageValueSet(this.commonCreateCourceForm, 'title_single', 'titleArr');
+	this.languageValueSet(this.commonCreateCourceForm, 'description_single', 'descriptionArr');
+	this.languageValueSet(this.commonCreateCourceForm, 'objective_single', 'objectiveArr');
+		  this.formCtrlSub = this.commonCreateCourceForm.valueChanges
+      .debounceTime(500)
+      .subscribe($durationx => {
+    this.totalObjnew = {
+      ...this.iltandViltForm.value,
+      ...this.commonCreateCourceForm.value,
+    };
+	this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'title', 'titleArr');
+	this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'description', 'descriptionArr');
+	this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'objective', 'objectiveArr');
+	this.formatArrayData(this.totalObjnew, this.iltandViltForm, 'for_whoom', 'forWhomArr');
+	this.formatArrayData(this.totalObjnew, this.iltandViltForm, 'learn_more', 'learnMoreArr');
+	this.totalObjnew.resource = this.cardImageBase64;
+	});
+	  this.formCtrlSub = this.commonCreateCourceForm.get('duration').valueChanges
+      .debounceTime(500)
+      .subscribe($durationx => {
+    if(!$durationx.includes(":")){
+		if($durationx.length == 2){
+		$durationx = "00:"+$durationx;
+		} else if($durationx.length == 3){
+			$durationx = "0"+$durationx.substring(0,1)+":"+$durationx.substring(1,3);
+		} else if($durationx.length == 4){
+			$durationx = $durationx.substring(0,2)+":"+$durationx.substring(2,4);
+		} else if($durationx.length > 4){
+			$durationx = $durationx.substring(0,2)+":"+$durationx.substring(2,4);
+		} else {
+		
+		}
+		var durationObj = {duration:$durationx};
+		this.commonCreateCourceForm.patchValue(durationObj);
+	  } else {
+	  console.log("aa");
+	  }
+	  });
     //ilt and vilt
     this.iltandViltForm = this.fb.group({
       manager_approval: new FormControl('',[Validators.required]),
@@ -472,14 +525,18 @@ export class CreateNewCourseComponent implements OnInit {
       certification_expiry_type: new FormControl('',[Validators.required]),
       validity_period: new FormControl('',[Validators.required]),
       external_vendor_name: new FormControl('',[Validators.required]),
+      expiry_date_type: new FormControl('', [Validators.required]),
       purchase_order: new FormControl(),
       // email_training_contact: new FormControl('', [Validators.required]),
       delivery_method: new FormControl('',[Validators.required]),
-      for_whoom: new FormControl('', [Validators.required]),
+      for_whoom: new FormControl(''),
 	  forWhomArr: new FormArray([]),
 	  learnMoreArr: new FormArray([]),
       cost_of_training: new FormControl(''),
       // cost_of_training: new FormControl('', [Validators.required]),
+      learn_more_single: new FormControl('', [Validators.required]),
+	  for_whoom_single: new FormControl('', [Validators.required]),
+
       learn_more: new FormControl(''),
       free_field_content: new FormControl(''),
       url: new FormControl(''),
@@ -507,7 +564,9 @@ export class CreateNewCourseComponent implements OnInit {
           ? new FormControl('', [Validators.required])
           : new FormControl(),
     });
-
+	this.languageValueSet(this.iltandViltForm, 'for_whoom_single', 'forWhomArr');
+	this.languageValueSet(this.iltandViltForm, 'learn_more_single', 'learnMoreArr');
+	
     //video based
     this.videobasedForm = this.fb.group({
       video_link: new FormControl(''),      
@@ -549,7 +608,9 @@ export class CreateNewCourseComponent implements OnInit {
       expiry_date: new FormControl(''),
       url: new FormControl('', [Validators.required]),
       who_see_course: new FormControl(''),
-      for_whoom: new FormControl('', [Validators.required]),
+      for_whoom: new FormControl(''),
+      learn_more_single: new FormControl('', [Validators.required]),
+	  for_whoom_single: new FormControl('', [Validators.required]),
       learner_guideline: this.fb.array([]),
       additional_comment: new FormControl(''),
       regional_cordinator:
@@ -575,6 +636,9 @@ export class CreateNewCourseComponent implements OnInit {
           : new FormControl()
     });
     this.playlistForm = this.fb.group({
+      learn_more_single: new FormControl('', [Validators.required]),
+	  for_whoom_single: new FormControl('', [Validators.required,
+      Validators.pattern(emailregexp)]),
       for_whoom: new FormControl('', [Validators.required,
       Validators.pattern(emailregexp)]),
       url: new FormControl('', [Validators.required]),
@@ -749,11 +813,7 @@ export class CreateNewCourseComponent implements OnInit {
     console.log(this.stringArray);
     console.log(this.learnerGuidearray);
     let savetype = { status: status };
-    let totalObj = {
-      ...this.iltandViltForm.value,
-      ...savetype,
-      ...this.commonCreateCourceForm.value,
-    };
+    
     let titlearray: any = [];
     let descriptionarray: any = [];
     let objectivearray: any = [];
@@ -768,7 +828,14 @@ export class CreateNewCourseComponent implements OnInit {
           [`${this.commonCreateCourceForm.value.titleArr[i].name}`]:
             this.commonCreateCourceForm.value.titleArr[i].value,
         });
-      }
+      } else {
+	  if(this.commonCreateCourceForm.value.titleArr[i].slug == this.lang){
+	  titlearray.push({
+          [`${this.commonCreateCourceForm.value.titleArr[i].name}`]:
+            this.commonCreateCourceForm.value.title_single,
+        });
+	  }
+	  }
     }
 	    for (let i = 0; i < this.commonCreateCourceForm.value.descriptionArr.length; i++) {
       if (this.commonCreateCourceForm.value.descriptionArr[i].value != '') {
@@ -776,7 +843,14 @@ export class CreateNewCourseComponent implements OnInit {
           [`${this.commonCreateCourceForm.value.descriptionArr[i].name}`]:
             this.commonCreateCourceForm.value.descriptionArr[i].value,
         });
-      }
+      } else {
+	  if(this.commonCreateCourceForm.value.descriptionArr[i].slug == this.lang){
+	  titlearray.push({
+          [`${this.commonCreateCourceForm.value.descriptionArr[i].name}`]:
+            this.commonCreateCourceForm.value.description_single,
+        });
+	  }
+	  }
     }
 	    for (let i = 0; i < this.commonCreateCourceForm.value.objectiveArr.length; i++) {
       if (this.commonCreateCourceForm.value.objectiveArr[i].value != '') {
@@ -784,7 +858,14 @@ export class CreateNewCourseComponent implements OnInit {
           [`${this.commonCreateCourceForm.value.objectiveArr[i].name}`]:
             this.commonCreateCourceForm.value.objectiveArr[i].value,
         });
-      }
+      } else {
+	  if(this.commonCreateCourceForm.value.objectiveArr[i].slug == this.lang){
+	  titlearray.push({
+          [`${this.commonCreateCourceForm.value.objectiveArr[i].name}`]:
+            this.commonCreateCourceForm.value.objective_single,
+        });
+	  }
+	  }
     }
 	    for (let i = 0; i < this.iltandViltForm.value.forWhomArr.length; i++) {
       if (this.iltandViltForm.value.forWhomArr[i].value != '') {
@@ -792,7 +873,14 @@ export class CreateNewCourseComponent implements OnInit {
           [`${this.iltandViltForm.value.forWhomArr[i].name}`]:
             this.iltandViltForm.value.forWhomArr[i].value,
         });
-      }
+      } else {
+	  if(this.iltandViltForm.value.forWhomArr[i].slug == this.lang){
+	  titlearray.push({
+          [`${this.iltandViltForm.value.forWhomArr[i].name}`]:
+            this.iltandViltForm.value.for_whom_single,
+        });
+	  }
+	  }
     }
 	for (let i = 0; i < this.iltandViltForm.value.learnMoreArr.length; i++) {
       if (this.iltandViltForm.value.learnMoreArr[i].value != '') {
@@ -800,19 +888,30 @@ export class CreateNewCourseComponent implements OnInit {
           [`${this.iltandViltForm.value.learnMoreArr[i].name}`]:
             this.iltandViltForm.value.learnMoreArr[i].value,
         });
-      }
+      } else {
+	  if(this.iltandViltForm.value.learnMoreArr[i].slug == this.lang){
+	  titlearray.push({
+          [`${this.iltandViltForm.value.learnMoreArr[i].name}`]:
+            this.iltandViltForm.value.learn_more_single,
+        });
+	  }
+	  }
     }
     console.log('titleForm', titlearray);
     
     this.commonCreateCourceForm.value.title = titlearray;
     this.commonCreateCourceForm.value.description	= descriptionarray;
     this.commonCreateCourceForm.value.objective = objectivearray;
-    this.commonCreateCourceForm.value.title = titlearray;
 	this.iltandViltForm.value.for_whoom = for_whomarray;
-	this.iltandViltForm.value.for_whoom = for_whomarray;
+	this.iltandViltForm.value.for_whoom = learn_morearray;
     // this.commonCreateCourceForm.patchValue({description:'fdgdg'}) ;
     // this.commonCreateCourceForm.patchValue({title:'fdgdg'})
     console.log(this.commonCreateCourceForm.value);
+	let totalObj = {
+      ...this.iltandViltForm.value,
+      ...savetype,
+      ...this.commonCreateCourceForm.value,
+    };
 //let abc = this.iltandViltForm.controls;
 //let c = Object.keys(abc);
 //for(let x in c){
@@ -829,6 +928,8 @@ export class CreateNewCourseComponent implements OnInit {
 
 //}
     this.getFormValidationErrors();
+      console.log(this.iltandViltForm.valid);
+      console.log(this.commonCreateCourceForm.valid);
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
       console.log(totalObj);
       if (totalObj.learning_type == null || totalObj.learning_type == "") {
@@ -842,9 +943,9 @@ export class CreateNewCourseComponent implements OnInit {
             let saveobj = { issave: true };
             let stateobj = { ...statedata, ...saveobj };
             // this.router.navigate(['/dashboard/cources']);
-            /*this.router.navigateByUrl('/dashboard/cources/request-detail', {
+            this.router.navigateByUrl('/dashboard/cources/request-detail', {
               state: stateobj,
-            });*/
+            });
           }
         },
         (err: any) => {
@@ -1246,7 +1347,14 @@ export class CreateNewCourseComponent implements OnInit {
           [`${this.commonCreateCourceForm.value.titleArr[i].name}`]:
             this.commonCreateCourceForm.value.titleArr[i].value,
         });
-      }
+      } else {
+	  if(this.commonCreateCourceForm.value.titleArr[i].slug == this.lang){
+	  titlearray.push({
+          [`${this.commonCreateCourceForm.value.titleArr[i].name}`]:
+            this.commonCreateCourceForm.value.title_single,
+        });
+	  }
+	  }
     }
     console.log('titleForm', titlearray);
 
@@ -1622,4 +1730,95 @@ export class CreateNewCourseComponent implements OnInit {
 	//	this.getallFormValidationErrors(this.currriculumForm, 'currriculumForm');
 
 	//}
+	formatdurationText($durationEvent:any){
+	var $duration = $durationEvent.target.value;
+	
+	   
+	  console.log($duration);
+	  console.log("uuuu");
+	  if(!$duration.includes(":")){
+		if($duration.length == 2){
+		$duration = "00:"+$duration;
+		} else if($duration.length == 3){
+			$duration = "0"+$duration.substring(0,1)+":"+$duration.substring(1,3);
+		} else if($duration.length == 4){
+			$duration = $duration.substring(0,2)+":"+$duration.substring(2,4);
+		} else if($duration.length > 4){
+			$duration = $duration.substring(0,2)+":"+$duration.substring(2,4);
+		} else {
+		
+		}
+		var durationObj = {duration:$duration};
+		this.commonCreateCourceForm.patchValue(durationObj);
+	  } else {
+	  console.log("aa");
+	  }
+	 
+	}
+ 	 debounce( callback:any, delay:any ) {
+    var timeout:any;
+    return function() {
+        clearTimeout( timeout );
+        timeout = setTimeout( callback, delay );
+    }
 }
+
+languageValueSet(formObj: FormGroup, fieldName: string, fieldArr: string){
+this.formCtrlSub = formObj.get(fieldName).valueChanges
+      .debounceTime(500)
+      .subscribe($data => {
+	  var fdata = formObj.value;
+	  if(fdata[fieldName] != ''){
+		for(let x in fdata[fieldArr]){
+			if(fdata[fieldArr][x]['name'] == this.lang){
+					fdata[fieldArr][x]['value'] = fdata[fieldName];
+			}
+		}
+		let fieldArrObj = {};
+		fieldArrObj[fieldArr] = fdata[fieldArr];
+		formObj.patchValue(fieldArrObj);
+	  }
+	  });
+}
+
+formatArrayData(cFormObj: any, formObj: FormGroup, fieldName: string, fieldArr: string){
+    let fdata = formObj.value;
+	let langArr = [];
+    for (let i = 0; i < fdata[fieldArr].length; i++) {
+      if (fdata[fieldArr][i].value != '') {
+        langArr.push({
+          [`${fdata[fieldArr][i].name}`]:
+            fdata[fieldArr][i].value,
+        });
+      }
+    }
+	cFormObj[fieldName] = langArr;
+}
+
+fileChangeEvent(fileInput: any, fieldName: any) {
+        this.imageError = null;
+		if (fileInput.target.files && fileInput.target.files[0]) {
+            // Size Filter Bytes
+            const max_size = 20971520;
+            const allowed_types = ['application/msword',
+'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+'image/jpg',
+'image/jpeg',
+'application/pdf','image/png','application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+            const reader = new FileReader();
+            reader.onload = (e: any) => {
+			let fdata = this.commonCreateCourceForm.value;
+			fdata[fieldName] = e.target.result;
+			let pdata = {};
+			pdata[fieldName] = "fgfgffhg";
+			console.log(pdata);
+			this.cardImageBase64 = e.target.result;
+			//this.commonCreateCourceForm.patchValue(pdata)
+            };
+
+            reader.readAsDataURL(fileInput.target.files[0]);
+        }
+    }
+
+}
+

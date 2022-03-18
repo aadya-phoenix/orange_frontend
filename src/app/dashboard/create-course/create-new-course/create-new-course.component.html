@@ -75,7 +75,7 @@
                 <div class="col-md-12">
                     <span class="indicate_css"><span style="color: red">*</span>Indicates required field</span>
 
-                    <form [formGroup]="commonCreateCourceForm">
+                    <form [formGroup]="commonCreateCourceForm"  enctype="multipart/form-data">
                         <div *ngIf="learningType != '0'">
                             <div class="card">
                                 <div class="card-header">
@@ -98,7 +98,7 @@
                                  title="Do provide an attractive, catchy and clear learning activity title (max 100 characters). Example: 7 Habits of Highly Effective People. Don’t use prefixes such as ‘OBS’ or abbreviations such as ‘ops’. Don’t make references to session location or target "></i>
                             </a>
                           </label>
-                                                    <input type="text" placeholder="Enter Title" class="form-control form_width" formControlName="title" />
+                                                    <input type="text" placeholder="Enter Title" class="form-control form_width" formControlName="title_single" />
                                                 </div>
 
                                                 <div>
@@ -128,7 +128,6 @@
                                                 </div>
                                             </div>
                                             <!--colend-->
-
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label class="form-control-label">
@@ -140,7 +139,7 @@
                                  title="Please indicate the learning activity duration in hours : minutes."></i>
                             </a>
                           </label>
-                                                    <input type="text" placeholder="Enter Training hours/duration (HH:MM) " class="form-control form_width" formControlName="duration" />
+                                                    <input (input)="debounce(formatdurationText, 1000)" type="text" placeholder="Enter Training hours/duration (HH:MM) " class="form-control form_width" formControlName="duration" />
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -156,7 +155,7 @@
                                 </i>
                               </a>
                             </label>
-                                                        <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Description" formControlName="description"></textarea>
+                                                        <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Description" formControlName="description_single"></textarea>
                                                     </div>
                                                     <div>
                                                         <a href="" data-toggle="modal" data-target="#commonDescription" class="d-flex flex-column align-items-end">
@@ -178,7 +177,7 @@
                                 </i>
                               </a>
                             </label>
-                                                        <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Objectives" formControlName="objective" appBulletpoints [(stringArray)]="stringArray"></textarea>
+                                                        <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Objectives" formControlName="objective_single" appBulletpoints [(stringArray)]="stringArray"></textarea>
                                                     </div>
 
                                                     <div>
@@ -325,7 +324,7 @@
                             </a>
                           </label>
                                                     <div class="upload_field">
-                                                        <input type="file" id="exampleInputFile" formControlName="resource" class="upload_css" />
+                                                        <input type="file" id="exampleInputFile" formControlName="resource" class="upload_css" (change)="fileChangeEvent($event, 'resource')" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -664,7 +663,7 @@
                             </i>
                           </a>
                         </label>
-                                                <select class="form-control form_width" formControlName="expiry_type">
+                                                <select class="form-control form_width" formControlName="expiry_date_type">
                           <option value="">Please Select expiry</option>
                           <option *ngFor="let cctExpiry of cctExpiryperiod" [value]="cctExpiry.id">
                             {{ cctExpiry.name }}
@@ -852,7 +851,7 @@
                               </i>
                             </a>
                           </label>
-                                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom"></textarea>
+                                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom_single"></textarea>
 
                                                 </div>
                                                 <div>
@@ -876,7 +875,7 @@
                               </i>
                             </a>
                           </label>
-                                                    <input type="text" placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more" />
+                                                    <input type="text" placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more_single" />
                                                 </div>
                                                 <div>
                                                     <a data-toggle="modal" data-target="#learnMoreModal" class="d-flex flex-column align-items-end">
@@ -903,7 +902,7 @@
                                     </div>
                                     <!--row end-->
 
-                                    <table class="table table-bordered">
+                                    <table class="table table-bordered"  *ngIf="t.controls.length > 0 ">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Learner Guidelines</th>
@@ -1098,7 +1097,7 @@
                             </i>
                           </a>
                         </label>
-                                                <input type="text" placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more" />
+                                                <input type="text" placeholder="Enter Learn more" class="form-control form_width" formControlName="learn_more_single" />
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1159,7 +1158,7 @@
                             </i>
                           </a>
                         </label>
-                                                <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom"></textarea>
+                                                <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom_single"></textarea>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1261,7 +1260,7 @@
 
 
 
-                                    <table class="table table-bordered">
+                                    <table class="table table-bordered"  *ngIf="curriculumArray.controls.length > 0">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Learner Guidelines</th>
@@ -1274,10 +1273,10 @@
                           let i = index
                         ">
                                                 <td [formGroupName]="i">
-                                                    <input type="text" placeholder="Enter Learner Guidelines" class="form-control form_width" formControlName="learnerguide_line" />
+                                                    <input type="text" placeholder="Enter Learner Guidelines" class="form-control form_width" formControlName="title" />
                                                 </td>
                                                 <td [formGroupName]="i">
-                                                    <textarea class="form-control form_width-textarea w-100" rows="3" placeholder="Enter Learner Guidelines Description" formControlName="learnerguide_line_description"></textarea>
+                                                    <textarea class="form-control form_width-textarea w-100" rows="3" placeholder="Enter Learner Guidelines Description" formControlName="description"></textarea>
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-success mr-2 mb-1" (click)="addLearnerGuidelinetocurriculum()">
@@ -1712,7 +1711,7 @@
                             </i>
                           </a>
                         </label>
-                                                <input type="text" placeholder="Enter Email of playlist creator" class="form-control form_width" formControlName="for_whoom" />
+                                                <input type="text" placeholder="Enter Email of playlist creator" class="form-control form_width" formControlName="for_whoom_single" />
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -2248,7 +2247,7 @@
                 <form [formGroup]="iltandViltForm">
                     <div class="row">
                         <div class="col-sm-12" formArrayName="forWhomArr" *ngFor="let language of titlecontrol;let i =index;">
-                            <div class="form-group">
+                            <div class="form-group"  [style.display]="(lang == availableLanguages[i].slug) ? 'none' : 'block' " >
                                 <div [formGroupName]="i">
                                     <label class="form-control-label"> {{availableLanguages[i].name}}</label>
                                     <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter" formControlName="value"></textarea>
@@ -2285,7 +2284,7 @@
                 <form [formGroup]="iltandViltForm">
                     <div class="row">
                         <div class="col-sm-12" formArrayName="learnMoreArr" *ngFor="let language of titlecontrol;let i =index;">
-                            <div class="form-group">
+                            <div class="form-group"  [style.display]="(lang == availableLanguages[i].slug) ? 'none' : 'block' " >
                                 <div [formGroupName]="i">
                                     <label class="form-control-label"> {{availableLanguages[i].name}}</label>
                                     <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter" formControlName="value"></textarea>
@@ -2323,7 +2322,7 @@
                 <form [formGroup]="commonCreateCourceForm">
                     <div class="row">
                         <div class="col-sm-12" formArrayName="descriptionArr" *ngFor="let language of titlecontrol;let i =index;">
-                            <div class="form-group">
+                            <div class="form-group"  [style.display]="(lang == availableLanguages[i].slug) ? 'none' : 'block' " >
                                 <div [formGroupName]="i">
                                     <label class="form-control-label"> {{availableLanguages[i].name}}</label>
                                     <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter" formControlName="value"></textarea>
@@ -2360,7 +2359,7 @@
                 <form [formGroup]="commonCreateCourceForm">
                     <div class="row">
                         <div class="col-sm-12" formArrayName="objectiveArr" *ngFor="let language of titlecontrol;let i =index;">
-                            <div class="form-group">
+                            <div class="form-group"  [style.display]="(lang == availableLanguages[i].slug) ? 'none' : 'block' " >
                                 <div [formGroupName]="i">
                                     <label class="form-control-label"> {{availableLanguages[i].name}}</label>
                                     <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter" formControlName="value"></textarea>
@@ -2398,7 +2397,7 @@
                 <form [formGroup]="commonCreateCourceForm">
                     <div class="row">
                         <div class="col-sm-12" formArrayName="titleArr" *ngFor="let language of titlecontrol;let i =index;">
-                            <div class="form-group">
+                            <div class="form-group"  [style.display]="(lang == availableLanguages[i].slug) ? 'none' : 'block' " >
                                 <div [formGroupName]="i">
                                     <label class="form-control-label"> {{availableLanguages[i].name}}</label>
                                     <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter" formControlName="value"></textarea>
