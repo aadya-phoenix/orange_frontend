@@ -14,6 +14,8 @@ import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive'
 export class CoursesComponent implements OnInit {
   public courcesList: any=[];
   public page = 1;
+  p:any;
+  paging:any;
   getUserprofile: any;
   getUserrole: any;
   collectionSize: any;

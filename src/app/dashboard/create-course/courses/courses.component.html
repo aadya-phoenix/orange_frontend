@@ -48,11 +48,6 @@
                 <div class="row">
                     <div class="col-md-12">
 
-
-
-
-
-
                         <div class="card">
                             <div class="card-header" style="
               padding: 0.45rem 1.25rem !important;
@@ -267,7 +262,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let cource of courcesList | filter: searchText" class="text-center bac_hover-table" style="font-size: 12px;">
+                                    <tr *ngFor="let cource of courcesList | filter: searchText  | paginate: { itemsPerPage: 5, currentPage: p }" class="text-center bac_hover-table" style="font-size: 12px;">
                                         <td (click)="getRequest(cource)" class="re_id">{{ cource.request_id }}</td>
                                         <td (click)="getRequest(cource)">
                                             {{ cource && cource.user_name ? cource.user_name : "- " }}
@@ -318,6 +313,9 @@
                                                 <a *ngIf="cource.status=='draft'" (click)="deleteRequest(cource)" class="copy_file mr-1" data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </a>
+                                                <a *ngIf="course.status=='reject'" (click)="editRequest(course)" class="copy_file mr-1"  data-toggle="tooltip" data-placement="top" title="Edit">
+                                                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                              </a>
                                                  <a  class="copy_file mr-1" data-toggle="tooltip" data-placement="top" title="View">
                                       <i class="fa fa-eye" aria-hidden="true"></i>
                                   </a>
@@ -329,7 +327,8 @@
                                 </tbody>
                             </table>
                         </div>
-                         <div class="searc_dislp_inlin mt-1  ml-2 mr-2">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                         <!-- <div class="searc_dislp_inlin mt-1  ml-2 mr-2">
                             <div class="d-flex align-content-center">
                                 <p style="font-size: 14px; color: #000">Show</p>
                                 <p class="counter_css ml-1 mr-1">
@@ -343,7 +342,7 @@
               <div class="pagintion_ child">
                 <p style="font-size: 14px; color: #000">Showing 1 entries</p>
               </div>
-              <div class="pagintion_ child">
+              <div class="pagintion_ child"> -->
                 <!-- <ngb-pagination
                   [collectionSize]="collectionSize "
                   [(page)]="service.page "
@@ -362,10 +361,10 @@
                     >{{ page }}</ng-template
                   >
                 </ngb-pagination> -->
-              </div>
+              <!-- </div>
             </div>
-            </div>
-             <nav role="navigation" aria-label="Pagination example with active span item">
+            </div> -->
+     <!--         <nav role="navigation" aria-label="Pagination example with active span item">
   <ul class="pagination">
     <li class="page-item disabled">
       <a class="page-link" title="Previous">
@@ -383,7 +382,7 @@
       </a>
     </li>
   </ul>
-</nav>
+</nav> -->
                     </div>
                 </div>
             </div>
@@ -508,7 +507,7 @@
                 </thead>
                 <tbody>
                   <tr
-                    *ngFor="let course of courcesList | filter: searchText" class="text-center bac_hover-table" style="font-size: 12px;">
+                    *ngFor="let course of courcesList | filter: searchText | paginate: { itemsPerPage: 10, currentPage: paging }" class="text-center bac_hover-table" style="font-size: 12px;">
                     <td (click)="getRequest(course)" class="re_id">{{ course.request_id }}</td>
                     <td (click)="getRequest(course)">
                       {{
@@ -550,6 +549,9 @@
                                   <a *ngIf="course.status=='draft'" (click)="deleteRequest(course)" class="copy_file mr-1" data-toggle="tooltip" data-placement="top" title="Delete">
                                       <i class="fa fa-trash" aria-hidden="true"></i>
                                   </a>
+                                  <a *ngIf="course.status=='reject'" (click)="editRequest(course)" class="copy_file mr-1"  data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
                                   <a  class="copy_file mr-1" data-toggle="tooltip" data-placement="top" title="View">
                                       <i class="fa fa-eye" aria-hidden="true"></i>
                                   </a>
@@ -560,8 +562,8 @@
                 </tbody>
               </table>
             </div>
-
-          <div class="searc_dislp_inlin mt-1 ml-2 mr-2">
+            <pagination-controls (pageChange)="paging = $event"></pagination-controls>
+         <!--  <div class="searc_dislp_inlin mt-1 ml-2 mr-2">
                             <div class="d-flex align-content-center">
                                 <p style="font-size: 14px; color: #000">Show</p>
                                 <p class="counter_css ml-1 mr-1">
@@ -575,7 +577,7 @@
               <div class="pagintion_ child">
                 <p style="font-size: 14px; color: #000">Showing 1 entries</p>
               </div>
-              <div class="pagintion_ child">
+              <div class="pagintion_ child"> -->
                 <!-- <ngb-pagination
                   [collectionSize]="collectionSize "
                   [(page)]="service.page "
@@ -594,10 +596,10 @@
                     >{{ page }}</ng-template
                   >
                 </ngb-pagination> -->
-              </div>
+             <!--  </div>
             </div>
-            </div>
-            <nav role="navigation" aria-label="Pagination example with active span item" class="d-flex justify-content-end">
+            </div> -->
+ <!--            <nav role="navigation" aria-label="Pagination example with active span item" class="d-flex justify-content-end">
   <ul class="pagination">
     <li class="page-item disabled">
       <a class="page-link" title="Previous">
@@ -615,7 +617,7 @@
       </a>
     </li>
   </ul>
-</nav>
+</nav> -->
           </div>
         </div>
       </div>

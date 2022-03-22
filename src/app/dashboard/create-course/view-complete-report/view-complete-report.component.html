@@ -189,10 +189,6 @@
                             </div>
 
                             <div class="card-body card-boy-padd">
-
-
-
-
                                 <div class="Course_icon_parent" data-aos="fade-right">
                                     <div class="Course_icon_child">
                                         <div class="alig_dashicon" (click)="getrecords(draftRequests)">
@@ -208,7 +204,7 @@
                                         </div>
                                     </div>
                                     <!--coled-->
-                                    <div class="Course_icon_child">
+                                    <div class="Course_icon_child" *ngIf="getUserrole.id == 2">
                                         <div class="alig_dashicon" (click)="getrecords(usersubmitRequests)">
                                             <div>
                                                 <div class="fa-icons-des" style="background-color: #a885db">
@@ -220,6 +216,19 @@
                                             <span class="number_css">{{
                                             usersubmitRequests && usersubmitRequests.length ? usersubmitRequests.length : '0'
                                             }}</span>
+                                        </div>
+                                    </div>
+                                    <!--coled-->
+                                    <div class="Course_icon_child" *ngIf="getUserrole.id != 2">
+                                        <div class="alig_dashicon" (click)="getrecords(submittedRequests)">
+                                            <div class="sub-child-dashicon">
+                                                <div class="fa-icons-des" style="background-color: #a885db">
+                                                    <img src="../../../../assets/images/icon/closed.png" />
+                                                </div>
+            
+                                                <p>Submitted</p>
+                                            </div>
+                                            <span class="number_css">{{submittedRequests && submittedRequests.length ? submittedRequests.length : '0'}}</span>
                                         </div>
                                     </div>
                                     <!--coled-->
@@ -309,8 +318,8 @@
                             <button class="btn btn-secondary mr-1" style="font-size: 12px;" (click)="exportToExcel()"><i
                                     class="fa fa-download mr-1" aria-hidden="true"
                                     ></i>Export</button>
-                            <button class="btn btn-primary" style="font-size: 11px;"><i class="fa fa-refresh mr-1"
-                                    aria-hidden="true" (click)="reset()" ></i>Reset</button>
+                            <button class="btn btn-primary" style="font-size: 11px;" (click)="reset()"><i class="fa fa-refresh mr-1"
+                                    aria-hidden="true"  ></i>Reset</button>
                         </div>
                         <div class="table-responsive">
                             <table id="excel-table" class="table table-bordered">

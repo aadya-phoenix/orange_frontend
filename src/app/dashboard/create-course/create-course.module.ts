@@ -11,6 +11,7 @@ import { RequestDetailComponent } from './request-detail/request-detail.componen
 import { UpdateCourceComponent } from './update-cource/update-cource.component';
 import { ViewCourseDetailsComponent } from './view-course-details/view-course-details.component';
 import { ViewCompleteReportComponent } from './view-complete-report/view-complete-report.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -20,6 +21,7 @@ import { ViewCompleteReportComponent } from './view-complete-report/view-complet
     CommonModule,
     CreateCourseRoutingModule,
     SharedModule,
+    NgxPaginationModule,
     NgSelectModule
   ]
 })
