@@ -1486,7 +1486,15 @@
                           </a>
                         </label>
                         <div class="upload_field">
-                          <input type="file" id="exampleInputFile" formControlName="video_link" style="width: 77%" />
+                          <input type="file" id="exampleInputFile" formControlName="material_source" style="width: 77%" />
+                        </div>
+                        <div *ngIf="fileToUpload_Material" style="margin-left:15px;">
+                          <ul>
+                            <li *ngFor="let f of fileToUpload_Material">
+                              <!--<input type="hidden" #attachmentId value="{{f.attachmentId}}">-->
+                              <a href="{{f.url}}" target="_blank" style="text-decoration:underline">View</a>
+                            </li>
+                          </ul>
                         </div>
                       </div>
                     </div>
