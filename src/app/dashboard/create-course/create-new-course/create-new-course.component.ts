@@ -383,7 +383,7 @@ export class CreateNewCourseComponent implements OnInit {
         this.showCurriculumContent = this.routergetdata.external_vendor_name
         this.showCurriculumLearnMore = this.courceService.getTText(this.routergetdata.learn_more);
         //this.showCurriculumForWhom = this.courceService.getTText(this.routergetdata.for_whoom);
-        //this.showCurriculumWhoSee = this.routergetdata.who_see_course
+        this.showCurriculumWhoSee = this.routergetdata.who_see_course
         this.showCurriculumRegional = Number(this.routergetdata.regional_cordinator)
         if (this.routergetdata.certification == "yes") {
           this.showCertificateExpiry_Curriculum = true
@@ -659,8 +659,7 @@ export class CreateNewCourseComponent implements OnInit {
         Validators.pattern(emailregexp),
       ]),
     });
-    if (this.routergetdata == undefined) {
-
+    if (this.routergetdata == undefined) {      
       this.languageValueSet_new(this.commonCreateCourceForm, 'title_single', 'titleArr');
       this.languageValueSet_new(this.commonCreateCourceForm_playlist, 'title_single', 'titleArr');
       this.languageValueSet_new(this.commonCreateCourceForm, 'description_single', 'descriptionArr');
@@ -678,15 +677,17 @@ export class CreateNewCourseComponent implements OnInit {
           this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'objective', 'objectiveArr');
           this.formatArrayData(this.totalObjnew, this.iltandViltForm, 'for_whoom', 'forWhomArr');
           this.formatArrayData(this.totalObjnew, this.iltandViltForm, 'learn_more', 'learnMoreArr');
+          this.formatArrayData(this.totalObjnew, this.currriculumForm, 'for_whoom', 'forWhomArr');
+          this.formatArrayData(this.totalObjnew, this.currriculumForm, 'learn_more', 'learnMoreArr');
         });
     }
     this.iltandViltForm = this.fb.group({
       manager_approval: new FormControl('', [Validators.required]),
       digital: new FormControl('', [Validators.required]),
       certification: new FormControl('', [Validators.required]),
-      certification_expiry_type: new FormControl('', [Validators.required]),
-      validity_period: new FormControl('', [Validators.required]),
-      external_vendor_name: new FormControl('', [Validators.required]),
+      certification_expiry_type: new FormControl(''),
+      validity_period: new FormControl(''),
+      external_vendor_name: new FormControl(''),
       expiry_date_type: new FormControl('', [Validators.required]),
       purchase_order: new FormControl(),
       // email_training_contact: new FormControl('', [Validators.required]),
@@ -725,14 +726,12 @@ export class CreateNewCourseComponent implements OnInit {
           ? new FormControl('', [Validators.required])
           : new FormControl(),
     });
-    if (this.routergetdata == undefined) {
+    if (this.routergetdata == undefined) {      
       this.addLearnerGuideline('', '');
       this.languageValueSet_new(this.iltandViltForm, 'for_whoom_single', 'forWhomArr');
       this.languageValueSet_new(this.iltandViltForm, 'learn_more_single', 'learnMoreArr');
     }
-    //this.languageValueSet(this.iltandViltForm, 'for_whoom_single', 'forWhomArr');
-    //this.languageValueSet(this.iltandViltForm, 'learn_more_single', 'learnMoreArr');
-
+    
     //video based
     this.videobasedForm = this.fb.group({
       video_link: new FormControl(''),
@@ -764,8 +763,8 @@ export class CreateNewCourseComponent implements OnInit {
       Validators.pattern(emailregexp)]),
       digital: new FormControl('', [Validators.required]),
       certification: new FormControl('', [Validators.required]),
-      certification_expiry_type: new FormControl('', [Validators.required]),
-      validity_period: new FormControl('', [Validators.required]),
+      certification_expiry_type: new FormControl(''),
+      validity_period: new FormControl(''),
       learn_more: new FormControl(''),
       video_link: new FormControl(''),
       title_additional: new FormControl(''),
@@ -776,6 +775,8 @@ export class CreateNewCourseComponent implements OnInit {
       who_see_course: new FormControl(''),
       for_whoom: new FormControl(''),
       learn_more_single: new FormControl(''),
+      forWhomArr: new FormArray([]),
+      learnMoreArr: new FormArray([]),
       for_whoom_single: new FormControl('', [Validators.required]),
       learner_guideline: this.fb.array([]),
       additional_comment: new FormControl(''),
@@ -784,7 +785,7 @@ export class CreateNewCourseComponent implements OnInit {
           ? new FormControl('', [Validators.required])
           : new FormControl()
     });
-    if (this.routergetdata == undefined) {
+    if (this.routergetdata == undefined) {      
       this.addLearnerGuidelinetocurriculum('', '');
       this.languageValueSet_new(this.currriculumForm, 'for_whoom_single', 'forWhomArr');
       this.languageValueSet_new(this.currriculumForm, 'learn_more_single', 'learnMoreArr');
@@ -794,10 +795,10 @@ export class CreateNewCourseComponent implements OnInit {
       Validators.pattern(emailregexp)]),
       digital: new FormControl('', [Validators.required]),
       certification: new FormControl('', [Validators.required]),
-      certification_expiry_type: new FormControl('', [Validators.required]),
-      validity_period: new FormControl('', [Validators.required]),
+      certification_expiry_type: new FormControl(''),
+      validity_period: new FormControl(''),
       external_vendor: new FormControl('', [Validators.required]),
-      external_vendor_name: new FormControl('', [Validators.required]),
+      external_vendor_name: new FormControl(''),
       purchase_order: new FormControl(''),
       additional_comment: new FormControl(''),
       regional_cordinator:
@@ -1051,7 +1052,7 @@ export class CreateNewCourseComponent implements OnInit {
             );
           }
 
-          if (this.learningType == "1" || this.learningType == undefined) {
+          
             const forWhomFormArr = this.iltandViltForm.controls.forWhomArr as FormArray;
             const learnMoreFormArr = this.iltandViltForm.controls.learnMoreArr as FormArray;
             if (forWhomFormArr != undefined) {
@@ -1064,21 +1065,20 @@ export class CreateNewCourseComponent implements OnInit {
                 this.fb.group({ name: [languages[index].slug], value: '' })
               );
             }
-          }
-          else if (this.learningType == "4") {
-            const forWhomFormArr = this.currriculumForm.controls.forWhomArr as FormArray;
-            const learnMoreFormArr = this.currriculumForm.controls.learnMoreArr as FormArray;
-            if (forWhomFormArr != undefined) {
-              forWhomFormArr.push(
+          
+            const forWhomFormArr_cur = this.currriculumForm.controls.forWhomArr as FormArray;
+            const learnMoreFormArr_cur = this.currriculumForm.controls.learnMoreArr as FormArray;
+          if (forWhomFormArr_cur != undefined) {
+            forWhomFormArr_cur.push(
                 this.fb.group({ name: [languages[index].slug], value: '' })
               );
             }
-            if (learnMoreFormArr != undefined) {
-              learnMoreFormArr.push(
+          if (learnMoreFormArr_cur != undefined) {
+            learnMoreFormArr_cur.push(
                 this.fb.group({ name: [languages[index].slug], value: '' })
               );
             }
-          }
+          
 
           
           
@@ -1221,6 +1221,12 @@ export class CreateNewCourseComponent implements OnInit {
         }
       }
     }
+    if (!titlearray.includes("english")) {
+      titlearray.push({
+        'english':
+          commonformObj.value.title_single,
+      });
+    }
     commonformObj.value.title = titlearray;
 
     if (this.learningType != "6") {
@@ -1254,45 +1260,74 @@ export class CreateNewCourseComponent implements OnInit {
           }
         }
       }
+      if (!descriptionarray.includes("english")) {
+        descriptionarray.push({
+          'english':
+            commonformObj.value.description_single,
+        });
+      }
+      if (!objectivearray.includes("english")) {
+        objectivearray.push({
+          'english':
+            commonformObj.value.objective_single,
+        });
+      }
       commonformObj.value.description = descriptionarray;
       commonformObj.value.objective = objectivearray;
     }
     
     
 
-    if (this.learningType == "1") {
-      for (let i = 0; i < this.iltandViltForm.value.forWhomArr.length; i++) {
-        if (this.iltandViltForm.value.forWhomArr[i].value != '') {
-          for_whomarray.push({
-            [`${this.iltandViltForm.value.forWhomArr[i].name}`]:
-              this.iltandViltForm.value.forWhomArr[i].value,
-          });
-        } else {
-          if (this.iltandViltForm.value.forWhomArr[i].slug == this.lang) {
+    if (this.learningType == "1" || this.learningType=="4") {
+      for (let i = 0; i < formObj.value.forWhomArr.length; i++) {
+        if (formObj.value.forWhomArr[i].value != '') {
+          
+          
+          
             for_whomarray.push({
-              [`${this.iltandViltForm.value.forWhomArr[i].name}`]:
-                this.iltandViltForm.value.for_whoom_single,
+              [`${formObj.value.forWhomArr[i].name}`]:
+                formObj.value.forWhomArr[i].value,
             });
-          }
-        }
-      }
-      for (let i = 0; i < this.iltandViltForm.value.learnMoreArr.length; i++) {
-        if (this.iltandViltForm.value.learnMoreArr[i].value != '') {
-          learn_morearray.push({
-            [`${this.iltandViltForm.value.learnMoreArr[i].name}`]:
-              this.iltandViltForm.value.learnMoreArr[i].value,
-          });
+          
         } else {
-          if (this.iltandViltForm.value.learnMoreArr[i].slug == this.lang) {
-            learn_morearray.push({
-              [`${this.iltandViltForm.value.learnMoreArr[i].name}`]:
-                this.iltandViltForm.value.learn_more_single,
+          if (formObj.value.forWhomArr[i].slug == this.lang) {
+            for_whomarray.push({
+              [`${formObj.value.forWhomArr[i].name}`]:
+                formObj.value.for_whoom_single,
             });
           }
         }
       }
-      this.iltandViltForm.value.for_whoom = for_whomarray;
-      this.iltandViltForm.value.learn_more = learn_morearray;
+      for (let i = 0; i < formObj.value.learnMoreArr.length; i++) {
+        if (formObj.value.learnMoreArr[i].value != '') {
+            learn_morearray.push({
+              [`${formObj.value.learnMoreArr[i].name}`]:
+                formObj.value.learnMoreArr[i].value,
+            });
+          
+        } else {
+          if (formObj.value.learnMoreArr[i].slug == this.lang) {
+            learn_morearray.push({
+              [`${formObj.value.learnMoreArr[i].name}`]:
+                formObj.value.learn_more_single,
+            });
+          }
+        }
+      }
+      if (!for_whomarray.includes("english")) {
+        for_whomarray.push({
+          'english':
+            formObj.value.for_whoom_single,
+        });
+      }
+      if (!learn_morearray.includes("english")) {
+        learn_morearray.push({
+          'english':
+            formObj.value.learn_more_single,
+        });
+      }
+      formObj.value.for_whoom = for_whomarray;
+      formObj.value.learn_more = learn_morearray;
     }
     //let otherdata = {
     //  title: titlearray,
@@ -1543,7 +1578,7 @@ export class CreateNewCourseComponent implements OnInit {
       this.materialbasedForm.get('url')?.clearValidators();
     }
   }
-
+  
   get_learningType(event: any) {
     console.log(event.target.value);
     this.learningType = event.target.value;
