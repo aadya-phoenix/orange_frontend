@@ -78,7 +78,7 @@ export class ViewCourseDetailsComponent implements OnInit {
   }
 
   updateCource(){
-    this.router.navigateByUrl('/dashboard/cources/edit-cource',{state:this.routegetdata})
+    this.router.navigateByUrl('/dashboard/cources/create-cource',{state:this.routegetdata})
   }
   ngOnInit(): void {
     console.log(this.routegetdata);
