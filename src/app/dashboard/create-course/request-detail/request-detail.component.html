@@ -120,7 +120,7 @@
                 <img src="../../../../assets/images/reject.png " />Reject
               </button>
             </div>
-            <div class="Requs_btn_inl-child1" *ngIf="getUserrole.id == 3 && status != 'publish'">
+            <div class="Requs_btn_inl-child1">
               <button
                 type="button"
                 class="btn btn-primary btn_requst ml-2"
@@ -136,7 +136,7 @@
         </div>
         <!--colensd-->
       </div>
-
+      <!--<form [formGroup]="commonCreateCourceForm">-->
       <div class="row">
         <div class="col-md-12">
           <div class="card">
@@ -147,7 +147,7 @@
                       <div class="form-group">
 <label for="exampleInputEmail1">Learning Type</label>
 <input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
-                            routegetdata.learning_type_name
+                            routegetdata.learning_type_name 
                               ? routegetdata.learning_type_name
                               : routegetdata.learning_type
                           }}">
@@ -175,81 +175,90 @@
                 <div class="row">
                   <div class="col-sm-4">
                     <div class="form-group">
-<label for="exampleInputEmail1">Request Number</label>
-<input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
+                      <label for="exampleInputEmail1">Request Number</label>
+                      <input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
                           routegetdata.request_id
                         }}">
-</div>
-                    
+                    </div>
+
                   </div>
                   <!--cole dn-->
                   <div class="col-sm-4">
                     <div class="form-group">
-<label for="exampleInputEmail1">Requester Name</label>
-<input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
+                      <label for="exampleInputEmail1">Requester Name</label>
+                      <input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
                             routegetdata.user_name
                               ? routegetdata.user_name
                               : routegetdata.user_id
                           }}">
-</div>
-                    
+                    </div>
+
                   </div>
                   <!--cole dn-->
-               
-               
+
+
                   <div class="col-sm-4">
-                      <div class="form-group">
-<label for="exampleInputEmail1">Title</label>
-<span class="form-control form_width" id="exampleInputEmail1" disabled >{{
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Title</label>
+                      <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                        {{
                             routegetdata.titleByLang
                               ? (routegetdata.titleByLang | titlecase)
                               : "-"
-                          }}</span>
+                        }}
+                      </span>
                     </div>
 
-                </div>
-                <!--cole dn-->
-                <div class="col-sm-4">
+                  </div>
+                  <!--cole dn-->
+                  <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Training Provided By</label>
-                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.training_provided_by }}</span>
+                      <label for="exampleInputEmail1">Training Provided By</label>
+                      <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.training_provided_by }}</span>
                     </div>
 
-                </div>
-                <!--cole dn-->
-                <div class="col-sm-4">
+                  </div>
+                  <!--cole dn-->
+                  <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Training Duration</label>
-                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.duration }}</span>
+                      <label for="exampleInputEmail1">Training Duration</label>
+                      <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.duration }}</span>
                     </div>
 
-                </div>
-                <!--cole dn-->
+                  </div>
+                  <!--cole dn-->
 
-                <div class="col-sm-4">
+                  <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Description</label>
-                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.descriptionByLang }}</span>
+                      <label for="exampleInputEmail1">Description</label>
+                      <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.descriptionByLang }}</span>
                     </div>
 
-                </div>
-                <!--cole dn-->
-                <div class="col-sm-4">
+                  </div>
+                  <!--cole dn-->
+                  <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Objective</label>
-                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.objectiveByLang }}</span>
+                      <label for="exampleInputEmail1">Objective</label>
+                      <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.objectiveByLang }}</span>
                     </div>
 
-                </div>
-                <!--cole dn-->
-                <div class="col-sm-4">
+                  </div>
+                  <!--cole dn-->
+                  <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Subject</label>
-                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.subject_name }}</span>
+                      <label for="exampleInputEmail1">Subject</label>
+                      <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.subject_name }}</span>
                     </div>
 
+                  </div>
+                  <!--cole dn-->
+                  <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Keywords</label>
+                    <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.keyword }}</span>
+                  </div>
+
                 </div>
-                <!--cole dn-->
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Available Language</label>
@@ -475,6 +484,7 @@
 </div>
 </div>
 </div>
+      <!--</form>-->
 <!-- .animated -->
 </div>
 <!-- .content -->
