@@ -76,7 +76,7 @@
 
   <div class="content">
     <div class="animated fadeIn">
-      <div class="card" *ngIf="getUserrole.id != 2 && !routegetdata.issave">
+      <div class="card" *ngIf="getUserrole.id != 2 && !routegetdata.issave  && showbuttons=='true'">
         <div class="card-body">
           <div class="Requs_btn_inl">
             <div class="Requs_btn_inl-child">
@@ -85,7 +85,7 @@
                 class="btn btn-primary btn_requst ml-2"
                 data-toggle="modal"
                 data-target="#publishModal"
-                *ngIf="getUserrole.id == 4"
+                *ngIf="getUserrole.id == 4 && status != 'publish'"
               >
                 <img src="../../../../assets/images/publish.png " />Publish
               </button>
@@ -95,7 +95,7 @@
                 class="btn btn-primary btn_requst ml-2"
                 data-toggle="modal"
                 data-target="#exampleModal"
-                *ngIf="getUserrole.id == 3"
+                *ngIf="getUserrole.id == 3 && status != 'publish'"
                 (click)="getPublisher()"
               >
                 <img src="../../../../assets/images/publish.png " /> Transfer to
@@ -105,6 +105,7 @@
               <button
                 class="btn btn-primary btn_requst ml-2"
                 (click)="updateCource()"
+                *ngIf="status != 'publish'"
               >
                 <img src="../../../../assets/images/update.png " />Update
               </button>
@@ -113,13 +114,13 @@
                 class="btn btn-primary btn_requst ml-2"
                 data-toggle="modal"
                 data-target="#rejectModal"
-                *ngIf="getUserrole.id == 3 || getUserrole.id == 4"
+                *ngIf="(getUserrole.id == 3 || getUserrole.id == 4) && status != 'publish'"
                 (click)="getPublisher()"
               >
                 <img src="../../../../assets/images/reject.png " />Reject
               </button>
             </div>
-            <div class="Requs_btn_inl-child1" *ngIf="getUserrole.id == 3">
+            <div class="Requs_btn_inl-child1" *ngIf="getUserrole.id == 3 && status != 'publish'">
               <button
                 type="button"
                 class="btn btn-primary btn_requst ml-2"
@@ -198,7 +199,7 @@
                
                   <div class="col-sm-4">
                       <div class="form-group">
-<label for="exampleInputEmail1">Title one</label>
+<label for="exampleInputEmail1">Title</label>
 <span class="form-control form_width" id="exampleInputEmail1" disabled >{{
                             routegetdata.titleByLang
                               ? (routegetdata.titleByLang | titlecase)
@@ -487,18 +488,19 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="form-group">
-                            <label>Transfer to Publisher</label>
-                            <select name="select " id="select " class="form-control" (change)="getPublisherselected($event)">
-                  <option value="0 ">Please select</option>
-                  <option
-                    *ngFor="let publisher of publisherList"
-                    [value]="publisher.id"
-                  >
-                    {{ publisher.first_name }}
-                  </option>
-                </select>
-                        </div>
+                      <div class="form-group">
+                        <label>Transfer to Publisher</label>
+                        <select name="select " id="select " class="form-control" (change)="getPublisherselected($event)">
+    <option value="0 ">Please select</option>
+    <option
+      *ngFor="let publisher of publisherList"
+      [value]="publisher.id"
+    >
+      {{ publisher.first_name }}
+    </option>
+  </select>
+                        
+                      </div>
                     </div>
                     <!--col end-->
                 </div>
@@ -556,25 +558,31 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="form-group">
-                            <label>Regional Operation Coordinator</label>
-                            <select class="form-control form_width" (change)="getRoc($event)">
-                  <option value=" ">Please select any</option>
-                  <option
-                    *ngFor="let otherroc of otherRocsList"
-                    [value]="otherroc.id"
-                  >
-                    {{ otherroc.first_name }}
-                  </option>
-                  <!-- <option>Asia Pacific</option> -->
-                  <!-- <option
-                  *ngFor="let vendor of vendorType "
-                  [value]="vendor.vendor_name "
-                >
-                  {{ vendor.name }}
-                </option> -->
-                </select>
-                        </div>
+                      <div class="form-group">
+                        <label>Regional Operation Coordinator</label>
+                        <!--<select class="form-control form_width" (change)="getRoc($event)">
+  <option value=" ">Please select any</option>
+  <option
+    *ngFor="let otherroc of otherRocsList"
+    [value]="otherroc.id"
+  >
+    {{ otherroc.first_name }}
+  </option>-->
+                        <!-- <option>Asia Pacific</option> -->
+                        <!-- <option
+    *ngFor="let vendor of vendorType "
+    [value]="vendor.vendor_name "
+  >
+    {{ vendor.name }}
+  </option> -->
+                        <!--</select>-->
+                        <select class="form-control form_width" (change)="getRoc($event)">
+                          <option value="">Regional Operation Coordinator</option>
+                          <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">
+                            {{ cordinator?.name }}
+                          </option>
+                        </select>
+                      </div>
                     </div>
                     <!--col end-->
                 </div>
