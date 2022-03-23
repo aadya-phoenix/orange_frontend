@@ -365,7 +365,7 @@
                             </a>
                           </label>
                           <div class="upload_field">
-                            <input type="file" id="exampleInputFile" formControlName="resource" class="upload_css" (change)="handleFileInput($event.target.files)" />
+                            <input type="file" id="exampleInputFile" formControlName="resource" class="upload_css" (change)="handleFileInput($event)" />
                           </div>
                           <div *ngIf="fileToUpload" style="margin-left:15px;">
                             <ul>
@@ -966,7 +966,7 @@
                           <textarea class="form-control form_width-textarea w-100" rows="3" placeholder="Enter Learner Guidelines Description" formControlName="description"></textarea>
                         </td>
                         <td>
-                          <button class="btn btn-success mr-2 mb-1" (click)="addLearnerGuideline()">
+                          <button class="btn btn-success mr-2 mb-1" (click)="addLearnerGuideline('','')">
                             +
                           </button>
                           <button class="btn btn-danger" *ngIf="i > 0" (click)="removeLearnerGuideline(i)">
@@ -1344,7 +1344,7 @@
                           <textarea class="form-control form_width-textarea w-100" rows="3" placeholder="Enter Learner Guidelines Description" formControlName="description"></textarea>
                         </td>
                         <td>
-                          <button class="btn btn-success mr-2 mb-1" (click)="addLearnerGuidelinetocurriculum()">
+                          <button class="btn btn-success mr-2 mb-1" (click)="addLearnerGuidelinetocurriculum('','')">
                             +
                           </button>
                           <button class="btn btn-danger" *ngIf="i > 0" (click)="removeLearnerGuidelinetocurriculum(i)">
@@ -1492,7 +1492,7 @@
                           </a>
                         </label>
                         <div class="upload_field">
-                          <input type="file" id="exampleInputFile" formControlName="material_source" (change)="handleFileInput_Material($event.target.files)"  style="width: 77%" />
+                          <input type="file" id="exampleInputFile" formControlName="material_source" (change)="handleFileInput_Material($event)"  style="width: 77%" />
                         </div>
                         <div *ngIf="fileToUpload_Material" style="margin-left:15px;">
                           <ul>
