@@ -21,7 +21,9 @@ export class CoursesComponent implements OnInit {
   collectionSize: any;
   searchText: any;
   draftRequests:any =[];
-  pendingRequests:any=[];
+  pendingRequests: any = [];
+  transferredRequests: any = [];
+  showbuttons: any;
   usersubmitRequests:any=[];
   rejectedRequests:any=[];
   closedRequests:any=[];
@@ -102,6 +104,7 @@ export class CoursesComponent implements OnInit {
 
   getrecords(data:any){
     this.courcesList = data;
+    console.log(this.courcesList)
   }
 
   refreshCourses() {
@@ -124,24 +127,48 @@ export class CoursesComponent implements OnInit {
 			this.coursedata[this.i]['titleByLang'] = this.courceService.getTText(this.coursedata[this.i]['title']);
             if (this.coursedata[this.i].request_id != "" && this.coursedata[this.i].request_id != null) {
               this.courcesList[this.j] = this.coursedata[this.i]
-
-              if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
-                this.pendingRequests.push(this.coursedata[this.i])
+              if (this.getUserrole.id == 3) {
+                if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].transfer_user_id == null && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
+                  this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order +"#"+"true";
+                  this.pendingRequests.push(this.coursedata[this.i])
+                  this.showbuttons = true;
+                }
+                if ((this.coursedata[this.i].status === 'pending') && this.coursedata[this.i].transfer_user_id != null && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
+                  this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order + "#" + "false";
+                  this.transferredRequests.push(this.coursedata[this.i])                  
+                }
+              }
+              else {
+                if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
+                  this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order + "#" + "true";
+                  this.pendingRequests.push(this.coursedata[this.i])
+                  this.showbuttons = true;
+                }
               }
               if (this.coursedata[this.i].status === 'pending') {
+                this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order + "#" + "true";
                 this.usersubmitRequests.push(this.coursedata[this.i])
+                //this.showbuttons = false;
               }
               if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].user_id == this.getprofileDetails.data.id) {
+                this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order + "#" + "false";
                 this.submittedRequests.push(this.coursedata[this.i])
+                this.showbuttons = false;
               }
               if (this.coursedata[this.i].status === 'reject') {
+                this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order + "#" + "true";
                 this.rejectedRequests.push(this.coursedata[this.i])
+                this.showbuttons = true;
               }
               if (this.coursedata[this.i].status === 'draft') {
+                this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order + "#" + "false";
                 this.draftRequests.push(this.coursedata[this.i])
+                this.showbuttons = false;
               }
               if (this.coursedata[this.i].status === 'publish') {
+                this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order + "#" + "false";
                 this.closedRequests.push(this.coursedata[this.i])
+                this.showbuttons = false;
               }
 
               this.j = this.j + 1;
@@ -192,7 +219,7 @@ export class CoursesComponent implements OnInit {
     this.courceService.courseDetail(cource.id).subscribe((res:any)=>{
       console.log(res);
       let coursedetail = res.data;
-      let username =  { user_name : cource.user_name}
+      let username = { user_name: cource.user_name, showbuttons: cource.purchase_order }
       this.router.navigateByUrl('/dashboard/cources/request-detail', {
         state: {...coursedetail,...username},
       });
@@ -204,7 +231,7 @@ export class CoursesComponent implements OnInit {
   }
 
   editRequest(course:any){
-    this.router.navigateByUrl('/dashboard/cources/edit-cource', {
+    this.router.navigateByUrl('/dashboard/cources/create-cource', {
       state: course,
     });
     console.log(course)

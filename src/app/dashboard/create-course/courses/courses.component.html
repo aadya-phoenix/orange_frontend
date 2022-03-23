@@ -72,99 +72,111 @@
                     </div>
                 </div>
                 <div class="card-body card_course_body">
-                    <div class="Course_icon_parent" data-aos="fade-right">
-                        <div class="Course_icon_child">
-                            <div class="alig_dashicon" (click)="getrecords(draftRequests)">
-                                <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #4bb4e6">
-                                        <img src="../../../../assets/images/icon/drafts.png" />
-                                    </div>
+                  <div class="Course_icon_parent" data-aos="fade-right">
+                    <div class="Course_icon_child">
+                      <div class="alig_dashicon" (click)="getrecords(draftRequests)">
+                        <div class="sub-child-dashicon">
+                          <div class="fa-icons-des" style="background-color: #4bb4e6">
+                            <img src="../../../../assets/images/icon/drafts.png" />
+                          </div>
 
-                                    <p>Draft</p>
-                                </div>
-                                <span class="number_css">{{draftRequests && draftRequests.length ? draftRequests.length : '0' }}</span>
-                            </div>
+                          <p>Draft</p>
                         </div>
-                        <!--coled-->
-                        <div class="Course_icon_child" *ngIf="getUserrole.id == 2">
-                            <div class="alig_dashicon" (click)="getrecords(usersubmitRequests)">
-                                <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #a885db">
-                                        <img src="../../../../assets/images/icon/closed.png" />
-                                    </div>
-
-                                    <p>Submitted</p>
-                                </div>
-                                <span class="number_css">{{usersubmitRequests && usersubmitRequests.length ? usersubmitRequests.length : '0'}}</span>
-                            </div>
-                        </div>
-
-                        <div class="Course_icon_child" *ngIf="getUserrole.id != 2">
-                            <div class="alig_dashicon" (click)="getrecords(submittedRequests)">
-                                <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #a885db">
-                                        <img src="../../../../assets/images/icon/closed.png" />
-                                    </div>
-
-                                    <p>Submitted</p>
-                                </div>
-                                <span class="number_css">{{submittedRequests && submittedRequests.length ? submittedRequests.length : '0'}}</span>
-                            </div>
-                        </div>
-                        <!--coled-->
-                        <div class="Course_icon_child" *ngIf="getUserrole.id != 2">
-                            <div class="alig_dashicon" (click)="getrecords(pendingRequests)">
-                                <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #ffd200">
-                                        <img src="../../../../assets/images/icon/pending.png" />
-                                    </div>
-
-                                    <p>Pending</p>
-                                </div>
-                                <span class="number_css">{{pendingRequests && pendingRequests.length ? pendingRequests.length : '0'}}</span>
-                            </div>
-                        </div>
-                        <!--coled-->
-                        <div class="Course_icon_child">
-                            <div class="alig_dashicon" (click)="getrecords(closedRequests)">
-                                <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #50be87">
-                                        <img src="../../../../assets/images/icon/check.png" />
-                                    </div>
-
-                                    <p>Closed</p>
-                                </div>
-                                <span class="number_css">{{closedRequests && closedRequests.length ? closedRequests.length : '0'}}</span>
-                            </div>
-                        </div>
-                        <!--coled-->
-                        <div class="Course_icon_child">
-                            <div class="alig_dashicon" (click)="getrecords(rejectedRequests)">
-                                <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #ffb4e6">
-                                        <img src="../../../../assets/images/icon/reject.png" />
-                                    </div>
-
-                                    <p>Rejected</p>
-                                </div>
-                                <span class="number_css">{{rejectedRequests && rejectedRequests.length ? rejectedRequests.length : '0'}}</span>
-                            </div>
-                        </div>
-                        <!--coled-->
-                        <div class="Course_icon_child">
-                            <div class="alig_dashicon" (click)="getrecords(allCourses)">
-                                <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #085ebd">
-                                        <img src="../../../../assets/images/icon/viewall.png" />
-                                    </div>
-
-                                    <p>View All</p>
-                                </div>
-                                <span class="number_css">{{allCourses && allCourses.length ? allCourses.length : '0' }}</span>
-                            </div>
-                        </div>
-                        <!--coled-->
+                        <span class="number_css">{{draftRequests && draftRequests.length ? draftRequests.length : '0' }}</span>
+                      </div>
                     </div>
+                    <!--coled-->
+                    <div class="Course_icon_child" *ngIf="getUserrole.id == 2">
+                      <div class="alig_dashicon" (click)="getrecords(usersubmitRequests)">
+                        <div class="sub-child-dashicon">
+                          <div class="fa-icons-des" style="background-color: #a885db">
+                            <img src="../../../../assets/images/icon/closed.png" />
+                          </div>
+
+                          <p>Submitted</p>
+                        </div>
+                        <span class="number_css">{{usersubmitRequests && usersubmitRequests.length ? usersubmitRequests.length : '0'}}</span>
+                      </div>
+                    </div>
+
+                    <div class="Course_icon_child" *ngIf="getUserrole.id != 2">
+                      <div class="alig_dashicon" (click)="getrecords(submittedRequests)">
+                        <div class="sub-child-dashicon">
+                          <div class="fa-icons-des" style="background-color: #a885db">
+                            <img src="../../../../assets/images/icon/closed.png" />
+                          </div>
+
+                          <p>Submitted</p>
+                        </div>
+                        <span class="number_css">{{submittedRequests && submittedRequests.length ? submittedRequests.length : '0'}}</span>
+                      </div>
+                    </div>
+                    <!--coled-->
+                    <div class="Course_icon_child" *ngIf="getUserrole.id != 2">
+                      <div class="alig_dashicon" (click)="getrecords(pendingRequests)">
+                        <div class="sub-child-dashicon">
+                          <div class="fa-icons-des" style="background-color: #ffd200">
+                            <img src="../../../../assets/images/icon/pending.png" />
+                          </div>
+
+                          <p>Pending</p>
+                        </div>
+                        <span class="number_css">{{pendingRequests && pendingRequests.length ? pendingRequests.length : '0'}}</span>
+                      </div>
+                    </div>
+                    <div class="Course_icon_child" *ngIf="getUserrole.id == 3">
+                      <div class="alig_dashicon" (click)="getrecords(transferredRequests)">
+                        <div class="sub-child-dashicon">
+                          <div class="fa-icons-des" style="background-color: #ffd200">
+                            <img src="../../../../assets/images/icon/pending.png" />
+                          </div>
+
+                          <p>Transferred</p>
+                        </div>
+                        <span class="number_css">{{transferredRequests && transferredRequests.length ? transferredRequests.length : '0'}}</span>
+                      </div>
+                    </div>
+                    <!--coled-->
+                    <div class="Course_icon_child">
+                      <div class="alig_dashicon" (click)="getrecords(closedRequests)">
+                        <div class="sub-child-dashicon">
+                          <div class="fa-icons-des" style="background-color: #50be87">
+                            <img src="../../../../assets/images/icon/check.png" />
+                          </div>
+
+                          <p>Closed</p>
+                        </div>
+                        <span class="number_css">{{closedRequests && closedRequests.length ? closedRequests.length : '0'}}</span>
+                      </div>
+                    </div>
+                    <!--coled-->
+                    <div class="Course_icon_child">
+                      <div class="alig_dashicon" (click)="getrecords(rejectedRequests)">
+                        <div class="sub-child-dashicon">
+                          <div class="fa-icons-des" style="background-color: #ffb4e6">
+                            <img src="../../../../assets/images/icon/reject.png" />
+                          </div>
+
+                          <p>Rejected</p>
+                        </div>
+                        <span class="number_css">{{rejectedRequests && rejectedRequests.length ? rejectedRequests.length : '0'}}</span>
+                      </div>
+                    </div>
+                    <!--coled-->
+                    <div class="Course_icon_child">
+                      <div class="alig_dashicon" (click)="getrecords(allCourses)">
+                        <div class="sub-child-dashicon">
+                          <div class="fa-icons-des" style="background-color: #085ebd">
+                            <img src="../../../../assets/images/icon/viewall.png" />
+                          </div>
+
+                          <p>View All</p>
+                        </div>
+                        <span class="number_css">{{allCourses && allCourses.length ? allCourses.length : '0' }}</span>
+                      </div>
+                    </div>
+                    <!--coled-->
+                  </div>
                     <!--ROW END-->
                 </div>
 
@@ -276,7 +288,7 @@
                                             {{ cource.learning_type_name ? cource.learning_type_name : "- " }}
                                         </td>
                                         <td (click)="getRequest(cource)">
-                                            {{cource && cource.transfer_user_id ? cource.transfer_user_name : '-'}}
+                                          {{cource && cource.transfer_user_name ? cource.transfer_user_name : '-'}}
                                         </td>
                                          
                                         <td (click)="getRequest(cource)">{{ cource.created_at | date: "short" }}</td>
@@ -289,7 +301,7 @@
                       ></i>
                     </td> -->
                      <td>
-                                           <a *ngIf="cource.status=='pending' || cource.status=='closed' || cource.status=='reject'" (click)="openModal(cource)" class="re_id">
+                                           <a *ngIf="cource.status=='pending' || cource.status=='publish' || cource.status=='reject'" (click)="openModal(cource)" class="re_id">
                                                  View
                                                 </a></td> 
                                         <td class="text-center">
@@ -521,11 +533,11 @@
                     <td (click)="getRequest(course)">
                       {{ course.learning_type_name ? course.learning_type_name : "- " }}
                     </td>
-                    <td (click)="getRequest(course)">{{course && course.transfer_user_id ? course.transfer_user_name : '-'}}</td>
+                    <td (click)="getRequest(course)">{{course && course.transfer_user_name ? course.transfer_user_name : '-'}}</td>
                     <td (click)="getRequest(course)">{{ course.created_at | date: "short" }}</td>
                     <td (click)="getRequest(course)">{{ course.updated_at | date: "short" }}</td>
                      <td >
-                        <a *ngIf="course.status=='pending' || course.status=='closed' || course.status=='reject'" (click)="openModal(course)" class="re_id">
+                        <a *ngIf="course.status=='pending' || course.status=='publish' || course.status=='reject'" (click)="openModal(course)" class="re_id">
                                      View
                                   </a></td>
                     <td  class="text-center">
