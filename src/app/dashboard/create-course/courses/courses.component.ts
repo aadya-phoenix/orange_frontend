@@ -31,7 +31,10 @@ export class CoursesComponent implements OnInit {
   allCourses:any;
   routegetdata:any;
   getprofileDetails: any;
-  coursedata: any=[];
+  coursedata: any = [];
+  allcoursedataroc: any = [];
+  allcoursedatapub: any = [];
+  allcoursedatareq: any = [];
   i: number = 0;
   j: number = 0;
   public compare = (v1: string | number, v2: string | number) =>
@@ -131,50 +134,80 @@ export class CoursesComponent implements OnInit {
                 if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].transfer_user_id == null && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
                   this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order +"#"+"true";
                   this.pendingRequests.push(this.coursedata[this.i])
+                  this.allcoursedataroc.push(this.coursedata[this.i])
                   this.showbuttons = true;
                 }
                 if ((this.coursedata[this.i].status === 'pending') && this.coursedata[this.i].transfer_user_id != null && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
                   this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order + "#" + "false";
-                  this.transferredRequests.push(this.coursedata[this.i])                  
+                  this.transferredRequests.push(this.coursedata[this.i])
+                  this.allcoursedataroc.push(this.coursedata[this.i])
                 }
               }
               else {
                 if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
                   this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order + "#" + "true";
                   this.pendingRequests.push(this.coursedata[this.i])
+                  //this.allcoursedatareq.push(this.coursedata[this.i])
+                  this.allcoursedatapub.push(this.coursedata[this.i])
                   this.showbuttons = true;
                 }
               }
               if (this.coursedata[this.i].status === 'pending') {
                 this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order + "#" + "true";
                 this.usersubmitRequests.push(this.coursedata[this.i])
+                //this.allcoursedataroc.push(this.coursedata[this.i])
+                //this.allcoursedatareq.push(this.coursedata[this.i])
+                //this.allcoursedatapub.push(this.coursedata[this.i])
                 //this.showbuttons = false;
               }
               if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].user_id == this.getprofileDetails.data.id) {
                 this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order + "#" + "false";
                 this.submittedRequests.push(this.coursedata[this.i])
+                this.allcoursedataroc.push(this.coursedata[this.i])
+                this.allcoursedatareq.push(this.coursedata[this.i])
+                this.allcoursedatapub.push(this.coursedata[this.i])
                 this.showbuttons = false;
               }
               if (this.coursedata[this.i].status === 'reject') {
                 this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order + "#" + "true";
                 this.rejectedRequests.push(this.coursedata[this.i])
-                this.showbuttons = true;
+                this.allcoursedataroc.push(this.coursedata[this.i])
+                this.allcoursedatareq.push(this.coursedata[this.i])
+                this.allcoursedatapub.push(this.coursedata[this.i])
+                this.showbuttons = true;  
               }
-              if (this.coursedata[this.i].status === 'draft') {
+              if (this.coursedata[this.i].status === 'draft' && this.coursedata[this.i].user_id == this.getprofileDetails.data.id) {
                 this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order + "#" + "false";
                 this.draftRequests.push(this.coursedata[this.i])
+                this.allcoursedataroc.push(this.coursedata[this.i])
+                this.allcoursedatareq.push(this.coursedata[this.i])
+                this.allcoursedatapub.push(this.coursedata[this.i])
                 this.showbuttons = false;
               }
               if (this.coursedata[this.i].status === 'publish') {
                 this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order + "#" + "false";
                 this.closedRequests.push(this.coursedata[this.i])
+                this.allcoursedataroc.push(this.coursedata[this.i])
+                this.allcoursedatareq.push(this.coursedata[this.i])
+                this.allcoursedatapub.push(this.coursedata[this.i])
                 this.showbuttons = false;
               }
 
               this.j = this.j + 1;
             }
           }
-          this.allCourses = this.courcesList;
+          if (this.getUserrole.id == 3) {
+            this.allCourses = this.allcoursedataroc;
+          }
+          else if (this.getUserrole.id == 2) {
+            this.allCourses = this.courcesList;
+          }
+          else if (this.getUserrole.id == 4) {
+            this.allCourses = this.allcoursedatapub;
+          }
+          //let course = this.courcesList;
+          //this.courcesList = course.filter((d: any) => d.user_id == this.getprofileDetails.data.id || );
+          //this.allCourses = this.allcoursedata;
           console.log(this.allCourses);
           if( this.routegetdata && this.routegetdata.status){
             console.log('this.routegetdata',this.routegetdata)

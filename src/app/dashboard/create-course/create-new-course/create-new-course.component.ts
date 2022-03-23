@@ -1257,41 +1257,38 @@ export class CreateNewCourseComponent implements OnInit {
   get curriculumArray() {
     return this.currriculum.learner_guideline as FormArray;
   }
-
   bindarraydata() {
     if (this.routergetdata.learning_type == '6') {
-      this.commonCreateCourceForm_playlist
-        .get('title_single')
-        .setValue(
-          this.commonCreateCourceForm_playlist.get('title_single').value
-        );
+      let ctrl1 = this.commonCreateCourceForm_playlist.get(
+        'title_single'
+      ) as FormControl;
+      ctrl1.setValue(ctrl1.value);
     } else {
-      this.commonCreateCourceForm
-        .get('title_single')
-        .setValue(this.commonCreateCourceForm.get('title_single').value);
-      this.commonCreateCourceForm
-        .get('description_single')
-        .setValue(this.commonCreateCourceForm.get('description_single').value);
-      this.commonCreateCourceForm
-        .get('objective_single')
-        .setValue(this.commonCreateCourceForm.get('objective_single').value);
+      let ctrl1 = this.commonCreateCourceForm.get(
+        'title_single'
+      ) as FormControl;
+      let ctrl2 = this.commonCreateCourceForm.get(
+        'description_single'
+      ) as FormControl;
+      let ctrl3 = this.commonCreateCourceForm.get(
+        'objective_single'
+      ) as FormControl;
+      ctrl1.setValue(ctrl1.value);
+      ctrl2.setValue(ctrl2.value);
+      ctrl3.setValue(ctrl3.value);
     }
 
     if (this.routergetdata.learning_type == '1') {
-      this.iltandViltForm
-        .get('for_whoom_single')
-        .setValue(this.iltandViltForm.get('for_whoom_single').value);
-      this.iltandViltForm
-        .get('learn_more_single')
-        .setValue(this.iltandViltForm.get('learn_more_single').value);
+      let ctrl1 = this.iltandViltForm.get('for_whoom_single') as FormControl;
+      let ctrl2 = this.iltandViltForm.get('learn_more_single') as FormControl;
+      ctrl1.setValue(ctrl1.value);
+      ctrl2.setValue(ctrl2.value);
     }
     if (this.routergetdata.learning_type == '4') {
-      this.currriculumForm
-        .get('for_whoom_single')
-        .setValue(this.currriculumForm.get('for_whoom_single').value);
-      this.currriculumForm
-        .get('learn_more_single')
-        .setValue(this.currriculumForm.get('learn_more_single').value);
+      let ctrl1 = this.currriculumForm.get('for_whoom_single') as FormControl;
+      let ctrl2 = this.currriculumForm.get('learn_more_single') as FormControl;
+      ctrl1.setValue(ctrl1.value);
+      ctrl2.setValue(ctrl2.value);
     }
   }
   addtitlemultilanguage(formObj: FormGroup): any {
@@ -1950,7 +1947,8 @@ export class CreateNewCourseComponent implements OnInit {
   }
   numbersOnly(val: any) {
     console.log(val.key);
-    let y = this.commonCreateCourceForm.get('duration').value;
+    let ctrl = this.commonCreateCourceForm.get('duration') as FormControl;
+    let y = ctrl.value;
     y = y.replace(/\D/g, '');
     console.log(y);
     if (y.length == 3 && val.key > 6) {
@@ -1970,7 +1968,6 @@ export class CreateNewCourseComponent implements OnInit {
     } else {
       var durationObj1 = { duration: y };
       this.commonCreateCourceForm.patchValue(durationObj1);
-      this.commonCreateCourceForm.get('duration').value = durationObj1;
     }
     if (y > 2400) {
       var durationObj2 = { duration: '' };
@@ -1983,10 +1980,10 @@ export class CreateNewCourseComponent implements OnInit {
     fieldArr: string,
     setdata: any
   ) {
-    console.log(formObj.get(fieldName));    
-    this.formCtrlSub = formObj
-      .get(fieldName)
-      .valueChanges.debounceTime(500)
+    console.log(formObj.get(fieldName));
+    let ctrl = formObj.get(fieldName) as FormControl;
+    this.formCtrlSub = ctrl.valueChanges
+      .debounceTime(500)
       .subscribe(($data: any) => {
         var fdata = formObj.value;
         if (fdata[fieldName] != '') {
@@ -2006,9 +2003,9 @@ export class CreateNewCourseComponent implements OnInit {
       });
   }
   languageValueSet_new(formObj: FormGroup, fieldName: string, fieldArr: any) {
-    this.formCtrlSub = formObj
-      .get(fieldName)
-      .valueChanges.debounceTime(500)
+    let ctrl = formObj.get(fieldName) as FormControl;
+    this.formCtrlSub = ctrl.valueChanges
+      .debounceTime(500)
       .subscribe(($data: any) => {
         var fdata = formObj.value;
         if (fdata[fieldName] != '') {
@@ -2087,17 +2084,16 @@ export class CreateNewCourseComponent implements OnInit {
         //pdata[fieldName] = "fgfgffhg";
         console.log(pdata);
         //this.cardImageBase64 = fileInput.target.files[0];
-        this.commonCreateCourceForm
-          .get('resource')
-          .setValue(fileInput.target.files[0]);
+        let ctrl = this.commonCreateCourceForm.get('resource') as FormControl;
+        ctrl.setValue(fileInput.target.files[0]);
         //this.commonCreateCourceForm.patchValue(pdata)
       };
 
       reader.readAsDataURL(fileInput.target.files[0]);
     }
   }
-  handleFileInput(files: FileList) {
-    this.FileConvertintoBytearray(files.item(0), async (f) => {
+  handleFileInput(event: any) {
+    this.FileConvertintoBytearray(event.target.files[0], async (f) => {
       // creating array bytes
 
       let objectdata: any = {
@@ -2108,8 +2104,8 @@ export class CreateNewCourseComponent implements OnInit {
       this.fileToUpload.push(objectdata);
     });
   }
-  handleFileInput_Material(files: FileList) {
-    this.FileConvertintoBytearray(files.item(0), async (f) => {
+  handleFileInput_Material(event: any) {
+    this.FileConvertintoBytearray(event.target.files[0], async (f) => {
       // creating array bytes
 
       let objectdata: any = {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class SetBackupComponent implements OnInit {
   userEmail:any;
   id:any;
   userid: any;
-  constructor(private courseService: CourcesService) { }
+  constructor(private courseService: CourcesService, private router: Router) { }
 
   ngOnInit(): void {
     this.courseService.getregionalCordinator().subscribe((res:any)=>{
@@ -62,7 +63,8 @@ export class SetBackupComponent implements OnInit {
       ...transferid
     }
     this.courseService.assignBackup(totalObj).subscribe((res:any)=>{
-      console.log("assign backup",res.data);
+      console.log("assign backup", res.data);
+      this.router.navigate(['/dashboard/cources']);
     },(err:any)=>{
       console.log(err);
     });
