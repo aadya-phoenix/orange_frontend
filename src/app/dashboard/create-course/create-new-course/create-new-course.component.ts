@@ -52,6 +52,7 @@ export class CreateNewCourseComponent implements OnInit {
   public learningType: any = '';
   public learningTypeSelected: any = '0';
   public selectedLanguages: any = [];
+  fieldArrObj: any= []
   public cctLevel: any;
   coursesList: any;
   courseLength: any;
@@ -292,7 +293,8 @@ export class CreateNewCourseComponent implements OnInit {
     private courceService: CourcesService,
     private router: Router,
     private authService: AuthenticationService
-  ) {    
+  ) {
+    
     this.getUserrole = this.authService.getRolefromlocal();
     //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
     this.lang = environment.lang;
@@ -321,7 +323,13 @@ export class CreateNewCourseComponent implements OnInit {
         };
         this.fileToUpload.push(objectdata);
       }
-
+      if (this.learningType == "3") {
+        let objectdata: any = {
+          fileName: this.routergetdata.material_source.split('/')[3],
+          url: 'https://orange.mindscroll.info/' + this.routergetdata.material_source
+        };
+        this.fileToUpload_Material.push(objectdata);
+      }
       //for (let l in learner_guide) {
       //  console.log(l[0])
       //  console.log(l[this.j][1])
@@ -666,7 +674,7 @@ export class CreateNewCourseComponent implements OnInit {
       this.languageValueSet_new(this.commonCreateCourceForm, 'objective_single', 'objectiveArr');
       this.formCtrlSub = this.commonCreateCourceForm.valueChanges
         .debounceTime(500)
-        .subscribe($durationx => {
+        .subscribe(($durationx: any) => {
           this.totalObjnew = {
             ...this.iltandViltForm.value,
             ...this.commonCreateCourceForm.value,
@@ -833,170 +841,178 @@ export class CreateNewCourseComponent implements OnInit {
     //console.log(this.commonCreateCourceForm.value);
 
     if (this.routergetdata != undefined) {
-      alert("1")
+      //alert("1")
       
-
+      //this.titlecontrol();
+      //this.titlecontrol_description();
       this.learningType = this.routergetdata.learning_type;
       if (this.learningType == "6") {
-        this.commonCreateCourceForm_playlist.patchValue(this.routergetdata, { emitEvent: false });
-        this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm_playlist, 'title', 'titleArr');
-        this.pushtoTitlearray(this.commonCreateCourceForm_playlist);
+        //alert("1");
+        setTimeout(() => {
+          this.bindarraydata();
+        }, 3000);
+        this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm_playlist, 'title', 'titleArr');        
         let setdata = JSON.parse(this.routergetdata.title);
         this.languageValueSet(this.commonCreateCourceForm_playlist, 'title_single', 'titleArr', setdata);
         this.formCtrlSub = this.commonCreateCourceForm_playlist.valueChanges
           //.debounceTime(500)
-          .subscribe($durationx => {
+          .subscribe(($durationx: any) => {
             //alert("2")
             this.totalObjnew = {
               ...this.playlistForm.value,
               ...this.commonCreateCourceForm_playlist.value,
             };
-            this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm_playlist, 'title', 'titleArr');            
-          });
+            this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm_playlist, 'title_single', 'titleArr');
+            let setdata = JSON.parse(this.routergetdata.title);
+            this.languageValueSet(this.commonCreateCourceForm_playlist, 'title_single', 'titleArr', setdata);
+          });                
+        
       }
       else {
-        this.commonCreateCourceForm.patchValue(this.routergetdata, { emitEvent: false });
-
-        console.log('patch', this.routergetdata)
+        setTimeout(() => {
+          this.bindarraydata();
+        }, 3000);
+        //this.commonCreateCourceForm.patchValue(this.routergetdata, { emitEvent: false });
+        //this.pushtoTitlearray(this.commonCreateCourceForm);
         this.pushtoTitlearray(this.commonCreateCourceForm);
-        
+        this.commonCreateCourceForm.patchValue(this.routergetdata, { emitEvent: false });
         this.commonCreateCourceForm.controls['learning_type'].disable({ onlySelf: true });
 
-        //setTimeout(function () {
+        
 
-        //}, 10000);
-        this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'title', 'titleArr');
-        this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'description', 'descriptionArr');
-        this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'objective', 'objectiveArr');
-        let setdata = JSON.parse(this.routergetdata.title);
-        this.languageValueSet(this.commonCreateCourceForm, 'title_single', 'titleArr', setdata);
-        setdata = JSON.parse(this.routergetdata.description);
-        this.languageValueSet(this.commonCreateCourceForm, 'description_single', 'descriptionArr', setdata);
-        setdata = JSON.parse(this.routergetdata.objective);
-        this.languageValueSet(this.commonCreateCourceForm, 'objective_single', 'objectiveArr', setdata);
+          this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'title', 'titleArr');
+          this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'description', 'descriptionArr');
+          this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'objective', 'objectiveArr');
+
+          let setdata = JSON.parse(this.routergetdata.title);
+          this.languageValueSet(this.commonCreateCourceForm, 'title_single', 'titleArr', setdata);
+          setdata = JSON.parse(this.routergetdata.description);
+          this.languageValueSet(this.commonCreateCourceForm, 'description_single', 'descriptionArr', setdata);
+          setdata = JSON.parse(this.routergetdata.objective);
+          this.languageValueSet(this.commonCreateCourceForm, 'objective_single', 'objectiveArr', setdata);
 
 
-        if (this.learningType == "1") {
-          this.formatArrayData(this.totalObjnew, this.iltandViltForm, 'for_whoom', 'forWhomArr');
-          this.formatArrayData(this.totalObjnew, this.iltandViltForm, 'learn_more', 'learnMoreArr');
-          setdata = JSON.parse(this.routergetdata.for_whoom);
-          this.languageValueSet(this.iltandViltForm, 'for_whoom_single', 'forWhomArr', setdata);
-          setdata = JSON.parse(this.routergetdata.learn_more);
-          this.languageValueSet(this.iltandViltForm, 'learn_more_single', 'learnMoreArr', setdata);
-          this.formCtrlSub = this.commonCreateCourceForm.valueChanges
-            //.debounceTime(500)
-            .subscribe($durationx => {
-              //alert("2")
-              this.totalObjnew = {
-                ...this.iltandViltForm.value,
-                ...this.commonCreateCourceForm.value,
-              };
-              this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'title', 'titleArr');
-              this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm_playlist, 'title', 'titleArr');
-              this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'description', 'descriptionArr');
-              this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'objective', 'objectiveArr');
-              this.formatArrayData(this.totalObjnew, this.iltandViltForm, 'for_whoom', 'forWhomArr');
-              this.formatArrayData(this.totalObjnew, this.iltandViltForm, 'learn_more', 'learnMoreArr');
-            });
+          if (this.learningType == "1") {
+            this.formatArrayData(this.totalObjnew, this.iltandViltForm, 'for_whoom', 'forWhomArr');
+            this.formatArrayData(this.totalObjnew, this.iltandViltForm, 'learn_more', 'learnMoreArr');
+            setdata = JSON.parse(this.routergetdata.for_whoom);
+            this.languageValueSet(this.iltandViltForm, 'for_whoom_single', 'forWhomArr', setdata);
+            setdata = JSON.parse(this.routergetdata.learn_more);
+            this.languageValueSet(this.iltandViltForm, 'learn_more_single', 'learnMoreArr', setdata);
+            this.formCtrlSub = this.commonCreateCourceForm.valueChanges
+              //.debounceTime(500)
+              .subscribe(($durationx: any) => {
+                //alert("2")
+                this.totalObjnew = {
+                  ...this.iltandViltForm.value,
+                  ...this.commonCreateCourceForm.value,
+                };
+                this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'title', 'titleArr');
+                this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'description', 'descriptionArr');
+                this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'objective', 'objectiveArr');
+                this.formatArrayData(this.totalObjnew, this.iltandViltForm, 'for_whoom', 'forWhomArr');
+                this.formatArrayData(this.totalObjnew, this.iltandViltForm, 'learn_more', 'learnMoreArr');
+              });
+          }
+          else if (this.learningType == "4") {
+            this.formatArrayData(this.totalObjnew, this.currriculumForm, 'for_whoom', 'forWhomArr');
+            this.formatArrayData(this.totalObjnew, this.currriculumForm, 'learn_more', 'learnMoreArr');
+            setdata = JSON.parse(this.routergetdata.for_whoom);
+            this.languageValueSet(this.currriculumForm, 'for_whoom_single', 'forWhomArr', setdata);
+            setdata = JSON.parse(this.routergetdata.learn_more);
+            this.languageValueSet(this.currriculumForm, 'learn_more_single', 'learnMoreArr', setdata);
+            this.formCtrlSub = this.commonCreateCourceForm.valueChanges
+              //.debounceTime(500)
+              .subscribe(($durationx: any) => {
+                //alert("2")
+                this.totalObjnew = {
+                  ...this.currriculumForm.value,
+                  ...this.commonCreateCourceForm.value,
+                };
+                this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'title', 'titleArr');
+                this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'description', 'descriptionArr');
+                this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'objective', 'objectiveArr');
+                this.formatArrayData(this.totalObjnew, this.currriculumForm, 'for_whoom', 'forWhomArr');
+                this.formatArrayData(this.totalObjnew, this.currriculumForm, 'learn_more', 'learnMoreArr');
+              });
+          }
+        
         }
-        else if (this.learningType == "4") {
-          this.formatArrayData(this.totalObjnew, this.currriculumForm, 'for_whoom', 'forWhomArr');
-          this.formatArrayData(this.totalObjnew, this.currriculumForm, 'learn_more', 'learnMoreArr');
-          setdata = JSON.parse(this.routergetdata.for_whoom);
-          this.languageValueSet(this.currriculumForm, 'for_whoom_single', 'forWhomArr', setdata);
-          setdata = JSON.parse(this.routergetdata.learn_more);
-          this.languageValueSet(this.currriculumForm, 'learn_more_single', 'learnMoreArr', setdata);
-          this.formCtrlSub = this.commonCreateCourceForm.valueChanges
-            //.debounceTime(500)
-            .subscribe($durationx => {
-              //alert("2")
-              this.totalObjnew = {
-                ...this.currriculumForm.value,
-                ...this.commonCreateCourceForm.value,
-              };
-              this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'title', 'titleArr');
-              this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm_playlist, 'title', 'titleArr');
-              this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'description', 'descriptionArr');
-              this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'objective', 'objectiveArr');
-              this.formatArrayData(this.totalObjnew, this.currriculumForm, 'for_whoom', 'forWhomArr');
-              this.formatArrayData(this.totalObjnew, this.currriculumForm, 'learn_more', 'learnMoreArr');
-            });
-        }
-      }
-      
+
       //this.delay(3000);
       //alert("1");
-      var durationObj = { title: 'kk' };
-      this.commonCreateCourceForm.patchValue(durationObj, { emitEvent: false });
-
-      if (this.learningType == "1") {
-        let learner_guide = JSON.parse(this.routergetdata.learner_guideline);
-        console.log(learner_guide)
-        learner_guide.forEach((element: { title: string; description: string; }) => {
-          console.log(element.title)
-          console.log(element.description)
-          this.addLearnerGuideline(element.title, element.description);
-        });
-        this.iltandViltForm.patchValue(this.routergetdata);
-      }
-      else if (this.learningType == "2") {
-        this.videobasedForm.patchValue(this.routergetdata);
-      }
-      else if (this.learningType == "3") {
-        this.materialbasedForm.patchValue(this.routergetdata);
-        if (this.routergetdata.url != "") {
-
-          this.materialbasedForm
-            .get('url')
-            ?.setValidators(Validators.required);
-          this.materialbasedForm.get('video_link')?.clearValidators();
+      
+        
+        if (this.learningType == "1") {
+          let learner_guide = JSON.parse(this.routergetdata.learner_guideline);
+          console.log(learner_guide)
+          learner_guide.forEach((element: { title: string; description: string; }) => {
+            console.log(element.title)
+            console.log(element.description)
+            this.addLearnerGuideline(element.title, element.description);
+          });
+          this.iltandViltForm.patchValue(this.routergetdata);
         }
-        else {
-
-          this.materialbasedForm
-            .get('video_link')
-            ?.setValidators(Validators.required);
-          this.materialbasedForm.get('url')?.clearValidators();
+        else if (this.learningType == "2") {
+          this.videobasedForm.patchValue(this.routergetdata);
         }
-      }
-      else if (this.learningType == "4") {
-        let learner_guide = JSON.parse(this.routergetdata.learner_guideline);
-        console.log(learner_guide)
-        learner_guide.forEach((element: { title: string; description: string; }) => {
-          console.log(element.title)
-          console.log(element.description)
-          this.addLearnerGuidelinetocurriculum(element.title, element.description);
-        });
-        this.currriculumForm.patchValue(this.routergetdata);
-      }
-      else if (this.learningType == "5") {
-        this.webbasedForm.patchValue(this.routergetdata);
-      }
-      else if (this.learningType == "6") {
-        this.playlistForm.patchValue(this.routergetdata);
-      }
-      console.log(this.routergetdata);
+        else if (this.learningType == "3") {
+          this.materialbasedForm.patchValue(this.routergetdata);
+          if (this.routergetdata.url != "") {
 
-      //this.commonCreateCourceForm.value.subject = this.routergetdata.subject;
+            this.materialbasedForm
+              .get('url')
+              ?.setValidators(Validators.required);
+            this.materialbasedForm.get('video_link')?.clearValidators();
+          }
+          else {
+
+            this.materialbasedForm
+              .get('video_link')
+              ?.setValidators(Validators.required);
+            this.materialbasedForm.get('url')?.clearValidators();
+          }
+        }
+        else if (this.learningType == "4") {
+          let learner_guide = JSON.parse(this.routergetdata.learner_guideline);
+          console.log(learner_guide)
+          learner_guide.forEach((element: { title: string; description: string; }) => {
+            console.log(element.title)
+            console.log(element.description)
+            this.addLearnerGuidelinetocurriculum(element.title, element.description);
+          });
+          this.currriculumForm.patchValue(this.routergetdata);
+        }
+        else if (this.learningType == "5") {
+          this.webbasedForm.patchValue(this.routergetdata);
+        }
+        else if (this.learningType == "6") {
+          this.commonCreateCourceForm_playlist.patchValue(this.routergetdata);
+          this.pushtoTitlearray(this.commonCreateCourceForm_playlist);
+          this.playlistForm.patchValue(this.routergetdata);
+        }
+        console.log(this.routergetdata);
+
+        //this.commonCreateCourceForm.value.subject = this.routergetdata.subject;
 
 
-      if (this.routergetdata.external_vendor == 'yes') {
-        this.externalVendorname = true;
-      } else {
-        this.externalVendorname = false;
+        if (this.routergetdata.external_vendor == 'yes') {
+          this.externalVendorname = true;
+        } else {
+          this.externalVendorname = false;
+        }
+        if (this.routergetdata.certification == 'yes') {
+          this.showCertificateExpiry = true;
+        }
+      
+
       }
-      if (this.routergetdata.certification == 'yes') {
-        this.showCertificateExpiry = true;
-      }
-
-
-    }
     else {
 
-      this.pushtoTitlearray(this.commonCreateCourceForm);
-      this.pushtoTitlearray(this.commonCreateCourceForm_playlist);
-    }
-
+        this.pushtoTitlearray(this.commonCreateCourceForm);
+        this.pushtoTitlearray(this.commonCreateCourceForm_playlist);
+      }
+    
   }
 
   get f() {
@@ -1022,7 +1038,25 @@ export class CreateNewCourseComponent implements OnInit {
   get curriculumArray() {
     return this.currriculum.learner_guideline as FormArray;
   }
-
+  bindarraydata() {    
+    if (this.routergetdata.learning_type == "6") {
+      this.commonCreateCourceForm_playlist.get('title_single').setValue(this.commonCreateCourceForm_playlist.get('title_single').value);
+    }
+    else {
+      this.commonCreateCourceForm.get('title_single').setValue(this.commonCreateCourceForm.get('title_single').value);
+      this.commonCreateCourceForm.get('description_single').setValue(this.commonCreateCourceForm.get('description_single').value);
+      this.commonCreateCourceForm.get('objective_single').setValue(this.commonCreateCourceForm.get('objective_single').value);
+    }
+    
+    if (this.routergetdata.learning_type == "1") {
+      this.iltandViltForm.get('for_whoom_single').setValue(this.iltandViltForm.get('for_whoom_single').value);
+      this.iltandViltForm.get('learn_more_single').setValue(this.iltandViltForm.get('learn_more_single').value);
+    }
+    if (this.routergetdata.learning_type == "4") {
+      this.currriculumForm.get('for_whoom_single').setValue(this.currriculumForm.get('for_whoom_single').value);
+      this.currriculumForm.get('learn_more_single').setValue(this.currriculumForm.get('learn_more_single').value);
+    }
+  }
   addtitlemultilanguage(formObj:FormGroup): any {
     //debugger
     this.courceService.getLanguages().subscribe(
@@ -1195,7 +1229,7 @@ export class CreateNewCourseComponent implements OnInit {
     console.log(status);
     console.log(this.learnerGuidearray);
     let savetype = { status: status };
-    let courseid = { course_id: this.routergetdata == undefined ? null : this.routergetdata.id, resource_ext: '' };
+    let courseid = { course_id: this.routergetdata == undefined ? null : this.routergetdata.id, resource_ext: '', material_source_ext:'' };
 
     let titlearray: any = [];
     let descriptionarray: any = [];
@@ -1691,7 +1725,7 @@ export class CreateNewCourseComponent implements OnInit {
     console.log(formObj.get(fieldName))
     this.formCtrlSub = formObj.get(fieldName).valueChanges
       .debounceTime(500)
-      .subscribe($data => {
+      .subscribe(($data: any) => {
 
         var fdata = formObj.value;
         if (fdata[fieldName] != '') {
@@ -1705,16 +1739,16 @@ export class CreateNewCourseComponent implements OnInit {
               }
             }
           }
-          let fieldArrObj = {};
-          fieldArrObj[fieldArr] = fdata[fieldArr];
-          formObj.patchValue(fieldArrObj);
+          this.fieldArrObj[fieldArr] = fdata[fieldArr];
+          console.log(this.fieldArrObj);
+          formObj.patchValue(this.fieldArrObj);
         }
       });
   }
-  languageValueSet_new(formObj: FormGroup, fieldName: string, fieldArr: string) {    
+  languageValueSet_new(formObj: FormGroup, fieldName: string, fieldArr: any) {
     this.formCtrlSub = formObj.get(fieldName).valueChanges
       .debounceTime(500)
-      .subscribe($data => {
+      .subscribe(($data: any) => {
         var fdata = formObj.value;
         if (fdata[fieldName] != '') {
           for (let x in fdata[fieldArr]) {
@@ -1722,10 +1756,9 @@ export class CreateNewCourseComponent implements OnInit {
               fdata[fieldArr][x]['value'] = fdata[fieldName];
             }
           }
-          let fieldArrObj = {};
-          fieldArrObj[fieldArr] = fdata[fieldArr];
-          console.log(fieldArrObj);
-          formObj.patchValue(fieldArrObj);
+          this.fieldArrObj[fieldArr] = fdata[fieldArr];
+          console.log(this.fieldArrObj);
+          formObj.patchValue(this.fieldArrObj);
         }
       });
   }

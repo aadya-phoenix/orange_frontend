@@ -1023,7 +1023,7 @@
                     <!--colend-->
                   </div>
 
-                  <p style="color: #000" *ngIf="getUserrole.id == 2">
+                  <p style="color: #000">
                     <b style="color: #ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
                   </p>
                   <p style="color: #000" *ngIf="getUserrole.id == 2 && notification">
@@ -1040,14 +1040,14 @@
                   <button *ngIf="getUserrole.id != 4 && getUserrole.id == 2" class="btn btn-primary" (click)="createUpdateCourse('pending')">
                     Submit
                   </button>
-                  <button class="btn btn-secondary ml-1" (click)="createUpdateCourse('draft')">
+                  <button  class="btn btn-secondary ml-1" (click)="createUpdateCourse('draft')">
                     Save as draft
                   </button>
                   <button class="btn btn-primary ml-1" data-toggle="modal" data-target="#transfertoPublisher" (click)="getPublisher()" *ngIf="getUserrole.id == 3">
                     Transfer to publisher
                   </button>
                   <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#rejectModal" *ngIf="getUserrole.id == 3 || getUserrole.id == 4" (click)="getPublisher()">
-                    <img src="../../../../assets/images/reject.png " />Reject
+                    <img src="../../../../assets/images/reject.png" style="width:20px;height:20px;" />Reject
                   </button>
                   <button *ngIf="getUserrole.id == 4" class="btn btn-primary ml-2" data-toggle="modal" data-target="#publish">
                     Publish
@@ -1401,11 +1401,11 @@
                     <!--colend-->
                   </div>
 
-                  <p style="color: #000">
+                  <p style="color: #000" *ngIf="getUserrole.id == 2 && notification">
                     <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
                     <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
                   </p>
-                  <p style="color: #000">
+                  <p style="color: #000" *ngIf="getUserrole.id != 2 && notification">
                     <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who is the backup for
                     <b>Russia</b> region.
                   </p>
@@ -1415,14 +1415,14 @@
                   <button *ngIf="getUserrole.id != 4 && getUserrole.id == 2" class="btn btn-primary" (click)="createUpdateCourse('pending')">
                     Submit
                   </button>
-                  <button class="btn btn-secondary ml-1" (click)="createUpdateCourse('draft')">
+                  <button  class="btn btn-secondary ml-1" (click)="createUpdateCourse('draft')">
                     Save as draft
                   </button>
                   <button class="btn btn-primary ml-1" data-toggle="modal" data-target="#transfertoPublisher" (click)="getPublisher()" *ngIf="getUserrole.id == 3">
                     Transfer to publisher
                   </button>
                   <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#rejectModal" *ngIf="getUserrole.id == 3 || getUserrole.id == 4" (click)="getPublisher()">
-                    <img src="../../../../assets/images/reject.png " />Reject
+                    <img src="../../../../assets/images/reject.png" style="width:20px;height:20px;" />Reject
                   </button>
                   <button *ngIf="getUserrole.id == 4" class="btn btn-primary ml-2" data-toggle="modal" data-target="#publish">
                     Publish
@@ -1468,6 +1468,12 @@
                           <input type="radio" id="chkupload" checked (click)="getmaterialsource('Upload')" name="fav_language" value="HTML" class="mr-1" />
                           <label>Uploaded Material</label>
                         </div>
+                        <div *ngIf="!showMaterialURLchecked && !showMaterialUploadchecked">
+                          <input type="radio" id="chkurl" (click)="getmaterialsource('Url')" name="fav_language" value="HTML" class="mr-1" />
+                          <label>URL</label>
+                          <input type="radio" id="chkupload" (click)="getmaterialsource('Upload')" name="fav_language" value="HTML" class="mr-1" />
+                          <label>Uploaded Material</label>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1486,7 +1492,7 @@
                           </a>
                         </label>
                         <div class="upload_field">
-                          <input type="file" id="exampleInputFile" formControlName="material_source" style="width: 77%" />
+                          <input type="file" id="exampleInputFile" formControlName="material_source" (change)="handleFileInput_Material($event.target.files)"  style="width: 77%" />
                         </div>
                         <div *ngIf="fileToUpload_Material" style="margin-left:15px;">
                           <ul>
@@ -1566,11 +1572,11 @@
                     <!--colend-->
                   </div>
 
-                  <p style="color: #000">
+                  <p style="color: #000" *ngIf="getUserrole.id == 2 && notification">
                     <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
                     <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
                   </p>
-                  <p style="color: #000">
+                  <p style="color: #000" *ngIf="getUserrole.id != 2 && notification">
                     <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who is the backup for
                     <b>Russia</b> region.
                   </p>
@@ -1580,14 +1586,14 @@
                   <button *ngIf="getUserrole.id != 4 && getUserrole.id == 2" class="btn btn-primary" (click)="createUpdateCourse('pending')">
                     Submit
                   </button>
-                  <button class="btn btn-secondary ml-1" (click)="createUpdateCourse('draft')">
+                  <button  class="btn btn-secondary ml-1" (click)="createUpdateCourse('draft')">
                     Save as draft
                   </button>
                   <button class="btn btn-primary ml-1" data-toggle="modal" data-target="#transfertoPublisher" (click)="getPublisher()" *ngIf="getUserrole.id == 3">
                     Transfer to publisher
                   </button>
                   <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#rejectModal" *ngIf="getUserrole.id == 3 || getUserrole.id == 4" (click)="getPublisher()">
-                    <img src="../../../../assets/images/reject.png " />Reject
+                    <img src="../../../../assets/images/reject.png" style="width:20px;height:20px;" />Reject
                   </button>
                   <button *ngIf="getUserrole.id == 4" class="btn btn-primary ml-2" data-toggle="modal" data-target="#publish">
                     Publish
@@ -1733,12 +1739,13 @@
                     <!--colend-->
                   </div>
 
-                  <p style="color: #000">
+                  <p style="color: #000" *ngIf="getUserrole.id == 2 && notification">
                     <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
                     <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
                   </p>
-                  <p style="color: #000">
-                    <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b>                                        region.
+                  <p style="color: #000" *ngIf="getUserrole.id != 2 && notification">
+                    <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who is the backup for
+                    <b>Russia</b> region.
                   </p>
                 </div>
                 <div class="card-footer d-flex justify-content-start">
@@ -1753,7 +1760,7 @@
                     Transfer to publisher
                   </button>
                   <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#rejectModal" *ngIf="getUserrole.id == 3 || getUserrole.id == 4" (click)="getPublisher()">
-                    <img src="../../../../assets/images/reject.png " />Reject
+                    <img src="../../../../assets/images/reject.png" style="width:20px;height:20px;" />Reject
                   </button>
                   <button *ngIf="getUserrole.id == 4" class="btn btn-primary ml-2" data-toggle="modal" data-target="#publish">
                     Publish
@@ -1958,12 +1965,13 @@
                     <!--colend-->
                   </div>
 
-                  <p style="color: #000">
+                  <p style="color: #000" *ngIf="getUserrole.id == 2 && notification">
                     <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
                     <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
                   </p>
-                  <p style="color: #000">
-                    <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b>                                        region.
+                  <p style="color: #000" *ngIf="getUserrole.id != 2 && notification">
+                    <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who is the backup for
+                    <b>Russia</b> region.
                   </p>
                 </div>
                 <div class="card-footer d-flex justify-content-start">
@@ -1978,7 +1986,7 @@
                     Transfer to publisher
                   </button>
                   <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#rejectModal" *ngIf="getUserrole.id == 3 || getUserrole.id == 4" (click)="getPublisher()">
-                    <img src="../../../../assets/images/reject.png " />Reject
+                    <img src="../../../../assets/images/reject.png" style="width:20px;height:20px;" />Reject
                   </button>
                   <button *ngIf="getUserrole.id == 4" class="btn btn-primary ml-2" data-toggle="modal" data-target="#publish">
                     Publish
@@ -2209,12 +2217,13 @@
                     <!--colend-->
                   </div>
 
-                  <p style="color: #000">
+                  <p style="color: #000" *ngIf="getUserrole.id == 2 && notification">
                     <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
                     <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
                   </p>
-                  <p style="color: #000">
-                    <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b>                                        region.
+                  <p style="color: #000" *ngIf="getUserrole.id != 2 && notification">
+                    <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who is the backup for
+                    <b>Russia</b> region.
                   </p>
                 </div>
                 <div class="card-footer d-flex justify-content-start">
@@ -2222,14 +2231,14 @@
                   <button *ngIf="getUserrole.id != 4 && getUserrole.id == 2" class="btn btn-primary" (click)="createUpdateCourse('pending')">
                     Submit
                   </button>
-                  <button class="btn btn-secondary ml-1" (click)="createUpdateCourse('draft')">
+                  <button  class="btn btn-secondary ml-1" (click)="createUpdateCourse('draft')">
                     Save as draft
                   </button>
                   <button class="btn btn-primary ml-1" data-toggle="modal" data-target="#transfertoPublisher" (click)="getPublisher()" *ngIf="getUserrole.id == 3">
                     Transfer to publisher
                   </button>
                   <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#rejectModal" *ngIf="getUserrole.id == 3 || getUserrole.id == 4" (click)="getPublisher()">
-                    <img src="../../../../assets/images/reject.png " />Reject
+                    <img src="../../../../assets/images/reject.png" style="width:20px;height:20px;" />Reject
                   </button>
                   <button *ngIf="getUserrole.id == 4" class="btn btn-primary ml-2" data-toggle="modal" data-target="#publish">
                     Publish
