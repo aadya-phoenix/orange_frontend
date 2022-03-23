@@ -23,8 +23,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let history of courseHistory" class="text-center">
-                    <th scope="row">1</th>
+                <tr *ngFor="let history of courseHistory;let i = index" class="text-center">
+                    <th scope="row">{{i+1}}</th>
                     <td>{{ history && history.transfer_by_name ? history.transfer_by_name : history.action_by_name}}</td>
                     <td>{{history && history.transfer_by_name ? history.transfer_to_name : '-'}}</td>
                     <td>{{ history.updated_at | date: "short"}}</td>

@@ -12,14 +12,14 @@ export class SetBackupComponent implements OnInit {
   userName:any;
   userEmail:any;
   id:any;
-
+  userid: any;
   constructor(private courseService: CourcesService) { }
 
   ngOnInit(): void {
-    this.courseService.getregionalCordinator().subscribe(res=>{
+    this.courseService.getregionalCordinator().subscribe((res:any)=>{
       console.log("getregionalCordinator()",res.data);
           this.rocObj = res.data;
-    },err=>{
+    },(err:any)=>{
       console.log(err);
     });
 
@@ -31,19 +31,22 @@ export class SetBackupComponent implements OnInit {
    this.courseService.getRoleUsers().subscribe((res: any) => {
     console.log("res data is ",res.data);
     for(let item of res.data[2]){
-      if (item.region_id==this.id){
+      if (item.region_id == this.id) {
+        this.userid = item.id;
         this.userEmail  = item.email;
         this.userName = item.first_name+" "+item.last_name;
       }
     };
     for(let item of res.data[3]){
-      if (item.region_id==this.id){
+      if (item.region_id == this.id) {
+        this.userid = item.id;
         this.userEmail  = item.email;
         this.userName = item.first_name+" "+item.last_name;
       }
     };
     for(let item of res.data[4]){
-      if (item.region_id==this.id){
+      if (item.region_id == this.id) {
+        this.userid = item.id;
         this.userEmail  = item.email;
         this.userName = item.first_name+" "+item.last_name;
       }
@@ -51,10 +54,16 @@ export class SetBackupComponent implements OnInit {
    });
   }
   assign(){
-    console.log("id is ",this.id);
-    this.courseService.assignBackup(this.id).subscribe(res=>{
+    console.log("id is ", this.id);
+    let transferid = {
+      transfer_id: this.userid
+    }
+    let totalObj = {
+      ...transferid
+    }
+    this.courseService.assignBackup(totalObj).subscribe((res:any)=>{
       console.log("assign backup",res.data);
-    },err=>{
+    },(err:any)=>{
       console.log(err);
     });
   }

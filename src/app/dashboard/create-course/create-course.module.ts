@@ -13,16 +13,22 @@ import { ViewCourseDetailsComponent } from './view-course-details/view-course-de
 import { ViewCompleteReportComponent } from './view-complete-report/view-complete-report.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 
-
-
 @NgModule({
-  declarations: [CoursesComponent, CreateNewCourseComponent, ViewHistoryComponent, RequestDetailComponent, UpdateCourceComponent, ViewCourseDetailsComponent, ViewCompleteReportComponent],
+  declarations: [
+    CoursesComponent,
+    CreateNewCourseComponent,
+    ViewHistoryComponent,
+    RequestDetailComponent,
+    UpdateCourceComponent,
+    ViewCourseDetailsComponent,
+    ViewCompleteReportComponent,
+  ],
   imports: [
     CommonModule,
     CreateCourseRoutingModule,
     SharedModule,
     NgxPaginationModule,
     NgSelectModule
-  ]
+  ],
 })
-export class CreateCourseModule { }
+export class CreateCourseModule {}

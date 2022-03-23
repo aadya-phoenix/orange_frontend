@@ -11,8 +11,13 @@ import { CourcesService } from 'src/app/shared/services/cources/cources.service'
 })
 export class RequestDetailComponent implements OnInit {
   getUserrole:any;
-  routegetdata:any;
-  publisherList:any=[];
+  routegetdata: any;
+  status: any;
+  transfer_user_id: any;
+  publisherList: any = [];
+  roleuserlist: any = [];
+  cordinatorsList: any = [];
+  showbuttons: any;
   otherRocsList:any=[];
   selectedotherRoc:any;
   selectedPublisher:any;
@@ -41,6 +46,7 @@ export class RequestDetailComponent implements OnInit {
     this.authService.getUserRoles().subscribe((res:any)=>{
       console.log(res);
       this.publisherList = res.data['4'];
+      this.roleuserlist = res.data;
       console.log(this.publisherList)
     },(err:any)=>{
       console.log(err)
@@ -86,7 +92,7 @@ export class RequestDetailComponent implements OnInit {
   }
 
   updateCource(){
-    this.router.navigateByUrl('/dashboard/cources/edit-cource',{state:this.routegetdata})
+    this.router.navigateByUrl('/dashboard/cources/create-cource',{state:this.routegetdata})
   }
 
 
@@ -103,6 +109,21 @@ export class RequestDetailComponent implements OnInit {
   getRoc(event:any){
     this.selectedotherRoc = event.target.value;
     console.log(this.selectedotherRoc)
+    let region = this.roleuserlist[3];
+    console.log(region);
+    let user = region.filter((d: any) => d.region_id === event.target.value);
+
+    region.forEach((field: any) => {
+      if (field.region_id == event.target.value) {
+        this.selectedotherRoc = field.id;
+        alert(this.selectedotherRoc);
+      }
+    });
+    console.log(user);
+    //  .map((res: any) => {
+    //  this.selectedotherRoc = res.id;
+    //  alert(this.selectedotherRoc)
+    //})
 
   }
 
@@ -112,13 +133,20 @@ export class RequestDetailComponent implements OnInit {
   }
 
   transfertoOtherRoc(){
-    let transferobj ={ course_id:this.routegetdata.id ,transfer_id:this.selectedotherRoc};
+    let transferobj ={ course_id:this.routegetdata.id,status:'pending' ,transfer_id:this.selectedotherRoc};
     this.courseService.courseTransfer(transferobj).subscribe((res:any)=>{
       console.log(res);
-      this.router.navigate(['/dashboard/cources']);
+      let transferobj1 = { course_id: this.routegetdata.id, status: 'pending' };
+      this.courseService.courceStatus(transferobj1).subscribe((res: any) => {
+        console.log(res);
+        this.router.navigate(['/dashboard/cources']);
+      }, (err: any) => {
+        console.log(err)
+      })
     },(err:any)=>{
       console.log(err)
     })
+    
   }
 
   transfertoPublisher(){
@@ -134,11 +162,27 @@ export class RequestDetailComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.routegetdata);
     let arr1 = this.routegetdata.objective;
+    this.status = this.routegetdata.status;
+    
+    this.transfer_user_id = this.routegetdata.transfer_user_id;
+    this.showbuttons = this.routegetdata.showbuttons.split('#')[1];
+    
 	console.log(arr1);
     this.objectarray = [];//arr1.split('• ')
     //console.log(arr1.split('• '))
-
+    this.getPublisher();
+    this.getCordinators();
     this.getRole();
   }
-
+  getCordinators() {
+    this.courseService.getregionalCordinator().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.cordinatorsList = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
 }

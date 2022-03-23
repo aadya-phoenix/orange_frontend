@@ -76,7 +76,7 @@
 
   <div class="content">
     <div class="animated fadeIn">
-      <div class="card" *ngIf="getUserrole.id != 2 && !routegetdata.issave">
+      <div class="card" *ngIf="getUserrole.id != 2 && !routegetdata.issave  && showbuttons=='true'">
         <div class="card-body">
           <div class="Requs_btn_inl">
             <div class="Requs_btn_inl-child">
@@ -85,20 +85,21 @@
                 class="btn btn-primary ml-2"
                 data-toggle="modal"
                 data-target="#publishModal"
-                *ngIf="getUserrole.id == 4"
+                *ngIf="getUserrole.id == 4 && status != 'publish'"
               >
               <i class="fa fa-upload" aria-hidden="true"></i> <span class="pl-1">Publish</span>
                         </button>
 
-                        <button type="button" class="btn btn-primary ml-2" data-toggle="modal" data-target="#exampleModal" *ngIf="getUserrole.id == 3" (click)="getPublisher()">
-               <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1"> Transfer to Publisher</span>
-                        </button>
-
-                        <button class="btn btn-primary  ml-2" (click)="updateCource()">
-               <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">Update</span>
+                        <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#exampleModal" *ngIf="getUserrole.id == 3 && status != 'publish'" (click)="getPublisher()">
+                <img src="../../../../assets/images/publish.png " /> Transfer to
+                Publisher
               </button>
-                        <button type="button" class="btn btn-primary  ml-2" data-toggle="modal" data-target="#rejectModal" *ngIf="getUserrole.id == 3 || getUserrole.id == 4" (click)="getPublisher()">
-             <i class="fa fa-times" aria-hidden="true"></i>  <span class="pl-1">Reject</span>
+
+                        <button class="btn btn-primary btn_requst ml-2" (click)="updateCource()" *ngIf="status != 'publish'">
+                <img src="../../../../assets/images/update.png " />Update
+              </button>
+                        <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#rejectModal" *ngIf="(getUserrole.id == 3 || getUserrole.id == 4) && status != 'publish'" (click)="getPublisher()">
+                <img src="../../../../assets/images/reject.png " />Reject
               </button>
                     </div>
                     <div class="Requs_btn_inl-child1" *ngIf="getUserrole.id == 3">
@@ -108,64 +109,72 @@
                     </div>
                 </div>
             </div>
-            <!--colensd-->
+
+            <div class="Requs_btn_inl-child1" *ngIf="getUserrole.id == 3 && status != 'publish'">
+                <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#transferotherRoc" (click)="transferOtherroc()">
+                <img src="../../../../assets/images/trans.png " />Transfer to
+                other ROC
+              </button>
+            </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="container-fluid">
-                            <div class="row mt-1">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Learning Type</label>
-                                        <input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row mt-1">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Learning Type</label>
+                                    <input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
                             routegetdata.learning_type_name
                               ? routegetdata.learning_type_name
                               : routegetdata.learning_type
                           }}">
-                                    </div>
-
                                 </div>
-                                <!--cole dn-->
+
                             </div>
+                            <!--cole dn-->
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class=" ">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="user_image">
-                                    <i class="fa fa-user-o" aria-hidden="true "></i>
-                                </div>
-                                <p class="text-center user_info">View Request</p>
+            </div>
+            <div class="card">
+                <div class=" ">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="user_image">
+                                <i class="fa fa-user-o" aria-hidden="true "></i>
                             </div>
+                            <p class="text-center user_info">View Request</p>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="container-fluid animate__fadeInDown">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Request Number</label>
-                                        <input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
+                </div>
+                <div class="card-body">
+                    <div class="container-fluid animate__fadeInDown">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Request Number</label>
+                                    <input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
                           routegetdata.request_id
                         }}">
-                                    </div>
-
                                 </div>
-                                <!--cole dn-->
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Requester Name</label>
-                                        <input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
+
+                            </div>
+                            <!--cole dn-->
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Requester Name</label>
+                                    <input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
                             routegetdata.user_name
                               ? routegetdata.user_name
                               : routegetdata.user_id
                           }}">
-                                    </div>
+                                    <<<<<<< HEAD </div>
 
                                 </div>
                                 <!--cole dn-->
@@ -175,6 +184,18 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Title one</label>
                                         <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
+=======
+</div>
+                    
+                  </div>
+                  <!--cole dn-->
+               
+               
+                  <div class="col-sm-4">
+                      <div class="form-group">
+<label for="exampleInputEmail1">Title</label>
+<span class="form-control form_width" id="exampleInputEmail1" disabled >{{
+>>>>>>> 1d74c67265a5632f68ac50859666d2f7f0ffc4a1
                             routegetdata.titleByLang
                               ? (routegetdata.titleByLang | titlecase)
                               : "-"
@@ -465,14 +486,15 @@
                         <div class="form-group">
                             <label>Transfer to Publisher</label>
                             <select name="select " id="select " class="form-control" (change)="getPublisherselected($event)">
-                  <option value="0 ">Please select</option>
-                  <option
-                    *ngFor="let publisher of publisherList"
-                    [value]="publisher.id"
-                  >
-                    {{ publisher.first_name }}
-                  </option>
-                </select>
+    <option value="0 ">Please select</option>
+    <option
+      *ngFor="let publisher of publisherList"
+      [value]="publisher.id"
+    >
+      {{ publisher.first_name }}
+    </option>
+  </select>
+
                         </div>
                     </div>
                     <!--col end-->
@@ -533,22 +555,28 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Regional Operation Coordinator</label>
+                            <!--<select class="form-control form_width" (change)="getRoc($event)">
+  <option value=" ">Please select any</option>
+  <option
+    *ngFor="let otherroc of otherRocsList"
+    [value]="otherroc.id"
+  >
+    {{ otherroc.first_name }}
+  </option>-->
+                            <!-- <option>Asia Pacific</option> -->
+                            <!-- <option
+    *ngFor="let vendor of vendorType "
+    [value]="vendor.vendor_name "
+  >
+    {{ vendor.name }}
+  </option> -->
+                            <!--</select>-->
                             <select class="form-control form_width" (change)="getRoc($event)">
-                  <option value=" ">Please select any</option>
-                  <option
-                    *ngFor="let otherroc of otherRocsList"
-                    [value]="otherroc.id"
-                  >
-                    {{ otherroc.first_name }}
-                  </option>
-                  <!-- <option>Asia Pacific</option> -->
-                  <!-- <option
-                  *ngFor="let vendor of vendorType "
-                  [value]="vendor.vendor_name "
-                >
-                  {{ vendor.name }}
-                </option> -->
-                </select>
+                          <option value="">Regional Operation Coordinator</option>
+                          <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">
+                            {{ cordinator?.name }}
+                          </option>
+                        </select>
                         </div>
                     </div>
                     <!--col end-->
