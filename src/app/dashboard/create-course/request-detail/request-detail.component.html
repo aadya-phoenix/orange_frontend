@@ -76,7 +76,7 @@
 
   <div class="content">
     <div class="animated fadeIn">
-      <div class="card" *ngIf="getUserrole.id != 2 && !routegetdata.issave  && showbuttons=='true'">
+      <div class="card" *ngIf="getUserrole.id != 2 && !routegetdata.issave  && showbuttons=='true' && showrejectbutton != getprofileDetails.data.id">
         <div class="card-body">
           <div class="Requs_btn_inl">
             <div class="Requs_btn_inl-child">
@@ -85,20 +85,20 @@
                 class="btn btn-primary  ml-2"
                 data-toggle="modal"
                 data-target="#publishModal"
-                *ngIf="getUserrole.id == 4 && status != 'publish'"
+                *ngIf="getUserrole.id == 4 && status != 'publish' && showrejectbutton != getprofileDetails.data.id"
               >
                 <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
                         </button>
 
-                        <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#exampleModal" *ngIf="getUserrole.id == 3 && status != 'publish'" (click)="getPublisher()">
+                        <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#exampleModal" *ngIf="getUserrole.id == 3 && status != 'publish' && showrejectbutton != getprofileDetails.data.id" (click)="getPublisher()">
                <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1"> Transfer to Publisher</span>
              
               </button>
 
-                        <button class="btn btn-primary btn_requst ml-2" (click)="updateCource()" *ngIf="status != 'publish'">
+                        <button class="btn btn-primary btn_requst ml-2" (click)="updateCource()" *ngIf="status != 'publish' && showrejectbutton != getprofileDetails.data.id">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">Update</span>
               </button>
-                        <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#rejectModal" *ngIf="(getUserrole.id == 3 || getUserrole.id == 4) && status != 'publish'" (click)="getPublisher()">
+                        <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#rejectModal" *ngIf="(getUserrole.id == 3 || getUserrole.id == 4) && status != 'publish' && showrejectbutton != getprofileDetails.data.id" (click)="getPublisher()">
                <i class="fa fa-times" aria-hidden="true"></i>  <span class="pl-1">Reject</span>
               </button>
                     </div>
@@ -111,896 +111,965 @@
             </div>
             <!--colensd-->
         </div>
-        <form [formGroup]="commonCreateCourceForm">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="container-fluid">
-                                <div class="row mt-1">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Learning Type</label>
-                                            <input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
-                            routegetdata.learning_type_name 
+      <form [formGroup]="commonCreateCourceForm">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="container-fluid">
+                  <div class="row mt-1">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Learning Type</label>
+                        <input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
+                            routegetdata.learning_type_name
                               ? routegetdata.learning_type_name
                               : routegetdata.learning_type
                           }}">
-                                        </div>
+                      </div>
 
-                                    </div>
-                                    <!--cole dn-->
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <div class="card">
-                        <div class=" ">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="user_image">
-                                        <i class="fa fa-user-o" aria-hidden="true"></i>
-                                    </div>
-                                    <p class="text-center user_info">View Request</p>
-                                </div>
-                            </div>
-                        </div>
+                    <!--cole dn-->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class=" ">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="user_image">
+                      <i class="fa fa-user-o" aria-hidden="true"></i>
+                    </div>
+                    <p class="text-center user_info">View Request</p>
+                  </div>
+                </div>
+              </div>
 
-                        <div class="card-body">
-                            <div class="container-fluid animate__fadeInDown">
-                                <div class="card-header">
-                                    <strong>Course Details</strong>
-                                </div>
-                                <div>&nbsp;</div>
-                                <div class="row">
+              <div class="card-body">
+                <div class="container-fluid animate__fadeInDown">
+                  <div class="card-header">
+                    <strong>Course Details</strong>
+                  </div>
+                  <div>&nbsp;</div>
+                  <div class="row">
 
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Request Number</label>
-                                            <input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Request Number</label>
+                        <input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
                           routegetdata.request_id
                         }}">
-                                        </div>
+                      </div>
 
-                                    </div>
-                                    <!--cole dn-->
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Requester Name</label>
-                                            <input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
+                    </div>
+                    <!--cole dn-->
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Requester Name</label>
+                        <input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
                             routegetdata.user_name
                               ? routegetdata.user_name
                               : routegetdata.user_id
                           }}">
-                                        </div>
+                      </div>
 
-                                    </div>
-                                    <!--cole dn-->
+                    </div>
+                    <!--cole dn-->
 
 
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Title</label>
-                                            <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                        {{
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Title</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          {{
                             routegetdata.titleByLang
                               ? (routegetdata.titleByLang | titlecase)
                               : "-"
-                        }}
-                      </span>
-                                        </div>
+                          }}
+                        </span>
+                      </div>
 
-                                    </div>
-                                    <!--cole dn-->
-                                    <div *ngIf="routegetdata.learning_type != '6'">
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Training Provided By</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.training_provided_by }}</span>
-                                            </div>
+                    </div>
+                    <!--cole dn-->
+                    <div *ngIf="routegetdata.learning_type != '6'">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Training Provided By</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.training_provided_by }}</span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Training Duration</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.duration }}</span>
-                                            </div>
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Training Duration</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.duration }}</span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
+                      </div>
+                      <!--cole dn-->
 
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Description</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.descriptionByLang }}</span>
-                                            </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Description</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.descriptionByLang }}</span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Objective</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.objectiveByLang }}</span>
-                                            </div>
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Objective</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.objectiveByLang }}</span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Subject</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.subject_name }}</span>
-                                            </div>
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Subject</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.subject_name }}</span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Keywords</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.keyword }}</span>
-                                            </div>
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Keywords</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.keyword }}</span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Available Language</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Available Language</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.available_language_name
                               ? routegetdata.available_language_name
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Level</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Level</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.level_name
                               ? routegetdata.level_name
                               : routegetdata.level
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Email of content owner</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.email_content_owner }}</span>
-                                            </div>
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Email of content owner</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.email_content_owner }}</span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
+                      </div>
+                      <!--cole dn-->
 
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Email of training contact</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Email of training contact</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.email_training_contact
                               ? routegetdata.email_training_contact
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Prerequisite</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Prerequisite</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.prerequisite
                               ? routegetdata.prerequisite
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Resources</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Resources</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.resource
                               ? routegetdata.resource
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '1'">
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Delivery Method</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                    </div>
+                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '1'">
+                      <div class="card-header">
+                        <strong>ILT and VILT Training</strong>
+                      </div>
+                      <div>&nbsp;</div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Delivery Method</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.delivery_method_name
                               ? routegetdata.delivery_method_name
                               : routegetdata.delivery_method
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1"> Does this course integrate digital?</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1"> Does this course integrate digital?</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.digital
                               ? (routegetdata.digital | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Purchase order required</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Purchase order required</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.purchase_order
                               ? (routegetdata.purchase_order | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Manage Approval</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Manage Approval</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.manager_approval
                               ? (routegetdata.manager_approval | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
+                      </div>
+                      <!--cole dn-->
 
 
 
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Who can see?</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Who can see?</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.who_see_course_name
                               ? (routegetdata.who_see_course_name | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Email of the preffered Instructor</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Email of the preffered Instructor</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.email_preffered_instructor
                               ? routegetdata.email_preffered_instructor
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Date of first session</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Date of first session</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.first_session_date
                               ? routegetdata.first_session_date
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Expiry Date</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Expiry Date</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.expiry_date
                               ? routegetdata.expiry_date
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Expiry Type</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Expiry Type</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.expiry_date_type
                               ? routegetdata.expiry_date_type
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Entity/Business area</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Entity/Business area</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.entity_business_area
                               ? routegetdata.entity_business_area
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Certification</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Certification</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.certification
                               ? (routegetdata.certification | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">  Certification Expiry type name</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">  Certification Expiry type name</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.certification_expiry_type_name
                               ? (routegetdata.certification_expiry_type_name
                                 | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Validity period</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Validity period</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.validity_period_name
                               ? (routegetdata.validity_period_name
                                 | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">External Vendor</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">External Vendor</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.external_vendor
                               ? (routegetdata.external_vendor | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">External Vendor name</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">External Vendor name</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.external_vendor_name
                               ? (routegetdata.external_vendor_name | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Free field content</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Free field content</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.free_field_content
                               ? (routegetdata.free_field_content | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">For Whom ?</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">For Whom ?</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.for_whoomByLang
                               ? routegetdata.for_whoomByLang
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Learn more</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Learn more</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.learn_moreByLang
                               ? routegetdata.learn_moreByLang
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Title of the additional free text field</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Title of the additional free text field</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.title_additional
                               ? routegetdata.title_additional
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '2'">
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Email of Content Owner</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
-                            routegetdata.email_preffered_instructor
-                              ? routegetdata.email_preffered_instructor
-                              : "-"
-                          }}
-                        </span>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Uploaded video URL</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                    </div>
+                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '2'">
+                      <div class="card-header">
+                        <strong>Video training</strong>
+                      </div>
+                      <div>&nbsp;</div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Uploaded video URL</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.video_link
                               ? routegetdata.video_link
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '3'">
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Material Source URL</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                    </div>
+                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '3'">
+                      <div class="card-header">
+                        <strong>Material Based Training</strong>
+                      </div>
+                      <div>&nbsp;</div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Material Source URL</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.url
                               ? routegetdata.url
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Uploaded Material</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Uploaded Material</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.material_source
                               ? routegetdata.material_source
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '4'">
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Email of Curriculum Owner</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
-                            routegetdata.email_preffered_instructor
-                              ? routegetdata.email_preffered_instructor
-                              : "-"
-                          }}
-                        </span>
-                                            </div>
-
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1"> Does this course integrate digital?</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                    </div>
+                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '4'">
+                      <div class="card-header">
+                        <strong>Currriculum</strong>
+                      </div>
+                      <div>&nbsp;</div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1"> Does this course integrate digital?</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.digital
                               ? (routegetdata.digital | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Provide the link to your video</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Provide the link to your video</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.video_link
                               ? (routegetdata.video_link | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Expiry Date</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Expiry Date</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.expiry_date
                               ? routegetdata.expiry_date
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Learn more</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Learn more</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.learn_moreByLang
                               ? routegetdata.learn_moreByLang
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Title of the additional free text field</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Title of the additional free text field</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.title_additional
                               ? routegetdata.title_additional
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Who can see my course?</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Who can see my course?</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.who_see_course_name
                               ? (routegetdata.who_see_course_name | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Free field content</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Free field content</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.free_field_content
                               ? (routegetdata.free_field_content | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">For Whom ?</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">For Whom ?</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.for_whoomByLang
                               ? routegetdata.for_whoomByLang
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Curriculum content</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Curriculum content</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.external_vendor_name
                               ? routegetdata.external_vendor_name
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Certification</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Certification</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.certification
                               ? (routegetdata.certification | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">  Certification Expiry type name</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">  Certification Expiry type name</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.certification_expiry_type_name
                               ? (routegetdata.certification_expiry_type_name
                                 | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Validity period</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Validity period</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.validity_period_name
                               ? (routegetdata.validity_period_name
                                 | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">URL</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">URL</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.url
                               ? routegetdata.url
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
+                      </div>
 
-                                    </div>
-                                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '5'">
-                                        <div class="card-header">
-                                            <strong>Web-based training</strong>
-                                        </div>
-                                        <div>&nbsp;</div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Email of Training Contact</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
-                            routegetdata.email_preffered_instructor
-                              ? routegetdata.email_preffered_instructor
-                              : "-"
-                          }}
-                        </span>
-                                            </div>
+                    </div>
+                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '5'">
+                      <div class="card-header">
+                        <strong>Web-based training</strong>
+                      </div>
+                      <div>&nbsp;</div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1"> Does this course integrate digital?</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1"> Does this course integrate digital?</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.digital
                               ? (routegetdata.digital | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Purchase order required</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Purchase order required</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.purchase_order
                               ? (routegetdata.purchase_order | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Certification</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Certification</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.certification
                               ? (routegetdata.certification | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">  Certification Expiry type name</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">  Certification Expiry type name</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.certification_expiry_type_name
                               ? (routegetdata.certification_expiry_type_name
                                 | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Validity period</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Validity period</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.validity_period_name
                               ? (routegetdata.validity_period_name
                                 | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">External Vendor</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">External Vendor</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.external_vendor
                               ? (routegetdata.external_vendor | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">External Vendor name</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                          {{
+                      </div>
+                      <!--cole dn-->
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">External Vendor name</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
                             routegetdata.external_vendor_name
                               ? (routegetdata.external_vendor_name | titlecase)
                               : "-"
-                          }}
-                        </span>
-                                            </div>
+                            }}
+                          </span>
+                        </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '6'">
-                                    </div>
-                                    <!--cole dn-->
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Additional comments</label>
-                                            <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                        {{
+                      </div>
+                    </div>
+                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '6'">
+                      <div class="card-header">
+                        <strong>Playlist</strong>
+                      </div>
+                      <div>&nbsp;</div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Playlist url</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
+                            routegetdata.url
+                              ? (routegetdata.url | titlecase)
+                              : "-"
+                            }}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Number of learning objects</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
+                            routegetdata.video_link
+                              ? (routegetdata.video_link | titlecase)
+                              : "-"
+                            }}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Email of playlist creator</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
+                            routegetdata.for_whoom
+                              ? (routegetdata.for_whoom | titlecase)
+                              : "-"
+                            }}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">
+                            Is the target audience of your Playlist from one region
+                            only?
+                          </label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
+                            routegetdata.level
+                              ? (routegetdata.level | titlecase)
+                              : "-"
+                            }}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Region of Target Audience</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
+                            routegetdata.who_see_course
+                              ? (routegetdata.who_see_course | titlecase)
+                              : "-"
+                            }}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Target audience</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
+                            routegetdata.free_field_content
+                              ? (routegetdata.free_field_content | titlecase)
+                              : "-"
+                            }}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">OBS employees in specific Functions/Divisions</label>
+                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                            {{
+                            routegetdata.email_preffered_instructor
+                              ? (routegetdata.email_preffered_instructor | titlecase)
+                              : "-"
+                            }}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <!--cole dn-->
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Additional comments</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          {{
                             routegetdata.additional_comment
                               ? (routegetdata.additional_comment
                                 | titlecase)
                               : "-"
-                        }}
-                      </span>
-                                        </div>
+                          }}
+                        </span>
+                      </div>
 
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Regional Cordinator Name</label>
-                                            <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                        {{
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Regional Cordinator Name</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          {{
                             routegetdata.regional_cordinator_name
                               ? (routegetdata.regional_cordinator_name
                                 | titlecase)
                               : "-"
-                        }}
-                      </span>
-                                        </div>
+                          }}
+                        </span>
+                      </div>
 
-                                    </div>
-
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Updated At</label>
-                                            <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.updated_at | date: "short" }}</span>
-                                        </div>
-
-                                    </div>
-                                    <!--cole dn-->
-                                    <!--cole dn-->
-                                </div>
-                                <!--row end-->
-                                <!--row end-->
-                            </div>
-                        </div>
-                        <!--colensd-->
                     </div>
+
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Updated At</label>
+                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.updated_at | date: "short" }}</span>
+                      </div>
+
+                    </div>
+                    <!--cole dn-->
+                    <!--cole dn-->
+                  </div>
+                  <!--row end-->
+                  <!--row end-->
                 </div>
+              </div>
+              <!--colensd-->
             </div>
-        </form>
+          </div>
+        </div>
+      </form>
         <!-- .animated -->
     </div>
     <!-- .content -->

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { ModalDismissReasons, NgbModal, } from "@ng-bootstrap/ng-bootstrap";
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-request-detail',
@@ -10,7 +11,8 @@ import { CourcesService } from 'src/app/shared/services/cources/cources.service'
   styleUrls: ['./request-detail.component.scss']
 })
 export class RequestDetailComponent implements OnInit {
-  getUserrole:any;
+  public commonCreateCourceForm!: FormGroup;
+  getUserrole: any;
   routegetdata: any;
   status: any;
   transfer_user_id: any;
@@ -18,52 +20,54 @@ export class RequestDetailComponent implements OnInit {
   roleuserlist: any = [];
   cordinatorsList: any = [];
   showbuttons: any;
-  otherRocsList:any=[];
-  selectedotherRoc:any;
-  selectedPublisher:any;
-  objectarray:any=[];
+  otherRocsList: any = [];
+  selectedotherRoc: any;
+  getprofileDetails: any;
+  selectedPublisher: any;
+  showrejectbutton: any;
+  objectarray: any = [];
   closeResult = "";
-  rejectcomment:any;
-  constructor(private authService:AuthenticationService,private router:Router,private modalService:NgbModal,private courseService:CourcesService) { 
+  rejectcomment: any;
+  constructor(private fb: FormBuilder, private authService: AuthenticationService, private router: Router, private modalService: NgbModal, private courseService: CourcesService) {
     this.routegetdata = this.router.getCurrentNavigation()?.extras.state;
-				this.routegetdata['titleByLang'] = this.courseService.getTText(this.routegetdata['title']);
-				this.routegetdata['descriptionByLang'] = this.courseService.getTText(this.routegetdata['description']);
-				this.routegetdata['objectiveByLang'] = this.courseService.getTText(this.routegetdata['objective']);
-				this.routegetdata['learn_moreByLang'] = this.courseService.getTText(this.routegetdata['learn_more']);
-				this.routegetdata['for_whomByLang'] = this.courseService.getTText(this.routegetdata['for_whom']);
-
-    if(!this.routegetdata){
+    this.routegetdata['titleByLang'] = this.courseService.getTText(this.routegetdata['title']);
+    this.routegetdata['descriptionByLang'] = this.courseService.getTText(this.routegetdata['description']);
+    this.routegetdata['objectiveByLang'] = this.courseService.getTText(this.routegetdata['objective']);
+    this.routegetdata['learn_moreByLang'] = this.courseService.getTText(this.routegetdata['learn_more']);
+    this.routegetdata['for_whomByLang'] = this.courseService.getTText(this.routegetdata['for_whom']);
+    this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
+    if (!this.routegetdata) {
       this.router.navigateByUrl('/dashboard/cources');
     }
-    
+
   }
 
-  saveChange(){
+  saveChange() {
     console.log('save')
   }
 
-  getPublisher(){
-    this.authService.getUserRoles().subscribe((res:any)=>{
+  getPublisher() {
+    this.authService.getUserRoles().subscribe((res: any) => {
       console.log(res);
       this.publisherList = res.data['4'];
       this.roleuserlist = res.data;
       console.log(this.publisherList)
-    },(err:any)=>{
+    }, (err: any) => {
       console.log(err)
     })
   }
 
-  transferOtherroc(){
-    this.authService.getUserRoles().subscribe((res:any)=>{
+  transferOtherroc() {
+    this.authService.getUserRoles().subscribe((res: any) => {
       console.log(res);
       this.otherRocsList = res.data['3'];
       console.log(this.otherRocsList)
-    },(err:any)=>{
+    }, (err: any) => {
       console.log(err)
     })
   }
 
-  open(content:any) {
+  open(content: any) {
     this.modalService
       .open(content, { size: "sm", backdrop: "static" })
       .result.then(
@@ -86,27 +90,27 @@ export class RequestDetailComponent implements OnInit {
     }
   }
 
-  getRole(){
+  getRole() {
     this.getUserrole = this.authService.getRolefromlocal();
     //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
   }
 
-  updateCource(){
-    this.router.navigateByUrl('/dashboard/cources/create-cource',{state:this.routegetdata})
+  updateCource() {
+    this.router.navigateByUrl('/dashboard/cources/create-cource', { state: this.routegetdata })
   }
 
 
-  reject(){
-    let statusobj = { course_id:this.routegetdata.id ,status:'reject',status_comment:this.rejectcomment}
-    this.courseService.changeStatus(statusobj).subscribe((res:any)=>{
+  reject() {
+    let statusobj = { course_id: this.routegetdata.id, status: 'reject', status_comment: this.rejectcomment }
+    this.courseService.changeStatus(statusobj).subscribe((res: any) => {
       console.log(res);
       this.router.navigate(['/dashboard/cources']);
-    },(err:any)=>{
+    }, (err: any) => {
       console.log(err)
     })
   }
 
-  getRoc(event:any){
+  getRoc(event: any) {
     this.selectedotherRoc = event.target.value;
     console.log(this.selectedotherRoc)
     let region = this.roleuserlist[3];
@@ -127,14 +131,14 @@ export class RequestDetailComponent implements OnInit {
 
   }
 
-  getPublisherselected(event:any){
-  this.selectedPublisher = event.target.value;
-  console.log(this.selectedPublisher)
+  getPublisherselected(event: any) {
+    this.selectedPublisher = event.target.value;
+    console.log(this.selectedPublisher)
   }
 
-  transfertoOtherRoc(){
-    let transferobj ={ course_id:this.routegetdata.id,status:'pending' ,transfer_id:this.selectedotherRoc};
-    this.courseService.courseTransfer(transferobj).subscribe((res:any)=>{
+  transfertoOtherRoc() {
+    let transferobj = { course_id: this.routegetdata.id, status: 'pending', transfer_id: this.selectedotherRoc };
+    this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
       console.log(res);
       let transferobj1 = { course_id: this.routegetdata.id, status: 'pending' };
       this.courseService.courceStatus(transferobj1).subscribe((res: any) => {
@@ -143,18 +147,18 @@ export class RequestDetailComponent implements OnInit {
       }, (err: any) => {
         console.log(err)
       })
-    },(err:any)=>{
+    }, (err: any) => {
       console.log(err)
     })
-    
+
   }
 
-  transfertoPublisher(){
-    let transferobj ={ course_id:this.routegetdata.id ,transfer_id:this.selectedPublisher};
-    this.courseService.courseTransfer(transferobj).subscribe((res:any)=>{
+  transfertoPublisher() {
+    let transferobj = { course_id: this.routegetdata.id, transfer_id: this.selectedPublisher };
+    this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
       console.log(res);
       this.router.navigate(['/dashboard/cources']);
-    },(err:any)=>{
+    }, (err: any) => {
       console.log(err)
     })
   }
@@ -163,16 +167,26 @@ export class RequestDetailComponent implements OnInit {
     console.log(this.routegetdata);
     let arr1 = this.routegetdata.objective;
     this.status = this.routegetdata.status;
-    
+
     this.transfer_user_id = this.routegetdata.transfer_user_id;
     this.showbuttons = this.routegetdata.showbuttons.split('#')[1];
-    
-	console.log(arr1);
+
+    console.log(arr1);
     this.objectarray = [];//arr1.split('• ')
     //console.log(arr1.split('• '))
     this.getPublisher();
     this.getCordinators();
     this.getRole();
+    this.setrejectbutton(this.routegetdata.id);
+  }
+  setrejectbutton(id:any) {
+    this.courseService.courseHistory(id).subscribe((res: any) => {
+      console.log(res);
+      if (res && res.status == 1) {
+        let history = res.data;
+        this.showrejectbutton = history[history.length - 1].action_by;
+      }
+    })
   }
   getCordinators() {
     this.courseService.getregionalCordinator().subscribe(
