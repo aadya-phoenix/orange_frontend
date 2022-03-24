@@ -345,12 +345,18 @@
                                 <tbody *ngIf="flagVar == false">
                                     <tr *ngFor="let cource of courcesList;let i =index;">
                                         <td scope="row">{{i+1}}</td>
-                                        <td>{{ cource.request_id }}</td>
+                                        <td class="re_id">{{ cource.request_id }}</td>
                                         <td *ngIf="getUserrole.id != 2"> <a *ngIf="cource.status=='pending' || cource.status=='closed' || cource.status=='reject'" (click)="openModal(cource)" class="text-primary">
                                         View
                                        </a></td>
-                                        <td>{{ cource.status }}</td>
-                                        <td>{{ cource.title}}</td>
+                                       <td class="text-center">
+                                        <span *ngIf="!cource.status">
+                                            Pending
+                                          </span>
+                                          <p *ngIf="cource.status" [ngClass]="cource.status" style="color:#ffd200">
+                                            {{  cource.status | titlecase   }}
+                                          </p></td>
+                                        <td>{{ cource.titleByLang | titlecase}}</td>
                                         <td>{{ cource.email_content_owner}}</td>
                                         <td>{{cource.transfer_user_name}}</td>
                                         <td>{{ cource.learning_type_name}}</td>
@@ -366,12 +372,18 @@
                                 <tbody *ngIf="flagVar">
                                     <tr *ngFor="let cource of filteredCourseList;let i =index;">
                                         <td scope="row">{{i+1}}</td>
-                                        <td>{{ cource.request_id }}</td>
+                                        <td class="re_id">{{ cource.request_id }}</td>
                                         <td> <a *ngIf="cource.status=='pending' || cource.status=='closed' || cource.status=='reject'" (click)="openModal(cource)" class="text-primary">
                                         View
                                        </a></td>
-                                        <td>{{ cource.status }}</td>
-                                        <td>{{ cource.title}}</td>
+                                       <td class="text-center">
+                                        <span *ngIf="!cource.status">
+                                            Pending
+                                          </span>
+                                          <p *ngIf="cource.status" [ngClass]="cource.status" style="color:#ffd200">
+                                            {{  cource.status | titlecase   }}
+                                          </p></td>
+                                        <td>{{ cource.titleByLang | titlecase}}</td>
                                         <td>{{ cource.email_content_owner}}</td>
                                         <td>{{cource.transfer_user_name}}</td>
                                         <td>{{ cource.learning_type_name}}</td>

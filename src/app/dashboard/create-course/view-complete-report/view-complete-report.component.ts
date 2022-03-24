@@ -76,17 +76,16 @@ export class ViewCompleteReportComponent implements OnInit {
       start_date: new FormControl('', []),
       end_date: new FormControl('', []),
       reporting_period: new FormControl('', []),
-      learning_type: new FormControl('', [Validators.required]),
-      status: new FormControl('', [Validators.required]),
-      department: new FormControl('', [Validators.required]),
-      roc: new FormControl('', [Validators.required]),
-      publisher: new FormControl('', [Validators.required]),
-     //custom_date:new FormControl('', [Validators.required]),
+      learning_type: new FormControl('', []),
+      status: new FormControl('', []),
+      department: new FormControl('', []),
+      roc: new FormControl('', []),
+      publisher: new FormControl('', []),
+     //custom_date:new FormControl('', []),
     });
   }
 
-  refreshCourses() {
-    
+  refreshCourses() {  
    // console.log(this.service.page);
   //  console.log(this.service.pageSize);
     this.pendingRequests=[];
@@ -136,8 +135,7 @@ export class ViewCompleteReportComponent implements OnInit {
             this.courcesList = this.courcesList.filter((course: any) => course.status == this.routegetdata.status)
 
           }
-          
-
+        
           this.collectionSize = this.courcesList.length;
           this.courcesList.map((course: any) => {
             
@@ -191,7 +189,6 @@ export class ViewCompleteReportComponent implements OnInit {
 
   //getLearning type
   getLearningType() {
-
     this.courceService.getLearningType().subscribe(
       (res: any) => {
         console.log(res);
@@ -317,12 +314,12 @@ export class ViewCompleteReportComponent implements OnInit {
       start_date: new FormControl('', []),
       end_date: new FormControl('', []),
       reporting_period: new FormControl('', []),
-      learning_type: new FormControl('', [Validators.required]),
-      status: new FormControl('', [Validators.required]),
-      department: new FormControl('', [Validators.required]),
-      roc: new FormControl('', [Validators.required]),
-      publisher: new FormControl('', [Validators.required]),
-     //custom_date:new FormControl('', [Validators.required]),
+      learning_type: new FormControl('', []),
+      status: new FormControl('', []),
+      department: new FormControl('', []),
+      roc: new FormControl('', []),
+      publisher: new FormControl('', []),
+     //custom_date:new FormControl('', []),
     });
     this.addDate =null;
   }
