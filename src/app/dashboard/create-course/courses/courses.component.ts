@@ -200,7 +200,7 @@ export class CoursesComponent implements OnInit {
             this.allCourses = this.allcoursedataroc;
           }
           else if (this.getUserrole.id == 2) {
-            this.allCourses = this.courcesList;
+            this.allCourses = this.allcoursedatareq;
           }
           else if (this.getUserrole.id == 4) {
             this.allCourses = this.allcoursedatapub;
@@ -212,8 +212,8 @@ export class CoursesComponent implements OnInit {
           if( this.routegetdata && this.routegetdata.status){
             console.log('this.routegetdata',this.routegetdata)
             console.log('this.cou',this.courcesList.filter((course:any)=>course.status == this.routegetdata.status))
-            this.courcesList = this.courcesList.filter((course: any) => course.status == this.routegetdata.status)
-
+            //this.courcesList = this.courcesList.filter((course: any) => course.status == this.routegetdata.status)
+            this.courcesList = this.allCourses
           }
           
 
@@ -328,4 +328,5 @@ export class CoursesComponent implements OnInit {
 
     
   }
+
 }
