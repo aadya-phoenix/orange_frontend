@@ -22,6 +22,7 @@ export class ViewHistoryComponent implements OnInit {
   }
 
   setDialogProps(dialogdata:any){
+
     this.courseHistory = dialogdata.data ? dialogdata.data : '';
     this.courseDetail = dialogdata.data1 ? dialogdata.data1 : '';
     this.copyDeletecourse = dialogdata.data3 ? dialogdata.data3 : '';
@@ -54,7 +55,9 @@ export class ViewHistoryComponent implements OnInit {
      console.log(err)
    })
  }
-
+closeModal(){
+  this.modalService.close();
+}
 
   onClose() {
     this.passEntry.next();

@@ -12,6 +12,7 @@ import { UpdateCourceComponent } from './update-cource/update-cource.component';
 import { ViewCourseDetailsComponent } from './view-course-details/view-course-details.component';
 import { ViewCompleteReportComponent } from './view-complete-report/view-complete-report.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -23,12 +24,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ViewCourseDetailsComponent,
     ViewCompleteReportComponent,
   ],
+  entryComponents:[ViewHistoryComponent],
   imports: [
     CommonModule,
     CreateCourseRoutingModule,
     SharedModule,
     NgxPaginationModule,
-    NgSelectModule
+    NgSelectModule,
+    NgbModule
   ],
 })
 export class CreateCourseModule {}
