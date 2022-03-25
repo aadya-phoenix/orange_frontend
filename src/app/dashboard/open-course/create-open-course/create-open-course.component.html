@@ -8,12 +8,12 @@
                     <div class="d-flex flex-column ml-3">
                         <span style="font-size: 20px" class="mb-1">Create new course </span>
                         <span style="color: #aba3a3; font-size: 13px">
-              <b style="color: #000">Instructor-Led (ILT)</b>-Instructor-Led
-              Training is face to face training delivered in a classroom.<b style="color: #000">
-                Virtual Instructor-Led
-                Training(vILT)-
-              </b>virtual instrutor-Led Training(vILT)is delivered remotely
-            </span>
+                            <b style="color: #000">Instructor-Led (ILT)</b>-Instructor-Led
+                            Training is face to face training delivered in a classroom.<b style="color: #000">
+                                Virtual Instructor-Led
+                                Training(vILT)-
+                            </b>virtual instrutor-Led Training(vILT)is delivered remotely
+                        </span>
                     </div>
                 </div>
             </div>
@@ -55,10 +55,11 @@
                   /> -->
                                     <span class="comlte_css">Complete this form and click on the submit button</span>
                                 </div>
-                                <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                  View overall request status<img src="../../../../assets/images/Viewreq.png" class="ml-2"
-                                                  style="width: 40px" />
-                </a>
+                                <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample"
+                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    View overall request status<img src="../../../../assets/images/Viewreq.png"
+                                        class="ml-2" style="width: 40px" />
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -75,219 +76,202 @@
             <div class="col-md-12">
                 <span class="indicate_css"><span style="color: red">*</span>Indicates required field</span>
 
-                <form *ngIf="learningType != '0'">
+                <form [formGroup]="createSessionForm" enctype="multipart/form-data">
                     <div class="card">
                         <div class="card-header">
                             <strong _ngcontent-jet-c125=""> Course Details </strong>
-                            <!-- <button class="btn btn-primary btn_common">
-          Common Fields
-        </button> -->
                         </div>
-                        <!-- <form [formGroup]="createCourceForm"> -->
+                        
                         <div class="card-body card_width">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                           Event Title <span style="color: red">* </span>
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="Provide the course name as it appears in the Orange Learning catalog.">
-                              </i>
-                            </a>
-                          </label>
-
-                                        <input type="text" class="form-control form_width" placeholder="Enter Event Title">
+                                            Event Title <span style="color: red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top"
+                                                    title="Provide the course name as it appears in the Orange Learning catalog.">
+                                                </i>
+                                            </a>
+                                        </label>
+                                        <input type="text" class="form-control form_width"
+                                            placeholder="Enter Event Title" formControlName="event_title">
                                     </div>
                                 </div>
                                 <!--col-->
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                         Select your region <span style="color: red">* </span>
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="">
-                              </i>
-                            </a>
-                          </label>
+                                            Select your region <span style="color: red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top" title="">
+                                                </i>
+                                            </a>
+                                        </label>
+                                        <ng-select  placeholder="Please Select Region"
+                                        [items]="rocObj" bindLabel="name" bindValue="id" formControlName="region" style="width: 100%">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <!--col-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">
+                                            Delivery Method <span style="color: red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top"
+                                                    title="The delivery method selected will apply to all sessions detailed below.">
+                                                </i>
+                                            </a>
+                                        </label>
+                                       <ng-select  placeholder="Please select Delivery method"
+                                         [items]="deliveryMethod" bindLabel="name" bindValue="id" formControlName="delivery_method" style="width: 100%">
+                                        </ng-select> 
+                                    </div>
+                                </div>
+                                <!--col-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">
+                                            Country <span style="color: red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top"
+                                                    title="Please select the country.">
+                                                </i>
+                                            </a>
+                                        </label>
 
                                         <select class="form-control form_width">
-<option>option 1</option>
-<option>option 2</option>
-<option>option 3</option>
-<option>option 4</option>
- <option>option 5</option>
-</select>
+                                            <option>option 1</option>
+                                            <option>option 2</option>
+                                            <option>option 3</option>
+                                            <option>option 4</option>
+                                            <option>option 5</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <!--col-->
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                        Delivery Method <span style="color: red">* </span>
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="The delivery method selected will apply to all sessions detailed below.">
-                              </i>
-                            </a>
-                          </label>
+                                            Email ID of participants <span style="color: red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top" title="">
+                                                </i>
+                                            </a>
+                                        </label>
 
                                         <select class="form-control form_width">
-<option>option 1</option>
-<option>option 2</option>
-<option>option 3</option>
-<option>option 4</option>
- <option>option 5</option>
-</select>
+                                            <option>option 1</option>
+                                            <option>option 2</option>
+                                            <option>option 3</option>
+                                            <option>option 4</option>
+                                            <option>option 5</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <!--col-->
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                       Country <span style="color: red">* </span>
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="Please select the country.">
-                              </i>
-                            </a>
-                          </label>
+                                            Start Date<span style="color: red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top" title="">
+                                                </i>
+                                            </a>
+                                        </label>
+
+                                        <input type="date" class="form-control form_width" formControlName="start_date">
+                                    </div>
+                                </div>
+                                <!--col-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">
+                                            Start Time<span style="color: red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top" title="">
+                                                </i>
+                                            </a>
+                                        </label>
+
+                                        <input type="time" class="form-control form_width"
+                                        formControlName="start_time">
+                                    </div>
+                                </div>
+                                <!--col-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">
+                                            End Date<span style="color: red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top" title="">
+                                                </i>
+                                            </a>
+                                        </label>
+
+                                        <input type="date" class="form-control form_width"
+                                        formControlName="end_date">
+                                    </div>
+                                </div>
+                                <!--col-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">
+                                            End Time<span style="color: red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top" title="">
+                                                </i>
+                                            </a>
+                                        </label>
+
+                                        <input type="time" class="form-control form_width" formControlName="end_time">
+                                    </div>
+                                </div>
+                                <!--col-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">
+                                            Time Zone
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top"
+                                                    title="Please indicate the time zone of the instructor.">
+                                                </i>
+                                            </a>
+                                        </label>
 
                                         <select class="form-control form_width">
-<option>option 1</option>
-<option>option 2</option>
-<option>option 3</option>
-<option>option 4</option>
- <option>option 5</option>
-</select>
+                                            <option>option 1</option>
+                                            <option>option 2</option>
+                                            <option>option 3</option>
+                                            <option>option 4</option>
+                                            <option>option 5</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <!--col-->
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                      Email ID of participants <span style="color: red">* </span>
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="">
-                              </i>
-                            </a>
-                          </label>
-
-                                        <select class="form-control form_width">
-<option>option 1</option>
-<option>option 2</option>
-<option>option 3</option>
-<option>option 4</option>
- <option>option 5</option>
-</select>
-                                    </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                           Start Date<span style="color: red">* </span>
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="">
-                              </i>
-                            </a>
-                          </label>
-
-                                        <input type="date" class="form-control form_width">
-                                    </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                           Start Time<span style="color: red">* </span>
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="">
-                              </i>
-                            </a>
-                          </label>
-
-                                        <input type="date" class="form-control form_width">
-                                    </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                           End Date<span style="color: red">* </span>
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="">
-                              </i>
-                            </a>
-                          </label>
-
-                                        <input type="date" class="form-control form_width">
-                                    </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                           End Time<span style="color: red">* </span>
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="">
-                              </i>
-                            </a>
-                          </label>
-
-                                        <input type="date" class="form-control form_width">
-                                    </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                    Time Zone
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="Please indicate the time zone of the instructor.">
-                              </i>
-                            </a>
-                          </label>
-
-                                        <select class="form-control form_width">
-<option>option 1</option>
-<option>option 2</option>
-<option>option 3</option>
-<option>option 4</option>
- <option>option 5</option>
-</select>
-                                    </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                           Comments 
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="">
-                              </i>
-                            </a>
-                          </label>
-                                        <textarea class="form-control form_width-textarea" rows="3"></textarea>
+                                            Comments
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top" title="">
+                                                </i>
+                                            </a>
+                                        </label>
+                                        <textarea class="form-control form_width-textarea" rows="3"
+                                        formControlName="comments"></textarea>
 
                                     </div>
                                 </div>
@@ -295,63 +279,65 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                           Minimum Registration <span style="color: red">* </span>
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="Please indicate the minimum number of participants required for the session to take place.">
-                              </i>
-                            </a>
-                          </label>
+                                            Minimum Registration <span style="color: red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top"
+                                                    title="Please indicate the minimum number of participants required for the session to take place.">
+                                                </i>
+                                            </a>
+                                        </label>
 
-                                        <input type="text" class="form-control form_width" placeholder="Enter Minimum Registration ">
+                                        <input type="text" class="form-control form_width"
+                                            placeholder="Enter Minimum Registration " formControlName="min_registration">
                                     </div>
                                 </div>
                                 <!--col-->
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                           Maximum Registration <span style="color: red">* </span>
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="Please indicate the maximum number of participants allowed to register on the session.">
-                              </i>
-                            </a>
-                          </label>
+                                            Maximum Registration <span style="color: red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top"
+                                                    title="Please indicate the maximum number of participants allowed to register on the session.">
+                                                </i>
+                                            </a>
+                                        </label>
 
-                                        <input type="text" class="form-control form_width" placeholder="Enter Maximum Registration ">
+                                        <input type="text" class="form-control form_width"
+                                            placeholder="Enter Maximum Registration " formControlName="max_registration">
                                     </div>
                                 </div>
                                 <!--col-->
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                          Registration Deadline<span style="color: red">* </span>
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="">
-                              </i>
-                            </a>
-                          </label>
+                                            Registration Deadline<span style="color: red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top" title="">
+                                                </i>
+                                            </a>
+                                        </label>
 
-                                        <input type="date" class="form-control form_width">
+                                        <input type="date" class="form-control form_width" formControlName="reg_deadline">
                                     </div>
                                 </div>
                                 <!--col-->
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                           Availability <span style="color: red">* </span>
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="Please indicate if the session should be restricted to a specific target audience: e.g. employees in a specific location, specific business unit, specific users.">
-                              </i>
-                            </a>
-                          </label>
-                                        <textarea class="form-control form_width-textarea" rows="3"></textarea>
+                                            Availability <span style="color: red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top"
+                                                    title="Please indicate if the session should be restricted to a specific target audience: e.g. employees in a specific location, specific business unit, specific users.">
+                                                </i>
+                                            </a>
+                                        </label>
+                                        <textarea class="form-control form_width-textarea" rows="3"
+                                        formControlName="availability"></textarea>
 
                                     </div>
                                 </div>
@@ -359,95 +345,87 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                        External vendor <span style="color: red">* </span>
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="Please indicate if the session is delivered by an external training provider.">
-                              </i>
-                            </a>
-                          </label>
+                                            External vendor <span style="color: red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top"
+                                                    title="Please indicate if the session is delivered by an external training provider.">
+                                                </i>
+                                            </a>
+                                        </label>
 
-                                        <select class="form-control form_width">
-<option>option 1</option>
-<option>option 2</option>
-<option>option 3</option>
-<option>option 4</option>
- <option>option 5</option>
-</select>
+                                        <ng-select placeholder="Please select" (change)="externalVendor($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="external_vendor" style="width: 100%">
+                                        </ng-select>
                                     </div>
                                 </div>
                                 <!--col-->
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                      Manager Approval
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="Please indicate if learners require manager approval to register for this session.">
-                              </i>
-                            </a>
-                          </label>
+                                            Manager Approval
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top"
+                                                    title="Please indicate if learners require manager approval to register for this session.">
+                                                </i>
+                                            </a>
+                                        </label>
 
-                                        <select class="form-control form_width">
-<option>option 1</option>
-<option>option 2</option>
-<option>option 3</option>
-<option>option 4</option>
- <option>option 5</option>
-</select>
+                                        <ng-select placeholder="Please select" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="manager_approval" style="width: 100%">
+                                        </ng-select>
                                     </div>
                                 </div>
                                 <!--col-->
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                          Training cost per participant 
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="Training delivered by Orange instructors has a standard cost of 20 Euros per hour per participant. Example: A course with the duration of 7 hours will have a training cost of 140 Euros.
-The cost of training delivered by an external instructor will be advertised as a cost per participant on the basis of 10 participants per session. The final cost will vary according to the number of participants.
-Example: A session costing a total of 2000 Euros will be advertised as a cost of 200 Euros per participant. If the final number of participants is 8, the final cost per participant will be 250 Euros. If the final number of participants is 12, the final cost per participant will be 166,50 Euros.
-Your Training Coordinator will update training costs on Orange Learning if required.">
-                              </i>
-                            </a>
-                          </label>
+                                            Training cost per participant
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top" title="Training delivered by Orange instructors has a standard cost of 20 Euros per hour per participant. Example: A course with the duration of 7 hours will have a training cost of 140 Euros.
+                                                    The cost of training delivered by an external instructor will be advertised as a cost per participant on the basis of 10 participants per session. The final cost will vary according to the number of participants.
+                                                    Example: A session costing a total of 2000 Euros will be advertised as a cost of 200 Euros per participant. If the final number of participants is 8, the final cost per participant will be 250 Euros. If the final number of participants is 12, the final cost per participant will be 166,50 Euros.
+                                                    Your Training Coordinator will update training costs on Orange Learning if required.">
+                                                 </i>
+                                            </a>
+                                        </label>
 
-                                        <input type="text" class="form-control form_width" placeholder="Enter Training cost per participant">
+                                        <input type="text" class="form-control form_width"
+                                            placeholder="Enter Training cost per participant" formControlName="training_cost">
                                     </div>
                                 </div>
                                 <!--col-->
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                         Description 
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="">
-                              </i>
-                            </a>
-                          </label>
+                                            Description
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top" title="">
+                                                </i>
+                                            </a>
+                                        </label>
 
-                                        <input type="text" class="form-control form_width" placeholder="Enter Description">
+                                        <input type="text" class="form-control form_width"
+                                            placeholder="Enter Description"
+                                            formControlName="description">
                                     </div>
                                 </div>
                                 <!--col-->
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                         Break Duration(HH:MM) 
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="">
-                              </i>
-                            </a>
-                          </label>
+                                            Break Duration(HH:MM)
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top" title="">
+                                                </i>
+                                            </a>
+                                        </label>
 
-                                        <input type="text" class="form-control form_width" placeholder="Enter Break Duration(HH:MM)">
+                                        <input type="text" (keyup)="numbersOnly($event)" class="form-control form_width"
+                                            placeholder="Enter Break Duration(HH:MM)"
+                                            formControlName="break_duration"  maxlength="5">
                                     </div>
                                 </div>
                                 <!--col-->
@@ -467,7 +445,8 @@ Your Training Coordinator will update training costs on Orange Learning if requi
     <div class="card card-body req_status-card">
         <div class="card_header reqst_header">
             <p>Overall request Status</p>
-            <i class="fa fa-times fa_cross mr-2" aria-hidden="true" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
+            <i class="fa fa-times fa_cross mr-2" aria-hidden="true" data-toggle="collapse" href="#collapseExample"
+                role="button" aria-expanded="false" aria-controls="collapseExample"></i>
         </div>
         <div class="row ml-1 mr-1" data-aos="fade-right">
             <div class="col-sm-2 dash_wid">
@@ -479,12 +458,12 @@ Your Training Coordinator will update training costs on Orange Learning if requi
 
                         <p>Draft</p>
                         <span class="number_css">
-                {{
-                draftRequests && draftRequests.length
-                ? draftRequests.length
-                : "0"
-                }}
-              </span>
+                            {{
+                            draftRequests && draftRequests.length
+                            ? draftRequests.length
+                            : "0"
+                            }}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -498,15 +477,15 @@ Your Training Coordinator will update training costs on Orange Learning if requi
 
                         <p>Submitted</p>
                         <span class="number_css">
-                {{
-                coursesList && coursesList.length ? coursesList.length : "0"
-                }}
-              </span>
+                            {{
+                            coursesList && coursesList.length ? coursesList.length : "0"
+                            }}
+                        </span>
                     </div>
                 </div>
             </div>
             <!--coled-->
-            <div class="col-sm-2 dash_wid" *ngIf="getUserrole.id != 2">
+            <div class="col-sm-2 dash_wid" >
                 <div class="alig_dashicon">
                     <div>
                         <div class="fa-icons-des" style="background-color: transparent">
@@ -515,12 +494,12 @@ Your Training Coordinator will update training costs on Orange Learning if requi
 
                         <p>Pending</p>
                         <span class="number_css">
-                {{
-                pendingRequests && pendingRequests.length
-                ? pendingRequests.length
-                : "0"
-                }}
-              </span>
+                            {{
+                            pendingRequests && pendingRequests.length
+                            ? pendingRequests.length
+                            : "0"
+                            }}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -534,12 +513,12 @@ Your Training Coordinator will update training costs on Orange Learning if requi
 
                         <p>Closed</p>
                         <span class="number_css">
-                {{
-                closedRequests && closedRequests.length
-                ? closedRequests.length
-                : "0"
-                }}
-              </span>
+                            {{
+                            closedRequests && closedRequests.length
+                            ? closedRequests.length
+                            : "0"
+                            }}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -553,12 +532,12 @@ Your Training Coordinator will update training costs on Orange Learning if requi
 
                         <p>Rejected</p>
                         <span class="number_css">
-                {{
-                rejectedRequests && rejectedRequests.length
-                ? rejectedRequests.length
-                : "0"
-                }}
-              </span>
+                            {{
+                            rejectedRequests && rejectedRequests.length
+                            ? rejectedRequests.length
+                            : "0"
+                            }}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -567,8 +546,8 @@ Your Training Coordinator will update training costs on Orange Learning if requi
         <!--ROW END-->
         <div class="view-comple-req_div">
             <button class="btn btn-primary view-comple-req justify-content-center" style="color: #fff">
-          <img src="../../../../assets/images/icon/viewrewall.png" style="width: 28px" />View Complete Request
-        </button>
+                <img src="../../../../assets/images/icon/viewrewall.png" style="width: 28px" />View Complete Request
+            </button>
         </div>
         <!--ROW END-->
     </div>
