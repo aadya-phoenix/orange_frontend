@@ -125,6 +125,7 @@
                                     <!--colend-->
                                 </div>
                                 <!--row-->
+                                <div class="row">
                                 <div *ngIf="getUserrole.id != 2" class="col-sm-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Roc
@@ -157,6 +158,7 @@
                                     </div>
                                 </div>
                                 <!--colend-->
+                                </div>
                                 <!-- <div class="col-sm-4">
                                 <div class="form-group">
                                     <label class="form-control-label">Custom Date
@@ -324,7 +326,7 @@
                         <div class="table-responsive">
                             <table id="excel-table" class="table table-bordered">
                                 <thead>
-                                    <tr style="white-space: nowrap;font-size: 12px;">
+                                    <tr style="white-space: nowrap;font-size: 13px;text-align: center;">
                                         <th scope="col">#</th>
                                         <th sortable="id " (sort)="onSort($event)" scope="col">Request Id</th>
                                         <th *ngIf="getUserrole.id != 2" scope="col">History</th>
@@ -342,8 +344,8 @@
                                         <th sortable="last_modified" (sort)="onSort($event)" scope="col">Last Modified</th>
                                     </tr>
                                 </thead>
-                                <tbody *ngIf="flagVar == false">
-                                    <tr *ngFor="let cource of courcesList;let i =index;">
+                                <tbody *ngIf="flagVar == false" >
+                                    <tr *ngFor="let cource of courcesList;let i =index;" style="font-size: 13px;text-align: center;">
                                         <td scope="row">{{i+1}}</td>
                                         <td class="re_id">{{ cource.request_id }}</td>
                                         <td *ngIf="getUserrole.id != 2"> <a *ngIf="cource.status=='pending' || cource.status=='closed' || cource.status=='reject'" (click)="openModal(cource)" class="text-primary">
@@ -370,7 +372,7 @@
                                     </tr>
                                 </tbody>
                                 <tbody *ngIf="flagVar">
-                                    <tr *ngFor="let cource of filteredCourseList;let i =index;">
+                                    <tr *ngFor="let cource of filteredCourseList;let i =index;"style="font-size: 12px;text-align:center;">
                                         <td scope="row">{{i+1}}</td>
                                         <td class="re_id">{{ cource.request_id }}</td>
                                         <td> <a *ngIf="cource.status=='pending' || cource.status=='closed' || cource.status=='reject'" (click)="openModal(cource)" class="text-primary">
