@@ -254,7 +254,7 @@ export class AllCoursesComponent implements OnInit {
       console.log(res);
       let coursedetail = res.data;
       let username = { user_name: cource.user_name, showbuttons: cource.purchase_order }
-      this.router.navigateByUrl('/dashboard/cources/request-detail', {
+      this.router.navigateByUrl('/dashboard/open/open-request-detail', {
         state: {...coursedetail,...username},
       });
     },(err:any)=>{

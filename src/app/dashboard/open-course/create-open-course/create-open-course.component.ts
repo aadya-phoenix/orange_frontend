@@ -12,7 +12,10 @@ export class CreateOpenCourseComponent implements OnInit {
 
   public courcesList: any=[];
   public deliveryMethod: any;
-
+  countryObj:any;
+  timeZoneObj:any;
+  coursesList:any;
+  pendingRequests:any;
   draftRequests:any =[];
   getUserrole: any;
   closedRequests:any=[];
@@ -57,7 +60,9 @@ export class CreateOpenCourseComponent implements OnInit {
     });
 
     this.getDeliveryMethod();
-    this.getRegionalCordinator()
+    this.getRegionalCordinator();
+    this.getCountries();
+    this.getTimezone();
   }
 
   getRegionalCordinator(){
@@ -74,6 +79,30 @@ export class CreateOpenCourseComponent implements OnInit {
       (res: any) => {
         console.log("delivery",res);
         this.deliveryMethod = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
+  getCountries(){
+    this.courseService.getCountries().subscribe(
+      (res: any) => {
+        console.log("country",res);
+        this.countryObj = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
+  getTimezone(){
+    this.courseService.getTimezone().subscribe(
+      (res: any) => {
+        console.log("time-zone",res);
+        this.timeZoneObj = res.data;
       },
       (err: any) => {
         console.log(err);

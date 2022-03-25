@@ -216,6 +216,23 @@ export class CourcesService {
       const urllive = `${this.basePath}api/${this.apiVersion}/user/transfer`;
       return this.http.post(url, id).pipe(catchError(this.Errorhandling));  
      }
+     //country
+     getCountries(){
+      const url = `/api/${this.apiVersion}/cct-country`;
+      const urllive = `${this.basePath}api/${this.apiVersion}/cct-country`;
+      return this.http
+        .get(url, this.http.headers)
+        .pipe(catchError(this.Errorhandling));
+     }
+
+     //timezone
+     getTimezone(){
+      const url = `/api/${this.apiVersion}/cct-timezone`;
+      const urllive = `${this.basePath}api/${this.apiVersion}/cct-timezone`;
+      return this.http
+        .get(url, this.http.headers)
+        .pipe(catchError(this.Errorhandling));
+     }
      
 
   Errorhandling(err: HttpErrorResponse) {
