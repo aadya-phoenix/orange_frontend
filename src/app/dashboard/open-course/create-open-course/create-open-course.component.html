@@ -55,8 +55,7 @@
                   /> -->
                                     <span class="comlte_css">Complete this form and click on the submit button</span>
                                 </div>
-                                <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample"
-                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                     View overall request status<img src="../../../../assets/images/Viewreq.png"
                                         class="ml-2" style="width: 40px" />
                                 </a>
@@ -79,9 +78,16 @@
                 <form [formGroup]="createSessionForm" enctype="multipart/form-data">
                     <div class="card">
                         <div class="card-header">
-                            <strong _ngcontent-jet-c125=""> Course Details </strong>
+                            <div class="heeader_button">
+                                <strong _ngcontent-jet-c125=""> Course Details </strong>
+                                <div class="button_div">
+                                    <button class="btn btn-primary mr-1">Copy Session <i class="fa fa-files-o ml-1" aria-hidden="true"></i></button>
+                                    <button class="btn btn-info mr-1">Add the Session +</button>
+                                    <button class="btn btn-danger">Remove <i class="fa fa-minus ml-1" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
                         </div>
-                        
+
                         <div class="card-body card_width">
                             <div class="row">
                                 <div class="col-sm-6">
@@ -95,8 +101,7 @@
                                                 </i>
                                             </a>
                                         </label>
-                                        <input type="text" class="form-control form_width"
-                                            placeholder="Enter Event Title" formControlName="event_title">
+                                        <input type="text" class="form-control form_width" placeholder="Enter Event Title" formControlName="event_title">
                                     </div>
                                 </div>
                                 <!--col-->
@@ -110,8 +115,7 @@
                                                 </i>
                                             </a>
                                         </label>
-                                        <ng-select  placeholder="Please Select Region"
-                                        [items]="rocObj" bindLabel="name" bindValue="id" formControlName="region" style="width: 100%">
+                                        <ng-select placeholder="Please Select Region" [items]="rocObj" bindLabel="name" bindValue="id" formControlName="region" style="width: 100%">
                                         </ng-select>
                                     </div>
                                 </div>
@@ -127,9 +131,8 @@
                                                 </i>
                                             </a>
                                         </label>
-                                       <ng-select  placeholder="Please select Delivery method"
-                                         [items]="deliveryMethod" bindLabel="name" bindValue="id" formControlName="delivery_method" style="width: 100%">
-                                        </ng-select> 
+                                        <ng-select placeholder="Please select Delivery method" [items]="deliveryMethod" bindLabel="name" bindValue="id" formControlName="delivery_method" style="width: 100%">
+                                        </ng-select>
                                     </div>
                                 </div>
                                 <!--col-->
@@ -155,7 +158,23 @@
                                     </div>
                                 </div>
                                 <!--col-->
-                                <div class="col-sm-6">
+
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card">
+
+
+                        <div class="card-body card_width">
+
+                            <div class="row">
+
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <label class="form-control-label">
                                             Email ID of participants <span style="color: red">* </span>
@@ -202,8 +221,7 @@
                                             </a>
                                         </label>
 
-                                        <input type="time" class="form-control form_width"
-                                        formControlName="start_time">
+                                        <input type="time" class="form-control form_width" formControlName="start_time">
                                     </div>
                                 </div>
                                 <!--col-->
@@ -218,8 +236,7 @@
                                             </a>
                                         </label>
 
-                                        <input type="date" class="form-control form_width"
-                                        formControlName="end_date">
+                                        <input type="date" class="form-control form_width" formControlName="end_date">
                                     </div>
                                 </div>
                                 <!--col-->
@@ -238,6 +255,53 @@
                                     </div>
                                 </div>
                                 <!--col-->
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card">
+
+
+                        <div class="card-body card_width">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Description</th>
+
+                                                <th scope="col" style="width: 12px"><button class="btn btn-primary">Add Break +</button></th>
+                                            </tr>
+                                            <tr>
+
+                                                <td class="d-flex">
+                                                    <textarea class="form-control form_width-textarea w-100 mr-2" rows="3" placeholder="Enter Description" formControlName="description"></textarea>
+                                                    <input type="time" class="form-control form_width" formControlName="start_time">
+                                                </td>
+                                                <td>
+
+                                                    <button class="btn btn-danger">
+                           Remove Break -
+                          </button>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <!--col-->
+                            </div>
+                            <!--row-->
+
+                        </div>
+                    </div>
+                    <div class="card">
+
+
+                        <div class="card-body card_width">
+
+                            <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
@@ -270,8 +334,7 @@
                                                 </i>
                                             </a>
                                         </label>
-                                        <textarea class="form-control form_width-textarea" rows="3"
-                                        formControlName="comments"></textarea>
+                                        <textarea class="form-control form_width-textarea" rows="3" formControlName="comments"></textarea>
 
                                     </div>
                                 </div>
@@ -288,8 +351,7 @@
                                             </a>
                                         </label>
 
-                                        <input type="text" class="form-control form_width"
-                                            placeholder="Enter Minimum Registration " formControlName="min_registration">
+                                        <input type="text" class="form-control form_width" placeholder="Enter Minimum Registration " formControlName="min_registration">
                                     </div>
                                 </div>
                                 <!--col-->
@@ -305,8 +367,7 @@
                                             </a>
                                         </label>
 
-                                        <input type="text" class="form-control form_width"
-                                            placeholder="Enter Maximum Registration " formControlName="max_registration">
+                                        <input type="text" class="form-control form_width" placeholder="Enter Maximum Registration " formControlName="max_registration">
                                     </div>
                                 </div>
                                 <!--col-->
@@ -336,8 +397,7 @@
                                                 </i>
                                             </a>
                                         </label>
-                                        <textarea class="form-control form_width-textarea" rows="3"
-                                        formControlName="availability"></textarea>
+                                        <textarea class="form-control form_width-textarea" rows="3" formControlName="availability"></textarea>
 
                                     </div>
                                 </div>
@@ -390,8 +450,7 @@
                                             </a>
                                         </label>
 
-                                        <input type="text" class="form-control form_width"
-                                            placeholder="Enter Training cost per participant" formControlName="training_cost">
+                                        <input type="text" class="form-control form_width" placeholder="Enter Training cost per participant" formControlName="training_cost">
                                     </div>
                                 </div>
                                 <!--col-->
@@ -406,9 +465,7 @@
                                             </a>
                                         </label>
 
-                                        <input type="text" class="form-control form_width"
-                                            placeholder="Enter Description"
-                                            formControlName="description">
+                                        <input type="text" class="form-control form_width" placeholder="Enter Description" formControlName="description">
                                     </div>
                                 </div>
                                 <!--col-->
@@ -423,9 +480,7 @@
                                             </a>
                                         </label>
 
-                                        <input type="text" (keyup)="numbersOnly($event)" class="form-control form_width"
-                                            placeholder="Enter Break Duration(HH:MM)"
-                                            formControlName="break_duration"  maxlength="5">
+                                        <input type="text" (keyup)="numbersOnly($event)" class="form-control form_width" placeholder="Enter Break Duration(HH:MM)" formControlName="break_duration" maxlength="5">
                                     </div>
                                 </div>
                                 <!--col-->
@@ -433,6 +488,8 @@
 
 
                             </div>
+                            <!--row-->
+
                         </div>
                     </div>
                 </form>
@@ -445,8 +502,7 @@
     <div class="card card-body req_status-card">
         <div class="card_header reqst_header">
             <p>Overall request Status</p>
-            <i class="fa fa-times fa_cross mr-2" aria-hidden="true" data-toggle="collapse" href="#collapseExample"
-                role="button" aria-expanded="false" aria-controls="collapseExample"></i>
+            <i class="fa fa-times fa_cross mr-2" aria-hidden="true" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
         </div>
         <div class="row ml-1 mr-1" data-aos="fade-right">
             <div class="col-sm-2 dash_wid">
@@ -485,7 +541,7 @@
                 </div>
             </div>
             <!--coled-->
-            <div class="col-sm-2 dash_wid" >
+            <div class="col-sm-2 dash_wid">
                 <div class="alig_dashicon">
                     <div>
                         <div class="fa-icons-des" style="background-color: transparent">
