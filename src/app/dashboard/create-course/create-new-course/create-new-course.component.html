@@ -127,16 +127,19 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="form-group" style="width: 100%">
                                                     <label class="form-control-label">
-                            Title <span style="color: red">* </span>
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="Do provide an attractive, catchy and clear learning activity title (max 100 characters). Example: 7 Habits of Highly Effective People. Don’t use prefixes such as ‘OBS’ or abbreviations such as ‘ops’. Don’t make references to session location or target "></i>
-                            </a>
-                          </label>
-                                                    <input type="text" [(ngModel)]="showtitle" placeholder="Enter Title" class="form-control form_width" formControlName="title_single" />
-                                                </div>
-
+                                             Title <span style="color: red">* </span>
+                                             <a>
+                                               <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                                                  data-placement="top"
+                                                  title="Do provide an attractive, catchy and clear learning activity title (max 100 characters). Example: 7 Habits of Highly Effective People. Don’t use prefixes such as ‘OBS’ or abbreviations such as ‘ops’. Don’t make references to session location or target "></i>
+                                             </a>
+                                           </label>
+                                                 <input type="text" [(ngModel)]="showtitle" placeholder="Enter Title" class="form-control form_width" formControlName="title_single" />
+                                                 <!--  <div class="error_message"*ngIf="commonCreateCourceForm.controls['title_single'].errors.required && commonCreateCourceForm.controls['title_single'].touched">
+                                                     Please Enter Title
+                                                 </div> --> 
+                                             </div>
+                 
                                                 <div>
                                                     <a href="" data-toggle="modal" data-target="#titleModal" class="d-flex flex-column align-items-end">
                                                         <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
@@ -164,6 +167,9 @@
 
                                                     <ng-select placeholder="Please select training provided" [items]="vendorType" bindLabel="name" bindValue="name" formControlName="training_provided_by" style="width: 100%">
                                                     </ng-select>
+                                                     <div class="error_message"*ngIf="commonCreateCourceForm.controls['training_provided_by'].hasError('required') && commonCreateCourceForm.controls['training_provided_by'].touched">
+                                                        Please Enter Training Provided By
+                                                    </div> 
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -194,7 +200,9 @@
                                 </i>
                               </a>
                             </label>
-                                                        <textarea class="form-control form_width-textarea" [(ngModel)]="showdescription" rows="3" placeholder="Enter Description" formControlName="description_single"></textarea>
+                                                        <textarea class="form-control form_width-textarea" [(ngModel)]="showdescription" (ngModelChange)="valueChange(showdescription)" maxlength="500"
+                                                        rows="3" placeholder="Enter Description" formControlName="description_single"></textarea>
+                                                        <span>{{remainingText}} characters remaining</span>
                                                     </div>
                                                     <div>
                                                         <a href="" data-toggle="modal" data-target="#commonDescription" class="d-flex flex-column align-items-end">
@@ -889,18 +897,18 @@
                                             </div>
                                         </div>
                                         <!--colend-->
-                                        <div class="col-sm-6">
+                                         <div class="col-sm-6">
                                             <div class="d-flex align-items-center">
                                                 <div class="form-group" style="width: 100%;">
                                                     <label class="form-control-label">
-                            For Whom? <span style="color: red">* </span>
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="Define the target audience for whom the course is designed.">
-                              </i>
-                            </a>
-                          </label>
+                                                      For Whom? <span style="color: red">* </span>
+                                                      <a>
+                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                                                           data-placement="top"
+                                                           title="Define the target audience for whom the course is designed.">
+                                                        </i>
+                                                      </a>
+                                                    </label>
                                                     <textarea class="form-control form_width-textarea" [(ngModel)]="showforwhoom" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom_single"></textarea>
 
                                                 </div>
@@ -910,21 +918,21 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> 
                                         <!--colend-->
 
-                                        <div class="col-sm-6">
+                                         <div class="col-sm-6">
                                             <div class="d-flex align-items-center">
                                                 <div class="form-group" style="width: 100%">
                                                     <label class="form-control-label">
-                            Learn more
-                            <a>
-                              <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                                 data-placement="top"
-                                 title="If you wish, add a link enabling users to access additional information about the program.">
-                              </i>
-                            </a>
-                          </label>
+                                                      Learn more
+                                                      <a>
+                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                                                           data-placement="top"
+                                                           title="If you wish, add a link enabling users to access additional information about the program.">
+                                                        </i>
+                                                      </a>
+                                                    </label>
                                                     <input type="text" placeholder="Enter Learn more" [(ngModel)]="showlearnmore" class="form-control form_width" formControlName="learn_more_single" />
                                                 </div>
                                                 <div>
@@ -933,21 +941,21 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> 
                                         <!--colend-->
-                                        <div class="col-sm-6">
+                                       <!--  <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          Title of the additional free text field
-                          <a>
-                            <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                               data-placement="top" title="Title of the additional free text field">
-                            </i>
-                          </a>
-                        </label>
+                                                   Title of the additional free text field
+                                                   <a>
+                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                                                        data-placement="top" title="Title of the additional free text field">
+                                                     </i>
+                                                   </a>
+                                                 </label>
                                                 <input [(ngModel)]="showILTtitleAdditional" type="text" placeholder="Enter Title of the additional free text field" class="form-control form_width" formControlName="title_additional" />
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <!--colend-->
                                     </div>
                                     <!--row end-->
@@ -1364,7 +1372,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" *ngIf="getUserrole.id === 2">
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-control-label">
@@ -1536,7 +1544,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" *ngIf="getUserrole.id === 2">
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-control-label">
@@ -1687,7 +1695,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" *ngIf="getUserrole.id === 2">
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-control-label">
@@ -1913,7 +1921,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" *ngIf="getUserrole.id === 2">
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-control-label">
@@ -2152,7 +2160,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" *ngIf="getUserrole.id === 2">
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-control-label">
@@ -2660,7 +2668,8 @@
                             <div class="form-group">
 
                                 <label>Comments</label>
-                                <textarea class="form-control form_width-textarea" rows="3 " formControlName="additional_comment" placeholder="Enter Your Comments ">
+                               <!--  formControlName="additional_comment" -->
+                                <textarea class="form-control form_width-textarea" rows="3 "  placeholder="Enter Your Comments ">
                 </textarea>
                             </div>
                         </div>

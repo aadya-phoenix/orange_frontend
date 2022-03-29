@@ -5,6 +5,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/observable/fromEvent';
 import { Subscription } from 'rxjs';
+/*  import * as CustomBuild from 'ckEditorCustomBuild/build/ckeditor';  */
 
 import {
   FormArray,
@@ -28,6 +29,10 @@ export class CreateNewCourseComponent implements OnInit {
   formCtrlSub: Subscription = new Subscription();
   isImageSaved: any;
   totalObjnew: any = {};
+
+ /*  public Editor = CustomBuild; */
+
+
   public cardImageBase64: any;
   public createCourceForm!: FormGroup;
   public commonCreateCourceForm!: FormGroup;
@@ -63,6 +68,7 @@ export class CreateNewCourseComponent implements OnInit {
   fileToUpload: any[] = [];
   fileToUpload_Material: any[] = [];
   j: any = 0;
+  remainingText:any=0;
   public lang;
   public imageError: string = "";
   public requiredFields: any = {
@@ -324,18 +330,22 @@ export class CreateNewCourseComponent implements OnInit {
       this.showforwhoom = this.courceService.getTText(this.routergetdata.for_whoom)
       this.showlearnmore = this.courceService.getTText(this.routergetdata.learn_more)
       if (this.learningType != "6") {
+        if (this.routergetdata.resource!=null){
         let objectdata: any = {
           fileName: this.routergetdata.resource.split('/')[3],
           url: 'https://orange.mindscroll.info/' + this.routergetdata.resource
         };
         this.fileToUpload.push(objectdata);
       }
+      }
       if (this.learningType == "3") {
+        if (this.routergetdata.material_source!=null){
         let objectdata: any = {
           fileName: this.routergetdata.material_source.split('/')[3],
           url: 'https://orange.mindscroll.info/' + this.routergetdata.material_source
         };
         this.fileToUpload_Material.push(objectdata);
+      }
       }
       //for (let l in learner_guide) {
       //  console.log(l[0])
@@ -553,7 +563,6 @@ export class CreateNewCourseComponent implements OnInit {
 
   //getLearning type
   getLearningType() {
-
     this.courceService.getLearningType().subscribe(
       (res: any) => {
         console.log(res);
@@ -751,8 +760,8 @@ export class CreateNewCourseComponent implements OnInit {
     this.videobasedForm = this.fb.group({
       video_link: new FormControl(''),
       additional_comment: new FormControl(''),
-      email_preffered_instructor: new FormControl('', [Validators.required,
-      Validators.pattern(emailregexp)]),
+     // email_preffered_instructor: new FormControl('', [Validators.required,
+   //   Validators.pattern(emailregexp)]),
       regional_cordinator:
         this.getUserrole.id === 2
           ? new FormControl('', [Validators.required])
@@ -774,8 +783,8 @@ export class CreateNewCourseComponent implements OnInit {
 
     //curriculum
     this.currriculumForm = this.fb.group({
-      email_preffered_instructor: new FormControl('', [Validators.required,
-      Validators.pattern(emailregexp)]),
+      /* email_preffered_instructor: new FormControl('', [Validators.required,
+      Validators.pattern(emailregexp)]), */
       digital: new FormControl('', [Validators.required]),
       certification: new FormControl('', [Validators.required]),
       certification_expiry_type: new FormControl(''),
@@ -806,8 +815,8 @@ export class CreateNewCourseComponent implements OnInit {
       this.languageValueSet_new(this.currriculumForm, 'learn_more_single', 'learnMoreArr');
     }
     this.webbasedForm = this.fb.group({
-      email_preffered_instructor: new FormControl('', [Validators.required,
-      Validators.pattern(emailregexp)]),
+     /*  email_preffered_instructor: new FormControl('', [Validators.required,
+      Validators.pattern(emailregexp)]), */
       digital: new FormControl('', [Validators.required]),
       certification: new FormControl('', [Validators.required]),
       certification_expiry_type: new FormControl(''),
@@ -1241,7 +1250,7 @@ export class CreateNewCourseComponent implements OnInit {
     }
   }
   createNewCource_Save(commonformObj: FormGroup, formObj: FormGroup, status: any) {
-    console.log(status);
+    console.log("status video is ",status);
     console.log(this.learnerGuidearray);
     let savetype = { status: status };
     let courseid = { course_id: this.routergetdata == undefined ? null : this.routergetdata.id, resource_ext: '', material_source_ext: '' };
@@ -1394,9 +1403,10 @@ export class CreateNewCourseComponent implements OnInit {
       ...commonformObj.value,
       ...courseid
     };
+    console.log("total obj is",totalObj);
     if (this.learningType != "6") {
       this.fileToUpload.forEach(element => {
-        console.log(element)
+        console.log("element is",element)
         totalObj.resource_ext = element.fileName.split('.')[1]
         totalObj.resource = element.base64FileBytes
       });
@@ -1512,6 +1522,7 @@ export class CreateNewCourseComponent implements OnInit {
         );
       }
     } else {
+      console.log("form is invalid");
       commonformObj.markAllAsTouched();
       formObj.markAllAsTouched();
     }
@@ -1655,7 +1666,9 @@ export class CreateNewCourseComponent implements OnInit {
     this.selectedPublisherId = event.target.value;
   }
 
-
+  valueChange(value:any){
+    this.remainingText = 500 - value.length;
+  }
 
 
   //getallFormValidationErrors(formObj: FormGroup, name:any) {
@@ -1853,6 +1866,7 @@ export class CreateNewCourseComponent implements OnInit {
     }
   }
   handleFileInput(event: any) {
+    console.log("event is",event.target.files[0]);
     this.FileConvertintoBytearray(event.target.files[0], async (f) => { // creating array bytes
 
       let objectdata: any = {

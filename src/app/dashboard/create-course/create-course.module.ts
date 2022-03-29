@@ -14,6 +14,7 @@ import { ViewCompleteReportComponent } from './view-complete-report/view-complet
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+
 @NgModule({
   declarations: [
     CoursesComponent,
@@ -31,6 +32,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SharedModule,
     NgxPaginationModule,
     NgSelectModule,
+    
     NgbModule
   ],
 })

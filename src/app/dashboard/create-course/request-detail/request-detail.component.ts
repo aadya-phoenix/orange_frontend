@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { ModalDismissReasons, NgbModal, } from "@ng-bootstrap/ng-bootstrap";
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-request-detail',
@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class RequestDetailComponent implements OnInit {
   public commonCreateCourceForm!: FormGroup;
+  public publishForm!: FormGroup;
   getUserrole: any;
   routegetdata: any;
   status: any;
@@ -99,7 +100,20 @@ export class RequestDetailComponent implements OnInit {
     this.router.navigateByUrl('/dashboard/cources/create-cource', { state: this.routegetdata })
   }
 
-
+  PublishRequest(){
+    let transferobj = { course_id: this.routegetdata.id, transfer_id: this.selectedPublisher, status: 'publish', intranet_url: this.publishForm.value.intranet_url, internet_url: this.publishForm.value.internet_url };
+    this.courseService.courceStatus(transferobj).subscribe(
+      (res: any) => {
+        console.log(res);
+        if (res) {
+          this.router.navigate(['/dashboard/cources']);
+        }
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );    
+  }
   reject() {
     let statusobj = { course_id: this.routegetdata.id, status: 'reject', status_comment: this.rejectcomment }
     this.courseService.changeStatus(statusobj).subscribe((res: any) => {
@@ -178,6 +192,11 @@ export class RequestDetailComponent implements OnInit {
     this.getCordinators();
     this.getRole();
     this.setrejectbutton(this.routegetdata.id);
+    this.publishForm = this.fb.group({
+      intranet_url: new FormControl(''),
+      internet_url: new FormControl(''),
+    });
+
   }
   setrejectbutton(id:any) {
     this.courseService.courseHistory(id).subscribe((res: any) => {

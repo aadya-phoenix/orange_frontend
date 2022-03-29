@@ -169,8 +169,7 @@
                                             <label for="exampleInputEmail1">Requester Name</label>
                                             <input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
                             routegetdata.user_name
-                              ? routegetdata.user_name
-                              : routegetdata.user_id
+                              
                           }}">
                                         </div>
 
@@ -1198,6 +1197,7 @@
 </div>
 
 <div class="modal fade" id="publishModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 150px;">
+  <form [formGroup]="publishForm">
     <div class="modal-dialog modal-lg" role="document ">
         <div class="modal-content">
             <div class="modal-header">
@@ -1217,14 +1217,14 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Orange Learning Intrance URL(SSO)</label>
-                            <input type="text " placeholder="Enter Orange Learning Intrance URL(SSO) " class="form-control form_width" />
+                            <input type="text " placeholder="Enter Orange Learning Intrance URL(SSO)" formControlName="intranet_url" class="form-control form_width" />
                         </div>
                     </div>
                     <!--col end-->
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Orange Learning Internet URL</label>
-                            <input type="text " placeholder="Enter Orange Learning Internet URL " class="form-control form_width" />
+                            <input type="text" formControlName="internet_url" placeholder="Enter Orange Learning Internet URL " class="form-control form_width" />
                         </div>
                     </div>
                     <!--col end-->
@@ -1233,12 +1233,13 @@
             </div>
             <div class="modal-footer">
                 <!-- <button type="button " class="btn btn-secondary " data-dismiss="modal ">Close</button> -->
-                <button type="button" class="btn btn-primary btn_requst">
+                <button type="button" data-dismiss="modal" class="btn btn-primary btn_requst" (click)="PublishRequest()">
             Submit
           </button>
             </div>
         </div>
     </div>
+  </form>
 </div>
 
 <!-- Button trigger modal -->
