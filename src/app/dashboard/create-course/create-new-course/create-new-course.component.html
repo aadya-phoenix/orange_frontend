@@ -169,7 +169,7 @@
                                            </label>
                                                  <input type="text" [(ngModel)]="showtitle" placeholder="Enter Title" class="form-control form_width" formControlName="title_single" />
                                                  <div class="error_message"*ngIf="commonCreateCourceForm.controls['title_single'].hasError('required') && commonCreateCourceForm.controls['title_single'].touched">
-                                                    Title By cannot be blank
+                                                    Title cannot be blank
                                                 </div>
                                              </div>
                  
@@ -266,12 +266,12 @@
                               </a>
                             </label>
                            <!--  <angular-editor [config]="editorConfig" ></angular-editor> -->
-                            <angular-editor class="form-control form_width-textarea" [(ngModel)]="showobjective" rows="3" placeholder="Enter Objectives" formControlName="objective_single"
+                            <angular-editor class="form-control " [(ngModel)]="showobjective" rows="3" placeholder="Enter Objectives" formControlName="objective_single"
                             [config]="editorConfig"></angular-editor>
-                                                        <div 
+                                                       <!--  <div 
                                                         class="error_message"*ngIf="commonCreateCourceForm.controls['objective_single'].hasError('required') && commonCreateCourceForm.controls['objective_single'].touched">
                                                             Objectives cannot be blank
-                                                        </div>
+                                                        </div> -->
                                                    
                                                     </div>
 
@@ -1609,22 +1609,22 @@
                         </label>
                                                 <div *ngIf="showMaterialURLchecked">
                                                     <input type="radio" id="chkurl" checked (click)="getmaterialsource('Url')" name="fav_language" value="HTML" class="mr-1" />
-                                                    <label>URL</label>
+                                                    <label class="mr-2">URL</label>
                                                     <!-- <span></span> -->
                                                     <input type="radio" id="chkupload" (click)="getmaterialsource('Upload')" name="fav_language" value="HTML" class="mr-1" />
-                                                    <label>Uploaded Material</label>
+                                                    <label class="mr-2">Uploaded Material</label>
                                                 </div>
                                                 <div *ngIf="showMaterialUploadchecked">
                                                     <input type="radio" id="chkurl" (click)="getmaterialsource('Url')" name="fav_language" value="HTML" class="mr-1" />
-                                                    <label>URL</label>
+                                                    <label class="mr-2">URL</label>
                                                     <input type="radio" id="chkupload" checked (click)="getmaterialsource('Upload')" name="fav_language" value="HTML" class="mr-1" />
-                                                    <label>Uploaded Material</label>
+                                                    <label class="mr-2">Uploaded Material</label>
                                                 </div>
                                                 <div *ngIf="!showMaterialURLchecked && !showMaterialUploadchecked">
                                                     <input type="radio" id="chkurl" (click)="getmaterialsource('Url')" name="fav_language" value="HTML" class="mr-1" />
-                                                    <label>URL</label>
+                                                    <label class="mr-2">URL</label>
                                                     <input type="radio" id="chkupload" (click)="getmaterialsource('Upload')" name="fav_language" value="HTML" class="mr-1" />
-                                                    <label>Uploaded Material</label>
+                                                    <label class="mr-2">Uploaded Material</label>
                                                 </div>
                                             </div>
                                         </div>
