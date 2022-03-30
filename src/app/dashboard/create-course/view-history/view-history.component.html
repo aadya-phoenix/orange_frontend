@@ -13,7 +13,7 @@
             <b>({{courseDetail.request_id}})</b></h5>
         <table class="table table-bordered">
             <thead>
-                <tr>
+                <tr style="font-size: 13px;">
                     <th scope="col">Sr.No</th>
                     <th scope="col">Request Name</th>
                     <th scope="col">Sent to</th>
@@ -23,7 +23,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let history of courseHistory;let i = index" class="text-center">
+                <tr *ngFor="let history of courseHistory;let i = index" class="text-center" style="font-size: 12px;">
                     <th scope="row">{{i+1}}</th>
                     <td>{{ history && history.transfer_by_name ? history.transfer_by_name : history.action_by_name}}</td>
                     <td>{{history && history.transfer_by_name ? history.transfer_to_name : '-'}}</td>
@@ -34,7 +34,8 @@
                     </td>
                     <td>
                         <span *ngIf="history.status !='reject'">-</span>
-                        <span *ngIf="history.status =='reject'">{{history.status_comment}}</span>
+                        <span *ngIf="history.status =='reject'" style="width: 154px;
+    overflow: scroll;">{{history.status_comment}}</span>
                     </td>
                 </tr>
                 <!-- <tr>

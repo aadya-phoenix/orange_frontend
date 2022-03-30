@@ -114,7 +114,7 @@
         <form [formGroup]="commonCreateCourceForm">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card">
+                    <!-- <div class="card">
                         <div class="card-body">
                             <div class="container-fluid">
                                 <div class="row mt-1">
@@ -129,13 +129,13 @@
                                         </div>
 
                                     </div>
-                                    <!--cole dn-->
+
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="card">
-                        <div class=" ">
+                        <!-- <div class=" ">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="user_image">
@@ -144,16 +144,16 @@
                                     <p class="text-center user_info">View Request</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="card-body">
                             <div class="container-fluid animate__fadeInDown">
-                                <div class="card-header">
+                                <!-- <div class="card-header">
                                     <strong>Course Details</strong>
                                 </div>
-                                <div>&nbsp;</div>
+                                <div>&nbsp;</div> -->
                                 <div class="row">
-
+                                    <!-- 
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Request Number</label>
@@ -163,7 +163,7 @@
                                         </div>
 
                                     </div>
-                                    <!--cole dn-->
+
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Requester Name</label>
@@ -175,53 +175,66 @@
                                         </div>
 
                                     </div>
-                                    <!--cole dn-->
+ -->
 
 
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Title</label>
-                                            <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                            <div class="d-flex align-items-center">
+                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
                           {{
                             routegetdata.titleByLang
                               ? (routegetdata.titleByLang | titlecase)
                               : "-"
                           }}
                         </span>
+                                                <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                            </div>
+
                                         </div>
 
                                     </div>
                                     <!--cole dn-->
-                                    <div *ngIf="routegetdata.learning_type != '6'">
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Training Provided By</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.training_provided_by }}</span>
-                                            </div>
-
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Training Duration</label>
+                                    <div class="col-sm-4" *ngIf="routegetdata.learning_type != '6'">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Training Duration</label>
+                                            <div class="d-flex align-items-center">
                                                 <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.duration }}</span>
+                                                <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                             </div>
 
                                         </div>
-                                        <!--cole dn-->
 
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Description</label>
+                                    </div>
+                                    <!--cole dn-->
+                                    <div class="col-sm-4" *ngIf="routegetdata.learning_type != '6'">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Description</label>
+                                            <div class="d-flex align-items-center">
                                                 <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.descriptionByLang }}</span>
+                                                <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                             </div>
 
                                         </div>
-                                        <!--cole dn-->
+
+                                    </div>
+                                    <!--cole dn-->
+
+                                    <div *ngIf="routegetdata.learning_type != '6'">
+
+
+
+
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Objective</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.objectiveByLang }}</span>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.objectiveByLang }}</span>
+
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -229,7 +242,11 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Subject</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.subject_name }}</span>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.subject_name }}</span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -237,20 +254,28 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Keywords</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.keyword }}</span>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.keyword }}</span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Available Language</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.available_language_name
                               ? routegetdata.available_language_name
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -258,13 +283,17 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Level</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.level_name
                               ? routegetdata.level_name
                               : routegetdata.level
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -272,7 +301,11 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Email of content owner</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.email_content_owner }}</span>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.email_content_owner }}</span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -281,13 +314,17 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Email of training contact</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.email_training_contact
                               ? routegetdata.email_training_contact
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -295,13 +332,17 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Prerequisite</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.prerequisite
                               ? routegetdata.prerequisite
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -309,46 +350,59 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Resources</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.resource
                               ? routegetdata.resource
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="col-sm-12" *ngIf="routegetdata.learning_type == '1'">
-                                        <div class="card-header">
+                                        <!-- <div class="card-header">
                                             <strong>ILT and VILT Training</strong>
                                         </div>
-                                        <div>&nbsp;</div>
+                                        <div>&nbsp;</div> -->
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Delivery Method</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.delivery_method_name
                               ? routegetdata.delivery_method_name
                               : routegetdata.delivery_method
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <!--cole dn-->
                                         <div class="col-sm-4">
                                             <div class="form-group">
+
                                                 <label for="exampleInputEmail1"> Does this course integrate digital?</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.digital
                               ? (routegetdata.digital | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -356,13 +410,17 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Purchase order required</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.purchase_order
                               ? (routegetdata.purchase_order | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -370,13 +428,17 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Manage Approval</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.manager_approval
                               ? (routegetdata.manager_approval | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -387,13 +449,17 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Who can see?</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.who_see_course_name
                               ? (routegetdata.who_see_course_name | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -401,65 +467,85 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Email of the preffered Instructor</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.email_preffered_instructor
                               ? routegetdata.email_preffered_instructor
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Date of first session</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.first_session_date
                               ? routegetdata.first_session_date
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Expiry Date</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.expiry_date
                               ? routegetdata.expiry_date
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Expiry Type</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.expiry_date_type
                               ? routegetdata.expiry_date_type
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Entity/Business area</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.entity_business_area
                               ? routegetdata.entity_business_area
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -467,13 +553,17 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Certification</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.certification
                               ? (routegetdata.certification | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -481,7 +571,8 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">  Certification Expiry type name</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.certification_expiry_type_name
                               ? (routegetdata.certification_expiry_type_name
@@ -489,6 +580,9 @@
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -496,7 +590,8 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Validity period</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.validity_period_name
                               ? (routegetdata.validity_period_name
@@ -504,19 +599,26 @@
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">External Vendor</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.external_vendor
                               ? (routegetdata.external_vendor | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -524,26 +626,34 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">External Vendor name</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.external_vendor_name
                               ? (routegetdata.external_vendor_name | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Free field content</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.free_field_content
                               ? (routegetdata.free_field_content | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -551,13 +661,17 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">For Whom ?</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.for_whoomByLang
                               ? routegetdata.for_whoomByLang
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -565,97 +679,121 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Learn more</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.learn_moreByLang
                               ? routegetdata.learn_moreByLang
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Title of the additional free text field</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.title_additional
                               ? routegetdata.title_additional
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="col-sm-12" *ngIf="routegetdata.learning_type == '2'">
-                                        <div class="card-header">
+                                        <!-- <div class="card-header">
                                             <strong>Video training</strong>
                                         </div>
-                                        <div>&nbsp;</div>
+                                        <div>&nbsp;</div> -->
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Uploaded video URL</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.video_link
                               ? routegetdata.video_link
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="col-sm-12" *ngIf="routegetdata.learning_type == '3'">
-                                        <div class="card-header">
+                                        <!-- <div class="card-header">
                                             <strong>Material Based Training</strong>
                                         </div>
-                                        <div>&nbsp;</div>
+                                        <div>&nbsp;</div> -->
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Material Source URL</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.url
                               ? routegetdata.url
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Uploaded Material</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.material_source
                               ? routegetdata.material_source
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="col-sm-12" *ngIf="routegetdata.learning_type == '4'">
-                                        <div class="card-header">
+                                        <!-- <div class="card-header">
                                             <strong>Currriculum</strong>
                                         </div>
-                                        <div>&nbsp;</div>
+                                        <div>&nbsp;</div> -->
                                         <!--cole dn-->
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1"> Does this course integrate digital?</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.digital
                               ? (routegetdata.digital | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -663,91 +801,120 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Provide the link to your video</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.video_link
                               ? (routegetdata.video_link | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Expiry Date</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.expiry_date
                               ? routegetdata.expiry_date
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Learn more</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.learn_moreByLang
                               ? routegetdata.learn_moreByLang
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Title of the additional free text field</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.title_additional
                               ? routegetdata.title_additional
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Who can see my course?</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.who_see_course_name
                               ? (routegetdata.who_see_course_name | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Free field content</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.free_field_content
                               ? (routegetdata.free_field_content | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">For Whom ?</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.for_whoomByLang
                               ? routegetdata.for_whoomByLang
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -755,26 +922,34 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Curriculum content</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.external_vendor_name
                               ? routegetdata.external_vendor_name
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Certification</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.certification
                               ? (routegetdata.certification | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -782,7 +957,8 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">  Certification Expiry type name</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.certification_expiry_type_name
                               ? (routegetdata.certification_expiry_type_name
@@ -790,6 +966,9 @@
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -797,7 +976,8 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Validity period</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.validity_period_name
                               ? (routegetdata.validity_period_name
@@ -805,40 +985,51 @@
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">URL</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.url
                               ? routegetdata.url
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
 
                                     </div>
                                     <div class="col-sm-12" *ngIf="routegetdata.learning_type == '5'">
-                                        <div class="card-header">
+                                        <!-- <div class="card-header">
                                             <strong>Web-based training</strong>
                                         </div>
-                                        <div>&nbsp;</div>
+                                        <div>&nbsp;</div> -->
 
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1"> Does this course integrate digital?</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.digital
                               ? (routegetdata.digital | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -846,13 +1037,17 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Purchase order required</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.purchase_order
                               ? (routegetdata.purchase_order | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -860,13 +1055,17 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Certification</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.certification
                               ? (routegetdata.certification | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -874,7 +1073,8 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">  Certification Expiry type name</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.certification_expiry_type_name
                               ? (routegetdata.certification_expiry_type_name
@@ -882,6 +1082,9 @@
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -889,7 +1092,8 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Validity period</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.validity_period_name
                               ? (routegetdata.validity_period_name
@@ -897,19 +1101,26 @@
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">External Vendor</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.external_vendor
                               ? (routegetdata.external_vendor | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -917,56 +1128,73 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">External Vendor name</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.external_vendor_name
                               ? (routegetdata.external_vendor_name | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="col-sm-12" *ngIf="routegetdata.learning_type == '6'">
-                                        <div class="card-header">
+                                        <!-- <div class="card-header">
                                             <strong>Playlist</strong>
                                         </div>
-                                        <div>&nbsp;</div>
+                                        <div>&nbsp;</div> -->
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Playlist url</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.url
                               ? (routegetdata.url | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Number of learning objects</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.video_link
                               ? (routegetdata.video_link | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Email of playlist creator</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.for_whoom
                               ? (routegetdata.for_whoom | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
+
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
@@ -975,49 +1203,65 @@
                             Is the target audience of your Playlist from one region
                             only?
                           </label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.level
                               ? (routegetdata.level | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Region of Target Audience</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.who_see_course
                               ? (routegetdata.who_see_course | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Target audience</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.free_field_content
                               ? (routegetdata.free_field_content | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">OBS employees in specific Functions/Divisions</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
                             routegetdata.email_preffered_instructor
                               ? (routegetdata.email_preffered_instructor | titlecase)
                               : "-"
                             }}
                           </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -1026,7 +1270,8 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Additional comments</label>
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                           {{
                             routegetdata.additional_comment
                               ? (routegetdata.additional_comment
@@ -1034,10 +1279,13 @@
                               : "-"
                           }}
                         </span>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
-                                        <div class="col-sm-4">
+                                        <!-- <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Regional Cordinator Name</label>
                                                 <span class="form-control form_width" id="exampleInputEmail1" disabled>
@@ -1050,15 +1298,15 @@
                         </span>
                                             </div>
 
-                                        </div>
+                                        </div> -->
 
-                                        <div class="col-sm-4">
+                                        <!-- <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Updated At</label>
                                                 <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.updated_at | date: "short" }}</span>
                                             </div>
 
-                                        </div>
+                                        </div> -->
                                         <!--cole dn-->
                                     </div>
                                     <!--cole dn-->
@@ -1087,7 +1335,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Transfer to Publisher</label>
-                            <select name="select " id="select " class="form-control" (change)="getPublisherselected($event)">
+                            <select name="select " id="select " class="form-control form_width" (change)="getPublisherselected($event)">
     <option value="0 ">Please select</option>
     <option
       *ngFor="let publisher of publisherList"
@@ -1125,8 +1373,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Comments</label>
-                            <textarea class="form-control form_width-textarea" [(ngModel)]="rejectcomment" rows="3 " placeholder="Enter Your Comments ">
-                </textarea>
+                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments" [(ngModel)]="rejectcomment"></textarea>
                         </div>
                     </div>
                     <!--col end-->
@@ -1173,7 +1420,7 @@
     {{ vendor.name }}
   </option> -->
                             <!--</select>-->
-                            <select class="form-control form_width" (change)="getRoc($event)">
+                            <select class="form-control form_width1" (change)="getRoc($event)">
                           <option value="">Regional Operation Coordinator</option>
                           <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">
                             {{ cordinator?.name }}
@@ -1209,22 +1456,21 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Comments</label>
-                            <textarea class="form-control form_width-textarea" rows="3 " placeholder="Enter Your Comments ">
-                </textarea>
+                            <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"></textarea>
                         </div>
                     </div>
                     <!--col end-->
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Orange Learning Intrance URL(SSO)</label>
-                            <input type="text " placeholder="Enter Orange Learning Intrance URL(SSO) " class="form-control form_width" />
+                            <input type="text" placeholder="Enter Orange Learning Intrance URL(SSO)" class="form-control form_width1" />
                         </div>
                     </div>
                     <!--col end-->
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Orange Learning Internet URL</label>
-                            <input type="text " placeholder="Enter Orange Learning Internet URL " class="form-control form_width" />
+                            <input type="text" class="form-control form_width1" placeholder="Enter Orange Learning Internet URL" />
                         </div>
                     </div>
                     <!--col end-->
