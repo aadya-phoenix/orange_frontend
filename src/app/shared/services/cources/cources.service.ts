@@ -218,8 +218,8 @@ export class CourcesService {
      }
      //remove backup
      removeBackup(){
-      const url = `/api/${this.apiVersion}/transfer/reset`;
-      const urllive = `${this.basePath}api/${this.apiVersion}/transfer/reset`;
+      const url = `/api/${this.apiVersion}/user/transfer/reset`;
+      const urllive = `${this.basePath}api/${this.apiVersion}/user/transfer/reset`;
       return this.http.post(url,{}).pipe(catchError(this.Errorhandling));  
      }
      //newregionalCordinator
@@ -229,6 +229,12 @@ export class CourcesService {
       return this.http
         .get(url, this.http.headers)
         .pipe(catchError(this.Errorhandling));
+     }
+      //newPublisher
+     getNewPublisher(){
+      const url = `/api/${this.apiVersion}/transfer/publisher-list`;
+      const urllive = `${this.basePath}api/${this.apiVersion}/transfer/publisher-list`;
+      return this.http.post(url,{}).pipe(catchError(this.Errorhandling)); 
      }
      
 

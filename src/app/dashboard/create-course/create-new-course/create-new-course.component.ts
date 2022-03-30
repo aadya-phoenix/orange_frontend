@@ -30,54 +30,7 @@ export class CreateNewCourseComponent implements OnInit {
   isImageSaved: any;
   totalObjnew: any = {};
 
-  editorConfig: AngularEditorConfig = {
-    sanitize: false,
-    editable: true,
-    
-    height: '100px',
-    enableToolbar: true,
-    showToolbar: true,
-    toolbarHiddenButtons:[
-      ['bold',
-      'undo',
-      'redo',
-      'italic',
-      'underline',
-      'italic',
-      'strikeThrough',
-      'subscript',
-      'superscript',
-      'justifyLeft',
-      'justifyCenter',
-      'justifyRight',
-      'justifyFull',
-      'indent',
-      'outdent',
-      'insertOrderedList',
-      'heading',
-      'fontName',
-      'textColor',
-      'backgroundColor',
-      'insertImage',
-      'insertVideo',
-      'horizontalLine',
-      'clearFormatting',
-      'htmlCode'
-    ],
-    [
-      'fontSize',
-      'textColor',
-      'backgroundColor',
-      'customClasses',
-      'link',
-      'unlink',
-      'insertImage',
-      'insertVideo',
-      'insertHorizontalRule',
-      'removeFormat',
-      'toggleEditorMode'
-    ]]
-  };
+ 
  /*  public Editor = CustomBuild; */
 
 
@@ -488,6 +441,54 @@ export class CreateNewCourseComponent implements OnInit {
     }    
   }
 
+  editorConfig: AngularEditorConfig = {
+    sanitize: false,
+    editable: true,
+    
+    height: '100px',
+    enableToolbar: true,
+    showToolbar: true,
+    toolbarHiddenButtons:[
+      ['bold',
+      'undo',
+      'redo',
+      'italic',
+      'underline',
+      'italic',
+      'strikeThrough',
+      'subscript',
+      'superscript',
+      'justifyLeft',
+      'justifyCenter',
+      'justifyRight',
+      'justifyFull',
+      'indent',
+      'outdent',
+      'insertOrderedList',
+      'heading',
+      'fontName',
+      'textColor',
+      'backgroundColor',
+      'insertImage',
+      'insertVideo',
+      'horizontalLine',
+      'clearFormatting',
+      'htmlCode'
+    ],
+    [
+      'fontSize',
+      'textColor',
+      'backgroundColor',
+      'customClasses',
+      'link',
+      'unlink',
+      'insertImage',
+      'insertVideo',
+      'insertHorizontalRule',
+      'removeFormat',
+      'toggleEditorMode'
+    ]]
+  };
   //get regional cordinators
   getCordinators() {
     this.courceService.getregionalCordinator().subscribe(
