@@ -3,13 +3,16 @@
         <!-- View History -->
         <div class="d-flex" style="justify-content: space-between;">
             {{title}}
-            <i class="fa fa-times" aria-hidden="true" style="color: #000;"></i>
+            <a (click)="closeModal()"><i class="fa fa-times" aria-hidden="true" style="color: #000;"></i></a>
+
         </div>
     </div>
     <div class="card-body">
         <h5 class="card-title" style="font-size: 0.9rem;">
-            <b>Be a Memorable Spaker(Coaching)-Non CoopNet Virtual Classroom:
-</b>{{courseDetail.learning_type}}
+            <b>Be a Memorable Spaker(Coaching)-:
+         </b>
+            <b>{{courseDetail.learning_type_name}}</b>
+            <span></span>
             <b>({{courseDetail.request_id}})</b></h5>
         <table class="table table-bordered">
             <thead>
@@ -34,8 +37,8 @@
                     </td>
                     <td>
                         <span *ngIf="history.status !='reject'">-</span>
-                        <span *ngIf="history.status =='reject'" style="width: 154px;
-    overflow: scroll;">{{history.status_comment}}</span>
+                        <p *ngIf="history.status =='reject'" style="width: 154px;
+    overflow-y: auto;font-size: 12px;">{{history.status_comment}}</p>
                     </td>
                 </tr>
                 <!-- <tr>

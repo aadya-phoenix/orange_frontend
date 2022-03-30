@@ -22,12 +22,13 @@ export class ViewHistoryComponent implements OnInit {
   }
 
   setDialogProps(dialogdata:any){
+
     this.courseHistory = dialogdata.data ? dialogdata.data : '';
     this.courseDetail = dialogdata.data1 ? dialogdata.data1 : '';
     this.copyDeletecourse = dialogdata.data3 ? dialogdata.data3 : '';
     this.title= dialogdata.title
     this.modalType = dialogdata.type;
-    console.log(this.courseHistory);
+    console.log("courseDetail",this.courseDetail);
   }
 
 
@@ -54,7 +55,9 @@ export class ViewHistoryComponent implements OnInit {
      console.log(err)
    })
  }
-
+closeModal(){
+  this.modalService.close();
+}
 
   onClose() {
     this.passEntry.next();

@@ -61,32 +61,28 @@
                   <span>View Request</span>
                         <span class="cc-text_css">({{ routegetdata.request_id }}) -
                   </span>
-                        <span style="color: #ff7900">Request Status - {{ routegetdata.status | titlecase }}</span
-                  >
-                </p>
-              </div>
+                        <span>
+                    {{ routegetdata.learning_type_name }} ({{ routegetdata.delivery_method_name }})
+                  </span>
+                        <span style="color: #ff7900">Request Status - {{ routegetdata.status | titlecase }}</span>
+                        </p>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <!-- .animated -->
     </div>
-    <!-- .content -->
-  </div>
+    <!-- .animated -->
+</div>
+<!-- .content -->
+</div>
 
-  <div class="content">
+<div class="content">
     <div class="animated fadeIn">
-      <div class="card" *ngIf="getUserrole.id != 2 && !routegetdata.issave  && showbuttons=='true' && showrejectbutton != getprofileDetails.data.id">
-        <div class="card-body">
-          <div class="Requs_btn_inl">
-            <div class="Requs_btn_inl-child">
-              <button
-                type="button"
-                class="btn btn-primary  ml-2"
-                data-toggle="modal"
-                data-target="#publishModal"
-                *ngIf="getUserrole.id == 4 && status != 'publish' && showrejectbutton != getprofileDetails.data.id"
-              >
+        <div class="card" *ngIf="getUserrole.id != 2 && !routegetdata.issave  && showbuttons=='true' && showrejectbutton != getprofileDetails.data.id">
+            <div class="card-body">
+                <div class="Requs_btn_inl">
+                    <div class="Requs_btn_inl-child">
+                        <button type="button" class="btn btn-primary  ml-2" data-toggle="modal" data-target="#publishModal" *ngIf="getUserrole.id == 4 && status != 'publish' && showrejectbutton != getprofileDetails.data.id">
                 <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
                         </button>
 
@@ -111,7 +107,7 @@
             </div>
             <!--colensd-->
         </div>
-        <form [formGroup]="commonCreateCourceForm">
+        <form>
             <div class="row">
                 <div class="col-md-12">
                     <!-- <div class="card">
@@ -200,7 +196,7 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Training Duration</label>
                                             <div class="d-flex align-items-center">
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.duration }}</span>
+                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ trainingDurationHours}}</span>
                                                 <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                             </div>
 
@@ -222,10 +218,6 @@
                                     <!--cole dn-->
 
                                     <div *ngIf="routegetdata.learning_type != '6'">
-
-
-
-
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Objective</label>
@@ -521,8 +513,8 @@
                                                 <div class="d-flex align-items-center">
                                                     <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
-                            routegetdata.expiry_date_type
-                              ? routegetdata.expiry_date_type
+                            routegetdata.expiry_date_type_name
+                              ? routegetdata.expiry_date_type_name
                               : "-"
                             }}
                           </span>
@@ -538,8 +530,8 @@
                                                 <div class="d-flex align-items-center">
                                                     <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{
-                            routegetdata.entity_business_area
-                              ? routegetdata.entity_business_area
+                            routegetdata.entity_business_area_name
+                              ? routegetdata.entity_business_area_name
                               : "-"
                             }}
                           </span>
@@ -570,7 +562,7 @@
                                         <!--cole dn-->
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">  Certification Expiry type name</label>
+                                                <label for="exampleInputEmail1">  Certification Expiry type</label>
                                                 <div class="d-flex align-items-center">
                                                     <span class="form-control form_width" id="exampleInputEmail1" disabled>
                             {{

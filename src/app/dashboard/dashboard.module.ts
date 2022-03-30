@@ -7,12 +7,16 @@ import { SetBackupComponent } from './set-backup/set-backup.component';
 
 
 
+
+
 @NgModule({
   declarations: [DashboardComponent, SetBackupComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    SharedModule
+    
+    SharedModule,
+    
   ]
 })
 export class DashboardModule { }

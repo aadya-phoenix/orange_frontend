@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { ModalDismissReasons, NgbModal, } from "@ng-bootstrap/ng-bootstrap";
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-request-detail',
@@ -12,8 +12,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class RequestDetailComponent implements OnInit {
   public commonCreateCourceForm!: FormGroup;
+  public publishForm!: FormGroup;
   getUserrole: any;
   routegetdata: any;
+  trainingDurationHours:any;
   status: any;
   transfer_user_id: any;
   publisherList: any = [];
@@ -90,6 +92,12 @@ export class RequestDetailComponent implements OnInit {
     }
   }
 
+  getTrainingHours(){
+    let str = this.routegetdata.duration;
+    let hours = str.match(/(.*):/g).pop().replace(":","");
+    let min = str.match(/:(.*)/g).pop().replace(":","");
+    this.trainingDurationHours = hours +"hours"+ " "+min + "minutes";
+  }
   getRole() {
     this.getUserrole = this.authService.getRolefromlocal();
     //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
@@ -99,7 +107,20 @@ export class RequestDetailComponent implements OnInit {
     this.router.navigateByUrl('/dashboard/cources/create-cource', { state: this.routegetdata })
   }
 
-
+  PublishRequest(){
+    let transferobj = { course_id: this.routegetdata.id, transfer_id: this.selectedPublisher, status: 'publish', intranet_url: this.publishForm.value.intranet_url, internet_url: this.publishForm.value.internet_url };
+    this.courseService.courceStatus(transferobj).subscribe(
+      (res: any) => {
+        console.log(res);
+        if (res) {
+          this.router.navigate(['/dashboard/cources']);
+        }
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );    
+  }
   reject() {
     let statusobj = { course_id: this.routegetdata.id, status: 'reject', status_comment: this.rejectcomment }
     this.courseService.changeStatus(statusobj).subscribe((res: any) => {
@@ -165,6 +186,7 @@ export class RequestDetailComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.routegetdata);
+    console.log(" this.routegetdata['title']",this.routegetdata['title']);
     let arr1 = this.routegetdata.objective;
     this.status = this.routegetdata.status;
 
@@ -178,6 +200,12 @@ export class RequestDetailComponent implements OnInit {
     this.getCordinators();
     this.getRole();
     this.setrejectbutton(this.routegetdata.id);
+    this.publishForm = this.fb.group({
+      intranet_url: new FormControl(''),
+      internet_url: new FormControl(''),
+    });
+    this.getTrainingHours();
+
   }
   setrejectbutton(id:any) {
     this.courseService.courseHistory(id).subscribe((res: any) => {
