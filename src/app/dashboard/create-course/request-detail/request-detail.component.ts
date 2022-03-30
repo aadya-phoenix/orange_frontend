@@ -15,6 +15,7 @@ export class RequestDetailComponent implements OnInit {
   public publishForm!: FormGroup;
   getUserrole: any;
   routegetdata: any;
+  trainingDurationHours:any;
   status: any;
   transfer_user_id: any;
   publisherList: any = [];
@@ -91,6 +92,12 @@ export class RequestDetailComponent implements OnInit {
     }
   }
 
+  getTrainingHours(){
+    let str = this.routegetdata.duration;
+    let hours = str.match(/(.*):/g).pop().replace(":","");
+    let min = str.match(/:(.*)/g).pop().replace(":","");
+    this.trainingDurationHours = hours +"hours"+ " "+min + "minutes";
+  }
   getRole() {
     this.getUserrole = this.authService.getRolefromlocal();
     //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
@@ -179,6 +186,7 @@ export class RequestDetailComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.routegetdata);
+    console.log(" this.routegetdata['title']",this.routegetdata['title']);
     let arr1 = this.routegetdata.objective;
     this.status = this.routegetdata.status;
 
@@ -196,6 +204,7 @@ export class RequestDetailComponent implements OnInit {
       intranet_url: new FormControl(''),
       internet_url: new FormControl(''),
     });
+    this.getTrainingHours();
 
   }
   setrejectbutton(id:any) {

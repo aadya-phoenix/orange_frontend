@@ -97,12 +97,45 @@
                           </a>
                         </label>
                                                 <input type="text" [(ngModel)]="showtitle" placeholder="Enter Title" class="form-control form_width" formControlName="title_single" />
+
+                                                <div class="error_message"*ngIf="commonCreateCourceForm_playlist.controls['title_single'].hasError('required') && commonCreateCourceForm_playlist.controls['title_single'].touched">
+                                                    Title cannot be blank
+                                                </div>
+                                                
                                             </div>
 
                                             <div>
                                                 <a href="" data-toggle="modal" data-target="#titleModal_playlist" class="d-flex flex-column align-items-end">
                                                     <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
                                                 </a>
+                                            </div>
+                                        </div>
+                                        <!--colend-->
+                                        <div class="col-sm-6">
+                                            <div class="d-flex align-items-center">
+                                                <div class="form-group" style="width: 100%">
+                                                    <label class="form-control-label">
+                          Description <span style="color: red">* </span>
+                          <a>
+                            <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                               data-placement="top" data-container="body"
+                               title="1-3 meaningful sentences describing the content of the learning activity (this field doesnâ€™t accept bullet points)">
+                            </i>
+                          </a>
+                        </label>
+                                                    <textarea class="form-control form_width-textarea" [(ngModel)]="showdescription" (ngModelChange)="valueChange(showdescription)" maxlength="500"
+                                                    rows="3" placeholder="Enter Description" formControlName="description_single"></textarea>
+                                                    <span>{{remainingText}} characters remaining</span>
+                                                    <div class="error_message"*ngIf="commonCreateCourceForm_playlist.controls['description_single'].hasError('required') && commonCreateCourceForm_playlist.controls['description_single'].touched">
+                                                        Description cannot be blank
+                                                    </div>
+                                              
+                                                </div>
+                                                <div>
+                                                    <a href="" data-toggle="modal" data-target="#commonDescription" class="d-flex flex-column align-items-end">
+                                                        <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -135,9 +168,9 @@
                                              </a>
                                            </label>
                                                  <input type="text" [(ngModel)]="showtitle" placeholder="Enter Title" class="form-control form_width" formControlName="title_single" />
-                                                 <!--  <div class="error_message"*ngIf="commonCreateCourceForm.controls['title_single'].errors.required && commonCreateCourceForm.controls['title_single'].touched">
-                                                     Please Enter Title
-                                                 </div> --> 
+                                                 <div class="error_message"*ngIf="commonCreateCourceForm.controls['title_single'].hasError('required') && commonCreateCourceForm.controls['title_single'].touched">
+                                                    Title By cannot be blank
+                                                </div>
                                              </div>
                  
                                                 <div>
@@ -167,9 +200,9 @@
 
                                                     <ng-select placeholder="Please select training provided" [items]="vendorType" bindLabel="name" bindValue="name" formControlName="training_provided_by" style="width: 100%">
                                                     </ng-select>
-                                                     <div class="error_message"*ngIf="commonCreateCourceForm.controls['training_provided_by'].hasError('required') && commonCreateCourceForm.controls['training_provided_by'].touched">
-                                                        Please Enter Training Provided By
-                                                    </div> 
+                                                    <div class="error_message"*ngIf="commonCreateCourceForm.controls['training_provided_by'].hasError('required') && commonCreateCourceForm.controls['training_provided_by'].touched">
+                                                        Training Provided By cannot be blank
+                                                    </div>
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -185,6 +218,10 @@
                             </a>
                           </label>
                                                     <input type="text" (keyup)="numbersOnly($event)" placeholder="Enter Training hours/duration (HH:MM) " class="form-control form_width" formControlName="duration" maxlength="5" />
+                                                    <div class="error_message"*ngIf="commonCreateCourceForm.controls['duration'].hasError('required') && commonCreateCourceForm.controls['duration'].touched">
+                                                        Training hours/duration cannot be blank
+                                                    </div>
+                                               
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -203,6 +240,10 @@
                                                         <textarea class="form-control form_width-textarea" [(ngModel)]="showdescription" (ngModelChange)="valueChange(showdescription)" maxlength="500"
                                                         rows="3" placeholder="Enter Description" formControlName="description_single"></textarea>
                                                         <span>{{remainingText}} characters remaining</span>
+                                                        <div class="error_message"*ngIf="commonCreateCourceForm.controls['description_single'].hasError('required') && commonCreateCourceForm.controls['description_single'].touched">
+                                                            Description cannot be blank
+                                                        </div>
+                                                  
                                                     </div>
                                                     <div>
                                                         <a href="" data-toggle="modal" data-target="#commonDescription" class="d-flex flex-column align-items-end">
@@ -224,7 +265,14 @@
                                 </i>
                               </a>
                             </label>
-                                                        <textarea class="form-control form_width-textarea" [(ngModel)]="showobjective" rows="3" placeholder="Enter Objectives" formControlName="objective_single"></textarea>
+                           <!--  <angular-editor [config]="editorConfig" ></angular-editor> -->
+                            <angular-editor class="form-control form_width-textarea" [(ngModel)]="showobjective" rows="3" placeholder="Enter Objectives" formControlName="objective_single"
+                            [config]="editorConfig"></angular-editor>
+                                                        <div 
+                                                        class="error_message"*ngIf="commonCreateCourceForm.controls['objective_single'].hasError('required') && commonCreateCourceForm.controls['objective_single'].touched">
+                                                            Objectives cannot be blank
+                                                        </div>
+                                                   
                                                     </div>
 
                                                     <div>
@@ -249,6 +297,9 @@
                           </label>
                                                     <ng-select [(ngModel)]="subjectId" placeholder="Please select subject" [items]="cctSubjects" bindLabel="name" bindValue="id" formControlName="subject" style="width: 100%">
                                                     </ng-select>
+                                                    <div class="error_message"*ngIf="commonCreateCourceForm.controls['subject'].hasError('required') && commonCreateCourceForm.controls['subject'].touched">
+                                                        Subject cannot be blank
+                                                    </div>
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -264,6 +315,10 @@
                             </a>
                           </label>
                                                     <input type="text" placeholder="Enter Keywords" class="form-control form_width" formControlName="keyword" />
+                                                    <div class="error_message"*ngIf="commonCreateCourceForm.controls['keyword'].hasError('required') && commonCreateCourceForm.controls['keyword'].touched">
+                                                        Keywords cannot be blank
+                                                    </div>
+                                                
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -280,6 +335,9 @@
                           </label>
                                                     <ng-select [(ngModel)]="selectedLanguages" placeholder="Please select language" [items]="availableLanguages" bindLabel="name" bindValue="id" [multiple]=true formControlName="available_language" style="width: 100%">
                                                     </ng-select>
+                                                    <div class="error_message"*ngIf="commonCreateCourceForm.controls['available_language'].hasError('required') && commonCreateCourceForm.controls['available_language'].touched">
+                                                        Available Languages cannot be blank
+                                                    </div>
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -297,6 +355,9 @@
                           </label>
                                                     <ng-select [(ngModel)]="showlevel" placeholder="Please select level" [items]="cctLevel" bindLabel="name" bindValue="id" formControlName="level" style="width: 100%">
                                                     </ng-select>
+                                                    <div class="error_message"*ngIf="commonCreateCourceForm.controls['level'].hasError('required') && commonCreateCourceForm.controls['level'].touched">
+                                                        Level cannot be blank
+                                                    </div>
 
                                                     <!-- <select class="form-control form_width" formControlName="level">
                     <option value="">Please select level</option>
@@ -326,6 +387,10 @@
                             </a>
                           </label>
                                                     <input type="text" placeholder="Email of Content Owner" class="form-control form_width" formControlName="email_content_owner" />
+                                                    <div class="error_message"*ngIf="commonCreateCourceForm.controls['email_content_owner'].hasError('required') && commonCreateCourceForm.controls['email_content_owner'].touched">
+                                                        Email of Content Owner cannot be blank
+                                                    </div>
+                                               
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -342,6 +407,10 @@
                             </a>
                           </label>
                                                     <input type="text" placeholder="Enter Email of Training Contact" class="form-control form_width" formControlName="email_training_contact" />
+                                                    <div class="error_message"*ngIf="commonCreateCourceForm.controls['email_training_contact'].hasError('required') && commonCreateCourceForm.controls['email_training_contact'].touched">
+                                                        Email of Training Contact cannot be blank
+                                                    </div>
+                                                
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -482,6 +551,9 @@
 
                                                 <ng-select [(ngModel)]="showILTDeliveryMethod" placeholder="Please select Delivery method" [items]="deliveryMethod" bindLabel="name" bindValue="id" formControlName="delivery_method" style="width: 100%">
                                                 </ng-select>
+                                                <div class="error_message"*ngIf="iltandViltForm.controls['delivery_method'].hasError('required') && iltandViltForm.controls['delivery_method'].touched">
+                                                    Delivery Method cannot be blank
+                                                </div>
                                                 <!-- <select class="form-control form_width" formControlName="delivery_method">
                   <option value="">
                     Please select delivery method
@@ -511,6 +583,9 @@
                         </label>
                                                 <ng-select placeholder="Please select" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="digital" style="width: 100%">
                                                 </ng-select>
+                                                <div class="error_message"*ngIf="iltandViltForm.controls['digital'].hasError('required') && iltandViltForm.controls['digital'].touched">
+                                                    Does this course integrate digital ? cannot be blank
+                                                </div>
                                                 <!-- <select class="form-control form_width" formControlName="digital">
                   <option value="">Please select</option>
                   <option value="yes">Yes</option>
@@ -554,6 +629,9 @@
                         </label>
                                                 <ng-select placeholder="Please select" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="manager_approval" style="width: 100%">
                                                 </ng-select>
+                                                <div class="error_message"*ngIf="iltandViltForm.controls['manager_approval'].hasError('required') && iltandViltForm.controls['manager_approval'].touched">
+                                                    Manager Approval cannot be blank
+                                                </div>
                                                 <!-- <select class="form-control form_width" formControlName="manager_approval">
                   <option value="">Please select</option>
                   <option value="yes">Yes</option>
@@ -620,6 +698,9 @@
                         </label>
                                                 <ng-select [(ngModel)]="showILTEmail" placeholder="Please select Instructor" [items]="preferedInstructor" bindLabel="email_id" bindValue="email_id" formControlName="email_preffered_instructor" style="width: 100%">
                                                 </ng-select>
+                                                <div class="error_message"*ngIf="iltandViltForm.controls['email_preffered_instructor'].hasError('required') && iltandViltForm.controls['email_preffered_instructor'].touched">
+                                                    Email of the preferred Instructor cannot be blank
+                                                </div>
                                                 <!-- <select class="form-control form_width" formControlName="email_preffered_instructor">
                   <option value="">Please select Instructor</option>
                   <option
@@ -690,6 +771,10 @@
                           </a>
                         </label>
                                                 <input type="date" class="form-control form_width" formControlName="first_session_date" />
+                                                <div class="error_message"*ngIf="iltandViltForm.controls['first_session_date'].hasError('required') && iltandViltForm.controls['first_session_date'].touched">
+                                                    Date of first session cannot be blank
+                                                </div>
+                                            
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -773,6 +858,9 @@
                         </label>
                                                 <ng-select placeholder="Please select" (change)="certificationType($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="certification" style="width: 100%">
                                                 </ng-select>
+                                                <div class="error_message"*ngIf="iltandViltForm.controls['certification'].hasError('required') && iltandViltForm.controls['certification'].touched">
+                                                    Certification cannot be blank
+                                                </div>
                                                 <!-- <select class="form-control form_width" (change)="certificationType($event)" formControlName="certification">
                   <option value="">Please select</option>
                   <option value="yes">Yes</option>
@@ -795,6 +883,9 @@
 
                                                 <ng-select placeholder="Please select" (change)="externalVendor($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="external_vendor" style="width: 100%">
                                                 </ng-select>
+                                                <div class="error_message"*ngIf="iltandViltForm.controls['external_vendor'].hasError('required') && iltandViltForm.controls['external_vendor'].touched">
+                                                    External vendor cannot be blank
+                                                </div>
 
                                                 <!-- <select class="form-control form_width" formControlName="external_vendor" (change)="externalVendor($event)">
                   <option value="">Please select externalvendor</option>
@@ -823,6 +914,9 @@
                             {{ cctExpiry.name }}
                           </option>
                         </select>
+                        <div class="error_message"*ngIf="iltandViltForm.controls['certification_expiry_type'].hasError('required') && iltandViltForm.controls['certification_expiry_type'].touched">
+                            Certification expiry type cannot be blank
+                        </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -858,6 +952,10 @@
                           </a>
                         </label>
                                                 <input [(ngModel)]="showILTVendorName" type="text" placeholder="External vendor name" class="form-control form_width" formControlName="external_vendor_name" />
+                                                <div class="error_message"*ngIf="iltandViltForm.controls['external_vendor_name'].hasError('required') && iltandViltForm.controls['external_vendor_name'].touched">
+                                                    External vendor name cannot be blank
+                                                </div>
+                                           
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -879,6 +977,9 @@
                             {{ validity.name }}
                           </option>
                         </select>
+                        <div class="error_message"*ngIf="iltandViltForm.controls['validity_period'].hasError('required') && iltandViltForm.controls['validity_period'].touched">
+                            Validity period cannot be blank
+                        </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -910,6 +1011,9 @@
                                                       </a>
                                                     </label>
                                                     <textarea class="form-control form_width-textarea" [(ngModel)]="showforwhoom" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom_single"></textarea>
+                                                    <div class="error_message"*ngIf="iltandViltForm.controls['for_whoom_single'].hasError('required') && iltandViltForm.controls['for_whoom_single'].touched">
+                                                        For Whom? cannot be blank
+                                                    </div>
 
                                                 </div>
                                                 <div>
@@ -1027,6 +1131,9 @@
                             {{ cordinator?.name }}
                           </option>
                         </select>
+                        <div class="error_message"*ngIf="iltandViltForm.controls['regional_cordinator'].hasError('required') && iltandViltForm.controls['regional_cordinator'].touched">
+                            Regional Training Cordinator cannot be blank
+                        </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1095,11 +1202,33 @@
                           <option value="yes">Yes</option>
                           <option value="no">No</option>
                         </select>
+                        <div class="error_message"*ngIf="currriculumForm.controls['digital'].hasError('required') && currriculumForm.controls['digital'].touched">
+                            Does this course integrate digital ? cannot be blank
+                        </div>
                                             </div>
                                         </div>
 
-
-                                        <div class="col-sm-6">
+                                  <!--colend-->
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">
+                  Manager Approval <span style="color: red">* </span>
+                  <a>
+                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                       data-placement="top"
+                       title="Please indicate if learners require manager approval to register for this course.">
+                    </i>
+                  </a>
+                </label>
+                                        <ng-select placeholder="Please select" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="manager_approval" style="width: 100%">
+                                        </ng-select>
+                                        <div class="error_message"*ngIf="currriculumForm.controls['manager_approval'].hasError('required') && currriculumForm.controls['manager_approval'].touched">
+                                            Manager Approval cannot be blank
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--colend-->
+                                       <!--  <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                           Provide the link to your video
@@ -1112,7 +1241,7 @@
                         </label>
                                                 <input type="text" [(ngModel)]="showCurriculumLink" placeholder="Enter Provide the link to your video" class="form-control form_width" formControlName="video_link" />
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <!--colend-->
 
                                         <div class="col-sm-6">
@@ -1128,6 +1257,10 @@
                           </a>
                         </label>
                                                 <input type="date" class="form-control form_width" formControlName="expiry_date" />
+                                                <div class="error_message"*ngIf="currriculumForm.controls['expiry_date'].hasError('required') && currriculumForm.controls['expiry_date'].touched">
+                                                    Expiry Date cannot be blank
+                                                </div>
+                                           
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1153,7 +1286,7 @@
                                             </div>
                                         </div>
                                         <!--colend-->
-                                        <div class="col-sm-6">
+                                      <!--   <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                           Title of the additional free text field
@@ -1165,7 +1298,7 @@
                         </label>
                                                 <input [(ngModel)]="showCurriculumFreeText" type="text" placeholder="Enter Title of the additional free text field" class="form-control form_width" formControlName="title_additional" />
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <!--colend-->
 
                                         <div class="col-sm-6">
@@ -1185,7 +1318,7 @@
                                             </div>
                                         </div>
                                         <!--colend-->
-                                        <div class="col-sm-6">
+                                       <!--  <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                           Free field content
@@ -1197,7 +1330,7 @@
                         </label>
                                                 <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Free field content" formControlName="free_field_content"></textarea>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <!--colend-->
 
                                         <div class="col-sm-6">
@@ -1213,7 +1346,9 @@
                             </a>
                           </label>
                                                     <textarea class="form-control form_width-textarea" [(ngModel)]="showforwhoom" rows="3" placeholder="Enter For Whom?" formControlName="for_whoom_single"></textarea>
-
+                                                    <div class="error_message"*ngIf="currriculumForm.controls['for_whoom_single'].hasError('required') && currriculumForm.controls['for_whoom_single'].touched">
+                                                        For Whom? cannot be blank
+                                                    </div>
                                                 </div>
                                                 <div>
                                                     <a data-toggle="modal" data-target="#exampleModal_curriculum" class="d-flex flex-column align-items-end">
@@ -1235,6 +1370,10 @@
                           </a>
                         </label>
                                                 <textarea [(ngModel)]="showCurriculumContent" class="form-control form_width-textarea" rows="3" placeholder="Enter Curriculum content" formControlName="external_vendor_name"></textarea>
+                                                <div class="error_message"*ngIf="currriculumForm.controls['external_vendor_name'].hasError('required') && currriculumForm.controls['external_vendor_name'].touched">
+                                                    Curriculum content cannot be blank
+                                                </div>
+                                           
                                             </div>
                                         </div>
 
@@ -1250,10 +1389,13 @@
                         </label>
                                                 <ng-select placeholder="Please select" (change)="certificationType_Curriculum($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="certification" style="width: 100%">
                                                 </ng-select>
+                                                <div class="error_message"*ngIf="currriculumForm.controls['certification'].hasError('required') && currriculumForm.controls['certification'].touched">
+                                                    Certification cannot be blank
+                                                </div>
                                             </div>
                                         </div>
                                         <!--colend-->
-                                        <div class="col-sm-6">
+                                        <!-- <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                           URL<span style="color: red">* </span>
@@ -1266,9 +1408,13 @@
                         </label>
                                                 <div class="url_field">
                                                     <input type="text" placeholder="Enter URL" class="form-control form_width" formControlName="url" />
+                                                    <div class="error_message"*ngIf="currriculumForm.controls['url'].hasError('required') && currriculumForm.controls['url'].touched">
+                                                        URL cannot be blank
+                                                    </div>
+                                               
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <!--colend-->
                                     </div>
                                     <!--row-->
@@ -1292,6 +1438,9 @@
                             {{ cctExpiry.name }}
                           </option>
                         </select>
+                        <div class="error_message"*ngIf="currriculumForm.controls['certification_expiry_type'].hasError('required') && currriculumForm.controls['certification_expiry_type'].touched">
+                            Certification expiry type cannot be blank
+                        </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1313,6 +1462,9 @@
                             {{ validity.name }}
                           </option>
                         </select>
+                        <div class="error_message"*ngIf="currriculumForm.controls['validity_period'].hasError('required') && currriculumForm.controls['validity_period'].touched">
+                            Validity period cannot be blank
+                        </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1392,6 +1544,9 @@
                             {{ cordinator?.name }}
                           </option>
                         </select>
+                        <div class="error_message"*ngIf="currriculumForm.controls['regional_cordinator'].hasError('required') && currriculumForm.controls['regional_cordinator'].touched">
+                            Regional Training Cordinator cannot be blank
+                        </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1455,6 +1610,7 @@
                                                 <div *ngIf="showMaterialURLchecked">
                                                     <input type="radio" id="chkurl" checked (click)="getmaterialsource('Url')" name="fav_language" value="HTML" class="mr-1" />
                                                     <label>URL</label>
+                                                    <!-- <span></span> -->
                                                     <input type="radio" id="chkupload" (click)="getmaterialsource('Upload')" name="fav_language" value="HTML" class="mr-1" />
                                                     <label>Uploaded Material</label>
                                                 </div>
@@ -1490,6 +1646,10 @@
                                                 <div class="d-flex justify-content-between">
                                                     <div class="upload_field" style="width:100%">
                                                         <input type="file" id="exampleInputFile" formControlName="material_source" (change)="handleFileInput_Material($event)" />
+                                                        <div class="error_message"*ngIf="materialbasedForm.controls['material_source'].hasError('required') && materialbasedForm.controls['material_source'].touched">
+                                                            Material Source cannot be blank
+                                                        </div>
+                                                   
                                                     </div>
                                                     <div *ngIf="fileToUpload_Material">
 
@@ -1516,7 +1676,11 @@
                           </a>
                         </label>
                                                 <div class="url_field">
-                                                    <input type="text" placeholder="Enter Number of learning objects" class="form-control form_width" formControlName="url" />
+                                                    <input type="text" placeholder="Enter URL" class="form-control form_width" formControlName="url" />
+                                                    <div class="error_message"*ngIf="materialbasedForm.controls['url'].hasError('required') && materialbasedForm.controls['url'].touched">
+                                                        URL cannot be blank
+                                                    </div>
+                                                
                                                 </div>
                                             </div>
                                         </div>
@@ -1564,6 +1728,9 @@
                             {{ cordinator?.name }}
                           </option>
                         </select>
+                        <div class="error_message"*ngIf="materialbasedForm.controls['regional_cordinator'].hasError('required') && materialbasedForm.controls['regional_cordinator'].touched">
+                            Regional Training Cordinator cannot be blank
+                        </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1715,6 +1882,9 @@
                             {{ cordinator?.name }}
                           </option>
                         </select>
+                        <div class="error_message"*ngIf="videobasedForm.controls['regional_cordinator'].hasError('required') && videobasedForm.controls['regional_cordinator'].touched">
+                            Regional Training Cordinator cannot be blank
+                        </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1772,6 +1942,10 @@
                           </a>
                         </label>
                                                 <input type="text" placeholder="Enter Playlist url" class="form-control form_width" formControlName="url" />
+                                                <div class="error_message"*ngIf="playlistForm.controls['url'].hasError('required') && playlistForm.controls['url'].touched">
+                                                    Playlist url cannot be blank
+                                                </div>
+                                           
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1788,6 +1962,10 @@
                           </a>
                         </label>
                                                 <input type="text" placeholder="Enter Number of learning objects" class="form-control form_width" formControlName="video_link" />
+                                            
+                                                <div class="error_message"*ngIf="playlistForm.controls['video_link'].hasError('required') && playlistForm.controls['video_link'].touched">
+                                                    Number of learning objects cannot be blank
+                                                </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1806,6 +1984,10 @@
                           </a>
                         </label>
                                                 <input type="text" [(ngModel)]="showPlaylistEmail" placeholder="Enter Email of playlist creator" class="form-control form_width" formControlName="for_whoom" />
+                                                <div class="error_message"*ngIf="playlistForm.controls['for_whoom'].hasError('required') && playlistForm.controls['for_whoom'].touched">
+                                                    Email of playlist creator cannot be blank
+                                                </div>
+                                           
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1821,15 +2003,19 @@
                             </i>
                           </a>
                         </label>
-                                                <ng-select placeholder="Please select" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="level" style="width: 100%">
+                                                <ng-select placeholder="Please select" (change)="targetAudience($event)"
+                                                [items]="yesNo" bindLabel="name" bindValue="id" formControlName="level" style="width: 100%">
                                                 </ng-select>
+                                                <div class="error_message"*ngIf="playlistForm.controls['level'].hasError('required') && playlistForm.controls['level'].touched">
+                                                    Is the target audience of your Playlist from one region only? cannot be blank
+                                                </div>
                                             </div>
                                         </div>
                                         <!--colend-->
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6" *ngIf="regionTargetAudience">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                           Region of Target Audience
@@ -1847,12 +2033,15 @@
                         </label>
                                                 <select class="form-control form_width" formControlName="who_see_course">
                           <option value="">Please select</option>
-                          <option *ngFor="let whosee of whocanSee" [value]="whosee.id"> {{whosee.name}}</option>
+                          <option *ngFor="let whosee of cordinatorsList" [value]="whosee.id"> {{whosee.name}}</option>
                         </select>
+                        <div class="error_message"*ngIf="playlistForm.controls['who_see_course'].hasError('required') && playlistForm.controls['who_see_course'].touched">
+                            Region of Target Audience cannot be blank
+                        </div>
                                             </div>
                                         </div>
                                         <!--colend-->
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6" *ngIf ="!regionTargetAudience">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                           Target audience <span style="color: red">* </span>
@@ -1864,19 +2053,23 @@
                             </i>
                           </a>
                         </label>
-                                                <select class="form-control form_width" formControlName="free_field_content">
+                                                <select class="form-control form_width" formControlName="free_field_content"
+                                                (change)="targetAudiencePlaylsit($event)">
                           <option value="">Please select</option>
                           <option value="1">OBS employees in specific Functions/Divisions</option>
                           <option value="2">All OBS employees</option>
                         </select>
+                        <div class="error_message"*ngIf="playlistForm.controls['free_field_content'].hasError('required') && playlistForm.controls['free_field_content'].touched">
+                            Target audience cannot be blank
+                        </div>
                                             </div>
                                         </div>
                                         <!--colend-->
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
+                                        <div class="col-sm-6" *ngIf ="!regionTargetAudience">
+                                            <div class="form-group" *ngIf ="!regionTargetAudiencePlaylist">
                                                 <label class="form-control-label">
                           OBS employees in specific Functions/Divisions
                           <span style="color: red">* </span>
@@ -1894,6 +2087,9 @@
                           </option>
 
                         </select>
+                        <div class="error_message"*ngIf="playlistForm.controls['email_preffered_instructor'].hasError('required') && playlistForm.controls['email_preffered_instructor'].touched">
+                            OBS employees in specific Functions/Divisions cannot be blank
+                        </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1941,6 +2137,9 @@
                             {{ cordinator?.name }}
                           </option>
                         </select>
+                        <div class="error_message"*ngIf="playlistForm.controls['regional_cordinator'].hasError('required') && playlistForm.controls['regional_cordinator'].touched">
+                            Regional Training Cordinator cannot be blank
+                        </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -2006,6 +2205,9 @@
                           <option value="yes">Yes</option>
                           <option value="no">No</option>
                         </select>
+                        <div class="error_message"*ngIf="webbasedForm.controls['digital'].hasError('required') && webbasedForm.controls['digital'].touched">
+                            Does this course integrate digital ? cannot be blank
+                        </div>
                                             </div>
                                         </div>
 
@@ -2041,6 +2243,9 @@
                         </label>
                                                 <ng-select placeholder="Please select" (change)="certificationType_Webbased($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="certification" style="width: 100%">
                                                 </ng-select>
+                                                <div class="error_message"*ngIf="webbasedForm.controls['certification'].hasError('required') && webbasedForm.controls['certification'].touched">
+                                                    Certification cannot be blank
+                                                </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -2057,6 +2262,9 @@
                         </label>
                                                 <ng-select placeholder="Please select" (change)="externalVendor_Webbased($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="external_vendor" style="width: 100%">
                                                 </ng-select>
+                                                <div class="error_message"*ngIf="webbasedForm.controls['external_vendor'].hasError('required') && webbasedForm.controls['external_vendor'].touched">
+                                                    External vendor cannot be blank
+                                                </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -2079,6 +2287,9 @@
                             {{ cctExpiry.name }}
                           </option>
                         </select>
+                        <div class="error_message"*ngIf="webbasedForm.controls['certification_expiry_type'].hasError('required') && webbasedForm.controls['certification_expiry_type'].touched">
+                            Certification expiry type cannot be blank
+                        </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -2112,6 +2323,10 @@
                           </a>
                         </label>
                                                 <input type="text" placeholder="External vendor name" class="form-control form_width" formControlName="external_vendor_name" />
+                                                <div class="error_message"*ngIf="webbasedForm.controls['external_vendor_name'].hasError('required') && webbasedForm.controls['external_vendor_name'].touched">
+                                                    External vendor name cannot be blank
+                                                </div>
+                                          
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -2134,6 +2349,9 @@
                             {{ validity.name }}
                           </option>
                         </select>
+                        <div class="error_message"*ngIf="webbasedForm.controls['validity_period'].hasError('required') && webbasedForm.controls['validity_period'].touched">
+                            Validity period cannot be blank
+                        </div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -2180,6 +2398,9 @@
                             {{ cordinator?.name }}
                           </option>
                         </select>
+                        <div class="error_message"*ngIf="webbasedForm.controls['regional_cordinator'].hasError('required') && webbasedForm.controls['regional_cordinator'].touched">
+                            Regional Training Cordinator cannot be blank
+                        </div>
                                             </div>
                                         </div>
                                         <!--colend-->

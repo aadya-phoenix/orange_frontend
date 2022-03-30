@@ -107,7 +107,7 @@ export class CoursesComponent implements OnInit {
 
   getrecords(data:any){
     this.courcesList = data;
-    console.log(this.courcesList)
+    console.log(this.courcesList);
   }
 
   refreshCourses() {

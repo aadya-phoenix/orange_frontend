@@ -28,7 +28,7 @@ export class ViewHistoryComponent implements OnInit {
     this.copyDeletecourse = dialogdata.data3 ? dialogdata.data3 : '';
     this.title= dialogdata.title
     this.modalType = dialogdata.type;
-    console.log(this.courseHistory);
+    console.log("courseDetail",this.courseDetail);
   }
 
 

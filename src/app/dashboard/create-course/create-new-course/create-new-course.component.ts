@@ -5,6 +5,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/observable/fromEvent';
 import { Subscription } from 'rxjs';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 /*  import * as CustomBuild from 'ckEditorCustomBuild/build/ckeditor';  */
 
 import {
@@ -12,7 +13,6 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -30,6 +30,49 @@ export class CreateNewCourseComponent implements OnInit {
   isImageSaved: any;
   totalObjnew: any = {};
 
+  editorConfig: AngularEditorConfig = {
+    placeholder: 'Enter text here...',
+    toolbarHiddenButtons:[
+      ['bold',
+      'undo',
+      'redo',
+      'italic',
+      'underline',
+      'italic',
+      'strikeThrough',
+      'subscript',
+      'superscript',
+      'justifyLeft',
+      'justifyCenter',
+      'justifyRight',
+      'justifyFull',
+      'indent',
+      'outdent',
+      'insertOrderedList',
+      'heading',
+      'fontName',
+      'textColor',
+      'backgroundColor',
+      'insertImage',
+      'insertVideo',
+      'horizontalLine',
+      'clearFormatting',
+      'htmlCode'
+    ],
+    [
+      'fontSize',
+      'textColor',
+      'backgroundColor',
+      'customClasses',
+      'link',
+      'unlink',
+      'insertImage',
+      'insertVideo',
+      'insertHorizontalRule',
+      'removeFormat',
+      'toggleEditorMode'
+    ]]
+  };
  /*  public Editor = CustomBuild; */
 
 
@@ -47,6 +90,8 @@ export class CreateNewCourseComponent implements OnInit {
   public showCertificateExpiry: boolean = false;
   public showCertificateExpiry_Curriculum: boolean = false;
   public showCertificateExpiry_Webbased: boolean = false;
+  public regionTargetAudience: boolean = false;
+  public regionTargetAudiencePlaylist: boolean = false;
   public externalVendorname: boolean = false;
   public externalVendorname_Webbased: boolean = false;
   public materialsourceurl: boolean = false;
@@ -651,6 +696,7 @@ export class CreateNewCourseComponent implements OnInit {
       titleArr: new FormArray([]),
       title: new FormControl(''),
       title_single: new FormControl('', [Validators.required]),
+      description_single: new FormControl('', [Validators.required])
     });
     this.commonCreateCourceForm = this.fb.group({
       titleArr: new FormArray([]),
@@ -786,16 +832,17 @@ export class CreateNewCourseComponent implements OnInit {
       /* email_preffered_instructor: new FormControl('', [Validators.required,
       Validators.pattern(emailregexp)]), */
       digital: new FormControl('', [Validators.required]),
+      manager_approval: new FormControl('', [Validators.required]),
       certification: new FormControl('', [Validators.required]),
       certification_expiry_type: new FormControl(''),
       validity_period: new FormControl(''),
       learn_more: new FormControl(''),
-      video_link: new FormControl(''),
-      title_additional: new FormControl(''),
+     /*  video_link: new FormControl(''), */
+     /*  title_additional: new FormControl(''), */
       external_vendor_name: new FormControl('', [Validators.required]),
-      free_field_content: new FormControl(''),
+     /*  free_field_content: new FormControl(''), */
       expiry_date: new FormControl(''),
-      url: new FormControl('', [Validators.required]),
+     /*  url: new FormControl('', [Validators.required]), */
       who_see_course: new FormControl(''),
       for_whoom: new FormControl(''),
       learn_more_single: new FormControl(''),
@@ -837,9 +884,9 @@ export class CreateNewCourseComponent implements OnInit {
       url: new FormControl('', [Validators.required]),
       video_link: new FormControl('', [Validators.required]),
       level: new FormControl('', [Validators.required]),
-      who_see_course: new FormControl('', [Validators.required]),
-      free_field_content: new FormControl('', [Validators.required]),
-      email_preffered_instructor: new FormControl('', [Validators.required]),
+      who_see_course: new FormControl(''),
+      free_field_content: new FormControl(''),
+      email_preffered_instructor: new FormControl(''),
       regional_cordinator:
         this.getUserrole.id === 2
           ? new FormControl('', [Validators.required])
@@ -1556,6 +1603,32 @@ export class CreateNewCourseComponent implements OnInit {
       this.iltandViltForm.get('validity_period')?.clearValidators();
     }
 
+  }
+
+  targetAudience(event: any){
+    if (event.id == 'yes'){
+      this.regionTargetAudience = true;
+      this.playlistForm.get('who_see_course')?.setValidators(Validators.required);
+      this.playlistForm.get('free_field_content')?.clearValidators();    
+      this.playlistForm.get('email_preffered_instructor')?.clearValidators();  
+    }
+    else{
+      this.regionTargetAudience = false;
+      this.playlistForm.get('free_field_content')?.setValidators(Validators.required);
+      this.playlistForm.get('email_preffered_instructor')?.setValidators(Validators.required);
+      this.playlistForm.get('who_see_course')?.clearValidators();
+    }
+  }
+  targetAudiencePlaylsit(event:any){
+    console.log("event is",event.target.value)
+    if (event.target.value == 2){
+      this.regionTargetAudiencePlaylist = true;
+      this.playlistForm.get('email_preffered_instructor')?.setValidators(Validators.required);
+    }
+    if (event.target.value == 1){
+      this.regionTargetAudiencePlaylist = false;
+      this.playlistForm.get('email_preffered_instructor')?.clearValidators();
+    } 
   }
   certificationType_Curriculum(event: any) {
     console.log(event.id);
