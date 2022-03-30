@@ -21,6 +21,7 @@ export class CoursesComponent implements OnInit {
   collectionSize: any;
   searchText: any;
   draftRequests:any =[];
+  public learningTypes: any;
   pendingRequests: any = [];
   transferredRequests: any = [];
   showbuttons: any;
@@ -39,6 +40,7 @@ export class CoursesComponent implements OnInit {
   j: number = 0;
   public compare = (v1: string | number, v2: string | number) =>
     v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+ 
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
@@ -321,11 +323,24 @@ export class CoursesComponent implements OnInit {
 
   }
 
+  //getLearning type
+  getLearningType() {
+    this.courceService.getLearningType().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.learningTypes = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
   ngOnInit(): void {
     // console.log(this.getUserrole);
     console.log(this.routegetdata)
     this.refreshCourses();
-
+    this.getLearningType();
     
   }
 

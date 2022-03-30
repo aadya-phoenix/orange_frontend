@@ -111,35 +111,36 @@
                                             </div>
                                         </div>
                                         <!--colend-->
-                                        <div class="col-sm-6">
-                                            <div class="d-flex align-items-center">
-                                                <div class="form-group" style="width: 100%">
-                                                    <label class="form-control-label">
-                          Description <span style="color: red">* </span>
-                          <a>
-                            <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                               data-placement="top" data-container="body"
-                               title="1-3 meaningful sentences describing the content of the learning activity (this field doesnâ€™t accept bullet points)">
-                            </i>
-                          </a>
-                        </label>
-                                                    <textarea class="form-control form_width-textarea" [(ngModel)]="showdescription" (ngModelChange)="valueChange(showdescription)" maxlength="500"
-                                                    rows="3" placeholder="Enter Description" formControlName="description_single"></textarea>
-                                                    <span>{{remainingText}} characters remaining</span>
-                                                    <div class="error_message"*ngIf="commonCreateCourceForm_playlist.controls['description_single'].hasError('required') && commonCreateCourceForm_playlist.controls['description_single'].touched">
-                                                        Description cannot be blank
-                                                    </div>
-                                              
+                                       
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="d-flex align-items-center">
+                                            <div class="form-group" style="width: 100%">
+                                                <label class="form-control-label">
+                      Description <span style="color: red">* </span>
+                      <a>
+                        <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                           data-placement="top" data-container="body"
+                           title="1-3 meaningful sentences describing the content of the learning activity (this field doesnâ€™t accept bullet points)">
+                        </i>
+                      </a>
+                    </label>
+                                                <textarea class="form-control form_width-textarea" [(ngModel)]="showdescription" (ngModelChange)="valueChange(showdescription)" maxlength="500"
+                                                rows="3" placeholder="Enter Description" formControlName="description_single"></textarea>
+                                                <span class="charcter_limit">{{remainingText}} characters remaining</span>
+                                                <div class="error_message"*ngIf="commonCreateCourceForm_playlist.controls['description_single'].hasError('required') && commonCreateCourceForm_playlist.controls['description_single'].touched">
+                                                    Description cannot be blank
                                                 </div>
-                                                <div>
-                                                    <a href="" data-toggle="modal" data-target="#commonDescription" class="d-flex flex-column align-items-end">
-                                                        <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
-                                                    </a>
-                                                </div>
+                                          
+                                            </div>
+                                            <div>
+                                                <a href="" data-toggle="modal" data-target="#commonDescription" class="d-flex flex-column align-items-end">
+                                                    <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                                                </a>
                                             </div>
                                         </div>
-                                        <!--colend-->
                                     </div>
+                                    <!--colend-->
                                 </div>
                             </div>
                         </div>
@@ -253,7 +254,12 @@
                                                 </div>
                                             </div>
                                             <!--colend-->
-                                            <div class="col-sm-6">
+                                           <div class="col-sm-6" style="margin-bottom: 10px;">
+                                                <label>Objective</label>
+                                                <angular-editor  formControlName="objective_single"  placeholder="Enter Objectives" 
+                                                [config]="editorConfig"></angular-editor>
+                                            </div>  
+                                           <!--  <div class="col-sm-6">
                                                 <div class="d-flex align-items-center">
                                                     <div class="form-group" style="width: 100%">
                                                         <label class="form-control-label">
@@ -266,14 +272,15 @@
                               </a>
                             </label>
                            <!--  <angular-editor [config]="editorConfig" ></angular-editor> -->
-                            <angular-editor class="form-control " [(ngModel)]="showobjective"  placeholder="Enter Objectives" formControlName="objective_single"
-                            [config]="editorConfig"></angular-editor>
-                                                       <!--  <div 
+
+                         <!--    <textarea class="form-control " [(ngModel)]="showobjective"  placeholder="Enter Objectives" formControlName="objective_single"
+                            ></textarea>
+                                                      <div 
                                                         class="error_message"*ngIf="commonCreateCourceForm.controls['objective_single'].hasError('required') && commonCreateCourceForm.controls['objective_single'].touched">
                                                             Objectives cannot be blank
-                                                        </div> -->
+                                                        </div> 
                                                    
-                                                    </div>
+                                                   </div>
 
                                                     <div>
                                                         <a href="" data-toggle="modal" data-target="#commonObjective" class="d-flex flex-column align-items-end">
@@ -281,7 +288,8 @@
                                                         </a>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>  -->
+                                            <!--colend-->
                                             <!--colend-->
 
                                             <div class="col-sm-6">
@@ -1635,14 +1643,14 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          Material Source<span style="color: red">* </span>
-                          <a>
-                            <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                               data-placement="top"
-                               title="Please upload that you wish to associate with the learning Material.">
-                            </i>
-                          </a>
-                        </label>
+                                                  Material Source<span style="color: red">* </span>
+                                                  <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                                                       data-placement="top"
+                                                       title="Please upload that you wish to associate with the learning Material.">
+                                                    </i>
+                                                  </a>
+                                                </label>
                                                 <div class="d-flex justify-content-between">
                                                     <div class="upload_field" style="width:100%">
                                                         <input type="file" id="exampleInputFile" formControlName="material_source" (change)="handleFileInput_Material($event)" />
@@ -1667,14 +1675,14 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          URL<span style="color: red">* </span>
-                          <a>
-                            <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                               data-placement="top"
-                               title="Please upload that you wish to associate with the learning Material.">
-                            </i>
-                          </a>
-                        </label>
+                                                 URL<span style="color: red">* </span>
+                                                 <a>
+                                                   <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                                                      data-placement="top"
+                                                      title="Please upload that you wish to associate with the learning Material.">
+                                                   </i>
+                                                 </a>
+                                               </label>
                                                 <div class="url_field">
                                                     <input type="text" placeholder="Enter URL" class="form-control form_width" formControlName="url" />
                                                     <div class="error_message"*ngIf="materialbasedForm.controls['url'].hasError('required') && materialbasedForm.controls['url'].touched">
@@ -1696,14 +1704,14 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          Additional Comment(s)
-                          <a>
-                            <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                               data-placement="top" data-container="body"
-                               title="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog.">
-                            </i>
-                          </a>
-                        </label>
+                                                  Additional Comment(s)
+                                                  <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                                                       data-placement="top" data-container="body"
+                                                       title="Provide any additional information to help with the publication of the learning object on Orange Learning. This text will not appear in the Orange Learning catalog.">
+                                                    </i>
+                                                  </a>
+                                                </label>
                                                 <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Additional Comment(s)" formControlName="additional_comment"></textarea>
                                             </div>
                                         </div>
@@ -1712,16 +1720,16 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          Request to RegionalTraining Cordinator
-                          <span style="color: red">* </span>
-
-                          <a>
-                            <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                               data-placement="top"
-                               title="If you selected Yes in the Certification field, please select how long the certification is valid.">
-                            </i>
-                          </a>
-                        </label>
+                                                  Request to RegionalTraining Cordinator
+                                                  <span style="color: red">* </span>
+                        
+                                                                          <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                                                       data-placement="top"
+                                                       title="If you selected Yes in the Certification field, please select how long the certification is valid.">
+                                                    </i>
+                                                  </a>
+                                                </label>
                                                 <select class="form-control form_width" formControlName="regional_cordinator">
                           <option value="">Please select ROC</option>
                           <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">

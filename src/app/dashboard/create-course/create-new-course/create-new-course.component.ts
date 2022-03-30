@@ -31,7 +31,12 @@ export class CreateNewCourseComponent implements OnInit {
   totalObjnew: any = {};
 
   editorConfig: AngularEditorConfig = {
-    placeholder: 'Enter text here...',
+    sanitize: false,
+    editable: true,
+    
+    height: '100px',
+    enableToolbar: true,
+    showToolbar: true,
     toolbarHiddenButtons:[
       ['bold',
       'undo',
@@ -1711,6 +1716,9 @@ export class CreateNewCourseComponent implements OnInit {
         .get('url')
         ?.setValidators(Validators.required);
       this.materialbasedForm.get('video_link')?.clearValidators();
+      this.materialbasedForm.patchValue({
+        video_link:null
+      });
     } else {
       this.materialsourceurl = false;
       this.materialsourceupload = true;
@@ -1718,6 +1726,9 @@ export class CreateNewCourseComponent implements OnInit {
         .get('video_link')
         ?.setValidators(Validators.required);
       this.materialbasedForm.get('url')?.clearValidators();
+      this.materialbasedForm.patchValue({
+        url:null
+      });
     }
   }
 
@@ -1740,7 +1751,9 @@ export class CreateNewCourseComponent implements OnInit {
   }
 
   valueChange(value:any){
+    if(value != undefined){
     this.remainingText = 500 - value.length;
+    }
   }
 
 

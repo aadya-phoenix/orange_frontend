@@ -216,6 +216,20 @@ export class CourcesService {
       const urllive = `${this.basePath}api/${this.apiVersion}/user/transfer`;
       return this.http.post(url, id).pipe(catchError(this.Errorhandling));  
      }
+     //remove backup
+     removeBackup(){
+      const url = `/api/${this.apiVersion}/transfer/reset`;
+      const urllive = `${this.basePath}api/${this.apiVersion}/transfer/reset`;
+      return this.http.post(url,{}).pipe(catchError(this.Errorhandling));  
+     }
+     //newregionalCordinator
+     getNewregionalCordinator(){
+      const url = `/api/${this.apiVersion}/regional-cordinator`;
+      const urllive = `${this.basePath}api/${this.apiVersion}/regional-cordinator`;
+      return this.http
+        .get(url, this.http.headers)
+        .pipe(catchError(this.Errorhandling));
+     }
      
 
   Errorhandling(err: HttpErrorResponse) {
