@@ -236,7 +236,12 @@ export class CourcesService {
       const urllive = `${this.basePath}api/${this.apiVersion}/transfer/publisher-list`;
       return this.http.post(url,{}).pipe(catchError(this.Errorhandling)); 
      }
-     
+     //newPublisherWithId
+     getNewPublisherId(id:any){
+      const url = `/api/${this.apiVersion}/transfer/publisher-list`;
+      const urllive = `${this.basePath}api/${this.apiVersion}/transfer/publisher-list`;
+      return this.http.post(url,id).pipe(catchError(this.Errorhandling)); 
+     }
 
   Errorhandling(err: HttpErrorResponse) {
     if (err.error instanceof ErrorEvent) {

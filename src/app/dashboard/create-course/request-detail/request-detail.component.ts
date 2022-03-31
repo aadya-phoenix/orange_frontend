@@ -19,6 +19,7 @@ export class RequestDetailComponent implements OnInit {
   status: any;
   transfer_user_id: any;
   publisherList: any = [];
+  newPublisherList:any=[];
   roleuserlist: any = [];
   cordinatorsList: any = [];
   showbuttons: any;
@@ -51,6 +52,7 @@ export class RequestDetailComponent implements OnInit {
    else{
     localStorage.setItem('routegetdata',JSON.stringify(this.routegetdata));
    }
+   console.log("route",this.routegetdata);
   }
 
   saveChange() {
@@ -108,7 +110,7 @@ export class RequestDetailComponent implements OnInit {
     if(this.routegetdata.duration != undefined){
     let hours = str.match(/(.*):/g).pop().replace(":","");
     let min = str.match(/:(.*)/g).pop().replace(":","");
-    this.trainingDurationHours = hours +"hours"+ " "+min + "minutes";
+    this.trainingDurationHours = hours +" "+"hours"+ " "+min +" "+ "minutes";
     }
   }
   getRole() {
@@ -167,6 +169,16 @@ export class RequestDetailComponent implements OnInit {
 
   }
 
+  getNewPublisherId(){
+    this.courseService.getNewPublisherId(this.routegetdata.id).subscribe(
+      (res: any) => { 
+        console.log("pub new",res);
+        this.newPublisherList = res.data;
+      }, (err: any) => {
+      console.log(err);
+    });
+  }
+
   getPublisherselected(event: any) {
     this.selectedPublisher = event.target.value;
     console.log(this.selectedPublisher)
@@ -212,6 +224,7 @@ export class RequestDetailComponent implements OnInit {
     this.objectarray = [];//arr1.split('• ')
     //console.log(arr1.split('• '))
     this.getPublisher();
+    this.getNewPublisherId();
     this.getCordinators();
     this.getRole();
     this.setrejectbutton(this.routegetdata.id);
@@ -232,7 +245,7 @@ export class RequestDetailComponent implements OnInit {
     })
   }
   getCordinators() {
-    this.courseService.getregionalCordinator().subscribe(
+    this.courseService.getNewregionalCordinator().subscribe(
       (res: any) => {
         console.log(res);
         this.cordinatorsList = res.data;

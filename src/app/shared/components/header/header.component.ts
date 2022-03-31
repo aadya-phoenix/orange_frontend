@@ -28,10 +28,12 @@ export class HeaderComponent implements OnInit {
   getUserprofile(){
     this.authService.getProfileDetails().subscribe((res:any)=>{
       console.log(res);
+      if(res != undefined){
       this.getprofileDetails = res.data;
       this.firstName = this.getprofileDetails.first_name;
       this.lastName = this.getprofileDetails.last_name;
       console.log("profile details",this.getprofileDetails);
+      } 
     },(err:any)=>{
       console.log(err)
     })

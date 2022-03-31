@@ -40,7 +40,7 @@ export class CreateNewCourseComponent implements OnInit {
          'UnorderedList']
   };
 
-
+  curriculumEditor:any;
   public cardImageBase64: any;
   public createCourceForm!: FormGroup;
   public commonCreateCourceForm!: FormGroup;
@@ -448,7 +448,10 @@ export class CreateNewCourseComponent implements OnInit {
     }    
   }
 
- 
+ /*  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
+  var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+      return new boosted.Tooltip(tooltipTriggerEl)
+   }); */
   /* editorConfig: AngularEditorConfig = {
     sanitize: false,
     editable: true,
@@ -495,7 +498,7 @@ export class CreateNewCourseComponent implements OnInit {
   }; */
   //get regional cordinators
   getCordinators() {
-    this.courceService.getregionalCordinator().subscribe(
+    this.courceService.getNewregionalCordinator().subscribe(
       (res: any) => {
         console.log(res);
         this.cordinatorsList = res.data;
@@ -505,6 +508,18 @@ export class CreateNewCourseComponent implements OnInit {
       }
     );
   }
+  //publisherWithId
+ /*  getNewPublisherId(){
+    this.courceService.getNewPublisherId(id).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.publisherNewList = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  } */
 
   getvendorType() {
     this.courceService.getVendortype().subscribe(
@@ -522,7 +537,7 @@ export class CreateNewCourseComponent implements OnInit {
     this.courceService.getcctLevel().subscribe(
       (res: any) => {
         this.cctLevel = res.data;
-        console.log(this.cctLevel);
+        console.log("cct level",this.cctLevel);
       },
       (err: any) => {
         console.log(err);
@@ -1086,6 +1101,7 @@ export class CreateNewCourseComponent implements OnInit {
       this.pushtoTitlearray(this.commonCreateCourceForm_playlist);
     }
 
+    
   }
 
   get f() {
@@ -1748,6 +1764,10 @@ export class CreateNewCourseComponent implements OnInit {
 
       }
     }
+    /* const curriculumContentTextEditor = document.getElementById('curriculumTextEditor');
+    if(curriculumContentTextEditor){
+      curriculumContentTextEditor.click();
+    } */
   }
 
   getPublisherselected(event: any) {
@@ -1761,7 +1781,10 @@ export class CreateNewCourseComponent implements OnInit {
     }
   }
 
-
+  onCreate(){
+    this.curriculumEditor = this;
+    this.curriculumEditor.refreshUI();
+  }
   //getallFormValidationErrors(formObj: FormGroup, name:any) {
   //	console.log("name = "+name);
   //	if(formObj){

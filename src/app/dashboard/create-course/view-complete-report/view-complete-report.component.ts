@@ -23,6 +23,7 @@ export class ViewCompleteReportComponent implements OnInit {
   public roleUsers:any;
   public departments:any;
   collectionSize: any;
+  p:any
   draftRequests:any =[];
   pendingRequests:any=[];
   closedRequests:any=[];

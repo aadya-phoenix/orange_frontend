@@ -59,6 +59,7 @@ export class CoursesComponent implements OnInit {
     }
     else{
       this.allCourses = this.pendingRequests;
+      this.getrecords(this.pendingRequests);
     }
     console.log(this.getprofileDetails)
     
@@ -260,7 +261,7 @@ export class CoursesComponent implements OnInit {
       });
     },(err:any)=>{
       console.log(err)
-    })
+    });
    
    
   }
@@ -341,6 +342,9 @@ export class CoursesComponent implements OnInit {
     console.log(this.routegetdata)
     this.refreshCourses();
     this.getLearningType();
+    if(this.routegetdata){
+      this.allCourses = this.pendingRequests;
+    }
     
   }
 

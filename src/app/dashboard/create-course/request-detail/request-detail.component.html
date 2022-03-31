@@ -352,12 +352,12 @@
                                                 <label for="exampleInputEmail1">Resources</label>
                                                 <div class="d-flex align-items-center">
                                                     <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                            {{
-                            routegetdata.resource
-                              ? routegetdata.resource
-                              : "-"
-                            }}
-                          </span>
+                                                       {{
+                                                       routegetdata.resource
+                                                         ? routegetdata.resource
+                                                         : "-"
+                                                       }}
+                                                     </span>
                                                     <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
@@ -1337,14 +1337,14 @@
                         <div class="form-group">
                             <label>Transfer to Publisher</label>
                             <select name="select " id="select " class="form-control form_width1" (change)="getPublisherselected($event)">
-    <option value="0 ">Please select</option>
-    <option
-      *ngFor="let publisher of publisherList"
-      [value]="publisher.id"
-    >
-      {{ publisher.first_name }}
-    </option>
-  </select>
+                             <option value="0 ">Please select</option>
+                             <option
+                               *ngFor="let publisher of newPublisherList"
+                               [value]="publisher.id"
+                             >
+                               {{ publisher.first_name }}
+                             </option>
+                           </select>
 
                         </div>
                     </div>
@@ -1453,6 +1453,7 @@
             </div>
 
             <div class="modal-body">
+              <form [formGroup]="publishForm">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
@@ -1464,23 +1465,25 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Orange Learning Intrance URL(SSO)</label>
-                            <input type="text" placeholder="Enter Orange Learning Intrance URL(SSO)" class="form-control form_width1" />
+                            <input type="text" placeholder="Enter Orange Learning Intrance URL(SSO)" class="form-control form_width1" formControlName="intranet_url"/>
                         </div>
                     </div>
                     <!--col end-->
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Orange Learning Internet URL</label>
-                            <input type="text" class="form-control form_width1" placeholder="Enter Orange Learning Internet URL" />
+                            <input type="text" class="form-control form_width1" placeholder="Enter Orange Learning Internet URL" formControlName="internet_url"/>
                         </div>
                     </div>
                     <!--col end-->
                 </div>
                 <!--row-->
+                </form>
             </div>
             <div class="modal-footer">
                 <!-- <button type="button " class="btn btn-secondary " data-dismiss="modal ">Close</button> -->
-                <button type="button" class="btn btn-primary btn_requst">
+                <button type="button" class="btn btn-primary btn_requst" 
+                (click)="PublishRequest()">
             Submit
           </button>
             </div>
