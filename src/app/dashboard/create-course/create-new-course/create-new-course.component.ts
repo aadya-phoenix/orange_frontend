@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/observable/fromEvent';
 import { Subscription } from 'rxjs';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
-/*  import * as CustomBuild from 'ckEditorCustomBuild/build/ckeditor';  */
+import { ToolbarService, HtmlEditorService, RichTextEditorComponent } from '@syncfusion/ej2-angular-richtexteditor';
 
 import {
   FormArray,
@@ -23,6 +22,7 @@ const emailregexp = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
   selector: 'app-create-new-course',
   templateUrl: './create-new-course.component.html',
   styleUrls: ['./create-new-course.component.scss'],
+  providers:[ToolbarService, HtmlEditorService]
 })
 export class CreateNewCourseComponent implements OnInit {
   routergetdata: any;
@@ -30,8 +30,11 @@ export class CreateNewCourseComponent implements OnInit {
   isImageSaved: any;
   totalObjnew: any = {};
 
- 
- /*  public Editor = CustomBuild; */
+  
+  public tools: object = {
+    items: [
+         'UnorderedList']
+};
 
 
   public cardImageBase64: any;
@@ -441,7 +444,8 @@ export class CreateNewCourseComponent implements OnInit {
     }    
   }
 
-  editorConfig: AngularEditorConfig = {
+ 
+  /* editorConfig: AngularEditorConfig = {
     sanitize: false,
     editable: true,
     
@@ -457,11 +461,7 @@ export class CreateNewCourseComponent implements OnInit {
       'italic',
       'strikeThrough',
       'subscript',
-      'superscript',
-      'justifyLeft',
-      'justifyCenter',
-      'justifyRight',
-      'justifyFull',
+      'superscript',     
       'indent',
       'outdent',
       'insertOrderedList',
@@ -488,7 +488,7 @@ export class CreateNewCourseComponent implements OnInit {
       'removeFormat',
       'toggleEditorMode'
     ]]
-  };
+  }; */
   //get regional cordinators
   getCordinators() {
     this.courceService.getregionalCordinator().subscribe(
