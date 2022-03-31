@@ -10,6 +10,9 @@ import { AuthenticationService } from '../../services/auth/authentication.servic
 export class HeaderComponent implements OnInit {
 
   getUserrole:any;
+  firstName:any;
+  lastName:any;
+
   constructor(private authService:AuthenticationService,
     private router:Router) { 
     this.getUserrole = this.authService.getRolefromlocal();
@@ -26,6 +29,9 @@ export class HeaderComponent implements OnInit {
     this.authService.getProfileDetails().subscribe((res:any)=>{
       console.log(res);
       this.getprofileDetails = res.data;
+      this.firstName = this.getprofileDetails.first_name;
+      this.lastName = this.getprofileDetails.last_name;
+      console.log("profile details",this.getprofileDetails);
     },(err:any)=>{
       console.log(err)
     })
