@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 
 @Component({
@@ -11,13 +12,19 @@ export class SetBackupComponent implements OnInit {
 
   public rocObj: any;
   userName:any;
+  getUserrole: any;
+  assignFlag:boolean=false;
   userEmail:any;
   id:any;
   userid: any;
-  constructor(private courseService: CourcesService, private router: Router) { }
+  constructor(private courseService: CourcesService,
+    private authService: AuthenticationService, private router: Router) {
+    this.getUserrole = this.authService.getRolefromlocal();
+   }
 
   ngOnInit(): void {
-    this.courseService.getregionalCordinator().subscribe((res:any)=>{
+    console.log("getUserrole",this.getUserrole);
+    this.courseService.getNewregionalCordinator().subscribe((res:any)=>{
       console.log("getregionalCordinator()",res.data);
           this.rocObj = res.data;
     },(err:any)=>{
@@ -27,7 +34,7 @@ export class SetBackupComponent implements OnInit {
   }
 
   getUser(event: any){
-   //console.log("id is",event.target.value);
+   console.log("id is",event.target.value);
    this.id = event.target.value;
    this.courseService.getRoleUsers().subscribe((res: any) => {
     console.log("res data is ",res.data);
@@ -56,18 +63,19 @@ export class SetBackupComponent implements OnInit {
   }
   assign(){
     console.log("id is ", this.id);
+    this.assignFlag = true;
     let transferid = {
       transfer_id: this.userid
     }
     let totalObj = {
       ...transferid
     }
-    this.courseService.assignBackup(totalObj).subscribe((res:any)=>{
+     this.courseService.assignBackup(totalObj).subscribe((res:any)=>{
       console.log("assign backup", res.data);
       this.router.navigate(['/dashboard/cources']);
     },(err:any)=>{
       console.log(err);
-    });
+    }); 
   }
 
 }

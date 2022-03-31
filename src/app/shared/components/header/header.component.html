@@ -9,29 +9,7 @@
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent" style="margin-top: -6px;">
         <ul class="navbar-nav">
-            <li class="nav-item dropdown" *ngIf="getUserrole.id != 2">
-                <a class="nav-link dropdown-toggle arrow_css_show mt-1" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-gear gear_css"></i>
-                    <span class="set_backup">Set Backup</span>
-                </a>
-                <div class="dropdown-menu drop_show dropshow_main-cs" aria-labelledby="navbarDropdown">
 
-                    <div class="text-box_div">
-                        <div class="button_msg-div" *ngIf="getUserrole.id == 3">
-                            <img src="https://img.icons8.com/ios/50/000000/security-user-female.png" style="width: 28px" />
-                            <a [routerLink]="['/dashboard/set-backup']">Set ROC Backup</a>
-                        </div>
-                        <div class="button_msg-div" *ngIf="getUserrole.id == 4">
-                            <img src="https://img.icons8.com/ios/50/000000/security-user-female.png" style="width: 28px" />
-                            <a [routerLink]="['/dashboard/set-backup']">Set ROC Backup</a>
-                        </div>
-                        <!-- <div class="button_msg-div">
-                                            <img src="https://img.icons8.com/ios/50/000000/security-user-female.png" style="width: 28px;" />
-                                            <span>Set Session Publisher (Backup)</span>
-                                        </div> -->
-                    </div>
-                </div>
-            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle arrow_css_toggl" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="../../../../assets/images/HeaderIcon/Dash.png" class="icon_header_desi">
@@ -52,7 +30,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" *ngIf="getUserrole.id != 2">
                 <a class="nav-link dropdown-toggle arrow_css_toggl" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="../../../../assets/images/HeaderIcon/Setbackup.png" class="icon_header_desi">
                     <span class="text_header_desi">Set backups<i class="fa fa-angle-right ml-2" aria-hidden="true"></i></span>
@@ -62,9 +40,9 @@
 
                         <div class="nav_p">
                             <div id="myDIV">
-                                <button class="btn_active active">PD&L Dashboard</button>
-                                <button class="btn_active">User Management</button>
-                                <button class="btn_active">Admin Console</button>
+                                <button class="btn_active active" *ngIf="getUserrole.id == 3">Set ROC Backup</button>
+
+                                <button class="btn_active" *ngIf="getUserrole.id == 4">Set Publisher Backup</button>
 
                             </div>
                         </div>

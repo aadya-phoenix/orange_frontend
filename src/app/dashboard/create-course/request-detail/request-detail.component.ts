@@ -31,17 +31,26 @@ export class RequestDetailComponent implements OnInit {
   closeResult = "";
   rejectcomment: any;
   constructor(private fb: FormBuilder, private authService: AuthenticationService, private router: Router, private modalService: NgbModal, private courseService: CourcesService) {
+  
     this.routegetdata = this.router.getCurrentNavigation()?.extras.state;
+    if(this.routegetdata==undefined){
+     this.routegetdata= localStorage.getItem('routegetdata');
+     console.log("route",this.routegetdata);
+     this.routegetdata = JSON.parse(this.routegetdata);
+    }
     this.routegetdata['titleByLang'] = this.courseService.getTText(this.routegetdata['title']);
     this.routegetdata['descriptionByLang'] = this.courseService.getTText(this.routegetdata['description']);
     this.routegetdata['objectiveByLang'] = this.courseService.getTText(this.routegetdata['objective']);
     this.routegetdata['learn_moreByLang'] = this.courseService.getTText(this.routegetdata['learn_more']);
     this.routegetdata['for_whomByLang'] = this.courseService.getTText(this.routegetdata['for_whom']);
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
+
     if (!this.routegetdata) {
       this.router.navigateByUrl('/dashboard/cources');
     }
-
+   else{
+    localStorage.setItem('routegetdata',JSON.stringify(this.routegetdata));
+   }
   }
 
   saveChange() {
@@ -50,7 +59,7 @@ export class RequestDetailComponent implements OnInit {
 
   getPublisher() {
     this.authService.getUserRoles().subscribe((res: any) => {
-      console.log(res);
+    //  console.log("roles are",res);
       this.publisherList = res.data['4'];
       this.roleuserlist = res.data;
       console.log(this.publisherList)
@@ -94,12 +103,18 @@ export class RequestDetailComponent implements OnInit {
 
   getTrainingHours(){
     let str = this.routegetdata.duration;
+    console.log("duyration",str);
+    console.log("duation",this.routegetdata.duration);
+    if(this.routegetdata.duration != undefined){
     let hours = str.match(/(.*):/g).pop().replace(":","");
     let min = str.match(/:(.*)/g).pop().replace(":","");
     this.trainingDurationHours = hours +"hours"+ " "+min + "minutes";
+    }
   }
   getRole() {
     this.getUserrole = this.authService.getRolefromlocal();
+    //console.log("userrole",this.getUserrole);
+    //console.log("this.roleuserlist",this.roleuserlist);
     //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
   }
 

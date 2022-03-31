@@ -51,13 +51,14 @@
               class="card-header"
               style="padding: 0rem 1.25rem !important; background-color: #fff"
             >
-              <div class="d-flex align-items-center">
+              <div class="d-flex align-items-center" style="justify-content: space-between;">
+                <div class="d-flex">
                 <img
                   src="../../../../assets/images/formm.png"
                   class="ml-2"
-                  style="height: 34px"
+                  style="height: 29px;margin-top: 4px;;"
                 />
-                <p class="mt-3 ml-2 view-re_css">
+                <p class="mt-2 ml-2 mb-2 view-re_css">
                   <span>View Request</span>
                         <span class="cc-text_css">({{ routegetdata.request_id }}) -
                   </span>
@@ -67,11 +68,13 @@
                         <span style="color: #ff7900">Request Status - {{ routegetdata.status | titlecase }}</span>
                         </p>
                     </div>
+                    <button class="btn btn-primary">Update</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- .animated -->
+</div>
+<!-- .animated -->
 </div>
 <!-- .content -->
 </div>
@@ -154,8 +157,8 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Request Number</label>
                                             <input type="text" class="form-control form_width" id="exampleInputEmail1" disabled placeholder="{{
-                          routegetdata.request_id
-                        }}">
+                                                routegetdata.request_id
+                                              }}">
                                         </div>
 
                                     </div>
@@ -171,60 +174,60 @@
                                         </div>
 
                                     </div>
- -->
-
-
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Title</label>
-                                            <div class="d-flex align-items-center">
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
+       -->
+                                    <div class="col-sm-12 col_12">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Title</label>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
                           {{
                             routegetdata.titleByLang
                               ? (routegetdata.titleByLang | titlecase)
                               : "-"
                           }}
                         </span>
-                                                <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
                                             </div>
 
                                         </div>
+                                        <!--cole dn-->
+                                        <div class="col-sm-4" *ngIf="routegetdata.learning_type != '6'">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Training Duration</label>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ trainingDurationHours}}</span>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
 
-                                    </div>
-                                    <!--cole dn-->
-                                    <div class="col-sm-4" *ngIf="routegetdata.learning_type != '6'">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Training Duration</label>
-                                            <div class="d-flex align-items-center">
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ trainingDurationHours}}</span>
-                                                <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                             </div>
 
                                         </div>
+                                        <!--cole dn-->
+                                        <div class="col-sm-4" *ngIf="routegetdata.learning_type != '6'">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Description</label>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.descriptionByLang }}</span>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
 
-                                    </div>
-                                    <!--cole dn-->
-                                    <div class="col-sm-4" *ngIf="routegetdata.learning_type != '6'">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Description</label>
-                                            <div class="d-flex align-items-center">
-                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.descriptionByLang }}</span>
-                                                <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                             </div>
 
                                         </div>
-
+                                        <!--cole dn-->
                                     </div>
-                                    <!--cole dn-->
 
-                                    <div *ngIf="routegetdata.learning_type != '6'">
+                                    <div class="col-sm-12 col_12" *ngIf="routegetdata.learning_type != '6'">
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Objective</label>
                                                 <div class="d-flex align-items-center">
                                                     <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.objectiveByLang }}</span>
 
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -236,7 +239,7 @@
                                                 <label for="exampleInputEmail1">Subject</label>
                                                 <div class="d-flex align-items-center">
                                                     <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.subject_name }}</span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -248,7 +251,7 @@
                                                 <label for="exampleInputEmail1">Keywords</label>
                                                 <div class="d-flex align-items-center">
                                                     <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.keyword }}</span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -265,7 +268,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -283,7 +286,7 @@
                               : routegetdata.level
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -295,7 +298,7 @@
                                                 <label for="exampleInputEmail1">Email of content owner</label>
                                                 <div class="d-flex align-items-center">
                                                     <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.email_content_owner }}</span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -314,7 +317,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -332,7 +335,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -350,14 +353,14 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
 
                                         </div>
                                     </div>
-                                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '1'">
+                                    <div class="col-sm-12 col_12" *ngIf="routegetdata.learning_type == '1'">
                                         <!-- <div class="card-header">
                                             <strong>ILT and VILT Training</strong>
                                         </div>
@@ -367,13 +370,13 @@
                                                 <label for="exampleInputEmail1">Delivery Method</label>
                                                 <div class="d-flex align-items-center">
                                                     <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                            {{
-                            routegetdata.delivery_method_name
-                              ? routegetdata.delivery_method_name
-                              : routegetdata.delivery_method
-                            }}
-                          </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                        {{
+                                                        routegetdata.delivery_method_name
+                                                          ? routegetdata.delivery_method_name
+                                                          : routegetdata.delivery_method
+                                                        }}
+                                                      </span>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -392,7 +395,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -410,7 +413,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -428,7 +431,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -449,7 +452,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -467,7 +470,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -484,7 +487,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -501,7 +504,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -518,7 +521,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -535,7 +538,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -547,20 +550,21 @@
                                                 <label for="exampleInputEmail1">Certification</label>
                                                 <div class="d-flex align-items-center">
                                                     <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                            {{
-                            routegetdata.certification
-                              ? (routegetdata.certification | titlecase)
-                              : "-"
-                            }}
-                          </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                      {{
+                                                      routegetdata.certification
+                                                        ? (routegetdata.certification | titlecase)
+                                                        : "-"
+                                                      }}
+                                                    </span>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
 
                                         </div>
                                         <!--cole dn-->
-                                        <div class="col-sm-4">
+
+                                        <div class="col-sm-4" *ngIf="routegetdata.certification_expiry_type !=''">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">  Certification Expiry type</label>
                                                 <div class="d-flex align-items-center">
@@ -572,14 +576,14 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
 
                                         </div>
                                         <!--cole dn-->
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4" *ngIf="routegetdata.validity_period_name !=''">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Validity period</label>
                                                 <div class="d-flex align-items-center">
@@ -591,7 +595,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -608,7 +612,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -626,7 +630,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -643,7 +647,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -661,7 +665,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -679,7 +683,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -696,14 +700,14 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
 
                                         </div>
                                     </div>
-                                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '2'">
+                                    <div class="col-sm-12 col_12" *ngIf="routegetdata.learning_type == '2'">
                                         <!-- <div class="card-header">
                                             <strong>Video training</strong>
                                         </div>
@@ -719,19 +723,19 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
 
                                         </div>
                                     </div>
-                                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '3'">
+                                    <div class="col-sm-12 col_12" *ngIf="routegetdata.learning_type == '3'">
                                         <!-- <div class="card-header">
                                             <strong>Material Based Training</strong>
                                         </div>
                                         <div>&nbsp;</div> -->
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4" *ngIf="routegetdata.url != null">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Material Source URL</label>
                                                 <div class="d-flex align-items-center">
@@ -742,13 +746,13 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
 
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4" *ngIf="routegetdata.material_source != null">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Uploaded Material</label>
                                                 <div class="d-flex align-items-center">
@@ -759,14 +763,14 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
 
                                         </div>
                                     </div>
-                                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '4'">
+                                    <div class="col-sm-12 col_12" *ngIf="routegetdata.learning_type == '4'">
                                         <!-- <div class="card-header">
                                             <strong>Currriculum</strong>
                                         </div>
@@ -783,7 +787,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -801,7 +805,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -818,7 +822,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -835,7 +839,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -852,7 +856,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -869,7 +873,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
 
@@ -887,7 +891,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -904,7 +908,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -922,7 +926,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -939,7 +943,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -958,7 +962,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -977,7 +981,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -994,7 +998,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -1002,7 +1006,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '5'">
+                                    <div class="col-sm-12 col_12" *ngIf="routegetdata.learning_type == '5'">
                                         <!-- <div class="card-header">
                                             <strong>Web-based training</strong>
                                         </div>
@@ -1019,7 +1023,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -1037,7 +1041,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -1055,7 +1059,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -1074,7 +1078,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -1093,7 +1097,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -1110,7 +1114,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -1128,14 +1132,14 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
 
                                         </div>
                                     </div>
-                                    <div class="col-sm-12" *ngIf="routegetdata.learning_type == '6'">
+                                    <div class="col-sm-12 col_12" *ngIf="routegetdata.learning_type == '6'">
                                         <!-- <div class="card-header">
                                             <strong>Playlist</strong>
                                         </div>
@@ -1151,7 +1155,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -1167,7 +1171,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -1183,7 +1187,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
 
@@ -1203,7 +1207,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -1219,7 +1223,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -1235,7 +1239,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -1251,14 +1255,14 @@
                               : "-"
                             }}
                           </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
                                         </div>
                                     </div>
                                     <!--cole dn-->
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-12 col_12">
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Additional comments</label>
@@ -1271,7 +1275,7 @@
                               : "-"
                           }}
                         </span>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -1327,7 +1331,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Transfer to Publisher</label>
-                            <select name="select " id="select " class="form-control form_width" (change)="getPublisherselected($event)">
+                            <select name="select " id="select " class="form-control form_width1" (change)="getPublisherselected($event)">
     <option value="0 ">Please select</option>
     <option
       *ngFor="let publisher of publisherList"
