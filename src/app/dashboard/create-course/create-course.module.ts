@@ -13,7 +13,7 @@ import { ViewCourseDetailsComponent } from './view-course-details/view-course-de
 import { ViewCompleteReportComponent } from './view-complete-report/view-complete-report.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AngularEditorModule } from '@kolkov/angular-editor';
+import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 
 
 @NgModule({
@@ -33,7 +33,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     SharedModule,
     NgxPaginationModule,
     NgSelectModule,
-    AngularEditorModule,
+    RichTextEditorAllModule,
     NgbModule
   ],
 })
