@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light bac_des_css">
-    <a class="logo_main d-flex align-items-end navbar-brand">
+    <a class="logo_main d-flex align-items-end navbar-brand" [routerLink]="[ '/dashboard']">
         <img src="../../../../assets/images/Small_Logo_RGB.png" alt="logo" class="header_orange_logo" />
         <span class="pdl_text">PD&L requests</span>
     </a>
@@ -10,98 +10,68 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent" style="margin-top: -6px;">
         <ul class="navbar-nav">
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle arrow_css_toggl" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="../../../../assets/images/HeaderIcon/Dash.png" class="icon_header_desi">
-                    <span class="text_header_desi">Dashboard<i class="fa fa-angle-right ml-2" aria-hidden="true"></i></span>
+            <li class="nav-item">
+                <a class="nav-link arrow_css_toggl" role="button" [routerLink]="[ '/dashboard']" style="margin-top: 3px;">
+                    <i class=" fa fa-home icon_header_desi " aria-hidden="true "></i>
+
                 </a>
-                <div class="dropdown-menu drop_show dropshow_main-cs" aria-labelledby="navbarDropdown">
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle arrow_css_toggl" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-dashcube icon_header_desi " aria-hidden="true "></i>
+                    <span class="text_header_desi ">Dashboard <i class="fa fa-angle-right ml-2 " aria-hidden="true "></i></span>
+                </a>
+                <div class="dropdown-menu drop_show dropshow_main-cs " aria-labelledby="navbarDropdownMenuLink">
+                    <div class="text-box_div ">
 
-                    <div class="text-box_div">
-
-                        <div class="nav_p">
-                            <div id="myDIV">
-                                <button class="btn_active active">PD&L Dashboard</button>
-                                <button class="btn_active">User Management</button>
-                                <button class="btn_active">Admin Console</button>
+                        <div class="nav_p ">
+                            <div id="myDIV ">
+                                <button class="btn_active active ">PD&L Dashboard</button>
+                                <button class="btn_active ">User Management</button>
+                                <button class="btn_active ">Admin Console</button>
 
                             </div>
                         </div>
                     </div>
                 </div>
             </li>
-            <li class="nav-item dropdown" *ngIf="getUserrole.id != 2">
-                <a class="nav-link dropdown-toggle arrow_css_toggl" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="../../../../assets/images/HeaderIcon/Setbackup.png" class="icon_header_desi">
-                    <span class="text_header_desi">Set backups<i class="fa fa-angle-right ml-2" aria-hidden="true"></i></span>
+            <li class="nav-item dropdown" *ngIf="getUserrole.id !=2 ">
+                <a class="nav-link dropdown-toggle arrow_css_toggl" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-map-o icon_header_desi" aria-hidden="true"></i>
+                    <span class="text_header_desi ">Set backups <i class="fa fa-angle-right ml-2 " aria-hidden="true "></i></span>
                 </a>
-                <div class="dropdown-menu drop_show dropshow_main-cs" aria-labelledby="navbarDropdown">
-                    <div class="text-box_div">
+                <div class="dropdown-menu drop_show dropshow_main-cs " aria-labelledby="navbarDropdownMenuLink">
+                    <div class="text-box_div ">
 
-                        <div class="nav_p">
-                            <div id="myDIV">
-                                <button class="btn_active active" *ngIf="getUserrole.id == 3" [routerLink]="['/dashboard/set-backup']">Set ROC Backup</button>
+                        <div class="nav_p ">
+                            <div class="text-box_div ">
 
-                                <button class="btn_active" *ngIf="getUserrole.id == 4" [routerLink]="['/dashboard/set-backup']">Set Publisher Backup</button>
+                                <div class="nav_p ">
+                                    <div id="myDIV ">
+                                        <button class="btn_active active " *ngIf="getUserrole.id==3 " [routerLink]="[ '/dashboard/set-backup'] ">Set ROC Backup</button>
 
+                                        <button class="btn_active " *ngIf="getUserrole.id==4 " [routerLink]="[ '/dashboard/set-backup'] ">Set Publisher Backup</button>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle arrow_css_toggl" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="../../../../assets/images/HeaderIcon/Helpguide.png" class="icon_header_desi">
-                    <span class="text_header_desi">Help Guide<i class="fa fa-angle-right ml-2" aria-hidden="true"></i></span>
+                <a class="nav-link dropdown-toggle arrow_css_toggl" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-question-circle icon_header_desi " aria-hidden="true"></i>
+                    <span class="text_header_desi ">Help Guide<i class="fa fa-angle-right ml-2 " aria-hidden="true "></i></span>
                 </a>
-                <div class="dropdown-menu drop_show dropshow_main-cs" aria-labelledby="navbarDropdown">
-                    <div class="text-box_div">
+                <div class="dropdown-menu drop_show dropshow_main-cs " aria-labelledby="navbarDropdownMenuLink">
+                    <div class="text-box_div ">
 
-                        <div class="nav_p">
-                            <div id="myDIV">
-                                <button class="btn_active active">PD&L Dashboard</button>
-                                <button class="btn_active">User Management</button>
-                                <button class="btn_active">Admin Console</button>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle arrow_css_toggl" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="../../../../assets/images/HeaderIcon/Useful.png" class="icon_header_desi">
-                    <span class="text_header_desi">Useful Links<i class="fa fa-angle-right ml-2" aria-hidden="true"></i></span>
-                </a>
-                <div class="dropdown-menu drop_show dropshow_main-cs" aria-labelledby="navbarDropdown">
-                    <div class="text-box_div">
-
-                        <div class="nav_p">
-                            <div id="myDIV">
-                                <button class="btn_active active">PD&L Dashboard</button>
-                                <button class="btn_active">User Management</button>
-                                <button class="btn_active">Admin Console</button>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle arrow_css_toggl mt-1 res_lastdrop" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-bell-o icon_header" aria-hidden="true"></i>
-                    <span class="bell_icon_number"><span>2</span></span>
-
-                </a>
-                <div class="dropdown-menu drop_show dropshow_main-cs" aria-labelledby="navbarDropdown">
-                    <div class="text-box_div">
-
-                        <div class="nav_p">
-                            <div id="myDIV">
-                                <button class="btn_active active">PD&L Dashboard</button>
-                                <button class="btn_active">User Management</button>
-                                <button class="btn_active">Admin Console</button>
+                        <div class="nav_p ">
+                            <div id="myDIV ">
+                                <button class="btn_active active ">PD&L Dashboard</button>
+                                <button class="btn_active ">User Management</button>
+                                <button class="btn_active ">Admin Console</button>
 
                             </div>
                         </div>
@@ -109,17 +79,56 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle arrow_css_toggl" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                    <span class="text_header_desi_country">EN
-                        <i class="fa fa-angle-right ml-2" aria-hidden="true" style="color: #fff"></i></span>
+                <a class="nav-link dropdown-toggle arrow_css_toggl" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-link icon_header_desi" aria-hidden="true"></i>
+                    <span class="text_header_desi ">Useful Links<i class="fa fa-angle-right ml-2 " aria-hidden="true "></i></span>
                 </a>
-                <div class="dropdown-menu drop_show dropshow_main-cs1" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu drop_show dropshow_main-cs " aria-labelledby="navbarDropdownMenuLink">
+                    <div class="text-box_div ">
 
-                    <div class="nav_p">
-                        <div id="myDIV">
-                            <button class="btn_active1 active">EN</button>
-                            <button class="btn_active1">FR</button>
+                        <div class="nav_p ">
+                            <div id="myDIV ">
+                                <button class="btn_active active ">PD&L Dashboard</button>
+                                <button class="btn_active ">User Management</button>
+                                <button class="btn_active ">Admin Console</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle arrow_css_toggl" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bell-o icon_header " aria-hidden="true "></i>
+                    <span class="bell_icon_number "><span>2</span></span>
+
+                </a>
+                <div class="dropdown-menu drop_show dropshow_main-cs " aria-labelledby="navbarDropdownMenuLink ">
+                    <div class="text-box_div ">
+
+                        <div class="nav_p ">
+                            <div id="myDIV ">
+                                <button class="btn_active active ">PD&L Dashboard</button>
+                                <button class="btn_active ">User Management</button>
+                                <button class="btn_active ">Admin Console</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle arrow_css_toggl" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+
+                    <span class="text_header_desi_country ">EN
+                        <i class="fa fa-angle-right ml-2 " aria-hidden="true " style="color: #fff "></i></span>
+                </a>
+                <div class="dropdown-menu drop_show dropshow_main-cs1 " aria-labelledby="navbarDropdownMenuLink ">
+
+                    <div class="nav_p ">
+                        <div id="myDIV ">
+                            <button class="btn_active1 active ">EN</button>
+                            <button class="btn_active1 ">FR</button>
 
                         </div>
                     </div>
@@ -127,18 +136,18 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle arrow_css_toggl" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle arrow_css_toggl" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
 
-                    <span class="text_header_desi_logout">Welcome <span style="color: #ff7900;">{{firstName + " " + lastName}}</span>
-                    <i class="fa fa-sign-out ml-2" aria-hidden="true"></i></span>
+                    <span class="text_header_desi_logout ">Welcome <span style="color: #ff7900; ">{{firstName + " " + lastName}}</span>
+                    <i class="fa fa-sign-out ml-2 " aria-hidden="true "></i></span>
                 </a>
-                <div class="dropdown-menu drop_show dropshow_main-cs" aria-labelledby="navbarDropdown" style="width: 260px;">
+                <div class="dropdown-menu drop_show dropshow_main-cs " aria-labelledby="navbarDropdownMenuLink " style="width: 260px; ">
 
-                    <!-- <div class="text-box_div">
-                            <h6 class="mark_anme d-flex justify-content-between">
-                                <span style="font-size: 9px; color: grey" class="mr-2"></span
+                    <!-- <div class="text-box_div ">
+                            <h6 class="mark_anme d-flex justify-content-between ">
+                                <span style="font-size: 9px; color: grey " class="mr-2 "></span
                 >
-                <span style="font-size: 9px; color: #000">
+                <span style="font-size: 9px; color: #000 ">
                   {{
                     getprofileDetails && getprofileDetails.first_name
                       ? getprofileDetails.first_name
@@ -151,11 +160,11 @@
                   }}</span
                 >
               </h6>
-              <h6 class="mark_anme d-flex justify-content-between">
-                <span style="font-size: 9px; color: grey" class="mr-2"
+              <h6 class="mark_anme d-flex justify-content-between ">
+                <span style="font-size: 9px; color: grey " class="mr-2 "
                   >Profile-</span
                 >
-                <span class="web-dev" style="font-size: 9px; color: #000"
+                <span class="web-dev " style="font-size: 9px; color: #000 "
                   >Web Developer</span
                 >
               </h6>
@@ -169,15 +178,15 @@
                                 <span class="pt-3 pb-3 pl-1 " style="color: grey; font-size: 16px ">Activity Log</span>
                             </h6>
                         </div> -->
-                    <div class="info_div clearfix">
-                        <div class="image">
-                            <a href="#">
-                                <img src="../../../../assets/images/userimg.png" alt="John Doe">
+                    <div class="info_div clearfix ">
+                        <div class="image ">
+                            <a href="# ">
+                                <img src="../../../../assets/images/userimg.png " alt="John Doe ">
                             </a>
                         </div>
-                        <div class="content_user">
-                            <h5 class="name">
-                                <a href="#"> {{
+                        <div class="content_user ">
+                            <h5 class="name ">
+                                <a href="# "> {{
                     getprofileDetails && getprofileDetails.first_name
                       ? getprofileDetails.first_name
                       : " "
@@ -188,15 +197,15 @@
                       : " "
                   }}</a>
                             </h5>
-                            <span class="email">Web Developer</span>
+                            <span class="email ">Web Developer</span>
                         </div>
                     </div>
-                    <div class="text-box_div" (click)="logout()">
+                    <div class="text-box_div " (click)="logout() ">
 
-                        <div class="nav_p">
-                            <div id="myDIV">
-                                <button class="btn_active" style="text-align: inherit !important;"><i class="fa fa-exchange mr-3" aria-hidden="true"></i><span>Switch User</span></button>
-                                <button class="btn_active" style="text-align: inherit !important;"><i class=" fa fa-sign-out mr-3" aria-hidden="true "></i><span>Logout</span></button>
+                        <div class="nav_p ">
+                            <div id="myDIV ">
+                                <button class="btn_active " style="text-align: inherit !important; "><i class="fa fa-exchange mr-3 " aria-hidden="true "></i><span>Switch User</span></button>
+                                <button class="btn_active " style="text-align: inherit !important; "><i class=" fa fa-sign-out mr-3 " aria-hidden="true "></i><span>Logout</span></button>
 
 
                             </div>

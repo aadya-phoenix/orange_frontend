@@ -38,6 +38,13 @@ export class CoursesComponent implements OnInit {
   routegetdata:any;
   getprofileDetails: any;
   coursedata: any = [];
+  public statusArray: any = [
+    { id: this.pendingRequests , name: 'Pending' },
+    { id: this.usersubmitRequests, name: 'Submitted' },
+    { id: this.draftRequests, name: 'Draft' },
+    { id: this.closedRequests, name: 'Closed' },
+    { id: this.rejectedRequests, name: 'Rejected' },
+  ];
   allcoursedataroc: any = [];
   allcoursedatapub: any = [];
   allcoursedatareq: any = [];
@@ -113,7 +120,7 @@ export class CoursesComponent implements OnInit {
     }
   }
 
-  getFilterRecords(event:any){
+  getNewFilterRecords(event:any){
     console.log("eventtarget",event.target.value);
     this.getrecords(event.target.value);
   }
@@ -142,13 +149,13 @@ export class CoursesComponent implements OnInit {
             if (this.coursedata[this.i].request_id != "" && this.coursedata[this.i].request_id != null) {
               this.courcesList[this.j] = this.coursedata[this.i]
               if (this.getUserrole.id == 3) {
-                if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].transfer_user_id == null && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
+                if (((this.coursedata[this.i].publisher_status === 'reject' && this.coursedata[this.i].transfer_user_id != null) || (this.coursedata[this.i].status === 'pending') && this.coursedata[this.i].transfer_user_id == null && this.coursedata[this.i].user_id != this.getprofileDetails.data.id)) {
                   this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order +"#"+"true";
                   this.pendingRequests.push(this.coursedata[this.i])
                   this.allcoursedataroc.push(this.coursedata[this.i])
                   this.showbuttons = true;
                 }
-                if ((this.coursedata[this.i].status === 'pending') && this.coursedata[this.i].transfer_user_id != null && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
+                if ((this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].publisher_status != 'reject') && this.coursedata[this.i].transfer_user_id != null && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
                   this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order + "#" + "false";
                   this.transferredRequests.push(this.coursedata[this.i])
                   this.allcoursedataroc.push(this.coursedata[this.i])
@@ -224,7 +231,7 @@ export class CoursesComponent implements OnInit {
             console.log('this.routegetdata',this.routegetdata)
             console.log('this.cou',this.courcesList.filter((course:any)=>course.status == this.routegetdata.status))
             //this.courcesList = this.courcesList.filter((course: any) => course.status == this.routegetdata.status)
-            this.courcesList = this.allCourses
+            this.courcesList = this.pendingRequests;
           }
           
 

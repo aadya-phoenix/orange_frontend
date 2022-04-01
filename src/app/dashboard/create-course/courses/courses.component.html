@@ -8,7 +8,8 @@
                     <img src="../../../../assets/images/creatnew.png" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
                         <span style="font-size: 20px" class="mb-1">Create new course </span>
-                        <span style="color: #aba3a3; font-size: 13px">People Development & Learning Strives on Providing you with the
+                        <span class="divider"></span>
+                        <span style="color: #aba3a3; font-size: 13px;margin-top: 10px;">People Development & Learning Strives on Providing you with the
             best customer service we can drive</span>
                     </div>
                 </div>
@@ -205,7 +206,7 @@
                             <div class="filter_dispaly">
                                 <div class="form-group filter_course">
                                     <label class="label_course">Filter by Learning Type</label>
-                                    <select class="form-control  form_width">
+                                    <select class="form-control  form_width" (change)="getFilterRecords($event.target.value)">
                                     <option hidden disabled selected='selected' value=''>Select learning type</option>
                                     <option *ngFor="let learning of learningTypes" [value]="learning.id">
                                       {{ learning.name }}
@@ -214,13 +215,10 @@
                                 </div>
                                 <div class="form-group filter_course">
                                     <label class="label_course">Filter by Training Status</label>
-                                    <select class="form-control  form_width" (change)="getFilterRecords($event)">
-                                      <option value="">Please select</option>
-                                      <option value="draftRequests">Pending</option>
-                                      <option value="usersubmitRequests">Submitted</option>
-                                      <option value="draftRequests">Draft</option>
-                                      <option value="closedRequests">Closed</option>
-                                      <option value="rejectedRequests">Rejected</option>
+                                    <select class="form-control  form_width" (change)="getNewFilterRecords($event.target.value)">
+                                      <option hidden disabled selected='selected' value="">Please select</option>
+                                      <option *ngFor="let status of statusArray" [value]="status.id">
+                                        {{status.name}}</option>
                                 </select>
                                 </div>
 
@@ -348,9 +346,9 @@
                                     <a *ngIf="cource.status=='draft'" (click)="deleteRequest(cource)" class="copy_file mr-1" data-toggle="tooltip" data-placement="top" title="Delete">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
-                                    <a *ngIf="cource.status=='reject'" (click)="editRequest(cource)" class="copy_file mr-1" data-toggle="tooltip" data-placement="top" title="Edit">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
+                                    <a *ngIf="cource.publisher_status !='reject' && cource.status !='pending' && cource.status !='reject'" (click)="editRequest(cource)" class="copy_file mr-1" data-toggle="tooltip" data-placement="top" title="Edit">
+                                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                  </a>
                                     <a class="copy_file mr-1" data-toggle="tooltip" (click)="getRequest(cource)" data-placement="top" title="View">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </a>
@@ -615,7 +613,7 @@
                                   <a *ngIf="course.status=='draft'" (click)="deleteRequest(course)" class="copy_file mr-1" data-toggle="tooltip" data-placement="top" title="Delete">
                                       <i class="fa fa-trash" aria-hidden="true"></i>
                                   </a>
-                                  <a *ngIf="course.status=='reject'" (click)="editRequest(course)" class="copy_file mr-1"  data-toggle="tooltip" data-placement="top" title="Edit">
+                                  <a *ngIf="course.publisher_status !='reject' && course.status !='pending' && course.status !='reject'" (click)="editRequest(course)" class="copy_file mr-1" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </a>
                                   <a  class="copy_file mr-1" data-toggle="tooltip" (click)="getRequest(course)" data-placement="top" title="View">
