@@ -55,7 +55,7 @@ export class SetBackupComponent implements OnInit {
       this.publisherUsername = this.newPubObj.pubusername;
       this.publisherEmail = this.newPubObj.pubemail;
       this.assignFlag = this.newPubObj.objFlag;
-      this.assignedPublish = this.newPubObj.pubusername;
+      this.assignedPublish = this.newPubObj.assignPublish;
       this.getPublisherDropdown = this.newPubObj.dropdownFlag;
       }
     }
@@ -117,6 +117,7 @@ export class SetBackupComponent implements OnInit {
         console.log("item",item);
         this.publisherUsername = item.first_name +" "+ item.last_name;
         this.publisherEmail= item.email;
+        this.assignedPublish= item.first_name +" "+ item.last_name;
       }
     }
   }
@@ -152,6 +153,7 @@ export class SetBackupComponent implements OnInit {
       pubemail:this.publisherEmail,
       objFlag:this.assignFlag,
       publisher:this.publisherUsername,
+      assignPublish:this.assignedPublish,
       dropdownFlag:this.getPublisherDropdown
     };
     localStorage.setItem('assignedPublisher',JSON.stringify(assignPublisherObject));

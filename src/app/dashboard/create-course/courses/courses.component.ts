@@ -14,8 +14,13 @@ import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive'
 export class CoursesComponent implements OnInit {
   public courcesList: any=[];
   public page = 1;
-  p:any;
-  paging:any;
+  public pageNumber= 1;
+  public newPageNumber= 1;
+  public pageSize=10;
+  startPageEntry:any;
+  endPageEntry:any;
+  newstartPageEntry:any;
+  newendPageEntry:any;
   getUserprofile: any;
   getUserrole: any;
   collectionSize: any;
@@ -108,13 +113,16 @@ export class CoursesComponent implements OnInit {
     }
   }
 
+  getFilterRecords(event:any){
+    console.log("eventtarget",event.target.value);
+    this.getrecords(event.target.value);
+  }
   getrecords(data:any){
     this.courcesList = data;
     console.log(this.courcesList);
   }
 
-  refreshCourses() {
-    
+  refreshCourses() {   
     console.log(this.service.page);
     console.log(this.service.pageSize);
     this.pendingRequests=[];
@@ -337,6 +345,18 @@ export class CoursesComponent implements OnInit {
     );
   }
 
+  pageChanged(event:any){
+    console.log(event);
+    this.pageNumber = event;
+    this.startPageEntry = (this.pageSize * (this.pageNumber - 1) ) + 1;
+    this.endPageEntry = this.pageSize * this.pageNumber;
+  }
+  newPageChanged(event:any){
+    console.log(event);
+    this.newPageNumber = event;
+    this.newstartPageEntry = (this.pageSize * (this.newPageNumber - 1) ) + 1;
+    this.newendPageEntry = this.pageSize * this.newPageNumber;
+  }
   ngOnInit(): void {
     // console.log(this.getUserrole);
     console.log(this.routegetdata)
@@ -345,7 +365,11 @@ export class CoursesComponent implements OnInit {
     if(this.routegetdata){
       this.allCourses = this.pendingRequests;
     }
+    this.startPageEntry = (this.pageSize * (this.pageNumber - 1) ) + 1;
+    this.endPageEntry = this.pageSize * this.pageNumber;
     
+    this.newstartPageEntry = (this.pageSize * (this.newPageNumber - 1) ) + 1;
+    this.newendPageEntry = this.pageSize * this.newPageNumber;
   }
 
 }

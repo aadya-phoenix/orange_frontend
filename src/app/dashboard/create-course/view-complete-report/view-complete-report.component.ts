@@ -17,6 +17,10 @@ export class ViewCompleteReportComponent implements OnInit {
 
   public filterForm!: FormGroup;
   public courcesList: any=[];
+  public pageNumber= 1;
+  public pageSize=10;
+  startPageEntry:any;
+  endPageEntry:any;
   public filteredCourseList:any;
   public learningTypes: any;
   public roles:any;
@@ -84,6 +88,8 @@ export class ViewCompleteReportComponent implements OnInit {
       publisher: new FormControl('', []),
      //custom_date:new FormControl('', []),
     });
+    this.startPageEntry = (this.pageSize * (this.pageNumber - 1) ) + 1;
+    this.endPageEntry = this.pageSize * this.pageNumber;
   }
 
   refreshCourses() {  
@@ -287,7 +293,12 @@ export class ViewCompleteReportComponent implements OnInit {
       this.filterForm.markAllAsTouched();
     }
   }
-
+  pageChanged(event:any){
+    console.log(event);
+    this.pageNumber = event;
+    this.startPageEntry = (this.pageSize * (this.pageNumber - 1) ) + 1;
+    this.endPageEntry = this.pageSize * this.pageNumber;
+  }
   openModal(course: any){
     this.courceService.courseHistory(course.id).subscribe((res:any)=>{
       console.log(res);

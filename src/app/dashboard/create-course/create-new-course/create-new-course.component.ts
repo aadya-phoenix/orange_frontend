@@ -245,6 +245,7 @@ export class CreateNewCourseComponent implements OnInit {
     { id: 'yes', name: 'Yes' },
     { id: 'no', name: 'No' },
   ];
+  target_audience_selected ='no';
   public cctExpiryType: any;
   public validityPeriod: any;
 
@@ -864,7 +865,7 @@ export class CreateNewCourseComponent implements OnInit {
       learn_more: new FormControl(''),
      /*  video_link: new FormControl(''), */
      /*  title_additional: new FormControl(''), */
-      external_vendor_name: new FormControl('', [Validators.required]),
+     /*  external_vendor_name: new FormControl('', [Validators.required]), */
      /*  free_field_content: new FormControl(''), */
       expiry_date: new FormControl(''),
      /*  url: new FormControl('', [Validators.required]), */
@@ -874,6 +875,7 @@ export class CreateNewCourseComponent implements OnInit {
       forWhomArr: new FormArray([]),
       learnMoreArr: new FormArray([]),
       for_whoom_single: new FormControl('', [Validators.required]),
+      curriculum_content: this.fb.array([]),
       learner_guideline: this.fb.array([]),
       additional_comment: new FormControl(''),
       regional_cordinator:
@@ -883,6 +885,7 @@ export class CreateNewCourseComponent implements OnInit {
     });
     if (this.routergetdata == undefined) {
       this.addLearnerGuidelinetocurriculum('', '');
+      this.addCurriculumContenttocurriculum( '');
       this.languageValueSet_new(this.currriculumForm, 'for_whoom_single', 'forWhomArr');
       this.languageValueSet_new(this.currriculumForm, 'learn_more_single', 'learnMoreArr');
     }
@@ -1069,6 +1072,12 @@ export class CreateNewCourseComponent implements OnInit {
           console.log(element.description)
           this.addLearnerGuidelinetocurriculum(element.title, element.description);
         });
+        let curr_content = JSON.parse(this.routergetdata.curriculum_content);
+        console.log(curr_content)
+        curr_content.forEach((element: { description: string; }) => {
+          console.log(element.description)
+          this.addCurriculumContenttocurriculum(element.description);
+        });
         this.currriculumForm.patchValue(this.routergetdata);
       }
       else if (this.learningType == "5") {
@@ -1126,6 +1135,9 @@ export class CreateNewCourseComponent implements OnInit {
 
   get curriculumArray() {
     return this.currriculum.learner_guideline as FormArray;
+  }
+  get curriculumContentArray() {
+    return this.currriculum.curriculum_content as FormArray;
   }
   bindarraydata() {
     if (this.routergetdata.learning_type == "6") {
@@ -1266,6 +1278,12 @@ export class CreateNewCourseComponent implements OnInit {
     });
   }
 
+  addMoreCurriculumContent(descriptionval: string){
+    return this.fb.group({
+      description: new FormControl(descriptionval),
+    });
+  }
+
   addLearnerGuideline(titleval: string, descriptionval: string) {
     //console.log(this.t);
     return this.t.push(this.addMorelearnerGuideline(titleval, descriptionval));
@@ -1275,12 +1293,19 @@ export class CreateNewCourseComponent implements OnInit {
     return this.curriculumArray.push(this.addMorelearnerGuideline(titleval, descriptionval));
   }
 
+  addCurriculumContenttocurriculum(descriptionval: string) {
+    return this.curriculumContentArray.push(this.addMoreCurriculumContent(descriptionval));
+  }
+
   removeLearnerGuideline(i: any) {
     this.t.removeAt(i);
   }
 
   removeLearnerGuidelinetocurriculum(i: any) {
     this.curriculumArray.removeAt(i);
+  }
+  removeCurriculumContenttocurriculum(i: any) {
+    this.curriculumContentArray.removeAt(i);
   }
   selectLearning() {
     // this.createCourceForm.setValue({
