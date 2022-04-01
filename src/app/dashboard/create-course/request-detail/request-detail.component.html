@@ -51,8 +51,9 @@
               class="card-header"
               style="padding: 0rem 1.25rem !important; background-color: #fff"
             >
-              <div class="d-flex align-items-center" style="justify-content: space-between;">
-                <div class="d-flex">
+              <div>
+                <div class="d-flex align-items-center" style="justify-content: space-between;">
+                  <div class="d-flex">
                 <img
                   src="../../../../assets/images/formm.png"
                   class="ml-2"
@@ -65,14 +66,17 @@
                         <span>
                     {{ routegetdata.learning_type_name }} ({{ routegetdata.delivery_method_name }})
                   </span>
-                        <span style="color: #ff7900">Request Status - {{ routegetdata.status | titlecase }}</span>
+
                         </p>
                     </div>
-                    <button class="btn btn-primary" *ngIf="status == 'draft'" (click)="updateCource()">Update</button>
+
+                    <span style="color: #ff7900">Request Status - {{ routegetdata.status | titlecase }}</span>
                 </div>
+
             </div>
         </div>
     </div>
+</div>
 </div>
 <!-- .animated -->
 </div>
@@ -1321,7 +1325,7 @@
     <!-- .content -->
 </div>
 <!-- /#right-panel -->
-
+<button class="btn btn-primary" *ngIf="status == 'draft'" (click)="updateCource()">Update</button>
 <!-- Right Panel -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 150px;">
     <div class="modal-dialog modal-lg" role="document ">
@@ -1459,14 +1463,14 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Orange Learning Intrance URL(SSO)</label>
-                            <input type="text" placeholder="Enter Orange Learning Intrance URL(SSO)" class="form-control form_width1" />
+                            <input type="text" placeholder="Enter Orange Learning Intrance URL(SSO)" class="form-control form_width1" formControlName="intranet_url" />
                         </div>
                     </div>
                     <!--col end-->
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Orange Learning Internet URL</label>
-                            <input type="text" class="form-control form_width1" placeholder="Enter Orange Learning Internet URL" />
+                            <input type="text" class="form-control form_width1" placeholder="Enter Orange Learning Internet URL" formControlName="internet_url" />
                         </div>
                     </div>
                     <!--col end-->
@@ -1475,7 +1479,7 @@
             </div>
             <div class="modal-footer">
                 <!-- <button type="button " class="btn btn-secondary " data-dismiss="modal ">Close</button> -->
-                <button type="button" class="btn btn-primary btn_requst">
+                <button type="button" class="btn btn-primary btn_requst" (click)="PublishRequest()">
             Submit
           </button>
             </div>

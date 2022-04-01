@@ -34,7 +34,11 @@ export class CreateNewCourseComponent implements OnInit {
   public tools: object = {
     items: [
          'UnorderedList']
-};
+  };
+  public newTools: object = {
+    items: [
+         'UnorderedList']
+  };
 
 
   public cardImageBase64: any;

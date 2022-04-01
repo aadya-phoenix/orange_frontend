@@ -92,7 +92,7 @@
                                                     Title <span style="color: red">* </span>
                                                     <a>
                                                         <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                            data-toggle="tooltip" data-placement="top"
+                                                            data-bs-toggle="tooltip" data-bs-placement="top"
                                                             title="Do provide an attractive, catchy and clear learning activity title (max 100 characters). Example: 7 Habits of Highly Effective People. Don’t use prefixes such as ‘OBS’ or abbreviations such as ‘ops’. Don’t make references to session location or target "></i>
                                                     </a>
                                                 </label>
@@ -187,7 +187,7 @@
 
 
                                         <!--colend-->
-                                        <div *ngIf="learningType != '6'">
+                                        <div class="col-sm-12" *ngIf="learningType != '6'">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label class="form-control-label">
@@ -260,10 +260,7 @@
                                                 <div class="form-group" style="width: 100%">
                                                     <label>Objective</label>
                                                     <div class="editControls"></div>
-                                                    <ejs-richtexteditor></ejs-richtexteditor>
-
-
-                                                    <!-- <angular-editor formControlName="objective_single" [config]="editorConfig"></angular-editor> -->
+                                                    <ejs-richtexteditor id='defaultRTE' [toolbarSettings]='tools'></ejs-richtexteditor>
                                                 </div>
                                             </div>
                                             <!--     <div class="col-sm-6">
@@ -311,9 +308,9 @@
                                                     </label>
                                                     <ng-select [(ngModel)]="subjectId" placeholder="Please select subject" [items]="cctSubjects" bindLabel="name" bindValue="id" formControlName="subject" style="width: 100%">
                                                     </ng-select>
-                                                    <div class="error_message" *ngIf="commonCreateCourceForm.controls['subject'].hasError('required') && commonCreateCourceForm.controls['subject'].touched">
+                                                    <span class="error_message" *ngIf="commonCreateCourceForm.controls['subject'].hasError('required') && commonCreateCourceForm.controls['subject'].touched">
                                                         Subject cannot be blank
-                                                    </div>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -1388,7 +1385,15 @@
                                             </div>
                                         </div>
                                         <!--colend-->
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12" style="margin-bottom: 10px;">
+                                            <div class="form-group" style="width: 100%">
+                                                <label>Curriculum content</label>
+                                                <div class="editControls"></div>
+                                                <ejs-richtexteditor id='newRTE' [toolbarSettings]='tools'></ejs-richtexteditor>
+                                            </div>
+                                        </div>
+                                        <!--colend-->
+                                        <!-- <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     Curriculum content <span style="color: red">* </span>
@@ -1399,13 +1404,17 @@
                                                         </i>
                                                     </a>
                                                 </label>
-                                                <textarea [(ngModel)]="showCurriculumContent" class="form-control form_width-textarea" rows="3" placeholder="Enter Curriculum content" formControlName="external_vendor_name"></textarea>
-                                                <div class="error_message" *ngIf="currriculumForm.controls['external_vendor_name'].hasError('required') && currriculumForm.controls['external_vendor_name'].touched">
+                                                <textarea [(ngModel)]="showCurriculumContent"
+                                                    class="form-control form_width-textarea" rows="3"
+                                                    placeholder="Enter Curriculum content"
+                                                    formControlName="external_vendor_name"></textarea>
+                                                <div class="error_message"
+                                                    *ngIf="currriculumForm.controls['external_vendor_name'].hasError('required') && currriculumForm.controls['external_vendor_name'].touched">
                                                     Curriculum content cannot be blank
                                                 </div>
 
                                             </div>
-                                        </div>
+                                        </div> -->
 
                                         <div class="col-sm-6">
                                             <div class="form-group">
@@ -2515,7 +2524,7 @@
             <div class="row ml-1 mr-1" data-aos="fade-right">
                 <div class="col-sm-2 dash_wid">
                     <div class="alig_dashicon">
-                        <div>
+                        <div class="child_align_icon">
                             <div class="fa-icons-des" style="background-color: transparent">
                                 <img src="../../../../assets/images/icon/draftsbl.png" />
                             </div>
@@ -2534,7 +2543,7 @@
                 <!--coled-->
                 <div class="col-sm-2 dash_wid">
                     <div class="alig_dashicon">
-                        <div>
+                        <div class="child_align_icon">
                             <div class="fa-icons-des" style="background-color: transparent">
                                 <img src="../../../../assets/images/icon/closedbl.png" />
                             </div>
@@ -2551,7 +2560,7 @@
                 <!--coled-->
                 <div class="col-sm-2 dash_wid" *ngIf="getUserrole.id != 2">
                     <div class="alig_dashicon">
-                        <div>
+                        <div class="child_align_icon">
                             <div class="fa-icons-des" style="background-color: transparent">
                                 <img src="../../../../assets/images/icon/pendingbl.png" />
                             </div>
@@ -2570,7 +2579,22 @@
                 <!--coled-->
                 <div class="col-sm-2 dash_wid">
                     <div class="alig_dashicon">
-                        <div>
+                        <div class="child_align_icon">
+                            <div class="fa-icons-des" style="background-color: transparent">
+                                <img src="../../../../assets/images/icon/transferbl.png" />
+                            </div>
+
+                            <p>Closed</p>
+                            <span class="number_css">
+                               1
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--coled-->
+                <div class="col-sm-2 dash_wid">
+                    <div class="alig_dashicon">
+                        <div class="child_align_icon">
                             <div class="fa-icons-des" style="background-color: transparent">
                                 <img src="../../../../assets/images/icon/checkbl.png" />
                             </div>
@@ -2589,7 +2613,7 @@
                 <!--coled-->
                 <div class="col-sm-2 dash_wid">
                     <div class="alig_dashicon">
-                        <div>
+                        <div class="child_align_icon">
                             <div class="fa-icons-des" style="background-color: transparent">
                                 <img src="../../../../assets/images/icon/rejectbl.png" />
                             </div>
@@ -2606,11 +2630,25 @@
                     </div>
                 </div>
                 <!--coled-->
+                <div class="col-sm-2 dash_wid">
+                    <div class="alig_dashicon">
+                        <div class="child_align_icon">
+                            <div class="fa-icons-des" style="background-color: transparent">
+                                <img src="../../../../assets/images/icon/viewallbl.png" />
+                            </div>
+
+                            <p>Closed</p>
+                            <span class="number_css">
+                               1
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!--ROW END-->
             <div class="view-comple-req_div">
-                <button class="btn btn-primary view-comple-req justify-content-center" style="color: #fff">
-                    <img src="../../../../assets/images/icon/viewrewall.png" style="width: 28px" />View Complete Request
+                <button class="btn btn-primary view-comple-req justify-content-center p-1">
+                   <i class="fa fa-database mr-1" aria-hidden="true"></i>View Complete Request
                 </button>
             </div>
             <!--ROW END-->
