@@ -185,6 +185,7 @@ export class RequestDetailComponent implements OnInit {
   }
 
   transfertoOtherRoc() {
+    if(this.selectedotherRoc){
     let transferobj = { course_id: this.routegetdata.id, status: 'pending', transfer_id: this.selectedotherRoc };
     this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
       console.log(res);
@@ -198,10 +199,11 @@ export class RequestDetailComponent implements OnInit {
     }, (err: any) => {
       console.log(err)
     })
-
+  }
   }
 
   transfertoPublisher() {
+    if( this.selectedPublisher){
     let transferobj = { course_id: this.routegetdata.id, transfer_id: this.selectedPublisher };
     this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
       console.log(res);
@@ -209,6 +211,7 @@ export class RequestDetailComponent implements OnInit {
     }, (err: any) => {
       console.log(err)
     })
+  }
   }
 
   ngOnInit(): void {
@@ -218,7 +221,8 @@ export class RequestDetailComponent implements OnInit {
     this.status = this.routegetdata.status;
 
     this.transfer_user_id = this.routegetdata.transfer_user_id;
-    this.showbuttons = this.routegetdata.showbuttons.split('#')[1];
+    let no = this.routegetdata.showbuttons.split('#').length;
+    this.showbuttons = this.routegetdata.showbuttons.split('#')[no-1];
 
     console.log(arr1);
     this.objectarray = [];//arr1.split('• ')
@@ -244,6 +248,11 @@ export class RequestDetailComponent implements OnInit {
       }
     })
   }
+
+  closeModal(){
+    this.modalService.dismissAll();
+  }
+
   getCordinators() {
     this.courseService.getNewregionalCordinator().subscribe(
       (res: any) => {

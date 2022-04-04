@@ -464,9 +464,9 @@
 
                                                             <div *ngFor="let f of fileToUpload">
                                                                 <!--<input type="hidden" #attachmentId value="{{f.attachmentId}}">-->
-                                                                <a href="{{f.url}}" target="_blank" style="text-decoration:underline" data-bs-toggle="tooltip" data-bs-placement="top" title="View Your Uploaded File"><i
+                                                               <!--  <a href="{{f.url}}" target="_blank" style="text-decoration:underline" data-bs-toggle="tooltip" data-bs-placement="top" title="View Your Uploaded File"><i
                                                                         class="fa fa-file-image-o" aria-hidden="true"
-                                                                        style="font-size:38px"></i></a>
+                                                                        style="font-size:38px"></i></a> -->
                                                             </div>
                                                         </div>
                                                     </div>
@@ -2987,7 +2987,7 @@
                         <div class="form-group ">
                             <label>Transfer to Publisher</label>
                             <select name="select " id="select " class="form-control " (change)="getPublisherselected($event)">
-                                <option value="0 ">Please select</option>
+                                <option hidden disabled selected='selected' value="0 ">Please select</option>
                                 <option *ngFor="let publisher of publisherList" [value]="publisher.id">
                                     {{publisher.first_name}}</option>
                             </select>
@@ -2999,7 +2999,7 @@
             </div>
             <div class="modal-footer">
                 <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createUpdateCourse('transfer')">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createUpdateCoursePublisher('transfer')">
                     Submit
                 </button>
             </div>

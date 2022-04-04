@@ -346,7 +346,8 @@
                                     <a *ngIf="cource.status=='draft'" (click)="deleteRequest(cource)" class="copy_file mr-1" data-toggle="tooltip" data-placement="top" title="Delete">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
-                                    <a *ngIf="cource.publisher_status !='reject' && cource.status !='pending' && cource.status !='reject'" (click)="editRequest(cource)" class="copy_file mr-1" data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <a *ngIf="getUserrole.id == '2' &&
+                                    cource.status =='reject'" (click)="editRequest(cource)" class="copy_file mr-1" data-toggle="tooltip" data-placement="top" title="Edit">
                                       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                   </a>
                                     <a class="copy_file mr-1" data-toggle="tooltip" (click)="getRequest(cource)" data-placement="top" title="View">
@@ -613,9 +614,10 @@
                                   <a *ngIf="course.status=='draft'" (click)="deleteRequest(course)" class="copy_file mr-1" data-toggle="tooltip" data-placement="top" title="Delete">
                                       <i class="fa fa-trash" aria-hidden="true"></i>
                                   </a>
-                                  <a *ngIf="course.publisher_status !='reject' && course.status !='pending' && course.status !='reject'" (click)="editRequest(course)" class="copy_file mr-1" data-toggle="tooltip" data-placement="top" title="Edit">
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                </a>
+                                  <a *ngIf="getUserrole.id == '2' &&
+                                    course.status =='reject'" (click)="editRequest(cource)" class="copy_file mr-1" data-toggle="tooltip" data-placement="top" title="Edit">
+                                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                  </a>
                                   <a  class="copy_file mr-1" data-toggle="tooltip" (click)="getRequest(course)" data-placement="top" title="View">
                                       <i class="fa fa-eye" aria-hidden="true"></i>
                                   </a>

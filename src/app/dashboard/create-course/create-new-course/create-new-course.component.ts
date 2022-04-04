@@ -1327,6 +1327,29 @@ export class CreateNewCourseComponent implements OnInit {
       }
     });
   }
+  createUpdateCoursePublisher(status: any) {
+    if(this.selectedPublisherId){
+    if (this.learningType == "1") {
+      this.createNewCource_Save(this.commonCreateCourceForm, this.iltandViltForm, status)
+    }
+    else if (this.learningType == "2") {
+      this.createNewCource_Save(this.commonCreateCourceForm, this.videobasedForm, status)
+    }
+    else if (this.learningType == "3") {
+      this.createNewCource_Save(this.commonCreateCourceForm, this.materialbasedForm, status)
+    }
+    else if (this.learningType == "4") {
+      this.createNewCource_Save(this.commonCreateCourceForm, this.currriculumForm, status)
+    }
+    else if (this.learningType == "5") {
+      this.createNewCource_Save(this.commonCreateCourceForm, this.webbasedForm, status)
+    }
+    else if (this.learningType == "6") {
+      this.createNewCource_Save(this.commonCreateCourceForm_playlist, this.playlistForm, status)
+    }
+   }
+  }
+
   createUpdateCourse(status: any) {
     if (this.learningType == "1") {
       this.createNewCource_Save(this.commonCreateCourceForm, this.iltandViltForm, status)
@@ -1347,6 +1370,7 @@ export class CreateNewCourseComponent implements OnInit {
       this.createNewCource_Save(this.commonCreateCourceForm_playlist, this.playlistForm, status)
     }
   }
+  
   createNewCource_Save(commonformObj: FormGroup, formObj: FormGroup, status: any) {
     console.log("status video is ",status);
     console.log(this.learnerGuidearray);
