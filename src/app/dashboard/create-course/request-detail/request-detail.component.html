@@ -230,7 +230,9 @@
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Objective</label>
                                                 <div class="d-flex align-items-center">
-                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.objectiveByLang }}</span>
+                                                    <span class="form-control form_width" [innerHTML]="routegetdata.objectiveByLang" id="exampleInputEmail1" disabled >
+
+                                                    </span>
 
                                                     <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
@@ -1337,7 +1339,7 @@
                         <div class="form-group">
                             <label>Transfer to Publisher</label>
                             <select name="select " id="select " class="form-control form_width1" (change)="getPublisherselected($event)">
-                             <option value="0 ">Please select</option>
+                             <option hidden disabled selected='selected'>Please select</option>
                              <option
                                *ngFor="let publisher of newPublisherList"
                                [value]="publisher.id"
@@ -1422,7 +1424,7 @@
   </option> -->
                             <!--</select>-->
                             <select class="form-control form_width1" (change)="getRoc($event)">
-                          <option value="">Regional Operation Coordinator</option>
+                          <option hidden disabled selected='selected'>Regional Operation Coordinator</option>
                           <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">
                             {{ cordinator?.name }}
                           </option>
