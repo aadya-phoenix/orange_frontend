@@ -53,17 +53,17 @@
                         </div>
                         <div class="card-body">
                             <div class="row" *ngIf="getUserrole.id == 3">
-
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="form-control-label label_font">Backup Username
                                         </label>
-                                        <select class="form-control form_width" (change)="getUser($event)">
+                                        <select class="form-control form_width" *ngIf="getRocDropdown" (change)="getUser($event)">
                                             <option hidden disabled selected='selected' value=''>-Please select ROC-</option>     
                                             <option *ngFor="let roc of rocObj" [value]="roc.id">
                                               {{roc.name}}
                                             </option>
                                         </select>
+                                        <input type="text" *ngIf="!getRocDropdown" class="form-control form_width" [(ngModel)]="assignedRegion">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -86,17 +86,17 @@
                             <!--colend-->
 
                             <div class="row" *ngIf="getUserrole.id == 4">
-
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="form-control-label label_font">Backup Username
                                         </label>
-                                        <select class="form-control form_width" (change)="getPublisherUser($event)">
+                                        <select class="form-control form_width" *ngIf="getPublisherDropdown" (change)="getPublisherUser($event)">
                                             <option hidden disabled selected='selected' value=''>-Please select Publisher-</option>     
                                             <option *ngFor="let pub of publisherObj" [value]="pub.id">
                                               {{pub.first_name +" "+ pub.last_name}}
                                             </option>
                                         </select>
+                                        <input disabled type="text" *ngIf="!getPublisherDropdown" class="form-control form_width" [(ngModel)]="assignedPublish">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -117,10 +117,8 @@
                                 <!--colend-->
                             </div>
                             <!--colend-->
-
                         </div>
                         <div class="card-footer">
-
                             <button class="btn btn-primary mt-1 mr-2" *ngIf ="!assignFlag" (click)="assignBackup()">Assign</button>
                             <button class="btn btn-secondary mt-1" *ngIf="assignFlag" (click)="removeBackup()">Remove</button>
 

@@ -51,9 +51,8 @@
               class="card-header"
               style="padding: 0rem 1.25rem !important; background-color: #fff"
             >
-              <div>
-                <div class="d-flex align-items-center" style="justify-content: space-between;">
-                  <div class="d-flex">
+              <div class="d-flex align-items-center" style="justify-content: space-between;">
+                <div class="d-flex">
                 <img
                   src="../../../../assets/images/formm.png"
                   class="ml-2"
@@ -63,33 +62,36 @@
                   <span>View Request</span>
                         <span class="cc-text_css">({{ routegetdata.request_id }}) -
                   </span>
-                        <span>
+                  <span>
                     {{ routegetdata.learning_type_name }} ({{ routegetdata.delivery_method_name }})
                   </span>
-
-                        </p>
-                    </div>
-
-                    <span style="color: #ff7900">Request Status - {{ routegetdata.status | titlecase }}</span>
-                </div>
-
+                  <span style="color: #ff7900">Request Status - {{ routegetdata.status | titlecase }}</span>
+                </p></div>
+                <button class="btn btn-primary" *ngIf="status == 'draft'"
+                (click)="updateCource()">Update</button>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+      <!-- .animated -->
     </div>
-</div>
-</div>
-<!-- .animated -->
-</div>
-<!-- .content -->
-</div>
+    <!-- .content -->
+  </div>
 
-<div class="content">
+  <div class="content">
     <div class="animated fadeIn">
-        <div class="card" *ngIf="getUserrole.id != 2 && !routegetdata.issave  && showbuttons=='true' && showrejectbutton != getprofileDetails.data.id">
-            <div class="card-body">
-                <div class="Requs_btn_inl">
-                    <div class="Requs_btn_inl-child">
-                        <button type="button" class="btn btn-primary  ml-2" data-toggle="modal" data-target="#publishModal" *ngIf="getUserrole.id == 4 && status != 'publish' && showrejectbutton != getprofileDetails.data.id">
+      <div class="card" *ngIf="getUserrole.id != 2 && !routegetdata.issave  && showbuttons=='true' && showrejectbutton != getprofileDetails.data.id">
+        <div class="card-body">
+          <div class="Requs_btn_inl">
+            <div class="Requs_btn_inl-child">
+              <button
+                type="button"
+                class="btn btn-primary  ml-2"
+                data-toggle="modal"
+                data-target="#publishModal"
+                *ngIf="getUserrole.id == 4 && status != 'publish' && showrejectbutton != getprofileDetails.data.id"
+              >
                 <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
                         </button>
 
@@ -114,7 +116,7 @@
             </div>
             <!--colensd-->
         </div>
-        <form>
+        <form >
             <div class="row">
                 <div class="col-md-12">
                     <!-- <div class="card">
@@ -178,52 +180,51 @@
                                         </div>
 
                                     </div>
-       -->
-                                    <div class="col-sm-12 col_12">
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Title</label>
-                                                <div class="d-flex align-items-center">
-                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
+       -->                       <div class="col-sm-12 col_12">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Title</label>
+                                            <div class="d-flex align-items-center">
+                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>
                           {{
                             routegetdata.titleByLang
                               ? (routegetdata.titleByLang | titlecase)
                               : "-"
                           }}
                         </span>
-                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
-                                                </div>
-
+                                                <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                             </div>
 
                                         </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4" *ngIf="routegetdata.learning_type != '6'">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Training Duration</label>
-                                                <div class="d-flex align-items-center">
-                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ trainingDurationHours}}</span>
-                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
-                                                </div>
 
-                                            </div>
-
-                                        </div>
-                                        <!--cole dn-->
-                                        <div class="col-sm-4" *ngIf="routegetdata.learning_type != '6'">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Description</label>
-                                                <div class="d-flex align-items-center">
-                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.descriptionByLang }}</span>
-                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                        <!--cole dn-->
                                     </div>
+                                    <!--cole dn-->
+                                    <div class="col-sm-4" *ngIf="routegetdata.learning_type != '6'">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Training Duration</label>
+                                            <div class="d-flex align-items-center">
+                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ trainingDurationHours}}</span>
+                                                <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                            </div>
 
+                                        </div>
+
+                                    </div>
+                                    <!--cole dn-->
+                                    <div class="col-sm-4" *ngIf="routegetdata.learning_type != '6'">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Description</label>
+                                            <div class="d-flex align-items-center">
+                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.descriptionByLang }}</span>
+                                                <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <!--cole dn-->
+                                    </div>
+                                    
                                     <div class="col-sm-12 col_12" *ngIf="routegetdata.learning_type != '6'">
                                         <div class="col-sm-4">
                                             <div class="form-group">
@@ -351,12 +352,12 @@
                                                 <label for="exampleInputEmail1">Resources</label>
                                                 <div class="d-flex align-items-center">
                                                     <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                            {{
-                            routegetdata.resource
-                              ? routegetdata.resource
-                              : "-"
-                            }}
-                          </span>
+                                                       {{
+                                                       routegetdata.resource
+                                                         ? routegetdata.resource
+                                                         : "-"
+                                                       }}
+                                                     </span>
                                                     <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
@@ -567,7 +568,7 @@
 
                                         </div>
                                         <!--cole dn-->
-
+                                        
                                         <div class="col-sm-4" *ngIf="routegetdata.certification_expiry_type !=''">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">  Certification Expiry type</label>
@@ -1118,7 +1119,7 @@
                               : "-"
                             }}
                           </span>
-                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                    <a  *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
                                             </div>
@@ -1325,7 +1326,7 @@
     <!-- .content -->
 </div>
 <!-- /#right-panel -->
-<button class="btn btn-primary" *ngIf="status == 'draft'" (click)="updateCource()">Update</button>
+
 <!-- Right Panel -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 150px;">
     <div class="modal-dialog modal-lg" role="document ">
@@ -1336,14 +1337,14 @@
                         <div class="form-group">
                             <label>Transfer to Publisher</label>
                             <select name="select " id="select " class="form-control form_width1" (change)="getPublisherselected($event)">
-    <option value="0 ">Please select</option>
-    <option
-      *ngFor="let publisher of publisherList"
-      [value]="publisher.id"
-    >
-      {{ publisher.first_name }}
-    </option>
-  </select>
+                             <option value="0 ">Please select</option>
+                             <option
+                               *ngFor="let publisher of newPublisherList"
+                               [value]="publisher.id"
+                             >
+                               {{ publisher.first_name }}
+                             </option>
+                           </select>
 
                         </div>
                     </div>
@@ -1452,6 +1453,7 @@
             </div>
 
             <div class="modal-body">
+              <form [formGroup]="publishForm">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
@@ -1463,23 +1465,25 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Orange Learning Intrance URL(SSO)</label>
-                            <input type="text" placeholder="Enter Orange Learning Intrance URL(SSO)" class="form-control form_width1" formControlName="intranet_url" />
+                            <input type="text" placeholder="Enter Orange Learning Intrance URL(SSO)" class="form-control form_width1" formControlName="intranet_url"/>
                         </div>
                     </div>
                     <!--col end-->
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Orange Learning Internet URL</label>
-                            <input type="text" class="form-control form_width1" placeholder="Enter Orange Learning Internet URL" formControlName="internet_url" />
+                            <input type="text" class="form-control form_width1" placeholder="Enter Orange Learning Internet URL" formControlName="internet_url"/>
                         </div>
                     </div>
                     <!--col end-->
                 </div>
                 <!--row-->
+                </form>
             </div>
             <div class="modal-footer">
                 <!-- <button type="button " class="btn btn-secondary " data-dismiss="modal ">Close</button> -->
-                <button type="button" class="btn btn-primary btn_requst" (click)="PublishRequest()">
+                <button type="button" class="btn btn-primary btn_requst" 
+                (click)="PublishRequest()">
             Submit
           </button>
             </div>

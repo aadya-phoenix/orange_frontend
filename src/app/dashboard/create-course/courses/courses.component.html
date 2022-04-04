@@ -8,7 +8,8 @@
                     <img src="../../../../assets/images/creatnew.png" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
                         <span style="font-size: 20px" class="mb-1">Create new course </span>
-                        <span style="color: #aba3a3; font-size: 13px">People Development & Learning Strives on Providing you with the
+                        <span class="divider"></span>
+                        <span style="color: #aba3a3; font-size: 13px;margin-top: 10px;">People Development & Learning Strives on Providing you with the
             best customer service we can drive</span>
                     </div>
                 </div>
@@ -214,13 +215,13 @@
                                 </div>
                                 <div class="form-group filter_course">
                                     <label class="label_course">Filter by Training Status</label>
-                                    <select class="form-control  form_width">
+                                    <select class="form-control  form_width" (change)="getFilterRecords($event)">
                                       <option value="">Please select</option>
-                                      <option value="pending">Pending</option>
-                                      <option value="submit">Submitted</option>
-                                      <option value="draft">Draft</option>
-                                      <option value="close">Closed</option>
-                                      <option value="reject">Rejected</option>
+                                      <option value="draftRequests">Pending</option>
+                                      <option value="usersubmitRequests">Submitted</option>
+                                      <option value="draftRequests">Draft</option>
+                                      <option value="closedRequests">Closed</option>
+                                      <option value="rejectedRequests">Rejected</option>
                                 </select>
                                 </div>
 
@@ -297,7 +298,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let cource of courcesList | filter: searchText  | paginate: { itemsPerPage: 10, currentPage: p }" class="text-center bac_hover-table" style="font-size: 12px;">
+                                    <tr *ngFor="let cource of courcesList | filter: searchText  | paginate: { itemsPerPage: 10, currentPage: pageNumber }" class="text-center bac_hover-table" style="font-size: 12px;">
                                         <td (click)="getRequest(cource)" class="re_id">{{ cource.request_id }}</td>
                                         <td (click)="getRequest(cource)">
                                             {{ cource && cource.user_name ? cource.user_name : "- " }}
@@ -351,7 +352,7 @@
                                     <a *ngIf="cource.status=='reject'" (click)="editRequest(cource)" class="copy_file mr-1" data-toggle="tooltip" data-placement="top" title="Edit">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     </a>
-                                    <a class="copy_file mr-1" data-toggle="tooltip" (click)="openModal(cource)" data-placement="top" title="View">
+                                    <a class="copy_file mr-1" data-toggle="tooltip" (click)="getRequest(cource)" data-placement="top" title="View">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </a>
 
@@ -365,9 +366,9 @@
                 <div class="pagiantio_dispaly">
 
                     <div class="pagintion_ child">
-                        <p style="font-size: 14px; color: #000">Showing {{collectionSize}} entries</p>
+                        <p style="font-size: 14px; color: #000">Showing {{startPageEntry}} to {{endPageEntry}} of {{collectionSize}} entries</p>
                     </div>
-                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                 </div>
                 <!-- <div class="searc_dislp_inlin mt-1  ml-2 mr-2">
                             <div class="d-flex align-content-center">
@@ -573,7 +574,7 @@
                 </thead>
                 <tbody>
                   <tr
-                    *ngFor="let course of courcesList | filter: searchText | paginate: { itemsPerPage: 10, currentPage: paging }" class="text-center bac_hover-table" style="font-size: 12px;">
+                    *ngFor="let course of courcesList | filter: searchText | paginate: { itemsPerPage: 10, currentPage: newPageNumber }" class="text-center bac_hover-table" style="font-size: 12px;">
                     <td (click)="getRequest(course)" class="re_id">{{ course.request_id }}</td>
                     <td (click)="getRequest(course)">
                       {{
@@ -618,7 +619,7 @@
                                   <a *ngIf="course.status=='reject'" (click)="editRequest(course)" class="copy_file mr-1"  data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </a>
-                                  <a  class="copy_file mr-1" data-toggle="tooltip" (click)="openModal(course)" data-placement="top" title="View">
+                                  <a  class="copy_file mr-1" data-toggle="tooltip" (click)="getRequest(course)" data-placement="top" title="View">
                                       <i class="fa fa-eye" aria-hidden="true"></i>
                                   </a>
                                  
@@ -631,9 +632,9 @@
               <div class="pagiantio_dispaly">
          
             <div class="pagintion_ child">
-              <p style="font-size: 14px; color: #000">Showing {{collectionSize}} entries</p>
+              <p style="font-size: 14px; color: #000">Showing {{newstartPageEntry}} to {{newendPageEntry}} of {{collectionSize}} entries</p>
             </div>
-               <pagination-controls (pageChange)="paging = $event"></pagination-controls>
+               <pagination-controls (pageChange)="newPageChanged($event)"></pagination-controls>
             </div>
          <!--  <div class="searc_dislp_inlin mt-1 ml-2 mr-2">
                             <div class="d-flex align-content-center">

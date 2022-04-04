@@ -7,7 +7,8 @@
                     <img src="../../../../assets/images/creatnew.png" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
                         <span style="font-size: 20px" class="mb-1">Create new course </span>
-                        <span style="color: #aba3a3; font-size: 13px">
+                        <span class="divider"></span>
+                        <span style="color: #aba3a3; font-size: 13px;margin-top: 10px;">
                             <b style="color: #000">Instructor-Led (ILT)</b>-Instructor-Led
                             Training is face to face training delivered in a classroom.<b style="color: #000">
                                 Virtual Instructor-Led
@@ -260,7 +261,10 @@
                                                 <div class="form-group" style="width: 100%">
                                                     <label>Objective</label>
                                                     <div class="editControls"></div>
-                                                    <ejs-richtexteditor id='defaultRTE' [toolbarSettings]='tools'></ejs-richtexteditor>
+                                                    <ejs-richtexteditor id='defaultRTE' [(ngModel)]="showobjective" formControlName="objective_single" [toolbarSettings]='tools'></ejs-richtexteditor>
+                                                </div>
+                                                <div class="error_message" *ngIf="commonCreateCourceForm.controls['objective_single'].hasError('required') && commonCreateCourceForm.controls['objective_single'].touched">
+                                                    Objectives cannot be blank
                                                 </div>
                                             </div>
                                             <!--     <div class="col-sm-6">
@@ -1257,14 +1261,14 @@
                                         <!--  <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          Provide the link to your video
-                          <a>
-                            <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                               data-placement="top"
-                               title="If required, you can include an embedded video such as YouTube, Dailymotion or Video on Demand FT.">
-                            </i>
-                          </a>
-                        </label>
+                                              Provide the link to your video
+                                              <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                                                   data-placement="top"
+                                                   title="If required, you can include an embedded video such as YouTube, Dailymotion or Video on Demand FT.">
+                                                </i>
+                                              </a>
+                                            </label>
                                                 <input type="text" [(ngModel)]="showCurriculumLink" placeholder="Enter Provide the link to your video" class="form-control form_width" formControlName="video_link" />
                                             </div>
                                         </div> -->
@@ -1315,13 +1319,13 @@
                                         <!--   <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          Title of the additional free text field
-                          <a>
-                            <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                               data-placement="top" title="Title of the additional free text field">
-                            </i>
-                          </a>
-                        </label>
+                                               Title of the additional free text field
+                                               <a>
+                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                                                    data-placement="top" title="Title of the additional free text field">
+                                                 </i>
+                                               </a>
+                                             </label>
                                                 <input [(ngModel)]="showCurriculumFreeText" type="text" placeholder="Enter Title of the additional free text field" class="form-control form_width" formControlName="title_additional" />
                                             </div>
                                         </div> -->
@@ -1348,13 +1352,13 @@
                                         <!--  <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          Free field content
-                          <a>
-                            <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                               data-placement="top" title="">
-                            </i>
-                          </a>
-                        </label>
+                                                 Free field content
+                                                 <a>
+                                                   <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                                                      data-placement="top" title="">
+                                                   </i>
+                                                 </a>
+                                               </label>
                                                 <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Free field content" formControlName="free_field_content"></textarea>
                                             </div>
                                         </div> -->
@@ -1385,15 +1389,15 @@
                                             </div>
                                         </div>
                                         <!--colend-->
-                                        <div class="col-sm-12" style="margin-bottom: 10px;">
+                                        <!--  <div class="col-sm-12" style="margin-bottom: 10px;">
                                             <div class="form-group" style="width: 100%">
                                                 <label>Curriculum content</label>
                                                 <div class="editControls"></div>
                                                 <ejs-richtexteditor id='newRTE' [toolbarSettings]='tools'></ejs-richtexteditor>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <!--colend-->
-                                        <!-- <div class="col-sm-6">
+                                        <!--   <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     Curriculum content <span style="color: red">* </span>
@@ -1415,7 +1419,6 @@
 
                                             </div>
                                         </div> -->
-
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
@@ -1435,17 +1438,97 @@
                                             </div>
                                         </div>
                                         <!--colend-->
+
+                                        <div class="row" *ngIf="showCertificateExpiry_Curriculum">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">
+                                                    Certification expiry type
+                                                    <span style="color: red">* </span>
+                                                    <a>
+                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="If you selected Yes in the Certification field, please select the type of certification and expiry date.">
+                                                        </i>
+                                                    </a>
+                                                </label>
+                                                    <select class="form-control form_width" formControlName="certification_expiry_type">
+                                                    <option value="">Please select option</option>
+                                                    <option *ngFor="let cctExpiry of cctExpiryType"
+                                                        [value]="cctExpiry.id">
+                                                        {{ cctExpiry.name }}
+                                                    </option>
+                                                </select>
+                                                    <div class="error_message" *ngIf="currriculumForm.controls['certification_expiry_type'].hasError('required') && currriculumForm.controls['certification_expiry_type'].touched">
+                                                        Certification expiry type cannot be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--colend-->
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">
+                                                    Validity period <span style="color: red">* </span>
+
+                                                    <a>
+                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="If you selected Yes in the Certification field, please select how long the certification is valid.">
+                                                        </i>
+                                                    </a>
+                                                </label>
+                                                    <select class="form-control form_width" formControlName="validity_period">
+                                                    <option value="">Please select validity</option>
+                                                    <option *ngFor="let validity of validityPeriod"
+                                                        [value]="validity.id">
+                                                        {{ validity.name }}
+                                                    </option>
+                                                </select>
+                                                    <div class="error_message" *ngIf="currriculumForm.controls['validity_period'].hasError('required') && currriculumForm.controls['validity_period'].touched">
+                                                        Validity period cannot be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--colend-->
+                                        </div>
+                                        <!--row-->
+
+                                        <table class="table table-bordered" *ngIf="curriculumContentArray.controls.length > 0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Curriculum Content</th>
+                                                    <th scope="col" style="width: 12px">Action</th>
+                                                </tr>
+                                                <tr formArrayName="curriculum_content" *ngFor="
+                                                       let curriculum of curriculumContentArray.controls;
+                                                       let i = index
+                                                     ">
+                                                    <td [formGroupName]="i">
+                                                        <input type="text" placeholder="Enter Curriculum Content" class="form-control form_width" formControlName="description" />
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-success mr-2 mb-1" (click)="addCurriculumContenttocurriculum('')">
+                                                            +
+                                                        </button>
+                                                        <button class="btn btn-danger" *ngIf="i > 0" (click)="removeCurriculumContenttocurriculum(i)">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                        </table>
+
                                         <!-- <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          URL<span style="color: red">* </span>
-                          <a>
-                            <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
-                               data-placement="top"
-                               title="Please upload that you wish to associate with the learning Material.">
-                            </i>
-                          </a>
-                        </label>
+                                                  URL<span style="color: red">* </span>
+                                                  <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
+                                                       data-placement="top"
+                                                       title="Please upload that you wish to associate with the learning Material.">
+                                                    </i>
+                                                  </a>
+                                                </label>
                                                 <div class="url_field">
                                                     <input type="text" placeholder="Enter URL" class="form-control form_width" formControlName="url" />
                                                     <div class="error_message"*ngIf="currriculumForm.controls['url'].hasError('required') && currriculumForm.controls['url'].touched">
@@ -1459,62 +1542,6 @@
                                     </div>
                                     <!--row-->
 
-                                    <div class="row" *ngIf="showCertificateExpiry_Curriculum">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Certification expiry type
-                                                    <span style="color: red">* </span>
-                                                    <a>
-                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                            data-toggle="tooltip" data-placement="top"
-                                                            title="If you selected Yes in the Certification field, please select the type of certification and expiry date.">
-                                                        </i>
-                                                    </a>
-                                                </label>
-                                                <select class="form-control form_width" formControlName="certification_expiry_type">
-                                                    <option value="">Please select option</option>
-                                                    <option *ngFor="let cctExpiry of cctExpiryType"
-                                                        [value]="cctExpiry.id">
-                                                        {{ cctExpiry.name }}
-                                                    </option>
-                                                </select>
-                                                <div class="error_message" *ngIf="currriculumForm.controls['certification_expiry_type'].hasError('required') && currriculumForm.controls['certification_expiry_type'].touched">
-                                                    Certification expiry type cannot be blank
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--colend-->
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Validity period <span style="color: red">* </span>
-
-                                                    <a>
-                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                            data-toggle="tooltip" data-placement="top"
-                                                            title="If you selected Yes in the Certification field, please select how long the certification is valid.">
-                                                        </i>
-                                                    </a>
-                                                </label>
-                                                <select class="form-control form_width" formControlName="validity_period">
-                                                    <option value="">Please select validity</option>
-                                                    <option *ngFor="let validity of validityPeriod"
-                                                        [value]="validity.id">
-                                                        {{ validity.name }}
-                                                    </option>
-                                                </select>
-                                                <div class="error_message" *ngIf="currriculumForm.controls['validity_period'].hasError('required') && currriculumForm.controls['validity_period'].touched">
-                                                    Validity period cannot be blank
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--colend-->
-                                    </div>
-                                    <!--row-->
-
-
-
                                     <table class="table table-bordered" *ngIf="curriculumArray.controls.length > 0">
                                         <thead>
                                             <tr>
@@ -1524,9 +1551,9 @@
                                             </tr>
 
                                             <tr formArrayName="learner_guideline" *ngFor="
-                          let learner of curriculumArray.controls;
-                          let i = index
-                        ">
+                                                   let learner of curriculumArray.controls;
+                                                   let i = index
+                                                 ">
                                                 <td [formGroupName]="i">
                                                     <input type="text" placeholder="Enter Learner Guidelines" class="form-control form_width" formControlName="title" />
                                                 </td>
@@ -1828,48 +1855,48 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <!--<div class="col-sm-6">
-                                  <div class="form-group">
+                                   <div class="form-group">
                                       <label class="form-control-label">Expiry Date
-              <a>
-                <i
-                  class="fa fa-info-circle info_circle"
-                  aria-hidden="true"
-                  data-toggle="tooltip"
-                  data-placement="top"
-                  title="Provide the date on which this learning object will no longer be valid. If the expiry date is unknown your learning object will be available in the Orange Learning catalog as follows: ILT & vILT with active sessions = no expiry date; ILT & vILT with no sessions = 12 months; online courses, videos, materials, tests = 2 years."
-                >
-                </i>
-              </a>
-            </label>
-                                      <input type="date" class="form-control form_width" formControlName="expiry_date" />
-                                  </div>
-                              </div>-->
+                                      <a>
+                                        <i
+                                          class="fa fa-info-circle info_circle"
+                                          aria-hidden="true"
+                                          data-toggle="tooltip"
+                                          data-placement="top"
+                                          title="Provide the date on which this learning object will no longer be valid. If the expiry date is unknown your learning object will be available in the Orange Learning catalog as follows: ILT & vILT with active sessions = no expiry date; ILT & vILT with no sessions = 12 months; online courses, videos, materials, tests = 2 years."
+                                        >
+                                        </i>
+                                      </a>
+                                    </label>
+                                                              <input type="date" class="form-control form_width" formControlName="expiry_date" />
+                                                          </div>
+                                                      </div>-->
                                         <!--colend-->
                                         <!--<div class="col-sm-6">
-                                  <div class="form-group">
-                                      <label class="form-control-label">Upload video status <span style="color: red">* </span>
-              <a  >
-                <i
-                  class="fa fa-info-circle info_circle"
-                  aria-hidden="true"
-                  data-toggle="tooltip"
-                  data-placement="top"
-                  title="NULL"
-                >
-                </i>
-              </a>
-            </label>
-                                      <select class="form-control form_width" formControlName="level">
-              <option value="">Please select level</option>
-              <option
-                *ngFor="let level of cctLevel"
-                [value]="level.id"
-              >
-                {{ level.name }}
-              </option>
-            </select>
-                                  </div>
-                              </div>-->
+                                                          <div class="form-group">
+                                                              <label class="form-control-label">Upload video status <span style="color: red">* </span>
+                                      <a  >
+                                        <i
+                                          class="fa fa-info-circle info_circle"
+                                          aria-hidden="true"
+                                          data-toggle="tooltip"
+                                          data-placement="top"
+                                          title="NULL"
+                                        >
+                                        </i>
+                                      </a>
+                                    </label>
+                                                              <select class="form-control form_width" formControlName="level">
+                                      <option value="">Please select level</option>
+                                      <option
+                                        *ngFor="let level of cctLevel"
+                                        [value]="level.id"
+                                      >
+                                        {{ level.name }}
+                                      </option>
+                                    </select>
+                                                          </div>
+                                                      </div>-->
                                         <!--colend-->
                                     </div>
 
@@ -2059,8 +2086,12 @@
                                                         </i>
                                                     </a>
                                                 </label>
-                                                <ng-select placeholder="Please select" (change)="targetAudience($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="level" style="width: 100%">
+                                                <ng-select placeholder="Please select" (change)="targetAudience($event)" [(ngModel)]="target_audience_selected" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="level" style="width: 100%">
                                                 </ng-select>
+                                                <!--  <select>
+                                                    <option value="">Yes</option>
+                                                    <option value="" selected >No</option>
+                                                </select> -->
                                                 <div class="error_message" *ngIf="playlistForm.controls['level'].hasError('required') && playlistForm.controls['level'].touched">
                                                     Is the target audience of your Playlist from one region only? cannot be blank
                                                 </div>
@@ -2079,10 +2110,10 @@
                                                         <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                             data-toggle="tooltip" data-placement="top"
                                                             title='Americas" if your Playlist is aimed at OBS employees in the Americas Region only.
-- "Asia Pacific" if your Playlist is aimed at OBS employees in the Asia Pacific Region only.
-- "Europe" if your Playlist is aimed at OBS employees in the Europe Region only.
-- "France" if your Playlist is aimed at OBS employees in the France Region only.
-- "Middle East, Africa and Russia" if your Playlist is aimed at OBS employees in the Middle East, Africa and Russia Region only.'>
+                                                           - "Asia Pacific" if your Playlist is aimed at OBS employees in the Asia Pacific Region only.
+                                                           - "Europe" if your Playlist is aimed at OBS employees in the Europe Region only.
+                                                           - "France" if your Playlist is aimed at OBS employees in the France Region only.
+                                                           - "Middle East, Africa and Russia" if your Playlist is aimed at OBS employees in the Middle East, Africa and Russia Region only.'>
                                                         </i>
                                                     </a>
                                                 </label>
@@ -2104,8 +2135,8 @@
                                                     <a>
                                                         <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                             data-toggle="tooltip" data-placement="top" title="Select:
-- 'OBS employees in specific Functions/Divisions' if your Playlist is aimed at OBS employees in one or more OBS Functions/Divisions.
-- 'All OBS employees' if your Playlist is aimed at all OBS employees">
+                                                             - 'OBS employees in specific Functions/Divisions' if your Playlist is aimed at OBS employees in one or more OBS Functions/Divisions.
+                                                             - 'All OBS employees' if your Playlist is aimed at all OBS employees">
                                                         </i>
                                                     </a>
                                                 </label>
@@ -2359,23 +2390,23 @@
                                         <div class="col-sm-6" *ngIf="externalVendorname_Webbased">
                                             <div class="form-group">
                                                 <!-- <label class="form-control-label"
-          >External vendor
-          <a href="">
-            <i
-              class="fa fa-info-circle info_circle"
-              aria-hidden="true"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Select Yes, if the course is provided by an external vendor."
-            >
-            </i>
-          </a>
-        </label>
-        <select class="form-control form_width" formControlName="who_see_course">
-          <option value="">Please select externalvendor</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select> -->
+                                                  >External vendor
+                                                  <a href="">
+                                                    <i
+                                                      class="fa fa-info-circle info_circle"
+                                                      aria-hidden="true"
+                                                      data-toggle="tooltip"
+                                                      data-placement="top"
+                                                      title="Select Yes, if the course is provided by an external vendor."
+                                                    >
+                                                    </i>
+                                                  </a>
+                                                </label>
+                                                <select class="form-control form_width" formControlName="who_see_course">
+                                                  <option value="">Please select externalvendor</option>
+                                                  <option value="yes">Yes</option>
+                                                  <option value="no">No</option>
+                                                </select> -->
                                                 <label class="form-control-label">
                                                     External vendor name
                                                     <span style="color: red">* </span>

@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
 
   navigatetoPending(status:any){
     let statusobj = { status :status};
+    console.log("status obj",status);
     this.router.navigateByUrl('/dashboard/cources', {
       state: statusobj,
     });
