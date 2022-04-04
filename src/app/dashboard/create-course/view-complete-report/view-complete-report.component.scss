@@ -267,63 +267,19 @@ tbody tr {
     background: #ff7901;
     border-radius: 0.25rem;
 }
-
-.pagination>li>a,
-.pagination>li>span {
-    position: relative;
-    float: left;
-    padding: 4px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #db6852;
-    text-decoration: none;
+.pagintion_child{
+    display: flex;
+    justify-content: space-between;
+}
+.table_height_scroll {
+    height: 400px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+.sticky_header {
+    position: sticky;
+    top: -1px;
     background-color: #fff;
-    border: 1px solid #ddd;
-}
-
-.pagination>li:first-child>a,
-.pagination>li:first-child>span {
-    margin-left: 0;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-}
-
-.pagination>.active>a,
-.pagination>.active>a:focus,
-.pagination>.active>a:hover,
-.pagination>.active>span,
-.pagination>.active>span:focus,
-.pagination>.active>span:hover {
-    z-index: 3;
-    color: #fff;
-    cursor: default;
-    background-color: #db6852;
-    border-color: #db6852;
-}
-
-::ng-deep {
-    .pagination li {
-        font-size: 14px;
-        a {
-            color: #db6852;
-            &:hover {
-                color: #db6852;
-            }
-            &:focus,
-            &:focus-visible {
-                box-shadow: none !important;
-            }
-        }
-    }
-    .pagination li.active a {
-        background-color: #db6852 !important;
-        border-color: #db6852 !important;
-    }
-    .searc_dislp_inlin {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
 }
 
 @media (max-width: 768px) {
@@ -341,7 +297,7 @@ tbody tr {
         margin-bottom: 10px;
     }
     .Course_icon_parent {
-        flex-direction: column;
+        display: inline;
     }
     .status_med_di {
         display: flex;
@@ -349,10 +305,20 @@ tbody tr {
     .overall_css {
         flex-direction: column;
     }
-    .body_header_view {
-        flex-direction: column;
-    }
-    .card_overall1 {
+    .Course_icon_child {
+        width: 33%;
+        float: left;
         margin-top: 10px;
+    }
+    .filter_dispaly {
+        flex-direction: column;
+        width: 100%;
+    }
+    .filter_course {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .pagiantio_dispaly {
+        flex-direction: column;
     }
 }

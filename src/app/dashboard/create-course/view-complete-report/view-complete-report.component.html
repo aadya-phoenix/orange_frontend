@@ -9,9 +9,8 @@
                     <div class="d-flex flex-column ml-3">
                         <span style="font-size: 20px">Create new course </span>
                         <span class="divider"></span>
-                        <span style="color: #aba3a3; font-size: 13px;margin-top: 6px;">People Development & Learning Strives on Providing
-                            you with the
-                            best customer service we can drive</span>
+                        <span style="color: #aba3a3; font-size: 13px;margin-top: 6px;">People Development & Learning Strives on Providing you with the
+            best customer service we can drive</span>
                     </div>
                 </div>
             </div>
@@ -27,16 +26,19 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" style="color: #ff7901">Dashboard</a>
-                        </li>
-                        <li>
-                            <a [routerLink]="['/dashboard/cources/']" style="color: #ff7901">Create new Course</a>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-        </div>
+                            <a [routerLink]="['/dashboard']" style="color: #ff7901">Dashboard</a
+            >
+          </li>
+          <li>
+            <a [routerLink]="['/dashboard/cources/']" style="color: #ff7901"
+              >Create new Course</a
+            >
+          </li>
+        </ol>
+      </div>
     </div>
+  </div>
+</div>
     <form [formGroup]="filterForm">
         <div class="content mt-3">
             <div class="animated fadeIn">
@@ -303,7 +305,7 @@
         </div>
     </form>
     <!-- .content -->
-</div>
+
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
@@ -324,10 +326,10 @@
                             <button class="btn btn-primary" style="font-size: 11px;" (click)="reset()"><i class="fa fa-refresh mr-1"
                                     aria-hidden="true"  ></i>Reset</button>
                         </div>
-                        <div class="table-responsive">
+                        <div class="table-responsive table_height_scroll">
                             <table id="excel-table" class="table table-bordered">
-                                <thead>
-                                    <tr style="white-space: nowrap;font-size: 13px;text-align: center;">
+                                <thead class="sticky_header">
+                                    <tr style="font-size: 13px;text-align: center;">
                                         <th scope="col">#</th>
                                         <th sortable="id " (sort)="onSort($event)" scope="col">Request Id</th>
                                         <th *ngIf="getUserrole.id != 2" scope="col">History</th>
@@ -403,10 +405,11 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="pagintion_ child">
+                        <div class="pagintion_child">
                             <p style="font-size: 14px; color: #000">Showing {{startPageEntry}} to {{endPageEntry}} of {{collectionSize}} entries</p>
+							 <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                         </div>
-                        <pagination-controls (pageChange)="pageChanged($event)" style="float: right;"></pagination-controls>
+                       
                     </div>
 
 
@@ -418,4 +421,8 @@
         </div>
     </div>
     <!-- .animated -->
+</div>
+
+
+
 </div>
