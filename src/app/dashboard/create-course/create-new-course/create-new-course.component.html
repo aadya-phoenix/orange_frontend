@@ -136,7 +136,7 @@
 
                                             </div>
                                             <div>
-                                                <a href="" data-toggle="modal" data-target="#commonDescription" class="d-flex flex-column align-items-end">
+                                                <a href="" data-toggle="modal" data-target="#commonDescription_playlist" class="d-flex flex-column align-items-end">
                                                     <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
                                                 </a>
                                             </div>
@@ -1727,9 +1727,9 @@
 
                                                         <div *ngFor="let f of fileToUpload_Material">
                                                             <!--<input type="hidden" #attachmentId value="{{f.attachmentId}}">-->
-                                                            <a href="{{f.url}}" target="_blank" style="text-decoration:underline" data-bs-toggle="tooltip" data-bs-placement="top" title="View Your Uploaded File"><i
+                                                            <!-- <a href="{{f.url}}" target="_blank" style="text-decoration:underline" data-bs-toggle="tooltip" data-bs-placement="top" title="View Your Uploaded File"><i
                                                                     class="fa fa-file-image-o" aria-hidden="true"
-                                                                    style="font-size:43px"></i></a>
+                                                                    style="font-size:43px"></i></a> -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2140,13 +2140,13 @@
                                                         </i>
                                                     </a>
                                                 </label>
-                                                <select class="form-control form_width" formControlName="free_field_content" (change)="targetAudiencePlaylsit($event)">
+                                                <select class="form-control form_width" formControlName="target_audience" (change)="targetAudiencePlaylsit($event)">
                                                     <option value="">Please select</option>
                                                     <option value="1">OBS employees in specific Functions/Divisions
                                                     </option>
                                                     <option value="2">All OBS employees</option>
                                                 </select>
-                                                <div class="error_message" *ngIf="playlistForm.controls['free_field_content'].hasError('required') && playlistForm.controls['free_field_content'].touched">
+                                                <div class="error_message" *ngIf="playlistForm.controls['target_audience'].hasError('required') && playlistForm.controls['target_audience'].touched">
                                                     Target audience cannot be blank
                                                 </div>
                                             </div>
@@ -2955,6 +2955,51 @@
                 <form [formGroup]="commonCreateCourceForm_playlist">
                     <div class="row">
                         <div class="col-sm-12" formArrayName="titleArr" *ngFor="let language of titlecontrol_playlist;let i =index;">
+                            <div class="form-group" [style.display]="(lang == availableLanguages[i].slug) ? 'none' : 'block' ">
+                                <div [formGroupName]="i">
+                                    <label class="form-control-label"> {{availableLanguages[i].name}}</label>
+                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter" formControlName="value"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!--colend-->
+                        <div class="col-sm-12" formArrayName="titleArr" *ngFor="let language of playlist_description;let i =index;">
+                            <div class="form-group" [style.display]="(lang == availableLanguages[i].slug) ? 'none' : 'block' ">
+                                <div [formGroupName]="i">
+                                    <label class="form-control-label"> {{availableLanguages[i].name}}</label>
+                                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter" formControlName="value"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!--colend-->
+                        <!--colend-->
+                    </div>
+                </form>
+                <!--ocl-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cancel_button" data-dismiss="modal">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="gettitlelanguage()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="commonDescription_playlist" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: #ff7900">
+                    Translate
+                </h5>
+                <!-- Boosted mod: using visually hidden text instead of aria-label -->
+            </div>
+            <div class="modal-body modal_height">
+                <form [formGroup]="commonCreateCourceForm_playlist">
+                    <div class="row">
+                        <div class="col-sm-12" formArrayName="descriptionArr" *ngFor="let language of playlist_description;let i =index;">
                             <div class="form-group" [style.display]="(lang == availableLanguages[i].slug) ? 'none' : 'block' ">
                                 <div [formGroupName]="i">
                                     <label class="form-control-label"> {{availableLanguages[i].name}}</label>

@@ -10,6 +10,7 @@ import { AuthenticationService } from '../../services/auth/authentication.servic
 export class HeaderComponent implements OnInit {
 
   getUserrole:any;
+  userName:any;
   firstName:any;
   lastName:any;
 
@@ -23,6 +24,14 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserprofile();
+    if(localStorage.getItem('userName')){
+      this.userName = JSON.parse(localStorage.getItem('userName') as any);
+    }
+    if(this.userName){
+      this.firstName = this.userName.first_name;
+      this.lastName = this.userName.last_name;
+    }
+    
   }
 
   getUserprofile(){
@@ -30,10 +39,15 @@ export class HeaderComponent implements OnInit {
       console.log(res);
       if(res != undefined){
       this.getprofileDetails = res.data;
-      this.firstName = this.getprofileDetails.first_name;
-      this.lastName = this.getprofileDetails.last_name;
-      console.log("profile details",this.getprofileDetails);
+      localStorage.setItem('userName',JSON.stringify(this.getprofileDetails));
       } 
+      if(localStorage.getItem('userName')){
+        this.userName = JSON.parse(localStorage.getItem('userName') as any);
+      }
+      if(this.userName){
+        this.firstName = this.userName.first_name;
+        this.lastName = this.userName.last_name;
+      }
     },(err:any)=>{
       console.log(err)
     })
@@ -46,6 +60,7 @@ export class HeaderComponent implements OnInit {
   logout(){
     console.log('he')
     this.authService.logOut();
+    localStorage.removeItem('userName');
   }
 
 }

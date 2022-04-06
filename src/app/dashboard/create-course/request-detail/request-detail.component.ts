@@ -13,6 +13,9 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export class RequestDetailComponent implements OnInit {
   public commonCreateCourceForm!: FormGroup;
   public publishForm!: FormGroup;
+  public learnerGuidelines: any = [];
+  public curriculumContent: any = [];
+  purchaseOrder:any;
   getUserrole: any;
   routegetdata: any;
   trainingDurationHours:any;
@@ -39,10 +42,13 @@ export class RequestDetailComponent implements OnInit {
      console.log("route",this.routegetdata);
      this.routegetdata = JSON.parse(this.routegetdata);
     }
+    this.learnerGuidelines = JSON.parse(this.routegetdata['learner_guideline']);
+    this.curriculumContent = JSON.parse(this.routegetdata['learner_guideline']);
     this.routegetdata['titleByLang'] = this.courseService.getTText(this.routegetdata['title']);
     this.routegetdata['descriptionByLang'] = this.courseService.getTText(this.routegetdata['description']);
     this.routegetdata['objectiveByLang'] = this.courseService.getTText(this.routegetdata['objective']);
     this.routegetdata['learn_moreByLang'] = this.courseService.getTText(this.routegetdata['learn_more']);
+    this.routegetdata['for_whoomByLang'] = this.courseService.getTText(this.routegetdata['for_whoom']);
     this.routegetdata['for_whomByLang'] = this.courseService.getTText(this.routegetdata['for_whom']);
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
 
@@ -224,6 +230,10 @@ export class RequestDetailComponent implements OnInit {
     let no = this.routegetdata.showbuttons.split('#').length;
     this.showbuttons = this.routegetdata.showbuttons.split('#')[no-1];
 
+    if(this.routegetdata.purchase_order){
+    this.purchaseOrder  = this.routegetdata.purchase_order.split('#')[0];
+    console.log("this.purchaseOrder",this.purchaseOrder);
+    }
     console.log(arr1);
     this.objectarray = [];//arr1.split('• ')
     //console.log(arr1.split('• '))
@@ -237,6 +247,10 @@ export class RequestDetailComponent implements OnInit {
       internet_url: new FormControl(''),
     });
     this.getTrainingHours();
+    console.log("learner guideline",this.routegetdata.learner_guideline);
+    let learner_guideline = this.routegetdata.learner_guideline;
+    console.log(JSON.parse(learner_guideline));
+    console.log("new learnerGuidelines",this.learnerGuidelines);
 
   }
   setrejectbutton(id:any) {

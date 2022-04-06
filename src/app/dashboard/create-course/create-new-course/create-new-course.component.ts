@@ -5,7 +5,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/observable/fromEvent';
 import { Subscription } from 'rxjs';
-import { ToolbarService, HtmlEditorService, RichTextEditorComponent } from '@syncfusion/ej2-angular-richtexteditor';
+import { ToolbarService, HtmlEditorService } from '@syncfusion/ej2-angular-richtexteditor';
 
 import {
   FormArray,
@@ -70,6 +70,7 @@ export class CreateNewCourseComponent implements OnInit {
   public learningType: any = '';
   public learningTypeSelected: any = '0';
   public selectedLanguages: any = [];
+  public learnerGuidelines: any = [];
   fieldArrObj: any = []
   public cctLevel: any;
   coursesList: any;
@@ -332,6 +333,7 @@ export class CreateNewCourseComponent implements OnInit {
       this.setrejectbutton(this.routergetdata.id);
       this.learningType = this.routergetdata.learning_type;
       this.selectedLanguages = JSON.parse(this.routergetdata['available_language']);
+    //  this.learnerGuidelines = JSON.parse(this.routergetdata['learner_guideline']);
       this.subjectId = Number(this.routergetdata['subject']);
       this.showlevel = Number(this.routergetdata.level);
       console.log(this.routergetdata)
@@ -720,9 +722,11 @@ export class CreateNewCourseComponent implements OnInit {
     //common form
     this.commonCreateCourceForm_playlist = this.fb.group({
       titleArr: new FormArray([]),
+      descriptionArr: new FormArray([]),
       title: new FormControl(''),
       title_single: new FormControl('', [Validators.required]),
-      description_single: new FormControl('', [Validators.required])
+      description_single: new FormControl('', [Validators.required]),
+      description: new FormControl(''),
     });
     this.commonCreateCourceForm = this.fb.group({
       titleArr: new FormArray([]),
@@ -758,6 +762,7 @@ export class CreateNewCourseComponent implements OnInit {
     if (this.routergetdata == undefined) {
       this.languageValueSet_new(this.commonCreateCourceForm, 'title_single', 'titleArr');
       this.languageValueSet_new(this.commonCreateCourceForm_playlist, 'title_single', 'titleArr');
+      this.languageValueSet_new(this.commonCreateCourceForm_playlist, 'description_single', 'descriptionArr');
       this.languageValueSet_new(this.commonCreateCourceForm, 'description_single', 'descriptionArr');
       this.languageValueSet_new(this.commonCreateCourceForm, 'objective_single', 'objectiveArr');
       this.formCtrlSub = this.commonCreateCourceForm.valueChanges
@@ -769,6 +774,7 @@ export class CreateNewCourseComponent implements OnInit {
           };
           this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'title', 'titleArr');
           this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm_playlist, 'title', 'titleArr');
+          this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm_playlist, 'description', 'descriptionArr');
           this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'description', 'descriptionArr');
           this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm, 'objective', 'objectiveArr');
           this.formatArrayData(this.totalObjnew, this.iltandViltForm, 'for_whoom', 'forWhomArr');
@@ -913,7 +919,7 @@ export class CreateNewCourseComponent implements OnInit {
       video_link: new FormControl('', [Validators.required]),
       level: new FormControl('', [Validators.required]),
       who_see_course: new FormControl(''),
-      free_field_content: new FormControl(''),
+      target_audience: new FormControl(''),
       email_preffered_instructor: new FormControl(''),
       regional_cordinator:
         this.getUserrole.id === 2
@@ -942,9 +948,13 @@ export class CreateNewCourseComponent implements OnInit {
         setTimeout(() => {
           this.bindarraydata();
         }, 3000);
-        this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm_playlist, 'title', 'titleArr');
+        this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm_playlist, 'description_single', 'descriptionArr');
+        this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm_playlist, 'title_single', 'titleArr');
         let setdata = JSON.parse(this.routergetdata.title);
+        let newSetData = JSON.parse(this.routergetdata.description);
+        console.log("descriptiondata " + newSetData)
         this.languageValueSet(this.commonCreateCourceForm_playlist, 'title_single', 'titleArr', setdata);
+        this.languageValueSet(this.commonCreateCourceForm_playlist, 'description_single', 'descriptionArr', newSetData);
         this.formCtrlSub = this.commonCreateCourceForm_playlist.valueChanges
           //.debounceTime(500)
           .subscribe(($durationx: any) => {
@@ -956,6 +966,11 @@ export class CreateNewCourseComponent implements OnInit {
             this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm_playlist, 'title_single', 'titleArr');
             let setdata = JSON.parse(this.routergetdata.title);
             this.languageValueSet(this.commonCreateCourceForm_playlist, 'title_single', 'titleArr', setdata);
+
+            this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm_playlist, 'description_single', 'descriptionArr');
+            let newsetdata = JSON.parse(this.routergetdata.description);
+            this.languageValueSet(this.commonCreateCourceForm_playlist, 'description_single', 'descriptionArr', newsetdata);
+
           });
 
       }
@@ -1143,6 +1158,8 @@ export class CreateNewCourseComponent implements OnInit {
     if (this.routergetdata.learning_type == "6") {
       let ctrl1 = this.commonCreateCourceForm_playlist.get('title_single') as FormControl;
       ctrl1.setValue(ctrl1.value);
+      let ctrl2 = this.commonCreateCourceForm_playlist.get('description_single') as FormControl;
+      ctrl2.setValue(ctrl2.value);
     }
     else {
       let ctrl1 = this.commonCreateCourceForm.get('title_single') as FormControl;
@@ -1258,6 +1275,9 @@ export class CreateNewCourseComponent implements OnInit {
 
     return (<FormArray>this.commonCreateCourceForm_playlist.get('titleArr')).controls;
   }
+  get playlist_description() {
+    return (<FormArray>this.commonCreateCourceForm_playlist.get('descriptionArr')).controls;
+  }
   get titlecontrol_description() {
     return (<FormArray>this.commonCreateCourceForm.get('descriptionArr')).controls;
   }
@@ -1370,7 +1390,6 @@ export class CreateNewCourseComponent implements OnInit {
       this.createNewCource_Save(this.commonCreateCourceForm_playlist, this.playlistForm, status)
     }
   }
-  
   createNewCource_Save(commonformObj: FormGroup, formObj: FormGroup, status: any) {
     console.log("status video is ",status);
     console.log(this.learnerGuidearray);
@@ -1454,6 +1473,30 @@ export class CreateNewCourseComponent implements OnInit {
       }
       commonformObj.value.description = descriptionarray;
       commonformObj.value.objective = objectivearray;
+    }
+    else{
+      for (let i = 0; i < commonformObj.value.descriptionArr.length; i++) {
+        if (commonformObj.value.descriptionArr[i].value != '') {
+          descriptionarray.push({
+            [`${commonformObj.value.descriptionArr[i].name}`]:
+              commonformObj.value.descriptionArr[i].value,
+          });
+        } else {
+          if (commonformObj.value.descriptionArr[i].slug == this.lang) {
+            descriptionarray.push({
+              [`${commonformObj.value.descriptionArr[i].name}`]:
+                commonformObj.value.description_single,
+            });
+          }
+        }
+      }
+      if (!descriptionarray.includes("english")) {
+        descriptionarray.push({
+          'english':
+            commonformObj.value.description_single,
+        });
+      }
+      commonformObj.value.description = descriptionarray;
     }
 
 
@@ -1676,6 +1719,10 @@ export class CreateNewCourseComponent implements OnInit {
       this.showCertificateExpiry = false;
       this.iltandViltForm.get('certification_expiry_type')?.clearValidators();
       this.iltandViltForm.get('validity_period')?.clearValidators();
+      this.iltandViltForm.patchValue({
+        certification_expiry_type:null,
+        validity_period:null
+      });
     }
 
   }
@@ -1684,14 +1731,21 @@ export class CreateNewCourseComponent implements OnInit {
     if (event.id == 'yes'){
       this.regionTargetAudience = true;
       this.playlistForm.get('who_see_course')?.setValidators(Validators.required);
-      this.playlistForm.get('free_field_content')?.clearValidators();    
+      this.playlistForm.get('target_audience')?.clearValidators();    
       this.playlistForm.get('email_preffered_instructor')?.clearValidators();  
+      this.playlistForm.patchValue({
+        target_audience:null,
+        email_preffered_instructor:null
+      });
     }
-    else{
+    else if(event.id == 'no'){
       this.regionTargetAudience = false;
-      this.playlistForm.get('free_field_content')?.setValidators(Validators.required);
+      this.playlistForm.get('target_audience')?.setValidators(Validators.required);
       this.playlistForm.get('email_preffered_instructor')?.setValidators(Validators.required);
       this.playlistForm.get('who_see_course')?.clearValidators();
+      this.playlistForm.patchValue({
+        who_see_course:null,
+      });
     }
   }
   targetAudiencePlaylsit(event:any){
@@ -1703,6 +1757,8 @@ export class CreateNewCourseComponent implements OnInit {
     if (event.target.value == 1){
       this.regionTargetAudiencePlaylist = false;
       this.playlistForm.get('email_preffered_instructor')?.clearValidators();
+      this.playlistForm.patchValue({
+        email_preffered_instructor:null});
     } 
   }
   certificationType_Curriculum(event: any) {
@@ -1719,6 +1775,10 @@ export class CreateNewCourseComponent implements OnInit {
       this.showCertificateExpiry_Curriculum = false;
       this.currriculumForm.get('certification_expiry_type')?.clearValidators();
       this.currriculumForm.get('validity_period')?.clearValidators();
+      this.currriculumForm.patchValue({
+        certification_expiry_type:null,
+        validity_period:null
+      });
     }
 
   }
@@ -1736,6 +1796,10 @@ export class CreateNewCourseComponent implements OnInit {
       this.showCertificateExpiry_Webbased = false;
       this.webbasedForm.get('certification_expiry_type')?.clearValidators();
       this.webbasedForm.get('validity_period')?.clearValidators();
+      this.iltandViltForm.patchValue({
+        certification_expiry_type:null,
+        validity_period:null
+      });
     }
 
   }
@@ -1750,6 +1814,9 @@ export class CreateNewCourseComponent implements OnInit {
       this.externalVendorname = false;
       this.showVendor = false;
       this.iltandViltForm.get('external_vendor_name')?.clearValidators();
+      this.iltandViltForm.patchValue({
+        external_vendor_name:null,
+      });
     }
 
     // if (event.target.value == 'yes') {
@@ -1775,6 +1842,9 @@ export class CreateNewCourseComponent implements OnInit {
       this.externalVendorname_Webbased = false;
       this.showVendor_Webbased = false;
       this.webbasedForm.get('external_vendor_name')?.clearValidators();
+      this.webbasedForm.patchValue({
+        external_vendor_name:null
+      });
     }
 
   }

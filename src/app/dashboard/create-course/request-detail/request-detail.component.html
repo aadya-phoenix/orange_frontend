@@ -141,8 +141,20 @@
                                               </div>
       
                                           </div><!--coleb-->
+
+                                          <div class="col-sm-12" *ngIf="routegetdata.learning_type != '6'">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Training Provided By</label>
+                                            <div class="d-flex align-items-center">
+                                                <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.training_provided_by}}</span>
+                                                <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
                  
- <div class="col-sm-12" *ngIf="routegetdata.learning_type != '6'">
+                                    <div class="col-sm-12" *ngIf="routegetdata.learning_type != '6'">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Training Duration</label>
                                             <div class="d-flex align-items-center">
@@ -154,7 +166,7 @@
 
                                     </div>
                                     <!--cole dn-->
-                                    <div class="col-sm-12" *ngIf="routegetdata.learning_type != '6'">
+                                    <div class="col-sm-12" *ngIf="routegetdata.learning_type ">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Description</label>
                                             <div class="d-flex align-items-center">
@@ -526,7 +538,7 @@
                                           </div>
                                           <!--cole dn-->
                                           
-                                          <div class="col-sm-12" *ngIf="routegetdata.certification_expiry_type !=''">
+                                          <div class="col-sm-12" *ngIf="routegetdata.certification_expiry_type_name !=''">
                                               <div class="form-group">
                                                   <label for="exampleInputEmail1">  Certification Expiry type</label>
                                                   <div class="d-flex align-items-center">
@@ -563,7 +575,7 @@
                                               </div>
   
                                           </div>
-                                          <div class="col-sm-12">
+                                          <div class="col-sm-12" *ngIf="routegetdata.external_vendor !=''">
                                               <div class="form-group">
                                                   <label for="exampleInputEmail1">External Vendor</label>
                                                   <div class="d-flex align-items-center">
@@ -581,7 +593,25 @@
   
                                           </div>
                                           <!--cole dn-->
-                                          <div class="col-sm-12">
+                                          <div class="col-sm-12" *ngIf="routegetdata.free_field_content !=''">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Free Field Content</label>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                      {{
+                                                      routegetdata.free_field_content
+                                                        ? (routegetdata.free_field_content)
+                                                        : "-"
+                                                      }}
+                                                    </span>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <!--cole dn-->
+                                          <div class="col-sm-12" *ngIf="routegetdata.external_vendor_name !=''">
                                               <div class="form-group">
                                                   <label for="exampleInputEmail1">External Vendor name</label>
                                                   <div class="d-flex align-items-center">
@@ -614,7 +644,7 @@
   
                                               </div>
   
-                                          </div -->>
+                                          </div -->
                                           <!--cole dn-->
                                           <div class="col-sm-12">
                                               <div class="form-group">
@@ -651,6 +681,36 @@
                                               </div>
   
                                           </div>
+                                          <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Learner Guidelines</label>
+                                                <div class="d-flex align-items-center">
+                                                    <span *ngFor="let learner of learnerGuidelines" class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                      {{
+                                                      learner.title }}
+                                                    </span>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-12">
+                                          <div class="form-group">
+                                              <label for="exampleInputEmail1">Learner Guidelines Description</label>
+                                              <div class="d-flex align-items-center">
+                                                  <span *ngFor="let learner of learnerGuidelines" class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                                                                       
+                                                    {{ learner.description
+                                                     
+                                                    }}
+                                                  </span>
+                                                  <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                              </div>
+
+                                          </div>
+
+                                      </div>
                                          <!--  <div class="col-sm-12">
                                               <div class="form-group">
                                                   <label for="exampleInputEmail1">Title of the additional free text field</label>
@@ -743,19 +803,34 @@
                                                   <label for="exampleInputEmail1"> Does this course integrate digital?</label>
                                                   <div class="d-flex align-items-center">
                                                       <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                              {{
-                              routegetdata.digital
-                                ? (routegetdata.digital | titlecase)
-                                : "-"
-                              }}
-                            </span>
+                                                       {{
+                                                       routegetdata.digital
+                                                         ? (routegetdata.digital | titlecase)
+                                                         : "-"
+                                                       }}
+                                                     </span>
                                                       <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                   </div>
-  
                                               </div>
-  
                                           </div>
                                           <!--cole dn-->
+                                           <!--cole dn-->
+                                           <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"> Manager Approval</label>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                     {{
+                                                     routegetdata.manager_approval
+                                                       ? (routegetdata.manager_approval | titlecase)
+                                                       : "-"
+                                                     }}
+                                                   </span>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--cole dn-->
                                          <!--  <div class="col-sm-12">
                                               <div class="form-group">
                                                   <label for="exampleInputEmail1">Provide the link to your video</label>
@@ -881,13 +956,11 @@
                                               <div class="form-group">
                                                   <label for="exampleInputEmail1">Curriculum content</label>
                                                   <div class="d-flex align-items-center">
-                                                      <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                              {{
-                              routegetdata.external_vendor_name
-                                ? routegetdata.external_vendor_name
-                                : "-"
-                              }}
-                            </span>
+                                                      <span *ngFor="let curr of curriculumContent" class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                        {{
+                                                          curr.description
+                                                        }}
+                                                      </span>
                                                       <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                   </div>
   
@@ -912,7 +985,7 @@
   
                                           </div>
                                           <!--cole dn-->
-                                          <div class="col-sm-12">
+                                          <div class="col-sm-12" *ngIf="routegetdata.certification_expiry_type_name != ''">
                                               <div class="form-group">
                                                   <label for="exampleInputEmail1">  Certification Expiry type name</label>
                                                   <div class="d-flex align-items-center">
@@ -931,7 +1004,7 @@
   
                                           </div>
                                           <!--cole dn-->
-                                          <div class="col-sm-12">
+                                          <div class="col-sm-12" *ngIf="routegetdata.validity_period_name != '' ">
                                               <div class="form-group">
                                                   <label for="exampleInputEmail1">Validity period</label>
                                                   <div class="d-flex align-items-center">
@@ -949,6 +1022,36 @@
                                               </div>
   
                                           </div>
+                                          <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Learner Guidelines</label>
+                                                <div class="d-flex align-items-center">
+                                                    <span *ngFor="let learner of learnerGuidelines" class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                      {{
+                                                      learner.title }}
+                                                    </span>
+                                                    <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-12">
+                                          <div class="form-group">
+                                              <label for="exampleInputEmail1">Learner Guidelines Description</label>
+                                              <div class="d-flex align-items-center">
+                                                  <span *ngFor="let learner of learnerGuidelines" class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                                                                       
+                                                    {{ learner.description
+                                                     
+                                                    }}
+                                                  </span>
+                                                  <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                                              </div>
+
+                                          </div>
+
+                                      </div>
                                           <!-- <div class="col-sm-12">
                                               <div class="form-group">
                                                   <label for="exampleInputEmail1">URL</label>
@@ -998,8 +1101,8 @@
                                                   <div class="d-flex align-items-center">
                                                       <span class="form-control form_width" id="exampleInputEmail1" disabled>
                               {{
-                              routegetdata.purchase_order
-                                ? (routegetdata.purchase_order | titlecase)
+                                purchaseOrder
+                                ? (purchaseOrder | titlecase)
                                 : "-"
                               }}
                             </span>
@@ -1028,7 +1131,7 @@
   
                                           </div>
                                           <!--cole dn-->
-                                          <div class="col-sm-12">
+                                          <div class="col-sm-12" *ngIf="routegetdata.certification_expiry_type_name != ''">
                                               <div class="form-group">
                                                   <label for="exampleInputEmail1">  Certification Expiry type name</label>
                                                   <div class="d-flex align-items-center">
@@ -1047,7 +1150,7 @@
   
                                           </div>
                                           <!--cole dn-->
-                                          <div class="col-sm-12">
+                                          <div class="col-sm-12" *ngIf="routegetdata.validity_period_name != ''">
                                               <div class="form-group">
                                                   <label for="exampleInputEmail1">Validity period</label>
                                                   <div class="d-flex align-items-center">
@@ -1065,7 +1168,7 @@
                                               </div>
   
                                           </div>
-                                          <div class="col-sm-12">
+                                          <div class="col-sm-12" *ngIf="routegetdata.external_vendor != ''">
                                               <div class="form-group">
                                                   <label for="exampleInputEmail1">External Vendor</label>
                                                   <div class="d-flex align-items-center">
@@ -1083,7 +1186,7 @@
   
                                           </div>
                                           <!--cole dn-->
-                                          <div class="col-sm-12">
+                                          <div class="col-sm-12" *ngIf="routegetdata.external_vendor_name != ''">
                                               <div class="form-group">
                                                   <label for="exampleInputEmail1">External Vendor name</label>
                                                   <div class="d-flex align-items-center">
@@ -1174,7 +1277,7 @@
   
                                               </div>
                                           </div>
-                                          <div class="col-sm-12">
+                                          <div class="col-sm-12" *ngIf="routegetdata.who_see_course_name != ''">
                                               <div class="form-group">
                                                   <label for="exampleInputEmail1">Region of Target Audience</label>
                                                   <div class="d-flex align-items-center">
@@ -1190,14 +1293,14 @@
   
                                               </div>
                                           </div>
-                                          <div class="col-sm-12">
+                                          <div class="col-sm-12" *ngIf="routegetdata.target_audience_name != null ">
                                               <div class="form-group">
                                                   <label for="exampleInputEmail1">Target audience</label>
                                                   <div class="d-flex align-items-center">
                                                       <span class="form-control form_width" id="exampleInputEmail1" disabled>
                               {{
-                              routegetdata.free_field_content_name
-                                ? (routegetdata.free_field_content_name | titlecase)
+                              routegetdata.target_audience_name
+                                ? (routegetdata.target_audience_name | titlecase)
                                 : "-"
                               }}
                             </span>
@@ -1206,7 +1309,7 @@
   
                                               </div>
                                           </div>
-                                          <div class="col-sm-12">
+                                          <div class="col-sm-12" *ngIf="routegetdata.email_preffered_instructor != null">
                                               <div class="form-group">
                                                   <label for="exampleInputEmail1">OBS employees in specific Functions/Divisions</label>
                                                   <div class="d-flex align-items-center">
@@ -1435,7 +1538,7 @@
             </div>
             <div class="modal-footer">
                 <!-- <button type="button " class="btn btn-secondary " data-dismiss="modal ">Close</button> -->
-                <button type="button" class="btn btn-primary btn_requst" 
+                <button type="button" class="btn btn-primary btn_requst"  data-dismiss="modal"
                 (click)="PublishRequest()">
             Submit
           </button>
