@@ -309,7 +309,7 @@
                                                 <label for="exampleInputEmail1">Resources</label>
                                                 <div class="d-flex align-items-center">
                                                     <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                                                      Click here to <a href="{{imgUrl}}" target="_blank" style="color:#ff7900">View / Download</a>
+                                                      Click here to <a href="{{imgUrl}}" target="_blank" style="color:#ff7900">View/Download</a>
                                                        <!-- {{
                                                        routegetdata.resource
                                                          ? routegetdata.resource
@@ -685,11 +685,13 @@
                                           <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Learner Guidelines</label>
-                                                <div class="d-flex align-items-center">
-                                                    <span *ngFor="let learner of learnerGuidelines" class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div>
+                                                  <span  class="form-control form_width d-flex" id="exampleInputEmail1" style="flex-direction: column;" disabled >
+                                                    <span *ngFor="let learner of learnerGuidelines">
                                                       {{
                                                       learner.title }}
                                                     </span>
+                                                  </span>
                                                     <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
@@ -699,13 +701,15 @@
                                         <div class="col-sm-12">
                                           <div class="form-group">
                                               <label for="exampleInputEmail1">Learner Guidelines Description</label>
-                                              <div class="d-flex align-items-center">
-                                                  <span *ngFor="let learner of learnerGuidelines" class="form-control form_width" id="exampleInputEmail1" disabled>
+                                              <div>
+                                                <span  class="form-control form_width d-flex" id="exampleInputEmail1" style="flex-direction: column;" disabled >
+                                                  <span *ngFor="let learner of learnerGuidelines">
                                                                                                        
                                                     {{ learner.description
                                                      
                                                     }}
                                                   </span>
+                                                </span>
                                                   <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                               </div>
 
@@ -956,11 +960,13 @@
                                           <div class="col-sm-12">
                                               <div class="form-group">
                                                   <label for="exampleInputEmail1">Curriculum content</label>
-                                                  <div class="d-flex align-items-center">
-                                                      <span *ngFor="let curr of curriculumContent" class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                  <div class="">
+                                                      <span  class="form-control form_width d-flex" id="exampleInputEmail1" style="flex-direction: column;" disabled >
+                                                        <span *ngFor="let curr of curriculumContent">
                                                         {{
                                                           curr.description
                                                         }}
+                                                        </span>
                                                       </span>
                                                       <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                   </div>
@@ -1026,11 +1032,13 @@
                                           <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Learner Guidelines</label>
-                                                <div class="d-flex align-items-center">
-                                                    <span *ngFor="let learner of learnerGuidelines" class="form-control form_width" id="exampleInputEmail1" disabled>
+                                                <div>
+                                                  <span  class="form-control form_width d-flex" id="exampleInputEmail1" style="flex-direction: column;" disabled >
+                                                    <span *ngFor="let learner of learnerGuidelines">
                                                       {{
                                                       learner.title }}
                                                     </span>
+                                                  </span>
                                                     <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                                 </div>
 
@@ -1040,12 +1048,14 @@
                                         <div class="col-sm-12">
                                           <div class="form-group">
                                               <label for="exampleInputEmail1">Learner Guidelines Description</label>
-                                              <div class="d-flex align-items-center">
-                                                  <span *ngFor="let learner of learnerGuidelines" class="form-control form_width" id="exampleInputEmail1" disabled>
+                                              <div>
+                                                <span  class="form-control form_width d-flex" id="exampleInputEmail1" style="flex-direction: column;" disabled>
+                                                  <span *ngFor="let learner of learnerGuidelines">
                                                                                                        
                                                     {{ learner.description
                                                      
                                                     }}
+                                                  </span>
                                                   </span>
                                                   <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> <i class="fa fa-files-o" aria-hidden="true"></i></a>
                                               </div>

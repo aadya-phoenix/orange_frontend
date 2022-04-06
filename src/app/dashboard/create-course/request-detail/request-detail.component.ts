@@ -44,7 +44,7 @@ export class RequestDetailComponent implements OnInit {
      this.routegetdata = JSON.parse(this.routegetdata);
     }
     this.learnerGuidelines = JSON.parse(this.routegetdata['learner_guideline']);
-    this.curriculumContent = JSON.parse(this.routegetdata['learner_guideline']);
+    this.curriculumContent = JSON.parse(this.routegetdata['curriculum_content']);
     this.routegetdata['titleByLang'] = this.courseService.getTText(this.routegetdata['title']);
     this.routegetdata['descriptionByLang'] = this.courseService.getTText(this.routegetdata['description']);
     this.routegetdata['objectiveByLang'] = this.courseService.getTText(this.routegetdata['objective']);
