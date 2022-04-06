@@ -1,32 +1,27 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ViewHistoryComponent } from '../view-history/view-history.component';
-import { Router } from '@angular/router';
-import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
+import { ViewHistoryComponent } from '../../create-course/view-history/view-history.component';
 
 @Component({
-  selector: 'app-courses',
-  templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.scss'],
+  selector: 'app-all-courses',
+  templateUrl: './all-courses.component.html',
+  styleUrls: ['./all-courses.component.scss']
 })
-export class CoursesComponent implements OnInit {
+export class AllCoursesComponent implements OnInit {
+
   public courcesList: any=[];
   public page = 1;
-  public pageNumber= 1;
-  public newPageNumber= 1;
-  public pageSize=10;
-  startPageEntry:any;
-  endPageEntry:any;
-  newstartPageEntry:any;
-  newendPageEntry:any;
+  p:any;
+  paging:any;
   getUserprofile: any;
   getUserrole: any;
   collectionSize: any;
   searchText: any;
   draftRequests:any =[];
-  public learningTypes: any;
   pendingRequests: any = [];
   transferredRequests: any = [];
   showbuttons: any;
@@ -37,15 +32,7 @@ export class CoursesComponent implements OnInit {
   allCourses:any;
   routegetdata:any;
   getprofileDetails: any;
-  historylaststatus:any;
   coursedata: any = [];
-  public statusArray: any = [
-    { id: this.pendingRequests , name: 'Pending' },
-    { id: this.usersubmitRequests, name: 'Submitted' },
-    { id: this.draftRequests, name: 'Draft' },
-    { id: this.closedRequests, name: 'Closed' },
-    { id: this.rejectedRequests, name: 'Rejected' },
-  ];
   allcoursedataroc: any = [];
   allcoursedatapub: any = [];
   allcoursedatareq: any = [];
@@ -53,7 +40,6 @@ export class CoursesComponent implements OnInit {
   j: number = 0;
   public compare = (v1: string | number, v2: string | number) =>
     v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
- 
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
@@ -67,13 +53,12 @@ export class CoursesComponent implements OnInit {
     //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.routegetdata = this.router.getCurrentNavigation()?.extras.state;
-    if(!this.routegetdata){
+    /* if(!this.routegetdata){
       this.router.navigateByUrl('/dashboard/cources');
-    }
-    else{
+    } */
+    /* else{
       this.allCourses = this.pendingRequests;
-      this.getrecords(this.pendingRequests);
-    }
+    } */
     console.log(this.getprofileDetails)
     
   }
@@ -121,23 +106,19 @@ export class CoursesComponent implements OnInit {
     }
   }
 
-  getNewFilterRecords(event:any){
-    console.log("eventtarget",event.target.value);
-    this.getrecords(event.target.value);
-  }
   getrecords(data:any){
     this.courcesList = data;
-    console.log(this.courcesList);
+    console.log(this.courcesList)
   }
 
-  refreshCourses() {   
+  refreshCourses() {
+    
     console.log(this.service.page);
     console.log(this.service.pageSize);
     this.pendingRequests=[];
     this.rejectedRequests=[];
     this.draftRequests=[];
     this.closedRequests=[];
-    
     this.courceService.getCources().subscribe(
       (res: any) => {
         console.log(res);
@@ -149,17 +130,15 @@ export class CoursesComponent implements OnInit {
             console.log(this.coursedata[this.i].request_id);
 			this.coursedata[this.i]['titleByLang'] = this.courceService.getTText(this.coursedata[this.i]['title']);
             if (this.coursedata[this.i].request_id != "" && this.coursedata[this.i].request_id != null) {
-              //this.historylaststatus=this.GetCourseHistory(this.coursedata[this.i].id);
-              //console.log(this.historylaststatus + " - " +this.coursedata[this.i].id)
               this.courcesList[this.j] = this.coursedata[this.i]
               if (this.getUserrole.id == 3) {
-                if (((this.coursedata[this.i].publisher_status === 'reject' && this.coursedata[this.i].transfer_user_id != null)  || (this.coursedata[this.i].status === 'pending') && this.coursedata[this.i].transfer_user_id == null && this.coursedata[this.i].user_id != this.getprofileDetails.data.id)) {
+                if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].transfer_user_id == null && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
                   this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order +"#"+"true";
                   this.pendingRequests.push(this.coursedata[this.i])
                   this.allcoursedataroc.push(this.coursedata[this.i])
                   this.showbuttons = true;
                 }
-                if ((this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].publisher_status != 'reject')  && this.coursedata[this.i].transfer_user_id != null && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
+                if ((this.coursedata[this.i].status === 'pending') && this.coursedata[this.i].transfer_user_id != null && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
                   this.coursedata[this.i].purchase_order = this.coursedata[this.i].purchase_order + "#" + "false";
                   this.transferredRequests.push(this.coursedata[this.i])
                   this.allcoursedataroc.push(this.coursedata[this.i])
@@ -235,7 +214,7 @@ export class CoursesComponent implements OnInit {
             console.log('this.routegetdata',this.routegetdata)
             console.log('this.cou',this.courcesList.filter((course:any)=>course.status == this.routegetdata.status))
             //this.courcesList = this.courcesList.filter((course: any) => course.status == this.routegetdata.status)
-            this.courcesList = this.pendingRequests;
+            this.courcesList = this.allCourses
           }
           
 
@@ -275,12 +254,12 @@ export class CoursesComponent implements OnInit {
       console.log(res);
       let coursedetail = res.data;
       let username = { user_name: cource.user_name, showbuttons: cource.purchase_order }
-      this.router.navigateByUrl('/dashboard/cources/request-detail', {
+      this.router.navigateByUrl('/dashboard/open/open-request-detail', {
         state: {...coursedetail,...username},
       });
     },(err:any)=>{
       console.log(err)
-    });
+    })
    
    
   }
@@ -294,7 +273,7 @@ export class CoursesComponent implements OnInit {
 
   deleteRequest(course:any){
 
-    const modalRef = this.modalService.open(ViewHistoryComponent, {
+   /*  const modalRef = this.modalService.open(ViewHistoryComponent, {
       centered: true,
       size: 'sm',
       windowClass: 'alert-popup',
@@ -306,7 +285,7 @@ export class CoursesComponent implements OnInit {
     };
     modalRef.componentInstance.passEntry.subscribe((res: any) => {
       this.refreshCourses();
-    });
+    }); */
     this.routegetdata='';
     // console.log(course);
     // this.courceService.deleteCourse({course_id :course.id}).subscribe((res:any)=>{
@@ -319,7 +298,7 @@ export class CoursesComponent implements OnInit {
 
   copyRequest(course:any){
 
-    const modalRef = this.modalService.open(ViewHistoryComponent, {
+   /*  const modalRef = this.modalService.open(ViewHistoryComponent, {
       centered: true,
       size: 'sm',
       windowClass: 'alert-popup',
@@ -331,7 +310,7 @@ export class CoursesComponent implements OnInit {
     };
     modalRef.componentInstance.passEntry.subscribe((res: any) => {
       this.refreshCourses();
-    });
+    }); */
     this.routegetdata='';
     // console.log(course);
     // this.courceService.copyCourse({course_id :course.id}).subscribe((res:any)=>{
@@ -343,52 +322,12 @@ export class CoursesComponent implements OnInit {
 
   }
 
-  //getLearning type
-  getLearningType() {
-    this.courceService.getLearningType().subscribe(
-      (res: any) => {
-        console.log(res);
-        this.learningTypes = res.data;
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
-  }
-
-  pageChanged(event:any){
-    console.log(event);
-    this.pageNumber = event;
-    this.startPageEntry = (this.pageSize * (this.pageNumber - 1) ) + 1;
-    this.endPageEntry = this.pageSize * this.pageNumber;
-  }
-  newPageChanged(event:any){
-    console.log(event);
-    this.newPageNumber = event;
-    this.newstartPageEntry = (this.pageSize * (this.newPageNumber - 1) ) + 1;
-    this.newendPageEntry = this.pageSize * this.newPageNumber;
-  }
   ngOnInit(): void {
     // console.log(this.getUserrole);
     console.log(this.routegetdata)
     this.refreshCourses();
-    this.getLearningType();
-    if(this.routegetdata){
-      this.allCourses = this.pendingRequests;
-    }
-    this.startPageEntry = (this.pageSize * (this.pageNumber - 1) ) + 1;
-    this.endPageEntry = this.pageSize * this.pageNumber;
+
     
-    this.newstartPageEntry = (this.pageSize * (this.newPageNumber - 1) ) + 1;
-    this.newendPageEntry = this.pageSize * this.newPageNumber;
   }
-  GetCourseHistory(id:any):any {
-    this.courceService.courseHistory(id).subscribe((res: any) => {
-      console.log(res);
-      if (res && res.status == 1) {
-        let history = res.data;
-        return history[history.length - 1].status;
-      }
-    })
-  }
+
 }
