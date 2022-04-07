@@ -105,6 +105,7 @@ export class CoursesComponent implements OnInit {
   };
 
   onSort({ column, direction }: any) {
+   // console.log("onsort called");
     this.headers.forEach((header) => {
       if (header.sortable !== column) {
         header.direction = '';
