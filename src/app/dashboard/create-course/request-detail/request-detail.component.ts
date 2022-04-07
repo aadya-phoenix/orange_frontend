@@ -18,6 +18,7 @@ export class RequestDetailComponent implements OnInit {
   purchaseOrder:any;
   getUserrole: any;
   routegetdata: any;
+  imgUrl:any;
   trainingDurationHours:any;
   status: any;
   transfer_user_id: any;
@@ -195,7 +196,9 @@ export class RequestDetailComponent implements OnInit {
     let transferobj = { course_id: this.routegetdata.id, status: 'pending', transfer_id: this.selectedotherRoc };
     this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
       console.log(res);
+      //this.router.navigate(['/dashboard/cources']);
       let transferobj1 = { course_id: this.routegetdata.id, status: 'pending' };
+      // Commenting it as it is not required : ANkur : 7Apr
       this.courseService.courceStatus(transferobj1).subscribe((res: any) => {
         console.log(res);
         this.router.navigate(['/dashboard/cources']);
@@ -234,6 +237,9 @@ export class RequestDetailComponent implements OnInit {
     this.purchaseOrder  = this.routegetdata.purchase_order.split('#')[0];
     console.log("this.purchaseOrder",this.purchaseOrder);
     }
+    if(this.routegetdata.resource){
+    this.imgUrl = `https://orange.mindscroll.info/public/public/${this.routegetdata.resource}`;
+    }
     console.log(arr1);
     this.objectarray = [];//arr1.split('• ')
     //console.log(arr1.split('• '))
@@ -251,7 +257,13 @@ export class RequestDetailComponent implements OnInit {
     let learner_guideline = this.routegetdata.learner_guideline;
     console.log(JSON.parse(learner_guideline));
     console.log("new learnerGuidelines",this.learnerGuidelines);
+   //this.getImageUrl();
 
+  }
+  getImageUrl(): void{
+    this.imgUrl = `https://orange.mindscroll.info/public/public/${this.routegetdata.resource}`;
+    console.log("this.imgUrl",this.imgUrl);
+    return this.imgUrl;
   }
   setrejectbutton(id:any) {
     this.courseService.courseHistory(id).subscribe((res: any) => {
