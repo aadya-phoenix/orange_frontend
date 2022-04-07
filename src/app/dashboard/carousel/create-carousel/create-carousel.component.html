@@ -116,7 +116,7 @@
                                                     </label>
                                                     <input type="text" placeholder="Enter Title" class="form-control form_width"  />
     
-                                                    <div class="error_message">
+                                                    <div class="error_message" *ngIf="commonCreateCourceForm_playlist.controls['title_single'].hasError('required') && commonCreateCourceForm_playlist.controls['title_single'].touched">
                                                         Title cannot be blank
                                                     </div>
     
@@ -139,7 +139,7 @@
                                                 </label>
                                                 <textarea class="form-control form_width-textarea" maxlength="500" rows="3" placeholder="Enter Description" ></textarea>
 
-                                                <div class="error_message">
+                                                <div class="error_message" *ngIf="commonCreateCourceForm_playlist.controls['title_single'].hasError('required') && commonCreateCourceForm_playlist.controls['title_single'].touched">
                                                     Title cannot be blank
                                                 </div>
 
@@ -455,11 +455,11 @@
 
                             <p>In Active Learning</p>
                             <span class="number_css">
-                                <!-- {{
+                                {{
                                 closedRequests && closedRequests.length
                                 ? closedRequests.length
                                 : "0"
-                                }} -->
+                                }}
                             </span>
                         </div>
                     </div>
