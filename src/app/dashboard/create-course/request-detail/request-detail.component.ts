@@ -165,7 +165,7 @@ export class RequestDetailComponent implements OnInit {
     region.forEach((field: any) => {
       if (field.region_id == event.target.value) {
         this.selectedotherRoc = field.id;
-        alert(this.selectedotherRoc);
+        //alert(this.selectedotherRoc);
       }
     });
     console.log(user);
