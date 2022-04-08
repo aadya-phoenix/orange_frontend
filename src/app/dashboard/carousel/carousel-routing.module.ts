@@ -9,7 +9,7 @@ import { CreateCarouselComponent } from './create-carousel/create-carousel.compo
 
 const routes: Routes = [
   {path:'',component:CarouselListComponent,canActivate:[AuthenticationServiceGuard]},
-  {path:'create-carousel',component:CreateCarouselComponent,canActivate:[AuthenticationServiceGuard]},
+  {path:'create',component:CreateCarouselComponent,canActivate:[AuthenticationServiceGuard]},
 ];
 
 @NgModule({

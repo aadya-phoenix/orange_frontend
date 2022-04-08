@@ -7,10 +7,9 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/creatnew.png" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span style="font-size: 20px">Create new course </span>
+                        <span style="font-size: 20px">Promote on Carousel </span>
                         <span class="divider"></span>
-                        <span style="color: #aba3a3; font-size: 13px;margin-top: 6px;">People Development & Learning Strives on Providing you with the
-            best customer service we can drive</span>
+                        <span class="title-sm-text">Request the creation of a new entry in the Orange Learning Carousel.</span>
                     </div>
                 </div>
             </div>
@@ -26,208 +25,201 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" style="color: #ff7901">Dashboard</a
-            >
-          </li>
-          <li>
-            <a [routerLink]="['/dashboard/cources/']" style="color: #ff7901"
-              >Create new Course</a
-            >
-          </li>
-        </ol>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Button trigger modal -->
-
-
-        <div class="content mt-2">
-            <div class="animated fadeIn">
-                <div class="row">
-                    <div class="col-md-12">
-
-                        <div class="card">
-                            <div class="card-header" style="
-              padding: 0.45rem 1.25rem !important;
-              background-color: #fff;
-              border-bottom: 1px solid #00000008; ">
-                                <div class="overall_css">
-                                    <span class="card_overall">Overall request Status</span>
-                        <div class="d-flex">
-                           
-                            <!-- </button> -->
-                            <button class="btn btn-primary ml-1">
-              + New request
-            </button>
-                            <!-- </button> -->
-                        </div>
-                        <!-- <a href="" class="btn btn-default float-right view_all"
-                >View All</a
-              > -->
-                    </div>
+                            <a [routerLink]="['/dashboard']" style="color: #ff7901">Dashboard</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/olcarousel ']" style="color: #ff7901">Create new Course</a>
+                        </li>
+                    </ol>
                 </div>
-                <div class="card-body card_course_body">
-                    <div class="Course_icon_parent" data-aos="fade-right">
-                        <div class="Course_icon_child">
-                            <div class="alig_dashicon" (click)="getrecords(draftRequests)">
-                                <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #4bb4e6">
-                                        <img src="../../../../assets/images/icon/drafts.png" />
-                                    </div>
-
-                                    <p>Draft</p>
-                                </div>
-                                <span class="number_css">1</span>
-                            </div>
-                        </div>
-                        <!--coled-->
-                        <div class="Course_icon_child" *ngIf="getUserrole.id == 2">
-                            <div class="alig_dashicon" (click)="getrecords(usersubmitRequests)">
-                                <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #a885db">
-                                        <img src="../../../../assets/images/icon/closed.png" />
-                                    </div>
-
-                                    <p>Submitted</p>
-                                </div>
-                                <span class="number_css">
-                                  1</span>
-                            </div>
-                        </div>
-
-                       
-                        <div class="Course_icon_child">
-                            <div class="alig_dashicon" (click)="getrecords(closedRequests)">
-                                <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #50be87">
-                                        <img src="../../../../assets/images/icon/check.png" />
-                                    </div>
-
-                                    <p>In Active Learning</p>
-                                </div>
-                                <span class="number_css">1</span>
-                            </div>
-                        </div>
-                        <!--coled-->
-                        <div class="Course_icon_child">
-                            <div class="alig_dashicon" (click)="getrecords(rejectedRequests)">
-                                <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #ffb4e6">
-                                        <img src="../../../../assets/images/icon/reject.png" />
-                                    </div>
-
-                                    <p>Rejected</p>
-                                </div>
-                                <span class="number_css"></span>
-                            </div>
-                        </div>
-                        <!--coled-->
-                        <div class="Course_icon_child">
-                            <div class="alig_dashicon" (click)="getrecords(allCourses)">
-                                <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #333">
-                                        <img src="../../../../assets/images/icon/expired.png" />
-                                    </div>
-
-                                    <p>Expired</p>
-                                </div>
-                                <span class="number_css">1</span>
-                            </div>
-                        </div>
-                        <!--coled-->
-                    </div>
-                    <!--ROW END-->
-                </div>
-
             </div>
         </div>
     </div>
-    <!-- .animated -->
-</div>
-<!-- .content -->
-</div>
+    <!-- Button trigger modal -->
 
-<div class="content">
-    <div class="animated fadeIn">
-        <div class="row">
-            <div class="col-md-12">
 
-                <div class="card">
-                    <div class="card-header" style="
+    <div class="content mt-2">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header cm-card-header">
+                            <div class="overall_css">
+                                <span class="card_overall">Overall request Status</span>
+                                <div class="d-flex">
+                                    <!-- </button> -->
+                                    <button class="btn btn-primary ml-1" [routerLink]="['/dashboard/olcarousel/create']">
+                                        <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1"> New request</span>
+                                    </button>
+                                    <!-- </button> -->
+                                </div>
+                                <!-- <a href="" class="btn btn-default float-right view_all"
+                >View All</a
+              > -->
+                            </div>
+                        </div>
+                        <div class="card-body card_course_body">
+                            <div class="Course_icon_parent" data-aos="fade-right">
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="getrecords(draftRequests)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des" style="background-color: #4bb4e6">
+                                                <img src="../../../../assets/images/icon/drafts.png" />
+                                            </div>
+
+                                            <p>Draft</p>
+                                        </div>
+                                        <span class="number_css">1</span>
+                                    </div>
+                                </div>
+                                <!--coled-->
+                                <div class="Course_icon_child" *ngIf="getUserrole.id == 2">
+                                    <div class="alig_dashicon" (click)="getrecords(usersubmitRequests)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des" style="background-color: #a885db">
+                                                <img src="../../../../assets/images/icon/closed.png" />
+                                            </div>
+
+                                            <p>Submitted</p>
+                                        </div>
+                                        <span class="number_css">
+                                            1</span>
+                                    </div>
+                                </div>
+
+
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="getrecords(closedRequests)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des" style="background-color: #50be87">
+                                                <img src="../../../../assets/images/icon/check.png" />
+                                            </div>
+
+                                            <p>In Active Learning</p>
+                                        </div>
+                                        <span class="number_css">1</span>
+                                    </div>
+                                </div>
+                                <!--coled-->
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="getrecords(rejectedRequests)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des" style="background-color: #ffb4e6">
+                                                <img src="../../../../assets/images/icon/reject.png" />
+                                            </div>
+
+                                            <p>Rejected</p>
+                                        </div>
+                                        <span class="number_css"></span>
+                                    </div>
+                                </div>
+                                <!--coled-->
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="getrecords(allCourses)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des" style="background-color: #333">
+                                                <img src="../../../../assets/images/icon/expired.png" />
+                                            </div>
+
+                                            <p>Expired</p>
+                                        </div>
+                                        <span class="number_css">1</span>
+                                    </div>
+                                </div>
+                                <!--coled-->
+                            </div>
+                            <!--ROW END-->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- .animated -->
+        </div>
+        <!-- .content -->
+    </div>
+
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="card">
+                        <div class="card-header" style="
                           padding: 0.45rem 1.25rem !important;
                           background-color: #fff;
                           border-bottom: 1px solid #00000008; ">
-                        <div class="overall_css">
-                            <div>
-                                <i class="fa fa-table fa_table" aria-hidden="true "></i>
-                                <span class="card-title card-title-text card_overall">My Request</span>
-                            </div>
+                            <div class="overall_css">
+                                <div>
+                                    <i class="fa fa-table fa_table" aria-hidden="true "></i>
+                                    <span class="card-title card-title-text card_overall">My Request</span>
+                                </div>
 
-                            
 
-                            <!-- <i
+
+                                <!-- <i
                 class="fa fa-align-justify float-right fa_table"
                 aria-hidden="true "
               ></i> -->
-                            <!-- <button (click)="getrecords(allCourses)" class="fa fa-align-justify float-right fa_table">View all</button> -->
+                                <!-- <button (click)="getrecords(allCourses)" class="fa fa-align-justify float-right fa_table">View all</button> -->
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-body">
+                        <div class="card-body">
 
-                        <div class="table-responsive table_height_scroll">
-                            <table id="bootstrap-data-table-export " class="table table-striped table-bordered">
-                                <thead class="sticky_header">
-                                    <tr class="text-center" style="font-size: 13px;">
-                                        <th sortable="id " (sort)="onSort($event)">
-                                            Request Id
-                                            <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
-                                            <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
-                                        </th>
-                                        <th sortable="user_name " (sort)="onSort($event)">
-                                            Requester Name
-                                            <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
-                                            <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
-                                        </th>
-                                       
-                                        <th sortable="title" (sort)="onSort($event)" class="corse_title">
-                                            Expiry Date<i class="fa fa-long-arrow-up arrow_css" aria-hidden="true"></i>
-                                            <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
-                                        </th>
+                            <div class="table-responsive table_height_scroll">
+                                <table id="bootstrap-data-table-export " class="table table-striped table-bordered">
+                                    <thead class="sticky_header">
+                                        <tr class="text-center" style="font-size: 13px;">
+                                            <th sortable="id " (sort)="onSort($event)">
+                                                Request Id
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="user_name " (sort)="onSort($event)">
+                                                Requester Name
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
 
-                                        <th sortable="learning_type " (sort)="onSort($event)">
-                                           Created Date
-                                            <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
-                                            <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
-                                        </th>
-                                        <!-- <th>Sent To</th> -->
-                                       
-                                        <th class="text-center">History</th>
-                                        <th class="text-center">Status</th>
-                                        <th class="text-center">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="text-center bac_hover-table" style="font-size: 12px;">
-                                        <td></td>
-                                        <td>
-                                           
-                                        </td>
-                                        <td>
-                                           
-                                        </td>
-                                        <td>
-                                           
-                                        </td>
+                                            <th sortable="title" (sort)="onSort($event)" class="corse_title">
+                                                Expiry Date<i class="fa fa-long-arrow-up arrow_css"
+                                                    aria-hidden="true"></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
+                                            </th>
 
-                                        <!-- <td>xyz</td> -->
-                                       
-                                        <td>
-                                            <!-- <a (click)="openModal(cource)" class="re_id">
+                                            <th sortable="learning_type " (sort)="onSort($event)">
+                                                Created Date
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <!-- <th>Sent To</th> -->
+
+                                            <th class="text-center">History</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="text-center bac_hover-table" style="font-size: 12px;">
+                                            <td></td>
+                                            <td>
+
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                            <td>
+
+                                            </td>
+
+                                            <!-- <td>xyz</td> -->
+
+                                            <td>
+                                                <!-- <a (click)="openModal(cource)" class="re_id">
                                                  View
                                                 </a></td> -->
-                            <td class="text-center">
-<!-- 
+                                            <td class="text-center">
+                                                <!-- 
                                 <span *ngIf="!cource.status">
                           Pending
                         </span>
@@ -235,9 +227,9 @@
                                     {{ cource.status | titlecase }}
                                 </p> -->
 
-                            </td>
-                            <td class="text-center">
-                                <!-- <div class="status_med_di">
+                                            </td>
+                                            <td class="text-center">
+                                                <!-- <div class="status_med_di">
                                     <a *ngIf="cource.status=='pending'" (click)="copyRequest(cource)" class="copy_file mr-1" data-toggle="tooltip" data-placement="top" title="Copy">
                                         <i class="fa fa-files-o" aria-hidden="true"></i>
                                     </a>
@@ -255,21 +247,22 @@
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </a>
  -->
-                                <!-- </div> -->
-                            </td>
+                                                <!-- </div> -->
+                                            </td>
 
-                            </tr>
-                            </tbody>
-                            </table>
-                </div>
-                <div class="pagiantio_dispaly">
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagiantio_dispaly">
 
-                    <div class="pagintion_ child">
-                        <p style="font-size: 14px; color: #000">Showing {{startPageEntry}} to {{endPageEntry}} of {{collectionSize}} entries</p>
-                    </div>
-                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
-                </div>
-                <!-- <div class="searc_dislp_inlin mt-1  ml-2 mr-2">
+                                <div class="pagintion_ child">
+                                    <p style="font-size: 14px; color: #000">Showing {{startPageEntry}} to
+                                        {{endPageEntry}} of {{collectionSize}} entries</p>
+                                </div>
+                                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                            </div>
+                            <!-- <div class="searc_dislp_inlin mt-1  ml-2 mr-2">
                             <div class="d-flex align-content-center">
                                 <p style="font-size: 14px; color: #000">Show</p>
                                 <p class="counter_css ml-1 mr-1">
@@ -284,7 +277,7 @@
                 <p style="font-size: 14px; color: #000">Showing 1 entries</p>
               </div>
               <div class="pagintion_ child"> -->
-                <!-- <ngb-pagination
+                            <!-- <ngb-pagination
                   [collectionSize]="collectionSize "
                   [(page)]="service.page "
                   (pageChange)="refreshCourses() "
@@ -302,10 +295,10 @@
                     >{{ page }}</ng-template
                   >
                 </ngb-pagination> -->
-                <!-- </div>
+                            <!-- </div>
             </div>
             </div> -->
-                <!--         <nav role="navigation" aria-label="Pagination example with active span item">
+                            <!--         <nav role="navigation" aria-label="Pagination example with active span item">
   <ul class="pagination">
     <li class="page-item disabled">
       <a class="page-link" title="Previous">
@@ -324,13 +317,13 @@
     </li>
   </ul>
 </nav> -->
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
+        <!-- .animated -->
     </div>
-
-   
-    </div>
-  </div>
-  <!-- .animated -->
-</div>
 </div>
