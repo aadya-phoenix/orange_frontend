@@ -73,8 +73,6 @@ export class CreateNewCourseComponent implements OnInit {
   public learnerGuidelines: any = [];
   fieldArrObj: any = []
   public cctLevel: any;
-  coursesList: any;
-  courseLength: any;
   notification: boolean = false;
   fileToUpload: any[] = [];
   fileToUpload_Material: any[] = [];
@@ -301,11 +299,15 @@ export class CreateNewCourseComponent implements OnInit {
 
   getUserrole: any; //to get user role
   public cordinatorsList: any = [];
-  draftRequests: any = [];
-  pendingRequests: any = [];
-  rejectedRequests: any = [];
-  closedRequests: any = [];
-  stringArray: any = [];
+  public course_count = {
+    closed: 0,
+    draft: 0,
+    pending: 0,
+    rejected: 0,
+    submitted: 0,
+    total: 0,
+    transferred: 0
+  };
   publisherList: any = [];
   selectedPublisherId: any;
 
@@ -661,7 +663,7 @@ export class CreateNewCourseComponent implements OnInit {
   }
 
   getPublisher() {
-    this.authService.getUserRoles().subscribe(
+    this.courceService.getNewPublisherByLearningType(this.learningType).subscribe(
       (res: any) => {
         console.log(res);
         this.publisherList = res.data['4'];
@@ -676,23 +678,7 @@ export class CreateNewCourseComponent implements OnInit {
   getTotalCourse() {
     this.courceService.getCources().subscribe(
       (res: any) => {
-        this.coursesList = res.data;
-        this.courseLength = this.coursesList.length;
-        this.coursesList.map((course: any) => {
-          if (course.status === 'pending') {
-            this.pendingRequests.push(course);
-          }
-          if (course.status === 'reject') {
-            this.rejectedRequests.push(course);
-          }
-          if (course.status === 'draft') {
-            this.draftRequests.push(course);
-          }
-          if (course.status === 'close') {
-            this.closedRequests.push(course);
-          }
-        });
-        console.log(res);
+        this.course_count = res.data.course_count;
       },
       (err: any) => {
         console.log(err);
@@ -744,7 +730,7 @@ export class CreateNewCourseComponent implements OnInit {
       objective: new FormControl(''),
       level: new FormControl('', [Validators.required]),
       subject: new FormControl('', [Validators.required]),
-      //additional_comment: new FormControl(''),
+      additional_comment: new FormControl(''),
       prerequisite: new FormControl(''),
       keyword: new FormControl('', [Validators.required]),
       email_content_owner: new FormControl('', [
