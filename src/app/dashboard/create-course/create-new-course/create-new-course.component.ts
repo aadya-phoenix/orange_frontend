@@ -65,7 +65,10 @@ export class CreateNewCourseComponent implements OnInit {
   showVendor_Webbased: boolean = false;
   getprofileDetails: any;
   showrejectbutton: any;
+  showStatus:any;
   user_id: any;
+  courseId:any;
+  corseId:any;
   public learnerGuidearray: any = [];
   public learningType: any = '';
   public learningTypeSelected: any = '0';
@@ -666,8 +669,10 @@ export class CreateNewCourseComponent implements OnInit {
     this.courceService.getNewPublisherByLearningType(this.learningType).subscribe(
       (res: any) => {
         console.log(res);
-        this.publisherList = res.data['4'];
-        console.log(this.publisherList);
+        this.publisherList = res.data;
+        console.log("pub res is",res.data);
+        console.log("this.learningType",this.learningType);
+        console.log("new publisher list",this.publisherList);
       },
       (err: any) => {
         console.log(err);
@@ -916,7 +921,11 @@ export class CreateNewCourseComponent implements OnInit {
       intranet_url: new FormControl(''),
       internet_url: new FormControl(''),
     });
+  
 
+    if(this.routergetdata){
+      this.showStatus = this.routergetdata.status;
+    }
 
     //this.addLearnerGuideline();
     //this.addLearnerGuidelinetocurriculum();
@@ -1632,9 +1641,12 @@ export class CreateNewCourseComponent implements OnInit {
           (res: any) => {
             console.log(res);
             if (res) {
-              debugger
+            //  debugger
               // this.router.navigate(['/dashboard/cources']);
-              let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId };
+              if(this.routergetdata){
+                this.courseId =this.routergetdata.id;
+              }
+              let transferobj = { course_id: this.courseId, transfer_id: this.selectedPublisherId };
               this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
                 console.log(res);
                 this.router.navigate(['/dashboard/cources']);
@@ -1649,11 +1661,15 @@ export class CreateNewCourseComponent implements OnInit {
         );
       }
       else if (status == "publish") {
+        console.log("publisheddd");
         this.courceService.updateCourse(totalObj).subscribe(
           (res: any) => {
-            console.log(res);
+            console.log("update course",res);
             if (res) {
-              let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId, status: 'publish', intranet_url: this.publishForm.value.intranet_url, internet_url: this.publishForm.value.internet_url };
+              if(this.routergetdata){
+                this.corseId = this.routergetdata.id;
+              }
+              let transferobj = { course_id: this.corseId , transfer_id: this.selectedPublisherId, status: 'publish', intranet_url: this.publishForm.value.intranet_url, internet_url: this.publishForm.value.internet_url };
               this.courceService.courceStatus(transferobj).subscribe(
                 (res: any) => {
                   console.log(res);
@@ -2131,6 +2147,9 @@ export class CreateNewCourseComponent implements OnInit {
       if (res && res.status == 1) {
         let history = res.data;
         this.showrejectbutton = history[history.length - 1].action_by;
+        console.log(" this.showrejectbutton"+  this.showrejectbutton);
+        console.log("history",res.data);
+        console.log("getprofileDetails.data.id",this.getprofileDetails.data.id);
       }
     })
   }
