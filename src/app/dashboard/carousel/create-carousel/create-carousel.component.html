@@ -33,7 +33,7 @@
                             <a [routerLink]="['/dashboard']" class="color-orange">Dashboard</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/cources']" class="color-orange">Create new Course</a>
+                            <a [routerLink]="['/dashboard/olcarousel']" class="color-orange">Create new Carousel</a>
                         </li>
                     </ol>
                 </div>
@@ -77,22 +77,24 @@
                                         ({{languageText}})</strong>
                                     <div class="chkbox_css_header">
                                         <label formArrayName="languages"
-                                            *ngFor="let language of lauguageFormArray.controls; let i = index" (change)="languageChange()">
+                                            *ngFor="let language of lauguageFormArray.controls; let i = index"
+                                            (change)="languageChange()">
                                             <input type="checkbox" [formControlName]="i">
                                             <span class="mr-1 ml-1">{{languageList[i].name}}</span>
                                         </label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body card_width">
-                                <div class="card_dis_promte col-md-6 col-sm-12" formArrayName="carousels"
-                                    *ngFor="let carousel of carouselFormArray.controls;">
-                                    <div class="card">
+                            <div class="card-body card_width" formArrayName="metadata">
+                                <div class="card_dis_promte col-md-6 col-sm-12"
+                                    *ngFor="let carousel of carouselFormArray.controls; let i = index">
+                                    <div class="card" [formGroupName]="i">
                                         <div class="card-header">
                                             <div class="header_div_promt">
                                                 <strong class="font-13">{{carousel.value.languageName}}</strong>
                                                 <div class="chkbox_css_header">
-                                                    <button class="btn btn-secondary">Remove Carousel</button>
+                                                    <button class="btn btn-secondary"
+                                                        (click)="removeCarousel(carousel)">Remove Carousel</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -110,11 +112,14 @@
                                                             </a>
                                                         </label>
                                                         <input type="text" placeholder="Enter Title"
-                                                            class="form-control form_width" />
-                                                        <!-- <div class="error_message"
-                                                            *ngIf="commonCreateCourceForm_playlist.controls['title_single'].hasError('required') && commonCreateCourceForm_playlist.controls['title_single'].touched">
-                                                            Title cannot be blank
-                                                        </div> -->
+                                                            formControlName="title" class="form-control form_width" />
+                                                        <div
+                                                            *ngIf="(carouselFormArray.controls[i].controls['title'].invalid && (carouselFormArray.controls[i].controls['title'].dirty || carouselFormArray.controls[i].controls['title'].touched)) || isSubmitted ">
+                                                            <div class="error_message"
+                                                                *ngIf="carouselFormArray.controls[i].controls['title'].errors?.required">
+                                                                Title cannot be blank
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
@@ -129,13 +134,15 @@
                                                             </a>
                                                         </label>
                                                         <textarea class="form-control form_width-textarea"
-                                                            maxlength="500" rows="3"
+                                                            formControlName="description" maxlength="500" rows="3"
                                                             placeholder="Enter Description"></textarea>
-
-                                                        <!-- <div class="error_message"
-                                                            *ngIf="commonCreateCourceForm_playlist.controls['title_single'].hasError('required') && commonCreateCourceForm_playlist.controls['title_single'].touched">
-                                                            Title cannot be blank
-                                                        </div> -->
+                                                        <div
+                                                            *ngIf="(carouselFormArray.controls[i].controls['description'].invalid && (carouselFormArray.controls[i].controls['description'].dirty || carouselFormArray.controls[i].controls['description'].touched)) || isSubmitted ">
+                                                            <div class="error_message"
+                                                                *ngIf="carouselFormArray.controls[i].controls['description'].errors?.required">
+                                                                Description cannot be blank
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
@@ -150,18 +157,21 @@
                                                             </a>
                                                         </label>
                                                         <input type="text" placeholder="Enter Link"
-                                                            class="form-control form_width" />
-
-                                                        <!-- <div class="error_message"
-                                                            *ngIf="commonCreateCourceForm_playlist.controls['title_single'].hasError('required') && commonCreateCourceForm_playlist.controls['title_single'].touched">
-                                                            Title cannot be blank
-                                                        </div> -->
+                                                            formControlName="link" class="form-control form_width" />
+                                                        <div
+                                                            *ngIf="(carouselFormArray.controls[i].controls['link'].invalid && (carouselFormArray.controls[i].controls['link'].dirty || carouselFormArray.controls[i].controls['link'].touched)) || isSubmitted ">
+                                                            <div class="error_message"
+                                                                *ngIf="carouselFormArray.controls[i].controls['link'].errors?.required">
+                                                                Link cannot be blank
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <div class="form-group mb-0">
-                                                        <label class="ml-1" style="position: relative;top: -2px;">
-                                                            <input type="checkbox" class="mr-1">I want my Carousel to be displayed to
+                                                        <label class="ml-1 manage-checkbox">
+                                                            <input type="checkbox" formControlName="display_manager"
+                                                                class="mr-1">I want my Carousel to be displayed to
                                                             Managers only</label>
                                                     </div>
                                                 </div>
@@ -175,7 +185,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="header_div_promt">
-                                    <strong _ngcontent-jet-c125="" style="font-size: 13px;">Other Details</strong>
+                                    <strong class="font-13">Other Details</strong>
                                 </div>
                             </div>
                             <div class="card-body card_width">
@@ -190,11 +200,15 @@
                                                         title="If possible , provide an image with the following ideal dimensions: 550 x 900. Alternatively, provide a raw image that you wish to display in the Carousel and the PD&L team will help you to crop it to a proper size. Note: Please avoid including text in your image."></i>
                                                 </a>
                                             </label>
-                                            <input type="file" id="upload" class="form-control form_width" />
-                                            <!-- <div class="error_message"
-                                                *ngIf="commonCreateCourceForm_playlist.controls['title_single'].hasError('required') && commonCreateCourceForm_playlist.controls['title_single'].touched">
-                                                Title cannot be blank
-                                            </div> -->
+                                            <input type="file" id="carouselImage" class="form-control form_width"
+                                                formControlName="image" (change)="handleFileInput($event)" />
+                                            <div
+                                                *ngIf="(createOlcarouselForm.controls['image'].invalid && (createOlcarouselForm.controls['image'].dirty || createOlcarouselForm.controls['image'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createOlcarouselForm.controls['image'].errors?.required">
+                                                    Image cannot be blank
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -208,11 +222,14 @@
                                                 </a>
                                             </label>
                                             <input type="date" class="form-control form_width"
-                                                formControlName="expiry_date" />
-                                            <!-- <div class="error_message"
-                                                *ngIf="commonCreateCourceForm_playlist.controls['title_single'].hasError('required') && commonCreateCourceForm_playlist.controls['title_single'].touched">
-                                                Title cannot be blank
-                                            </div> -->
+                                                formControlName="publication_date" />
+                                            <div
+                                                *ngIf="(createOlcarouselForm.controls['publication_date'].invalid && (createOlcarouselForm.controls['publication_date'].dirty || createOlcarouselForm.controls['publication_date'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createOlcarouselForm.controls['publication_date'].errors?.required">
+                                                    Requested Publication Date cannot be blank
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -227,10 +244,13 @@
                                             </label>
                                             <input type="date" class="form-control form_width"
                                                 formControlName="expiry_date" />
-                                            <!-- <div class="error_message"
-                                                *ngIf="commonCreateCourceForm_playlist.controls['title_single'].hasError('required') && commonCreateCourceForm_playlist.controls['title_single'].touched">
-                                                Title cannot be blank
-                                            </div> -->
+                                            <div
+                                                *ngIf="(createOlcarouselForm.controls['expiry_date'].invalid && (createOlcarouselForm.controls['expiry_date'].dirty || createOlcarouselForm.controls['expiry_date'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createOlcarouselForm.controls['expiry_date'].errors?.required">
+                                                    Expiry Date cannot be blank
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -239,14 +259,19 @@
                                                 Additional Comments <span class="text-danger-ligth">* </span>
                                             </label>
                                             <textarea class="form-control form_width-textarea" maxlength="500" rows="3"
+                                                formControlName="additional_comment"
                                                 placeholder="Enter Additional Comments"></textarea>
-                                            <!-- <div class="error_message"
-                                                *ngIf="commonCreateCourceForm_playlist.controls['title_single'].hasError('required') && commonCreateCourceForm_playlist.controls['title_single'].touched">
-                                                Title cannot be blank
-                                            </div> -->
+                                            <div
+                                                *ngIf="(createOlcarouselForm.controls['additional_comment'].invalid && (createOlcarouselForm.controls['additional_comment'].dirty || createOlcarouselForm.controls['additional_comment'].touched)) || isSubmitted ">
+                                                <div class="error_message"
+                                                    *ngIf="createOlcarouselForm.controls['additional_comment'].errors?.required">
+                                                    Additional Comments cannot be blank
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
-                                    <div class="col-sm-12">
+                                    <!-- <div class="col-sm-12">
                                         <div class="form-group">
                                             <select class="form-control form_width">
                                                 <option value="">Please Select </option>
@@ -254,11 +279,14 @@
                                                 </option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button class="btn btn-primary">Submit</button>
+                                <button class="btn btn-secondary mr-1" (click)="saveCarousel('draft')">
+                                    Save as draft
+                                </button>
+                                <button class="btn btn-primary" type="submit" (click)="saveCarousel('pending')">Submit</button>
                             </div>
                         </div>
                     </div>
@@ -279,7 +307,7 @@
                 <div class="col-sm-2 dash_wid">
                     <div class="alig_dashicon">
                         <div class="child_align_icon">
-                            <div class="fa-icons-des" style="background-color: transparent">
+                            <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/draftsbl.png" />
                             </div>
 
@@ -294,7 +322,7 @@
                 <div class="col-sm-2 dash_wid">
                     <div class="alig_dashicon">
                         <div class="child_align_icon">
-                            <div class="fa-icons-des" style="background-color: transparent">
+                            <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/closedbl.png" />
                             </div>
 
@@ -311,13 +339,13 @@
                 <div class="col-sm-2 dash_wid">
                     <div class="alig_dashicon">
                         <div class="child_align_icon">
-                            <div class="fa-icons-des" style="background-color: transparent">
+                            <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/checkbl.png" />
                             </div>
 
                             <p>In Active Learning</p>
                             <span class="number_css">
-                                {{0}}
+                                0
                             </span>
                         </div>
                     </div>
@@ -326,7 +354,7 @@
                 <div class="col-sm-2 dash_wid">
                     <div class="alig_dashicon">
                         <div class="child_align_icon">
-                            <div class="fa-icons-des" style="background-color: transparent">
+                            <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/rejectbl.png" />
                             </div>
 
@@ -341,7 +369,7 @@
                 <div class="col-sm-2 dash_wid">
                     <div class="alig_dashicon">
                         <div class="child_align_icon">
-                            <div class="fa-icons-des" style="background-color: transparent">
+                            <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/expiredbl.png" />
                             </div>
 
