@@ -21,7 +21,7 @@
                     <th scope="col">Sent to</th>
                     <th scope="col">Last Modified</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Reject Comments</th>
+                    <th scope="col">Comments</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,8 +35,8 @@
                         {{history.status | titlecase}}
                     </td>
                     <td>
-                        <span *ngIf="history.status !='reject'">-</span>
-                        <p *ngIf="history.status =='reject'" style="width: 154px;
+                        <!-- <span *ngIf="history.status !='reject'">-</span> *ngIf="history.status =='reject'" -->
+                        <p  style="width: 154px;
     overflow-y: auto;font-size: 12px;">{{history.status_comment}}</p>
                     </td>
                 </tr>
