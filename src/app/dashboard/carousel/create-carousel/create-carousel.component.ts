@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CarouselService } from 'src/app/shared/services/carousel/carousel.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
-
 const emailregexp = dataConstant.EmailPattren;
 
 @Component({
@@ -19,6 +17,15 @@ export class CreateCarouselComponent implements OnInit {
   languageText = "";
   carouselImage = "";
   isSubmitted = false;
+  carousel_count = {
+    total: 0,
+    draft: 0,
+    closed: 0,
+    rejected: 0,
+    pending: 0,
+    submitted: 0,
+    transferred: 0
+  }
 
   constructor(private formBuilder: FormBuilder,
     private commonService: CommonService,
@@ -35,6 +42,7 @@ export class CreateCarouselComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getTotalCourse();
   }
 
   get lauguageFormArray(): FormArray {
@@ -47,6 +55,17 @@ export class CreateCarouselComponent implements OnInit {
 
   newMetaData(language: { id: any; name: any; slug: any; }): FormGroup {
     return this.formBuilder.group({ language: language.id, languageName: language.name, language_slug: language.slug, title: new FormControl('', [Validators.required]), description: new FormControl('', [Validators.required]), link: new FormControl('', [Validators.required]), display_manager: 0 })
+  }
+
+  getTotalCourse() {
+    this.carouselService.getCarousel().subscribe(
+      (res: any) => {
+        this.carousel_count = res.data.carousel_count;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
   }
 
   getLanguageList() {

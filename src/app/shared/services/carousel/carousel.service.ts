@@ -21,4 +21,12 @@ export class CarouselService {
     const urllive = `${this.basePath}api/${this.apiVersion}/carousel/create`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
+
+  getCarousel() {
+    const url = `/api/${this.apiVersion}/carousel`;
+    const urllive = `${this.basePath}api/${this.apiVersion}/carousel`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
 }

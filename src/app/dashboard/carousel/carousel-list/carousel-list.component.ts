@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
+import { CarouselService } from 'src/app/shared/services/carousel/carousel.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { ViewHistoryComponent } from '../../create-course/view-history/view-history.component';
 
@@ -18,6 +19,15 @@ export class CarouselListComponent implements OnInit {
   public pageNumber= 1;
   public newPageNumber= 1;
   public pageSize=10;
+  carousel_count = {
+    total: 0,
+    draft: 0,
+    closed: 0,
+    rejected: 0,
+    pending: 0,
+    submitted: 0,
+    transferred: 0
+  }
   startPageEntry:any;
   endPageEntry:any;
   newstartPageEntry:any;
@@ -60,6 +70,7 @@ export class CarouselListComponent implements OnInit {
 
   constructor(
     private courceService: CourcesService,
+    private carouselService: CarouselService,
     private authService: AuthenticationService,
     private modalService: NgbModal,
     private router: Router
@@ -139,13 +150,13 @@ export class CarouselListComponent implements OnInit {
     this.draftRequests=[];
     this.closedRequests=[];
     
-    this.courceService.getCources().subscribe(
+    this.carouselService.getCarousel().subscribe(
       (res: any) => {
-        console.log(res);
+        this.carousel_count = res.data.carousel_count;
         if (res.status == 1 && res.message == 'Success') {
           this.i = 0;
           this.j = 0;
-          this.coursedata = res.data;
+          this.coursedata = res.data.carousel;
           for (this.i = 0; this.i < this.coursedata.length; this.i++) {
             console.log(this.coursedata[this.i].request_id);
 			this.coursedata[this.i]['titleByLang'] = this.courceService.getTText(this.coursedata[this.i]['title']);
