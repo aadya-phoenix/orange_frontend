@@ -5,6 +5,7 @@ import { ModalDismissReasons, NgbModal, } from "@ng-bootstrap/ng-bootstrap";
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
+
 @Component({
   selector: 'app-request-detail',
   templateUrl: './request-detail.component.html',
@@ -33,7 +34,10 @@ export class RequestDetailComponent implements OnInit {
   selectedPublisher: any;
   showrejectbutton: any;
   objectarray: any = [];
+  availableLanguages: any = [];
   closeResult = "";
+  coursedetail: any;
+  translateData = [];
   rejectcomment: any;
   constructor(private fb: FormBuilder, private authService: AuthenticationService, private router: Router, private modalService: NgbModal, private courseService: CourcesService) {
   
@@ -74,6 +78,58 @@ export class RequestDetailComponent implements OnInit {
       console.log(this.publisherList)
     }, (err: any) => {
       console.log(err)
+    })
+  }
+
+   //get Languages
+   getLanguages() {
+    this.courseService.getLanguages().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.availableLanguages = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
+  changeTranslateData(data:string){
+    if(data == 'title'){
+      this.translateData = this.coursedetail.title ? JSON.parse(this.coursedetail.title) : [];
+    }
+    if(data == 'learn_more'){
+      this.translateData = this.coursedetail.learn_more ? JSON.parse(this.coursedetail.learn_more) : [];
+    }
+    if(data == 'description'){
+      this.translateData = this.coursedetail.description ? JSON.parse(this.coursedetail.description) : [];
+    }
+    if(data == 'for_whoom'){
+      this.translateData = this.coursedetail.for_whoom ? JSON.parse(this.coursedetail.for_whoom) : [];
+    }
+  }
+
+  getLabel(data:any) {
+    let result;
+    if(data) {
+      const lang = this.availableLanguages.find((x: { slug: any; }) => x.slug == Object.keys(data)[0]);
+      result = lang?.name;
+    }
+    return result;
+  }
+
+  getValue(data:any) {
+    let result;
+    if(data) {
+      result = data[Object.keys(data)[0]]
+    }
+    return result;
+  }
+
+  getDetailsOfCourse(){
+    this.courseService.courseDetail(this.routegetdata.id).subscribe((res: any) => {
+      this.coursedetail = res.data;
+    }, (err: any) => {
     })
   }
 
@@ -244,7 +300,9 @@ export class RequestDetailComponent implements OnInit {
     this.objectarray = [];//arr1.split('• ')
     //console.log(arr1.split('• '))
     this.getPublisher();
+    this.getLanguages();
     this.getNewPublisherId();
+    this.getDetailsOfCourse();
     this.getCordinators();
     this.getRole();
     this.setrejectbutton(this.routegetdata.id);
@@ -290,4 +348,6 @@ export class RequestDetailComponent implements OnInit {
       }
     );
   }
+
+
 }
