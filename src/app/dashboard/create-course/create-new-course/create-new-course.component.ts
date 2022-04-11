@@ -22,7 +22,7 @@ const emailregexp = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
   selector: 'app-create-new-course',
   templateUrl: './create-new-course.component.html',
   styleUrls: ['./create-new-course.component.scss'],
-  providers:[ToolbarService, HtmlEditorService]
+  providers: [ToolbarService, HtmlEditorService]
 })
 export class CreateNewCourseComponent implements OnInit {
   routergetdata: any;
@@ -30,17 +30,17 @@ export class CreateNewCourseComponent implements OnInit {
   isImageSaved: any;
   totalObjnew: any = {};
 
-  
+
   public tools: object = {
     items: [
-         'UnorderedList']
+      'UnorderedList']
   };
   public newTools: object = {
     items: [
-         'UnorderedList']
+      'UnorderedList']
   };
 
-  curriculumEditor:any;
+  curriculumEditor: any;
   public cardImageBase64: any;
   public createCourceForm!: FormGroup;
   public commonCreateCourceForm!: FormGroup;
@@ -65,7 +65,10 @@ export class CreateNewCourseComponent implements OnInit {
   showVendor_Webbased: boolean = false;
   getprofileDetails: any;
   showrejectbutton: any;
+  showStatus: any;
   user_id: any;
+  courseId: any;
+  corseId: any;
   public learnerGuidearray: any = [];
   public learningType: any = '';
   public learningTypeSelected: any = '0';
@@ -73,13 +76,11 @@ export class CreateNewCourseComponent implements OnInit {
   public learnerGuidelines: any = [];
   fieldArrObj: any = []
   public cctLevel: any;
-  coursesList: any;
-  courseLength: any;
   notification: boolean = false;
   fileToUpload: any[] = [];
   fileToUpload_Material: any[] = [];
   j: any = 0;
-  remainingText:any=0;
+  remainingText: any = 0;
   public lang;
   public imageError: string = "";
   public requiredFields: any = {
@@ -246,7 +247,7 @@ export class CreateNewCourseComponent implements OnInit {
     { id: 'yes', name: 'Yes' },
     { id: 'no', name: 'No' },
   ];
-  target_audience_selected ='no';
+  target_audience_selected = 'no';
   public cctExpiryType: any;
   public validityPeriod: any;
 
@@ -301,11 +302,15 @@ export class CreateNewCourseComponent implements OnInit {
 
   getUserrole: any; //to get user role
   public cordinatorsList: any = [];
-  draftRequests: any = [];
-  pendingRequests: any = [];
-  rejectedRequests: any = [];
-  closedRequests: any = [];
-  stringArray: any = [];
+  public course_count = {
+    closed: 0,
+    draft: 0,
+    pending: 0,
+    rejected: 0,
+    submitted: 0,
+    total: 0,
+    transferred: 0
+  };
   publisherList: any = [];
   selectedPublisherId: any;
 
@@ -322,7 +327,7 @@ export class CreateNewCourseComponent implements OnInit {
     console.log(this.router.getCurrentNavigation()?.extras.state)
 
     if (this.router.getCurrentNavigation()?.extras.state != undefined) {
-      
+
       this.routergetdata = this.router.getCurrentNavigation()?.extras.state;
       if (!this.routergetdata) {
         this.router.navigateByUrl('/dashboard/cources');
@@ -333,7 +338,7 @@ export class CreateNewCourseComponent implements OnInit {
       this.setrejectbutton(this.routergetdata.id);
       this.learningType = this.routergetdata.learning_type;
       this.selectedLanguages = JSON.parse(this.routergetdata['available_language']);
-    //  this.learnerGuidelines = JSON.parse(this.routergetdata['learner_guideline']);
+      //  this.learnerGuidelines = JSON.parse(this.routergetdata['learner_guideline']);
       this.subjectId = Number(this.routergetdata['subject']);
       this.showlevel = Number(this.routergetdata.level);
       console.log(this.routergetdata)
@@ -343,22 +348,22 @@ export class CreateNewCourseComponent implements OnInit {
       this.showforwhoom = this.courceService.getTText(this.routergetdata.for_whoom)
       this.showlearnmore = this.courceService.getTText(this.routergetdata.learn_more)
       if (this.learningType != "6") {
-        if (this.routergetdata.resource!=null){
-        let objectdata: any = {
-          fileName: this.routergetdata.resource.split('/')[3],
-          url: 'https://orange.mindscroll.info/' + this.routergetdata.resource
-        };
-        this.fileToUpload.push(objectdata);
-      }
+        if (this.routergetdata.resource != null) {
+          let objectdata: any = {
+            fileName: this.routergetdata.resource.split('/')[3],
+            url: 'https://orange.mindscroll.info/' + this.routergetdata.resource
+          };
+          this.fileToUpload.push(objectdata);
+        }
       }
       if (this.learningType == "3") {
-        if (this.routergetdata.material_source!=null){
-        let objectdata: any = {
-          fileName: this.routergetdata.material_source.split('/')[3],
-          url: 'https://orange.mindscroll.info/' + this.routergetdata.material_source
-        };
-        this.fileToUpload_Material.push(objectdata);
-      }
+        if (this.routergetdata.material_source != null) {
+          let objectdata: any = {
+            fileName: this.routergetdata.material_source.split('/')[3],
+            url: 'https://orange.mindscroll.info/' + this.routergetdata.material_source
+          };
+          this.fileToUpload_Material.push(objectdata);
+        }
       }
       //for (let l in learner_guide) {
       //  console.log(l[0])
@@ -448,13 +453,13 @@ export class CreateNewCourseComponent implements OnInit {
         this.showPlaylistTargetAudience = this.routergetdata['level'] == "1" ? "yes" : "no";
         this.showPlaylistEmail = this.routergetdata.for_whoom.toString().replace('"', '').replace('"', '')
       }
-    }    
+    }
   }
 
- /*  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
-  var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-      return new boosted.Tooltip(tooltipTriggerEl)
-   }); */
+  /*  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
+   var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+       return new boosted.Tooltip(tooltipTriggerEl)
+    }); */
   /* editorConfig: AngularEditorConfig = {
     sanitize: false,
     editable: true,
@@ -512,17 +517,17 @@ export class CreateNewCourseComponent implements OnInit {
     );
   }
   //publisherWithId
- /*  getNewPublisherId(){
-    this.courceService.getNewPublisherId(id).subscribe(
-      (res: any) => {
-        console.log(res);
-        this.publisherNewList = res.data;
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
-  } */
+  /*  getNewPublisherId(){
+     this.courceService.getNewPublisherId(id).subscribe(
+       (res: any) => {
+         console.log(res);
+         this.publisherNewList = res.data;
+       },
+       (err: any) => {
+         console.log(err);
+       }
+     );
+   } */
 
   getvendorType() {
     this.courceService.getVendortype().subscribe(
@@ -540,7 +545,7 @@ export class CreateNewCourseComponent implements OnInit {
     this.courceService.getcctLevel().subscribe(
       (res: any) => {
         this.cctLevel = res.data;
-        console.log("cct level",this.cctLevel);
+        console.log("cct level", this.cctLevel);
       },
       (err: any) => {
         console.log(err);
@@ -661,11 +666,13 @@ export class CreateNewCourseComponent implements OnInit {
   }
 
   getPublisher() {
-    this.authService.getUserRoles().subscribe(
+    this.courceService.getNewPublisherByLearningType(this.learningType).subscribe(
       (res: any) => {
         console.log(res);
-        this.publisherList = res.data['4'];
-        console.log(this.publisherList);
+        this.publisherList = res.data;
+        console.log("pub res is", res.data);
+        console.log("this.learningType", this.learningType);
+        console.log("new publisher list", this.publisherList);
       },
       (err: any) => {
         console.log(err);
@@ -676,23 +683,7 @@ export class CreateNewCourseComponent implements OnInit {
   getTotalCourse() {
     this.courceService.getCources().subscribe(
       (res: any) => {
-        this.coursesList = res.data;
-        this.courseLength = this.coursesList.length;
-        this.coursesList.map((course: any) => {
-          if (course.status === 'pending') {
-            this.pendingRequests.push(course);
-          }
-          if (course.status === 'reject') {
-            this.rejectedRequests.push(course);
-          }
-          if (course.status === 'draft') {
-            this.draftRequests.push(course);
-          }
-          if (course.status === 'close') {
-            this.closedRequests.push(course);
-          }
-        });
-        console.log(res);
+        this.course_count = res.data.course_count;
       },
       (err: any) => {
         console.log(err);
@@ -744,7 +735,7 @@ export class CreateNewCourseComponent implements OnInit {
       objective: new FormControl(''),
       level: new FormControl('', [Validators.required]),
       subject: new FormControl('', [Validators.required]),
-      //additional_comment: new FormControl(''),
+      additional_comment: new FormControl(''),
       prerequisite: new FormControl(''),
       keyword: new FormControl('', [Validators.required]),
       email_content_owner: new FormControl('', [
@@ -838,8 +829,8 @@ export class CreateNewCourseComponent implements OnInit {
     this.videobasedForm = this.fb.group({
       video_link: new FormControl(''),
       additional_comment: new FormControl(''),
-     // email_preffered_instructor: new FormControl('', [Validators.required,
-   //   Validators.pattern(emailregexp)]),
+      // email_preffered_instructor: new FormControl('', [Validators.required,
+      //   Validators.pattern(emailregexp)]),
       regional_cordinator:
         this.getUserrole.id === 2
           ? new FormControl('', [Validators.required])
@@ -869,12 +860,12 @@ export class CreateNewCourseComponent implements OnInit {
       certification_expiry_type: new FormControl(''),
       validity_period: new FormControl(''),
       learn_more: new FormControl(''),
-     /*  video_link: new FormControl(''), */
-     /*  title_additional: new FormControl(''), */
-     /*  external_vendor_name: new FormControl('', [Validators.required]), */
-     /*  free_field_content: new FormControl(''), */
+      /*  video_link: new FormControl(''), */
+      /*  title_additional: new FormControl(''), */
+      /*  external_vendor_name: new FormControl('', [Validators.required]), */
+      /*  free_field_content: new FormControl(''), */
       expiry_date: new FormControl(''),
-     /*  url: new FormControl('', [Validators.required]), */
+      /*  url: new FormControl('', [Validators.required]), */
       who_see_course: new FormControl(''),
       for_whoom: new FormControl(''),
       learn_more_single: new FormControl(''),
@@ -891,13 +882,13 @@ export class CreateNewCourseComponent implements OnInit {
     });
     if (this.routergetdata == undefined) {
       this.addLearnerGuidelinetocurriculum('', '');
-      this.addCurriculumContenttocurriculum( '');
+      this.addCurriculumContenttocurriculum('');
       this.languageValueSet_new(this.currriculumForm, 'for_whoom_single', 'forWhomArr');
       this.languageValueSet_new(this.currriculumForm, 'learn_more_single', 'learnMoreArr');
     }
     this.webbasedForm = this.fb.group({
-     /*  email_preffered_instructor: new FormControl('', [Validators.required,
-      Validators.pattern(emailregexp)]), */
+      /*  email_preffered_instructor: new FormControl('', [Validators.required,
+       Validators.pattern(emailregexp)]), */
       digital: new FormControl('', [Validators.required]),
       certification: new FormControl('', [Validators.required]),
       certification_expiry_type: new FormControl(''),
@@ -929,8 +920,13 @@ export class CreateNewCourseComponent implements OnInit {
     this.publishForm = this.fb.group({
       intranet_url: new FormControl(''),
       internet_url: new FormControl(''),
+      status_comment: new FormControl(''),
     });
 
+
+    if (this.routergetdata) {
+      this.showStatus = this.routergetdata.status;
+    }
 
     //this.addLearnerGuideline();
     //this.addLearnerGuidelinetocurriculum();
@@ -1125,7 +1121,7 @@ export class CreateNewCourseComponent implements OnInit {
       this.pushtoTitlearray(this.commonCreateCourceForm_playlist);
     }
 
-    
+
   }
 
   get f() {
@@ -1298,7 +1294,7 @@ export class CreateNewCourseComponent implements OnInit {
     });
   }
 
-  addMoreCurriculumContent(descriptionval: string){
+  addMoreCurriculumContent(descriptionval: string) {
     return this.fb.group({
       description: new FormControl(descriptionval),
     });
@@ -1348,26 +1344,26 @@ export class CreateNewCourseComponent implements OnInit {
     });
   }
   createUpdateCoursePublisher(status: any) {
-    if(this.selectedPublisherId){
-    if (this.learningType == "1") {
-      this.createNewCource_Save(this.commonCreateCourceForm, this.iltandViltForm, status)
+    if (this.selectedPublisherId) {
+      if (this.learningType == "1") {
+        this.createNewCource_Save(this.commonCreateCourceForm, this.iltandViltForm, status)
+      }
+      else if (this.learningType == "2") {
+        this.createNewCource_Save(this.commonCreateCourceForm, this.videobasedForm, status)
+      }
+      else if (this.learningType == "3") {
+        this.createNewCource_Save(this.commonCreateCourceForm, this.materialbasedForm, status)
+      }
+      else if (this.learningType == "4") {
+        this.createNewCource_Save(this.commonCreateCourceForm, this.currriculumForm, status)
+      }
+      else if (this.learningType == "5") {
+        this.createNewCource_Save(this.commonCreateCourceForm, this.webbasedForm, status)
+      }
+      else if (this.learningType == "6") {
+        this.createNewCource_Save(this.commonCreateCourceForm_playlist, this.playlistForm, status)
+      }
     }
-    else if (this.learningType == "2") {
-      this.createNewCource_Save(this.commonCreateCourceForm, this.videobasedForm, status)
-    }
-    else if (this.learningType == "3") {
-      this.createNewCource_Save(this.commonCreateCourceForm, this.materialbasedForm, status)
-    }
-    else if (this.learningType == "4") {
-      this.createNewCource_Save(this.commonCreateCourceForm, this.currriculumForm, status)
-    }
-    else if (this.learningType == "5") {
-      this.createNewCource_Save(this.commonCreateCourceForm, this.webbasedForm, status)
-    }
-    else if (this.learningType == "6") {
-      this.createNewCource_Save(this.commonCreateCourceForm_playlist, this.playlistForm, status)
-    }
-   }
   }
 
   createUpdateCourse(status: any) {
@@ -1391,7 +1387,7 @@ export class CreateNewCourseComponent implements OnInit {
     }
   }
   createNewCource_Save(commonformObj: FormGroup, formObj: FormGroup, status: any) {
-    console.log("status video is ",status);
+    console.log("status video is ", status);
     console.log(this.learnerGuidearray);
     let savetype = { status: status };
     let courseid = { course_id: this.routergetdata == undefined ? null : this.routergetdata.id, resource_ext: '', material_source_ext: '' };
@@ -1474,7 +1470,7 @@ export class CreateNewCourseComponent implements OnInit {
       commonformObj.value.description = descriptionarray;
       commonformObj.value.objective = objectivearray;
     }
-    else{
+    else {
       for (let i = 0; i < commonformObj.value.descriptionArr.length; i++) {
         if (commonformObj.value.descriptionArr[i].value != '') {
           descriptionarray.push({
@@ -1568,10 +1564,10 @@ export class CreateNewCourseComponent implements OnInit {
       ...commonformObj.value,
       ...courseid
     };
-    console.log("total obj is",totalObj);
+    console.log("total obj is", totalObj);
     if (this.learningType != "6") {
       this.fileToUpload.forEach(element => {
-        console.log("element is",element)
+        console.log("element is", element)
         totalObj.resource_ext = element.fileName.split('.')[1]
         totalObj.resource = element.base64FileBytes
       });
@@ -1641,50 +1637,114 @@ export class CreateNewCourseComponent implements OnInit {
         }
       }
       else if (status == "transfer") {
-        totalObj.status = "pending"
-        this.courceService.updateCourse(totalObj).subscribe(
-          (res: any) => {
-            console.log(res);
-            if (res) {
-              debugger
-              // this.router.navigate(['/dashboard/cources']);
-              let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId };
-              this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
-                console.log(res);
+        totalObj.status = "pending";
+        if (totalObj.course_id) {
+          totalObj.publisher_id = this.selectedPublisherId;
+          this.courceService.updateCourse(totalObj).subscribe(
+            (res: any) => {
+              console.log(res);
+              if (res) {
+                //  debugger
+                // this.router.navigate(['/dashboard/cources']);
+                if (this.routergetdata) {
+                  this.courseId = this.routergetdata.id;
+                }
+                // let transferobj = { course_id: this.courseId, transfer_id: this.selectedPublisherId };
+                // this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
+                //   console.log(res);
                 this.router.navigate(['/dashboard/cources']);
-              }, (err: any) => {
-                console.log(err)
-              })
+                // }, (err: any) => {
+                //   console.log(err)
+                // })
+              }
+            },
+            (err: any) => {
+              console.log(err);
             }
-          },
-          (err: any) => {
-            console.log(err);
-          }
-        );
+          );
+        }
+        else {
+          totalObj.publisher_id = this.selectedPublisherId;
+          this.courceService.createCource(totalObj).subscribe(
+            (res: any) => {
+              console.log(res);
+              if (res) {
+                // this.router.navigate(['/dashboard/cources']);
+                if (this.routergetdata) {
+                  this.courseId = this.routergetdata.id;
+                }
+                // let transferobj = { course_id: this.courseId, transfer_id: this.selectedPublisherId };
+                // this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
+                //   console.log(res);
+                this.router.navigate(['/dashboard/cources']);
+                // }, (err: any) => {
+                //   console.log(err)
+                // })
+              }
+            },
+            (err: any) => {
+              console.log(err);
+            }
+          );
+        }
       }
       else if (status == "publish") {
-        this.courceService.updateCourse(totalObj).subscribe(
-          (res: any) => {
-            console.log(res);
-            if (res) {
-              let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId, status: 'publish', intranet_url: this.publishForm.value.intranet_url, internet_url: this.publishForm.value.internet_url };
-              this.courceService.courceStatus(transferobj).subscribe(
-                (res: any) => {
-                  console.log(res);
-                  if (res) {
-                    this.router.navigate(['/dashboard/cources']);
-                  }
-                },
-                (err: any) => {
-                  console.log(err);
+        console.log("publisheddd");
+        debugger;
+        totalObj.intranet_url = this.publishForm.value.intranet_url;
+        totalObj.internet_url = this.publishForm.value.internet_url;
+        totalObj.publisher_id = this.selectedPublisherId;
+        totalObj.status_comment = this.publishForm.value.status_comment;
+        if (totalObj.course_id) {
+          this.courceService.updateCourse(totalObj).subscribe(
+            (res: any) => {
+              console.log("update course", res);
+              if (res) {
+                if (this.routergetdata) {
+                  this.corseId = this.routergetdata.id;
                 }
-              );
+                // let transferobj = { course_id: this.corseId , transfer_id: this.selectedPublisherId, status: 'publish', intranet_url: this.publishForm.value.intranet_url, internet_url: this.publishForm.value.internet_url };
+                // this.courceService.courceStatus(transferobj).subscribe(
+                //   (res: any) => {
+                //     console.log(res);
+                //     if (res) {
+                this.router.navigate(['/dashboard/cources']);
+                //     }
+                //   },
+                //   (err: any) => {
+                //     console.log(err);
+                //   }
+                // );
+              }
+            },
+            (err: any) => {
+              console.log(err);
             }
-          },
-          (err: any) => {
-            console.log(err);
-          }
-        );
+          );
+        }
+        else {
+          this.courceService.createCource(totalObj).subscribe(
+            (res: any) => {
+              console.log(res);
+              if (res) {
+                // this.router.navigate(['/dashboard/cources']);
+                if (this.routergetdata) {
+                  this.courseId = this.routergetdata.id;
+                }
+                // let transferobj = { course_id: this.courseId, transfer_id: this.selectedPublisherId };
+                // this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
+                //   console.log(res);
+                this.router.navigate(['/dashboard/cources']);
+                // }, (err: any) => {
+                //   console.log(err)
+                // })
+              }
+            },
+            (err: any) => {
+              console.log(err);
+            }
+          );
+        }
       }
     } else {
       console.log("form is invalid");
@@ -1720,46 +1780,47 @@ export class CreateNewCourseComponent implements OnInit {
       this.iltandViltForm.get('certification_expiry_type')?.clearValidators();
       this.iltandViltForm.get('validity_period')?.clearValidators();
       this.iltandViltForm.patchValue({
-        certification_expiry_type:null,
-        validity_period:null
+        certification_expiry_type: null,
+        validity_period: null
       });
     }
 
   }
 
-  targetAudience(event: any){
-    if (event.id == 'yes'){
+  targetAudience(event: any) {
+    if (event.id == 'yes') {
       this.regionTargetAudience = true;
       this.playlistForm.get('who_see_course')?.setValidators(Validators.required);
-      this.playlistForm.get('target_audience')?.clearValidators();    
-      this.playlistForm.get('email_preffered_instructor')?.clearValidators();  
+      this.playlistForm.get('target_audience')?.clearValidators();
+      this.playlistForm.get('email_preffered_instructor')?.clearValidators();
       this.playlistForm.patchValue({
-        target_audience:null,
-        email_preffered_instructor:null
+        target_audience: null,
+        email_preffered_instructor: null
       });
     }
-    else if(event.id == 'no'){
+    else if (event.id == 'no') {
       this.regionTargetAudience = false;
       this.playlistForm.get('target_audience')?.setValidators(Validators.required);
       this.playlistForm.get('email_preffered_instructor')?.setValidators(Validators.required);
       this.playlistForm.get('who_see_course')?.clearValidators();
       this.playlistForm.patchValue({
-        who_see_course:null,
+        who_see_course: null,
       });
     }
   }
-  targetAudiencePlaylsit(event:any){
-    console.log("event is",event.target.value)
-    if (event.target.value == 2){
+  targetAudiencePlaylsit(event: any) {
+    console.log("event is", event.target.value)
+    if (event.target.value == 2) {
       this.regionTargetAudiencePlaylist = true;
       this.playlistForm.get('email_preffered_instructor')?.setValidators(Validators.required);
     }
-    if (event.target.value == 1){
+    if (event.target.value == 1) {
       this.regionTargetAudiencePlaylist = false;
       this.playlistForm.get('email_preffered_instructor')?.clearValidators();
       this.playlistForm.patchValue({
-        email_preffered_instructor:null});
-    } 
+        email_preffered_instructor: null
+      });
+    }
   }
   certificationType_Curriculum(event: any) {
     console.log(event.id);
@@ -1776,8 +1837,8 @@ export class CreateNewCourseComponent implements OnInit {
       this.currriculumForm.get('certification_expiry_type')?.clearValidators();
       this.currriculumForm.get('validity_period')?.clearValidators();
       this.currriculumForm.patchValue({
-        certification_expiry_type:null,
-        validity_period:null
+        certification_expiry_type: null,
+        validity_period: null
       });
     }
 
@@ -1797,8 +1858,8 @@ export class CreateNewCourseComponent implements OnInit {
       this.webbasedForm.get('certification_expiry_type')?.clearValidators();
       this.webbasedForm.get('validity_period')?.clearValidators();
       this.iltandViltForm.patchValue({
-        certification_expiry_type:null,
-        validity_period:null
+        certification_expiry_type: null,
+        validity_period: null
       });
     }
 
@@ -1815,7 +1876,7 @@ export class CreateNewCourseComponent implements OnInit {
       this.showVendor = false;
       this.iltandViltForm.get('external_vendor_name')?.clearValidators();
       this.iltandViltForm.patchValue({
-        external_vendor_name:null,
+        external_vendor_name: null,
       });
     }
 
@@ -1843,7 +1904,7 @@ export class CreateNewCourseComponent implements OnInit {
       this.showVendor_Webbased = false;
       this.webbasedForm.get('external_vendor_name')?.clearValidators();
       this.webbasedForm.patchValue({
-        external_vendor_name:null
+        external_vendor_name: null
       });
     }
 
@@ -1857,7 +1918,7 @@ export class CreateNewCourseComponent implements OnInit {
         ?.setValidators(Validators.required);
       this.materialbasedForm.get('video_link')?.clearValidators();
       this.materialbasedForm.patchValue({
-        video_link:null
+        video_link: null
       });
     } else {
       this.materialsourceurl = false;
@@ -1867,7 +1928,7 @@ export class CreateNewCourseComponent implements OnInit {
         ?.setValidators(Validators.required);
       this.materialbasedForm.get('url')?.clearValidators();
       this.materialbasedForm.patchValue({
-        url:null
+        url: null
       });
     }
   }
@@ -1894,13 +1955,13 @@ export class CreateNewCourseComponent implements OnInit {
     this.selectedPublisherId = event.target.value;
   }
 
-  valueChange(value:any){
-    if(value != undefined){
-    this.remainingText = 500 - value.length;
+  valueChange(value: any) {
+    if (value != undefined) {
+      this.remainingText = 500 - value.length;
     }
   }
 
-  onCreate(){
+  onCreate() {
     this.curriculumEditor = this;
     this.curriculumEditor.refreshUI();
   }
@@ -2099,7 +2160,7 @@ export class CreateNewCourseComponent implements OnInit {
     }
   }
   handleFileInput(event: any) {
-    console.log("event is",event.target.files[0]);
+    console.log("event is", event.target.files[0]);
     this.FileConvertintoBytearray(event.target.files[0], async (f) => { // creating array bytes
 
       let objectdata: any = {
@@ -2145,6 +2206,9 @@ export class CreateNewCourseComponent implements OnInit {
       if (res && res.status == 1) {
         let history = res.data;
         this.showrejectbutton = history[history.length - 1].action_by;
+        console.log(" this.showrejectbutton" + this.showrejectbutton);
+        console.log("history", res.data);
+        console.log("getprofileDetails.data.id", this.getprofileDetails.data.id);
       }
     })
   }
