@@ -197,14 +197,14 @@ export class RequestDetailComponent implements OnInit {
     this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
       console.log(res);
       //this.router.navigate(['/dashboard/cources']);
-      let transferobj1 = { course_id: this.routegetdata.id, status: 'pending' };
-      // Commenting it as it is not required : ANkur : 7Apr
-      this.courseService.courceStatus(transferobj1).subscribe((res: any) => {
-        console.log(res);
+      // let transferobj1 = { course_id: this.routegetdata.id, status: 'pending' };
+      // // Commenting it as it is not required : ANkur : 7Apr
+      // this.courseService.courceStatus(transferobj1).subscribe((res: any) => {
+      //   console.log(res);
         this.router.navigate(['/dashboard/cources']);
-      }, (err: any) => {
-        console.log(err)
-      })
+      // }, (err: any) => {
+      //   console.log(err)
+      // })
     }, (err: any) => {
       console.log(err)
     })
