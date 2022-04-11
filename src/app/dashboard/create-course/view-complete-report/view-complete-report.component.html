@@ -303,7 +303,7 @@
                             style=" padding: 0.45rem 1.25rem; background-color: #fff;border-bottom: 1px solid #00000008;color:#000">
                             <div class="body_header_view">
                                 <span class="card_overall">View All Request request Status</span>
-                                <span class="  card_overall1">Showing 1 to 50 of 2,4407items.</span>
+                                <!-- <span class="  card_overall1">Showing 1 to 50 of 2,4407items.</span> -->
                             </div>
                         </div>
                         <div class="card-body">
@@ -383,7 +383,7 @@
                                             style="font-size: 12px;text-align:center;">
                                             <td scope="row">{{i+1}}</td>
                                             <td class="re_id">{{ cource.request_id }}</td>
-                                            <td> <a *ngIf="cource.status=='pending' || cource.status=='closed' || cource.status=='reject'"
+                                            <td *ngIf="getUserrole.id != 2"> <a *ngIf="cource.status=='pending' || cource.status=='closed' || cource.status=='reject'"
                                                     (click)="openModal(cource)" class="text-primary">
                                                     View
                                                 </a></td>
@@ -401,10 +401,10 @@
                                             <td>{{cource.transfer_user_name}}</td>
                                             <td>{{ cource.learning_type_name}}</td>
                                             <td>{{ cource.created_at}}</td>
-                                            <td>{{ cource.regional_cordinator}}</td>
-                                            <td>{{ cource.created_at}}</td>
-                                            <td></td>
-                                            <td></td>
+                                            <td *ngIf="getUserrole.id != 2">{{ cource.regional_cordinator}}</td>
+                                            <td *ngIf="getUserrole.id != 2">{{ cource.created_at}}</td>
+                                            <td *ngIf="getUserrole.id != 2"></td>
+                                            <td *ngIf="getUserrole.id != 2"></td>
                                             <td></td>
                                             <td>{{cource.updated_at}}</td>
                                         </tr>
