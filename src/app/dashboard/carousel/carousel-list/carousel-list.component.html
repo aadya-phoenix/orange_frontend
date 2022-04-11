@@ -57,7 +57,7 @@
                         <div class="card-body card_course_body">
                             <div class="Course_icon_parent" data-aos="fade-right">
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="getrecords(draftRequests)">
+                                    <div class="alig_dashicon" (click)="showRecords(carouselStatus.draft)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-draft">
                                                 <img src="../../../../assets/images/icon/drafts.png" />
@@ -68,7 +68,7 @@
                                     </div>
                                 </div>
                                 <div class="Course_icon_child" *ngIf="getUserrole.id == 2">
-                                    <div class="alig_dashicon" (click)="getrecords(usersubmitRequests)">
+                                    <div class="alig_dashicon" (click)="showRecords(carouselStatus.submitted)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-submit">
                                                 <img src="../../../../assets/images/icon/closed.png" />
@@ -79,7 +79,7 @@
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="getrecords(closedRequests)">
+                                    <div class="alig_dashicon" (click)="showRecords(carouselStatus.pending)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-learning">
                                                 <img src="../../../../assets/images/icon/check.png" />
@@ -90,7 +90,7 @@
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="getrecords(rejectedRequests)">
+                                    <div class="alig_dashicon" (click)="showRecords(carouselStatus.rejected)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-reject">
                                                 <img src="../../../../assets/images/icon/reject.png" />
@@ -101,7 +101,7 @@
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="getrecords(allCourses)">
+                                    <div class="alig_dashicon" (click)="showRecords(carouselStatus.closed)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-expire">
                                                 <img src="../../../../assets/images/icon/expired.png" />
@@ -112,17 +112,17 @@
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="getrecords(allCourses)">
-                                      <div class="sub-child-dashicon">
-                                        <div class="fa-icons-des cm-all">
-                                          <img src="../../../../assets/images/icon/viewall.png" />
+                                    <div class="alig_dashicon" (click)="showRecords(carouselStatus.total)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des cm-all">
+                                                <img src="../../../../assets/images/icon/viewall.png" />
+                                            </div>
+
+                                            <p>View All</p>
                                         </div>
-                  
-                                        <p>View All</p>
-                                      </div>
-                                      <span class="number_css">{{carousel_count.total}}</span>
+                                        <span class="number_css">{{carousel_count.total}}</span>
                                     </div>
-                                  </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -178,11 +178,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="text-center bac_hover-table font-12">
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                        <tr *ngFor="let item of carouselListToShow | filter: searchText  | paginate: { itemsPerPage: 10, currentPage: pageNumber }"
+                                            class="text-center bac_hover-table font-12">
+                                            <td>{{ item.request_id }}</td>
+                                            <td>{{ item && item.user_name ? item.user_name : "-" }}</td>
+                                            <td>{{ item.expiry_date | date: "short" }}</td>
+                                            <td>{{ item.created_at | date: "short" }}</td>
                                             <td></td>
                                             <td class="text-center"></td>
                                             <td class="text-center"></td>
@@ -193,7 +194,7 @@
                             <div class="pagiantio_dispaly">
                                 <div class="pagintion_ child">
                                     <p class="cm-pagination-fotter">Showing {{startPageEntry}} to
-                                        {{endPageEntry}} of {{collectionSize}} entries</p>
+                                        {{endPageEntry}} of {{this.carouselListToShow?.length}} entries</p>
                                 </div>
                                 <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                             </div>

@@ -15,6 +15,7 @@ export const dataConstant = {
       409: '409',//Conflict
     },
     EmailPattren: /^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/,
+    CarouselStatus: {total :'total', closed:'closed', draft:'draft', pending:'pending', rejected:'rejected', submitted:'submitted', transferred:'transferred'}
   }
   
   

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CarouselService } from 'src/app/shared/services/carousel/carousel.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
@@ -15,7 +16,7 @@ export class CreateCarouselComponent implements OnInit {
   languageList: any = [];
   public createOlcarouselForm!: FormGroup;
   languageText = "";
-  carouselImage = {image:'', ext: ''};
+  carouselImage = { image: '', ext: '' };
   isSubmitted = false;
   carousel_count = {
     total: 0,
@@ -29,6 +30,7 @@ export class CreateCarouselComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private commonService: CommonService,
+    private router: Router,
     private carouselService: CarouselService) {
     this.createOlcarouselForm = this.formBuilder.group({
       languages: new FormArray([]),
@@ -105,13 +107,13 @@ export class CreateCarouselComponent implements OnInit {
   }
 
   handleFileInput(event: any) {
-    debugger;
-    this.commonService.FileConvertintoBytearray(event.target.files[0], async (f) => { // creating array bytes
-      this.carouselImage = {image:this.commonService.byteArrayTobase64(f.bytes), ext: f.name.split('.').pop()};
+    this.commonService.FileConvertintoBytearray(event.target.files[0], async (f) => {
+      // creating array bytes
+      this.carouselImage = { image: this.commonService.byteArrayTobase64(f.bytes), ext: f.name.split('.').pop() };
     });
   }
 
-  saveCarousel(status:string) {
+  saveCarousel(status: string) {
     this.isSubmitted = true;
     if (this.createOlcarouselForm.invalid) {
       return;
@@ -123,10 +125,7 @@ export class CreateCarouselComponent implements OnInit {
     body.status = status;
     this.carouselService.create(body).subscribe(
       (res: any) => {
-        console.log(res);
-        debugger;
-        if (res) {
-        }
+        this.router.navigate(['/dashboard/olcarousel']);
       },
       (err: any) => {
         console.log(err);
