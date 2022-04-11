@@ -8,7 +8,7 @@ import { CourcesService } from '../shared/services/cources/cources.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  pendingRequests: any = [];
+  pendingRequestCount = 0;
   courcesList: any;
   constructor(private courseService: CourcesService,private router:Router) {}
 
@@ -21,20 +21,10 @@ export class DashboardComponent implements OnInit {
   }
 
   getpendingCourses() {
-    this.pendingRequests = [];
-
     this.courseService.getCources().subscribe(
       (res: any) => {
-        console.log(res);
-        
         if (res.status == 1) {
-          
-          this.courcesList = res.data;
-          this.courcesList.map((course: any) => {
-            if (course.status === 'pending') {
-              this.pendingRequests.push(course);
-            }
-          });
+          this.pendingRequestCount = res.data?.course_count?.pending;
         }
       },
       (err: any) => {

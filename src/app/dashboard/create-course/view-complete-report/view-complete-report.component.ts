@@ -19,6 +19,15 @@ export class ViewCompleteReportComponent implements OnInit {
   public courcesList: any=[];
   public pageNumber= 1;
   public pageSize=10;
+  public course_count = {
+    closed: 0,
+    draft: 0,
+    pending: 0,
+    rejected: 0,
+    submitted: 0,
+    total: 0,
+    transferred: 0
+  };
   startPageEntry:any;
   endPageEntry:any;
   public filteredCourseList:any;
@@ -105,7 +114,8 @@ export class ViewCompleteReportComponent implements OnInit {
         if (res.status == 1 && res.message == 'Success') {
           this.i = 0;
           this.j = 0;
-          this.coursedata = res.data;
+          this.coursedata = res.data.course;
+          this.course_count = res.data.course_count;
           for (this.i = 0; this.i < this.coursedata.length; this.i++) {
             console.log(this.coursedata[this.i].request_id);
 			this.coursedata[this.i]['titleByLang'] = this.courceService.getTText(this.coursedata[this.i]['title']);

@@ -62,8 +62,8 @@
                                 <!--text_div_sec-->
                             </div>
                             <div class="sec_footer ">
-                                <div class="footer_sec_ano " (click)="navigatetoPending('pending')">
-                                    <p class="footer_p ">{{pendingRequests && pendingRequests.length ? pendingRequests.length : 0}}</p>
+                                <div class="footer_sec_ano"  (click)="navigatetoPending('pending')">
+                                    <p class="footer_p" [ngClass]="{'backgound_green': pendingRequestCount === 0}">{{pendingRequestCount}}</p>
                                     <span style="color: #fff ">Pending</span>
                                 </div>
 

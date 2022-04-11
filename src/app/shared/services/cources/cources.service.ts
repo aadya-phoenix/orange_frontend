@@ -236,12 +236,20 @@ export class CourcesService {
       const urllive = `${this.basePath}api/${this.apiVersion}/transfer/publisher-list`;
       return this.http.post(url,{}).pipe(catchError(this.Errorhandling)); 
      }
+       // getNewPublisherByLearningType
+       getNewPublisherByLearningType(learning_type: number){
+        const url = `/api/${this.apiVersion}/transfer/publisher-list`;
+        const urllive = `${this.basePath}api/${this.apiVersion}/transfer/publisher-list`;
+        const body = {learning_type};
+        return this.http.post(url,body).pipe(catchError(this.Errorhandling)); 
+       }
      //newPublisherWithId
      getNewPublisherId(id:any){
       const url = `/api/${this.apiVersion}/transfer/publisher-list`;
       const urllive = `${this.basePath}api/${this.apiVersion}/transfer/publisher-list`;
       return this.http.post(url,id).pipe(catchError(this.Errorhandling)); 
      }
+
      //country
      getCountries(){
       const url = `/api/${this.apiVersion}/cct-country`;
