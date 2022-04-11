@@ -15,7 +15,7 @@ export class CreateCarouselComponent implements OnInit {
   languageList: any = [];
   public createOlcarouselForm!: FormGroup;
   languageText = "";
-  carouselImage = "";
+  carouselImage = {image:'', ext: ''};
   isSubmitted = false;
   carousel_count = {
     total: 0,
@@ -105,8 +105,9 @@ export class CreateCarouselComponent implements OnInit {
   }
 
   handleFileInput(event: any) {
+    debugger;
     this.commonService.FileConvertintoBytearray(event.target.files[0], async (f) => { // creating array bytes
-      this.carouselImage = this.commonService.byteArrayTobase64(f.bytes);
+      this.carouselImage = {image:this.commonService.byteArrayTobase64(f.bytes), ext: f.name.split('.').pop()};
     });
   }
 
@@ -116,7 +117,8 @@ export class CreateCarouselComponent implements OnInit {
       return;
     }
     const body = this.createOlcarouselForm.value;
-    body.image = this.carouselImage;
+    body.image = this.carouselImage.image;
+    body.image_ext = this.carouselImage.ext;
     body.reviewer_id = "";
     body.status = status;
     this.carouselService.create(body).subscribe(
