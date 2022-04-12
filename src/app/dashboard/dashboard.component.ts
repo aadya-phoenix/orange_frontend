@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../shared/services/auth/authentication.service';
 import { CourcesService } from '../shared/services/cources/cources.service';
 
 @Component({
@@ -8,9 +9,14 @@ import { CourcesService } from '../shared/services/cources/cources.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  pendingRequests: any = [];
+  pendingRequestCount = 0;
+  getUserrole:any;
   courcesList: any;
-  constructor(private courseService: CourcesService,private router:Router) {}
+  pendingFlag:boolean=true;
+  constructor(private courseService: CourcesService,private router:Router,
+    private authService:AuthenticationService) {
+    this.getUserrole = this.authService.getRolefromlocal();
+  }
 
   navigatetoPending(status:any){
     let statusobj = { status :status};
@@ -21,20 +27,10 @@ export class DashboardComponent implements OnInit {
   }
 
   getpendingCourses() {
-    this.pendingRequests = [];
-
     this.courseService.getCources().subscribe(
       (res: any) => {
-        console.log(res);
-        
         if (res.status == 1) {
-          
-          this.courcesList = res.data;
-          this.courcesList.map((course: any) => {
-            if (course.status === 'pending') {
-              this.pendingRequests.push(course);
-            }
-          });
+          this.pendingRequestCount = res.data?.course_count?.pending;
         }
       },
       (err: any) => {
@@ -45,5 +41,11 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getpendingCourses();
+    if(this.getUserrole.id == 2){
+      this.pendingFlag = true;
+    }
+    else{
+      this.pendingFlag = false;
+    }
   }
 }

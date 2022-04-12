@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { ModalDismissReasons, NgbModal, } from "@ng-bootstrap/ng-bootstrap";
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
+const urlregex ='^(https?:\\/\\/)?'+'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,5}|'+'((\\d{1,3}\\.){3}\\d{1,3}))'+'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+'(\\?[;&a-z\\d%_.~+=-]*)?'+'(\\#[-a-z\\d_]*)?$';
 @Component({
   selector: 'app-request-detail',
   templateUrl: './request-detail.component.html',
@@ -33,7 +34,10 @@ export class RequestDetailComponent implements OnInit {
   selectedPublisher: any;
   showrejectbutton: any;
   objectarray: any = [];
+  availableLanguages: any = [];
   closeResult = "";
+  coursedetail: any;
+  translateData = [];
   rejectcomment: any;
   constructor(private fb: FormBuilder, private authService: AuthenticationService, private router: Router, private modalService: NgbModal, private courseService: CourcesService) {
   
@@ -74,6 +78,58 @@ export class RequestDetailComponent implements OnInit {
       console.log(this.publisherList)
     }, (err: any) => {
       console.log(err)
+    })
+  }
+
+   //get Languages
+   getLanguages() {
+    this.courseService.getLanguages().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.availableLanguages = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
+  changeTranslateData(data:string){
+    if(data == 'title'){
+      this.translateData = this.coursedetail.title ? JSON.parse(this.coursedetail.title) : [];
+    }
+    if(data == 'learn_more'){
+      this.translateData = this.coursedetail.learn_more ? JSON.parse(this.coursedetail.learn_more) : [];
+    }
+    if(data == 'description'){
+      this.translateData = this.coursedetail.description ? JSON.parse(this.coursedetail.description) : [];
+    }
+    if(data == 'for_whoom'){
+      this.translateData = this.coursedetail.for_whoom ? JSON.parse(this.coursedetail.for_whoom) : [];
+    }
+  }
+
+  getLabel(data:any) {
+    let result;
+    if(data) {
+      const lang = this.availableLanguages.find((x: { slug: any; }) => x.slug == Object.keys(data)[0]);
+      result = lang?.name;
+    }
+    return result;
+  }
+
+  getValue(data:any) {
+    let result;
+    if(data) {
+      result = data[Object.keys(data)[0]]
+    }
+    return result;
+  }
+
+  getDetailsOfCourse(){
+    this.courseService.courseDetail(this.routegetdata.id).subscribe((res: any) => {
+      this.coursedetail = res.data;
+    }, (err: any) => {
     })
   }
 
@@ -165,7 +221,7 @@ export class RequestDetailComponent implements OnInit {
     region.forEach((field: any) => {
       if (field.region_id == event.target.value) {
         this.selectedotherRoc = field.id;
-        alert(this.selectedotherRoc);
+        //alert(this.selectedotherRoc);
       }
     });
     console.log(user);
@@ -196,13 +252,15 @@ export class RequestDetailComponent implements OnInit {
     let transferobj = { course_id: this.routegetdata.id, status: 'pending', transfer_id: this.selectedotherRoc };
     this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
       console.log(res);
-      let transferobj1 = { course_id: this.routegetdata.id, status: 'pending' };
-      this.courseService.courceStatus(transferobj1).subscribe((res: any) => {
-        console.log(res);
+      //this.router.navigate(['/dashboard/cources']);
+      // let transferobj1 = { course_id: this.routegetdata.id, status: 'pending' };
+      // // Commenting it as it is not required : ANkur : 7Apr
+      // this.courseService.courceStatus(transferobj1).subscribe((res: any) => {
+      //   console.log(res);
         this.router.navigate(['/dashboard/cources']);
-      }, (err: any) => {
-        console.log(err)
-      })
+      // }, (err: any) => {
+      //   console.log(err)
+      // })
     }, (err: any) => {
       console.log(err)
     })
@@ -242,13 +300,21 @@ export class RequestDetailComponent implements OnInit {
     this.objectarray = [];//arr1.split('• ')
     //console.log(arr1.split('• '))
     this.getPublisher();
+    this.getLanguages();
     this.getNewPublisherId();
+    this.getDetailsOfCourse();
     this.getCordinators();
     this.getRole();
     this.setrejectbutton(this.routegetdata.id);
     this.publishForm = this.fb.group({
-      intranet_url: new FormControl(''),
-      internet_url: new FormControl(''),
+      intranet_url: new FormControl('',[
+        Validators.required,
+        Validators.pattern(urlregex),
+      ]),
+      internet_url: new FormControl('',[
+        Validators.required,
+        Validators.pattern(urlregex),
+      ]),
     });
     this.getTrainingHours();
     console.log("learner guideline",this.routegetdata.learner_guideline);
@@ -256,6 +322,7 @@ export class RequestDetailComponent implements OnInit {
     console.log(JSON.parse(learner_guideline));
     console.log("new learnerGuidelines",this.learnerGuidelines);
    //this.getImageUrl();
+   console.log("getprofileDetails",this.getprofileDetails.data.id);
 
   }
   getImageUrl(): void{
@@ -269,6 +336,7 @@ export class RequestDetailComponent implements OnInit {
       if (res && res.status == 1) {
         let history = res.data;
         this.showrejectbutton = history[history.length - 1].action_by;
+        console.log("showrejectbutton",this.showrejectbutton)
       }
     })
   }
@@ -288,4 +356,6 @@ export class RequestDetailComponent implements OnInit {
       }
     );
   }
+
+
 }
