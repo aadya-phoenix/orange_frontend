@@ -156,13 +156,17 @@
                                                                     title="Provide the link of the learning object to which the Carousel entry points."></i>
                                                             </a>
                                                         </label>
-                                                        <input type="text" placeholder="Enter Link"
+                                                        <input type="url" placeholder="Enter Link"
                                                             formControlName="link" class="form-control form_width" />
                                                         <div
                                                             *ngIf="(carouselFormArray.controls[i].controls['link'].invalid && (carouselFormArray.controls[i].controls['link'].dirty || carouselFormArray.controls[i].controls['link'].touched)) || isSubmitted ">
                                                             <div class="error_message"
                                                                 *ngIf="carouselFormArray.controls[i].controls['link'].errors?.required">
                                                                 Link cannot be blank
+                                                            </div>
+                                                            <div class="error_message"
+                                                                *ngIf="carouselFormArray.controls[i].controls['link'].errors?.pattern">
+                                                                Link invalid
                                                             </div>
                                                         </div>
                                                     </div>
@@ -235,20 +239,25 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Expiry Date <span class="text-danger-ligth">* </span>
+                                                Expiry Type <span class="text-danger-ligth">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Provide the date on which this entry should be removed from the Orange Learning Carousel. If the Expiry Date is unknown, the entry will be available in the Carousel for a maximum of 3 months."></i>
                                                 </a>
                                             </label>
-                                            <input type="date" class="form-control form_width"
-                                                formControlName="expiry_date" />
+                                            <select class="form-control form_width" formControlName="expiry_date">
+                                                <option value="">Please Select expiry</option>
+                                                <option *ngFor="let cctExpiry of cctExpiryperiod"
+                                                    [value]="cctExpiry.id">
+                                                    {{ cctExpiry.name }}
+                                                </option>
+                                            </select>
                                             <div
                                                 *ngIf="(createOlcarouselForm.controls['expiry_date'].invalid && (createOlcarouselForm.controls['expiry_date'].dirty || createOlcarouselForm.controls['expiry_date'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createOlcarouselForm.controls['expiry_date'].errors?.required">
-                                                    Expiry Date cannot be blank
+                                                    Expiry Type cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -271,22 +280,14 @@
 
                                         </div>
                                     </div>
-                                    <!-- <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <select class="form-control form_width">
-                                                <option value="">Please Select </option>
-                                                <option>
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div> -->
                                 </div>
                             </div>
                             <div class="card-footer">
+                                <button class="btn btn-primary" type="submit"
+                                    (click)="saveCarousel('pending')">Submit</button>
                                 <button class="btn btn-secondary mr-1" (click)="saveCarousel('draft')">
                                     Save as draft
                                 </button>
-                                <button class="btn btn-primary" type="submit" (click)="saveCarousel('pending')">Submit</button>
                             </div>
                         </div>
                     </div>

@@ -15,12 +15,13 @@ import { ViewHistoryComponent } from '../../create-course/view-history/view-hist
 })
 export class CarouselListComponent implements OnInit {
   carouselStatus = dataConstant.CarouselStatus;
-  public carouselList: any = [];
-  public carouselListToShow: any = [];
-  public page = 1;
-  public pageNumber = 1;
-  public newPageNumber = 1;
-  public pageSize = 10;
+  carouselList: any = [];
+  carouselListToShow: any = [];
+  selectedStatus = this.carouselStatus.total;
+  page = 1;
+  pageNumber = 1;
+  newPageNumber = 1;
+  pageSize = 10;
   carousel_count = {
     total: 0,
     draft: 0,
@@ -70,7 +71,6 @@ export class CarouselListComponent implements OnInit {
     private router: Router
   ) {
     this.getUserrole = this.authService.getRolefromlocal();
-    //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.routegetdata = this.router.getCurrentNavigation()?.extras.state;
     if (!this.routegetdata) {
@@ -82,6 +82,24 @@ export class CarouselListComponent implements OnInit {
     }
     console.log(this.getprofileDetails)
 
+  }
+
+  ngOnInit(): void {
+    this.refreshCourses();
+    if (this.routegetdata) {
+      this.allCourses = this.pendingRequests;
+    }
+    this.startPageEntry = (this.pageSize * (this.pageNumber - 1)) + 1;
+    this.endPageEntry = this.pageSize * this.pageNumber;
+
+    this.newstartPageEntry = (this.pageSize * (this.newPageNumber - 1)) + 1;
+    this.newendPageEntry = this.pageSize * this.newPageNumber;
+  }
+
+  viewRequest(item: any) {
+    if (item && item.id) {
+      this.router.navigateByUrl(`/dashboard/olcarousel/view/${item.id}`);
+    }
   }
 
   openModal(course: any) {
@@ -142,6 +160,7 @@ export class CarouselListComponent implements OnInit {
     } else {
       this.carouselListToShow = this.carouselList.filter((x: any) => { if (x.status_show === type) { return x } }).map((x: any) => Object.assign({}, x));
     }
+    this.selectedStatus = type;
   }
 
   refreshCourses() {
@@ -181,69 +200,6 @@ export class CarouselListComponent implements OnInit {
     console.log(course)
   }
 
-  deleteRequest(course: any) {
-
-    const modalRef = this.modalService.open(ViewHistoryComponent, {
-      centered: true,
-      size: 'sm',
-      windowClass: 'alert-popup',
-    });
-    modalRef.componentInstance.props = {
-      title: 'Delete Request',
-      data3: course,
-      type: 'delete'
-    };
-    modalRef.componentInstance.passEntry.subscribe((res: any) => {
-      this.refreshCourses();
-    });
-    this.routegetdata = '';
-    // console.log(course);
-    // this.courceService.deleteCourse({course_id :course.id}).subscribe((res:any)=>{
-    //   console.log(res);
-    //   this.refreshCourses();
-    // },(err:any)=>{
-    //   console.log(err)
-    // })
-  }
-
-  copyRequest(course: any) {
-
-    const modalRef = this.modalService.open(ViewHistoryComponent, {
-      centered: true,
-      size: 'sm',
-      windowClass: 'alert-popup',
-    });
-    modalRef.componentInstance.props = {
-      title: 'Copy Request',
-      data3: course,
-      type: 'copy'
-    };
-    modalRef.componentInstance.passEntry.subscribe((res: any) => {
-      this.refreshCourses();
-    });
-    this.routegetdata = '';
-    // console.log(course);
-    // this.courceService.copyCourse({course_id :course.id}).subscribe((res:any)=>{
-    //   console.log(res);
-    //   this.refreshCourses();
-    // },(err:any)=>{
-    //   console.log(err)
-    // })
-
-  }
-
-  //getLearning type
-  getLearningType() {
-    this.courceService.getLearningType().subscribe(
-      (res: any) => {
-        console.log(res);
-        this.learningTypes = res.data;
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
-  }
 
   pageChanged(event: any) {
     console.log(event);
@@ -257,20 +213,7 @@ export class CarouselListComponent implements OnInit {
     this.newstartPageEntry = (this.pageSize * (this.newPageNumber - 1)) + 1;
     this.newendPageEntry = this.pageSize * this.newPageNumber;
   }
-  ngOnInit(): void {
-    // console.log(this.getUserrole);
-    console.log(this.routegetdata)
-    this.refreshCourses();
-    this.getLearningType();
-    if (this.routegetdata) {
-      this.allCourses = this.pendingRequests;
-    }
-    this.startPageEntry = (this.pageSize * (this.pageNumber - 1)) + 1;
-    this.endPageEntry = this.pageSize * this.pageNumber;
 
-    this.newstartPageEntry = (this.pageSize * (this.newPageNumber - 1)) + 1;
-    this.newendPageEntry = this.pageSize * this.newPageNumber;
-  }
   GetCourseHistory(id: any): any {
     this.courceService.courseHistory(id).subscribe((res: any) => {
       console.log(res);

@@ -53,4 +53,12 @@ export class CommonService {
       .pipe(catchError(this.Errorhandling));
   }
 
+   //ExpiryDateType
+   getExpiryDateType() {
+    const url = `api/${this.apiVersion}/cct-expiry-date-type`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.Errorhandling));
+  }
+
 }

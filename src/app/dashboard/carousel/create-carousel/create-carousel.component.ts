@@ -14,6 +14,7 @@ const emailregexp = dataConstant.EmailPattren;
 export class CreateCarouselComponent implements OnInit {
 
   languageList: any = [];
+  cctExpiryperiod: any = [];
   public createOlcarouselForm!: FormGroup;
   languageText = "";
   carouselImage = { image: '', ext: '' };
@@ -41,6 +42,7 @@ export class CreateCarouselComponent implements OnInit {
       additional_comment: new FormControl('', [Validators.required]),
     });
     this.getLanguageList();
+    this.getExpiryDateType();
   }
 
   ngOnInit(): void {
@@ -56,7 +58,13 @@ export class CreateCarouselComponent implements OnInit {
   }
 
   newMetaData(language: { id: any; name: any; slug: any; }): FormGroup {
-    return this.formBuilder.group({ language: language.id, languageName: language.name, language_slug: language.slug, title: new FormControl('', [Validators.required]), description: new FormControl('', [Validators.required]), link: new FormControl('', [Validators.required]), display_manager: 0 })
+    return this.formBuilder.group({ language: language.id, languageName: language.name, language_slug: language.slug, 
+      title: new FormControl('', [Validators.required]), 
+      description: new FormControl('', [Validators.required]), 
+      link: new FormControl('', [Validators.required,  Validators.pattern( new RegExp(
+        `${dataConstant.UrlPattern}`,
+        'i'
+      ))]), display_manager: 0 })
   }
 
   getTotalCourse() {
@@ -81,6 +89,17 @@ export class CreateCarouselComponent implements OnInit {
             this.carouselFormArray.push(this.newMetaData(x));
           }
         });
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
+  getExpiryDateType() {
+    this.commonService.getExpiryDateType().subscribe(
+      (res: any) => {
+        this.cctExpiryperiod = res.data;
       },
       (err: any) => {
         console.log(err);

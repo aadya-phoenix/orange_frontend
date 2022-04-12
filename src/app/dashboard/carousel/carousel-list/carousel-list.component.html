@@ -180,13 +180,18 @@
                                     <tbody>
                                         <tr *ngFor="let item of carouselListToShow | filter: searchText  | paginate: { itemsPerPage: 10, currentPage: pageNumber }"
                                             class="text-center bac_hover-table font-12">
-                                            <td>{{ item.request_id }}</td>
-                                            <td>{{ item && item.user_name ? item.user_name : "-" }}</td>
-                                            <td>{{ item.expiry_date | date: "short" }}</td>
-                                            <td>{{ item.created_at | date: "short" }}</td>
+                                            <td class="request_id" (click)="viewRequest(item)">{{ item.request_id }}</td>
+                                            <td (click)="viewRequest(item)">{{ item && item.user_name ? item.user_name : "-" }}</td>
+                                            <td (click)="viewRequest(item)">{{ item.expiry_date | date: "shortDate" }}</td>
+                                            <td (click)="viewRequest(item)">{{ item.created_at | date: "shortDate" }}</td>
                                             <td></td>
                                             <td class="text-center"></td>
-                                            <td class="text-center"></td>
+                                            <td class="text-center">
+                                                <a class="copy_file mr-1" data-toggle="tooltip" (click)="viewRequest(item)"
+                                                data-placement="top" title="View">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                              </a>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
