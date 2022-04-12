@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { ModalDismissReasons, NgbModal, } from "@ng-bootstrap/ng-bootstrap";
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-
+const urlregex ='^(https?:\\/\\/)?'+'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,5}|'+'((\\d{1,3}\\.){3}\\d{1,3}))'+'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+'(\\?[;&a-z\\d%_.~+=-]*)?'+'(\\#[-a-z\\d_]*)?$';
 @Component({
   selector: 'app-request-detail',
   templateUrl: './request-detail.component.html',
@@ -307,8 +307,14 @@ export class RequestDetailComponent implements OnInit {
     this.getRole();
     this.setrejectbutton(this.routegetdata.id);
     this.publishForm = this.fb.group({
-      intranet_url: new FormControl(''),
-      internet_url: new FormControl(''),
+      intranet_url: new FormControl('',[
+        Validators.required,
+        Validators.pattern(urlregex),
+      ]),
+      internet_url: new FormControl('',[
+        Validators.required,
+        Validators.pattern(urlregex),
+      ]),
     });
     this.getTrainingHours();
     console.log("learner guideline",this.routegetdata.learner_guideline);
@@ -316,6 +322,7 @@ export class RequestDetailComponent implements OnInit {
     console.log(JSON.parse(learner_guideline));
     console.log("new learnerGuidelines",this.learnerGuidelines);
    //this.getImageUrl();
+   console.log("getprofileDetails",this.getprofileDetails.data.id);
 
   }
   getImageUrl(): void{
@@ -329,6 +336,7 @@ export class RequestDetailComponent implements OnInit {
       if (res && res.status == 1) {
         let history = res.data;
         this.showrejectbutton = history[history.length - 1].action_by;
+        console.log("showrejectbutton",this.showrejectbutton)
       }
     })
   }

@@ -18,6 +18,9 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 const emailregexp = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
+/* const urlregex = '^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$' ; */
+/* const urlregex = '^(https:\/\/www\.|http:\/\/www\.|www\.)[a-zA-Z0-9\-_$]+\.[a-zA-Z]{2,5}$'; */
+const urlregex ='^(https?:\\/\\/)?'+'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,5}|'+'((\\d{1,3}\\.){3}\\d{1,3}))'+'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+'(\\?[;&a-z\\d%_.~+=-]*)?'+'(\\#[-a-z\\d_]*)?$';
 @Component({
   selector: 'app-create-new-course',
   templateUrl: './create-new-course.component.html',
@@ -790,7 +793,10 @@ export class CreateNewCourseComponent implements OnInit {
       for_whoom: new FormControl(''),
       learn_more: new FormControl(''),
       for_whoom_single: new FormControl('', [Validators.required]),
-      learn_more_single: new FormControl(''),
+      learn_more_single: new FormControl('',[
+        Validators.required,
+        Validators.pattern(urlregex),
+      ]),
       cost_of_training: new FormControl(''),
       // cost_of_training: new FormControl('', [Validators.required]),	        
       free_field_content: new FormControl(''),
@@ -868,7 +874,10 @@ export class CreateNewCourseComponent implements OnInit {
       /*  url: new FormControl('', [Validators.required]), */
       who_see_course: new FormControl(''),
       for_whoom: new FormControl(''),
-      learn_more_single: new FormControl(''),
+      learn_more_single: new FormControl('',[
+        Validators.required,
+        Validators.pattern(urlregex),
+      ]),
       forWhomArr: new FormArray([]),
       learnMoreArr: new FormArray([]),
       for_whoom_single: new FormControl('', [Validators.required]),
@@ -918,8 +927,14 @@ export class CreateNewCourseComponent implements OnInit {
           : new FormControl()
     });
     this.publishForm = this.fb.group({
-      intranet_url: new FormControl(''),
-      internet_url: new FormControl(''),
+      intranet_url: new FormControl('',[
+        Validators.required,
+        Validators.pattern(urlregex),
+      ]),
+      internet_url: new FormControl('',[
+        Validators.required,
+        Validators.pattern(urlregex),
+      ]),
       status_comment: new FormControl(''),
     });
 
