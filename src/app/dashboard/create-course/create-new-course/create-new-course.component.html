@@ -793,7 +793,7 @@
                                                     </a>
                                                 </label>
                                                 <ng-select [(ngModel)]="showILTEmail"
-                                                    placeholder="Please select Instructor" [items]="preferedInstructor"
+                                                    placeholder="Please select Instructor" [items]="preferedInstructor"  [multiple]="true"
                                                     bindLabel="email_id" bindValue="email_id"
                                                     formControlName="email_preffered_instructor" style="width: 100%">
                                                 </ng-select>
@@ -1173,7 +1173,7 @@
                                                             </i>
                                                         </a>
                                                     </label>
-                                                    <input type="text" placeholder="Enter Learn more"
+                                                    <input type="url" placeholder="Enter Learn more"
                                                         [(ngModel)]="showlearnmore" class="form-control form_width"
                                                         formControlName="learn_more_single" />
                                                 </div>
@@ -1184,6 +1184,11 @@
                                                             class="langu_css" />
                                                     </a>
                                                 </div>
+                                                <!-- <div class="error_message"
+                                                        *ngIf="iltandViltForm.controls['learn_more_single'].hasError('required') && iltandViltForm.controls['learn_more_single'].touched">
+                                                        Learn more cannot be blank
+                                                    </div> -->
+                                                    <div class="error_message" *ngIf="iltandViltForm.controls['learn_more_single'].invalid && (iltandViltForm.controls['learn_more_single'].dirty || iltandViltForm.controls['learn_more_single'].touched)">Learn more  is not a valid URL</div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1450,7 +1455,7 @@
                                                             </i>
                                                         </a>
                                                     </label>
-                                                    <input type="text" placeholder="Enter Learn more"
+                                                    <input type="url" placeholder="Enter Learn more"
                                                         [(ngModel)]="showlearnmore" class="form-control form_width"
                                                         formControlName="learn_more_single" />
                                                 </div>
@@ -1461,6 +1466,11 @@
                                                             class="langu_css" />
                                                     </a>
                                                 </div>
+                                                <div class="error_message" *ngIf="currriculumForm.controls['learn_more_single'].invalid && (currriculumForm.controls['learn_more_single'].dirty || currriculumForm.controls['learn_more_single'].touched)">Learn more  is not a valid URL</div>
+                                                <!-- <div class="error_message"
+                                                        *ngIf="currriculumForm.controls['learn_more_single'].hasError('required') && currriculumForm.controls['learn_more_single'].touched">
+                                                        Learn more cannot be blank
+                                                    </div> -->
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -3397,7 +3407,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
 
-                                <label>Comments</label>
+                                <label>Additional Comments</label>
                                 <!--  formControlName="additional_comment" -->
                                 <!-- formControlName="additional_comment" -->
                                 <textarea class="form-control form_width-textarea"  rows="3" formControlName="status_comment"
@@ -3410,6 +3420,7 @@
                                 <label>Orange Learning Intrance URL(SSO)</label>
                                 <input type="text " placeholder="Enter Orange Learning Intrance URL(SSO) "
                                     class="form-control form_width" formControlName="intranet_url" />
+                                    <div class="error_message" *ngIf="publishForm.controls['intranet_url'].invalid && (publishForm.controls['intranet_url'].dirty || publishForm.controls['intranet_url'].touched)">Learn more  is not a valid URL</div>
                             </div>
                         </div>
                         <!--col end-->
@@ -3418,6 +3429,7 @@
                                 <label>Orange Learning Internet URL</label>
                                 <input type="text " placeholder="Enter Orange Learning Internet URL "
                                     class="form-control form_width" formControlName="internet_url" />
+                                    <div class="error_message" *ngIf="publishForm.controls['internet_url'].invalid && (publishForm.controls['internet_url'].dirty || publishForm.controls['internet_url'].touched)">Learn more  is not a valid URL</div>
                             </div>
                         </div>
                         <!--col end-->

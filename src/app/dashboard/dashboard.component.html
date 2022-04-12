@@ -61,11 +61,17 @@
 
                                 <!--text_div_sec-->
                             </div>
+                           
                             <div class="sec_footer ">
-                                <div class="footer_sec_ano"  (click)="navigatetoPending('pending')">
+                              
+                                <div class="footer_sec_ano" >
+                                   <button [disabled]="pendingFlag" (click)="navigatetoPending('pending')" style="background-color: transparent;border: none;">
                                     <p class="footer_p" [ngClass]="{'backgound_green': pendingRequestCount === 0}">{{pendingRequestCount}}</p>
+                                   </button>
                                     <span style="color: #fff ">Pending</span>
                                 </div>
+                               
+                          
 
                                 <div class="p-2 bd-highlight ">
                                     <img src="../../assets/images/share.png " style="width: 22px " class="mr-2 " />

@@ -64,7 +64,7 @@
                       <span style="color: #ff7900">Request Status - {{ routegetdata.status | titlecase }}</span>
                     </p>
                   </div>
-                  <button class="btn btn-primary" *ngIf="status == 'draft'" (click)="updateCource()">Update</button>
+                  <button class="btn btn-primary" *ngIf="status == 'draft'  || (getUserrole.id == 2 && status == 'reject')" (click)="updateCource()">Update</button>
                 </div>
               </div>
             </div>
@@ -346,7 +346,7 @@
                         <label for="exampleInputEmail1">Resources</label>
                         <div class="d-flex align-items-center">
                           <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                            Click here to <a href="{{imgUrl}}" target="_blank" style="color:#ff7900">View / Download</a>
+                            Click here to <a href="{{imgUrl}}" target="_blank" style="color:#ff7900">View</a>
                             <!-- {{
                                                        routegetdata.resource
                                                          ? routegetdata.resource
@@ -1274,7 +1274,7 @@
 
                     </div>
                     <!--cole dn-->
-                    <div class="col-sm-12" *ngIf="routegetdata.certification_expiry_type_name != ''">
+                    <div class="col-sm-12" *ngIf="routegetdata.certification_expiry_type_name != '' || routegetdata.certification_expiry_type_name != null">
                       <div class="form-group">
                         <label for="exampleInputEmail1"> Certification Expiry type name</label>
                         <div class="d-flex align-items-center">
@@ -1295,7 +1295,7 @@
 
                     </div>
                     <!--cole dn-->
-                    <div class="col-sm-12" *ngIf="routegetdata.validity_period_name != ''">
+                    <div class="col-sm-12" *ngIf="routegetdata.validity_period_name != '' ||routegetdata.validity_period_name != null">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Validity period</label>
                         <div class="d-flex align-items-center">
@@ -1315,7 +1315,7 @@
                       </div>
 
                     </div>
-                    <div class="col-sm-12" *ngIf="routegetdata.external_vendor != ''">
+                    <div class="col-sm-12" *ngIf="routegetdata.external_vendor != '' || routegetdata.external_vendor != null">
                       <div class="form-group">
                         <label for="exampleInputEmail1">External Vendor</label>
                         <div class="d-flex align-items-center">
@@ -1335,7 +1335,7 @@
 
                     </div>
                     <!--cole dn-->
-                    <div class="col-sm-12" *ngIf="routegetdata.external_vendor_name != ''">
+                    <div class="col-sm-12" *ngIf="routegetdata.external_vendor_name != '' || routegetdata.external_vendor_name != null">
                       <div class="form-group">
                         <label for="exampleInputEmail1">External Vendor name</label>
                         <div class="d-flex align-items-center">
@@ -1436,7 +1436,7 @@
 
                       </div>
                     </div>
-                    <div class="col-sm-12" *ngIf="routegetdata.who_see_course_name != ''">
+                    <div class="col-sm-12" *ngIf="routegetdata.who_see_course_name != '' || routegetdata.who_see_course_name != null">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Region of Target Audience</label>
                         <div class="d-flex align-items-center">
@@ -1454,7 +1454,7 @@
 
                       </div>
                     </div>
-                    <div class="col-sm-12" *ngIf="routegetdata.target_audience_name != null ">
+                    <div class="col-sm-12" *ngIf="routegetdata.target_audience_name != '' || routegetdata.target_audience_name != null">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Target audience</label>
                         <div class="d-flex align-items-center">
@@ -1472,7 +1472,7 @@
 
                       </div>
                     </div>
-                    <div class="col-sm-12" *ngIf="routegetdata.email_preffered_instructor != null">
+                    <div class="col-sm-12" *ngIf="routegetdata.email_preffered_instructor != '' || routegetdata.email_preffered_instructor != null">
                       <div class="form-group">
                         <label for="exampleInputEmail1">OBS employees in specific Functions/Divisions</label>
                         <div class="d-flex align-items-center">
@@ -1690,7 +1690,7 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-group">
-                  <label>Comments</label>
+                  <label>Additional Comments</label>
                   <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"></textarea>
                 </div>
               </div>
@@ -1700,6 +1700,7 @@
                   <label>Orange Learning Intrance URL(SSO)</label>
                   <input type="text" placeholder="Enter Orange Learning Intrance URL(SSO)"
                     class="form-control form_width1" formControlName="intranet_url" />
+                    <div class="error_message" *ngIf="publishForm.controls['intranet_url'].invalid && (publishForm.controls['intranet_url'].dirty || publishForm.controls['intranet_url'].touched)">Learn more  is not a valid URL</div>
                 </div>
               </div>
               <!--col end-->
@@ -1708,6 +1709,7 @@
                   <label>Orange Learning Internet URL</label>
                   <input type="text" class="form-control form_width1" placeholder="Enter Orange Learning Internet URL"
                     formControlName="internet_url" />
+                    <div class="error_message" *ngIf="publishForm.controls['internet_url'].invalid && (publishForm.controls['internet_url'].dirty || publishForm.controls['internet_url'].touched)">Learn more  is not a valid URL</div>
                 </div>
               </div>
               <!--col end-->
