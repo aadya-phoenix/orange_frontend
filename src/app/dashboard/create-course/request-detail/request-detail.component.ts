@@ -232,8 +232,8 @@ export class RequestDetailComponent implements OnInit {
 
   }
 
-  getNewPublisherId(){
-    this.courseService.getNewPublisherId(this.routegetdata.id).subscribe(
+  getNewPublisherByLearningType(){
+    this.courseService.getNewPublisherByLearningType(this.routegetdata.learning_type).subscribe(
       (res: any) => { 
         console.log("pub new",res);
         this.newPublisherList = res.data;
@@ -301,7 +301,7 @@ export class RequestDetailComponent implements OnInit {
     //console.log(arr1.split('• '))
     this.getPublisher();
     this.getLanguages();
-    this.getNewPublisherId();
+    this.getNewPublisherByLearningType();
     this.getDetailsOfCourse();
     this.getCordinators();
     this.getRole();
