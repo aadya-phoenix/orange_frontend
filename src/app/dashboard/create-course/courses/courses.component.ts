@@ -49,6 +49,7 @@ export class CoursesComponent implements OnInit {
   routegetdata: any;
   getprofileDetails: any;
   historylaststatus: any;
+  
   coursedata: any = [];
   public statusArray: any = [
     { id: this.pendingRequests, name: 'Pending' },
@@ -85,7 +86,7 @@ export class CoursesComponent implements OnInit {
       this.allCourses = this.pendingRequests;
       this.getrecords(this.pendingRequests);
     }
-    // console.log(this.getprofileDetails)
+    console.log("profile details",this.getprofileDetails)
 
   }
 

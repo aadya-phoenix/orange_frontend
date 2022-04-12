@@ -344,7 +344,7 @@
                             <i class="fa fa-trash" aria-hidden="true"></i>
                           </a>
                           <a *ngIf="getUserrole.id == '2' &&
-                                  cource.status =='reject'" (click)="editRequest(cource)" class="copy_file mr-1"
+                                  cource.status =='reject' || getUserrole.id == '3' && cource.status =='reject' && getprofileDetails.data.id == cource.user_id"   (click)="editRequest(cource)" class="copy_file mr-1"
                             data-toggle="tooltip" data-placement="top" title="Edit">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                           </a>
@@ -578,7 +578,7 @@
                             <i class="fa fa-trash" aria-hidden="true"></i>
                           </a>
                           <a *ngIf="getUserrole.id == '2' &&
-                                  course.status =='reject'" (click)="editRequest(cource)" class="copy_file mr-1"
+                                  course.status =='reject' || getUserrole.id == '3' && course.status =='reject' && getprofileDetails.data.id == course.user_id" (click)="editRequest(course)" class="copy_file mr-1"
                             data-toggle="tooltip" data-placement="top" title="Edit">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                           </a>
