@@ -82,6 +82,7 @@ export class CreateNewCourseComponent implements OnInit {
   notification: boolean = false;
   fileToUpload: any[] = [];
   fileToUpload_Material: any[] = [];
+  isFileResouce = '';
   j: any = 0;
   remainingText: any = 0;
   public lang;
@@ -354,11 +355,12 @@ export class CreateNewCourseComponent implements OnInit {
       this.showResource = this.routergetdata.resource;
       if (this.learningType != "6") {
         if (this.routergetdata.resource != null) {
-          let objectdata: any = {
-            fileName: this.routergetdata.resource.split('/')[3],
-            url: 'https://orange.mindscroll.info/' + this.routergetdata.resource
-          };
-          this.fileToUpload.push(objectdata);
+          this.isFileResouce = 'https://orange.mindscroll.info/public/public/' + this.routergetdata.resource;
+          // let objectdata: any = {
+          //   fileName: this.routergetdata.resource.split('/')[3],
+          //   url: 'https://orange.mindscroll.info/public/public/' + this.routergetdata.resource
+          // };
+          // this.fileToUpload.push(objectdata);
         }
       }
       if (this.learningType == "3") {
@@ -380,7 +382,7 @@ export class CreateNewCourseComponent implements OnInit {
 
       if (this.routergetdata.learning_type == "1") {
         this.showILTWhoSee = Number(this.routergetdata.who_see_course)
-        this.showILTEmail = this.routergetdata.email_preffered_instructor
+        this.showILTEmail = JSON.parse(this.routergetdata.email_preffered_instructor)
         this.showILTFree = this.routergetdata.free_field_content
         this.showILTDeliveryMethod = Number(this.routergetdata.delivery_method)
         this.showILTLearnMore = this.courceService.getTText(this.routergetdata.learn_more);

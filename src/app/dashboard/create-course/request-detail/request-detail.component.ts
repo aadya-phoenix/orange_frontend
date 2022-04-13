@@ -5,7 +5,7 @@ import { ModalDismissReasons, NgbModal, } from "@ng-bootstrap/ng-bootstrap";
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-const urlregex ='^(https?:\\/\\/)?'+'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,5}|'+'((\\d{1,3}\\.){3}\\d{1,3}))'+'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+'(\\?[;&a-z\\d%_.~+=-]*)?'+'(\\#[-a-z\\d_]*)?$';
+const urlregex = '^(https?:\\/\\/)?' + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,5}|' + '((\\d{1,3}\\.){3}\\d{1,3}))' + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + '(\\?[;&a-z\\d%_.~+=-]*)?' + '(\\#[-a-z\\d_]*)?$';
 @Component({
   selector: 'app-request-detail',
   templateUrl: './request-detail.component.html',
@@ -15,17 +15,17 @@ export class RequestDetailComponent implements OnInit {
   public commonCreateCourceForm!: FormGroup;
   public publishForm!: FormGroup;
   public learnerGuidelines: any = [];
-  public emailPrefferedEmail:any=[];
+  public emailPrefferedEmail: any = [];
   public curriculumContent: any = [];
-  purchaseOrder:any;
+  purchaseOrder: any;
   getUserrole: any;
   routegetdata: any;
-  imgUrl:any;
-  trainingDurationHours:any;
+  imgUrl: any;
+  trainingDurationHours: any;
   status: any;
   transfer_user_id: any;
   publisherList: any = [];
-  newPublisherList:any=[];
+  newPublisherList: any = [];
   roleuserlist: any = [];
   cordinatorsList: any = [];
   showbuttons: any;
@@ -41,17 +41,21 @@ export class RequestDetailComponent implements OnInit {
   translateData = [];
   rejectcomment: any;
   constructor(private fb: FormBuilder, private authService: AuthenticationService, private router: Router, private modalService: NgbModal, private courseService: CourcesService) {
-  
+
     this.routegetdata = this.router.getCurrentNavigation()?.extras.state;
-    if(this.routegetdata==undefined){
-     this.routegetdata= localStorage.getItem('routegetdata');
-     console.log("route",this.routegetdata);
-     this.routegetdata = JSON.parse(this.routegetdata);
+    if (this.routegetdata == undefined) {
+      this.routegetdata = localStorage.getItem('routegetdata');
+      console.log("route", this.routegetdata);
+      this.routegetdata = JSON.parse(this.routegetdata);
     }
     this.learnerGuidelines = JSON.parse(this.routegetdata['learner_guideline']);
     this.curriculumContent = JSON.parse(this.routegetdata['learner_guideline']);
-    if(this.routegetdata['email_preffered_instructor']){
-      this.emailPrefferedEmail = JSON.parse(this.routegetdata['email_preffered_instructor']);
+    if (this.routegetdata['email_preffered_instructor']) {
+      try {
+        this.emailPrefferedEmail = JSON.parse(this.routegetdata['email_preffered_instructor']);
+      } catch {
+        this.emailPrefferedEmail = '';
+      }
     }
     this.routegetdata['titleByLang'] = this.courseService.getTText(this.routegetdata['title']);
     this.routegetdata['descriptionByLang'] = this.courseService.getTText(this.routegetdata['description']);
@@ -64,10 +68,10 @@ export class RequestDetailComponent implements OnInit {
     if (!this.routegetdata) {
       this.router.navigateByUrl('/dashboard/cources');
     }
-   else{
-    localStorage.setItem('routegetdata',JSON.stringify(this.routegetdata));
-   }
-   console.log("route",this.routegetdata);
+    else {
+      localStorage.setItem('routegetdata', JSON.stringify(this.routegetdata));
+    }
+    console.log("route", this.routegetdata);
   }
 
   saveChange() {
@@ -76,7 +80,7 @@ export class RequestDetailComponent implements OnInit {
 
   getPublisher() {
     this.authService.getUserRoles().subscribe((res: any) => {
-    //  console.log("roles are",res);
+      //  console.log("roles are",res);
       this.publisherList = res.data['4'];
       this.roleuserlist = res.data;
       console.log(this.publisherList)
@@ -85,8 +89,8 @@ export class RequestDetailComponent implements OnInit {
     })
   }
 
-   //get Languages
-   getLanguages() {
+  //get Languages
+  getLanguages() {
     this.courseService.getLanguages().subscribe(
       (res: any) => {
         console.log(res);
@@ -98,39 +102,39 @@ export class RequestDetailComponent implements OnInit {
     );
   }
 
-  changeTranslateData(data:string){
-    if(data == 'title'){
+  changeTranslateData(data: string) {
+    if (data == 'title') {
       this.translateData = this.coursedetail.title ? JSON.parse(this.coursedetail.title) : [];
     }
-    if(data == 'learn_more'){
+    if (data == 'learn_more') {
       this.translateData = this.coursedetail.learn_more ? JSON.parse(this.coursedetail.learn_more) : [];
     }
-    if(data == 'description'){
+    if (data == 'description') {
       this.translateData = this.coursedetail.description ? JSON.parse(this.coursedetail.description) : [];
     }
-    if(data == 'for_whoom'){
+    if (data == 'for_whoom') {
       this.translateData = this.coursedetail.for_whoom ? JSON.parse(this.coursedetail.for_whoom) : [];
     }
   }
 
-  getLabel(data:any) {
+  getLabel(data: any) {
     let result;
-    if(data) {
+    if (data) {
       const lang = this.availableLanguages.find((x: { slug: any; }) => x.slug == Object.keys(data)[0]);
       result = lang?.name;
     }
     return result;
   }
 
-  getValue(data:any) {
+  getValue(data: any) {
     let result;
-    if(data) {
+    if (data) {
       result = data[Object.keys(data)[0]]
     }
     return result;
   }
 
-  getDetailsOfCourse(){
+  getDetailsOfCourse() {
     this.courseService.courseDetail(this.routegetdata.id).subscribe((res: any) => {
       this.coursedetail = res.data;
     }, (err: any) => {
@@ -170,14 +174,14 @@ export class RequestDetailComponent implements OnInit {
     }
   }
 
-  getTrainingHours(){
+  getTrainingHours() {
     let str = this.routegetdata.duration;
-    console.log("duyration",str);
-    console.log("duation",this.routegetdata.duration);
-    if(this.routegetdata.duration != undefined){
-    let hours = str.match(/(.*):/g).pop().replace(":","");
-    let min = str.match(/:(.*)/g).pop().replace(":","");
-    this.trainingDurationHours = hours +" "+"hours"+ " "+min +" "+ "minutes";
+    console.log("duyration", str);
+    console.log("duation", this.routegetdata.duration);
+    if (this.routegetdata.duration != undefined) {
+      let hours = str.match(/(.*):/g).pop().replace(":", "");
+      let min = str.match(/:(.*)/g).pop().replace(":", "");
+      this.trainingDurationHours = hours + " " + "hours" + " " + min + " " + "minutes";
     }
   }
   getRole() {
@@ -191,24 +195,24 @@ export class RequestDetailComponent implements OnInit {
     this.router.navigateByUrl('/dashboard/cources/create-cource', { state: this.routegetdata })
   }
 
-  PublishRequest(){
+  PublishRequest() {
     let transferobj = { course_id: this.routegetdata.id, transfer_id: this.selectedPublisher, status: 'publish', intranet_url: this.publishForm.value.intranet_url, internet_url: this.publishForm.value.internet_url };
-    if(this.publishForm.valid){
-    this.courseService.courceStatus(transferobj).subscribe(
-      (res: any) => {
-        console.log(res);
-        if (res) {
-          this.router.navigate(['/dashboard/cources']);
+    if (this.publishForm.valid) {
+      this.courseService.courceStatus(transferobj).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res) {
+            this.router.navigate(['/dashboard/cources']);
+          }
+        },
+        (err: any) => {
+          console.log(err);
         }
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );    
-   }
-   else{
-     console.log("form invalid");
-   }
+      );
+    }
+    else {
+      console.log("form invalid");
+    }
   }
   reject() {
     let statusobj = { course_id: this.routegetdata.id, status: 'reject', status_comment: this.rejectcomment }
@@ -241,14 +245,14 @@ export class RequestDetailComponent implements OnInit {
 
   }
 
-  getNewPublisherByLearningType(){
+  getNewPublisherByLearningType() {
     this.courseService.getNewPublisherByLearningType(this.routegetdata.learning_type).subscribe(
-      (res: any) => { 
-        console.log("pub new",res);
+      (res: any) => {
+        console.log("pub new", res);
         this.newPublisherList = res.data;
       }, (err: any) => {
-      console.log(err);
-    });
+        console.log(err);
+      });
   }
 
   getPublisherselected(event: any) {
@@ -257,53 +261,53 @@ export class RequestDetailComponent implements OnInit {
   }
 
   transfertoOtherRoc() {
-    if(this.selectedotherRoc){
-    let transferobj = { course_id: this.routegetdata.id, status: 'pending', transfer_id: this.selectedotherRoc };
-    this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
-      console.log(res);
-      //this.router.navigate(['/dashboard/cources']);
-      // let transferobj1 = { course_id: this.routegetdata.id, status: 'pending' };
-      // // Commenting it as it is not required : ANkur : 7Apr
-      // this.courseService.courceStatus(transferobj1).subscribe((res: any) => {
-      //   console.log(res);
+    if (this.selectedotherRoc) {
+      let transferobj = { course_id: this.routegetdata.id, status: 'pending', transfer_id: this.selectedotherRoc };
+      this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
+        console.log(res);
+        //this.router.navigate(['/dashboard/cources']);
+        // let transferobj1 = { course_id: this.routegetdata.id, status: 'pending' };
+        // // Commenting it as it is not required : ANkur : 7Apr
+        // this.courseService.courceStatus(transferobj1).subscribe((res: any) => {
+        //   console.log(res);
         this.router.navigate(['/dashboard/cources']);
-      // }, (err: any) => {
-      //   console.log(err)
-      // })
-    }, (err: any) => {
-      console.log(err)
-    })
-  }
+        // }, (err: any) => {
+        //   console.log(err)
+        // })
+      }, (err: any) => {
+        console.log(err)
+      })
+    }
   }
 
   transfertoPublisher() {
-    if( this.selectedPublisher){
-    let transferobj = { course_id: this.routegetdata.id, transfer_id: this.selectedPublisher };
-    this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
-      console.log(res);
-      this.router.navigate(['/dashboard/cources']);
-    }, (err: any) => {
-      console.log(err)
-    })
-  }
+    if (this.selectedPublisher) {
+      let transferobj = { course_id: this.routegetdata.id, transfer_id: this.selectedPublisher };
+      this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
+        console.log(res);
+        this.router.navigate(['/dashboard/cources']);
+      }, (err: any) => {
+        console.log(err)
+      })
+    }
   }
 
   ngOnInit(): void {
     console.log(this.routegetdata);
-    console.log(" this.routegetdata['title']",this.routegetdata['title']);
+    console.log(" this.routegetdata['title']", this.routegetdata['title']);
     let arr1 = this.routegetdata.objective;
     this.status = this.routegetdata.status;
 
     this.transfer_user_id = this.routegetdata.transfer_user_id;
     let no = this.routegetdata.showbuttons.split('#').length;
-    this.showbuttons = this.routegetdata.showbuttons.split('#')[no-1];
+    this.showbuttons = this.routegetdata.showbuttons.split('#')[no - 1];
 
-    if(this.routegetdata.purchase_order){
-    this.purchaseOrder  = this.routegetdata.purchase_order.split('#')[0];
-    console.log("this.purchaseOrder",this.purchaseOrder);
+    if (this.routegetdata.purchase_order) {
+      this.purchaseOrder = this.routegetdata.purchase_order.split('#')[0];
+      console.log("this.purchaseOrder", this.purchaseOrder);
     }
-    if(this.routegetdata.resource){
-    this.imgUrl = `https://orange.mindscroll.info/public/public/${this.routegetdata.resource}`;
+    if (this.routegetdata.resource) {
+      this.imgUrl = `https://orange.mindscroll.info/public/public/${this.routegetdata.resource}`;
     }
     console.log(arr1);
     this.objectarray = [];//arr1.split('• ')
@@ -316,41 +320,41 @@ export class RequestDetailComponent implements OnInit {
     this.getRole();
     this.setrejectbutton(this.routegetdata.id);
     this.publishForm = this.fb.group({
-      intranet_url: new FormControl('',[
+      intranet_url: new FormControl('', [
         Validators.required,
         Validators.pattern(urlregex),
       ]),
-      internet_url: new FormControl('',[
+      internet_url: new FormControl('', [
         Validators.required,
         Validators.pattern(urlregex),
       ]),
     });
     this.getTrainingHours();
-    console.log("learner guideline",this.routegetdata.learner_guideline);
+    console.log("learner guideline", this.routegetdata.learner_guideline);
     let learner_guideline = this.routegetdata.learner_guideline;
     console.log(JSON.parse(learner_guideline));
-    console.log("new learnerGuidelines",this.learnerGuidelines);
-   //this.getImageUrl();
-   console.log("getprofileDetails",this.getprofileDetails.data.id);
+    console.log("new learnerGuidelines", this.learnerGuidelines);
+    //this.getImageUrl();
+    console.log("getprofileDetails", this.getprofileDetails.data.id);
 
   }
-  getImageUrl(): void{
+  getImageUrl(): void {
     this.imgUrl = `https://orange.mindscroll.info/public/public/${this.routegetdata.resource}`;
-    console.log("this.imgUrl",this.imgUrl);
+    console.log("this.imgUrl", this.imgUrl);
     return this.imgUrl;
   }
-  setrejectbutton(id:any) {
+  setrejectbutton(id: any) {
     this.courseService.courseHistory(id).subscribe((res: any) => {
       console.log(res);
       if (res && res.status == 1) {
         let history = res.data;
         this.showrejectbutton = history[history.length - 1].action_by;
-        console.log("showrejectbutton",this.showrejectbutton)
+        console.log("showrejectbutton", this.showrejectbutton)
       }
     })
   }
 
-  closeModal(){
+  closeModal() {
     this.modalService.dismissAll();
   }
 

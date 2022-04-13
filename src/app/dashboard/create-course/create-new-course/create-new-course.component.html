@@ -515,13 +515,17 @@
                                                             </i>
                                                         </a>
                                                     </label>
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="upload_field" style="width:100%">
+                                                    <div>
+                                                        <div class="upload_field mb-2" style="width:100%">
                                                             <input type="file" id="exampleInputFile"
                                                                 formControlName="resource" class="upload_css"
                                                                 [(ngModel)]="showResource"
                                                                 (change)="handleFileInput($event)" />
                                                         </div>
+                                                        <span *ngIf="isFileResouce">
+                                                            Click here to <a href="{{isFileResouce}}" target="_blank"
+                                                                style="color:#ff7900">View</a>
+                                                        </span>
                                                         <div *ngIf="fileToUpload">
 
                                                             <div *ngFor="let f of fileToUpload">
@@ -794,8 +798,8 @@
                                                     </a>
                                                 </label>
                                                 <ng-select [(ngModel)]="showILTEmail"
-                                                    placeholder="Please select Instructor" [items]="preferedInstructor"  [multiple]="true"
-                                                    bindLabel="email_id" bindValue="email_id"
+                                                    placeholder="Please select Instructor" [items]="preferedInstructor"
+                                                    [multiple]="true" bindLabel="email_id" bindValue="email_id"
                                                     formControlName="email_preffered_instructor" style="width: 100%">
                                                 </ng-select>
                                                 <div class="error_message"
@@ -1189,7 +1193,9 @@
                                                         *ngIf="iltandViltForm.controls['learn_more_single'].hasError('required') && iltandViltForm.controls['learn_more_single'].touched">
                                                         Learn more cannot be blank
                                                     </div> -->
-                                                    <div class="error_message" *ngIf="iltandViltForm.controls['learn_more_single'].invalid && (iltandViltForm.controls['learn_more_single'].dirty || iltandViltForm.controls['learn_more_single'].touched)">Learn more  is not a valid URL</div>
+                                                <div class="error_message"
+                                                    *ngIf="iltandViltForm.controls['learn_more_single'].invalid && (iltandViltForm.controls['learn_more_single'].dirty || iltandViltForm.controls['learn_more_single'].touched)">
+                                                    Learn more is not a valid URL</div>
                                             </div>
                                         </div>
                                         <!--colend-->
@@ -1338,7 +1344,8 @@
                                         (click)="getPublisher()">
                                         <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                                     </button>
-                                    <button *ngIf="getUserrole.id == 4 && (showrejectbutton != getprofileDetails.data.id || showStatus =='draft')"
+                                    <button
+                                        *ngIf="getUserrole.id == 4 && (showrejectbutton != getprofileDetails.data.id || showStatus =='draft')"
                                         class="btn btn-primary ml-2" data-toggle="modal" data-target="#publish">
                                         Publish
                                     </button>
@@ -1467,7 +1474,9 @@
                                                             class="langu_css" />
                                                     </a>
                                                 </div>
-                                                <div class="error_message" *ngIf="currriculumForm.controls['learn_more_single'].invalid && (currriculumForm.controls['learn_more_single'].dirty || currriculumForm.controls['learn_more_single'].touched)">Learn more  is not a valid URL</div>
+                                                <div class="error_message"
+                                                    *ngIf="currriculumForm.controls['learn_more_single'].invalid && (currriculumForm.controls['learn_more_single'].dirty || currriculumForm.controls['learn_more_single'].touched)">
+                                                    Learn more is not a valid URL</div>
                                                 <!-- <div class="error_message"
                                                         *ngIf="currriculumForm.controls['learn_more_single'].hasError('required') && currriculumForm.controls['learn_more_single'].touched">
                                                         Learn more cannot be blank
@@ -1848,7 +1857,8 @@
                                         (click)="getPublisher()">
                                         <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                                     </button>
-                                    <button *ngIf="getUserrole.id == 4 && (showrejectbutton != getprofileDetails.data.id || showStatus =='draft')"
+                                    <button
+                                        *ngIf="getUserrole.id == 4 && (showrejectbutton != getprofileDetails.data.id || showStatus =='draft')"
                                         class="btn btn-primary ml-2" data-toggle="modal" data-target="#publish">
                                         Publish
                                     </button>
@@ -2069,7 +2079,8 @@
                                         (click)="getPublisher()">
                                         <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                                     </button>
-                                    <button *ngIf="getUserrole.id == 4 && (showrejectbutton != getprofileDetails.data.id || showStatus =='draft')"
+                                    <button
+                                        *ngIf="getUserrole.id == 4 && (showrejectbutton != getprofileDetails.data.id || showStatus =='draft')"
                                         class="btn btn-primary ml-2" data-toggle="modal" data-target="#publish">
                                         Publish
                                     </button>
@@ -2246,7 +2257,8 @@
                                         (click)="getPublisher()">
                                         <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                                     </button>
-                                    <button *ngIf="getUserrole.id == 4 && (showrejectbutton != getprofileDetails.data.id || showStatus =='draft')"
+                                    <button
+                                        *ngIf="getUserrole.id == 4 && (showrejectbutton != getprofileDetails.data.id || showStatus =='draft')"
                                         class="btn btn-primary ml-2" data-toggle="modal" data-target="#publish">
                                         Publish
                                     </button>
@@ -2548,7 +2560,8 @@
                                         (click)="getPublisher()">
                                         <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                                     </button>
-                                    <button *ngIf="getUserrole.id == 4 && (showrejectbutton != getprofileDetails.data.id || showStatus =='draft')"
+                                    <button
+                                        *ngIf="getUserrole.id == 4 && (showrejectbutton != getprofileDetails.data.id || showStatus =='draft')"
                                         class="btn btn-primary ml-2" data-toggle="modal" data-target="#publish">
                                         Publish
                                     </button>
@@ -2851,7 +2864,8 @@
                                         (click)="getPublisher()">
                                         <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                                     </button>
-                                    <button *ngIf="getUserrole.id == 4 && (showrejectbutton != getprofileDetails.data.id || showStatus =='draft')"
+                                    <button
+                                        *ngIf="getUserrole.id == 4 && (showrejectbutton != getprofileDetails.data.id || showStatus =='draft')"
                                         class="btn btn-primary ml-2" data-toggle="modal" data-target="#publish">
                                         Publish
                                     </button>
@@ -3026,10 +3040,10 @@
                 <!--ocl-->
             </div>
             <div class="modal-footer">
-               
+
                 <button type="button" class="btn btn-primary" data-dismiss="modal"
                     (click)="gettitlelanguage()">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -3065,10 +3079,10 @@
                 <!--ocl-->
             </div>
             <div class="modal-footer">
-               
+
                 <button type="button" class="btn btn-primary" data-dismiss="modal"
                     (click)="gettitlelanguage()">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -3104,10 +3118,10 @@
                 <!--ocl-->
             </div>
             <div class="modal-footer">
-               
+
                 <button type="button" class="btn btn-primary" data-dismiss="modal"
                     (click)="gettitlelanguage()">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -3143,10 +3157,10 @@
                 <!--ocl-->
             </div>
             <div class="modal-footer">
-                
+
                 <button type="button" class="btn btn-primary" data-dismiss="modal"
                     (click)="gettitlelanguage()">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -3183,10 +3197,10 @@
                 <!--ocl-->
             </div>
             <div class="modal-footer">
-                
+
                 <button type="button" class="btn btn-primary" data-dismiss="modal"
                     (click)="gettitlelanguage()">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -3223,10 +3237,10 @@
                 <!--ocl-->
             </div>
             <div class="modal-footer">
-               
+
                 <button type="button" class="btn btn-primary" data-dismiss="modal"
                     (click)="gettitlelanguage()">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -3264,10 +3278,10 @@
                 <!--ocl-->
             </div>
             <div class="modal-footer">
-              
+
                 <button type="button" class="btn btn-primary" data-dismiss="modal"
                     (click)="gettitlelanguage()">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -3314,10 +3328,10 @@
                 <!--ocl-->
             </div>
             <div class="modal-footer">
-               
+
                 <button type="button" class="btn btn-primary" data-dismiss="modal"
                     (click)="gettitlelanguage()">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -3354,10 +3368,10 @@
                 <!--ocl-->
             </div>
             <div class="modal-footer">
-                
+
                 <button type="button" class="btn btn-primary" data-dismiss="modal"
                     (click)="gettitlelanguage()">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -3411,8 +3425,8 @@
                                 <label>Additional Comments</label>
                                 <!--  formControlName="additional_comment" -->
                                 <!-- formControlName="additional_comment" -->
-                                <textarea class="form-control form_width-textarea"  rows="3" formControlName="status_comment"
-                                    placeholder="Enter Your Comments"></textarea>
+                                <textarea class="form-control form_width-textarea" rows="3"
+                                    formControlName="status_comment" placeholder="Enter Your Comments"></textarea>
                             </div>
                         </div>
                         <!--col end-->
@@ -3421,7 +3435,9 @@
                                 <label>Orange Learning Intrance URL(SSO)</label>
                                 <input type="text " placeholder="Enter Orange Learning Intrance URL(SSO) "
                                     class="form-control form_width" formControlName="intranet_url" />
-                                    <div class="error_message" *ngIf="publishForm.controls['intranet_url'].invalid && (publishForm.controls['intranet_url'].dirty || publishForm.controls['intranet_url'].touched)">Orange Learning Intrance URL is not a valid URL</div>
+                                <div class="error_message"
+                                    *ngIf="publishForm.controls['intranet_url'].invalid && (publishForm.controls['intranet_url'].dirty || publishForm.controls['intranet_url'].touched)">
+                                    Orange Learning Intrance URL is not a valid URL</div>
                             </div>
                         </div>
                         <!--col end-->
@@ -3430,7 +3446,9 @@
                                 <label>Orange Learning Internet URL</label>
                                 <input type="text " placeholder="Enter Orange Learning Internet URL "
                                     class="form-control form_width" formControlName="internet_url" />
-                                    <div class="error_message" *ngIf="publishForm.controls['internet_url'].invalid && (publishForm.controls['internet_url'].dirty || publishForm.controls['internet_url'].touched)">Orange Learning Internet URL is not a valid URL</div>
+                                <div class="error_message"
+                                    *ngIf="publishForm.controls['internet_url'].invalid && (publishForm.controls['internet_url'].dirty || publishForm.controls['internet_url'].touched)">
+                                    Orange Learning Internet URL is not a valid URL</div>
                             </div>
                         </div>
                         <!--col end-->
@@ -3444,7 +3462,7 @@
                     (click)="createUpdateCourse('publish')">
                     Publish
                 </button>
-                
+
             </div>
         </div>
     </div>
