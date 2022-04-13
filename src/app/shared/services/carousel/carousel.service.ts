@@ -37,4 +37,9 @@ export class CarouselService {
       .get(url, this.http.headers)
       .pipe(catchError(this.commmonService.Errorhandling));
   }
+
+  carouselHistory(data:any){
+    const url =`api/${this.apiVersion}/carousel/${data}/history`;
+    return this.http.get(url,this.http.headers).pipe(catchError(this.commmonService.Errorhandling))
+  }
 }

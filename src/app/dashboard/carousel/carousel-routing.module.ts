@@ -11,6 +11,7 @@ import { CarouselViewComponent } from './carousel-view/carousel-view.component';
 const routes: Routes = [
   {path:'',component:CarouselListComponent,canActivate:[AuthenticationServiceGuard]},
   {path:'create',component:CreateCarouselComponent,canActivate:[AuthenticationServiceGuard]},
+  {path:'update/:id',component:CreateCarouselComponent,canActivate:[AuthenticationServiceGuard]},
   {path:'view/:id',component:CarouselViewComponent,canActivate:[AuthenticationServiceGuard]},
 ];
 

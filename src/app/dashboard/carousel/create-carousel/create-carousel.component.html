@@ -246,7 +246,7 @@
                                                         title="Provide the date on which this entry should be removed from the Orange Learning Carousel. If the Expiry Date is unknown, the entry will be available in the Carousel for a maximum of 3 months."></i>
                                                 </a>
                                             </label>
-                                            <select class="form-control form_width" formControlName="expiry_date">
+                                            <select class="form-control form_width" formControlName="expiry_type">
                                                 <option value="">Please Select expiry</option>
                                                 <option *ngFor="let cctExpiry of cctExpiryperiod"
                                                     [value]="cctExpiry.id">
@@ -254,9 +254,9 @@
                                                 </option>
                                             </select>
                                             <div
-                                                *ngIf="(createOlcarouselForm.controls['expiry_date'].invalid && (createOlcarouselForm.controls['expiry_date'].dirty || createOlcarouselForm.controls['expiry_date'].touched)) || isSubmitted">
+                                                *ngIf="(createOlcarouselForm.controls['expiry_type'].invalid && (createOlcarouselForm.controls['expiry_type'].dirty || createOlcarouselForm.controls['expiry_type'].touched)) || isSubmitted">
                                                 <div class="error_message"
-                                                    *ngIf="createOlcarouselForm.controls['expiry_date'].errors?.required">
+                                                    *ngIf="createOlcarouselForm.controls['expiry_type'].errors?.required">
                                                     Expiry Type cannot be blank
                                                 </div>
                                             </div>
@@ -283,9 +283,9 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button class="btn btn-primary" type="submit"
+                                <button class="btn btn-primary mr-1" type="submit"
                                     (click)="saveCarousel('pending')">Submit</button>
-                                <button class="btn btn-secondary mr-1" (click)="saveCarousel('draft')">
+                                <button class="btn btn-secondary" (click)="saveCarousel('draft')">
                                     Save as draft
                                 </button>
                             </div>

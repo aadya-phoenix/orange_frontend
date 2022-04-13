@@ -9,6 +9,7 @@ import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateCarouselComponent } from './create-carousel/create-carousel.component';
 import { CarouselViewComponent } from './carousel-view/carousel-view.component';
+import { CarouselHistoryComponent } from './carousel-history/carousel-history.component';
 
 
 
@@ -17,7 +18,9 @@ import { CarouselViewComponent } from './carousel-view/carousel-view.component';
     CarouselListComponent,
     CreateCarouselComponent,
     CarouselViewComponent,
+    CarouselHistoryComponent,
   ],
+  entryComponents:[CarouselHistoryComponent],
   imports: [
     CommonModule,
     CarouselRoutingModule,

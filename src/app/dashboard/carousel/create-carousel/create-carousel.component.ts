@@ -38,7 +38,7 @@ export class CreateCarouselComponent implements OnInit {
       metadata: this.formBuilder.array([]),
       image: new FormControl('', [Validators.required]),
       publication_date: new FormControl('', [Validators.required]),
-      expiry_date: new FormControl('', [Validators.required]),
+      expiry_type: new FormControl('', [Validators.required]),
       additional_comment: new FormControl('', [Validators.required]),
     });
     this.getLanguageList();
@@ -58,13 +58,15 @@ export class CreateCarouselComponent implements OnInit {
   }
 
   newMetaData(language: { id: any; name: any; slug: any; }): FormGroup {
-    return this.formBuilder.group({ language: language.id, languageName: language.name, language_slug: language.slug, 
-      title: new FormControl('', [Validators.required]), 
-      description: new FormControl('', [Validators.required]), 
-      link: new FormControl('', [Validators.required,  Validators.pattern( new RegExp(
+    return this.formBuilder.group({
+      language: language.id, languageName: language.name, language_slug: language.slug,
+      title: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+      link: new FormControl('', [Validators.required, Validators.pattern(new RegExp(
         `${dataConstant.UrlPattern}`,
         'i'
-      ))]), display_manager: 0 })
+      ))]), display_manager: 0
+    })
   }
 
   getTotalCourse() {
@@ -81,12 +83,14 @@ export class CreateCarouselComponent implements OnInit {
   getLanguageList() {
     this.commonService.getLanguages().subscribe(
       (res: any) => {
-        this.languageList = res.data;
+        this.languageList = res.data.filter((x: { carousel_show: number; }) => x.carousel_show === 1);
         this.languageText = this.languageList.map((x: { name: string }) => x.name).join('/');
-        this.languageList.forEach((x: { name: string, id: number, slug: string }) => {
-          this.lauguageFormArray.push(new FormControl(x.slug === 'english' ? true : false));
-          if (x.slug === 'english') {
-            this.carouselFormArray.push(this.newMetaData(x));
+        this.languageList.forEach((x: { name: string, id: number, slug: string, carousel_show: number }) => {
+          if (x.carousel_show === 1) {
+            this.lauguageFormArray.push(new FormControl(x.slug === 'english' ? true : false));
+            if (x.slug === 'english') {
+              this.carouselFormArray.push(this.newMetaData(x));
+            }
           }
         });
       },

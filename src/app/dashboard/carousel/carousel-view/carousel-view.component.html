@@ -64,44 +64,34 @@
     </div>
     <div class="content" style="background-image: url('../../../../assets/images/viewbac.jpg');">
         <div class="animated fadeIn">
-            <!-- <div class="card"
-            *ngIf="getUserrole.id != 2 && !routegetdata.issave  && showbuttons =='true' && showrejectbutton != getprofileDetails.data.id">
-            <div class="card-body">
-              <div class="Requs_btn_inl">
-                <div class="Requs_btn_inl-child">
-                  <button type="button" class="btn btn-primary  ml-2" data-toggle="modal" data-target="#publishModal"
-                    *ngIf="getUserrole.id == 4 && status != 'publish' && showrejectbutton != getprofileDetails.data.id">
-                    <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
-                  </button>
-  
-                  <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal"
-                    data-target="#exampleModal"
-                    *ngIf="getUserrole.id == 3 && status != 'publish' && showrejectbutton != getprofileDetails.data.id"
-                    (click)="getPublisher()">
-                    <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1"> Transfer to Publisher</span>
-  
-                  </button>
-  
-                  <button class="btn btn-primary btn_requst ml-2" (click)="updateCource()"
-                    *ngIf="status != 'publish' && showrejectbutton != getprofileDetails.data.id">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">Update</span>
-                  </button>
-                  <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal"
-                    data-target="#rejectModal"
-                    *ngIf="(getUserrole.id == 3 || getUserrole.id == 4) && status != 'publish' && showrejectbutton != getprofileDetails.data.id"
-                    (click)="getPublisher()">
-                    <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
-                  </button>
+            <div class="card">
+                <div class="card-body">
+                    <div class="Requs_btn_inl">
+                        <div class="Requs_btn_inl-child">
+                            <button type="button" class="btn btn-primary  ml-2" data-toggle="modal"
+                                data-target="#publishModal">
+                                <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
+                            </button>
+
+                            <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal"
+                                data-target="#exampleModal" (click)="getPublisher()">
+                                <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1"> Transfer to
+                                    Publisher</span>
+
+                            </button>
+
+                            <button class="btn btn-primary btn_requst ml-2" (click)="updateCource()">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span
+                                    class="pl-1">Update</span>
+                            </button>
+                            <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal"
+                                data-target="#rejectModal" (click)="getPublisher()">
+                                <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="Requs_btn_inl-child1">
-                  <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal"
-                    data-target="#transferotherRoc" (click)="transferOtherroc()">
-                    <i class="fa fa-exchange" aria-hidden="true"></i><span class="pl-1">Transfer to Other ROC</span>
-                  </button>
-                </div>
-              </div>
             </div>
-          </div> -->
             <div class="row mb-3">
                 <div class="col-12">
                     <div class="card border-radius-0">
@@ -193,54 +183,54 @@
         </div>
         <ngb-accordion #acc="ngbAccordion">
             <ngb-panel *ngFor="let meta of requestdata.metadata; let i = index">
-              <ng-template ngbPanelTitle>
-                <span>Carousal {{i+1}}</span>
-              </ng-template>
-              <ng-template ngbPanelContent>
-                <div class="card-body p-2">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Language</label>
-                            <div class="d-flex align-items-center">
-                                <span class="form-control form_width">
-                                    {{meta.language_slug | titlecase}}
-                                </span>
+                <ng-template ngbPanelTitle>
+                    <span>Carousal {{i+1}}</span>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                    <div class="card-body p-2">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Language</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.language_slug | titlecase}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Title</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.title}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Description</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.description}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Show carousal only to manager</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.display_manager===1?'Yes':'No'}}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Title</label>
-                            <div class="d-flex align-items-center">
-                                <span class="form-control form_width">
-                                    {{meta.title}}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Description</label>
-                            <div class="d-flex align-items-center">
-                                <span class="form-control form_width">
-                                    {{meta.description}}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Show carousal only to manager</label>
-                            <div class="d-flex align-items-center">
-                                <span class="form-control form_width">
-                                    {{meta.display_manager===1?'Yes':'No'}}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-              </ng-template>
+                </ng-template>
             </ngb-panel>
-          </ngb-accordion>
+        </ngb-accordion>
     </div>
 </div>
