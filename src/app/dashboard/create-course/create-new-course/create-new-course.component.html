@@ -519,6 +519,7 @@
                                                         <div class="upload_field" style="width:100%">
                                                             <input type="file" id="exampleInputFile"
                                                                 formControlName="resource" class="upload_css"
+                                                                [(ngModel)]="showResource"
                                                                 (change)="handleFileInput($event)" />
                                                         </div>
                                                         <div *ngIf="fileToUpload">
@@ -3420,7 +3421,7 @@
                                 <label>Orange Learning Intrance URL(SSO)</label>
                                 <input type="text " placeholder="Enter Orange Learning Intrance URL(SSO) "
                                     class="form-control form_width" formControlName="intranet_url" />
-                                    <div class="error_message" *ngIf="publishForm.controls['intranet_url'].invalid && (publishForm.controls['intranet_url'].dirty || publishForm.controls['intranet_url'].touched)">Learn more  is not a valid URL</div>
+                                    <div class="error_message" *ngIf="publishForm.controls['intranet_url'].invalid && (publishForm.controls['intranet_url'].dirty || publishForm.controls['intranet_url'].touched)">Orange Learning Intrance URL is not a valid URL</div>
                             </div>
                         </div>
                         <!--col end-->
@@ -3429,7 +3430,7 @@
                                 <label>Orange Learning Internet URL</label>
                                 <input type="text " placeholder="Enter Orange Learning Internet URL "
                                     class="form-control form_width" formControlName="internet_url" />
-                                    <div class="error_message" *ngIf="publishForm.controls['internet_url'].invalid && (publishForm.controls['internet_url'].dirty || publishForm.controls['internet_url'].touched)">Learn more  is not a valid URL</div>
+                                    <div class="error_message" *ngIf="publishForm.controls['internet_url'].invalid && (publishForm.controls['internet_url'].dirty || publishForm.controls['internet_url'].touched)">Orange Learning Internet URL is not a valid URL</div>
                             </div>
                         </div>
                         <!--col end-->

@@ -15,6 +15,7 @@ export class RequestDetailComponent implements OnInit {
   public commonCreateCourceForm!: FormGroup;
   public publishForm!: FormGroup;
   public learnerGuidelines: any = [];
+  public emailPrefferedEmail:any=[];
   public curriculumContent: any = [];
   purchaseOrder:any;
   getUserrole: any;
@@ -49,6 +50,9 @@ export class RequestDetailComponent implements OnInit {
     }
     this.learnerGuidelines = JSON.parse(this.routegetdata['learner_guideline']);
     this.curriculumContent = JSON.parse(this.routegetdata['learner_guideline']);
+    if(this.routegetdata['email_preffered_instructor']){
+      this.emailPrefferedEmail = JSON.parse(this.routegetdata['email_preffered_instructor']);
+    }
     this.routegetdata['titleByLang'] = this.courseService.getTText(this.routegetdata['title']);
     this.routegetdata['descriptionByLang'] = this.courseService.getTText(this.routegetdata['description']);
     this.routegetdata['objectiveByLang'] = this.courseService.getTText(this.routegetdata['objective']);
@@ -189,6 +193,7 @@ export class RequestDetailComponent implements OnInit {
 
   PublishRequest(){
     let transferobj = { course_id: this.routegetdata.id, transfer_id: this.selectedPublisher, status: 'publish', intranet_url: this.publishForm.value.intranet_url, internet_url: this.publishForm.value.internet_url };
+    if(this.publishForm.valid){
     this.courseService.courceStatus(transferobj).subscribe(
       (res: any) => {
         console.log(res);
@@ -200,6 +205,10 @@ export class RequestDetailComponent implements OnInit {
         console.log(err);
       }
     );    
+   }
+   else{
+     console.log("form invalid");
+   }
   }
   reject() {
     let statusobj = { course_id: this.routegetdata.id, status: 'reject', status_comment: this.rejectcomment }

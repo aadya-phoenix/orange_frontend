@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/observable/fromEvent';
-import { Subscription } from 'rxjs';
+import { iif, Subscription } from 'rxjs';
 import { ToolbarService, HtmlEditorService } from '@syncfusion/ej2-angular-richtexteditor';
 
 import {
@@ -160,7 +160,7 @@ export class CreateNewCourseComponent implements OnInit {
       },
       'each': {
         "material_source": [Validators.required],
-        "url": [Validators.required]
+        "url": [Validators.required,Validators.pattern(urlregex)]
       }
     },
     '4':
@@ -289,8 +289,9 @@ export class CreateNewCourseComponent implements OnInit {
   showMaterialUploadchecked: boolean = false;
 
   showILTWhoSee: any;
-  showILTEmail: any;
+  showILTEmail: any=[];
   showILTForWhom: any;
+  showResource:any;
   showILTLearnMore: any;
   showILTtitleAdditional: any;
   showILTEntity: any;
@@ -349,7 +350,8 @@ export class CreateNewCourseComponent implements OnInit {
       this.showobjective = this.courceService.getTText(this.routergetdata.objective);
       this.showdescription = this.courceService.getTText(this.routergetdata.description)
       this.showforwhoom = this.courceService.getTText(this.routergetdata.for_whoom)
-      this.showlearnmore = this.courceService.getTText(this.routergetdata.learn_more)
+      this.showlearnmore = this.courceService.getTText(this.routergetdata.learn_more);
+      this.showResource = this.routergetdata.resource;
       if (this.learningType != "6") {
         if (this.routergetdata.resource != null) {
           let objectdata: any = {
@@ -388,6 +390,7 @@ export class CreateNewCourseComponent implements OnInit {
         //this.showILTExiryType = Number(this.routergetdata.entity_business_area)
         this.showILTRegional = Number(this.routergetdata.regional_cordinator)
         this.showILTVendorName = this.routergetdata.external_vendor_name
+        console.log("prefered instructor",this.showILTEmail);
         if (this.routergetdata.certification == "yes") {
           this.showCertificateExpiry = true
         }
@@ -454,7 +457,13 @@ export class CreateNewCourseComponent implements OnInit {
       }
       else if (this.routergetdata.learning_type == "6") {
         this.showPlaylistTargetAudience = this.routergetdata['level'] == "1" ? "yes" : "no";
-        this.showPlaylistEmail = this.routergetdata.for_whoom.toString().replace('"', '').replace('"', '')
+        this.showPlaylistEmail = this.routergetdata.for_whoom.toString().replace('"', '').replace('"', '');
+        if (this.routergetdata.level == "yes"){
+          this.regionTargetAudience = true;
+        }
+        else{
+          this.regionTargetAudience = false;
+        }
       }
     }
   }
@@ -738,7 +747,7 @@ export class CreateNewCourseComponent implements OnInit {
       objective: new FormControl(''),
       level: new FormControl('', [Validators.required]),
       subject: new FormControl('', [Validators.required]),
-      additional_comment: new FormControl(''),
+      /* additional_comment: new FormControl(''), */
       prerequisite: new FormControl(''),
       keyword: new FormControl('', [Validators.required]),
       email_content_owner: new FormControl('', [
@@ -833,7 +842,7 @@ export class CreateNewCourseComponent implements OnInit {
 
     //video based
     this.videobasedForm = this.fb.group({
-      video_link: new FormControl(''),
+      video_link: new FormControl('',Validators.pattern(urlregex)),
       additional_comment: new FormControl(''),
       // email_preffered_instructor: new FormControl('', [Validators.required,
       //   Validators.pattern(emailregexp)]),
@@ -847,7 +856,7 @@ export class CreateNewCourseComponent implements OnInit {
     this.materialbasedForm = this.fb.group({
       //material based          
       material_source: new FormControl(''),
-      url: new FormControl(''),
+      url: new FormControl('',Validators.pattern(urlregex)),
       additional_comment: new FormControl(''),
       regional_cordinator:
         this.getUserrole.id === 2
@@ -915,7 +924,7 @@ export class CreateNewCourseComponent implements OnInit {
       for_whoom: new FormControl('', [Validators.required,
       Validators.pattern(emailregexp)]),
       additional_comment: new FormControl(''),
-      url: new FormControl('', [Validators.required]),
+      url: new FormControl('', [Validators.required, Validators.pattern(urlregex)]),
       video_link: new FormControl('', [Validators.required]),
       level: new FormControl('', [Validators.required]),
       who_see_course: new FormControl(''),
@@ -1069,6 +1078,7 @@ export class CreateNewCourseComponent implements OnInit {
           this.addLearnerGuideline(element.title, element.description);
         });
         this.iltandViltForm.patchValue(this.routergetdata);
+        
       }
       else if (this.learningType == "2") {
         this.videobasedForm.patchValue(this.routergetdata);
@@ -1115,6 +1125,7 @@ export class CreateNewCourseComponent implements OnInit {
         this.playlistForm.patchValue(this.routergetdata);
       }
       console.log(this.routergetdata);
+      
 
       //this.commonCreateCourceForm.value.subject = this.routergetdata.subject;
 
@@ -1705,12 +1716,15 @@ export class CreateNewCourseComponent implements OnInit {
       }
       else if (status == "publish") {
         console.log("publisheddd");
-        debugger;
+        //debugger;
         totalObj.intranet_url = this.publishForm.value.intranet_url;
         totalObj.internet_url = this.publishForm.value.internet_url;
         totalObj.publisher_id = this.selectedPublisherId;
         totalObj.status_comment = this.publishForm.value.status_comment;
+        this.getFormValidationErrors(this.publishForm);
         if (totalObj.course_id) {
+          if(this.publishForm.valid){
+            console.log("form valid");
           this.courceService.updateCourse(totalObj).subscribe(
             (res: any) => {
               console.log("update course", res);
@@ -1736,6 +1750,11 @@ export class CreateNewCourseComponent implements OnInit {
               console.log(err);
             }
           );
+          }
+          else{
+            this.publishForm.markAllAsTouched();
+            console.log("invalid publish form")
+          }
         }
         else {
           this.courceService.createCource(totalObj).subscribe(

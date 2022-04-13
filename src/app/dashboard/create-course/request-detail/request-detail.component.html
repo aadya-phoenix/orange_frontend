@@ -489,19 +489,17 @@
                     <div class="col-sm-12">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Email of the preffered Instructor</label>
-                        <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                            {{
-                            routegetdata.email_preffered_instructor
-                            ? routegetdata.email_preffered_instructor
-                            : "-"
-                            }}
+                        <div>
+                          <span class="form-control form_width d-flex" id="exampleInputEmail1"
+                          style="flex-direction: column;" disabled>
+                            <span *ngFor="let email of emailPrefferedEmail">
+                              {{ email }}
+                            </span>
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             title="Tooltip on top">
                             <i class="fa fa-files-o" aria-hidden="true"></i></a>
                         </div>
-
                       </div>
 
                     </div>
@@ -603,7 +601,7 @@
                     </div>
                     <!--cole dn-->
 
-                    <div class="col-sm-12" *ngIf="routegetdata.certification_expiry_type_name !=''">
+                    <div class="col-sm-12" *ngIf="routegetdata.certification_expiry_type_name">
                       <div class="form-group">
                         <label for="exampleInputEmail1"> Certification Expiry type</label>
                         <div class="d-flex align-items-center">
@@ -624,7 +622,7 @@
 
                     </div>
                     <!--cole dn-->
-                    <div class="col-sm-12" *ngIf="routegetdata.validity_period_name !=''">
+                    <div class="col-sm-12" *ngIf="routegetdata.validity_period_name">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Validity period</label>
                         <div class="d-flex align-items-center">
@@ -644,7 +642,7 @@
                       </div>
 
                     </div>
-                    <div class="col-sm-12" *ngIf="routegetdata.external_vendor !=''">
+                    <div class="col-sm-12" *ngIf="routegetdata.external_vendor">
                       <div class="form-group">
                         <label for="exampleInputEmail1">External Vendor</label>
                         <div class="d-flex align-items-center">
@@ -664,7 +662,7 @@
 
                     </div>
                     <!--cole dn-->
-                    <div class="col-sm-12" *ngIf="routegetdata.free_field_content !=''">
+                    <div class="col-sm-12" *ngIf="routegetdata.free_field_content">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Free Field Content</label>
                         <div class="d-flex align-items-center">
@@ -684,7 +682,7 @@
 
                     </div>
                     <!--cole dn-->
-                    <div class="col-sm-12" *ngIf="routegetdata.external_vendor_name !=''">
+                    <div class="col-sm-12" *ngIf="routegetdata.external_vendor_name">
                       <div class="form-group">
                         <label for="exampleInputEmail1">External Vendor name</label>
                         <div class="d-flex align-items-center">
@@ -856,7 +854,7 @@
                                               <strong>Material Based Training</strong>
                                           </div>
                                           <div>&nbsp;</div> -->
-                    <div class="col-sm-12" *ngIf="routegetdata.url != null">
+                    <div class="col-sm-12" *ngIf="routegetdata.url">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Material Source URL</label>
                         <div class="d-flex align-items-center">
@@ -875,7 +873,7 @@
                       </div>
 
                     </div>
-                    <div class="col-sm-12" *ngIf="routegetdata.material_source != null">
+                    <div class="col-sm-12" *ngIf="routegetdata.material_source">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Uploaded Material</label>
                         <div class="d-flex align-items-center">
@@ -1107,7 +1105,7 @@
 
                     </div>
                     <!--cole dn-->
-                    <div class="col-sm-12" *ngIf="routegetdata.certification_expiry_type_name != ''">
+                    <div class="col-sm-12" *ngIf="routegetdata.certification_expiry_type_name">
                       <div class="form-group">
                         <label for="exampleInputEmail1"> Certification Expiry type name</label>
                         <div class="d-flex align-items-center">
@@ -1128,7 +1126,7 @@
 
                     </div>
                     <!--cole dn-->
-                    <div class="col-sm-12" *ngIf="routegetdata.validity_period_name != '' ">
+                    <div class="col-sm-12" *ngIf="routegetdata.validity_period_name">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Validity period</label>
                         <div class="d-flex align-items-center">
@@ -1273,7 +1271,7 @@
 
                     </div>
                     <!--cole dn-->
-                    <div class="col-sm-12" *ngIf="routegetdata.certification_expiry_type_name != '' || routegetdata.certification_expiry_type_name != null">
+                    <div class="col-sm-12" *ngIf="routegetdata.certification_expiry_type_name">
                       <div class="form-group">
                         <label for="exampleInputEmail1"> Certification Expiry type name</label>
                         <div class="d-flex align-items-center">
@@ -1294,7 +1292,7 @@
 
                     </div>
                     <!--cole dn-->
-                    <div class="col-sm-12" *ngIf="routegetdata.validity_period_name != '' ||routegetdata.validity_period_name != null">
+                    <div class="col-sm-12" *ngIf="routegetdata.validity_period_name">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Validity period</label>
                         <div class="d-flex align-items-center">
@@ -1314,7 +1312,7 @@
                       </div>
 
                     </div>
-                    <div class="col-sm-12" *ngIf="routegetdata.external_vendor != '' || routegetdata.external_vendor != null">
+                    <div class="col-sm-12" *ngIf="routegetdata.external_vendor">
                       <div class="form-group">
                         <label for="exampleInputEmail1">External Vendor</label>
                         <div class="d-flex align-items-center">
@@ -1334,7 +1332,7 @@
 
                     </div>
                     <!--cole dn-->
-                    <div class="col-sm-12" *ngIf="routegetdata.external_vendor_name != '' || routegetdata.external_vendor_name != null">
+                    <div class="col-sm-12" *ngIf="routegetdata.external_vendor_name">
                       <div class="form-group">
                         <label for="exampleInputEmail1">External Vendor name</label>
                         <div class="d-flex align-items-center">
@@ -1453,7 +1451,7 @@
 
                       </div>
                     </div>
-                    <div class="col-sm-12" *ngIf="routegetdata.target_audience_name != '' || routegetdata.target_audience_name != null">
+                    <div class="col-sm-12" *ngIf="routegetdata.target_audience_name">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Target audience</label>
                         <div class="d-flex align-items-center">
@@ -1471,7 +1469,7 @@
 
                       </div>
                     </div>
-                    <div class="col-sm-12" *ngIf="routegetdata.email_preffered_instructor != '' || routegetdata.email_preffered_instructor != null">
+                    <div class="col-sm-12" *ngIf="routegetdata.email_preffered_instructor">
                       <div class="form-group">
                         <label for="exampleInputEmail1">OBS employees in specific Functions/Divisions</label>
                         <div class="d-flex align-items-center">
@@ -1699,7 +1697,7 @@
                   <label>Orange Learning Intrance URL(SSO)</label>
                   <input type="text" placeholder="Enter Orange Learning Intrance URL(SSO)"
                     class="form-control form_width1" formControlName="intranet_url" />
-                    <div class="error_message" *ngIf="publishForm.controls['intranet_url'].invalid && (publishForm.controls['intranet_url'].dirty || publishForm.controls['intranet_url'].touched)">Learn more  is not a valid URL</div>
+                    <div class="error_message" *ngIf="publishForm.controls['intranet_url'].invalid && (publishForm.controls['intranet_url'].dirty || publishForm.controls['intranet_url'].touched)">Orange Learning Intrance URL  is not a valid URL</div>
                 </div>
               </div>
               <!--col end-->
@@ -1708,7 +1706,7 @@
                   <label>Orange Learning Internet URL</label>
                   <input type="text" class="form-control form_width1" placeholder="Enter Orange Learning Internet URL"
                     formControlName="internet_url" />
-                    <div class="error_message" *ngIf="publishForm.controls['internet_url'].invalid && (publishForm.controls['internet_url'].dirty || publishForm.controls['internet_url'].touched)">Learn more  is not a valid URL</div>
+                    <div class="error_message" *ngIf="publishForm.controls['internet_url'].invalid && (publishForm.controls['internet_url'].dirty || publishForm.controls['internet_url'].touched)">Orange Learning Internet URL is not a valid URL</div>
                 </div>
               </div>
               <!--col end-->
