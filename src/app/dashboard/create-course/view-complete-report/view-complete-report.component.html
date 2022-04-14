@@ -1,9 +1,9 @@
 <div id="right-panel" class="right-panel">
     <app-header></app-header>
 
-    <div class="breadcrumbs" style="background-color: #fbfbf7; padding: 6px 9px 6px 9px">
+    <div class="breadcrumbs cm_breadcums">
         <div class="col-sm-7">
-            <div class="page-header float-left" style="background: transparent">
+            <div class="page-header float-left">
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/first.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
@@ -18,19 +18,19 @@
         </div>
 
         <div class="col-sm-5 float-right">
-            <div class="page-header float-right" style="background: transparent">
+            <div class="page-header float-right">
                 <div class="page-title d-flex end_just">
-                    <ol class="breadcrumb text-right" style="background: transparent">
+                    <ol class="breadcrumb text-right">
                         <li>
-                            <a href="# ">
-                                <i class="fa fa-home" style="color: #fff"></i>
+                            <a href="# " class="text_white">
+                                <i class="fa fa-home"></i>
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" style="color: #fff">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/cources/']" style="color: #fff">Create new Course</a>
+                            <a [routerLink]="['/dashboard/cources/']" class="text_white">Create new Course</a>
                         </li>
                     </ol>
                 </div>
@@ -44,7 +44,7 @@
                     <div class="col-md-12">
 
                         <div class="card">
-                            <div class="card-body" style="padding: 28px 10px;">
+                            <div class="card-body card_padding">
 
                                 <div class="row">
                                     <div class="col-sm-4">
@@ -173,11 +173,7 @@
                             </div>
                         </div>
                         <div class="card">
-                            <div class="card-header" style="
-                padding: 0.45rem 1.25rem;
-                background-color: #fff;
-                border-bottom: 1px solid #00000008;
-              ">
+                            <div class="card-header card_header_common" >
                                 <div>
                                     <span class="card-title card_overall">All request Report</span>
                                     <!-- <a href="" class="btn btn-default float-right view_all"
@@ -191,7 +187,7 @@
                                     <div class="Course_icon_child">
                                         <div class="alig_dashicon" (click)="getrecords(draftRequests)">
                                             <div>
-                                                <div class="fa-icons-des" style="background-color: #4bb4e6">
+                                                <div class="fa-icons-des bac_blue">
                                                     <img src="../../../../assets/images/icon/drafts.png" />
                                                 </div>
 
@@ -204,7 +200,7 @@
                                     <div class="Course_icon_child" *ngIf="getUserrole.id == 2">
                                         <div class="alig_dashicon" (click)="getrecords(usersubmitRequests)">
                                             <div>
-                                                <div class="fa-icons-des" style="background-color: #a885db">
+                                                <div class="fa-icons-des bac_puple">
                                                     <img src="../../../../assets/images/icon/closed.png" />
                                                 </div>
 
@@ -217,7 +213,7 @@
                                     <div class="Course_icon_child" *ngIf="getUserrole.id != 2">
                                         <div class="alig_dashicon" (click)="getrecords(submittedRequests)">
                                             <div class="sub-child-dashicon">
-                                                <div class="fa-icons-des" style="background-color: #a885db">
+                                                <div class="fa-icons-des bac_puple">
                                                     <img src="../../../../assets/images/icon/closed.png" />
                                                 </div>
 
@@ -230,7 +226,7 @@
                                     <div class="Course_icon_child" *ngIf="getUserrole.id != 2">
                                         <div class="alig_dashicon" (click)="getrecords(pendingRequests)">
                                             <div>
-                                                <div class="fa-icons-des" style="background-color: #ffd200">
+                                                <div class="fa-icons-des bac_yellow">
                                                     <img src="../../../../assets/images/icon/pending.png" />
                                                 </div>
 
@@ -243,7 +239,7 @@
                                     <div class="Course_icon_child">
                                         <div class="alig_dashicon" (click)="getrecords(closedRequests)">
                                             <div>
-                                                <div class="fa-icons-des" style="background-color: #50be87">
+                                                <div class="fa-icons-des bac_green">
                                                     <img src="../../../../assets/images/icon/check.png" />
                                                 </div>
 
@@ -256,7 +252,7 @@
                                     <div class="Course_icon_child">
                                         <div class="alig_dashicon" (click)="getrecords(rejectedRequests)">
                                             <div>
-                                                <div class="fa-icons-des" style="background-color: #ffb4e6">
+                                                <div class="fa-icons-des bac_pink">
                                                     <img src="../../../../assets/images/icon/reject.png" />
                                                 </div>
 
@@ -269,7 +265,7 @@
                                     <div class="Course_icon_child">
                                         <div class="alig_dashicon" (click)="getrecords(allCourses)">
                                             <div>
-                                                <div class="fa-icons-des" style="background-color: #085ebd">
+                                                <div class="fa-icons-des bac_blue">
                                                     <img src="../../../../assets/images/icon/viewall.png" />
                                                 </div>
 
@@ -299,8 +295,7 @@
                 <div class="col-md-12">
 
                     <div class="card">
-                        <div class="card-header"
-                            style=" padding: 0.45rem 1.25rem; background-color: #fff;border-bottom: 1px solid #00000008;color:#000">
+                        <div class="card-header card_header_common">
                             <div class="body_header_view">
                                 <span class="card_overall">View All Request Status</span>
                                 <!-- <span class="  card_overall1">Showing 1 to 50 of 2,4407items.</span> -->
@@ -308,28 +303,28 @@
                         </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-end mb-1 mt-1">
-                                <button class="btn btn-secondary mr-1" style="font-size: 12px;"
+                                <button class="btn btn-secondary mr-1 fon_12"
                                     (click)="exportToExcel()"><i class="fa fa-download mr-1"
                                         aria-hidden="true"></i>Export</button>
-                                <button class="btn btn-primary" style="font-size: 11px;" (click)="reset()"><i
+                                <button class="btn btn-primary fon_11" (click)="reset()"><i
                                         class="fa fa-refresh mr-1" aria-hidden="true"></i>Reset</button>
                             </div>
                             <div class="table-responsive table_height_scroll">
                                 <table id="excel-table" class="table table-bordered">
                                     <thead class="sticky_header">
-                                        <tr style="font-size: 13px;text-align: center;">
+                                        <tr class="text-center fon_13">
                                             <th scope="col">#</th>
                                             <th sortable="id " (sort)="onSort($event)" scope="col">Request Id</th>
                                             <th *ngIf="getUserrole.id != 2" scope="col">History</th>
                                             <th sortable="handle" (sort)="onSort($event)" scope="col"
-                                                style="width: 10%;">Status</th>
+                                               class="w_10">Status</th>
                                             <th sortable="training_title" (sort)="onSort($event)" scope="col">Traning
                                                 Title</th>
                                             <th sortable="request_email" (sort)="onSort($event)" scope="col">Request
                                                 Email</th>
                                             <th sortable="activity_type" (sort)="onSort($event)" scope="col">Send To
                                             </th>
-                                            <th scope="col" style="width: 10%;">Activity Type</th>
+                                            <th scope="col" class="w_10">Activity Type</th>
                                             <th sortable="created_at" (sort)="onSort($event)" scope="col">Create Date
                                             </th>
                                             <th *ngIf="getUserrole.id != 2" sortable="roc_name" (sort)="onSort($event)"
@@ -348,7 +343,7 @@
                                     </thead>
                                     <tbody *ngIf="flagVar == false">
                                         <tr *ngFor="let cource of courcesList | paginate: { itemsPerPage: pageSize, currentPage: pageNumber } ;let i =index;"
-                                            style="font-size: 13px;text-align: center;">
+                                        class="text-center fon_13">
                                             <td scope="row">{{i+1}}</td>
                                             <td class="re_id">{{ cource.request_id }}</td>
                                             <td *ngIf="getUserrole.id != 2"> <a
@@ -361,7 +356,7 @@
                                                     Pending
                                                 </span>
                                                 <p *ngIf="cource.status" [ngClass]="cource.status"
-                                                    style="color:#ffd200">
+                                                   class="text_yellow">
                                                     {{ cource.status | titlecase }}
                                                 </p>
                                             </td>
@@ -380,7 +375,7 @@
                                     </tbody>
                                     <tbody *ngIf="flagVar">
                                         <tr *ngFor="let cource of filteredCourseList | paginate: { itemsPerPage: pageSize, currentPage: pageNumber }; let i =index;"
-                                            style="font-size: 12px;text-align:center;">
+                                        class="text-center fon_12">
                                             <td scope="row">{{i+1}}</td>
                                             <td class="re_id">{{ cource.request_id }}</td>
                                             <td *ngIf="getUserrole.id != 2"> <a *ngIf="cource.status=='pending' || cource.status=='closed' || cource.status=='reject'"
@@ -392,7 +387,7 @@
                                                     Pending
                                                 </span>
                                                 <p *ngIf="cource.status" [ngClass]="cource.status"
-                                                    style="color:#ffd200">
+                                                   class="text_yellow">
                                                     {{ cource.status | titlecase }}
                                                 </p>
                                             </td>
@@ -412,7 +407,7 @@
                                 </table>
                             </div>
                             <div class="pagintion_child">
-                                <p style="font-size: 14px; color: #000">Showing {{startPageEntry}} to {{endPageEntry}}
+                                <p class="P_showing">Showing {{startPageEntry}} to {{endPageEntry}}
                                     of {{collectionSize}} entries</p>
                                 <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                             </div>

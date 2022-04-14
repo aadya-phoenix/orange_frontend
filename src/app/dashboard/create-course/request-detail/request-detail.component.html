@@ -3,9 +3,9 @@
   <app-header></app-header>
   <!-- /header -->
   <!-- Header-->
-  <div class="breadcrumbs" style="background-color: #fbfbf7;padding: 6px 9px 6px 9px">
+  <div class="breadcrumbs cm_breadcums">
     <div class="col-sm-7">
-      <div class="page-header" style="background: transparent">
+      <div class="page-header">
         <div class="page-title d-flex align-items-center">
           <img src="../../../../assets/images/first.jpg" class="home_Css_img" />
           <div class="d-flex flex-column ml-3">
@@ -20,20 +20,20 @@
     </div>
 
     <div class="col-sm-5 float-right">
-      <div class="page-header" style="background: transparent;">
+      <div class="page-header">
 
-        <div class="page-title d-flex" style="justify-content: end;">
-          <ol class="breadcrumb text-right" style="background: transparent">
+        <div class="page-title d-flex justify_content">
+          <ol class="breadcrumb text-right">
             <li>
-              <a href="# ">
-                <i class="fa fa-home" style="color: #fff"></i>
+              <a href="# " class="text_white"> 
+                <i class="fa fa-home"></i>
               </a>
             </li>
             <li>
-              <a [routerLink]="['/dashboard']" style="color: #fff">Dashboard</a>
+              <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
             </li>
             <li>
-              <a [routerLink]="['/dashboard/cources/']" style="color: #fff">Create new Course</a>
+              <a [routerLink]="['/dashboard/cources/']" class="text_white">Create new Course</a>
             </li>
           </ol>
         </div>
@@ -42,30 +42,37 @@
   </div>
 
   <div>
-    <div class="content mt-3" style="background-image: url('../../../../assets/images/viewbac.jpg');">
+    <div class="content mt-3 back_img_viewbac">
       <div class="animated fadeIn">
         <div class="row">
           <div class="col-md-12">
-            <div class="card" style="border-radius: 10px;">
-              <div class="card-header"
-                style="padding: 0rem 1.25rem !important; background-color: #fff;border-radius: 10px;">
-                <div class="d-flex align-items-center" style="justify-content: space-between;">
+            <div class="card">
+              <div class="card-header card_header_common">
+                <div class="d-flex align-items-center justify_content">
                   <div class="d-flex">
-                    <img src="../../../../assets/images/formm.png" class="ml-2"
-                      style="height: 29px;margin-top: 4px;;" />
+                    <img src="../../../../assets/images/formm.png" class="ml-2 form_img_req"/>
                     <p class="mt-2 ml-2 mb-2 view-re_css">
                       <span>View Request</span>
                       <span class="cc-text_css">({{ routegetdata.request_id }}) -
                       </span>
                       <span>
-                        {{ routegetdata.learning_type_name }} ({{ routegetdata.delivery_method_name }})
+                        {{ routegetdata.learning_type_name }} {{ routegetdata.delivery_method_name }}
                       </span>
-                      <span style="color: #ff7900">Request Status - {{ routegetdata.status | titlecase }}</span>
+                      <span class="text_orange">Request Status - {{ routegetdata.status | titlecase }}</span>
                     </p>
                   </div>
-                  <button class="btn btn-primary" *ngIf="status == 'draft'  || (getUserrole.id == 2 && status == 'reject')" (click)="updateCource()">Update</button>
+                 
                 </div>
               </div>
+            </div>
+            <div class="card" *ngIf="status == 'draft'  || (getUserrole.id == 2 && status == 'reject')">
+              <div class="card-body">
+                <div class="Requs_btn_inl">
+                  <div class="Requs_btn_inl-child">
+             <button class="btn btn-primary"  (click)="updateCource()">  <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">Update</span></button>
+            </div>
+            </div>
+            </div>
             </div>
           </div>
         </div>
@@ -74,7 +81,7 @@
       <!-- .content -->
     </div>
 
-    <div class="content" style="background-image: url('../../../../assets/images/viewbac.jpg');">
+    <div class="content back_img_viewbac">
       <div class="animated fadeIn">
         <div class="card"
           *ngIf="getUserrole.id != 2 && !routegetdata.issave  && showbuttons =='true' && showrejectbutton != getprofileDetails.data.id">
@@ -118,7 +125,7 @@
         <form>
           <div class="row mb-3">
             <div class="col-md-6">
-              <div class="card" style="width: 80%;margin:auto;border-radius: 0px;">
+              <div class="card card_req_width">
                 <div class="card-header card_header_view">
                   <p>Common Course Details</p>
                 </div>
@@ -345,7 +352,7 @@
                         <label for="exampleInputEmail1">Resources</label>
                         <div class="d-flex align-items-center">
                           <span class="form-control form_width" id="exampleInputEmail1" disabled>
-                            Click here to <a href="{{imgUrl}}" target="_blank" style="color:#ff7900">View</a>
+                            Click here to <a href="{{imgUrl}}" target="_blank" class="text_orange">View</a>
                             <!-- {{
                                                        routegetdata.resource
                                                          ? routegetdata.resource
@@ -370,9 +377,9 @@
             <!--colend-->
 
             <div class="col-md-6">
-              <div class="card" style="width: 80%;margin:auto;border-radius: 0px;">
+              <div class="card card_req_width">
                 <div class="card-header card_header_view">
-                  <p>{{ routegetdata.learning_type_name }}</p>
+                  <p><span class="mr-1">Training Type:</span>{{ routegetdata.learning_type_name }}</p>
                 </div>
                 <!--card-header-->
                 <div class="card-body">
@@ -769,7 +776,7 @@
                     <div class="col-sm-12">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Learner Guidelines</label>
-                        <div>
+                        <div class="d-flex align-items-center">
                           <span class="form-control form_width d-flex" id="exampleInputEmail1"
                             style="flex-direction: column;" disabled>
                             <span *ngFor="let learner of learnerGuidelines">
@@ -788,7 +795,7 @@
                     <div class="col-sm-12">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Learner Guidelines Description</label>
-                        <div>
+                        <div class="d-flex align-items-center">
                           <span class="form-control form_width d-flex" id="exampleInputEmail1"
                             style="flex-direction: column;" disabled>
                             <span *ngFor="let learner of learnerGuidelines">
@@ -1068,7 +1075,7 @@
                     <div class="col-sm-12">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Curriculum content</label>
-                        <div>
+                        <div class="d-flex align-items-center">
                           <span class="form-control form_width d-flex" id="exampleInputEmail1"
                             style="flex-direction: column;" disabled>
                             <span *ngFor="let curr of curriculumContent">
@@ -1149,9 +1156,9 @@
                     <div class="col-sm-12">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Learner Guidelines</label>
-                        <div>
-                          <span class="form-control form_width d-flex" id="exampleInputEmail1"
-                            style="flex-direction: column;" disabled>
+                        <div class="d-flex align-items-center">
+                          <span class="form-control form_width d-flex flex_direction" id="exampleInputEmail1"
+                            disabled>
                             <span *ngFor="let learner of learnerGuidelines">
                               {{
                               learner.title }}
@@ -1168,9 +1175,9 @@
                     <div class="col-sm-12">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Learner Guidelines Description</label>
-                        <div>
-                          <span class="form-control form_width d-flex" id="exampleInputEmail1"
-                            style="flex-direction: column;" disabled>
+                        <div class="d-flex align-items-center">
+                          <span class="form-control form_width d-flex flex_direction" id="exampleInputEmail1"
+                            disabled>
                             <span *ngFor="let learner of learnerGuidelines">
 
                               {{ learner.description
@@ -1552,8 +1559,7 @@
     <!-- /#right-panel -->
   </div>
   <!-- Right Panel -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-    style="margin-top: 150px;">
+  <div class="modal fade mt_150" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document ">
       <div class="modal-content">
         <div class="modal-body">
@@ -1568,6 +1574,14 @@
                     {{ publisher.first_name }}
                   </option>
                 </select>
+
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label>Comment</label>
+                <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"
+                 ></textarea>
 
               </div>
             </div>
@@ -1586,12 +1600,12 @@
     </div>
     <!-- </ng-template> -->
   </div>
-  <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-    style="margin-top: 150px;">
+  <div class="modal fade mt_150" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+   >
     <div class="modal-dialog modal-lg" role="document ">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 style="font-size: 14px; color: #ff7900;margin-bottom: 0px;">Reject Request</h4>
+          <h4 class="reject_req_h4">Reject Request</h4>
         </div>
 
         <div class="modal-body">
@@ -1623,7 +1637,7 @@
     <div class="modal-dialog modal-lg" role="document ">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 style="font-size: 14px; color: #ff7900;margin-bottom: 0px;">
+          <h4  class="reject_req_h4">
             Transfer the requet to other ROC
           </h4>
         </div>
@@ -1679,7 +1693,7 @@
     <div class="modal-dialog modal-lg" role="document ">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 style="font-size: 14px; color: #ff7900;margin-bottom: 0px;">Publish Request</h4>
+          <h4 class="reject_req_h4">Publish Request</h4>
         </div>
 
         <div class="modal-body">

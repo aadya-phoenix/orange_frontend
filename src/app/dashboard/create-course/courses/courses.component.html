@@ -1,9 +1,9 @@
 <div id="right-panel" class="right-panel">
   <app-header></app-header>
 
-  <div class="breadcrumbs" style="background-color: #fbfbf7; padding: 6px 9px 6px 9px">
+  <div class="breadcrumbs cm_breadcums">
     <div class="col-sm-7">
-      <div class="page-header float-left" style="background: transparent">
+      <div class="page-header float-left bac_trasparent">
         <div class="page-title d-flex align-items-center">
           <img src="../../../../assets/images/first.jpg" class="home_Css_img" />
           <div class="d-flex flex-column ml-3">
@@ -18,19 +18,19 @@
     </div>
 
     <div class="col-sm-5 float-right">
-      <div class="page-header float-right" style="background: transparent">
+      <div class="page-header float-right bac_trasparent">
         <div class="page-title d-flex end_just">
-          <ol class="breadcrumb text-right" style="background: transparent">
+          <ol class="breadcrumb text-right bac_trasparent">
             <li>
               <a href="# ">
-                <i class="fa fa-home" style="color: #fff"></i>
+                <i class="fa fa-home text_white"></i>
               </a>
             </li>
             <li>
-              <a [routerLink]="['/dashboard']" style="color: #fff">Dashboard</a>
+              <a [routerLink]="['/dashboard']"class="text_white">Dashboard</a>
             </li>
             <li>
-              <a [routerLink]="['/dashboard/cources/']" style="color: #fff">Create new Course</a>
+              <a [routerLink]="['/dashboard/cources/']" class="text_white">Create new Course</a>
             </li>
           </ol>
         </div>
@@ -46,10 +46,7 @@
         <div class="col-md-12">
 
           <div class="card">
-            <div class="card-header" style="
-            padding: 0.45rem 1.25rem !important;
-            background-color: #fff;
-            border-bottom: 1px solid #00000008; ">
+            <div class="card-header card_header_common">
               <div class="overall_css">
                 <span class="card_overall">Overall request Status</span>
                 <div class="d-flex">
@@ -73,7 +70,7 @@
                 <div class="Course_icon_child">
                   <div class="alig_dashicon" (click)="getrecords(draftRequests)">
                     <div class="sub-child-dashicon">
-                      <div class="fa-icons-des" style="background-color: #4bb4e6">
+                      <div class="fa-icons-des bac_blue">
                         <img src="../../../../assets/images/icon/drafts.png" />
                       </div>
 
@@ -86,7 +83,7 @@
                 <div class="Course_icon_child" *ngIf="getUserrole.id == 2">
                   <div class="alig_dashicon" (click)="getrecords(usersubmitRequests)">
                     <div class="sub-child-dashicon">
-                      <div class="fa-icons-des" style="background-color: #a885db">
+                      <div class="fa-icons-des bac_puple">
                         <img src="../../../../assets/images/icon/closed.png" />
                       </div>
 
@@ -99,7 +96,7 @@
                 <div class="Course_icon_child" *ngIf="getUserrole.id != 2">
                   <div class="alig_dashicon" (click)="getrecords(submittedRequests)">
                     <div class="sub-child-dashicon">
-                      <div class="fa-icons-des" style="background-color: #a885db">
+                      <div class="fa-icons-des bac_puple">
                         <img src="../../../../assets/images/icon/closed.png" />
                       </div>
 
@@ -112,7 +109,7 @@
                 <div class="Course_icon_child" *ngIf="getUserrole.id != 2">
                   <div class="alig_dashicon" (click)="getrecords(pendingRequests)">
                     <div class="sub-child-dashicon">
-                      <div class="fa-icons-des" style="background-color: #ffd200">
+                      <div class="fa-icons-des bac_yellow">
                         <img src="../../../../assets/images/icon/pending.png" />
                       </div>
 
@@ -124,7 +121,7 @@
                 <div class="Course_icon_child" *ngIf="getUserrole.id == 3">
                   <div class="alig_dashicon" (click)="getrecords(transferredRequests)">
                     <div class="sub-child-dashicon">
-                      <div class="fa-icons-des" style="background-color: #cd3c14">
+                      <div class="fa-icons-des bac_red">
                         <img src="../../../../assets/images/icon/transfer.png" />
                       </div>
 
@@ -137,7 +134,7 @@
                 <div class="Course_icon_child">
                   <div class="alig_dashicon" (click)="getrecords(closedRequests)">
                     <div class="sub-child-dashicon">
-                      <div class="fa-icons-des" style="background-color: #50be87">
+                      <div class="fa-icons-des bac_green">
                         <img src="../../../../assets/images/icon/check.png" />
                       </div>
 
@@ -150,7 +147,7 @@
                 <div class="Course_icon_child">
                   <div class="alig_dashicon" (click)="getrecords(rejectedRequests)">
                     <div class="sub-child-dashicon">
-                      <div class="fa-icons-des" style="background-color: #ffb4e6">
+                      <div class="fa-icons-des bac_pink">
                         <img src="../../../../assets/images/icon/reject.png" />
                       </div>
 
@@ -163,7 +160,7 @@
                 <div class="Course_icon_child">
                   <div class="alig_dashicon" (click)="getrecords(allCourses)">
                     <div class="sub-child-dashicon">
-                      <div class="fa-icons-des" style="background-color: #085ebd">
+                      <div class="fa-icons-des bac_blue">
                         <img src="../../../../assets/images/icon/viewall.png" />
                       </div>
 
@@ -191,10 +188,7 @@
         <div class="col-md-12" *ngIf="getUserrole.id === 2">
 
           <div class="card">
-            <div class="card-header" style="
-                        padding: 0.45rem 1.25rem !important;
-                        background-color: #fff;
-                        border-bottom: 1px solid #00000008; ">
+            <div class="card-header card_header_common">
               <div class="overall_css">
                 <div>
                   <i class="fa fa-table fa_table" aria-hidden="true "></i>
@@ -221,7 +215,7 @@
                   </div>
 
                   <div _ngcontent-cue-c109=" " class="form-group filter_course">
-                    <label _ngcontent-cue-c109=" " class="label_course" style="color: #000;">Search</label>
+                    <label _ngcontent-cue-c109=" " class="label_course text_black">Search</label>
                     <input _ngcontent-cue-c109=" " type="text " name="search " autocomplete="off "
                       [(ngModel)]="searchText" placeholder=" "
                       class="form-control ng-untouched ng-pristine ng-valid form_width" ng-reflect-name="search " />
@@ -324,7 +318,7 @@
                         <span *ngIf="!cource.status">
                           Pending
                         </span>
-                        <p *ngIf="cource.status" [ngClass]="cource.status" style="color:#ffd200">
+                        <p *ngIf="cource.status" [ngClass]="cource.status" class="text_yellow">
                           {{ cource.status | titlecase }}
                         </p>
 
@@ -363,7 +357,7 @@
               <div class="pagiantio_dispaly">
 
                 <div class="pagintion_ child">
-                  <p style="font-size: 14px; color: #000">Showing {{startPageEntry}} to {{endPageEntry}} of
+                  <p style="font-size: 14px;" class="text_black">Showing {{startPageEntry}} to {{endPageEntry}} of
                     {{collectionSize}} entries</p>
                 </div>
                 <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
@@ -429,7 +423,7 @@
 
         <div class="col-md-12" *ngIf="getUserrole.id === 3 || getUserrole.id === 4">
           <div class="card">
-            <div class="card-header" style="background-color: #fff">
+            <div class="card-header text_white">
               <div class="overall_css">
                 <div>
                   <i class="fa fa-table fa_table" aria-hidden="true "></i>
@@ -459,7 +453,7 @@
                   </div>
 
                   <div _ngcontent-cue-c109=" " class="form-group filter_course">
-                    <label _ngcontent-cue-c109=" " class="label_course" style="color: #000;">Search</label>
+                    <label _ngcontent-cue-c109=" " class="label_course text_black">Search</label>
                     <input _ngcontent-cue-c109=" " type="text " name="search " autocomplete="off "
                       [(ngModel)]="searchText" placeholder=" "
                       class="form-control ng-untouched ng-pristine ng-valid form_width" ng-reflect-name="search " />
@@ -558,7 +552,7 @@
                         <span *ngIf="!course.status">
                           Pending
                         </span>
-                        <p *ngIf="course.status" [ngClass]="course.status" style="color:#ffd200">
+                        <p *ngIf="course.status" [ngClass]="course.status" class="text_yellow">
                           {{ course.status | titlecase }}
                         </p>
 
@@ -596,7 +590,7 @@
               <div class="pagiantio_dispaly">
 
                 <div class="pagintion_ child">
-                  <p style="font-size: 14px; color: #000">Showing {{newstartPageEntry}} to {{newendPageEntry}} of
+                  <p style="font-size: 14px;" class="text_black">Showing {{newstartPageEntry}} to {{newendPageEntry}} of
                     {{collectionSize}} entries</p>
                 </div>
                 <pagination-controls (pageChange)="newPageChanged($event)"></pagination-controls>
