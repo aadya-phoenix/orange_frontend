@@ -6,11 +6,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './shared/interceptor/token-interceptor';
 import { AuthenticationServiceGuard } from './shared/services/guards/authentication.guards';
 import { AuthorizationServiceGuard } from './shared/services/guards/authorization.guards';
+import { ToastrModule } from 'ngx-toastr';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, ToastrModule.forRoot(),],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
