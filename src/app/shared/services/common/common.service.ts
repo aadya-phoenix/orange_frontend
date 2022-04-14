@@ -32,7 +32,6 @@ export class CommonService {
   }
 
   Errorhandling(err: HttpErrorResponse) {
-    debugger;
     if (err.error instanceof ErrorEvent) {
       console.error(err.error.message);
     } else {

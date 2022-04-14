@@ -172,7 +172,6 @@ export class CreateCarouselComponent implements OnInit {
         this.router.navigate(['/dashboard/olcarousel']);
       },
       (err: any) => {
-        debugger
         this.commonService.toastErrorMsg('Error', err.message);
       }
     );
