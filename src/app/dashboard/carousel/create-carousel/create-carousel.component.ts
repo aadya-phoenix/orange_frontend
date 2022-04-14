@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CarouselService } from 'src/app/shared/services/carousel/carousel.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
@@ -12,7 +12,8 @@ const emailregexp = dataConstant.EmailPattren;
   styleUrls: ['./create-carousel.component.scss']
 })
 export class CreateCarouselComponent implements OnInit {
-
+  carousel_id = 0;
+  carousel_details = {};
   languageList: any = [];
   cctExpiryperiod: any = [];
   public createOlcarouselForm!: FormGroup;
@@ -32,6 +33,7 @@ export class CreateCarouselComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private commonService: CommonService,
     private router: Router,
+    private route: ActivatedRoute,
     private carouselService: CarouselService) {
     this.createOlcarouselForm = this.formBuilder.group({
       languages: new FormArray([]),
@@ -47,6 +49,24 @@ export class CreateCarouselComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTotalCourse();
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      const Id = params.get('id');
+      this.carousel_id = Id ? parseInt(Id) : 0;
+      this.getCarouselDetails();
+    });
+  }
+
+  getCarouselDetails() {
+    this.carouselService.getCarouselDetails(this.carousel_id).subscribe(
+      (res: any) => {
+        if (res.status === 1 && res.message === 'Success') {
+          this.carousel_details = res.data;
+        }
+      },
+      (err: any) => {
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    );
   }
 
   get lauguageFormArray(): FormArray {
@@ -75,7 +95,7 @@ export class CreateCarouselComponent implements OnInit {
         this.carousel_count = res.data.carousel_count;
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.toastErrorMsg('Error', err.message);
       }
     );
   }
@@ -95,7 +115,7 @@ export class CreateCarouselComponent implements OnInit {
         });
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.toastErrorMsg('Error', err.message);
       }
     );
   }
@@ -106,7 +126,7 @@ export class CreateCarouselComponent implements OnInit {
         this.cctExpiryperiod = res.data;
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.toastErrorMsg('Error', err.message);
       }
     );
   }
@@ -148,10 +168,12 @@ export class CreateCarouselComponent implements OnInit {
     body.status = status;
     this.carouselService.create(body).subscribe(
       (res: any) => {
+        this.commonService.toastSuccessMsg('Carousel', 'Successfully Saved.');
         this.router.navigate(['/dashboard/olcarousel']);
       },
       (err: any) => {
-        console.log(err);
+        debugger
+        this.commonService.toastErrorMsg('Error', err.message);
       }
     );
 

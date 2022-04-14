@@ -20,7 +20,7 @@ export class CarouselViewComponent implements OnInit {
       const Id = params.get('id');
       this.id = Id ? parseInt(Id) : 0;
       this.getCarouselDetails();
-    })
+    });
   }
 
   getCarouselDetails() {
@@ -31,7 +31,6 @@ export class CarouselViewComponent implements OnInit {
           this.requestdata.metadata.forEach((element:any) => {
             element.isCollapsed = false;
           });
-          console.log(this.requestdata);
           if (this.requestdata.image) {
             this.requestdata.imgUrl = `${dataConstant.ImageUrl}/${this.requestdata.image}`;
           }
