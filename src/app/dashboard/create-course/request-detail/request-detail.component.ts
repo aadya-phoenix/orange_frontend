@@ -31,6 +31,7 @@ export class RequestDetailComponent implements OnInit {
   showbuttons: any;
   otherRocsList: any = [];
   selectedotherRoc: any;
+  transfercomment:any;
   getprofileDetails: any;
   selectedPublisher: any;
   showrejectbutton: any;
@@ -262,7 +263,7 @@ export class RequestDetailComponent implements OnInit {
 
   transfertoOtherRoc() {
     if (this.selectedotherRoc) {
-      let transferobj = { course_id: this.routegetdata.id, status: 'pending', transfer_id: this.selectedotherRoc };
+      let transferobj = { course_id: this.routegetdata.id, status: 'pending', transfer_id: this.selectedotherRoc, status_comment: this.transfercomment};
       this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
         console.log(res);
         //this.router.navigate(['/dashboard/cources']);

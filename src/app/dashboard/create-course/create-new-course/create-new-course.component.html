@@ -579,7 +579,7 @@
                                             <div class="form-group">
                                                 <select [(ngModel)]="learningType" class="form-control form_width"
                                                     name="list " id="list " accesskey="target"
-                                                    formControlName="learning_type" (change)="get_learningType($event)">
+                                                    formControlName="learning_type" (change)="get_learningType($event);scrollToElement(target)">
                                                     <option hidden disabled selected='selected' value=''>-Select
                                                         learning type-</option>
                                                     <option *ngFor="let learning of learningTypes"
@@ -614,6 +614,7 @@
                         </div>
 
                     </form>
+                    <div #target>
                     <!--ILT and vILT-->
                     <form [formGroup]="iltandViltForm">
                         <div [style.display]="(learningType == '1') ? 'block' : 'none' ">
@@ -1310,18 +1311,10 @@
                                         page in the Orange Learning catalog. The training cost will only be displayed in
                                         the corresponding session(s) of the course.
                                     </p>
-                                    <p class="text_black" *ngIf="getUserrole.id == 2 && notification">
-                                        <b class="text_orange">Note</b>: The Training coordinator of Asia Pacific
-                                        region in unavailable.Therefore,please select the
-                                        <b class="text_orange">Middle East and Africa</b>.region from the list,who is
-                                        the backup for Asia Pacificregion
-                                    </p>
-                                    <p class="text_black" *ngIf="getUserrole.id != 2 && notification">
-                                        <b class="text_orange">Note</b>: The Training Coordinator of <b>Russia</b>
-                                        Region is unavailable.Therefore,please select the <b
-                                        class="text_orange">Europe</b> region from the list, who is the backup
-                                        for
-                                        <b>Russia</b> region.
+                                    <p class="text_black" *ngFor="let item of backupCordinatorsList">
+                                        <b class="text_orange">Note</b>: The training coordinator of {{item.name}}
+                                        region is unavaliable.Therefore, please select the
+                                        <b class="text_orange">{{item.backup_roc_region}}</b>.region from the list, who is the backup for {{item.name}} region.
                                     </p>
                                 </div>
                                 <div class="card-footer d-flex justify-content-start">
@@ -1822,18 +1815,10 @@
                                         <!--colend-->
                                     </div>
 
-                                    <p class="text_black" *ngIf="getUserrole.id == 2 && notification">
-                                        <b class="text_orange">Note</b>: The Training coordinator of Asia Pacific
-                                        region in unavailable.Therefore,please select the
-                                        <b class="text_orange">Middle East and Africa</b>.region from the list,who is
-                                        the backup for Asia Pacificregion
-                                    </p>
-                                    <p class="text_black" *ngIf="getUserrole.id != 2 && notification">
-                                        <b class="text_orange">Note</b>: The Training Coordinator of <b>Russia</b>
-                                        Region is unavailable.Therefore,please select the <b
-                                        class="text_orange">Europe</b> region from the list, who is the backup
-                                        for
-                                        <b>Russia</b> region.
+                                    <p class="text_black" *ngFor="let item of backupCordinatorsList">
+                                        <b class="text_orange">Note</b>: The training coordinator of {{item.name}}
+                                        region is unavaliable.Therefore, please select the
+                                        <b class="text_orange">{{item.backup_roc_region}}</b>.region from the list, who is the backup for {{item.name}} region.
                                     </p>
                                 </div>
                                 <div class="card-footer d-flex justify-content-start">
@@ -2044,18 +2029,10 @@
                                         <!--colend-->
                                     </div>
 
-                                    <p class="text_black" *ngIf="getUserrole.id == 2 && notification">
-                                        <b class="text_orange">Note</b>: The Training coordinator of Asia Pacific
-                                        region in unavailable.Therefore,please select the
-                                        <b class="text_orange">Middle East and Africa</b>.region from the list,who is
-                                        the backup for Asia Pacificregion
-                                    </p>
-                                    <p class="text_black" *ngIf="getUserrole.id != 2 && notification">
-                                        <b class="text_orange">Note</b>: The Training Coordinator of <b>Russia</b>
-                                        Region is unavailable.Therefore,please select the <b
-                                        class="text_orange">Europe</b> region from the list, who is the backup
-                                        for
-                                        <b>Russia</b> region.
+                                    <p class="text_black" *ngFor="let item of backupCordinatorsList">
+                                        <b class="text_orange">Note</b>: The training coordinator of {{item.name}}
+                                        region is unavaliable.Therefore, please select the
+                                        <b class="text_orange">{{item.backup_roc_region}}</b>.region from the list, who is the backup for {{item.name}} region.
                                     </p>
                                 </div>
                                 <div class="card-footer d-flex justify-content-start">
@@ -2222,18 +2199,10 @@
                                         <!--colend-->
                                     </div>
 
-                                    <p class="text_black" *ngIf="getUserrole.id == 2 && notification">
-                                        <b class="text_orange">Note</b>: The Training coordinator of Asia Pacific
-                                        region in unavailable.Therefore,please select the
-                                        <b class="text_orange">Middle East and Africa</b>.region from the list,who is
-                                        the backup for Asia Pacificregion
-                                    </p>
-                                    <p class="text_black" *ngIf="getUserrole.id != 2 && notification">
-                                        <b class="text_orange">Note</b>: The Training Coordinator of <b>Russia</b>
-                                        Region is unavailable.Therefore,please select the <b
-                                        class="text_orange">Europe</b> region from the list, who is the backup
-                                        for
-                                        <b>Russia</b> region.
+                                    <p class="text_black" *ngFor="let item of backupCordinatorsList">
+                                        <b class="text_orange">Note</b>: The training coordinator of {{item.name}}
+                                        region is unavaliable.Therefore, please select the
+                                        <b class="text_orange">{{item.backup_roc_region}}</b>.region from the list, who is the backup for {{item.name}} region.
                                     </p>
                                 </div>
                                 <div class="card-footer d-flex justify-content-start">
@@ -2525,18 +2494,10 @@
                                         <!--colend-->
                                     </div>
 
-                                    <p class="text_black" *ngIf="getUserrole.id == 2 && notification">
-                                        <b class="text_orange">Note</b>: The Training coordinator of Asia Pacific
-                                        region in unavailable.Therefore,please select the
-                                        <b class="text_orange">Middle East and Africa</b>.region from the list,who is
-                                        the backup for Asia Pacificregion
-                                    </p>
-                                    <p class="text_black" *ngIf="getUserrole.id != 2 && notification">
-                                        <b class="text_orange">Note</b>: The Training Coordinator of <b>Russia</b>
-                                        Region is unavailable.Therefore,please select the <b
-                                        class="text_orange">Europe</b> region from the list, who is the backup
-                                        for
-                                        <b>Russia</b> region.
+                                    <p class="text_black" *ngFor="let item of backupCordinatorsList">
+                                        <b class="text_orange">Note</b>: The training coordinator of {{item.name}}
+                                        region is unavaliable.Therefore, please select the
+                                        <b class="text_orange">{{item.backup_roc_region}}</b>.region from the list, who is the backup for {{item.name}} region.
                                     </p>
                                 </div>
                                 <div class="card-footer d-flex justify-content-start">
@@ -2831,18 +2792,10 @@
                                         <!--colend-->
                                     </div>
 
-                                    <p class="text_black" *ngIf="getUserrole.id == 2 && notification">
-                                        <b class="text_orange">Note</b>: The Training coordinator of Asia Pacific
-                                        region in unavailable.Therefore,please select the
-                                        <b class="text_orange">Middle East and Africa</b>.region from the list,who is
-                                        the backup for Asia Pacificregion
-                                    </p>
-                                    <p class="text_black" *ngIf="getUserrole.id != 2 && notification">
-                                        <b class="text_orange">Note</b>: The Training Coordinator of <b>Russia</b>
-                                        Region is unavailable.Therefore,please select the <b
-                                        class="text_orange">Europe</b> region from the list, who is the backup
-                                        for
-                                        <b>Russia</b> region.
+                                    <p class="text_black" *ngFor="let item of backupCordinatorsList">
+                                        <b class="text_orange">Note</b>: The training coordinator of {{item.name}}
+                                        region is unavaliable.Therefore, please select the
+                                        <b class="text_orange">{{item.backup_roc_region}}</b>.region from the list, who is the backup for {{item.name}} region.
                                     </p>
                                 </div>
                                 <div class="card-footer d-flex justify-content-start">
@@ -2878,6 +2831,7 @@
                         </form>
                     </div>
                     <!--Webbased Training-->
+                </div>
                 </div>
             </div>
             <!-- .animated -->

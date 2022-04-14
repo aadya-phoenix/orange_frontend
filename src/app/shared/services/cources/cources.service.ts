@@ -230,6 +230,16 @@ export class CourcesService {
         .get(url, this.http.headers)
         .pipe(catchError(this.Errorhandling));
      }
+
+      //getBackupRegionalCordinator
+      getBackupRegionalCordinator(){
+        const url = `/api/${this.apiVersion}/backup/regional-cordinator`;
+        const urllive = `${this.basePath}api/${this.apiVersion}/backup/regional-cordinator`;
+        return this.http
+          .get(url, this.http.headers)
+          .pipe(catchError(this.Errorhandling));
+       }
+
       //newPublisher
      getNewPublisher(){
       const url = `/api/${this.apiVersion}/transfer/publisher-list`;

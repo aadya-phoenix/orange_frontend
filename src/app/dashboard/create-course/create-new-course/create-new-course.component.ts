@@ -307,6 +307,7 @@ export class CreateNewCourseComponent implements OnInit {
 
   getUserrole: any; //to get user role
   public cordinatorsList: any = [];
+  backupCordinatorsList: any =[];
   public course_count = {
     closed: 0,
     draft: 0,
@@ -530,6 +531,16 @@ export class CreateNewCourseComponent implements OnInit {
       }
     );
   }
+  getBackupRegionalCordinator(){
+    this.courceService.getBackupRegionalCordinator().subscribe(
+      (res: any) => {
+        this.backupCordinatorsList = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
   //publisherWithId
   /*  getNewPublisherId(){
      this.courceService.getNewPublisherId(id).subscribe(
@@ -711,6 +722,7 @@ export class CreateNewCourseComponent implements OnInit {
   ngOnInit(): void {
 
     this.getCordinators();
+    this.getBackupRegionalCordinator();
     this.getvendorType();
     this.getLevel();
     this.getSubjects();
@@ -1799,6 +1811,11 @@ export class CreateNewCourseComponent implements OnInit {
   }
   curriculumSubmit() {
     console.log(this.currriculumForm.value);
+  }
+
+  scrollToElement($element: { scrollIntoView: (arg0: { behavior: string; block: string; inline: string; }) => void; }): void {
+    console.log($element);
+    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
   }
 
   certificationType(event: any) {
