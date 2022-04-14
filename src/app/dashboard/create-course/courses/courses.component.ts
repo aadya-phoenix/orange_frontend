@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ViewHistoryComponent } from '../view-history/view-history.component';
 import { Router } from '@angular/router';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-courses',
@@ -117,25 +118,29 @@ export class CoursesComponent implements OnInit {
   };
 
   onSort({ column, direction }: any) {
-    // // console.log("onsort called");
-    this.headers.forEach((header) => {
+    this.headers.forEach((header: { sortable: any; direction: string; }) => {
       if (header.sortable !== column) {
         header.direction = '';
       }
     });
 
-    if (direction === '' || column === '') {
+    if (direction && column) {
+      this.courcesList = _.orderBy(this.courcesList, column, direction);
+    }
+    else {
       this.courcesList = this.courcesList;
-    } else {
-      this.courcesList = [...this.courcesList].sort((a, b) => {
-        const res = this.compare(a[column], b[column]);
-        return direction === 'asc' ? res : -res;
-      });
     }
   }
 
+  getLearningTypeFilterRecords(event: any) {
+    this.courcesList = [...this.courcesList].filter((a, b) => {
+      return a.learning_type?.toLowerCase() == event.toLocaleLowerCase()
+    });
+    // console.log("eventtarget", event.target.value);
+    //this.getrecords(event.target.value);
+  }
+
   getNewFilterRecords(event: any) {
-    debugger;
     this.courcesList = [...this.courcesList].filter((a, b) => {
       return a.status_show?.toLowerCase() == this.searchStatus.toLocaleLowerCase()
     });

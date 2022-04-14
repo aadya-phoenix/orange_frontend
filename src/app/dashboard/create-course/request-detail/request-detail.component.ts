@@ -370,5 +370,9 @@ export class RequestDetailComponent implements OnInit {
     );
   }
 
+  copyToClipBoard(text:string){
+    navigator.clipboard.writeText(text);
+  }
+
 
 }
