@@ -105,9 +105,8 @@
                                             <select formControlName="status" class="form-control form_width">
                                                 <option value="">Please select</option>
                                                 <option value="pending">Pending</option>
-                                                <option value="submit">Submitted</option>
                                                 <option value="draft">Draft</option>
-                                                <option value="close">Closed</option>
+                                                <option value="publish">Closed</option>
                                                 <option value="reject">Rejected</option>
                                             </select>
                                         </div>
@@ -236,6 +235,19 @@
                                         </div>
                                     </div>
                                     <!--coled-->
+                                    <div class="Course_icon_child" *ngIf="getUserrole.id == 3">
+                                        <div class="alig_dashicon" (click)="getrecords(transferredRequests)">
+                                          <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des bac_red">
+                                              <img src="../../../../assets/images/icon/transfer.png" />
+                                            </div>
+                      
+                                            <p>Transferred</p>
+                                          </div>
+                                          <span class="number_css">{{course_count.transferred}}</span>
+                                        </div>
+                                      </div>
+                                      <!--coled-->
                                     <div class="Course_icon_child">
                                         <div class="alig_dashicon" (click)="getrecords(closedRequests)">
                                             <div>
@@ -331,8 +343,6 @@
                                                 scope="col">ROC Name</th>
                                             <th *ngIf="getUserrole.id != 2" sortable="request_date "
                                                 (sort)="onSort($event)" scope="col">Request Date</th>
-                                            <th *ngIf="getUserrole.id != 2" sortable="process_date"
-                                                (sort)="onSort($event)" scope="col">Process Date</th>
                                             <th *ngIf="getUserrole.id != 2" sortable="roc_response_time "
                                                 (sort)="onSort($event)" scope="col">ROC response time</th>
                                             <th sortable="publisher_name" (sort)="onSort($event)" scope="col">Publisher
@@ -347,7 +357,7 @@
                                             <td scope="row">{{i+1}}</td>
                                             <td class="re_id">{{ cource.request_id }}</td>
                                             <td *ngIf="getUserrole.id != 2"> <a
-                                                    *ngIf="cource.status=='pending' || cource.status=='closed' || cource.status=='reject'"
+                                                    *ngIf="cource.status != 'draft'"
                                                     (click)="openModal(cource)" class="text-primary">
                                                     View
                                                 </a></td>
@@ -362,23 +372,23 @@
                                             </td>
                                             <td>{{ cource.titleByLang | titlecase}}</td>
                                             <td>{{ cource.email_content_owner}}</td>
-                                            <td>{{cource.transfer_user_name}}</td>
+                                            <td>{{cource.send_to}}</td>
                                             <td>{{ cource.learning_type_name}}</td>
                                             <td>{{ cource.created_at}}</td>
-                                            <td *ngIf="getUserrole.id != 2">{{ cource.regional_cordinator}}</td>
+                                            <td *ngIf="getUserrole.id != 2">{{ cource.roc_name}}</td>
                                             <td *ngIf="getUserrole.id != 2">{{ cource.created_at}}</td>
-                                            <td *ngIf="getUserrole.id != 2"></td>
-                                            <td *ngIf="getUserrole.id != 2"></td>
-                                            <td></td>
+                                            
+                                            <td *ngIf="getUserrole.id != 2">{{cource.roc_response_time}}</td>
+                                            <td>{{cource.publisher_name}}</td>
                                             <td>{{cource.updated_at}}</td>
                                         </tr>
                                     </tbody>
                                     <tbody *ngIf="flagVar">
-                                        <tr *ngFor="let cource of filteredCourseList | paginate: { itemsPerPage: pageSize, currentPage: pageNumber }; let i =index;"
+                                        <tr *ngFor="let cource of fitertedcoursedata | paginate: { itemsPerPage: pageSize, currentPage: pageNumber }; let i =index;"
                                         class="text-center fon_12">
                                             <td scope="row">{{i+1}}</td>
                                             <td class="re_id">{{ cource.request_id }}</td>
-                                            <td *ngIf="getUserrole.id != 2"> <a *ngIf="cource.status=='pending' || cource.status=='closed' || cource.status=='reject'"
+                                            <td *ngIf="getUserrole.id != 2"> <a *ngIf="cource.status!='draft'"
                                                     (click)="openModal(cource)" class="text-primary">
                                                     View
                                                 </a></td>
@@ -393,14 +403,14 @@
                                             </td>
                                             <td>{{ cource.titleByLang | titlecase}}</td>
                                             <td>{{ cource.email_content_owner}}</td>
-                                            <td>{{cource.transfer_user_name}}</td>
+                                            <td>{{cource.send_to}}</td>
                                             <td>{{ cource.learning_type_name}}</td>
                                             <td>{{ cource.created_at}}</td>
-                                            <td *ngIf="getUserrole.id != 2">{{ cource.regional_cordinator}}</td>
+                                            <td *ngIf="getUserrole.id != 2">{{ cource.roc_name}}</td>
                                             <td *ngIf="getUserrole.id != 2">{{ cource.created_at}}</td>
-                                            <td *ngIf="getUserrole.id != 2"></td>
-                                            <td *ngIf="getUserrole.id != 2"></td>
-                                            <td></td>
+                                           
+                                            <td *ngIf="getUserrole.id != 2">{{cource.roc_response_time}}</td>
+                                            <td>{{cource.publisher_name}}</td>
                                             <td>{{cource.updated_at}}</td>
                                         </tr>
                                     </tbody>

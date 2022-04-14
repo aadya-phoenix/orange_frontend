@@ -17,6 +17,7 @@ export class ViewCompleteReportComponent implements OnInit {
 
   public filterForm!: FormGroup;
   public courcesList: any=[];
+  public fitertedcoursedata:any=[];
   public pageNumber= 1;
   public pageSize=10;
   public course_count = {
@@ -42,7 +43,11 @@ export class ViewCompleteReportComponent implements OnInit {
   closedRequests:any=[];
   rejectedRequests:any=[];
   submittedRequests:any=[];
+  transferredRequests: any = [];
   usersubmitRequests:any=[];
+  allcoursedataroc: any = [];
+  allcoursedatapub: any = [];
+  allcoursedatareq: any = [];
   allCourses:any;
   routegetdata:any;
   getUserrole: any;
@@ -50,6 +55,7 @@ export class ViewCompleteReportComponent implements OnInit {
   rocObj:any=[];
   publisherObj:any=[];
   flagVar:boolean=false;
+  filterflag:boolean=false;
   addDate:any;
   coursedata: any=[];
   i: number = 0;
@@ -101,81 +107,103 @@ export class ViewCompleteReportComponent implements OnInit {
     this.endPageEntry = this.pageSize * this.pageNumber;
   }
 
-  refreshCourses() {  
-   // console.log(this.service.page);
-  //  console.log(this.service.pageSize);
-    this.pendingRequests=[];
-    this.rejectedRequests=[];
-    this.draftRequests=[];
-    this.closedRequests=[];
-    this.courceService.getCources().subscribe(
+  refreshCourses() {
+    // console.log(this.service.page);
+    // console.log(this.service.pageSize);
+    this.pendingRequests = [];
+    this.rejectedRequests = [];
+    this.draftRequests = [];
+    this.closedRequests = [];
+
+    this.courceService.getCourseWithoutFilter().subscribe(
       (res: any) => {
-        console.log(res);
+        // console.log(res);
         if (res.status == 1 && res.message == 'Success') {
           this.i = 0;
           this.j = 0;
           this.coursedata = res.data.course;
           this.course_count = res.data.course_count;
           for (this.i = 0; this.i < this.coursedata.length; this.i++) {
-            console.log(this.coursedata[this.i].request_id);
-			this.coursedata[this.i]['titleByLang'] = this.courceService.getTText(this.coursedata[this.i]['title']);
+            // console.log(this.coursedata[this.i].request_id);
+            this.coursedata[this.i]['titleByLang'] = this.courceService.getTText(this.coursedata[this.i]['title']);
             if (this.coursedata[this.i].request_id != "" && this.coursedata[this.i].request_id != null) {
+             
               this.courcesList[this.j] = this.coursedata[this.i]
-
-              if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
-                this.pendingRequests.push(this.coursedata[this.i])
+              if (this.getUserrole.id == 3) {
+                if (((this.coursedata[this.i].publisher_status === 'reject' && this.coursedata[this.i].transfer_user_id != null) || (this.coursedata[this.i].status === 'pending') && this.coursedata[this.i].transfer_user_id == null && this.coursedata[this.i].user_id != this.getprofileDetails.data.id)) {
+                  
+                  this.pendingRequests.push(this.coursedata[this.i])
+                  this.allcoursedataroc.push(this.coursedata[this.i])
+                 
+                }
+                if ((this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].publisher_status != 'reject') && this.coursedata[this.i].transfer_user_id != null && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
+                 
+                  this.transferredRequests.push(this.coursedata[this.i])
+                  this.allcoursedataroc.push(this.coursedata[this.i])
+                }
+              }
+              else {
+                if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
+                 
+                  this.pendingRequests.push(this.coursedata[this.i])
+                  
+                  this.allcoursedatapub.push(this.coursedata[this.i])
+                  
+                }
               }
               if (this.coursedata[this.i].status === 'pending') {
+                
                 this.usersubmitRequests.push(this.coursedata[this.i])
+          
               }
               if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].user_id == this.getprofileDetails.data.id) {
+               
                 this.submittedRequests.push(this.coursedata[this.i])
+                this.allcoursedataroc.push(this.coursedata[this.i])
+                this.allcoursedatareq.push(this.coursedata[this.i])
+                this.allcoursedatapub.push(this.coursedata[this.i])
+                
               }
               if (this.coursedata[this.i].status === 'reject') {
+              
                 this.rejectedRequests.push(this.coursedata[this.i])
+                this.allcoursedataroc.push(this.coursedata[this.i])
+                this.allcoursedatareq.push(this.coursedata[this.i])
+                this.allcoursedatapub.push(this.coursedata[this.i])
+               
               }
-              if (this.coursedata[this.i].status === 'draft') {
+              if (this.coursedata[this.i].status === 'draft' && this.coursedata[this.i].user_id == this.getprofileDetails.data.id) {
+                
                 this.draftRequests.push(this.coursedata[this.i])
+                this.allcoursedataroc.push(this.coursedata[this.i])
+                this.allcoursedatareq.push(this.coursedata[this.i])
+                this.allcoursedatapub.push(this.coursedata[this.i])
+               
               }
               if (this.coursedata[this.i].status === 'publish') {
+                
                 this.closedRequests.push(this.coursedata[this.i])
+                this.allcoursedataroc.push(this.coursedata[this.i])
+                this.allcoursedatareq.push(this.coursedata[this.i])
+                this.allcoursedatapub.push(this.coursedata[this.i])
+               
               }
 
               this.j = this.j + 1;
             }
           }
-          this.allCourses = this.courcesList;
-          console.log(this.allCourses);
-          if( this.routegetdata && this.routegetdata.status){
-            console.log('this.routegetdata',this.routegetdata)
-            console.log('this.cou',this.courcesList.filter((course:any)=>course.status == this.routegetdata.status))
-            this.courcesList = this.courcesList.filter((course: any) => course.status == this.routegetdata.status)
-
+          if (this.getUserrole.id == 3) {
+            this.allCourses = this.allcoursedataroc;
           }
-        
+          else if (this.getUserrole.id == 2) {
+            this.allCourses = this.allcoursedatareq;
+          }
+          else if (this.getUserrole.id == 4) {
+            this.allCourses = this.allcoursedatapub;
+          }
+         
           this.collectionSize = this.courcesList.length;
-          this.courcesList.map((course: any) => {
-            
-            //if(course.status === 'pending' && course.user_id != this.getprofileDetails.data.id){
-            //  this.pendingRequests.push(course)
-            //}
-            //if(course.status === 'pending'){
-            //  this.usersubmitRequests.push(course)
-            //}
-            //if(course.status === 'pending' && course.user_id == this.getprofileDetails.data.id){
-            //  this.submittedRequests.push(course)
-            //}
-            //if(course.status === 'reject'){
-            //  this.rejectedRequests.push(course)
-            //}
-            //if(course.status === 'draft'){
-            //  this.draftRequests.push(course)
-            //}
-            //if(course.status === 'publish'){
-            //  this.closedRequests.push(course)
-            //}
-            console.log(this.draftRequests)
-          })
+          
         }
       },
       (err: any) => {
@@ -201,7 +229,12 @@ export class ViewCompleteReportComponent implements OnInit {
   }
 
   getrecords(data:any){
+    if(!this.filterflag){
     this.courcesList = data;
+    }
+    if(this.filterflag){
+      this.fitertedcoursedata= data;
+    }
   }
 
   //getLearning type
@@ -278,7 +311,18 @@ export class ViewCompleteReportComponent implements OnInit {
   }
 
   applyFilter(){
+    this.filterflag = true;
     console.log("apply call");
+    this.pendingRequests=[];
+    this.rejectedRequests=[];
+    this.draftRequests=[];
+    this.closedRequests=[];
+    this.transferredRequests = [];
+    this.allCourses=[];
+    this.usersubmitRequests=[];
+    this.allcoursedataroc = [];
+    this.allcoursedatapub = [];
+    this.allcoursedatareq = [];
     if(this.filterForm.value.reporting_period){
      this.filterForm.value.start_date = '';
      this.filterForm.value.end_date = '';
@@ -292,8 +336,71 @@ export class ViewCompleteReportComponent implements OnInit {
       this.courceService.getCourseFilter(totalObj).subscribe((res: any) => {
         console.log("filtered",res);
         if (res.status == 1 && res.message == 'Success') {
-        this.filteredCourseList = res.data;
+        this.fitertedcoursedata = res.data.course;
+        this.course_count = res.data.course_count;
         this.flagVar = true;
+        for (this.i = 0; this.i < this.fitertedcoursedata.length; this.i++) {
+          this.fitertedcoursedata[this.i]['titleByLang'] = this.courceService.getTText(this.fitertedcoursedata[this.i]['title']);
+             if (this.fitertedcoursedata[this.i].request_id != "" && this.fitertedcoursedata[this.i].   request_id != null){
+            if (this.getUserrole.id == 3) {
+              if (((this.fitertedcoursedata[this.i].publisher_status === 'reject' && this.fitertedcoursedata[this.i].transfer_user_id != null) || (this.fitertedcoursedata[this.i].status === 'pending') && this.fitertedcoursedata[this.i].transfer_user_id == null && this.fitertedcoursedata[this.i].user_id != this.getprofileDetails.data.id)) {
+                this.pendingRequests.push(this.fitertedcoursedata[this.i])
+                this.allcoursedataroc.push(this.fitertedcoursedata[this.i])
+              }
+              if ((this.fitertedcoursedata[this.i].status === 'pending' && this.fitertedcoursedata[this.i].publisher_status != 'reject') && this.fitertedcoursedata[this.i].transfer_user_id != null && this.fitertedcoursedata[this.i].user_id != this.getprofileDetails.data.id) {
+                this.transferredRequests.push(this.fitertedcoursedata[this.i])
+                this.allcoursedataroc.push(this.fitertedcoursedata[this.i])
+              }
+            }
+            else {
+              if (this.fitertedcoursedata[this.i].status === 'pending' && this.fitertedcoursedata[this.i].user_id != this.getprofileDetails.data.id) {
+                this.pendingRequests.push(this.fitertedcoursedata[this.i])
+                this.allcoursedatapub.push(this.fitertedcoursedata[this.i])
+              }
+            }
+            if (this.fitertedcoursedata[this.i].status === 'pending') {
+              this.usersubmitRequests.push(this.fitertedcoursedata[this.i])
+            }
+            if (this.fitertedcoursedata[this.i].status === 'pending' && this.fitertedcoursedata[this.i].user_id == this.getprofileDetails.data.id) {
+             
+              this.submittedRequests.push(this.fitertedcoursedata[this.i])
+              this.allcoursedataroc.push(this.fitertedcoursedata[this.i])
+              this.allcoursedatareq.push(this.fitertedcoursedata[this.i])
+              this.allcoursedatapub.push(this.fitertedcoursedata[this.i])
+            }
+            if (this.fitertedcoursedata[this.i].status === 'reject') {
+              this.rejectedRequests.push(this.fitertedcoursedata[this.i])
+              this.allcoursedataroc.push(this.fitertedcoursedata[this.i])
+              this.allcoursedatareq.push(this.fitertedcoursedata[this.i])
+              this.allcoursedatapub.push(this.fitertedcoursedata[this.i])
+            }
+            if (this.fitertedcoursedata[this.i].status === 'draft' && this.fitertedcoursedata[this.i].user_id == this.getprofileDetails.data.id) {
+              this.draftRequests.push(this.fitertedcoursedata[this.i])
+              this.allcoursedataroc.push(this.fitertedcoursedata[this.i])
+              this.allcoursedatareq.push(this.fitertedcoursedata[this.i])
+              this.allcoursedatapub.push(this.fitertedcoursedata[this.i])
+            }
+            if (this.fitertedcoursedata[this.i].status === 'publish') {
+              this.closedRequests.push(this.fitertedcoursedata[this.i])
+              this.allcoursedataroc.push(this.fitertedcoursedata[this.i])
+              this.allcoursedatareq.push(this.fitertedcoursedata[this.i])
+              this.allcoursedatapub.push(this.fitertedcoursedata[this.i])
+            }
+            this.j = this.j + 1;
+          }
+         }
+         if (this.getUserrole.id == 3) {
+          this.allCourses = this.allcoursedataroc;
+        }
+        else if (this.getUserrole.id == 2) {
+          this.allCourses = this.allcoursedatareq;
+        }
+        else if (this.getUserrole.id == 4) {
+          this.allCourses = this.allcoursedatapub;
+        }
+        this.allCourses = this.fitertedcoursedata;
+         console.log("this.filteredCourseList",this.filteredCourseList)
+         this.collectionSize = this.fitertedcoursedata.length;
         }},
         (err: any) => {
           console.log(err);
@@ -329,6 +436,7 @@ export class ViewCompleteReportComponent implements OnInit {
   }
 
   reset(){
+    this.filterflag = false;
     this.refreshCourses();
     this.getLearningType();
     this.flagVar = false;

@@ -200,7 +200,12 @@ export class CourcesService {
       const urllive = `${this.basePath}api/${this.apiVersion}/course/filter`;
       return this.http.post(url, data).pipe(catchError(this.Errorhandling));  
      }
-  
+   //complete-report-filter
+   getCourseWithoutFilter(){
+    const url = `/api/${this.apiVersion}/course/filter`;
+    const urllive = `${this.basePath}api/${this.apiVersion}/course/filter`;
+    return this.http.post(url, {}).pipe(catchError(this.Errorhandling));  
+   }
      //departments
      getDepartments(){
       const url = `/api/${this.apiVersion}/department_description`;

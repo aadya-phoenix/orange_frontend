@@ -800,7 +800,7 @@
                                                 <ng-select [(ngModel)]="showILTEmail"
                                                     placeholder="Please select Instructor" [items]="preferedInstructor"
                                                     [multiple]="true" bindLabel="email_id" bindValue="email_id"
-                                                    formControlName="email_preffered_instructor w-100">
+                                                    formControlName="email_preffered_instructor">
                                                 </ng-select>
                                                 <div class="error_message"
                                                     *ngIf="iltandViltForm.controls['email_preffered_instructor'].hasError('required') && iltandViltForm.controls['email_preffered_instructor'].touched">
@@ -1196,10 +1196,10 @@
                                                         *ngIf="iltandViltForm.controls['learn_more_single'].hasError('required') && iltandViltForm.controls['learn_more_single'].touched">
                                                         Learn more cannot be blank
                                                     </div> -->
-                                                <div class="error_message"
+                                            </div>
+                                            <div class="error_message" style="margin-top: -22px;margin-bottom: 10px;"
                                                     *ngIf="iltandViltForm.controls['learn_more_single'].invalid && (iltandViltForm.controls['learn_more_single'].dirty || iltandViltForm.controls['learn_more_single'].touched)">
                                                     Learn more is not a valid URL</div>
-                                            </div>
                                         </div>
                                         <!--colend-->
                                         <!--  <div class="col-sm-6">
@@ -1469,14 +1469,15 @@
                                                             class="langu_css" />
                                                     </a>
                                                 </div>
-                                                <div class="error_message"
-                                                    *ngIf="currriculumForm.controls['learn_more_single'].invalid && (currriculumForm.controls['learn_more_single'].dirty || currriculumForm.controls['learn_more_single'].touched)">
-                                                    Learn more is not a valid URL</div>
+                                                
                                                 <!-- <div class="error_message"
                                                         *ngIf="currriculumForm.controls['learn_more_single'].hasError('required') && currriculumForm.controls['learn_more_single'].touched">
                                                         Learn more cannot be blank
                                                     </div> -->
                                             </div>
+                                            <div class="error_message"  style="margin-top: -28px;margin-bottom: 10px;"
+                                                    *ngIf="currriculumForm.controls['learn_more_single'].invalid && (currriculumForm.controls['learn_more_single'].dirty || currriculumForm.controls['learn_more_single'].touched)">
+                                                    Learn more is not a valid URL</div>
                                         </div>
                                         <!--colend-->
                                         <!--   <div class="col-sm-6">
@@ -1960,12 +1961,13 @@
                                                         </i>
                                                     </a>
                                                 </label>
+                                                
                                                 <div class="url_field">
                                                     <input type="text" placeholder="Enter URL"
                                                         class="form-control form_width" formControlName="url" />
                                                     <div class="error_message"
-                                                        *ngIf="materialbasedForm.controls['url'].hasError('required') && materialbasedForm.controls['url'].touched">
-                                                        URL cannot be blank
+                                                        *ngIf="materialbasedForm.controls['url'].invalid && (materialbasedForm.controls['url'].dirty || materialbasedForm.controls['url'].touched)">
+                                                        Material Source URL is not a valid URL
                                                     </div>
 
                                                 </div>
@@ -2261,8 +2263,8 @@
                                                 <input type="text" placeholder="Enter Playlist url"
                                                     class="form-control form_width" formControlName="url" />
                                                 <div class="error_message"
-                                                    *ngIf="playlistForm.controls['url'].hasError('required') && playlistForm.controls['url'].touched">
-                                                    Playlist url cannot be blank
+                                                    *ngIf="playlistForm.controls['url'].invalid && (playlistForm.controls['url'].dirty ||playlistForm.controls['url'].touched)">
+                                                    Playlist url is not a valid URL
                                                 </div>
 
                                             </div>
@@ -3389,12 +3391,12 @@
                         <!--col end-->
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label>Orange Learning Intrance URL(SSO)</label>
-                                <input type="text " placeholder="Enter Orange Learning Intrance URL(SSO) "
+                                <label>Orange Learning Intranet URL(SSO)</label>
+                                <input type="text " placeholder="Enter Orange Learning Intranet URL(SSO) "
                                     class="form-control form_width" formControlName="intranet_url" />
                                 <div class="error_message"
                                     *ngIf="publishForm.controls['intranet_url'].invalid && (publishForm.controls['intranet_url'].dirty || publishForm.controls['intranet_url'].touched)">
-                                    Orange Learning Intrance URL is not a valid URL</div>
+                                    Orange Learning Intranet URL is not a valid URL</div>
                             </div>
                         </div>
                         <!--col end-->

@@ -219,7 +219,7 @@ export class CreateNewCourseComponent implements OnInit {
         "description": [Validators.required],
       },
       'each': {
-        "url": [Validators.required],
+        "url": [Validators.required,Validators.pattern(urlregex)],
         "video_link": [Validators.required],
         "for_whoom": [Validators.required],
         "level": [Validators.required],
@@ -856,7 +856,7 @@ export class CreateNewCourseComponent implements OnInit {
 
     //video based
     this.videobasedForm = this.fb.group({
-      video_link: new FormControl('',Validators.pattern(urlregex)),
+      video_link: new FormControl(''),
       additional_comment: new FormControl(''),
       // email_preffered_instructor: new FormControl('', [Validators.required,
       //   Validators.pattern(emailregexp)]),
@@ -1103,7 +1103,7 @@ export class CreateNewCourseComponent implements OnInit {
 
           this.materialbasedForm
             .get('url')
-            ?.setValidators(Validators.required);
+            ?.setValidators([Validators.required,Validators.pattern(urlregex)]);
           this.materialbasedForm.get('video_link')?.clearValidators();
         }
         else {
@@ -1968,7 +1968,7 @@ export class CreateNewCourseComponent implements OnInit {
       this.materialsourceupload = false;
       this.materialbasedForm
         .get('url')
-        ?.setValidators(Validators.required);
+        ?.setValidators([Validators.required,Validators.pattern(urlregex)]);
       this.materialbasedForm.get('video_link')?.clearValidators();
       this.materialbasedForm.patchValue({
         video_link: null
