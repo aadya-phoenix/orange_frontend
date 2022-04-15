@@ -1456,7 +1456,7 @@ export class CreateNewCourseComponent implements OnInit {
         }
       }
     }
-    if (!titlearray.includes("english")) {
+    if (!titlearray.some((obj: { hasOwnProperty: (arg0: string) => any; }) => obj.hasOwnProperty('english'))) {
       titlearray.push({
         'english':
           commonformObj.value.title_single,
@@ -1495,13 +1495,13 @@ export class CreateNewCourseComponent implements OnInit {
           }
         }
       }
-      if (!descriptionarray.includes("english")) {
+      if (!descriptionarray.some((obj: { hasOwnProperty: (arg0: string) => any; }) => obj.hasOwnProperty('english'))) {
         descriptionarray.push({
           'english':
             commonformObj.value.description_single,
         });
       }
-      if (!objectivearray.includes("english")) {
+      if (!objectivearray.some((obj: { hasOwnProperty: (arg0: string) => any; }) => obj.hasOwnProperty('english'))) {
         objectivearray.push({
           'english':
             commonformObj.value.objective_single,
@@ -1526,7 +1526,7 @@ export class CreateNewCourseComponent implements OnInit {
           }
         }
       }
-      if (!descriptionarray.includes("english")) {
+      if (!descriptionarray.some((obj: { hasOwnProperty: (arg0: string) => any; }) => obj.hasOwnProperty('english'))) {
         descriptionarray.push({
           'english':
             commonformObj.value.description_single,
@@ -1573,13 +1573,13 @@ export class CreateNewCourseComponent implements OnInit {
           }
         }
       }
-      if (!for_whomarray.includes("english")) {
+      if (!for_whomarray.some((obj: { hasOwnProperty: (arg0: string) => any; }) => obj.hasOwnProperty('english'))) {
         for_whomarray.push({
           'english':
             formObj.value.for_whoom_single,
         });
       }
-      if (!learn_morearray.includes("english")) {
+      if (!learn_morearray.some((obj: { hasOwnProperty: (arg0: string) => any; }) => obj.hasOwnProperty('english'))) {
         learn_morearray.push({
           'english':
             formObj.value.learn_more_single,
@@ -1986,17 +1986,20 @@ export class CreateNewCourseComponent implements OnInit {
     }
   }
 
-  get_learningType(event: any) {
-    console.log(event.target.value);
+  get_learningType(event: any, target:any) {
+    // console.log(event.target.value);
     this.learningType = event.target.value;
-    let selectedLid = this.requiredFields[this.learningType];
-    for (let x in this.requiredFields) {
-      if (x == selectedLid) {
+    // let selectedLid = this.requiredFields[this.learningType];
+    setTimeout(() => {
+      this.scrollToElement(target);
+    }, 200);
+    // for (let x in this.requiredFields) {
+    //   if (x == selectedLid) {
 
-      } else {
+    //   } else {
 
-      }
-    }
+    //   }
+    // }
     /* const curriculumContentTextEditor = document.getElementById('curriculumTextEditor');
     if(curriculumContentTextEditor){
       curriculumContentTextEditor.click();

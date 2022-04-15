@@ -579,7 +579,7 @@
                                             <div class="form-group">
                                                 <select [(ngModel)]="learningType" class="form-control form_width"
                                                     name="list " id="list " accesskey="target"
-                                                    formControlName="learning_type" (change)="get_learningType($event);scrollToElement(target)">
+                                                    formControlName="learning_type" (change)="get_learningType($event, learningTypeDetails)">
                                                     <option hidden disabled selected='selected' value=''>-Select
                                                         learning type-</option>
                                                     <option *ngFor="let learning of learningTypes"
@@ -614,7 +614,7 @@
                         </div>
 
                     </form>
-                    <div #target>
+                    <div #learningTypeDetails>
                     <!--ILT and vILT-->
                     <form [formGroup]="iltandViltForm">
                         <div [style.display]="(learningType == '1') ? 'block' : 'none' ">
@@ -3385,7 +3385,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
 
-                                <label>Additional Comments</label>
+                                <label>Comments</label>
                                 <!--  formControlName="additional_comment" -->
                                 <!-- formControlName="additional_comment" -->
                                 <textarea class="form-control form_width-textarea" rows="3"

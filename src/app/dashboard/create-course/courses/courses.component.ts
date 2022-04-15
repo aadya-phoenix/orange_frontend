@@ -14,6 +14,7 @@ import * as _ from 'lodash';
 })
 export class CoursesComponent implements OnInit {
   public courcesList: any = [];
+  courcesListData: any = [];
   public page = 1;
   public pageNumber = 1;
   public newPageNumber = 1;
@@ -133,7 +134,7 @@ export class CoursesComponent implements OnInit {
   }
 
   getLearningTypeFilterRecords(event: any) {
-    this.courcesList = [...this.courcesList].filter((a, b) => {
+    this.courcesList = [...this.courcesListData].filter((a, b) => {
       return a.learning_type?.toLowerCase() == event.toLocaleLowerCase()
     });
     // console.log("eventtarget", event.target.value);
@@ -141,7 +142,7 @@ export class CoursesComponent implements OnInit {
   }
 
   getNewFilterRecords(event: any) {
-    this.courcesList = [...this.courcesList].filter((a, b) => {
+    this.courcesList = [...this.courcesListData].filter((a, b) => {
       return a.status_show?.toLowerCase() == this.searchStatus.toLocaleLowerCase()
     });
     // console.log("eventtarget", event.target.value);
@@ -149,6 +150,7 @@ export class CoursesComponent implements OnInit {
   }
   getrecords(data: any) {
     this.courcesList = data;
+    this.courcesListData = this.courcesList.map((x: any) => Object.assign({}, x));
     // console.log(this.courcesList);
   }
 
