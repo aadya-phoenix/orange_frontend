@@ -1,16 +1,16 @@
 <div id="right-panel" class="right-panel">
     <app-header></app-header>
-    <div class="breadcrumbs mb-3" style="background-color: #fbfbf7; padding: 6px 9px 6px 9px">
+    <div class="breadcrumbs mb-3 cm_breadcums">
         <div class="col-sm-7">
-            <div class="page-header float-left" style="background: transparent">
+            <div class="page-header float-left">
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/first.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
                         <span class="breade_text_span1">Create new course </span>
                         <span class="divider"></span>
                         <span class="breade_text_span">
-              <b style="color: #000">Instructor-Led (ILT)</b>-Instructor-Led
-              Training is face to face training delivered in a classroom.<b style="color: #fff">
+              <b >Instructor-Led (ILT)</b>-Instructor-Led
+              Training is face to face training delivered in a classroom.<b>
                 Virtual Instructor-Led
                 Training(vILT)-
               </b>virtual instrutor-Led Training(vILT)is delivered remotely
@@ -21,19 +21,19 @@
         </div>
 
         <div class="col-sm-5 float-right">
-            <div class="page-header float-right" style="background: transparent">
+            <div class="page-header float-right">
                 <div class="page-title d-flex end_just">
-                    <ol class="breadcrumb text-right" style="background: transparent">
+                    <ol class="breadcrumb text-right">
                         <li>
-                            <a [routerLink]="['/dashboard']">
-                                <i class="fa fa-home" style="color: #fff"></i>
+                            <a [routerLink]="['/dashboard']" class="text_white">
+                                <i class="fa fa-home"></i>
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" style="color: #fff">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/cources']" style="color: #fff">Create new Course</a>
+                            <a [routerLink]="['/dashboard/cources']" class="text_white">Create new Course</a>
                         </li>
                     </ol>
                 </div>
@@ -46,7 +46,7 @@
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-12">
-                    <span class="indicate_css mt-2"><span style="color: red">*</span>Indicates required field</span>
+                    <span class="indicate_css mt-2"><span class="text_red">*</span>Indicates required field</span>
                     <form [formGroup]="commonCreateCourceForm">
                         <div class="card" *ngIf="learningType != '6'">
                             <div class="card-header">
@@ -60,9 +60,9 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="d-flex">
-                                            <div class="form-group" style="width: 100%">
+                                            <div class="form-group w-100">
                                                 <label class="form-control-label">
-                          Title <span style="color: red">* </span>
+                          Title <span class="text_red">* </span>
                           <a href="">
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                                data-placement="top"
@@ -73,7 +73,7 @@
                                             </div>
 
                                             <div>
-                                                <a href="" data-toggle="modal" data-target="#titleModal" class="d-flex flex-column align-items-end" style="margin-top: 28px;">
+                                                <a href="" data-toggle="modal" data-target="#titleModal" class="d-flex flex-column align-items-end mt_28" >
                                                     <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
                                                 </a>
                                             </div>
@@ -85,7 +85,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        Training provided by <span style="color: red">* </span>
+                        Training provided by <span class="text_red">* </span>
                         <a href="">
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
@@ -107,7 +107,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Training hours/duration (HH:MM)
-                        <span style="color: red">* </span>
+                        <span class="text_red">* </span>
                         <a href="">
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
@@ -122,7 +122,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        Description <span style="color: red">* </span>
+                        Description <span class="text_red">* </span>
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top" data-container="body"
@@ -142,7 +142,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        Objectives <span style="color: red">* </span>
+                        Objectives <span class="text_red">* </span>
                         <a href="">
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
@@ -163,7 +163,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        Subject <span style="color: red">* </span>
+                        Subject <span class="text_red">* </span>
                         <a href="">
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
@@ -178,7 +178,7 @@
                        </option>
                        </select> -->
 
-                                            <ng-select placeholder="Please select subject" [(ngModel)]="subjectId" [items]="cctSubjects" bindLabel="name" bindValue="id" formControlName="subject" style="width: 100%">
+                                            <ng-select placeholder="Please select subject" [(ngModel)]="subjectId" [items]="cctSubjects" bindLabel="name" bindValue="id" formControlName="subject" class="w_100">
                                             </ng-select>
                                         </div>
                                     </div>
@@ -187,7 +187,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        Keywords <span style="color: red">* </span>
+                        Keywords <span class="text_red">* </span>
 
                         <a href="">
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
@@ -203,7 +203,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        Available Languages <span style="color: red">* </span>
+                        Available Languages <span  class="text_red">* </span>
 
                         <a href="">
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
@@ -211,7 +211,7 @@
                           </i>
                         </a>
                       </label>
-                                            <ng-select placeholder="Please select language" [items]="availableLanguages" bindLabel="name" bindValue="id" [multiple]=true formControlName="available_language" style="width: 100%" [(ngModel)]="selectedLanguages">
+                                            <ng-select placeholder="Please select language" [items]="availableLanguages" bindLabel="name" bindValue="id" [multiple]=true formControlName="available_language"  [(ngModel)]="selectedLanguages" class="w_100">
                                             </ng-select>
                                         </div>
                                     </div>
@@ -220,7 +220,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        Level <span style="color: red">* </span>
+                        Level <span  class="text_red">* </span>
                         <a href="">
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
@@ -242,7 +242,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Email of Content Owner
-                        <span style="color: red">* </span>
+                        <span  class="text_red">* </span>
 
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
@@ -259,7 +259,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Email of Training Contact
-                        <span style="color: red">* </span>
+                        <span  class="text_red">* </span>
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
@@ -330,7 +330,7 @@
                                         <div class="form-group">
                                             <label>
                         Select learning type
-                        <span style="color: red">*</span>
+                        <span class="text_red">*</span>
                       </label>
                                             <select class="form-control form_width" name="list " id="list " accesskey="target" formControlName="learning_type" (change)="get_learningType($event)">
                         <!-- <option value="">Select learning type</option> -->
@@ -374,7 +374,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        Title <span style="color: red">* </span>
+                        Title <span  class="text_red">* </span>
                         <a href="">
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
@@ -389,7 +389,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        Description <span style="color: red">* </span>
+                        Description <span  class="text_red">* </span>
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top" data-container="body"
@@ -408,9 +408,9 @@
                                         <div class="form-group">
                                             <label>
                         Select learning type
-                        <span style="color: red">*</span>
+                        <span  class="text_red">*</span>
                       </label>
-                                            <select class="form-control" name="list " id="list " accesskey="target" formControlName="learning_type" (change)="get_learningType($event)" style="width: 89%">
+                                            <select class="form-control w_89" name="list " id="list " accesskey="target" formControlName="learning_type" (change)="get_learningType($event)">
                         <!-- <option value="">Select learning type</option> -->
                         <option *ngFor="let learning of learningTypes" [value]="learning.id">{{learning.name}}</option>
                         <!-- <option value="ILT and vILT training">
@@ -453,7 +453,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          Delivery Method <span style="color: red">* </span>
+                          Delivery Method <span class="text_red">* </span>
                           <a href="">
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                                data-placement="top" title="Please select the delivery method">
@@ -475,7 +475,7 @@
                                             <div class="form-group">
                                                 <label class="form-control-label">
                           Does this course integrate digital ?
-                          <span style="color: red">* </span>
+                          <span class="text_red">* </span>
                           <a href="">
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                                data-placement="top"
@@ -514,7 +514,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          Manager Approval <span style="color: red">* </span>
+                          Manager Approval <span class="text_red">* </span>
                           <a href="">
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                                data-placement="top"
@@ -563,7 +563,7 @@
                             </i>
                           </a>
                         </label>
-                                                <ng-select placeholder="Please select Instructor" [(ngModel)]="showILTEmail" [items]="preferedInstructor" bindLabel="email_id" bindValue="email_id" formControlName="email_preffered_instructor" style="width: 100%">
+                                                <ng-select placeholder="Please select Instructor" [(ngModel)]="showILTEmail" [items]="preferedInstructor" bindLabel="email_id" bindValue="email_id" formControlName="email_preffered_instructor" class="w_100">
                                                 </ng-select>
                                             </div>
                                         </div>
@@ -572,7 +572,7 @@
                                             <div class="form-group">
                                                 <label class="form-control-label">
                           Date of first session
-                          <span style="color: red">* </span>
+                          <span class="text_red">* </span>
                           <a href="">
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                                data-placement="top"
@@ -605,7 +605,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          Expiry Type <span style="color: red">* </span>
+                          Expiry Type <span class="text_red">* </span>
                           <a href="">
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                                data-placement="top"
@@ -626,7 +626,7 @@
                                             <div class="form-group">
                                                 <label class="form-control-label">
                           Entity/Business area
-                          <span style="color: red">* </span>
+                          <span class="text_red">* </span>
                           <a>
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                                data-placement="top"
@@ -644,7 +644,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          Certification <span style="color: red">* </span>
+                          Certification <span class="text_red">* </span>
                           <a href="">
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                                data-placement="top" title="Indicates whether the event leads to a certification or not.">
@@ -662,7 +662,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          External vendor <span style="color: red">* </span>
+                          External vendor <span class="text_red">* </span>
 
                           <a>
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
@@ -683,7 +683,7 @@
                                             <div class="form-group">
                                                 <label class="form-control-label">
                           Certification expiry type
-                          <span style="color: red">* </span>
+                          <span class="text_red">* </span>
                           <a>
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                                data-placement="top"
@@ -723,7 +723,7 @@
                         </select> -->
                                                 <label class="form-control-label">
                           External vendor name
-                          <span style="color: red">* </span>
+                          <span class="text_red">* </span>
                           <a href="">
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                                data-placement="top" title="Please provide the name of the external vendor.">
@@ -738,7 +738,7 @@
                                         <div class="col-sm-6" *ngIf="showCertificateExpiry">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          Validity period <span style="color: red">* </span>
+                          Validity period <span class="text_red">* </span>
 
                           <a>
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
@@ -775,7 +775,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          For Whom? <span style="color: red">* </span>
+                          For Whom? <span class="text_red">* </span>
                           <a href="">
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                                data-placement="top" title="Define the target audience for whom the course is designed.">
@@ -865,7 +865,7 @@
                                             <tr>
                                                 <th scope="col">Learner Guidelines</th>
                                                 <th scope="col">Learner Guidelines Description</th>
-                                                <th scope="col" style="width: 12px">Action</th>
+                                                <th scope="col" class="w_12">Action</th>
                                             </tr>
                                             <tr formArrayName="learner_guideline" *ngFor="let learner of t.controls; let i = index">
                                                 <td [formGroupName]="i">
@@ -913,7 +913,7 @@
                                             <div class="form-group">
                                                 <label class="form-control-label">
                           Request to RegionalTraining Cordinator
-                          <span style="color: red">* </span>
+                          <span class="text_red">* </span>
 
                           <a>
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
@@ -932,15 +932,15 @@
                                         </div>
                                         <!--colend-->
                                     </div>
-                                    <p style="color: #000" *ngIf="getUserrole.id == 2">
-                                        <b style="color: #ff7900">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
+                                    <p class="text_black" *ngIf="getUserrole.id == 2">
+                                        <b class="text_orange">Note</b>: The cost will not be displayed on the course page in the Orange Learning catalog. The training cost will only be displayed in the corresponding session(s) of the course.
                                     </p>
-                                    <p style="color: #000" *ngIf="getUserrole.id == 2 && notifications">
-                                        <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
-                                        <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
+                                    <p class="text_black" *ngIf="getUserrole.id == 2 && notifications">
+                                        <b class="text_orange">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
+                                        <b class="text_orange">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
                                     </p>
-                                    <p style="color: #000" *ngIf="getUserrole.id != 2 && notifications">
-                                        <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b>                                        region.
+                                    <p class="text_black" *ngIf="getUserrole.id != 2 && notifications">
+                                        <b class="text_orange">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b class="text_orange">Europe</b> region from the list, who is the backup for <b>Russia</b>                                        region.
                                     </p>
                                 </div>
                                 <div class="card-footer d-flex justify-content-start">
@@ -982,7 +982,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Email of Curriculum Owner
-                        <span style="color: red">* </span>
+                        <span class="text_red">* </span>
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top" title="Email of Curriculum Owner"></i>
@@ -996,7 +996,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Does this course integrate digital ?
-                        <span style="color: red">* </span>
+                        <span class="text_red">* </span>
                         <a href="">
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
@@ -1113,7 +1113,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        For Whom? <span style="color: red">* </span>
+                        For Whom? <span class="text_red">* </span>
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top" title="Define the target audience for whom the course is designed.">
@@ -1128,7 +1128,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        Curriculum content <span style="color: red">* </span>
+                        Curriculum content <span class="text_red">* </span>
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
@@ -1145,14 +1145,14 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        Certification <span style="color: red">* </span>
+                        Certification <span class="text_red">* </span>
                         <a href="">
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top" title="Indicates whether the event leads to a certification or not.">
                           </i>
                         </a>
                       </label>
-                                            <ng-select placeholder="Please select" (change)="certificationType_Curriculum($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="certification" style="width: 100%">
+                                            <ng-select placeholder="Please select" (change)="certificationType_Curriculum($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="certification" class="w_100">
                                             </ng-select>
                                         </div>
                                     </div>
@@ -1160,7 +1160,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        URL<span style="color: red">* </span>
+                        URL<span class="text_red">* </span>
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
@@ -1182,7 +1182,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Certification expiry type
-                        <span style="color: red">* </span>
+                        <span class="text_red">* </span>
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
@@ -1202,7 +1202,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        Validity period <span style="color: red">* </span>
+                        Validity period <span class="text_red">* </span>
 
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
@@ -1230,7 +1230,7 @@
                                         <tr>
                                             <th scope="col">Learner Guidelines</th>
                                             <th scope="col">Learner Guidelines Description</th>
-                                            <th scope="col" style="width: 12px">Action</th>
+                                            <th scope="col" class="w_12">Action</th>
                                         </tr>
 
                                         <tr formArrayName="learner_guideline" *ngFor="
@@ -1280,7 +1280,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Request to RegionalTraining Cordinator
-                        <span style="color: red">* </span>
+                        <span class="text_red">* </span>
 
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
@@ -1300,12 +1300,12 @@
                                     <!--colend-->
                                 </div>
 
-                                <p style="color: #000">
-                                    <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
-                                    <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
+                                <p class="text_black">
+                                    <b class="text_orange">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
+                                    <b class="text_orange">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
                                 </p>
-                                <p style="color: #000">
-                                    <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who is the backup for
+                                <p class="text_black">
+                                    <b class="text_orange">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b class="text_orange">Europe</b> region from the list, who is the backup for
                                     <b>Russia</b> region.
                                 </p>
                             </div>
@@ -1348,7 +1348,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          Material Source<span style="color: red">* </span>
+                          Material Source<span class="text_red">* </span>
 
                           <a>
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
@@ -1378,7 +1378,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          Material Source<span style="color: red">* </span>
+                          Material Source<span class="text_red">* </span>
                           <a>
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                                data-placement="top"
@@ -1387,7 +1387,7 @@
                           </a>
                         </label>
                                                 <div class="upload_field">
-                                                    <input type="file" id="exampleInputFile" formControlName="video_link" style="width: 77%" />
+                                                    <input type="file" id="exampleInputFile" formControlName="video_link"class="w_77" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1397,7 +1397,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                          URL<span style="color: red">* </span>
+                          URL<span class="text_red">* </span>
                           <a>
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                                data-placement="top"
@@ -1439,7 +1439,7 @@
                                             <div class="form-group">
                                                 <label class="form-control-label">
                           Request to RegionalTraining Cordinator
-                          <span style="color: red">* </span>
+                          <span class="text_red">* </span>
 
                           <a>
                             <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
@@ -1460,12 +1460,12 @@
                                     </div>
                                 </div>
                             </form>
-                            <p style="color: #000">
-                                <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
-                                <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
+                            <p class="text_black">
+                                <b class="text_orange">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
+                                <b class="text_orange">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
                             </p>
-                            <p style="color: #000">
-                                <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who is the backup for
+                            <p class="text_black">
+                                <b class="text_orange">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b class="text_orange">Europe</b> region from the list, who is the backup for
                                 <b>Russia</b> region.
                             </p>
 
@@ -1477,15 +1477,15 @@
                                 <button *ngIf="getUserrole.id === 2" class="btn btn-secondary ml-1" (click)="createNewCourceMaterial('draft')">Save as draft</button>
                                 <!-- </button> -->
                                 <button *ngIf="getUserrole.id === 3" class="btn btn-primary btn_requst ml-1" (click)="getPublisher()" data-toggle="modal" data-target="#transfertoPublisher">
-                  <img src="../../../../assets/images/publish.png " /> Transfer to Publisher
+                                  <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1"> Transfer to Publisher</span>
                 </button>
 
                                 <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#rejectModal" *ngIf="getUserrole.id == 3 || getUserrole.id == 4" (click)="getPublisher()">
-                  <img src="../../../../assets/images/reject.png " />Reject
+                                  <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                 </button>
 
-                                <button *ngIf="getUserrole.id === 4" style="height:30px;width:150px" data-toggle="modal" data-target="#publish" class="btn btn-primary ml-1">
-                  Publish
+                                <button *ngIf="getUserrole.id === 4"  data-toggle="modal" data-target="#publish" class="btn btn-primary ml-1">
+                                  <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
                 </button>
                             </div>
                         </div>
@@ -1551,7 +1551,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Email of Content Owner
-                        <span style="color: red">* </span>
+                        <span class="text_red">* </span>
 
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
@@ -1605,7 +1605,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Request to RegionalTraining Cordinator
-                        <span style="color: red">* </span>
+                        <span class="text_red">* </span>
 
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
@@ -1625,12 +1625,12 @@
                                     <!--colend-->
                                 </div>
 
-                                <p style="color: #000">
-                                    <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
-                                    <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
+                                <p class="text_black">
+                                    <b class="text_orange">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
+                                    <b class="text_orange">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
                                 </p>
-                                <p style="color: #000">
-                                    <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b>                                    region.
+                                <p class="text_black">
+                                    <b class="text_orange">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b class="text_orange">Europe</b> region from the list, who is the backup for <b>Russia</b>                                    region.
                                 </p>
                             </div>
                         </form>
@@ -1642,15 +1642,15 @@
                             <button *ngIf="getUserrole.id === 2" class="btn btn-secondary ml-1" (click)="createNewCourceVideo('draft')">Save as draft</button>
                             <!-- </button> -->
                             <button *ngIf="getUserrole.id === 3" class="btn btn-primary btn_requst ml-1" (click)="getPublisher()" data-toggle="modal" data-target="#transfertoPublisher">
-                   <img src="../../../../assets/images/reject.png "  />Transfer to Publisher
+                              <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1"> Transfer to Publisher</span>
               </button>
 
                             <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#rejectModal" *ngIf="getUserrole.id == 3 || getUserrole.id == 4" (click)="getPublisher()">
-                <img src="../../../../assets/images/reject.png " />Reject
+                              <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
               </button>
 
                             <button *ngIf="getUserrole.id === 4" data-toggle="modal" data-target="#publish" class="btn btn-primary ml-1">
-                Publish
+                              <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
               </button>
                         </div>
                     </div>
@@ -1667,7 +1667,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        Playlist url <span style="color: red">* </span>
+                        Playlist url <span class="text_red">* </span>
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top" title="From your browser, copy and paste the URL of your Playlist.">
@@ -1682,7 +1682,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Number of learning objects
-                        <span style="color: red">* </span>
+                        <span class="text_red">* </span>
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
@@ -1699,7 +1699,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Email of playlist creator
-                        <span style="color: red">* </span>
+                        <span class="text_red">* </span>
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top" title="From your browser, copy and paste the URL of your Playlist.">
@@ -1714,7 +1714,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Is the target audience of your Playlist from one region
-                        only? <span style="color: red">* </span>
+                        only? <span class="text_red">* </span>
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
@@ -1722,7 +1722,7 @@
                           </i>
                         </a>
                       </label>
-                                            <ng-select placeholder="Please select" [(ngModel)]="showPlaylistTargetAudience" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="level" style="width: 100%">
+                                            <ng-select placeholder="Please select" [(ngModel)]="showPlaylistTargetAudience" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="level" class="w_100">
                                             </ng-select>
                                         </div>
                                     </div>
@@ -1732,7 +1732,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Region of Target Audience
-                        <span style="color: red">* </span>
+                        <span class="text_red">* </span>
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
@@ -1754,7 +1754,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        Target audience <span style="color: red">* </span>
+                        Target audience <span class="text_red">* </span>
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top" title="Select:
@@ -1776,7 +1776,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         OBS employees in specific Functions/Divisions
-                        <span style="color: red">* </span>
+                        <span  class="text_red">* </span>
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
@@ -1821,7 +1821,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Request to RegionalTraining Cordinator
-                        <span style="color: red">* </span>
+                        <span  class="text_red">* </span>
 
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
@@ -1841,12 +1841,12 @@
                                     <!--colend-->
                                 </div>
 
-                                <p style="color: #000">
-                                    <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
-                                    <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
+                                <p  class="text_black">
+                                    <b class="text_orange">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
+                                    <b class="text_orange">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
                                 </p>
-                                <p style="color: #000">
-                                    <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b>                                    region.
+                                <p class="text_black">
+                                    <b class="text_orange">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b class="text_orange">Europe</b> region from the list, who is the backup for <b>Russia</b>                                    region.
                                 </p>
                             </div>
                         </form>
@@ -1857,16 +1857,16 @@
                             <!-- </button> -->
                             <button *ngIf="getUserrole.id === 2" class="btn btn-secondary ml-1" (click)="createNewCourcePlaylist('draft')">Save as draft</button>
                             <!-- </button> -->
-                            <button *ngIf="getUserrole.id === 3" class="btn btn-primary ml-1" (click)="getPublisher()" data-toggle="modal" data-target="#transfertoPublisher">
-                   <img src="../../../../assets/images/reject.png "  />Transfer to Publisher
+                            <button *ngIf="getUserrole.id === 3" class="btn btn-primary ml-2" (click)="getPublisher()" data-toggle="modal" data-target="#transfertoPublisher">
+                              <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
               </button>
 
                             <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#rejectModal" *ngIf="getUserrole.id == 3 || getUserrole.id == 4" (click)="getPublisher()">
-                <img src="../../../../assets/images/reject.png "  />Reject
+                              <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
               </button>
 
                             <button *ngIf="getUserrole.id === 4" data-toggle="modal" data-target="#publish" class="btn btn-primary ml-1">
-                Publish
+                              <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
               </button>
                         </div>
                     </div>
@@ -1883,7 +1883,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Email of Curriculum Owner
-                        <span style="color: red">* </span>
+                        <span class="text_red">* </span>
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top" title="Email of Curriculum Owner"></i>
@@ -1897,7 +1897,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Does this course integrate digital ?
-                        <span style="color: red">* </span>
+                        <span class="text_red">* </span>
                         <a href="">
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
@@ -1936,14 +1936,14 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        Certification <span style="color: red">* </span>
+                        Certification <span class="text_red">* </span>
                         <a href="">
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top" title="Indicates whether the event leads to a certification or not.">
                           </i>
                         </a>
                       </label>
-                                            <ng-select placeholder="Please select" (change)="certificationType_Webbased($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="certification" style="width: 100%">
+                                            <ng-select placeholder="Please select" (change)="certificationType_Webbased($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="certification" class="w_100">
                                             </ng-select>
                                         </div>
                                     </div>
@@ -1951,7 +1951,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        External vendor <span style="color: red">* </span>
+                        External vendor <span class="text_red">* </span>
 
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
@@ -1959,7 +1959,7 @@
                           </i>
                         </a>
                       </label>
-                                            <ng-select placeholder="Please select" (change)="externalVendor_Webbased($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="external_vendor" style="width: 100%">
+                                            <ng-select placeholder="Please select" (change)="externalVendor_Webbased($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="external_vendor" class="w_100">
                                             </ng-select>
                                         </div>
                                     </div>
@@ -1969,7 +1969,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Certification expiry type
-                        <span style="color: red">* </span>
+                        <span class="text_red">* </span>
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top"
@@ -2008,7 +2008,7 @@
                       </select> -->
                                             <label class="form-control-label">
                         External vendor name
-                        <span style="color: red">* </span>
+                        <span class="text_red">* </span>
                         <a href="">
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
                              data-placement="top" title="Please provide the name of the external vendor.">
@@ -2023,7 +2023,7 @@
                                     <div class="col-sm-6" *ngIf="showCertificateExpiry_Webbased">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                        Validity period <span style="color: red">* </span>
+                        Validity period <span class="text_red">* </span>
 
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
@@ -2068,7 +2068,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                         Request to RegionalTraining Cordinator
-                        <span style="color: red">* </span>
+                        <span class="text_red">* </span>
 
                         <a>
                           <i class="fa fa-info-circle info_circle" aria-hidden="true" data-toggle="tooltip"
@@ -2088,12 +2088,12 @@
                                     <!--colend-->
                                 </div>
 
-                                <p style="color: #000">
-                                    <b style="color: #ff7900">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
-                                    <b style="color: #ff7900">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
+                                <p class="text_black">
+                                    <b class="text_orange">Note</b>: The Training coordinator of Asia Pacific region in unavailable.Therefore,please select the
+                                    <b class="text_orange">Middle East and Africa</b>.region from the list,who is the backup for Asia Pacificregion
                                 </p>
-                                <p style="color: #000">
-                                    <b style="color: #ff7900">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b style="color: #ff7900">Europe</b> region from the list, who is the backup for <b>Russia</b>                                    region.
+                                <p class="text_black">
+                                    <b class="text_orange">Note</b>: The Training Coordinator of <b>Russia</b> Region is unavailable.Therefore,please select the <b class="text_orange">Europe</b> region from the list, who is the backup for <b>Russia</b>                                    region.
                                 </p>
                             </div>
                         </form>
@@ -2104,16 +2104,16 @@
                             <!-- </button> -->
                             <button *ngIf="getUserrole.id === 2" class="btn btn-secondary ml-1" (click)="createNewCourceWebbased('draft')">Save as draft</button>
                             <!-- </button> -->
-                            <button *ngIf="getUserrole.id === 3" class="btn btn-primary btn_requst ml-1" (click)="getPublisher()" data-toggle="modal" data-target="#transfertoPublisher">
-                 <img src="../../../../assets/images/publish.png "  />Transfer to Publisher
+                            <button *ngIf="getUserrole.id === 3" class="btn btn-primary btn_requst ml-2" (click)="getPublisher()" data-toggle="modal" data-target="#transfertoPublisher">
+                              <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1"> Transfer to Publisher</span>   
               </button>
 
                             <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal" data-target="#rejectModal" *ngIf="getUserrole.id == 3 || getUserrole.id == 4" (click)="getPublisher()">
-                <img src="../../../../assets/images/reject.png "  />Reject
+                              <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
               </button>
 
-                            <button *ngIf="getUserrole.id === 4" data-toggle="modal" data-target="#publish" class="btn btn-primary ml-1">
-                Publish
+                            <button *ngIf="getUserrole.id === 4" data-toggle="modal" data-target="#publish" class="btn btn-primary ml-2">
+                              <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
               </button>
                         </div>
                     </div>
@@ -2138,7 +2138,7 @@
                 <div class="col-sm-2 dash_wid">
                     <div class="alig_dashicon">
                         <div>
-                            <div class="fa-icons-des" style="background-color: transparent">
+                            <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/draftsbl.png" />
                             </div>
 
@@ -2151,7 +2151,7 @@
                 <div class="col-sm-2 dash_wid">
                     <div class="alig_dashicon">
                         <div>
-                            <div class="fa-icons-des" style="background-color: transparent">
+                            <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/closedbl.png" />
                             </div>
 
@@ -2164,7 +2164,7 @@
                 <div class="col-sm-2 dash_wid">
                     <div class="alig_dashicon">
                         <div>
-                            <div class="fa-icons-des" style="background-color: transparent">
+                            <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/pendingbl.png" />
                             </div>
 
@@ -2177,7 +2177,7 @@
                 <div class="col-sm-2 dash_wid">
                     <div class="alig_dashicon">
                         <div>
-                            <div class="fa-icons-des" style="background-color: transparent">
+                            <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/checkbl.png" />
                             </div>
 
@@ -2190,7 +2190,7 @@
                 <div class="col-sm-2 dash_wid">
                     <div class="alig_dashicon">
                         <div>
-                            <div class="fa-icons-des" style="background-color: transparent">
+                            <div class="fa-icons-des bg-transparent" >
                                 <img src="../../../../assets/images/icon/rejectbl.png" />
                             </div>
 
@@ -2209,7 +2209,7 @@
 <!--end-->
 <!--Pop ups-->
 <!----Transfer to publisher-->
-<div class="modal fade" id="transfertoPublisher" tabindex="-1" aria-labelledby="transfertoPublisherLabel" aria-hidden="true" style="margin-top: 50px ">
+<div class="modal fade mt_50" id="transfertoPublisher" tabindex="-1" aria-labelledby="transfertoPublisherLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg " role="document ">
         <div class="modal-content ">
             <div class="modal-body ">
@@ -2243,7 +2243,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" style="color: #ff7900">
+                <h5 class="modal-title text_orange" id="exampleModalLabel">
                     Translate
                 </h5>
                 <!-- Boosted mod: using visually hidden text instead of aria-label -->
@@ -2342,7 +2342,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" style="color: #ff7900">
+                <h5 class="modal-title text_orange" id="exampleModalLabel">
                     Translate
                 </h5>
                 <!-- Boosted mod: using visually hidden text instead of aria-label -->
@@ -2375,7 +2375,7 @@
 </div>
 
 <!-- publish -->
-<div class="modal fade" id="publish" tabindex="-1" aria-labelledby="publishLabel" aria-hidden="true" style="margin-top: 50px ">
+<div class="modal fade mt_50" id="publish" tabindex="-1" aria-labelledby="publishLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg " role="document ">
         <div class="modal-content ">
             <div class="modal-body">
@@ -2419,11 +2419,11 @@
 
 
 <!--Reject-->
-<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 50px">
+<div class="modal fade mt_50" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 style="font-size: 14px; color: #ff7900">Reject Request</h4>
+                <h4  class="reject_update_text">Reject Request</h4>
             </div>
 
             <div class="modal-body">
@@ -2456,7 +2456,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" style="color: #ff7900">
+                <h5 class="modal-title text_orange" id="exampleModalLabel">
                     Translate
                 </h5>
                 <!-- Boosted mod: using visually hidden text instead of aria-label -->
@@ -2492,7 +2492,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" style="color: #ff7900">
+                <h5 class="modal-title text_orange">
                     Translate
                 </h5>
                 <!-- Boosted mod: using visually hidden text instead of aria-label -->
@@ -2529,7 +2529,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" style="color: #ff7900">
+                <h5 class="modal-title text_orange" id="exampleModalLabel" >
                     Translate
                 </h5>
                 <!-- Boosted mod: using visually hidden text instead of aria-label -->
@@ -2565,7 +2565,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" style="color: #ff7900">
+                <h5 class="modal-title text_orange" id="exampleModalLabel" >
                     Translate
                 </h5>
                 <!-- Boosted mod: using visually hidden text instead of aria-label -->
