@@ -22,6 +22,12 @@ export class CarouselService {
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  update(data: any) {
+    const url = `/api/${this.apiVersion}/carousel/update`;
+    //const urllive = `${this.basePath}api/${this.apiVersion}/carousel/create`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
   getCarousel() {
     const url = `/api/${this.apiVersion}/carousel`;
     //const urllive = `${this.basePath}api/${this.apiVersion}/carousel`;
@@ -42,4 +48,10 @@ export class CarouselService {
     const url =`api/${this.apiVersion}/carousel/${data}/history`;
     return this.http.get(url,this.http.headers).pipe(catchError(this.commmonService.Errorhandling))
   }
+
+  carouselDelete(data:any){
+    const url =`api/${this.apiVersion}/carousel/delete`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
 }
