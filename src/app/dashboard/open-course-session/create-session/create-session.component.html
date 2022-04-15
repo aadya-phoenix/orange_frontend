@@ -1,15 +1,16 @@
 <div id="right-panel" class="right-panel">
     <app-header></app-header>
-    <div class="breadcrumbs" style="background-color: #fbfbf7; padding: 6px 9px 6px 9px">
+    <div class="breadcrumbs cm_breadcums">
         <div class="col-sm-7">
-            <div class="page-header float-left" style="background: transparent">
+            <div class="page-header float-left">
                 <div class="page-title d-flex align-items-center">
-                    <img src="../../../../assets/images/creatnew.png" class="home_Css_img" />
+                    <img src="../../../../assets/images/second.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span style="font-size: 20px" class="mb-1">Create new course </span>
-                        <span style="color: #aba3a3; font-size: 13px">
-                            <b style="color: #000">Instructor-Led (ILT)</b>-Instructor-Led
-                            Training is face to face training delivered in a classroom.<b style="color: #000">
+                        <span class="breade_text_span1">Create new course </span>
+                        <span class="divider"></span>
+            <span class="breade_text_span">
+                            <b>Instructor-Led (ILT)</b>-Instructor-Led
+                            Training is face to face training delivered in a classroom.<b>
                                 Virtual Instructor-Led
                                 Training(vILT)-
                             </b>virtual instrutor-Led Training(vILT)is delivered remotely
@@ -20,19 +21,19 @@
         </div>
 
         <div class="col-sm-5 float-right">
-            <div class="page-header float-right" style="background: transparent">
+            <div class="page-header float-right">
                 <div class="page-title d-flex end_just">
-                    <ol class="breadcrumb text-right" style="background: transparent">
+                    <ol class="breadcrumb text-right">
                         <li>
-                            <a [routerLink]="['/dashboard']">
-                                <i class="fa fa-home" style="color: #5161ce"></i>
+                            <a [routerLink]="['/dashboard']" class="text_white">
+                                <i class="fa fa-home"></i>
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" style="color: #ff7900">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/cources']" style="color: #ff7900">Create new Course</a>
+                            <a [routerLink]="['/dashboard/cources']" class="text_white">Create new Course</a>
                         </li>
                     </ol>
                 </div>
@@ -44,10 +45,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header" style="padding: 0.75rem 1.25rem !important; background-color: #fff">
+                        <div class="card-header card_header_common">
                             <div class="d-flex justify-content-between media_creat_couse_col">
                                 <div class="d-flex align-items-center">
-                                    <img src="../../../../assets/images/formm.png" class="ml-2" style="width: 40px" />
+
+                                    <img src="../../../../assets/images/formm.png" class="ml-2 w_40" />
                                     <!-- <img
                     src="../../../../assets/images/form.png"
                     style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px"
@@ -57,7 +59,7 @@
                                 </div>
                                 <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                     View overall request status<img src="../../../../assets/images/Viewreq.png"
-                                        class="ml-2" style="width: 40px" />
+                                        class="ml-2 w_40" />
                                 </a>
                             </div>
                         </div>
@@ -73,7 +75,8 @@
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-12">
-                <span class="indicate_css"><span style="color: red">*</span>Indicates required field</span>
+                <span class="indicate_css"><span class="text_red
+                    ">*</span>Indicates required field</span>
 
                 <form [formGroup]="createSessionForm" enctype="multipart/form-data">
                     <div class="card">
@@ -93,7 +96,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Event Title <span style="color: red">* </span>
+                                            Event Title <span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                     data-toggle="tooltip" data-placement="top"
@@ -108,14 +111,14 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Select your region <span style="color: red">* </span>
+                                            Select your region <span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                     data-toggle="tooltip" data-placement="top" title="">
                                                 </i>
                                             </a>
                                         </label>
-                                        <ng-select placeholder="Please Select Region" [items]="rocObj" bindLabel="name" bindValue="id" formControlName="region" style="width: 100%">
+                                        <ng-select placeholder="Please Select Region" [items]="rocObj" bindLabel="name" bindValue="id" formControlName="region" class="w_100">
                                         </ng-select>
                                     </div>
                                 </div>
@@ -123,7 +126,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Delivery Method <span style="color: red">* </span>
+                                            Delivery Method <span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                     data-toggle="tooltip" data-placement="top"
@@ -131,7 +134,7 @@
                                                 </i>
                                             </a>
                                         </label>
-                                        <ng-select placeholder="Please select Delivery method" [items]="deliveryMethod" bindLabel="name" bindValue="id" formControlName="delivery_method" style="width: 100%">
+                                        <ng-select placeholder="Please select Delivery method" [items]="deliveryMethod" bindLabel="name" bindValue="id" formControlName="delivery_method" class="w_100">
                                         </ng-select>
                                     </div>
                                 </div>
@@ -139,7 +142,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Country <span style="color: red">* </span>
+                                            Country <span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                     data-toggle="tooltip" data-placement="top"
@@ -149,7 +152,7 @@
                                         </label>
 
                                         <ng-select placeholder="Please select Country" 
-                                        [items]="countryObj" bindLabel="country_name" bindValue="id" formControlName="country" style="width: 100%">
+                                        [items]="countryObj" bindLabel="country_name" bindValue="id" formControlName="country" class="w_100">
                                         </ng-select>
                                     </div>
                                 </div>
@@ -173,7 +176,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Email ID of participants <span style="color: red">* </span>
+                                            Email ID of participants <span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                     data-toggle="tooltip" data-placement="top" title="">
@@ -194,7 +197,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Start Date<span style="color: red">* </span>
+                                            Start Date<span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                     data-toggle="tooltip" data-placement="top" title="">
@@ -209,7 +212,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Start Time<span style="color: red">* </span>
+                                            Start Time<span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                     data-toggle="tooltip" data-placement="top" title="">
@@ -224,7 +227,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            End Date<span style="color: red">* </span>
+                                            End Date<span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                     data-toggle="tooltip" data-placement="top" title="">
@@ -239,7 +242,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            End Time<span style="color: red">* </span>
+                                            End Time<span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                     data-toggle="tooltip" data-placement="top" title="">
@@ -268,7 +271,7 @@
                                             <tr>
                                                 <th scope="col">Description</th>
 
-                                                <th scope="col" style="width: 12px"><button class="btn btn-primary">Add Break +</button></th>
+                                                <th scope="col" class="fon_12"><button class="btn btn-primary">Add Break +</button></th>
                                             </tr>
                                             <tr>
 
@@ -311,7 +314,7 @@
                                         </label>
 
                                         <ng-select placeholder="Please select Country" 
-                                        [items]="timeZoneObj" bindLabel="name" bindValue="id" formControlName="time_zone" style="width: 100%">
+                                        [items]="timeZoneObj" bindLabel="name" bindValue="id" formControlName="time_zone" class="w_100">
                                         </ng-select>
                                     </div>
                                 </div>
@@ -334,7 +337,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Minimum Registration <span style="color: red">* </span>
+                                            Minimum Registration <span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                     data-toggle="tooltip" data-placement="top"
@@ -350,7 +353,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Maximum Registration <span style="color: red">* </span>
+                                            Maximum Registration <span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                     data-toggle="tooltip" data-placement="top"
@@ -366,7 +369,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Registration Deadline<span style="color: red">* </span>
+                                            Registration Deadline<span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                     data-toggle="tooltip" data-placement="top" title="">
@@ -381,7 +384,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Availability <span style="color: red">* </span>
+                                            Availability <span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                     data-toggle="tooltip" data-placement="top"
@@ -397,7 +400,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            External vendor <span style="color: red">* </span>
+                                            External vendor <span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                     data-toggle="tooltip" data-placement="top"
@@ -406,7 +409,7 @@
                                             </a>
                                         </label>
 
-                                        <ng-select placeholder="Please select" (change)="externalVendor($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="external_vendor" style="width: 100%">
+                                        <ng-select placeholder="Please select" (change)="externalVendor($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="external_vendor" class="w_100">
                                         </ng-select>
                                     </div>
                                 </div>
@@ -423,7 +426,7 @@
                                             </a>
                                         </label>
 
-                                        <ng-select placeholder="Please select" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="manager_approval" style="width: 100%">
+                                        <ng-select placeholder="Please select" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="manager_approval" class="w_100">
                                         </ng-select>
                                     </div>
                                 </div>
@@ -499,8 +502,8 @@
         <div class="row ml-1 mr-1" data-aos="fade-right">
             <div class="col-sm-2 dash_wid">
                 <div class="alig_dashicon">
-                    <div>
-                        <div class="fa-icons-des" style="background-color: transparent">
+                    <div class="child_align_icon">
+                        <div class="fa-icons-des bac_trasparent">
                             <img src="../../../../assets/images/icon/draftsbl.png" />
                         </div>
 
@@ -518,8 +521,8 @@
             <!--coled-->
             <div class="col-sm-2 dash_wid">
                 <div class="alig_dashicon">
-                    <div>
-                        <div class="fa-icons-des" style="background-color: transparent">
+                    <div class="child_align_icon">
+                        <div class="fa-icons-des bac_trasparent">
                             <img src="../../../../assets/images/icon/closedbl.png" />
                         </div>
 
@@ -535,8 +538,8 @@
             <!--coled-->
             <div class="col-sm-2 dash_wid">
                 <div class="alig_dashicon">
-                    <div>
-                        <div class="fa-icons-des" style="background-color: transparent">
+                    <div class="child_align_icon">
+                        <div class="fa-icons-des bac_trasparent">
                             <img src="../../../../assets/images/icon/pendingbl.png" />
                         </div>
 
@@ -554,8 +557,8 @@
             <!--coled-->
             <div class="col-sm-2 dash_wid">
                 <div class="alig_dashicon">
-                    <div>
-                        <div class="fa-icons-des" style="background-color: transparent">
+                    <div class="child_align_icon">
+                        <div class="fa-icons-des bac_trasparent">
                             <img src="../../../../assets/images/icon/checkbl.png" />
                         </div>
 
@@ -573,8 +576,8 @@
             <!--coled-->
             <div class="col-sm-2 dash_wid">
                 <div class="alig_dashicon">
-                    <div>
-                        <div class="fa-icons-des" style="background-color: transparent">
+                    <div class="child_align_icon">
+                        <div class="fa-icons-des bac_trasparent">
                             <img src="../../../../assets/images/icon/rejectbl.png" />
                         </div>
 
@@ -593,8 +596,8 @@
         </div>
         <!--ROW END-->
         <div class="view-comple-req_div">
-            <button class="btn btn-primary view-comple-req justify-content-center" style="color: #fff">
-                <img src="../../../../assets/images/icon/viewrewall.png" style="width: 28px" />View Complete Request
+            <button class="btn btn-primary view-comple-req justify-content-center p-1">
+                <i class="fa fa-database mr-1" aria-hidden="true"></i>View Complete Request
             </button>
         </div>
         <!--ROW END-->

@@ -1,14 +1,15 @@
 <div id="right-panel" class="right-panel">
     <app-header></app-header>
 
-    <div class="breadcrumbs" style="background-color: #fbfbf7; padding: 6px 9px 6px 9px">
+    <div class="breadcrumbs cm_breadcums">
         <div class="col-sm-7">
-            <div class="page-header float-left" style="background: transparent">
+            <div class="page-header float-left">
                 <div class="page-title d-flex align-items-center">
-                    <img src="../../../../assets/images/creatnew.png" class="home_Css_img" />
+                    <img src="../../../../assets/images/second.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span style="font-size: 20px" class="mb-1">Create new course </span>
-                        <span style="color: #aba3a3; font-size: 13px">People Development & Learning Strives on Providing you with the
+                        <span  class="breade_text_span1">Create new course </span>
+                        <span class="divider"></span>
+                        <span class="breade_text_span">People Development & Learning Strives on Providing you with the
             best customer service we can drive</span
           >
         </div>
@@ -17,21 +18,21 @@
   </div>
 
   <div class="col-sm-5 float-right">
-    <div class="page-header float-right" style="background: transparent">
+    <div class="page-header float-right">
       <div class="page-title d-flex end_just">
-        <ol class="breadcrumb text-right" style="background: transparent">
+        <ol class="breadcrumb text-right">
           <li>
-            <a href="# ">
-              <i class="fa fa-home" style="color: #5161ce"></i>
+            <a href="# " class="text_white">
+              <i class="fa fa-home"></i>
             </a>
           </li>
           <li>
-            <a [routerLink]="['/dashboard']" style="color: #ff7901"
+            <a [routerLink]="['/dashboard']" class="text_white"
               >Dashboard</a
             >
           </li>
           <li>
-            <a [routerLink]="['/dashboard/cources/']" style="color: #ff7901"
+            <a [routerLink]="['/dashboard/cources/']" class="text_white"
               >Create new Course</a
             >
           </li>
@@ -49,14 +50,11 @@
                     <div class="col-md-12">
 
                         <div class="card">
-                            <div class="card-header" style="
-              padding: 0.45rem 1.25rem !important;
-              background-color: #fff;
-              border-bottom: 1px solid #00000008; ">
+                            <div class="card-header card_header_common" >
                                 <div class="overall_css">
                                     <span class="card_overall">Overall request Status</span>
                         <div class="d-flex">
-                            <button class="btn btn-primary" [routerLink]="['/dashboard/cources/view-complete-report']">
+                            <button class="btn btn-secondary" [routerLink]="['/dashboard/cources/view-complete-report']">
               <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> View
               complete report
             </button>
@@ -76,7 +74,7 @@
                         <div class="Course_icon_child">
                             <div class="alig_dashicon" (click)="getrecords(draftRequests)">
                                 <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #4bb4e6">
+                                    <div class="fa-icons-des bac_blue">
                                         <img src="../../../../assets/images/icon/drafts.png" />
                                     </div>
 
@@ -89,7 +87,7 @@
                         <div class="Course_icon_child" *ngIf="getUserrole.id == 2">
                             <div class="alig_dashicon" (click)="getrecords(usersubmitRequests)">
                                 <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #a885db">
+                                    <div class="fa-icons-des bac_puple">
                                         <img src="../../../../assets/images/icon/closed.png" />
                                     </div>
 
@@ -102,7 +100,7 @@
                         <div class="Course_icon_child" *ngIf="getUserrole.id != 2">
                             <div class="alig_dashicon" (click)="getrecords(submittedRequests)">
                                 <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #a885db">
+                                    <div class="fa-icons-des bac_puple">
                                         <img src="../../../../assets/images/icon/closed.png" />
                                     </div>
 
@@ -115,7 +113,7 @@
                         <div class="Course_icon_child" *ngIf="getUserrole.id != 2">
                             <div class="alig_dashicon" (click)="getrecords(pendingRequests)">
                                 <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #ffd200">
+                                    <div class="fa-icons-des bac_yellow">
                                         <img src="../../../../assets/images/icon/pending.png" />
                                     </div>
 
@@ -127,7 +125,7 @@
                         <div class="Course_icon_child" *ngIf="getUserrole.id == 3">
                             <div class="alig_dashicon" (click)="getrecords(transferredRequests)">
                                 <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #cd3c14">
+                                    <div class="fa-icons-des bac_red">
                                         <img src="../../../../assets/images/icon/transfer.png" />
                                     </div>
 
@@ -140,7 +138,7 @@
                         <div class="Course_icon_child">
                             <div class="alig_dashicon" (click)="getrecords(closedRequests)">
                                 <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #50be87">
+                                    <div class="fa-icons-des bac_green">
                                         <img src="../../../../assets/images/icon/check.png" />
                                     </div>
 
@@ -153,7 +151,7 @@
                         <div class="Course_icon_child">
                             <div class="alig_dashicon" (click)="getrecords(rejectedRequests)">
                                 <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #ffb4e6">
+                                    <div class="fa-icons-des bac_pink">
                                         <img src="../../../../assets/images/icon/reject.png" />
                                     </div>
 
@@ -166,7 +164,7 @@
                         <div class="Course_icon_child">
                             <div class="alig_dashicon" (click)="getrecords(allCourses)">
                                 <div class="sub-child-dashicon">
-                                    <div class="fa-icons-des" style="background-color: #085ebd">
+                                    <div class="fa-icons-des bac_blue1">
                                         <img src="../../../../assets/images/icon/viewall.png" />
                                     </div>
 
@@ -194,17 +192,14 @@
             <div class="col-md-12" *ngIf="getUserrole.id === 2">
 
                 <div class="card">
-                    <div class="card-header" style="
-              padding: 0.45rem 1.25rem !important;
-              background-color: #fff;
-              border-bottom: 1px solid #00000008; ">
+                    <div class="card-header card_header_common">
                         <div class="overall_css">
                             <div>
                                 <i class="fa fa-table fa_table" aria-hidden="true "></i>
                                 <span class="card-title card-title-text card_overall">My Request</span>
                             </div>
                             <div _ngcontent-cue-c109=" " class="d-flex">
-                                <label _ngcontent-cue-c109=" " class="mt-2 mr-1" style="color: #000;">Search:</label
+                                <label _ngcontent-cue-c109=" " class="mt-2 mr-1 text_black">Search:</label
                 >
                 <input
                   _ngcontent-cue-c109=" "
@@ -229,7 +224,7 @@
                         <div class="table-responsive">
                             <table id="bootstrap-data-table-export " class="table table-striped table-bordered">
                                 <thead>
-                                    <tr class="text-center" style="font-size: 13px;">
+                                    <tr class="text-center fon_13">
                                         <th sortable="id " (sort)="onSort($event)">
                                             Request Id
                                             <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
@@ -274,7 +269,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let cource of courcesList | filter: searchText  | paginate: { itemsPerPage: 5, currentPage: p }" class="text-center bac_hover-table" style="font-size: 12px;">
+                                    <tr *ngFor="let cource of courcesList | filter: searchText  | paginate: { itemsPerPage: 5, currentPage: p }" class="text-center bac_hover-table fon_12">
                                         <td (click)="getRequest(cource)" class="re_id">{{ cource.request_id }}</td>
                                         <td (click)="getRequest(cource)">
                                             {{ cource && cource.user_name ? cource.user_name : "- " }}
@@ -309,7 +304,7 @@
                                             <span *ngIf="!cource.status">
                           Pending
                         </span>
-                                            <p *ngIf="cource.status" [ngClass]="cource.status" style="color:#ffd200">
+                                            <p *ngIf="cource.status" [ngClass]="cource.status" class="text_yellow">
                                                 {{ cource.status | titlecase }}
                                             </p>
 
@@ -401,14 +396,14 @@
 
             <div class="col-md-12" *ngIf="getUserrole.id === 3 || getUserrole.id === 4">
                 <div class="card">
-                    <div class="card-header" style="background-color: #fff">
+                    <div class="card-header">
                        <div class="overall_css">
                             <div>
                                 <i class="fa fa-table fa_table" aria-hidden="true "></i>
                                 <span class="card-title card-title-text card_overall">My Request</span>
                             </div>
                             <div _ngcontent-cue-c109=" " class="d-flex">
-                                <label _ngcontent-cue-c109=" " class="mt-2 mr-1" style="color: #000;">Search:</label
+                                <label _ngcontent-cue-c109=" " class="mt-2 mr-1 text_black">Search:</label
                 >
                 <input
                   _ngcontent-cue-c109=" "
@@ -433,7 +428,7 @@
             <div class="table-responsive">
               <table id="bootstrap-data-table-export "class="table table-striped table-bordered">
                 <thead class="text-center">
-                  <tr style="font-size: 13px" class="text-center">
+                  <tr  class="text-center fon_13">
                     <th sortable="request_id" (sort)="onSort($event)">
                       Request Id
                       <i
@@ -519,7 +514,7 @@
                 </thead>
                 <tbody>
                   <tr
-                    *ngFor="let course of courcesList | filter: searchText | paginate: { itemsPerPage: 10, currentPage: paging }" class="text-center bac_hover-table" style="font-size: 12px;">
+                    *ngFor="let course of courcesList | filter: searchText | paginate: { itemsPerPage: 10, currentPage: paging }" class="text-center bac_hover-table fon_12">
                     <td (click)="getRequest(course)" class="re_id">{{ course.request_id }}</td>
                     <td (click)="getRequest(course)">
                       {{
@@ -545,7 +540,7 @@
                         <span *ngIf="!course.status">
                           Pending
                         </span>
-                        <p *ngIf="course.status" [ngClass]="course.status" style="color:#ffd200">
+                        <p *ngIf="course.status" [ngClass]="course.status" class="text_yellow">
                         {{  course.status | titlecase   }}
                       </p>
                     
