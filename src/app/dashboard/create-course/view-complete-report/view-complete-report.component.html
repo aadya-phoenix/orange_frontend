@@ -326,28 +326,28 @@
                                     <thead class="sticky_header">
                                         <tr class="text-center fon_13">
                                             <th scope="col">#</th>
-                                            <th sortable="id " (sort)="onSort($event)" scope="col">Request Id</th>
+                                            <th sortable="request_id" (sort)="onSort($event)" scope="col">Request Id</th>
                                             <th *ngIf="getUserrole.id != 2" scope="col">History</th>
-                                            <th sortable="handle" (sort)="onSort($event)" scope="col"
+                                            <th sortable="status" (sort)="onSort($event)" scope="col"
                                                class="w_10">Status</th>
-                                            <th sortable="training_title" (sort)="onSort($event)" scope="col">Traning
+                                            <th sortable="titleByLang" (sort)="onSort($event)" scope="col">Traning
                                                 Title</th>
-                                            <th sortable="request_email" (sort)="onSort($event)" scope="col">Request
+                                            <th sortable="email_content_owner" (sort)="onSort($event)" scope="col">Request
                                                 Email</th>
-                                            <th sortable="activity_type" (sort)="onSort($event)" scope="col">Send To
+                                            <th sortable="send_to" (sort)="onSort($event)" scope="col">Send To
                                             </th>
-                                            <th scope="col" class="w_10">Activity Type</th>
+                                            <th sortable="learning_type_name" (sort)="onSort($event)" scope="col" class="w_10">Activity Type</th>
                                             <th sortable="created_at" (sort)="onSort($event)" scope="col">Create Date
                                             </th>
                                             <th *ngIf="getUserrole.id != 2" sortable="roc_name" (sort)="onSort($event)"
                                                 scope="col">ROC Name</th>
-                                            <th *ngIf="getUserrole.id != 2" sortable="request_date "
+                                            <th *ngIf="getUserrole.id != 2" sortable="created_at"
                                                 (sort)="onSort($event)" scope="col">Request Date</th>
-                                            <th *ngIf="getUserrole.id != 2" sortable="roc_response_time "
+                                            <th *ngIf="getUserrole.id != 2" sortable="roc_response_time"
                                                 (sort)="onSort($event)" scope="col">ROC response time</th>
                                             <th sortable="publisher_name" (sort)="onSort($event)" scope="col">Publisher
                                                 Name</th>
-                                            <th sortable="last_modified" (sort)="onSort($event)" scope="col">Last
+                                            <th sortable="updated_at" (sort)="onSort($event)" scope="col">Last
                                                 Modified</th>
                                         </tr>
                                     </thead>
@@ -416,9 +416,14 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="pagintion_child">
+                            <div class="pagintion_child" *ngIf="flagVar == false">
                                 <p class="P_showing">Showing {{startPageEntry}} to {{endPageEntry}}
-                                    of {{collectionSize}} entries</p>
+                                    of {{courcesList.length}} entries</p>
+                                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                            </div>
+                            <div class="pagintion_child" *ngIf="flagVar">
+                                <p class="P_showing">Showing {{startPageEntry}} to {{endPageEntry}}
+                                    of {{fitertedcoursedata.length}} entries</p>
                                 <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                             </div>
 
