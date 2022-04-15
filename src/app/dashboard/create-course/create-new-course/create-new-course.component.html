@@ -1184,6 +1184,9 @@
                                                     <input type="url" placeholder="Enter Learn more"
                                                         [(ngModel)]="showlearnmore" class="form-control form_width"
                                                         formControlName="learn_more_single" />
+														 <div class="error_message" 
+                                                    *ngIf="iltandViltForm.controls['learn_more_single'].invalid && (iltandViltForm.controls['learn_more_single'].dirty || iltandViltForm.controls['learn_more_single'].touched)">
+                                                    Learn more is not a valid URL</div>
                                                 </div>
                                                 <div class="mt_top">
                                                     <a data-toggle="modal" data-target="#learnMoreModal"
@@ -1192,14 +1195,14 @@
                                                             class="langu_css" />
                                                     </a>
                                                 </div>
+												   </div>
+												
                                                 <!-- <div class="error_message"
                                                         *ngIf="iltandViltForm.controls['learn_more_single'].hasError('required') && iltandViltForm.controls['learn_more_single'].touched">
                                                         Learn more cannot be blank
                                                     </div> -->
-                                            </div>
-                                            <div class="error_message" style="margin-top: -22px;margin-bottom: 10px;"
-                                                    *ngIf="iltandViltForm.controls['learn_more_single'].invalid && (iltandViltForm.controls['learn_more_single'].dirty || iltandViltForm.controls['learn_more_single'].touched)">
-                                                    Learn more is not a valid URL</div>
+                                         
+                                           
                                         </div>
                                         <!--colend-->
                                         <!--  <div class="col-sm-6">
@@ -1461,6 +1464,9 @@
                                                     <input type="url" placeholder="Enter Learn more"
                                                         [(ngModel)]="showlearnmore" class="form-control form_width"
                                                         formControlName="learn_more_single" />
+                                                        <div class="error_message" 
+                                                        *ngIf="currriculumForm.controls['learn_more_single'].invalid && (currriculumForm.controls['learn_more_single'].dirty || currriculumForm.controls['learn_more_single'].touched)">
+                                                        Learn more is not a valid URL</div>
                                                 </div>
                                                 <div class="mt_top">
                                                     <a data-toggle="modal" data-target="#learnMoreModal_curriculum"
@@ -1475,9 +1481,7 @@
                                                         Learn more cannot be blank
                                                     </div> -->
                                             </div>
-                                            <div class="error_message"  style="margin-top: -28px;margin-bottom: 10px;"
-                                                    *ngIf="currriculumForm.controls['learn_more_single'].invalid && (currriculumForm.controls['learn_more_single'].dirty || currriculumForm.controls['learn_more_single'].touched)">
-                                                    Learn more is not a valid URL</div>
+                                           
                                         </div>
                                         <!--colend-->
                                         <!--   <div class="col-sm-6">
@@ -3371,8 +3375,8 @@
 </div>
 
 <!-- publish -->
-<div class="modal fade" id="publish" tabindex="-1" aria-labelledby="publishLabel" aria-hidden="true"
-    style="margin-top: 50px ">
+<div class="modal fade mt_top_50" id="publish" tabindex="-1" aria-labelledby="publishLabel" aria-hidden="true"
+    >
     <div class="modal-dialog modal-lg " role="document">
         <div class="modal-content ">
             <div class="modal-body">
