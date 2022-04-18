@@ -4,7 +4,7 @@
   <!-- /header -->
   <!-- Header-->
   <div class="breadcrumbs cm_breadcums">
-    <div class="col-sm-7">
+    <div class="col-sm-8">
       <div class="page-header">
         <div class="page-title d-flex align-items-center">
           <img src="../../../../assets/images/first.jpg" class="home_Css_img" />
@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <div class="col-sm-5 float-right">
+    <div class="col-sm-4 float-right">
       <div class="page-header">
 
         <div class="page-title d-flex justify-content-end">
@@ -183,10 +183,10 @@
                         </span>
                         <a data-toggle="modal" data-target="#learnMoreModal" (click)="changeTranslateData('title')"
                           class="d-flex flex-column align-items-end w-20">
-                          <img src="../../../../assets/images/icon/lang.png" class="langu_css mr-2" />
+                          <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
                         </a>
                         <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text"
-                          (click)="copyToClipBoard(routegetdata.titleByLang)">
+                          (click)="copyToClipBoard(routegetdata.titleByLang)" class="ml-1">
                           <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                       </div>
 
@@ -233,10 +233,10 @@
                           routegetdata.descriptionByLang }}</span>
                           <a data-toggle="modal" data-target="#learnMoreModal"
                             (click)="changeTranslateData('description')" class="d-flex flex-column align-items-end w-20">
-                            <img src="../../../../assets/images/icon/lang.png" class="langu_css mr-2" />
+                            <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
                           </a>
                         <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text"
-                          (click)="copyToClipBoard(routegetdata.descriptionByLang)">
+                          (click)="copyToClipBoard(routegetdata.descriptionByLang)" class="ml-1">
                           <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                       </div>
 
@@ -783,10 +783,10 @@
                           </span>
                           <a data-toggle="modal" data-target="#learnMoreModal"
                             (click)="changeTranslateData('for_whoom')" class="d-flex flex-column align-items-end w-20">
-                            <img src="../../../../assets/images/icon/lang.png" class="langu_css mr-2" />
+                            <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
                           </a>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.for_whoomByLang)" title="Copy Text">
+                            (click)="copyToClipBoard(routegetdata.for_whoomByLang)" title="Copy Text" class="ml-1">
                             <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
@@ -807,10 +807,10 @@
                           </span>
                           <a data-toggle="modal" data-target="#learnMoreModal"
                             (click)="changeTranslateData('learn_more')" class="d-flex flex-column align-items-end w-20">
-                            <img src="../../../../assets/images/icon/lang.png" class="langu_css mr-2" />
+                            <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
                           </a>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.learn_moreByLang)" title="Copy Text">
+                            (click)="copyToClipBoard(routegetdata.learn_moreByLang)" title="Copy Text" class="ml-1">
                             <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
@@ -1802,9 +1802,12 @@
                 <div class="form-group block">
                   <div>
                     <label class="form-control-label">{{getLabel(item)}}</label>
-                    <span class="form-control form_width">
-                      {{getValue(item)}}
-                    </span>
+                    
+                  </div>
+                  <div class="d-flex">
+                  <span class="form_data1" onkeyup="textAreaAdjust(this)">
+                    {{getValue(item)}}
+                  </span>
                   </div>
                 </div>
               </div>
