@@ -337,8 +337,8 @@
                                                 Title</th>
                                             <th sortable="email_content_owner" (sort)="onSort($event)" scope="col">Request
                                                 Email</th>
-                                            <!-- <th sortable="send_to" (sort)="onSort($event)" scope="col">Send To
-                                            </th> -->
+                                            <th *ngIf="getUserrole.id != 2" sortable="send_to" (sort)="onSort($event)" scope="col">Send To
+                                            </th>
                                             <th sortable="learning_type_name" (sort)="onSort($event)" scope="col" class="w_10">Activity Type</th>
                                             <th sortable="created_at" (sort)="onSort($event)" scope="col">Create Date
                                             </th>
@@ -348,8 +348,8 @@
                                                 (sort)="onSort($event)" scope="col">Request Date</th>
                                             <th *ngIf="getUserrole.id != 2" sortable="roc_response_time"
                                                 (sort)="onSort($event)" scope="col">ROC response time</th>
-                                            <!-- <th sortable="publisher_name" (sort)="onSort($event)" scope="col">Publisher
-                                                Name</th> -->
+                                            <th *ngIf="getUserrole.id != 2" sortable="publisher_name" (sort)="onSort($event)" scope="col">Publisher
+                                                Name</th>
                                             <th sortable="updated_at" (sort)="onSort($event)" scope="col">Last
                                                 Modified</th>
                                         </tr>
@@ -375,14 +375,14 @@
                                             </td>
                                             <td>{{ cource.titleByLang | titlecase}}</td>
                                             <td>{{ cource.email_content_owner}}</td>
-                                            <!-- <td>{{cource.send_to}}</td> -->
+                                            <td *ngIf="getUserrole.id != 2">{{cource.send_to}}</td>
                                             <td>{{ cource.learning_type_name}}</td>
                                             <td>{{ cource.created_at}}</td>
                                             <td *ngIf="getUserrole.id != 2">{{ cource.roc_name}}</td>
                                             <td *ngIf="getUserrole.id != 2">{{ cource.created_at}}</td>
                                             
                                             <td *ngIf="getUserrole.id != 2">{{cource.roc_response_time}}</td>
-                                            <!-- <td>{{cource.publisher_name}}</td> -->
+                                            <td *ngIf="getUserrole.id != 2">{{cource.publisher_name}}</td>
                                             <td>{{cource.updated_at}}</td>
                                         </tr>
                                     </tbody>
@@ -406,14 +406,14 @@
                                             </td>
                                             <td>{{ cource.titleByLang | titlecase}}</td>
                                             <td>{{ cource.email_content_owner}}</td>
-                                            <!-- <td>{{cource.send_to}}</td> -->
+                                            <td *ngIf="getUserrole.id != 2">{{cource.send_to}}</td>
                                             <td>{{ cource.learning_type_name}}</td>
                                             <td>{{ cource.created_at}}</td>
                                             <td *ngIf="getUserrole.id != 2">{{ cource.roc_name}}</td>
                                             <td *ngIf="getUserrole.id != 2">{{ cource.created_at}}</td>
                                            
                                             <td *ngIf="getUserrole.id != 2">{{cource.roc_response_time}}</td>
-                                            <!-- <td>{{cource.publisher_name}}</td> -->
+                                            <td *ngIf="getUserrole.id != 2">{{cource.publisher_name}}</td>
                                             <td>{{cource.updated_at}}</td>
                                         </tr>
                                     </tbody>
