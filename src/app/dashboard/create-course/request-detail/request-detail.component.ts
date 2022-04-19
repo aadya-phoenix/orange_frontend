@@ -198,7 +198,7 @@ export class RequestDetailComponent implements OnInit {
   }
 
   PublishRequest() {
-    let transferobj = { course_id: this.routegetdata.id, transfer_id: this.selectedPublisher, status: 'publish', intranet_url: this.publishForm.value.intranet_url, internet_url: this.publishForm.value.internet_url };
+    let transferobj = { course_id: this.routegetdata.id, transfer_id: this.selectedPublisher, status: 'publish', intranet_url: this.publishForm.value.intranet_url, internet_url: this.publishForm.value.internet_url, status_comment: this.publishForm.value.status_comment };
     if (this.publishForm.valid) {
       this.courseService.courceStatus(transferobj).subscribe(
         (res: any) => {
@@ -329,6 +329,9 @@ export class RequestDetailComponent implements OnInit {
       internet_url: new FormControl('', [
         Validators.required,
         Validators.pattern(urlregex),
+      ]),
+      status_comment: new FormControl('', [
+        Validators.required
       ]),
     });
     this.getTrainingHours();

@@ -1115,9 +1115,13 @@
                                                         </i>
                                                     </a>
                                                 </label>
-                                                <input [(ngModel)]="showILTVendorName" type="text"
+                                                <ng-select placeholder="External vendor name"
+                                                    [items]="vendor" bindLabel="vendor_name" bindValue="vendor_name"
+                                                    formControlName="external_vendor_name" class="w_100">
+                                                </ng-select>
+                                                <!-- <input [(ngModel)]="showILTVendorName" type="text"
                                                     placeholder="External vendor name" class="form-control form_width"
-                                                    formControlName="external_vendor_name" />
+                                                    formControlName="external_vendor_name" /> -->
                                                 <div class="error_message"
                                                     *ngIf="iltandViltForm.controls['external_vendor_name'].hasError('required') && iltandViltForm.controls['external_vendor_name'].touched">
                                                     External vendor name cannot be blank

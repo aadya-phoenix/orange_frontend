@@ -320,6 +320,7 @@ export class CreateNewCourseComponent implements OnInit {
     transferred: 0
   };
   publisherList: any = [];
+  vendor: any = [];
   selectedPublisherId: any;
 
   constructor(
@@ -561,6 +562,18 @@ export class CreateNewCourseComponent implements OnInit {
       (res: any) => {
         this.vendorType = res.data;
         console.log(this.vendorType);
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
+
+  getvendor() {
+    this.courceService.getVendor().subscribe(
+      (res: any) => {
+        this.vendor = res.data;
       },
       (err: any) => {
         console.log(err);
@@ -1941,6 +1954,7 @@ export class CreateNewCourseComponent implements OnInit {
     if (event.id == 'yes') {
       this.externalVendorname = true;
       this.showVendor = true;
+      this.getvendor();
       this.iltandViltForm
         .get('external_vendor_name')
         ?.setValidators(Validators.required);
