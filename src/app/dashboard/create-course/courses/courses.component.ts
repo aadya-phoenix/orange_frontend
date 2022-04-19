@@ -28,7 +28,7 @@ export class CoursesComponent implements OnInit {
     total: 0,
     transferred: 0
   };
-  
+
   startPageEntry: any;
   endPageEntry: any;
   newstartPageEntry: any;
@@ -51,7 +51,7 @@ export class CoursesComponent implements OnInit {
   routegetdata: any;
   getprofileDetails: any;
   historylaststatus: any;
-  
+
   coursedata: any = [];
   public statusArray: any = [
     { id: this.pendingRequests, name: 'Pending' },
@@ -88,7 +88,7 @@ export class CoursesComponent implements OnInit {
       this.allCourses = this.pendingRequests;
       this.getrecords(this.pendingRequests);
     }
-    console.log("profile details",this.getprofileDetails)
+    console.log("profile details", this.getprofileDetails)
 
   }
 
@@ -134,17 +134,31 @@ export class CoursesComponent implements OnInit {
   }
 
   getLearningTypeFilterRecords(event: any) {
-    this.courcesList = [...this.courcesListData].filter((a, b) => {
-      return a.learning_type?.toLowerCase() == event.toLocaleLowerCase()
-    });
+    if(this.courcesListData.length === 0){
+      this.courcesListData = this.courcesList;
+    }
+    if (event) {
+      this.courcesList = [...this.courcesListData].filter((a, b) => {
+        return a.learning_type?.toLowerCase() == event.toLocaleLowerCase()
+      });
+    } else {
+      this.courcesList = this.allCourses;
+    }
     // console.log("eventtarget", event.target.value);
     //this.getrecords(event.target.value);
   }
 
   getNewFilterRecords(event: any) {
-    this.courcesList = [...this.courcesListData].filter((a, b) => {
-      return a.status_show?.toLowerCase() == this.searchStatus.toLocaleLowerCase()
-    });
+    if(this.courcesListData.length === 0){
+      this.courcesListData = this.courcesList;
+    }
+    if (this.searchStatus) {
+      this.courcesList = [...this.courcesListData].filter((a, b) => {
+        return a.status_show?.toLowerCase() == this.searchStatus.toLocaleLowerCase()
+      });
+    } else {
+      this.courcesList = this.allCourses;
+    }
     // console.log("eventtarget", event.target.value);
     //this.getrecords(event.target.value);
   }

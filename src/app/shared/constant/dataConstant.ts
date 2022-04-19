@@ -18,9 +18,9 @@ export const dataConstant = {
   UrlPattern: '^(https?:\\/\\/)?' + // protocol
     '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
     '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-    '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-    '(\\#[-a-z\\d_]*)?$',
+    '(\\:\\d+)?(\\/[-A-Za-z\\d%_.~+]*)*' + // port and path
+    '(\\?[;&A-Za-z\\d%_.:/?~+=-]*)?' + // query string
+    '(\\#[-A-Za-z\\d_]*)?$',
   CarouselStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred' },
   ImageUrl: 'https://orange.mindscroll.info/public/public',
   RoleID: {

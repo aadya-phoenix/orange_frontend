@@ -17,10 +17,12 @@ import {
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 const emailregexp = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
 /* const urlregex = '^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$' ; */
 /* const urlregex = '^(https:\/\/www\.|http:\/\/www\.|www\.)[a-zA-Z0-9\-_$]+\.[a-zA-Z]{2,5}$'; */
-const urlregex ='^(https?:\\/\\/)?'+'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,5}|'+'((\\d{1,3}\\.){3}\\d{1,3}))'+'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+'(\\?[;&a-z\\d%_.~+=-]*)?'+'(\\#[-a-z\\d_]*)?$';
+const urlregex = '^(https?:\\/\\/)?' + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,5}|' + '((\\d{1,3}\\.){3}\\d{1,3}))' + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + '(\\?[;&a-z\\d%_.~+=-]*)?' + '(\\#[-a-z\\d_]*)?$';
+// const urlregex = '((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)';
 @Component({
   selector: 'app-create-new-course',
   templateUrl: './create-new-course.component.html',
@@ -161,7 +163,7 @@ export class CreateNewCourseComponent implements OnInit {
       },
       'each': {
         "material_source": [Validators.required],
-        "url": [Validators.required,Validators.pattern(urlregex)]
+        "url": [Validators.required, Validators.pattern(dataConstant.UrlPattern)]
       }
     },
     '4':
@@ -219,7 +221,7 @@ export class CreateNewCourseComponent implements OnInit {
         "description": [Validators.required],
       },
       'each': {
-        "url": [Validators.required,Validators.pattern(urlregex)],
+        "url": [Validators.required, Validators.pattern(dataConstant.UrlPattern)],
         "video_link": [Validators.required],
         "for_whoom": [Validators.required],
         "level": [Validators.required],
@@ -290,9 +292,9 @@ export class CreateNewCourseComponent implements OnInit {
   showMaterialUploadchecked: boolean = false;
 
   showILTWhoSee: any;
-  showILTEmail: any=[];
+  showILTEmail: any = [];
   showILTForWhom: any;
-  showResource:any;
+  showResource: any;
   showILTLearnMore: any;
   showILTtitleAdditional: any;
   showILTEntity: any;
@@ -307,7 +309,7 @@ export class CreateNewCourseComponent implements OnInit {
 
   getUserrole: any; //to get user role
   public cordinatorsList: any = [];
-  backupCordinatorsList: any =[];
+  backupCordinatorsList: any = [];
   public course_count = {
     closed: 0,
     draft: 0,
@@ -318,6 +320,7 @@ export class CreateNewCourseComponent implements OnInit {
     transferred: 0
   };
   publisherList: any = [];
+  vendor: any = [];
   selectedPublisherId: any;
 
   constructor(
@@ -393,7 +396,7 @@ export class CreateNewCourseComponent implements OnInit {
         //this.showILTExiryType = Number(this.routergetdata.entity_business_area)
         this.showILTRegional = Number(this.routergetdata.regional_cordinator)
         this.showILTVendorName = this.routergetdata.external_vendor_name
-        console.log("prefered instructor",this.showILTEmail);
+        console.log("prefered instructor", this.showILTEmail);
         if (this.routergetdata.certification == "yes") {
           this.showCertificateExpiry = true
         }
@@ -429,7 +432,7 @@ export class CreateNewCourseComponent implements OnInit {
 
       }
       else if (this.routergetdata.learning_type == "4") {
-        this.showCurriculumEmail = this.routergetdata.email_preffered_instructor
+        this.showCurriculumEmail = JSON.parse(this.routergetdata.email_preffered_instructor);
         this.showCurriculumLink = this.routergetdata.video_link
         this.showCurriculumFreeText = this.routergetdata.title_additional
         this.showCurriculumContent = this.routergetdata.external_vendor_name
@@ -461,10 +464,10 @@ export class CreateNewCourseComponent implements OnInit {
       else if (this.routergetdata.learning_type == "6") {
         this.showPlaylistTargetAudience = this.routergetdata['level'] == "1" ? "yes" : "no";
         this.showPlaylistEmail = this.routergetdata.for_whoom.toString().replace('"', '').replace('"', '');
-        if (this.routergetdata.level == "yes"){
+        if (this.routergetdata.level == "yes") {
           this.regionTargetAudience = true;
         }
-        else{
+        else {
           this.regionTargetAudience = false;
         }
       }
@@ -531,7 +534,7 @@ export class CreateNewCourseComponent implements OnInit {
       }
     );
   }
-  getBackupRegionalCordinator(){
+  getBackupRegionalCordinator() {
     this.courceService.getBackupRegionalCordinator().subscribe(
       (res: any) => {
         this.backupCordinatorsList = res.data;
@@ -559,6 +562,18 @@ export class CreateNewCourseComponent implements OnInit {
       (res: any) => {
         this.vendorType = res.data;
         console.log(this.vendorType);
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+
+
+  getvendor() {
+    this.courceService.getVendor().subscribe(
+      (res: any) => {
+        this.vendor = res.data;
       },
       (err: any) => {
         console.log(err);
@@ -816,9 +831,9 @@ export class CreateNewCourseComponent implements OnInit {
       for_whoom: new FormControl(''),
       learn_more: new FormControl(''),
       for_whoom_single: new FormControl('', [Validators.required]),
-      learn_more_single: new FormControl('',[
+      learn_more_single: new FormControl('', [
         Validators.required,
-        Validators.pattern(urlregex),
+        Validators.pattern(dataConstant.UrlPattern),
       ]),
       cost_of_training: new FormControl(''),
       // cost_of_training: new FormControl('', [Validators.required]),	        
@@ -870,7 +885,7 @@ export class CreateNewCourseComponent implements OnInit {
     this.materialbasedForm = this.fb.group({
       //material based          
       material_source: new FormControl(''),
-      url: new FormControl('',Validators.pattern(urlregex)),
+      url: new FormControl('', Validators.pattern(dataConstant.UrlPattern)),
       additional_comment: new FormControl(''),
       regional_cordinator:
         this.getUserrole.id === 2
@@ -897,9 +912,9 @@ export class CreateNewCourseComponent implements OnInit {
       /*  url: new FormControl('', [Validators.required]), */
       who_see_course: new FormControl(''),
       for_whoom: new FormControl(''),
-      learn_more_single: new FormControl('',[
+      learn_more_single: new FormControl('', [
         Validators.required,
-        Validators.pattern(urlregex),
+        Validators.pattern(dataConstant.UrlPattern),
       ]),
       forWhomArr: new FormArray([]),
       learnMoreArr: new FormArray([]),
@@ -938,7 +953,7 @@ export class CreateNewCourseComponent implements OnInit {
       for_whoom: new FormControl('', [Validators.required,
       Validators.pattern(emailregexp)]),
       additional_comment: new FormControl(''),
-      url: new FormControl('', [Validators.required, Validators.pattern(urlregex)]),
+      url: new FormControl('', [Validators.required, Validators.pattern(dataConstant.UrlPattern)]),
       video_link: new FormControl('', [Validators.required]),
       level: new FormControl('', [Validators.required]),
       who_see_course: new FormControl(''),
@@ -950,13 +965,13 @@ export class CreateNewCourseComponent implements OnInit {
           : new FormControl()
     });
     this.publishForm = this.fb.group({
-      intranet_url: new FormControl('',[
+      intranet_url: new FormControl('', [
         Validators.required,
-        Validators.pattern(urlregex),
+        Validators.pattern(dataConstant.UrlPattern),
       ]),
-      internet_url: new FormControl('',[
+      internet_url: new FormControl('', [
         Validators.required,
-        Validators.pattern(urlregex),
+        Validators.pattern(dataConstant.UrlPattern),
       ]),
       status_comment: new FormControl(''),
     });
@@ -1092,7 +1107,7 @@ export class CreateNewCourseComponent implements OnInit {
           this.addLearnerGuideline(element.title, element.description);
         });
         this.iltandViltForm.patchValue(this.routergetdata);
-        
+
       }
       else if (this.learningType == "2") {
         this.videobasedForm.patchValue(this.routergetdata);
@@ -1103,7 +1118,7 @@ export class CreateNewCourseComponent implements OnInit {
 
           this.materialbasedForm
             .get('url')
-            ?.setValidators([Validators.required,Validators.pattern(urlregex)]);
+            ?.setValidators([Validators.required, Validators.pattern(dataConstant.UrlPattern)]);
           this.materialbasedForm.get('video_link')?.clearValidators();
         }
         else {
@@ -1134,12 +1149,14 @@ export class CreateNewCourseComponent implements OnInit {
         this.webbasedForm.patchValue(this.routergetdata);
       }
       else if (this.learningType == "6") {
+        this.routergetdata.email_preffered_instructor = JSON.parse(this.routergetdata.email_preffered_instructor);
         this.commonCreateCourceForm_playlist.patchValue(this.routergetdata);
         this.pushtoTitlearray(this.commonCreateCourceForm_playlist);
+        debugger;
         this.playlistForm.patchValue(this.routergetdata);
       }
       console.log(this.routergetdata);
-      
+
 
       //this.commonCreateCourceForm.value.subject = this.routergetdata.subject;
 
@@ -1462,6 +1479,9 @@ export class CreateNewCourseComponent implements OnInit {
           commonformObj.value.title_single,
       });
     }
+    else {
+      titlearray.find((obj: { hasOwnProperty: (arg0: string) => any; }) => obj.hasOwnProperty('english')).english = commonformObj.value.title_single;
+    }
     commonformObj.value.title = titlearray;
 
     if (this.learningType != "6") {
@@ -1500,12 +1520,16 @@ export class CreateNewCourseComponent implements OnInit {
           'english':
             commonformObj.value.description_single,
         });
+      } else {
+        descriptionarray.find((obj: { hasOwnProperty: (arg0: string) => any; }) => obj.hasOwnProperty('english')).english = commonformObj.value.description_single;
       }
       if (!objectivearray.some((obj: { hasOwnProperty: (arg0: string) => any; }) => obj.hasOwnProperty('english'))) {
         objectivearray.push({
           'english':
             commonformObj.value.objective_single,
         });
+      } else {
+        objectivearray.find((obj: { hasOwnProperty: (arg0: string) => any; }) => obj.hasOwnProperty('english')).english = commonformObj.value.objective_single;
       }
       commonformObj.value.description = descriptionarray;
       commonformObj.value.objective = objectivearray;
@@ -1531,6 +1555,8 @@ export class CreateNewCourseComponent implements OnInit {
           'english':
             commonformObj.value.description_single,
         });
+      } else {
+        descriptionarray.find((obj: { hasOwnProperty: (arg0: string) => any; }) => obj.hasOwnProperty('english')).english = commonformObj.value.description_single;
       }
       commonformObj.value.description = descriptionarray;
     }
@@ -1578,12 +1604,16 @@ export class CreateNewCourseComponent implements OnInit {
           'english':
             formObj.value.for_whoom_single,
         });
+      } else {
+        for_whomarray.find((obj: { hasOwnProperty: (arg0: string) => any; }) => obj.hasOwnProperty('english')).english = formObj.value.for_whoom_single;
       }
       if (!learn_morearray.some((obj: { hasOwnProperty: (arg0: string) => any; }) => obj.hasOwnProperty('english'))) {
         learn_morearray.push({
           'english':
             formObj.value.learn_more_single,
         });
+      } else {
+        learn_morearray.find((obj: { hasOwnProperty: (arg0: string) => any; }) => obj.hasOwnProperty('english')).english = formObj.value.learn_more_single;
       }
       formObj.value.for_whoom = for_whomarray;
       formObj.value.learn_more = learn_morearray;
@@ -1737,35 +1767,35 @@ export class CreateNewCourseComponent implements OnInit {
         totalObj.status_comment = this.publishForm.value.status_comment;
         this.getFormValidationErrors(this.publishForm);
         if (totalObj.course_id) {
-          if(this.publishForm.valid){
+          if (this.publishForm.valid) {
             console.log("form valid");
-          this.courceService.updateCourse(totalObj).subscribe(
-            (res: any) => {
-              console.log("update course", res);
-              if (res) {
-                if (this.routergetdata) {
-                  this.corseId = this.routergetdata.id;
+            this.courceService.updateCourse(totalObj).subscribe(
+              (res: any) => {
+                console.log("update course", res);
+                if (res) {
+                  if (this.routergetdata) {
+                    this.corseId = this.routergetdata.id;
+                  }
+                  // let transferobj = { course_id: this.corseId , transfer_id: this.selectedPublisherId, status: 'publish', intranet_url: this.publishForm.value.intranet_url, internet_url: this.publishForm.value.internet_url };
+                  // this.courceService.courceStatus(transferobj).subscribe(
+                  //   (res: any) => {
+                  //     console.log(res);
+                  //     if (res) {
+                  this.router.navigate(['/dashboard/cources']);
+                  //     }
+                  //   },
+                  //   (err: any) => {
+                  //     console.log(err);
+                  //   }
+                  // );
                 }
-                // let transferobj = { course_id: this.corseId , transfer_id: this.selectedPublisherId, status: 'publish', intranet_url: this.publishForm.value.intranet_url, internet_url: this.publishForm.value.internet_url };
-                // this.courceService.courceStatus(transferobj).subscribe(
-                //   (res: any) => {
-                //     console.log(res);
-                //     if (res) {
-                this.router.navigate(['/dashboard/cources']);
-                //     }
-                //   },
-                //   (err: any) => {
-                //     console.log(err);
-                //   }
-                // );
+              },
+              (err: any) => {
+                console.log(err);
               }
-            },
-            (err: any) => {
-              console.log(err);
-            }
-          );
+            );
           }
-          else{
+          else {
             this.publishForm.markAllAsTouched();
             console.log("invalid publish form")
           }
@@ -1813,9 +1843,9 @@ export class CreateNewCourseComponent implements OnInit {
     console.log(this.currriculumForm.value);
   }
 
-  scrollToElement($element: { scrollIntoView: (arg0: { behavior: string; block: string; inline: string; }) => void; }): void {
-    console.log($element);
-    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+  scrollToElement($element: any): void {
+    var topOfElement = $element.offsetTop;
+    window.scroll({ top: topOfElement, behavior: "smooth" });
   }
 
   certificationType(event: any) {
@@ -1846,6 +1876,7 @@ export class CreateNewCourseComponent implements OnInit {
       this.playlistForm.get('who_see_course')?.setValidators(Validators.required);
       this.playlistForm.get('target_audience')?.clearValidators();
       this.playlistForm.get('email_preffered_instructor')?.clearValidators();
+      debugger;
       this.playlistForm.patchValue({
         target_audience: null,
         email_preffered_instructor: null
@@ -1856,6 +1887,7 @@ export class CreateNewCourseComponent implements OnInit {
       this.playlistForm.get('target_audience')?.setValidators(Validators.required);
       this.playlistForm.get('email_preffered_instructor')?.setValidators(Validators.required);
       this.playlistForm.get('who_see_course')?.clearValidators();
+      debugger;
       this.playlistForm.patchValue({
         who_see_course: null,
       });
@@ -1870,6 +1902,7 @@ export class CreateNewCourseComponent implements OnInit {
     if (event.target.value == 1) {
       this.regionTargetAudiencePlaylist = false;
       this.playlistForm.get('email_preffered_instructor')?.clearValidators();
+      debugger;
       this.playlistForm.patchValue({
         email_preffered_instructor: null
       });
@@ -1921,6 +1954,7 @@ export class CreateNewCourseComponent implements OnInit {
     if (event.id == 'yes') {
       this.externalVendorname = true;
       this.showVendor = true;
+      this.getvendor();
       this.iltandViltForm
         .get('external_vendor_name')
         ?.setValidators(Validators.required);
@@ -1968,7 +2002,7 @@ export class CreateNewCourseComponent implements OnInit {
       this.materialsourceupload = false;
       this.materialbasedForm
         .get('url')
-        ?.setValidators([Validators.required,Validators.pattern(urlregex)]);
+        ?.setValidators([Validators.required, Validators.pattern(dataConstant.UrlPattern)]);
       this.materialbasedForm.get('video_link')?.clearValidators();
       this.materialbasedForm.patchValue({
         video_link: null
@@ -1986,7 +2020,7 @@ export class CreateNewCourseComponent implements OnInit {
     }
   }
 
-  get_learningType(event: any, target:any) {
+  get_learningType(event: any, target: any) {
     // console.log(event.target.value);
     this.learningType = event.target.value;
     // let selectedLid = this.requiredFields[this.learningType];

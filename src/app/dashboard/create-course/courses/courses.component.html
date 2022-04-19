@@ -30,7 +30,7 @@
               <a [routerLink]="['/dashboard']"class="text_white">Dashboard</a>
             </li>
             <li>
-              <a [routerLink]="['/dashboard/cources/']" class="text_white">Create new Course</a>
+              <a  class="text_white">Create new Course</a>
             </li>
           </ol>
         </div>
@@ -89,7 +89,7 @@
 
                       <p>Submitted</p>
                     </div>
-                    <span class="number_css">{{course_count.submitted}}</span>
+                    <span class="number_css margin_equal">{{course_count.submitted}}</span>
                   </div>
                 </div>
 
@@ -102,7 +102,7 @@
 
                       <p>Submitted</p>
                     </div>
-                    <span class="number_css">{{course_count.submitted}}</span>
+                    <span class="number_css margin_equal">{{course_count.submitted}}</span>
                   </div>
                 </div>
                 <!--coled-->
@@ -125,9 +125,9 @@
                         <img src="../../../../assets/images/icon/transfer.png" />
                       </div>
 
-                      <p>Transferred</p>
+                      <p>Forwarded</p>
                     </div>
-                    <span class="number_css">{{course_count.transferred}}</span>
+                    <span class="number_css margin_equal1">{{course_count.transferred}}</span>
                   </div>
                 </div>
                 <!--coled-->
@@ -140,7 +140,7 @@
 
                       <p>Closed</p>
                     </div>
-                    <span class="number_css">{{course_count.closed}}</span>
+                    <span class="number_css margin_equal2">{{course_count.closed}}</span>
                   </div>
                 </div>
                 <!--coled-->
@@ -199,7 +199,7 @@
                   <div class="form-group filter_course">
                     <label class="label_course">Filter by Learning Type</label>
                     <select class="form-control  form_width" (change)="getLearningTypeFilterRecords($event.target.value)">
-                      <option disabled selected='selected' value=''>Select learning type</option>
+                      <option selected='selected' value=''>View All</option>
                       <option *ngFor="let learning of learningTypes" [value]="learning.id">
                         {{ learning.name }}
                       </option>
@@ -208,13 +208,13 @@
                   <div class="form-group filter_course">
                     <label class="label_course">Filter by Training Status</label>
                     <select class="form-control  form_width" [(ngModel)]="searchStatus" (change)="getNewFilterRecords($event)">
-                      <option disabled selected='selected' value="">Please select</option>
+                      <option selected='selected' value="">View All</option>
                       <option *ngFor="let status of statusArray" [value]="status.name">
                         {{status.name}}</option>
                     </select>
                   </div>
 
-                  <div _ngcontent-cue-c109=" " class="form-group filter_course">
+                  <div _ngcontent-cue-c109=" " class="form-group filter_course mr-0">
                     <label _ngcontent-cue-c109=" " class="label_course text_black">Search</label>
                     <input _ngcontent-cue-c109=" " type="text " name="search " autocomplete="off "
                       [(ngModel)]="searchText" placeholder=" "
@@ -452,7 +452,7 @@
                     </select>
                   </div>
 
-                  <div _ngcontent-cue-c109=" " class="form-group filter_course">
+                  <div _ngcontent-cue-c109=" " class="form-group filter_course mr-0">
                     <label _ngcontent-cue-c109=" " class="label_course text_black">Search</label>
                     <input _ngcontent-cue-c109=" " type="text " name="search " autocomplete="off "
                       [(ngModel)]="searchText" placeholder=" "

@@ -4,7 +4,7 @@
   <!-- /header -->
   <!-- Header-->
   <div class="breadcrumbs cm_breadcums">
-    <div class="col-sm-7">
+    <div class="col-sm-8">
       <div class="page-header">
         <div class="page-title d-flex align-items-center">
           <img src="../../../../assets/images/first.jpg" class="home_Css_img" />
@@ -19,10 +19,10 @@
       </div>
     </div>
 
-    <div class="col-sm-5 float-right">
+    <div class="col-sm-4 float-right">
       <div class="page-header">
 
-        <div class="page-title d-flex justify_content">
+        <div class="page-title d-flex justify-content-end">
           <ol class="breadcrumb text-right">
             <li>
               <a href="# " class="text_white">
@@ -34,6 +34,9 @@
             </li>
             <li>
               <a [routerLink]="['/dashboard/cources/']" class="text_white">Create new Course</a>
+            </li>
+            <li>
+              <a  class="text_white">View</a>
             </li>
           </ol>
         </div>
@@ -94,7 +97,7 @@
                   <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
                 </button>
 
-                <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal"
+                <button type="button" class="btn btn-primary ml-2" data-toggle="modal"
                   data-target="#exampleModal"
                   *ngIf="getUserrole.id == 3 && status != 'publish' && showrejectbutton != getprofileDetails.data.id"
                   (click)="getPublisher()">
@@ -102,11 +105,11 @@
 
                 </button>
 
-                <button class="btn btn-primary btn_requst ml-2" (click)="updateCource()"
+                <button class="btn btn-secondary ml-2" (click)="updateCource()"
                   *ngIf="status != 'publish' && showrejectbutton != getprofileDetails.data.id">
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">Update</span>
                 </button>
-                <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal"
+                <button type="button" class="btn btn-secondary ml-2" data-toggle="modal"
                   data-target="#rejectModal"
                   *ngIf="(getUserrole.id == 3 || getUserrole.id == 4) && status != 'publish' && showrejectbutton != getprofileDetails.data.id"
                   (click)="getPublisher()">
@@ -114,7 +117,7 @@
                 </button>
               </div>
               <div class="Requs_btn_inl-child1" *ngIf="getUserrole.id != 4">
-                <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal"
+                <button type="button" class="btn btn-secondary ml-2" data-toggle="modal"
                   data-target="#transferotherRoc" (click)="transferOtherroc()">
                   <i class="fa fa-exchange" aria-hidden="true"></i><span class="pl-1">Transfer to Other ROC</span>
                 </button>
@@ -130,12 +133,18 @@
                 <div class="card" *ngIf="status == 'publish'">
                   <div class="card-body">
                     <div class="col-sm-12 col-md-6">
+                      
                       <div class="form-group">
                         <label for="exampleInputEmail1">Orange Learning Intranet URL(SSO)</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width">
+                          <span class="form_data" onkeyup="textAreaAdjust(this)">
                             {{routegetdata.intranet_url ? routegetdata.intranet_url : "-" }}
                           </span>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text"
+                          (click)="copyToClipBoard(routegetdata.titleByLang)" class="ml-1">
+                          <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                       
+                          
                         </div>
                       </div>
                     </div>
@@ -143,9 +152,12 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Orange Learning Internet URL</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width">
+                          <span class="form_data" onkeyup="textAreaAdjust(this)">
                             {{routegetdata.internet_url ? routegetdata.internet_url : "-" }}
                           </span>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text"
+                          (click)="copyToClipBoard(routegetdata.titleByLang)" class="ml-1">
+                          <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
                       </div>
                     </div>
@@ -168,7 +180,7 @@
                     <div class="form-group">
                       <label for="exampleInputEmail1">Title</label>
                       <div class="d-flex align-items-center">
-                        <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                        <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                           {{
                           routegetdata.titleByLang
                           ? (routegetdata.titleByLang | titlecase)
@@ -177,11 +189,11 @@
                         </span>
                         <a data-toggle="modal" data-target="#learnMoreModal" (click)="changeTranslateData('title')"
                           class="d-flex flex-column align-items-end w-20">
-                          <img src="../../../../assets/images/icon/lang.png" class="langu_css mr-2" />
+                          <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
                         </a>
                         <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text"
-                          (click)="copyToClipBoard(routegetdata.titleByLang)">
-                          <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                          (click)="copyToClipBoard(routegetdata.titleByLang)" class="ml-1">
+                          <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                       </div>
 
                     </div>
@@ -193,11 +205,11 @@
                     <div class="form-group">
                       <label for="exampleInputEmail1">Training Provided By</label>
                       <div class="d-flex align-items-center">
-                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
+                        <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>{{
                           routegetdata.training_provided_by}}</span>
                         <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text"
                           (click)="copyToClipBoard(routegetdata.training_provided_by)">
-                          <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                          <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                       </div>
 
                     </div>
@@ -208,11 +220,11 @@
                     <div class="form-group">
                       <label for="exampleInputEmail1">Training Duration</label>
                       <div class="d-flex align-items-center">
-                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
+                        <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>{{
                           trainingDurationHours}}</span>
                         <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text"
                           (click)="copyToClipBoard(routegetdata.trainingDurationHours)">
-                          <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                          <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                       </div>
 
                     </div>
@@ -223,15 +235,15 @@
                     <div class="form-group">
                       <label for="exampleInputEmail1">Description</label>
                       <div class="d-flex align-items-center">
-                        <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
+                        <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>{{
                           routegetdata.descriptionByLang }}</span>
                           <a data-toggle="modal" data-target="#learnMoreModal"
                             (click)="changeTranslateData('description')" class="d-flex flex-column align-items-end w-20">
-                            <img src="../../../../assets/images/icon/lang.png" class="langu_css mr-2" />
+                            <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
                           </a>
                         <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text"
-                          (click)="copyToClipBoard(routegetdata.descriptionByLang)">
-                          <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                          (click)="copyToClipBoard(routegetdata.descriptionByLang)" class="ml-1">
+                          <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                       </div>
 
                     </div>
@@ -245,14 +257,12 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Objective</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" [innerHTML]="routegetdata.objectiveByLang"
-                            id="exampleInputEmail1" disabled>
-
+                          <span class="form_data pl-3" onkeyup="textAreaAdjust(this)" [innerHTML]="routegetdata.objectiveByLang"
+                           disabled>
                           </span>
-
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.objectiveByLang)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -263,11 +273,9 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Subject</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>{{
                             routegetdata.subject_name }}</span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.subject_name)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                          
                         </div>
 
                       </div>
@@ -278,13 +286,12 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Keywords</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>{{ routegetdata.keyword
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>{{ routegetdata.keyword
                             }}</span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.keyword)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
-
                       </div>
 
                     </div>
@@ -292,16 +299,13 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Available Language</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.available_language_name
                             ? routegetdata.available_language_name
                             : "-"
                             }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.available_language_name)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
                         </div>
 
                       </div>
@@ -312,7 +316,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Level</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.level_name
                             ? routegetdata.level_name
@@ -321,7 +325,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.level_name)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -332,11 +336,11 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Email of content owner</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>{{
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>{{
                             routegetdata.email_content_owner }}</span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.email_content_owner)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -348,7 +352,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Email of training contact</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.email_training_contact
                             ? routegetdata.email_training_contact
@@ -357,7 +361,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.email_training_contact)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -368,7 +372,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Prerequisite</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.prerequisite
                             ? routegetdata.prerequisite
@@ -377,7 +381,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.prerequisite)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -388,7 +392,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Resources</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             Click here to <a href="{{imgUrl}}" target="_blank" class="text_orange">View</a>
                             <!-- {{
                                                        routegetdata.resource
@@ -398,7 +402,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(imgUrl)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -430,18 +434,14 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Delivery Method</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.delivery_method_name
                             ? routegetdata.delivery_method_name
                             : routegetdata.delivery_method
                             }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.delivery_method_name)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
                         </div>
-
                       </div>
 
                     </div>
@@ -451,17 +451,14 @@
 
                         <label for="exampleInputEmail1"> Does this course integrate digital?</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.digital
                             ? (routegetdata.digital | titlecase)
                             : "-"
                             }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.digital)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
-                        </div>
+                             </div>
 
                       </div>
 
@@ -471,17 +468,14 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Purchase order required</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.purchase_order
                             ? (routegetdata.purchase_order | titlecase)
                             : "-"
                             }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.purchase_order)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
-                        </div>
+                          </div>
 
                       </div>
 
@@ -491,7 +485,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Manage Approval</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.manager_approval
                             ? (routegetdata.manager_approval | titlecase)
@@ -500,7 +494,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.manager_approval)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -514,7 +508,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Who can see?</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.who_see_course_name
                             ? (routegetdata.who_see_course_name | titlecase)
@@ -523,7 +517,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.who_see_course_name)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -533,8 +527,8 @@
                     <div class="col-sm-12">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Email of the preffered Instructor</label>
-                        <div>
-                          <span class="form-control form_width d-flex flex_direction" id="exampleInputEmail1"
+                        <div class="d-flex align-items-center">
+                          <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" id="exampleInputEmail1"
                           disabled>
                             <span *ngFor="let email of emailPrefferedEmail">
                               {{ email }}
@@ -542,7 +536,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(email)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
                       </div>
 
@@ -551,7 +545,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Date of first session</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.first_session_date
                             ? routegetdata.first_session_date
@@ -560,7 +554,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.first_session_date)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -570,7 +564,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Expiry Date</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.expiry_date
                             ? routegetdata.expiry_date
@@ -579,7 +573,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.expiry_date)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -589,17 +583,14 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Expiry Type</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.expiry_date_type_name
                             ? routegetdata.expiry_date_type_name
                             : "-"
                             }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.expiry_date_type_name)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
-                        </div>
+                           </div>
 
                       </div>
 
@@ -608,17 +599,14 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Entity/Business area</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.entity_business_area_name
                             ? routegetdata.entity_business_area_name
                             : "-"
                             }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.entity_business_area_name)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
-                        </div>
+                         </div>
 
                       </div>
 
@@ -628,7 +616,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Certification</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.certification
                             ? (routegetdata.certification | titlecase)
@@ -637,7 +625,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.certification)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -649,7 +637,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1"> Certification Expiry type</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.certification_expiry_type_name
                             ? (routegetdata.certification_expiry_type_name
@@ -660,7 +648,7 @@
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.certification_expiry_type_name)"
                             title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -671,7 +659,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Validity period</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.validity_period_name
                             ? (routegetdata.validity_period_name
@@ -681,7 +669,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.validity_period_name)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -691,17 +679,14 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">External Vendor</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.external_vendor
                             ? (routegetdata.external_vendor | titlecase)
                             : "-"
                             }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.external_vendor)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
-                        </div>
+                          </div>
 
                       </div>
 
@@ -711,7 +696,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Free Field Content</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.free_field_content
                             ? (routegetdata.free_field_content)
@@ -720,7 +705,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.free_field_content)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -731,7 +716,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">External Vendor name</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.external_vendor_name
                             ? (routegetdata.external_vendor_name | titlecase)
@@ -740,7 +725,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.external_vendor_name)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -768,7 +753,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">For Whom ?</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.for_whoomByLang
                             ? routegetdata.for_whoomByLang
@@ -777,11 +762,11 @@
                           </span>
                           <a data-toggle="modal" data-target="#learnMoreModal"
                             (click)="changeTranslateData('for_whoom')" class="d-flex flex-column align-items-end w-20">
-                            <img src="../../../../assets/images/icon/lang.png" class="langu_css mr-2" />
+                            <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
                           </a>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.for_whoomByLang)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            (click)="copyToClipBoard(routegetdata.for_whoomByLang)" title="Copy Text" class="ml-1">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -792,7 +777,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Learn more</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.learn_moreByLang
                             ? routegetdata.learn_moreByLang
@@ -801,11 +786,11 @@
                           </span>
                           <a data-toggle="modal" data-target="#learnMoreModal"
                             (click)="changeTranslateData('learn_more')" class="d-flex flex-column align-items-end w-20">
-                            <img src="../../../../assets/images/icon/lang.png" class="langu_css mr-2" />
+                            <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
                           </a>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.learn_moreByLang)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            (click)="copyToClipBoard(routegetdata.learn_moreByLang)" title="Copy Text" class="ml-1">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -815,7 +800,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Learner Guidelines</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width d-flex flex_direction" id="exampleInputEmail1"
+                          <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)"
                              disabled>
                             <span *ngFor="let learner of learnerGuidelines">
                               {{
@@ -824,7 +809,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -834,7 +819,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Learner Guidelines Description</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width d-flex flex_direction" id="exampleInputEmail1"
+                          <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)"
                             disabled>
                             <span *ngFor="let learner of learnerGuidelines">
 
@@ -845,7 +830,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -878,7 +863,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Uploaded video URL</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.video_link
                             ? routegetdata.video_link
@@ -887,7 +872,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.video_link)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -903,7 +888,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Material Source URL</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.url
                             ? routegetdata.url
@@ -912,7 +897,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.url)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -922,7 +907,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Uploaded Material</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.material_source
                             ? routegetdata.material_source
@@ -931,7 +916,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.material_source)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -948,17 +933,14 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1"> Does this course integrate digital?</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.digital
                             ? (routegetdata.digital | titlecase)
                             : "-"
                             }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.digital)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
-                        </div>
+                                </div>
                       </div>
                     </div>
                     <!--cole dn-->
@@ -967,17 +949,14 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1"> Manager Approval</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.manager_approval
                             ? (routegetdata.manager_approval | titlecase)
                             : "-"
                             }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.manager_approval)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
-                        </div>
+                          </div>
                       </div>
                     </div>
                     <!--cole dn-->
@@ -1002,7 +981,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Expiry Date</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.expiry_date
                             ? routegetdata.expiry_date
@@ -1011,7 +990,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.expiry_date)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1021,7 +1000,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Learn more</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.learn_moreByLang
                             ? routegetdata.learn_moreByLang
@@ -1030,7 +1009,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.learn_moreByLang)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1057,16 +1036,13 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Who can see my course?</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.who_see_course_name
                             ? (routegetdata.who_see_course_name | titlecase)
                             : "-"
                             }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.who_see_course_name)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
                         </div>
 
 
@@ -1094,7 +1070,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">For Whom ?</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.for_whoomByLang
                             ? routegetdata.for_whoomByLang
@@ -1103,7 +1079,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.for_whoomByLang)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1114,7 +1090,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Curriculum content</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width d-flex flex_direction" id="exampleInputEmail1"
+                          <span class="form_data d-flex flex_direction"  onkeyup="textAreaAdjust(this)"
                              disabled>
                             <span *ngFor="let curr of curriculumContent">
                               {{
@@ -1124,7 +1100,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1134,7 +1110,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Certification</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.certification
                             ? (routegetdata.certification | titlecase)
@@ -1143,7 +1119,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.certification)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1154,7 +1130,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1"> Certification Expiry type name</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.certification_expiry_type_name
                             ? (routegetdata.certification_expiry_type_name
@@ -1165,7 +1141,7 @@
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.certification_expiry_type_name)"
                             title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1176,7 +1152,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Validity period</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.validity_period_name
                             ? (routegetdata.validity_period_name
@@ -1186,7 +1162,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.validity_period_name)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1196,7 +1172,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Learner Guidelines</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width d-flex flex_direction" id="exampleInputEmail1" disabled>
+                          <span class="form_data d-flex flex_direction"  onkeyup="textAreaAdjust(this)" disabled>
                             <span *ngFor="let learner of learnerGuidelines">
                               {{
                               learner.title }}
@@ -1204,7 +1180,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1214,7 +1190,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Learner Guidelines Description</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width d-flex flex_direction" id="exampleInputEmail1" disabled>
+                          <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" disabled>
                             <span *ngFor="let learner of learnerGuidelines">
 
                               {{ learner.description
@@ -1224,7 +1200,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1259,17 +1235,14 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1"> Does this course integrate digital?</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.digital
                             ? (routegetdata.digital | titlecase)
                             : "-"
                             }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.digital)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
-                        </div>
+                                </div>
 
                       </div>
 
@@ -1279,17 +1252,14 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Purchase order required</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             purchaseOrder
                             ? (purchaseOrder | titlecase)
                             : "-"
                             }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(purchaseOrder)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
-                        </div>
+                            </div>
 
                       </div>
 
@@ -1299,7 +1269,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Certification</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.certification
                             ? (routegetdata.certification | titlecase)
@@ -1308,7 +1278,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.certification)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1319,7 +1289,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1"> Certification Expiry type name</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.certification_expiry_type_name
                             ? (routegetdata.certification_expiry_type_name
@@ -1330,7 +1300,7 @@
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.certification_expiry_type_name)"
                             title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1341,7 +1311,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Validity period</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.validity_period_name
                             ? (routegetdata.validity_period_name
@@ -1351,7 +1321,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.validity_period_name)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1361,17 +1331,14 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">External Vendor</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.external_vendor
                             ? (routegetdata.external_vendor | titlecase)
                             : "-"
                             }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.external_vendor)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
-                        </div>
+                          </div>
 
                       </div>
 
@@ -1381,7 +1348,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">External Vendor name</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.external_vendor_name
                             ? (routegetdata.external_vendor_name | titlecase)
@@ -1390,7 +1357,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.external_vendor_name)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1406,7 +1373,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Playlist url</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.url
                             ? (routegetdata.url | titlecase)
@@ -1415,7 +1382,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.url)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1424,7 +1391,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Number of learning objects</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.video_link
                             ? (routegetdata.video_link | titlecase)
@@ -1433,7 +1400,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.video_link)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1442,17 +1409,14 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Email of playlist creator</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.for_whoom
                             ? (routegetdata.for_whoom | titlecase)
                             : "-"
                             }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.for_whoom)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
-                        </div>
+                         </div>
 
 
                       </div>
@@ -1464,17 +1428,14 @@
                           only?
                         </label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.level
                             ? (routegetdata.level | titlecase)
                             : "-"
                             }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.level)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
-                        </div>
+                           </div>
 
                       </div>
                     </div>
@@ -1482,7 +1443,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Region of Target Audience</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.who_see_course_name
                             ? (routegetdata.who_see_course_name | titlecase)
@@ -1491,7 +1452,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.who_see_course_name)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1500,17 +1461,14 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Target audience</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.target_audience_name
                             ? (routegetdata.target_audience_name | titlecase)
                             : "-"
                             }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.target_audience_name)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
-                        </div>
+                          </div>
 
                       </div>
                     </div>
@@ -1518,17 +1476,14 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">OBS employees in specific Functions/Divisions</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.email_preffered_instructor
                             ? (routegetdata.email_preffered_instructor | titlecase)
                             : "-"
                             }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
-                            (click)="copyToClipBoard(routegetdata.email_preffered_instructor)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
-                        </div>
+                          </div>
 
                       </div>
                     </div>
@@ -1539,7 +1494,7 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">Additional comments</label>
                         <div class="d-flex align-items-center">
-                          <span class="form-control form_width" id="exampleInputEmail1" disabled>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
                             routegetdata.additional_comment
                             ? (routegetdata.additional_comment
@@ -1549,7 +1504,7 @@
                           </span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                             (click)="copyToClipBoard(routegetdata.additional_comment)" title="Copy Text">
-                            <i class="fa fa-files-o" aria-hidden="true"></i></a>
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1739,7 +1694,7 @@
               <div class="col-sm-12">
                 <div class="form-group">
                   <label>Comments</label>
-                  <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"></textarea>
+                  <textarea class="form-control form_width-textarea" formControlName="status_comment" rows="3" placeholder="Enter Comments"></textarea>
                 </div>
               </div>
               <!--col end-->
@@ -1796,9 +1751,12 @@
                 <div class="form-group block">
                   <div>
                     <label class="form-control-label">{{getLabel(item)}}</label>
-                    <span class="form-control form_width">
-                      {{getValue(item)}}
-                    </span>
+                    
+                  </div>
+                  <div class="d-flex">
+                  <span class="form_data1" onkeyup="textAreaAdjust(this)">
+                    {{getValue(item)}}
+                  </span>
                   </div>
                 </div>
               </div>
@@ -1821,3 +1779,4 @@
 
   <!-- Modal -->
 </div>
+

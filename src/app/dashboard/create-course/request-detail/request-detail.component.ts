@@ -4,8 +4,9 @@ import { AuthenticationService } from 'src/app/shared/services/auth/authenticati
 import { ModalDismissReasons, NgbModal, } from "@ng-bootstrap/ng-bootstrap";
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 
-const urlregex = '^(https?:\\/\\/)?' + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,5}|' + '((\\d{1,3}\\.){3}\\d{1,3}))' + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + '(\\?[;&a-z\\d%_.~+=-]*)?' + '(\\#[-a-z\\d_]*)?$';
+const urlregex = dataConstant.UrlPattern;
 @Component({
   selector: 'app-request-detail',
   templateUrl: './request-detail.component.html',
@@ -197,7 +198,7 @@ export class RequestDetailComponent implements OnInit {
   }
 
   PublishRequest() {
-    let transferobj = { course_id: this.routegetdata.id, transfer_id: this.selectedPublisher, status: 'publish', intranet_url: this.publishForm.value.intranet_url, internet_url: this.publishForm.value.internet_url };
+    let transferobj = { course_id: this.routegetdata.id, transfer_id: this.selectedPublisher, status: 'publish', intranet_url: this.publishForm.value.intranet_url, internet_url: this.publishForm.value.internet_url, status_comment: this.publishForm.value.status_comment };
     if (this.publishForm.valid) {
       this.courseService.courceStatus(transferobj).subscribe(
         (res: any) => {
@@ -328,6 +329,9 @@ export class RequestDetailComponent implements OnInit {
       internet_url: new FormControl('', [
         Validators.required,
         Validators.pattern(urlregex),
+      ]),
+      status_comment: new FormControl('', [
+        Validators.required
       ]),
     });
     this.getTrainingHours();
