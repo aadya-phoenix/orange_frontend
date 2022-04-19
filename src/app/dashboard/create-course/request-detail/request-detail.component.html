@@ -140,6 +140,9 @@
                           <span class="form_data" onkeyup="textAreaAdjust(this)">
                             {{routegetdata.intranet_url ? routegetdata.intranet_url : "-" }}
                           </span>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text"
+                          (click)="copyToClipBoard(routegetdata.titleByLang)" class="ml-1">
+                          <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                        
                           
                         </div>
@@ -152,6 +155,9 @@
                           <span class="form_data" onkeyup="textAreaAdjust(this)">
                             {{routegetdata.internet_url ? routegetdata.internet_url : "-" }}
                           </span>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text"
+                          (click)="copyToClipBoard(routegetdata.titleByLang)" class="ml-1">
+                          <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
                       </div>
                     </div>
