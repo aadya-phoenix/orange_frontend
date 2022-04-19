@@ -153,4 +153,31 @@ export class CarouselListComponent implements OnInit {
         }
       })
     }
+
+    copyRequest(carousel_id: number) {
+      Swal.fire({
+        title: 'Are you sure you want to copy?',
+        text: 'You will copy this request',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, copy it!',
+        cancelButtonText: 'No'
+      }).then((result) => {
+        if (result.value) {
+          this.commonService.showLoading();
+          this.carouselService.carouselCopy({carousel_id :carousel_id}).subscribe((res:any)=>{
+            this.commonService.hideLoading();
+            this.refreshCourses();
+            Swal.fire(
+              'Copied!',
+              'Your request has been copyed.',
+              'success'
+            )
+          },(err:any)=>{
+            this.commonService.hideLoading();
+          })
+          
+        }
+      })
+    }
 }

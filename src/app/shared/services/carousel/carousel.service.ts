@@ -54,4 +54,9 @@ export class CarouselService {
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  carouselCopy(data:any){
+    const url =`api/${this.apiVersion}/carousel/copy`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
 }
