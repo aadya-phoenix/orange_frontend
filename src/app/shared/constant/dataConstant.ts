@@ -22,6 +22,11 @@ export const dataConstant = {
     '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
     '(\\#[-a-z\\d_]*)?$',
   CarouselStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred' },
-  ImageUrl: 'https://orange.mindscroll.info/public/public'
+  ImageUrl: 'https://orange.mindscroll.info/public/public',
+  RoleID: {
+    RequesterID: 2,
+    CarouselReviewer: 0,
+    CarouselPublisher: 0
+  }
 }
 
