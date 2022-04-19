@@ -199,7 +199,7 @@
                   <div class="form-group filter_course">
                     <label class="label_course">Filter by Learning Type</label>
                     <select class="form-control  form_width" (change)="getLearningTypeFilterRecords($event.target.value)">
-                      <option disabled selected='selected' value=''>Select learning type</option>
+                      <option selected='selected' value=''>View All</option>
                       <option *ngFor="let learning of learningTypes" [value]="learning.id">
                         {{ learning.name }}
                       </option>
@@ -208,7 +208,7 @@
                   <div class="form-group filter_course">
                     <label class="label_course">Filter by Training Status</label>
                     <select class="form-control  form_width" [(ngModel)]="searchStatus" (change)="getNewFilterRecords($event)">
-                      <option disabled selected='selected' value="">Please select</option>
+                      <option selected='selected' value="">View All</option>
                       <option *ngFor="let status of statusArray" [value]="status.name">
                         {{status.name}}</option>
                     </select>
