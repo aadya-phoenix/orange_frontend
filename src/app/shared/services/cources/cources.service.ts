@@ -93,6 +93,14 @@ export class CourcesService {
       .pipe(catchError(this.Errorhandling));
   }
 
+
+  getVendor() {
+    const url = `/api/${this.apiVersion}/cct-vendor`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.Errorhandling));
+  }
+
   getSubjects() {
     const url = `/api/${this.apiVersion}/cct-subject`;
     return this.http
