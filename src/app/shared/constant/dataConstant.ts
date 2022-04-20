@@ -25,8 +25,8 @@ export const dataConstant = {
   ImageUrl: 'https://orange.mindscroll.info/public/public',
   RoleID: {
     RequesterID: 2,
-    CarouselReviewer: 0,
-    CarouselPublisher: 0
+    CarouselReviewer: 7,
+    CarouselPublisher: 8
   }
 }
 

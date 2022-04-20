@@ -58,7 +58,15 @@ export class CarouselViewComponent implements OnInit {
     if (this.requestdata.status == this.CarouselStatus.draft){
       return true;
     }
-
+    return false;
+  }
+  isPublish(){
+    return false;
+  }
+  isForward(){
+    return false;
+  }
+  isReject(){
     return false;
   }
 
