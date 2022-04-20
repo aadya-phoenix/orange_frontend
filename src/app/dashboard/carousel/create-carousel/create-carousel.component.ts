@@ -24,6 +24,7 @@ export class CreateCarouselComponent implements OnInit {
   createOlcarouselForm: FormGroup;
   languageText = "";
   isReviewer = false;
+  isPublisher = false;
   rejectcomment = "";
   carouselImage = { image: '', ext: '' };
   isSubmitted = false;
@@ -45,6 +46,7 @@ export class CreateCarouselComponent implements OnInit {
     private carouselService: CarouselService) {
     this.getUserrole = this.authService.getRolefromlocal();
     this.isReviewer = this.getUserrole.id === this.RoleID.CarouselReviewer;
+    this.isPublisher = this.getUserrole.id === this.RoleID.CarouselPublisher;
     this.createOlcarouselForm = this.formBuilder.group({
       languages: new FormArray([]),
       metadata: this.formBuilder.array([]),

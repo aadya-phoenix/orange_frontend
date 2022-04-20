@@ -14,11 +14,17 @@ export class CarouselViewComponent implements OnInit {
   requestdata: any = {};
   getUserrole: any = {};
   RoleID = dataConstant.RoleID;
+  isReviewer = false;
+  isPublisher = false;
   CarouselStatus = dataConstant.CarouselStatus;
   constructor(private route: ActivatedRoute,
     private carouselService: CarouselService,
     private authService: AuthenticationService,
-    private router: Router) { }
+    private router: Router) {
+      this.getUserrole = this.authService.getRolefromlocal();
+      this.isReviewer = this.getUserrole.id === this.RoleID.CarouselReviewer;
+      this.isPublisher = this.getUserrole.id === this.RoleID.CarouselPublisher;
+     }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -26,7 +32,6 @@ export class CarouselViewComponent implements OnInit {
       this.id = Id ? parseInt(Id) : 0;
       this.getCarouselDetails();
     });
-    this.getUserrole = this.authService.getRolefromlocal();
   }
 
   getCarouselDetails() {
@@ -55,18 +60,24 @@ export class CarouselViewComponent implements OnInit {
   }
 
   isUpdate() {
-    if (this.requestdata.status == this.CarouselStatus.draft){
+    if (this.requestdata.status == this.CarouselStatus.draft || (this.requestdata.status == this.CarouselStatus.pending && this.isPublisher)){
       return true;
     }
     return false;
   }
   isPublish(){
+    if (this.requestdata.status == this.CarouselStatus.pending && this.isPublisher){
+      return true;
+    }
     return false;
   }
   isForward(){
     return false;
   }
   isReject(){
+    if (this.requestdata.status == this.CarouselStatus.pending && this.isPublisher){
+      return true;
+    }
     return false;
   }
 

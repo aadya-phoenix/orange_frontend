@@ -308,9 +308,9 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button class="btn btn-primary mr-1" type="submit" (click)="saveCarousel('pending')">{{this.isReviewer ? 'Submit' : 'Submit'}}</button>
-                                <button class="btn btn-primary mr-1" type="submit" (click)="saveCarousel('publish')">Publish</button>
-                                <button class="btn btn-primary mr-1" type="submit" data-toggle="modal" data-target="#rejectModal">Reject</button>
+                                <button class="btn btn-primary mr-1" type="submit" *ngIf="!isPublisher" (click)="saveCarousel('pending')">{{this.isReviewer ? 'Submit' : 'Submit'}}</button>
+                                <button class="btn btn-primary mr-1" type="submit" *ngIf="isPublisher" (click)="saveCarousel('publish')">Publish</button>
+                                <button class="btn btn-primary mr-1" type="submit" *ngIf="carousel_details.id && (isPublisher || isReviewer)" data-toggle="modal" data-target="#rejectModal">Reject</button>
                                 <button class="btn btn-secondary" (click)="saveCarousel('draft')">Save as draft</button>
                             </div>
                         </div>
