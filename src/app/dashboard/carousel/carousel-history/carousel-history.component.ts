@@ -37,30 +37,6 @@ export class CarouselHistoryComponent implements OnInit {
     }
   }
 
-
-  // deleteRequest() {
-  //   this.courseService.deleteCourse({ course_id: this.copyDeletecourse.id }).subscribe((res: any) => {
-  //     console.log(res);
-  //     this.onClose();
-  //   }, (err: any) => {
-  //     console.log(err)
-  //   })
-  // }
-
-  // copyRequest() {
-  //   this.courseService.copyCourse({ course_id: this.copyDeletecourse.id }).subscribe((res: any) => {
-  //     console.log(res);
-  //     let dataobj = res.data;
-  //     let iscopyy = { copy: true };
-  //     let totalObj = { ...res.data, ...iscopyy }
-  //     this.router.navigateByUrl('/dashboard/cources/create-cource', {
-  //       state: totalObj,
-  //     });
-  //     this.onClose();
-  //   }, (err: any) => {
-  //     console.log(err)
-  //   })
-  // }
   closeModal() {
     this.modalService.close();
   }

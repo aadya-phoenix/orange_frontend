@@ -36,6 +36,14 @@ export class CarouselService {
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  getCarouselPublisher() {
+    const url = `/api/${this.apiVersion}/carousel/publisher-list`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+
   getCarouselDetails(id:number) {
     const url = `/api/${this.apiVersion}/carousel/${id}/detail`;
     //const urllive = `${this.basePath}api/${this.apiVersion}/carousel/${id}/detail`;
@@ -56,6 +64,16 @@ export class CarouselService {
 
   carouselCopy(data:any){
     const url =`api/${this.apiVersion}/carousel/copy`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  carouselStatus(data:any){
+    const url =`api/${this.apiVersion}/carousel/status`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  carouselTransfer(data:any){
+    const url =`api/${this.apiVersion}/carousel/transfer`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 

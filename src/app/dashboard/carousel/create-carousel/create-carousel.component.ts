@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CarouselService } from 'src/app/shared/services/carousel/carousel.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 const emailregexp = dataConstant.EmailPattren;
@@ -13,12 +14,17 @@ const emailregexp = dataConstant.EmailPattren;
   styleUrls: ['./create-carousel.component.scss']
 })
 export class CreateCarouselComponent implements OnInit {
+  RoleID = dataConstant.RoleID;
   carousel_id = 0;
   carousel_details: any = {};
   languageList: any = [];
   cctExpiryperiod: any = [];
-  public createOlcarouselForm!: FormGroup;
+  carouselPublisher: any = [];
+  getUserrole: any = {};
+  createOlcarouselForm: FormGroup;
   languageText = "";
+  isReviewer = false;
+  rejectcomment = "";
   carouselImage = { image: '', ext: '' };
   isSubmitted = false;
   carousel_count = {
@@ -35,7 +41,10 @@ export class CreateCarouselComponent implements OnInit {
     private commonService: CommonService,
     private router: Router,
     private route: ActivatedRoute,
+    private authService: AuthenticationService,
     private carouselService: CarouselService) {
+    this.getUserrole = this.authService.getRolefromlocal();
+    this.isReviewer = this.getUserrole.id === this.RoleID.CarouselReviewer;
     this.createOlcarouselForm = this.formBuilder.group({
       languages: new FormArray([]),
       metadata: this.formBuilder.array([]),
@@ -43,9 +52,15 @@ export class CreateCarouselComponent implements OnInit {
       publication_date: new FormControl('', [Validators.required]),
       expiry_type: new FormControl('', [Validators.required]),
       additional_comment: new FormControl('', [Validators.required]),
+      ...(this.isReviewer && {
+        publisher_id: new FormControl('', [Validators.required]),
+      }),
     });
     this.getLanguageList();
     this.getExpiryDateType();
+    if (this.isReviewer) {
+      this.getCarouselPublisher();
+    }
   }
 
   ngOnInit(): void {
@@ -168,6 +183,20 @@ export class CreateCarouselComponent implements OnInit {
       (res: any) => {
         this.commonService.hideLoading();
         this.cctExpiryperiod = res.data;
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    );
+  }
+
+  getCarouselPublisher() {
+    this.commonService.showLoading();
+    this.carouselService.getCarouselPublisher().subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        this.carouselPublisher = res.data;
       },
       (err: any) => {
         this.commonService.hideLoading();
