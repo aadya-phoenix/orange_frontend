@@ -74,6 +74,7 @@ export class CreateNewCourseComponent implements OnInit {
   user_id: any;
   courseId: any;
   corseId: any;
+  showVendorName: any;
   public learnerGuidearray: any = [];
   public learningType: any = '';
   public learningTypeSelected: any = '0';
@@ -393,6 +394,7 @@ export class CreateNewCourseComponent implements OnInit {
         this.showILTForWhom = this.courceService.getTText(this.routergetdata.for_whoom);
         this.showILTtitleAdditional = this.routergetdata.title_additional
         this.showILTEntity = Number(this.routergetdata.entity_business_area)
+        this.showVendorName = this.routergetdata.external_vendor_name;
         //this.showILTExiryType = Number(this.routergetdata.entity_business_area)
         this.showILTRegional = Number(this.routergetdata.regional_cordinator)
         this.showILTVendorName = this.routergetdata.external_vendor_name
@@ -739,6 +741,7 @@ export class CreateNewCourseComponent implements OnInit {
     this.getCordinators();
     this.getBackupRegionalCordinator();
     this.getvendorType();
+    this.getvendor();
     this.getLevel();
     this.getSubjects();
     this.getValidityPeriod();
