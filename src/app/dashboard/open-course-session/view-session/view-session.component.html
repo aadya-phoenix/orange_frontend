@@ -1,0 +1,325 @@
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+    <div class="breadcrumbs cm-breadcrumbs">
+        <div class="col-sm-7">
+            <div class="page-header float-left bg-transparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/creatnew.png" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="font-20">Open Course Session </span>
+                        <span class="divider"></span>
+                        <span class="title-sm-text">Request the creation of one or more sessions in Orange Learning.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-5 float-right">
+            <div class="page-header float-right bg-transparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bg-transparent">
+                        <li>
+                            <a href="# ">
+                                <i class="fa fa-home color-blue"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard']" class="color-orange">Dashboard</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/opensession']" class="color-orange">Create new Session</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content mt-3" style="background-image: url('../../../../assets/images/viewbac.jpg');">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card" style="border-radius: 10px;">
+                        <div class="card-header"
+                            style="padding: 0rem 1.25rem !important; background-color: #fff;border-radius: 10px;">
+                            <div class="d-flex align-items-center" style="justify-content: space-between;">
+                                <div class="d-flex">
+                                    <img src="../../../../assets/images/formm.png" class="ml-2"
+                                        style="height: 29px;margin-top: 4px;;" />
+                                    <p class="mt-2 ml-2 mb-2 view-re_css">
+                                        <span>View Session Request</span>
+                                        <span class="cc-text_css"> ({{ sessiondata.request_id }}) -
+                                        </span>
+                                        <span style="color: #ff7900">Request Status - {{ sessiondata.status | titlecase
+                                            }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content" style="background-image: url('../../../../assets/images/viewbac.jpg');">
+        <div class="animated fadeIn">
+            <div  class="card">
+                <div class="card-body">
+                    <div class="Requs_btn_inl">
+                        <div class="Requs_btn_inl-child">
+                            <button *ngIf="getUserrole.id == 4" type="button" class="btn btn-primary  ml-2" data-toggle="modal"
+                                data-target="#publishModal">
+                                <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="card border-radius-0">
+                        <div class="card-header card_header_view">
+                            <p>Session Details</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Title</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form-control form_width">
+                                            {{ sessiondata.title }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Region</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form-control form_width">
+                                            {{ sessiondata.region_name }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ngb-accordion #acc="ngbAccordion">
+            <ngb-panel *ngFor="let meta of sessiondata.metadata; let i = index">
+                <ng-template ngbPanelTitle>
+                    <span>Session: {{i+1}}</span>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                    <div class="card-body p-2">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Delivery Method</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.delivery_method_name}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Country</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.country_name}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Location</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.location}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Instructor Name</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.instructor_name}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email Id of Participants</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.email_participant}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Start Date</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.start_date}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Start Time</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.start_time}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">End Date</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.end_date}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">End Time</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.end_time}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">TimeZone</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.time_zone_name}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Break Description</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        <!-- {{meta.end_time}} -->
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Break Duration</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        <!-- {{meta.end_time}} -->
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Comments</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.comment}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Minimum Registration</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.min_registration}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Maximum Registration</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.max_registration}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Registration Deadline</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.registration_deadline}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Availability</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.availability}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Manager Approval</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.manager_approval}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">External vendor</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.external_vendor}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Training cost per participant</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form-control form_width">
+                                        {{meta.training_cost}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </ng-template>
+            </ngb-panel>
+        </ngb-accordion>
+    </div>
+</div>

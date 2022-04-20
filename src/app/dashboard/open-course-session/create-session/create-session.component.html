@@ -6,9 +6,9 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/second.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="breade_text_span1">Create new course </span>
+                        <span class="breade_text_span1">Create new session </span>
                         <span class="divider"></span>
-            <span class="breade_text_span">
+                           <span class="breade_text_span">
                             <b>Instructor-Led (ILT)</b>-Instructor-Led
                             Training is face to face training delivered in a classroom.<b>
                                 Virtual Instructor-Led
@@ -19,7 +19,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-sm-5 float-right">
             <div class="page-header float-right">
                 <div class="page-title d-flex end_just">
@@ -33,7 +32,7 @@
                             <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/cources']" class="text_white">Create new Course</a>
+                            <a [routerLink]="['/dashboard/cources']" class="text_white">Create new Session</a>
                         </li>
                     </ol>
                 </div>
@@ -50,11 +49,6 @@
                                 <div class="d-flex align-items-center">
 
                                     <img src="../../../../assets/images/formm.png" class="ml-2 w_40" />
-                                    <!-- <img
-                    src="../../../../assets/images/form.png"
-                    style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px"
-                    class="mr-2"
-                  /> -->
                                     <span class="comlte_css">Complete this form and click on the submit button</span>
                                 </div>
                                 <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -71,26 +65,14 @@
         <!-- .content -->
     </div>
 </div>
+<form [formGroup]="createSessionForm" enctype="multipart/form-data">
 <div class="content mt-1">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-12">
                 <span class="indicate_css"><span class="text_red
-                    ">*</span>Indicates required field</span>
-
-                <form [formGroup]="createSessionForm" enctype="multipart/form-data">
+                    ">*</span>Indicates required field</span>                
                     <div class="card">
-                        <div class="card-header">
-                            <div class="heeader_button">
-                                <strong _ngcontent-jet-c125=""> Course Details </strong>
-                                <div class="button_div">
-                                    <button class="btn btn-primary mr-1">Copy Session <i class="fa fa-files-o ml-1" aria-hidden="true"></i></button>
-                                    <button class="btn btn-info mr-1">Add the Session +</button>
-                                    <button class="btn btn-danger">Remove <i class="fa fa-minus ml-1" aria-hidden="true"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="card-body card_width">
                             <div class="row">
                                 <div class="col-sm-6">
@@ -104,7 +86,11 @@
                                                 </i>
                                             </a>
                                         </label>
-                                        <input type="text" class="form-control form_width" placeholder="Enter Event Title" formControlName="event_title">
+                                        <input type="text" class="form-control form_width" placeholder="Enter Event Title" formControlName="title">
+                                        <div class="error_message"
+                                                    *ngIf="createSessionForm.controls['title'].hasError('required') && createSessionForm.controls['title'].touched">
+                                                    Event Title cannot be blank
+                                                </div>
                                     </div>
                                 </div>
                                 <!--col-->
@@ -118,11 +104,35 @@
                                                 </i>
                                             </a>
                                         </label>
-                                        <ng-select placeholder="Please Select Region" [items]="rocObj" bindLabel="name" bindValue="id" formControlName="region" class="w_100">
+                                        <ng-select placeholder="Please Select Region" [items]="rocObj" bindLabel="name" bindValue="id" formControlName="region_id" class="w_100">
                                         </ng-select>
+                                        <div class="error_message"
+                                                    *ngIf="createSessionForm.controls['region_id'].hasError('required') && createSessionForm.controls['region_id'].touched">
+                                                    Region cannot be blank
+                                                </div>
                                     </div>
                                 </div>
                                 <!--col-->
+                            </div>
+                        </div>
+                    </div>
+                   <ng-container *ngIf="sessionArray.controls.length > 0">                    <div class="card" formArrayName="metadata" *ngFor="let sess of sessionArray.controls;
+                    let i = index">
+                       <!--  <ng-container > -->
+                        <div class="card-header" >
+                            <div class="heeader_button">
+                                <strong _ngcontent-jet-c125=""> Sessions:{{i+1}} </strong>
+                                <div class="button_div">
+                                    <button (click)="copySession(sess)" class="btn btn-primary mr-1">Copy Session <i class="fa fa-files-o ml-1" aria-hidden="true"></i></button>
+                                    <button (click)="addMetadata()" class="btn btn-info mr-1">Add the Session +</button>
+                                    <!-- <button (click)="addSession('','','','','','','','','','','','','','','','','','')" class="btn btn-info mr-1">Add the Session +</button> -->
+                                    <button  *ngIf="i > 0" (click)="removeMetadata(i)" class="btn btn-danger">Remove <i class="fa fa-minus ml-1" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div [formGroupName]="i" class="card-body card_width">
+                            <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
@@ -157,21 +167,34 @@
                                     </div>
                                 </div>
                                 <!--col-->
-
-
-
-
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="card">
-
-
-                        <div class="card-body card_width">
-
-                            <div class="row">
+                                   <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">
+                                            Location
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top" title="">
+                                                </i>
+                                            </a>
+                                        </label>
+                                        <input type="text" class="form-control form_width" placeholder="Enter Location" formControlName="location" >
+                                    </div>
+                                </div> 
+                                <!--col-->
+                                   <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">
+                                            Instructor Name
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top" title="">
+                                                </i>
+                                            </a>
+                                        </label>
+                                        <input type="text" class="form-control form_width" placeholder="Enter Instructor Name" formControlName="instructor_name" >
+                                    </div>
+                                </div> 
+                                <!--col-->
 
                                 <div class="col-sm-12">
                                     <div class="form-group">
@@ -184,13 +207,11 @@
                                             </a>
                                         </label>
 
-                                        <select class="form-control form_width">
-                                            <option>option 1</option>
-                                            <option>option 2</option>
-                                            <option>option 3</option>
-                                            <option>option 4</option>
-                                            <option>option 5</option>
-                                        </select>
+                                        <ng-select
+                                                    placeholder="Please select Instructor" [items]="preferedInstructor"
+                                                    [multiple]="true" bindLabel="email_id" bindValue="email_id"
+                                                    formControlName="email_participant">
+                                                </ng-select>
                                     </div>
                                 </div>
                                 <!--col-->
@@ -254,53 +275,6 @@
                                     </div>
                                 </div>
                                 <!--col-->
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="card">
-
-
-                        <div class="card-body card_width">
-
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Description</th>
-
-                                                <th scope="col" class="fon_12"><button class="btn btn-primary">Add Break +</button></th>
-                                            </tr>
-                                            <tr>
-
-                                                <td class="d-flex">
-                                                    <textarea class="form-control form_width-textarea w-100 mr-2" rows="3" placeholder="Enter Description" formControlName="description"></textarea>
-                                                    <input type="time" class="form-control form_width" formControlName="start_time">
-                                                </td>
-                                                <td>
-
-                                                    <button class="btn btn-danger">
-                           Remove Break -
-                          </button>
-                                                </td>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                                <!--col-->
-                            </div>
-                            <!--row-->
-
-                        </div>
-                    </div>
-                    <div class="card">
-
-
-                        <div class="card-body card_width">
-
-                            <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
@@ -312,13 +286,44 @@
                                                 </i>
                                             </a>
                                         </label>
-
                                         <ng-select placeholder="Please select Country" 
                                         [items]="timeZoneObj" bindLabel="name" bindValue="id" formControlName="time_zone" class="w_100">
                                         </ng-select>
                                     </div>
                                 </div>
                                 <!--col-->
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered" >
+                                        <thead>
+                                            <tr >
+                                                <th scope="col">Break Description</th>
+                                                <th scope="col">Break Duration</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            <tr>
+                                                <td  class="d-flex">
+                                                    <textarea formControlName="break" class="form-control form_width-textarea w-100 mr-2" rows="3"  placeholder="Enter Description" ></textarea>
+                                                </td>
+                                                <td> <input type="time" class="form-control form_width" ></td>
+                                                <td>
+                                                    <button class="btn btn-primary">Add Break +</button>
+                                                    <button class="btn btn-danger">
+                                                    Remove Break -
+                                                   </button>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <!--col-->
+                            </div>
+                            <!--row-->
+                            <div class="row">
+                                
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
@@ -329,8 +334,7 @@
                                                 </i>
                                             </a>
                                         </label>
-                                        <textarea class="form-control form_width-textarea" rows="3" formControlName="comments"></textarea>
-
+                                        <textarea class="form-control form_width-textarea" rows="3" formControlName="comment"></textarea>
                                     </div>
                                 </div>
                                 <!--col-->
@@ -345,7 +349,6 @@
                                                 </i>
                                             </a>
                                         </label>
-
                                         <input type="text" class="form-control form_width" placeholder="Enter Minimum Registration " formControlName="min_registration">
                                     </div>
                                 </div>
@@ -361,7 +364,6 @@
                                                 </i>
                                             </a>
                                         </label>
-
                                         <input type="text" class="form-control form_width" placeholder="Enter Maximum Registration " formControlName="max_registration">
                                     </div>
                                 </div>
@@ -376,8 +378,7 @@
                                                 </i>
                                             </a>
                                         </label>
-
-                                        <input type="date" class="form-control form_width" formControlName="reg_deadline">
+                                        <input type="date" class="form-control form_width" formControlName="registration_deadline">
                                     </div>
                                 </div>
                                 <!--col-->
@@ -393,24 +394,6 @@
                                             </a>
                                         </label>
                                         <textarea class="form-control form_width-textarea" rows="3" formControlName="availability"></textarea>
-
-                                    </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            External vendor <span class="text_red">* </span>
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top"
-                                                    title="Please indicate if the session is delivered by an external training provider.">
-                                                </i>
-                                            </a>
-                                        </label>
-
-                                        <ng-select placeholder="Please select" (change)="externalVendor($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="external_vendor" class="w_100">
-                                        </ng-select>
                                     </div>
                                 </div>
                                 <!--col-->
@@ -425,12 +408,28 @@
                                                 </i>
                                             </a>
                                         </label>
-
                                         <ng-select placeholder="Please select" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="manager_approval" class="w_100">
                                         </ng-select>
                                     </div>
                                 </div>
                                 <!--col-->
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">
+                                            External vendor <span class="text_red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top"
+                                                    title="Please indicate if the session is delivered by an external training provider.">
+                                                </i>
+                                            </a>
+                                        </label>
+                                        <ng-select placeholder="Please select" (change)="externalVendor($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="external_vendor" class="w_100">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <!--col-->
+                               
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
@@ -449,50 +448,24 @@
                                     </div>
                                 </div>
                                 <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Description
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top" title="">
-                                                </i>
-                                            </a>
-                                        </label>
-
-                                        <input type="text" class="form-control form_width" placeholder="Enter Description" formControlName="description">
-                                    </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Break Duration(HH:MM)
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top" title="">
-                                                </i>
-                                            </a>
-                                        </label>
-
-                                        <input type="text" (keyup)="numbersOnly($event)" class="form-control form_width" placeholder="Enter Break Duration(HH:MM)" formControlName="break_duration" maxlength="5">
-                                    </div>
-                                </div>
-                                <!--col-->
-
-
-
                             </div>
                             <!--row-->
-
                         </div>
+                        
                     </div>
-                </form>
-
+                </ng-container>
+                <div class="card-footer">
+                    <button class="btn btn-primary mr-1" type="submit"
+                        (click)="createSession('pending')">Submit</button>
+                    <button class="btn btn-secondary" (click)="createSession('draft')">
+                        Save as draft
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+</form>
 <div class="collapse" id="collapseExample">
     <div class="card card-body req_status-card">
         <div class="card_header reqst_header">

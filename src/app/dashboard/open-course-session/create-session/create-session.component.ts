@@ -1,7 +1,13 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
+import { CourseSessionService } from 'src/app/shared/services/course_session/course-session.service';
+
+const numbersOnlyregexp = dataConstant.NumbersOnlyPattern;
+/* const currencyregexp = dataConstant.CurrencyPattern; */
 
 @Component({
   selector: 'app-create-session',
@@ -10,8 +16,8 @@ import { CourcesService } from 'src/app/shared/services/cources/cources.service'
 })
 export class CreateSessionComponent implements OnInit {
 
-  public courcesList: any=[];
   public deliveryMethod: any;
+  public preferedInstructor: any;
   countryObj:any;
   timeZoneObj:any;
   coursesList:any;
@@ -32,39 +38,85 @@ export class CreateSessionComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private courseService: CourcesService,
+    private currencyPipe:CurrencyPipe,
+    private courseSessionService:CourseSessionService,
     private router: Router,
-    ) { }
+    ) { 
+      this.createSessionForm = this.fb.group({
+        title: new FormControl('',[Validators.required]),
+        region_id: new FormControl('',[Validators.required]),
+        metadata:new FormArray([this.addMetaDataGroup() ]),
+      });
+    }
 
   ngOnInit(): void {
-    this.createSessionForm = this.fb.group({
-      event_title: new FormControl(''),
-      region: new FormControl(''),
-      delivery_method: new FormControl(''),
-      country: new FormControl(''),
-      email: new FormControl(''),
-      start_date: new FormControl(''),
-      start_time: new FormControl(''),
-      end_date: new FormControl(''),
-      end_time: new FormControl(''),
-      time_zone: new FormControl(''),
-      comments: new FormControl(''),
-      min_registration: new FormControl(''),
-      max_registration: new FormControl(''),
-      reg_deadline: new FormControl(''),
-      availability: new FormControl(''),
-      external_vendor: new FormControl(''),
-      manager_approval: new FormControl(''),
-      training_cost: new FormControl(''),
-      description: new FormControl(''),
-      break_duration:new FormControl('')
-    });
-
+    //currency display in training cost
+    /* this.createSessionForm.valueChanges.subscribe(form=>{
+      if(form.metadata.training_cost){
+        this.createSessionForm.patchValue({
+          metadata.training_cost : this.currencyPipe.transform(form.metadata.training_cost.replace(/\D/g,'').replace(/^0+/,''),'EUR','symbol')
+        },{emitEvent:false});
+      }
+    }); */
     this.getDeliveryMethod();
     this.getRegionalCordinator();
     this.getCountries();
+    this.getPreferedInstructor();
     this.getTimezone();
+   // this.addMetadata();
+   // this.addSession('','','','','','','','','','','','','','','','','');
   }
 
+  private addMetaDataGroup(): FormGroup {
+    return this.fb.group({
+      metadata_id:'',
+      delivery_method: new FormControl('',[Validators.required]),
+      country: new FormControl('',[Validators.required]),
+      location:new FormControl('',[Validators.required]),
+      instructor_name:new FormControl('',[Validators.required]),
+      email_participant: new FormControl('',[Validators.required]),
+      start_date: new FormControl('',[Validators.required]),
+      start_time: new FormControl('',[Validators.required]),
+      end_date: new FormControl('',[Validators.required]),
+      end_time: new FormControl('',[Validators.required]),
+      time_zone: new FormControl(''),
+      break:new FormControl(),
+     /*  break:this.fb.array([this.breakGroup()]), */
+      comment: new FormControl(),
+      min_registration: new FormControl('',[Validators.required,
+        Validators.pattern(numbersOnlyregexp)]),
+      max_registration: new FormControl('',[Validators.required,
+        Validators.pattern(numbersOnlyregexp)]),
+      registration_deadline: new FormControl('',[Validators.required]),
+      availability: new FormControl('',[Validators.required]),
+      external_vendor: new FormControl('',[Validators.required]),
+      manager_approval: new FormControl(''),
+      training_cost: new FormControl(''), 
+    });
+  }
+
+  private breakGroup(): FormGroup {
+    return this.fb.group({
+      description:new FormControl(),
+      duration:new FormControl() 
+    });
+  }
+
+  addMetadata():void{
+    this.metadataArray.push(this.addMetaDataGroup());
+  }
+
+  removeMetadata(index: number): void {
+    this.metadataArray.removeAt(index);
+  }
+
+  addBreak(index:any):void{
+    (<FormArray>(<FormGroup>this.metadataArray.controls[index]).controls.break).push(this.breakGroup());
+  }
+
+  get metadataArray(): FormArray {
+    return <FormArray>this.createSessionForm.get('metadata');
+  }
   getRegionalCordinator(){
     this.courseService.getregionalCordinator().subscribe((res:any)=>{
       console.log("getregionalCordinator()",res.data);
@@ -97,6 +149,18 @@ export class CreateSessionComponent implements OnInit {
       }
     );
   }
+  //prefered instructor
+  getPreferedInstructor() {
+    this.courseService.getpreferedInstructor().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.preferedInstructor = res.data;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
 
   getTimezone(){
     this.courseService.getTimezone().subscribe(
@@ -110,9 +174,43 @@ export class CreateSessionComponent implements OnInit {
     );
   }
 
+  get sessionArray():FormArray {
+    return this.createSessionForm.get("metadata") as FormArray;
+  }
+
+ 
+  copySession(i:any){
+    //return this.sessionArray.push(this.addMoreSession(this.sessionArray.value);
+    //console.log(this.sessionArray.get("deliveryMethod")?.value);
+  }
+
+  
+  removeSession(i:any){
+    this.sessionArray.removeAt(i);
+  }
+
+  createSession(status:any){
+    if(this.createSessionForm.valid){
+     const sessionObj = this.createSessionForm.value;
+     sessionObj.status = status;
+     console.log("session value",sessionObj);
+     this.courseSessionService.createSession(sessionObj).subscribe(
+      (res: any) => {
+        this.router.navigate(['/dashboard/opensession']);
+        console.log("res is",res);
+      },
+      (err: any) => {
+      }
+    );
+    }
+    else{
+      return;
+    }
+  }
+
   numbersOnly(val:any){
     console.log(val.key);
-    let ctrl = this.createSessionForm.get('duration') as FormControl;
+    let ctrl = this.sessionArray.get('duration') as FormControl;
     let y = ctrl.value
     y = y.replace(/\D/g, '');
     console.log(y)
