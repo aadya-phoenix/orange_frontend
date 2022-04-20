@@ -21,7 +21,7 @@
                 <div class="page-title d-flex end_just">
                     <ol class="breadcrumb text-right bg-transparent">
                         <li>
-                            <a href="# ">
+                            <a [routerLink]="['/dashboard']">
                                 <i class="fa fa-home color-blue"></i>
                             </a>
                         </li>
@@ -208,21 +208,21 @@
                                                 </p>
                                             </td>
                                             <td class="text-center">
-                                                <!-- <a (click)="copyRequest(course)"
+                                                <a (click)="copyRequest(item.id)"
                                                     class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                     title="Copy">
                                                     <i class="fa fa-files-o" aria-hidden="true"></i>
-                                                </a> -->
-                                                <a (click)="editRequest(item)"
+                                                </a>
+                                                <a (click)="editRequest(item)" *ngIf="item.status_show === carouselStatus.draft"
                                                     class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                     title="Edit">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
-                                                <!-- <a (click)="deleteRequest(course)"
+                                                <a (click)="deleteRequest(item.id)" *ngIf="item.status_show === carouselStatus.draft"
                                                     class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                     title="Delete">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
-                                                </a> -->
+                                                </a>
                                                 <a class="copy_file mr-1" data-toggle="tooltip"
                                                     (click)="viewRequest(item)" data-placement="top" title="View">
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
