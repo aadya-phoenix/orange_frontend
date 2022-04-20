@@ -7,6 +7,8 @@ import { AuthenticationService } from 'src/app/shared/services/auth/authenticati
 import { CarouselService } from 'src/app/shared/services/carousel/carousel.service';
 import { CarouselHistoryComponent } from '../carousel-history/carousel-history.component';
 import * as _ from 'lodash';
+import { CommonService } from 'src/app/shared/services/common/common.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-carousel-list',
@@ -40,6 +42,7 @@ export class CarouselListComponent implements OnInit {
 
   constructor(
     private carouselService: CarouselService,
+    private commonService: CommonService,
     private authService: AuthenticationService,
     private modalService: NgbModal,
     private router: Router
@@ -101,8 +104,10 @@ export class CarouselListComponent implements OnInit {
   }
 
   refreshCourses() {
+    this.commonService.showLoading();
     this.carouselService.getCarousel().subscribe(
       (res: any) => {
+        this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
           this.carouselList = res.data.carousel;
           this.carousel_count = res.data.carousel_count;
@@ -110,6 +115,7 @@ export class CarouselListComponent implements OnInit {
         }
       },
       (err: any) => {
+        this.commonService.hideLoading();
         console.log(err);
       }
     );
@@ -120,4 +126,58 @@ export class CarouselListComponent implements OnInit {
       this.router.navigateByUrl(`/dashboard/olcarousel/update/${item.id}`);
     }
   }
+
+  deleteRequest(carousel_id: number){
+      Swal.fire({
+        title: 'Are you sure want to remove?',
+        text: 'You will not be able to recover this request!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, keep it'
+      }).then((result) => {
+        if (result.value) {
+          this.commonService.showLoading();
+          this.carouselService.carouselDelete({carousel_id :carousel_id}).subscribe((res:any)=>{
+            this.commonService.hideLoading();
+            this.refreshCourses();
+            Swal.fire(
+              'Deleted!',
+              'Your request has been deleted.',
+              'success'
+            )
+          },(err:any)=>{
+            this.commonService.hideLoading();
+          })
+          
+        }
+      })
+    }
+
+    copyRequest(carousel_id: number) {
+      Swal.fire({
+        title: 'Are you sure you want to copy?',
+        text: 'You will copy this request',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, copy it!',
+        cancelButtonText: 'No'
+      }).then((result) => {
+        if (result.value) {
+          this.commonService.showLoading();
+          this.carouselService.carouselCopy({carousel_id :carousel_id}).subscribe((res:any)=>{
+            this.commonService.hideLoading();
+            this.refreshCourses();
+            Swal.fire(
+              'Copied!',
+              'Your request has been copyed.',
+              'success'
+            )
+          },(err:any)=>{
+            this.commonService.hideLoading();
+          })
+          
+        }
+      })
+    }
 }

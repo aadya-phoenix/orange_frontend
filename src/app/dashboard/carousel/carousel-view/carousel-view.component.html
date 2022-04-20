@@ -20,7 +20,7 @@
                 <div class="page-title d-flex end_just">
                     <ol class="breadcrumb text-right bg-transparent">
                         <li>
-                            <a href="# ">
+                            <a [routerLink]="['/dashboard']">
                                 <i class="fa fa-home color-blue"></i>
                             </a>
                         </li>
@@ -68,9 +68,18 @@
                 <div class="card-body">
                     <div class="Requs_btn_inl">
                         <div class="Requs_btn_inl-child">
-                            <button type="button" class="btn btn-primary  ml-2" data-toggle="modal"
+                            <button type="button" class="btn btn-primary  ml-2"  *ngIf="isPublish()" data-toggle="modal"
                                 data-target="#publishModal">
                                 <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
+                            </button>
+                            <button type="button" class="btn btn-primary  ml-2" *ngIf="isUpdate()" (click)="updateRequest()">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">Update</span>
+                            </button>
+                            <button type="button" class="btn btn-primary  ml-2"  *ngIf="isForward()">
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i><span class="pl-1">Forward</span>
+                            </button>
+                            <button type="button" class="btn btn-primary  ml-2"  *ngIf="isReject()">
+                                <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                             </button>
 
                             <!-- <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal"

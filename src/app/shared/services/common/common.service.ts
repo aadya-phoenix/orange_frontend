@@ -1,10 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { HttpService } from '../http/http.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,8 @@ export class CommonService {
   public headers = new Headers({});
 
   constructor(private http: HttpService,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService) {
     this.headers.append('Access-Control-Allow-Origin', '*');
   }
 
@@ -29,6 +32,18 @@ export class CommonService {
 
   public toastWarningMsg(title: any, message: any, timeOut?: object) {
     this.toastr.warning(message, title, timeOut);
+  }
+
+  //show loader
+  public showLoading() {
+    this.spinner.show();
+  }
+
+  //Hide loader
+  public hideLoading() {
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 100);
   }
 
   Errorhandling(err: HttpErrorResponse) {
