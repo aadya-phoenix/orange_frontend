@@ -86,7 +86,7 @@ export class CreateNewCourseComponent implements OnInit {
   fileToUpload_Material: any[] = [];
   isFileResouce = '';
   j: any = 0;
-  remainingText: any = 0;
+  remainingText: any = 500;
   public lang;
   public imageError: string = "";
   public requiredFields: any = {

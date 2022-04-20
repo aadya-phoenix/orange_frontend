@@ -131,20 +131,20 @@ export class ViewCompleteReportComponent implements OnInit {
 
               this.courcesList[this.j] = this.coursedata[this.i]
               if (this.getUserrole.id == 3) {
-                if (((this.coursedata[this.i].publisher_status === 'reject' && this.coursedata[this.i].transfer_user_id != null) || (this.coursedata[this.i].status === 'pending') && this.coursedata[this.i].transfer_user_id == null && this.coursedata[this.i].user_id != this.getprofileDetails.data.id)) {
+                if (((this.coursedata[this.i].publisher_status === 'reject') || (this.coursedata[this.i].status === 'pending'))) {
 
                   this.pendingRequests.push(this.coursedata[this.i])
                   this.allcoursedataroc.push(this.coursedata[this.i])
 
                 }
-                if ((this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].publisher_status != 'reject') && this.coursedata[this.i].transfer_user_id != null && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
+                if ((this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].publisher_status != 'reject')) {
 
                   this.transferredRequests.push(this.coursedata[this.i])
                   this.allcoursedataroc.push(this.coursedata[this.i])
                 }
               }
               else {
-                if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].user_id != this.getprofileDetails.data.id) {
+                if (this.coursedata[this.i].status === 'pending') {
 
                   this.pendingRequests.push(this.coursedata[this.i])
 
@@ -157,7 +157,7 @@ export class ViewCompleteReportComponent implements OnInit {
                 this.usersubmitRequests.push(this.coursedata[this.i])
 
               }
-              if (this.coursedata[this.i].status === 'pending' && this.coursedata[this.i].user_id == this.getprofileDetails.data.id) {
+              if (this.coursedata[this.i].status === 'pending') {
 
                 this.submittedRequests.push(this.coursedata[this.i])
                 this.allcoursedataroc.push(this.coursedata[this.i])
@@ -173,7 +173,7 @@ export class ViewCompleteReportComponent implements OnInit {
                 this.allcoursedatapub.push(this.coursedata[this.i])
 
               }
-              if (this.coursedata[this.i].status === 'draft' && this.coursedata[this.i].user_id == this.getprofileDetails.data.id) {
+              if (this.coursedata[this.i].status === 'draft') {
 
                 this.draftRequests.push(this.coursedata[this.i])
                 this.allcoursedataroc.push(this.coursedata[this.i])
@@ -352,17 +352,17 @@ export class ViewCompleteReportComponent implements OnInit {
             this.fitertedcoursedata[this.i]['titleByLang'] = this.courceService.getTText(this.fitertedcoursedata[this.i]['title']);
             if (this.fitertedcoursedata[this.i].request_id != "" && this.fitertedcoursedata[this.i].request_id != null) {
               if (this.getUserrole.id == 3) {
-                if (((this.fitertedcoursedata[this.i].publisher_status === 'reject' && this.fitertedcoursedata[this.i].transfer_user_id != null) || (this.fitertedcoursedata[this.i].status === 'pending') && this.fitertedcoursedata[this.i].transfer_user_id == null && this.fitertedcoursedata[this.i].user_id != this.getprofileDetails.data.id)) {
+                if (((this.fitertedcoursedata[this.i].publisher_status === 'reject') || (this.fitertedcoursedata[this.i].status === 'pending'))) {
                   this.pendingRequests.push(this.fitertedcoursedata[this.i])
                   this.allcoursedataroc.push(this.fitertedcoursedata[this.i])
                 }
-                if ((this.fitertedcoursedata[this.i].status === 'pending' && this.fitertedcoursedata[this.i].publisher_status != 'reject') && this.fitertedcoursedata[this.i].transfer_user_id != null && this.fitertedcoursedata[this.i].user_id != this.getprofileDetails.data.id) {
+                if ((this.fitertedcoursedata[this.i].status === 'pending' && this.fitertedcoursedata[this.i].publisher_status != 'reject')) {
                   this.transferredRequests.push(this.fitertedcoursedata[this.i])
                   this.allcoursedataroc.push(this.fitertedcoursedata[this.i])
                 }
               }
               else {
-                if (this.fitertedcoursedata[this.i].status === 'pending' && this.fitertedcoursedata[this.i].user_id != this.getprofileDetails.data.id) {
+                if (this.fitertedcoursedata[this.i].status === 'pending') {
                   this.pendingRequests.push(this.fitertedcoursedata[this.i])
                   this.allcoursedatapub.push(this.fitertedcoursedata[this.i])
                 }
@@ -370,7 +370,7 @@ export class ViewCompleteReportComponent implements OnInit {
               if (this.fitertedcoursedata[this.i].status === 'pending') {
                 this.usersubmitRequests.push(this.fitertedcoursedata[this.i])
               }
-              if (this.fitertedcoursedata[this.i].status === 'pending' && this.fitertedcoursedata[this.i].user_id == this.getprofileDetails.data.id) {
+              if (this.fitertedcoursedata[this.i].status === 'pending') {
 
                 this.submittedRequests.push(this.fitertedcoursedata[this.i])
                 this.allcoursedataroc.push(this.fitertedcoursedata[this.i])
@@ -383,7 +383,7 @@ export class ViewCompleteReportComponent implements OnInit {
                 this.allcoursedatareq.push(this.fitertedcoursedata[this.i])
                 this.allcoursedatapub.push(this.fitertedcoursedata[this.i])
               }
-              if (this.fitertedcoursedata[this.i].status === 'draft' && this.fitertedcoursedata[this.i].user_id == this.getprofileDetails.data.id) {
+              if (this.fitertedcoursedata[this.i].status === 'draft') {
                 this.draftRequests.push(this.fitertedcoursedata[this.i])
                 this.allcoursedataroc.push(this.fitertedcoursedata[this.i])
                 this.allcoursedatareq.push(this.fitertedcoursedata[this.i])

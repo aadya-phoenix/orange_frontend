@@ -22,7 +22,7 @@
                 <div class="page-title d-flex end_just">
                     <ol class="breadcrumb text-right">
                         <li>
-                            <a href="# " class="text_white">
+                            <a [routerLink]="['/dashboard']" class="text_white">
                                 <i class="fa fa-home"></i>
                             </a>
                         </li>
@@ -356,7 +356,7 @@
                                     <tbody *ngIf="flagVar == false">
                                         <tr *ngFor="let cource of courcesList | paginate: { itemsPerPage: pageSize, currentPage: pageNumber } ;let i =index;"
                                         class="text-center fon_13">
-                                            <td scope="row">{{i+1}}</td>
+                                            <td scope="row">{{i+startPageEntry}}</td>
                                             <td class="re_id">{{ cource.request_id }}</td>
                                             <td *ngIf="getUserrole.id != 2"> <a
                                                     *ngIf="cource.status != 'draft'"
@@ -388,7 +388,7 @@
                                     <tbody *ngIf="flagVar">
                                         <tr *ngFor="let cource of fitertedcoursedata | paginate: { itemsPerPage: pageSize, currentPage: pageNumber }; let i =index;"
                                         class="text-center fon_12">
-                                            <td scope="row">{{i+1}}</td>
+                                            <td scope="row">{{i+startPageEntry}}</td>
                                             <td class="re_id">{{ cource.request_id }}</td>
                                             <td *ngIf="getUserrole.id != 2"> <a *ngIf="cource.status!='draft'"
                                                     (click)="openModal(cource)" class="text-primary">
