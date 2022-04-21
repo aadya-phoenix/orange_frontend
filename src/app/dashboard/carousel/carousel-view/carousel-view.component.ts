@@ -70,9 +70,6 @@ export class CarouselViewComponent implements OnInit {
     if (this.requestdata?.status === this.CarouselStatus.publish){
       return false;  
     }
-    // if(this.requestdata?.status === this.CarouselStatus.pending){
-    //   return false;
-    // }
     if(this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isReviewer){
       return false;
     }
