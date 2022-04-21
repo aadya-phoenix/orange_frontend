@@ -64,39 +64,23 @@
     </div>
     <div class="content" style="background-image: url('../../../../assets/images/viewbac.jpg');">
         <div class="animated fadeIn">
-            <div class="card">
+            <div class="card" *ngIf="isUpdate() || isPublish() || isForward() || isReject()">
                 <div class="card-body">
                     <div class="Requs_btn_inl">
                         <div class="Requs_btn_inl-child">
-                            <button type="button" class="btn btn-primary  ml-2"  *ngIf="isPublish()" data-toggle="modal"
-                                data-target="#publishModal">
-                                <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
-                            </button>
-                            <button type="button" class="btn btn-primary  ml-2" *ngIf="isUpdate()" (click)="updateRequest()">
+                            <button type="button" class="btn btn-primary  ml-2" *ngIf="isUpdate()"
+                                (click)="updateRequest()">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">Update</span>
                             </button>
-                            <button type="button" class="btn btn-primary  ml-2"  *ngIf="isForward()">
+                            <button type="button" class="btn btn-primary  ml-2" *ngIf="isPublish()"  (click)="statusChangeRequest(CarouselStatus.publish)">
+                                <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
+                            </button>
+                            <button type="button" class="btn btn-primary  ml-2" *ngIf="isForward()" (click)="forwardRequest()">
                                 <i class="fa fa-arrow-right" aria-hidden="true"></i><span class="pl-1">Forward</span>
                             </button>
-                            <button type="button" class="btn btn-primary  ml-2"  *ngIf="isReject()">
+                            <button type="button" class="btn btn-primary  ml-2" *ngIf="isReject()" (click)="statusChangeRequest(CarouselStatus.reject)">
                                 <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                             </button>
-
-                            <!-- <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal"
-                                data-target="#exampleModal" (click)="getPublisher()">
-                                <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1"> Transfer to
-                                    Publisher</span>
-
-                            </button>
-
-                            <button class="btn btn-primary btn_requst ml-2" (click)="updateCource()">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span
-                                    class="pl-1">Update</span>
-                            </button>
-                            <button type="button" class="btn btn-primary btn_requst ml-2" data-toggle="modal"
-                                data-target="#rejectModal" (click)="getPublisher()">
-                                <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
-                            </button> -->
                         </div>
                     </div>
                 </div>

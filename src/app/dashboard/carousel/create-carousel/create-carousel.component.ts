@@ -2,10 +2,13 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CarouselService } from 'src/app/shared/services/carousel/carousel.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
+import { CarouselForwardComponent } from '../carousel-forward/carousel-forward.component';
+import { CarouselPublishComponent } from '../carousel-publish/carousel-publish.component';
 const emailregexp = dataConstant.EmailPattren;
 
 @Component({
@@ -15,6 +18,7 @@ const emailregexp = dataConstant.EmailPattren;
 })
 export class CreateCarouselComponent implements OnInit {
   RoleID = dataConstant.RoleID;
+  CarouselStatus = dataConstant.CarouselStatus;
   carousel_id = 0;
   carousel_details: any = {};
   languageList: any = [];
@@ -24,6 +28,8 @@ export class CreateCarouselComponent implements OnInit {
   createOlcarouselForm: FormGroup;
   languageText = "";
   isReviewer = false;
+  isPublisher = false;
+  isRequester = false;
   rejectcomment = "";
   carouselImage = { image: '', ext: '' };
   isSubmitted = false;
@@ -41,10 +47,13 @@ export class CreateCarouselComponent implements OnInit {
     private commonService: CommonService,
     private router: Router,
     private route: ActivatedRoute,
+    private modalService: NgbModal,
     private authService: AuthenticationService,
     private carouselService: CarouselService) {
     this.getUserrole = this.authService.getRolefromlocal();
     this.isReviewer = this.getUserrole.id === this.RoleID.CarouselReviewer;
+    this.isPublisher = this.getUserrole.id === this.RoleID.CarouselPublisher;
+    this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
     this.createOlcarouselForm = this.formBuilder.group({
       languages: new FormArray([]),
       metadata: this.formBuilder.array([]),
@@ -56,15 +65,16 @@ export class CreateCarouselComponent implements OnInit {
         publisher_id: new FormControl('', [Validators.required]),
       }),
     });
-    this.getLanguageList();
-    this.getExpiryDateType();
-    if (this.isReviewer) {
-      this.getCarouselPublisher();
-    }
+   
   }
 
-  ngOnInit(): void {
-    this.getTotalCourse();
+  async  ngOnInit() {
+    await this.getTotalCourse();
+    await this.getLanguageList();
+    await this.getExpiryDateType();
+    if (this.isReviewer) {
+      await this.getCarouselPublisher();
+    }
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.carousel_id = Id ? parseInt(Id) : 0;
@@ -228,6 +238,92 @@ export class CreateCarouselComponent implements OnInit {
       // creating array bytes
       this.carouselImage = { image: this.commonService.byteArrayTobase64(f.bytes), ext: f.name.split('.').pop() };
     });
+  }
+
+  isDraft(){
+    if (this.carousel_details?.status === this.CarouselStatus.publish){
+      return false;  
+    }
+    if(this.carousel_details?.status === this.CarouselStatus.pending){
+      return false;
+    }
+    if(this.carousel_details?.transfer_user_id && !this.carousel_details?.publisher_status && this.isReviewer){
+      return false;
+    }
+    return true;
+  }
+
+  isReject(){
+    if (this.carousel_details?.status === this.CarouselStatus.publish){
+      return false;  
+    }
+    if(this.isRequester || !this.carousel_details.id){
+      return false;
+    }
+    if(this.carousel_details?.status === this.CarouselStatus.draft){
+      return false;
+    }
+    if(this.carousel_details?.transfer_user_id && !this.carousel_details?.publisher_status && this.isReviewer){
+      return false;
+    }
+    return true;
+  }
+
+  isPublish(){
+    if (this.carousel_details?.status === this.CarouselStatus.publish){
+      return false;  
+    }
+    if(!this.isPublisher){
+      return false;
+    }
+    if(this.carousel_details?.transfer_user_id && !this.carousel_details?.publisher_status && this.isReviewer){
+      return false;
+    }
+    return true;
+  }
+
+  isSubmit(){
+    if (this.carousel_details?.status === this.CarouselStatus.publish){
+      return false;  
+    }
+    if (this.carousel_details?.status === this.CarouselStatus.pending){
+      return false;  
+    }
+    if(this.isPublisher){
+      return false;
+    }
+    if(this.carousel_details?.transfer_user_id && !this.carousel_details?.publisher_status && this.isReviewer){
+      return false;
+    }
+
+    return true;
+  }
+
+  forwardRequest(){
+    const modalRef = this.modalService.open(CarouselForwardComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      title: 'Request Forward',
+      data: this.carousel_details.id,
+      objectDetail: this.carousel_details
+    };
+  }
+
+  statusChangeRequest(status:any){
+    const modalRef = this.modalService.open(CarouselPublishComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      title: `Request ${status == this.CarouselStatus.reject ? "Reject" : "Publish"}`,
+      status: status,
+      data: this.carousel_details.id,
+      objectDetail: this.carousel_details
+    };
   }
 
   saveCarousel(status: string) {

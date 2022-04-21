@@ -106,7 +106,8 @@
                                                             Title <span class="text-danger-ligth">* </span>
                                                             <a>
                                                                 <i class="fa fa-info-circle info_circle"
-                                                                    aria-hidden="true"  placement="right" ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
+                                                                    aria-hidden="true" placement="right"
+                                                                    ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
                                                             </a>
                                                         </label>
                                                         <input type="text" placeholder="Enter Title"
@@ -308,10 +309,13 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button class="btn btn-primary mr-1" type="submit" (click)="saveCarousel('pending')">{{this.isReviewer ? 'Submit' : 'Submit'}}</button>
-                                <button class="btn btn-primary mr-1" type="submit" (click)="saveCarousel('publish')">Publish</button>
-                                <button class="btn btn-primary mr-1" type="submit" data-toggle="modal" data-target="#rejectModal">Reject</button>
-                                <button class="btn btn-secondary" (click)="saveCarousel('draft')">Save as draft</button>
+                                <button class="btn btn-primary mr-1" type="submit"  *ngIf="isSubmit()"
+                                    (click)="saveCarousel('pending')">Submit</button>
+                                <button class="btn btn-primary mr-1" type="submit" *ngIf="isPublish()"
+                                    (click)="saveCarousel('publish')">Publish</button>
+                                <button class="btn btn-primary mr-1" type="submit" *ngIf="isReject()" (click)="statusChangeRequest(CarouselStatus.reject)">Reject</button>
+                                <button class="btn btn-secondary" *ngIf="isDraft()" (click)="saveCarousel('draft')">Save
+                                    as draft</button>
                             </div>
                         </div>
                     </div>
@@ -409,32 +413,4 @@
             <!--ROW END-->
         </div>
     </div>
-    <!-- Reject -->
-    <div class="modal fade mt_top_50" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4  class="text_orange fon_14">Reject Request</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label>Comments</label>
-                            <textarea class="form-control form_width-textarea" maxlength="500" [(ngModel)]="rejectcomment" rows="3 "
-                                placeholder="Enter Your Comments ">
-                </textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" >
-                    Submit
-                </button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
 </div>
-
-</div>
-<!--end-->
