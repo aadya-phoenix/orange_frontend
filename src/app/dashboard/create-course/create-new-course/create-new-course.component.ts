@@ -86,6 +86,7 @@ export class CreateNewCourseComponent implements OnInit {
   fileToUpload: any[] = [];
   fileToUpload_Material: any[] = [];
   isFileResouce = '';
+  isMaterialSource = '';
   j: any = 0;
   remainingText: any = 500;
   public lang;
@@ -361,6 +362,7 @@ export class CreateNewCourseComponent implements OnInit {
       if (this.learningType != "6") {
         if (this.routergetdata.resource != null) {
           this.isFileResouce = 'https://orange.mindscroll.info/public/public/' + this.routergetdata.resource;
+          this.routergetdata.resource = null;
           // let objectdata: any = {
           //   fileName: this.routergetdata.resource.split('/')[3],
           //   url: 'https://orange.mindscroll.info/public/public/' + this.routergetdata.resource
@@ -374,6 +376,8 @@ export class CreateNewCourseComponent implements OnInit {
             fileName: this.routergetdata.material_source.split('/')[3],
             url: 'https://orange.mindscroll.info/' + this.routergetdata.material_source
           };
+          this.isMaterialSource = 'https://orange.mindscroll.info/public/public/' + this.routergetdata.material_source;
+          this.routergetdata.material_source = null;
           this.fileToUpload_Material.push(objectdata);
         }
       }
@@ -417,7 +421,7 @@ export class CreateNewCourseComponent implements OnInit {
 
       }
       else if (this.routergetdata.learning_type == "3") {
-        if (this.routergetdata.url != "") {
+        if (this.routergetdata.url) {
           this.showMaterialURLchecked = true;
           this.materialsourceurl = true;
           this.showMaterialUploadchecked = false;
@@ -464,7 +468,7 @@ export class CreateNewCourseComponent implements OnInit {
         }
       }
       else if (this.routergetdata.learning_type == "6") {
-        this.showPlaylistTargetAudience = this.routergetdata['level'] == "1" ? "yes" : "no";
+        this.showPlaylistTargetAudience = this.routergetdata['level'] == "yes" ? "yes" : "no";
         this.showPlaylistEmail = this.routergetdata.for_whoom.toString().replace('"', '').replace('"', '');
         if (this.routergetdata.level == "yes") {
           this.regionTargetAudience = true;
@@ -874,7 +878,7 @@ export class CreateNewCourseComponent implements OnInit {
 
     //video based
     this.videobasedForm = this.fb.group({
-      video_link: new FormControl(''),
+      video_link: new FormControl('',[Validators.pattern(dataConstant.UrlPattern)]),
       additional_comment: new FormControl(''),
       // email_preffered_instructor: new FormControl('', [Validators.required,
       //   Validators.pattern(emailregexp)]),
@@ -982,6 +986,10 @@ export class CreateNewCourseComponent implements OnInit {
 
     if (this.routergetdata) {
       this.showStatus = this.routergetdata.status;
+    }
+
+    if(this.routergetdata.status != 'draft'){
+      this.commonCreateCourceForm.controls['learning_type'].disable();
     }
 
     //this.addLearnerGuideline();
@@ -1155,8 +1163,8 @@ export class CreateNewCourseComponent implements OnInit {
         this.routergetdata.email_preffered_instructor = JSON.parse(this.routergetdata.email_preffered_instructor);
         this.commonCreateCourceForm_playlist.patchValue(this.routergetdata);
         this.pushtoTitlearray(this.commonCreateCourceForm_playlist);
-        debugger;
         this.playlistForm.patchValue(this.routergetdata);
+        this.targetAudiencePlaylsitValue(this.routergetdata.target_audience);
       }
       console.log(this.routergetdata);
 
@@ -1879,7 +1887,6 @@ export class CreateNewCourseComponent implements OnInit {
       this.playlistForm.get('who_see_course')?.setValidators(Validators.required);
       this.playlistForm.get('target_audience')?.clearValidators();
       this.playlistForm.get('email_preffered_instructor')?.clearValidators();
-      debugger;
       this.playlistForm.patchValue({
         target_audience: null,
         email_preffered_instructor: null
@@ -1890,7 +1897,6 @@ export class CreateNewCourseComponent implements OnInit {
       this.playlistForm.get('target_audience')?.setValidators(Validators.required);
       this.playlistForm.get('email_preffered_instructor')?.setValidators(Validators.required);
       this.playlistForm.get('who_see_course')?.clearValidators();
-      debugger;
       this.playlistForm.patchValue({
         who_see_course: null,
       });
@@ -1898,19 +1904,23 @@ export class CreateNewCourseComponent implements OnInit {
   }
   targetAudiencePlaylsit(event: any) {
     console.log("event is", event.target.value)
-    if (event.target.value == 2) {
+    this.targetAudiencePlaylsitValue(event.target.value);
+  }
+
+  targetAudiencePlaylsitValue(value: any) {
+    if (value == 2) {
       this.regionTargetAudiencePlaylist = true;
       this.playlistForm.get('email_preffered_instructor')?.setValidators(Validators.required);
     }
-    if (event.target.value == 1) {
+    if (value == 1) {
       this.regionTargetAudiencePlaylist = false;
       this.playlistForm.get('email_preffered_instructor')?.clearValidators();
-      debugger;
       this.playlistForm.patchValue({
         email_preffered_instructor: null
       });
     }
   }
+
   certificationType_Curriculum(event: any) {
     console.log(event.id);
     if (event.id == 'yes') {
