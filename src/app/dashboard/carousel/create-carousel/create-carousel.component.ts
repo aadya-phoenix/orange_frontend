@@ -29,6 +29,7 @@ export class CreateCarouselComponent implements OnInit {
   languageText = "";
   isReviewer = false;
   isPublisher = false;
+  isRequester = false;
   rejectcomment = "";
   carouselImage = { image: '', ext: '' };
   isSubmitted = false;
@@ -52,6 +53,7 @@ export class CreateCarouselComponent implements OnInit {
     this.getUserrole = this.authService.getRolefromlocal();
     this.isReviewer = this.getUserrole.id === this.RoleID.CarouselReviewer;
     this.isPublisher = this.getUserrole.id === this.RoleID.CarouselPublisher;
+    this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
     this.createOlcarouselForm = this.formBuilder.group({
       languages: new FormArray([]),
       metadata: this.formBuilder.array([]),
@@ -255,6 +257,9 @@ export class CreateCarouselComponent implements OnInit {
     if (this.carousel_details?.status === this.CarouselStatus.publish){
       return false;  
     }
+    if(this.isRequester || !this.carousel_details.id){
+      return false;
+    }
     if(this.carousel_details?.status === this.CarouselStatus.draft){
       return false;
     }
@@ -279,6 +284,9 @@ export class CreateCarouselComponent implements OnInit {
 
   isSubmit(){
     if (this.carousel_details?.status === this.CarouselStatus.publish){
+      return false;  
+    }
+    if (this.carousel_details?.status === this.CarouselStatus.pending){
       return false;  
     }
     if(this.isPublisher){

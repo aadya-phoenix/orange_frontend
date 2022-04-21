@@ -20,6 +20,7 @@ export class CarouselViewComponent implements OnInit {
   RoleID = dataConstant.RoleID;
   isReviewer = false;
   isPublisher = false;
+  isRequester = false;
   CarouselStatus = dataConstant.CarouselStatus;
   constructor(private route: ActivatedRoute,
     private carouselService: CarouselService,
@@ -29,6 +30,7 @@ export class CarouselViewComponent implements OnInit {
       this.getUserrole = this.authService.getRolefromlocal();
       this.isReviewer = this.getUserrole.id === this.RoleID.CarouselReviewer;
       this.isPublisher = this.getUserrole.id === this.RoleID.CarouselPublisher;
+      this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
      }
 
   ngOnInit(): void {
@@ -92,7 +94,7 @@ export class CarouselViewComponent implements OnInit {
     if (this.requestdata?.status === this.CarouselStatus.publish){
       return false;  
     }
-    if(this.isPublisher){
+    if(!this.isReviewer){
       return false;
     }
     if(this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isReviewer){
@@ -104,6 +106,9 @@ export class CarouselViewComponent implements OnInit {
   isReject(){
     if (this.requestdata?.status === this.CarouselStatus.publish){
       return false;  
+    }
+    if(this.isRequester){
+      return false;
     }
     if(this.requestdata?.status === this.CarouselStatus.draft){
       return false;
