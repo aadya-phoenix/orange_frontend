@@ -137,7 +137,6 @@ export class CreateSessionComponent implements OnInit {
       }
     );
   }
-
   getCountries(){
     this.courseService.getCountries().subscribe(
       (res: any) => {
