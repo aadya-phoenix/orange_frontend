@@ -1,39 +1,35 @@
 <div id="right-panel" class="right-panel">
     <app-header></app-header>
-    <div class="breadcrumbs cm-breadcrumbs">
-        <div class="col-sm-7">
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-8">
             <div class="page-header float-left bg-transparent">
                 <div class="page-title d-flex align-items-center">
-                    <img src="../../../../assets/images/creatnew.png" class="home_Css_img" />
+                    <img src="../../../../assets/images/3.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="font-20">Promote on Carousel1</span>
+                        <span class="breade_text_span1">Promote on Carousel</span>
                         <span class="divider"></span>
-                        <span class="title-detail mt-6">
-                            <b>Instructor-Led (ILT)</b> - Instructor-Led
-                            Training is face to face training delivered in a classroom.
-                        </span>
-                        <span class="title-detail mt-2"><b>
-                                Virtual Instructor-Led Training(vILT)</b> - Virtual instrutor-Led Training(vILT)is
-                            delivered remotely</span>
+                        <span class="breade_text_span">
+                            Request the creation of a new entry in the Orange Learning Carousel</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-5 float-right">
+        <div class="col-sm-4 float-right">
             <div class="page-header float-right bg-transparent">
                 <div class="page-title d-flex end_just">
                     <ol class="breadcrumb text-right bg-transparent">
                         <li>
                             <a [routerLink]="['/dashboard']">
-                                <i class="fa fa-home color-blue"></i>
+                                <i class="fa fa-home text_white"></i>
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="color-orange">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/olcarousel']" class="color-orange">Create new Carousel</a>
+                            <span class="text_white span_dis">Create new Carousel</span>
+                        
                         </li>
                     </ol>
                 </div>
@@ -73,14 +69,14 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="header_div_promt">
-                                    <strong class="font-13">I want my entry to appear in the following Carousel(s).
+                                    <strong class="font-16">I want my entry to appear in the following Carousel(s).
                                         ({{languageText}})</strong>
                                     <div class="chkbox_css_header">
                                         <label formArrayName="languages"
                                             *ngFor="let language of lauguageFormArray.controls; let i = index"
                                             (change)="languageChange()">
                                             <input type="checkbox" [formControlName]="i">
-                                            <span class="mr-1 ml-1">{{languageList[i].name}}</span>
+                                            <span class="mr-1 ml-1 font-13">{{languageList[i].name}}</span>
                                         </label>
                                     </div>
                                 </div>
@@ -91,7 +87,7 @@
                                     <div class="card" [formGroupName]="i">
                                         <div class="card-header">
                                             <div class="header_div_promt">
-                                                <strong class="font-13">{{carousel.value.languageName}}</strong>
+                                                <strong class="font-16">{{carousel.value.languageName}}</strong>
                                                 <div class="chkbox_css_header">
                                                     <button class="btn btn-secondary"
                                                         (click)="removeCarousel(carousel)">Remove Carousel</button>
@@ -188,7 +184,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="header_div_promt">
-                                    <strong class="font-13">Other Details</strong>
+                                    <strong class="font-16">Other Details</strong>
                                 </div>
                             </div>
                             <div class="card-body card_width">
@@ -404,12 +400,12 @@
                 </div>
             </div>
             <!--ROW END-->
-            <div class="view-comple-req_div">
+            <!-- <div class="view-comple-req_div">
                 <button class="btn btn-primary view-comple-req justify-content-center p-1"
                     [routerLink]="['/dashboard/cources/view-complete-report']">
                     <i class="fa fa-database mr-1" aria-hidden="true"></i>View Complete Request
                 </button>
-            </div>
+            </div> -->
             <!--ROW END-->
         </div>
     </div>
