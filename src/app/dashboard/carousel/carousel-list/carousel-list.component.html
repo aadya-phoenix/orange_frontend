@@ -30,7 +30,7 @@
                             <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
                         </li>
                         <li>
-                            <span class="text_white span_dis">Create new Course</span>
+                            <span class="text_white span_dis">Create new Carousel</span>
                         </li>
                     </ol>
                 </div>
@@ -105,7 +105,7 @@
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(carouselStatus.publish)">
+                                    <div class="alig_dashicon" (click)="showRecords(carouselStatus.closed)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-learning">
                                                 <img src="../../../../assets/images/icon/check.png" />
@@ -113,7 +113,7 @@
                                             <p>Active in Orange Learning</p>
                                         </div>
                                         <span
-                                            class="number_css In_Active_Learning">{{carousel_count.publish?carousel_count.publish:0}}</span>
+                                            class="number_css In_Active_Learning">{{carousel_count.closed?carousel_count.closed:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
@@ -222,9 +222,9 @@
                                             </td>
                                             <td (click)="viewRequest(item)">{{ item && item.user_name ? item.user_name :
                                                 "-" }}</td>
-                                            <td (click)="viewRequest(item)">{{ item.expiry_date | date: "shortDate" }}
+                                            <td (click)="viewRequest(item)">{{ item.expiry_date | date: "short" }}
                                             </td>
-                                            <td (click)="viewRequest(item)">{{ item.created_at | date: "shortDate" }}
+                                            <td (click)="viewRequest(item)">{{ item.created_at | date: "short" }}
                                             </td>
                                             <td>
                                                 <a (click)="openModal(item)" class="re_id">
@@ -237,12 +237,12 @@
                                                 </p>
                                             </td>
                                             <td class="text-center">
-                                                <a (click)="copyRequest(item.id)" class="copy_file mr-1"
+                                                <a (click)="copyRequest(item.id)" class="copy_file mr-1" *ngIf="item.status_show === carouselStatus.submitted"
                                                     data-toggle="tooltip" data-placement="top" title="Copy">
                                                     <i class="fa fa-files-o" aria-hidden="true"></i>
                                                 </a>
                                                 <a (click)="editRequest(item)"
-                                                    *ngIf="item.status_show === carouselStatus.draft"
+                                                    *ngIf="item.status_show === carouselStatus.draft || (item.status === carouselStatus.reject && item.user_id === getprofileDetails.data.id)"
                                                     class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                     title="Edit">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

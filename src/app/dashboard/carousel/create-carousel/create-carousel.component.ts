@@ -17,6 +17,8 @@ const emailregexp = dataConstant.EmailPattren;
   styleUrls: ['./create-carousel.component.scss']
 })
 export class CreateCarouselComponent implements OnInit {
+  today = new Date();
+  minDate = {};
   RoleID = dataConstant.RoleID;
   CarouselStatus = dataConstant.CarouselStatus;
   carousel_id = 0;
@@ -25,6 +27,7 @@ export class CreateCarouselComponent implements OnInit {
   cctExpiryperiod: any = [];
   carouselPublisher: any = [];
   getUserrole: any = {};
+  getprofileDetails: any = {};
   createOlcarouselForm: FormGroup;
   languageText = "";
   isReviewer = false;
@@ -50,14 +53,25 @@ export class CreateCarouselComponent implements OnInit {
     private modalService: NgbModal,
     private authService: AuthenticationService,
     private carouselService: CarouselService) {
+    this.minDate = {
+      year: this.today.getFullYear(),
+      month: this.today.getMonth() + 1,
+      day: this.today.getDay()
+    };
+    this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.getUserrole = this.authService.getRolefromlocal();
     this.isReviewer = this.getUserrole.id === this.RoleID.CarouselReviewer;
     this.isPublisher = this.getUserrole.id === this.RoleID.CarouselPublisher;
     this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      const Id = params.get('id');
+      this.carousel_id = Id ? parseInt(Id) : 0;
+      this.getCarouselDetails();
+    });
     this.createOlcarouselForm = this.formBuilder.group({
       languages: new FormArray([]),
       metadata: this.formBuilder.array([]),
-      image: new FormControl('', [Validators.required]),
+      image: new FormControl('', this.carousel_id ? [] : [Validators.required]),
       publication_date: new FormControl('', [Validators.required]),
       expiry_type: new FormControl('', [Validators.required]),
       additional_comment: new FormControl('', [Validators.required]),
@@ -65,21 +79,17 @@ export class CreateCarouselComponent implements OnInit {
         publisher_id: new FormControl('', [Validators.required]),
       }),
     });
-   
+
   }
 
-  async  ngOnInit() {
-    await this.getTotalCourse();
-    await this.getLanguageList();
-    await this.getExpiryDateType();
+  async ngOnInit() {
+    this.getTotalCourse();
+    this.getLanguageList();
+    this.getExpiryDateType();
     if (this.isReviewer) {
-      await this.getCarouselPublisher();
+      this.getCarouselPublisher();
     }
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      const Id = params.get('id');
-      this.carousel_id = Id ? parseInt(Id) : 0;
-      this.getCarouselDetails();
-    });
+
   }
 
   getCarouselDetails() {
@@ -93,6 +103,8 @@ export class CreateCarouselComponent implements OnInit {
           this.createOlcarouselForm.controls.additional_comment.setValue(this.carousel_details.additional_comment);
           this.createOlcarouselForm.controls.publication_date.setValue(new Date(this.carousel_details.publication_date).toISOString().slice(0, 10));
           // this.createOlcarouselForm.controls.image.setValue(this.carousel_details.image);
+          this.carousel_details.imageUrl = `${dataConstant.ImageUrl}/${this.carousel_details.image}`;
+          this.carousel_details.image = null;
           this.launguageFormBind();
         }
       },
@@ -156,35 +168,37 @@ export class CreateCarouselComponent implements OnInit {
   }
 
   launguageFormBind() {
-    if (!this.carousel_id) {
-      this.languageList.forEach((x: { name: string, id: number, slug: string, carousel_show: number }) => {
-        if (x.carousel_show === 1) {
-          this.lauguageFormArray.push(new FormControl(x.slug === 'english' ? true : false));
-          if (x.slug === 'english') {
-            this.carouselFormArray.push(this.newMetaData(x));
+    setTimeout(() => {
+      if (!this.carousel_id) {
+        this.languageList.forEach((x: { name: string, id: number, slug: string, carousel_show: number }) => {
+          if (x.carousel_show === 1) {
+            this.lauguageFormArray.push(new FormControl(x.slug === 'english' ? true : false));
+            if (x.slug === 'english') {
+              this.carouselFormArray.push(this.newMetaData(x));
+            }
           }
-        }
-      });
-    }
-    else {
-      this.languageList.forEach((x: { name: string, id: number, slug: string, carousel_show: number }) => {
-        if (x.carousel_show === 1) {
-          const existData = this.carousel_details.metadata.find((y: { language_slug: any; }) => y.language_slug == x.slug);
-          if (existData) {
-            this.lauguageFormArray.push(new FormControl(true));
-            const formControl = this.newMetaData(x)
-            formControl.controls.title.setValue(existData.title);
-            formControl.controls.description.setValue(existData.description);
-            formControl.controls.link.setValue(existData.link);
-            formControl.controls.display_manager.setValue(existData.display_manager);
-            this.carouselFormArray.push(formControl);
+        });
+      }
+      else {
+        this.languageList.forEach((x: { name: string, id: number, slug: string, carousel_show: number }) => {
+          if (x.carousel_show === 1) {
+            const existData = this.carousel_details.metadata.find((y: { language_slug: any; }) => y.language_slug == x.slug);
+            if (existData) {
+              this.lauguageFormArray.push(new FormControl(true));
+              const formControl = this.newMetaData(x)
+              formControl.controls.title.setValue(existData.title);
+              formControl.controls.description.setValue(existData.description);
+              formControl.controls.link.setValue(existData.link);
+              formControl.controls.display_manager.setValue(existData.display_manager);
+              this.carouselFormArray.push(formControl);
+            }
+            else {
+              this.lauguageFormArray.push(new FormControl(false));
+            }
           }
-          else {
-            this.lauguageFormArray.push(new FormControl(false));
-          }
-        }
-      });
-    }
+        });
+      }
+    }, 2000);
   }
 
   getExpiryDateType() {
@@ -240,66 +254,66 @@ export class CreateCarouselComponent implements OnInit {
     });
   }
 
-  isDraft(){
-    if (this.carousel_details?.status === this.CarouselStatus.publish){
-      return false;  
-    }
-    if(this.carousel_details?.status === this.CarouselStatus.pending){
+  isDraft() {
+    if (this.carousel_details?.status === this.CarouselStatus.publish) {
       return false;
     }
-    if(this.carousel_details?.transfer_user_id && !this.carousel_details?.publisher_status && this.isReviewer){
+    if (this.carousel_details?.status === this.CarouselStatus.pending) {
       return false;
     }
-    return true;
-  }
-
-  isReject(){
-    if (this.carousel_details?.status === this.CarouselStatus.publish){
-      return false;  
-    }
-    if(this.isRequester || !this.carousel_details.id){
-      return false;
-    }
-    if(this.carousel_details?.status === this.CarouselStatus.draft){
-      return false;
-    }
-    if(this.carousel_details?.transfer_user_id && !this.carousel_details?.publisher_status && this.isReviewer){
+    if (this.getprofileDetails.data.id != this.carousel_details?.user_id && this.carousel_details?.transfer_user_id && !this.carousel_details?.publisher_status && this.isReviewer) {
       return false;
     }
     return true;
   }
 
-  isPublish(){
-    if (this.carousel_details?.status === this.CarouselStatus.publish){
-      return false;  
-    }
-    if(!this.isPublisher){
+  isReject() {
+    if (this.carousel_details?.status === this.CarouselStatus.publish) {
       return false;
     }
-    if(this.carousel_details?.transfer_user_id && !this.carousel_details?.publisher_status && this.isReviewer){
+    if (this.isRequester || !this.carousel_details.id) {
+      return false;
+    }
+    if (this.carousel_details?.status === this.CarouselStatus.draft) {
+      return false;
+    }
+    if (this.getprofileDetails.data.id != this.carousel_details?.user_id && this.carousel_details?.transfer_user_id && !this.carousel_details?.publisher_status && this.isReviewer) {
       return false;
     }
     return true;
   }
 
-  isSubmit(){
-    if (this.carousel_details?.status === this.CarouselStatus.publish){
-      return false;  
-    }
-    if (this.carousel_details?.status === this.CarouselStatus.pending){
-      return false;  
-    }
-    if(this.isPublisher){
+  isPublish() {
+    if (this.carousel_details?.status === this.CarouselStatus.publish) {
       return false;
     }
-    if(this.carousel_details?.transfer_user_id && !this.carousel_details?.publisher_status && this.isReviewer){
+    if (!this.isPublisher) {
+      return false;
+    }
+    if (this.getprofileDetails.data.id != this.carousel_details?.user_id && this.carousel_details?.transfer_user_id && !this.carousel_details?.publisher_status && this.isReviewer) {
+      return false;
+    }
+    return true;
+  }
+
+  isSubmit() {
+    if (this.carousel_details?.status === this.CarouselStatus.publish) {
+      return false;
+    }
+    if (this.getprofileDetails.data.id === this.carousel_details?.user_id &&this.carousel_details?.status === this.CarouselStatus.pending) {
+      return false;
+    }
+    if (this.isPublisher) {
+      return false;
+    }
+    if (this.getprofileDetails.data.id != this.carousel_details?.user_id && this.carousel_details?.transfer_user_id && !this.carousel_details?.publisher_status && this.isReviewer) {
       return false;
     }
 
     return true;
   }
 
-  forwardRequest(){
+  forwardRequest() {
     const modalRef = this.modalService.open(CarouselForwardComponent, {
       centered: true,
       size: 'lg',
@@ -312,7 +326,7 @@ export class CreateCarouselComponent implements OnInit {
     };
   }
 
-  statusChangeRequest(status:any){
+  statusChangeRequest(status: any) {
     const modalRef = this.modalService.open(CarouselPublishComponent, {
       centered: true,
       size: 'lg',
