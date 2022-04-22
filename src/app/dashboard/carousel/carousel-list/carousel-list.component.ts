@@ -17,9 +17,13 @@ import Swal from 'sweetalert2';
 })
 export class CarouselListComponent implements OnInit {
   carouselStatus = dataConstant.CarouselStatus;
+  RoleID = dataConstant.RoleID;
   carouselList: any = [];
   carouselListToShow: any = [];
   selectedStatus = this.carouselStatus.total;
+  isReviewer = false;
+  isPublisher = false;
+  isRequester = false;
   pagination = {
     page: 1,
     pageNumber: 1,
@@ -32,7 +36,9 @@ export class CarouselListComponent implements OnInit {
     rejected: 0,
     pending: 0,
     submitted: 0,
-    transferred: 0
+    transferred: 0,
+    expired: 0,
+    publish: 0
   }
   getUserrole: any;
   getprofileDetails: any;
@@ -48,6 +54,9 @@ export class CarouselListComponent implements OnInit {
     private router: Router
   ) {
     this.getUserrole = this.authService.getRolefromlocal();
+    this.isReviewer = this.getUserrole.id === this.RoleID.CarouselReviewer;
+    this.isPublisher = this.getUserrole.id === this.RoleID.CarouselPublisher;
+    this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
   }
 
