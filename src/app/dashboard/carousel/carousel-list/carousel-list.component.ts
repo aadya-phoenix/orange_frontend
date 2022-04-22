@@ -36,7 +36,9 @@ export class CarouselListComponent implements OnInit {
     rejected: 0,
     pending: 0,
     submitted: 0,
-    transferred: 0
+    transferred: 0,
+    expired: 0,
+    publish: 0
   }
   getUserrole: any;
   getprofileDetails: any;
