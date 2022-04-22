@@ -18,14 +18,21 @@ export const dataConstant = {
   UrlPattern: '^(https?:\\/\\/)?' + // protocol
     '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
     '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-    '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-    '(\\#[-a-z\\d_]*)?$',
+    '(\\:\\d+)?(\\/[-A-Za-z\\d%_.~+]*)*' + // port and path
+    '(\\?[;&A-Za-z\\d%_.:/?~+=-]*)?' + // query string
+    '(\\#[-A-Za-z\\d_]*)?$',
   NumbersOnlyPattern:'^[0-9]+$',
   CurrencyPattern:'/(?=.*?\d)^\$?(([1-9]\d{0,2}(,\d{3})*)|\d+)?(\.\d{1,2})?$/',
 
-  CarouselStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred' },
+  CarouselStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
+  
   CourseSessionStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred' },
-  ImageUrl: 'https://orange.mindscroll.info/public/public'
+
+  ImageUrl: 'https://orange.mindscroll.info/public/public',
+  RoleID: {
+    RequesterID: 2,
+    CarouselReviewer: 7,
+    CarouselPublisher: 8
+  }
 }
 

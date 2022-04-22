@@ -10,6 +10,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateCarouselComponent } from './create-carousel/create-carousel.component';
 import { CarouselViewComponent } from './carousel-view/carousel-view.component';
 import { CarouselHistoryComponent } from './carousel-history/carousel-history.component';
+import { CarouselPublishComponent } from './carousel-publish/carousel-publish.component';
+import { CarouselForwardComponent } from './carousel-forward/carousel-forward.component';
 
 
 
@@ -19,8 +21,10 @@ import { CarouselHistoryComponent } from './carousel-history/carousel-history.co
     CreateCarouselComponent,
     CarouselViewComponent,
     CarouselHistoryComponent,
+    CarouselPublishComponent,
+    CarouselForwardComponent,
   ],
-  entryComponents:[CarouselHistoryComponent],
+  entryComponents:[CarouselHistoryComponent, CarouselPublishComponent, CarouselForwardComponent],
   imports: [
     CommonModule,
     CarouselRoutingModule,

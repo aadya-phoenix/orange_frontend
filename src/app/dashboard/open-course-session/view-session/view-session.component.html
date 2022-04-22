@@ -63,7 +63,7 @@
     </div>
     <div class="content" style="background-image: url('../../../../assets/images/viewbac.jpg');">
         <div class="animated fadeIn">
-            <div  class="card">
+            <!-- <div  class="card">
                 <div class="card-body">
                     <div class="Requs_btn_inl">
                         <div class="Requs_btn_inl-child">
@@ -72,6 +72,21 @@
                                 <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
                             </button>
                         </div>
+                    </div>
+                </div>
+            </div> -->
+            <div *ngIf ="getUserrole.id == 3" class="card">
+                <div class="card-body">
+                    <div class="Requs_btn_inl">
+                        <div class="Requs_btn_inl-child">
+                            <button class="btn btn-secondary ml-2" (click)="updateSession()">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">Update</span>
+                          </button>
+                          <button type="button" class="btn btn-secondary ml-2" data-toggle="modal"
+                            data-target="#rejectModal">
+                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                          </button>
+                        </div>  
                     </div>
                 </div>
             </div>
@@ -322,4 +337,52 @@
             </ngb-panel>
         </ngb-accordion>
     </div>
+
+    <div class="modal fade mt_150" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document ">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="reject_req_h4">Reject Request</h4>
+            </div>
+    
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label>Comments</label>
+                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"
+                      [(ngModel)]="rejectcomment"></textarea>
+                  </div>
+                </div>
+                <!--col end-->
+              </div>
+              <!--row-->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="reject()">
+                Submit
+              </button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade mar_top_150" id="transferotherRoc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-lg" role="document ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="reject_req_h4">
+            Transfer the requet to other ROC
+          </h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" (click)="transfertoOtherRoc()" class="btn btn-primary btn_requst">
+            Submit
+          </button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

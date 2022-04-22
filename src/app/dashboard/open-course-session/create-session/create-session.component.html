@@ -116,14 +116,15 @@
                             </div>
                         </div>
                     </div>
-                   <ng-container *ngIf="sessionArray.controls.length > 0">                    <div class="card" formArrayName="metadata" *ngFor="let sess of sessionArray.controls;
+                   <ng-container *ngIf="metadataArray.controls.length > 0">                    
+                       <div class="card" formArrayName="metadata" *ngFor="let session of metadataArray.controls;
                     let i = index">
                        <!--  <ng-container > -->
                         <div class="card-header" >
                             <div class="heeader_button">
                                 <strong _ngcontent-jet-c125=""> Sessions:{{i+1}} </strong>
                                 <div class="button_div">
-                                    <button (click)="copySession(sess)" class="btn btn-primary mr-1">Copy Session <i class="fa fa-files-o ml-1" aria-hidden="true"></i></button>
+                                    <button (click)="copySession(session)" class="btn btn-primary mr-1">Copy Session <i class="fa fa-files-o ml-1" aria-hidden="true"></i></button>
                                     <button (click)="addMetadata()" class="btn btn-info mr-1">Add the Session +</button>
                                     <!-- <button (click)="addSession('','','','','','','','','','','','','','','','','','')" class="btn btn-info mr-1">Add the Session +</button> -->
                                     <button  *ngIf="i > 0" (click)="removeMetadata(i)" class="btn btn-danger">Remove <i class="fa fa-minus ml-1" aria-hidden="true"></i></button>
@@ -147,10 +148,10 @@
                                         
                                         <ng-select placeholder="Please select Delivery method" [items]="deliveryMethod" bindLabel="name" bindValue="id" formControlName="delivery_method" class="w_100">
                                         </ng-select>
-                                        <!-- <div class="error_message"
-                                            *ngIf="createSessionForm.controls[i].controls['delivery_method'].hasError('required') && createSessionForm.controls[i].controls['delivery_method'].touched">
+                                       <div class="error_message"
+                                            *ngIf="metadataArray.controls[i].controls['delivery_method'].hasError('required') && metadataArray.controls[i].controls['delivery_method'].touched">
                                             Delivery Method cannot be blank
-                                        </div> -->
+                                        </div> 
                                     </div>
                                 </div>
                                 <!--col-->
@@ -169,6 +170,10 @@
                                         <ng-select placeholder="Please select Country" 
                                         [items]="countryObj" bindLabel="country_name" bindValue="id" formControlName="country" class="w_100">
                                         </ng-select>
+                                        <div class="error_message"
+                                            *ngIf="metadataArray.controls[i].controls['country'].hasError('required') && metadataArray.controls[i].controls['country'].touched">
+                                            Country cannot be blank
+                                        </div>
                                     </div>
                                 </div>
                                 <!--col-->
@@ -183,6 +188,10 @@
                                             </a>
                                         </label>
                                         <input type="text" class="form-control form_width" placeholder="Enter Location" formControlName="location" >
+                                        <div class="error_message"
+                                            *ngIf="metadataArray.controls[i].controls['location'].hasError('required') && metadataArray.controls[i].controls['location'].touched">
+                                            Location cannot be blank
+                                        </div>
                                     </div>
                                 </div> 
                                 <!--col-->
@@ -197,6 +206,10 @@
                                             </a>
                                         </label>
                                         <input type="text" class="form-control form_width" placeholder="Enter Instructor Name" formControlName="instructor_name" >
+                                        <div class="error_message"
+                                            *ngIf="metadataArray.controls[i].controls['instructor_name'].hasError('required') && metadataArray.controls[i].controls['instructor_name'].touched">
+                                            Instructor Name cannot be blank
+                                        </div>
                                     </div>
                                 </div> 
                                 <!--col-->
@@ -217,6 +230,10 @@
                                                     [multiple]="true" bindLabel="email_id" bindValue="email_id"
                                                     formControlName="email_participant">
                                                 </ng-select>
+                                                <div class="error_message"
+                                            *ngIf="metadataArray.controls[i].controls['email_participant'].hasError('required') && metadataArray.controls[i].controls['email_participant'].touched">
+                                            Email ID of participants cannot be blank
+                                        </div>
                                     </div>
                                 </div>
                                 <!--col-->
@@ -232,6 +249,10 @@
                                         </label>
 
                                         <input type="date" class="form-control form_width" formControlName="start_date">
+                                        <div class="error_message"
+                                            *ngIf="metadataArray.controls[i].controls['start_date'].hasError('required') && metadataArray.controls[i].controls['start_date'].touched">
+                                            Start Date cannot be blank
+                                        </div>
                                     </div>
                                 </div>
                                 <!--col-->
@@ -247,6 +268,10 @@
                                         </label>
 
                                         <input type="time" class="form-control form_width" formControlName="start_time">
+                                        <div class="error_message"
+                                            *ngIf="metadataArray.controls[i].controls['start_time'].hasError('required') && metadataArray.controls[i].controls['start_time'].touched">
+                                            Start Time cannot be blank
+                                        </div>
                                     </div>
                                 </div>
                                 <!--col-->
@@ -262,6 +287,10 @@
                                         </label>
 
                                         <input type="date" class="form-control form_width" formControlName="end_date">
+                                        <div class="error_message"
+                                            *ngIf="metadataArray.controls[i].controls['end_date'].hasError('required') && metadataArray.controls[i].controls['end_date'].touched">
+                                            End Date cannot be blank
+                                        </div>
                                     </div>
                                 </div>
                                 <!--col-->
@@ -277,6 +306,10 @@
                                         </label>
 
                                         <input type="time" class="form-control form_width" formControlName="end_time">
+                                        <div class="error_message"
+                                            *ngIf="metadataArray.controls[i].controls['end_time'].hasError('required') && metadataArray.controls[i].controls['end_time'].touched">
+                                            End Time cannot be blank
+                                        </div>
                                     </div>
                                 </div>
                                 <!--col-->
@@ -294,6 +327,7 @@
                                         <ng-select placeholder="Please select Country" 
                                         [items]="timeZoneObj" bindLabel="name" bindValue="id" formControlName="time_zone" class="w_100">
                                         </ng-select>
+                                        
                                     </div>
                                 </div>
                                 <!--col-->
@@ -302,27 +336,27 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table class="table table-bordered" >
+                                   <!--  <table *ngIf="session.controls.break.controls.length > 0" class="table table-bordered"  >
                                         <thead>
-                                            <tr >
+                                            <tr formArrayName="break" *ngFor="let group of session.controls.break.controls; let idx = index;" >
                                                 <th scope="col">Break Description</th>
                                                 <th scope="col">Break Duration</th>
                                                 <th scope="col">Action</th>
                                             </tr>
                                             <tr>
-                                                <td  class="d-flex">
-                                                    <textarea formControlName="break" class="form-control form_width-textarea w-100 mr-2" rows="3"  placeholder="Enter Description" ></textarea>
+                                                <td [formGroupName]="idx" class="d-flex">
+                                                    <textarea formControlName="description" class="form-control form_width-textarea w-100 mr-2" rows="3"  placeholder="Enter Description" ></textarea>
                                                 </td>
-                                                <td> <input type="time" class="form-control form_width" ></td>
+                                                <td [formGroupName]="idx"> <input type="time" class="form-control form_width" formControlName="duration" ></td>
                                                 <td>
-                                                    <button class="btn btn-primary">Add Break +</button>
+                                                    <button (click)="addBreak(idx)" class="btn btn-primary">Add Break +</button>
                                                     <button class="btn btn-danger">
                                                     Remove Break -
                                                    </button>
                                                 </td>
                                             </tr>
                                         </thead>
-                                    </table>
+                                    </table> -->
                                 </div>
                                 <!--col-->
                             </div>
@@ -355,6 +389,10 @@
                                             </a>
                                         </label>
                                         <input type="text" class="form-control form_width" placeholder="Enter Minimum Registration " formControlName="min_registration">
+                                        <div class="error_message"
+                                            *ngIf="metadataArray.controls[i].controls['min_registration'].hasError('required') && metadataArray.controls[i].controls['min_registration'].touched">
+                                            Minimum Registration cannot be blank
+                                        </div>
                                     </div>
                                 </div>
                                 <!--col-->
@@ -370,6 +408,10 @@
                                             </a>
                                         </label>
                                         <input type="text" class="form-control form_width" placeholder="Enter Maximum Registration " formControlName="max_registration">
+                                        <div class="error_message"
+                                            *ngIf="metadataArray.controls[i].controls['max_registration'].hasError('required') && metadataArray.controls[i].controls['max_registration'].touched">
+                                            Maximum Registration cannot be blank
+                                        </div>
                                     </div>
                                 </div>
                                 <!--col-->
@@ -384,6 +426,10 @@
                                             </a>
                                         </label>
                                         <input type="date" class="form-control form_width" formControlName="registration_deadline">
+                                        <div class="error_message"
+                                            *ngIf="metadataArray.controls[i].controls['registration_deadline'].hasError('required') && metadataArray.controls[i].controls['registration_deadline'].touched">
+                                            Registration Deadline cannot be blank
+                                        </div>
                                     </div>
                                 </div>
                                 <!--col-->
@@ -399,6 +445,10 @@
                                             </a>
                                         </label>
                                         <textarea class="form-control form_width-textarea" rows="3" formControlName="availability"></textarea>
+                                        <div class="error_message"
+                                            *ngIf="metadataArray.controls[i].controls['availability'].hasError('required') && metadataArray.controls[i].controls['availability'].touched">
+                                            Availability cannot be blank
+                                        </div>
                                     </div>
                                 </div>
                                 <!--col-->
@@ -431,6 +481,10 @@
                                         </label>
                                         <ng-select placeholder="Please select" (change)="externalVendor($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="external_vendor" class="w_100">
                                         </ng-select>
+                                        <div class="error_message"
+                                            *ngIf="metadataArray.controls[i].controls['external_vendor'].hasError('required') && metadataArray.controls[i].controls['external_vendor'].touched">
+                                            External vendor cannot be blank
+                                        </div>
                                     </div>
                                 </div>
                                 <!--col-->
@@ -450,6 +504,7 @@
                                         </label>
 
                                         <input type="text" class="form-control form_width" placeholder="Enter Training cost per participant" formControlName="training_cost">
+                                        
                                     </div>
                                 </div>
                                 <!--col-->
@@ -488,9 +543,7 @@
                         <p>Draft</p>
                         <span class="number_css">
                             {{
-                            draftRequests && draftRequests.length
-                            ? draftRequests.length
-                            : "0"
+                                session_count.draft
                             }}
                         </span>
                     </div>
@@ -507,7 +560,7 @@
                         <p>Submitted</p>
                         <span class="number_css">
                             {{
-                            coursesList && coursesList.length ? coursesList.length : "0"
+                                session_count.submitted
                             }}
                         </span>
                     </div>
@@ -524,9 +577,7 @@
                         <p>Pending</p>
                         <span class="number_css">
                             {{
-                            pendingRequests && pendingRequests.length
-                            ? pendingRequests.length
-                            : "0"
+                                session_count.pending
                             }}
                         </span>
                     </div>
@@ -543,9 +594,7 @@
                         <p>Closed</p>
                         <span class="number_css">
                             {{
-                            closedRequests && closedRequests.length
-                            ? closedRequests.length
-                            : "0"
+                                session_count.closed
                             }}
                         </span>
                     </div>
@@ -562,21 +611,13 @@
                         <p>Rejected</p>
                         <span class="number_css">
                             {{
-                            rejectedRequests && rejectedRequests.length
-                            ? rejectedRequests.length
-                            : "0"
+                                session_count.rejected
                             }}
                         </span>
                     </div>
                 </div>
             </div>
             <!--coled-->
-        </div>
-        <!--ROW END-->
-        <div class="view-comple-req_div">
-            <button class="btn btn-primary view-comple-req justify-content-center p-1">
-                <i class="fa fa-database mr-1" aria-hidden="true"></i>View Complete Request
-            </button>
         </div>
         <!--ROW END-->
     </div>

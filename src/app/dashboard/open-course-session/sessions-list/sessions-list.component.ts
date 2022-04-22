@@ -8,6 +8,7 @@ import { CourcesService } from 'src/app/shared/services/cources/cources.service'
 import { CourseSessionService } from 'src/app/shared/services/course_session/course-session.service';
 import * as _ from 'lodash';
 import { SessionHistoryComponent } from '../session-history/session-history.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sessions-list',
@@ -129,15 +130,27 @@ export class SessionsListComponent implements OnInit {
   }
 
   deleteRequest(session:any){
-    alert('u sure u want to delete');
-    if(session){
+    Swal.fire({
+      title: 'Are you sure want to remove?',
+      text: 'You will not be able to recover this request!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
     const id = session.id;
     this.courseSessionService.deleteSession({session_id:id}).subscribe((res:any)=>{
-      alert("deleted successfully");
       this.refreshSessions();
-     },(err:any)=>{
-    })
-  }  
+      Swal.fire(
+        'Deleted!',
+        'Your request has been deleted.',
+        'success'
+       )
+      },(err:any)=>{
+     })   
+    }
+  })
  }    
 
  

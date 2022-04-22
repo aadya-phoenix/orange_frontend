@@ -2,7 +2,7 @@
     <app-header></app-header>
 
     <div class="breadcrumbs cm_breadcums">
-        <div class="col-sm-7">
+        <div class="col-sm-8">
             <div class="page-header float-left">
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/first.jpg" class="home_Css_img" />
@@ -17,12 +17,12 @@
             </div>
         </div>
 
-        <div class="col-sm-5 float-right">
+        <div class="col-sm-4 float-right">
             <div class="page-header float-right">
                 <div class="page-title d-flex end_just">
-                    <ol class="breadcrumb text-right">
+                    <ol class="breadcrumb text-right end_just">
                         <li>
-                            <a href="# " class="text_white">
+                            <a [routerLink]="['/dashboard']" class="text_white">
                                 <i class="fa fa-home"></i>
                             </a>
                         </li>
@@ -31,6 +31,10 @@
                         </li>
                         <li>
                             <a [routerLink]="['/dashboard/cources/']" class="text_white">Create new Course</a>
+                        </li>
+                        <li>
+                            <span  class="text_white span_dis" >View Complete Report</span>
+                          
                         </li>
                     </ol>
                 </div>
@@ -315,10 +319,10 @@
                         </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-end mb-1 mt-1">
-                                <button class="btn btn-secondary mr-1 fon_12"
+                                <button class="btn btn-primary mr-1 fon_12"
                                     (click)="exportToExcel()"><i class="fa fa-download mr-1"
                                         aria-hidden="true"></i>Export</button>
-                                <button class="btn btn-primary fon_11" (click)="reset()"><i
+                                <button class="btn btn-secondary fon_11" (click)="reset()"><i
                                         class="fa fa-refresh mr-1" aria-hidden="true"></i>Reset</button>
                             </div>
                             <div class="table-responsive table_height_scroll">
@@ -332,9 +336,8 @@
                                                class="w_10">Status</th>
                                             <th sortable="titleByLang" (sort)="onSort($event)" scope="col">Traning
                                                 Title</th>
-                                            <th sortable="email_content_owner" (sort)="onSort($event)" scope="col">Request
-                                                Email</th>
-                                            <th sortable="send_to" (sort)="onSort($event)" scope="col">Send To
+                                            <th sortable="email_content_owner" (sort)="onSort($event)" scope="col">Requester Email</th>
+                                            <th *ngIf="getUserrole.id != 2" sortable="send_to" (sort)="onSort($event)" scope="col">Send To
                                             </th>
                                             <th sortable="learning_type_name" (sort)="onSort($event)" scope="col" class="w_10">Activity Type</th>
                                             <th sortable="created_at" (sort)="onSort($event)" scope="col">Create Date
@@ -345,7 +348,7 @@
                                                 (sort)="onSort($event)" scope="col">Request Date</th>
                                             <th *ngIf="getUserrole.id != 2" sortable="roc_response_time"
                                                 (sort)="onSort($event)" scope="col">ROC response time</th>
-                                            <th sortable="publisher_name" (sort)="onSort($event)" scope="col">Publisher
+                                            <th *ngIf="getUserrole.id != 2" sortable="publisher_name" (sort)="onSort($event)" scope="col">Publisher
                                                 Name</th>
                                             <th sortable="updated_at" (sort)="onSort($event)" scope="col">Last
                                                 Modified</th>
@@ -354,7 +357,7 @@
                                     <tbody *ngIf="flagVar == false">
                                         <tr *ngFor="let cource of courcesList | paginate: { itemsPerPage: pageSize, currentPage: pageNumber } ;let i =index;"
                                         class="text-center fon_13">
-                                            <td scope="row">{{i+1}}</td>
+                                            <td scope="row">{{i+startPageEntry}}</td>
                                             <td class="re_id">{{ cource.request_id }}</td>
                                             <td *ngIf="getUserrole.id != 2"> <a
                                                     *ngIf="cource.status != 'draft'"
@@ -372,21 +375,21 @@
                                             </td>
                                             <td>{{ cource.titleByLang | titlecase}}</td>
                                             <td>{{ cource.email_content_owner}}</td>
-                                            <td>{{cource.send_to}}</td>
+                                            <td *ngIf="getUserrole.id != 2">{{cource.send_to}}</td>
                                             <td>{{ cource.learning_type_name}}</td>
                                             <td>{{ cource.created_at}}</td>
                                             <td *ngIf="getUserrole.id != 2">{{ cource.roc_name}}</td>
                                             <td *ngIf="getUserrole.id != 2">{{ cource.created_at}}</td>
                                             
                                             <td *ngIf="getUserrole.id != 2">{{cource.roc_response_time}}</td>
-                                            <td>{{cource.publisher_name}}</td>
+                                            <td *ngIf="getUserrole.id != 2">{{cource.publisher_name}}</td>
                                             <td>{{cource.updated_at}}</td>
                                         </tr>
                                     </tbody>
                                     <tbody *ngIf="flagVar">
                                         <tr *ngFor="let cource of fitertedcoursedata | paginate: { itemsPerPage: pageSize, currentPage: pageNumber }; let i =index;"
                                         class="text-center fon_12">
-                                            <td scope="row">{{i+1}}</td>
+                                            <td scope="row">{{i+startPageEntry}}</td>
                                             <td class="re_id">{{ cource.request_id }}</td>
                                             <td *ngIf="getUserrole.id != 2"> <a *ngIf="cource.status!='draft'"
                                                     (click)="openModal(cource)" class="text-primary">
@@ -403,14 +406,14 @@
                                             </td>
                                             <td>{{ cource.titleByLang | titlecase}}</td>
                                             <td>{{ cource.email_content_owner}}</td>
-                                            <td>{{cource.send_to}}</td>
+                                            <td *ngIf="getUserrole.id != 2">{{cource.send_to}}</td>
                                             <td>{{ cource.learning_type_name}}</td>
                                             <td>{{ cource.created_at}}</td>
                                             <td *ngIf="getUserrole.id != 2">{{ cource.roc_name}}</td>
                                             <td *ngIf="getUserrole.id != 2">{{ cource.created_at}}</td>
                                            
                                             <td *ngIf="getUserrole.id != 2">{{cource.roc_response_time}}</td>
-                                            <td>{{cource.publisher_name}}</td>
+                                            <td *ngIf="getUserrole.id != 2">{{cource.publisher_name}}</td>
                                             <td>{{cource.updated_at}}</td>
                                         </tr>
                                     </tbody>

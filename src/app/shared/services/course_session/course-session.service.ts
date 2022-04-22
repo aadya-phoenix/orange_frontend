@@ -46,4 +46,13 @@ export class CourseSessionService {
      .get(url, this.http.headers)
      .pipe(catchError(this.commmonService.Errorhandling));
   }
+
+  changeStatusSession(data:any){
+    const url = `/api/${this.apiVersion}/course-session/status`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+  updateSession(data:any){
+    const url = `/api/${this.apiVersion}/course-session/create`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
 }
