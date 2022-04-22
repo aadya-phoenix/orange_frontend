@@ -24,7 +24,6 @@ export class CreateCarouselComponent implements OnInit {
   languageList: any = [];
   cctExpiryperiod: any = [];
   carouselPublisher: any = [];
-  promises = [];
   getUserrole: any = {};
   createOlcarouselForm: FormGroup;
   languageText = "";
@@ -55,14 +54,10 @@ export class CreateCarouselComponent implements OnInit {
     this.isReviewer = this.getUserrole.id === this.RoleID.CarouselReviewer;
     this.isPublisher = this.getUserrole.id === this.RoleID.CarouselPublisher;
     this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      const Id = params.get('id');
-      this.carousel_id = Id ? parseInt(Id) : 0;
-    });
     this.createOlcarouselForm = this.formBuilder.group({
       languages: new FormArray([]),
       metadata: this.formBuilder.array([]),
-      image: new FormControl('', this.carousel_id ? [] : [Validators.required]),
+      image: new FormControl('', [Validators.required]),
       publication_date: new FormControl('', [Validators.required]),
       expiry_type: new FormControl('', [Validators.required]),
       additional_comment: new FormControl('', [Validators.required]),
@@ -74,13 +69,17 @@ export class CreateCarouselComponent implements OnInit {
   }
 
   async  ngOnInit() {
-    this.getTotalCourse();
-    this.getLanguageList();
-    this.getExpiryDateType();
+    await this.getTotalCourse();
+    await this.getLanguageList();
+    await this.getExpiryDateType();
     if (this.isReviewer) {
-      this.getCarouselPublisher();
+      await this.getCarouselPublisher();
     }
-    
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      const Id = params.get('id');
+      this.carousel_id = Id ? parseInt(Id) : 0;
+      this.getCarouselDetails();
+    });
   }
 
   getCarouselDetails() {
@@ -93,8 +92,7 @@ export class CreateCarouselComponent implements OnInit {
           this.createOlcarouselForm.controls.expiry_type.setValue(this.carousel_details.expiry_type);
           this.createOlcarouselForm.controls.additional_comment.setValue(this.carousel_details.additional_comment);
           this.createOlcarouselForm.controls.publication_date.setValue(new Date(this.carousel_details.publication_date).toISOString().slice(0, 10));
-          this.carousel_details.imageUrl =  `${dataConstant.ImageUrl}/${this.carousel_details.image}`;
-          this.carousel_details.image = null;
+          // this.createOlcarouselForm.controls.image.setValue(this.carousel_details.image);
           this.launguageFormBind();
         }
       },

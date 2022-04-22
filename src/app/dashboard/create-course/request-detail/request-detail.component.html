@@ -46,29 +46,28 @@
   </div>
 
   <div>
-    <div class="card-header card_header_common">
-      <div class="d-flex align-items-center justify_content">
-        <div class="d-flex">
-          <img src="../../../../assets/images/formm.png" class="ml-2 form_img_req" />
-          <p class="mt-2 ml-2 mb-2 view-re_css">
-            <span>View Request</span>
-            <span class="cc-text_css">({{ routegetdata.request_id }}) -
-            </span>
-            <span>
-              {{ routegetdata.learning_type_name }} {{ routegetdata.delivery_method_name }}
-            </span>
-            <span class="text_orange">Request Status - {{ routegetdata.status | titlecase }}</span>
-          </p>
-        </div>
-
-      </div>
-    </div>
-    <div class="content">
+    <div class="content mt-3 back_img_viewbac">
       <div class="animated fadeIn">
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-             
+              <div class="card-header card_header_common">
+                <div class="d-flex align-items-center justify_content">
+                  <div class="d-flex">
+                    <img src="../../../../assets/images/formm.png" class="ml-2 form_img_req" />
+                    <p class="mt-2 ml-2 mb-2 view-re_css">
+                      <span>View Request</span>
+                      <span class="cc-text_css">({{ routegetdata.request_id }}) -
+                      </span>
+                      <span>
+                        {{ routegetdata.learning_type_name }} {{ routegetdata.delivery_method_name }}
+                      </span>
+                      <span class="text_orange">Request Status - {{ routegetdata.status | titlecase }}</span>
+                    </p>
+                  </div>
+
+                </div>
+              </div>
             </div>
             <div class="card" *ngIf="status == 'draft'  || (getUserrole.id == 2 && status == 'reject')">
               <div class="card-body">
@@ -89,17 +88,17 @@
 
     <div class="content back_img_viewbac">
       <div class="animated fadeIn">
-        <div class="mb-2"
+        <div class="card"
           *ngIf="getUserrole.id != 2 && !routegetdata.issave  && showbuttons =='true' && showrejectbutton != getprofileDetails.data.id">
-         
+          <div class="card-body">
             <div class="Requs_btn_inl">
               <div class="Requs_btn_inl-child">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#publishModal"
+                <button type="button" class="btn btn-primary  ml-2" data-toggle="modal" data-target="#publishModal"
                   *ngIf="getUserrole.id == 4 && status != 'publish' && showrejectbutton != getprofileDetails.data.id">
                   <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
                 </button>
 
-                <button type="button" class="btn btn-primary" data-toggle="modal"
+                <button type="button" class="btn btn-primary ml-2" data-toggle="modal"
                   data-target="#exampleModal"
                   *ngIf="getUserrole.id == 3 && status != 'publish' && showrejectbutton != getprofileDetails.data.id"
                   (click)="getPublisher()">
@@ -125,7 +124,7 @@
                 </button>
               </div>
             </div>
-        
+          </div>
           <!--colensd-->
         </div>
         <div class="row">
@@ -910,9 +909,15 @@
                         <label for="exampleInputEmail1">Uploaded Material</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
-                            Click here to <a href="{{material_sourceUrl}}" target="_blank" class="text_orange">View
-                            </a>
+                            {{
+                            routegetdata.material_source
+                            ? routegetdata.material_source
+                            : "-"
+                            }}
                           </span>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
+                            (click)="copyToClipBoard(routegetdata.material_source)" title="Copy Text">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
