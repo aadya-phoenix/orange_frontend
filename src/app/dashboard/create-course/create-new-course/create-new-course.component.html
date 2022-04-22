@@ -2024,11 +2024,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    <span *ngIf="isMaterialSource" class="text_orange">
-                                                        Click here to <a href="{{isMaterialSource}}"
-                                                            target="_blank">View</a>
-                                                    </span>
                                                 </div>
                                             </div>
                                             <!--colend-->
@@ -2236,10 +2231,6 @@
                                                     <textarea class="form-control form_width-textarea" rows="3"
                                                         placeholder="Enter Uploaded video URL" maxlength="500"
                                                         formControlName="video_link"></textarea>
-                                                    <div class="error_message"
-                                                        *ngIf="videobasedForm.controls['video_link'].invalid && (videobasedForm.controls['video_link'].dirty || videobasedForm.controls['video_link'].touched)">
-                                                        Uploaded video URL is not a valid URL
-                                                    </div>
                                                     <!-- <span class="charcter_limit">{{remainingText}} characters
                                                         remaining</span> -->
                                                 </div>
@@ -2449,7 +2440,7 @@
                                                     </label>
                                                     <ng-select placeholder="Please select"
                                                         (change)="targetAudience($event)"
-                                                        [(ngModel)]="showPlaylistTargetAudience" [items]="yesNo"
+                                                        [(ngModel)]="target_audience_selected" [items]="yesNo"
                                                         bindLabel="name" bindValue="id" formControlName="level"
                                                         class="w_100">
                                                     </ng-select>

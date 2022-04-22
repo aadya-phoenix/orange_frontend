@@ -14,7 +14,6 @@ const urlregex = dataConstant.UrlPattern;
 })
 export class RequestDetailComponent implements OnInit {
   public commonCreateCourceForm!: FormGroup;
-  urlPrifix = dataConstant.ImageUrl;
   public publishForm!: FormGroup;
   public learnerGuidelines: any = [];
   public emailPrefferedEmail: any = [];
@@ -23,7 +22,6 @@ export class RequestDetailComponent implements OnInit {
   getUserrole: any;
   routegetdata: any;
   imgUrl: any;
-  material_sourceUrl: any;
   trainingDurationHours: any;
   status: any;
   transfer_user_id: any;
@@ -312,9 +310,6 @@ export class RequestDetailComponent implements OnInit {
     }
     if (this.routegetdata.resource) {
       this.imgUrl = `https://orange.mindscroll.info/public/public/${this.routegetdata.resource}`;
-    }
-    if (this.routegetdata.material_source) {
-      this.material_sourceUrl = `https://orange.mindscroll.info/public/public/${this.routegetdata.material_source}`;
     }
     console.log(arr1);
     this.objectarray = [];//arr1.split('• ')
