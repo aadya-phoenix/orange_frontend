@@ -1,40 +1,44 @@
 <div id="right-panel" class="right-panel">
     <app-header></app-header>
-    <div class="breadcrumbs cm_breadcums">
-        <div class="col-sm-8">
-            <div class="page-header float-left bac_trasparent">
+    <div class="breadcrumbs cm-breadcrumbs">
+        <div class="col-sm-7">
+            <div class="page-header float-left bg-transparent">
                 <div class="page-title d-flex align-items-center">
-                  <img src="../../../../assets/images/3.jpg" class="home_Css_img" />
-                  <div class="d-flex flex-column ml-3">
-                    <span class="breade_text_span1">Promote on Carousel</span>
-                    <span class="divider"></span>
-                    <span class="breade_text_span">Request the creation of a new entry in the Orange Learning
-                        Carousel</span>
-                  </div>
+                    <img src="../../../../assets/images/creatnew.png" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="font-20">Promote on Carousel</span>
+                        <span class="divider"></span>
+                        <span class="title-detail mt-6">
+                            <b>Instructor-Led (ILT)</b> - Instructor-Led
+                            Training is face to face training delivered in a classroom.
+                        </span>
+                        <span class="title-detail mt-2"><b>
+                                Virtual Instructor-Led Training(vILT)</b> - Virtual instrutor-Led Training(vILT)is
+                            delivered remotely</span>
+                    </div>
                 </div>
-              </div>
-       
+            </div>
         </div>
 
-        <div class="col-sm-4 float-right">
-            <div class="page-header float-right bac_trasparent">
-              <div class="page-title d-flex end_just">
-                <ol class="breadcrumb text-right bac_trasparent">
-                  <li>
-                    <a [routerLink]="['/dashboard']">
-                      <i class="fa fa-home text_white"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a [routerLink]="['/dashboard']"class="text_white">Dashboard</a>
-                  </li>
-                  <li>
-                    <span  class="text_white span_dis" >Create new Course</span>
-                  </li>
-                </ol>
-              </div>
+        <div class="col-sm-5 float-right">
+            <div class="page-header float-right bg-transparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bg-transparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home color-blue"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard']" class="color-orange">Dashboard</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/olcarousel']" class="color-orange">Create new Carousel</a>
+                        </li>
+                    </ol>
+                </div>
             </div>
-          </div>
+        </div>
     </div>
     <div class="content mt-3">
         <div class="animated fadeIn">
@@ -66,131 +70,6 @@
                     <div class="col-md-12">
                         <span class="indicate_css"><span class="text-danger-ligth">*</span> Indicates required
                             field</span>
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="header_div_promt">
-                                        <strong class="font-13">Other Details</strong>
-                                    </div>
-                                </div>
-                                <div class="card-body card_width">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Images <span class="text-danger-ligth">* </span>
-                                                    <a>
-                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top"
-                                                            title="If possible , provide an image with the following ideal dimensions: 550 x 900. Alternatively, provide a raw image that you wish to display in the Carousel and the PD&L team will help you to crop it to a proper size. Note: Please avoid including text in your image."></i>
-                                                    </a>
-                                                </label>
-                                                <input type="file" id="carouselImage" class="form-control form_width"
-                                                    formControlName="image" (change)="handleFileInput($event)" />
-                                                <div
-                                                    *ngIf="(createOlcarouselForm.controls['image'].invalid && (createOlcarouselForm.controls['image'].dirty || createOlcarouselForm.controls['image'].touched)) || isSubmitted">
-                                                    <div class="error_message"
-                                                        *ngIf="createOlcarouselForm.controls['image'].errors?.required">
-                                                        Image cannot be blank
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Requested Publication Date <span class="text-danger-ligth">* </span>
-                                                    <a>
-                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top"
-                                                            title="Upon receipt of a correctly completed request, the entry will appear in the Orange Learning Carousel within 3-5 business days."></i>
-                                                    </a>
-                                                </label>
-                                                <input type="date" class="form-control form_width"
-                                                    formControlName="publication_date" />
-                                                <div
-                                                    *ngIf="(createOlcarouselForm.controls['publication_date'].invalid && (createOlcarouselForm.controls['publication_date'].dirty || createOlcarouselForm.controls['publication_date'].touched)) || isSubmitted">
-                                                    <div class="error_message"
-                                                        *ngIf="createOlcarouselForm.controls['publication_date'].errors?.required">
-                                                        Requested Publication Date cannot be blank
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Expiry Type <span class="text-danger-ligth">* </span>
-                                                    <a>
-                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top"
-                                                            title="Provide the date on which this entry should be removed from the Orange Learning Carousel. If the Expiry Date is unknown, the entry will be available in the Carousel for a maximum of 3 months."></i>
-                                                    </a>
-                                                </label>
-                                                <select class="form-control form_width" formControlName="expiry_type">
-                                                    <option value="">Please Select expiry</option>
-                                                    <option *ngFor="let cctExpiry of cctExpiryperiod"
-                                                        [value]="cctExpiry.id">
-                                                        {{ cctExpiry.name }}
-                                                    </option>
-                                                </select>
-                                                <div
-                                                    *ngIf="(createOlcarouselForm.controls['expiry_type'].invalid && (createOlcarouselForm.controls['expiry_type'].dirty || createOlcarouselForm.controls['expiry_type'].touched)) || isSubmitted">
-                                                    <div class="error_message"
-                                                        *ngIf="createOlcarouselForm.controls['expiry_type'].errors?.required">
-                                                        Expiry Type cannot be blank
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Additional Comments <span class="text-danger-ligth">* </span>
-                                                </label>
-                                                <textarea class="form-control form_width-textarea" maxlength="500" rows="3"
-                                                    formControlName="additional_comment"
-                                                    placeholder="Enter Additional Comments"></textarea>
-                                                <div
-                                                    *ngIf="(createOlcarouselForm.controls['additional_comment'].invalid && (createOlcarouselForm.controls['additional_comment'].dirty || createOlcarouselForm.controls['additional_comment'].touched)) || isSubmitted ">
-                                                    <div class="error_message"
-                                                        *ngIf="createOlcarouselForm.controls['additional_comment'].errors?.required">
-                                                        Additional Comments cannot be blank
-                                                    </div>
-                                                </div>
-    
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12" *ngIf="isReviewer">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Publisher <span class="text-danger-ligth">* </span>
-                                                    <a>
-                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top"
-                                                            title="Provide the date on which this entry should be removed from the Orange Learning Carousel. If the Expiry Date is unknown, the entry will be available in the Carousel for a maximum of 3 months."></i>
-                                                    </a>
-                                                </label>
-                                                <select class="form-control form_width" formControlName="publisher_id">
-                                                    <option value="">Please Select Publisher</option>
-                                                    <option *ngFor="let publisher of carouselPublisher"
-                                                        [value]="publisher.id">
-                                                        {{ publisher.first_name }} {{publisher.last_name}}
-                                                    </option>
-                                                </select>
-                                                <div
-                                                    *ngIf="(createOlcarouselForm.controls['publisher_id'].invalid && (createOlcarouselForm.controls['publisher_id'].dirty || createOlcarouselForm.controls['publisher_id'].touched)) || isSubmitted">
-                                                    <div class="error_message"
-                                                        *ngIf="createOlcarouselForm.controls['publisher_id'].errors?.required">
-                                                        Publisher cannot be blank
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-    
-                                    </div>
-                                </div>
-                                
-                            </div>
                         <div class="card">
                             <div class="card-header">
                                 <div class="header_div_promt">
@@ -304,6 +183,131 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="header_div_promt">
+                                    <strong class="font-13">Other Details</strong>
+                                </div>
+                            </div>
+                            <div class="card-body card_width">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Images <span class="text-danger-ligth">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="If possible , provide an image with the following ideal dimensions: 550 x 900. Alternatively, provide a raw image that you wish to display in the Carousel and the PD&L team will help you to crop it to a proper size. Note: Please avoid including text in your image."></i>
+                                                </a>
+                                            </label>
+                                            <input type="file" id="carouselImage" class="form-control form_width"
+                                                formControlName="image" (change)="handleFileInput($event)" />
+                                            <div
+                                                *ngIf="(createOlcarouselForm.controls['image'].invalid && (createOlcarouselForm.controls['image'].dirty || createOlcarouselForm.controls['image'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createOlcarouselForm.controls['image'].errors?.required">
+                                                    Image cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Requested Publication Date <span class="text-danger-ligth">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Upon receipt of a correctly completed request, the entry will appear in the Orange Learning Carousel within 3-5 business days."></i>
+                                                </a>
+                                            </label>
+                                            <input type="date" class="form-control form_width"
+                                                formControlName="publication_date" />
+                                            <div
+                                                *ngIf="(createOlcarouselForm.controls['publication_date'].invalid && (createOlcarouselForm.controls['publication_date'].dirty || createOlcarouselForm.controls['publication_date'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createOlcarouselForm.controls['publication_date'].errors?.required">
+                                                    Requested Publication Date cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Expiry Type <span class="text-danger-ligth">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Provide the date on which this entry should be removed from the Orange Learning Carousel. If the Expiry Date is unknown, the entry will be available in the Carousel for a maximum of 3 months."></i>
+                                                </a>
+                                            </label>
+                                            <select class="form-control form_width" formControlName="expiry_type">
+                                                <option value="">Please Select expiry</option>
+                                                <option *ngFor="let cctExpiry of cctExpiryperiod"
+                                                    [value]="cctExpiry.id">
+                                                    {{ cctExpiry.name }}
+                                                </option>
+                                            </select>
+                                            <div
+                                                *ngIf="(createOlcarouselForm.controls['expiry_type'].invalid && (createOlcarouselForm.controls['expiry_type'].dirty || createOlcarouselForm.controls['expiry_type'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createOlcarouselForm.controls['expiry_type'].errors?.required">
+                                                    Expiry Type cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Additional Comments <span class="text-danger-ligth">* </span>
+                                            </label>
+                                            <textarea class="form-control form_width-textarea" maxlength="500" rows="3"
+                                                formControlName="additional_comment"
+                                                placeholder="Enter Additional Comments"></textarea>
+                                            <div
+                                                *ngIf="(createOlcarouselForm.controls['additional_comment'].invalid && (createOlcarouselForm.controls['additional_comment'].dirty || createOlcarouselForm.controls['additional_comment'].touched)) || isSubmitted ">
+                                                <div class="error_message"
+                                                    *ngIf="createOlcarouselForm.controls['additional_comment'].errors?.required">
+                                                    Additional Comments cannot be blank
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12" *ngIf="isReviewer">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Publisher <span class="text-danger-ligth">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Provide the date on which this entry should be removed from the Orange Learning Carousel. If the Expiry Date is unknown, the entry will be available in the Carousel for a maximum of 3 months."></i>
+                                                </a>
+                                            </label>
+                                            <select class="form-control form_width" formControlName="publisher_id">
+                                                <option value="">Please Select Publisher</option>
+                                                <option *ngFor="let publisher of carouselPublisher"
+                                                    [value]="publisher.id">
+                                                    {{ publisher.first_name }} {{publisher.last_name}}
+                                                </option>
+                                            </select>
+                                            <div
+                                                *ngIf="(createOlcarouselForm.controls['publisher_id'].invalid && (createOlcarouselForm.controls['publisher_id'].dirty || createOlcarouselForm.controls['publisher_id'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createOlcarouselForm.controls['publisher_id'].errors?.required">
+                                                    Publisher cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                             <div class="card-footer">
                                 <button class="btn btn-primary mr-1" type="submit"  *ngIf="isSubmit()"
                                     (click)="saveCarousel('pending')">Submit</button>
@@ -314,8 +318,6 @@
                                     as draft</button>
                             </div>
                         </div>
-
-                       
                     </div>
                 </div>
             </div>
@@ -402,12 +404,12 @@
                 </div>
             </div>
             <!--ROW END-->
-            <!-- <div class="view-comple-req_div">
+            <div class="view-comple-req_div">
                 <button class="btn btn-primary view-comple-req justify-content-center p-1"
                     [routerLink]="['/dashboard/cources/view-complete-report']">
                     <i class="fa fa-database mr-1" aria-hidden="true"></i>View Complete Request
                 </button>
-            </div> -->
+            </div>
             <!--ROW END-->
         </div>
     </div>
