@@ -46,31 +46,32 @@
   </div>
 
   <div>
-    <div class="content mt-3 back_img_viewbac">
+    <div class="card_header_common">
+      <div class="d-flex align-items-center justify_content">
+        <div class="d-flex">
+          <img src="../../../../assets/images/formm.png" class="ml-2 form_img_req" />
+          <p class="mt-2 ml-2 mb-2 view-re_css">
+            <span>View Request</span>
+            <span class="cc-text_css">({{ routegetdata.request_id }}) -
+            </span>
+            <span>
+              {{ routegetdata.learning_type_name }} {{ routegetdata.delivery_method_name }}
+            </span>
+            <span class="text_orange">Request Status - {{ routegetdata.status | titlecase }}</span>
+          </p>
+        </div>
+
+      </div>
+    </div>
+    <div class="content">
       <div class="animated fadeIn">
         <div class="row">
           <div class="col-md-12">
-            <div class="card">
-              <div class="card-header card_header_common">
-                <div class="d-flex align-items-center justify_content">
-                  <div class="d-flex">
-                    <img src="../../../../assets/images/formm.png" class="ml-2 form_img_req" />
-                    <p class="mt-2 ml-2 mb-2 view-re_css">
-                      <span>View Request</span>
-                      <span class="cc-text_css">({{ routegetdata.request_id }}) -
-                      </span>
-                      <span>
-                        {{ routegetdata.learning_type_name }} {{ routegetdata.delivery_method_name }}
-                      </span>
-                      <span class="text_orange">Request Status - {{ routegetdata.status | titlecase }}</span>
-                    </p>
-                  </div>
-
-                </div>
-              </div>
+            <div class="">
+             
             </div>
-            <div class="card" *ngIf="status == 'draft'  || (getUserrole.id == 2 && status == 'reject')">
-              <div class="card-body">
+            <div class="mb-2" *ngIf="status == 'draft'  || (getUserrole.id == 2 && status == 'reject')">
+              <div class="">
                 <div class="Requs_btn_inl">
                   <div class="Requs_btn_inl-child">
                     <button class="btn btn-primary" (click)="updateCource()"> <i class="fa fa-pencil-square-o"
@@ -86,7 +87,7 @@
       <!-- .content -->
     </div>
 
-    <div class="content back_img_viewbac">
+    <div class="content">
       <div class="animated fadeIn">
         <div class="card"
           *ngIf="getUserrole.id != 2 && !routegetdata.issave  && showbuttons =='true' && showrejectbutton != getprofileDetails.data.id">
