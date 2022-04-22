@@ -54,10 +54,10 @@ export class CarouselListComponent implements OnInit {
     private router: Router
   ) {
     this.getUserrole = this.authService.getRolefromlocal();
+    this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.isReviewer = this.getUserrole.id === this.RoleID.CarouselReviewer;
     this.isPublisher = this.getUserrole.id === this.RoleID.CarouselPublisher;
     this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
-    this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
   }
 
   ngOnInit(): void {
