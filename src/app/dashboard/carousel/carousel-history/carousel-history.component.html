@@ -1,19 +1,20 @@
 <div class="card mb-0" *ngIf="modalType=='viewhistory'">
     <div class="card-header color-orange">
         <div class="d-flex justify-content-between">
-            {{title}}
+            <span class="row">
+            {{title}} <h5 class="card-title ml-1">
+                <b class="color-orange"> ({{objectDetail.request_id}})</b>
+            </h5>
+            </span>
             <a (click)="closeModal()"><i class="fa fa-times color-black" aria-hidden="true"></i></a>
         </div>
     </div>
     <div class="card-body">
-        <h5 class="card-title" style="font-size: 0.9rem;">
-            <b class="color-orange">({{objectDetail.request_id}})</b>
-        </h5>
         <table class="table table-bordered">
             <thead>
                 <tr class="font-14 text-center">
                     <th scope="col">Sr.No</th>
-                    <th scope="col">Request Name</th>
+                    <th scope="col">Requester Name</th>
                     <th scope="col">Sent to</th>
                     <th scope="col">Last Modified</th>
                     <th scope="col">Status</th>

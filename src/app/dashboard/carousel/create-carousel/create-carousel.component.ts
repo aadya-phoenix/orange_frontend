@@ -20,6 +20,7 @@ export class CreateCarouselComponent implements OnInit {
   today = new Date();
   minDate = {};
   RoleID = dataConstant.RoleID;
+  dateFormate = dataConstant.dateFormate;
   CarouselStatus = dataConstant.CarouselStatus;
   carousel_id = 0;
   carousel_details: any = {};
@@ -53,11 +54,7 @@ export class CreateCarouselComponent implements OnInit {
     private modalService: NgbModal,
     private authService: AuthenticationService,
     private carouselService: CarouselService) {
-    this.minDate = {
-      year: this.today.getFullYear(),
-      month: this.today.getMonth() + 1,
-      day: this.today.getDay()
-    };
+    this.minDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.getUserrole = this.authService.getRolefromlocal();
     this.isReviewer = this.getUserrole.id === this.RoleID.CarouselReviewer;
@@ -66,7 +63,6 @@ export class CreateCarouselComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.carousel_id = Id ? parseInt(Id) : 0;
-      this.getCarouselDetails();
     });
     this.createOlcarouselForm = this.formBuilder.group({
       languages: new FormArray([]),
@@ -84,12 +80,6 @@ export class CreateCarouselComponent implements OnInit {
 
   async ngOnInit() {
     this.getTotalCourse();
-    this.getLanguageList();
-    this.getExpiryDateType();
-    if (this.isReviewer) {
-      this.getCarouselPublisher();
-    }
-
   }
 
   getCarouselDetails() {
@@ -123,9 +113,9 @@ export class CreateCarouselComponent implements OnInit {
     return this.createOlcarouselForm.get("metadata") as FormArray;
   }
 
-  newMetaData(language: { id: any; name: any; slug: any; }): FormGroup {
+  newMetaData(language: { id: any; name: any; slug: any; name_original: any }): FormGroup {
     return this.formBuilder.group({
-      language: language.id, languageName: language.name, language_slug: language.slug,
+      language: language.id, languageName: language.name_original, language_slug: language.slug,
       title: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       link: new FormControl('', [Validators.required, Validators.pattern(new RegExp(
@@ -141,6 +131,7 @@ export class CreateCarouselComponent implements OnInit {
       (res: any) => {
         this.commonService.hideLoading();
         this.carousel_count = res.data.carousel_count;
+        this.getLanguageList();
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -156,9 +147,7 @@ export class CreateCarouselComponent implements OnInit {
         this.commonService.hideLoading();
         this.languageList = res.data.filter((x: { carousel_show: number; }) => x.carousel_show === 1);
         this.languageText = this.languageList.map((x: { name: string }) => x.name).join('/');
-        if (!this.carousel_id) {
-          this.launguageFormBind();
-        }
+        this.getExpiryDateType();
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -168,37 +157,35 @@ export class CreateCarouselComponent implements OnInit {
   }
 
   launguageFormBind() {
-    setTimeout(() => {
-      if (!this.carousel_id) {
-        this.languageList.forEach((x: { name: string, id: number, slug: string, carousel_show: number }) => {
-          if (x.carousel_show === 1) {
-            this.lauguageFormArray.push(new FormControl(x.slug === 'english' ? true : false));
-            if (x.slug === 'english') {
-              this.carouselFormArray.push(this.newMetaData(x));
-            }
+    if (!this.carousel_id) {
+      this.languageList.forEach((x: { name: string, id: number, slug: string, carousel_show: number }) => {
+        if (x.carousel_show === 1) {
+          this.lauguageFormArray.push(new FormControl(false));
+          // if (x.slug === 'english') {
+          //   this.carouselFormArray.push(this.newMetaData(x));
+          // }
+        }
+      });
+    }
+    else {
+      this.languageList.forEach((x: { name: string, id: number, slug: string, carousel_show: number, name_original: any }) => {
+        if (x.carousel_show === 1) {
+          const existData = this.carousel_details.metadata.find((y: { language_slug: any; }) => y.language_slug == x.slug);
+          if (existData) {
+            this.lauguageFormArray.push(new FormControl(true));
+            const formControl = this.newMetaData(x)
+            formControl.controls.title.setValue(existData.title);
+            formControl.controls.description.setValue(existData.description);
+            formControl.controls.link.setValue(existData.link);
+            formControl.controls.display_manager.setValue(existData.display_manager);
+            this.carouselFormArray.push(formControl);
           }
-        });
-      }
-      else {
-        this.languageList.forEach((x: { name: string, id: number, slug: string, carousel_show: number }) => {
-          if (x.carousel_show === 1) {
-            const existData = this.carousel_details.metadata.find((y: { language_slug: any; }) => y.language_slug == x.slug);
-            if (existData) {
-              this.lauguageFormArray.push(new FormControl(true));
-              const formControl = this.newMetaData(x)
-              formControl.controls.title.setValue(existData.title);
-              formControl.controls.description.setValue(existData.description);
-              formControl.controls.link.setValue(existData.link);
-              formControl.controls.display_manager.setValue(existData.display_manager);
-              this.carouselFormArray.push(formControl);
-            }
-            else {
-              this.lauguageFormArray.push(new FormControl(false));
-            }
+          else {
+            this.lauguageFormArray.push(new FormControl(false));
           }
-        });
-      }
-    }, 2000);
+        }
+      });
+    }
   }
 
   getExpiryDateType() {
@@ -207,6 +194,12 @@ export class CreateCarouselComponent implements OnInit {
       (res: any) => {
         this.commonService.hideLoading();
         this.cctExpiryperiod = res.data;
+        if (!this.carousel_id) {
+          this.launguageFormBind();
+        }
+        else {
+          this.getCarouselDetails();
+        }
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -215,19 +208,19 @@ export class CreateCarouselComponent implements OnInit {
     );
   }
 
-  getCarouselPublisher() {
-    this.commonService.showLoading();
-    this.carouselService.getCarouselPublisher().subscribe(
-      (res: any) => {
-        this.commonService.hideLoading();
-        this.carouselPublisher = res.data;
-      },
-      (err: any) => {
-        this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
-      }
-    );
-  }
+  // getCarouselPublisher() {
+  //   this.commonService.showLoading();
+  //   this.carouselService.getCarouselPublisher().subscribe(
+  //     (res: any) => {
+  //       this.commonService.hideLoading();
+  //       this.carouselPublisher = res.data;
+  //     },
+  //     (err: any) => {
+  //       this.commonService.hideLoading();
+  //       this.commonService.toastErrorMsg('Error', err.message);
+  //     }
+  //   );
+  // }
 
   languageChange() {
     this.lauguageFormArray.controls.forEach((x, index) => {
@@ -268,7 +261,7 @@ export class CreateCarouselComponent implements OnInit {
   }
 
   isReject() {
-    if (this.carousel_details?.status === this.CarouselStatus.publish) {
+    if (this.carousel_details?.status === this.CarouselStatus.publish || this.carousel_details?.status === this.CarouselStatus.reject) {
       return false;
     }
     if (this.isRequester || !this.carousel_details.id) {
@@ -300,7 +293,7 @@ export class CreateCarouselComponent implements OnInit {
     if (this.carousel_details?.status === this.CarouselStatus.publish) {
       return false;
     }
-    if (this.getprofileDetails.data.id === this.carousel_details?.user_id &&this.carousel_details?.status === this.CarouselStatus.pending) {
+    if (this.getprofileDetails.data.id === this.carousel_details?.user_id && this.carousel_details?.status === this.CarouselStatus.pending) {
       return false;
     }
     if (this.isPublisher) {
@@ -356,7 +349,7 @@ export class CreateCarouselComponent implements OnInit {
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Carousel', 'Successfully Saved.');
-          this.router.navigate(['/dashboard/olcarousel']);
+          this.router.navigateByUrl(`/dashboard/olcarousel/view/${res.data.id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();
@@ -371,7 +364,7 @@ export class CreateCarouselComponent implements OnInit {
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Carousel', 'Successfully Saved.');
-          this.router.navigate(['/dashboard/olcarousel']);
+          this.router.navigateByUrl(`/dashboard/olcarousel/view/${this.carousel_id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();

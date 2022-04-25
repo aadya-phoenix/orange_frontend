@@ -64,14 +64,11 @@
             <div class="animated fadeIn">
                 <div class="row">
                     <div class="col-md-12">
-                        <span class="indicate_css"><span class="text-danger-ligth">*</span> Indicates required
-                            field</span>
                         <div class="card">
                             <div class="card-header">
-                                <div class="header_div_promt">
-                                    <strong class="font-16">I want my entry to appear in the following Carousel(s).
-                                        ({{languageText}})</strong>
-                                    <div class="chkbox_css_header">
+                                <div class="header_div_promt row">
+                                    <strong class="font-16 col-md-12">I want my entry to appear in the following Carousel(s).</strong>
+                                    <div class="chkbox_css_header ml-2 mt-2">
                                         <label formArrayName="languages"
                                             *ngFor="let language of lauguageFormArray.controls; let i = index"
                                             (change)="languageChange()">
@@ -225,7 +222,7 @@
                                                 </a>
                                             </label>
                                             <input type="date" class="form-control form_width"
-                                                formControlName="publication_date" min="{{today | date:'dd/MM/yyyy'}}" />
+                                                formControlName="publication_date"  min="{{minDate}}" />
                                             <div
                                                 *ngIf="(createOlcarouselForm.controls['publication_date'].invalid && (createOlcarouselForm.controls['publication_date'].dirty || createOlcarouselForm.controls['publication_date'].touched)) || isSubmitted">
                                                 <div class="error_message"
@@ -279,7 +276,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="col-sm-12" *ngIf="isReviewer">
+                                    <!-- <div class="col-sm-12" *ngIf="isReviewer">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Publisher <span class="text-danger-ligth">* </span>
@@ -304,7 +301,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                 </div>
                             </div>
