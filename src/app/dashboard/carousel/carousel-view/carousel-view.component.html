@@ -79,8 +79,8 @@
             <div class="row mb-3">
               
            <div class="col-sm-6">
-        <ngb-accordion #acc="ngbAccordion">
-            <ngb-panel *ngFor="let meta of requestdata.metadata; let i = index">
+        <ngb-accordion #acc="ngbAccordion" [activeIds]="activeIds">
+            <ngb-panel *ngFor="let meta of requestdata.metadata; let i = index" id="panel-{{i}}">
                 <ng-template ngbPanelTitle>
                     <span>Carousal {{i+1}}</span>
                 </ng-template>
@@ -164,7 +164,7 @@
                             <label for="exampleInputEmail1">Request Publish By</label>
                             <div class="d-flex align-items-center">
                                 <span class="form_data">
-                                    {{ requestdata.publication_date | date: "shortDate" }}
+                                    {{ requestdata.publication_date | date: dateFormate }}
                                 </span>
                             </div>
                         </div>
@@ -172,10 +172,10 @@
 
                     <div class="col-sm-12 col-md-12">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Expiry Date</label>
+                            <label for="exampleInputEmail1">Expiry Type</label>
                             <div class="d-flex align-items-center">
                                 <span class="form_data">
-                                    {{ requestdata.expiry_date | date: "shortDate" }}
+                                    {{requestdata.expiry_type_name}} ({{ requestdata.expiry_date | date: dateFormate }})
                                 </span>
                             </div>
                         </div>
@@ -194,10 +194,10 @@
 
                     <div class="col-sm-12 col-md-12">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Atteched Image</label>
+                            <label for="exampleInputEmail1">Attached Image</label>
                             <div class="d-flex align-items-center">
-                                <span class="form_data text_orange">
-                                    Click here to <a href="{{requestdata.imgUrl}}" target="_blank"
+                                <span class="form_data">
+                                    Click here to <a class="text_orange" href="{{requestdata.imgUrl}}" target="_blank"
                                       >View</a>.
                                 </span>
                             </div>

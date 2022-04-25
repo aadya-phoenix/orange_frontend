@@ -14,6 +14,8 @@ export const dataConstant = {
     404: '404',//Not Found
     409: '409',//Conflict
   },
+  dateFormate : 'dd-MM-yyyy',
+  dateTimeFormate: 'dd-MM-yyyy HH:mm a',
   EmailPattren: /^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/,
   UrlPattern: '^(https?:\\/\\/)?' + // protocol
     '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name

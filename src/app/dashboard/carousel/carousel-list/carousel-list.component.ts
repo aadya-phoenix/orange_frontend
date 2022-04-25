@@ -17,6 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class CarouselListComponent implements OnInit {
   carouselStatus = dataConstant.CarouselStatus;
+  dateTimeFormate = dataConstant.dateTimeFormate;
   RoleID = dataConstant.RoleID;
   carouselList: any = [];
   carouselListToShow: any = [];
