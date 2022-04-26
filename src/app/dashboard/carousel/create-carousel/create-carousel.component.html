@@ -358,21 +358,49 @@
                     </div>
                 </div>
                 <!--coled-->
-                <div class="col-sm-2 dash_wid">
+                <div class="col-sm-2 dash_wid" *ngIf="isReviewer || isPublisher">
                     <div class="alig_dashicon">
                         <div class="child_align_icon">
                             <div class="fa-icons-des bg-transparent">
-                                <img src="../../../../assets/images/icon/checkbl.png" />
+                                <img src="../../../../assets/images/icon/pendingbl.png" />
                             </div>
-                            <p>In Active Learning</p>
+                            <p>Pending</p>
                             <span class="number_css">
                                 {{carousel_count.pending}}
                             </span>
                         </div>
                     </div>
                 </div>
-                <!--coled-->
-                <div class="col-sm-2 dash_wid">
+                 <!--coled-->
+                 <div class="col-sm-2 dash_wid" *ngIf="isReviewer">
+                    <div class="alig_dashicon">
+                        <div class="child_align_icon">
+                            <div class="fa-icons-des bg-transparent">
+                                <img src="../../../../assets/images/icon/transferbl.png" />
+                            </div>
+                            <p>Forwarded</p>
+                            <span class="number_css">
+                                {{carousel_count.transferred?carousel_count.transferred:0}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                 <!--coled-->
+                 <div class="col-sm-2 dash_wid">
+                    <div class="alig_dashicon">
+                        <div class="child_align_icon">
+                            <div class="fa-icons-des bg-transparent">
+                                <img src="../../../../assets/images/icon/checkbl.png" />
+                            </div>
+                            <p>Active in Orange Learning</p>
+                            <span class="number_css">
+                                {{carousel_count.closed?carousel_count.closed:0}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                 <!--coled-->
+                 <div class="col-sm-2 dash_wid">
                     <div class="alig_dashicon">
                         <div class="child_align_icon">
                             <div class="fa-icons-des bg-transparent">
@@ -380,13 +408,13 @@
                             </div>
                             <p>Rejected</p>
                             <span class="number_css">
-                                {{carousel_count.rejected}}
+                                {{carousel_count.rejected?carousel_count.rejected:0}}
                             </span>
                         </div>
                     </div>
                 </div>
-                <!--coled-->
-                <div class="col-sm-2 dash_wid">
+                 <!--coled-->
+                 <div class="col-sm-2 dash_wid">
                     <div class="alig_dashicon">
                         <div class="child_align_icon">
                             <div class="fa-icons-des bg-transparent">
@@ -394,19 +422,19 @@
                             </div>
                             <p>Expired</p>
                             <span class="number_css">
-                                {{carousel_count.closed}}
+                                {{carousel_count.expired?carousel_count.expired:0}}
                             </span>
                         </div>
                     </div>
                 </div>
             </div>
             <!--ROW END-->
-            <!-- <div class="view-comple-req_div">
+            <div class="view-comple-req_div">
                 <button class="btn btn-primary view-comple-req justify-content-center p-1"
-                    [routerLink]="['/dashboard/cources/view-complete-report']">
-                    <i class="fa fa-database mr-1" aria-hidden="true"></i>View Complete Request
+                    [routerLink]="['/dashboard/olcarousel/view-complete-report']">
+                    <i class="fa fa-database mr-1" aria-hidden="true"></i>View Complete Report
                 </button>
-            </div> -->
+            </div>
             <!--ROW END-->
         </div>
     </div>

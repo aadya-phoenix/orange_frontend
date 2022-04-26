@@ -77,7 +77,7 @@ export class CarouselViewComponent implements OnInit {
   }
 
   isUpdate() {
-    if (this.requestdata?.status === this.CarouselStatus.publish){
+    if (this.requestdata?.status === this.CarouselStatus.publish || (this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status === this.CarouselStatus.pending)){
       return false;  
     }
     if (this.requestdata?.status === this.CarouselStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
