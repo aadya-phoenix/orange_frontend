@@ -25,6 +25,8 @@ export class RequestDetailComponent implements OnInit {
   trainingDurationHours: any;
   status: any;
   transfer_user_id: any;
+  urlPrifix = dataConstant.ImageUrl;
+  material_sourceUrl: any;
   publisherList: any = [];
   newPublisherList: any = [];
   roleuserlist: any = [];
@@ -310,6 +312,9 @@ export class RequestDetailComponent implements OnInit {
     }
     if (this.routegetdata.resource) {
       this.imgUrl = `https://orange.mindscroll.info/public/public/${this.routegetdata.resource}`;
+    }
+    if (this.routegetdata.material_source) {
+      this.material_sourceUrl = `https://orange.mindscroll.info/public/public/${this.routegetdata.material_source}`;
     }
     console.log(arr1);
     this.objectarray = [];//arr1.split('• ')

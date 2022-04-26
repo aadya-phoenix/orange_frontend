@@ -77,7 +77,7 @@ export class CarouselViewComponent implements OnInit {
   }
 
   isUpdate() {
-    if (this.requestdata?.status === this.CarouselStatus.publish || (this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status === this.CarouselStatus.pending)){
+    if (this.requestdata?.status === this.CarouselStatus.publish || this.requestdata?.status === this.CarouselStatus.expired || (this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status === this.CarouselStatus.pending)){
       return false;  
     }
     if (this.requestdata?.status === this.CarouselStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
@@ -95,7 +95,7 @@ export class CarouselViewComponent implements OnInit {
     return true;
   }
   isPublish(){
-    if (this.requestdata?.status === this.CarouselStatus.publish){
+    if (this.requestdata?.status === this.CarouselStatus.publish|| this.requestdata?.status === this.CarouselStatus.expired || this.requestdata?.status === this.CarouselStatus.draft){
       return false;  
     }
     if (this.requestdata?.status === this.CarouselStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
@@ -110,7 +110,7 @@ export class CarouselViewComponent implements OnInit {
     return true;
   }
   isForward(){
-    if (this.requestdata?.status === this.CarouselStatus.publish || this.requestdata?.status === this.CarouselStatus.reject){
+    if (this.requestdata?.status === this.CarouselStatus.publish|| this.requestdata?.status === this.CarouselStatus.expired || this.requestdata?.status === this.CarouselStatus.reject|| this.requestdata?.status === this.CarouselStatus.draft){
       return false;  
     }
     if (this.requestdata?.status === this.CarouselStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
@@ -119,14 +119,14 @@ export class CarouselViewComponent implements OnInit {
     if(!this.isReviewer){
       return false;
     }
-    if(this.requestdata?.user_id != this.getprofileDetails.data.id && this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isReviewer){
+    if(this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isReviewer){
       return false;
     }
 
     return true;
   }
   isReject(){
-    if (this.requestdata?.status === this.CarouselStatus.publish || this.requestdata?.status === this.CarouselStatus.reject){
+    if (this.requestdata?.status === this.CarouselStatus.publish|| this.requestdata?.status === this.CarouselStatus.expired || this.requestdata?.status === this.CarouselStatus.reject){
       return false;  
     }
     if (this.requestdata?.status === this.CarouselStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
@@ -138,7 +138,7 @@ export class CarouselViewComponent implements OnInit {
     if(this.requestdata?.status === this.CarouselStatus.draft){
       return false;
     }
-    if(this.requestdata?.user_id != this.getprofileDetails.data.id && this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isReviewer){
+    if(this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isReviewer){
       return false;
     }
     return true;
@@ -146,7 +146,7 @@ export class CarouselViewComponent implements OnInit {
 
   forwardRequest(){
       Swal.fire({
-        title: 'Are you sure want to publish?',
+        title: 'Are you sure want to transfer?',
         text: 'Request will be transfer to the publisher!',
         icon: 'question',
         showCancelButton: true,

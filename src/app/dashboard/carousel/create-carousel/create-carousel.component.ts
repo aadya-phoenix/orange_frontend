@@ -47,7 +47,6 @@ export class CreateCarouselComponent implements OnInit {
     transferred: 0,
     expired: 0,
     publish: 0
-
   }
 
   constructor(private formBuilder: FormBuilder,
@@ -248,10 +247,7 @@ export class CreateCarouselComponent implements OnInit {
   }
 
   isDraft() {
-    if (this.carousel_details?.status === this.CarouselStatus.publish) {
-      return false;
-    }
-    if (this.carousel_details?.status === this.CarouselStatus.pending) {
+    if (this.carousel_details?.status === this.CarouselStatus.publish || this.carousel_details?.status === this.CarouselStatus.expired || this.carousel_details?.status === this.CarouselStatus.pending) {
       return false;
     }
     if (this.getprofileDetails.data.id != this.carousel_details?.user_id && this.carousel_details?.transfer_user_id && !this.carousel_details?.publisher_status && this.isReviewer) {
@@ -261,7 +257,7 @@ export class CreateCarouselComponent implements OnInit {
   }
 
   isReject() {
-    if (this.carousel_details?.status === this.CarouselStatus.publish || this.carousel_details?.status === this.CarouselStatus.reject) {
+    if (this.carousel_details?.status === this.CarouselStatus.publish || this.carousel_details?.status === this.CarouselStatus.expired  || this.carousel_details?.status === this.CarouselStatus.reject) {
       return false;
     }
     if (this.isRequester || !this.carousel_details.id) {
@@ -270,14 +266,14 @@ export class CreateCarouselComponent implements OnInit {
     if (this.carousel_details?.status === this.CarouselStatus.draft) {
       return false;
     }
-    if (this.getprofileDetails.data.id != this.carousel_details?.user_id && this.carousel_details?.transfer_user_id && !this.carousel_details?.publisher_status && this.isReviewer) {
+    if (this.carousel_details?.transfer_user_id && !this.carousel_details?.publisher_status && this.isReviewer) {
       return false;
     }
     return true;
   }
 
   isPublish() {
-    if (this.carousel_details?.status === this.CarouselStatus.publish) {
+    if (this.carousel_details?.status === this.CarouselStatus.publish || this.carousel_details?.status === this.CarouselStatus.expired ) {
       return false;
     }
     if (!this.isPublisher) {
@@ -290,7 +286,7 @@ export class CreateCarouselComponent implements OnInit {
   }
 
   isSubmit() {
-    if (this.carousel_details?.status === this.CarouselStatus.publish) {
+    if (this.carousel_details?.status === this.CarouselStatus.publish || this.carousel_details?.status === this.CarouselStatus.expired ) {
       return false;
     }
     if (this.getprofileDetails.data.id === this.carousel_details?.user_id && this.carousel_details?.status === this.CarouselStatus.pending) {

@@ -434,7 +434,7 @@
                   <div class="form-group filter_course">
                     <label class="label_course">Filter by Learning Type</label>
                     <select class="form-control  form_width" (change)="getLearningTypeFilterRecords($event.target.value)">
-                      <option hidden disabled selected='selected' value=''>-Select learning type-</option>
+                      <option selected='selected' value=''>View All</option>
                       <option *ngFor="let learning of learningTypes" [value]="learning.id">
                         {{ learning.name }}
                       </option>
@@ -443,7 +443,7 @@
                   <div class="form-group filter_course">
                     <label class="label_course">Filter by Training Status</label>
                     <select class="form-control  form_width" (change)="getNewFilterRecords($event)">
-                      <option value="">-Please select-</option>
+                      <option selected='selected' value="">View All</option>
                       <option value="pending">Pending</option>
                       <option value="submit">Submitted</option>
                       <option value="draft">Draft</option>

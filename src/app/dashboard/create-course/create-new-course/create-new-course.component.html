@@ -2233,6 +2233,10 @@
                                                         formControlName="video_link"></textarea>
                                                     <!-- <span class="charcter_limit">{{remainingText}} characters
                                                         remaining</span> -->
+                                                        <div class="error_message"
+                                                        *ngIf="videobasedForm.controls['video_link'].invalid && (videobasedForm.controls['video_link'].dirty || videobasedForm.controls['video_link'].touched)">
+                                                        Uploaded video URL is not a valid URL
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

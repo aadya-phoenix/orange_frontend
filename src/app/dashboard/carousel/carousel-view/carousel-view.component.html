@@ -67,7 +67,7 @@
                             (click)="statusChangeRequest(CarouselStatus.publish)">
                             <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
                         </button>
-                        <button type="button" class="btn btn-primary mr-2" *ngIf="isUpdate()"
+                        <button type="button" class="btn mr-2" *ngIf="isUpdate()"  [ngClass]="(isPublish() || isForward()) ?  'btn-secondary'  : 'btn-primary'"
                             (click)="updateRequest()">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">Update</span>
                         </button>

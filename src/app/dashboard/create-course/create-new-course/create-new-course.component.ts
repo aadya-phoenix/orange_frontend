@@ -874,7 +874,7 @@ export class CreateNewCourseComponent implements OnInit {
 
     //video based
     this.videobasedForm = this.fb.group({
-      video_link: new FormControl(''),
+      video_link: new FormControl('',[Validators.pattern(dataConstant.UrlPattern)]),
       additional_comment: new FormControl(''),
       // email_preffered_instructor: new FormControl('', [Validators.required,
       //   Validators.pattern(emailregexp)]),
@@ -1034,7 +1034,9 @@ export class CreateNewCourseComponent implements OnInit {
         //this.pushtoTitlearray(this.commonCreateCourceForm);
         this.pushtoTitlearray(this.commonCreateCourceForm);
         this.commonCreateCourceForm.patchValue(this.routergetdata, { emitEvent: false });
-        this.commonCreateCourceForm.controls['learning_type'].disable({ onlySelf: true });
+        if(this.routergetdata.status != 'draft'){
+          this.commonCreateCourceForm.controls['learning_type'].disable({ onlySelf: true });
+        }
 
 
 

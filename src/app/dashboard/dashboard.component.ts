@@ -26,6 +26,14 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  navigatetoPendingCarousel(status: any) {
+    let statusobj = { status: status };
+    console.log("status obj", status);
+    this.router.navigateByUrl('/dashboard/cources', {
+      state: statusobj,
+    });
+  }
+
   getpendingCourses() {
     this.courseService.getCources().subscribe(
       (res: any) => {
