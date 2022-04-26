@@ -70,10 +70,7 @@ export class CreateCarouselComponent implements OnInit {
       image: new FormControl('', this.carousel_id ? [] : [Validators.required]),
       publication_date: new FormControl('', [Validators.required]),
       expiry_type: new FormControl('', [Validators.required]),
-      additional_comment: new FormControl('', [Validators.required]),
-      ...(this.isReviewer && {
-        publisher_id: new FormControl('', [Validators.required]),
-      }),
+      additional_comment: new FormControl('', [Validators.required])
     });
 
   }

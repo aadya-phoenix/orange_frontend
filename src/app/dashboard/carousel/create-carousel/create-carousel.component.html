@@ -307,7 +307,7 @@
                             </div>
                             <div class="card-footer">
                                 <button class="btn btn-primary mr-1" type="submit"  *ngIf="isSubmit()"
-                                    (click)="saveCarousel('pending')">Submit</button>
+                                    (click)="saveCarousel('pending')">{{ isReviewer ? 'Transfer To Publisher': 'Submit' }}</button>
                                 <button class="btn btn-primary mr-1" type="submit" *ngIf="isPublish()"
                                     (click)="saveCarousel('publish')">Publish</button>
                                 <button class="btn btn-primary mr-1" type="submit" *ngIf="isReject()" (click)="statusChangeRequest(CarouselStatus.reject)">Reject</button>

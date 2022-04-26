@@ -36,6 +36,13 @@ export class CarouselService {
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  getCarouselReport(data: any) {
+    const url = `/api/${this.apiVersion}/carousel/filter`;
+    return this.http
+      .post(url, data)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
   getCarouselPublisher() {
     const url = `/api/${this.apiVersion}/carousel/publisher-list`;
     return this.http
@@ -44,7 +51,7 @@ export class CarouselService {
   }
 
 
-  getCarouselDetails(id:number) {
+  getCarouselDetails(id: number) {
     const url = `/api/${this.apiVersion}/carousel/${id}/detail`;
     //const urllive = `${this.basePath}api/${this.apiVersion}/carousel/${id}/detail`;
     return this.http
@@ -52,28 +59,28 @@ export class CarouselService {
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  carouselHistory(data:any){
-    const url =`api/${this.apiVersion}/carousel/${data}/history`;
-    return this.http.get(url,this.http.headers).pipe(catchError(this.commmonService.Errorhandling))
+  carouselHistory(data: any) {
+    const url = `api/${this.apiVersion}/carousel/${data}/history`;
+    return this.http.get(url, this.http.headers).pipe(catchError(this.commmonService.Errorhandling))
   }
 
-  carouselDelete(data:any){
-    const url =`api/${this.apiVersion}/carousel/delete`;
+  carouselDelete(data: any) {
+    const url = `api/${this.apiVersion}/carousel/delete`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  carouselCopy(data:any){
-    const url =`api/${this.apiVersion}/carousel/copy`;
+  carouselCopy(data: any) {
+    const url = `api/${this.apiVersion}/carousel/copy`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  carouselStatus(data:any){
-    const url =`api/${this.apiVersion}/carousel/status`;
+  carouselStatus(data: any) {
+    const url = `api/${this.apiVersion}/carousel/status`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  carouselTransfer(data:any){
-    const url =`api/${this.apiVersion}/carousel/transfer`;
+  carouselTransfer(data: any) {
+    const url = `api/${this.apiVersion}/carousel/transfer`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
