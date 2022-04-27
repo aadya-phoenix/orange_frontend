@@ -74,8 +74,8 @@
                                     <div class="chkbox_css_header ml-2 mt-2">
                                         <label formArrayName="languages"
                                             *ngFor="let language of lauguageFormArray.controls; let i = index"
-                                            (change)="languageChange()">
-                                            <input type="checkbox" [formControlName]="i">
+                                            (change)="languageChange()" >
+                                            <input type="checkbox" [formControlName]="i"  [attr.disabled]="isCreater ? null : true">
                                             <span class="mr-1 ml-1 font-13">{{languageList[i].name}}</span>
                                         </label>
                                     </div>
@@ -88,9 +88,9 @@
                                         <div class="card-header">
                                             <div class="header_div_promt">
                                                 <strong class="font-16">{{carousel.value.languageName}}</strong>
-                                                <div class="chkbox_css_header">
-                                                    <button class="btn btn-secondary"
-                                                        (click)="removeCarousel(carousel)">Remove Carousel</button>
+                                                <div class="chkbox_css_header" *ngIf="isCreater">
+                                                    <button class="btn btn-secondary btn-sm"
+                                                        (click)="removeCarousel(carousel)">Remove</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -106,7 +106,7 @@
                                                                     ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
                                                             </a>
                                                         </label>
-                                                        <input type="text" placeholder="Enter Title"
+                                                        <input type="text" placeholder="Enter Title"  maxlength="32" 
                                                             formControlName="title" class="form-control form_width" />
                                                         <div
                                                             *ngIf="(carouselFormArray.controls[i].controls['title'].invalid && (carouselFormArray.controls[i].controls['title'].dirty || carouselFormArray.controls[i].controls['title'].touched)) || isSubmitted ">
@@ -129,7 +129,7 @@
                                                             </a>
                                                         </label>
                                                         <textarea class="form-control form_width-textarea"
-                                                            formControlName="description" maxlength="500" rows="3"
+                                                            formControlName="description" maxlength="211" rows="3"
                                                             placeholder="Enter Description"></textarea>
                                                         <div
                                                             *ngIf="(carouselFormArray.controls[i].controls['description'].invalid && (carouselFormArray.controls[i].controls['description'].dirty || carouselFormArray.controls[i].controls['description'].touched)) || isSubmitted ">
@@ -264,19 +264,11 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Additional Comments <span class="text-danger-ligth">* </span>
+                                                Additional Comments
                                             </label>
                                             <textarea class="form-control form_width-textarea" maxlength="500" rows="3"
                                                 formControlName="additional_comment"
                                                 placeholder="Enter Additional Comments"></textarea>
-                                            <div
-                                                *ngIf="(createOlcarouselForm.controls['additional_comment'].invalid && (createOlcarouselForm.controls['additional_comment'].dirty || createOlcarouselForm.controls['additional_comment'].touched)) || isSubmitted ">
-                                                <div class="error_message"
-                                                    *ngIf="createOlcarouselForm.controls['additional_comment'].errors?.required">
-                                                    Additional Comments cannot be blank
-                                                </div>
-                                            </div>
-
                                         </div>
                                     </div>
                                     <!-- <div class="col-sm-12" *ngIf="isReviewer">

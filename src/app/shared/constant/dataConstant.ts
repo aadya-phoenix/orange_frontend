@@ -14,6 +14,7 @@ export const dataConstant = {
     404: '404',//Not Found
     409: '409',//Conflict
   },
+  maxImageSize: 5, //5 Mb
   dateFormate : 'dd-MM-yyyy',
   dateTimeFormate: 'dd-MM-yyyy HH:mm a',
   EmailPattren: /^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/,

@@ -18,6 +18,7 @@ import Swal from 'sweetalert2';
 export class CarouselListComponent implements OnInit {
   carouselStatus = dataConstant.CarouselStatus;
   dateTimeFormate = dataConstant.dateTimeFormate;
+  dateFormate = dataConstant.dateFormate;
   RoleID = dataConstant.RoleID;
   carouselList: any = [];
   carouselListToShow: any = [];
@@ -74,7 +75,7 @@ export class CarouselListComponent implements OnInit {
   openModal(item: any) {
     const modalRef = this.modalService.open(CarouselHistoryComponent, {
       centered: true,
-      size: 'lg',
+      size: 'xl',
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {

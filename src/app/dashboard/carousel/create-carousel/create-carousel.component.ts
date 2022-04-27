@@ -7,6 +7,7 @@ import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CarouselService } from 'src/app/shared/services/carousel/carousel.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
+import Swal from 'sweetalert2';
 import { CarouselForwardComponent } from '../carousel-forward/carousel-forward.component';
 import { CarouselPublishComponent } from '../carousel-publish/carousel-publish.component';
 const emailregexp = dataConstant.EmailPattren;
@@ -37,6 +38,7 @@ export class CreateCarouselComponent implements OnInit {
   rejectcomment = "";
   carouselImage = { image: '', ext: '' };
   isSubmitted = false;
+  isCreater = true;
   carousel_count = {
     total: 0,
     draft: 0,
@@ -72,7 +74,7 @@ export class CreateCarouselComponent implements OnInit {
       image: new FormControl('', this.carousel_id ? [] : [Validators.required]),
       publication_date: new FormControl('', [Validators.required]),
       expiry_type: new FormControl('', [Validators.required]),
-      additional_comment: new FormControl('', [Validators.required])
+      additional_comment: new FormControl('')
     });
 
   }
@@ -94,6 +96,9 @@ export class CreateCarouselComponent implements OnInit {
           // this.createOlcarouselForm.controls.image.setValue(this.carousel_details.image);
           this.carousel_details.imageUrl = `${dataConstant.ImageUrl}/${this.carousel_details.image}`;
           this.carousel_details.image = null;
+          if(this.getprofileDetails.data.id != this.carousel_details.user_id){
+            this.isCreater = false;
+          }
           this.launguageFormBind();
         }
       },
@@ -240,6 +245,16 @@ export class CreateCarouselComponent implements OnInit {
   }
 
   handleFileInput(event: any) {
+    const fsize = event.target.files[0].size;
+    const file = Math.round((fsize / 1024)/1024);
+    if(file > dataConstant.maxImageSize){
+      Swal.fire(
+        'Images!',
+        `Image is more than ${dataConstant.maxImageSize} mb. Please select valida file`,
+        'warning'
+      )
+      return;
+    }
     this.commonService.FileConvertintoBytearray(event.target.files[0], async (f) => {
       // creating array bytes
       this.carouselImage = { image: this.commonService.byteArrayTobase64(f.bytes), ext: f.name.split('.').pop() };

@@ -19,6 +19,7 @@ export class CarouselViewReportComponent implements OnInit {
   public filterForm!: FormGroup;
   carouselStatus = dataConstant.CarouselStatus;
   dateTimeFormate = dataConstant.dateTimeFormate;
+  dateFormate = dataConstant.dateFormate;
   RoleID = dataConstant.RoleID;
   carouselList: any = [];
   addDate = false;
