@@ -1,12 +1,14 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CarouselService } from 'src/app/shared/services/carousel/carousel.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
+import { CarouselHistoryComponent } from '../carousel-history/carousel-history.component';
 
 @Component({
   selector: 'app-carousel-view-report',
@@ -19,6 +21,7 @@ export class CarouselViewReportComponent implements OnInit {
   dateTimeFormate = dataConstant.dateTimeFormate;
   RoleID = dataConstant.RoleID;
   carouselList: any = [];
+  addDate = false;
   carouselListToShow: any = [];
   selectedStatus = this.carouselStatus.total;
   isReviewer = false;
@@ -51,6 +54,7 @@ export class CarouselViewReportComponent implements OnInit {
     private carouselService: CarouselService,
     private commonService: CommonService,
     private authService: AuthenticationService,
+    private modalService: NgbModal,
     private router: Router
   ) {
     this.getUserrole = this.authService.getRolefromlocal();
@@ -63,6 +67,10 @@ export class CarouselViewReportComponent implements OnInit {
       end_date: new FormControl('', []),
       reporting_period: new FormControl('', []),
     });
+    this.filterForm.controls.start_date.valueChanges.subscribe((x: any) => {
+      this.addDate = x ? true : false;
+    })
+
   }
 
   ngOnInit(): void {
@@ -73,6 +81,20 @@ export class CarouselViewReportComponent implements OnInit {
     if (item && item.id) {
       this.router.navigateByUrl(`/dashboard/olcarousel/view/${item.id}`);
     }
+  }
+
+  openModal(item: any) {
+    const modalRef = this.modalService.open(CarouselHistoryComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      title: 'View History',
+      data: item.id,
+      objectDetail: item,
+      type: 'viewhistory'
+    };
   }
 
 
@@ -105,10 +127,15 @@ export class CarouselViewReportComponent implements OnInit {
   }
 
   reset() {
+    this.filterForm.setValue({
+      start_date: '',
+      end_date: '',
+      reporting_period: '',
+    });
     this.refreshCarousel({});
   }
 
-  filterData(){
+  filterData() {
     debugger;
     const data = this.filterForm.value;
     this.refreshCarousel(data);

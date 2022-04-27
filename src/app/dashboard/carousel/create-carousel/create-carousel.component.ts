@@ -247,7 +247,7 @@ export class CreateCarouselComponent implements OnInit {
   }
 
   isDraft() {
-    if (this.carousel_details?.status === this.CarouselStatus.publish || this.carousel_details?.status === this.CarouselStatus.expired || this.carousel_details?.status === this.CarouselStatus.pending) {
+    if (this.carousel_details?.status === this.CarouselStatus.publish || this.carousel_details?.status === this.CarouselStatus.expired || this.carousel_details?.status === this.CarouselStatus.pending || this.carousel_details?.status === this.CarouselStatus.reject) {
       return false;
     }
     if (this.getprofileDetails.data.id != this.carousel_details?.user_id && this.carousel_details?.transfer_user_id && !this.carousel_details?.publisher_status && this.isReviewer) {
