@@ -9,7 +9,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ViewHistoryComponent } from './view-history/view-history.component';
 import { RequestDetailComponent } from './request-detail/request-detail.component';
 import { UpdateCourceComponent } from './update-cource/update-cource.component';
-import { ViewCourseDetailsComponent } from './view-course-details/view-course-details.component';
 import { ViewCompleteReportComponent } from './view-complete-report/view-complete-report.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -23,7 +22,6 @@ import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor'
     ViewHistoryComponent,
     RequestDetailComponent,
     UpdateCourceComponent,
-    ViewCourseDetailsComponent,
     ViewCompleteReportComponent,
   ],
   entryComponents:[ViewHistoryComponent],

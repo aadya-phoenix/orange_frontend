@@ -1,26 +1,28 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as _ from 'lodash';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CarouselService } from 'src/app/shared/services/carousel/carousel.service';
-import { CarouselHistoryComponent } from '../carousel-history/carousel-history.component';
-import * as _ from 'lodash';
 import { CommonService } from 'src/app/shared/services/common/common.service';
-import Swal from 'sweetalert2';
+import { CarouselHistoryComponent } from '../carousel-history/carousel-history.component';
 
 @Component({
-  selector: 'app-carousel-list',
-  templateUrl: './carousel-list.component.html',
-  styleUrls: ['./carousel-list.component.scss']
+  selector: 'app-carousel-view-report',
+  templateUrl: './carousel-view-report.component.html',
+  styleUrls: ['./carousel-view-report.component.scss']
 })
-export class CarouselListComponent implements OnInit {
+export class CarouselViewReportComponent implements OnInit {
+  public filterForm!: FormGroup;
   carouselStatus = dataConstant.CarouselStatus;
   dateTimeFormate = dataConstant.dateTimeFormate;
   dateFormate = dataConstant.dateFormate;
   RoleID = dataConstant.RoleID;
   carouselList: any = [];
+  addDate = false;
   carouselListToShow: any = [];
   selectedStatus = this.carouselStatus.total;
   isReviewer = false;
@@ -31,9 +33,6 @@ export class CarouselListComponent implements OnInit {
     pageNumber: 1,
     pageSize: 10
   }
-  isReviewer = false;
-  isPublisher = false;
-  isRequester = false;
   carousel_count = {
     total: 0,
     draft: 0,
@@ -52,6 +51,7 @@ export class CarouselListComponent implements OnInit {
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
   constructor(
+    private fb: FormBuilder,
     private carouselService: CarouselService,
     private commonService: CommonService,
     private authService: AuthenticationService,
@@ -63,10 +63,19 @@ export class CarouselListComponent implements OnInit {
     this.isReviewer = this.getUserrole.id === this.RoleID.CarouselReviewer;
     this.isPublisher = this.getUserrole.id === this.RoleID.CarouselPublisher;
     this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
+    this.filterForm = this.fb.group({
+      start_date: new FormControl('', []),
+      end_date: new FormControl('', []),
+      reporting_period: new FormControl('', []),
+    });
+    this.filterForm.controls.start_date.valueChanges.subscribe((x: any) => {
+      this.addDate = x ? true : false;
+    })
+
   }
 
   ngOnInit(): void {
-    this.refreshCourses();
+    this.refreshCarousel({});
   }
 
   viewRequest(item: any) {
@@ -78,7 +87,7 @@ export class CarouselListComponent implements OnInit {
   openModal(item: any) {
     const modalRef = this.modalService.open(CarouselHistoryComponent, {
       centered: true,
-      size: 'xl',
+      size: 'lg',
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
@@ -88,6 +97,7 @@ export class CarouselListComponent implements OnInit {
       type: 'viewhistory'
     };
   }
+
 
   onSort({ column, direction }: any) {
     this.headers.forEach((header: { sortable: any; direction: string; }) => {
@@ -117,9 +127,24 @@ export class CarouselListComponent implements OnInit {
     this.selectedStatus = type;
   }
 
-  refreshCourses() {
+  reset() {
+    this.filterForm.setValue({
+      start_date: '',
+      end_date: '',
+      reporting_period: '',
+    });
+    this.refreshCarousel({});
+  }
+
+  filterData() {
+    debugger;
+    const data = this.filterForm.value;
+    this.refreshCarousel(data);
+  }
+
+  refreshCarousel(data: any) {
     this.commonService.showLoading();
-    this.carouselService.getCarousel().subscribe(
+    this.carouselService.getCarouselReport(data).subscribe(
       (res: any) => {
         this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
@@ -135,63 +160,4 @@ export class CarouselListComponent implements OnInit {
     );
   }
 
-  editRequest(item: any) {
-    if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/olcarousel/update/${item.id}`);
-    }
-  }
-
-  deleteRequest(carousel_id: number){
-      Swal.fire({
-        title: 'Are you sure want to remove?',
-        text: 'You will not be able to recover this request!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, keep it'
-      }).then((result) => {
-        if (result.value) {
-          this.commonService.showLoading();
-          this.carouselService.carouselDelete({carousel_id :carousel_id}).subscribe((res:any)=>{
-            this.commonService.hideLoading();
-            this.refreshCourses();
-            Swal.fire(
-              'Deleted!',
-              'Your request has been deleted.',
-              'success'
-            )
-          },(err:any)=>{
-            this.commonService.hideLoading();
-          })
-          
-        }
-      })
-    }
-
-    copyRequest(carousel_id: number) {
-      Swal.fire({
-        title: 'Are you sure you want to copy?',
-        text: 'You will copy this request',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, copy it!',
-        cancelButtonText: 'No'
-      }).then((result) => {
-        if (result.value) {
-          this.commonService.showLoading();
-          this.carouselService.carouselCopy({carousel_id :carousel_id}).subscribe((res:any)=>{
-            this.commonService.hideLoading();
-            this.refreshCourses();
-            Swal.fire(
-              'Copied!',
-              'Your request has been copyed.',
-              'success'
-            )
-          },(err:any)=>{
-            this.commonService.hideLoading();
-          })
-          
-        }
-      })
-    }
 }

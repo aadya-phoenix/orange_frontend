@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewCourseDetailsComponent } from './view-course-details.component';
+import { CarouselViewReportComponent } from './carousel-view-report.component';
 
-describe('ViewCourseDetailsComponent', () => {
-  let component: ViewCourseDetailsComponent;
-  let fixture: ComponentFixture<ViewCourseDetailsComponent>;
+describe('CarouselViewReportComponent', () => {
+  let component: CarouselViewReportComponent;
+  let fixture: ComponentFixture<CarouselViewReportComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewCourseDetailsComponent ]
+      declarations: [ CarouselViewReportComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewCourseDetailsComponent);
+    fixture = TestBed.createComponent(CarouselViewReportComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

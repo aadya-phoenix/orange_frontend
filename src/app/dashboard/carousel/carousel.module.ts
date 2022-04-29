@@ -12,6 +12,7 @@ import { CarouselViewComponent } from './carousel-view/carousel-view.component';
 import { CarouselHistoryComponent } from './carousel-history/carousel-history.component';
 import { CarouselPublishComponent } from './carousel-publish/carousel-publish.component';
 import { CarouselForwardComponent } from './carousel-forward/carousel-forward.component';
+import { CarouselViewReportComponent } from './carousel-view-report/carousel-view-report.component';
 
 
 
@@ -23,6 +24,7 @@ import { CarouselForwardComponent } from './carousel-forward/carousel-forward.co
     CarouselHistoryComponent,
     CarouselPublishComponent,
     CarouselForwardComponent,
+    CarouselViewReportComponent,
   ],
   entryComponents:[CarouselHistoryComponent, CarouselPublishComponent, CarouselForwardComponent],
   imports: [

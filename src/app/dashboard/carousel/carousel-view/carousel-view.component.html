@@ -2,190 +2,98 @@
     <app-header></app-header>
     <div class="breadcrumbs cm_breadcums">
         <div class="col-sm-8">
-            <div class="page-header float-left bac_trasparent">
+            <div class="page-header float-left bg-transparent">
                 <div class="page-title d-flex align-items-center">
-                  <img src="../../../../assets/images/3.jpg" class="home_Css_img" />
-                  <div class="d-flex flex-column ml-3">
-                    <span class="breade_text_span1">Promote on Carousel</span>
-                    <span class="divider"></span>
-                    <span class="breade_text_span">Request the creation of a new entry in the Orange Learning
-                        Carousel</span>
-                  </div>
+                    <img src="../../../../assets/images/3.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="font-20 text_white">Promote on Carousel</span>
+                        <span class="divider"></span>
+                        <span class="title-detail mt-6">
+                            Request the creation of a new entry in the Orange Learning Carousel</span>
+                    </div>
                 </div>
-              </div>
-       
+            </div>
         </div>
 
         <div class="col-sm-4 float-right">
-            <div class="page-header float-right bac_trasparent">
-              <div class="page-title d-flex end_just">
-                <ol class="breadcrumb text-right bac_trasparent">
-                  <li>
-                    <a [routerLink]="['/dashboard']">
-                      <i class="fa fa-home text_white"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a [routerLink]="['/dashboard']"class="text_white">Dashboard</a>
-                  </li>
-                  <li>
-                    <span  class="text_white span_dis" >Create new Course</span>
-                  </li>
-                </ol>
-              </div>
-            </div>
-          </div>
-    </div>
+            <div class="page-header float-right bg-transparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bg-transparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home text_white"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/olcarousel']" class="text_white">Create new Carousel</a>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">View</span>
 
-    <div class="content mt-3" style="background-image: url('../../../../assets/images/viewBack.png');">
-        <div class="animated fadeIn">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card" style="border-radius: 10px;">
-                        <div class="card-header"
-                            style="padding: 0rem 1.25rem !important; background-color: #fff;border-radius: 10px;">
-                            <div class="d-flex align-items-center" style="justify-content: space-between;">
-                                <div class="d-flex">
-                                    <img src="../../../../assets/images/formm.png" class="ml-2"
-                                        style="height: 29px;margin-top: 4px;;" />
-                                    <p class="mt-2 ml-2 mb-2 view-re_css">
-                                        <span>View Carousel Request</span>
-                                        <span class="cc-text_css"> ({{ requestdata.request_id }}) -
-                                        </span>
-                                        <span style="color: #ff7900">Request Status - {{ requestdata.status | titlecase
-                                            }}</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        </li>
+                    </ol>
                 </div>
             </div>
         </div>
     </div>
-    <div class="content" style="background-image: url('../../../../assets/images/viewBack.png');">
+
+    <div class="d-flex align-items-center justify_content card_header_common">
+        <div class="d-flex">
+            <img src="../../../../assets/images/formm.png" class="ml-2 form_img_req" />
+            <p class="mt-2 ml-2 mb-2 view-re_css">
+                <span>View Carousel Request</span>
+                <span class="cc-text_css"> ({{ requestdata.request_id }}) -
+                </span>
+                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status | titlecase
+                    }}</span>
+            </p>
+        </div>
+    </div>
+    <div class="content">
         <div class="animated fadeIn">
-            <div class="card" *ngIf="isUpdate() || isPublish() || isForward() || isReject()">
-                <div class="card-body" style="padding: 10px 10px;">
-                    <div class="Requs_btn_inl">
-                        <div class="Requs_btn_inl-child">
-                            <button type="button" class="btn btn-primary  ml-2" *ngIf="isUpdate()"
-                                (click)="updateRequest()">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">Update</span>
-                            </button>
-                            <button type="button" class="btn btn-primary  ml-2" *ngIf="isPublish()"  (click)="statusChangeRequest(CarouselStatus.publish)">
-                                <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
-                            </button>
-                            <button type="button" class="btn btn-primary  ml-2" *ngIf="isForward()" (click)="forwardRequest()">
-                                <i class="fa fa-arrow-right" aria-hidden="true"></i><span class="pl-1">Forward</span>
-                            </button>
-                            <button type="button" class="btn btn-secondary  ml-2" *ngIf="isReject()" (click)="statusChangeRequest(CarouselStatus.reject)">
-                                <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
-                            </button>
-                        </div>
+            <div class="mb-2" *ngIf="isUpdate() || isPublish() || isForward() || isReject()">
+
+                <div class="Requs_btn_inl">
+                    <div class="Requs_btn_inl-child">
+                        <button type="button" class="btn btn-primary mr-2" *ngIf="isForward()"
+                            (click)="forwardRequest()">
+                            <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Transfer to
+                                Publisher</span>
+                        </button>
+                        <button type="button" class="btn btn-primary mr-2" *ngIf="isPublish()"
+                            (click)="statusChangeRequest(CarouselStatus.publish)">
+                            <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
+                        </button>
+                        <button type="button" class="btn mr-2" *ngIf="isUpdate()"
+                            [ngClass]="(isPublish() || isForward()) ?  'btn-secondary'  : 'btn-primary'"
+                            (click)="updateRequest()">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">Update</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" *ngIf="isReject()"
+                            (click)="statusChangeRequest(CarouselStatus.reject)">
+                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                        </button>
                     </div>
                 </div>
+
             </div>
             <div class="row mb-3">
-                <div class="col-6">
-                    <div class="card border-radius-0">
-                        <div class="card-header card_header_view">
-                            <p>Carousal Details</p>
-                        </div>
-                        <div class="card-body">
-                            <!-- <div class="col-sm-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Status</label>
-                                    <div class="d-flex align-items-center">
-                                        <span class="form-control form_width">
-                                            {{ requestdata.status ? (requestdata.status | titlecase) : "-"}}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div> -->
-
-                            <!-- <div class="col-sm-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Requester Name</label>
-                                    <div class="d-flex align-items-center">
-                                        <span class="form-control form_width">
-                                            {{ requestdata.requester_name }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div> -->
-
-                             <div class="col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Request Publish By</label>
-                                    <div class="d-flex align-items-center">
-                                        <span class="form-control form_width">
-                                            {{ requestdata.publication_date | date: "shortDate" }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div> 
-
-                            <div class="col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Expiry Date</label>
-                                    <div class="d-flex align-items-center">
-                                        <span class="form-control form_width">
-                                            {{ requestdata.expiry_date | date: "shortDate" }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Additional Comments</label>
-                                    <div class="d-flex align-items-center">
-                                        <span class="form-control form_width">
-                                            {{ requestdata.additional_comment }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Atteched Image</label>
-                                    <div class="d-flex align-items-center">
-                                        <span class="form-control form_width">
-                                            Click to <a href="{{requestdata.imgUrl}}" target="_blank"
-                                                style="color:#ff7900">View / Download</a> image.
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- <div class="col-sm-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Created Date</label>
-                                    <div class="d-flex align-items-center">
-                                        <span class="form-control form_width">
-                                            {{ requestdata.created_at | date: "shortDate" }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <ngb-accordion #acc="ngbAccordion">
-                        <ngb-panel *ngFor="let meta of requestdata.metadata; let i = index">
+                <div class="col-sm-6" *ngFor="let meta of requestdata.metadata; let i = index">
+                    <ngb-accordion #acc="ngbAccordion" [activeIds]="activeIds" class="d-flex">
+                        <ngb-panel id="panel-{{i}}" class="mr-1 w_100  ">
                             <ng-template ngbPanelTitle>
                                 <span>Carousal {{i+1}}</span>
                             </ng-template>
                             <ng-template ngbPanelContent>
-                                <div class="card-body p-2">
+                                <div class="p-2">
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Language</label>
                                             <div class="d-flex align-items-center">
-                                                <span class="form-control form_width">
+                                                <span class="form_data" onkeyup="textAreaAdjust(this)">
                                                     {{meta.language_slug | titlecase}}
                                                 </span>
                                             </div>
@@ -195,7 +103,7 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Title</label>
                                             <div class="d-flex align-items-center">
-                                                <span class="form-control form_width">
+                                                <span class="form_data" onkeyup="textAreaAdjust(this)">
                                                     {{meta.title}}
                                                 </span>
                                             </div>
@@ -205,8 +113,18 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Description</label>
                                             <div class="d-flex align-items-center">
-                                                <span class="form-control form_width">
+                                                <span class="form_data" onkeyup="textAreaAdjust(this)">
                                                     {{meta.description}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Link</label>
+                                            <div class="d-flex align-items-center">
+                                                <span class="form_data" onkeyup="textAreaAdjust(this)">
+                                                 {{meta.link}}
                                                 </span>
                                             </div>
                                         </div>
@@ -215,7 +133,7 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Show carousal only to manager</label>
                                             <div class="d-flex align-items-center">
-                                                <span class="form-control form_width">
+                                                <span class="form_data" onkeyup="textAreaAdjust(this)">
                                                     {{meta.display_manager===1?'Yes':'No'}}
                                                 </span>
                                             </div>
@@ -225,9 +143,62 @@
                             </ng-template>
                         </ngb-panel>
                     </ngb-accordion>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card border-radius-0">
+                        <div class="card-header card_header_view">
+                            <p>Carousal Details</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Request Publish By</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.publication_date | date: dateFormate }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Expiry Type</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{requestdata.expiry_type_name}} ({{ requestdata.expiry_date | date:
+                                            dateFormate }})
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Additional Comments</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.additional_comment }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Attached Image</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            Click here to <a class="text_orange" href="{{requestdata.imgUrl}}"
+                                                target="_blank">View</a>.
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
             </div>
         </div>
-       
     </div>
 </div>
