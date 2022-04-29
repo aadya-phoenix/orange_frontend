@@ -2,12 +2,15 @@ import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import * as _ from 'lodash';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { CourseSessionService } from 'src/app/shared/services/course_session/course-session.service';
+import * as XLSX from 'xlsx';
 
-const numbersOnlyregexp = dataConstant.NumbersOnlyPattern;
-/* const currencyregexp = dataConstant.CurrencyPattern; */
+const numbersOnlyregexp = dataConstant.NumbersOnlyPattern;  
+const currencyregexp = dataConstant.CurrencyPattern; 
 
 @Component({
   selector: 'app-create-session',
@@ -29,6 +32,7 @@ export class CreateSessionComponent implements OnInit {
   };
   public deliveryMethod: any;
   public preferedInstructor: any;
+  public externalVendorname: boolean = false;
   countryObj: any;
   timeZoneObj: any;
   coursesList: any;
@@ -37,19 +41,23 @@ export class CreateSessionComponent implements OnInit {
   getUserrole: any;
   closedRequests: any = [];
   rejectedRequests: any = [];
-
+  vendor: any = [];
   rocObj: any = [];
   public yesNo: any = [
     { id: 'yes', name: 'Yes' },
     { id: 'no', name: 'No' },
   ];
-
   public createSessionForm!: FormGroup;
+
+  data:any=[];
+  newdata:any=[];
+  //data:[][]=[[]];
 
   constructor(
     private fb: FormBuilder,
     private courseService: CourcesService,
     private currencyPipe: CurrencyPipe,
+    private authService:AuthenticationService,
     private courseSessionService: CourseSessionService,
     private router: Router,
     private route: ActivatedRoute,
@@ -57,8 +65,10 @@ export class CreateSessionComponent implements OnInit {
     this.createSessionForm = this.fb.group({
       title: new FormControl('', [Validators.required]),
       region_id: new FormControl('', [Validators.required]),
-      metadata: new FormArray([this.metaDataGroup()]),
+      metadata: this.fb.array([]),
     });
+
+    this.getUserrole = this.authService.getRolefromlocal();
   }
 
   ngOnInit(): void {
@@ -68,19 +78,16 @@ export class CreateSessionComponent implements OnInit {
       this.session_id = Id ? parseInt(Id) : 0;
       this.getSessionDetails();
     })
-    //currency display in training cost
-    /* this.createSessionForm.valueChanges.subscribe(form=>{
-      if(form.metadata.training_cost){
-        this.createSessionForm.patchValue({
-          metadata.training_cost : this.currencyPipe.transform(form.metadata.training_cost.replace(/\D/g,'').replace(/^0+/,''),'EUR','symbol')
-        },{emitEvent:false});
-      }
-    }); */
+    this.getExternalVendor();
     this.getDeliveryMethod();
     this.getRegionalCordinator();
     this.getCountries();
     this.getPreferedInstructor();
     this.getTimezone();
+    this.getSessionPublisherStatus();
+     
+   /*  const metacontrols = (this.createSessionForm.get('metadata') as FormArray).controls[0].controls['external_vendor']; */
+    
   }
 
   private metaDataGroup(): FormGroup {
@@ -97,7 +104,7 @@ export class CreateSessionComponent implements OnInit {
       end_time: new FormControl('', [Validators.required]),
       time_zone: new FormControl(''),
       break: new FormControl(''),
-      /*  break: new FormArray([this.breakGroup()]),  */
+   //   break: this.fb.array([this.breakGroup()]),  
       comment: new FormControl(),
       min_registration: new FormControl('', [Validators.required,
       Validators.pattern(numbersOnlyregexp)]),
@@ -106,6 +113,7 @@ export class CreateSessionComponent implements OnInit {
       registration_deadline: new FormControl('', [Validators.required]),
       availability: new FormControl('', [Validators.required]),
       external_vendor: new FormControl('', [Validators.required]),
+      external_vendor_name:new FormControl(''),
       manager_approval: new FormControl(''),
       training_cost: new FormControl(''),
     });
@@ -127,11 +135,16 @@ export class CreateSessionComponent implements OnInit {
   }
 
   addBreak(index: any): void {
+    console.log("meta array",index);
     (<FormArray>(<FormGroup>this.metadataArray.controls[index]).controls.break).push(this.breakGroup());
+    
   }
-
+  
   get metadataArray(): FormArray {
+    //debugger;
+   // if(this.metadataArray?.length > 0){
     return <FormArray>this.createSessionForm.get('metadata');
+  //  }
   }
 
   getSessionLists() {
@@ -146,15 +159,25 @@ export class CreateSessionComponent implements OnInit {
   }
 
   getSessionDetails() {
-    if (this.session_id) {
+    if(!this.session_id){
+      this.addMetadata();
+    }
+    else{
       this.courseSessionService.getSessionDetails(this.session_id).subscribe((res: any) => {
         if (res.status === 1 && res.message === 'Success') {
           this.session_details = res.data;
-          console.log("resdetails data", this.session_details)
+          console.log("resdetails data", this.session_details);
+          console.log("resdetails 2 data", res.data);
           this.createSessionForm.controls.title.setValue(this.session_details.title);
           this.createSessionForm.controls.region_id.setValue(this.session_details.region_id);
           const metadata = this.session_details.metadata;
-          for (let meta of metadata) {
+          for (let meta of metadata){
+            meta.delivery_method_id = JSON.parse(meta.delivery_method);
+            meta.country_id  = JSON.parse(meta.country);
+            meta.email = JSON.parse(meta.email_participant);
+          //  meta.external_vendor_id = JSON.parse(meta.external_vendor);
+            this.metadataArray.push(this.updateMetadata(meta));
+            console.log("meta",meta);
             // this.metadataArray.controls.delivery_method.setValue
           }
         }
@@ -163,6 +186,7 @@ export class CreateSessionComponent implements OnInit {
           console.log(err);
         });
     }
+    
   }
   getRegionalCordinator() {
     this.courseService.getregionalCordinator().subscribe((res: any) => {
@@ -195,7 +219,7 @@ export class CreateSessionComponent implements OnInit {
       }
     );
   }
-  //prefered instructor
+  //preferred instructor
   getPreferedInstructor() {
     this.courseService.getpreferedInstructor().subscribe(
       (res: any) => {
@@ -220,11 +244,80 @@ export class CreateSessionComponent implements OnInit {
     );
   }
 
-  copySession(i: any) {
-    //return this.sessionArray.push(this.addMoreSession(this.sessionArray.value);
-    //console.log(this.sessionArray.get("deliveryMethod")?.value);
+  getExternalVendor(){
+    this.courseService.getVendor().subscribe(
+      (res: any) => {
+        this.vendor = res.data;
+        console.log("vendor",this.vendor);
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
   }
 
+  copySession(session: any) {
+    //console.log("session is",session.value);
+    this.metadataArray.push(this.addMoreMetadata(session.value));
+  }
+
+  addMoreMetadata(sessionval:any):FormGroup{
+    return this.fb.group({
+      metadata_id: '',
+      delivery_method: new FormControl(sessionval.delivery_method, [Validators.required]),
+      country: new FormControl(sessionval.country, [Validators.required]),
+      location: new FormControl(sessionval.location, [Validators.required]),
+      instructor_name: new FormControl(sessionval.instructor_name, [Validators.required]),
+      email_participant: new FormControl(sessionval.email_participant, [Validators.required]),
+      start_date: new FormControl(sessionval.start_date, [Validators.required]),
+      start_time: new FormControl(sessionval.start_time, [Validators.required]),
+      end_date: new FormControl(sessionval.end_date, [Validators.required]),
+      end_time: new FormControl(sessionval.end_time, [Validators.required]),
+      time_zone: new FormControl(sessionval.time_zone),
+      break: new FormControl(sessionval.break),
+     // break: this.fb.array([]),  
+      comment: new FormControl(sessionval.comment),
+      min_registration: new FormControl(sessionval.min_registration, [Validators.required,
+      Validators.pattern(numbersOnlyregexp)]),
+      max_registration: new FormControl(sessionval.max_registration, [Validators.required,
+      Validators.pattern(numbersOnlyregexp)]),
+      registration_deadline: new FormControl(sessionval.registration_deadline, [Validators.required]),
+      availability: new FormControl(sessionval.availability, [Validators.required]),
+      external_vendor: new FormControl(sessionval.external_vendor, [Validators.required]),
+      external_vendor_name: new FormControl(sessionval.external_vendor_name, [Validators.required]),
+      manager_approval: new FormControl(sessionval.manager_approval),
+      training_cost: new FormControl(sessionval.training_cost),
+    })
+  }
+
+  updateMetadata(sessionval:any):FormGroup{
+    return this.fb.group({
+      metadata_id: '',
+      delivery_method: new FormControl(sessionval.delivery_method_id, [Validators.required]),
+      country: new FormControl(sessionval.country_id, [Validators.required]),
+      location: new FormControl(sessionval.location, [Validators.required]),
+      instructor_name: new FormControl(sessionval.instructor_name, [Validators.required]),
+      email_participant: new FormControl(sessionval.email, [Validators.required]),
+      start_date: new FormControl(sessionval.start_date, [Validators.required]),
+      start_time: new FormControl(sessionval.start_time, [Validators.required]),
+      end_date: new FormControl(sessionval.end_date, [Validators.required]),
+      end_time: new FormControl(sessionval.end_time, [Validators.required]),
+      time_zone: new FormControl(sessionval.time_zone),
+      break: new FormControl(sessionval.break),
+     // break: this.fb.array([]),  
+      comment: new FormControl(sessionval.comment),
+      min_registration: new FormControl(sessionval.min_registration, [Validators.required,
+      Validators.pattern(numbersOnlyregexp)]),
+      max_registration: new FormControl(sessionval.max_registration, [Validators.required,
+      Validators.pattern(numbersOnlyregexp)]),
+      registration_deadline: new FormControl(sessionval.registration_deadline, [Validators.required]),
+      availability: new FormControl(sessionval.availability, [Validators.required]),
+      external_vendor: new FormControl(sessionval.external_vendor_id, [Validators.required]),
+      external_vendor_name: new FormControl(sessionval.external_vendor_name, [Validators.required]),
+      manager_approval: new FormControl(sessionval.manager_approval),
+      training_cost: new FormControl(sessionval.training_cost),
+    })
+  }
 
   removeSession(i: any) {
     this.metadataArray.removeAt(i);
@@ -235,7 +328,7 @@ export class CreateSessionComponent implements OnInit {
       const sessionObj = this.createSessionForm.value;
       sessionObj.status = status;
       console.log("session value", sessionObj);
-      if (this.session_id) {
+      if (!this.session_id) {
         this.courseSessionService.createSession(sessionObj).subscribe(
           (res: any) => {
             this.router.navigate(['/dashboard/opensession']);
@@ -249,7 +342,7 @@ export class CreateSessionComponent implements OnInit {
         sessionObj.session_id = this.session_id;
         this.courseSessionService.updateSession(sessionObj).subscribe(
           (res: any) => {
-            this.router.navigate(['/dashboard/olcarousel']);
+            this.router.navigate(['/dashboard/opensession']);
           },
           (err: any) => {
           }
@@ -257,11 +350,107 @@ export class CreateSessionComponent implements OnInit {
       }
     }
     else {
+      console.log("invalid form");
       return;
     }
   }
 
-  externalVendor(event: any) {
+  onFileChange(event:any){
+    const target = event.target;
+    const reader:FileReader = new FileReader();
+    reader.onload =(e:any)=>{
+      const bstr:string = e.target.result;
 
+      const wb:XLSX.WorkBook = XLSX.read(bstr,{type:'binary'});
+
+      const wsname : string = wb.SheetNames[0];
+
+      const ws:XLSX.WorkSheet = wb.Sheets[wsname];
+
+      console.log(ws);
+
+      this.data = (XLSX.utils.sheet_to_json(ws,{header:1}));
+
+      console.log(this.data);
+
+      for(let item of this.data){
+        for(let newitem of item){
+          this.newdata.push({email_id:newitem,city: '',
+          country: '',
+          creation_date: null,
+          department_description: '',
+          department_manager: '',
+          department_manager_cuid: '',
+          emp_datasource: '',
+          employee_cuid: '',
+          first_name: '',
+          functional_manager_cuid: '',
+          id: null,
+          last_name: '',
+          legal_entity_code: '',
+          legal_entity_description: '',
+          m1_description: '',
+          m2_description: '',
+          m3_description: '',
+          management_code: '',
+          manager_emailid: '',
+          manager_id: '',
+          manager_name: '',
+          manager_role: '',
+          modified_date: null,
+          name: '' ,
+          name_prefix: '',
+          organizational_relationship: '',
+          p1_description: '',
+          p2_description: '',
+          password: '',
+          region: '',
+          staff_status: '',
+          supervisor_of_others: ''
+          });
+        }
+      }
+      console.log("newdata",this.newdata);
+      this.newEmailParticipants(this.newdata);
+      /* this.data.map((e:any)=>{
+          e.email_id=e;
+          console.log("e",e);
+      }); */
+    };
+    reader.readAsBinaryString(target.files[0]);
   }
+
+  externalVendor(event:any){
+    if (event.id == 'yes') {
+      this.externalVendorname = true;
+      console.log("validators",)
+      this.getExternalVendor();
+     
+      this.createSessionForm
+        .get('external_vendor_name')
+        ?.setValidators(Validators.required);
+     } 
+     else {
+      this.externalVendorname = false;
+      this.createSessionForm.get('external_vendor_name')?.clearValidators();
+      this.createSessionForm.patchValue({
+        external_vendor_name: null,
+      });
+    }
+  }
+
+  newEmailParticipants(arr:any){
+    return _.map(arr,(e)=>{this.preferedInstructor.push(e);
+    console.log("emailk",this.preferedInstructor);
+    });
+  }
+
+  getSessionPublisherStatus(){
+   this.courseSessionService.getSessionPublisherStatus().subscribe(res=>{
+     console.log("res session publisher status",res);
+   },err=>{
+     console.log(err);
+   });
+  }
+
 }

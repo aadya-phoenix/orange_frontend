@@ -213,8 +213,21 @@
                                     </div>
                                 </div> 
                                 <!--col-->
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label">
+                                            Excel Import
+                                        </label>
 
-                                <div class="col-sm-12">
+                                        <div class="upload_field mb-2 w_100">
+                                            <input type="file" id="exampleInputFile"
+                                              multiple="false" class="upload_css"
+                                                (change)="onFileChange($event)" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--col-->
+                                <div class="col-sm-9">
                                     <div class="form-group">
                                         <label class="form-control-label">
                                             Email ID of participants <span class="text_red">* </span>
@@ -336,9 +349,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                   <!--  <table *ngIf="session.controls.break.controls.length > 0" class="table table-bordered"  >
-                                        <thead>
-                                            <tr formArrayName="break" *ngFor="let group of session.controls.break.controls; let idx = index;" >
+                                    <!-- *ngIf="metadataArray.controls[i].controls.break.controls.length > 0" -->
+                                   <!--  <table  class="table table-bordered"  >
+                                        <thead *ngIf="metadataArray.controls[i].controls.break.controls.length > 0">
+                                            <tr formArrayName="break" *ngFor="let item of session.controls.break.controls; let idx = index;" >
                                                 <th scope="col">Break Description</th>
                                                 <th scope="col">Break Duration</th>
                                                 <th scope="col">Action</th>
@@ -356,7 +370,7 @@
                                                 </td>
                                             </tr>
                                         </thead>
-                                    </table> -->
+                                    </table> -->  
                                 </div>
                                 <!--col-->
                             </div>
@@ -468,6 +482,7 @@
                                     </div>
                                 </div>
                                 <!--col-->
+
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
@@ -479,14 +494,37 @@
                                                 </i>
                                             </a>
                                         </label>
-                                        <ng-select placeholder="Please select" (change)="externalVendor($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="external_vendor" class="w_100">
-                                        </ng-select>
+                                        <ng-select placeholder="Please select" 
+                                           [items]="yesNo"
+                                           bindLabel="name" bindValue="id"
+                                           formControlName="external_vendor" class="w_100">
+                                         </ng-select>
                                         <div class="error_message"
                                             *ngIf="metadataArray.controls[i].controls['external_vendor'].hasError('required') && metadataArray.controls[i].controls['external_vendor'].touched">
                                             External vendor cannot be blank
                                         </div>
                                     </div>
                                 </div>
+                                <!--col-->
+                                 <div class="col-sm-6" >
+                                    <div class="form-group">
+                                        <label class="form-control-label">
+                                            External vendor name<span class="text_red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="top"
+                                                    title="Please indicate if the session is delivered by an external training provider.">
+                                                </i>
+                                            </a>
+                                        </label>
+                                        <ng-select placeholder="Please select"  [items]="vendor" bindLabel="vendor_name" bindValue="vendor_name" formControlName="external_vendor_name" class="w_100">
+                                        </ng-select>
+                                        <div class="error_message"
+                                            *ngIf="metadataArray.controls[i].controls['external_vendor_name'].hasError('required') && metadataArray.controls[i].controls['external_vendor_name'].touched">
+                                            External vendor name cannot be blank
+                                        </div>
+                                    </div>
+                                </div> 
                                 <!--col-->
                                
                                 <div class="col-sm-6">
@@ -503,7 +541,7 @@
                                             </a>
                                         </label>
 
-                                        <input type="text" class="form-control form_width" placeholder="Enter Training cost per participant" formControlName="training_cost">
+                                        <input [value]="metadataArray.controls[i].controls['training_cost'].value | currency :'EU'"  type="text" class="form-control form_width" placeholder="Enter Training cost per participant" formControlName="training_cost">
                                         
                                     </div>
                                 </div>
@@ -514,13 +552,20 @@
                         
                     </div>
                 </ng-container>
-                <div class="card-footer">
+                <div class="card-footer" *ngIf ="getUserrole.id == 2 || session_id == 0">
                     <button class="btn btn-primary mr-1" type="submit"
                         (click)="createSession('pending')">Submit</button>
                     <button class="btn btn-secondary" (click)="createSession('draft')">
                         Save as draft
                     </button>
                 </div>
+                <!-- <div class="card-footer" *ngIf ="getUserrole.id != 2 || session_id != 0">
+                    <button class="btn btn-primary mr-1" type="submit"
+                        (click)="createSession('pending')">Publish</button>
+                    <button class="btn btn-secondary" (click)="createSession('draft')">
+                        Save as draft
+                    </button>
+                </div> -->
             </div>
         </div>
     </div>

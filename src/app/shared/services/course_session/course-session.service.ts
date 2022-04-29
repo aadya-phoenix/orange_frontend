@@ -55,4 +55,24 @@ export class CourseSessionService {
     const url = `/api/${this.apiVersion}/course-session/create`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
+
+  courseSessionTransfer(data:any){
+    const url = `/api/${this.apiVersion}/course-session/transfer`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+  //sessionPublsiher
+  setSessionPublisherStatus(status:any) {
+    const url = `api/${this.apiVersion}/course-session/publisher-status`;
+    return this.http.post(url, status).pipe(catchError(this.commmonService.Errorhandling));;
+  }
+
+  getSessionPublisherStatus(){
+    const url = `/api/${this.apiVersion}/course-session/publisher-list`;
+   return this.http
+     .get(url, this.http.headers)
+     .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+
+
 }

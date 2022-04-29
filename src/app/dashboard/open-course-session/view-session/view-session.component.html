@@ -50,7 +50,7 @@
                                         <span>View Session Request</span>
                                         <span class="cc-text_css"> ({{ sessiondata.request_id }}) -
                                         </span>
-                                        <span style="color: #ff7900">Request Status - {{ sessiondata.status | titlecase
+                                        <span style="color: #ff7900">Request Status - {{ status | titlecase
                                             }}</span>
                                     </p>
                                 </div>
@@ -63,22 +63,25 @@
     </div>
     <div class="content" style="background-image: url('../../../../assets/images/viewbac.jpg');">
         <div class="animated fadeIn">
-            <!-- <div  class="card">
+             <div *ngIf ="getUserrole.id == 2 && (status == 'reject' || status == 'draft') || status == 'draft'"     class="card">
                 <div class="card-body">
                     <div class="Requs_btn_inl">
                         <div class="Requs_btn_inl-child">
-                            <button *ngIf="getUserrole.id == 4" type="button" class="btn btn-primary  ml-2" data-toggle="modal"
-                                data-target="#publishModal">
-                                <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
-                            </button>
+                            <button class="btn btn-secondary ml-2" (click)="updateSession()">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">Update</span>
+                              </button>
                         </div>
                     </div>
                 </div>
-            </div> -->
-            <div *ngIf ="getUserrole.id == 3" class="card">
+            </div> 
+            <div *ngIf ="getUserrole.id == 3 && status =='pending'" class="card">
                 <div class="card-body">
                     <div class="Requs_btn_inl">
                         <div class="Requs_btn_inl-child">
+                            <button type="button" class="btn btn-primary  ml-2" data-toggle="modal" data-target="#publishModal"
+                              *ngIf="status != 'publish'">
+                              <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
+                            </button>
                             <button class="btn btn-secondary ml-2" (click)="updateSession()">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">Update</span>
                           </button>
@@ -86,7 +89,30 @@
                             data-target="#rejectModal">
                             <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                           </button>
-                        </div>  
+                          <button type="button" class="btn btn-secondary ml-2" data-toggle="modal"
+                              data-target="#transferotherRoc" (click)="getCordinators()">
+                              <i class="fa fa-exchange" aria-hidden="true"></i><span class="pl-1">Transfer to Other ROC</span>
+                          </button>
+                        </div>                            
+                    </div>
+                </div>
+            </div>
+            <div *ngIf ="getUserrole.id == 9 && status =='pending'" class="card">
+                <div class="card-body">
+                    <div class="Requs_btn_inl">
+                        <div class="Requs_btn_inl-child">
+                            <button type="button" class="btn btn-primary  ml-2" data-toggle="modal" data-target="#publishModal"
+                              *ngIf="status != 'publish'">
+                              <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
+                            </button>
+                            <button class="btn btn-secondary ml-2" (click)="updateSession()">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">Update</span>
+                          </button>
+                          <button type="button" class="btn btn-secondary ml-2" data-toggle="modal"
+                            data-target="#rejectModal">
+                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                          </button>
+                        </div>                            
                     </div>
                 </div>
             </div>
@@ -174,9 +200,11 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email Id of Participants</label>
                                 <div class="d-flex align-items-center">
-                                    <span class="form-control form_width">
-                                        {{meta.email_participant}}
+                                    <span class="form_data d-flex flex_direction form-control "  onkeyup="textAreaAdjust(this)">                         
+                                    <span *ngFor="let item of meta.email" >
+                                        {{item}}
                                     </span>
+                                </span>
                                 </div>
                             </div>
                         </div>
@@ -338,6 +366,61 @@
         </ngb-accordion>
     </div>
 
+    <div class="modal fade mar_top_150" id="publishModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+   >
+    <div class="modal-dialog modal-lg" role="document ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="reject_req_h4">Publish Request</h4>
+        </div>
+
+        <div class="modal-body">
+          <form [formGroup]="publishForm">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Comments</label>
+                  <textarea class="form-control form_width-textarea" formControlName="status_comment" rows="3" placeholder="Enter Comments"></textarea>
+                </div>
+              </div>
+              <!--col end-->
+             <!--  <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Orange Learning Intranet URL(SSO)</label>
+                  <input type="text" placeholder="Enter Orange Learning Intranet URL(SSO)"
+                    class="form-control form_width1" formControlName="intranet_url" />
+                  <div class="error_message"
+                    *ngIf="publishForm.controls['intranet_url'].invalid && (publishForm.controls['intranet_url'].dirty || publishForm.controls['intranet_url'].touched)">
+                    Orange Learning Intranet URL is not a valid URL</div>
+                </div>
+              </div> -->
+              <!--col end-->
+             <!--  <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Orange Learning Internet URL</label>
+                  <input type="text" class="form-control form_width1" placeholder="Enter Orange Learning Internet URL"
+                    formControlName="internet_url" />
+                  <div class="error_message"
+                    *ngIf="publishForm.controls['internet_url'].invalid && (publishForm.controls['internet_url'].dirty || publishForm.controls['internet_url'].touched)">
+                    Orange Learning Internet URL is not a valid URL</div>
+                </div>
+              </div> -->
+              <!--col end-->
+            </div>
+            <!--row-->
+          </form>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button " class="btn btn-secondary " data-dismiss="modal ">Close</button> -->
+          <button type="button" class="btn btn-primary btn_requst" data-dismiss="modal" (click)="publishRequest()">
+            Submit
+          </button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <div class="modal fade mt_150" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document ">
           <div class="modal-content">
@@ -368,21 +451,47 @@
         </div>
       </div>
 
-      <div class="modal fade mar_top_150" id="transferotherRoc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-    <div class="modal-dialog modal-lg" role="document ">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="reject_req_h4">
-            Transfer the requet to other ROC
-          </h4>
-        </div>
-        <div class="modal-footer">
-          <button type="button" data-dismiss="modal" (click)="transfertoOtherRoc()" class="btn btn-primary btn_requst">
-            Submit
-          </button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <div class="modal fade mar_top_150" id="transferotherRoc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+      >
+      <div class="modal-dialog modal-lg" role="document ">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="reject_req_h4">
+              Transfer the requet to other ROC
+            </h4>
+          </div>
+  
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Regional Operation Coordinator</label>
+                  <select class="form-control form_width1" (change)="getRoc($event)">
+                    <option hidden disabled selected='selected'>Regional Operation Coordinator</option>
+                    <option *ngFor="let cordinator of cordinatorsList" [value]="cordinator.id">
+                      {{ cordinator?.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Comment</label>
+                  <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"
+                    [(ngModel)]="transfercomment"></textarea>
+                </div>
+              </div>
+              <!--col end-->
+            </div>
+            <!--row-->
+          </div>
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" (click)="transfertoOtherRoc()" class="btn btn-primary btn_requst">
+              Submit
+            </button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 </div>

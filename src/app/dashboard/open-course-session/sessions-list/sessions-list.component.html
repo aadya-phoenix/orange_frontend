@@ -237,7 +237,7 @@
                       </td>
                       <td class="text-center">
                         <div class="status_med_di">
-                          <a *ngIf="session.status=='pending'" (click)="copyRequest(session)" class="copy_file mr-1"
+                          <a *ngIf="session.status=='pending' && getUserrole.id == 2" (click)="copyRequest(session)" class="copy_file mr-1"
                             data-toggle="tooltip" data-placement="top" title="Copy">
                             <i class="fa fa-files-o" aria-hidden="true"></i>
                           </a>
@@ -249,7 +249,7 @@
                             data-toggle="tooltip" data-placement="top" title="Delete">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                           </a>
-                          <a *ngIf="session.status=='reject'" (click)="editRequest(session)" class="copy_file mr-1"
+                          <a *ngIf="session.status=='reject' && getUserrole.id == 2" (click)="editRequest(session)" class="copy_file mr-1"
                             data-toggle="tooltip" data-placement="top" title="Edit">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                           </a>
