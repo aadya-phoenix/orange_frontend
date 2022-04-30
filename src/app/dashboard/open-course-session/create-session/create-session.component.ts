@@ -224,7 +224,7 @@ export class CreateSessionComponent implements OnInit {
     this.courseService.getpreferedInstructor().subscribe(
       (res: any) => {
         console.log(res);
-        this.preferedInstructor = res.data;
+        this.preferedInstructor = _.map(res.data, function(x) { return {'email_id':x.email_id}});
       },
       (err: any) => {
         console.log(err);
@@ -375,7 +375,8 @@ export class CreateSessionComponent implements OnInit {
 
       for(let item of this.data){
         for(let newitem of item){
-          this.newdata.push({email_id:newitem,city: '',
+          this.preferedInstructor.push({email_id:newitem,
+          /*   city: '',
           country: '',
           creation_date: null,
           department_description: '',
@@ -406,12 +407,12 @@ export class CreateSessionComponent implements OnInit {
           password: '',
           region: '',
           staff_status: '',
-          supervisor_of_others: ''
+          supervisor_of_others: '' */
           });
         }
       }
-      console.log("newdata",this.newdata);
-      this.newEmailParticipants(this.newdata);
+      console.log("newdata",this.preferedInstructor);
+     // this.newEmailParticipants(this.newdata);
       /* this.data.map((e:any)=>{
           e.email_id=e;
           console.log("e",e);
@@ -440,6 +441,7 @@ export class CreateSessionComponent implements OnInit {
   }
 
   newEmailParticipants(arr:any){
+    debugger;
     return _.map(arr,(e)=>{this.preferedInstructor.push(e);
     console.log("emailk",this.preferedInstructor);
     });
