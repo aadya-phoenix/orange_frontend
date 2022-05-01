@@ -2,6 +2,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
@@ -48,10 +49,17 @@ export class CreateSessionComponent implements OnInit {
     { id: 'no', name: 'No' },
   ];
   public createSessionForm!: FormGroup;
+  breaksArray :any= [];
+  breaksCopyArray:any=[];
+  faControl:any=[];
 
   data:any=[];
   newdata:any=[];
   //data:[][]=[[]];
+  sessionPub:boolean=false;
+  closeResult:string = "";
+  rejectcomment:string='';
+  publishComment:string='';
 
   constructor(
     private fb: FormBuilder,
@@ -61,6 +69,7 @@ export class CreateSessionComponent implements OnInit {
     private courseSessionService: CourseSessionService,
     private router: Router,
     private route: ActivatedRoute,
+    private modalService: NgbModal
   ) {
     this.createSessionForm = this.fb.group({
       title: new FormControl('', [Validators.required]),
@@ -139,12 +148,13 @@ export class CreateSessionComponent implements OnInit {
     (<FormArray>(<FormGroup>this.metadataArray.controls[index]).controls.break).push(this.breakGroup());
     
   }
+
+   removeBreak(sessIndex: any,breakIndex:any): void{
+    (<FormArray>(<FormGroup>this.metadataArray.controls[sessIndex]).controls.break).removeAt(breakIndex);
+  } 
   
   get metadataArray(): FormArray {
-    //debugger;
-   // if(this.metadataArray?.length > 0){
     return <FormArray>this.createSessionForm.get('metadata');
-  //  }
   }
 
   getSessionLists() {
@@ -167,18 +177,22 @@ export class CreateSessionComponent implements OnInit {
         if (res.status === 1 && res.message === 'Success') {
           this.session_details = res.data;
           console.log("resdetails data", this.session_details);
-          console.log("resdetails 2 data", res.data);
           this.createSessionForm.controls.title.setValue(this.session_details.title);
           this.createSessionForm.controls.region_id.setValue(this.session_details.region_id);
           const metadata = this.session_details.metadata;
           for (let meta of metadata){
+            this.breaksArray = [];
             meta.delivery_method_id = JSON.parse(meta.delivery_method);
             meta.country_id  = JSON.parse(meta.country);
             meta.email = JSON.parse(meta.email_participant);
-          //  meta.external_vendor_id = JSON.parse(meta.external_vendor);
+            meta.break_data = JSON.parse(meta.break)
+            console.log("meta break",meta.break_data);
+          for(let item of meta.break_data){
+            this.breaksArray.push(this.fb.group({description:item.description,duration:item.duration}))
+          }
+          meta.breakArray = this.breaksArray;
             this.metadataArray.push(this.updateMetadata(meta));
             console.log("meta",meta);
-            // this.metadataArray.controls.delivery_method.setValue
           }
         }
       }
@@ -257,7 +271,11 @@ export class CreateSessionComponent implements OnInit {
   }
 
   copySession(session: any) {
-    //console.log("session is",session.value);
+    console.log("session is",session.value);
+    for(let item of session.break){
+      this.breaksCopyArray.push(this.fb.group({description:item.description,duration:item.duration}))
+    }
+    session.breaksCopyArray = this.breaksCopyArray;
     this.metadataArray.push(this.addMoreMetadata(session.value));
   }
 
@@ -274,8 +292,7 @@ export class CreateSessionComponent implements OnInit {
       end_date: new FormControl(sessionval.end_date, [Validators.required]),
       end_time: new FormControl(sessionval.end_time, [Validators.required]),
       time_zone: new FormControl(sessionval.time_zone),
-      break: new FormControl(sessionval.break),
-     // break: this.fb.array([]),  
+      break: this.fb.array(sessionval.breaksCopyArray),  
       comment: new FormControl(sessionval.comment),
       min_registration: new FormControl(sessionval.min_registration, [Validators.required,
       Validators.pattern(numbersOnlyregexp)]),
@@ -303,8 +320,7 @@ export class CreateSessionComponent implements OnInit {
       end_date: new FormControl(sessionval.end_date, [Validators.required]),
       end_time: new FormControl(sessionval.end_time, [Validators.required]),
       time_zone: new FormControl(sessionval.time_zone),
-      break: new FormControl(sessionval.break),
-     // break: this.fb.array([]),  
+      break: this.fb.array(sessionval.breakArray),
       comment: new FormControl(sessionval.comment),
       min_registration: new FormControl(sessionval.min_registration, [Validators.required,
       Validators.pattern(numbersOnlyregexp)]),
@@ -421,21 +437,24 @@ export class CreateSessionComponent implements OnInit {
     reader.readAsBinaryString(target.files[0]);
   }
 
-  externalVendor(event:any){
+  externalVendor(event:any,index:number){
     if (event.id == 'yes') {
+      this.faControl =[];
       this.externalVendorname = true;
       console.log("validators",)
       this.getExternalVendor();
-     
-      this.createSessionForm
-        .get('external_vendor_name')
-        ?.setValidators(Validators.required);
+      this.faControl = 
+      (<FormArray>this.createSessionForm.controls['metadata']).at(index);
+       this.faControl['controls'].external_vendor_name?.setValidators(Validators.required);;
      } 
      else {
+      this.faControl =[];
       this.externalVendorname = false;
+      this.faControl = 
+      (<FormArray>this.createSessionForm.controls['metadata']).at(index);
       this.createSessionForm.get('external_vendor_name')?.clearValidators();
-      this.createSessionForm.patchValue({
-        external_vendor_name: null,
+      this.faControl['controls'].external_vendor_name?.patchValue({
+        external_vendor_name: '',
       });
     }
   }
@@ -453,6 +472,54 @@ export class CreateSessionComponent implements OnInit {
    },err=>{
      console.log(err);
    });
+  }
+
+  open(content: any) {
+    this.modalService
+      .open(content, { size: "sm", backdrop: "static" })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return "by pressing ESC";
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return "by clicking on a backdrop";
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  publishRequest() {
+   let publishobj = { session_id: this.session_id, status: 'publish', status_comment: this.publishComment };
+     this.courseSessionService.changeStatusSession(publishobj).subscribe(
+       (res: any) => {
+         console.log(res);
+         if (res) {
+           this.router.navigate(['/dashboard/opensession']);
+         }
+       },
+       (err: any) => {
+         console.log(err);
+       }
+     );
+  }
+
+  reject() {
+    let statusobj = { session_id: this.session_id, status: 'reject', status_comment: this.rejectcomment }
+    this.courseSessionService.changeStatusSession(statusobj).subscribe((res: any) => {
+      console.log(res);
+      this.router.navigate(['/dashboard/opensession']);
+    }, (err: any) => {
+      console.log(err)
+    })
   }
 
 }

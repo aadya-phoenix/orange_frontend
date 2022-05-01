@@ -223,20 +223,7 @@
                                         </div>
                                     </div>
                                     <!--col-->
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label class="form-control-label">
-                                                Excel Import
-                                            </label>
-
-                                            <div class="upload_field mb-2 w_100">
-                                                <input type="file" id="exampleInputFile" multiple="false"
-                                                    class="upload_css" (change)="onFileChange($event)" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--col-->
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Email ID of participants <span class="text_red">* </span>
@@ -361,28 +348,28 @@
 
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-12" formArrayName="break">
+                                    <div class="col-sm-12">
                                         <!-- *ngIf="metadataArray.controls[i].controls.break.controls.length > 0" -->
-                                        <table class="table table-bordered">
+                                        <table  formArrayName="break" class="table table-bordered">
                                             <thead *ngFor="let item of session.controls.break.controls; let idx = index;">
                                                 <tr >
                                                     <th scope="col">Break Description</th>
                                                     <th scope="col">Break Duration</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
-                                                <tr [formGroupName]="idx">
-                                                    <td  class="d-flex">
+                                                <tr >
+                                                    <td [formGroupName]="idx"  class="d-flex">
                                                         <textarea formControlName="description"
                                                             class="form-control form_width-textarea w-100 mr-2" rows="3"
                                                             placeholder="Enter Description"></textarea>
                                                     </td>
-                                                    <td> <input type="time"
+                                                    <td [formGroupName]="idx"> <input type="time"
                                                             class="form-control form_width" formControlName="duration">
                                                     </td>
                                                     <td>
-                                                        <button (click)="addBreak(idx)" class="btn btn-primary">Add
+                                                        <button (click)="addBreak(i)" class="btn btn-primary">Add
                                                             Break +</button>
-                                                        <button class="btn btn-danger">
+                                                        <button  *ngIf="idx > 0" (click)="removeBreak(i,idx)" class="btn btn-danger">
                                                             Remove Break -
                                                         </button>
                                                     </td>
@@ -520,7 +507,7 @@
                                                     </i>
                                                 </a>
                                             </label>
-                                            <ng-select placeholder="Please select" [items]="yesNo" bindLabel="name"
+                                            <ng-select placeholder="Please select" [items]="yesNo" bindLabel="name" (change)="externalVendor($event,i)"
                                                 bindValue="id" formControlName="external_vendor" class="w_100">
                                             </ng-select>
                                             <div class="error_message"
@@ -530,7 +517,7 @@
                                         </div>
                                     </div>
                                     <!--col-->
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" *ngIf="externalVendorname">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 External vendor name<span class="text_red">* </span>
@@ -569,7 +556,7 @@
                                             </label>
 
                                             <input
-                                                [value]="metadataArray.controls[i].controls['training_cost'].value | currency :'EU'"
+                                                [value]="metadataArray.controls[i].controls['training_cost'].value | currency :'EUR'"
                                                 type="text" class="form-control form_width"
                                                 placeholder="Enter Training cost per participant"
                                                 formControlName="training_cost">
@@ -583,25 +570,100 @@
 
                         </div>
                     </ng-container>
-                    <div class="card-footer" *ngIf="getUserrole.id == 2 || session_id == 0">
+                    <div class="card-footer" *ngIf ="getUserrole.id == 2">
                         <button class="btn btn-primary mr-1" type="submit"
                             (click)="createSession('pending')">Submit</button>
                         <button class="btn btn-secondary" (click)="createSession('draft')">
                             Save as draft
                         </button>
                     </div>
-                    <!-- <div class="card-footer" *ngIf ="getUserrole.id != 2 || session_id != 0">
-                    <button class="btn btn-primary mr-1" type="submit"
-                        (click)="createSession('pending')">Publish</button>
-                    <button class="btn btn-secondary" (click)="createSession('draft')">
-                        Save as draft
-                    </button>
-                </div> -->
+                     <div class="card-footer" *ngIf ="getUserrole.id == 3">
+                        <button *ngIf="sessionPub && session_status != 'pending'" class="btn btn-primary mr-1" type="submit"
+                        (click)="createSession('pending')">Submit</button>
+                        <button *ngIf="!sessionPub || session_status == 'pending'" class="btn btn-primary mr-1" data-target="#publishModal" data-toggle="modal">Publish</button>
+                        <button *ngIf="session_id == 0" class="btn btn-secondary" (click)="createSession('draft')">
+                            Save as draft
+                        </button>
+                        <button *ngIf="session_id != 0" class="btn btn-secondary" data-target="#rejectModal" data-toggle="modal" (click)="reject()">
+                            Reject
+                        </button>
+                    </div> 
+                    <div class="card-footer" *ngIf ="getUserrole.id == 9">
+                        <button class="btn btn-primary mr-1" type="submit"
+                             data-target="#publishModal" data-toggle="modal">Publish</button>
+                            <button *ngIf="session_id == 0" class="btn btn-secondary" (click)="createSession('draft')">
+                                Save as draft
+                            </button>
+                        <button *ngIf="session_id != 0" class="btn btn-secondary" data-toggle="modal" (click)="reject()">
+                            Reject
+                        </button>
+                    </div> 
                 </div>
             </div>
         </div>
     </div>
 </form>
+
+<div class="modal fade mar_top_150" id="publishModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+   >
+    <div class="modal-dialog modal-lg" role="document ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="reject_req_h4">Publish Request</h4>
+        </div>
+
+        <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Comments</label>
+                  <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments" [(ngModel)]="publishComment"></textarea>
+                </div>
+              </div>
+            </div>
+            <!--row-->
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button " class="btn btn-secondary " data-dismiss="modal ">Close</button> -->
+          <button type="button" class="btn btn-primary btn_requst" data-dismiss="modal" (click)="publishRequest()">
+            Submit
+          </button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="modal fade mt_150" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel"   aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document ">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="reject_req_h4">Reject Request</h4>
+            </div>
+    
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label>Comments</label>
+                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"
+                      [(ngModel)]="rejectcomment"></textarea>
+                  </div>
+                </div>
+                <!--col end-->
+              </div>
+              <!--row-->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="reject()">
+                Submit
+              </button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 <div class="collapse" id="collapseExample">
     <div class="card card-body req_status-card">
         <div class="card_header reqst_header">
