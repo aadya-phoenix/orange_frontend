@@ -185,12 +185,21 @@ export class CreateSessionComponent implements OnInit {
             meta.delivery_method_id = JSON.parse(meta.delivery_method);
             meta.country_id  = JSON.parse(meta.country);
             meta.email = JSON.parse(meta.email_participant);
+            console.log("meta break",meta.break);
+            if(meta.external_vendor =='yes'){
+              this.externalVendorname = true;
+            }
+            if(meta.break != null){
             meta.break_data = JSON.parse(meta.break)
             console.log("meta break",meta.break_data);
           for(let item of meta.break_data){
-            this.breaksArray.push(this.fb.group({description:item.description,duration:item.duration}))
+            this.breaksArray.push(this.fb.group({description:item.description,duration:item.duration}));
           }
           meta.breakArray = this.breaksArray;
+        }
+        else{
+          meta.breakArray=[];
+        }
             this.metadataArray.push(this.updateMetadata(meta));
             console.log("meta",meta);
           }
@@ -272,10 +281,24 @@ export class CreateSessionComponent implements OnInit {
 
   copySession(session: any) {
     console.log("session is",session.value);
-    for(let item of session.break){
-      this.breaksCopyArray.push(this.fb.group({description:item.description,duration:item.duration}))
+    console.log("session break",session.value.break);
+    console.log("session is",session.value.country);
+    if(session.external_vendor =='yes'){
+      this.externalVendorname = true;
+    } 
+   this.breaksCopyArray=[];
+    if(session.value.break != undefined){
+      console.log("not undefined");
+    for(let item of session.value.break){
+      this.breaksCopyArray.push(this.fb.group({description:item.description,duration:item.duration}));
     }
-    session.breaksCopyArray = this.breaksCopyArray;
+    session.value.breaksCopyArray = this.breaksCopyArray; 
+   }
+   else{
+     console.log("undefined");
+    session.breaksCopyArray = session.break;  
+    console.log("session.breaksCopyArray",session.breaksCopyArray) 
+   }
     this.metadataArray.push(this.addMoreMetadata(session.value));
   }
 
@@ -328,7 +351,7 @@ export class CreateSessionComponent implements OnInit {
       Validators.pattern(numbersOnlyregexp)]),
       registration_deadline: new FormControl(sessionval.registration_deadline, [Validators.required]),
       availability: new FormControl(sessionval.availability, [Validators.required]),
-      external_vendor: new FormControl(sessionval.external_vendor_id, [Validators.required]),
+      external_vendor: new FormControl(sessionval.external_vendor, [Validators.required]),
       external_vendor_name: new FormControl(sessionval.external_vendor_name, [Validators.required]),
       manager_approval: new FormControl(sessionval.manager_approval),
       training_cost: new FormControl(sessionval.training_cost),
@@ -343,6 +366,9 @@ export class CreateSessionComponent implements OnInit {
     if (this.createSessionForm.valid) {
       const sessionObj = this.createSessionForm.value;
       sessionObj.status = status;
+      if(status =='publish'){
+        sessionObj. status_comment =  this.publishComment;
+      }
       console.log("session value", sessionObj);
       if (!this.session_id) {
         this.courseSessionService.createSession(sessionObj).subscribe(

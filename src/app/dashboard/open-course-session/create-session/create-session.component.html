@@ -556,7 +556,7 @@
                                             </label>
 
                                             <input
-                                                [value]="metadataArray.controls[i].controls['training_cost'].value | currency :'EUR'"
+                                                [value]="metadataArray.controls[i].controls['training_cost'].value | currency:'EUR':'symbol':'4.2-2'"
                                                 type="text" class="form-control form_width"
                                                 placeholder="Enter Training cost per participant"
                                                 formControlName="training_cost">
@@ -625,7 +625,7 @@
         </div>
         <div class="modal-footer">
           <!-- <button type="button " class="btn btn-secondary " data-dismiss="modal ">Close</button> -->
-          <button type="button" class="btn btn-primary btn_requst" data-dismiss="modal" (click)="publishRequest()">
+          <button type="button" class="btn btn-primary btn_requst" data-dismiss="modal" (click)="createSession('publish')">
             Submit
           </button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
