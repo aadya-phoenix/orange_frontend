@@ -1,0 +1,40 @@
+<div class="card mb-0" *ngIf="modalType=='viewhistory'">
+    <div class="card-header color-orange">
+        <div class="d-flex justify-content-between">
+            {{title}}
+            <a (click)="closeModal()"><i class="fa fa-times color-black" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title" style="font-size: 0.9rem;">
+            <b class="color-orange">({{objectDetail.request_id}})</b>
+        </h5>
+        <table class="table table-bordered">
+            <thead>
+                <tr class="font-14 text-center">
+                    <th scope="col">Sr.No</th>
+                    <th scope="col">Request Name</th>
+                    <th scope="col">Sent to</th>
+                    <th scope="col">Last Modified</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Comments</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let history of historyList;let i = index" class="text-center font-13">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{ history && history.transfer_by_name ? history.transfer_by_name : history.action_by_name}}
+                    </td>
+                    <td>{{history && history.transfer_by_name ? history.transfer_to_name : '-'}}</td>
+                    <td>{{ history.updated_at | date: "short"}}</td>
+                    <td>
+                        {{history.status | titlecase}}
+                    </td>
+                    <td>
+                        <p style="width: 154px; overflow-y: auto;font-size: 12px;">{{history.status_comment}}</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

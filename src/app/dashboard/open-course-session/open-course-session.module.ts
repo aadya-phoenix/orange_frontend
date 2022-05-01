@@ -1,23 +1,30 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 
 import { OpenCourseSessionRoutingModule } from './open-course-session-routing.module';
-import { AllCoursesComponent } from './all-courses/all-courses.component';
+
 import { CreateSessionComponent } from './create-session/create-session.component';
-import { OpenRequestDetailComponent } from './open-request-detail/open-request-detail.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { SessionHistoryComponent } from './session-history/session-history.component';
+import { ViewSessionComponent } from './view-session/view-session.component';
+import { SessionsListComponent } from './sessions-list/sessions-list.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
-  declarations: [AllCoursesComponent, CreateSessionComponent, OpenRequestDetailComponent],
+  declarations: [ SessionsListComponent, CreateSessionComponent, SessionHistoryComponent, 
+    ViewSessionComponent],
+  providers:[CurrencyPipe],
+  entryComponents:[SessionHistoryComponent],
   imports: [
     CommonModule,
     SharedModule,
     OpenCourseSessionRoutingModule,
     NgxPaginationModule,
-    NgSelectModule
+    NgSelectModule,
+    NgbModule
   ]
 })
 export class OpenCourseSessionModule { }

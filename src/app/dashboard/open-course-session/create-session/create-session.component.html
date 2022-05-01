@@ -1,15 +1,16 @@
 <div id="right-panel" class="right-panel">
     <app-header></app-header>
-    <div class="breadcrumbs" style="background-color: #fbfbf7; padding: 6px 9px 6px 9px">
+    <div class="breadcrumbs cm_breadcums">
         <div class="col-sm-7">
-            <div class="page-header float-left" style="background: transparent">
+            <div class="page-header float-left">
                 <div class="page-title d-flex align-items-center">
-                    <img src="../../../../assets/images/creatnew.png" class="home_Css_img" />
+                    <img src="../../../../assets/images/second.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span style="font-size: 20px" class="mb-1">Create new course </span>
-                        <span style="color: #aba3a3; font-size: 13px">
-                            <b style="color: #000">Instructor-Led (ILT)</b>-Instructor-Led
-                            Training is face to face training delivered in a classroom.<b style="color: #000">
+                        <span class="breade_text_span1">Create new session </span>
+                        <span class="divider"></span>
+                        <span class="breade_text_span">
+                            <b>Instructor-Led (ILT)</b>-Instructor-Led
+                            Training is face to face training delivered in a classroom.<b>
                                 Virtual Instructor-Led
                                 Training(vILT)-
                             </b>virtual instrutor-Led Training(vILT)is delivered remotely
@@ -18,21 +19,20 @@
                 </div>
             </div>
         </div>
-
         <div class="col-sm-5 float-right">
-            <div class="page-header float-right" style="background: transparent">
+            <div class="page-header float-right">
                 <div class="page-title d-flex end_just">
-                    <ol class="breadcrumb text-right" style="background: transparent">
+                    <ol class="breadcrumb text-right">
                         <li>
-                            <a [routerLink]="['/dashboard']">
-                                <i class="fa fa-home" style="color: #5161ce"></i>
+                            <a [routerLink]="['/dashboard']" class="text_white">
+                                <i class="fa fa-home"></i>
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" style="color: #ff7900">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/cources']" style="color: #ff7900">Create new Course</a>
+                            <a [routerLink]="['/dashboard/cources']" class="text_white">Create new Session</a>
                         </li>
                     </ol>
                 </div>
@@ -44,20 +44,17 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header" style="padding: 0.75rem 1.25rem !important; background-color: #fff">
+                        <div class="card-header card_header_common">
                             <div class="d-flex justify-content-between media_creat_couse_col">
                                 <div class="d-flex align-items-center">
-                                    <img src="../../../../assets/images/formm.png" class="ml-2" style="width: 40px" />
-                                    <!-- <img
-                    src="../../../../assets/images/form.png"
-                    style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px"
-                    class="mr-2"
-                  /> -->
+
+                                    <img src="../../../../assets/images/formm.png" class="ml-2 w_40" />
                                     <span class="comlte_css">Complete this form and click on the submit button</span>
                                 </div>
-                                <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample"
+                                    role="button" aria-expanded="false" aria-controls="collapseExample">
                                     View overall request status<img src="../../../../assets/images/Viewreq.png"
-                                        class="ml-2" style="width: 40px" />
+                                        class="ml-2 w_40" />
                                 </a>
                             </div>
                         </div>
@@ -69,31 +66,20 @@
         <!-- .content -->
     </div>
 </div>
-<div class="content mt-1">
-    <div class="animated fadeIn">
-        <div class="row">
-            <div class="col-md-12">
-                <span class="indicate_css"><span style="color: red">*</span>Indicates required field</span>
-
-                <form [formGroup]="createSessionForm" enctype="multipart/form-data">
+<form [formGroup]="createSessionForm" enctype="multipart/form-data">
+    <div class="content mt-1">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="indicate_css"><span class="text_red
+                    ">*</span>Indicates required field</span>
                     <div class="card">
-                        <div class="card-header">
-                            <div class="heeader_button">
-                                <strong _ngcontent-jet-c125=""> Course Details </strong>
-                                <div class="button_div">
-                                    <button class="btn btn-primary mr-1">Copy Session <i class="fa fa-files-o ml-1" aria-hidden="true"></i></button>
-                                    <button class="btn btn-info mr-1">Add the Session +</button>
-                                    <button class="btn btn-danger">Remove <i class="fa fa-minus ml-1" aria-hidden="true"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="card-body card_width">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Event Title <span style="color: red">* </span>
+                                            Event Title <span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                     data-toggle="tooltip" data-placement="top"
@@ -101,415 +87,602 @@
                                                 </i>
                                             </a>
                                         </label>
-                                        <input type="text" class="form-control form_width" placeholder="Enter Event Title" formControlName="event_title">
+                                        <input type="text" class="form-control form_width"
+                                            placeholder="Enter Event Title" formControlName="title">
+                                        <div class="error_message"
+                                            *ngIf="createSessionForm.controls['title'].hasError('required') && createSessionForm.controls['title'].touched">
+                                            Event Title cannot be blank
+                                        </div>
                                     </div>
                                 </div>
                                 <!--col-->
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Select your region <span style="color: red">* </span>
+                                            Select your region <span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                     data-toggle="tooltip" data-placement="top" title="">
                                                 </i>
                                             </a>
                                         </label>
-                                        <ng-select placeholder="Please Select Region" [items]="rocObj" bindLabel="name" bindValue="id" formControlName="region" style="width: 100%">
+                                        <ng-select placeholder="Please Select Region" [items]="rocObj" bindLabel="name"
+                                            bindValue="id" formControlName="region_id" class="w_100">
                                         </ng-select>
+                                        <div class="error_message"
+                                            *ngIf="createSessionForm.controls['region_id'].hasError('required') && createSessionForm.controls['region_id'].touched">
+                                            Region cannot be blank
+                                        </div>
                                     </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Delivery Method <span style="color: red">* </span>
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top"
-                                                    title="The delivery method selected will apply to all sessions detailed below.">
-                                                </i>
-                                            </a>
-                                        </label>
-                                        <ng-select placeholder="Please select Delivery method" [items]="deliveryMethod" bindLabel="name" bindValue="id" formControlName="delivery_method" style="width: 100%">
-                                        </ng-select>
-                                    </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Country <span style="color: red">* </span>
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top"
-                                                    title="Please select the country.">
-                                                </i>
-                                            </a>
-                                        </label>
-
-                                        <ng-select placeholder="Please select Country" 
-                                        [items]="countryObj" bindLabel="country_name" bindValue="id" formControlName="country" style="width: 100%">
-                                        </ng-select>
-                                    </div>
-                                </div>
-                                <!--col-->
-
-
-
-
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="card">
-
-
-                        <div class="card-body card_width">
-
-                            <div class="row">
-
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Email ID of participants <span style="color: red">* </span>
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top" title="">
-                                                </i>
-                                            </a>
-                                        </label>
-
-                                        <select class="form-control form_width">
-                                            <option>option 1</option>
-                                            <option>option 2</option>
-                                            <option>option 3</option>
-                                            <option>option 4</option>
-                                            <option>option 5</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Start Date<span style="color: red">* </span>
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top" title="">
-                                                </i>
-                                            </a>
-                                        </label>
-
-                                        <input type="date" class="form-control form_width" formControlName="start_date">
-                                    </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Start Time<span style="color: red">* </span>
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top" title="">
-                                                </i>
-                                            </a>
-                                        </label>
-
-                                        <input type="time" class="form-control form_width" formControlName="start_time">
-                                    </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            End Date<span style="color: red">* </span>
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top" title="">
-                                                </i>
-                                            </a>
-                                        </label>
-
-                                        <input type="date" class="form-control form_width" formControlName="end_date">
-                                    </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            End Time<span style="color: red">* </span>
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top" title="">
-                                                </i>
-                                            </a>
-                                        </label>
-
-                                        <input type="time" class="form-control form_width" formControlName="end_time">
-                                    </div>
-                                </div>
-                                <!--col-->
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="card">
-
-
-                        <div class="card-body card_width">
-
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Description</th>
-
-                                                <th scope="col" style="width: 12px"><button class="btn btn-primary">Add Break +</button></th>
-                                            </tr>
-                                            <tr>
-
-                                                <td class="d-flex">
-                                                    <textarea class="form-control form_width-textarea w-100 mr-2" rows="3" placeholder="Enter Description" formControlName="description"></textarea>
-                                                    <input type="time" class="form-control form_width" formControlName="start_time">
-                                                </td>
-                                                <td>
-
-                                                    <button class="btn btn-danger">
-                           Remove Break -
-                          </button>
-                                                </td>
-                                            </tr>
-                                        </thead>
-                                    </table>
                                 </div>
                                 <!--col-->
                             </div>
-                            <!--row-->
-
                         </div>
                     </div>
-                    <div class="card">
-
-
-                        <div class="card-body card_width">
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Time Zone
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top"
-                                                    title="Please indicate the time zone of the instructor.">
-                                                </i>
-                                            </a>
-                                        </label>
-
-                                        <ng-select placeholder="Please select Country" 
-                                        [items]="timeZoneObj" bindLabel="name" bindValue="id" formControlName="time_zone" style="width: 100%">
-                                        </ng-select>
+                    <ng-container *ngIf="metadataArray.controls.length > 0">
+                        <div class="card" formArrayName="metadata" *ngFor="let session of metadataArray.controls; let i = index">
+                             <!--  <ng-container > -->
+                            <div class="card-header">
+                                <div class="heeader_button">
+                                    <strong _ngcontent-jet-c125=""> Sessions:{{i+1}} </strong>
+                                    <div class="button_div">
+                                        <button (click)="copySession(session)" class="btn btn-primary mr-1">Copy Session
+                                            <i class="fa fa-files-o ml-1" aria-hidden="true"></i></button>
+                                        <button (click)="addMetadata()" class="btn btn-info mr-1">Add the Session
+                                            +</button>
+                                        <!-- <button (click)="addSession('','','','','','','','','','','','','','','','','','')" class="btn btn-info mr-1">Add the Session +</button> -->
+                                        <button *ngIf="i > 0" (click)="removeMetadata(i)" class="btn btn-danger">Remove
+                                            <i class="fa fa-minus ml-1" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Comments
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top" title="">
-                                                </i>
-                                            </a>
-                                        </label>
-                                        <textarea class="form-control form_width-textarea" rows="3" formControlName="comments"></textarea>
+                            </div>
 
-                                    </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Minimum Registration <span style="color: red">* </span>
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top"
-                                                    title="Please indicate the minimum number of participants required for the session to take place.">
-                                                </i>
-                                            </a>
-                                        </label>
+                            <div [formGroupName]="i" class="card-body card_width">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Delivery Method <span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="The delivery method selected will apply to all sessions detailed below.">
+                                                    </i>
+                                                </a>
+                                            </label>
 
-                                        <input type="text" class="form-control form_width" placeholder="Enter Minimum Registration " formControlName="min_registration">
+                                            <ng-select placeholder="Please select Delivery method"
+                                                [items]="deliveryMethod" bindLabel="name" bindValue="id"
+                                                formControlName="delivery_method" class="w_100">
+                                            </ng-select>
+                                            <div class="error_message"
+                                                *ngIf="metadataArray.controls[i].controls['delivery_method'].hasError('required') && metadataArray.controls[i].controls['delivery_method'].touched">
+                                                Delivery Method cannot be blank
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Maximum Registration <span style="color: red">* </span>
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top"
-                                                    title="Please indicate the maximum number of participants allowed to register on the session.">
-                                                </i>
-                                            </a>
-                                        </label>
+                                    <!--col-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Country <span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Please select the country.">
+                                                    </i>
+                                                </a>
+                                            </label>
 
-                                        <input type="text" class="form-control form_width" placeholder="Enter Maximum Registration " formControlName="max_registration">
+                                            <ng-select placeholder="Please select Country" [items]="countryObj"
+                                                bindLabel="country_name" bindValue="id" formControlName="country"
+                                                class="w_100">
+                                            </ng-select>
+                                            <div class="error_message"
+                                                *ngIf="metadataArray.controls[i].controls['country'].hasError('required') && metadataArray.controls[i].controls['country'].touched">
+                                                Country cannot be blank
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Registration Deadline<span style="color: red">* </span>
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top" title="">
-                                                </i>
-                                            </a>
-                                        </label>
+                                    <!--col-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Location
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top" title="">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <input type="text" class="form-control form_width"
+                                                placeholder="Enter Location" formControlName="location">
+                                            <div class="error_message"
+                                                *ngIf="metadataArray.controls[i].controls['location'].hasError('required') && metadataArray.controls[i].controls['location'].touched">
+                                                Location cannot be blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Instructor Name
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top" title="">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <input type="text" class="form-control form_width"
+                                                placeholder="Enter Instructor Name" formControlName="instructor_name">
+                                            <div class="error_message"
+                                                *ngIf="metadataArray.controls[i].controls['instructor_name'].hasError('required') && metadataArray.controls[i].controls['instructor_name'].touched">
+                                                Instructor Name cannot be blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Email ID of participants <span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top" title="">
+                                                    </i>
+                                                </a>
+                                            </label>
 
-                                        <input type="date" class="form-control form_width" formControlName="reg_deadline">
+                                            <ng-select placeholder="Please select Instructor"
+                                                [items]="preferedInstructor" [multiple]="true" bindLabel="email_id"
+                                                bindValue="email_id" formControlName="email_participant">
+                                            </ng-select>
+                                            <div class="error_message"
+                                                *ngIf="metadataArray.controls[i].controls['email_participant'].hasError('required') && metadataArray.controls[i].controls['email_participant'].touched">
+                                                Email ID of participants cannot be blank
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Availability <span style="color: red">* </span>
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top"
-                                                    title="Please indicate if the session should be restricted to a specific target audience: e.g. employees in a specific location, specific business unit, specific users.">
-                                                </i>
-                                            </a>
-                                        </label>
-                                        <textarea class="form-control form_width-textarea" rows="3" formControlName="availability"></textarea>
+                                    <!--col-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Start Date<span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top" title="">
+                                                    </i>
+                                                </a>
+                                            </label>
 
+                                            <input type="date" class="form-control form_width"
+                                                formControlName="start_date">
+                                            <div class="error_message"
+                                                *ngIf="metadataArray.controls[i].controls['start_date'].hasError('required') && metadataArray.controls[i].controls['start_date'].touched">
+                                                Start Date cannot be blank
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            External vendor <span style="color: red">* </span>
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top"
-                                                    title="Please indicate if the session is delivered by an external training provider.">
-                                                </i>
-                                            </a>
-                                        </label>
+                                    <!--col-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Start Time<span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top" title="">
+                                                    </i>
+                                                </a>
+                                            </label>
 
-                                        <ng-select placeholder="Please select" (change)="externalVendor($event)" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="external_vendor" style="width: 100%">
-                                        </ng-select>
+                                            <input type="time" class="form-control form_width"
+                                                formControlName="start_time">
+                                            <div class="error_message"
+                                                *ngIf="metadataArray.controls[i].controls['start_time'].hasError('required') && metadataArray.controls[i].controls['start_time'].touched">
+                                                Start Time cannot be blank
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Manager Approval
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top"
-                                                    title="Please indicate if learners require manager approval to register for this session.">
-                                                </i>
-                                            </a>
-                                        </label>
+                                    <!--col-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                End Date<span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top" title="">
+                                                    </i>
+                                                </a>
+                                            </label>
 
-                                        <ng-select placeholder="Please select" [items]="yesNo" bindLabel="name" bindValue="id" formControlName="manager_approval" style="width: 100%">
-                                        </ng-select>
+                                            <input type="date" class="form-control form_width"
+                                                formControlName="end_date">
+                                            <div class="error_message"
+                                                *ngIf="metadataArray.controls[i].controls['end_date'].hasError('required') && metadataArray.controls[i].controls['end_date'].touched">
+                                                End Date cannot be blank
+                                            </div>
+                                        </div>
                                     </div>
+                                    <!--col-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                End Time<span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top" title="">
+                                                    </i>
+                                                </a>
+                                            </label>
+
+                                            <input type="time" class="form-control form_width"
+                                                formControlName="end_time">
+                                            <div class="error_message"
+                                                *ngIf="metadataArray.controls[i].controls['end_time'].hasError('required') && metadataArray.controls[i].controls['end_time'].touched">
+                                                End Time cannot be blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Time Zone
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Please indicate the time zone of the instructor.">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <ng-select placeholder="Please select Country" [items]="timeZoneObj"
+                                                bindLabel="name" bindValue="id" formControlName="time_zone"
+                                                class="w_100">
+                                            </ng-select>
+
+                                        </div>
+                                    </div>
+                                    <!--col-->
+
+
                                 </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Training cost per participant
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top" title="Training delivered by Orange instructors has a standard cost of 20 Euros per hour per participant. Example: A course with the duration of 7 hours will have a training cost of 140 Euros.
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <!-- *ngIf="metadataArray.controls[i].controls.break.controls.length > 0" -->
+                                        <table  formArrayName="break" class="table table-bordered">
+                                            <thead *ngFor="let item of session.controls.break.controls; let idx = index;">
+                                                <tr >
+                                                    <th scope="col">Break Description</th>
+                                                    <th scope="col">Break Duration</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                                <tr >
+                                                    <td [formGroupName]="idx"  class="d-flex">
+                                                        <textarea formControlName="description"
+                                                            class="form-control form_width-textarea w-100 mr-2" rows="3"
+                                                            placeholder="Enter Description"></textarea>
+                                                    </td>
+                                                    <td [formGroupName]="idx"> <input type="time"
+                                                            class="form-control form_width" formControlName="duration">
+                                                    </td>
+                                                    <td>
+                                                        <button (click)="addBreak(i)" class="btn btn-primary">Add
+                                                            Break +</button>
+                                                        <button  *ngIf="idx > 0" (click)="removeBreak(i,idx)" class="btn btn-danger">
+                                                            Remove Break -
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                    <!--col-->
+                                </div>
+                                <!--row-->
+                                <div class="row">
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Comments
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top" title="">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <textarea class="form-control form_width-textarea" rows="3"
+                                                formControlName="comment"></textarea>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Minimum Registration <span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Please indicate the minimum number of participants required for the session to take place.">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <input type="text" class="form-control form_width"
+                                                placeholder="Enter Minimum Registration "
+                                                formControlName="min_registration">
+                                            <div class="error_message"
+                                                *ngIf="metadataArray.controls[i].controls['min_registration'].hasError('required') && metadataArray.controls[i].controls['min_registration'].touched">
+                                                Minimum Registration cannot be blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Maximum Registration <span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Please indicate the maximum number of participants allowed to register on the session.">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <input type="text" class="form-control form_width"
+                                                placeholder="Enter Maximum Registration "
+                                                formControlName="max_registration">
+                                            <div class="error_message"
+                                                *ngIf="metadataArray.controls[i].controls['max_registration'].hasError('required') && metadataArray.controls[i].controls['max_registration'].touched">
+                                                Maximum Registration cannot be blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Registration Deadline<span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top" title="">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <input type="date" class="form-control form_width"
+                                                formControlName="registration_deadline">
+                                            <div class="error_message"
+                                                *ngIf="metadataArray.controls[i].controls['registration_deadline'].hasError('required') && metadataArray.controls[i].controls['registration_deadline'].touched">
+                                                Registration Deadline cannot be blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Availability <span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Please indicate if the session should be restricted to a specific target audience: e.g. employees in a specific location, specific business unit, specific users.">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <textarea class="form-control form_width-textarea" rows="3"
+                                                formControlName="availability"></textarea>
+                                            <div class="error_message"
+                                                *ngIf="metadataArray.controls[i].controls['availability'].hasError('required') && metadataArray.controls[i].controls['availability'].touched">
+                                                Availability cannot be blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Manager Approval
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Please indicate if learners require manager approval to register for this session.">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <ng-select placeholder="Please select" [items]="yesNo" bindLabel="name"
+                                                bindValue="id" formControlName="manager_approval" class="w_100">
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                External vendor <span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Please indicate if the session is delivered by an external training provider.">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <ng-select placeholder="Please select" [items]="yesNo" bindLabel="name" (change)="externalVendor($event,i)"
+                                                bindValue="id" formControlName="external_vendor" class="w_100">
+                                            </ng-select>
+                                            <div class="error_message"
+                                                *ngIf="metadataArray.controls[i].controls['external_vendor'].hasError('required') && metadataArray.controls[i].controls['external_vendor'].touched">
+                                                External vendor cannot be blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                    <div class="col-sm-6" *ngIf="externalVendorname">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                External vendor name<span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Please indicate if the session is delivered by an external training provider.">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <ng-select placeholder="Please select" [items]="vendor"
+                                                bindLabel="vendor_name" bindValue="vendor_name"
+                                                formControlName="external_vendor_name" class="w_100">
+                                            </ng-select>
+                                            <div class="error_message"
+                                                *ngIf="metadataArray.controls[i].controls['external_vendor_name'].hasError('required') && metadataArray.controls[i].controls['external_vendor_name'].touched">
+                                                External vendor name cannot be blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Training cost per participant
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Training delivered by Orange instructors has a standard cost of 20 Euros per hour per participant. Example: A course with the duration of 7 hours will have a training cost of 140 Euros.
                                                     The cost of training delivered by an external instructor will be advertised as a cost per participant on the basis of 10 participants per session. The final cost will vary according to the number of participants.
                                                     Example: A session costing a total of 2000 Euros will be advertised as a cost of 200 Euros per participant. If the final number of participants is 8, the final cost per participant will be 250 Euros. If the final number of participants is 12, the final cost per participant will be 166,50 Euros.
                                                     Your Training Coordinator will update training costs on Orange Learning if required.">
-                                                 </i>
-                                            </a>
-                                        </label>
+                                                    </i>
+                                                </a>
+                                            </label>
 
-                                        <input type="text" class="form-control form_width" placeholder="Enter Training cost per participant" formControlName="training_cost">
+                                            <input
+                                                [value]="metadataArray.controls[i].controls['training_cost'].value | currency:'EUR':'symbol':'4.2-2'"
+                                                type="text" class="form-control form_width"
+                                                placeholder="Enter Training cost per participant"
+                                                formControlName="training_cost">
+
+                                        </div>
                                     </div>
+                                    <!--col-->
                                 </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Description
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top" title="">
-                                                </i>
-                                            </a>
-                                        </label>
-
-                                        <input type="text" class="form-control form_width" placeholder="Enter Description" formControlName="description">
-                                    </div>
-                                </div>
-                                <!--col-->
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Break Duration(HH:MM)
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top" title="">
-                                                </i>
-                                            </a>
-                                        </label>
-
-                                        <input type="text" (keyup)="numbersOnly($event)" class="form-control form_width" placeholder="Enter Break Duration(HH:MM)" formControlName="break_duration" maxlength="5">
-                                    </div>
-                                </div>
-                                <!--col-->
-
-
-
+                                <!--row-->
                             </div>
-                            <!--row-->
 
                         </div>
+                    </ng-container>
+                    <div class="card-footer" *ngIf ="getUserrole.id == 2">
+                        <button class="btn btn-primary mr-1" type="submit"
+                            (click)="createSession('pending')">Submit</button>
+                        <button class="btn btn-secondary" (click)="createSession('draft')">
+                            Save as draft
+                        </button>
                     </div>
-                </form>
-
+                     <div class="card-footer" *ngIf ="getUserrole.id == 3">
+                        <button *ngIf="sessionPub && session_status != 'pending'" class="btn btn-primary mr-1" type="submit"
+                        (click)="createSession('pending')">Submit</button>
+                        <button *ngIf="!sessionPub || session_status == 'pending'" class="btn btn-primary mr-1" data-target="#publishModal" data-toggle="modal">Publish</button>
+                        <button *ngIf="session_id == 0" class="btn btn-secondary" (click)="createSession('draft')">
+                            Save as draft
+                        </button>
+                        <button *ngIf="session_id != 0" class="btn btn-secondary" data-target="#rejectModal" data-toggle="modal" (click)="reject()">
+                            Reject
+                        </button>
+                    </div> 
+                    <div class="card-footer" *ngIf ="getUserrole.id == 9">
+                        <button class="btn btn-primary mr-1" type="submit"
+                             data-target="#publishModal" data-toggle="modal">Publish</button>
+                            <button *ngIf="session_id == 0" class="btn btn-secondary" (click)="createSession('draft')">
+                                Save as draft
+                            </button>
+                        <button *ngIf="session_id != 0" class="btn btn-secondary" data-toggle="modal" (click)="reject()">
+                            Reject
+                        </button>
+                    </div> 
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
+
+<div class="modal fade mar_top_150" id="publishModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+   >
+    <div class="modal-dialog modal-lg" role="document ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="reject_req_h4">Publish Request</h4>
+        </div>
+
+        <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Comments</label>
+                  <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments" [(ngModel)]="publishComment"></textarea>
+                </div>
+              </div>
+            </div>
+            <!--row-->
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button " class="btn btn-secondary " data-dismiss="modal ">Close</button> -->
+          <button type="button" class="btn btn-primary btn_requst" data-dismiss="modal" (click)="createSession('publish')">
+            Submit
+          </button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="modal fade mt_150" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel"   aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document ">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="reject_req_h4">Reject Request</h4>
+            </div>
+    
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label>Comments</label>
+                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"
+                      [(ngModel)]="rejectcomment"></textarea>
+                  </div>
+                </div>
+                <!--col end-->
+              </div>
+              <!--row-->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="reject()">
+                Submit
+              </button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 <div class="collapse" id="collapseExample">
     <div class="card card-body req_status-card">
         <div class="card_header reqst_header">
             <p>Overall request Status</p>
-            <i class="fa fa-times fa_cross mr-2" aria-hidden="true" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></i>
+            <i class="fa fa-times fa_cross mr-2" aria-hidden="true" data-toggle="collapse" href="#collapseExample"
+                role="button" aria-expanded="false" aria-controls="collapseExample"></i>
         </div>
         <div class="row ml-1 mr-1" data-aos="fade-right">
             <div class="col-sm-2 dash_wid">
                 <div class="alig_dashicon">
-                    <div>
-                        <div class="fa-icons-des" style="background-color: transparent">
+                    <div class="child_align_icon">
+                        <div class="fa-icons-des bac_trasparent">
                             <img src="../../../../assets/images/icon/draftsbl.png" />
                         </div>
 
                         <p>Draft</p>
                         <span class="number_css">
                             {{
-                            draftRequests && draftRequests.length
-                            ? draftRequests.length
-                            : "0"
+                            session_count.draft
                             }}
                         </span>
                     </div>
@@ -518,15 +691,15 @@
             <!--coled-->
             <div class="col-sm-2 dash_wid">
                 <div class="alig_dashicon">
-                    <div>
-                        <div class="fa-icons-des" style="background-color: transparent">
+                    <div class="child_align_icon">
+                        <div class="fa-icons-des bac_trasparent">
                             <img src="../../../../assets/images/icon/closedbl.png" />
                         </div>
 
                         <p>Submitted</p>
                         <span class="number_css">
                             {{
-                            coursesList && coursesList.length ? coursesList.length : "0"
+                            session_count.submitted
                             }}
                         </span>
                     </div>
@@ -535,17 +708,15 @@
             <!--coled-->
             <div class="col-sm-2 dash_wid">
                 <div class="alig_dashicon">
-                    <div>
-                        <div class="fa-icons-des" style="background-color: transparent">
+                    <div class="child_align_icon">
+                        <div class="fa-icons-des bac_trasparent">
                             <img src="../../../../assets/images/icon/pendingbl.png" />
                         </div>
 
                         <p>Pending</p>
                         <span class="number_css">
                             {{
-                            pendingRequests && pendingRequests.length
-                            ? pendingRequests.length
-                            : "0"
+                            session_count.pending
                             }}
                         </span>
                     </div>
@@ -554,17 +725,15 @@
             <!--coled-->
             <div class="col-sm-2 dash_wid">
                 <div class="alig_dashicon">
-                    <div>
-                        <div class="fa-icons-des" style="background-color: transparent">
+                    <div class="child_align_icon">
+                        <div class="fa-icons-des bac_trasparent">
                             <img src="../../../../assets/images/icon/checkbl.png" />
                         </div>
 
                         <p>Closed</p>
                         <span class="number_css">
                             {{
-                            closedRequests && closedRequests.length
-                            ? closedRequests.length
-                            : "0"
+                            session_count.closed
                             }}
                         </span>
                     </div>
@@ -573,29 +742,21 @@
             <!--coled-->
             <div class="col-sm-2 dash_wid">
                 <div class="alig_dashicon">
-                    <div>
-                        <div class="fa-icons-des" style="background-color: transparent">
+                    <div class="child_align_icon">
+                        <div class="fa-icons-des bac_trasparent">
                             <img src="../../../../assets/images/icon/rejectbl.png" />
                         </div>
 
                         <p>Rejected</p>
                         <span class="number_css">
                             {{
-                            rejectedRequests && rejectedRequests.length
-                            ? rejectedRequests.length
-                            : "0"
+                            session_count.rejected
                             }}
                         </span>
                     </div>
                 </div>
             </div>
             <!--coled-->
-        </div>
-        <!--ROW END-->
-        <div class="view-comple-req_div">
-            <button class="btn btn-primary view-comple-req justify-content-center" style="color: #fff">
-                <img src="../../../../assets/images/icon/viewrewall.png" style="width: 28px" />View Complete Request
-            </button>
         </div>
         <!--ROW END-->
     </div>

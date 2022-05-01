@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/observable/fromEvent';
-import { iif, Subscription } from 'rxjs';
+import {  Subscription } from 'rxjs';
 import { ToolbarService, HtmlEditorService } from '@syncfusion/ej2-angular-richtexteditor';
 
 import {
