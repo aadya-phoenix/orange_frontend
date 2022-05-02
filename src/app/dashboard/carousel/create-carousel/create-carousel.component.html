@@ -39,27 +39,19 @@
             </div>
         </div>
     </div>
-    <div class="content mt-3">
-        <div class="animated fadeIn">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header cm-card-header">
-                            <div class="d-flex justify-content-between media_creat_couse_col">
-                                <div class="d-flex align-items-center">
-                                    <img src="../../../../assets/images/formm.png" class="ml-2" width="40" />
-                                    <span class="comlte_css">Complete this form and click on the submit button</span>
-                                </div>
-                                <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample"
-                                    role="button" aria-expanded="false" aria-controls="collapseExample">
-                                    View overall request status<img src="../../../../assets/images/Viewreq.png"
-                                        class="ml-2" width="40" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="card_header_common">
+        <div class="d-flex justify-content-between media_creat_couse_col">
+            <div class="d-flex align-items-center">
+                <img src="../../../../assets/images/formm.png" class="form_img_req" />
+                <p class="mt-2 ml-2 mb-2 view-re_css">
+                <span class="comlte_css">Complete this form and click on the submit button</span>
+                </p>
             </div>
+            <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample"
+                role="button" aria-expanded="false" aria-controls="collapseExample">
+                View overall request status<img src="../../../../assets/images/Viewreq.png"
+                    class="ml-2" width="40" />
+            </a>
         </div>
     </div>
     <form [formGroup]="createOlcarouselForm">
@@ -387,7 +379,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/checkbl.png" />
                             </div>
-                            <p>Active in Orange Learning</p>
+                            <p data-toggle="tooltip" data-placement="top" title="Active in Orange Learning">Active in ....</p>
                             <span class="number_css">
                                 {{carousel_count.closed?carousel_count.closed:0}}
                             </span>
@@ -424,12 +416,12 @@
                 </div>
             </div>
             <!--ROW END-->
-            <div class="view-comple-req_div">
+            <!-- <div class="view-comple-req_div">
                 <button class="btn btn-primary view-comple-req justify-content-center p-1"
                     [routerLink]="['/dashboard/olcarousel/view-complete-report']">
                     <i class="fa fa-database mr-1" aria-hidden="true"></i>View Complete Report
                 </button>
-            </div>
+            </div> -->
             <!--ROW END-->
         </div>
     </div>

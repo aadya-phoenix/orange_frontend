@@ -1,25 +1,19 @@
 <div id="right-panel" class="right-panel">
     <app-header></app-header>
     <div class="breadcrumbs cm_breadcums">
-        <div class="col-sm-7">
+        <div class="col-sm-8">
             <div class="page-header float-left">
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/second.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
                         <span class="breade_text_span1">Create new session </span>
                         <span class="divider"></span>
-                        <span class="breade_text_span">
-                            <b>Instructor-Led (ILT)</b>-Instructor-Led
-                            Training is face to face training delivered in a classroom.<b>
-                                Virtual Instructor-Led
-                                Training(vILT)-
-                            </b>virtual instrutor-Led Training(vILT)is delivered remotely
-                        </span>
+                        <span class="breade_text_span">Request the creation of one or more sessions in Orange Learning.</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-5 float-right">
+        <div class="col-sm-4">
             <div class="page-header float-right">
                 <div class="page-title d-flex end_just">
                     <ol class="breadcrumb text-right">
@@ -39,31 +33,21 @@
             </div>
         </div>
     </div>
-    <div class="content mt-3">
-        <div class="animated fadeIn">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header card_header_common">
-                            <div class="d-flex justify-content-between media_creat_couse_col">
-                                <div class="d-flex align-items-center">
+    <div class="card_header_common">
+        <div class="d-flex justify-content-between media_creat_couse_col">
+            <div class="d-flex align-items-center">
 
-                                    <img src="../../../../assets/images/formm.png" class="ml-2 w_40" />
-                                    <span class="comlte_css">Complete this form and click on the submit button</span>
-                                </div>
-                                <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample"
-                                    role="button" aria-expanded="false" aria-controls="collapseExample">
-                                    View overall request status<img src="../../../../assets/images/Viewreq.png"
-                                        class="ml-2 w_40" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <img src="../../../../assets/images/formm.png" class="form_img_req" />
+                <p class="mt-2 ml-2 mb-2 view-re_css">
+                <span>Complete this form and click on the submit button</span>
+            </p>
             </div>
-            <!-- .animated -->
+            <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample"
+                role="button" aria-expanded="false" aria-controls="collapseExample">
+                View overall request status<img src="../../../../assets/images/Viewreq.png"
+                    class="ml-2 w_40" />
+            </a>
         </div>
-        <!-- .content -->
     </div>
 </div>
 <form [formGroup]="createSessionForm" enctype="multipart/form-data">
@@ -71,8 +55,7 @@
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-12">
-                    <span class="indicate_css"><span class="text_red
-                    ">*</span>Indicates required field</span>
+                    <p class="indicate_css"><span class="text_red">*</span>Indicates required field</p>
                     <div class="card">
                         <div class="card-body card_width">
                             <div class="row">
@@ -118,6 +101,7 @@
                                 <!--col-->
                             </div>
                         </div>
+                      
                     </div>
                     <ng-container *ngIf="metadataArray.controls.length > 0">
                         <div class="card" formArrayName="metadata" *ngFor="let session of metadataArray.controls; let i = index">
@@ -355,7 +339,7 @@
                                                 <tr >
                                                     <th scope="col">Break Description</th>
                                                     <th scope="col">Break Duration</th>
-                                                    <th scope="col">Action</th>
+                                                    <th scope="col">Add</th>
                                                 </tr>
                                                 <tr >
                                                     <td [formGroupName]="idx"  class="d-flex">
@@ -567,37 +551,40 @@
                                 </div>
                                 <!--row-->
                             </div>
-
+                            <div class="card-footer" *ngIf ="getUserrole.id == 2">
+                                <button class="btn btn-primary mr-1" type="submit"
+                                    (click)="createSession('pending')">Submit</button>
+                                <button class="btn btn-secondary" (click)="createSession('draft')">
+                                    Save as draft
+                                </button>
+                            </div>
+                             <div class="card-footer" *ngIf ="getUserrole.id == 3">
+                                <button *ngIf="sessionPub && session_status != 'pending'" class="btn btn-primary mr-1" type="submit"
+                                (click)="createSession('pending')">Submit</button>
+                                <button *ngIf="!sessionPub || session_status == 'pending'" class="btn btn-primary mr-1" data-target="#publishModal" data-toggle="modal">  <i class="fa fa-upload" aria-hidden="true"></i>
+                                    <span class="pl-1"> Publish</span></button>
+                                <button *ngIf="session_id == 0" class="btn btn-secondary" (click)="createSession('draft')">
+                                    Save as draft
+                                </button>
+                                <button *ngIf="session_id != 0" class="btn btn-secondary" data-target="#rejectModal" data-toggle="modal" (click)="reject()">
+                                    <i class="fa fa-times" aria-hidden="true"></i> <span
+                                            class="pl-1">Reject</span>
+                                </button>
+                            </div> 
+                            <div class="card-footer" *ngIf ="getUserrole.id == 9">
+                                <button class="btn btn-primary mr-1" type="submit"
+                                     data-target="#publishModal" data-toggle="modal">Publish</button>
+                                    <button *ngIf="session_id == 0" class="btn btn-secondary" (click)="createSession('draft')">
+                                        Save as draft
+                                    </button>
+                                <button *ngIf="session_id != 0" class="btn btn-secondary" data-toggle="modal" (click)="reject()">
+                                    <i class="fa fa-times" aria-hidden="true"></i> <span
+                                            class="pl-1">Reject</span>
+                                </button>
+                            </div> 
                         </div>
                     </ng-container>
-                    <div class="card-footer" *ngIf ="getUserrole.id == 2">
-                        <button class="btn btn-primary mr-1" type="submit"
-                            (click)="createSession('pending')">Submit</button>
-                        <button class="btn btn-secondary" (click)="createSession('draft')">
-                            Save as draft
-                        </button>
-                    </div>
-                     <div class="card-footer" *ngIf ="getUserrole.id == 3">
-                        <button *ngIf="sessionPub && session_status != 'pending'" class="btn btn-primary mr-1" type="submit"
-                        (click)="createSession('pending')">Submit</button>
-                        <button *ngIf="!sessionPub || session_status == 'pending'" class="btn btn-primary mr-1" data-target="#publishModal" data-toggle="modal">Publish</button>
-                        <button *ngIf="session_id == 0" class="btn btn-secondary" (click)="createSession('draft')">
-                            Save as draft
-                        </button>
-                        <button *ngIf="session_id != 0" class="btn btn-secondary" data-target="#rejectModal" data-toggle="modal" (click)="reject()">
-                            Reject
-                        </button>
-                    </div> 
-                    <div class="card-footer" *ngIf ="getUserrole.id == 9">
-                        <button class="btn btn-primary mr-1" type="submit"
-                             data-target="#publishModal" data-toggle="modal">Publish</button>
-                            <button *ngIf="session_id == 0" class="btn btn-secondary" (click)="createSession('draft')">
-                                Save as draft
-                            </button>
-                        <button *ngIf="session_id != 0" class="btn btn-secondary" data-toggle="modal" (click)="reject()">
-                            Reject
-                        </button>
-                    </div> 
+                   
                 </div>
             </div>
         </div>
