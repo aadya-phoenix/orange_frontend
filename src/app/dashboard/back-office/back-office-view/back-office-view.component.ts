@@ -55,11 +55,8 @@ export class BackOfficeViewComponent implements OnInit {
         this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
           this.requestdata = res.data;
-          this.requestdata.metadata.forEach((element: any, index:number) => {
-            this.activeIds.push(`panel-${index}`);
-          });
-          if (this.requestdata.image) {
-            this.requestdata.imgUrl = `${dataConstant.ImageUrl}/${this.requestdata.image}`;
+          if(this.requestdata.delivery_perimeter){
+            this.requestdata.delivery_perimeter = JSON.parse(this.requestdata.delivery_perimeter).join(', ');
           }
         }
       },
@@ -72,7 +69,7 @@ export class BackOfficeViewComponent implements OnInit {
 
   updateRequest() {
     if (this.id) {
-      this.router.navigateByUrl(`/dashboard/olback-office/update/${this.id}`);
+      this.router.navigateByUrl(`/dashboard/back-office/update/${this.id}`);
     }
   }
 

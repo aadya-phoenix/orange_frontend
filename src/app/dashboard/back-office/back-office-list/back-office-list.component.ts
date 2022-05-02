@@ -68,7 +68,7 @@ export class BackOfficeListComponent implements OnInit {
 
   viewRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/olback-office/view/${item.id}`);
+      this.router.navigateByUrl(`/dashboard/back-office/view/${item.id}`);
     }
   }
 
@@ -134,7 +134,7 @@ export class BackOfficeListComponent implements OnInit {
 
   editRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/olback-office/update/${item.id}`);
+      this.router.navigateByUrl(`/dashboard/back-office/update/${item.id}`);
     }
   }
 

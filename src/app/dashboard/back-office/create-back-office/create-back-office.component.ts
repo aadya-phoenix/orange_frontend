@@ -3,12 +3,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as _ from 'lodash';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { BackOfficeService } from 'src/app/shared/services/back-office/back-office.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
+import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import Swal from 'sweetalert2';
 import { BackOfficeForwardComponent } from '../back-office-forward/back-office-forward.component';
+import { BackOfficeHistoryComponent } from '../back-office-history/back-office-history.component';
 import { BackOfficePublishComponent } from '../back-office-publish/back-office-publish.component';
 const emailregexp = dataConstant.EmailPattren;
 
@@ -25,9 +28,15 @@ export class CreateBackOfficeComponent implements OnInit {
   BackOfficeStatus = dataConstant.BackOfficeStatus;
   back_office_id = 0;
   back_office_details: any = {};
+  preferedInstructor: any = [];
+  entityList: any = [];
   languageList: any = [];
   cctExpiryperiod: any = [];
   backOfficePublisher: any = [];
+  cordinatorsList: any = [];
+  backupCordinatorsList: any = [];
+  cctDeliveryPerimeter: any = [];
+  cctLearningRole: any = [];
   getUserrole: any = {};
   getprofileDetails: any = {};
   createBackOfficeForm: FormGroup;
@@ -56,6 +65,7 @@ export class CreateBackOfficeComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private modalService: NgbModal,
+    private courseService: CourcesService,
     private authService: AuthenticationService,
     private backOfficeService: BackOfficeService) {
     this.minDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
@@ -69,18 +79,118 @@ export class CreateBackOfficeComponent implements OnInit {
       this.back_office_id = Id ? parseInt(Id) : 0;
     });
     this.createBackOfficeForm = this.formBuilder.group({
-      languages: new FormArray([]),
-      metadata: this.formBuilder.array([]),
-      image: new FormControl('', this.back_office_id ? [] : [Validators.required]),
-      publication_date: new FormControl('', [Validators.required]),
-      expiry_type: new FormControl('', [Validators.required]),
-      additional_comment: new FormControl('')
+      email: new FormControl('', [Validators.required]),
+      cuid: new FormControl('', [Validators.required]),
+      first_name: new FormControl('', [Validators.required]),
+      last_name: new FormControl('', [Validators.required]),
+      entity: new FormControl(''),
+      course_deliver: new FormControl('',[Validators.required]),
+      first_session_date: new FormControl('', [Validators.required]),
+      learning_role: new FormControl('', [Validators.required]),
+      regional_cordinator: new FormControl('', [Validators.required]),
+      additional_comment: new FormControl(''),
+      delivery_perimeter: new FormControl('', [Validators.required]),
+      agree: new FormControl(false, [Validators.requiredTrue]),
     });
-
   }
 
   async ngOnInit() {
     this.getTotalCount();
+  }
+
+   //preferred instructor
+   getPreferedInstructor() {
+    this.commonService.showLoading();
+    this.courseService.getpreferedInstructor().subscribe(
+      (res: any) => {
+        this.preferedInstructor = res.data;
+        this.getEntitylist();
+        this.commonService.hideLoading();
+      },
+      (err: any) => {
+        console.log(err);
+        this.commonService.hideLoading();
+      }
+    );
+  }
+
+  getEntitylist() {
+    this.commonService.showLoading();
+    this.courseService.getEntitylist().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.entityList = res.data;
+        this.getCordinators();
+        this.commonService.hideLoading();
+      },
+      (err: any) => {
+        console.log(err);
+        this.commonService.hideLoading();
+      }
+    );
+  }
+
+  getCCTDeliveryPerimeter() {
+    this.commonService.showLoading();
+    this.backOfficeService.getCCTDeliveryPerimeter().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.cctDeliveryPerimeter = res.data;
+        this.getCCTLearningRole();
+        this.commonService.hideLoading();
+      },
+      (err: any) => {
+        console.log(err);
+        this.commonService.hideLoading();
+      }
+    );
+  }
+  getCCTLearningRole() {
+    this.commonService.showLoading();
+    this.backOfficeService.getCCTLearningRole().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.cctLearningRole = res.data;
+        this.commonService.hideLoading();
+        if (this.back_office_id) {
+          this.getBackOfficeDetails();
+        }
+      },
+      (err: any) => {
+        console.log(err);
+        this.commonService.hideLoading();
+      }
+    );
+  }
+
+  getCordinators() {
+    this.commonService.showLoading();
+    this.courseService.getNewregionalCordinator().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.cordinatorsList = res.data;
+    this.getBackupRegionalCordinator();
+    this.commonService.hideLoading();
+      },
+      (err: any) => {
+        console.log(err);
+        this.commonService.hideLoading();
+      }
+    );
+  }
+  getBackupRegionalCordinator() {
+    this.commonService.showLoading();
+    this.courseService.getBackupRegionalCordinator().subscribe(
+      (res: any) => {
+        this.backupCordinatorsList = res.data;
+        this.getCCTDeliveryPerimeter();
+        this.commonService.hideLoading();
+      },
+      (err: any) => {
+        console.log(err);
+        this.commonService.hideLoading();
+      }
+    );
   }
 
   getBackOfficeDetails() {
@@ -90,12 +200,19 @@ export class CreateBackOfficeComponent implements OnInit {
         this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
           this.back_office_details = res.data;
-          this.createBackOfficeForm.controls.expiry_type.setValue(this.back_office_details.expiry_type);
+          this.createBackOfficeForm.controls.email.setValue(this.back_office_details.email);
+          this.createBackOfficeForm.controls.cuid.setValue(this.back_office_details.cuid);
+          this.createBackOfficeForm.controls.first_name.setValue(this.back_office_details.first_name);
+          this.createBackOfficeForm.controls.last_name.setValue(this.back_office_details.last_name);
+          this.createBackOfficeForm.controls.entity.setValue(this.back_office_details.entity);
+          this.createBackOfficeForm.controls.course_deliver.setValue(this.back_office_details.course_deliver);
+          this.createBackOfficeForm.controls.learning_role.setValue(this.back_office_details.learning_role);
+          this.createBackOfficeForm.controls.regional_cordinator.setValue(this.back_office_details.regional_cordinator);
           this.createBackOfficeForm.controls.additional_comment.setValue(this.back_office_details.additional_comment);
-          this.createBackOfficeForm.controls.publication_date.setValue(new Date(this.back_office_details.publication_date).toISOString().slice(0, 10));
-          // this.createBackOfficeForm.controls.image.setValue(this.back_office_details.image);
-          this.back_office_details.imageUrl = `${dataConstant.ImageUrl}/${this.back_office_details.image}`;
-          this.back_office_details.image = null;
+          this.createBackOfficeForm.controls.delivery_perimeter.setValue(JSON.parse(this.back_office_details.delivery_perimeter));
+          this.createBackOfficeForm.controls.agree.setValue(this.back_office_details.agree === "1" ? true : false);
+          this.createBackOfficeForm.controls.first_session_date.setValue(new Date(this.back_office_details.first_session_date).toISOString().slice(0, 10));
+
           if(this.getprofileDetails.data.id != this.back_office_details.user_id){
             this.isCreater = false;
           }
@@ -108,25 +225,13 @@ export class CreateBackOfficeComponent implements OnInit {
     );
   }
 
-  // get lauguageFormArray(): FormArray {
-  //   return this.createBackOfficeForm.get("languages") as FormArray;
-  // }
-
-  // get back-officeFormArray(): FormArray {
-  //   return this.createBackOfficeForm.get("metadata") as FormArray;
-  // }
-
-  // newMetaData(language: { id: any; name: any; slug: any; name_original: any }): FormGroup {
-  //   return this.formBuilder.group({
-  //     language: language.id, languageName: language.name_original, language_slug: language.slug,
-  //     title: new FormControl('', [Validators.required]),
-  //     description: new FormControl('', [Validators.required]),
-  //     link: new FormControl('', [Validators.required, Validators.pattern(new RegExp(
-  //       `${dataConstant.UrlPattern}`,
-  //       'i'
-  //     ))]), display_manager: 0
-  //   })
-  // }
+  changeEmail(item: any){
+    if(item){
+      this.createBackOfficeForm.controls.first_name.setValue(item.first_name);
+      this.createBackOfficeForm.controls.last_name.setValue(item.last_name);
+      this.createBackOfficeForm.controls.cuid.setValue(item.department_manager_cuid);
+    }
+  }
 
   getTotalCount() {
     this.commonService.showLoading();
@@ -134,7 +239,8 @@ export class CreateBackOfficeComponent implements OnInit {
       (res: any) => {
         this.commonService.hideLoading();
         this.back_office_count = res.data.back_office_count;
-        // this.getLanguageList();
+        this.getPreferedInstructor();
+    
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -143,121 +249,17 @@ export class CreateBackOfficeComponent implements OnInit {
     );
   }
 
-  // getLanguageList() {
-  //   this.commonService.showLoading();
-  //   this.commonService.getLanguages().subscribe(
-  //     (res: any) => {
-  //       this.commonService.hideLoading();
-  //       this.languageList = res.data.filter((x: { back-office_show: number; }) => x.back-office_show === 1);
-  //       this.languageText = this.languageList.map((x: { name: string }) => x.name).join('/');
-  //       this.getExpiryDateType();
-  //     },
-  //     (err: any) => {
-  //       this.commonService.hideLoading();
-  //       this.commonService.toastErrorMsg('Error', err.message);
-  //     }
-  //   );
-  // }
-
-  // launguageFormBind() {
-  //   if (!this.back_office_id) {
-  //     this.languageList.forEach((x: { name: string, id: number, slug: string, back-office_show: number }) => {
-  //       if (x.back-office_show === 1) {
-  //         this.lauguageFormArray.push(new FormControl(false));
-  //         // if (x.slug === 'english') {
-  //         //   this.back-officeFormArray.push(this.newMetaData(x));
-  //         // }
-  //       }
-  //     });
-  //   }
-  //   else {
-  //     this.languageList.forEach((x: { name: string, id: number, slug: string, back-office_show: number, name_original: any }) => {
-  //       if (x.back-office_show === 1) {
-  //         const existData = this.back_office_details.metadata.find((y: { language_slug: any; }) => y.language_slug == x.slug);
-  //         if (existData) {
-  //           this.lauguageFormArray.push(new FormControl(true));
-  //           const formControl = this.newMetaData(x)
-  //           formControl.controls.title.setValue(existData.title);
-  //           formControl.controls.description.setValue(existData.description);
-  //           formControl.controls.link.setValue(existData.link);
-  //           formControl.controls.display_manager.setValue(existData.display_manager);
-  //           this.back-officeFormArray.push(formControl);
-  //         }
-  //         else {
-  //           this.lauguageFormArray.push(new FormControl(false));
-  //         }
-  //       }
-  //     });
-  //   }
-  // }
-
-  // getExpiryDateType() {
-  //   this.commonService.showLoading();
-  //   this.commonService.getExpiryDateType().subscribe(
-  //     (res: any) => {
-  //       this.commonService.hideLoading();
-  //       this.cctExpiryperiod = res.data;
-  //       if (!this.back_office_id) {
-  //         this.launguageFormBind();
-  //       }
-  //       else {
-  //         this.getBackOfficeDetails();
-  //       }
-  //     },
-  //     (err: any) => {
-  //       this.commonService.hideLoading();
-  //       this.commonService.toastErrorMsg('Error', err.message);
-  //     }
-  //   );
-  // }
-
-  // getBackOfficePublisher() {
-  //   this.commonService.showLoading();
-  //   this.backOfficeService.getBackOfficePublisher().subscribe(
-  //     (res: any) => {
-  //       this.commonService.hideLoading();
-  //       this.back-officePublisher = res.data;
-  //     },
-  //     (err: any) => {
-  //       this.commonService.hideLoading();
-  //       this.commonService.toastErrorMsg('Error', err.message);
-  //     }
-  //   );
-  // }
-
-  // languageChange() {
-  //   this.lauguageFormArray.controls.forEach((x, index) => {
-  //     const language = this.languageList[index];
-  //     const formControl = this.back-officeFormArray.controls.find(x => x.value.language === language.id);
-  //     if (x.value && !formControl) {
-  //       this.back-officeFormArray.push(this.newMetaData(language));
-  //     }
-  //     else if (!x.value && formControl) {
-  //       this.back-officeFormArray.removeAt(this.back-officeFormArray.controls.findIndex(x => x.value.language === language.id));
-  //     }
-  //   });
-  // }
-
-  // removeBackOffice(back-office: any) {
-  //   this.back-officeFormArray.removeAt(this.back-officeFormArray.controls.findIndex(x => x.value.language === back-office?.value?.language));
-  //   this.lauguageFormArray.controls[this.languageList.findIndex((x: { id: any; }) => x.id === back-office?.value?.language)].setValue(false);
-  // }
-
-  handleFileInput(event: any) {
-    const fsize = event.target.files[0].size;
-    const file = Math.round((fsize / 1024)/1024);
-    if(file > dataConstant.maxImageSize){
-      Swal.fire(
-        'Images!',
-        `Image is more than ${dataConstant.maxImageSize} mb. Please select valida file`,
-        'warning'
-      )
-      return;
-    }
-    this.commonService.FileConvertintoBytearray(event.target.files[0], async (f) => {
-      // creating array bytes
-      this.backOfficeImage = { image: this.commonService.byteArrayTobase64(f.bytes), ext: f.name.split('.').pop() };
+  agreeChange() {
+    if(this.createBackOfficeForm.controls.agree.value){
+    const modalRef = this.modalService.open(BackOfficeHistoryComponent, {
+      centered: true,
+      windowClass: 'alert-popup',
     });
+    modalRef.componentInstance.props = {
+      title: '' ,
+      type: 'agree'
+    };
+  }
   }
 
   isDraft() {
@@ -349,9 +351,6 @@ export class CreateBackOfficeComponent implements OnInit {
       return;
     }
     const body = this.createBackOfficeForm.value;
-    body.image = this.backOfficeImage.image;
-    body.image_ext = this.backOfficeImage.ext;
-    body.reviewer_id = "";
     body.status = status;
     if (!this.back_office_id) {
       this.commonService.showLoading();
@@ -359,7 +358,7 @@ export class CreateBackOfficeComponent implements OnInit {
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('BackOffice', 'Successfully Saved.');
-          this.router.navigateByUrl(`/dashboard/olback-office/view/${res.data.id}`);
+          this.router.navigateByUrl(`/dashboard/back-office/view/${res.data.id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();
@@ -374,7 +373,7 @@ export class CreateBackOfficeComponent implements OnInit {
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('BackOffice', 'Successfully Saved.');
-          this.router.navigateByUrl(`/dashboard/olback-office/view/${this.back_office_id}`);
+          this.router.navigateByUrl(`/dashboard/back-office/view/${this.back_office_id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();

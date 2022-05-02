@@ -75,13 +75,15 @@
                                             <label class="form-control-label">
                                                 Email Address <span class="text-danger-ligth">* </span>
                                             </label>
-                                            <input type="text" placeholder="Enter Email" formControlName="email"
-                                                class="form-control form_width" />
+                                            <ng-select placeholder="Please select email" [items]="preferedInstructor"
+                                                [multiple]="false" bindLabel="email_id" bindValue="email_id"
+                                                (change)="changeEmail($event)" formControlName="email">
+                                            </ng-select>
                                             <div
                                                 *ngIf="(createBackOfficeForm.controls['email'].invalid && (createBackOfficeForm.controls['email'].dirty || createBackOfficeForm.controls['email'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createBackOfficeForm.controls['email'].errors?.required">
-                                                    Email Address be blank
+                                                    Email Address cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -97,7 +99,7 @@
                                                 *ngIf="(createBackOfficeForm.controls['cuid'].invalid && (createBackOfficeForm.controls['cuid'].dirty || createBackOfficeForm.controls['cuid'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createBackOfficeForm.controls['cuid'].errors?.required">
-                                                    Email Address be blank
+                                                    CUID/FTID cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -113,7 +115,7 @@
                                                 *ngIf="(createBackOfficeForm.controls['first_name'].invalid && (createBackOfficeForm.controls['first_name'].dirty || createBackOfficeForm.controls['first_name'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createBackOfficeForm.controls['first_name'].errors?.required">
-                                                    Email Address be blank
+                                                    Frist Name cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -129,7 +131,7 @@
                                                 *ngIf="(createBackOfficeForm.controls['last_name'].invalid && (createBackOfficeForm.controls['last_name'].dirty || createBackOfficeForm.controls['last_name'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createBackOfficeForm.controls['last_name'].errors?.required">
-                                                    Email Address be blank
+                                                    Last Name cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -139,8 +141,10 @@
                                             <label class="form-control-label">
                                                 Entity
                                             </label>
-                                            <input type="text" placeholder="Enter Entity" formControlName="entity"
-                                                class="form-control form_width" />
+                                            <ng-select placeholder="Please select email" [items]="entityList"
+                                                [multiple]="false" bindLabel="division_id" bindValue="id"
+                                                formControlName="entity">
+                                            </ng-select>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
@@ -148,13 +152,13 @@
                                             <label class="form-control-label">
                                                 Course to be delivered <span class="text-danger-ligth">* </span>
                                             </label>
-                                            <input type="text" placeholder="Enter Entity"
-                                                formControlName="course_deliver" class="form-control form_width" />
+                                            <input type="text" placeholder="Enter Title" formControlName="course_deliver"
+                                                class="form-control form_width" />
                                             <div
                                                 *ngIf="(createBackOfficeForm.controls['course_deliver'].invalid && (createBackOfficeForm.controls['course_deliver'].dirty || createBackOfficeForm.controls['course_deliver'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createBackOfficeForm.controls['course_deliver'].errors?.required">
-                                                    Email Address be blank
+                                                    Course to be delivered can not be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -200,18 +204,83 @@
                                                         ngbTooltip="Upon receipt of a correctly completed request, the entry will appear in the Orange Learning BackOffice within 3-5 business days."></i>
                                                 </a>
                                             </label>
-                                            <input type="text" placeholder="Enter Entity"
-                                                formControlName="learning_role" class="form-control form_width" />
+                                            <ng-select placeholder="Please select email" [items]="cctLearningRole"
+                                                [multiple]="false" bindLabel="name" bindValue="id"
+                                                formControlName="learning_role">
+                                            </ng-select>
                                             <div
                                                 *ngIf="(createBackOfficeForm.controls['learning_role'].invalid && (createBackOfficeForm.controls['learning_role'].dirty || createBackOfficeForm.controls['learning_role'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createBackOfficeForm.controls['learning_role'].errors?.required">
-                                                    Email Address be blank
+                                                    Orange Learning Role cannot be blank
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Instructor Delivery Perimeter<span class="text-danger-ligth">* </span>
+                                            </label>
+                                            <ng-select placeholder="Please select Delivery" [items]="cctDeliveryPerimeter"
+                                                [multiple]="true" bindLabel="name" bindValue="name"
+                                                formControlName="delivery_perimeter">
+                                            </ng-select>
+                                            <div
+                                                *ngIf="(createBackOfficeForm.controls['course_deliver'].invalid && (createBackOfficeForm.controls['course_deliver'].dirty || createBackOfficeForm.controls['course_deliver'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createBackOfficeForm.controls['course_deliver'].errors?.required">
+                                                    Course to be delivered can not be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Request to Regional Training Cordinator
+                                                <span class="text_red">* </span>
+
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="right"
+                                                        ngbTooltip="If you selected Yes in the Certification field, please select how long the certification is valid.">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <select class="form-control form_width"
+                                                formControlName="regional_cordinator">
+                                                <option value="">Please select ROC</option>
+                                                <option *ngFor="let cordinator of cordinatorsList"
+                                                    [value]="cordinator.id">
+                                                    {{ cordinator?.name }}
+                                                </option>
+                                            </select>
+                                            <div
+                                                *ngIf="(createBackOfficeForm.controls['regional_cordinator'].invalid && (createBackOfficeForm.controls['regional_cordinator'].dirty || createBackOfficeForm.controls['regional_cordinator'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createBackOfficeForm.controls['regional_cordinator'].errors?.required">
+                                                    Request to Regional Operational Coordinator cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label (change)="agreeChange()">
+                                            <input type="checkbox" formControlName="agree">
+                                            <span class="mr-1 ml-1 font-13">As an instructor on orange learning i hereby
+                                                agree to...</span>
+                                        </label>
+                                        <div
+                                            *ngIf="(createBackOfficeForm.controls['agree'].invalid && (createBackOfficeForm.controls['agree'].dirty || createBackOfficeForm.controls['agree'].touched)) || isSubmitted">
+                                            <div class="error_message"
+                                                *ngIf="createBackOfficeForm.controls['agree'].errors">
+                                                As an instructor on orange learning cannot be blank
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Request to Regional Operational Coordinator <span
@@ -228,11 +297,11 @@
                                                 *ngIf="(createBackOfficeForm.controls['regional_cordinator'].invalid && (createBackOfficeForm.controls['regional_cordinator'].dirty || createBackOfficeForm.controls['regional_cordinator'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createBackOfficeForm.controls['regional_cordinator'].errors?.required">
-                                                    Email Address be blank
+                                                    Request to Regional Operational Coordinator cannot be blank
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="card-footer">

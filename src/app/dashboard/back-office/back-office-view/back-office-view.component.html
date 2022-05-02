@@ -31,7 +31,6 @@
                         </li>
                         <li>
                             <span class="text_white span_dis">View</span>
-
                         </li>
                     </ol>
                 </div>
@@ -43,7 +42,7 @@
         <div class="d-flex">
             <img src="../../../../assets/images/formm.png" class="ml-2 form_img_req" />
             <p class="mt-2 ml-2 mb-2 view-re_css">
-                <span>View BackOffice Request</span>
+                <span>View Back Office Request</span>
                 <span class="cc-text_css"> ({{ requestdata.request_id }}) -
                 </span>
                 <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status | titlecase
@@ -54,7 +53,6 @@
     <div class="content">
         <div class="animated fadeIn">
             <div class="mb-2" *ngIf="isUpdate() || isPublish() || isForward() || isReject()">
-
                 <div class="Requs_btn_inl">
                     <div class="Requs_btn_inl-child">
                         <button type="button" class="btn btn-primary mr-2" *ngIf="isForward()"
@@ -80,116 +78,139 @@
 
             </div>
             <div class="row mb-3">
-                <div class="col-sm-6" *ngFor="let meta of requestdata.metadata; let i = index">
-                    <ngb-accordion #acc="ngbAccordion" [activeIds]="activeIds" class="d-flex">
-                        <ngb-panel id="panel-{{i}}" class="mr-1 w_100  ">
-                            <ng-template ngbPanelTitle>
-                                <span>Back Office {{i+1}}</span>
-                            </ng-template>
-                            <ng-template ngbPanelContent>
-                                <div class="p-2">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Language</label>
-                                            <div class="d-flex align-items-center">
-                                                <span class="form_data" onkeyup="textAreaAdjust(this)">
-                                                    {{meta.language_slug | titlecase}}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Title</label>
-                                            <div class="d-flex align-items-center">
-                                                <span class="form_data" onkeyup="textAreaAdjust(this)">
-                                                    {{meta.title}}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Description</label>
-                                            <div class="d-flex align-items-center">
-                                                <span class="form_data" onkeyup="textAreaAdjust(this)">
-                                                    {{meta.description}}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Link</label>
-                                            <div class="d-flex align-items-center">
-                                                <span class="form_data" onkeyup="textAreaAdjust(this)">
-                                                 {{meta.link}}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Show carousal only to manager</label>
-                                            <div class="d-flex align-items-center">
-                                                <span class="form_data" onkeyup="textAreaAdjust(this)">
-                                                    {{meta.display_manager===1?'Yes':'No'}}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ng-template>
-                        </ngb-panel>
-                    </ngb-accordion>
-                </div>
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <div class="card border-radius-0">
-                        <div class="card-header card_header_view">
+                        <!-- <div class="card-header card_header_view">
                             <p>Back Office Details</p>
-                        </div>
+                        </div> -->
                         <div class="card-body">
-                            <div class="col-sm-12 col-md-12">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Request Publish By</label>
+                                    <label for="exampleInputEmail1">Email Address</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
-                                            {{ requestdata.publication_date | date: dateFormate }}
+                                            {{requestdata.email}}
                                         </span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 col-md-12">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Expiry Type</label>
+                                    <label for="exampleInputEmail1">CUID/FTID</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
-                                            {{requestdata.expiry_type_name}} ({{ requestdata.expiry_date | date:
-                                            dateFormate }})
+                                            {{requestdata.cuid}}
                                         </span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-12">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">First Name</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{requestdata.first_name}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Last Name</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.last_name}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Entity</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.entity_name}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Course to be delivered</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.course_deliver}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Date of the first session</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.first_session_date | date: dateFormate }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Additional Comments</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
-                                            {{ requestdata.additional_comment }}
+                                            {{ requestdata.additional_comment}}
                                         </span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 col-md-12">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Attached Image</label>
+                                    <label for="exampleInputEmail1">Orange Learning Role</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
-                                            Click here to <a class="text_orange" href="{{requestdata.imgUrl}}"
-                                                target="_blank">View</a>.
+                                            {{ requestdata.learning_role_name}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Instructor Delivery Perimeter</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.delivery_perimeter}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Request to Regional Training Cordinator</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.regional_cordinator_name}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">As an instructor on orange learning i hereby agree to</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.agree == "1" ? "Yes" : "No"}}
                                         </span>
                                     </div>
                                 </div>

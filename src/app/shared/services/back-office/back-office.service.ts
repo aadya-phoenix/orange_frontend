@@ -28,6 +28,20 @@ export class BackOfficeService {
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  getCCTLearningRole(){
+    const url = `/api/${this.apiVersion}/cct-learning-role`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  getCCTDeliveryPerimeter(){
+    const url = `/api/${this.apiVersion}/cct-delivery-perimeter`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
   getBackOffice() {
     const url = `/api/${this.apiVersion}/back_office_role`;
     //const urllive = `${this.basePath}api/${this.apiVersion}/back_office_role`;

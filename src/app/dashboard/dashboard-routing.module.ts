@@ -10,7 +10,7 @@ const routes: Routes = [
 {path:'cources',loadChildren:()=>import("./create-course/create-course.module").then(m=>m.CreateCourseModule)},
 {path:'olcarousel',loadChildren:()=>import("./carousel/carousel.module").then(m=>m.CarouselModule)},
 {path:'back-office',loadChildren:()=>import("./back-office/back-office.module").then(m=>m.BackOfficeModule)},
-{path:'open',loadChildren:()=>import("./open-course-session/open-course-session.module").then(m=>m.OpenCourseSessionModule)},
+{path:'opensession',loadChildren:()=>import("./open-course-session/open-course-session.module").then(m=>m.OpenCourseSessionModule)},
 {path:'set-backup',component:SetBackupComponent},
 {path:'sctworkflow', component:SessionPublisherComponent}
 ];

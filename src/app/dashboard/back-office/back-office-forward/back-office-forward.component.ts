@@ -67,7 +67,7 @@ export class BackOfficeForwardComponent implements OnInit {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('BackOffice', 'Successfully Transfered.');
           this.modalService.close();
-          this.router.navigate(['/dashboard/olback-office']);
+          this.router.navigate(['/dashboard/back-office']);
         },
         (err: any) => {
           this.commonService.hideLoading();
