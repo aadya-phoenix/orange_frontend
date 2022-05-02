@@ -96,9 +96,6 @@ export class CreateSessionComponent implements OnInit {
     this.getTimezone();
     this.getSessionPublisherStatus();
     this.getBackupRegionalCordinator(); 
-     
-   /*  const metacontrols = (this.createSessionForm.get('metadata') as FormArray).controls[0].controls['external_vendor']; */
-    
   }
 
   private metaDataGroup(): FormGroup {
@@ -114,7 +111,6 @@ export class CreateSessionComponent implements OnInit {
       end_date: new FormControl('', [Validators.required]),
       end_time: new FormControl('', [Validators.required]),
       time_zone: new FormControl(''),
-      //break: new FormControl(''),
       break: this.fb.array([this.breakGroup()]),  
       comment: new FormControl(),
       min_registration: new FormControl('', [Validators.required,
@@ -151,7 +147,7 @@ export class CreateSessionComponent implements OnInit {
     
   }
 
-   removeBreak(sessIndex: any,breakIndex:any): void{
+  removeBreak(sessIndex: any,breakIndex:any): void{
     (<FormArray>(<FormGroup>this.metadataArray.controls[sessIndex]).controls.break).removeAt(breakIndex);
   } 
   
@@ -162,7 +158,6 @@ export class CreateSessionComponent implements OnInit {
   getSessionLists() {
     this.courseSessionService.getSessions().subscribe((res: any) => {
       if (res.status === 1 && res.message === 'Success') {
-        console.log("data", res.data);
         this.session_count = res.data.session_count;
       }
     }, (err: any) => {
@@ -178,7 +173,6 @@ export class CreateSessionComponent implements OnInit {
       this.courseSessionService.getSessionDetails(this.session_id).subscribe((res: any) => {
         if (res.status === 1 && res.message === 'Success') {
           this.session_details = res.data;
-          console.log("resdetails data", this.session_details);
           this.createSessionForm.controls.title.setValue(this.session_details.title);
           this.createSessionForm.controls.region_id.setValue(this.session_details.region_id);
           const metadata = this.session_details.metadata;
@@ -187,119 +181,94 @@ export class CreateSessionComponent implements OnInit {
             meta.delivery_method_id = JSON.parse(meta.delivery_method);
             meta.country_id  = JSON.parse(meta.country);
             meta.email = JSON.parse(meta.email_participant);
-            console.log("meta break",meta.break);
             if(meta.external_vendor =='yes'){
               this.externalVendorname = true;
             }
-            if(meta.break != null){
-            meta.break_data = JSON.parse(meta.break)
-            console.log("meta break",meta.break_data);
-          for(let item of meta.break_data){
-            this.breaksArray.push(this.fb.group({description:item.description,duration:item.duration}));
-          }
-          meta.breakArray = this.breaksArray;
-        }
-        else{
-          meta.breakArray=[];
-        }
+             if(meta.break != null){
+             meta.break_data = JSON.parse(meta.break)
+             for(let item of meta.break_data){
+              this.breaksArray.push(this.fb.group({description:item.description,duration:item.duration}));
+             }
+             meta.breakArray = this.breaksArray;
+            }
+            else{
+             meta.breakArray=[];
+            }
             this.metadataArray.push(this.updateMetadata(meta));
-            console.log("meta",meta);
-          }
-        }
-      }
-        , err => {
+           }
+         }
+        }, err => {
           console.log(err);
         });
-    }
-    
+      }
   }
+
   getRegionalCordinator() {
-    this.courseService.getNewregionalCordinator().subscribe((res: any) => {
-      console.log("getregionalCordinator()", res.data);
+   this.courseService.getNewregionalCordinator().subscribe((res: any) => {
       this.rocObj = res.data;
-    }, (err: any) => {
+    },(err: any) => {
       console.log(err);
     });
   }
 
   getDeliveryMethod() {
-    this.courseService.getDeliveryMethod().subscribe(
-      (res: any) => {
-        console.log("delivery", res);
-        this.deliveryMethod = res.data;
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
+   this.courseService.getDeliveryMethod().subscribe(
+     (res: any) => {
+       this.deliveryMethod = res.data;
+     },(err: any) => {
+       console.log(err);
+     });
   }
+
   getCountries() {
-    this.courseService.getCountries().subscribe(
-      (res: any) => {
-        console.log("country", res);
-        this.countryObj = res.data;
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
+   this.courseService.getCountries().subscribe(
+     (res: any) => {
+       this.countryObj = res.data;
+     },(err: any) => {
+       console.log(err);
+     });
   }
   //preferred instructor
   getPreferedInstructor() {
-    this.courseService.getpreferedInstructor().subscribe(
-      (res: any) => {
-        console.log(res);
-        this.preferedInstructor = _.map(res.data, function(x) { return {'email_id':x.email_id}});
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
+   this.courseService.getpreferedInstructor().subscribe(
+     (res: any) => {
+       this.preferedInstructor = _.map(res.data, function(x) { return {'email_id':x.email_id}});
+     },(err: any) => {
+       console.log(err);
+     });
   }
 
   getTimezone() {
-    this.courseService.getTimezone().subscribe(
-      (res: any) => {
-        console.log("time-zone", res);
-        this.timeZoneObj = res.data;
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
+   this.courseService.getTimezone().subscribe(
+     (res: any) => {
+       this.timeZoneObj = res.data;
+     },(err: any) => {
+       console.log(err);
+     });
   }
 
   getExternalVendor(){
     this.courseService.getVendor().subscribe(
       (res: any) => {
         this.vendor = res.data;
-        console.log("vendor",this.vendor);
-      },
-      (err: any) => {
+      },(err: any) => {
         console.log(err);
-      }
-    );
+      });
   }
 
   copySession(session: any) {
-    console.log("session is",session.value);
-    console.log("session break",session.value.break);
-    console.log("session is",session.value.country);
     if(session.external_vendor =='yes'){
       this.externalVendorname = true;
     } 
-   this.breaksCopyArray=[];
+    this.breaksCopyArray=[];
     if(session.value.break != undefined){
-      console.log("not undefined");
-    for(let item of session.value.break){
+     for(let item of session.value.break){
       this.breaksCopyArray.push(this.fb.group({description:item.description,duration:item.duration}));
     }
     session.value.breaksCopyArray = this.breaksCopyArray; 
    }
    else{
-     console.log("undefined");
     session.breaksCopyArray = session.break;  
-    console.log("session.breaksCopyArray",session.breaksCopyArray) 
    }
     this.metadataArray.push(this.addMoreMetadata(session.value));
   }
@@ -365,7 +334,6 @@ export class CreateSessionComponent implements OnInit {
   }
 
   createSession(status: any) {
-    console.log("value",this.createSessionForm.value);
     if (this.createSessionForm.valid) {
       const sessionObj = this.createSessionForm.value;
       sessionObj.status = status;
@@ -420,39 +388,8 @@ export class CreateSessionComponent implements OnInit {
 
       for(let item of this.data){
         for(let newitem of item){
-          this.preferedInstructor.push({email_id:newitem,
-          /*   city: '',
-          country: '',
-          creation_date: null,
-          department_description: '',
-          department_manager: '',
-          department_manager_cuid: '',
-          emp_datasource: '',
-          employee_cuid: '',
-          first_name: '',
-          functional_manager_cuid: '',
-          id: null,
-          last_name: '',
-          legal_entity_code: '',
-          legal_entity_description: '',
-          m1_description: '',
-          m2_description: '',
-          m3_description: '',
-          management_code: '',
-          manager_emailid: '',
-          manager_id: '',
-          manager_name: '',
-          manager_role: '',
-          modified_date: null,
-          name: '' ,
-          name_prefix: '',
-          organizational_relationship: '',
-          p1_description: '',
-          p2_description: '',
-          password: '',
-          region: '',
-          staff_status: '',
-          supervisor_of_others: '' */
+          this.preferedInstructor.push({
+            email_id:newitem,
           });
         }
       }
@@ -470,7 +407,6 @@ export class CreateSessionComponent implements OnInit {
     if (event.id == 'yes') {
       this.metaControl = [];
       this.externalVendorname = true;
-      console.log("validators",)
       this.getExternalVendor();
       this.metaControl =
         (<FormArray>this.createSessionForm.controls['metadata']).at(index);
@@ -481,7 +417,6 @@ export class CreateSessionComponent implements OnInit {
       this.externalVendorname = false;
       this.metaControl =
         (<FormArray>this.createSessionForm.controls['metadata']).at(index);
-        console.log("meta controls",this.metaControl);
         this.metaControl['controls'].external_vendor_name.clearValidators();
       this.metaControl['controls']?.external_vendor_name.patchValue(
         '');
@@ -491,7 +426,6 @@ export class CreateSessionComponent implements OnInit {
   newEmailParticipants(arr:any){
     debugger;
     return _.map(arr,(e)=>{this.preferedInstructor.push(e);
-    console.log("emailk",this.preferedInstructor);
     });
   }
 
@@ -503,8 +437,6 @@ export class CreateSessionComponent implements OnInit {
        else{
          this.sessionPub=false;
        }
-      console.log("res session publisher status",res.data);
-      console.log("session pub flag",this.sessionPub);
     },err=>{
       console.log(err);
     });
@@ -562,7 +494,6 @@ export class CreateSessionComponent implements OnInit {
     this.courseService.getBackupRegionalCordinator().subscribe(
       (res: any) => {
         this.backupCordinatorsList = res.data;
-        console.log("roc backup",this.backupCordinatorsList);
       },
       (err: any) => {
         console.log(err);
