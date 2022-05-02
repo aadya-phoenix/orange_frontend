@@ -87,17 +87,7 @@
                     <span class="number_css">{{session_count.pending}}</span>
                   </div>
                 </div>
-                <div class="Course_icon_child" *ngIf="getUserrole.id == 3">
-                  <div class="alig_dashicon" (click)="getrecords(courseSessionStatus.transferred)">
-                    <div class="sub-child-dashicon">
-                      <div class="fa-icons-des bac_red">
-                        <img src="../../../../assets/images/icon/transfer.png" />
-                      </div>
-                      <p>Transferred</p>
-                    </div>
-                    <span class="number_css">{{session_count.transferred}}</span>
-                  </div>
-                </div>
+                
                 <!--coled-->
                 <div class="Course_icon_child">
                   <div class="alig_dashicon" (click)="getrecords(courseSessionStatus.closed)">
@@ -249,7 +239,7 @@
                             data-toggle="tooltip" data-placement="top" title="Delete">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                           </a>
-                          <a *ngIf="session.status=='reject' && getUserrole.id == 2" (click)="editRequest(session)" class="copy_file mr-1"
+                          <a *ngIf="(session.status=='reject' && getUserrole.id == 2) || (getUserrole.id == 3 &&session.status === 'reject' && session.user_id === getprofileDetails.data.id)" class="copy_file mr-1"
                             data-toggle="tooltip" data-placement="top" title="Edit">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                           </a>
