@@ -19,6 +19,7 @@ export class ViewSessionComponent implements OnInit {
   
   id = 0;
   status:any;
+  status_show:string='';
   sessiondata: any = {};
   getUserrole: any;
   rejectcomment:string='';
@@ -71,6 +72,7 @@ export class ViewSessionComponent implements OnInit {
         if (res.status === 1 && res.message === 'Success') {
           this.sessiondata = res.data;
           this.status = this.sessiondata.status;
+          this.status_show = this.sessiondata.status_show;
           console.log("session data",this.sessiondata);
 
           this.sessiondata.metadata.forEach((element:any) => {

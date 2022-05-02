@@ -51,7 +51,7 @@ export class CreateSessionComponent implements OnInit {
   public createSessionForm!: FormGroup;
   breaksArray :any= [];
   breaksCopyArray:any=[];
-  faControl:any=[];
+  metaControl:any=[];
 
   data:any=[];
   newdata:any=[];
@@ -363,6 +363,7 @@ export class CreateSessionComponent implements OnInit {
   }
 
   createSession(status: any) {
+    console.log("value",this.createSessionForm.value);
     if (this.createSessionForm.valid) {
       const sessionObj = this.createSessionForm.value;
       sessionObj.status = status;
@@ -463,25 +464,25 @@ export class CreateSessionComponent implements OnInit {
     reader.readAsBinaryString(target.files[0]);
   }
 
-  externalVendor(event:any,index:number){
+  externalVendor(event: any, index: number) {
     if (event.id == 'yes') {
-      this.faControl =[];
+      this.metaControl = [];
       this.externalVendorname = true;
       console.log("validators",)
       this.getExternalVendor();
-      this.faControl = 
-      (<FormArray>this.createSessionForm.controls['metadata']).at(index);
-       this.faControl['controls'].external_vendor_name?.setValidators(Validators.required);;
-     } 
-     else {
-      this.faControl =[];
+      this.metaControl =
+        (<FormArray>this.createSessionForm.controls['metadata']).at(index);
+      this.metaControl['controls'].external_vendor_name?.setValidators(Validators.required);;
+    }
+    else {
+      this.metaControl = [];
       this.externalVendorname = false;
-      this.faControl = 
-      (<FormArray>this.createSessionForm.controls['metadata']).at(index);
-      this.createSessionForm.get('external_vendor_name')?.clearValidators();
-      this.faControl['controls'].external_vendor_name?.patchValue({
-        external_vendor_name: '',
-      });
+      this.metaControl =
+        (<FormArray>this.createSessionForm.controls['metadata']).at(index);
+        console.log("meta controls",this.metaControl);
+        this.metaControl['controls'].external_vendor_name.clearValidators();
+      this.metaControl['controls']?.external_vendor_name.patchValue(
+        '');
     }
   }
 
@@ -493,12 +494,19 @@ export class CreateSessionComponent implements OnInit {
   }
 
   getSessionPublisherStatus(){
-   this.courseSessionService.getSessionPublisherStatus().subscribe(res=>{
-     console.log("res session publisher status",res);
-   },err=>{
-     console.log(err);
-   });
-  }
+    this.courseSessionService.getSessionPublisherStatus().subscribe(res=>{
+      if(res.data.length>0){
+        this.sessionPub=true;
+       }
+       else{
+         this.sessionPub=false;
+       }
+      console.log("res session publisher status",res.data);
+      console.log("session pub flag",this.sessionPub);
+    },err=>{
+      console.log(err);
+    });
+   }
 
   open(content: any) {
     this.modalService
