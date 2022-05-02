@@ -55,6 +55,7 @@ export class CreateSessionComponent implements OnInit {
 
   data:any=[];
   newdata:any=[];
+  backupCordinatorsList: any = [];
   //data:[][]=[[]];
   sessionPub:boolean=false;
   closeResult:string = "";
@@ -94,6 +95,7 @@ export class CreateSessionComponent implements OnInit {
     this.getPreferedInstructor();
     this.getTimezone();
     this.getSessionPublisherStatus();
+    this.getBackupRegionalCordinator(); 
      
    /*  const metacontrols = (this.createSessionForm.get('metadata') as FormArray).controls[0].controls['external_vendor']; */
     
@@ -212,7 +214,7 @@ export class CreateSessionComponent implements OnInit {
     
   }
   getRegionalCordinator() {
-    this.courseService.getregionalCordinator().subscribe((res: any) => {
+    this.courseService.getNewregionalCordinator().subscribe((res: any) => {
       console.log("getregionalCordinator()", res.data);
       this.rocObj = res.data;
     }, (err: any) => {
@@ -554,6 +556,18 @@ export class CreateSessionComponent implements OnInit {
     }, (err: any) => {
       console.log(err)
     })
+  }
+
+  getBackupRegionalCordinator() {
+    this.courseService.getBackupRegionalCordinator().subscribe(
+      (res: any) => {
+        this.backupCordinatorsList = res.data;
+        console.log("roc backup",this.backupCordinatorsList);
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
   }
 
 }

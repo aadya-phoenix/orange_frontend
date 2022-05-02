@@ -96,6 +96,12 @@
                                             *ngIf="createSessionForm.controls['region_id'].hasError('required') && createSessionForm.controls['region_id'].touched">
                                             Region cannot be blank
                                         </div>
+                                        <p class="text_black" *ngFor="let item of backupCordinatorsList">
+                                            <b class="text_orange">Note</b>: The training coordinator of {{item.name}}
+                                            region is unavaliable.Therefore, please select the
+                                            <b class="text_orange">{{item.backup_roc_region}}</b>.region from the list,
+                                            who is the backup for {{item.name}} region.
+                                        </p>
                                     </div>
                                 </div>
                                 <!--col-->
@@ -544,6 +550,11 @@
                                                 type="text" class="form-control form_width"
                                                 placeholder="Enter Training cost per participant"
                                                 formControlName="training_cost">
+
+                                                <p class="text_black">
+                                                    <b class="text_orange">Note</b>The training cost will not be displayed on the course page in the Orange Learning catalog.
+                                                    The training cost will only be displayed in the corresponding session(s) of the course.
+                                                </p>
 
                                         </div>
                                     </div>

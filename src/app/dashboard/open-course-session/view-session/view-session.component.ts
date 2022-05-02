@@ -78,9 +78,8 @@ export class ViewSessionComponent implements OnInit {
           this.sessiondata.metadata.forEach((element:any) => {
             element.email = JSON.parse(element.email_participant);
             element.break_data = JSON.parse(element.break);
-            console.log("break data",element.break_data);
+            element.training_cost_euro = '€ ' + (element.training_cost != null ? element.training_cost : 0) ;
           });
-          console.log(this.sessiondata);
         }
       },
       (err: any) => {
