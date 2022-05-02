@@ -31,6 +31,9 @@ export class CarouselListComponent implements OnInit {
     pageNumber: 1,
     pageSize: 10
   }
+  //isReviewer = false;
+//  isPublisher = false;
+//  isRequester = false;
   carousel_count = {
     total: 0,
     draft: 0,

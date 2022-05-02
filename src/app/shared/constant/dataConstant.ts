@@ -24,8 +24,12 @@ export const dataConstant = {
     '(\\:\\d+)?(\\/[-A-Za-z\\d%_.~+]*)*' + // port and path
     '(\\?[;&A-Za-z\\d%_.:/?~+=-]*)?' + // query string
     '(\\#[-A-Za-z\\d_]*)?$',
+  NumbersOnlyPattern:'^[0-9]+$',
+ // CurrencyPattern:'/(?=.*?\d)^\$?(([1-9]\d{0,2}(,\d{3})*)|\d+)?(\.\d{1,2})?$/',
+  CurrencyPattern:'^(?!0\.00)\d{1,3}(,\d{3})*(\.\d\d)?$',
   CarouselStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
   BackOfficeStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
+  CourseSessionStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred' },
   ImageUrl: 'https://orange.mindscroll.info/public/public',
   RoleID: {
     RequesterID: 2,
