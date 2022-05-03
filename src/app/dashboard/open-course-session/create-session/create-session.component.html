@@ -570,14 +570,18 @@
                                 </button>
                             </div>
                              <div class="card-footer" *ngIf ="getUserrole.id == 3">
-                                <button *ngIf="sessionPub && session_status != 'pending'" class="btn btn-primary mr-1" type="submit"
+                                <button *ngIf="(sessionPub || session_status == 'reject') && session_status !='pending'" class="btn btn-primary mr-1" type="submit"
                                 (click)="createSession('pending')">Submit</button>
-                                <button *ngIf="!sessionPub || session_status == 'pending'" class="btn btn-primary mr-1" data-target="#publishModal" data-toggle="modal">  <i class="fa fa-upload" aria-hidden="true"></i>
+                                <button *ngIf="(!sessionPub && session_status != 'reject') || session_status == 'pending' " class="btn btn-primary mr-1" data-target="#publishModal" data-toggle="modal">  <i class="fa fa-upload" aria-hidden="true"></i>
                                     <span class="pl-1"> Publish</span></button>
-                                <button *ngIf="session_id == 0" class="btn btn-secondary" (click)="createSession('draft')">
+                                <button *ngIf="session_id == 0 || sessionPub && session_status != 'pending' || session_status == 'draft' || session_status == 'reject'" class="btn btn-secondary" (click)="createSession('draft')">
                                     Save as draft
                                 </button>
-                                <button *ngIf="session_id != 0" class="btn btn-secondary" data-target="#rejectModal" data-toggle="modal" (click)="reject()">
+                                <!-- <button *ngIf="session_id != 0 && (!sessionPub || session_status == 'pending') && (session_status != 'draft' && session_status != 'reject')" class="btn btn-secondary" data-target="#rejectModal" data-toggle="modal" >
+                                    <i class="fa fa-times" aria-hidden="true"></i> <span
+                                            class="pl-1">Reject</span>
+                                </button> -->
+                                <button *ngIf="(session_id != 0 && session_status == 'pending')" class="btn btn-secondary" data-target="#rejectModal" data-toggle="modal" >
                                     <i class="fa fa-times" aria-hidden="true"></i> <span
                                             class="pl-1">Reject</span>
                                 </button>
@@ -588,7 +592,7 @@
                                     <button *ngIf="session_id == 0" class="btn btn-secondary" (click)="createSession('draft')">
                                         Save as draft
                                     </button>
-                                <button *ngIf="session_id != 0" class="btn btn-secondary" data-toggle="modal" (click)="reject()">
+                                <button *ngIf="session_id != 0" class="btn btn-secondary" data-toggle="modal" data-target="#rejectModal">
                                     <i class="fa fa-times" aria-hidden="true"></i> <span
                                             class="pl-1">Reject</span>
                                 </button>

@@ -52,7 +52,7 @@ export class CourseSessionService {
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
   updateSession(data:any){
-    const url = `/api/${this.apiVersion}/course-session/create`;
+    const url = `/api/${this.apiVersion}/course-session/update`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
