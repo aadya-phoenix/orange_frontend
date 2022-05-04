@@ -56,6 +56,11 @@ export class CourseSessionService {
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  copySession(data: any) {
+    const url = `api/${this.apiVersion}/course-session/copy`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
   courseSessionTransfer(data:any){
     const url = `/api/${this.apiVersion}/course-session/transfer`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));

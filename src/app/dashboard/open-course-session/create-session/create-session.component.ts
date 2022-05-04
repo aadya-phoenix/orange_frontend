@@ -34,7 +34,7 @@ export class CreateSessionComponent implements OnInit {
   };
   public deliveryMethod: any;
   public preferedInstructor: any;
-  public externalVendorname: boolean = false;
+
   countryObj: any;
   timeZoneObj: any;
   coursesList: any;
@@ -181,12 +181,11 @@ export class CreateSessionComponent implements OnInit {
           const metadata = this.session_details.metadata;
           for (let meta of metadata){
             this.breaksArray = [];
+
             meta.delivery_method_id = JSON.parse(meta.delivery_method);
             meta.country_id  = JSON.parse(meta.country);
             meta.email = JSON.parse(meta.email_participant);
-            if(meta.external_vendor =='yes'){
-              this.externalVendorname = true;
-            }
+          
              if(meta.break != null){
              meta.break_data = JSON.parse(meta.break)
              for(let item of meta.break_data){
@@ -260,10 +259,7 @@ export class CreateSessionComponent implements OnInit {
   }
 
   copySession(session: any) {
-    console.log("session",session.value)
-    if(session.external_vendor =='yes'){
-      this.externalVendorname = true;
-    } 
+    console.log("session",session.value);
     this.sessionCopyVal = session.value;
     this.breaksCopyArray=[];
     if(session.value.break != undefined){
@@ -418,7 +414,6 @@ export class CreateSessionComponent implements OnInit {
   externalVendor(event: any, index: number) {
     if (event.id == 'yes') {
       this.metaControl = [];
-      this.externalVendorname = true;
       this.getExternalVendor();
       this.metaControl =
         (<FormArray>this.createSessionForm.controls['metadata']).at(index);
@@ -426,7 +421,6 @@ export class CreateSessionComponent implements OnInit {
     }
     else {
       this.metaControl = [];
-      this.externalVendorname = false;
       this.metaControl =
         (<FormArray>this.createSessionForm.controls['metadata']).at(index);
         this.metaControl['controls'].external_vendor_name.clearValidators();
