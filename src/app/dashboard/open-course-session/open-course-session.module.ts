@@ -12,6 +12,7 @@ import { ViewSessionComponent } from './view-session/view-session.component';
 import { SessionsListComponent } from './sessions-list/sessions-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SessionCompleteReportComponent } from './session-complete-report/session-complete-report.component';
+import { DigitOnlyModule } from '@uiowa/digit-only';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { SessionCompleteReportComponent } from './session-complete-report/sessio
     NgxPaginationModule,
     NgSelectModule,
     NgbModule,
+    DigitOnlyModule
   ]
 })
 export class OpenCourseSessionModule { }

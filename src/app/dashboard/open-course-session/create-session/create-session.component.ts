@@ -19,7 +19,10 @@ const currencyregexp = dataConstant.CurrencyPattern;
   styleUrls: ['./create-session.component.scss']
 })
 export class CreateSessionComponent implements OnInit {
-
+  today = new Date();
+  minStartDate = {};
+  meridian = true;
+  
   session_id :number= 0;
   session_details: any = {};
   session_status:string='';
@@ -54,7 +57,7 @@ export class CreateSessionComponent implements OnInit {
   breaksArray :any= [];
   breaksCopyArray:any=[];
   metaControl:any=[];
-
+  
   data:any=[];
   newdata:any=[];
   backupCordinatorsList: any = [];
@@ -73,6 +76,8 @@ export class CreateSessionComponent implements OnInit {
     private route: ActivatedRoute,
     private modalService: NgbModal
   ) {
+    this.minStartDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
+
     this.createSessionForm = this.fb.group({
       title: new FormControl('', [Validators.required]),
       region_id: new FormControl('', [Validators.required]),
@@ -176,6 +181,7 @@ export class CreateSessionComponent implements OnInit {
           this.session_details = res.data;
           console.log("session_status",res.data);
           this.session_status = this.session_details.status;
+  
           this.createSessionForm.controls.title.setValue(this.session_details.title);
           this.createSessionForm.controls.region_id.setValue(this.session_details.region_id);
           const metadata = this.session_details.metadata;

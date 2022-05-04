@@ -58,7 +58,7 @@
    
     <div class="content">
         <div class="animated fadeIn">
-             <div *ngIf ="getUserrole.id == 2 && (status == 'reject' || status == 'draft') || status == 'draft'"     class="mb-2">
+             <div class="mb-2" *ngIf ="getUserrole.id == 2 && (status == 'reject' || status == 'draft') || status == 'draft' || (getUserrole.id == 3 && status == 'reject')">
               
                     <div class="Requs_btn_inl">
                         <div class="Requs_btn_inl-child">
@@ -198,7 +198,7 @@
                                             <label for="exampleInputEmail1">Email Id of Participants</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">
-                                                <span *ngFor="let item of meta.email" >
+                                                <span *ngFor="let item of meta.email" class="d-flex" >
                                                     {{item}}
                                                 </span>
                                             </span>
@@ -261,7 +261,7 @@
                                             <label for="exampleInputEmail1">Break Description</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">
-                                                <span *ngFor="let item of meta.break_data" >
+                                                <span *ngFor="let item of meta.break_data" class="d-flex">
                                                     {{item.description}}
                                                 </span>
                                             </span>
@@ -273,7 +273,7 @@
                                             <label for="exampleInputEmail1">Break Duration</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">                         
-                                                <span *ngFor="let item of meta.break_data" >
+                                                <span *ngFor="let item of meta.break_data" class="d-flex" >
                                                     {{item.duration}}
                                                 </span>
                                             </span>
