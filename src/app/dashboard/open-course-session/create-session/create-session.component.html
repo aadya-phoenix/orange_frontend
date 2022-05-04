@@ -86,13 +86,8 @@
                                     <div class="form-group">
                                         <label class="form-control-label">
                                             Select your region <span class="text_red">* </span>
-                                            <!-- <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="top" title="">
-                                                </i>
-                                            </a> -->
                                         </label>
-                                        <ng-select placeholder="Please Select Region" [items]="rocObj" bindLabel="name"
+                                        <ng-select placeholder="Please Select Region" [items]="rocObj" bindLabel="name" [readonly]="session_status =='pending'"
                                             bindValue="id" formControlName="region_id" class="w_100">
                                         </ng-select>
                                         <div class="error_message"
@@ -112,24 +107,24 @@
                         </div>
                       
                     </div>
+                    
                     <ng-container *ngIf="metadataArray.controls.length > 0">
                         <div class="card" formArrayName="metadata" *ngFor="let session of metadataArray.controls; let i = index">
-                             <!--  <ng-container > -->
                             <div class="card-header">
                                 <div class="heeader_button">
                                     <strong _ngcontent-jet-c125=""> Sessions:{{i+1}} </strong>
                                     <div class="button_div">
                                         <button (click)="copySession(session)" class="btn btn-primary mr-1">Copy Session
-                                            <i class="fa fa-files-o ml-1" aria-hidden="true"></i></button>
-                                        <button (click)="addMetadata()" class="btn btn-info mr-1">Add the Session
-                                            +</button>
-                                        <!-- <button (click)="addSession('','','','','','','','','','','','','','','','','','')" class="btn btn-info mr-1">Add the Session +</button> -->
+                                            <i class="fa fa-files-o ml-1" aria-hidden="true"></i>
+                                        </button>
+                                        <button (click)="addMetadata()" class="btn btn-info mr-1">Add the Session +
+                                        </button>
                                         <button *ngIf="i > 0" (click)="removeMetadata(i)" class="btn btn-danger">Remove
-                                            <i class="fa fa-minus ml-1" aria-hidden="true"></i></button>
+                                            <i class="fa fa-minus ml-1" aria-hidden="true"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-
                             <div [formGroupName]="i" class="card-body card_width">
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -143,7 +138,6 @@
                                                     </i>
                                                 </a>
                                             </label>
-
                                             <ng-select placeholder="Please select Delivery method"
                                                 [items]="deliveryMethod" bindLabel="name" bindValue="id"
                                                 formControlName="delivery_method" class="w_100">
@@ -166,7 +160,6 @@
                                                     </i>
                                                 </a>
                                             </label>
-
                                             <ng-select placeholder="Please select Country" [items]="countryObj"
                                                 bindLabel="country_name" bindValue="id" formControlName="country"
                                                 class="w_100">
@@ -182,11 +175,6 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Location
-                                                <!-- <a>
-                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                        data-toggle="tooltip" data-placement="top" title="">
-                                                    </i>
-                                                </a> -->
                                             </label>
                                             <input type="text" class="form-control form_width"
                                                 placeholder="Enter Location" formControlName="location">
@@ -201,11 +189,6 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Instructor Name
-                                                <!-- <a>
-                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                        data-toggle="tooltip" data-placement="top" title="">
-                                                    </i>
-                                                </a> -->
                                             </label>
                                             <input type="text" class="form-control form_width"
                                                 placeholder="Enter Instructor Name" formControlName="instructor_name">
@@ -220,11 +203,6 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Email ID of participants <span class="text_red">* </span>
-                                                <!-- <a>
-                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                        data-toggle="tooltip" data-placement="top" title="">
-                                                    </i>
-                                                </a> -->
                                             </label>
 
                                             <ng-select placeholder="Please select Instructor"
@@ -242,15 +220,9 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Start Date<span class="text_red">* </span>
-                                                <!-- <a>
-                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                        data-toggle="tooltip" data-placement="top" title="">
-                                                    </i>
-                                                </a> -->
                                             </label>
-
                                             <input type="date" class="form-control form_width"
-                                                formControlName="start_date">
+                                                formControlName="start_date" min="{{minStartDate}}">
                                             <div class="error_message"
                                                 *ngIf="metadataArray.controls[i].controls['start_date'].hasError('required') && metadataArray.controls[i].controls['start_date'].touched">
                                                 Start Date cannot be blank
@@ -262,15 +234,10 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Start Time<span class="text_red">* </span>
-                                                <!-- <a>
-                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                        data-toggle="tooltip" data-placement="top" title="">
-                                                    </i>
-                                                </a> -->
                                             </label>
-
-                                            <input type="time" class="form-control form_width"
-                                                formControlName="start_time">
+                                            <ngb-timepicker [(ngModel)]="time" [meridian]="meridian"></ngb-timepicker>
+                                            <!-- <input type="time" class="form-control form_width"
+                                                formControlName="start_time"> -->
                                             <div class="error_message"
                                                 *ngIf="metadataArray.controls[i].controls['start_time'].hasError('required') && metadataArray.controls[i].controls['start_time'].touched">
                                                 Start Time cannot be blank
@@ -282,15 +249,9 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 End Date<span class="text_red">* </span>
-                                                <!-- <a>
-                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                        data-toggle="tooltip" data-placement="top" title="">
-                                                    </i>
-                                                </a> -->
                                             </label>
-
                                             <input type="date" class="form-control form_width"
-                                                formControlName="end_date">
+                                                formControlName="end_date" [min]="metadataArray.controls[i].controls['start_date'].value">
                                             <div class="error_message"
                                                 *ngIf="metadataArray.controls[i].controls['end_date'].hasError('required') && metadataArray.controls[i].controls['end_date'].touched">
                                                 End Date cannot be blank
@@ -302,13 +263,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 End Time<span class="text_red">* </span>
-                                                <!-- <a>
-                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                        data-toggle="tooltip" data-placement="top" title="">
-                                                    </i>
-                                                </a> -->
                                             </label>
-
                                             <input type="time" class="form-control form_width"
                                                 formControlName="end_time">
                                             <div class="error_message"
@@ -333,16 +288,12 @@
                                                 bindLabel="name" bindValue="id" formControlName="time_zone"
                                                 class="w_100">
                                             </ng-select>
-
                                         </div>
                                     </div>
                                     <!--col-->
-
-
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <!-- *ngIf="metadataArray.controls[i].controls.break.controls.length > 0" -->
                                         <table  formArrayName="break" class="table table-bordered">
                                             <thead *ngFor="let item of session.controls.break.controls; let idx = index;">
                                                 <tr >
@@ -374,16 +325,10 @@
                                 </div>
                                 <!--row-->
                                 <div class="row">
-
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Comments
-                                                <!-- <a>
-                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                        data-toggle="tooltip" data-placement="right" ngbTooltip="">
-                                                    </i>
-                                                </a> -->
                                             </label>
                                             <textarea class="form-control form_width-textarea" rows="3"
                                                 formControlName="comment"></textarea>
@@ -405,7 +350,7 @@
                                             </label>
                                             <input type="text" class="form-control form_width"
                                                 placeholder="Enter Minimum Registration "
-                                                formControlName="min_registration">
+                                                formControlName="min_registration" digitOnly>
                                             <div class="error_message"
                                                 *ngIf="metadataArray.controls[i].controls['min_registration'].hasError('required') && metadataArray.controls[i].controls['min_registration'].touched">
                                                 Minimum Registration cannot be blank
@@ -426,7 +371,7 @@
                                             </label>
                                             <input type="text" class="form-control form_width"
                                                 placeholder="Enter Maximum Registration "
-                                                formControlName="max_registration">
+                                                formControlName="max_registration" digitOnly>
                                             <div class="error_message"
                                                 *ngIf="metadataArray.controls[i].controls['max_registration'].hasError('required') && metadataArray.controls[i].controls['max_registration'].touched">
                                                 Maximum Registration cannot be blank
@@ -515,10 +460,7 @@
                                         </div>
                                     </div>
                                     <!--col-->
-                                </div>
-                                <div class="w_100">
-
-                                    <div class="col-sm-6" *ngIf="externalVendorname">
+                                    <div class="col-sm-6" *ngIf="metadataArray.controls[i].controls['external_vendor'].value =='yes'">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 External vendor name<span class="text_red">* </span>
@@ -557,7 +499,7 @@
                                             </label>
 
                                             <input
-                                                [value]="metadataArray.controls[i].controls['training_cost'].value | currency:'EUR':'symbol':'4.2-2'"
+                                                [value]="metadataArray.controls[i].controls['training_cost'].value | currency:'EUR':'symbol'"
                                                 type="text" class="form-control form_width"
                                                 placeholder="Enter Training cost per participant"
                                                 formControlName="training_cost">
@@ -580,7 +522,7 @@
                         <div class="card-footer1" *ngIf ="getUserrole.id == 2">
                             <button class="btn btn-primary mr-1" type="submit"
                                 (click)="createSession('pending')">Submit</button>
-                            <button class="btn btn-secondary" (click)="createSession('draft')">
+                            <button class="btn btn-secondary" *ngIf=" session_status != 'reject'" (click)="createSession('draft')">
                                 Save as draft
                             </button>
                         </div>
@@ -589,7 +531,7 @@
                             (click)="createSession('pending')">Submit</button>
                             <button *ngIf="(!sessionPub && session_status != 'reject') || session_status == 'pending' " class="btn btn-primary mr-1" data-target="#publishModal" data-toggle="modal">  <i class="fa fa-upload" aria-hidden="true"></i>
                                 <span class="pl-1"> Publish</span></button>
-                            <button *ngIf="session_id == 0 || sessionPub && session_status != 'pending' || session_status == 'draft' || session_status == 'reject'" class="btn btn-secondary" (click)="createSession('draft')">
+                            <button *ngIf="session_id == 0 || sessionPub && session_status != 'pending' || session_status == 'draft'" class="btn btn-secondary" (click)="createSession('draft')">
                                 Save as draft
                             </button>
                             <!-- <button *ngIf="session_id != 0 && (!sessionPub || session_status == 'pending') && (session_status != 'draft' && session_status != 'reject')" class="btn btn-secondary" data-target="#rejectModal" data-toggle="modal" >
@@ -648,37 +590,37 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
 
-    <div class="modal fade mt_150" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel"   aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document ">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="reject_req_h4">Reject Request</h4>
-            </div>
-    
-            <div class="modal-body">
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <label>Comments</label>
-                    <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"
-                      [(ngModel)]="rejectcomment"></textarea>
-                  </div>
-                </div>
-                <!--col end-->
+<div class="modal fade mt_150" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel"   aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="reject_req_h4">Reject Request</h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label>Comments</label>
+                <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"
+                  [(ngModel)]="rejectcomment"></textarea>
               </div>
-              <!--row-->
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="reject()">
-                Submit
-              </button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+            <!--col end-->
           </div>
+          <!--row-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="reject()">
+            Submit
+          </button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
+    </div>
+</div>
 
 <div class="collapse" id="collapseExample">
     <div class="card card-body req_status-card">

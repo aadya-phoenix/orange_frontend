@@ -9,6 +9,7 @@ import { CourseSessionService } from 'src/app/shared/services/course_session/cou
 import * as _ from 'lodash';
 import { SessionHistoryComponent } from '../session-history/session-history.component';
 import Swal from 'sweetalert2';
+import { CommonService } from 'src/app/shared/services/common/common.service';
 
 @Component({
   selector: 'app-sessions-list',
@@ -45,7 +46,7 @@ export class SessionsListComponent implements OnInit {
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
   constructor(
-    private courceService: CourcesService,
+    private commonService: CommonService,
     private courseSessionService:CourseSessionService,
     private authService: AuthenticationService,
     private modalService: NgbModal,
@@ -153,11 +154,30 @@ export class SessionsListComponent implements OnInit {
   })
  }    
 
- 
-  copyRequest(session:any){
-    if (session) {
-      this.router.navigateByUrl(`/dashboard/opensession/update/${session.id}`);
+ copyRequest(sessionId:any) {
+  Swal.fire({
+    title: 'Are you sure you want to copy?',
+    text: 'You will copy this request',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, copy it!',
+    cancelButtonText: 'No'
+  }).then((result) => {
+    if (result.value) {
+      this.commonService.showLoading();
+      this.courseSessionService.copySession({session_id :sessionId}).subscribe((res:any)=>{
+        this.commonService.hideLoading();
+        this.refreshSessions();
+        Swal.fire(
+          'Copied!',
+          'Your request has been copied.',
+          'success'
+        )
+      },(err:any)=>{
+        this.commonService.hideLoading();
+      });
     }
-  }
+  });
+ }
 
 }

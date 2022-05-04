@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 
 import { OpenCourseSessionRoutingModule } from './open-course-session-routing.module';
 
@@ -11,12 +11,14 @@ import { SessionHistoryComponent } from './session-history/session-history.compo
 import { ViewSessionComponent } from './view-session/view-session.component';
 import { SessionsListComponent } from './sessions-list/sessions-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SessionCompleteReportComponent } from './session-complete-report/session-complete-report.component';
+import { DigitOnlyModule } from '@uiowa/digit-only';
 
 
 @NgModule({
   declarations: [ SessionsListComponent, CreateSessionComponent, SessionHistoryComponent, 
-    ViewSessionComponent],
-  providers:[CurrencyPipe],
+    ViewSessionComponent, SessionCompleteReportComponent],
+  providers:[CurrencyPipe,DatePipe],
   entryComponents:[SessionHistoryComponent],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     OpenCourseSessionRoutingModule,
     NgxPaginationModule,
     NgSelectModule,
-    NgbModule
+    NgbModule,
+    DigitOnlyModule
   ]
 })
 export class OpenCourseSessionModule { }
