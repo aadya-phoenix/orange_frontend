@@ -59,7 +59,7 @@
               
                     <div class="Requs_btn_inl">
                         <div class="Requs_btn_inl-child">
-                            <button class="btn btn-secondary" (click)="updateSession()">
+                            <button class="btn btn-primary" (click)="updateSession()">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">Update</span>
                               </button>
                         </div>
@@ -112,9 +112,9 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-sm-6">
-                    <ngb-accordion #acc="ngbAccordion">
-                        <ngb-panel *ngFor="let meta of sessiondata.metadata; let i = index">
+                <div class="col-sm-6" *ngFor="let meta of sessiondata.metadata; let i = index">
+                    <ngb-accordion #acc="ngbAccordion" class="d-flex">
+                        <ngb-panel class="mr-1 w_100  ">
                             <ng-template ngbPanelTitle>
                                 <span>Session: {{i+1}}</span>
                             </ng-template>
@@ -317,11 +317,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div *ngIf="meta.external_vendor_name" class="col-sm-6">
+                                    <div *ngIf="meta.external_vendor_name" class="col-sm-12">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">External vendor name</label>
                                             <div class="d-flex align-items-center">
-                                                <span class="form-control form_width">
+                                                <span class="form_data">
                                                     {{meta.external_vendor_name}}
                                                 </span>
                                             </div>
