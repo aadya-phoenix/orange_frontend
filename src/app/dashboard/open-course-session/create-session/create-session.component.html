@@ -28,6 +28,9 @@
                         <li>
                             <a [routerLink]="['/dashboard/cources']" class="text_white">Create new Session</a>
                         </li>
+                        <li>
+                            <a  class="text_white">New request</a>
+                        </li>
                     </ol>
                 </div>
             </div>
@@ -357,10 +360,10 @@
                                                             class="form-control form_width" formControlName="duration">
                                                     </td>
                                                     <td>
-                                                        <button (click)="addBreak(i)" class="btn btn-primary">Add
-                                                            Break +</button>
+                                                        <button (click)="addBreak(i)" class="btn btn-primary mb-1">
+                                                           <span class="fon_12"> Add Break +</span></button>
                                                         <button  *ngIf="idx > 0" (click)="removeBreak(i,idx)" class="btn btn-danger">
-                                                            Remove Break -
+                                                            <span class="fon_12"> Remove Break -</span>   
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -372,7 +375,7 @@
                                 <!--row-->
                                 <div class="row">
 
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Comments
@@ -489,6 +492,7 @@
                                         </div>
                                     </div>
                                     <!--col-->
+                                    <div class="w_100">
 
                                     <div class="col-sm-6">
                                         <div class="form-group">
@@ -511,6 +515,32 @@
                                         </div>
                                     </div>
                                     <!--col-->
+                                </div>
+                                <div class="w_100">
+
+                                    <div class="col-sm-6" *ngIf="externalVendorname">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                External vendor name<span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Please indicate if the session is delivered by an external training provider.">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <ng-select placeholder="Please select" [items]="vendor"
+                                                bindLabel="vendor_name" bindValue="vendor_name"
+                                                formControlName="external_vendor_name" class="w_100">
+                                            </ng-select>
+                                            <div class="error_message"
+                                                *ngIf="metadataArray.controls[i].controls['external_vendor_name'].hasError('required') && metadataArray.controls[i].controls['external_vendor_name'].touched">
+                                                External vendor name cannot be blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--col-->
+                                    </div><!--w_100-->
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
@@ -540,30 +570,6 @@
                                         </div>
                                     </div>
                                     <!--col-->
-                                  
-                                    <div class="col-sm-6" *ngIf="externalVendorname">
-                                        <div class="form-group">
-                                            <label class="form-control-label">
-                                                External vendor name<span class="text_red">* </span>
-                                                <a>
-                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Please indicate if the session is delivered by an external training provider.">
-                                                    </i>
-                                                </a>
-                                            </label>
-                                            <ng-select placeholder="Please select" [items]="vendor"
-                                                bindLabel="vendor_name" bindValue="vendor_name"
-                                                formControlName="external_vendor_name" class="w_100">
-                                            </ng-select>
-                                            <div class="error_message"
-                                                *ngIf="metadataArray.controls[i].controls['external_vendor_name'].hasError('required') && metadataArray.controls[i].controls['external_vendor_name'].touched">
-                                                External vendor name cannot be blank
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--col-->
-
                                    
                                   
                                 </div>
