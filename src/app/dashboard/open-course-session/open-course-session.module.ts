@@ -13,6 +13,10 @@ import { SessionsListComponent } from './sessions-list/sessions-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SessionCompleteReportComponent } from './session-complete-report/session-complete-report.component';
 import { DigitOnlyModule } from '@uiowa/digit-only';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+
+
+
 
 
 @NgModule({
@@ -27,7 +31,8 @@ import { DigitOnlyModule } from '@uiowa/digit-only';
     NgxPaginationModule,
     NgSelectModule,
     NgbModule,
-    DigitOnlyModule
+    DigitOnlyModule, 
+    NgxMaterialTimepickerModule  
   ]
 })
 export class OpenCourseSessionModule { }
