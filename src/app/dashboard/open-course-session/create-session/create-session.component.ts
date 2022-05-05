@@ -128,7 +128,7 @@ export class CreateSessionComponent implements OnInit {
       external_vendor: new FormControl('', [Validators.required]),
       external_vendor_name:new FormControl(''),
       manager_approval: new FormControl(''),
-      training_cost: new FormControl('0.00'),
+      training_cost: new FormControl('0'),
     });
   }
 

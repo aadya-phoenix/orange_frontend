@@ -235,9 +235,12 @@
                                             <label class="form-control-label">
                                                 Start Time<span class="text_red">* </span>
                                             </label>
-                                            <!-- <ngb-timepicker formControlName="start_time" [meridian]="meridian"></ngb-timepicker> -->
-                                             <input type="time" class="form-control form_width"
-                                                formControlName="start_time"> 
+                                              <!--  <input [ngxTimepicker]="picker">
+                                               <ngx-material-timepicker></ngx-material-timepicker>  -->
+                                             <!--  <ngx-timepicker-field formControlName="start_time" [controlOnly]="true"></ngx-timepicker-field>  -->
+                                             <!-- <ngb-timepicker formControlName="start_time" [meridian]="meridian"></ngb-timepicker>  -->  
+                                              <input type="time" class="form-control form_width"
+                                                formControlName="start_time">  
                                             <div class="error_message"
                                                 *ngIf="metadataArray.controls[i].controls['start_time'].hasError('required') && metadataArray.controls[i].controls['start_time'].touched">
                                                 Start Time cannot be blank
@@ -497,14 +500,11 @@
                                                     </i>
                                                 </a>
                                             </label>
-
-                                            <input
-                                                [value]="metadataArray.controls[i].controls['training_cost'].value | currency:'EUR':'symbol'"
-                                                type="text" class="form-control form_width"
-                                                placeholder="Enter Training cost per participant"
-                                                formControlName="training_cost">
-
-                                                <p class="text_black">
+                                            <div class="dollar_div">
+                                            <label>€</label>
+                                              <input type="text"  formControlName="training_cost">
+                                              </div>                                              
+                                               <p class="text_black">
                                                     <b class="text_orange">Note</b>The training cost will not be displayed on the course page in the Orange Learning catalog.
                                                     The training cost will only be displayed in the corresponding session(s) of the course.
                                                 </p>
