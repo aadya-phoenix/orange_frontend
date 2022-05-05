@@ -13,6 +13,7 @@ import { ViewCompleteReportComponent } from './view-complete-report/view-complet
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
+import { MultiLaunguageComponent } from './multi-launguage/multi-launguage.component';
 
 
 @NgModule({
@@ -23,8 +24,9 @@ import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor'
     RequestDetailComponent,
     UpdateCourceComponent,
     ViewCompleteReportComponent,
+    MultiLaunguageComponent,
   ],
-  entryComponents:[ViewHistoryComponent],
+  entryComponents:[ViewHistoryComponent, MultiLaunguageComponent],
   imports: [
     CommonModule,
     CreateCourseRoutingModule,
