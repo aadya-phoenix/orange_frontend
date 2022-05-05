@@ -44,6 +44,11 @@
               <div class="overall_css">
                 <span class="card_overall">Overall request Status</span>
                 <div class="d-flex">
+                  <button class="btn btn-secondary" 
+                  [routerLink]="['/dashboard/opensession/view-complete-report']">
+                    <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> View
+                   all activity report
+                  </button>
                   <button class="btn btn-primary ml-1" [routerLink]="['/dashboard/opensession/create']">
                     + New request
                   </button>
@@ -95,7 +100,7 @@
                       <div class="fa-icons-des bac_green">
                         <img src="../../../../assets/images/icon/check.png" />
                       </div>
-                      <p>Closed</p>
+                      <p>Publish</p>
                     </div>
                     <span class="number_css">{{session_count.closed}}</span>
                   </div>
@@ -173,7 +178,7 @@
                       </th>
 
                       <th sortable="title" (sort)="onSort($event)" class="corse_title">
-                        Course Title<i class="fa fa-long-arrow-up arrow_css" aria-hidden="true"></i>
+                        Event Title<i class="fa fa-long-arrow-up arrow_css" aria-hidden="true"></i>
                         <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
                       </th>
                       <th sortable="sent_to" (sort)="onSort($event)">
@@ -228,7 +233,7 @@
                       </td>
                       <td class="text-center">
                         <div class="status_med_di">
-                          <a *ngIf="session.status=='pending' && getUserrole.id == 2" (click)="copyRequest(session)" class="copy_file mr-1"
+                          <a *ngIf="session.status=='pending' && getUserrole.id == 2" (click)="copyRequest(session.id)" class="copy_file mr-1"
                             data-toggle="tooltip" data-placement="top" title="Copy">
                             <i class="fa fa-files-o" aria-hidden="true"></i>
                           </a>

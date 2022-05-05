@@ -27,7 +27,10 @@
                   <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
                 </li>
                 <li>
-                  <a class="text_white">Create new Session</a>
+                  <a [routerLink]="['/dashboard']" class="text_white">Create new Session</a>
+                </li>
+                <li>
+                  <a class="text_white">View</a>
                 </li>
               </ol>
             </div>
@@ -55,11 +58,11 @@
    
     <div class="content">
         <div class="animated fadeIn">
-             <div *ngIf ="getUserrole.id == 2 && (status == 'reject' || status == 'draft') || status == 'draft'"     class="mb-2">
+             <div class="mb-2" *ngIf ="getUserrole.id == 2 && (status == 'reject' || status == 'draft') || status == 'draft' || (getUserrole.id == 3 && status == 'reject')">
               
                     <div class="Requs_btn_inl">
                         <div class="Requs_btn_inl-child">
-                            <button class="btn btn-secondary" (click)="updateSession()">
+                            <button class="btn btn-primary" (click)="updateSession()">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">Update</span>
                               </button>
                         </div>
@@ -112,9 +115,39 @@
                 </div>
             </div>
             <div class="row mb-3">
+              <div class="col-sm-6">
+                <div class="card border-radius-0">
+                    <div class="card-header card_header_view">
+                        <p>Session Details</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Title</label>
+                                <div class="d-flex align-items-center">
+                                    <span class="form_data">
+                                        {{ sessiondata.title }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Region</label>
+                                <div class="d-flex align-items-center">
+                                    <span class=" form_data">
+                                        {{ sessiondata.region_name }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
                 <div class="col-sm-6">
-                    <ngb-accordion #acc="ngbAccordion">
-                        <ngb-panel *ngFor="let meta of sessiondata.metadata; let i = index">
+                    <ngb-accordion #acc="ngbAccordion" *ngFor="let meta of sessiondata.metadata; let i = index">
+                        <ngb-panel>
                             <ng-template ngbPanelTitle>
                                 <span>Session: {{i+1}}</span>
                             </ng-template>
@@ -165,7 +198,7 @@
                                             <label for="exampleInputEmail1">Email Id of Participants</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">
-                                                <span *ngFor="let item of meta.email" >
+                                                <span *ngFor="let item of meta.email" class="d-flex" >
                                                     {{item}}
                                                 </span>
                                             </span>
@@ -228,7 +261,7 @@
                                             <label for="exampleInputEmail1">Break Description</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">
-                                                <span *ngFor="let item of meta.break_data" >
+                                                <span *ngFor="let item of meta.break_data" class="d-flex">
                                                     {{item.description}}
                                                 </span>
                                             </span>
@@ -240,7 +273,7 @@
                                             <label for="exampleInputEmail1">Break Duration</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">                         
-                                                <span *ngFor="let item of meta.break_data" >
+                                                <span *ngFor="let item of meta.break_data" class="d-flex" >
                                                     {{item.duration}}
                                                 </span>
                                             </span>
@@ -317,11 +350,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div *ngIf="meta.external_vendor_name" class="col-sm-6">
+                                    <div *ngIf="meta.external_vendor_name" class="col-sm-12">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">External vendor name</label>
                                             <div class="d-flex align-items-center">
-                                                <span class="form-control form_width">
+                                                <span class="form_data">
                                                     {{meta.external_vendor_name}}
                                                 </span>
                                             </div>
@@ -343,36 +376,7 @@
                         </ngb-panel>
                     </ngb-accordion>
 </div>          
-                <div class="col-sm-6">
-                    <div class="card border-radius-0">
-                        <div class="card-header card_header_view">
-                            <p>Session Details</p>
-                        </div>
-                        <div class="card-body">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Title</label>
-                                    <div class="d-flex align-items-center">
-                                        <span class="form_data">
-                                            {{ sessiondata.title }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Region</label>
-                                    <div class="d-flex align-items-center">
-                                        <span class=" form_data">
-                                            {{ sessiondata.region_name }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
                     
  </div>
         </div>

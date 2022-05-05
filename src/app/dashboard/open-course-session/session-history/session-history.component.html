@@ -11,7 +11,7 @@
         </h5>
         <table class="table table-bordered">
             <thead>
-                <tr class="font-14 text-center">
+                <tr class="font-15 text-center">
                     <th scope="col">Sr.No</th>
                     <th scope="col">Request Name</th>
                     <th scope="col">Sent to</th>
@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let history of historyList;let i = index" class="text-center font-13">
+                <tr *ngFor="let history of historyList;let i = index" class="text-center font-16">
                     <th scope="row">{{i+1}}</th>
                     <td>{{ history && history.transfer_by_name ? history.transfer_by_name : history.action_by_name}}
                     </td>
@@ -31,7 +31,7 @@
                         {{history.status | titlecase}}
                     </td>
                     <td>
-                        <p style="width: 154px; overflow-y: auto;font-size: 12px;">{{history.status_comment}}</p>
+                        <p  class="history_p">{{history.status_comment}}</p>
                     </td>
                 </tr>
             </tbody>

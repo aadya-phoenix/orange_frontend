@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
@@ -37,7 +38,8 @@ export class ViewSessionComponent implements OnInit {
     private authService:AuthenticationService,
     private route: ActivatedRoute,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private datepipe: DatePipe
   ) { 
     this.getUserrole = this.authService.getRolefromlocal();
   }
@@ -79,6 +81,9 @@ export class ViewSessionComponent implements OnInit {
             element.email = JSON.parse(element.email_participant);
             element.break_data = JSON.parse(element.break);
             element.training_cost_euro = '€ ' + (element.training_cost != null ? element.training_cost : 0) ;
+            element.end_date = this.datepipe.transform(element.end_date,'dd-MM-yyyy');
+            element.start_date = this.datepipe.transform(element.start_date,'dd-MM-yyyy');
+            element.registration_deadline = this.datepipe.transform(element.registration_deadline,'dd-MM-yyyy');
           });
         }
       },
