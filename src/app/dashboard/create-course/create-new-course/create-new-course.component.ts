@@ -18,6 +18,8 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MultiLaunguageComponent } from '../multi-launguage/multi-launguage.component';
 const emailregexp = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
 /* const urlregex = '^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$' ; */
 /* const urlregex = '^(https:\/\/www\.|http:\/\/www\.|www\.)[a-zA-Z0-9\-_$]+\.[a-zA-Z]{2,5}$'; */
@@ -85,6 +87,7 @@ export class CreateNewCourseComponent implements OnInit {
   notification: boolean = false;
   fileToUpload: any[] = [];
   fileToUpload_Material: any[] = [];
+  isMaterialSource = '';
   isFileResouce = '';
   j: any = 0;
   remainingText: any = 500;
@@ -328,7 +331,8 @@ export class CreateNewCourseComponent implements OnInit {
     private fb: FormBuilder,
     private courceService: CourcesService,
     private router: Router,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private modalService: NgbModal
   ) {
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.getUserrole = this.authService.getRolefromlocal();
@@ -374,6 +378,8 @@ export class CreateNewCourseComponent implements OnInit {
             fileName: this.routergetdata.material_source.split('/')[3],
             url: 'https://orange.mindscroll.info/' + this.routergetdata.material_source
           };
+          this.isMaterialSource = 'https://orange.mindscroll.info/public/public/' + this.routergetdata.material_source;
+          this.routergetdata.material_source = null;
           this.fileToUpload_Material.push(objectdata);
         }
       }
@@ -417,7 +423,7 @@ export class CreateNewCourseComponent implements OnInit {
 
       }
       else if (this.routergetdata.learning_type == "3") {
-        if (this.routergetdata.url != "") {
+        if (this.routergetdata.url) {
           this.showMaterialURLchecked = true;
           this.materialsourceurl = true;
           this.showMaterialUploadchecked = false;
@@ -464,7 +470,7 @@ export class CreateNewCourseComponent implements OnInit {
         }
       }
       else if (this.routergetdata.learning_type == "6") {
-        this.showPlaylistTargetAudience = this.routergetdata['level'] == "1" ? "yes" : "no";
+        this.showPlaylistTargetAudience = this.routergetdata['level'] == "yes" ? "yes" : "no";
         this.showPlaylistEmail = this.routergetdata.for_whoom.toString().replace('"', '').replace('"', '');
         if (this.routergetdata.level == "yes") {
           this.regionTargetAudience = true;
@@ -474,6 +480,25 @@ export class CreateNewCourseComponent implements OnInit {
         }
       }
     }
+  }
+
+
+  openModal(item: any) {
+    const modalRef = this.modalService.open(MultiLaunguageComponent, {
+      centered: true,
+      size: 'xl',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      data: item
+    };
+    modalRef.componentInstance.passEntry.subscribe((res: any) => {
+      debugger;
+      res;
+      if(res){
+        debugger;
+      }
+    });
   }
 
   /*  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
@@ -1346,6 +1371,7 @@ export class CreateNewCourseComponent implements OnInit {
 
 
   gettitlelanguage() {
+    debugger;
     console.log(this.commonCreateCourceForm.value);
   }
 
@@ -1463,16 +1489,16 @@ export class CreateNewCourseComponent implements OnInit {
     let obj: any;
 
     titleForm = commonformObj.value.titleArr;
-    for (let i = 0; i < commonformObj.value.titleArr.length; i++) {
-      if (commonformObj.value.titleArr[i].value != '') {
+    for (let i = 0; i < titleForm.length; i++) {
+      if (titleForm[i].value) {
         titlearray.push({
-          [`${commonformObj.value.titleArr[i].name}`]:
-            commonformObj.value.titleArr[i].value,
+          [`${titleForm[i].name}`]:
+            titleForm[i].value,
         });
       } else {
-        if (commonformObj.value.titleArr[i].slug == this.lang) {
+        if (titleForm[i].slug == this.lang || titleForm[i].name == this.lang ) {
           titlearray.push({
-            [`${commonformObj.value.titleArr[i].name}`]:
+            [`${titleForm[i].name}`]:
               commonformObj.value.title_single,
           });
         }
@@ -1719,7 +1745,6 @@ export class CreateNewCourseComponent implements OnInit {
             (res: any) => {
               console.log(res);
               if (res) {
-                //  debugger
                 // this.router.navigate(['/dashboard/cources']);
                 if (this.routergetdata) {
                   this.courseId = this.routergetdata.id;
@@ -1765,7 +1790,6 @@ export class CreateNewCourseComponent implements OnInit {
       }
       else if (status == "publish") {
         console.log("publisheddd");
-        //debugger;
         totalObj.intranet_url = this.publishForm.value.intranet_url;
         totalObj.internet_url = this.publishForm.value.internet_url;
         totalObj.publisher_id = this.selectedPublisherId;
@@ -1881,7 +1905,6 @@ export class CreateNewCourseComponent implements OnInit {
       this.playlistForm.get('who_see_course')?.setValidators(Validators.required);
       this.playlistForm.get('target_audience')?.clearValidators();
       this.playlistForm.get('email_preffered_instructor')?.clearValidators();
-      debugger;
       this.playlistForm.patchValue({
         target_audience: null,
         email_preffered_instructor: null
@@ -1892,7 +1915,6 @@ export class CreateNewCourseComponent implements OnInit {
       this.playlistForm.get('target_audience')?.setValidators(Validators.required);
       this.playlistForm.get('email_preffered_instructor')?.setValidators(Validators.required);
       this.playlistForm.get('who_see_course')?.clearValidators();
-      debugger;
       this.playlistForm.patchValue({
         who_see_course: null,
       });
