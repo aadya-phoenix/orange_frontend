@@ -68,7 +68,7 @@ export class CourseSessionService {
   //sessionPublsiher
   setSessionPublisherStatus(status:any) {
     const url = `api/${this.apiVersion}/course-session/publisher-status`;
-    return this.http.post(url, status).pipe(catchError(this.commmonService.Errorhandling));;
+    return this.http.post(url, status).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   getSessionPublisherStatus(){
@@ -76,6 +76,11 @@ export class CourseSessionService {
    return this.http
      .get(url, this.http.headers)
      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  getsessionReport(data:any){
+    const url = `/api/${this.apiVersion}/course-session/filter`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
 

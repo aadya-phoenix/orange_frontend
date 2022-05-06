@@ -4,7 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
-import { CourcesService } from 'src/app/shared/services/cources/cources.service';
+
 import { CourseSessionService } from 'src/app/shared/services/course_session/course-session.service';
 import * as _ from 'lodash';
 import { SessionHistoryComponent } from '../session-history/session-history.component';
