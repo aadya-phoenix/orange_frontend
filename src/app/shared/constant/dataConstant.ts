@@ -28,14 +28,15 @@ export const dataConstant = {
  // CurrencyPattern:'/(?=.*?\d)^\$?(([1-9]\d{0,2}(,\d{3})*)|\d+)?(\.\d{1,2})?$/',
   CurrencyPattern:'^(?!0\.00)\d{1,3}(,\d{3})*(\.\d\d)?$',
   CarouselStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
-  
+  BackOfficeStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
   CourseSessionStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred' },
-
   ImageUrl: 'https://orange.mindscroll.info/public/public',
   RoleID: {
     RequesterID: 2,
     CarouselReviewer: 7,
-    CarouselPublisher: 8
+    CarouselPublisher: 8,
+    BackOfficeReviewer: 3,
+    BackOfficePublisher: 10,
   }
 }
 

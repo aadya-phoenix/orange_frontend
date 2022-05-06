@@ -1,0 +1,440 @@
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-8">
+            <div class="page-header float-left bg-transparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="breade_text_span1">Request back-office role</span>
+                        <span class="divider"></span>
+                        <span class="breade_text_span">Request a specific Orange Learning role.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 float-right">
+            <div class="page-header float-right bg-transparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bg-transparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home text_white"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/back-office']" class="text_white">Create new back office</a>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">{{ back_office_id === 0 ? 'New Request' : 'Update
+                                Request'}}</span>
+
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header cm-card-header">
+                            <div class="d-flex justify-content-between media_creat_couse_col">
+                                <div class="d-flex align-items-center">
+                                    <img src="../../../../assets/images/formm.png" class="ml-2" width="40" />
+                                    <span class="comlte_css">Complete this form and click on the submit button</span>
+                                </div>
+                                <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample"
+                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    View overall request status<img src="../../../../assets/images/Viewreq.png"
+                                        class="ml-2" width="40" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="createBackOfficeForm">
+        <div class="content mt-1">
+            <div class="animated fadeIn">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body card_width">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Email Address <span class="text-danger-ligth">* </span>
+                                            </label>
+                                            <ng-select placeholder="Please select email" [items]="preferedInstructor"
+                                                [multiple]="false" bindLabel="email_id" bindValue="email_id"
+                                                (change)="changeEmail($event)" formControlName="email">
+                                            </ng-select>
+                                            <div
+                                                *ngIf="(createBackOfficeForm.controls['email'].invalid && (createBackOfficeForm.controls['email'].dirty || createBackOfficeForm.controls['email'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createBackOfficeForm.controls['email'].errors?.required">
+                                                    Email Address cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                CUID/FTID <span class="text-danger-ligth">* </span>
+                                            </label>
+                                            <input type="text" placeholder="Enter CUID/FTID" formControlName="cuid"
+                                                class="form-control form_width" />
+                                            <div
+                                                *ngIf="(createBackOfficeForm.controls['cuid'].invalid && (createBackOfficeForm.controls['cuid'].dirty || createBackOfficeForm.controls['cuid'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createBackOfficeForm.controls['cuid'].errors?.required">
+                                                    CUID/FTID cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                First Name <span class="text-danger-ligth">* </span>
+                                            </label>
+                                            <input type="text" placeholder="Enter First Name"
+                                                formControlName="first_name" class="form-control form_width" />
+                                            <div
+                                                *ngIf="(createBackOfficeForm.controls['first_name'].invalid && (createBackOfficeForm.controls['first_name'].dirty || createBackOfficeForm.controls['first_name'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createBackOfficeForm.controls['first_name'].errors?.required">
+                                                    Frist Name cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Last Name <span class="text-danger-ligth">* </span>
+                                            </label>
+                                            <input type="text" placeholder="Enter Last Name" formControlName="last_name"
+                                                class="form-control form_width" />
+                                            <div
+                                                *ngIf="(createBackOfficeForm.controls['last_name'].invalid && (createBackOfficeForm.controls['last_name'].dirty || createBackOfficeForm.controls['last_name'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createBackOfficeForm.controls['last_name'].errors?.required">
+                                                    Last Name cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Entity
+                                            </label>
+                                            <ng-select placeholder="Please Select Entity" [items]="entityList"
+                                                [multiple]="false" bindLabel="division_id" bindValue="id"
+                                                formControlName="entity">
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Course to be delivered <span class="text-danger-ligth">* </span>
+                                            </label>
+                                            <input type="text" placeholder="Enter Title" formControlName="course_deliver"
+                                                class="form-control form_width" />
+                                            <div
+                                                *ngIf="(createBackOfficeForm.controls['course_deliver'].invalid && (createBackOfficeForm.controls['course_deliver'].dirty || createBackOfficeForm.controls['course_deliver'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createBackOfficeForm.controls['course_deliver'].errors?.required">
+                                                    Course to be delivered can not be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Date of the first session <span class="text-danger-ligth">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-bs-toggle="tooltip" data-bs-placement="right"
+                                                        ngbTooltip="Upon receipt of a correctly completed request, the entry will appear in the Orange Learning BackOffice within 3-5 business days."></i>
+                                                </a>
+                                            </label>
+                                            <input type="date" class="form-control form_width"
+                                                formControlName="first_session_date" min="{{minDate}}" />
+                                            <div
+                                                *ngIf="(createBackOfficeForm.controls['first_session_date'].invalid && (createBackOfficeForm.controls['first_session_date'].dirty || createBackOfficeForm.controls['first_session_date'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createBackOfficeForm.controls['first_session_date'].errors?.required">
+                                                    Date of the first session cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Additional Comments
+                                            </label>
+                                            <textarea class="form-control form_width-textarea" maxlength="500" rows="3"
+                                                formControlName="additional_comment"
+                                                placeholder="Enter Additional Comments"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Orange Learning Role <span class="text-danger-ligth">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-bs-toggle="tooltip" data-bs-placement="right"
+                                                        ngbTooltip="Upon receipt of a correctly completed request, the entry will appear in the Orange Learning BackOffice within 3-5 business days."></i>
+                                                </a>
+                                            </label>
+                                            <ng-select placeholder="Please select email" [items]="cctLearningRole"
+                                                [multiple]="false" bindLabel="name" bindValue="id"
+                                                formControlName="learning_role">
+                                            </ng-select>
+                                            <div
+                                                *ngIf="(createBackOfficeForm.controls['learning_role'].invalid && (createBackOfficeForm.controls['learning_role'].dirty || createBackOfficeForm.controls['learning_role'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createBackOfficeForm.controls['learning_role'].errors?.required">
+                                                    Orange Learning Role cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Instructor Delivery Perimeter<span class="text-danger-ligth">* </span>
+                                            </label>
+                                            <ng-select placeholder="Please select Delivery" [items]="cctDeliveryPerimeter"
+                                                [multiple]="true" bindLabel="name" bindValue="name"
+                                                formControlName="delivery_perimeter">
+                                            </ng-select>
+                                            <div
+                                                *ngIf="(createBackOfficeForm.controls['course_deliver'].invalid && (createBackOfficeForm.controls['course_deliver'].dirty || createBackOfficeForm.controls['course_deliver'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createBackOfficeForm.controls['course_deliver'].errors?.required">
+                                                    Course to be delivered can not be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12" *ngIf="isRequester">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Request to Regional Operation Cordinator
+                                                <span class="text_red">* </span>
+
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="right"
+                                                        ngbTooltip="If you selected Yes in the Certification field, please select how long the certification is valid.">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <select class="form-control form_width"
+                                                formControlName="regional_cordinator">
+                                                <option value="">Please select ROC</option>
+                                                <option *ngFor="let cordinator of cordinatorsList"
+                                                    [value]="cordinator.id">
+                                                    {{ cordinator?.name }}
+                                                </option>
+                                            </select>
+                                            <div
+                                                *ngIf="(createBackOfficeForm.controls['regional_cordinator'].invalid && (createBackOfficeForm.controls['regional_cordinator'].dirty || createBackOfficeForm.controls['regional_cordinator'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createBackOfficeForm.controls['regional_cordinator'].errors?.required">
+                                                    Request to Regional Operational Coordinator cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12" *ngIf="isRequester" >
+                                    <p class="text_black" *ngFor="let item of backupCordinatorsList">
+                                        <b class="text_orange">Note</b>: The training coordinator of {{item.name}}
+                                        region is unavaliable.Therefore, please select the
+                                        <b class="text_orange">{{item.backup_roc_region}}</b>.region from the list,
+                                        who is the backup for {{item.name}} region.
+                                    </p>
+                                </div>
+                                    <div class="col-sm-12">
+                                        <label (change)="agreeChange()">
+                                            <input type="checkbox" formControlName="agree">
+                                            <span class="mr-1 ml-1 font-13">As an instructor on Orange Learning i hereby
+                                                agree to...</span>
+                                        </label>
+                                        <div
+                                            *ngIf="(createBackOfficeForm.controls['agree'].invalid && (createBackOfficeForm.controls['agree'].dirty || createBackOfficeForm.controls['agree'].touched)) || isSubmitted">
+                                            <div class="error_message"
+                                                *ngIf="createBackOfficeForm.controls['agree'].errors">
+                                                As an instructor on Orange Learning cannot be blank
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Request to Regional Operational Coordinator <span
+                                                    class="text-danger-ligth">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-bs-toggle="tooltip" data-bs-placement="right"
+                                                        ngbTooltip="Upon receipt of a correctly completed request, the entry will appear in the Orange Learning BackOffice within 3-5 business days."></i>
+                                                </a>
+                                            </label>
+                                            <input type="text" placeholder="Enter Entity"
+                                                formControlName="regional_cordinator" class="form-control form_width" />
+                                            <div
+                                                *ngIf="(createBackOfficeForm.controls['regional_cordinator'].invalid && (createBackOfficeForm.controls['regional_cordinator'].dirty || createBackOfficeForm.controls['regional_cordinator'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createBackOfficeForm.controls['regional_cordinator'].errors?.required">
+                                                    Request to Regional Operational Coordinator cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary mr-1" type="submit" *ngIf="isSubmit()"
+                                    (click)="saveBackOffice('pending')">{{ isReviewer ? 'Transfer To Publisher':
+                                    'Submit'
+                                    }}</button>
+                                <button class="btn btn-primary mr-1" type="submit" *ngIf="isPublish()"
+                                    (click)="saveBackOffice('publish')"><i aria-hidden="true"
+                                        class="fa fa-upload"></i><span class="pl-1">Publish</span></button>
+                                <button class="btn btn-secondary mr-1" type="submit" *ngIf="isReject()"
+                                    (click)="statusChangeRequest(BackOfficeStatus.reject)"><i aria-hidden="true"
+                                        class="fa fa-times"></i><span class="pl-1">Reject</span></button>
+                                <button class="btn btn-secondary" *ngIf="isDraft()"
+                                    (click)="saveBackOffice('draft')">Save
+                                    as draft</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- .content -->
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body req_status-card">
+            <div class="card_header reqst_header">
+                <p>Overall request Status</p>
+                <i class="fa fa-times fa_cross mr-2" aria-hidden="true" data-toggle="collapse" href="#collapseExample"
+                    role="button" aria-expanded="false" aria-controls="collapseExample"></i>
+            </div>
+            <div class="row ml-1 mr-1" data-aos="fade-right">
+                <div class="col-sm-2 dash_wid">
+                    <div class="alig_dashicon">
+                        <div class="child_align_icon">
+                            <div class="fa-icons-des bg-transparent">
+                                <img src="../../../../assets/images/icon/draftsbl.png" />
+                            </div>
+                            <p>Draft</p>
+                            <span class="number_css">
+                                {{back_office_count.draft}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--coled-->
+                <div class="col-sm-2 dash_wid">
+                    <div class="alig_dashicon">
+                        <div class="child_align_icon">
+                            <div class="fa-icons-des bg-transparent">
+                                <img src="../../../../assets/images/icon/closedbl.png" />
+                            </div>
+                            <p>Submitted</p>
+                            <span class="number_css">
+                                {{back_office_count.submitted}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--coled-->
+                <div class="col-sm-2 dash_wid" *ngIf="isReviewer || isPublisher">
+                    <div class="alig_dashicon">
+                        <div class="child_align_icon">
+                            <div class="fa-icons-des bg-transparent">
+                                <img src="../../../../assets/images/icon/pendingbl.png" />
+                            </div>
+                            <p>Pending</p>
+                            <span class="number_css">
+                                {{back_office_count.pending}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--coled-->
+                <div class="col-sm-2 dash_wid" *ngIf="isReviewer">
+                    <div class="alig_dashicon">
+                        <div class="child_align_icon">
+                            <div class="fa-icons-des bg-transparent">
+                                <img src="../../../../assets/images/icon/transferbl.png" />
+                            </div>
+                            <p>Forwarded</p>
+                            <span class="number_css">
+                                {{back_office_count.transferred?back_office_count.transferred:0}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--coled-->
+                <div class="col-sm-2 dash_wid">
+                    <div class="alig_dashicon">
+                        <div class="child_align_icon">
+                            <div class="fa-icons-des bg-transparent">
+                                <img src="../../../../assets/images/icon/checkbl.png" />
+                            </div>
+                            <p>Published</p>
+                            <span class="number_css">
+                                {{back_office_count.closed?back_office_count.closed:0}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--coled-->
+                <div class="col-sm-2 dash_wid">
+                    <div class="alig_dashicon">
+                        <div class="child_align_icon">
+                            <div class="fa-icons-des bg-transparent">
+                                <img src="../../../../assets/images/icon/rejectbl.png" />
+                            </div>
+                            <p>Rejected</p>
+                            <span class="number_css">
+                                {{back_office_count.rejected?back_office_count.rejected:0}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--ROW END-->
+            <div class="view-comple-req_div">
+                <button class="btn btn-primary view-comple-req justify-content-center p-1"
+                    [routerLink]="['/dashboard/olcarousel/view-complete-report']">
+                    <i class="fa fa-database mr-1" aria-hidden="true"></i>View Complete Report
+                </button>
+            </div>
+            <!--ROW END-->
+        </div>
+    </div>
+</div>
