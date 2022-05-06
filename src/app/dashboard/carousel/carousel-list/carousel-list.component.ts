@@ -153,7 +153,6 @@ export class CarouselListComponent implements OnInit {
         if (result.value) {
           this.commonService.showLoading();
           this.carouselService.carouselDelete({carousel_id :carousel_id}).subscribe((res:any)=>{
-            this.commonService.hideLoading();
             this.refreshCourses();
             Swal.fire(
               'Deleted!',
@@ -166,9 +165,9 @@ export class CarouselListComponent implements OnInit {
           
         }
       })
-    }
+  }
 
-    copyRequest(carousel_id: number) {
+  copyRequest(carousel_id: number) {
       Swal.fire({
         title: 'Are you sure you want to copy?',
         text: 'You will copy this request',
@@ -193,5 +192,5 @@ export class CarouselListComponent implements OnInit {
           
         }
       })
-    }
+   }
 }

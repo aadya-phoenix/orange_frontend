@@ -5,6 +5,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
+import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { CourseSessionService } from 'src/app/shared/services/course_session/course-session.service';
 
@@ -35,6 +36,7 @@ export class ViewSessionComponent implements OnInit {
     private fb: FormBuilder,
     private courseSessionService:CourseSessionService,
     private courseService:CourcesService,
+    private commonService: CommonService,
     private authService:AuthenticationService,
     private route: ActivatedRoute,
     private modalService: NgbModal,
@@ -69,8 +71,10 @@ export class ViewSessionComponent implements OnInit {
   }
 
   getSessionDetails(){
+    this.commonService.showLoading();
     this.courseSessionService.getSessionDetails(this.id).subscribe(
       (res: any) => {
+        this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
           this.sessiondata = res.data;
           this.status = this.sessiondata.status;
@@ -88,6 +92,7 @@ export class ViewSessionComponent implements OnInit {
         }
       },
       (err: any) => {
+        this.commonService.hideLoading();
         console.log(err);
       }
     );
@@ -132,7 +137,7 @@ export class ViewSessionComponent implements OnInit {
     let statusobj = { session_id: this.id, status: 'reject', status_comment: this.rejectcomment }
     this.courseSessionService.changeStatusSession(statusobj).subscribe((res: any) => {
       console.log(res);
-      this.router.navigate(['/dashboard/opensession']);
+      this.router.navigate(['/dashboard/sct']);
     }, (err: any) => {
       console.log(err)
     })
@@ -145,7 +150,7 @@ export class ViewSessionComponent implements OnInit {
         (res: any) => {
           console.log(res);
           if (res) {
-            this.router.navigate(['/dashboard/opensession']);
+            this.router.navigate(['/dashboard/sct']);
           }
         },
         (err: any) => {
@@ -183,7 +188,7 @@ export class ViewSessionComponent implements OnInit {
       let transferobj = { session_id: this.id, status: 'pending', transfer_id: this.selectedotherRoc, status_comment: this.transfercomment};
       this.courseSessionService.courseSessionTransfer(transferobj).subscribe((res: any) => {
         console.log(res);
-        this.router.navigate(['/dashboard/opensession']);
+        this.router.navigate(['/dashboard/sct']);
       }, (err: any) => {
         console.log(err)
       })
@@ -191,6 +196,6 @@ export class ViewSessionComponent implements OnInit {
   }
 
   updateSession(){
-    this.router.navigateByUrl(`/dashboard/opensession/update/${this.id}`);
+    this.router.navigateByUrl(`/dashboard/sct/update/${this.id}`);
   }
 }
