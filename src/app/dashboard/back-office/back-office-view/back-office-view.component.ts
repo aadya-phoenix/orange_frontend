@@ -9,6 +9,7 @@ import { CommonService } from 'src/app/shared/services/common/common.service';
 import Swal from 'sweetalert2';
 import { BackOfficeForwardComponent } from '../back-office-forward/back-office-forward.component';
 import { BackOfficePublishComponent } from '../back-office-publish/back-office-publish.component';
+import { BackOfficeTransferToOtherRocComponent } from '../back-office-transfer-to-other-roc/back-office-transfer-to-other-roc.component';
 
 @Component({
   selector: 'app-back-office-view',
@@ -141,34 +142,62 @@ export class BackOfficeViewComponent implements OnInit {
     return true;
   }
 
+  isOtherRoc(){
+    if(this.isReviewer && this.requestdata?.status === this.BackOfficeStatus.pending){
+      return true;
+    }
+    return false
+  }
+
+  transferToOtherRoc(){
+    const modalRef = this.modalService.open(BackOfficeTransferToOtherRocComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      data: this.requestdata.id,
+      objectDetail: this.requestdata
+    };
+  }
+
   forwardRequest(){
-      Swal.fire({
-        title: 'Are you sure want to transfer?',
-        text: 'Request will be transfer to the publisher!',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, move it!',
-        cancelButtonText: 'No, keep it'
-      }).then((result) => {
-        if (result.value) {
-          var data = {
-            back_office_id: this.requestdata.id,
-          };
-            this.commonService.showLoading();
-            this.backOfficeService.backOfficeTransfer(data).subscribe(
-              (res: any) => {
-                this.commonService.hideLoading();
-                this.commonService.toastSuccessMsg('BackOffice', 'Successfully Transfered.');
-                this.getBackOfficeDetails();
-              },
-              (err: any) => {
-                this.commonService.hideLoading();
-                this.commonService.toastErrorMsg('Error', err.message);
-              }
-            );
+    const modalRef = this.modalService.open(BackOfficeForwardComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      data: this.requestdata.id,
+      objectDetail: this.requestdata
+    };
+      // Swal.fire({
+      //   title: 'Are you sure want to transfer?',
+      //   text: 'Request will be transfer to the publisher!',
+      //   icon: 'question',
+      //   showCancelButton: true,
+      //   confirmButtonText: 'Yes, move it!',
+      //   cancelButtonText: 'No, keep it'
+      // }).then((result) => {
+      //   if (result.value) {
+      //     var data = {
+      //       back_office_id: this.requestdata.id,
+      //     };
+      //       this.commonService.showLoading();
+      //       this.backOfficeService.backOfficeTransfer(data).subscribe(
+      //         (res: any) => {
+      //           this.commonService.hideLoading();
+      //           this.commonService.toastSuccessMsg('BackOffice', 'Successfully Transfered.');
+      //           this.getBackOfficeDetails();
+      //         },
+      //         (err: any) => {
+      //           this.commonService.hideLoading();
+      //           this.commonService.toastErrorMsg('Error', err.message);
+      //         }
+      //       );
           
-        }
-      })
+      //   }
+      // })
   }
 
   statusChangeRequest(status:any){

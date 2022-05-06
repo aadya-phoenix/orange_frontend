@@ -29,6 +29,7 @@ export class CreateBackOfficeComponent implements OnInit {
   back_office_id = 0;
   back_office_details: any = {};
   preferedInstructor: any = [];
+  termsAndCondition: any = [];
   entityList: any = [];
   languageList: any = [];
   cctExpiryperiod: any = [];
@@ -84,10 +85,12 @@ export class CreateBackOfficeComponent implements OnInit {
       first_name: new FormControl('', [Validators.required]),
       last_name: new FormControl('', [Validators.required]),
       entity: new FormControl(''),
-      course_deliver: new FormControl('',[Validators.required]),
+      course_deliver: new FormControl('', [Validators.required]),
       first_session_date: new FormControl('', [Validators.required]),
       learning_role: new FormControl('', [Validators.required]),
-      regional_cordinator: new FormControl('', [Validators.required]),
+      ...(this.isRequester && {
+        regional_cordinator: new FormControl('', [Validators.required]),
+      }),
       additional_comment: new FormControl(''),
       delivery_perimeter: new FormControl('', [Validators.required]),
       agree: new FormControl(false, [Validators.requiredTrue]),
@@ -98,14 +101,25 @@ export class CreateBackOfficeComponent implements OnInit {
     this.getTotalCount();
   }
 
-   //preferred instructor
-   getPreferedInstructor() {
-    this.commonService.showLoading();
+  //preferred instructor
+  getPreferedInstructor() {
     this.courseService.getpreferedInstructor().subscribe(
       (res: any) => {
         this.preferedInstructor = res.data;
-        this.getEntitylist();
+        this.getCCTTermCondition();
+      },
+      (err: any) => {
+        console.log(err);
         this.commonService.hideLoading();
+      }
+    );
+  }
+
+  getCCTTermCondition() {
+    this.backOfficeService.getCCTTermCondition().subscribe(
+      (res: any) => {
+        this.termsAndCondition = res.data;
+        this.getEntitylist();
       },
       (err: any) => {
         console.log(err);
@@ -115,13 +129,11 @@ export class CreateBackOfficeComponent implements OnInit {
   }
 
   getEntitylist() {
-    this.commonService.showLoading();
     this.courseService.getEntitylist().subscribe(
       (res: any) => {
         console.log(res);
         this.entityList = res.data;
         this.getCordinators();
-        this.commonService.hideLoading();
       },
       (err: any) => {
         console.log(err);
@@ -131,13 +143,10 @@ export class CreateBackOfficeComponent implements OnInit {
   }
 
   getCCTDeliveryPerimeter() {
-    this.commonService.showLoading();
     this.backOfficeService.getCCTDeliveryPerimeter().subscribe(
       (res: any) => {
-        console.log(res);
         this.cctDeliveryPerimeter = res.data;
         this.getCCTLearningRole();
-        this.commonService.hideLoading();
       },
       (err: any) => {
         console.log(err);
@@ -146,14 +155,18 @@ export class CreateBackOfficeComponent implements OnInit {
     );
   }
   getCCTLearningRole() {
-    this.commonService.showLoading();
     this.backOfficeService.getCCTLearningRole().subscribe(
       (res: any) => {
         console.log(res);
         this.cctLearningRole = res.data;
-        this.commonService.hideLoading();
         if (this.back_office_id) {
           this.getBackOfficeDetails();
+        }
+        else {
+          if (this.cctLearningRole.length > 0) {
+            this.createBackOfficeForm.controls.learning_role.setValue(this.cctLearningRole[0].id);
+          }
+          this.commonService.hideLoading();
         }
       },
       (err: any) => {
@@ -164,13 +177,11 @@ export class CreateBackOfficeComponent implements OnInit {
   }
 
   getCordinators() {
-    this.commonService.showLoading();
     this.courseService.getNewregionalCordinator().subscribe(
       (res: any) => {
         console.log(res);
         this.cordinatorsList = res.data;
-    this.getBackupRegionalCordinator();
-    this.commonService.hideLoading();
+        this.getBackupRegionalCordinator();
       },
       (err: any) => {
         console.log(err);
@@ -179,12 +190,10 @@ export class CreateBackOfficeComponent implements OnInit {
     );
   }
   getBackupRegionalCordinator() {
-    this.commonService.showLoading();
     this.courseService.getBackupRegionalCordinator().subscribe(
       (res: any) => {
         this.backupCordinatorsList = res.data;
         this.getCCTDeliveryPerimeter();
-        this.commonService.hideLoading();
       },
       (err: any) => {
         console.log(err);
@@ -194,7 +203,6 @@ export class CreateBackOfficeComponent implements OnInit {
   }
 
   getBackOfficeDetails() {
-    this.commonService.showLoading();
     this.backOfficeService.getBackOfficeDetails(this.back_office_id).subscribe(
       (res: any) => {
         this.commonService.hideLoading();
@@ -207,13 +215,15 @@ export class CreateBackOfficeComponent implements OnInit {
           this.createBackOfficeForm.controls.entity.setValue(this.back_office_details.entity);
           this.createBackOfficeForm.controls.course_deliver.setValue(this.back_office_details.course_deliver);
           this.createBackOfficeForm.controls.learning_role.setValue(this.back_office_details.learning_role);
-          this.createBackOfficeForm.controls.regional_cordinator.setValue(this.back_office_details.regional_cordinator);
+          if (this.isRequester) {
+            this.createBackOfficeForm.controls.regional_cordinator.setValue(this.back_office_details.regional_cordinator);
+          }
           this.createBackOfficeForm.controls.additional_comment.setValue(this.back_office_details.additional_comment);
           this.createBackOfficeForm.controls.delivery_perimeter.setValue(JSON.parse(this.back_office_details.delivery_perimeter));
           this.createBackOfficeForm.controls.agree.setValue(this.back_office_details.agree === "1" ? true : false);
           this.createBackOfficeForm.controls.first_session_date.setValue(new Date(this.back_office_details.first_session_date).toISOString().slice(0, 10));
 
-          if(this.getprofileDetails.data.id != this.back_office_details.user_id){
+          if (this.getprofileDetails.data.id != this.back_office_details.user_id) {
             this.isCreater = false;
           }
         }
@@ -225,8 +235,8 @@ export class CreateBackOfficeComponent implements OnInit {
     );
   }
 
-  changeEmail(item: any){
-    if(item){
+  changeEmail(item: any) {
+    if (item) {
       this.createBackOfficeForm.controls.first_name.setValue(item.first_name);
       this.createBackOfficeForm.controls.last_name.setValue(item.last_name);
       this.createBackOfficeForm.controls.cuid.setValue(item.department_manager_cuid);
@@ -237,10 +247,8 @@ export class CreateBackOfficeComponent implements OnInit {
     this.commonService.showLoading();
     this.backOfficeService.getBackOffice().subscribe(
       (res: any) => {
-        this.commonService.hideLoading();
         this.back_office_count = res.data.back_office_count;
         this.getPreferedInstructor();
-    
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -250,16 +258,17 @@ export class CreateBackOfficeComponent implements OnInit {
   }
 
   agreeChange() {
-    if(this.createBackOfficeForm.controls.agree.value){
-    const modalRef = this.modalService.open(BackOfficeHistoryComponent, {
-      centered: true,
-      windowClass: 'alert-popup',
-    });
-    modalRef.componentInstance.props = {
-      title: '' ,
-      type: 'agree'
-    };
-  }
+    if (this.createBackOfficeForm.controls.agree.value) {
+      const modalRef = this.modalService.open(BackOfficeHistoryComponent, {
+        centered: true,
+        windowClass: 'alert-popup',
+      });
+      modalRef.componentInstance.props = {
+        title: '',
+        objectDetail: this.termsAndCondition.find((x: { id: any; }) => x.id === this.createBackOfficeForm.value.learning_role),
+        type: 'agree'
+      };
+    }
   }
 
   isDraft() {
@@ -273,7 +282,7 @@ export class CreateBackOfficeComponent implements OnInit {
   }
 
   isReject() {
-    if (this.back_office_details?.status === this.BackOfficeStatus.publish || this.back_office_details?.status === this.BackOfficeStatus.expired  || this.back_office_details?.status === this.BackOfficeStatus.reject) {
+    if (this.back_office_details?.status === this.BackOfficeStatus.publish || this.back_office_details?.status === this.BackOfficeStatus.expired || this.back_office_details?.status === this.BackOfficeStatus.reject) {
       return false;
     }
     if (this.isRequester || !this.back_office_details.id) {
@@ -289,7 +298,7 @@ export class CreateBackOfficeComponent implements OnInit {
   }
 
   isPublish() {
-    if (this.back_office_details?.status === this.BackOfficeStatus.publish || this.back_office_details?.status === this.BackOfficeStatus.expired ) {
+    if (this.back_office_details?.status === this.BackOfficeStatus.publish || this.back_office_details?.status === this.BackOfficeStatus.expired) {
       return false;
     }
     if (!this.isPublisher) {
@@ -302,7 +311,7 @@ export class CreateBackOfficeComponent implements OnInit {
   }
 
   isSubmit() {
-    if (this.back_office_details?.status === this.BackOfficeStatus.publish || this.back_office_details?.status === this.BackOfficeStatus.expired ) {
+    if (this.back_office_details?.status === this.BackOfficeStatus.publish || this.back_office_details?.status === this.BackOfficeStatus.expired) {
       return false;
     }
     if (this.getprofileDetails.data.id === this.back_office_details?.user_id && this.back_office_details?.status === this.BackOfficeStatus.pending) {
@@ -316,19 +325,6 @@ export class CreateBackOfficeComponent implements OnInit {
     }
 
     return true;
-  }
-
-  forwardRequest() {
-    const modalRef = this.modalService.open(BackOfficeForwardComponent, {
-      centered: true,
-      size: 'lg',
-      windowClass: 'alert-popup',
-    });
-    modalRef.componentInstance.props = {
-      title: 'Request Forward',
-      data: this.back_office_details.id,
-      objectDetail: this.back_office_details
-    };
   }
 
   statusChangeRequest(status: any) {
@@ -352,6 +348,26 @@ export class CreateBackOfficeComponent implements OnInit {
     }
     const body = this.createBackOfficeForm.value;
     body.status = status;
+    if (this.isReviewer) {
+      const modalRef = this.modalService.open(BackOfficeForwardComponent, {
+        centered: true,
+        size: 'lg',
+        windowClass: 'alert-popup',
+      });
+      modalRef.componentInstance.props = {
+        objectDetail: body,
+      };
+      modalRef.componentInstance.passEntry.subscribe((res: any) => {
+        body.publisher_id = res;
+        this.saveData(body);
+      });
+    }
+    else {
+      this.saveData(body);
+    }
+  }
+
+  saveData(body: any) {
     if (!this.back_office_id) {
       this.commonService.showLoading();
       this.backOfficeService.create(body).subscribe(
@@ -381,7 +397,6 @@ export class CreateBackOfficeComponent implements OnInit {
         }
       );
     }
-
   }
 
 }

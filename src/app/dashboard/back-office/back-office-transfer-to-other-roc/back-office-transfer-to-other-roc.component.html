@@ -1,36 +1,40 @@
 <div class="card mb-0">
     <div class="card-header color-orange">
         <div class="d-flex justify-content-between">
-            Transfer to Publisher
+            Transfer to other ROC
             <a (click)="closeModal()"><i class="fa fa-times color-black" aria-hidden="true"></i></a>
         </div>
     </div>
     <div class="card-body">
-        <!-- <h5 class="card-title" style="font-size: 0.9rem;">
-            <b class="color-orange">({{objectDetail.request_id}})</b>
-        </h5> -->
         <form [formGroup]="publishBackOfficeForm">
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">
-                        Publisher <span class="text-danger-ligth">* </span>
+                        Regional Operation Cordinator <span class="text-danger-ligth">* </span>
                     </label>
                     <select class="form-control form_width" formControlName="publisher_id">
-                        <option value="">Please Select Publisher</option>
-                        <option *ngFor="let publisher of backOfficePublisher"
+                        <option value="">Please Select ROC</option>
+                        <option *ngFor="let publisher of cordinatorsList"
                             [value]="publisher.id">
-                            {{ publisher.first_name }} {{publisher.last_name}}
+                            {{ publisher.name }}
                         </option>
                     </select>
                     <div
                         *ngIf="(publishBackOfficeForm.controls['publisher_id'].invalid && (publishBackOfficeForm.controls['publisher_id'].dirty || publishBackOfficeForm.controls['publisher_id'].touched)) || isSubmitted">
                         <div class="error_message"
                             *ngIf="publishBackOfficeForm.controls['publisher_id'].errors?.required">
-                            Publisher cannot be blank
+                            Regional Operation Cordinator cannot be blank
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Comment</label>
+                  <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"
+                  formControlName="status_comment"></textarea>
+                </div>
+              </div>
         </form>
     </div>
     <div class="card-footer">

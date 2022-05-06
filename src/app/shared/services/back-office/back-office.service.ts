@@ -64,6 +64,13 @@ export class BackOfficeService {
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  getCCTTermCondition() {
+    const url = `/api/${this.apiVersion}/cct-term-condition`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
 
   getBackOfficeDetails(id: number) {
     const url = `/api/${this.apiVersion}/back_office_role/${id}/detail`;

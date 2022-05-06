@@ -27,7 +27,7 @@
                             <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/olcarousel']" class="text_white">Create new back office</a>
+                            <a [routerLink]="['/dashboard/back-office']" class="text_white">Create new back office</a>
                         </li>
                         <li>
                             <span class="text_white span_dis">{{ back_office_id === 0 ? 'New Request' : 'Update
@@ -141,7 +141,7 @@
                                             <label class="form-control-label">
                                                 Entity
                                             </label>
-                                            <ng-select placeholder="Please select email" [items]="entityList"
+                                            <ng-select placeholder="Please Select Entity" [items]="entityList"
                                                 [multiple]="false" bindLabel="division_id" bindValue="id"
                                                 formControlName="entity">
                                             </ng-select>
@@ -235,10 +235,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-12" *ngIf="isRequester">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Request to Regional Training Cordinator
+                                                Request to Regional Operation Cordinator
                                                 <span class="text_red">* </span>
 
                                                 <a>
@@ -265,17 +265,25 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-sm-12" *ngIf="isRequester" >
+                                    <p class="text_black" *ngFor="let item of backupCordinatorsList">
+                                        <b class="text_orange">Note</b>: The training coordinator of {{item.name}}
+                                        region is unavaliable.Therefore, please select the
+                                        <b class="text_orange">{{item.backup_roc_region}}</b>.region from the list,
+                                        who is the backup for {{item.name}} region.
+                                    </p>
+                                </div>
                                     <div class="col-sm-12">
                                         <label (change)="agreeChange()">
                                             <input type="checkbox" formControlName="agree">
-                                            <span class="mr-1 ml-1 font-13">As an instructor on orange learning i hereby
+                                            <span class="mr-1 ml-1 font-13">As an instructor on Orange Learning i hereby
                                                 agree to...</span>
                                         </label>
                                         <div
                                             *ngIf="(createBackOfficeForm.controls['agree'].invalid && (createBackOfficeForm.controls['agree'].dirty || createBackOfficeForm.controls['agree'].touched)) || isSubmitted">
                                             <div class="error_message"
                                                 *ngIf="createBackOfficeForm.controls['agree'].errors">
-                                                As an instructor on orange learning cannot be blank
+                                                As an instructor on Orange Learning cannot be blank
                                             </div>
                                         </div>
                                     </div>

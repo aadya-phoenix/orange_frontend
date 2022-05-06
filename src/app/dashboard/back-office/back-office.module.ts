@@ -13,6 +13,7 @@ import { BackOfficeHistoryComponent } from './back-office-history/back-office-hi
 import { BackOfficePublishComponent } from './back-office-publish/back-office-publish.component';
 import { BackOfficeForwardComponent } from './back-office-forward/back-office-forward.component';
 import { BackOfficeViewReportComponent } from './back-office-view-report/back-office-view-report.component';
+import { BackOfficeTransferToOtherRocComponent } from './back-office-transfer-to-other-roc/back-office-transfer-to-other-roc.component';
 
 
 
@@ -25,8 +26,9 @@ import { BackOfficeViewReportComponent } from './back-office-view-report/back-of
     BackOfficePublishComponent,
     BackOfficeForwardComponent,
     BackOfficeViewReportComponent,
+    BackOfficeTransferToOtherRocComponent,
   ],
-  entryComponents:[BackOfficeHistoryComponent, BackOfficePublishComponent, BackOfficeForwardComponent],
+  entryComponents:[BackOfficeHistoryComponent, BackOfficePublishComponent, BackOfficeForwardComponent, BackOfficeTransferToOtherRocComponent],
   imports: [
     CommonModule,
     BackOfficeRoutingModule,

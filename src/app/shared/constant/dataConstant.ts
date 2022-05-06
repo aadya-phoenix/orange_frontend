@@ -35,8 +35,8 @@ export const dataConstant = {
     RequesterID: 2,
     CarouselReviewer: 7,
     CarouselPublisher: 8,
-    BackOfficeReviewer: 7,
-    BackOfficePublisher: 7,
+    BackOfficeReviewer: 3,
+    BackOfficePublisher: 10,
   }
 }
 
