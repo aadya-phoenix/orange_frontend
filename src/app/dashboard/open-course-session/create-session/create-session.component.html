@@ -26,7 +26,7 @@
                             <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/cources']" class="text_white">Create new Session</a>
+                            <a [routerLink]="['/dashboard/sct']" class="text_white">Create new Session</a>
                         </li>
                         <li>
                             <a  class="text_white">New request</a>
@@ -75,10 +75,14 @@
                                         </label>
                                         <input type="text" class="form-control form_width"
                                             placeholder="Enter Event Title" formControlName="title">
-                                        <div class="error_message"
-                                            *ngIf="createSessionForm.controls['title'].hasError('required') && createSessionForm.controls['title'].touched">
-                                            Event Title cannot be blank
-                                        </div>
+                                         <div
+                                             *ngIf="(createSessionForm.controls['title'].invalid && (createSessionForm.controls['title'].dirty || createSessionForm.controls['title'].touched)) || isSubmitted">
+                                             <div class="error_message"
+                                                 *ngIf="createSessionForm.controls['title'].errors?.required">
+                                                 Event Title cannot be blank
+                                             </div>
+                                         </div>
+        
                                     </div>
                                 </div>
                                 <!--col-->
@@ -90,10 +94,14 @@
                                         <ng-select placeholder="Please Select Region" [items]="rocObj" bindLabel="name" [readonly]="session_status =='pending'"
                                             bindValue="id" formControlName="region_id" class="w_100">
                                         </ng-select>
-                                        <div class="error_message"
-                                            *ngIf="createSessionForm.controls['region_id'].hasError('required') && createSessionForm.controls['region_id'].touched">
-                                            Region cannot be blank
-                                        </div>
+                                        <div
+                                              *ngIf="(createSessionForm.controls['region_id'].invalid && (createSessionForm.controls['region_id'].dirty || createSessionForm.controls['region_id'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="createSessionForm.controls['region_id'].errors?.required">
+                                                  Region cannot be blank
+                                              </div>
+                                             </div>
+                                        
                                         <p class="text_black" *ngFor="let item of backupCordinatorsList">
                                             <b class="text_orange">Note</b>: The training coordinator of {{item.name}}
                                             region is unavaliable.Therefore, please select the
@@ -115,12 +123,10 @@
                                     <strong _ngcontent-jet-c125=""> Sessions:{{i+1}} </strong>
                                     <div class="button_div">
                                         <button (click)="copySession(session)" class="btn btn-primary btn_creat_session1 mr-1"><span class="fon_12">Copy Session</span>
-                                            <!-- <i class="fa fa-files-o ml-1" aria-hidden="true"></i> -->
                                         </button>
                                         <button (click)="addMetadata()" class="btn btn-info btn_creat_session1 mr-1"><span class="fon_12">Add the Session </span>
                                         </button>
                                         <button *ngIf="i > 0" (click)="removeMetadata(i)" class="btn btn-danger btn_creat_session1"><span class="fon_12">Remove</span>
-                                            <!-- <i class="fa fa-minus ml-1" aria-hidden="true"></i> -->
                                         </button>
                                     </div>
                                 </div>
@@ -142,10 +148,14 @@
                                                 [items]="deliveryMethod" bindLabel="name" bindValue="id"
                                                 formControlName="delivery_method" class="w_100">
                                             </ng-select>
-                                            <div class="error_message"
-                                                *ngIf="metadataArray.controls[i].controls['delivery_method'].hasError('required') && metadataArray.controls[i].controls['delivery_method'].touched">
-                                                Delivery Method cannot be blank
-                                            </div>
+                                            <div
+                                             *ngIf="(metadataArray.controls[i].controls['delivery_method'].invalid && (metadataArray.controls[i].controls['delivery_method'].dirty || metadataArray.controls[i].controls['delivery_method'].touched)) || isSubmitted">
+                                             <div class="error_message"
+                                                 *ngIf="metadataArray.controls[i].controls['delivery_method'].errors?.required">
+                                                 Delivery Method cannot be blank
+                                             </div>
+                                         </div>
+                                           
                                         </div>
                                     </div>
                                     <!--col-->
@@ -164,9 +174,12 @@
                                                 bindLabel="country_name" bindValue="id" formControlName="country"
                                                 class="w_100">
                                             </ng-select>
-                                            <div class="error_message"
-                                                *ngIf="metadataArray.controls[i].controls['country'].hasError('required') && metadataArray.controls[i].controls['country'].touched">
-                                                Country cannot be blank
+                                            <div
+                                             *ngIf="(metadataArray.controls[i].controls['country'].invalid && (metadataArray.controls[i].controls['country'].dirty || metadataArray.controls[i].controls['country'].touched)) || isSubmitted">
+                                             <div class="error_message"
+                                                 *ngIf="metadataArray.controls[i].controls['country'].errors?.required">
+                                                 Country cannot be blank
+                                             </div>
                                             </div>
                                         </div>
                                     </div>
@@ -178,10 +191,14 @@
                                             </label>
                                             <input type="text" class="form-control form_width"
                                                 placeholder="Enter Location" formControlName="location">
-                                            <div class="error_message"
-                                                *ngIf="metadataArray.controls[i].controls['location'].hasError('required') && metadataArray.controls[i].controls['location'].touched">
-                                                Location cannot be blank
+                                             <div
+                                             *ngIf="(metadataArray.controls[i].controls['location'].invalid && (metadataArray.controls[i].controls['location'].dirty || metadataArray.controls[i].controls['location'].touched)) || isSubmitted">
+                                             <div class="error_message"
+                                                 *ngIf="metadataArray.controls[i].controls['location'].errors?.required">
+                                                 Location cannot be blank
+                                             </div>
                                             </div>
+                                            
                                         </div>
                                     </div>
                                     <!--col-->
@@ -192,10 +209,14 @@
                                             </label>
                                             <input type="text" class="form-control form_width"
                                                 placeholder="Enter Instructor Name" formControlName="instructor_name">
-                                            <div class="error_message"
-                                                *ngIf="metadataArray.controls[i].controls['instructor_name'].hasError('required') && metadataArray.controls[i].controls['instructor_name'].touched">
-                                                Instructor Name cannot be blank
-                                            </div>
+                                            <div
+                                              *ngIf="(metadataArray.controls[i].controls['instructor_name'].invalid && (metadataArray.controls[i].controls['instructor_name'].dirty || metadataArray.controls[i].controls['instructor_name'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="metadataArray.controls[i].controls['instructor_name'].errors?.required">
+                                                  Instructor Name cannot be blank
+                                              </div>
+                                             </div>
+                                            
                                         </div>
                                     </div>
                                     <!--col-->
@@ -209,10 +230,14 @@
                                                 [items]="preferedInstructor" [multiple]="true" bindLabel="email_id"
                                                 bindValue="email_id" formControlName="email_participant">
                                             </ng-select>
-                                            <div class="error_message"
-                                                *ngIf="metadataArray.controls[i].controls['email_participant'].hasError('required') && metadataArray.controls[i].controls['email_participant'].touched">
-                                                Email ID of participants cannot be blank
-                                            </div>
+                                            <div
+                                              *ngIf="(metadataArray.controls[i].controls['email_participant'].invalid && (metadataArray.controls[i].controls['email_participant'].dirty || metadataArray.controls[i].controls['email_participant'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="metadataArray.controls[i].controls['email_participant'].errors?.required">
+                                                  Email ID of participants cannot be blank
+                                              </div>
+                                             </div>
+                                            
                                         </div>
                                     </div>
                                     <!--col-->
@@ -223,10 +248,14 @@
                                             </label>
                                             <input type="date" class="form-control form_width"
                                                 formControlName="start_date" min="{{minStartDate}}">
-                                            <div class="error_message"
-                                                *ngIf="metadataArray.controls[i].controls['start_date'].hasError('required') && metadataArray.controls[i].controls['start_date'].touched">
-                                                Start Date cannot be blank
-                                            </div>
+                                                <div
+                                              *ngIf="(metadataArray.controls[i].controls['start_date'].invalid && (metadataArray.controls[i].controls['start_date'].dirty || metadataArray.controls[i].controls['start_date'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="metadataArray.controls[i].controls['start_date'].errors?.required">
+                                                  Start Date cannot be blank
+                                              </div>
+                                             </div>
+                                            
                                         </div>
                                     </div>
                                     <!--col-->
@@ -238,13 +267,17 @@
                                               <!--  <input [ngxTimepicker]="picker">
                                                <ngx-material-timepicker></ngx-material-timepicker>  -->
                                              <!--  <ngx-timepicker-field formControlName="start_time" [controlOnly]="true"></ngx-timepicker-field>  -->
-                                             <!-- <ngb-timepicker formControlName="start_time" [meridian]="meridian"></ngb-timepicker>  -->  
+                                             <!-- <ngb-timepicker formControlName="start_time" [meridian]="meridian"></ngb-timepicker> -->  
                                               <input type="time" class="form-control form_width"
-                                                formControlName="start_time">  
-                                            <div class="error_message"
-                                                *ngIf="metadataArray.controls[i].controls['start_time'].hasError('required') && metadataArray.controls[i].controls['start_time'].touched">
-                                                Start Time cannot be blank
-                                            </div>
+                                                formControlName="start_time">   
+                                                <div
+                                              *ngIf="(metadataArray.controls[i].controls['start_time'].invalid && (metadataArray.controls[i].controls['start_time'].dirty || metadataArray.controls[i].controls['start_time'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="metadataArray.controls[i].controls['start_time'].errors?.required">
+                                                  Start Time cannot be blank
+                                              </div>
+                                             </div>
+                                            
                                         </div>
                                     </div>
                                     <!--col-->
@@ -255,10 +288,14 @@
                                             </label>
                                             <input type="date" class="form-control form_width"
                                                 formControlName="end_date" [min]="metadataArray.controls[i].controls['start_date'].value">
-                                            <div class="error_message"
-                                                *ngIf="metadataArray.controls[i].controls['end_date'].hasError('required') && metadataArray.controls[i].controls['end_date'].touched">
-                                                End Date cannot be blank
-                                            </div>
+                                                <div
+                                              *ngIf="(metadataArray.controls[i].controls['end_date'].invalid && (metadataArray.controls[i].controls['end_date'].dirty || metadataArray.controls[i].controls['end_date'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="metadataArray.controls[i].controls['end_date'].errors?.required">
+                                                  End Date cannot be blank
+                                              </div>
+                                             </div>
+                                            
                                         </div>
                                     </div>
                                     <!--col-->
@@ -269,10 +306,14 @@
                                             </label>
                                             <input type="time" class="form-control form_width"
                                                 formControlName="end_time">
-                                            <div class="error_message"
-                                                *ngIf="metadataArray.controls[i].controls['end_time'].hasError('required') && metadataArray.controls[i].controls['end_time'].touched">
-                                                End Time cannot be blank
-                                            </div>
+                                                <div
+                                              *ngIf="(metadataArray.controls[i].controls['end_time'].invalid && (metadataArray.controls[i].controls['end_time'].dirty || metadataArray.controls[i].controls['end_time'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="metadataArray.controls[i].controls['end_time'].errors?.required">
+                                                  End Time cannot be blank
+                                              </div>
+                                             </div>
+                                            
                                         </div>
                                     </div>
                                     <!--col-->
@@ -313,6 +354,7 @@
                                                     <td [formGroupName]="idx"> <input type="time"
                                                             class="form-control form_width" formControlName="duration">
                                                     </td>
+                                                    <!-- (keyup)="numbersOnly($event,i,idx)" -->
                                                     <td>
                                                         <button (click)="addBreak(i)" class="btn btn-primary btn_creat_session mb-1">
                                                            <span class="fon_12"> Add Break </span></button>
@@ -354,10 +396,14 @@
                                             <input type="text" class="form-control form_width"
                                                 placeholder="Enter Minimum Registration "
                                                 formControlName="min_registration" digitOnly>
-                                            <div class="error_message"
-                                                *ngIf="metadataArray.controls[i].controls['min_registration'].hasError('required') && metadataArray.controls[i].controls['min_registration'].touched">
-                                                Minimum Registration cannot be blank
-                                            </div>
+                                                <div
+                                              *ngIf="(metadataArray.controls[i].controls['min_registration'].invalid && (metadataArray.controls[i].controls['min_registration'].dirty || metadataArray.controls[i].controls['min_registration'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="metadataArray.controls[i].controls['min_registration'].errors?.required">
+                                                  Minimum Registration cannot be blank
+                                              </div>
+                                             </div>
+                                            
                                         </div>
                                     </div>
                                     <!--col-->
@@ -375,10 +421,14 @@
                                             <input type="text" class="form-control form_width"
                                                 placeholder="Enter Maximum Registration "
                                                 formControlName="max_registration" digitOnly>
-                                            <div class="error_message"
-                                                *ngIf="metadataArray.controls[i].controls['max_registration'].hasError('required') && metadataArray.controls[i].controls['max_registration'].touched">
-                                                Maximum Registration cannot be blank
-                                            </div>
+                                                <div
+                                              *ngIf="(metadataArray.controls[i].controls['max_registration'].invalid && (metadataArray.controls[i].controls['max_registration'].dirty || metadataArray.controls[i].controls['max_registration'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="metadataArray.controls[i].controls['max_registration'].errors?.required">
+                                                  Maximum Registration cannot be blank
+                                              </div>
+                                             </div>
+                                            
                                         </div>
                                     </div>
                                     <!--col-->
@@ -394,10 +444,14 @@
                                             </label>
                                             <input type="date" class="form-control form_width"
                                                 formControlName="registration_deadline">
-                                            <div class="error_message"
-                                                *ngIf="metadataArray.controls[i].controls['registration_deadline'].hasError('required') && metadataArray.controls[i].controls['registration_deadline'].touched">
-                                                Registration Deadline cannot be blank
-                                            </div>
+                                                <div
+                                              *ngIf="(metadataArray.controls[i].controls['registration_deadline'].invalid && (metadataArray.controls[i].controls['registration_deadline'].dirty || metadataArray.controls[i].controls['registration_deadline'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="metadataArray.controls[i].controls['registration_deadline'].errors?.required">
+                                                  Registration Deadline cannot be blank
+                                              </div>
+                                             </div>
+                                            
                                         </div>
                                     </div>
                                     <!--col-->
@@ -416,10 +470,14 @@
                                             </label>
                                             <textarea class="form-control form_width-textarea" rows="3"
                                                 formControlName="availability"></textarea>
-                                            <div class="error_message"
-                                                *ngIf="metadataArray.controls[i].controls['availability'].hasError('required') && metadataArray.controls[i].controls['availability'].touched">
-                                                Availability cannot be blank
-                                            </div>
+                                                <div
+                                              *ngIf="(metadataArray.controls[i].controls['availability'].invalid && (metadataArray.controls[i].controls['availability'].dirty || metadataArray.controls[i].controls['availability'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="metadataArray.controls[i].controls['availability'].errors?.required">
+                                                  Availability cannot be blank
+                                              </div>
+                                             </div>
+                                            
                                         </div>
                                     </div>
                                     <!--col-->
@@ -456,10 +514,14 @@
                                             <ng-select placeholder="Please select" [items]="yesNo" bindLabel="name" (change)="externalVendor($event,i)"
                                                 bindValue="id" formControlName="external_vendor" class="w_100">
                                             </ng-select>
-                                            <div class="error_message"
-                                                *ngIf="metadataArray.controls[i].controls['external_vendor'].hasError('required') && metadataArray.controls[i].controls['external_vendor'].touched">
-                                                External vendor cannot be blank
-                                            </div>
+                                            <div
+                                              *ngIf="(metadataArray.controls[i].controls['external_vendor'].invalid && (metadataArray.controls[i].controls['external_vendor'].dirty || metadataArray.controls[i].controls['external_vendor'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="metadataArray.controls[i].controls['external_vendor'].errors?.required">
+                                                  External vendor cannot be blank
+                                              </div>
+                                             </div>
+                                            
                                         </div>
                                     </div>
                                     <!--col-->
@@ -478,10 +540,14 @@
                                                 bindLabel="vendor_name" bindValue="vendor_name"
                                                 formControlName="external_vendor_name" class="w_100">
                                             </ng-select>
-                                            <div class="error_message"
-                                                *ngIf="metadataArray.controls[i].controls['external_vendor_name'].hasError('required') && metadataArray.controls[i].controls['external_vendor_name'].touched">
-                                                External vendor name cannot be blank
-                                            </div>
+                                            <div
+                                              *ngIf="(metadataArray.controls[i].controls['external_vendor_name'].invalid && (metadataArray.controls[i].controls['external_vendor_name'].dirty || metadataArray.controls[i].controls['external_vendor_name'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="metadataArray.controls[i].controls['external_vendor_name'].errors?.required">
+                                                  External vendor name cannot be blank
+                                              </div>
+                                             </div>
+                                           
                                         </div>
                                     </div>
                                     <!--col-->

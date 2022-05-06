@@ -161,7 +161,7 @@ export class SessionCompleteReportComponent implements OnInit {
 
   viewRequest(session:any){
     if (session && session.id) {
-      this.router.navigateByUrl(`/dashboard/opensession/view/${session.id}`);
+      this.router.navigateByUrl(`/dashboard/sct/view/${session.id}`);
     }
   }
 

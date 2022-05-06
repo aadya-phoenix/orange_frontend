@@ -6,6 +6,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
+import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { CourseSessionService } from 'src/app/shared/services/course_session/course-session.service';
 import * as XLSX from 'xlsx';
@@ -22,7 +23,7 @@ export class CreateSessionComponent implements OnInit {
   today = new Date();
   minStartDate = {};
   meridian = true;
-  
+  isSubmitted = false;
   session_id :number= 0;
   session_details: any = {};
   session_status:string='';
@@ -57,7 +58,7 @@ export class CreateSessionComponent implements OnInit {
   breaksArray :any= [];
   breaksCopyArray:any=[];
   metaControl:any=[];
-  
+  metaArrayControl:any=[];
   data:any=[];
   newdata:any=[];
   backupCordinatorsList: any = [];
@@ -69,7 +70,7 @@ export class CreateSessionComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private courseService: CourcesService,
-    private currencyPipe: CurrencyPipe,
+    private commonService: CommonService,
     private authService:AuthenticationService,
     private courseSessionService: CourseSessionService,
     private router: Router,
@@ -172,11 +173,14 @@ export class CreateSessionComponent implements OnInit {
   }
 
   getSessionDetails() {
+    this.commonService.showLoading();
     if(!this.session_id){
+      this.commonService.hideLoading();
       this.addMetadata();
     }
     else{
       this.courseSessionService.getSessionDetails(this.session_id).subscribe((res: any) => {
+        this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
           this.session_details = res.data;
           console.log("session_status",res.data);
@@ -206,7 +210,8 @@ export class CreateSessionComponent implements OnInit {
            }
          }
         }, err => {
-          console.log(err);
+          this.commonService.hideLoading();
+          this.commonService.toastErrorMsg('Error', err.message);
         });
       }
   }
@@ -341,6 +346,7 @@ export class CreateSessionComponent implements OnInit {
   }
 
   createSession(status: any) {
+    this.isSubmitted = true;
     if (this.createSessionForm.valid) {
       const sessionObj = this.createSessionForm.value;
       sessionObj.status = status;
@@ -355,9 +361,12 @@ export class CreateSessionComponent implements OnInit {
       console.log("session value", sessionObj);
       if (this.session_id == 0) {
         console.log("session id",this.session_id);
+        this.commonService.showLoading();
         this.courseSessionService.createSession(sessionObj).subscribe(
           (res: any) => {
-            this.router.navigate(['/dashboard/opensession']);
+            this.commonService.hideLoading();
+            this.commonService.toastSuccessMsg('Session', 'Successfully Created.');
+            this.router.navigate(['/dashboard/sct']);
             console.log("res is", res);
           },
           (err: any) => {
@@ -367,9 +376,12 @@ export class CreateSessionComponent implements OnInit {
       else {
         sessionObj.session_id = this.session_id;
         console.log("not session id",this.session_id);
+        this.commonService.showLoading();
         this.courseSessionService.updateSession(sessionObj).subscribe(
           (res: any) => {
-            this.router.navigate(['/dashboard/opensession']);
+            this.commonService.hideLoading();
+            this.commonService.toastSuccessMsg('Session', 'Successfully Updated.');
+            this.router.navigate(['/dashboard/sct']);
           },
           (err: any) => {
           }
@@ -483,7 +495,7 @@ export class CreateSessionComponent implements OnInit {
        (res: any) => {
          console.log(res);
          if (res) {
-           this.router.navigate(['/dashboard/opensession']);
+           this.router.navigate(['/dashboard/sct']);
          }
        },
        (err: any) => {
@@ -496,7 +508,7 @@ export class CreateSessionComponent implements OnInit {
     let statusobj = { session_id: this.session_id, status: 'reject', status_comment: this.rejectcomment }
     this.courseSessionService.changeStatusSession(statusobj).subscribe((res: any) => {
       console.log(res);
-      this.router.navigate(['/dashboard/opensession']);
+      this.router.navigate(['/dashboard/sct']);
     }, (err: any) => {
       console.log(err)
     })
@@ -511,6 +523,38 @@ export class CreateSessionComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  numbersOnly(val: any,sessIndex:number,breakIndex:number) {
+   this.metaArrayControl= (<FormArray>(<FormGroup>this.metadataArray.controls[sessIndex]).controls.break).at(breakIndex);
+  
+   let ctrl = this.metaArrayControl.controls['duration'] as FormControl;
+    let y = ctrl.value
+    y = y.replace(/\D/g, '');
+    console.log(y)
+    if (y.length == 3 && val.key > 6) {
+      y = y.substring(0, 2);
+    }
+    if (y.length == 4) {
+      if (y.substring(2, 4) > 60) {
+        y = y.substring(0, 2) + y.substring(2, 3);
+        var durationObj4 = { duration: y };
+        this.metaArrayControl.patchValue(durationObj4);
+        return;
+      }
+      let valduration = y.substring(0, 2) + ":" + y.substring(2, 4)
+
+      var durationObj = { duration: valduration };
+      this.metaArrayControl.patchValue(durationObj);
+    }
+    else {
+      var durationObj1 = { duration: y };
+      this.metaArrayControl.patchValue(durationObj1);
+    }
+    if (y > 2400) {
+      var durationObj2 = { duration: '' };
+      this.metaArrayControl.patchValue(durationObj2);
+    } 
   }
 
 }

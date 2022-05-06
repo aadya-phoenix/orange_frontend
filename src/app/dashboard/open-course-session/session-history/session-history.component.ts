@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourseSessionService } from 'src/app/shared/services/course_session/course-session.service';
 
 @Component({
@@ -10,7 +11,9 @@ import { CourseSessionService } from 'src/app/shared/services/course_session/cou
 export class SessionHistoryComponent implements OnInit {
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
-  constructor(private modalService: NgbActiveModal, private courseSessionService: CourseSessionService) { }
+  constructor(
+  private modalService: NgbActiveModal, private courseSessionService: CourseSessionService,
+  private commonService: CommonService) { }
   public historyList: any;
   public objectDetail: any;
   public modalType: any;
@@ -25,7 +28,9 @@ export class SessionHistoryComponent implements OnInit {
     this.title = dialogdata.title
     this.modalType = dialogdata.type;
     if (this.modalType === 'viewhistory') {
+      this.commonService.showLoading();
       this.courseSessionService.getSessionHistory(dialogdata.data).subscribe((res: any) => {
+        this.commonService.hideLoading();
         if (res && res.status == 1) {
          
           this.historyList = res.data;

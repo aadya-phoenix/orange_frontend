@@ -92,14 +92,16 @@ export class SessionsListComponent implements OnInit {
   }
 
   refreshSessions(){
+    this.commonService.showLoading();
     this.courseSessionService.getSessions().subscribe((res:any)=>{
+      this.commonService.hideLoading();
       if (res.status === 1 && res.message === 'Success') {
-          console.log("data",res.data);
           this.sessionList = res.data.session;
           this.session_count = res.data.session_count;
           this.getrecords(this.courseSessionStatus.total)
        }
      },(err: any) => {
+      this.commonService.hideLoading();
       console.log(err);
     });
   }
@@ -120,13 +122,13 @@ export class SessionsListComponent implements OnInit {
 
   getRequest(session: any) {
     if (session && session.id) {
-      this.router.navigateByUrl(`/dashboard/opensession/view/${session.id}`);
+      this.router.navigateByUrl(`/dashboard/sct/view/${session.id}`);
     }
   }
 
   editRequest(session:any){
     if (session) {
-      this.router.navigateByUrl(`/dashboard/opensession/update/${session.id}`);
+      this.router.navigateByUrl(`/dashboard/sct/update/${session.id}`);
     }
   }
 
@@ -140,18 +142,20 @@ export class SessionsListComponent implements OnInit {
       cancelButtonText: 'No, keep it'
     }).then((result) => {
       if (result.value) {
-    const id = session.id;
-    this.courseSessionService.deleteSession({session_id:id}).subscribe((res:any)=>{
-      this.refreshSessions();
-      Swal.fire(
-        'Deleted!',
-        'Your request has been deleted.',
-        'success'
-       )
-      },(err:any)=>{
-     })   
-    }
-  })
+        this.commonService.showLoading();
+         const id = session.id;
+         this.courseSessionService.deleteSession({session_id:id}).subscribe((res:any)=>{
+           this.refreshSessions();
+           Swal.fire(
+             'Deleted!',
+             'Your request has been deleted.',
+             'success'
+            )
+         },(err:any)=>{
+          this.commonService.hideLoading();
+        })   
+       }
+     })
  }    
 
  copyRequest(sessionId:any) {
