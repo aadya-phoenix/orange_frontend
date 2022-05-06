@@ -1,0 +1,227 @@
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-8">
+            <div class="page-header float-left bg-transparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="font-20 text_white">Request back-office role</span>
+                        <span class="divider"></span>
+                        <span class="title-detail mt-6">Request a specific Orange Learning role.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 float-right">
+            <div class="page-header float-right bg-transparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bg-transparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home text_white"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/back-office']" class="text_white">Create New Back Office</a>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">View</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center justify_content card_header_common">
+        <div class="d-flex">
+            <img src="../../../../assets/images/formm.png" class="ml-2 form_img_req" />
+            <p class="mt-2 ml-2 mb-2 view-re_css">
+                <span>View Back Office Request</span>
+                <span class="cc-text_css"> ({{ requestdata.request_id }}) -
+                </span>
+                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status | titlecase
+                    }}</span>
+            </p>
+        </div>
+    </div>
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="mb-2" *ngIf="isUpdate() || isPublish() || isForward() || isReject()">
+                <div class="Requs_btn_inl">
+                    <div class="Requs_btn_inl-child">
+                        <button type="button" class="btn btn-primary mr-2" *ngIf="isForward()"
+                            (click)="forwardRequest()">
+                            <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Transfer to
+                                Publisher</span>
+                        </button>
+                        <button type="button" class="btn btn-primary mr-2" *ngIf="isPublish()"
+                            (click)="statusChangeRequest(BackOfficeStatus.publish)">
+                            <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
+                        </button>
+                        <button type="button" class="btn mr-2" *ngIf="isUpdate()"
+                            [ngClass]="(isPublish() || isForward()) ?  'btn-secondary'  : 'btn-primary'"
+                            (click)="updateRequest()">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">Update</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" *ngIf="isReject()"
+                            (click)="statusChangeRequest(BackOfficeStatus.reject)">
+                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-secondary ml-2" *ngIf="isOtherRoc()" (click)="transferToOtherRoc()">
+                        <i class="fa fa-exchange" aria-hidden="true"></i><span class="pl-1">Transfer to Other ROC</span>
+                    </button>
+                </div>
+
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <div class="card border-radius-0">
+                        <!-- <div class="card-header card_header_view">
+                            <p>Back Office Details</p>
+                        </div> -->
+                        <div class="card-body">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email Address</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{requestdata.email}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">CUID/FTID</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{requestdata.cuid}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">First Name</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{requestdata.first_name}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Last Name</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.last_name}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Entity</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.entity_name}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Course to be delivered</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.course_deliver}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Date of the first session</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.first_session_date | date: dateFormate }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Additional Comments</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.additional_comment}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Orange Learning Role</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.learning_role_name}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Instructor Delivery Perimeter</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.delivery_perimeter}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Regional Operation Cordinator</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.regional_cordinator_name}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">As an instructor on orange learning i hereby agree to</label>
+                                    <div class="d-flex align-items-center">
+                                        <span class="form_data">
+                                            {{ requestdata.agree == "1" ? "Yes" : "No"}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
