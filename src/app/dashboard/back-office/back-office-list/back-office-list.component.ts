@@ -1,5 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
@@ -53,6 +53,7 @@ export class BackOfficeListComponent implements OnInit {
     private commonService: CommonService,
     private authService: AuthenticationService,
     private modalService: NgbModal,
+    private route: ActivatedRoute,
     private router: Router
   ) {
     this.getUserrole = this.authService.getRolefromlocal();
@@ -63,6 +64,13 @@ export class BackOfficeListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.queryParams
+    .subscribe(params => {
+      if(params?.status){
+        this.selectedStatus = params?.status;
+      }
+    }
+  );
     this.refreshCourses();
   }
 
@@ -122,7 +130,7 @@ export class BackOfficeListComponent implements OnInit {
         if (res.status === 1 && res.message === 'Success') {
           this.backOfficeList = res.data.back_office;
           this.back_office_count = res.data.back_office_count;
-          this.showRecords(this.backOfficeStatus.total);
+          this.showRecords(this.selectedStatus);
         }
       },
       (err: any) => {

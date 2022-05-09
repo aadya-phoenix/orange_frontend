@@ -15,6 +15,7 @@ export class CommonService {
 
   public apiVersion = environment.apiVersion;
   public headers = new Headers({});
+  public laungaugesData = {french: {},english: {} };
 
   constructor(private http: HttpService,
     private toastr: ToastrService,
@@ -83,11 +84,34 @@ export class CommonService {
       .pipe(catchError(this.Errorhandling));
   }
 
+    //language Translation
+    getLanguageTranslation() {
+      const url = `api/${this.apiVersion}/cct-language-translation`;
+      return this.http
+        .get(url, this.http.headers)
+        .pipe(catchError(this.Errorhandling));
+    }
+  
+
   //ExpiryDateType
   getExpiryDateType() {
     const url = `api/${this.apiVersion}/cct-expiry-date-type`;
     return this.http
       .get(url, this.http.headers)
+      .pipe(catchError(this.Errorhandling));
+  }
+
+  dashboardCount() {
+    const url = `api/${this.apiVersion}/dashboard`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.Errorhandling));
+  }
+
+  exportAPI() {
+    const url = `api/${this.apiVersion}/export`;
+    return this.http
+      .post(url, {})
       .pipe(catchError(this.Errorhandling));
   }
 

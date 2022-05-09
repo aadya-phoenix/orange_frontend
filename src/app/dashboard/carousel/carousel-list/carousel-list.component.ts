@@ -1,5 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
@@ -56,6 +56,7 @@ export class CarouselListComponent implements OnInit {
     private commonService: CommonService,
     private authService: AuthenticationService,
     private modalService: NgbModal,
+    private route: ActivatedRoute,
     private router: Router
   ) {
     this.getUserrole = this.authService.getRolefromlocal();
@@ -66,6 +67,13 @@ export class CarouselListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.queryParams
+      .subscribe(params => {
+        if(params?.status){
+          this.selectedStatus = params?.status;
+        }
+      }
+    );
     this.refreshCourses();
   }
 

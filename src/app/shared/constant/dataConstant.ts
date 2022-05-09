@@ -37,6 +37,7 @@ export const dataConstant = {
     CarouselPublisher: 8,
     BackOfficeReviewer: 3,
     BackOfficePublisher: 10,
-  }
+  },
+  Laungauges : { EN:'EN', FR:'FR'}
 }
 

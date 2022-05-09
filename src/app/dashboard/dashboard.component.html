@@ -3,19 +3,16 @@
     <app-header></app-header>
     <!-- /header -->
     <!-- Header-->
-    
+
     <div class="breadcrumbs cm_breadcums">
-        
         <div class="col-sm-8">
             <div class="page-header float-left">
                 <div class="page-title d-flex align-items-center">
                     <img src="../../assets/images/first.jpg" class="home_Css_img">
                     <div class="d-flex flex-column ml-3 mt-6 ">
-                        <span class="breade_text_span1">Dashboard </span>
+                        <span class="breade_text_span1">{{lableConstant.dashboard}}</span>
                         <span class="divider"></span>
-                        <span class="breade_text_span">People Development &amp; Learning Strives on
-                            Providing you with
-                            the best customer service we can drive</span>
+                        <span class="breade_text_span">{{lableConstant.development_customer_service}}</span>
                     </div>
                 </div>
             </div>
@@ -25,23 +22,26 @@
             <div class="page-header float-right ">
                 <div class="page-title d-flex end_just mt-3">
                     <i class="fa fa-star star-css "></i>
-                    <span class="mt-1 ml-1 see-fav ">See Your Favourites </span>
+                    <span class="mt-1 ml-1 see-fav ">{{lableConstant.see_favourites}}</span>
                 </div>
             </div>
         </div>
     </div>
-   
+
     <div>
         <div class="tabbed round ">
             <ul class="nav nav-pills" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Orange Learning related request</a>
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                        aria-controls="pills-home" aria-selected="true">{{lableConstant.learning_request}}</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"> Learning and Development request</a>
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                        aria-controls="pills-profile" aria-selected="false">{{lableConstant.ld_request}}</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"> PD&L internal tools</a>
+                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
+                        aria-controls="pills-contact" aria-selected="false">{{lableConstant.internal_tools}}</a>
                 </li>
             </ul>
         </div>
@@ -51,28 +51,29 @@
                     <div class="course_box_child">
                         <div>
                             <div class="img_div ">
-                                <img src="../../assets/images/first.jpg "/>
+                                <img src="../../assets/images/first.jpg " />
                             </div>
                             <div class="text_div_sec ">
-                                <a [routerLink]="[ '/dashboard/cources'] " class="create_course color-orange">Create new course</a>
+                                <a [routerLink]="[ '/dashboard/cources'] " class="create_course color-orange">{{lableConstant.create_new_course}}</a>
 
                                 <p class="p__text_divcss text-center ">
-                                    Request the creation of a new learning object (course) in the Orange Learning catalog.
+                                    {{lableConstant.request_course_catalog}}
                                 </p>
 
                                 <!--text_div_sec-->
                             </div>
-                           
+
                             <div class="sec_footer ">
-                              
-                                <div class="footer_sec_ano" >
-                                   <button [disabled]="pendingFlag" (click)="navigatetoPending('pending')">
-                                    <p class="footer_p" [ngClass]="{'backgound_green': pendingRequestCount === 0}">{{pendingRequestCount}}</p>
-                                   </button>
-                                    <span class="text_white">Pending</span>
+
+                                <div class="footer_sec_ano">
+                                    <button [disabled]="pendingFlag" (click)="navigatetoPending('pending')">
+                                        <p class="footer_p" [ngClass]="{'backgound_green': pendingRequestCount.course_pending === 0}">
+                                            {{pendingRequestCount.course_pending}}</p>
+                                    </button>
+                                    <span class="text_white">{{lableConstant.pending}}</span>
                                 </div>
-                               
-                          
+
+
 
                                 <div class="p-2 bd-highlight ">
                                     <img src="../../assets/images/share.png " class="mr-2 w_22" />
@@ -89,19 +90,22 @@
                             <img src="../../assets/images/Open course session.jpg " />
                         </div>
                         <div class="text_div_sec ">
-                            <a  [routerLink]="[ '/dashboard/sct'] " class="create_course ">Open course session (s)
+                            <a [routerLink]="[ '/dashboard/sct'] " class="create_course ">{{lableConstant.open_course_session}}
                             </a>
 
                             <p class="p__text_divcss text-center ">
-                                Request the creation of one or more sessions in Orange Learning.
+                                {{lableConstant.request_create_session}}
                             </p>
 
                             <!--text_div_sec-->
                         </div>
                         <div class="sec_footer ">
                             <div class="footer_sec_ano ">
-                                <p class="footer_p ">2</p>
-                                <span class="text_white">Pending</span>
+                                <button [disabled]="pendingFlag" (click)="navigatetoPending('pending')">
+                                    <p class="footer_p" [ngClass]="{'backgound_green': pendingRequestCount.session_pending === 0}">
+                                        {{pendingRequestCount.session_pending}}</p>
+                                </button>
+                                <span class="text_white">{{lableConstant.pending}}</span>
                             </div>
 
                             <div class="p-2 bd-highlight ">
@@ -117,21 +121,22 @@
                             <img src="../../assets/images/Promote on Carousel.jpg" />
                         </div>
                         <div class="text_div_sec ">
-                            <a [routerLink]="[ '/dashboard/olcarousel'] " class="create_course ">Promote on Carousel
+                            <a [routerLink]="[ '/dashboard/olcarousel'] " class="create_course ">{{lableConstant.promote_on_carousel}}
                             </a>
 
                             <p class="p__text_divcss text-center ">
-                                Request the creation of a new entry in the Orange Learning Carousel.
+                                {{lableConstant.request_create_entity}}
                             </p>
 
                             <!--text_div_sec-->
                         </div>
                         <div class="sec_footer ">
                             <div class="footer_sec_ano ">
-                                <button [disabled]="pendingFlag" (click)="navigatetoPending('pending')">
-                                    <p class="footer_p" [ngClass]="{'backgound_green': pendingRequestCount === 0}">{{pendingRequestCount}}</p>
-                                   </button>
-                                <span class="text_white">Pending</span>
+                                <button [disabled]="pendingFlag" (click)="navigatetoPendingCarousel()">
+                                    <p class="footer_p" [ngClass]="{'backgound_green': pendingRequestCount.carousel_pending === 0}">
+                                        {{pendingRequestCount.carousel_pending}}</p>
+                                </button>
+                                <span class="text_white">{{lableConstant.pending}}</span>
                             </div>
 
                             <div class="p-2 bd-highlight ">
@@ -147,23 +152,26 @@
                             <img src="../../assets/images/4.jpg " />
                         </div>
                         <div class="text_div_sec ">
-                            <a [routerLink]="[ '/dashboard/back-office'] " class="create_course ">Request back-office role
+                            <a [routerLink]="[ '/dashboard/back-office'] " class="create_course ">{{lableConstant.request_back_office_role}}
                             </a>
 
                             <p class="p__text_divcss text-center ">
-                                Request a specific Orange Learning role.
-                            </p> 
+                                {{lableConstant.request_specific_role}}
+                            </p>
 
                             <!--text_div_sec-->
                         </div>
                         <div class="sec_footer ">
-                            <div class="footer_sec_ano ">
-                                <p class="footer_p ">2</p>
-                                <span class="text_white">Pending</span>
+                            <div class="footer_sec_ano">
+                                <button [disabled]="pendingFlag" (click)="navigatetoPendingBackOffice()">
+                                    <p class="footer_p" [ngClass]="{'backgound_green': pendingRequestCount.office_role_pending === 0}">
+                                        {{pendingRequestCount.office_role_pending}}</p>
+                                </button>
+                                <span class="text_white">{{lableConstant.pending}}</span>
                             </div>
 
                             <div class="p-2 bd-highlight ">
-                                <img src="../../assets/images/share.png "class="mr-2 width_22" />
+                                <img src="../../assets/images/share.png " class="mr-2 width_22" />
                                 <img src="../../assets/images/star.png " class="width_22" />
                             </div>
                         </div>
@@ -176,13 +184,13 @@
                 <div class="course_box ">
                     <div class="course_box_child ">
                         <div class="img_div ">
-                            <img src="../../assets/images/Design learning module.jpg"/>
+                            <img src="../../assets/images/Design learning module.jpg" />
                         </div>
                         <div class="text_div_sec ">
-                            <a class="create_course ">Design learning odule</a>
+                            <a class="create_course ">{{lableConstant.design_learning_module}}</a>
 
                             <p class="p__text_divcss text-center ">
-                                Request the development of new learning modules for your team or our organization
+                                {{lableConstant.request_learning_team}}
                             </p>
 
                             <!--text_div_sec-->
@@ -190,7 +198,7 @@
                         <div class="sec_footer ">
                             <div class="footer_sec_ano ">
                                 <p class="footer_p ">2</p>
-                                <span class="text_white">Pending</span>
+                                <span class="text_white">{{lableConstant.pending}}</span>
                             </div>
 
                             <div class="p-2 bd-highlight ">
@@ -206,14 +214,14 @@
                             <img src="../../assets/images/get a report.jpg" />
                         </div>
                         <div class="text_div_sec ">
-                            <a class="create_course ">Get a Report </a>
+                            <a class="create_course ">{{lableConstant.get_a_report}}</a>
 
                             <p class="p__text_divcss text-center d-flex flex-column">
-                             	
-Request a report, this is your one stop shop for all your reporting needs.
-<a  data-toggle="modal" data-target="#exampleModal" class="text_orange fon_weight_read">
-    Read More
-</a> 
+
+                                Request a report, this is your one stop shop for all your reporting needs.
+                                <a data-toggle="modal" data-target="#exampleModal" class="text_orange fon_weight_read">
+                                    Read More
+                                </a>
                             </p>
 
                             <!--text_div_sec-->
@@ -221,7 +229,7 @@ Request a report, this is your one stop shop for all your reporting needs.
                         <div class="sec_footer ">
                             <div class="footer_sec_ano ">
                                 <p class="footer_p ">2</p>
-                                <span class="text_white">Pending</span>
+                                <span class="text_white">{{lableConstant.pending}}</span>
                             </div>
 
                             <div class="p-2 bd-highlight ">
@@ -234,16 +242,17 @@ Request a report, this is your one stop shop for all your reporting needs.
                     <!--cole end-->
                     <div class="course_box_child ">
                         <div class="img_div ">
-                            <img src="../../assets/images/Access Learning Needs tool(DNA).jpg"/>
+                            <img src="../../assets/images/Access Learning Needs tool(DNA).jpg" />
                         </div>
                         <div class="text_div_sec ">
-                            <a href="creatnew.html " class="create_course ">Access Learning Needs tool(DNA)
+                            <a href="creatnew.html " class="create_course ">{{lableConstant.access_learning_tool}}
                             </a>
 
                             <p class="p__text_divcss text-center d-flex flex-column">
-                                Digital Needs Analysis (DNA) is a tool<a  data-toggle="modal" data-target="#exampleModal1" class="text_orange fon_weight_read">
+                                Digital Needs Analysis (DNA) is a tool<a data-toggle="modal"
+                                    data-target="#exampleModal1" class="text_orange fon_weight_read">
                                     Read More
-                                </a>  
+                                </a>
                             </p>
 
                             <!--text_div_sec-->
@@ -251,7 +260,7 @@ Request a report, this is your one stop shop for all your reporting needs.
                         <div class="sec_footer ">
                             <div class="footer_sec_ano ">
                                 <p class="footer_p ">2</p>
-                                <span class="text_white">Pending</span>
+                                <span class="text_white">{{lableConstant.pending}}</span>
                             </div>
 
                             <div class="p-2 bd-highlight ">
@@ -267,12 +276,13 @@ Request a report, this is your one stop shop for all your reporting needs.
                             <img src="../../assets/images/SME_DB.jpg" />
                         </div>
                         <div class="text_div_sec ">
-                            <a class="create_course ">SME Database </a>
+                            <a class="create_course ">{{lableConstant.sme_database}}</a>
 
                             <p class="p__text_divcss text-center d-flex flex-column">
-                                The SME learning Community is one of the enablers for OBS <a  data-toggle="modal" data-target="#exampleModal2" class="text_orange fon_weight_read">
+                                The SME learning Community is one of the enablers for OBS <a data-toggle="modal"
+                                    data-target="#exampleModal2" class="text_orange fon_weight_read">
                                     Read More
-                                </a> 
+                                </a>
                             </p>
 
                             <!--text_div_sec-->
@@ -280,7 +290,7 @@ Request a report, this is your one stop shop for all your reporting needs.
                         <div class="sec_footer ">
                             <div class="footer_sec_ano ">
                                 <p class="footer_p ">2</p>
-                                <span class="text_white">Pending</span>
+                                <span class="text_white">{{lableConstant.pending}}</span>
                             </div>
 
                             <div class="p-2 bd-highlight ">
@@ -294,17 +304,16 @@ Request a report, this is your one stop shop for all your reporting needs.
                 </div>
             </div>
             <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <div class="course_box " >
+                <div class="course_box ">
                     <div class="course_box_child ">
                         <div class="img_div ">
-                            <img src="../../assets/images/manage vendor.jpg"  />
+                            <img src="../../assets/images/manage vendor.jpg" />
                         </div>
                         <div class="text_div_sec ">
-                            <a class="create_course ">Manage Vendors</a>
+                            <a class="create_course ">{{lableConstant.manage_vendors}}</a>
 
                             <p class="p__text_divcss text-center ">
-                              	
-View and manage details about external vendor workshops and internal PD&L workshops.
+                                {{lableConstant.view_manage_workshops}}
                             </p>
 
                             <!--text_div_sec-->
@@ -312,7 +321,7 @@ View and manage details about external vendor workshops and internal PD&L worksh
                         <div class="sec_footer ">
                             <div class="footer_sec_ano ">
                                 <p class="footer_p ">2</p>
-                                <span class="text_white">Pending</span>
+                                <span class="text_white">{{lableConstant.pending}}</span>
                             </div>
                             <div class="p-2 bd-highlight ">
                                 <img src="../../assets/images/share.png " class="mr-2 width_22" />
@@ -333,56 +342,51 @@ View and manage details about external vendor workshops and internal PD&L worksh
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content modal_conten_width">
-        <div class="modal-header">
-          <h5 class="modal-title fon_15" id="exampleModalLabel">Get a Report</h5>
-          <!-- Boosted mod: using visually hidden text instead of aria-label -->
-          <button type="button" class="close close_widhei" data-dismiss="modal">
-            <span class="sr-only">Close live modal demo</span>
-          </button>
+        <div class="modal-content modal_conten_width">
+            <div class="modal-header">
+                <h5 class="modal-title fon_15" id="exampleModalLabel">{{lableConstant.get_a_report}}</h5>
+                <!-- Boosted mod: using visually hidden text instead of aria-label -->
+                <button type="button" class="close close_widhei" data-dismiss="modal">
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="fon_15 text-center"> 
+                    {{lableConstant.request_training_vc_report}}</p>
+            </div>
+
         </div>
-        <div class="modal-body">
-           <p class="fon_15 text-center"> Request a report, this is your one stop shop for all your reporting needs. This includes Orange Learning training reports
-             as well as vendor certification reports.</p>
-        </div>
-      
-      </div>
     </div>
-  </div>
-  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+</div>
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content modal_conten_width">
-        <div class="modal-header">
-          <h5 class="modal-title fon_15" id="exampleModalLabel1">Access Learning Needs tool(DNA) </h5>
-          <!-- Boosted mod: using visually hidden text instead of aria-label -->
-          <button type="button" class="close close_widhei" data-dismiss="modal">
-            <span class="sr-only">Close live modal demo</span>
-          </button>
+        <div class="modal-content modal_conten_width">
+            <div class="modal-header">
+                <h5 class="modal-title fon_15" id="exampleModalLabel1">{{lableConstant.access_learning_tool}}</h5>
+                <!-- Boosted mod: using visually hidden text instead of aria-label -->
+                <button type="button" class="close close_widhei" data-dismiss="modal">
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="fon_15 text-center">
+                    {{lableConstant.dna_tool_feature}}</p>
+            </div>
+
         </div>
-        <div class="modal-body">
-           <p class="fon_15 text-center">  Digital Needs Analysis (DNA) is a tool that gathers learning needs
-       from managers and helps align development needs with the overall business strategy. DNA also helps PD&L team
-         to analyse and plan our learning resources efficiently.</p>
-        </div>
-      
-      </div>
     </div>
-  </div>
-  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+</div>
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content modal_conten_width">
-        <div class="modal-header">
-          <h5 class="modal-title fon_15" id="exampleModalLabel2">SME Database </h5>
-          <!-- Boosted mod: using visually hidden text instead of aria-label -->
-          <button type="button" class="close close_widhei" data-dismiss="modal">
-            <span class="sr-only">Close live modal demo</span>
-          </button>
+        <div class="modal-content modal_conten_width">
+            <div class="modal-header">
+                <h5 class="modal-title fon_15" id="exampleModalLabel2">{{lableConstant.sme_database}}</h5>
+                <!-- Boosted mod: using visually hidden text instead of aria-label -->
+                <button type="button" class="close close_widhei" data-dismiss="modal">
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="fon_15 text-center">{{lableConstant.sme_learning_community_feature}}</p>
+            </div>
+
         </div>
-        <div class="modal-body">
-           <p class="fon_15 text-center">  The SME learning Community is one of the enablers for OBS   to become a Learning organization by enabling a co-development environment through sharing knowledge and hands-on 
-        experience on the latest industry technologies and practices.</p>
-        </div>
-      
-      </div>
     </div>
-  </div>
+</div>
