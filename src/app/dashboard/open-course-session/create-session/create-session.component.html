@@ -116,21 +116,30 @@
                       
                     </div>
                     
+                       
                     <ng-container *ngIf="metadataArray.controls.length > 0">
-                        <div class="card" formArrayName="metadata" *ngFor="let session of metadataArray.controls; let i = index">
-                            <div class="card-header">
+                        
+                    <ngb-accordion #a="ngbAccordion" formArrayName="metadata" *ngFor="let session of metadataArray.controls; let i = index" activeIds="custom-panel-1"> 
+                        <div class="card" > 
+                            <ngb-panel id="custom-panel-1">
+                            <ng-template ngbPanelHeader style="padding: 0px !important;">
+                            <div class="card-header" style="background: #fff !important;">
                                 <div class="heeader_button">
-                                    <strong _ngcontent-jet-c125=""> Sessions:{{i+1}} </strong>
-                                    <div class="button_div">
-                                        <button (click)="copySession(session)" class="btn btn-primary btn_creat_session1 mr-1"><span class="fon_12">Copy Session</span>
+                                    <strong _ngcontent-jet-c125=""> Session:{{i+1}} </strong>
+                                    <div class="button_div d-flex">
+                                       
+                                        <button (click)="copySession(session)" class="btn btn-primary btn_creat_session1"><span class="fon_12">Copy Session</span>
                                         </button>
-                                        <button (click)="addMetadata()" class="btn btn-info btn_creat_session1 mr-1"><span class="fon_12">Add the Session </span>
+                                        <button (click)="addMetadata()" class="btn btn-success btn_creat_session1"><span class="fon_12">Add the Session </span>
                                         </button>
                                         <button *ngIf="i > 0" (click)="removeMetadata(i)" class="btn btn-danger btn_creat_session1"><span class="fon_12">Remove</span>
                                         </button>
+                                        <button ngbPanelToggle class="btn btn-link p-0">-</button>
                                     </div>
                                 </div>
                             </div>
+                            </ng-template>
+                            <ng-template ngbPanelContent>
                             <div [formGroupName]="i" class="card-body card_width">
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -583,8 +592,13 @@
                                 </div>
                                 <!--row-->
                             </div>
-                           
-                        </div>
+                           </ng-template>
+
+                        
+                          </ngb-panel>
+                        </div> 
+                  </ngb-accordion>
+                </ng-container>
                         <div class="card-footer1" *ngIf ="getUserrole.id == 2">
                             <button class="btn btn-primary mr-1" type="submit"
                                 (click)="createSession('pending')">Submit</button>
@@ -620,8 +634,7 @@
                                         class="pl-1">Reject</span>
                             </button>
                         </div> 
-                    </ng-container>
-                   
+                    
                 </div>
             </div>
         </div>

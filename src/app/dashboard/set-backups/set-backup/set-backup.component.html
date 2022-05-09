@@ -55,7 +55,8 @@
                                     <div class="form-group">
                                         <label class="form-control-label label_font">Backup Username
                                         </label>
-                                        <select class="form-control form_width" *ngIf="getRocDropdown" (change)="getUser($event)">
+                                        <select class="form-control form_width" [(ngModel)]="region_id"
+                                        *ngIf="getRocDropdown" (change)="getUser($event)">
                                             <option hidden disabled selected='selected' value=''>-Please select ROC-</option>     
                                             <option *ngFor="let roc of rocObj" [value]="roc.id">
                                               {{roc.name}}

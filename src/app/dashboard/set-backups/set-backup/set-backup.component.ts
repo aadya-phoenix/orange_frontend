@@ -13,6 +13,7 @@ export class SetBackupComponent implements OnInit {
   public rocObj: any;
   public publisherObj:any;
   userName:any;
+  backup_id:number=0;
   getUserrole: any;
   assignedRegion:any;
   assignedPublish:any;
@@ -21,19 +22,23 @@ export class SetBackupComponent implements OnInit {
   getPublisherDropdown:boolean=true;
   userEmail:any;
   id:any;
+  //pubId:number=0;
   newObj:any;
   newPubObj:any;
   userid: any;
   publisherUsername:any;
   publisherEmail:any;
+  roleUsers:any;
+  region_id:number=0
 
   constructor(private courseService: CourcesService,
     private authService: AuthenticationService, private router: Router) {
     this.getUserrole = this.authService.getRolefromlocal();
+    this.getProfileDetails();
+    this.getRoleUsers();
    }
 
   ngOnInit(): void {
-    console.log("new obj",localStorage);
     if(localStorage.getItem('assignedRoc')){
       this.newObj = JSON.parse(localStorage.getItem('assignedRoc') as any);
       if(this.newObj){
@@ -75,25 +80,22 @@ export class SetBackupComponent implements OnInit {
   }
 
   getUser(event: any){
-   console.log("id is",event.target.value);
     this.id = event.target.value;
-    this.courseService.getRoleUsers().subscribe((res: any) => {
-    console.log("res data is ",res.data);
-    for(let item of res.data[2]){
+    for(let item of this.roleUsers.data[2]){
       if (item.region_id == this.id) {
         this.userid = item.id;
         this.userEmail  = item.email;
         this.userName = item.first_name+" "+item.last_name;
       }
     };
-    for(let item of res.data[3]){
+    for(let item of this.roleUsers.data[3]){
       if (item.region_id == this.id) {
         this.userid = item.id;
         this.userEmail  = item.email;
         this.userName = item.first_name+" "+item.last_name;
       }
     };
-    for(let item of res.data[4]){
+    for(let item of this.roleUsers.data[4]){
       if (item.region_id == this.id) {
         this.userid = item.id;
         this.userEmail  = item.email;
@@ -103,17 +105,15 @@ export class SetBackupComponent implements OnInit {
     for(let roc of this.rocObj){
       if(roc.id == this.id){
         this.assignedRegion = roc.name;
-        console.log("roc region",this.assignedRegion);
       }
     }
-   });
   }
 
   getPublisherUser(event:any){
-    console.log("id is",event.target.value);
-    let id = event.target.value;
+    this.id = event.target.value;
+    
     for(let item of this.publisherObj){
-      if(id == item.id){
+      if(this.id == item.id){
         console.log("item",item);
         this.publisherUsername = item.first_name +" "+ item.last_name;
         this.publisherEmail= item.email;
@@ -128,11 +128,12 @@ export class SetBackupComponent implements OnInit {
     this.getPublisherDropdown =  false;
 
     let transferid = {
-      transfer_id: this.userid
+      transfer_id: this.id
     }
     let totalObj = {
       ...transferid
     }
+    
      this.courseService.assignBackup(totalObj).subscribe((res:any)=>{
       console.log("assign backup", res.data);
     },(err:any)=>{
@@ -185,4 +186,50 @@ export class SetBackupComponent implements OnInit {
   }); */
   }
 
+  getProfileDetails(){
+   
+    this.authService.getProfileDetails().subscribe(res=>{
+      console.log("publisher data",res.data);
+      this.backup_id = res.data.transfer_id;
+      if(this.backup_id){
+        this.assignFlag = true;
+        this.courseService.getRoleUsers().subscribe((res: any) => {
+          this.roleUsers = res;
+          console.log("role users",this.roleUsers);
+          for(let item of this.roleUsers.data[3]){
+            if (item.id == this.backup_id) {
+              this.region_id = item.region_id;
+              this.userEmail  = item.email;
+              this.userName = item.first_name+" "+item.last_name;
+            }
+          };
+          for(let item of this.roleUsers.data[4]){
+            if (item.id == this.backup_id) {
+              this.userid = item.id;
+              this.userEmail  = item.email;
+              this.userName = item.first_name+" "+item.last_name;
+            }
+          };
+        },err=>{
+          console.log(err);
+        });
+       
+      
+      }
+      else{
+        this.assignFlag = false;
+        
+      }
+    },err=>{
+      console.log(err);
+    });
+  }
+
+  getRoleUsers(){
+    this.courseService.getRoleUsers().subscribe((res: any) => {
+      this.roleUsers = res;
+    },err=>{
+      console.log(err);
+    });
+  }
 }
