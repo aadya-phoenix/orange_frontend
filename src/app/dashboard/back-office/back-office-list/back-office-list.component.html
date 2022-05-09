@@ -225,7 +225,7 @@
                                             <td (click)="viewRequest(item)">{{ item.created_at | date: dateTimeFormate }}
                                             </td>
                                             <td>
-                                                <a (click)="openModal(item)" class="re_id">
+                                                <a *ngIf="item.status !== backOfficeStatus.draft" (click)="openModal(item)" class="re_id">
                                                     View
                                                 </a>
                                             </td>
