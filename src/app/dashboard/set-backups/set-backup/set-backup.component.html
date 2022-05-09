@@ -89,7 +89,8 @@
                                     <div class="form-group">
                                         <label class="form-control-label label_font">Backup Username
                                         </label>
-                                        <select class="form-control form_width" *ngIf="getPublisherDropdown" (change)="getPublisherUser($event)">
+                                        <select class="form-control form_width"     *ngIf="getPublisherDropdown"
+                                        [(ngModel)]="publisherId" (change)="getPublisherUser($event)">
                                             <option hidden disabled selected='selected' value=''>-Please select Publisher-</option>     
                                             <option *ngFor="let pub of publisherObj" [value]="pub.id">
                                               {{pub.first_name +" "+ pub.last_name}}

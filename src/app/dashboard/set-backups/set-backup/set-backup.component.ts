@@ -22,6 +22,7 @@ export class SetBackupComponent implements OnInit {
   getPublisherDropdown:boolean=true;
   userEmail:any;
   id:any;
+  publisherId:number=0;
   //pubId:number=0;
   newObj:any;
   newPubObj:any;
@@ -80,38 +81,34 @@ export class SetBackupComponent implements OnInit {
   }
 
   getUser(event: any){
-    this.id = event.target.value;
-    for(let item of this.roleUsers.data[2]){
-      if (item.region_id == this.id) {
-        this.userid = item.id;
-        this.userEmail  = item.email;
-        this.userName = item.first_name+" "+item.last_name;
-      }
-    };
+   let id = event.target.value;
+    console.log("role new users",this.roleUsers);
     for(let item of this.roleUsers.data[3]){
-      if (item.region_id == this.id) {
+      if (item.region_id == id) {
         this.userid = item.id;
+        this.id= item.id;
         this.userEmail  = item.email;
         this.userName = item.first_name+" "+item.last_name;
       }
-    };
+    }
     for(let item of this.roleUsers.data[4]){
       if (item.region_id == this.id) {
         this.userid = item.id;
         this.userEmail  = item.email;
         this.userName = item.first_name+" "+item.last_name;
       }
-    };
+    }
     for(let roc of this.rocObj){
       if(roc.id == this.id){
         this.assignedRegion = roc.name;
       }
     }
+    
   }
 
   getPublisherUser(event:any){
     this.id = event.target.value;
-    
+    console.log("id",this.id);
     for(let item of this.publisherObj){
       if(this.id == item.id){
         console.log("item",item);
@@ -187,9 +184,8 @@ export class SetBackupComponent implements OnInit {
   }
 
   getProfileDetails(){
-   
     this.authService.getProfileDetails().subscribe(res=>{
-      console.log("publisher data",res.data);
+      console.log("publisher/roc data",res.data);
       this.backup_id = res.data.transfer_id;
       if(this.backup_id){
         this.assignFlag = true;
@@ -205,9 +201,10 @@ export class SetBackupComponent implements OnInit {
           };
           for(let item of this.roleUsers.data[4]){
             if (item.id == this.backup_id) {
-              this.userid = item.id;
-              this.userEmail  = item.email;
-              this.userName = item.first_name+" "+item.last_name;
+              this.publisherUsername = item.first_name +" "+ item.last_name;
+              this.publisherEmail= item.email;
+              this.assignedPublish= item.first_name +" "+ item.last_name;
+              this.publisherId=this.backup_id;
             }
           };
         },err=>{
