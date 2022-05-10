@@ -57,7 +57,7 @@ export class CoursesComponent implements OnInit {
     { id: this.pendingRequests, name: 'Pending' },
     { id: this.usersubmitRequests, name: 'Submitted' },
     { id: this.draftRequests, name: 'Draft' },
-    { id: this.closedRequests, name: 'Closed' },
+    { id: this.closedRequests, name: 'Published' },
     { id: this.rejectedRequests, name: 'Rejected' },
   ];
   allcoursedataroc: any = [];
