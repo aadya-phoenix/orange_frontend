@@ -82,6 +82,30 @@
                                             </select>
                                         </div>
                                     </div>
+                                        <div *ngIf="!isRequester" class="col-sm-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Roc
+                                                </label>
+                                                <select class="form-control form_width" formControlName="roc">
+                                                    <option value="">Please select</option>
+                                                    <option *ngFor="let item of rocObj" [value]="item.id">
+                                                        {{ item.first_name + " " + item.last_name }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="!isRequester" class="col-sm-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Publisher
+                                                </label>
+                                                <select class="form-control form_width" formControlName="publisher">
+                                                    <option value="">Please select</option>
+                                                    <option *ngFor="let item of publisherObj" [value]="item.id">
+                                                        {{ item.first_name + " " + item.last_name }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                             <div class="card-footer">
