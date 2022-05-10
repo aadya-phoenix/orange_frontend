@@ -9,6 +9,7 @@ import { AuthorizationServiceGuard } from './shared/services/guards/authorizatio
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxSpinnerModule } from "ngx-spinner";
+
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({

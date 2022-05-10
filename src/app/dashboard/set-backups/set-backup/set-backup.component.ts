@@ -87,6 +87,7 @@ export class SetBackupComponent implements OnInit {
       if (item.region_id == id) {
         this.userid = item.id;
         this.id= item.id;
+        this.region_id = item.region_id;
         this.userEmail  = item.email;
         this.userName = item.first_name+" "+item.last_name;
       }
