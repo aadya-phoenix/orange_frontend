@@ -8,6 +8,7 @@ import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive'
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CarouselService } from 'src/app/shared/services/carousel/carousel.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
+import Swal from 'sweetalert2';
 import { CarouselHistoryComponent } from '../carousel-history/carousel-history.component';
 
 @Component({
@@ -152,6 +153,31 @@ export class CarouselViewReportComponent implements OnInit {
           this.carousel_count = res.data.carousel_count;
           this.showRecords(this.carouselStatus.total);
         }
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        console.log(err);
+      }
+    );
+  }
+
+  exportExcel(){
+    const data = this.filterForm.value;
+    data.type = dataConstant.ExporType.carousel;
+    this.commonService.showLoading();
+    this.commonService.exportAPI(data).subscribe(
+      (res: any) => {
+        if(res.status === 1){
+          window.open(`${dataConstant.ImageUrl}/${res.data.url}`);
+        }
+        else{
+          Swal.fire(
+            'Information!',
+            res.message,
+            'warning'
+          )
+        }
+        this.commonService.hideLoading();
       },
       (err: any) => {
         this.commonService.hideLoading();

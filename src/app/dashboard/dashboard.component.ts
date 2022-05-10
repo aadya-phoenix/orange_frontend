@@ -29,7 +29,6 @@ export class DashboardComponent implements OnInit {
     private authService: AuthenticationService,
     private commonService: CommonService) {
     this.getUserrole = this.authService.getRolefromlocal();
-    //this.exportExcel();
     this.isReviewer = this.getUserrole.id === this.RoleID.BackOfficeReviewer;
     this.isPublisher = this.getUserrole.id === this.RoleID.BackOfficePublisher;
     this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
@@ -53,22 +52,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl(`/dashboard/back-office?status=${status}`);
   }
 
-  exportExcel(){
-    this.commonService.showLoading();
-    this.commonService.exportAPI().subscribe(
-      (res: any) => {
-        this.commonService.hideLoading();
-        debugger;
-          const blob = new Blob([res], { type: 'application/octet-stream' });
-          const url= window.URL.createObjectURL(blob);
-          window.open(url);
-      },
-      (err: any) => {
-        this.commonService.hideLoading();
-        console.log(err);
-      }
-    );
-  }
+  
 
 
   getpendingCourses() {

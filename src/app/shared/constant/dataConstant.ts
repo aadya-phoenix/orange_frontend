@@ -31,6 +31,7 @@ export const dataConstant = {
   BackOfficeStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
   CourseSessionStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish:'publish' , reject: 'reject' },
   ImageUrl: 'https://orange.mindscroll.info/public/public',
+  ExporType : {course:'course', session:'session', carousel:'carousel', back_office:'back_office'},
   RoleID: {
     RequesterID: 2,
     CarouselReviewer: 7,
