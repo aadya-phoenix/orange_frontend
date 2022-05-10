@@ -8,6 +8,7 @@ import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive'
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { BackOfficeService } from 'src/app/shared/services/back-office/back-office.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
+import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { BackOfficeHistoryComponent } from '../back-office-history/back-office-history.component';
 
 @Component({
@@ -28,6 +29,8 @@ export class BackOfficeViewReportComponent implements OnInit {
   isReviewer = false;
   isPublisher = false;
   isRequester = false;
+  publisherObj: any = [];
+  rocObj: any = [];
   pagination = {
     page: 1,
     pageNumber: 1,
@@ -56,7 +59,8 @@ export class BackOfficeViewReportComponent implements OnInit {
     private commonService: CommonService,
     private authService: AuthenticationService,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private courceService: CourcesService
   ) {
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
@@ -67,6 +71,8 @@ export class BackOfficeViewReportComponent implements OnInit {
       start_date: new FormControl('', []),
       end_date: new FormControl('', []),
       reporting_period: new FormControl('', []),
+      roc: new FormControl('', []),
+      publisher: new FormControl('', []),
     });
     this.filterForm.controls.start_date.valueChanges.subscribe((x: any) => {
       this.addDate = x ? true : false;
@@ -76,6 +82,22 @@ export class BackOfficeViewReportComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshBackOffice({});
+    if(this.isPublisher || this.isReviewer){
+      this.getRoles();
+    }
+  }
+
+  getRoles() {
+    this.commonService.showLoading();
+    this.courceService.getRoleUsers().subscribe((res: any) => {
+      this.rocObj = res.data[this.RoleID.BackOfficeReviewer];
+      this.publisherObj = res.data[this.RoleID.BackOfficePublisher];
+      this.commonService.hideLoading();
+    },
+      (err: any) => {
+        this.commonService.hideLoading();
+        console.log(err);
+      });
   }
 
   viewRequest(item: any) {
@@ -132,12 +154,13 @@ export class BackOfficeViewReportComponent implements OnInit {
       start_date: '',
       end_date: '',
       reporting_period: '',
+      roc: '',
+      publisher: ''
     });
     this.refreshBackOffice({});
   }
 
   filterData() {
-    debugger;
     const data = this.filterForm.value;
     this.refreshBackOffice(data);
   }
