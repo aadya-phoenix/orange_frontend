@@ -7,7 +7,7 @@
                     <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
                         <span class="breade_text_span1">Request back-office role</span>
-                        <span class="divider"></span>
+                        <span class="divider_req"></span>
                         <span class="breade_text_span">Request a specific Orange Learning role.</span>
                     </div>
                 </div>
@@ -39,35 +39,33 @@
             </div>
         </div>
     </div>
-    <div class="content mt-3">
-        <div class="animated fadeIn">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header cm-card-header">
-                            <div class="d-flex justify-content-between media_creat_couse_col">
-                                <div class="d-flex align-items-center">
-                                    <img src="../../../../assets/images/formm.png" class="ml-2" width="40" />
-                                    <span class="comlte_css">Complete this form and click on the submit button</span>
-                                </div>
-                                <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample"
-                                    role="button" aria-expanded="false" aria-controls="collapseExample">
-                                    View overall request status<img src="../../../../assets/images/Viewreq.png"
-                                        class="ml-2" width="40" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="card_header_common">
+        <div class="d-flex justify-content-between media_creat_couse_col">
+            <div class="d-flex align-items-center">
+                <img src="../../../../assets/images/formm.png" class="ml-2" width="40" />
+                <span class="comlte_css">Complete this form and click on the submit button</span>
             </div>
+            <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample"
+                role="button" aria-expanded="false" aria-controls="collapseExample">
+                View overall request status<img src="../../../../assets/images/Viewreq.png"
+                    class="ml-2" width="40" />
+            </a>
         </div>
     </div>
+    
+   
     <form [formGroup]="createBackOfficeForm">
         <div class="content mt-1">
             <div class="animated fadeIn">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
+                            <div class="card-header">
+                                <strong _ngcontent-jet-c125=""> Request back-office role Details </strong>
+                                <!-- <button class="btn btn-primary btn_common">
+                                   Common Fields
+                                 </button> -->
+                            </div>
                             <div class="card-body card_width">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
@@ -314,7 +312,7 @@
                             </div>
                             <div class="card-footer">
                                 <button class="btn btn-primary mr-1" type="submit" *ngIf="isSubmit()"
-                                    (click)="saveBackOffice('pending')">{{ isReviewer ? 'Transfer To Publisher':
+                                    (click)="saveBackOffice('pending')"> <i class="fa fa-upload mr-1" aria-hidden="true"></i>{{ isReviewer ? 'Transfer To Publisher':
                                     'Submit'
                                     }}</button>
                                 <button class="btn btn-primary mr-1" type="submit" *ngIf="isPublish()"
@@ -431,7 +429,7 @@
             <div class="view-comple-req_div">
                 <button class="btn btn-primary view-comple-req justify-content-center p-1"
                     [routerLink]="['/dashboard/olcarousel/view-complete-report']">
-                    <i class="fa fa-database mr-1" aria-hidden="true"></i>View Complete Report
+                    <i class="fa fa-database mr-1" aria-hidden="true"></i>View all activity Report
                 </button>
             </div>
             <!--ROW END-->
