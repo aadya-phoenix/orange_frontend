@@ -83,10 +83,13 @@
             <div class="row mb-3">
                 <div class="col-sm-6" *ngFor="let meta of requestdata.metadata; let i = index">
                     <ngb-accordion #acc="ngbAccordion" [activeIds]="activeIds" class="d-flex">
+                       
                         <ngb-panel id="panel-{{i}}" class="mr-1 w_100  ">
+                           
                             <ng-template ngbPanelTitle>
                                 <span>Carousal {{i+1}}</span>
                             </ng-template>
+                            
                             <ng-template ngbPanelContent>
                                 <div class="p-2">
                                     <div class="col-sm-12">
@@ -142,6 +145,7 @@
                                 </div>
                             </ng-template>
                         </ngb-panel>
+                        
                     </ngb-accordion>
                 </div>
                 <div class="col-sm-6">

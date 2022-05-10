@@ -1,3 +1,4 @@
+
 <div id="right-panel" class="right-panel">
     <app-header></app-header>
     <div class="breadcrumbs cm_breadcums">
@@ -118,12 +119,13 @@
                     
                        
                     <ng-container *ngIf="metadataArray.controls.length > 0">
-                        
+                     
                     <ngb-accordion #a="ngbAccordion" formArrayName="metadata" *ngFor="let session of metadataArray.controls; let i = index" activeIds="custom-panel-1"> 
                         <div class="card" > 
+                            <div class="ng_container_header">
                             <ngb-panel id="custom-panel-1">
-                            <ng-template ngbPanelHeader style="padding: 0px !important;">
-                            <div class="card-header" style="background: #fff !important;">
+                            <ng-template ngbPanelHeader>
+                            <div class="card-header">
                                 <div class="heeader_button">
                                     <strong _ngcontent-jet-c125=""> Session:{{i+1}} </strong>
                                     <div class="button_div d-flex">
@@ -134,7 +136,8 @@
                                         </button>
                                         <button *ngIf="i > 0" (click)="removeMetadata(i)" class="btn btn-danger btn_creat_session1"><span class="fon_12">Remove</span>
                                         </button>
-                                        <button ngbPanelToggle class="btn btn-link p-0">-</button>
+                                        <button ngbPanelToggle class="btn btn-link btn_minimize p-0"><span>-</span></button>
+                                        <!-- <a ngbPanelToggle class="btn_minimize p-0"><span>-</span></a> -->
                                     </div>
                                 </div>
                             </div>
@@ -596,8 +599,10 @@
 
                         
                           </ngb-panel>
+                          </div>
                         </div> 
                   </ngb-accordion>
+                 
                 </ng-container>
                         <div class="card-footer1" *ngIf ="getUserrole.id == 2">
                             <button class="btn btn-primary mr-1" type="submit"
@@ -794,6 +799,13 @@
                 </div>
             </div>
             <!--coled-->
+        </div>
+        <!--ROW END-->
+        <div class="view-comple-req_div">
+            <button class="btn btn-primary view-comple-req justify-content-center p-1"
+                [routerLink]="['/dashboard/cources/view-complete-report']">
+                <i class="fa fa-database mr-1" aria-hidden="true"></i>View all activity Request
+            </button>
         </div>
         <!--ROW END-->
     </div>

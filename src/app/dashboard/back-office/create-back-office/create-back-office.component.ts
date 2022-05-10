@@ -103,6 +103,7 @@ export class CreateBackOfficeComponent implements OnInit {
 
   //preferred instructor
   getPreferedInstructor() {
+    this.commonService.showLoading();
     this.courseService.getpreferedInstructor().subscribe(
       (res: any) => {
         this.preferedInstructor = res.data;
@@ -116,6 +117,7 @@ export class CreateBackOfficeComponent implements OnInit {
   }
 
   getCCTTermCondition() {
+    this.commonService.showLoading();
     this.backOfficeService.getCCTTermCondition().subscribe(
       (res: any) => {
         this.termsAndCondition = res.data;
@@ -129,6 +131,7 @@ export class CreateBackOfficeComponent implements OnInit {
   }
 
   getEntitylist() {
+    this.commonService.showLoading();
     this.courseService.getEntitylist().subscribe(
       (res: any) => {
         console.log(res);
@@ -143,6 +146,7 @@ export class CreateBackOfficeComponent implements OnInit {
   }
 
   getCCTDeliveryPerimeter() {
+    this.commonService.showLoading();
     this.backOfficeService.getCCTDeliveryPerimeter().subscribe(
       (res: any) => {
         this.cctDeliveryPerimeter = res.data;
@@ -155,6 +159,7 @@ export class CreateBackOfficeComponent implements OnInit {
     );
   }
   getCCTLearningRole() {
+    this.commonService.showLoading();
     this.backOfficeService.getCCTLearningRole().subscribe(
       (res: any) => {
         console.log(res);
@@ -177,6 +182,7 @@ export class CreateBackOfficeComponent implements OnInit {
   }
 
   getCordinators() {
+    this.commonService.showLoading();
     this.courseService.getNewregionalCordinator().subscribe(
       (res: any) => {
         console.log(res);
@@ -190,6 +196,7 @@ export class CreateBackOfficeComponent implements OnInit {
     );
   }
   getBackupRegionalCordinator() {
+    this.commonService.showLoading();
     this.courseService.getBackupRegionalCordinator().subscribe(
       (res: any) => {
         this.backupCordinatorsList = res.data;
@@ -202,7 +209,13 @@ export class CreateBackOfficeComponent implements OnInit {
     );
   }
 
+  dateFormat(date:any){
+    const newdate = new Date(date);
+    return `${newdate.getFullYear()}-${newdate.getMonth()+1}-${newdate.getDate()}`;
+  }
+
   getBackOfficeDetails() {
+    this.commonService.showLoading();
     this.backOfficeService.getBackOfficeDetails(this.back_office_id).subscribe(
       (res: any) => {
         this.commonService.hideLoading();
@@ -221,7 +234,7 @@ export class CreateBackOfficeComponent implements OnInit {
           this.createBackOfficeForm.controls.additional_comment.setValue(this.back_office_details.additional_comment);
           this.createBackOfficeForm.controls.delivery_perimeter.setValue(JSON.parse(this.back_office_details.delivery_perimeter));
           this.createBackOfficeForm.controls.agree.setValue(this.back_office_details.agree === "1" ? true : false);
-          this.createBackOfficeForm.controls.first_session_date.setValue(new Date(this.back_office_details.first_session_date).toISOString().slice(0, 10));
+          this.createBackOfficeForm.controls.first_session_date.setValue(this.dateFormat(this.back_office_details.first_session_date));
 
           if (this.getprofileDetails.data.id != this.back_office_details.user_id) {
             this.isCreater = false;
