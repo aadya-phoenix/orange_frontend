@@ -7,10 +7,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { GetReportHistoryComponent } from './get-report-history/get-report-history.component';
+import { GetReportCreateComponent } from './get-report-create/get-report-create.component';
 
 
 @NgModule({
-  declarations: [GetReportListComponent],
+  declarations: [GetReportListComponent, GetReportHistoryComponent, GetReportCreateComponent],
   imports: [
     CommonModule,
     GetReportRoutingModule,
