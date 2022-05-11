@@ -72,7 +72,18 @@
   element.style.height = "1px";
   element.style.height = (25+element.scrollHeight)+"px";
 }
-
+$(document).ready(function() {
+  //set initial state.
+  $('#example').change(function() {
+    if($(this).is(":checked")) {
+      $('code').text('Checked');
+    }
+    else {
+      $('code').text('Unchecked');
+    }
+    $('#textbox1').val($(this).is(':checked'));        
+  });
+});
 
 </script>
 
