@@ -9,6 +9,7 @@ import { AuthenticationService } from 'src/app/shared/services/auth/authenticati
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { CourseSessionService } from 'src/app/shared/services/course_session/course-session.service';
+import Swal from 'sweetalert2';
 import { SessionHistoryComponent } from '../session-history/session-history.component';
 
 @Component({
@@ -182,6 +183,31 @@ export class SessionCompleteReportComponent implements OnInit {
     else {
       this.showRecords(this.selectedStatus);
     }
+  }
+
+  exportExcel(){
+    const data = this.filterForm.value;
+    data.type = dataConstant.ExporType.session;
+    this.commonService.showLoading();
+    this.commonService.exportAPI(data).subscribe(
+      (res: any) => {
+        if(res.status === 1){
+          window.open(`${dataConstant.ImageUrl}/${res.data.url}`);
+        }
+        else{
+          Swal.fire(
+            'Information!',
+            res.message,
+            'warning'
+          )
+        }
+        this.commonService.hideLoading();
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        console.log(err);
+      }
+    );
   }
 
 }

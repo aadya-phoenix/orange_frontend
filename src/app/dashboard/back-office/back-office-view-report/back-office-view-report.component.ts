@@ -9,6 +9,7 @@ import { AuthenticationService } from 'src/app/shared/services/auth/authenticati
 import { BackOfficeService } from 'src/app/shared/services/back-office/back-office.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
+import Swal from 'sweetalert2';
 import { BackOfficeHistoryComponent } from '../back-office-history/back-office-history.component';
 
 @Component({
@@ -175,6 +176,31 @@ export class BackOfficeViewReportComponent implements OnInit {
           this.back_office_count = res.data.back_office_count;
           this.showRecords(this.backOfficeStatus.total);
         }
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        console.log(err);
+      }
+    );
+  }
+
+  exportExcel(){
+    const data = this.filterForm.value;
+    data.type = dataConstant.ExporType.back_office;
+    this.commonService.showLoading();
+    this.commonService.exportAPI(data).subscribe(
+      (res: any) => {
+        if(res.status === 1){
+          window.open(`${dataConstant.ImageUrl}/${res.data.url}`);
+        }
+        else{
+          Swal.fire(
+            'Information!',
+            res.message,
+            'warning'
+          )
+        }
+        this.commonService.hideLoading();
       },
       (err: any) => {
         this.commonService.hideLoading();

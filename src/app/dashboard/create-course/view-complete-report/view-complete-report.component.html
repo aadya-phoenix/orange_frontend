@@ -50,7 +50,7 @@
                         <div class="card">
                             <div class="card-body card_padding">
 
-                                <div class="row">
+                                <div class="row col_width_20">
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">Start Date
@@ -86,9 +86,8 @@
                                         </div>
                                     </div>
                                     <!--colend-->
-                                </div>
-                                <!--row-->
-                                <div class="row">
+                               
+                              
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">Learning Type
@@ -110,7 +109,7 @@
                                                 <option value="">Please select</option>
                                                 <option value="pending">Pending</option>
                                                 <option value="draft">Draft</option>
-                                                <option value="publish">Closed</option>
+                                                <option value="publish">Published</option>
                                                 <option value="reject">Rejected</option>
                                             </select>
                                         </div>
@@ -128,9 +127,8 @@
                                         </div>
                                     </div>
                                     <!--colend-->
-                                </div>
-                                <!--row-->
-                                <div class="row">
+                               
+                             
                                     <div *ngIf="getUserrole.id != 2" class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">Roc
@@ -370,7 +368,7 @@
                                                 </span>
                                                 <p *ngIf="cource.status" [ngClass]="cource.status"
                                                    class="text_yellow">
-                                                    {{ cource.status | titlecase }}
+                                                    {{ cource.status_new | titlecase }}
                                                 </p>
                                             </td>
                                             <td>{{ cource.titleByLang | titlecase}}</td>

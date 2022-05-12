@@ -108,10 +108,10 @@ export class CommonService {
       .pipe(catchError(this.Errorhandling));
   }
 
-  exportAPI() {
+  exportAPI(data:any) {
     const url = `api/${this.apiVersion}/export`;
     return this.http
-      .post(url, {})
+      .post(url, data)
       .pipe(catchError(this.Errorhandling));
   }
 
