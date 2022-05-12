@@ -1,0 +1,333 @@
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-7">
+            <div class="page-header float-left bg-transparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="font-20 text_white">Get a report.</span>
+                        <span class="divider_req"></span>
+                        <span class="title-detail mt-6">Request a report, this is your one stop shop for all your
+                            reporting needs.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-5 float-right">
+            <div class="page-header float-right bg-transparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bg-transparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home text_white"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/olreport']" class="text_white">Create New Get a report</a>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">View</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center justify_content card_header_common">
+        <div class="d-flex">
+            <img src="../../../../assets/images/formm.png" class="ml-2 form_img_req" />
+            <p class="mt-2 ml-2 mb-2 view-re_css">
+                <span>View Get a report Request</span>
+                <span class="cc-text_css"> ({{ requestdata.request_id }}) -
+                </span>
+                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status | titlecase
+                    }}</span>
+            </p>
+        </div>
+    </div>
+    <div class="content">
+        <div class="animated fadeIn">
+            <!-- <div class="mb-2" >
+                <div class="Requs_btn_inl">
+                    <div class="Requs_btn_inl-child">
+                        <button type="button" class="btn btn-primary mr-2" 
+                            >
+                            <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Transfer to
+                                Publisher</span>
+                        </button>
+                        <button type="button" class="btn btn-primary mr-2" 
+                            >
+                            <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
+                        </button>
+                        <button type="button" class="btn mr-2" 
+                            >
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">Update</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" >
+                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-secondary ml-2" >
+                        <i class="fa fa-exchange" aria-hidden="true"></i><span class="pl-1">Transfer to Other ROC</span>
+                    </button>
+                </div>
+
+            </div> -->
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <div class="card border-radius-0">
+                        <div class="card-header card_header_view">
+                            <p>Get a report Details</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Requester Name</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{requestdata.user_name}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Report Type</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{requestdata.report_type}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.report_type =='Training'">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Training Title</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{requestdata.title | titlecase}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.transcript_status">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Transcript Status</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.transcript_status}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.report_type !='Training'">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Certification Title</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.title | titlecase}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.certification_vendor">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Certification Vendor</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.certification_vendor}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.certification_domain">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Certification Domain</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.certification_domain }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.certification_status">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Certification Status</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.certification_status}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.region_name">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Regions</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.region_name}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.country">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Specific Country</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.country}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.business_unit">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Business Unit</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.business_unit}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.management_code">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Management Code</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.management_code}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>                     
+                            
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">All available history</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.all_available_history == "1" ? "Yes" : "No"}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.start_date">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Start Date</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.start_date | date: dateFormate }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.end_date">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">End Date</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.end_date | date: dateFormate }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.contact_person">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Contact Person</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.contact_person}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.report_purpose">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Report Purpose</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.report_purpose}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Deadline</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.deadline | date: dateFormate }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.attachment">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Attachment</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.attachment}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.additional_comment">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Additional Comments</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.additional_comment}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Regioanl Training Coordinator</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.regional_cordinator_name}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

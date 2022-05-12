@@ -13,7 +13,7 @@ import * as XLSX from 'xlsx';
 
 const numbersOnlyregexp = dataConstant.NumbersOnlyPattern;  
 const currencyregexp = dataConstant.CurrencyPattern; 
-
+const eurocurrencyregex= dataConstant.EuroCurrencyPattern;
 @Component({
   selector: 'app-create-session',
   templateUrl: './create-session.component.html',
@@ -129,7 +129,7 @@ export class CreateSessionComponent implements OnInit {
       external_vendor: new FormControl('', [Validators.required]),
       external_vendor_name:new FormControl(''),
       manager_approval: new FormControl(''),
-      training_cost: new FormControl('0'),
+      training_cost: new FormControl('0',Validators.pattern(eurocurrencyregex)),
     });
   }
 

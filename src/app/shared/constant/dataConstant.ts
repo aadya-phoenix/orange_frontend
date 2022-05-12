@@ -25,11 +25,13 @@ export const dataConstant = {
     '(\\?[;&A-Za-z\\d%_.:/?~+=-]*)?' + // query string
     '(\\#[-A-Za-z\\d_]*)?$',
   NumbersOnlyPattern:'^[0-9]+$',
- // CurrencyPattern:'/(?=.*?\d)^\$?(([1-9]\d{0,2}(,\d{3})*)|\d+)?(\.\d{1,2})?$/',
+  EuroCurrencyPattern:'^[0-9,]*$',
   CurrencyPattern:'^(?!0\.00)\d{1,3}(,\d{3})*(\.\d\d)?$',
+
   CarouselStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
   BackOfficeStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
   CourseSessionStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish:'publish' , reject: 'reject' },
+  GetReportStatus: {total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
   ImageUrl: 'https://orange.mindscroll.info/public/public',
   ExporType : {course:'course', session:'session', carousel:'carousel', back_office:'back_office'},
   RoleID: {
