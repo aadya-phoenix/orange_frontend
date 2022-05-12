@@ -6,17 +6,16 @@ import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
-import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { GetReportService } from 'src/app/shared/services/get-report/get-report.service';
 import Swal from 'sweetalert2';
 import { GetReportHistoryComponent } from '../get-report-history/get-report-history.component';
 
 @Component({
-  selector: 'app-get-report-list',
-  templateUrl: './get-report-list.component.html',
-  styleUrls: ['./get-report-list.component.scss']
+  selector: 'app-get-report-complete-report',
+  templateUrl: './get-report-complete-report.component.html',
+  styleUrls: ['./get-report-complete-report.component.scss']
 })
-export class GetReportListComponent implements OnInit {
+export class GetReportCompleteReportComponent implements OnInit {
 
   report_id:number=0;
   reportStatus= dataConstant.GetReportStatus;
@@ -65,7 +64,7 @@ export class GetReportListComponent implements OnInit {
   
   viewRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/olreport/view/${item.id}`);
+      this.router.navigateByUrl(`/dashboard//view/${item.id}`);
     }
   }
 
@@ -113,6 +112,7 @@ export class GetReportListComponent implements OnInit {
       (res: any) => {
         this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
+          console.log("reports",res.data);
           this.reportList = res.data.get_report;
           this.report_count = res.data.get_report_count;
           this.showRecords(this.reportStatus.total);
@@ -180,11 +180,5 @@ export class GetReportListComponent implements OnInit {
           
         }
       })
-  }
-
-  editRequest(item: any) {
-    if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/olreport/update/${item.id}`);
-    }
   }
 }

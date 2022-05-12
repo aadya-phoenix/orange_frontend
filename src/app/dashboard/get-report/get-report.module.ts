@@ -9,10 +9,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { GetReportHistoryComponent } from './get-report-history/get-report-history.component';
 import { GetReportCreateComponent } from './get-report-create/get-report-create.component';
+import { GetReportCompleteReportComponent } from './get-report-complete-report/get-report-complete-report.component';
+import { GetReportViewComponent } from './get-report-view/get-report-view.component';
 
 
 @NgModule({
-  declarations: [GetReportListComponent, GetReportHistoryComponent, GetReportCreateComponent],
+  declarations: [GetReportListComponent, GetReportHistoryComponent, GetReportCreateComponent, GetReportCompleteReportComponent, GetReportViewComponent],
+  entryComponents:[GetReportHistoryComponent],
   imports: [
     CommonModule,
     GetReportRoutingModule,

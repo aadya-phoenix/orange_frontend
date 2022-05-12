@@ -33,15 +33,15 @@ export class GetReportService {
     .pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  getReportDetail(){
-    const url = `/api/${this.apiVersion}/get-report/detail`;
+  getReportDetails(id:number){
+    const url = `/api/${this.apiVersion}/get-report/${id}/detail`;
     return this.http
     .get(url, this.http.headers)
     .pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  getReportHistory(){
-    const url = `/api/${this.apiVersion}/get-report/history`;
+  getReportHistory(data:any){
+    const url = `/api/${this.apiVersion}/get-report/${data}/history`;
     return this.http
     .get(url, this.http.headers)
     .pipe(catchError(this.commmonService.Errorhandling));

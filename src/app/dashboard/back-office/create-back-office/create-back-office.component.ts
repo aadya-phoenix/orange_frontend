@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -68,7 +69,8 @@ export class CreateBackOfficeComponent implements OnInit {
     private modalService: NgbModal,
     private courseService: CourcesService,
     private authService: AuthenticationService,
-    private backOfficeService: BackOfficeService) {
+    private backOfficeService: BackOfficeService,
+    private datepipe: DatePipe) {
     this.minDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.getUserrole = this.authService.getRolefromlocal();
@@ -211,7 +213,8 @@ export class CreateBackOfficeComponent implements OnInit {
 
   dateFormat(date:any){
     const newdate = new Date(date);
-    return `${newdate.getFullYear()}-${newdate.getMonth()+1}-${newdate.getDate()}`;
+    const newdate1 =  `${newdate.getFullYear()}-${newdate.getMonth()+1}-${newdate.getDate()}`; 
+    return this.datepipe.transform(newdate1,'yyyy-MM-dd');
   }
 
   getBackOfficeDetails() {

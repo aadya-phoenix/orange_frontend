@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
@@ -32,9 +32,10 @@ export class GetReportCreateComponent implements OnInit {
   getprofileDetails: any = {};
   getReportForm: FormGroup;
 
-  certiFlag:boolean = false;
-  availableHistoryFlag:boolean=false;
+  isCertification:boolean = false;
+  isAvailableHistory:boolean=false;
   isSubmitted:boolean = false;
+  isSpecificCountry:boolean=true;
 
   reportAttachment = { file: '', ext: '' };
 
@@ -59,13 +60,14 @@ export class GetReportCreateComponent implements OnInit {
     private getReportService: GetReportService,
     private courseService:CourcesService) { 
       this.getReportForm= this.formBuilder.group({
-        report_type: new FormControl('', []),
+        report_type: new FormControl('', [Validators.required]),
+       /*  title: new FormControl('', this.isCertification ?[Validators.required]:[]), */
         title: new FormControl('', []),
         transcript_status: new FormControl('', []),
-        certification_vendor: new FormControl('', []),
+        certification_vendor: new FormControl('',  []),
         certification_title: new FormControl('', []),
-        certification_domain: new FormControl('', []),
-        certification_status: new FormControl('', []),
+        certification_domain: new FormControl('',  []),
+        certification_status: new FormControl('',  []),
         region_name: new FormControl('', []),
         country: new FormControl('', []),
         business_unit: new FormControl('', []),
@@ -75,10 +77,10 @@ export class GetReportCreateComponent implements OnInit {
         end_date: new FormControl('', []),
         contact_person: new FormControl('', []),
         report_purpose: new FormControl('', []),
-        deadline: new FormControl('', []),
+        deadline: new FormControl('', [Validators.required]),
         attachment: new FormControl('', []),
         additional_comment: new FormControl('', []),
-        regional_cordinator: new FormControl('', []),
+        regional_cordinator: new FormControl('', [Validators.required]),
       });
     }
 
@@ -90,6 +92,163 @@ export class GetReportCreateComponent implements OnInit {
     this.getRegions();
     this.getCountries();
     this.getRegionalCordinator();
+  }
+
+  getRegionName(regions:any){
+   for(let region of regions){
+     if (region.name=='Global'){
+       this.isSpecificCountry = false;
+     }
+     else{
+       this.isSpecificCountry = true;
+     }
+   }
+  }
+
+  getDate(event:any){
+   let selectedDate = event.target.value;
+    if(selectedDate == 'last_year'){
+      this.getReportForm.controls.start_date.setValue('');
+    }
+
+    if(selectedDate == 'this_year'){}
+
+    if(selectedDate == 'last_month'){}
+
+    if(selectedDate == 'this_month'){}
+
+    if(selectedDate == 'last_week'){}
+
+    if(selectedDate == 'this_week'){}
+
+    if(selectedDate == 'custom'){}
+  }
+
+  handleFileInput(event: any) {
+    const fsize = event.target.files[0].size;
+    const file = Math.round((fsize / 1024)/1024);
+    if(file > dataConstant.maxImageSize){
+      Swal.fire(
+        'Images!',
+        `Image is more than ${dataConstant.maxImageSize} mb. Please select valida file`,
+        'warning'
+      )
+      return;
+    }
+    this.commonService.FileConvertintoBytearray(event.target.files[0], async (f) => {
+      // creating array bytes
+      this.reportAttachment = { file: this.commonService.byteArrayTobase64(f.bytes), ext: f.name.split('.').pop() };
+    });
+  }
+
+  changeReportType(event:any){
+    let type = event.id;
+    if(type == 1){
+    this.isCertification = false;
+
+    this.getReportForm
+    .get('title')
+    ?.setValidators(Validators.required);
+    this.getReportForm
+    .get('title')
+    ?.setValidators(Validators.required);
+
+    this.getReportForm
+    .get('certification_vendor')
+    ?.clearValidators();
+    this.getReportForm
+    .get('certification_title')
+    ?.clearValidators();
+    this.getReportForm
+    .get('certification_domain')
+    ?.clearValidators();
+    this.getReportForm
+    .get('certification_status')
+    ?.clearValidators();
+
+    this.getReportForm
+    .get('certification_vendor')
+    ?.patchValue(null);
+    this.getReportForm
+    .get('certification_title')
+    ?.patchValue(null);
+    this.getReportForm
+    .get('certification_domain')
+    ?.patchValue(null);
+    this.getReportForm
+    .get('certification_status')
+    ?.patchValue(null);
+    }
+    else{
+      this.isCertification = true;
+
+      this.getReportForm
+      .get('certification_vendor')
+      ?.setValidators(Validators.required);
+      this.getReportForm
+      .get('certification_title')
+      ?.setValidators(Validators.required);
+      this.getReportForm
+      .get('certification_domain')
+      ?.setValidators(Validators.required);
+      this.getReportForm
+      .get('certification_status')
+      ?.setValidators(Validators.required);
+      this.getReportForm
+      .get('title')
+      ?.clearValidators();
+      this.getReportForm
+      .get('title')
+      ?.clearValidators();
+
+      this.getReportForm
+      .get('title')
+      ?.patchValue(null);
+      this.getReportForm
+      .get('title')
+      ?.patchValue(null);
+    }
+  }
+
+  save(status:any){
+    this.isSubmitted = true;
+    if (this.getReportForm.invalid) {
+      console.log("form invalid")
+      return;
+    }
+    const body = this.getReportForm.value;
+    body.attachment = this.reportAttachment.file;
+    body.attachment_ext = this.reportAttachment.ext;
+    body.status = status;
+    console.log("obj",body);
+    if (!this.report_id) {
+      this.commonService.showLoading();
+      this.getReportService.createReport(body).subscribe(
+        (res: any) => {
+          this.commonService.hideLoading();
+          this.router.navigateByUrl(`/dashboard/olreport`);
+        },
+        (err: any) => {
+          this.commonService.hideLoading();
+          this.commonService.toastErrorMsg('Error', err.message);
+        }
+      );
+    }
+    else {
+      body.report_id = this.report_id;
+      this.commonService.showLoading();
+      this.getReportService.updateReport(body).subscribe(
+        (res: any) => {
+          this.commonService.hideLoading();
+          this.commonService.toastSuccessMsg('Carousel', 'Successfully Saved.');
+          this.router.navigateByUrl(`/dashboard/olcarousel/view/${this.report_id}`);
+        },
+        (err: any) => {
+          this.commonService.hideLoading();
+          this.commonService.toastErrorMsg('Error', err.message);
+        }
+      );
+    }
   }
 
   getReportType(){
@@ -104,16 +263,6 @@ export class GetReportCreateComponent implements OnInit {
         this.commonService.toastErrorMsg('Error', err.message);
       }
     );
-  }
-
-  changeReportType(event:any){
-    let type = event.id;
-    if(type == 1){
-    this.certiFlag = false;
-    }
-    else{
-      this.certiFlag = true;
-    }
   }
 
   getBusinessUnits(){
@@ -132,7 +281,7 @@ export class GetReportCreateComponent implements OnInit {
 
   getTranscriptStatus(){
     this.commonService.showLoading();
-    this.getReportService.getReportType().subscribe(
+    this.getReportService.getTranscriptStatus().subscribe(
       (res: any) => {
         this.commonService.hideLoading();
         this.transcriptStatusObj = res.data;
@@ -190,82 +339,7 @@ export class GetReportCreateComponent implements OnInit {
   }
 
   getAvailableHistory(event:any){
-    this.availableHistoryFlag = !this.availableHistoryFlag;
-  }
-
-  getDate(event:any){
-   let selectedDate = event.target.value;
-    if(selectedDate == 'last_year'){
-      this.getReportForm.controls.start_date.setValue('');
-    }
-
-    if(selectedDate == 'this_year'){}
-
-    if(selectedDate == 'last_month'){}
-
-    if(selectedDate == 'this_month'){}
-
-    if(selectedDate == 'last_week'){}
-
-    if(selectedDate == 'this_week'){}
-
-    if(selectedDate == 'custom'){}
-  }
-
-  handleFileInput(event: any) {
-    const fsize = event.target.files[0].size;
-    const file = Math.round((fsize / 1024)/1024);
-    if(file > dataConstant.maxImageSize){
-      Swal.fire(
-        'Images!',
-        `Image is more than ${dataConstant.maxImageSize} mb. Please select valida file`,
-        'warning'
-      )
-      return;
-    }
-    this.commonService.FileConvertintoBytearray(event.target.files[0], async (f) => {
-      // creating array bytes
-      this.reportAttachment = { file: this.commonService.byteArrayTobase64(f.bytes), ext: f.name.split('.').pop() };
-    });
-  }
-
-  save(status:any){
-    this.isSubmitted = true;
-    if (this.getReportForm.invalid) {
-      return;
-    }
-    const body = this.getReportForm.value;
-    body.attachment = this.reportAttachment.file;
-    body.attachment_ext = this.reportAttachment.ext;
-    body.status = status;
-    if (!this.report_id) {
-      this.commonService.showLoading();
-      this.getReportService.createReport(body).subscribe(
-        (res: any) => {
-          this.commonService.hideLoading();
-          this.router.navigateByUrl(`/dashboard/olreport`);
-        },
-        (err: any) => {
-          this.commonService.hideLoading();
-          this.commonService.toastErrorMsg('Error', err.message);
-        }
-      );
-    }
-    else {
-      body.report_id = this.report_id;
-      this.commonService.showLoading();
-      this.getReportService.updateReport(body).subscribe(
-        (res: any) => {
-          this.commonService.hideLoading();
-          this.commonService.toastSuccessMsg('Carousel', 'Successfully Saved.');
-          this.router.navigateByUrl(`/dashboard/olcarousel/view/${this.report_id}`);
-        },
-        (err: any) => {
-          this.commonService.hideLoading();
-          this.commonService.toastErrorMsg('Error', err.message);
-        }
-      );
-    }
+    this.isAvailableHistory = !this.isAvailableHistory;
   }
 
 }

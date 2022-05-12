@@ -62,28 +62,35 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body card_width">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Report Type <span class="text-danger-ligth">* </span>
-                                                    <a>
-                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                            placement="right"
-                                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                                    </a>
-                                                </label>
-                                                <ng-select (change)="changeReportType($event)"                                              placeholder="Please select report type" 
-                                                       [items]="reportTypeObj"
-                                                        bindLabel="name" bindValue="id" formControlName="report_type"
-                                                        class="w_100">
-                                                </ng-select>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Report Type <span class="text-danger-ligth">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        placement="right"
+                                                        ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
+                                                </a>
+                                            </label>
+                                            <ng-select (change)="changeReportType($event)"
+                                                placeholder="Please select report type" [items]="reportTypeObj"
+                                                bindLabel="name" bindValue="name" formControlName="report_type"
+                                                class="w_100">
+                                            </ng-select>
+                                            <div
+                                                *ngIf="(getReportForm.controls['report_type'].invalid && (getReportForm.controls['report_type'].dirty || getReportForm.controls['report_type'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="getReportForm.controls['report_type'].errors?.required">
+                                                    Report Type cannot be blank
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="card" *ngIf="!certiFlag">
+                        <div class="card" *ngIf="!isCertification">
                             <div class="card-header">
                                 <div class="header_div_promt">
                                     <strong class="font-16">Training</strong>
@@ -104,7 +111,14 @@
                                                 </a>
                                             </label>
                                             <input type="text" class="form-control form_width"
-                                            formControlName="title" />
+                                                formControlName="title" />
+                                            <div
+                                                *ngIf="(getReportForm.controls['title'].invalid && (getReportForm.controls['title'].dirty || getReportForm.controls['title'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="getReportForm.controls['title'].errors?.required">
+                                                    Training Title cannot be blank
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -118,17 +132,23 @@
                                                         ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
                                                 </a>
                                             </label>
-                                            <ng-select                                                    placeholder="Please select report type" 
-                                              [items]="transcriptStatusObj"
-                                              bindLabel="name" bindValue="id" formControlName="transcript_status"
-                                              class="w_100">
+                                            <ng-select placeholder="Please select Transcript Status"
+                                                [items]="transcriptStatusObj" bindLabel="name" bindValue="name"
+                                                formControlName="transcript_status" class="w_100">
                                             </ng-select>
+                                            <div
+                                                *ngIf="(getReportForm.controls['transcript_status'].invalid && (getReportForm.controls['transcript_status'].dirty || getReportForm.controls['transcript_status'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="getReportForm.controls['transcript_status'].errors?.required">
+                                                    Transcript Status cannot be blank
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card" *ngIf="certiFlag">
+                        <div class="card" *ngIf="isCertification">
                             <div class="card-header">
                                 <div class="header_div_promt">
                                     <strong class="font-16">Certification</strong>
@@ -148,7 +168,14 @@
                                                 </a>
                                             </label>
                                             <input type="text" class="form-control form_width"
-                                            formControlName="certification_vendor" />
+                                                formControlName="certification_vendor" />
+                                            <div
+                                                *ngIf="(getReportForm.controls['certification_vendor'].invalid && (getReportForm.controls['certification_vendor'].dirty || getReportForm.controls['certification_vendor'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="getReportForm.controls['certification_vendor'].errors?.required">
+                                                    Certification Vendor cannot be blank
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -163,7 +190,14 @@
                                                 </a>
                                             </label>
                                             <input type="text" class="form-control form_width"
-                                            formControlName="certification_title" />
+                                                formControlName="certification_title" />
+                                            <div
+                                                *ngIf="(getReportForm.controls['certification_title'].invalid && (getReportForm.controls['certification_title'].dirty || getReportForm.controls['certification_title'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="getReportForm.controls['certification_title'].errors?.required">
+                                                    Certification Title cannot be blank
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -178,7 +212,14 @@
                                                 </a>
                                             </label>
                                             <input type="text" class="form-control form_width"
-                                            formControlName="certification_domain" />
+                                                formControlName="certification_domain" />
+                                            <div
+                                                *ngIf="(getReportForm.controls['certification_domain'].invalid && (getReportForm.controls['certification_domain'].dirty || getReportForm.controls['certification_domain'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="getReportForm.controls['certification_domain'].errors?.required">
+                                                    Certification Domain cannot be blank
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -192,11 +233,17 @@
                                                         ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
                                                 </a>
                                             </label>
-                                            <ng-select                                                    placeholder="Please select report type" 
-                                              [items]="certificationStatusObj"
-                                              bindLabel="name" bindValue="id" formControlName="certification_status"
-                                              class="w_100">
+                                            <ng-select placeholder="Please select Certification Status"
+                                                [items]="certificationStatusObj" bindLabel="name" bindValue="name"
+                                                formControlName="certification_status" class="w_100">
                                             </ng-select>
+                                            <div
+                                                *ngIf="(getReportForm.controls['certification_status'].invalid && (getReportForm.controls['certification_status'].dirty || getReportForm.controls['certification_status'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="getReportForm.controls['certification_status'].errors?.required">
+                                                    Certification Status cannot be blank
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -215,69 +262,44 @@
                             <div class="form-group">
                                 <label class="form-control-label">
                                     Region Name
-                                    <span class="text-danger-ligth">* </span>
-                                    <a>
-                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                            placement="right"
-                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                    </a>
+
                                 </label>
-                                <ng-select                                                                 placeholder="Please select report type" 
-                                   [items]="regionObj"
-                                   bindLabel="name" bindValue="id" formControlName="region_name"
-                                    class="w_100">
-                               </ng-select>
+                                <ng-select [items]="regionObj" [multiple]="true" (change)="getRegionName($event)"
+                                    bindLabel="name" bindValue="name" formControlName="region_name" class="w_100">
+                                </ng-select>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" *ngIf="isSpecificCountry">
                             <div class="form-group">
                                 <label class="form-control-label">
                                     Specific Country
-                                    <span class="text-danger-ligth">* </span>
-                                    <a>
-                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                            placement="right"
-                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                    </a>
+
                                 </label>
-                                <ng-select                                                                 placeholder="Please select report type" 
-                                   [items]="countryObj"
-                                   bindLabel="country_name" bindValue="id" formControlName="country"
+                                <ng-select placeholder="Please select Specific Country" [items]="countryObj"
+                                    bindLabel="country_name" bindValue="country_name" formControlName="country"
                                     class="w_100">
-                               </ng-select>
+                                </ng-select>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="form-control-label">
-                                  Business Unit
-                                    <span class="text-danger-ligth">* </span>
-                                    <a>
-                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                            placement="right"
-                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                    </a>
+                                    Business Unit
+
                                 </label>
-                                <ng-select                                                                 placeholder="Please select report type" 
-                                   [items]="businessUnitsObj"
-                                   bindLabel="team_name" bindValue="id" formControlName="business_unit"
+                                <ng-select placeholder="Please select Business Unit" [items]="businessUnitsObj"
+                                    bindLabel="team_name" bindValue="team_name" formControlName="business_unit"
                                     class="w_100">
-                               </ng-select>
+                                </ng-select>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="form-control-label">
                                     Management Code
-                                    <span class="text-danger-ligth">* </span>
-                                    <a>
-                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                            placement="right"
-                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                    </a>
+
                                 </label>
-                                <input type="text" class="form-control form_width"
-                                formControlName="management_code" />
+                                <input type="text" class="form-control form_width" formControlName="management_code" />
                             </div>
                         </div>
                     </div>
@@ -292,75 +314,65 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                            <input type="checkbox" (change)="getAvailableHistory($event)" formControlName="all_available_history">
-                            <strong class="font-16">All available history</strong>
-                            </div>
+                                    <input type="checkbox" (change)="getAvailableHistory($event)"
+                                        formControlName="all_available_history">
+                                    <strong class="font-16">All available history</strong>
+                                </div>
                             </div>
                         </div>
-                        <ng-container *ngIf="!availableHistoryFlag">
-                        <div class="row">
+                        <ng-container *ngIf="!isAvailableHistory">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="radio" name="date" value="last_year" (change)="getDate($event)">
+                                        <strong class="font-16">Last year</strong>
+
+                                        <input type="radio" name="date" value="this_year" (change)="getDate($event)">
+                                        <strong class="font-16">This year</strong>
+
+                                        <input type="radio" name="date" value="last_month" (change)="getDate($event)">
+                                        <strong class="font-16">Last month</strong>
+
+                                        <input type="radio" name="date" value="this_month" (change)="getDate($event)">
+                                        <strong class="font-16">This month</strong>
+
+                                        <input type="radio" name="date" value="last_week" (change)="getDate($event)">
+                                        <strong class="font-16">Last week</strong>
+
+                                        <input type="radio" name="date" value="this_week" (change)="getDate($event)">
+                                        <strong class="font-16">This week</strong>
+
+                                        <input type="radio" name="date" value="custom" (change)="getDate($event)">
+                                        <strong class="font-16">Custom date</strong>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                <input type="radio" name="date" value="last_year" (change)="getDate($event)">
-                                <strong class="font-16">Last year</strong>
+                                    <div class="form-group">
+                                        <label class="form-control-label">
+                                            Start Date
 
-                                <input type="radio" name="date" value="this_year" (change)="getDate($event)">
-                                <strong class="font-16">This year</strong>
-
-                                <input type="radio" name="date" value="last_month" (change)="getDate($event)">
-                                <strong class="font-16">Last month</strong>
-
-                                <input type="radio" name="date" value="this_month" (change)="getDate($event)">
-                                <strong class="font-16">This month</strong>
-
-                                <input type="radio" name="date" value="last_week" (change)="getDate($event)">
-                                <strong class="font-16">Last week</strong>
-
-                                <input type="radio" name="date" value="this_week" (change)="getDate($event)">
-                                <strong class="font-16">This week</strong>
-
-                                <input type="radio" name="date" value="custom" (change)="getDate($event)">
-                                <strong class="font-16">Custom date</strong>
+                                        </label>
+                                        <input type="date" class="form-control form_width"
+                                            formControlName="start_date" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
+                            <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="form-control-label">
-                                        Start Date
-                                        <span class="text-danger-ligth">* </span>
-                                        <a>
-                                            <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                placement="right"
-                                                ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                        </a>
-                                    </label>
-                                    <input type="date" class="form-control form_width"
-                                    formControlName="start_date" />
+                                    <div class="form-group">
+                                        <label class="form-control-label">
+                                            End Date
+
+                                        </label>
+                                        <input type="date" class="form-control form_width" formControlName="end_date" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label class="form-control-label">
-                                        End Date
-                                        <span class="text-danger-ligth">* </span>
-                                        <a>
-                                            <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                placement="right"
-                                                ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                        </a>
-                                    </label>
-                                    <input type="date" class="form-control form_width"
-                                    formControlName="end_date" />
-                                </div>
-                            </div>
-                        </div>
-                    </ng-container>
+                        </ng-container>
                     </div>
-                </div> 
+                </div>
                 <div class="card">
                     <div class="card-header">
                         <div class="header_div_promt">
@@ -369,117 +381,107 @@
                     </div>
                     <div class="card-body card_width">
                         <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="form-control-label">
-                                    Contact Person
-                                    <span class="text-danger-ligth">* </span>
-                                    <a>
-                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                            placement="right"
-                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                    </a>
-                                </label>
-                                <input type="text" class="form-control form_width"
-                                formControlName="contact_person" />
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-control-label">
+                                        Contact Person
+
+                                    </label>
+                                    <input type="text" class="form-control form_width"
+                                        formControlName="contact_person" />
+                                </div>
                             </div>
                         </div>
-                        </div>
                         <div class="row">
-                         <div class="col-sm-6">
-                             <div class="form-group">
-                                 <label class="form-control-label">
-                                     Report Purpose
-                                     <span class="text-danger-ligth">* </span>
-                                     <a>
-                                         <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                             placement="right"
-                                             ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                     </a>
-                                 </label>
-                                 <input type="text" class="form-control form_width"
-                                 formControlName="report_purpose" />
-                             </div>
-                         </div>
-                         <div class="col-sm-6">
-                             <div class="form-group">
-                                 <label class="form-control-label">
-                                     Deadline
-                                     <span class="text-danger-ligth">* </span>
-                                     <a>
-                                         <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                             placement="right"
-                                             ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                     </a>
-                                 </label>
-                                 <input type="date" class="form-control form_width"
-                                 formControlName="deadline" />
-                             </div>
-                         </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">
+                                        Report Purpose
+
+                                    </label>
+                                    <input type="text" class="form-control form_width"
+                                        formControlName="report_purpose" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">
+                                        Deadline
+                                        <span class="text-danger-ligth">* </span>
+                                        <a>
+                                            <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                placement="right"
+                                                ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
+                                        </a>
+                                    </label>
+                                    <input type="date" class="form-control form_width" formControlName="deadline" />
+                                    <div
+                                        *ngIf="(getReportForm.controls['deadline'].invalid && (getReportForm.controls['deadline'].dirty || getReportForm.controls['deadline'].touched)) || isSubmitted">
+                                        <div class="error_message"
+                                            *ngIf="getReportForm.controls['deadline'].errors?.required">
+                                            Deadline cannot be blank
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-sm-7">
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="form-control-label">
                                     Attachments
-                                    <span class="text-danger-ligth">* </span>
-                                    <a>
-                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                            placement="right"
-                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                    </a>
+
                                 </label>
-                                <input type="file" id="reportAttachment" class="form-control form_width" (change)="handleFileInput($event)"
-                                formControlName="attachment" />
+                                <input type="file" id="reportAttachment" class="form-control form_width"
+                                    (change)="handleFileInput($event)" formControlName="attachment" />
                             </div>
                         </div>
-                        <div class="col-sm-8">
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="form-control-label">
                                     Additional Comments
-                                    <span class="text-danger-ligth">* </span>
-                                    <a>
-                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                            placement="right"
-                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                    </a>
+
                                 </label>
                                 <textarea type="text" class="form-control form_width-textarea"
-                                formControlName="additional_comment">
+                                    formControlName="additional_comment">
                                 </textarea>
                             </div>
                         </div>
-                        <div class="col-sm-5">
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="form-control-label">
-                                    Request to Regioanl Training Coordinator
+                                    Request to Regional Training Coordinator
                                     <span class="text-danger-ligth">* </span>
                                     <a>
-                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                            placement="right"
+                                        <i class="fa fa-info-circle info_circle" aria-hidden="true" placement="right"
                                             ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
                                     </a>
                                 </label>
-                                <ng-select                                                                 placeholder="Please select report type" 
-                                   [items]="rocObj"
-                                   bindLabel="name" bindValue="id" formControlName="regional_cordinator"
-                                    class="w_100">
-                               </ng-select>
+                                <ng-select placeholder="Please select Regioanl Training Coordinator" [items]="rocObj"
+                                    bindLabel="name" bindValue="id" formControlName="regional_cordinator" class="w_100">
+                                </ng-select>
+                                <div
+                                    *ngIf="(getReportForm.controls['regional_cordinator'].invalid && (getReportForm.controls['regional_cordinator'].dirty || getReportForm.controls['regional_cordinator'].touched)) || isSubmitted">
+                                    <div class="error_message"
+                                        *ngIf="getReportForm.controls['regional_cordinator'].errors?.required">
+                                        Regional Training Coordinator cannot be blank
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        
+
                     </div>
-                    
-                </div>  
+
+                </div>
             </div>
         </div>
     </form>
 
     <div class="card-footer">
         <button class="btn btn-primary mr-1" (click)="save('pending')" type="submit">
-        <i aria-hidden="true" class="fa fa-upload">
-        </i> <span class="pl-1"> Submit</span>
+            <i aria-hidden="true" class="fa fa-upload">
+            </i> <span class="pl-1"> Submit</span>
         </button>
-        <button class="btn btn-secondary"  (click)="save('draft')">Save
+        <button class="btn btn-secondary" (click)="save('draft')">Save
             as draft
         </button>
     </div>
@@ -520,7 +522,7 @@
                     </div>
                 </div>
                 <!--coled-->
-                <div class="col-sm-2 dash_wid" >
+                <div class="col-sm-2 dash_wid">
                     <div class="alig_dashicon">
                         <div class="child_align_icon">
                             <div class="fa-icons-des bg-transparent">
