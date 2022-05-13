@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { GetReportRoutingModule } from './get-report-routing.module';
 import { GetReportListComponent } from './get-report-list/get-report-list.component';
@@ -15,6 +15,7 @@ import { GetReportViewComponent } from './get-report-view/get-report-view.compon
 
 @NgModule({
   declarations: [GetReportListComponent, GetReportHistoryComponent, GetReportCreateComponent, GetReportCompleteReportComponent, GetReportViewComponent],
+  providers:[DatePipe],
   entryComponents:[GetReportHistoryComponent],
   imports: [
     CommonModule,

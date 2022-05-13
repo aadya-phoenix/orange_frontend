@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -42,6 +43,7 @@ export class GetReportCreateComponent implements OnInit {
   isRoc = false;
   isDataAnalyst = false;
   isRequester = false;
+  isRocAction = false;
 
   reportAttachment = { file: '', ext: '' };
 
@@ -56,6 +58,7 @@ export class GetReportCreateComponent implements OnInit {
     publish: 0
   }
 
+  statusObj=[{name:'Close'},{name:'Reject'}];
   constructor(
     private formBuilder: FormBuilder,
     private commonService: CommonService,
@@ -64,13 +67,17 @@ export class GetReportCreateComponent implements OnInit {
     private modalService: NgbModal,
     private authService: AuthenticationService,
     private getReportService: GetReportService,
-    private courseService:CourcesService) {
+    private courseService:CourcesService,
+    private datepipe:DatePipe) {
       
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
+    this.getUserrole = this.authService.getRolefromlocal();
     this.isRoc = this.getUserrole.id === this.RoleID.Roc;
     this.isDataAnalyst = this.getUserrole.id === this.RoleID.DataAnalyst;
     this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
-
+   console.log("roc",this.isRequester);
+   console.log("user",this.getUserrole.id,);
+   console.log("requser",this.RoleID.RequesterID);
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.report_id = Id ? parseInt(Id) : 0;
@@ -80,10 +87,10 @@ export class GetReportCreateComponent implements OnInit {
       this.getReportForm= this.formBuilder.group({
         report_type: new FormControl('', [Validators.required]),
        /*  title: new FormControl('', this.isCertification ?[Validators.required]:[]), */
-        title: new FormControl('', []),
+        title: new FormControl('', [Validators.required]),
         transcript_status: new FormControl('', []),
         certification_vendor: new FormControl('',  []),
-        certification_title: new FormControl('', []),
+     //   certification_title: new FormControl('', []),
         certification_domain: new FormControl('',  []),
         certification_status: new FormControl('',  []),
         region_name: new FormControl('', []),
@@ -98,8 +105,9 @@ export class GetReportCreateComponent implements OnInit {
         deadline: new FormControl('', [Validators.required]),
         attachment: new FormControl('', []),
         additional_comment: new FormControl('', []),
-        regional_cordinator: new FormControl('', [Validators.required]),
-      });
+        regional_cordinator: new FormControl('', []),
+        additional_attachment:new FormControl('',[])
+       });
 
       this.getUserrole = this.authService.getRolefromlocal();
     }
@@ -167,17 +175,11 @@ export class GetReportCreateComponent implements OnInit {
     this.isCertification = false;
 
     this.getReportForm
-    .get('title')
-    ?.setValidators(Validators.required);
-    this.getReportForm
-    .get('title')
+    .get('transcript_status')
     ?.setValidators(Validators.required);
 
     this.getReportForm
     .get('certification_vendor')
-    ?.clearValidators();
-    this.getReportForm
-    .get('certification_title')
     ?.clearValidators();
     this.getReportForm
     .get('certification_domain')
@@ -188,9 +190,6 @@ export class GetReportCreateComponent implements OnInit {
 
     this.getReportForm
     .get('certification_vendor')
-    ?.patchValue(null);
-    this.getReportForm
-    .get('certification_title')
     ?.patchValue(null);
     this.getReportForm
     .get('certification_domain')
@@ -206,9 +205,6 @@ export class GetReportCreateComponent implements OnInit {
       .get('certification_vendor')
       ?.setValidators(Validators.required);
       this.getReportForm
-      .get('certification_title')
-      ?.setValidators(Validators.required);
-      this.getReportForm
       .get('certification_domain')
       ?.setValidators(Validators.required);
       this.getReportForm
@@ -217,13 +213,7 @@ export class GetReportCreateComponent implements OnInit {
       this.getReportForm
       .get('title')
       ?.clearValidators();
-      this.getReportForm
-      .get('title')
-      ?.clearValidators();
 
-      this.getReportForm
-      .get('title')
-      ?.patchValue(null);
       this.getReportForm
       .get('title')
       ?.patchValue(null);
@@ -233,14 +223,12 @@ export class GetReportCreateComponent implements OnInit {
   save(status:any){
     this.isSubmitted = true;
     if (this.getReportForm.invalid) {
-      console.log("form invalid")
       return;
     }
     const body = this.getReportForm.value;
     body.attachment = this.reportAttachment.file;
     body.attachment_ext = this.reportAttachment.ext;
     body.status = status;
-    console.log("obj",body);
     if (!this.report_id) {
       this.commonService.showLoading();
       this.getReportService.createReport(body).subscribe(
@@ -361,8 +349,17 @@ export class GetReportCreateComponent implements OnInit {
   getAvailableHistory(event:any){
     this.isAvailableHistory = !this.isAvailableHistory;
   }
+  dateFormat(date:any){
+    const newdate = new Date(date);
+    const newdate1 =  `${newdate.getFullYear()}-${newdate.getMonth()+1}-${newdate.getDate()}`; 
+    return this.datepipe.transform(newdate,'yyyy-MM-dd');
+  }
 
   getReportDetails() {
+    if(!this.report_id){
+      return
+    }
+    else{
     this.commonService.showLoading();
     this.getReportService.getReportDetails(this.report_id).subscribe(
       (res: any) => {
@@ -381,12 +378,12 @@ export class GetReportCreateComponent implements OnInit {
           this.getReportForm.controls.business_unit.setValue(this.get_report_details.business_unit);
           this.getReportForm.controls.management_code.setValue(this.get_report_details.management_code);
           this.getReportForm.controls.contact_person.setValue(this.get_report_details.contact_person);
-          this.getReportForm.controls.start_date.setValue(this.get_report_details.start_date);
-          this.getReportForm.controls.end_date.setValue(this.get_report_details.end_date);
+          this.getReportForm.controls.start_date.setValue(this.dateFormat(this.get_report_details.start_date));
+          this.getReportForm.controls.end_date.setValue(this.dateFormat(this.get_report_details.end_date));
           this.getReportForm.controls.all_available_history.setValue(this.get_report_details.all_available_history === "1" ? true : false);
           this.getReportForm.controls.report_purpose.setValue(this.get_report_details.report_purpose);
-          this.getReportForm.controls.deadline.setValue(this.get_report_details.deadline);
-          this.getReportForm.controls.attachment.setValue(this.get_report_details.attachment);
+          this.getReportForm.controls.deadline.setValue(this.dateFormat(this.get_report_details.deadline));
+         // this.getReportForm.controls.attachment.setValue(this.get_report_details.attachment);
           this.getReportForm.controls.additional_comment.setValue(this.get_report_details.additional_comment);
           if (this.isRequester) {  
            this.getReportForm.controls.regional_cordinator.setValue(this.get_report_details.regional_cordinator);
@@ -402,6 +399,7 @@ export class GetReportCreateComponent implements OnInit {
         this.commonService.toastErrorMsg('Error', err.message);
       }
     );
+    }
   }
 
   isDraft() {
@@ -459,5 +457,27 @@ export class GetReportCreateComponent implements OnInit {
 
     return true;
   }
+
+  isRocSubmit(){
+    if(this.isRoc && this.get_report_details?.status === this.reportStatus.pending){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  getRocAction(event:any){
+   console.log("roc event",event.target.value);
+   let rocaction = event.target.value;
+   if(rocaction == 'roc'){
+     this.isRocAction = true;
+   }
+   else{
+     this.isRocAction = false;
+   }
+  }
+
+  getRocStatus(event:any){}
 
 }

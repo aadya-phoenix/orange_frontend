@@ -190,11 +190,11 @@
                                                 </a>
                                             </label>
                                             <input type="text" class="form-control form_width"
-                                                formControlName="certification_title" />
+                                                formControlName="title" />
                                             <div
-                                                *ngIf="(getReportForm.controls['certification_title'].invalid && (getReportForm.controls['certification_title'].dirty || getReportForm.controls['certification_title'].touched)) || isSubmitted">
+                                                *ngIf="(getReportForm.controls['title'].invalid && (getReportForm.controls['title'].dirty || getReportForm.controls['title'].touched)) || isSubmitted">
                                                 <div class="error_message"
-                                                    *ngIf="getReportForm.controls['certification_title'].errors?.required">
+                                                    *ngIf="getReportForm.controls['title'].errors?.required">
                                                     Certification Title cannot be blank
                                                 </div>
                                             </div>
@@ -446,6 +446,7 @@
                                 </textarea>
                             </div>
                         </div>
+                    
                         <div class="col-sm-12" *ngIf="isRequester">
                             <div class="form-group">
                                 <label class="form-control-label">
@@ -469,9 +470,53 @@
                             </div>
                         </div>
 
-                    </div>
+                      <!--   *ngIf="isRocSubmit()" -->
+                      <div class="row">
+                        <div class="col-sm-6" >
+                            <div class="form-group">
+                                <input type="radio" name="roc_action" value="transfer" (change)="getRocAction($event)">
+                                <strong class="font-16">Transfer to data analyst</strong>
+                                <input type="radio" name="roc_action" value="roc" (change)="getRocAction($event)">
+                                <strong class="font-16">Action By ROC</strong>
+                            </div>
+                        </div>
+                       </div>
+                        <div class="row" *ngIf="this.isRocAction">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                    Status
 
-                </div>
+                                </label>
+                                <ng-select (change)="getRocStatus($event)" [items]="statusObj"
+                                    bindLabel="name" bindValue="name" 
+                                    class="w_100">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                   Additional Attachments
+                                </label>
+                                <input type="file" id="reportAttachment" class="form-control form_width"
+                                    (change)="handleFileInput($event)" formControlName="additional_attachment" />
+                            </div>
+                        </div>
+                        
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                   Comments
+                                </label>
+                                <textarea type="text" class="form-control form_width-textarea"
+                                >
+                            </textarea>
+                            </div>
+                        </div>
+                    </div>
+                  </div>                  
             </div>
         </div>
     </form>
@@ -481,7 +526,7 @@
             <i aria-hidden="true" class="fa fa-upload">
             </i> <span class="pl-1"> Submit</span>
         </button>
-        <button class="btn btn-secondary" (click)="save('draft')">Save
+        <button class="btn btn-secondary" *ngIf="isDraft()" (click)="save('draft')">Save
             as draft
         </button>
     </div>
