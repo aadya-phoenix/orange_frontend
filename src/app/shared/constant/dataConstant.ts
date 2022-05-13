@@ -40,6 +40,8 @@ export const dataConstant = {
     CarouselPublisher: 8,
     BackOfficeReviewer: 3,
     BackOfficePublisher: 10,
+    Roc: 3,
+    DataAnalyst:11
   },
   Laungauges : { EN:'EN', FR:'FR'}
 }
