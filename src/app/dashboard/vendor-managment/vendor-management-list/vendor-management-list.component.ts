@@ -5,10 +5,10 @@ import * as _ from 'lodash';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
-import { BackOfficeService } from 'src/app/shared/services/back-office/back-office.service';
+import { VendorService } from 'src/app/shared/services/vendor/vendor.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import Swal from 'sweetalert2';
-import { BackOfficeHistoryComponent } from '../../back-office/back-office-history/back-office-history.component';
+import { VendorManagementHistoryComponent } from '../vendor-management-history/vendor-management-history.component';
 
 @Component({
   selector: 'app-vendor-management-list',
@@ -17,13 +17,13 @@ import { BackOfficeHistoryComponent } from '../../back-office/back-office-histor
 })
 export class VendorManagementListComponent implements OnInit {
 
-  backOfficeStatus = dataConstant.BackOfficeStatus;
+  vendorStatus = dataConstant.VendorStatus;
   dateTimeFormate = dataConstant.dateTimeFormate;
   dateFormate = dataConstant.dateFormate;
   RoleID = dataConstant.RoleID;
-  backOfficeList: any = [];
-  backOfficeListToShow: any = [];
-  selectedStatus = this.backOfficeStatus.total;
+  vendorList: any = [];
+  vendorListToShow: any = [];
+  selectedStatus = this.vendorStatus.total;
   isReviewer = false;
   isPublisher = false;
   isRequester = false;
@@ -32,16 +32,10 @@ export class VendorManagementListComponent implements OnInit {
     pageNumber: 1,
     pageSize: 10
   }
-  back_office_count = {
+  vendor_count = {
     total: 0,
-    draft: 0,
-    closed: 0,
-    rejected: 0,
-    pending: 0,
-    submitted: 0,
-    transferred: 0,
-    expired: 0,
-    publish: 0
+    active: 0,
+    deactive: 0,
   }
   getUserrole: any;
   getprofileDetails: any;
@@ -50,7 +44,7 @@ export class VendorManagementListComponent implements OnInit {
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
   constructor(
-    private backOfficeService: BackOfficeService,
+    private vendorService: VendorService,
     private commonService: CommonService,
     private authService: AuthenticationService,
     private modalService: NgbModal,
@@ -59,9 +53,6 @@ export class VendorManagementListComponent implements OnInit {
   ) {
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
-    this.isReviewer = this.getUserrole.id === this.RoleID.BackOfficeReviewer;
-    this.isPublisher = this.getUserrole.id === this.RoleID.BackOfficePublisher;
-    this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
   }
 
   ngOnInit(): void {
@@ -77,12 +68,12 @@ export class VendorManagementListComponent implements OnInit {
 
   viewRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/back-office/view/${item.id}`);
+      this.router.navigateByUrl(`/dashboard/vendormanagement/view/${item.id}`);
     }
   }
 
   openModal(item: any) {
-    const modalRef = this.modalService.open(BackOfficeHistoryComponent, {
+    const modalRef = this.modalService.open(VendorManagementHistoryComponent, {
       centered: true,
       size: 'xl',
       windowClass: 'alert-popup',
@@ -103,7 +94,7 @@ export class VendorManagementListComponent implements OnInit {
     });
 
     if (direction && column) {
-      this.backOfficeListToShow = _.orderBy(this.backOfficeListToShow, column, direction);
+      this.vendorListToShow = _.orderBy(this.vendorListToShow, column, direction);
     }
     else {
       this.showRecords(this.selectedStatus);
@@ -115,22 +106,26 @@ export class VendorManagementListComponent implements OnInit {
   }
 
   showRecords(type: string) {
-    if (type === this.backOfficeStatus.total) {
-      this.backOfficeListToShow = this.backOfficeList.map((x: any) => Object.assign({}, x));
+    if (type === this.vendorStatus.total) {
+      this.vendorListToShow = this.vendorList.map((x: any) => Object.assign({}, x));
     } else {
-      this.backOfficeListToShow = this.backOfficeList.filter((x: any) => { if (x.status_show === type) { return x } }).map((x: any) => Object.assign({}, x));
+      this.vendorListToShow = this.vendorList.filter((x: any) => { if (x.status === type) { return x } }).map((x: any) => Object.assign({}, x));
     }
     this.selectedStatus = type;
   }
 
   refreshCourses() {
     this.commonService.showLoading();
-    this.backOfficeService.getBackOffice().subscribe(
+    this.vendorService.getVendor().subscribe(
       (res: any) => {
         this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
-          this.backOfficeList = res.data.back_office;
-          this.back_office_count = res.data.back_office_count;
+          this.vendorList = res.data.vendor;
+          this.vendorList.forEach((data: any)=>{
+            data.nfps_entity = JSON.parse(data.nfps_entity).join(',');
+            data.training_offer = JSON.parse(data.training_offer).join(',');
+          });
+          this.vendor_count = res.data.vendor_count;
           this.showRecords(this.selectedStatus);
         }
       },
@@ -143,11 +138,11 @@ export class VendorManagementListComponent implements OnInit {
 
   editRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/back-office/update/${item.id}`);
+      this.router.navigateByUrl(`/dashboard/vendor/update/${item.id}`);
     }
   }
 
-  deleteRequest(back_office_id: number){
+  deleteRequest(vendor_id: number){
       Swal.fire({
         title: 'Are you sure want to remove?',
         text: 'You will not be able to recover this request!',
@@ -158,7 +153,7 @@ export class VendorManagementListComponent implements OnInit {
       }).then((result) => {
         if (result.value) {
           this.commonService.showLoading();
-          this.backOfficeService.backOfficeDelete({back_office_id :back_office_id}).subscribe((res:any)=>{
+          this.vendorService.VendorDelete({vendor_id :vendor_id}).subscribe((res:any)=>{
             this.commonService.hideLoading();
             this.refreshCourses();
             Swal.fire(
@@ -174,7 +169,7 @@ export class VendorManagementListComponent implements OnInit {
       })
     }
 
-    copyRequest(back_office_id: number) {
+    copyRequest(vendor_id: number) {
       Swal.fire({
         title: 'Are you sure you want to copy?',
         text: 'You will copy this request',
@@ -185,7 +180,7 @@ export class VendorManagementListComponent implements OnInit {
       }).then((result) => {
         if (result.value) {
           this.commonService.showLoading();
-          this.backOfficeService.backOfficeCopy({back_office_id :back_office_id}).subscribe((res:any)=>{
+          this.vendorService.VendorCopy({vendor_id :vendor_id}).subscribe((res:any)=>{
             this.commonService.hideLoading();
             this.refreshCourses();
             Swal.fire(

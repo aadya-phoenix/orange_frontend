@@ -1,1 +1,355 @@
-<p>vendor-management-create works!</p>
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-8">
+            <div class="page-header float-left bac_trasparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/manage vendor.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="breade_text_span1">Manage Vendors</span>
+                        <span class="divider_req"></span>
+                        <span class="breade_text_span">View and manage details about external vendor workshops and
+                            internal PD&L workshops.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 float-right">
+            <div class="page-header float-right bac_trasparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bac_trasparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home text_white"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/vendormanagement']" class="text_white span_dis">Create New
+                                Vendor</a>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">New Vendor</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card_header_common">
+        <div class="d-flex justify-content-between media_creat_couse_col">
+            <div class="d-flex align-items-center">
+                <img src="../../../../assets/images/formm.png" class="ml-2 form_img_req" />
+                <p class="mt-2 ml-2 mb-2 view-re_css">
+                    <span class="">Complete this form and click on the submit button</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <form [formGroup]="createVendorForm">
+        <div class="content mt-1">
+            <div class="animated fadeIn">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <strong _ngcontent-jet-c125=""> Vendors Details </strong>
+                                </div>
+                                <div class="card-body card_width">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="d-flex align-items-center">
+                                                <div class="form-group w-100">
+                                                    <label class="form-control-label">
+                                                        Vendor Name <span class="text_red">* </span>
+                                                        <a>
+                                                            <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                                data-bs-toggle="tooltip" placement="top"
+                                                                ngbTooltip="Do provide an attractive, catchy and clear learning activity title (max 100 characters). Example: 7 Habits of Highly Effective People. Don’t use prefixes such as ‘OBS’ or abbreviations such as ‘ops’. Don’t make references to session location or target "></i>
+                                                        </a>
+                                                    </label>
+                                                    <input type="text" placeholder="Enter Name"
+                                                        class="form-control form_width" formControlName="name" />
+
+                                                    <div
+                                                        *ngIf="(createVendorForm.controls['region'].invalid && (createVendorForm.controls['region'].dirty || createVendorForm.controls['region'].touched)) || isSubmitted">
+                                                        <div class="error_message"
+                                                            *ngIf="createVendorForm.controls['region'].errors?.required">
+                                                            Vendor name can not be blank
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">
+                                                    Vendor Region<span class="text-danger-ligth">* </span>
+                                                </label>
+                                                <ng-select placeholder="Please select Delivery"
+                                                    [items]="cordinatorsList" [multiple]="true" bindLabel="name"
+                                                    bindValue="name" formControlName="region">
+                                                </ng-select>
+                                                <div
+                                                    *ngIf="(createVendorForm.controls['region'].invalid && (createVendorForm.controls['region'].dirty || createVendorForm.controls['region'].touched)) || isSubmitted">
+                                                    <div class="error_message"
+                                                        *ngIf="createVendorForm.controls['region'].errors?.required">
+                                                        Course to be delivered can not be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">
+                                                    Vendor location<span class="text-danger-ligth">* </span>
+                                                </label>
+                                                <ng-select placeholder="Please select location"
+                                                    [items]="CCTLearningLocation" [multiple]="true"
+                                                    bindLabel="location_name" bindValue="location_name"
+                                                    formControlName="location">
+                                                </ng-select>
+                                                <div
+                                                    *ngIf="(createVendorForm.controls['location'].invalid && (createVendorForm.controls['location'].dirty || createVendorForm.controls['location'].touched)) || isSubmitted">
+                                                    <div class="error_message"
+                                                        *ngIf="createVendorForm.controls['location'].errors?.required">
+                                                        Vendor location can not be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">
+                                                    Vendor address<span class="text-danger-ligth">* </span>
+                                                </label>
+                                                <input type="text" placeholder="Enter Title"
+                                                    class="form-control form_width" formControlName="address" />
+                                                <div
+                                                    *ngIf="(createVendorForm.controls['address'].invalid && (createVendorForm.controls['address'].dirty || createVendorForm.controls['address'].touched)) || isSubmitted">
+                                                    <div class="error_message"
+                                                        *ngIf="createVendorForm.controls['address'].errors?.required">
+                                                        Vendor address can not be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">
+                                                    Website<span class="text-danger-ligth">* </span>
+                                                </label>
+                                                <input type="text" placeholder="Enter Website"
+                                                    class="form-control form_width" formControlName="website" />
+                                                <div
+                                                    *ngIf="(createVendorForm.controls['website'].invalid && (createVendorForm.controls['website'].dirty || createVendorForm.controls['website'].touched)) || isSubmitted">
+                                                    <div class="error_message"
+                                                        *ngIf="createVendorForm.controls['website'].errors?.required">
+                                                        Website can not be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">
+                                                    NFPS entity(Oracle entity)<span class="text-danger-ligth">* </span>
+                                                </label>
+                                                <ng-select placeholder="Please select location" [items]="CCTNfpsEntity"
+                                                    [multiple]="true" bindLabel="nfps_entity" bindValue="nfps_entity"
+                                                    formControlName="nfps_entity">
+                                                </ng-select>
+                                                <div
+                                                    *ngIf="(createVendorForm.controls['nfps_entity'].invalid && (createVendorForm.controls['nfps_entity'].dirty || createVendorForm.controls['nfps_entity'].touched)) || isSubmitted">
+                                                    <div class="error_message"
+                                                        *ngIf="createVendorForm.controls['nfps_entity'].errors?.required">
+                                                        Vendor nfps_entity can not be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="d-flex align-items-center">
+                                                <div class="form-group w-100">
+                                                    <label class="form-control-label">
+                                                        Epurchase</label>
+                                                    <p>
+                                                        <label class="toggleSwitch xlarge" onclick="">
+                                                            <input type="checkbox"  formControlName="epurchase"/>
+                                                            <span>
+                                                                <span>NO</span>
+                                                                <span>YES</span>
+                                                            </span>
+                                                            <a></a>
+                                                        </label>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="d-flex align-items-center">
+                                                <div class="form-group w-100">
+                                                    <label class="form-control-label">
+                                                        Do we have global contact</label>
+                                                    <p>
+                                                        <label class="toggleSwitch xlarge" onclick="">
+                                                            <input type="checkbox" formControlName="global_contract" />
+                                                            <span>
+                                                                <span>NO</span>
+                                                                <span>YES</span>
+                                                            </span>
+                                                        </label>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label">
+                                                    Training Offers<span class="text-danger-ligth">* </span>
+                                                </label>
+                                                <ng-select placeholder="Please select location"
+                                                    [items]="CCTOfferTraining" [multiple]="true"
+                                                    bindLabel="training_offers" bindValue="training_offers"
+                                                    formControlName="training_offer">
+                                                </ng-select>
+                                                <div
+                                                    *ngIf="(createVendorForm.controls['training_offer'].invalid && (createVendorForm.controls['training_offer'].dirty || createVendorForm.controls['training_offer'].touched)) || isSubmitted">
+                                                    <div class="error_message"
+                                                        *ngIf="createVendorForm.controls['training_offer'].errors?.required">
+                                                        Vendor training_offer can not be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" formArrayName="contact">
+                                <div class="card-header card_header_vendor">
+                                    <strong _ngcontent-jet-c125=""> Vendors Point of contact </strong>
+                                </div>
+                                <!-- <form [formGroup]="createCourceForm"> -->
+                                    <div class="card-body card_width"
+                                    *ngFor="let cont of contactFormArray.controls; let i = index">
+                                    <div class="card">
+                                    <div class="card-header justify-content-end card_header_vendor">
+                                        <div class="d-flex">
+                                            <button class="btn btn-primary btn_contact mr-1" (click)="addContact()">
+                                                <span class="fon_12">+ Add Contact</span>
+                                            </button>
+                                            <button class="btn btn-secondary btn_contact" (click)="removeContact(cont)">
+                                                <span class="fon_12">-Remove Contact</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row card-body" [formGroupName]="i">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label class="form-control-label">
+                                                    Contact For <span class="text-danger-ligth">* </span>
+                                                    <a>
+                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                            placement="right"
+                                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
+                                                    </a>
+                                                </label>
+                                                <ng-select placeholder="Please select location"
+                                                    [items]="CCTContactPoint" [multiple]="false" bindLabel="name"
+                                                    bindValue="name" formControlName="contact_for">
+                                                </ng-select>
+                                                <div
+                                                    *ngIf="(contactFormArray.controls[i].controls['contact_for'].invalid && (contactFormArray.controls[i].controls['contact_for'].dirty || contactFormArray.controls[i].controls['contact_for'].touched)) || isSubmitted ">
+                                                    <div class="error_message"
+                                                        *ngIf="contactFormArray.controls[i].controls['contact_for'].errors?.required">
+                                                        Contact For cannot be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label class="form-control-label">
+                                                    Contact Person <span class="text-danger-ligth">* </span>
+                                                </label>
+                                                <input type="text" placeholder="Enter Contact Person"
+                                                    class="form-control form_width" formControlName="person" />
+                                                <div
+                                                    *ngIf="(contactFormArray.controls[i].controls['person'].invalid && (contactFormArray.controls[i].controls['person'].dirty || contactFormArray.controls[i].controls['person'].touched)) || isSubmitted ">
+                                                    <div class="error_message"
+                                                        *ngIf="contactFormArray.controls[i].controls['person'].errors?.required">
+                                                        Contact Person cannot be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label class="form-control-label">
+                                                    Email Id <span class="text-danger-ligth">* </span>
+                                                </label>
+                                                <input type="text" placeholder="Enter Email Id"
+                                                    class="form-control form_width" formControlName="email" />
+                                                <div
+                                                    *ngIf="(contactFormArray.controls[i].controls['email'].invalid && (contactFormArray.controls[i].controls['email'].dirty || contactFormArray.controls[i].controls['email'].touched)) || isSubmitted ">
+                                                    <div class="error_message"
+                                                        *ngIf="contactFormArray.controls[i].controls['email'].errors?.required">
+                                                        Email Id cannot be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label class="form-control-label">
+                                                    Phone Number
+                                                </label>
+                                                <input type="text" placeholder="Enter phone"
+                                                    class="form-control form_width" formControlName="phone" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <strong _ngcontent-jet-c125=""> Comments </strong>
+                                </div>
+                                <div class="card-body card_width">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">
+                                                    Other Comments<span class="text-danger-ligth">* </span>
+                                                </label>
+                                                <textarea class="form-control form_width-textarea" maxlength="500"
+                                                    rows="3" placeholder="Enter  Other Comments"
+                                                    formControlName="other_comment" maxlength="500"></textarea>
+                                                <div
+                                                    *ngIf="(createVendorForm.controls['other_comment'].invalid && (createVendorForm.controls['other_comment'].dirty || createVendorForm.controls['other_comment'].touched)) || isSubmitted">
+                                                    <div class="error_message"
+                                                        *ngIf="createVendorForm.controls['other_comment'].errors?.required">
+                                                        Comment can not be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <button class="btn btn-primary" type="submit"
+                                    (click)="saveVendor('active')">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
