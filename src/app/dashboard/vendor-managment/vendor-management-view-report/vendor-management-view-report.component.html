@@ -50,34 +50,85 @@
                         <div class="card">
                             <div class="card-body card_padding">
                                 <div class="row">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-2">
                                         <div class="form-group">
-                                            <label class="form-control-label">Start Date
+                                            <label class="form-control-label">Status
                                             </label>
-                                            <input type="date" class="form-control form_width"
-                                                formControlName="start_date" />
+                                            <ng-select placeholder="Select status"
+                                                        [items]="status" [multiple]="false" bindLabel="name"
+                                                        bindValue="value" formControlName="status">
+                                                    </ng-select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-2">
                                         <div class="form-group">
-                                            <label class="form-control-label">End Date
+                                            <label class="form-control-label">Overall Rating
                                             </label>
-                                            <input type="date" class="form-control form_width"
-                                                formControlName="end_date" />
+                                            <ng-select placeholder="Select overall rating"
+                                            [items]="overallRatings" [multiple]="false" bindLabel="name"
+                                            bindValue="id" formControlName="overall_rating">
+                                        </ng-select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-2">
                                         <div class="form-group">
-                                            <label class="form-control-label">Reporting Period
+                                            <label class="form-control-label">Vendor Name
                                             </label>
-                                            <select class="form-control form_width" formControlName="reporting_period" [attr.disabled]="addDate ? 'disabled' : null">
-                                                <option value="">Please select</option>
-                                                <option value="7">Last 7 days</option>
-                                                <option value="30">Last 30 days</option>
-                                                <option value="60">Last 60 days</option>
-                                                <option value="90">Last 90 days</option>
-                                                <option value="All">All time</option>
-                                            </select>
+                                            <input type="text" placeholder="Enter Name"
+                                                        class="form-control form_width" formControlName="vendor_name" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label">NFPS entity(Oracle entity)
+                                            </label>
+                                            <ng-select placeholder="Select NFPS entity"
+                                            [items]="CCTNfpsEntity" [multiple]="false" bindLabel="nfps_entity"
+                                            bindValue="nfps_entity" formControlName="overall_rating">
+                                        </ng-select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Vendor Region
+                                            </label>
+                                            <ng-select placeholder="Select Region"
+                                                [items]="cordinatorsList" [multiple]="true" bindLabel="name"
+                                                bindValue="name" formControlName="region">
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Vendor location
+                                            </label>
+                                            <ng-select placeholder="Select location"
+                                            [items]="CCTLearningLocation" [multiple]="true"
+                                            bindLabel="location_name" bindValue="location_name"
+                                            formControlName="location">
+                                        </ng-select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Training Offers
+                                            </label>
+                                            <ng-select placeholder="Please select location"
+                                                [items]="CCTOfferTraining" [multiple]="true"
+                                                bindLabel="training_offers" bindValue="training_offers"
+                                                formControlName="training_offer">
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Other Training Offers
+                                            </label>
+                                            <input type="text" placeholder="Enter Other Training Offers"
+                                                        class="form-control form_width" formControlName="other_training_offer" />
                                         </div>
                                     </div>
                                 </div>
@@ -105,15 +156,17 @@
                             <div class="overall_css">
                                 <span class="card_overall">Overall request Status</span>
                                 <div class="d-flex">
-                                    <button class="btn btn-secondary" [routerLink]="['/dashboard/vendormanagement/report']">
-                                        <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> View
-                                        all activity report
-                                      </button>
-                                    <button class="btn btn-primary ml-1"
+                                    <button class="btn btn-primary mr-1"
                                         [routerLink]="['/dashboard/vendormanagement/create']">
                                         <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1"> New
-                                            request</span>
+                                            vendor</span>
                                     </button>
+                                        <button class="btn btn-primary mr-1 fon_12"
+                                        (click)="ratingReport()"><i class="fa fa-star mr-1"
+                                            aria-hidden="true"></i>Rating Report</button>
+                                            <button class="btn btn-secondary mr-1 fon_12"
+                                    (click)="exportExcel()"><i class="fa fa-download mr-1"
+                                        aria-hidden="true"></i>Export</button>
                                 </div>
                             </div>
                         </div>

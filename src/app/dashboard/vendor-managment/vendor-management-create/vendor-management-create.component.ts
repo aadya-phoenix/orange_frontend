@@ -24,6 +24,7 @@ export class VendorManagementCreateComponent implements OnInit {
   RoleID = dataConstant.RoleID;
   dateFormate = dataConstant.dateFormate;
   BackOfficeStatus = dataConstant.BackOfficeStatus;
+  yesnoDropdown = [{name:'Yes',value:1},{name:'No',value:0}]
   CCTContactPoint: any = [];
   CCTLearningLocation: any = [];
   CCTNfpsEntity: any = [];
@@ -94,8 +95,8 @@ export class VendorManagementCreateComponent implements OnInit {
         'i'
       ))]),
       nfps_entity: new FormControl('', [Validators.required]),
-      epurchase: new FormControl('', [Validators.required]),
-      global_contract: new FormControl('', [Validators.required]),
+      epurchase: new FormControl(0, [Validators.required]),
+      global_contract: new FormControl(0, [Validators.required]),
       training_offer: new FormControl(''),
       other_comment: new FormControl('', [Validators.required]),
       contact: this.formBuilder.array([]),

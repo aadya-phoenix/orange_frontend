@@ -34,7 +34,7 @@ export const dataConstant = {
   VendorStatus: { total: 'total', active:'active', deactive:'deactive'},
   GetReportStatus: {total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
   ImageUrl: 'https://orange.mindscroll.info/public/public',
-  ExporType : {course:'course', session:'session', carousel:'carousel', back_office:'back_office'},
+  ExporType : {course:'course', session:'session', carousel:'carousel', back_office:'back_office', vendor:'vendor', vendor_rating:'vendor_rating'},
   RoleID: {
     RequesterID: 2,
     CarouselReviewer: 7,

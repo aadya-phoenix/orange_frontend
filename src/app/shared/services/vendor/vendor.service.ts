@@ -57,6 +57,13 @@ export class VendorService {
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  getVendorRatingReport(data: any) {
+    const url = `/api/${this.apiVersion}/vendor/filter-rating`;
+    return this.http
+      .post(url, data)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
   getCCTLearningLocation() {
     const url = `/api/${this.apiVersion}/cct-learning-location`;
     return this.http
@@ -80,6 +87,13 @@ export class VendorService {
 
   getCCTOfferTraining() {
     const url = `/api/${this.apiVersion}/cct-offer-training`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  getCCTRating() {
+    const url = `/api/${this.apiVersion}/cct-rating`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.commmonService.Errorhandling));
