@@ -1,4 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
@@ -6,6 +7,7 @@ import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
+import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { GetReportService } from 'src/app/shared/services/get-report/get-report.service';
 import Swal from 'sweetalert2';
 import { GetReportHistoryComponent } from '../get-report-history/get-report-history.component';
@@ -16,11 +18,17 @@ import { GetReportHistoryComponent } from '../get-report-history/get-report-hist
   styleUrls: ['./get-report-complete-report.component.scss']
 })
 export class GetReportCompleteReportComponent implements OnInit {
-
+  public filterForm!: FormGroup;
+  dateTimeFormate = dataConstant.dateTimeFormate;
+  dateFormate = dataConstant.dateFormate;
+  attachUrl = dataConstant.ImageUrl;
+  RoleID = dataConstant.RoleID;
+  addDate = false;
   report_id:number=0;
   reportStatus= dataConstant.GetReportStatus;
   reportList:any = [];
   reportListToShow:any = [];
+  rocObj: any = [];
   selectedStatus = this.reportStatus.total;
 
   report_count = {
@@ -45,27 +53,55 @@ export class GetReportCompleteReportComponent implements OnInit {
   getUserrole: any;
   getprofileDetails: any;
 
+  isRoc = false;
+  isDataAnalyst = false;
+  isRequester = false;
+
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
   constructor(
+    private fb: FormBuilder,
     private getReportService:GetReportService,
     private commonService: CommonService,
     private authService: AuthenticationService,
     private modalService: NgbModal,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private courceService: CourcesService
   ) { 
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
+    this.isRoc = this.getUserrole.id === this.RoleID.Roc;
+    this.isDataAnalyst = this.getUserrole.id === this.RoleID.DataAnalyst;
+    this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
+    this.filterForm = this.fb.group({
+      start_date: new FormControl('', []),
+      end_date: new FormControl('', []),
+      reporting_period: new FormControl('', []),
+      roc: new FormControl('', []),
+      publisher: new FormControl('', []),
+    });
+    this.filterForm.controls.start_date.valueChanges.subscribe((x: any) => {
+      this.addDate = x ? true : false;
+    })
   }
 
   ngOnInit(): void {
-    this.refreshReports();
-  }
-  
-  viewRequest(item: any) {
-    if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard//view/${item.id}`);
+    this.refreshReports({});
+    if(this.isDataAnalyst || this.isRoc){
+      this.getRoles();
     }
+  }
+
+  getRoles() {
+    this.commonService.showLoading();
+    this.courceService.getRoleUsers().subscribe((res: any) => {
+      this.rocObj = res.data[this.RoleID.Roc];
+      this.commonService.hideLoading();
+    },
+      (err: any) => {
+        this.commonService.hideLoading();
+        console.log(err);
+      });
   }
 
   openModal(item: any) {
@@ -106,9 +142,9 @@ export class GetReportCompleteReportComponent implements OnInit {
     this.selectedStatus = type;
   }
 
-  refreshReports() {
+  refreshReports(data: any) {
     this.commonService.showLoading();
-    this.getReportService.getReportList().subscribe(
+    this.getReportService.getReportFilter(data).subscribe(
       (res: any) => {
         this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
@@ -124,61 +160,23 @@ export class GetReportCompleteReportComponent implements OnInit {
       }
     );
   }
-
   pageChanged(event: any) {
     this.pagination.pageNumber = event;
   }
 
-  deleteRequest(report_id: number){
-    Swal.fire({
-      title: 'Are you sure want to remove?',
-      text: 'You will not be able to recover this request!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, keep it'
-    }).then((result) => {
-      if (result.value) {
-        this.commonService.showLoading();
-        this.getReportService.reportDelete({report_id :report_id}).subscribe((res:any)=>{
-          this.refreshReports();
-          Swal.fire(
-            'Deleted!',
-            'Your request has been deleted.',
-            'success'
-          )
-        },(err:any)=>{
-          this.commonService.hideLoading();
-        })
-        
-      }
-    })
+  reset() {
+    this.filterForm.setValue({
+      start_date: '',
+      end_date: '',
+      reporting_period: '',
+      roc: '',
+      publisher: ''
+    });
+    this.refreshReports({});
   }
 
-  copyRequest(report_id: number) {
-      Swal.fire({
-        title: 'Are you sure you want to copy?',
-        text: 'You will copy this request',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, copy it!',
-        cancelButtonText: 'No'
-      }).then((result) => {
-        if (result.value) {
-          this.commonService.showLoading();
-          this.getReportService.reportCopy({report_id :report_id}).subscribe((res:any)=>{
-            this.commonService.hideLoading();
-            this.refreshReports();
-            Swal.fire(
-              'Copied!',
-              'Your request has been copyed.',
-              'success'
-            )
-          },(err:any)=>{
-            this.commonService.hideLoading();
-          })
-          
-        }
-      })
+  filterData() {
+    const data = this.filterForm.value;
+    this.refreshReports(data);
   }
 }

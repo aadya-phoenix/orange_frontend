@@ -63,7 +63,7 @@
                         <div class="card">
                             <div class="card-body card_width">
                                 <div class="row">
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-5">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Report Type <span class="text-danger-ligth">* </span>
@@ -90,6 +90,7 @@
                                 </div>
                             </div>
                         </div>
+                        <ng-container *ngIf="getForm">
                         <div class="card" *ngIf="!isCertification">
                             <div class="card-header">
                                 <div class="header_div_promt">
@@ -99,7 +100,7 @@
                             <div class="card-body card_width">
 
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Training Title
@@ -121,7 +122,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Transcript Status
@@ -132,7 +133,7 @@
                                                         ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
                                                 </a>
                                             </label>
-                                            <ng-select placeholder="Please select Transcript Status"
+                                            <ng-select 
                                                 [items]="transcriptStatusObj" bindLabel="name" bindValue="name"
                                                 formControlName="transcript_status" class="w_100">
                                             </ng-select>
@@ -156,7 +157,7 @@
                             </div>
                             <div class="card-body card_width">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-3">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Certification Vendor
@@ -178,7 +179,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-3">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Certification Title
@@ -190,17 +191,17 @@
                                                 </a>
                                             </label>
                                             <input type="text" class="form-control form_width"
-                                                formControlName="certification_title" />
+                                                formControlName="title" />
                                             <div
-                                                *ngIf="(getReportForm.controls['certification_title'].invalid && (getReportForm.controls['certification_title'].dirty || getReportForm.controls['certification_title'].touched)) || isSubmitted">
+                                                *ngIf="(getReportForm.controls['title'].invalid && (getReportForm.controls['title'].dirty || getReportForm.controls['title'].touched)) || isSubmitted">
                                                 <div class="error_message"
-                                                    *ngIf="getReportForm.controls['certification_title'].errors?.required">
+                                                    *ngIf="getReportForm.controls['title'].errors?.required">
                                                     Certification Title cannot be blank
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-3">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Certification Domain
@@ -222,7 +223,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-3">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Certification Status
@@ -233,7 +234,7 @@
                                                         ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
                                                 </a>
                                             </label>
-                                            <ng-select placeholder="Please select Certification Status"
+                                            <ng-select 
                                                 [items]="certificationStatusObj" bindLabel="name" bindValue="name"
                                                 formControlName="certification_status" class="w_100">
                                             </ng-select>
@@ -249,8 +250,10 @@
                                 </div>
                             </div>
                         </div>
+                        </ng-container>
                     </div>
                 </div>
+                <ng-container *ngIf="getForm">
                 <div class="card">
                     <div class="card-header">
                         <div class="header_div_promt">
@@ -258,22 +261,20 @@
                         </div>
                     </div>
                     <div class="card-body card_width">
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="form-control-label">
                                     Region Name
-
                                 </label>
                                 <ng-select [items]="regionObj" [multiple]="true" (change)="getRegionName($event)"
                                     bindLabel="name" bindValue="name" formControlName="region_name" class="w_100">
                                 </ng-select>
                             </div>
                         </div>
-                        <div class="col-sm-6" *ngIf="isSpecificCountry">
+                        <div class="col-sm-3" *ngIf="isSpecificCountry">
                             <div class="form-group">
                                 <label class="form-control-label">
                                     Specific Country
-
                                 </label>
                                 <ng-select placeholder="Please select Specific Country" [items]="countryObj"
                                     bindLabel="country_name" bindValue="country_name" formControlName="country"
@@ -281,23 +282,29 @@
                                 </ng-select>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="form-control-label">
                                     Business Unit
-
                                 </label>
-                                <ng-select placeholder="Please select Business Unit" [items]="businessUnitsObj"
+                                <ng-select placeholder="Please select Business Unit" [items]="businessUnitsObj" (change)="getOtherBussinessUnit($event)"
                                     bindLabel="team_name" bindValue="team_name" formControlName="business_unit"
                                     class="w_100">
                                 </ng-select>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-3" *ngIf="isOtherBussinessUnit">
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                 Other Business Unit
+                                </label>
+                                <input type="text" class="form-control form_width" formControlName="other_business_unit" />
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="form-control-label">
                                     Management Code
-
                                 </label>
                                 <input type="text" class="form-control form_width" formControlName="management_code" />
                             </div>
@@ -324,49 +331,47 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="radio" name="date" value="last_year" (change)="getDate($event)">
+                                        <input type="radio"  value="last_year" formControlName="date_type" (change)="getDate($event)">
                                         <strong class="font-16">Last year</strong>
 
-                                        <input type="radio" name="date" value="this_year" (change)="getDate($event)">
+                                        <input type="radio"  value="this_year" formControlName="date_type" (change)="getDate($event)">
                                         <strong class="font-16">This year</strong>
 
-                                        <input type="radio" name="date" value="last_month" (change)="getDate($event)">
+                                        <input type="radio"  value="last_month" formControlName="date_type" (change)="getDate($event)">
                                         <strong class="font-16">Last month</strong>
 
-                                        <input type="radio" name="date" value="this_month" (change)="getDate($event)">
+                                        <input type="radio" value="this_month" formControlName="date_type" (change)="getDate($event)">
                                         <strong class="font-16">This month</strong>
 
-                                        <input type="radio" name="date" value="last_week" (change)="getDate($event)">
+                                        <input type="radio"  value="last_week" formControlName="date_type" (change)="getDate($event)">
                                         <strong class="font-16">Last week</strong>
 
-                                        <input type="radio" name="date" value="this_week" (change)="getDate($event)">
+                                        <input type="radio"  value="this_week" formControlName="date_type" (change)="getDate($event)">
                                         <strong class="font-16">This week</strong>
 
-                                        <input type="radio" name="date" value="custom" (change)="getDate($event)">
+                                        <input type="radio" value="custom" formControlName="date_type" (change)="getDate($event)">
                                         <strong class="font-16">Custom date</strong>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label class="form-control-label">
                                             Start Date
-
                                         </label>
-                                        <input type="date" class="form-control form_width"
-                                            formControlName="start_date" />
+                                        <input type="date" class="form-control form_width" 
+                                            formControlName="start_date" [attr.disabled]="addDate ? 'disabled' : null"/>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label class="form-control-label">
                                             End Date
-
                                         </label>
-                                        <input type="date" class="form-control form_width" formControlName="end_date" />
+                                        <input type="date" class="form-control form_width" formControlName="end_date" [min]="getReportForm.controls['start_date'].value" [attr.disabled]="addDate ? 'disabled' : null" />
                                     </div>
                                 </div>
                             </div>
@@ -381,29 +386,26 @@
                     </div>
                     <div class="card-body card_width">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label class="form-control-label">
                                         Contact Person
-
                                     </label>
                                     <input type="text" class="form-control form_width"
                                         formControlName="contact_person" />
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
+                        
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label class="form-control-label">
                                         Report Purpose
-
                                     </label>
                                     <input type="text" class="form-control form_width"
                                         formControlName="report_purpose" />
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label class="form-control-label">
                                         Deadline
@@ -414,7 +416,7 @@
                                                 ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
                                         </a>
                                     </label>
-                                    <input type="date" class="form-control form_width" formControlName="deadline" />
+                                    <input type="date" class="form-control form_width" formControlName="deadline" min="{{minStartDate}}" />
                                     <div
                                         *ngIf="(getReportForm.controls['deadline'].invalid && (getReportForm.controls['deadline'].dirty || getReportForm.controls['deadline'].touched)) || isSubmitted">
                                         <div class="error_message"
@@ -429,21 +431,26 @@
                             <div class="form-group">
                                 <label class="form-control-label">
                                     Attachments
-
                                 </label>
                                 <input type="file" id="reportAttachment" class="form-control form_width"
                                     (change)="handleFileInput($event)" formControlName="attachment" />
+                                 <span class="pt-2" *ngIf="get_report_details.attachUrl">
+                                     Click here to <a href="{{get_report_details.attachUrl}}" target="_blank"
+                                         style="color:#ff7900">View</a>
+                                 </span>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="form-control-label">
                                     Additional Comments
-
                                 </label>
                                 <textarea type="text" class="form-control form_width-textarea"
-                                    formControlName="additional_comment">
+                                    formControlName="additional_comment" maxlength="500" rows="3"
+                                    (keyup)="valueChange()">
                                 </textarea>
+                                <span class="charcter_limit ">{{remainingText}} characters
+                                    remaining</span>
                             </div>
                         </div>
                         <div class="col-sm-12" *ngIf="isRequester">
@@ -467,25 +474,70 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>                     
+                      <div class="row" *ngIf="isRocSubmit()">
+                        <div class="col-sm-6" >
+                            <div class="form-group">
+                                <input type="radio" name="roc_action" value="transfer" (change)="getRocAction($event)">
+                                <strong class="font-16">Transfer to data analyst</strong>
+                                <input type="radio" name="roc_action" value="roc" (change)="getRocAction($event)">
+                                <strong class="font-16">Action By ROC</strong>
+                            </div>
                         </div>
-
+                       </div>
+                       <ng-container *ngIf="isRocAction || isDAaction">
+                        <div class="row" >
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                    Status
+                                </label>
+                                <ng-select (change)="getRocStatus($event)" [items]="statusObj"
+                                    bindLabel="name" bindValue="id" 
+                                    class="w_100">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                   Additional Attachments
+                                </label>
+                                <input type="file" id="reportAttachment" class="form-control form_width"
+                                    (change)="handleAdditionFileInput($event)" formControlName="additional_attachment" />
+                            </div>
+                        </div>
+                       </div>
+                       </ng-container>
+                        <div class="col-sm-12" *ngIf="getComment || isDAaction">
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                   Comments
+                                </label>
+                                <textarea type="text" class="form-control form_width-textarea"
+                                formControlName="status_comment"
+                                >
+                            </textarea>
+                            </div>
+                        </div>
+                    
                     </div>
-
-                </div>
+                </div>  
+            </ng-container>                
             </div>
         </div>
     </form>
-
+    <ng-container *ngIf="getForm">
     <div class="card-footer">
         <button class="btn btn-primary mr-1" (click)="save('pending')" type="submit">
             <i aria-hidden="true" class="fa fa-upload">
             </i> <span class="pl-1"> Submit</span>
         </button>
-        <button class="btn btn-secondary" (click)="save('draft')">Save
+        <button class="btn btn-secondary" *ngIf="isDraft()" (click)="save('draft')">Save
             as draft
         </button>
     </div>
-
+    </ng-container>
     <div class="collapse" id="collapseExample">
         <div class="card card-body req_status-card">
             <div class="card_header reqst_header">

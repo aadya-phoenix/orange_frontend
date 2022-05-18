@@ -102,10 +102,19 @@ export class GetReportService {
     .pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  getBackOfficePublisher(data: any) {
-    const url = `/api/${this.apiVersion}/`;
+  getReportTransfer(data:any){
+    const url = `/api/${this.apiVersion}/get-report/transfer`;
     return this.http
     .post(url, data)
     .pipe(catchError(this.commmonService.Errorhandling));
   }
+
+  getReportFilter(data:any){
+    const url = `/api/${this.apiVersion}/get-report/filter`;
+    return this.http
+    .post(url, data)
+    .pipe(catchError(this.commmonService.Errorhandling));
+  }
+  
+  
 }

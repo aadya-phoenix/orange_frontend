@@ -5,6 +5,9 @@ import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { GetReportService } from 'src/app/shared/services/get-report/get-report.service';
+import { GetReportForwardComponent } from '../get-report-forward/get-report-forward.component';
+import { GetReportPublishComponent } from '../get-report-publish/get-report-publish.component';
+import { GetReportTransferToOtherRocComponent } from '../get-report-transfer-to-other-roc/get-report-transfer-to-other-roc.component';
 
 @Component({
   selector: 'app-get-report-view',
@@ -17,10 +20,11 @@ export class GetReportViewComponent implements OnInit {
   requestdata: any = {};
   getUserrole: any = {};
   getprofileDetails:any = {};
+  public historyList: any;
   dateFormate = dataConstant.dateFormate;
   RoleID = dataConstant.RoleID;
-  isReviewer = false;
-  isPublisher = false;
+  isRoc = false;
+  isDataAnalyst = false;
   isRequester = false;
   GetReportStatus = dataConstant.GetReportStatus;
   constructor(
@@ -33,6 +37,9 @@ export class GetReportViewComponent implements OnInit {
   ) { 
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
+    this.isRoc = this.getUserrole.id == this.RoleID.Roc;
+    this.isDataAnalyst = this.getUserrole.id == this.RoleID.DataAnalyst;
+    this.isRequester = this.getUserrole.id == this.RoleID.RequesterID;
   }
 
   ngOnInit(): void {
@@ -40,6 +47,7 @@ export class GetReportViewComponent implements OnInit {
       const Id = params.get('id');
       this.id = Id ? parseInt(Id) : 0;
       this.getReportDetails();
+      this.getHistory();
     });
   }
 
@@ -48,8 +56,15 @@ export class GetReportViewComponent implements OnInit {
     this.getReportService.getReportDetails(this.id).subscribe(
       (res: any) => {
         this.commonService.hideLoading();
-        if (res.status === 1 && res.message === 'Success') {
+        if (res.status == 1 && res.message == 'Success') {
           this.requestdata = res.data;
+          if(this.requestdata.region_name){
+            this.requestdata.region_name = JSON.parse(this.requestdata.region_name);
+          }
+          if(this.requestdata.attachment){
+            this.requestdata.attachUrl = `${dataConstant.ImageUrl}/${this.requestdata.attachment}`;
+          }
+          
           console.log("res data",this.requestdata)
         }
       },
@@ -59,5 +74,159 @@ export class GetReportViewComponent implements OnInit {
       }
     );
   }
+
+  getHistory(){
+    this.commonService.showLoading();
+    this.getReportService.getReportHistory(this.id).subscribe((res: any) => {
+      this.commonService.hideLoading();
+      if (res && res.status == 1) {
+        this.historyList = res.data;
+      }
+    });
+  }
+
+  updateRequest() {
+    if (this.id) {
+      this.router.navigateByUrl(`/dashboard/olreport/update/${this.id}`);
+    }
+  }
+
+  isUpdate() {
+    if (this.requestdata?.status == this.GetReportStatus.publish ||  (this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status == this.GetReportStatus.pending)){
+      return false;  
+    }
+    if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
+      return false;  
+    }
+    if (this.requestdata?.status == this.GetReportStatus.draft){
+      return true;  
+    }
+    if(this.isRequester && (this.requestdata?.status == this.GetReportStatus.publish || this.requestdata?.status == this.GetReportStatus.pending)){
+     return false;
+    }
+    if(!this.requestdata?.transfer_user_id && this.requestdata?.status == this.GetReportStatus.pending && this.isRequester){
+      return false;
+    }
+    if(this.requestdata?.user_id != this.getprofileDetails.data.id && this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isRoc){
+      return false;
+    }
+    if(this.isRoc && (this.requestdata.user_id == this.getprofileDetails.data.id) && (this.requestdata?.status_show == this.GetReportStatus.submitted)){
+      return false;
+    }
+    return true;
+  }
+
+  isPublish(){
+    if (this.requestdata?.status == this.GetReportStatus.publish|| this.requestdata?.status == this.GetReportStatus.publish || this.requestdata?.status == this.GetReportStatus.draft){
+      return false;  
+    }
+    if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
+      return false;  
+    }
+    if(this.isRequester){
+      return false;
+    }
+    if(this.requestdata.user_id === this.getprofileDetails.data.id && this.requestdata?.status_show === this.GetReportStatus.submitted){
+      return false;
+    }
+    if(this.requestdata?.user_id != this.getprofileDetails.data.id && this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status ){
+      return false;
+    } 
+    if(this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status == this. GetReportStatus.pending){
+      return false;
+    } 
+    return true;
+  }
+  isForward(){
+    if (this.requestdata?.status == this.GetReportStatus.publish|| this.requestdata?.status == this.GetReportStatus.expired || this.requestdata?.status == this.GetReportStatus.reject|| this.requestdata?.status == this.GetReportStatus.draft){
+      return false;  
+    }
+    if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
+      return false;  
+    }
+    if(!this.isRoc){
+      return false;
+    }
+    if(this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status == this. GetReportStatus.pending){
+      return false;
+    }
+  
+    if(this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isRoc){
+      return false;
+    }
+
+    return true;
+  }
+  isReject(){
+    if (this.requestdata?.status == this.GetReportStatus.publish|| this.requestdata?.status == this.GetReportStatus.expired || this.requestdata?.status == this.GetReportStatus.reject){
+      return false;  
+    }
+    if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
+      return false;  
+    }
+    if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id == this.getprofileDetails.data.id){
+      return false;  
+    }
+    if(this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status == this. GetReportStatus.pending){
+      return false;
+    }
+    if(this.isRequester){
+      return false;
+    }
+    if(this.requestdata?.status == this.GetReportStatus.draft){
+      return false;
+    }
+    if(this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isRoc){
+      return false;
+    }
+    return true;
+  }
+
+  isOtherRoc(){
+    if(this.isRoc && this.requestdata?.status_show == this.GetReportStatus.pending){
+      return true;
+    }
+    
+    return false
+  }
+
+  transferToOtherRoc(){
+    const modalRef = this.modalService.open(GetReportTransferToOtherRocComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      data: this.requestdata.id,
+      objectDetail: this.requestdata
+    };
+  }
+
+  forwardRequest(){
+    const modalRef = this.modalService.open(GetReportForwardComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      data: this.requestdata.id,
+      objectDetail: this.requestdata
+    };
+  }
+
+  statusChangeRequest(status:any){
+    const modalRef = this.modalService.open(GetReportPublishComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      title: `Request ${status == this.GetReportStatus.reject ? "Reject" : "Close"}`,
+      status: status,
+      data: this.requestdata.id,
+      objectDetail: this.requestdata
+    };
+  } 
+
 
 }

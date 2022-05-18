@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { GetReportRoutingModule } from './get-report-routing.module';
 import { GetReportListComponent } from './get-report-list/get-report-list.component';
@@ -11,11 +11,16 @@ import { GetReportHistoryComponent } from './get-report-history/get-report-histo
 import { GetReportCreateComponent } from './get-report-create/get-report-create.component';
 import { GetReportCompleteReportComponent } from './get-report-complete-report/get-report-complete-report.component';
 import { GetReportViewComponent } from './get-report-view/get-report-view.component';
+import { GetReportPublishComponent } from './get-report-publish/get-report-publish.component';
+import { GetReportTransferToOtherRocComponent } from './get-report-transfer-to-other-roc/get-report-transfer-to-other-roc.component';
+import { GetReportForwardComponent } from './get-report-forward/get-report-forward.component';
 
 
 @NgModule({
-  declarations: [GetReportListComponent, GetReportHistoryComponent, GetReportCreateComponent, GetReportCompleteReportComponent, GetReportViewComponent],
-  entryComponents:[GetReportHistoryComponent],
+  declarations: [GetReportListComponent, GetReportHistoryComponent, GetReportCreateComponent, GetReportCompleteReportComponent, GetReportViewComponent, GetReportPublishComponent, GetReportTransferToOtherRocComponent, GetReportForwardComponent],
+  providers:[DatePipe],
+  entryComponents:[GetReportHistoryComponent,GetReportForwardComponent,GetReportPublishComponent,
+    GetReportTransferToOtherRocComponent],
   imports: [
     CommonModule,
     GetReportRoutingModule,

@@ -46,7 +46,7 @@
                             <div class="overall_css">
                                 <span class="card_overall">Overall request Status</span>
                                 <div class="d-flex">
-                                    <button class="btn btn-secondary" [routerLink]="['']">
+                                    <button class="btn btn-secondary" [routerLink]="['/dashboard/olreport/view-complete-report']">
                                         <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> View
                                       all activity report
                                       </button>
@@ -83,7 +83,7 @@
                                             class="number_css sub_mitted">{{report_count.submitted?report_count.submitted:0}}</span>
                                     </div>
                                 </div>
-                                <div class="Course_icon_child">
+                                <div class="Course_icon_child" *ngIf="!isRequester">
                                     <div class="alig_dashicon" (click)="showRecords(reportStatus.pending)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des bac_yellow">
@@ -95,7 +95,7 @@
                                             class="number_css ">{{report_count.pending?report_count.pending:0}}</span>
                                     </div>
                                 </div>
-                                <div class="Course_icon_child" >
+                                <div class="Course_icon_child" *ngIf="isRoc">
                                     <div class="alig_dashicon" (click)="showRecords(reportStatus.transferred)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des bac_red">
@@ -107,6 +107,19 @@
                                             class="number_css">{{report_count.transferred?report_count.transferred:0}}</span>
                                     </div>
                                 </div>
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="showRecords(reportStatus.closed)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des cm-learning">
+                                                <img src="../../../../assets/images/icon/check.png" />
+                                            </div>
+                                            <p>Closed</p>
+                                        </div>
+                                        <span
+                                            class="number_css pub_lished">{{report_count.closed?report_count.closed:0}}</span>
+                                    </div>
+                                </div>
+                               
                                
                                 <div class="Course_icon_child">
                                     <div class="alig_dashicon" (click)="showRecords(reportStatus.rejected)">
@@ -228,7 +241,7 @@
                                                 {{ item.title | titlecase }}
                                             </td>
                                             <td  (click)="viewRequest(item)">
-                                                {{ item.report_type_name }}
+                                                {{ item.report_type }}
                                             </td>
                                             <td (click)="viewRequest(item)">
                                                 {{ item && item.user_name ? item.user_name :
@@ -236,7 +249,7 @@
                                             </td>
                                             <td class="text-center">
                                                 <p [ngClass]="item.status">
-                                                    {{ (item.status ? item.status : 'Pending') | titlecase }}
+                                                    {{ (item.status_new ? item.status_new : 'Pending') | titlecase }}
                                                 </p>
                                             </td>
                                             <td (click)="viewRequest(item)">{{ item.created_at | date: dateTimeFormate }}
@@ -244,8 +257,11 @@
                                             <td (click)="viewRequest(item)">
                                                 {{ item.deadline | date: dateFormate }}
                                             </td>
-                                            <td (click)="viewRequest(item)">
-                                                
+                                            <td>
+                                                <a *ngIf="item.status_new == reportStatus.closed"
+                                                href="{{attachUrl+'/'+item.attachment}}">
+                                                    <i class="fa fa-download" aria-hidden="true"></i>
+                                                </a>
                                             </td>
                                             <td>
                                                 <a *ngIf="item.status !== reportStatus.draft" (click)="openModal(item)" class="re_id">
