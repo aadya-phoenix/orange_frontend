@@ -1,1 +1,35 @@
-<p>vendor-management-status works!</p>
+<div class="card mb-0">
+    <div class="card-header color-orange">
+        <div class="d-flex justify-content-between">
+            {{title}}
+            <a (click)="closeModal()"><i class="fa fa-times color-black" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="publishVendorForm">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">
+                        Comments <span class="text-danger-ligth">* </span>
+                    </label>
+                    <textarea class="form-control form_width-textarea mb-2" maxlength="500" rows="3"
+                        formControlName="status_comment" placeholder="Enter Comments" (change)="valueChange()"></textarea>
+                    <span class="charcter_limit ">{{remainingText}} characters
+                        remaining</span>
+                    <div
+                        *ngIf="(publishVendorForm.controls['status_comment'].invalid && (publishVendorForm.controls['status_comment'].dirty || publishVendorForm.controls['status_comment'].touched)) || isSubmitted ">
+                        <div class="error_message"
+                            *ngIf="publishVendorForm.controls['status_comment'].errors?.required">
+                            Comments cannot be blank
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-primary mr-1" type="submit" (click)="publishVendor()">{{status | titlecase}}</button>
+        <button class="btn btn-secondary" type="submit" (click)="closeModal()">Cancel</button>
+    </div>
+</div>

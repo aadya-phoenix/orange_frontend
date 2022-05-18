@@ -138,14 +138,14 @@ export class VendorManagementListComponent implements OnInit {
 
   editRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/vendor/update/${item.id}`);
+      this.router.navigateByUrl(`/dashboard/vendormanagement/update/${item.id}`);
     }
   }
 
   deleteRequest(vendor_id: number){
       Swal.fire({
         title: 'Are you sure want to remove?',
-        text: 'You will not be able to recover this request!',
+        text: 'You will not be able to recover this vendor!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Yes, delete it!',
@@ -158,7 +158,7 @@ export class VendorManagementListComponent implements OnInit {
             this.refreshCourses();
             Swal.fire(
               'Deleted!',
-              'Your request has been deleted.',
+              'Your vendor has been deleted.',
               'success'
             )
           },(err:any)=>{

@@ -114,4 +114,15 @@ export class VendorService {
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  VendorRatingList(vendor_id: any) {
+    const url = `api/${this.apiVersion}/vendor/${vendor_id}/rating`;
+    return this.http.get(url,this.http.headers).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  VendorRatings(data: any) {
+    const url = `api/${this.apiVersion}/vendor/${data.vendor_id}/rating`;
+    delete data.vendor_id;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
 }

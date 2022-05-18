@@ -28,6 +28,7 @@ import { VendorManagementHistoryComponent } from './vendor-management-history/ve
     VendorManagementStatusComponent,
     VendorManagementHistoryComponent
   ],
+  entryComponents:[VendorManagementStatusComponent, VendorManagementHistoryComponent, VendorManagementRatingComponent],
   imports: [
     CommonModule,
     VendorManagementRoutingModule,

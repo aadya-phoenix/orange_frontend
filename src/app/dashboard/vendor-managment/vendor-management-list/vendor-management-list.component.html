@@ -174,6 +174,7 @@
                                             <td (click)="viewRequest(item)">{{ item.training_offer }}
                                             </td>
                                             <td (click)="viewRequest(item)">
+                                                {{item.other_training_offer}}
                                             </td>
                                             <td>
                                                 <a *ngIf="item.status !== vendorStatus.draft" (click)="openModal(item)" class="re_id">
@@ -181,10 +182,6 @@
                                                 </a>
                                             </td>
                                             <td class="text-center">
-                                                <a (click)="copyRequest(item.id)" class="copy_file mr-1" *ngIf="item.status_show === vendorStatus.submitted"
-                                                    data-toggle="tooltip" data-placement="top" title="Copy">
-                                                    <i class="fa fa-files-o" aria-hidden="true"></i>
-                                                </a>
                                                 <a (click)="editRequest(item)"
                                                     *ngIf="item.status_show === vendorStatus.draft || (item.status === vendorStatus.reject && item.user_id === getprofileDetails.data.id)"
                                                     class="copy_file mr-1" data-toggle="tooltip" data-placement="top"

@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="card-body card_width">
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12 col-md-4">
                                             <div class="d-flex align-items-center">
                                                 <div class="form-group w-100">
                                                     <label class="form-control-label">
@@ -85,7 +85,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     Vendor Region<span class="text-danger-ligth">* </span>
@@ -103,7 +105,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12 col-md-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     Vendor location<span class="text-danger-ligth">* </span>
@@ -122,7 +124,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12 col-md-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     Vendor address<span class="text-danger-ligth">* </span>
@@ -138,7 +140,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12 col-md-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     Website<span class="text-danger-ligth">* </span>
@@ -152,9 +154,13 @@
                                                         Website can not be blank
                                                     </div>
                                                 </div>
+                                                <div class="error_message"
+                                                    *ngIf="createVendorForm.controls['website'].errors?.pattern">
+                                                    Website invalid
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12 col-md-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     NFPS entity(Oracle entity)<span class="text-danger-ligth">* </span>
@@ -172,42 +178,48 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-12 col-md-4">
                                             <div class="d-flex align-items-center">
                                                 <div class="form-group w-100">
                                                     <label class="form-control-label">
                                                         Epurchase</label>
-                                                    <p>
-                                                        <label class="toggleSwitch xlarge" onclick="">
-                                                            <input type="checkbox"  formControlName="epurchase"/>
-                                                            <span>
-                                                                <span>NO</span>
-                                                                <span>YES</span>
-                                                            </span>
-                                                            <a></a>
-                                                        </label>
-                                                    </p>
+                                                            <p>
+                                                                <input type="checkbox"  formControlName="epurchase"/>
+                                                            </p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-4">
                                             <div class="d-flex align-items-center">
                                                 <div class="form-group w-100">
-                                                    <label class="form-control-label">
-                                                        Do we have global contact</label>
-                                                    <p>
-                                                        <label class="toggleSwitch xlarge" onclick="">
-                                                            <input type="checkbox" formControlName="global_contract" />
-                                                            <span>
-                                                                <span>NO</span>
-                                                                <span>YES</span>
-                                                            </span>
+                                                        <label>
+                                                            Do we have global contact ?
                                                         </label>
-                                                    </p>
+                                                        <p><input type="checkbox" formControlName="global_contract" /></p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-12 col-md-4" *ngIf="orange_contact">
+                                            <div class="form-group">
+                                                <label class="form-control-label">
+                                                    PD&L/Orange contact<span class="text-danger-ligth">* </span>
+                                                </label>
+                                                <input type="text" placeholder="Enter Orange contact"
+                                                    class="form-control form_width" formControlName="orange_contact" />
+                                                <div
+                                                    *ngIf="(createVendorForm.controls['orange_contact'].invalid && (createVendorForm.controls['orange_contact'].dirty || createVendorForm.controls['orange_contact'].touched)) || isSubmitted">
+                                                    <div class="error_message"
+                                                        *ngIf="createVendorForm.controls['orange_contact'].errors?.required">
+                                                        Orange contact can not be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="row">
+                                        <div class="col-sm-12 col-md-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     Training Offers<span class="text-danger-ligth">* </span>
@@ -226,6 +238,16 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-sm-12 col-md-4" *ngIf="other_training_offer">
+                                            <div class="form-group">
+                                                <label class="form-control-label">
+                                                    Other training offers
+                                                </label>
+                                                <input type="text" placeholder="Enter Orange contact"
+                                                    class="form-control form_width"
+                                                    formControlName="other_training_offer" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -233,88 +255,88 @@
                                 <div class="card-header card_header_vendor">
                                     <strong _ngcontent-jet-c125=""> Vendors Point of contact </strong>
                                 </div>
-                                <!-- <form [formGroup]="createCourceForm"> -->
-                                    <div class="card-body card_width"
+                                <div class="card-body card_width"
                                     *ngFor="let cont of contactFormArray.controls; let i = index">
                                     <div class="card">
-                                    <div class="card-header justify-content-end card_header_vendor">
-                                        <div class="d-flex">
-                                            <button class="btn btn-primary btn_contact mr-1" (click)="addContact()">
-                                                <span class="fon_12">+ Add Contact</span>
-                                            </button>
-                                            <button class="btn btn-secondary btn_contact" (click)="removeContact(cont)">
-                                                <span class="fon_12">-Remove Contact</span>
-                                            </button>
+                                        <div class="card-header justify-content-end card_header_vendor">
+                                            <div class="d-flex">
+                                                <button class="btn btn-primary btn_contact mr-1" (click)="addContact()">
+                                                    <span class="fon_12"><i class="fa fa-plus" aria-hidden="true"></i> Add More Contact</span>
+                                                </button>
+                                                <button class="btn btn-secondary btn_contact"
+                                                    (click)="removeContact(cont)">
+                                                    <span class="fon_12"><i class="fa fa-minus" aria-hidden="true"></i> Remove Contact</span>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row card-body" [formGroupName]="i">
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Contact For <span class="text-danger-ligth">* </span>
-                                                    <a>
-                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                            placement="right"
-                                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                                    </a>
-                                                </label>
-                                                <ng-select placeholder="Please select location"
-                                                    [items]="CCTContactPoint" [multiple]="false" bindLabel="name"
-                                                    bindValue="name" formControlName="contact_for">
-                                                </ng-select>
-                                                <div
-                                                    *ngIf="(contactFormArray.controls[i].controls['contact_for'].invalid && (contactFormArray.controls[i].controls['contact_for'].dirty || contactFormArray.controls[i].controls['contact_for'].touched)) || isSubmitted ">
-                                                    <div class="error_message"
-                                                        *ngIf="contactFormArray.controls[i].controls['contact_for'].errors?.required">
-                                                        Contact For cannot be blank
+                                        <div class="row card-body" [formGroupName]="i">
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">
+                                                        Contact For <span class="text-danger-ligth">* </span>
+                                                        <a>
+                                                            <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                                placement="right"
+                                                                ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
+                                                        </a>
+                                                    </label>
+                                                    <ng-select placeholder="Please select location"
+                                                        [items]="CCTContactPoint" [multiple]="false" bindLabel="name"
+                                                        bindValue="name" formControlName="contact_for">
+                                                    </ng-select>
+                                                    <div
+                                                        *ngIf="(contactFormArray.controls[i].controls['contact_for'].invalid && (contactFormArray.controls[i].controls['contact_for'].dirty || contactFormArray.controls[i].controls['contact_for'].touched)) || isSubmitted ">
+                                                        <div class="error_message"
+                                                            *ngIf="contactFormArray.controls[i].controls['contact_for'].errors?.required">
+                                                            Contact For cannot be blank
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Contact Person <span class="text-danger-ligth">* </span>
-                                                </label>
-                                                <input type="text" placeholder="Enter Contact Person"
-                                                    class="form-control form_width" formControlName="person" />
-                                                <div
-                                                    *ngIf="(contactFormArray.controls[i].controls['person'].invalid && (contactFormArray.controls[i].controls['person'].dirty || contactFormArray.controls[i].controls['person'].touched)) || isSubmitted ">
-                                                    <div class="error_message"
-                                                        *ngIf="contactFormArray.controls[i].controls['person'].errors?.required">
-                                                        Contact Person cannot be blank
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">
+                                                        Contact Person <span class="text-danger-ligth">* </span>
+                                                    </label>
+                                                    <input type="text" placeholder="Enter Contact Person"
+                                                        class="form-control form_width" formControlName="person" />
+                                                    <div
+                                                        *ngIf="(contactFormArray.controls[i].controls['person'].invalid && (contactFormArray.controls[i].controls['person'].dirty || contactFormArray.controls[i].controls['person'].touched)) || isSubmitted ">
+                                                        <div class="error_message"
+                                                            *ngIf="contactFormArray.controls[i].controls['person'].errors?.required">
+                                                            Contact Person cannot be blank
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Email Id <span class="text-danger-ligth">* </span>
-                                                </label>
-                                                <input type="text" placeholder="Enter Email Id"
-                                                    class="form-control form_width" formControlName="email" />
-                                                <div
-                                                    *ngIf="(contactFormArray.controls[i].controls['email'].invalid && (contactFormArray.controls[i].controls['email'].dirty || contactFormArray.controls[i].controls['email'].touched)) || isSubmitted ">
-                                                    <div class="error_message"
-                                                        *ngIf="contactFormArray.controls[i].controls['email'].errors?.required">
-                                                        Email Id cannot be blank
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">
+                                                        Email Id <span class="text-danger-ligth">* </span>
+                                                    </label>
+                                                    <input type="text" placeholder="Enter Email Id"
+                                                        class="form-control form_width" formControlName="email" />
+                                                    <div
+                                                        *ngIf="(contactFormArray.controls[i].controls['email'].invalid && (contactFormArray.controls[i].controls['email'].dirty || contactFormArray.controls[i].controls['email'].touched)) || isSubmitted ">
+                                                        <div class="error_message"
+                                                            *ngIf="contactFormArray.controls[i].controls['email'].errors?.required">
+                                                            Email Id cannot be blank
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Phone Number
-                                                </label>
-                                                <input type="text" placeholder="Enter phone"
-                                                    class="form-control form_width" formControlName="phone" />
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">
+                                                        Phone Number
+                                                    </label>
+                                                    <input type="text" placeholder="Enter phone"
+                                                        class="form-control form_width" formControlName="phone" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             </div>
                             <div class="card">
                                 <div class="card-header">
@@ -327,9 +349,11 @@
                                                 <label class="form-control-label">
                                                     Other Comments<span class="text-danger-ligth">* </span>
                                                 </label>
-                                                <textarea class="form-control form_width-textarea" maxlength="500"
+                                                <textarea class="form-control form_width-textarea mb-2" maxlength="500"
                                                     rows="3" placeholder="Enter  Other Comments"
                                                     formControlName="other_comment" maxlength="500"></textarea>
+                                                    <span class="charcter_limit">{{remainingText}} characters
+                                                        remaining</span>
                                                 <div
                                                     *ngIf="(createVendorForm.controls['other_comment'].invalid && (createVendorForm.controls['other_comment'].dirty || createVendorForm.controls['other_comment'].touched)) || isSubmitted">
                                                     <div class="error_message"

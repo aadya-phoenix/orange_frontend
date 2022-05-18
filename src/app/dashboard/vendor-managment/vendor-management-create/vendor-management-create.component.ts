@@ -19,7 +19,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./vendor-management-create.component.scss']
 })
 export class VendorManagementCreateComponent implements OnInit {
-
   today = new Date();
   minDate = {};
   RoleID = dataConstant.RoleID;
@@ -31,6 +30,8 @@ export class VendorManagementCreateComponent implements OnInit {
   CCTOfferTraining: any = [];
   vendor_id = 0;
   vendor_details: any = {};
+  other_training_offer = false;
+  orange_contact = false;
   preferedInstructor: any = [];
   termsAndCondition: any = [];
   entityList: any = [];
@@ -49,6 +50,7 @@ export class VendorManagementCreateComponent implements OnInit {
   isPublisher = false;
   isRequester = false;
   rejectcomment = "";
+  remainingText = 500;
   backOfficeImage = { image: '', ext: '' };
   isSubmitted = false;
   isCreater = true;
@@ -87,22 +89,45 @@ export class VendorManagementCreateComponent implements OnInit {
       region: new FormControl('', [Validators.required]),
       location: new FormControl('', [Validators.required]),
       address: new FormControl('', [Validators.required]),
-      website: new FormControl(''),
+      website: new FormControl('', [Validators.pattern(new RegExp(
+        `${dataConstant.UrlPattern}`,
+        'i'
+      ))]),
       nfps_entity: new FormControl('', [Validators.required]),
       epurchase: new FormControl('', [Validators.required]),
       global_contract: new FormControl('', [Validators.required]),
-      //orange_contact: new FormControl('', [Validators.required]),
-      // ...(this.isRequester && {
-      //   regional_cordinator: new FormControl('', [Validators.required]),
-      // }),
       training_offer: new FormControl(''),
       other_comment: new FormControl('', [Validators.required]),
       contact: this.formBuilder.array([]),
+      other_training_offer: new FormControl(''),
+    });
+    this.createVendorForm.get("global_contract")?.valueChanges.subscribe(x => {
+      if (x) {
+        this.createVendorForm.addControl("orange_contact", new FormControl('', [Validators.required]))
+        this.orange_contact = true;
+      }
+      else {
+        this.orange_contact = false;
+        this.createVendorForm.removeControl("orange_contact");
+      }
+    });
+    this.createVendorForm.get("training_offer")?.valueChanges.subscribe(x => {
+      if (_.includes(x, 'Others')) {
+        this.other_training_offer = true;
+      }
+      else {
+        this.other_training_offer = false;
+        this.createVendorForm.controls.other_training_offer.setValue(null);
+      }
+    });
+    this.createVendorForm.get("other_comment")?.valueChanges.subscribe(() => {
+      this.valueChange();
     });
   }
 
   async ngOnInit() {
     this.getCordinators();
+
   }
 
   get contactFormArray(): FormArray {
@@ -201,15 +226,23 @@ export class VendorManagementCreateComponent implements OnInit {
 
 
   addContact() {
-    this.contactFormArray.push(this.newContactData(0,this.contactFormArray.length));
+    this.contactFormArray.push(this.newContactData(0, this.contactFormArray.length));
   }
 
   removeContact(contact: any) {
-    if(this.contactFormArray.length > 1){
+    if (this.contactFormArray.length > 1) {
       this.contactFormArray.removeAt(this.contactFormArray.controls.findIndex(x => x.value.index === contact?.value?.index));
     }
   }
 
+  valueChange() {
+    if (this.createVendorForm.value.other_comment) {
+      this.remainingText = 500 - this.createVendorForm.value.other_comment.length;
+    }
+    else {
+      this.remainingText = 500;
+    }
+  }
 
   getBackOfficeDetails() {
     this.commonService.showLoading();
@@ -226,8 +259,14 @@ export class VendorManagementCreateComponent implements OnInit {
           this.createVendorForm.controls.nfps_entity.setValue(JSON.parse(this.vendor_details.nfps_entity));
           this.createVendorForm.controls.epurchase.setValue(this.vendor_details.epurchase);
           this.createVendorForm.controls.global_contract.setValue(this.vendor_details.global_contract);
+          if (this.vendor_details.global_contract) {
+            this.createVendorForm.addControl("orange_contact", new FormControl('', [Validators.required]))
+            this.createVendorForm.controls.orange_contact.setValue(this.vendor_details.orange_contact);
+            this.orange_contact = true;
+          }
           this.createVendorForm.controls.training_offer.setValue(JSON.parse(this.vendor_details.training_offer));
           this.createVendorForm.controls.other_comment.setValue(this.vendor_details.other_comment);
+          this.createVendorForm.controls.other_training_offer.setValue(this.vendor_details.other_training_offer);
           this.vendor_details.contact.forEach((element: any, index: any) => {
             const formControl = this.newContactData(element.id, index);
             formControl.controls.contact_for.setValue(element.contact_for);
@@ -236,6 +275,7 @@ export class VendorManagementCreateComponent implements OnInit {
             formControl.controls.phone.setValue(element.phone);
             this.contactFormArray.push(formControl);
           });
+          this.valueChange();
         }
       },
       (err: any) => {
@@ -251,77 +291,6 @@ export class VendorManagementCreateComponent implements OnInit {
       this.createVendorForm.controls.last_name.setValue(item.last_name);
       this.createVendorForm.controls.cuid.setValue(item.department_manager_cuid);
     }
-  }
-
-
-  agreeChange() {
-    // if (this.createVendorForm.controls.agree.value) {
-    //   const modalRef = this.modalService.open(BackOfficeHistoryComponent, {
-    //     centered: true,
-    //     windowClass: 'alert-popup',
-    //   });
-    //   modalRef.componentInstance.props = {
-    //     title: '',
-    //     objectDetail: this.termsAndCondition.find((x: { id: any; }) => x.id === this.createVendorForm.value.learning_role),
-    //     type: 'agree'
-    //   };
-    // }
-  }
-
-  isDraft() {
-    if (this.vendor_details?.status === this.BackOfficeStatus.publish || this.vendor_details?.status === this.BackOfficeStatus.expired || this.vendor_details?.status === this.BackOfficeStatus.pending || this.vendor_details?.status === this.BackOfficeStatus.reject) {
-      return false;
-    }
-    if (this.getprofileDetails.data.id != this.vendor_details?.user_id && this.vendor_details?.transfer_user_id && !this.vendor_details?.publisher_status && this.isReviewer) {
-      return false;
-    }
-    return true;
-  }
-
-  isReject() {
-    if (this.vendor_details?.status === this.BackOfficeStatus.publish || this.vendor_details?.status === this.BackOfficeStatus.expired || this.vendor_details?.status === this.BackOfficeStatus.reject) {
-      return false;
-    }
-    if (this.isRequester || !this.vendor_details.id) {
-      return false;
-    }
-    if (this.vendor_details?.status === this.BackOfficeStatus.draft) {
-      return false;
-    }
-    if (this.vendor_details?.transfer_user_id && !this.vendor_details?.publisher_status && this.isReviewer) {
-      return false;
-    }
-    return true;
-  }
-
-  isPublish() {
-    if (this.vendor_details?.status === this.BackOfficeStatus.publish || this.vendor_details?.status === this.BackOfficeStatus.expired) {
-      return false;
-    }
-    if (!this.isPublisher) {
-      return false;
-    }
-    if (this.getprofileDetails.data.id != this.vendor_details?.user_id && this.vendor_details?.transfer_user_id && !this.vendor_details?.publisher_status && this.isReviewer) {
-      return false;
-    }
-    return true;
-  }
-
-  isSubmit() {
-    if (this.vendor_details?.status === this.BackOfficeStatus.publish || this.vendor_details?.status === this.BackOfficeStatus.expired) {
-      return false;
-    }
-    if (this.getprofileDetails.data.id === this.vendor_details?.user_id && this.vendor_details?.status === this.BackOfficeStatus.pending) {
-      return false;
-    }
-    if (this.isPublisher) {
-      return false;
-    }
-    if (this.getprofileDetails.data.id != this.vendor_details?.user_id && this.vendor_details?.transfer_user_id && !this.vendor_details?.publisher_status && this.isReviewer) {
-      return false;
-    }
-
-    return true;
   }
 
   statusChangeRequest(status: any) {
@@ -343,7 +312,6 @@ export class VendorManagementCreateComponent implements OnInit {
     if (this.createVendorForm.invalid) {
       return;
     }
-    debugger;
     const body = this.createVendorForm.value;
     body.status = status;
     this.saveData(body);
@@ -356,7 +324,7 @@ export class VendorManagementCreateComponent implements OnInit {
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Vendor', 'Successfully Saved.');
-          this.router.navigateByUrl(`/dashboard/back-office/view/${res.data.id}`);
+          this.router.navigateByUrl(`/dashboard/vendormanagement/view/${res.data.id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();
@@ -371,7 +339,7 @@ export class VendorManagementCreateComponent implements OnInit {
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Vendor', 'Successfully Saved.');
-          this.router.navigateByUrl(`/dashboard/back-office/view/${this.vendor_id}`);
+          this.router.navigateByUrl(`/dashboard/vendormanagement/view/${this.vendor_id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();
