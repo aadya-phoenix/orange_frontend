@@ -183,12 +183,15 @@ export class GetReportCreateComponent implements OnInit {
     }
 
     if(selectedDate == 'last_week'){
-      let target = 1
-      this.selectedStartDate = this.today;
-      let newStartDate=this.datepipe.transform(this.selectedStartDate.setDate(this.selectedStartDate.getDate() - ( this.selectedStartDate.getDay() == target ? 7 : (this.selectedStartDate.getDay() + (7 - target)) % 7 )),'yyyy-MM-dd');
-      this.getReportForm.controls.start_date.setValue(newStartDate);
-      this.today =new Date();
-     this.selectedEndDate = this.datepipe.transform(new Date(this.today.getFullYear(),this.today.getMonth(),this.selectedStartDate.getDate()+6),'yyyy-MM-dd');
+      var dateNow = new Date();
+      var firstDayOfTheWeek = (dateNow.getDate() - dateNow.getDay()) + 1; 
+      var lastDayOfTheWeek = firstDayOfTheWeek + 6;
+      var firstDayOfLastWeek = new Date(dateNow.setDate(firstDayOfTheWeek - 7)) as any;
+      var lastDayOfLastWeek = new Date(dateNow.setDate(lastDayOfTheWeek - 7)) as any;
+      this.selectedStartDate = this.datepipe.transform(firstDayOfLastWeek,'yyyy-MM-dd');
+      this.getReportForm.controls.start_date.setValue(this.selectedStartDate);
+
+      this.selectedEndDate = this.datepipe.transform(lastDayOfLastWeek,'yyyy-MM-dd');
       this.getReportForm.controls.end_date.setValue(this.selectedEndDate);
       this.addDate = true;
     }
@@ -426,12 +429,22 @@ export class GetReportCreateComponent implements OnInit {
     }
   }
 
-  valueChange() {
-    if (this.getReportForm.value.additional_comment) {
-      this.remainingText = 500 - this.getReportForm.value.additional_comment.length;
+  valueChange(status:string) {
+    if(status == 'comment'){
+      if (this.getReportForm.value.additional_comment) {
+        this.remainingText = 500 - this.getReportForm.value.additional_comment.length;
+      }
+      else {
+        this.remainingText = 500;
+      }
     }
-    else {
-      this.remainingText = 500;
+    if(status == 'status_comment'){
+      if (this.getReportForm.value.status_comment) {
+        this.remainingText = 500 - this.getReportForm.value.status_comment.length;
+      }
+      else {
+        this.remainingText = 500;
+      }
     }
   }
 
