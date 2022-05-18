@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { BackOfficeListComponent } from './back-office-list/back-office-list.component';
 import { BackOfficeRoutingModule } from './back-office-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -28,6 +28,7 @@ import { BackOfficeTransferToOtherRocComponent } from './back-office-transfer-to
     BackOfficeViewReportComponent,
     BackOfficeTransferToOtherRocComponent,
   ],
+  providers:[DatePipe],
   entryComponents:[BackOfficeHistoryComponent, BackOfficePublishComponent, BackOfficeForwardComponent, BackOfficeTransferToOtherRocComponent],
   imports: [
     CommonModule,

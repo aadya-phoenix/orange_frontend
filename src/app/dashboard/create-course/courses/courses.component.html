@@ -321,7 +321,7 @@
                           Pending
                         </span>
                         <p *ngIf="cource.status" [ngClass]="cource.status" class="text_yellow">
-                          {{ cource.status | titlecase }}
+                          {{ cource.status_new | titlecase }}
                         </p>
 
                       </td>
@@ -331,10 +331,7 @@
                             data-toggle="tooltip" data-placement="top" title="Copy">
                             <i class="fa fa-files-o" aria-hidden="true"></i>
                           </a>
-                          <a *ngIf="cource.learning_type == '1'" class="copy_file mr-1" data-toggle="tooltip"
-                            data-placement="top" title="Open Course Session">
-                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                          </a>
+                          
                           <a *ngIf="cource.status=='draft'" (click)="editRequest(cource)" class="copy_file mr-1"
                             data-toggle="tooltip" data-placement="top" title="Edit">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -353,7 +350,10 @@
                             data-placement="top" title="View">
                             <i class="fa fa-eye" aria-hidden="true"></i>
                           </a>
-
+                          <a *ngIf="cource.learning_type == '1' && cource.status == 'publish'" class="copy_file mr-1" data-toggle="tooltip"
+                          data-placement="top" title="Open Course Session">
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </a>
                         </div>
                       </td>
 
@@ -455,7 +455,7 @@
                       <option value="pending">Pending</option>
                       <option value="submit">Submitted</option>
                       <option value="draft">Draft</option>
-                      <option value="close">Closed</option>
+                      <option value="close">Published</option>
                       <option value="reject">Rejected</option>
                     </select>
                   </div>
@@ -561,7 +561,7 @@
                           Pending
                         </span>
                         <p *ngIf="course.status" [ngClass]="course.status" class="text_yellow">
-                          {{ course.status | titlecase }}
+                          {{ course.status_new | titlecase }}
                         </p>
 
                       </td>
@@ -570,10 +570,6 @@
                           <a *ngIf="course.status=='submit'" (click)="copyRequest(course)" class="copy_file mr-1"
                             data-toggle="tooltip" data-placement="top" title="Copy">
                             <i class="fa fa-files-o" aria-hidden="true"></i>
-                          </a>
-                          <a *ngIf="course.learning_type == '1'" class="copy_file mr-1" data-toggle="tooltip"
-                            data-placement="top" title="Open Course Session">
-                            <i class="fa fa-calendar" aria-hidden="true"></i>
                           </a>
                           <a *ngIf="course.status=='draft'" (click)="editRequest(course)" class="copy_file mr-1"
                             data-toggle="tooltip" data-placement="top" title="Edit">
@@ -593,7 +589,10 @@
                             data-placement="top" title="View">
                             <i class="fa fa-eye" aria-hidden="true"></i>
                           </a>
-
+                          <a *ngIf="course.learning_type == '1' && course.status == 'publish'" class="copy_file mr-1" data-toggle="tooltip"
+                          data-placement="top" title="Open Course Session">
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </a>
                         </div>
                       </td>
                     </tr>

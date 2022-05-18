@@ -6,8 +6,10 @@ import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive'
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { ViewHistoryComponent } from '../view-history/view-history.component';
-import * as XLSX from 'xlsx';
 import * as _ from 'lodash';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
+import Swal from 'sweetalert2';
+import { CommonService } from 'src/app/shared/services/common/common.service';
 
 @Component({
   selector: 'app-view-complete-report',
@@ -75,7 +77,8 @@ export class ViewCompleteReportComponent implements OnInit {
     private courceService: CourcesService,
     private authService: AuthenticationService,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private commonService: CommonService
   ) {
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
@@ -464,13 +467,32 @@ export class ViewCompleteReportComponent implements OnInit {
     this.addDate = null;
   }
   exportToExcel(): void {
-    console.log("excel call");
-    let element = document.getElementById("excel-table");
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    XLSX.writeFile(wb, this.fileName);
+    if (this.filterForm.value.reporting_period) {
+      this.filterForm.value.start_date = '';
+      this.filterForm.value.end_date = '';
+    }
+    const data = this.filterForm.value;
+    data.type = dataConstant.ExporType.course;
+    this.commonService.showLoading();
+    this.commonService.exportAPI(data).subscribe(
+      (res: any) => {
+        if(res.status === 1){
+          window.open(`${dataConstant.ImageUrl}/${res.data.url}`);
+        }
+        else{
+          Swal.fire(
+            'Information!',
+            res.message,
+            'warning'
+          )
+        }
+        this.commonService.hideLoading();
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        console.log(err);
+      }
+    );
   }
 
 }

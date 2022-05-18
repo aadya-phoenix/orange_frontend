@@ -581,12 +581,15 @@
                                             <div class="dollar_div">
                                             <label>€</label>
                                               <input type="text"  formControlName="training_cost">
-                                              </div>                                              
+                                              </div>  
+                                              <div class="error_message"
+                                                *ngIf="metadataArray.controls[i].controls['training_cost'].invalid && (metadataArray.controls[i].controls['training_cost'].dirty || metadataArray.controls[i].controls['training_cost'].touched)">
+                                                Only Numerics and comma allowed.</div>                                            
                                                <p class="text_black">
                                                     <b class="text_orange">Note</b>The training cost will not be displayed on the course page in the Orange Learning catalog.
                                                     The training cost will only be displayed in the corresponding session(s) of the course.
                                                 </p>
-
+                                                
                                         </div>
                                     </div>
                                     <!--col-->

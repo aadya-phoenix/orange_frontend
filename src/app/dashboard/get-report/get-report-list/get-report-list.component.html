@@ -7,10 +7,9 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/3.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="breade_text_span1">Promote on Carousel</span>
+                        <span class="breade_text_span1">Get a report</span>
                         <span class="divider"></span>
-                        <span class="breade_text_span">Request the creation of a new entry in the Orange Learning
-                            Carousel</span>
+                        <span class="breade_text_span">Request a report, this is your one stop shop for all your reporting needs.</span>
                     </div>
                 </div>
             </div>
@@ -30,7 +29,7 @@
                             <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
                         </li>
                         <li>
-                            <span class="text_white span_dis">Create new Carousel</span>
+                            <span class="text_white span_dis">Get a report</span>
                         </li>
                     </ol>
                 </div>
@@ -47,12 +46,12 @@
                             <div class="overall_css">
                                 <span class="card_overall">Overall request Status</span>
                                 <div class="d-flex">
-                                    <button class="btn btn-secondary" [routerLink]="['/dashboard/olcarousel/view-complete-report']">
+                                    <button class="btn btn-secondary" [routerLink]="['']">
                                         <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> View
                                       all activity report
                                       </button>
                                     <button class="btn btn-primary ml-1"
-                                        [routerLink]="['/dashboard/olcarousel/create']">
+                                        [routerLink]="['/dashboard/olreport/create']">
                                         <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1"> New
                                             request</span>
                                     </button>
@@ -62,18 +61,18 @@
                         <div class="card-body card_course_body">
                             <div class="Course_icon_parent" data-aos="fade-right">
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(carouselStatus.draft)">
+                                    <div class="alig_dashicon" (click)="showRecords(reportStatus.draft)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-draft">
                                                 <img src="../../../../assets/images/icon/drafts.png" />
                                             </div>
                                             <p>Draft</p>
                                         </div>
-                                        <span class="number_css">{{carousel_count.draft?carousel_count.draft:0}}</span>
+                                        <span class="number_css">{{report_count.draft?report_count.draft:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(carouselStatus.submitted)">
+                                    <div class="alig_dashicon" (click)="showRecords(reportStatus.submitted)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-submit">
                                                 <img src="../../../../assets/images/icon/closed.png" />
@@ -81,11 +80,11 @@
                                             <p>Submitted</p>
                                         </div>
                                         <span
-                                            class="number_css sub_mitted">{{carousel_count.submitted?carousel_count.submitted:0}}</span>
+                                            class="number_css sub_mitted">{{report_count.submitted?report_count.submitted:0}}</span>
                                     </div>
                                 </div>
-                                <div class="Course_icon_child" *ngIf="isReviewer || isPublisher">
-                                    <div class="alig_dashicon" (click)="showRecords(carouselStatus.pending)">
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="showRecords(reportStatus.pending)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des bac_yellow">
                                                 <img src="../../../../assets/images/icon/pending.png" />
@@ -93,11 +92,11 @@
                                             <p>Pending</p>
                                         </div>
                                         <span
-                                            class="number_css ">{{carousel_count.pending?carousel_count.pending:0}}</span>
+                                            class="number_css ">{{report_count.pending?report_count.pending:0}}</span>
                                     </div>
                                 </div>
-                                <div class="Course_icon_child" *ngIf="isReviewer">
-                                    <div class="alig_dashicon" (click)="showRecords(carouselStatus.transferred)">
+                                <div class="Course_icon_child" >
+                                    <div class="alig_dashicon" (click)="showRecords(reportStatus.transferred)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des bac_red">
                                                 <img src="../../../../assets/images/icon/transfer.png" />
@@ -105,23 +104,12 @@
                                             <p>Forwarded</p>
                                         </div>
                                         <span
-                                            class="number_css">{{carousel_count.transferred?carousel_count.transferred:0}}</span>
+                                            class="number_css">{{report_count.transferred?report_count.transferred:0}}</span>
                                     </div>
                                 </div>
+                               
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(carouselStatus.closed)">
-                                        <div class="sub-child-dashicon">
-                                            <div class="fa-icons-des cm-learning">
-                                                <img src="../../../../assets/images/icon/check.png" />
-                                            </div>
-                                            <p>Active in Orange Learning</p>
-                                        </div>
-                                        <span
-                                            class="number_css In_Active_Learning">{{carousel_count.closed?carousel_count.closed:0}}</span>
-                                    </div>
-                                </div>
-                                <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(carouselStatus.rejected)">
+                                    <div class="alig_dashicon" (click)="showRecords(reportStatus.rejected)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-reject">
                                                 <img src="../../../../assets/images/icon/reject.png" />
@@ -129,23 +117,12 @@
                                             <p>Rejected</p>
                                         </div>
                                         <span
-                                            class="number_css">{{carousel_count.rejected?carousel_count.rejected:0}}</span>
+                                            class="number_css">{{report_count.rejected?report_count.rejected:0}}</span>
                                     </div>
                                 </div>
+                               
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(carouselStatus.expired)">
-                                        <div class="sub-child-dashicon">
-                                            <div class="fa-icons-des cm-expire">
-                                                <img src="../../../../assets/images/icon/expired.png" />
-                                            </div>
-                                            <p>Expired</p>
-                                        </div>
-                                        <span
-                                            class="number_css">{{carousel_count.expired?carousel_count.expired:0}}</span>
-                                    </div>
-                                </div>
-                                <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(carouselStatus.total)">
+                                    <div class="alig_dashicon" (click)="showRecords(reportStatus.total)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-all">
                                                 <img src="../../../../assets/images/icon/viewall.png" />
@@ -153,7 +130,7 @@
 
                                             <p>View All</p>
                                         </div>
-                                        <span class="number_css">{{carousel_count.total?carousel_count.total:0}}</span>
+                                        <span class="number_css">{{report_count.total?report_count.total:0}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -197,69 +174,97 @@
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
-                                            <th sortable="user_name" (sort)="onSort($event)">
+                                            <th sortable="training_title" (sort)="onSort($event)">
+                                                Training Title
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="report_type" (sort)="onSort($event)">
+                                                Report Type
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="requester_name" (sort)="onSort($event)">
                                                 Requester Name
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
-
-                                            <th sortable="expiry_date" (sort)="onSort($event)">
-                                                Expiry Date<i class="fa fa-long-arrow-up arrow_css"
-                                                    aria-hidden="true"></i>
-                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
-                                            </th>
-                                            <th sortable="publication_date" (sort)="onSort($event)">
-                                                Publish Date<i class="fa fa-long-arrow-up arrow_css"
-                                                    aria-hidden="true"></i>
-                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
-                                            </th>
-
-                                            <th sortable="created_at" (sort)="onSort($event)">
-                                                Created Date
+                                            <th sortable="status" (sort)="onSort($event)">
+                                                Status
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
-                                            <th class="text-center">History</th>
-                                            <th class="text-center">Status</th>
+                                            <th sortable="requested_date" (sort)="onSort($event)">
+                                                Requested Date
+                                                <i class="fa fa-long-arrow-up arrow_css"
+                                                    aria-hidden="true"></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
+                                            </th>
+                                            <th sortable="deadline" (sort)="onSort($event)">
+                                                Deadline
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="download_report" (sort)="onSort($event)">
+                                                Download Report
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="history" (sort)="onSort($event)">
+                                                History
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>                                           
                                             <th class="text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let item of carouselListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber }"
+                                        <tr *ngFor="let item of reportListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber }"
                                             class="text-center bac_hover-table font-12">
-                                            <td class="request_id" (click)="viewRequest(item)">{{ item.request_id }}
+                                            <td class="request_id" (click)="viewRequest(item)">
+                                                {{ item.request_id }}
                                             </td>
-                                            <td (click)="viewRequest(item)">{{ item && item.user_name ? item.user_name :
-                                                "-" }}</td>
-                                            <td (click)="viewRequest(item)">{{ item.publication_date | date: dateFormate }}
+                                            <td  (click)="viewRequest(item)">
+                                                {{ item.title | titlecase }}
                                             </td>
-                                            <td (click)="viewRequest(item)">{{ item.expiry_date | date: dateFormate }}
+                                            <td  (click)="viewRequest(item)">
+                                                {{ item.report_type_name }}
+                                            </td>
+                                            <td (click)="viewRequest(item)">
+                                                {{ item && item.user_name ? item.user_name :
+                                                "-" }}
+                                            </td>
+                                            <td class="text-center">
+                                                <p [ngClass]="item.status">
+                                                    {{ (item.status ? item.status : 'Pending') | titlecase }}
+                                                </p>
                                             </td>
                                             <td (click)="viewRequest(item)">{{ item.created_at | date: dateTimeFormate }}
                                             </td>
+                                            <td (click)="viewRequest(item)">
+                                                {{ item.deadline | date: dateFormate }}
+                                            </td>
+                                            <td (click)="viewRequest(item)">
+                                                
+                                            </td>
                                             <td>
-                                                <a *ngIf="item.status !== carouselStatus.draft" (click)="openModal(item)" class="re_id">
+                                                <a *ngIf="item.status !== reportStatus.draft" (click)="openModal(item)" class="re_id">
                                                     View
                                                 </a>
                                             </td>
                                             <td class="text-center">
-                                                <p [ngClass]="item.status">
-                                                    {{ (item.status_new ? item.status_new : 'Pending') | titlecase }}
-                                                </p>
-                                            </td>
-                                            <td class="text-center">
-                                                <a (click)="copyRequest(item.id)" class="copy_file mr-1" *ngIf="item.status_show === carouselStatus.submitted"
+                                                <a (click)="copyRequest(item.id)" class="copy_file mr-1" *ngIf="item.status_show === reportStatus.submitted"
                                                     data-toggle="tooltip" data-placement="top" title="Copy">
                                                     <i class="fa fa-files-o" aria-hidden="true"></i>
                                                 </a>
                                                 <a (click)="editRequest(item)"
-                                                    *ngIf="item.status_show === carouselStatus.draft || (item.status === carouselStatus.reject && item.user_id === getprofileDetails.data.id)"
+                                                    *ngIf="item.status_show === reportStatus.draft || (item.status === reportStatus.reject && item.user_id === getprofileDetails.data.id)"
                                                     class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                     title="Edit">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
                                                 <a (click)="deleteRequest(item.id)"
-                                                    *ngIf="item.status_show === carouselStatus.draft"
+                                                    *ngIf="item.status_show === reportStatus.draft"
                                                     class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                     title="Delete">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
@@ -278,9 +283,9 @@
                                     <p class="cm-pagination-fotter">Showing {{(pagination.pageSize *
                                         (pagination.pageNumber - 1)) + 1}} to
                                         {{(this.pagination.pageSize * this.pagination.pageNumber) >
-                                        this.carouselListToShow?.length ? this.carouselListToShow?.length :
+                                        this.reportListToShow?.length ? this.reportListToShow?.length :
                                         this.pagination.pageSize * this.pagination.pageNumber}} of
-                                        {{this.carouselListToShow?.length}} entries</p>
+                                        {{this.reportListToShow?.length}} entries</p>
                                 </div>
                                 <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                             </div>
