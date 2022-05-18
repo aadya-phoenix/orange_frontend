@@ -447,7 +447,7 @@
                                 </label>
                                 <textarea type="text" class="form-control form_width-textarea"
                                     formControlName="additional_comment" maxlength="500" rows="3"
-                                    (keyup)="valueChange()">
+                                    (keyup)="valueChange('comment')">
                                 </textarea>
                                 <span class="charcter_limit ">{{remainingText}} characters
                                     remaining</span>
@@ -515,9 +515,11 @@
                                    Comments
                                 </label>
                                 <textarea type="text" class="form-control form_width-textarea"
-                                formControlName="status_comment"
-                                >
+                                formControlName="status_comment" maxlength="500" rows="3"
+                                (keyup)="valueChange('status_comment')">
                             </textarea>
+                            <span class="charcter_limit ">{{remainingText}} characters
+                                remaining</span>
                             </div>
                         </div>
                     
