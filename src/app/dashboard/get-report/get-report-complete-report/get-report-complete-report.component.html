@@ -2,7 +2,7 @@
     <app-header></app-header>
 
     <div class="breadcrumbs cm_breadcums">
-        <div class="col-sm-8">
+        <div class="col-sm-7">
             <div class="page-header float-left bac_trasparent">
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/3.jpg" class="home_Css_img" />
@@ -16,7 +16,7 @@
 
         </div>
 
-        <div class="col-sm-4 float-right">
+        <div class="col-sm-5 float-right">
             <div class="page-header float-right bac_trasparent">
                 <div class="page-title d-flex end_just">
                     <ol class="breadcrumb text-right bac_trasparent">
@@ -29,13 +29,85 @@
                             <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
                         </li>
                         <li>
-                            <span class="text_white span_dis">Get a report</span>
+                            <a [routerLink]="['/dashboard/olreport']" class="text_white span_dis">Create new
+                                Get a Report</a>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">View All Activity Report</span>
+
                         </li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
+
+    <form [formGroup]="filterForm">
+        <div class="content mt-3">
+            <div class="animated fadeIn">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="card">
+                            <div class="card-body card_padding">
+                                <div class="row col_width_20 ">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Start Date
+                                            </label>
+                                            <input type="date" class="form-control form_width"
+                                                formControlName="start_date" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">End Date
+                                            </label>
+                                            <input type="date" class="form-control form_width"
+                                                formControlName="end_date" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Reporting Period
+                                            </label>
+                                            <select class="form-control form_width" formControlName="reporting_period" [attr.disabled]="addDate ? 'disabled' : null">
+                                                <option value="">Please select</option>
+                                                <option value="7">Last 7 days</option>
+                                                <option value="30">Last 30 days</option>
+                                                <option value="60">Last 60 days</option>
+                                                <option value="90">Last 90 days</option>
+                                                <option value="All">All time</option>
+
+                                            </select>
+                                        </div>
+                                  </div>
+                                        <div *ngIf="!isRequester" class="col-sm-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Roc
+                                                </label>
+                                                <select class="form-control form_width" formControlName="roc">
+                                                    <option value="">Please select</option>
+                                                    <option *ngFor="let item of rocObj" [value]="item.id">
+                                                        {{ item.first_name + " " + item.last_name }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-center">
+                                    <button class="btn btn-secondary mr-1" (click)="reset()">Reset</button>
+                                    <button class="btn btn-primary" (click)="filterData()">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
     <!-- Button trigger modal -->
     <div class="content mt-2">
         <div class="animated fadeIn">
@@ -44,18 +116,7 @@
                     <div class="card">
                         <div class="card-header cm-card-header">
                             <div class="overall_css">
-                                <span class="card_overall">Overall request Status</span>
-                                <div class="d-flex">
-                                    <button class="btn btn-secondary" [routerLink]="['']">
-                                        <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> View
-                                      all activity report
-                                      </button>
-                                    <button class="btn btn-primary ml-1"
-                                        [routerLink]="['/dashboard/olreport/create']">
-                                        <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1"> New
-                                            request</span>
-                                    </button>
-                                </div>
+                                <span class="card_overall">All request Report</span>
                             </div>
                         </div>
                         <div class="card-body card_course_body">
@@ -83,7 +144,7 @@
                                             class="number_css sub_mitted">{{report_count.submitted?report_count.submitted:0}}</span>
                                     </div>
                                 </div>
-                                <div class="Course_icon_child">
+                                <div class="Course_icon_child" *ngIf="!isRequester">
                                     <div class="alig_dashicon" (click)="showRecords(reportStatus.pending)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des bac_yellow">
@@ -95,7 +156,7 @@
                                             class="number_css ">{{report_count.pending?report_count.pending:0}}</span>
                                     </div>
                                 </div>
-                                <div class="Course_icon_child" >
+                                <div class="Course_icon_child" *ngIf="isRoc">
                                     <div class="alig_dashicon" (click)="showRecords(reportStatus.transferred)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des bac_red">
@@ -105,6 +166,18 @@
                                         </div>
                                         <span
                                             class="number_css">{{report_count.transferred?report_count.transferred:0}}</span>
+                                    </div>
+                                </div>
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="showRecords(reportStatus.closed)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des cm-learning">
+                                                <img src="../../../../assets/images/icon/check.png" />
+                                            </div>
+                                            <p>Closed</p>
+                                        </div>
+                                        <span
+                                            class="number_css pub_lished">{{report_count.closed?report_count.closed:0}}</span>
                                     </div>
                                 </div>
                                
@@ -145,7 +218,6 @@
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-12">
-
                     <div class="card">
                         <div class="card-header cm-card-header">
                             <div class="overall_css">
@@ -190,12 +262,12 @@
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
                                             <th sortable="user_name" (sort)="onSort($event)">
-                                                Training Title
+                                                Report Type
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
                                             <th sortable="user_name" (sort)="onSort($event)">
-                                                Certification Title
+                                                 Title
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
@@ -204,12 +276,6 @@
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
-                                            <th sortable="user_name" (sort)="onSort($event)">
-                                                Report Type
-                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
-                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
-                                            </th>
-
                                            
                                             <th sortable="publication_date" (sort)="onSort($event)">
                                                 Modified Date<i class="fa fa-long-arrow-up arrow_css"
@@ -245,27 +311,12 @@
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
-
-                                            <th sortable="created_at" (sort)="onSort($event)">
-                                                Process Date
-                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
-                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
-                                            </th>
-                                            
-                                            <th class="text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let item of reportListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber }"
                                             class="text-center bac_hover-table font-12">
                                             <td class="request_id" (click)="viewRequest(item)">{{ item.request_id }}
-                                            </td>
-                                            <td (click)="viewRequest(item)">{{ item && item.user_name ? item.user_name :
-                                                "-" }}</td>
-                                            <td (click)="viewRequest(item)">{{ item.publication_date | date: dateFormate }}
-                                            </td>
-                                            
-                                            <td (click)="viewRequest(item)">{{ item.created_at | date: dateTimeFormate }}
                                             </td>
                                             <td>
                                                 <a *ngIf="item.status !== reportStatus.draft" (click)="openModal(item)" class="re_id">
@@ -278,26 +329,29 @@
                                                 </p>
                                             </td>
                                             <td class="text-center">
-                                                <a (click)="copyRequest(item.id)" class="copy_file mr-1" *ngIf="item.status_show === reportStatus.submitted"
-                                                    data-toggle="tooltip" data-placement="top" title="Copy">
-                                                    <i class="fa fa-files-o" aria-hidden="true"></i>
-                                                </a>
-                                                <a (click)="editRequest(item)"
-                                                    *ngIf="item.status_show === reportStatus.draft || (item.status === reportStatus.reject && item.user_id === getprofileDetails.data.id)"
-                                                    class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
-                                                    title="Edit">
-                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                </a>
-                                                <a (click)="deleteRequest(item.id)"
-                                                    *ngIf="item.status_show === reportStatus.draft"
-                                                    class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
-                                                    title="Delete">
-                                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                                </a>
-                                                <a class="copy_file mr-1" data-toggle="tooltip"
-                                                    (click)="viewRequest(item)" data-placement="top" title="View">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </a>
+                                                
+                                            </td>
+                                            <td class="text-center">
+                                                {{ item.report_type }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ item.title | titlecase }}
+                                            </td>
+                                            <td (click)="viewRequest(item)">{{ item && item.requester_name ? item.requester_name :
+                                                "-" }}</td>
+                                            <td (click)="viewRequest(item)">{{ item.updated_at | date: dateFormate }}
+                                            </td>
+                                            <td (click)="viewRequest(item)">{{ item.deadline | date: dateTimeFormate }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ item.roc_name }}
+                                            </td>
+                                            <td (click)="viewRequest(item)">{{ item.created_at | date: dateFormate }}
+                                            </td>
+                                            <td (click)="viewRequest(item)">
+                                            </td>
+                                            <td (click)="viewRequest(item)">
+                                                {{item.roc_response_tim}}
                                             </td>
                                         </tr>
                                     </tbody>

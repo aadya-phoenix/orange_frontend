@@ -20,10 +20,11 @@ export class GetReportListComponent implements OnInit {
 
   report_id:number=0;
   reportStatus= dataConstant.GetReportStatus;
+  attachUrl = dataConstant.ImageUrl;
   reportList:any = [];
   reportListToShow:any = [];
   selectedStatus = this.reportStatus.total;
-
+  RoleID = dataConstant.RoleID;
   report_count = {
     total: 0,
     draft: 0,
@@ -41,6 +42,9 @@ export class GetReportListComponent implements OnInit {
     pageSize: 10
   }
 
+  isRoc = false;
+  isDataAnalyst = false;
+  isRequester = false;
 
   searchText:string='';
   getUserrole: any;
@@ -57,6 +61,9 @@ export class GetReportListComponent implements OnInit {
   ) { 
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
+    this.isRoc = this.getUserrole.id === this.RoleID.Roc;
+    this.isDataAnalyst = this.getUserrole.id === this.RoleID.DataAnalyst;
+    this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
   }
 
   ngOnInit(): void {

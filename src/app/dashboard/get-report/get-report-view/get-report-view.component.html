@@ -53,32 +53,34 @@
     </div>
     <div class="content">
         <div class="animated fadeIn">
-            <!-- <div class="mb-2" >
+            <div class="mb-2" *ngIf="isUpdate() || isPublish() || isForward() || isReject()">
                 <div class="Requs_btn_inl">
                     <div class="Requs_btn_inl-child">
-                        <button type="button" class="btn btn-primary mr-2" 
-                            >
-                            <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Transfer to
-                                Publisher</span>
+                        
+                        <button type="button" class="btn btn-primary mr-2" *ngIf="isPublish()"
+                            (click)="statusChangeRequest(GetReportStatus.close)">
+                            <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Close</span>
                         </button>
-                        <button type="button" class="btn btn-primary mr-2" 
-                            >
-                            <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
+                        <button type="button" class="btn btn-secondary" *ngIf="isForward()"
+                            (click)="forwardRequest()">
+                            <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Transfer to Data Analyst</span>
                         </button>
-                        <button type="button" class="btn mr-2" 
-                            >
+                        <button type="button" class="btn mr-2" *ngIf="isUpdate()"
+                            [ngClass]="(isPublish() || isForward()) ?  'btn-secondary'  : 'btn-primary'"
+                            (click)="updateRequest()">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">Update</span>
                         </button>
-                        <button type="button" class="btn btn-secondary" >
+                        <button type="button" class="btn btn-secondary" *ngIf="isReject()"
+                            (click)="statusChangeRequest(GetReportStatus.reject)">
                             <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                         </button>
                     </div>
-                    <button type="button" class="btn btn-secondary ml-2" >
+                    <button type="button" class="btn btn-secondary ml-2" *ngIf="isOtherRoc()" (click)="transferToOtherRoc()">
                         <i class="fa fa-exchange" aria-hidden="true"></i><span class="pl-1">Transfer to Other ROC</span>
                     </button>
                 </div>
 
-            </div> -->
+            </div>
             <div class="row mb-3">
                 <div class="col-sm-12">
                     <div class="card border-radius-0">
@@ -86,7 +88,7 @@
                             <p>Get a report Details</p>
                         </div>
                         <div class="card-body">
-                            <div class="row">
+                            
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Requester Name</label>
@@ -174,15 +176,17 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
+                            
+                            
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.region_name">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Regions</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
-                                                {{ requestdata.region_name}}
+                                            <span *ngFor="let item of requestdata.region_name" class="d-flex" >
+                                                {{item}}
                                             </span>
+                                           </span>
                                         </div>
                                     </div>
                                 </div>
@@ -196,15 +200,25 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            
                            
-                            <div class="row">
+                            
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.business_unit">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Business Unit</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                                 {{ requestdata.business_unit}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.other_business_unit">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Other Business Unit</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.other_business_unit}}
                                             </span>
                                         </div>
                                     </div>
@@ -230,8 +244,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row" >
+                            
+                            
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.start_date">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Start Date</label>
@@ -253,8 +267,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row" >
+                            
+                            
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.contact_person">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Contact Person</label>
@@ -276,8 +290,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
+                           
+                            
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Deadline</label>
@@ -294,13 +308,14 @@
                                         <label for="exampleInputEmail1">Attachment</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
-                                                {{ requestdata.attachment}}
+                                                Click here to <a class="text_orange" href="{{requestdata.attachUrl}}"
+                                                    target="_blank">View</a>.
                                             </span>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row" >
+                            
+                           
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.additional_comment">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Additional Comments</label>
@@ -314,7 +329,7 @@
                             
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Regioanl Training Coordinator</label>
+                                        <label for="exampleInputEmail1">Regional Training Coordinator</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                                 {{ requestdata.regional_cordinator_name}}
@@ -322,8 +337,50 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            
 
+                        </div>
+                        <div class="card-body">
+                            <div class="card mb-0" >
+                                <div class="card-header color-orange">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="row">
+                                            View History <h5 class="card-title ml-1">
+                                                <b class="color-orange"> ({{requestdata.request_id}})</b>
+                                            </h5>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr class="font-14 text-center">
+                                                <th scope="col">Sr.No</th>
+                                                <th scope="col">Submitted by</th>
+                                                <th scope="col">Sent to</th>
+                                                <th scope="col">Last Modified</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Comments</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let history of historyList;let i = index" class="text-center font-13">
+                                                <th scope="row">{{i+1}}</th>
+                                                <td>{{ history && history.transfer_by_name ? history.transfer_by_name : history.action_by_name}}
+                                                </td>
+                                                <td>{{history && history.transfer_by_name ? history.transfer_to_name : '-'}}</td>
+                                                <td>{{ history.updated_at | date: "short"}}</td>
+                                                <td>
+                                                    {{history.status | titlecase}}
+                                                </td>
+                                                <td>
+                                                    <p style="width: 154px; overflow-y: auto;font-size: 12px;">{{history.status_comment}}</p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
