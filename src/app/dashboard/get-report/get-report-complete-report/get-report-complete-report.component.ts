@@ -21,6 +21,7 @@ export class GetReportCompleteReportComponent implements OnInit {
   public filterForm!: FormGroup;
   dateTimeFormate = dataConstant.dateTimeFormate;
   dateFormate = dataConstant.dateFormate;
+  attachUrl = dataConstant.ImageUrl;
   RoleID = dataConstant.RoleID;
   addDate = false;
   report_id:number=0;

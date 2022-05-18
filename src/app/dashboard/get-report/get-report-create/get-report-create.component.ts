@@ -46,7 +46,7 @@ export class GetReportCreateComponent implements OnInit {
   isSubmitted:boolean = false;
   isSpecificCountry:boolean=true;
   isOtherBussinessUnit:boolean=false;
-
+  remainingText: any = 500;
   isRoc = false;
   isDataAnalyst = false;
   isRequester = false;
@@ -421,6 +421,15 @@ export class GetReportCreateComponent implements OnInit {
     }
   }
 
+  valueChange() {
+    if (this.getReportForm.value.additional_comment) {
+      this.remainingText = 500 - this.getReportForm.value.additional_comment.length;
+    }
+    else {
+      this.remainingText = 500;
+    }
+  }
+
   isDraft() {
     if (this.get_report_details?.status === this.reportStatus.closed || this.get_report_details?.status === this.reportStatus.pending || this.get_report_details?.status === this.reportStatus.reject) {
       return false;
@@ -599,4 +608,5 @@ export class GetReportCreateComponent implements OnInit {
      });
   }
 
+  
 }

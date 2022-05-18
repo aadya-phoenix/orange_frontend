@@ -446,8 +446,11 @@
                                     Additional Comments
                                 </label>
                                 <textarea type="text" class="form-control form_width-textarea"
-                                    formControlName="additional_comment">
+                                    formControlName="additional_comment" maxlength="500" rows="3"
+                                    (keyup)="valueChange()">
                                 </textarea>
+                                <span class="charcter_limit ">{{remainingText}} characters
+                                    remaining</span>
                             </div>
                         </div>
                         <div class="col-sm-12" *ngIf="isRequester">
