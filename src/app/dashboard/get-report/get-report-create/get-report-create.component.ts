@@ -287,6 +287,7 @@ export class GetReportCreateComponent implements OnInit {
   }
 
   save(status:any){
+    console.log("status",status);
     this.isSubmitted = true;
     if (this.getReportForm.invalid) {
       return;
@@ -301,6 +302,10 @@ export class GetReportCreateComponent implements OnInit {
     }
     else{
     body.status = status;
+    }
+    if(body.status == 'reject'){
+      this.changeStatusGetReport(body.status);
+      return;
     }
     if (!this.report_id) {
       this.commonService.showLoading();
@@ -428,6 +433,27 @@ export class GetReportCreateComponent implements OnInit {
     else {
       this.remainingText = 500;
     }
+  }
+
+  changeStatusGetReport(status:any) {
+    console.log("reject new",status);
+    var data = {
+      report_id: this.report_id,
+      status_comment: this.getReportForm.value.status_comment,
+      status: status,
+    };
+    this.commonService.showLoading();
+    this.getReportService.changeReportStatus(data).subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastSuccessMsg('GetReport', `Successfully ${status}.`);
+        this.router.navigate(['/dashboard/olreport']);
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    );
   }
 
   isDraft() {
