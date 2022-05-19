@@ -64,8 +64,6 @@ export class GetReportViewComponent implements OnInit {
           if(this.requestdata.attachment){
             this.requestdata.attachUrl = `${dataConstant.ImageUrl}/${this.requestdata.attachment}`;
           }
-          
-          console.log("res data",this.requestdata)
         }
       },
       (err: any) => {
@@ -92,7 +90,7 @@ export class GetReportViewComponent implements OnInit {
   }
 
   isUpdate() {
-    if (this.requestdata?.status == this.GetReportStatus.publish ||  (this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status == this.GetReportStatus.pending)){
+    if (this.requestdata?.status == this.GetReportStatus.publish || this.requestdata?.status_show == this.GetReportStatus.transferred ||  (this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status == this.GetReportStatus.pending)){
       return false;  
     }
     if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
@@ -117,12 +115,15 @@ export class GetReportViewComponent implements OnInit {
   }
 
   isPublish(){
-    if (this.requestdata?.status == this.GetReportStatus.publish|| this.requestdata?.status == this.GetReportStatus.publish || this.requestdata?.status == this.GetReportStatus.draft){
+    if (this.requestdata?.status == this.GetReportStatus.publish|| this.requestdata?.status == this.GetReportStatus.publish || this.requestdata?.status == this.GetReportStatus.draft || this.requestdata?.status_show == this.GetReportStatus.transferred || this.requestdata?.status == this.GetReportStatus.reject){
       return false;  
     }
-    if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
+  /*   if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
       return false;  
     }
+    if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id == this.getprofileDetails.data.id){
+      return false;  
+    } */
     if(this.isRequester){
       return false;
     }
@@ -137,8 +138,9 @@ export class GetReportViewComponent implements OnInit {
     } 
     return true;
   }
+
   isForward(){
-    if (this.requestdata?.status == this.GetReportStatus.publish|| this.requestdata?.status == this.GetReportStatus.expired || this.requestdata?.status == this.GetReportStatus.reject|| this.requestdata?.status == this.GetReportStatus.draft){
+    if (this.requestdata?.status == this.GetReportStatus.publish|| this.requestdata?.status == this.GetReportStatus.expired || this.requestdata?.status == this.GetReportStatus.reject|| this.requestdata?.status == this.GetReportStatus.draft || this.requestdata?.status_show == this.GetReportStatus.transferred){
       return false;  
     }
     if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
@@ -157,8 +159,9 @@ export class GetReportViewComponent implements OnInit {
 
     return true;
   }
+
   isReject(){
-    if (this.requestdata?.status == this.GetReportStatus.publish|| this.requestdata?.status == this.GetReportStatus.expired || this.requestdata?.status == this.GetReportStatus.reject){
+    if (this.requestdata?.status == this.GetReportStatus.publish|| this.requestdata?.status == this.GetReportStatus.expired || this.requestdata?.status == this.GetReportStatus.reject || this.requestdata?.status_show == this.GetReportStatus.transferred){
       return false;  
     }
     if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
@@ -186,7 +189,6 @@ export class GetReportViewComponent implements OnInit {
     if(this.isRoc && this.requestdata?.status_show == this.GetReportStatus.pending){
       return true;
     }
-    
     return false
   }
 
@@ -223,10 +225,9 @@ export class GetReportViewComponent implements OnInit {
     modalRef.componentInstance.props = {
       title: `Request ${status == this.GetReportStatus.reject ? "Reject" : "Close"}`,
       status: status,
+      status_show: status=='publish' ? 'Close':'Reject',
       data: this.requestdata.id,
       objectDetail: this.requestdata
     };
   } 
-
-
 }

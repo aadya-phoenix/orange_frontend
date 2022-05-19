@@ -5,21 +5,19 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { GetReportService } from 'src/app/shared/services/get-report/get-report.service';
-import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-get-report-publish',
-  templateUrl: './get-report-publish.component.html',
-  styleUrls: ['./get-report-publish.component.scss']
+  selector: 'app-get-report-close-on-update',
+  templateUrl: './get-report-close-on-update.component.html',
+  styleUrls: ['./get-report-close-on-update.component.scss']
 })
-export class GetReportPublishComponent implements OnInit {
+export class GetReportCloseOnUpdateComponent implements OnInit {
 
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   publishGetReportForm: FormGroup;
   isSubmitted = false;
   status = '';
-  status_show = '';
   GetReportStatus = dataConstant.GetReportStatus;
   constructor(private formBuilder: FormBuilder,
     private modalService: NgbActiveModal,
@@ -41,7 +39,6 @@ export class GetReportPublishComponent implements OnInit {
     this.objectDetail = this.props.objectDetail ? this.props.objectDetail : '';
     this.title = this.props.title;
     this.status = this.props.status;
-    this.status_show = this.props.status_show;
      console.log("ststus",this.status)
     this.publishGetReportForm = this.formBuilder.group({
       report_attachment:new FormControl('',[]),
@@ -57,20 +54,20 @@ export class GetReportPublishComponent implements OnInit {
     if (this.publishGetReportForm.invalid) {
       return;
     }
-    var data = {
-      report_id: this.props.objectDetail.id,
-      status_comment: this.publishGetReportForm.value.status_comment,
-      status: this.props.status,
-      report_attachment : this.getreportAttachment.file,
-      report_attachment_ext : this.getreportAttachment.ext
-    };
+    const body = this.props.objectDetail;
+    body.report_id = this.props.data;
+    body.status_comment = this.publishGetReportForm.value.status_comment,
+    body.status = this.props.status,
+    body.report_attachment = this.getreportAttachment.file,
+    body.report_attachment_ext = this.getreportAttachment.ext
+
     this.commonService.showLoading();
-    this.getReportService.changeReportStatus(data).subscribe(
+    this.getReportService.updateReport(body).subscribe(
       (res: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastSuccessMsg('GetReport', `Successfully ${this.props.status_show}.`);
+        this.commonService.toastSuccessMsg('Get Report', 'Successfully Saved.');
         this.modalService.close();
-        this.router.navigate(['/dashboard/olreport']);
+        this.router.navigateByUrl(`/dashboard/olreport/view/${body.report_id}`);
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -82,14 +79,6 @@ export class GetReportPublishComponent implements OnInit {
   handleFileInput(event: any) {
     const fsize = event.target.files[0].size;
     const file = Math.round((fsize / 1024)/1024);
-  /*   if(file > dataConstant.maxImageSize){
-      Swal.fire(
-        'Images!',
-        `Image is more than ${dataConstant.maxImageSize} mb. Please select valida file`,
-        'warning'
-      )
-      return;
-    } */
     this.commonService.FileConvertintoBytearray(event.target.files[0], async (f) => {
       // creating array bytes
       this.getreportAttachment = { file: this.commonService.byteArrayTobase64(f.bytes), ext: f.name.split('.').pop() };

@@ -9,7 +9,8 @@ import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { GetReportService } from 'src/app/shared/services/get-report/get-report.service';
 import Swal from 'sweetalert2';
-import { GetReportPublishComponent } from '../get-report-publish/get-report-publish.component';
+import { GetReportForwardComponent } from '../get-report-forward/get-report-forward.component';
+import { GetReportCloseOnUpdateComponent } from '../get-report-close-on-update/get-report-close-on-update.component';
 
 @Component({
   selector: 'app-get-report-create',
@@ -52,6 +53,7 @@ export class GetReportCreateComponent implements OnInit {
   isRequester = false;
   isRocAction = false;
   isDAaction = false;
+  isRocTransfer = false;
   getForm:boolean = false;
   getComment:boolean = false;
 
@@ -307,7 +309,7 @@ export class GetReportCreateComponent implements OnInit {
     body.status = status;
     }
     if(body.status == 'reject'){
-      this.changeStatusGetReport(body.status);
+     // this.changeStatusGetReport(body.status);
       return;
     }
     if (!this.report_id) {
@@ -448,14 +450,11 @@ export class GetReportCreateComponent implements OnInit {
     }
   }
 
-  changeStatusGetReport(status:any) {
-    console.log("reject new",status);
+  statusChangeRequest(status:any){
     var data = {
-      report_id: this.report_id,
-      status_comment: this.getReportForm.value.status_comment,
+      report_id: this.get_report_details.id,
       status: status,
     };
-    this.commonService.showLoading();
     this.getReportService.changeReportStatus(data).subscribe(
       (res: any) => {
         this.commonService.hideLoading();
@@ -467,6 +466,23 @@ export class GetReportCreateComponent implements OnInit {
         this.commonService.toastErrorMsg('Error', err.message);
       }
     );
+  } 
+
+  closeRequest(status:any){
+    const body = this.getReportForm.value;
+    body.attachment = this.getreportAttachment.file;
+    body.attachment_ext = this.getreportAttachment.ext;
+    const modalRef = this.modalService.open(GetReportCloseOnUpdateComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      title: `Request Close`,
+      status: status,
+      data: this.report_id,
+      objectDetail: body
+    };
   }
 
   isDraft() {
@@ -480,53 +496,37 @@ export class GetReportCreateComponent implements OnInit {
   }
 
   isReject() {
-    if (this.get_report_details?.status === this.reportStatus.publish || this.get_report_details?.status === this.reportStatus.expired || this.get_report_details?.status === this.reportStatus.reject) {
-      return false;
+    if (this.get_report_details?.status_show === this.reportStatus.pending && (this.isRoc || this.isDataAnalyst)) {
+      return true;
     }
-    if (this.isRequester || !this.get_report_details.id) {
-      return false;
-    }
-    if (this.get_report_details?.status === this.reportStatus.draft) {
-      return false;
-    }
-    if (this.get_report_details?.transfer_user_id && !this.get_report_details?.publisher_status ) {
-      return false;
-    }
-    return true;
+    
+    return false;
   }
 
   isPublish() {
-    if (this.get_report_details?.status === this.reportStatus.publish || this.get_report_details?.status === this.reportStatus.expired) {
-      return false;
+    if (this.get_report_details?.status_show === this.reportStatus.pending && (this.isRoc || this.isDataAnalyst)) {
+      return true;
     }
-    if (!this.isDataAnalyst) {
-      return false;
+    return false;
+  }
+
+  isDaTransfer(){
+    if (this.get_report_details?.status_show === this.reportStatus.pending && this.isRoc) {
+      return true;
     }
-    if (this.getprofileDetails.data.id != this.get_report_details?.user_id && this.get_report_details?.transfer_user_id && !this.get_report_details?.publisher_status) {
-      return false;
-    }
-    return true;
+    return false;
   }
 
   isSubmit() {
-    if (this.get_report_details?.status === this.reportStatus.publish || this.get_report_details?.status === this.reportStatus.expired) {
-      return false;
+    if(!this.get_report_details?.status || this.isRequester || this.get_report_details?.status === this.reportStatus.draft || (this.getprofileDetails.data.id == this.get_report_details?.user_id &&
+      this.get_report_details?.status === this.reportStatus.reject)){
+      return true;
     }
-    if (this.getprofileDetails.data.id === this.get_report_details?.user_id && this.get_report_details?.status === this.reportStatus.pending) {
-      return false;
-    }
-    if (this.isDataAnalyst) {
-      return false;
-    }
-    if (this.getprofileDetails.data.id != this.get_report_details?.user_id && this.get_report_details?.transfer_user_id && !this.get_report_details?.publisher_status ) {
-      return false;
-    }
-
-    return true;
+    return false;
   }
 
   isRocSubmit(){
-    if(this.isRoc && this.get_report_details?.status === this.reportStatus.pending && 
+    if(this.isRoc && this.get_report_details?.status_show === this.reportStatus.pending && 
       this.getprofileDetails.data.id != this.get_report_details?.user_id){
       return true;
     }
@@ -538,27 +538,28 @@ export class GetReportCreateComponent implements OnInit {
   getRocAction(event:any){
    this.getComment = true;
    let rocaction = event.target.value;
+   console.log("roc action",rocaction);
    if(rocaction == 'roc'){
      this.isRocAction = true;
    }
+   
    else{
      this.isRocAction = false;
    }
   }
 
-  statusChangeRequest(status: any) {
-    const modalRef = this.modalService.open(GetReportPublishComponent, {
+  forwardRequest(){
+    const modalRef = this.modalService.open(GetReportForwardComponent, {
       centered: true,
       size: 'lg',
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
-      title: `Request ${status == this.reportStatus.reject ? "Reject" : "Publish"}`,
-      status: status,
       data: this.get_report_details.id,
       objectDetail: this.get_report_details
     };
   }
+
 
   getRegionalCordinator(){
     this.courseService.getNewregionalCordinator().subscribe((res: any) => {
