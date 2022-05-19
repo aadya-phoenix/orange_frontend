@@ -8,7 +8,7 @@
                     <img src="../../../../assets/images/manage vendor.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
                         <span class="breade_text_span1">Manage Vendors</span>
-                        <span class="divider_req"></span>
+                        <span class="divider"></span>
                         <span class="breade_text_span">View and manage details about external vendor workshops and internal PD&L workshops.</span>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                         <div class="card">
                             <div class="card-body card_padding">
                                 <div class="row">
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">Status
                                             </label>
@@ -60,7 +60,7 @@
                                                     </ng-select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">Overall Rating
                                             </label>
@@ -70,7 +70,7 @@
                                         </ng-select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">Vendor Name
                                             </label>
@@ -78,7 +78,7 @@
                                                         class="form-control form_width" formControlName="vendor_name" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">NFPS entity(Oracle entity)
                                             </label>
@@ -88,7 +88,7 @@
                                         </ng-select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Vendor Region
@@ -99,7 +99,7 @@
                                             </ng-select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Vendor location
@@ -111,7 +111,7 @@
                                         </ng-select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Training Offers
@@ -123,7 +123,7 @@
                                             </ng-select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">Other Training Offers
                                             </label>
@@ -134,7 +134,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-end">
                                     <button class="btn btn-secondary mr-1" (click)="reset()">Reset</button>
                                     <button class="btn btn-primary" (click)="filterData()">Apply</button>
                                 </div>
@@ -238,7 +238,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive table_height_scroll">
-                                <table id="bootstrap-data-table-export " class="table table-striped table-bordered">
+                                <table id="excel-table" class="table table-bordered">
                                     <thead class="sticky_header">
                                         <tr class="text-center font-13">
                                             <th scope="col">#</th>
@@ -358,6 +358,7 @@
                                                 </a>
                                             </td>
                                             <td class="text-center">
+                                                <div class="d-flex justify-content-center">
                                                 <a (click)="editRequest(item)"
                                                     class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                     title="Edit">
@@ -377,7 +378,7 @@
                                                     (click)="viewRequest(item)" data-placement="top" title="View">
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
-
+</div>
                                             </td>
                                         </tr>
                                     </tbody>

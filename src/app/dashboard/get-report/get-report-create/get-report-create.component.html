@@ -63,7 +63,7 @@
                         <div class="card">
                             <div class="card-body card_width">
                                 <div class="row">
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Report Type <span class="text-danger-ligth">* </span>
@@ -100,7 +100,7 @@
                             <div class="card-body card_width">
 
                                 <div class="row">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Training Title
@@ -122,7 +122,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Transcript Status
@@ -253,282 +253,290 @@
                         </ng-container>
                     </div>
                 </div>
-                <ng-container *ngIf="getForm">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="header_div_promt">
-                            <strong class="font-16">Target Population</strong>
+                               
+            </div>
+        </div>
+        <ng-container *ngIf="getForm">
+            <div class="content">
+            <div class="row">
+                <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="header_div_promt">
+                        <strong class="font-16">Target Population</strong>
+                    </div>
+                </div>
+                <div class="card-body card_width">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Region Name
+                            </label>
+                            <ng-select [items]="regionObj" [multiple]="true" (change)="getRegionName($event)"
+                                bindLabel="name" bindValue="name" formControlName="region_name" class="w_100">
+                            </ng-select>
                         </div>
                     </div>
-                    <div class="card-body card_width">
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label class="form-control-label">
-                                    Region Name
-                                </label>
-                                <ng-select [items]="regionObj" [multiple]="true" (change)="getRegionName($event)"
-                                    bindLabel="name" bindValue="name" formControlName="region_name" class="w_100">
-                                </ng-select>
-                            </div>
+                    <div class="col-sm-3" *ngIf="isSpecificCountry">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Specific Country
+                            </label>
+                            <ng-select placeholder="Please select Specific Country" [items]="countryObj"
+                                bindLabel="country_name" bindValue="country_name" formControlName="country"
+                                class="w_100">
+                            </ng-select>
                         </div>
-                        <div class="col-sm-3" *ngIf="isSpecificCountry">
-                            <div class="form-group">
-                                <label class="form-control-label">
-                                    Specific Country
-                                </label>
-                                <ng-select placeholder="Please select Specific Country" [items]="countryObj"
-                                    bindLabel="country_name" bindValue="country_name" formControlName="country"
-                                    class="w_100">
-                                </ng-select>
-                            </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Business Unit
+                            </label>
+                            <ng-select placeholder="Please select Business Unit" [items]="businessUnitsObj" (change)="getOtherBussinessUnit($event)"
+                                bindLabel="team_name" bindValue="team_name" formControlName="business_unit"
+                                class="w_100">
+                            </ng-select>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label class="form-control-label">
-                                    Business Unit
-                                </label>
-                                <ng-select placeholder="Please select Business Unit" [items]="businessUnitsObj" (change)="getOtherBussinessUnit($event)"
-                                    bindLabel="team_name" bindValue="team_name" formControlName="business_unit"
-                                    class="w_100">
-                                </ng-select>
-                            </div>
+                    </div>
+                    <div class="col-sm-3" *ngIf="isOtherBussinessUnit">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                             Other Business Unit
+                            </label>
+                            <input type="text" class="form-control form_width" formControlName="other_business_unit" />
                         </div>
-                        <div class="col-sm-3" *ngIf="isOtherBussinessUnit">
-                            <div class="form-group">
-                                <label class="form-control-label">
-                                 Other Business Unit
-                                </label>
-                                <input type="text" class="form-control form_width" formControlName="other_business_unit" />
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label class="form-control-label">
-                                    Management Code
-                                </label>
-                                <input type="text" class="form-control form_width" formControlName="management_code" />
-                            </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Management Code
+                            </label>
+                            <input type="text" class="form-control form_width" formControlName="management_code" />
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-header">
-                        <div class="header_div_promt">
-                            <strong class="font-16">Reporting Period</strong>
-                        </div>
-                    </div>
-                    <div class="card-body card_width">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input type="checkbox" (change)="getAvailableHistory($event)"
-                                        formControlName="all_available_history">
-                                    <strong class="font-16">All available history</strong>
-                                </div>
-                            </div>
-                        </div>
-                        <ng-container *ngIf="!isAvailableHistory">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input type="radio"  value="last_year" formControlName="date_type" (change)="getDate($event)">
-                                        <strong class="font-16">Last year</strong>
-
-                                        <input type="radio"  value="this_year" formControlName="date_type" (change)="getDate($event)">
-                                        <strong class="font-16">This year</strong>
-
-                                        <input type="radio"  value="last_month" formControlName="date_type" (change)="getDate($event)">
-                                        <strong class="font-16">Last month</strong>
-
-                                        <input type="radio" value="this_month" formControlName="date_type" (change)="getDate($event)">
-                                        <strong class="font-16">This month</strong>
-
-                                        <input type="radio"  value="last_week" formControlName="date_type" (change)="getDate($event)">
-                                        <strong class="font-16">Last week</strong>
-
-                                        <input type="radio"  value="this_week" formControlName="date_type" (change)="getDate($event)">
-                                        <strong class="font-16">This week</strong>
-
-                                        <input type="radio" value="custom" formControlName="date_type" (change)="getDate($event)">
-                                        <strong class="font-16">Custom date</strong>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Start Date
-                                        </label>
-                                        <input type="date" class="form-control form_width" 
-                                            formControlName="start_date" [attr.disabled]="addDate ? 'disabled' : null"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            End Date
-                                        </label>
-                                        <input type="date" class="form-control form_width" formControlName="end_date" [min]="getReportForm.controls['start_date'].value" [attr.disabled]="addDate ? 'disabled' : null" />
-                                    </div>
-                                </div>
-                            </div>
-                        </ng-container>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="header_div_promt">
+                        <strong class="font-16">Reporting Period</strong>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-header">
-                        <div class="header_div_promt">
-                            <strong class="font-16">Other Information</strong>
-                        </div>
-                    </div>
-                    <div class="card-body card_width">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="form-control-label">
-                                        Contact Person
-                                    </label>
-                                    <input type="text" class="form-control form_width"
-                                        formControlName="contact_person" />
-                                </div>
-                            </div>
-                        
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="form-control-label">
-                                        Report Purpose
-                                    </label>
-                                    <input type="text" class="form-control form_width"
-                                        formControlName="report_purpose" />
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="form-control-label">
-                                        Deadline
-                                        <span class="text-danger-ligth">* </span>
-                                        <a>
-                                            <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                placement="right"
-                                                ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                        </a>
-                                    </label>
-                                    <input type="date" class="form-control form_width" formControlName="deadline" min="{{minStartDate}}" />
-                                    <div
-                                        *ngIf="(getReportForm.controls['deadline'].invalid && (getReportForm.controls['deadline'].dirty || getReportForm.controls['deadline'].touched)) || isSubmitted">
-                                        <div class="error_message"
-                                            *ngIf="getReportForm.controls['deadline'].errors?.required">
-                                            Deadline cannot be blank
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label class="form-control-label">
-                                    Attachments
-                                </label>
-                                <input type="file" id="reportAttachment" class="form-control form_width"
-                                    (change)="handleFileInput($event)" formControlName="attachment" />
-                                 <span class="pt-2" *ngIf="get_report_details.attachUrl">
-                                     Click here to <a href="{{get_report_details.attachUrl}}" target="_blank"
-                                         style="color:#ff7900">View</a>
-                                 </span>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label class="form-control-label">
-                                    Additional Comments
-                                </label>
-                                <textarea type="text" class="form-control form_width-textarea"
-                                    formControlName="additional_comment" maxlength="500" rows="3"
-                                    (keyup)="valueChange('comment')">
-                                </textarea>
-                                <span class="charcter_limit ">{{remainingText}} characters
-                                    remaining</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-12" *ngIf="isRequester">
-                            <div class="form-group">
-                                <label class="form-control-label">
-                                    Request to Regional Training Coordinator
-                                    <span class="text-danger-ligth">* </span>
-                                    <a>
-                                        <i class="fa fa-info-circle info_circle" aria-hidden="true" placement="right"
-                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                    </a>
-                                </label>
-                                <ng-select placeholder="Please select Regioanl Training Coordinator" [items]="rocObj"
-                                    bindLabel="name" bindValue="id" formControlName="regional_cordinator" class="w_100">
-                                </ng-select>
-                                <div
-                                    *ngIf="(getReportForm.controls['regional_cordinator'].invalid && (getReportForm.controls['regional_cordinator'].dirty || getReportForm.controls['regional_cordinator'].touched)) || isSubmitted">
-                                    <div class="error_message"
-                                        *ngIf="getReportForm.controls['regional_cordinator'].errors?.required">
-                                        Regional Training Coordinator cannot be blank
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                     
-                      <div class="row" *ngIf="isRocSubmit()">
-                        <div class="col-sm-6" >
-                            <div class="form-group">
-                                <input type="radio" name="roc_action" value="transfer" (change)="getRocAction($event)">
-                                <strong class="font-16">Transfer to data analyst</strong>
-                                <input type="radio" name="roc_action" value="roc" (change)="getRocAction($event)">
-                                <strong class="font-16">Action By ROC</strong>
-                            </div>
-                        </div>
-                       </div>
-                       <ng-container *ngIf="isRocAction || isDAaction">
-                        <div class="row" >
+                <div class="card-body card_width">
+                    <div class="row">
                         <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="form-control-label">
-                                    Status
-                                </label>
-                                <ng-select (change)="getRocStatus($event)" [items]="statusObj"
-                                    bindLabel="name" bindValue="id" 
-                                    class="w_100">
-                                </ng-select>
+                            <div class="mb-2">
+                                <input type="checkbox" (change)="getAvailableHistory($event)"
+                                            formControlName="all_available_history">
+                                        <strong class="font-16 ml-2">All available history</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-container *ngIf="!isAvailableHistory">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered">
+                                    <thead>
+                                      <tr class="text-center">
+                                          
+                                        <th scope="col"> <input type="radio"  value="last_year" formControlName="date_type" (change)="getDate($event)"><strong class="font-16 ml-2">Last year</strong></th>
+                                        <th scope="col"> <input type="radio"  value="this_year" formControlName="date_type" (change)="getDate($event)">
+                                            <strong class="font-16 ml-2">This year</strong></th>
+                                        <th scope="col">  <input type="radio"  value="last_month" formControlName="date_type" (change)="getDate($event)">
+                                            <strong class="font-16 ml-2">Last month</strong> </th>
+                                        <th scope="col"> <input type="radio"  value="last_week" formControlName="date_type" (change)="getDate($event)">
+                                            <strong class="font-16 ml-2">Last week</strong></th>
+                                           <th>  <input type="radio"  value="this_week" formControlName="date_type" (change)="getDate($event)">
+                                            <strong class="font-16 ml-2">This week</strong>
+                                               </th>
+                                               <th> <input type="radio" value="custom" formControlName="date_type" (change)="getDate($event)">
+                                                <strong class="font-16 ml-2">Custom date</strong>   </th>
+                                      </tr>
+                                    </thead>
+                                   
+                                  </table>
+                               
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label class="form-control-label">
-                                   Additional Attachments
-                                </label>
-                                <input type="file" id="reportAttachment" class="form-control form_width"
-                                    (change)="handleAdditionFileInput($event)" formControlName="additional_attachment" />
+                                <div class="form-group">
+                                    <label class="form-control-label">
+                                        Start Date
+                                    </label>
+                                    <input type="date" class="form-control form_width" 
+                                        formControlName="start_date" [attr.disabled]="addDate ? 'disabled' : null"/>
+                                </div>
                             </div>
                         </div>
-                       </div>
-                       </ng-container>
-                        <div class="col-sm-12" *ngIf="getComment || isDAaction">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label class="form-control-label">
+                                        End Date
+                                    </label>
+                                    <input type="date" class="form-control form_width" formControlName="end_date" [min]="getReportForm.controls['start_date'].value" [attr.disabled]="addDate ? 'disabled' : null" />
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="header_div_promt">
+                        <strong class="font-16">Other Information</strong>
+                    </div>
+                </div>
+                <div class="card-body card_width">
+                    <div class="row">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 <label class="form-control-label">
-                                   Comments
+                                    Contact Person
                                 </label>
-                                <textarea type="text" class="form-control form_width-textarea"
-                                formControlName="status_comment" maxlength="500" rows="3"
-                                (keyup)="valueChange('status_comment')">
-                            </textarea>
-                            <span class="charcter_limit ">{{remainingText}} characters
-                                remaining</span>
+                                <input type="text" class="form-control form_width"
+                                    formControlName="contact_person" />
                             </div>
                         </div>
                     
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                    Report Purpose
+                                </label>
+                                <input type="text" class="form-control form_width"
+                                    formControlName="report_purpose" />
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                    Deadline
+                                    <span class="text-danger-ligth">* </span>
+                                    <a>
+                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                            placement="right"
+                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
+                                    </a>
+                                </label>
+                                <input type="date" class="form-control form_width" formControlName="deadline" min="{{minStartDate}}" />
+                                <div
+                                    *ngIf="(getReportForm.controls['deadline'].invalid && (getReportForm.controls['deadline'].dirty || getReportForm.controls['deadline'].touched)) || isSubmitted">
+                                    <div class="error_message"
+                                        *ngIf="getReportForm.controls['deadline'].errors?.required">
+                                        Deadline cannot be blank
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                  
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Attachments
+                            </label>
+                            <input type="file" id="reportAttachment" class="form-control form_width"
+                                (change)="handleFileInput($event)" formControlName="attachment" />
+                             <span class="pt-2" *ngIf="get_report_details.attachUrl">
+                                 Click here to <a href="{{get_report_details.attachUrl}}" target="_blank"
+                                     style="color:#ff7900">View</a>
+                             </span>
+                        </div>
                     </div>
-                </div>  
-            </ng-container>                
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Additional Comments
+                            </label>
+                            <textarea type="text" class="form-control form_width-textarea"
+                                formControlName="additional_comment" maxlength="500" rows="3"
+                                (keyup)="valueChange('comment')">
+                            </textarea>
+                            <span class="charcter_limit ">{{remainingText}} characters
+                                remaining</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12" *ngIf="isRequester">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Request to Regional Training Coordinator
+                                <span class="text-danger-ligth">* </span>
+                                <a>
+                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" placement="right"
+                                        ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
+                                </a>
+                            </label>
+                            <ng-select placeholder="Please select Regioanl Training Coordinator" [items]="rocObj"
+                                bindLabel="name" bindValue="id" formControlName="regional_cordinator" class="w_100">
+                            </ng-select>
+                            <div
+                                *ngIf="(getReportForm.controls['regional_cordinator'].invalid && (getReportForm.controls['regional_cordinator'].dirty || getReportForm.controls['regional_cordinator'].touched)) || isSubmitted">
+                                <div class="error_message"
+                                    *ngIf="getReportForm.controls['regional_cordinator'].errors?.required">
+                                    Regional Training Coordinator cannot be blank
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>                   
+                  <div class="row" *ngIf="isRocSubmit()">
+                    <div class="col-sm-6" >
+                        <div class="form-group">
+                            <input type="radio" name="roc_action" value="transfer" (change)="getRocAction($event)">
+                            <strong class="font-16">Transfer to data analyst</strong>
+                            <input type="radio" name="roc_action" value="roc" (change)="getRocAction($event)">
+                            <strong class="font-16">Action By ROC</strong>
+                        </div>
+                    </div>
+                   </div>
+                   <ng-container *ngIf="isRocAction || isDAaction">
+                    <div class="row" >
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Status
+                            </label>
+                            <ng-select (change)="getRocStatus($event)" [items]="statusObj"
+                                bindLabel="name" bindValue="id" 
+                                class="w_100">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                               Additional Attachments
+                            </label>
+                            <input type="file" id="reportAttachment" class="form-control form_width"
+                                (change)="handleAdditionFileInput($event)" formControlName="additional_attachment" />
+                        </div>
+                    </div>
+                   </div>
+                   </ng-container>
+                    <div class="col-sm-12" *ngIf="getComment || isDAaction">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                               Comments
+                            </label>
+                            <textarea type="text" class="form-control form_width-textarea"
+                            formControlName="status_comment" maxlength="500" rows="3"
+                            (keyup)="valueChange('status_comment')">
+                        </textarea>
+                        <span class="charcter_limit ">{{remainingText}} characters
+                            remaining</span>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>  
+            </div>
             </div>
         </div>
+        </ng-container> 
     </form>
+    
     <ng-container *ngIf="getForm">
     <div class="card-footer">
         <button class="btn btn-primary mr-1" (click)="save('pending')" type="submit">

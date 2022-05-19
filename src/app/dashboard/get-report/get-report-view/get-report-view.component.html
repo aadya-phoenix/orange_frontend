@@ -7,7 +7,7 @@
                     <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
                         <span class="font-20 text_white">Get a report.</span>
-                        <span class="divider_req"></span>
+                        <span class="divider1"></span>
                         <span class="title-detail mt-6">Request a report, this is your one stop shop for all your
                             reporting needs.</span>
                     </div>
@@ -61,7 +61,7 @@
                             (click)="statusChangeRequest(GetReportStatus.close)">
                             <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Close</span>
                         </button>
-                        <button type="button" class="btn btn-secondary" *ngIf="isForward()"
+                        <button type="button" class="btn btn-secondary  mr-2" *ngIf="isForward()"
                             (click)="forwardRequest()">
                             <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Transfer to Data Analyst</span>
                         </button>
@@ -70,12 +70,12 @@
                             (click)="updateRequest()">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">Update</span>
                         </button>
-                        <button type="button" class="btn btn-secondary" *ngIf="isReject()"
+                        <button type="button" class="btn btn-secondary  mr-2" *ngIf="isReject()"
                             (click)="statusChangeRequest(GetReportStatus.reject)">
                             <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                         </button>
                     </div>
-                    <button type="button" class="btn btn-secondary ml-2" *ngIf="isOtherRoc()" (click)="transferToOtherRoc()">
+                    <button type="button" class="btn btn-secondary" *ngIf="isOtherRoc()" (click)="transferToOtherRoc()">
                         <i class="fa fa-exchange" aria-hidden="true"></i><span class="pl-1">Transfer to Other ROC</span>
                     </button>
                 </div>
@@ -340,46 +340,47 @@
                             
 
                         </div>
-                        <div class="card-body">
-                            <div class="card mb-0" >
-                                <div class="card-header color-orange">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="row">
-                                            View History <h5 class="card-title ml-1">
-                                                <b class="color-orange"> ({{requestdata.request_id}})</b>
-                                            </h5>
-                                        </span>
-                                    </div>
+                       
+                    </div>
+                    <div class="">
+                        <div class="card mb-0" >
+                            <div class="card-header color-orange">
+                                <div class="d-flex justify-content-between">
+                                    <span class="row">
+                                        View History <h5 class="card-title ml-1">
+                                            <b class="color-orange"> ({{requestdata.request_id}})</b>
+                                        </h5>
+                                    </span>
                                 </div>
-                                <div class="card-body">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr class="font-14 text-center">
-                                                <th scope="col">Sr.No</th>
-                                                <th scope="col">Submitted by</th>
-                                                <th scope="col">Sent to</th>
-                                                <th scope="col">Last Modified</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Comments</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let history of historyList;let i = index" class="text-center font-13">
-                                                <th scope="row">{{i+1}}</th>
-                                                <td>{{ history && history.transfer_by_name ? history.transfer_by_name : history.action_by_name}}
-                                                </td>
-                                                <td>{{history && history.transfer_by_name ? history.transfer_to_name : '-'}}</td>
-                                                <td>{{ history.updated_at | date: "short"}}</td>
-                                                <td>
-                                                    {{history.status | titlecase}}
-                                                </td>
-                                                <td>
-                                                    <p style="width: 154px; overflow-y: auto;font-size: 12px;">{{history.status_comment}}</p>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr class="font-14 text-center">
+                                            <th scope="col">Sr.No</th>
+                                            <th scope="col">Submitted by</th>
+                                            <th scope="col">Sent to</th>
+                                            <th scope="col">Last Modified</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Comments</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let history of historyList;let i = index" class="text-center font-13">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{ history && history.transfer_by_name ? history.transfer_by_name : history.action_by_name}}
+                                            </td>
+                                            <td>{{history && history.transfer_by_name ? history.transfer_to_name : '-'}}</td>
+                                            <td>{{ history.updated_at | date: "short"}}</td>
+                                            <td>
+                                                {{history.status | titlecase}}
+                                            </td>
+                                            <td>
+                                                <p style="width: 154px; overflow-y: auto;font-size: 12px;">{{history.status_comment}}</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
