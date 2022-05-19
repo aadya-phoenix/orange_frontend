@@ -29,6 +29,7 @@ export const dataConstant = {
   CurrencyPattern:'^(?!0\.00)\d{1,3}(,\d{3})*(\.\d\d)?$',
 
   CarouselStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
+  CourseStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
   BackOfficeStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
   CourseSessionStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish:'publish' , reject: 'reject' },
   VendorStatus: { total: 'total', active:'active', deactive:'deactive'},
@@ -37,6 +38,9 @@ export const dataConstant = {
   ExporType : {course:'course', session:'session', carousel:'carousel', back_office:'back_office', vendor:'vendor', vendor_rating:'vendor_rating'},
   RoleID: {
     RequesterID: 2,
+    CourseReviewer: 7,
+    CoursePublisher: 8,
+    CourseRequester: 2,
     CarouselReviewer: 7,
     CarouselPublisher: 8,
     BackOfficeReviewer: 3,
