@@ -5,7 +5,7 @@ import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { GetReportService } from 'src/app/shared/services/get-report/get-report.service';
-import { GetReportForwardComponent } from '../get-report-forward/get-report-forward.component';
+import Swal from 'sweetalert2';
 import { GetReportPublishComponent } from '../get-report-publish/get-report-publish.component';
 import { GetReportTransferToOtherRocComponent } from '../get-report-transfer-to-other-roc/get-report-transfer-to-other-roc.component';
 
@@ -204,17 +204,32 @@ export class GetReportViewComponent implements OnInit {
     };
   }
 
-  forwardRequest(){
-    const modalRef = this.modalService.open(GetReportForwardComponent, {
-      centered: true,
-      size: 'lg',
-      windowClass: 'alert-popup',
-    });
-    modalRef.componentInstance.props = {
-      data: this.requestdata.id,
-      objectDetail: this.requestdata
-    };
-  }
+  forwardRequest() {
+    Swal.fire({
+      title: 'Are you sure you want to Transfer to Data Analyst?',
+      text: 'Transfer to Data Analyst',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Transfer it!',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.commonService.showLoading();
+        this.getReportService.getReportTransfer({report_id :this.id}).subscribe((res:any)=>{
+          this.commonService.hideLoading();
+          Swal.fire(
+            'Transferred!',
+            'Your request has been Transferred to Data Analyst.',
+            'success'
+          )
+          this.router.navigate(['/dashboard/olreport']);
+        },(err:any)=>{
+          this.commonService.hideLoading();
+        })
+        
+      }
+    })
+}
 
   statusChangeRequest(status:any){
     const modalRef = this.modalService.open(GetReportPublishComponent, {

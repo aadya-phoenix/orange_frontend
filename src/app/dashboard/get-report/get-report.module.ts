@@ -13,14 +13,13 @@ import { GetReportCompleteReportComponent } from './get-report-complete-report/g
 import { GetReportViewComponent } from './get-report-view/get-report-view.component';
 import { GetReportPublishComponent } from './get-report-publish/get-report-publish.component';
 import { GetReportTransferToOtherRocComponent } from './get-report-transfer-to-other-roc/get-report-transfer-to-other-roc.component';
-import { GetReportForwardComponent } from './get-report-forward/get-report-forward.component';
 import { GetReportCloseOnUpdateComponent } from './get-report-close-on-update/get-report-close-on-update.component';
 
 
 @NgModule({
-  declarations: [GetReportListComponent, GetReportHistoryComponent, GetReportCreateComponent, GetReportCompleteReportComponent, GetReportViewComponent, GetReportPublishComponent, GetReportTransferToOtherRocComponent, GetReportForwardComponent, GetReportCloseOnUpdateComponent],
+  declarations: [GetReportListComponent, GetReportHistoryComponent, GetReportCreateComponent, GetReportCompleteReportComponent, GetReportViewComponent, GetReportPublishComponent, GetReportTransferToOtherRocComponent, GetReportCloseOnUpdateComponent],
   providers:[DatePipe],
-  entryComponents:[GetReportHistoryComponent,GetReportForwardComponent,GetReportPublishComponent,
+  entryComponents:[GetReportHistoryComponent,GetReportPublishComponent,
     GetReportTransferToOtherRocComponent,GetReportCloseOnUpdateComponent
   ],
   imports: [

@@ -10,6 +10,9 @@ import { UserManageService } from 'src/app/shared/services/user-management/user-
 export class UserManagementComponent implements OnInit {
 
   userObj:any=[];
+  first_name : any;
+  last_name : any;
+  email  : any
 
   constructor(
     private userManageServicse:UserManageService,
@@ -17,6 +20,13 @@ export class UserManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
+  }
+
+  getUsername(user:any){
+   let id = user.id;
+   this.first_name = user.first_name;
+   this.last_name = user.last_name;
+   this.email = user.email;
   }
 
   getUsers(){
@@ -32,7 +42,6 @@ export class UserManagementComponent implements OnInit {
         this.commonService.toastErrorMsg('Error', err.message);
       }
     );
-    
   }
 
 }
