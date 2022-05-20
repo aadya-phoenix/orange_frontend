@@ -10,7 +10,7 @@
             <div class="col-sm-12" *ngIf="status =='publish'">
                 <div class="form-group">
                     <label class="form-control-label">
-                       Additional Attachments
+                       Attach Report
                     </label>
                     <input type="file" id="reportAttachment" class="form-control form_width"
                         (change)="handleFileInput($event)" formControlName="report_attachment" />
@@ -39,7 +39,8 @@
         </form>
     </div>
     <div class="card-footer">
-        <button class="btn btn-primary mr-1" type="submit" (click)="publishGetReport()">{{status_show | titlecase}}</button>
+        <button *ngIf="status == GetReportStatus.reject" class="btn btn-primary mr-1" type="submit" (click)="publishGetReport()">{{status_show | titlecase}}</button>
+        <button *ngIf="status == GetReportStatus.publish" class="btn btn-primary mr-1" type="submit" (click)="publishGetReport()">{{status_show | titlecase}} Request </button>
         <button class="btn btn-secondary" type="submit" (click)="closeModal()">Cancel</button>
     </div>
 </div>

@@ -96,6 +96,7 @@ export class GetReportCompleteReportComponent implements OnInit {
     this.commonService.showLoading();
     this.courceService.getRoleUsers().subscribe((res: any) => {
       this.rocObj = res.data[this.RoleID.Roc];
+      console.log("roc ob",this.rocObj)
       this.commonService.hideLoading();
     },
       (err: any) => {
@@ -160,6 +161,7 @@ export class GetReportCompleteReportComponent implements OnInit {
       }
     );
   }
+
   pageChanged(event: any) {
     this.pagination.pageNumber = event;
   }
@@ -178,5 +180,30 @@ export class GetReportCompleteReportComponent implements OnInit {
   filterData() {
     const data = this.filterForm.value;
     this.refreshReports(data);
+  }
+
+  exportExcel(){
+    const data = this.filterForm.value;
+    data.type = dataConstant.ExporType.get_report;
+    this.commonService.showLoading();
+    this.commonService.exportAPI(data).subscribe(
+      (res: any) => {
+        if(res.status === 1){
+          window.open(`${dataConstant.ImageUrl}/${res.data.url}`);
+        }
+        else{
+          Swal.fire(
+            'Information!',
+            res.message,
+            'warning'
+          )
+        }
+        this.commonService.hideLoading();
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        console.log(err);
+      }
+    );
   }
 }

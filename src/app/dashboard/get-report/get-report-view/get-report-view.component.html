@@ -46,11 +46,32 @@
                 <span>View Get a report Request</span>
                 <span class="cc-text_css"> ({{ requestdata.request_id }}) -
                 </span>
-                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status | titlecase
+                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status_show | titlecase
                     }}</span>
             </p>
         </div>
     </div>
+    <div class="row" *ngIf="requestdata.status_new == GetReportStatus.closed">
+        <div class="col-md-12">
+          <div class="back_img_viewbac">
+            <div class="animated fadeIn">
+              <div class="card" >
+                <div class="card-body">
+                  <div class="col-sm-12 col-md-6">
+                    <div class="d-flex"> 
+                        <div>
+                            <a href="{{requestdata.attachUrl}}">
+                              <i class="fa fa-download" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <div class="content">
         <div class="animated fadeIn">
             <div class="mb-2" *ngIf="isUpdate() || isPublish() || isForward() || isReject()">
@@ -59,7 +80,7 @@
                         
                         <button type="button" class="btn btn-primary mr-2" *ngIf="isPublish()"
                             (click)="statusChangeRequest(GetReportStatus.publish)">
-                            <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Close</span>
+                            <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Close Request</span>
                         </button>
                         <button type="button" class="btn btn-secondary  mr-2" *ngIf="isForward()"
                             (click)="forwardRequest()">
@@ -87,8 +108,7 @@
                         <div class="card-header card_header_view">
                             <p>Get a report Details</p>
                         </div>
-                        <div class="card-body">
-                            
+                        <div class="card-body">                      
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Requester Name</label>
@@ -99,7 +119,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Report Type</label>
@@ -110,7 +129,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.report_type =='Training'">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Training Title</label>
@@ -121,7 +139,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.transcript_status">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Transcript Status</label>
@@ -132,7 +149,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.report_type !='Training'">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Certification Title</label>
@@ -143,7 +159,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.certification_vendor">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Certification Vendor</label>
@@ -154,7 +169,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.certification_domain">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Certification Domain</label>
@@ -165,7 +179,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.certification_status">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Certification Status</label>
@@ -175,9 +188,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
-                            
+                                </div>                           
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.region_name">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Regions</label>
@@ -199,10 +210,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
-                           
-                            
+                                </div>                            
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.business_unit">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Business Unit</label>
@@ -232,8 +240,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>                     
-                            
+                                </div>                                                 
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">All available history</label>
@@ -243,9 +250,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
-                            
+                                </div>                            
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.start_date">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Start Date</label>
@@ -255,8 +260,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
+                                </div>                           
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.end_date">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">End Date</label>
@@ -266,9 +270,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
-                            
+                                </div>                            
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.contact_person">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Contact Person</label>
@@ -278,8 +280,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
+                                </div>                          
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.report_purpose">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Report Purpose</label>
@@ -289,9 +290,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                           
-                            
+                                </div>                           
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Deadline</label>
@@ -301,8 +300,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
+                                </div>                           
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.attachment">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Attachment</label>
@@ -313,9 +311,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
-                           
+                                </div>                          
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.additional_comment">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Additional Comments</label>
@@ -325,8 +321,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
+                                </div>                           
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Regional Training Coordinator</label>
@@ -337,10 +332,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            
-
                         </div>
-                       
                     </div>
                     <div class="">
                         <div class="card mb-0" >

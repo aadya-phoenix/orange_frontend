@@ -9,7 +9,6 @@ import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { GetReportService } from 'src/app/shared/services/get-report/get-report.service';
 import Swal from 'sweetalert2';
-import { GetReportForwardComponent } from '../get-report-forward/get-report-forward.component';
 import { GetReportCloseOnUpdateComponent } from '../get-report-close-on-update/get-report-close-on-update.component';
 
 @Component({
@@ -131,6 +130,20 @@ export class GetReportCreateComponent implements OnInit {
     this.getRegions();
     this.getCountries();
     this.getRegionalCordinator();
+    this.getTotalCount();
+  }
+
+  getTotalCount() {
+    this.commonService.showLoading();
+    this.getReportService.getReportList().subscribe(
+      (res: any) => {
+        this.report_count = res.data.get_report_count;
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    );
   }
 
   getRegionName(regions:any){
@@ -486,12 +499,16 @@ export class GetReportCreateComponent implements OnInit {
   }
 
   isDraft() {
-    if (this.get_report_details?.status === this.reportStatus.closed || this.get_report_details?.status === this.reportStatus.pending || this.get_report_details?.status === this.reportStatus.reject) {
+    if (this.get_report_details?.status === this.reportStatus.publish || this.get_report_details?.status === this.reportStatus.pending || this.get_report_details?.status === this.reportStatus.reject) {
       return false;
     }
     if (this.getprofileDetails.data.id != this.get_report_details?.user_id && this.get_report_details?.transfer_user_id && !this.get_report_details?.publisher_status ) {
       return false;
     }
+    if(this.get_report_details?.status_show == this.reportStatus.submitted){
+       return false;
+    }
+    
     return true;
   }
 
@@ -518,9 +535,12 @@ export class GetReportCreateComponent implements OnInit {
   }
 
   isSubmit() {
-    if(!this.get_report_details?.status || this.isRequester || this.get_report_details?.status === this.reportStatus.draft || (this.getprofileDetails.data.id == this.get_report_details?.user_id &&
+    if(!this.get_report_details?.status || (this.isRequester && (this.get_report_details?.status == this.reportStatus.draft) ||(this.get_report_details?.status == this.reportStatus.reject) )  || this.get_report_details?.status === this.reportStatus.draft || (this.getprofileDetails.data.id == this.get_report_details?.user_id &&
       this.get_report_details?.status === this.reportStatus.reject)){
       return true;
+    }
+    if(this.get_report_details?.status == 'publish' || this.get_report_details?.status_show == this.reportStatus.submitted){
+      return false;
     }
     return false;
   }
@@ -547,19 +567,6 @@ export class GetReportCreateComponent implements OnInit {
      this.isRocAction = false;
    }
   }
-
-  forwardRequest(){
-    const modalRef = this.modalService.open(GetReportForwardComponent, {
-      centered: true,
-      size: 'lg',
-      windowClass: 'alert-popup',
-    });
-    modalRef.componentInstance.props = {
-      data: this.get_report_details.id,
-      objectDetail: this.get_report_details
-    };
-  }
-
 
   getRegionalCordinator(){
     this.courseService.getNewregionalCordinator().subscribe((res: any) => {
