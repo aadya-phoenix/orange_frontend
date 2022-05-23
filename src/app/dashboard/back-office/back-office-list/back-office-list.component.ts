@@ -171,7 +171,7 @@ export class BackOfficeListComponent implements OnInit {
           
         }
       })
-    }
+   }
 
     copyRequest(back_office_id: number) {
       Swal.fire({
