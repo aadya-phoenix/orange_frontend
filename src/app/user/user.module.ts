@@ -5,6 +5,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { SharedModule } from '../shared/shared.module';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     CommonModule,
     UserRoutingModule,
     SharedModule,
-    NgSelectModule
+    NgSelectModule,
+    NgxPaginationModule,
   ]
 })
 export class UserModule { }

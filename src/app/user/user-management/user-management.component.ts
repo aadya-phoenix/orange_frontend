@@ -10,9 +10,16 @@ import { UserManageService } from 'src/app/shared/services/user-management/user-
 export class UserManagementComponent implements OnInit {
 
   userObj:any=[];
+  searchText:string='';
   first_name : any;
   last_name : any;
-  email  : any
+  email  : any;
+
+  pagination = {
+    page: 1,
+    pageNumber: 1,
+    pageSize: 10
+  }
 
   constructor(
     private userManageServicse:UserManageService,
@@ -43,5 +50,11 @@ export class UserManagementComponent implements OnInit {
       }
     );
   }
+
+  pageChanged(event: any) {
+    this.pagination.pageNumber = event;
+  }
+
+  
 
 }
