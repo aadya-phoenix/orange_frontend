@@ -89,169 +89,177 @@
                                 </div>
                             </div>
                         </div>
-                        <ng-container *ngIf="getForm">
-                            <div class="card" *ngIf="!isCertification">
-                                <div class="card-header">
-                                    <div class="header_div_promt">
-                                        <strong class="font-16">Training</strong>
-                                    </div>
-                                </div>
-                                <div class="card-body card_width">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Training Title
-                                                    <span class="text-danger-ligth">* </span>
-                                                    <a>
-                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                            placement="right"
-                                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                                    </a>
-                                                </label>
-                                                <input type="text" class="form-control form_width"
-                                                    formControlName="title" />
-                                                <div
-                                                    *ngIf="(getReportForm.controls['title'].invalid && (getReportForm.controls['title'].dirty || getReportForm.controls['title'].touched)) || isSubmitted">
-                                                    <div class="error_message"
-                                                        *ngIf="getReportForm.controls['title'].errors?.required">
-                                                        Training Title cannot be blank
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Transcript Status
-                                                    <span class="text-danger-ligth">* </span>
-                                                    <a>
-                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                            placement="right"
-                                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                                    </a>
-                                                </label>
-                                                <ng-select [items]="transcriptStatusObj" bindLabel="name"
-                                                    bindValue="name" formControlName="transcript_status" class="w_100">
-                                                </ng-select>
-                                                <div
-                                                    *ngIf="(getReportForm.controls['transcript_status'].invalid && (getReportForm.controls['transcript_status'].dirty || getReportForm.controls['transcript_status'].touched)) || isSubmitted">
-                                                    <div class="error_message"
-                                                        *ngIf="getReportForm.controls['transcript_status'].errors?.required">
-                                                        Transcript Status cannot be blank
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card" *ngIf="isCertification">
-                                <div class="card-header">
-                                    <div class="header_div_promt">
-                                        <strong class="font-16">Certification</strong>
-                                    </div>
-                                </div>
-                                <div class="card-body card_width">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Certification Vendor
-                                                    <span class="text-danger-ligth">* </span>
-                                                    <a>
-                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                            placement="right"
-                                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                                    </a>
-                                                </label>
-                                                <input type="text" class="form-control form_width"
-                                                    formControlName="certification_vendor" />
-                                                <div
-                                                    *ngIf="(getReportForm.controls['certification_vendor'].invalid && (getReportForm.controls['certification_vendor'].dirty || getReportForm.controls['certification_vendor'].touched)) || isSubmitted">
-                                                    <div class="error_message"
-                                                        *ngIf="getReportForm.controls['certification_vendor'].errors?.required">
-                                                        Certification Vendor cannot be blank
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Certification Title
-                                                    <span class="text-danger-ligth">* </span>
-                                                    <a>
-                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                            placement="right"
-                                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                                    </a>
-                                                </label>
-                                                <input type="text" class="form-control form_width"
-                                                    formControlName="title" />
-                                                <div
-                                                    *ngIf="(getReportForm.controls['title'].invalid && (getReportForm.controls['title'].dirty || getReportForm.controls['title'].touched)) || isSubmitted">
-                                                    <div class="error_message"
-                                                        *ngIf="getReportForm.controls['title'].errors?.required">
-                                                        Certification Title cannot be blank
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Certification Domain
-                                                    <span class="text-danger-ligth">* </span>
-                                                    <a>
-                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                            placement="right"
-                                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                                    </a>
-                                                </label>
-                                                <input type="text" class="form-control form_width"
-                                                    formControlName="certification_domain" />
-                                                <div
-                                                    *ngIf="(getReportForm.controls['certification_domain'].invalid && (getReportForm.controls['certification_domain'].dirty || getReportForm.controls['certification_domain'].touched)) || isSubmitted">
-                                                    <div class="error_message"
-                                                        *ngIf="getReportForm.controls['certification_domain'].errors?.required">
-                                                        Certification Domain cannot be blank
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Certification Status
-                                                    <span class="text-danger-ligth">* </span>
-                                                    <a>
-                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                            placement="right"
-                                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
-                                                    </a>
-                                                </label>
-                                                <ng-select [items]="certificationStatusObj" bindLabel="name"
-                                                    bindValue="name" formControlName="certification_status"
-                                                    class="w_100">
-                                                </ng-select>
-                                                <div
-                                                    *ngIf="(getReportForm.controls['certification_status'].invalid && (getReportForm.controls['certification_status'].dirty || getReportForm.controls['certification_status'].touched)) || isSubmitted">
-                                                    <div class="error_message"
-                                                        *ngIf="getReportForm.controls['certification_status'].errors?.required">
-                                                        Certification Status cannot be blank
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </ng-container>
+                        
                     </div>
                 </div>
             </div>
         </div>
+        <ng-container *ngIf="getForm">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                       
+            <div class="card" *ngIf="!isCertification">
+                <div class="card-header">
+                    <div class="header_div_promt">
+                        <strong class="font-16">Training</strong>
+                    </div>
+                </div>
+                <div class="card-body card_width">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                    Training Title
+                                    <span class="text-danger-ligth">* </span>
+                                    <a>
+                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                            placement="right"
+                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
+                                    </a>
+                                </label>
+                                <input type="text" class="form-control form_width"
+                                    formControlName="title" />
+                                <div
+                                    *ngIf="(getReportForm.controls['title'].invalid && (getReportForm.controls['title'].dirty || getReportForm.controls['title'].touched)) || isSubmitted">
+                                    <div class="error_message"
+                                        *ngIf="getReportForm.controls['title'].errors?.required">
+                                        Training Title cannot be blank
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                    Transcript Status
+                                    <span class="text-danger-ligth">* </span>
+                                    <a>
+                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                            placement="right"
+                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
+                                    </a>
+                                </label>
+                                <ng-select [items]="transcriptStatusObj" bindLabel="name"
+                                    bindValue="name" formControlName="transcript_status" class="w_100 drop_panel">
+                                </ng-select>
+                                <div
+                                    *ngIf="(getReportForm.controls['transcript_status'].invalid && (getReportForm.controls['transcript_status'].dirty || getReportForm.controls['transcript_status'].touched)) || isSubmitted">
+                                    <div class="error_message"
+                                        *ngIf="getReportForm.controls['transcript_status'].errors?.required">
+                                        Transcript Status cannot be blank
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card" *ngIf="isCertification">
+                <div class="card-header">
+                    <div class="header_div_promt">
+                        <strong class="font-16">Certification</strong>
+                    </div>
+                </div>
+                <div class="card-body card_width">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                    Certification Vendor
+                                    <span class="text-danger-ligth">* </span>
+                                    <a>
+                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                            placement="right"
+                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
+                                    </a>
+                                </label>
+                                <input type="text" class="form-control form_width"
+                                    formControlName="certification_vendor" />
+                                <div
+                                    *ngIf="(getReportForm.controls['certification_vendor'].invalid && (getReportForm.controls['certification_vendor'].dirty || getReportForm.controls['certification_vendor'].touched)) || isSubmitted">
+                                    <div class="error_message"
+                                        *ngIf="getReportForm.controls['certification_vendor'].errors?.required">
+                                        Certification Vendor cannot be blank
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                    Certification Title
+                                    <span class="text-danger-ligth">* </span>
+                                    <a>
+                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                            placement="right"
+                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
+                                    </a>
+                                </label>
+                                <input type="text" class="form-control form_width"
+                                    formControlName="title" />
+                                <div
+                                    *ngIf="(getReportForm.controls['title'].invalid && (getReportForm.controls['title'].dirty || getReportForm.controls['title'].touched)) || isSubmitted">
+                                    <div class="error_message"
+                                        *ngIf="getReportForm.controls['title'].errors?.required">
+                                        Certification Title cannot be blank
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                    Certification Domain
+                                    <span class="text-danger-ligth">* </span>
+                                    <a>
+                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                            placement="right"
+                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
+                                    </a>
+                                </label>
+                                <input type="text" class="form-control form_width"
+                                    formControlName="certification_domain" />
+                                <div
+                                    *ngIf="(getReportForm.controls['certification_domain'].invalid && (getReportForm.controls['certification_domain'].dirty || getReportForm.controls['certification_domain'].touched)) || isSubmitted">
+                                    <div class="error_message"
+                                        *ngIf="getReportForm.controls['certification_domain'].errors?.required">
+                                        Certification Domain cannot be blank
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                    Certification Status
+                                    <span class="text-danger-ligth">* </span>
+                                    <a>
+                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                            placement="right"
+                                            ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
+                                    </a>
+                                </label>
+                                <ng-select [items]="certificationStatusObj" bindLabel="name"
+                                    bindValue="name" formControlName="certification_status"
+                                    class="w_100">
+                                </ng-select>
+                                <div
+                                    *ngIf="(getReportForm.controls['certification_status'].invalid && (getReportForm.controls['certification_status'].dirty || getReportForm.controls['certification_status'].touched)) || isSubmitted">
+                                    <div class="error_message"
+                                        *ngIf="getReportForm.controls['certification_status'].errors?.required">
+                                        Certification Status cannot be blank
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+        </ng-container>
         <ng-container *ngIf="getForm">
             <div class="content">
                 <div class="row">

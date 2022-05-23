@@ -46,32 +46,12 @@
                 <span>View Get a report Request</span>
                 <span class="cc-text_css"> ({{ requestdata.request_id }}) -
                 </span>
-                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status_show | titlecase
+                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status_new | titlecase
                     }}</span>
             </p>
         </div>
     </div>
-    <div class="row" *ngIf="requestdata.status_new == GetReportStatus.closed">
-        <div class="col-md-12">
-          <div class="back_img_viewbac">
-            <div class="animated fadeIn">
-              <div class="card" >
-                <div class="card-body">
-                  <div class="col-sm-12 col-md-6">
-                    <div class="d-flex"> 
-                        <div>
-                            <a href="{{requestdata.attachUrl}}">
-                              <i class="fa fa-download" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div> 
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  
     <div class="content">
         <div class="animated fadeIn">
             <div class="mb-2" *ngIf="isUpdate() || isPublish() || isForward() || isReject()">
@@ -107,6 +87,11 @@
                     <div class="card border-radius-0">
                         <div class="card-header card_header_view">
                             <p>Get a report Details</p>
+                            <div *ngIf="requestdata.status_new == GetReportStatus.closed">
+                                <a href="{{requestdata.attachUrl}}" class="text_white">
+                                 Download Report <i class="fa fa-download text_white ml-1" aria-hidden="true"></i>
+                                </a>
+                            </div>
                         </div>
                         <div class="card-body">                      
                                 <div class="col-sm-12 col-md-6">
