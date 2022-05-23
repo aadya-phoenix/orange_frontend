@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthenticationServiceGuard } from '../shared/services/guards/authentication.guards';
+import { EditUserComponent } from './edit-user/edit-user.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 
 const routes: Routes = [
   {path:'',component:UserManagementComponent},
+  {path:'create',component:EditUserComponent,canActivate:[AuthenticationServiceGuard]},
+  {path:'edit/:id',component:EditUserComponent,canActivate:[AuthenticationServiceGuard]},
 /*   {path:'cources',loadChildren:()=>import("./create-course/create-course.module").then(m=>m.CreateCourseModule)},
   */
   ];

@@ -6,16 +6,19 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { SharedModule } from '../shared/shared.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 
 @NgModule({
-  declarations: [UserManagementComponent],
+  declarations: [UserManagementComponent, EditUserComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
     SharedModule,
     NgSelectModule,
     NgxPaginationModule,
+    NgbModule
   ]
 })
 export class UserModule { }

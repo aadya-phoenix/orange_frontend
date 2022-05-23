@@ -1,0 +1,126 @@
+<div class="content mt-3">
+    <div class="animated fadeIn" >
+        <div class="card" *ngIf="isCreate">
+            <div class="card-body">
+                <div class="Requs_btn_inl" >
+                    <div class="Requs_btn_inl-child">
+                        <button class="btn btn-default btn_requst ml-2 " data-toggle="modal">
+                            <i class="fa fa-edit mr-1" aria-hidden="true"></i>Edit
+                        </button>
+                        <button class="btn btn-default btn_requst ml-2">
+                            <i class="fa fa-floppy-o mr-1" aria-hidden="true"></i>Save
+                        </button>
+                        <button class="btn btn-default btn_requst ml-2" data-toggle="modal">
+                            <i class="fa fa-trash mr-1" aria-hidden="true"></i>Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <form [formGroup]="createUserForm">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class=" ">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="user_image">
+                                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                                </div>
+                                <p class="text-center user_info">User Information</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                           <!--  <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Username                                   </label>
+                                    <input type="text " placeholder="Enter Username" class="form-control form_width" />
+                                </div>
+                            </div>-->                           
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">First Name</label>
+                                    <input type="text" placeholder="Enter Firstname" class="form-control form_width" formControlName="first_name" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">
+                                        Last Name</label>
+                                    <input type="text" placeholder="Enter Lastname" class="form-control form_width" formControlName="last_name"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">
+                                        Enter Password </label>
+                                    <input type="password" placeholder="Enter Username" class="form-control form_width" formControlName="password"/>
+                                    <div *ngIf="(createUserForm.controls['password'].invalid && (createUserForm.controls['password'].dirty || createUserForm.controls['password'].touched))" class="error_message">
+                                       Please Enter Valid Password
+                                     <div class="error_message"
+                                        *ngIf="createUserForm.controls['password'].errors?.required">
+                                        Password cannot be blank
+                                    </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">
+                                        Confirm Password</label>
+                                    <input type="password" placeholder="Enter Username" class="form-control form_width" formControlName="confirm_password"/>
+                                    <div *ngIf="(createUserForm.controls['confirm_password'].invalid && (createUserForm.controls['confirm_password'].dirty || createUserForm.controls['confirm_password'].touched))" class="error_message">
+                                        Please Enter Valid Password
+                                      <div class="error_message"
+                                         *ngIf="createUserForm.controls['confirm_password'].errors?.required">
+                                         Password cannot be blank
+                                     </div>
+                                     <div *ngIf="createUserForm.controls['confirm_password'].mustMatch">
+                                         Password and confirm not match</div>
+                                     </div>
+                                </div>                                
+                            </div> 
+                            <div class="col-sm-6 mt-2">
+                                <div class="form-group">
+                                    <label class="form-control-label">Email </label>
+                                    <input type="text " placeholder="Enter Email" class="form-control form_width" formControlName="email"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt-2">
+                                <div class="form-group">
+                                    <label class="form-control-label">Role</label>
+                                    <ng-select placeholder="Please select role" [items]="rolesList"
+                                    (change)="getSelectedRole($event)"
+                                    [multiple]="false" bindLabel="role" bindValue="id"
+                                     formControlName="role_id">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt-2" *ngIf="isRegion">
+                                <div class="form-group">
+                                    <label class="form-control-label">Region</label>
+                                    <ng-select placeholder="Please select region" [items]="regionList"
+                                    [multiple]="false" bindLabel="name" bindValue="id"
+                                     formControlName="region_id">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt-2">
+                                <div class="form-group">
+                                    <label class="form-control-label">PDL Member</label>
+                                    <input type="checkbox" class="form-control form_width" formControlName="pdl_member"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary mr-1" type="submit" > <i class="fa fa-upload mr-1" aria-hidden="true"></i>Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       </form>
+    </div>
+</div>
