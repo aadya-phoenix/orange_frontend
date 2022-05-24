@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { CustomValidators } from 'src/app/shared/constant/customValidators';
+import {  passwordMatchingValidatior } from 'src/app/shared/constant/customValidators';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
@@ -34,7 +34,7 @@ export class EditUserComponent implements OnInit {
       region_id: new FormControl('', [Validators.required]),
       pdl_member: new FormControl(false, [Validators.required]),
     },
-    CustomValidators.mustMatch('password', 'confirm_password') );
+    { validators: passwordMatchingValidatior } );
   }
 
   ngOnInit(): void {
