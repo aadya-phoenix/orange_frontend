@@ -47,12 +47,11 @@
                                     <i class="fa fa-table fa_table" aria-hidden="true "></i>
                                     <span class="card-title card-title-text card_overall">My Request</span>
                                 </div>
+                              
+                                   
                                 <div class="filter_dispaly">
-                                    <button class=" btn btn-default btn_requst" [routerLink]="['/user/create']" data-toggle="modal" 
-                                    >
-                                        <i class="fa fa-plus mr-1" aria-hidden="true"></i>Add
-                                      </button>
-                                    <div class="form-group filter_course">
+                                    
+                                    <div class="form-group filter_course mr-1">
                                       <label class="label_course">Filter by Role</label>
                                       <select class="form-control  form_width" (change)="getRoleFilterRecords($event.target.value)"
                                        >
@@ -61,13 +60,18 @@
                                        [value]="role.id">{{role.role}}</option>
                                       </select>
                                     </div>                 
-                                    <div _ngcontent-cue-c109=" " class="form-group filter_course mr-0">
+                                    <div _ngcontent-cue-c109=" " class="form-group filter_course mr-1">
                                       <label _ngcontent-cue-c109=" " class="label_course text_black">Search</label>
                                       <input _ngcontent-cue-c109=" " type="text " name="search " autocomplete="off "
                                         [(ngModel)]="searchText" placeholder=" "
                                         class="form-control ng-untouched ng-pristine ng-valid form_width" ng-reflect-name="search " />
                                     </div>
+                                    <button class=" btn btn-primary btn_adduser mt-3" [routerLink]="['/user/create']" data-toggle="modal" 
+                                    >
+                                        <i class="fa fa-plus mr-1" aria-hidden="true"></i><span>Add User</span>
+                                      </button>
                                   </div>
+                                  
                             </div>
                         </div>
                         <div class="card-body">
