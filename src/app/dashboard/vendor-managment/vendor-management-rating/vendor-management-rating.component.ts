@@ -20,6 +20,8 @@ export class VendorManagementRatingComponent implements OnInit {
   status = '';
   ratings: any = [];
   model = 0;
+  RatingList = dataConstant.Ratings;
+  selectedRatings = {}
   VendorStatus = dataConstant.VendorStatus;
   constructor(private formBuilder: FormBuilder,
     private modalService: NgbActiveModal,
@@ -57,6 +59,10 @@ export class VendorManagementRatingComponent implements OnInit {
     );
   }
 
+  changeRating(){
+    // this.selectedRatings = this.
+  }
+
   submitRating() {
     this.isSubmitted = true;
     if (this.publishVendorForm.invalid) {
@@ -71,7 +77,7 @@ export class VendorManagementRatingComponent implements OnInit {
     this.vendorService.VendorRatings(data).subscribe(
       (res: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastSuccessMsg('Vendor', `Successfully ${this.props.status}.`);
+        this.commonService.toastSuccessMsg('Vendor', `Rating submitted successfully.`);
         this.vendorRatingList();
       },
       (err: any) => {

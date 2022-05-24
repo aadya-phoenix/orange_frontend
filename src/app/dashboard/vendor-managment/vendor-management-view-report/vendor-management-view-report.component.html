@@ -9,7 +9,8 @@
                     <div class="d-flex flex-column ml-3">
                         <span class="breade_text_span1">Manage Vendors</span>
                         <span class="divider"></span>
-                        <span class="breade_text_span">View and manage details about external vendor workshops and internal PD&L workshops.</span>
+                        <span class="breade_text_span">View and manage details about external vendor workshops and
+                            internal PD&L workshops.</span>
                     </div>
                 </div>
             </div>
@@ -42,50 +43,49 @@
         </div>
     </div>
 
-    <form [formGroup]="filterForm">
-        <div class="content mt-3">
-            <div class="animated fadeIn">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <form [formGroup]="filterForm">
                             <div class="card-body card_padding">
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label class="form-control-label">Status
                                             </label>
-                                            <ng-select placeholder="Select status"
-                                                        [items]="status" [multiple]="false" bindLabel="name"
-                                                        bindValue="value" formControlName="status">
-                                                    </ng-select>
+                                            <ng-select placeholder="Select status" [items]="status" [multiple]="false"
+                                                bindLabel="name" bindValue="value" formControlName="status">
+                                            </ng-select>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label class="form-control-label">Overall Rating
                                             </label>
-                                            <ng-select placeholder="Select overall rating"
-                                            [items]="overallRatings" [multiple]="false" bindLabel="name"
-                                            bindValue="id" formControlName="overall_rating">
-                                        </ng-select>
+                                            <ng-select placeholder="Select overall rating" [items]="overallRatings"
+                                                [multiple]="false" bindLabel="name" bindValue="id"
+                                                formControlName="overall_rating">
+                                            </ng-select>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label class="form-control-label">Vendor Name
                                             </label>
-                                            <input type="text" placeholder="Enter Name"
-                                                        class="form-control form_width" formControlName="vendor_name" />
+                                            <input type="text" placeholder="Enter Name" class="form-control form_width"
+                                                formControlName="vendor_name" />
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label class="form-control-label">NFPS entity(Oracle entity)
                                             </label>
-                                            <ng-select placeholder="Select NFPS entity"
-                                            [items]="CCTNfpsEntity" [multiple]="false" bindLabel="nfps_entity"
-                                            bindValue="nfps_entity" formControlName="overall_rating">
-                                        </ng-select>
+                                            <ng-select placeholder="Select NFPS entity" [items]="CCTNfpsEntity"
+                                                [multiple]="false" bindLabel="nfps_entity" bindValue="nfps_entity"
+                                                formControlName="overall_rating">
+                                            </ng-select>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -93,9 +93,9 @@
                                             <label class="form-control-label">
                                                 Vendor Region
                                             </label>
-                                            <ng-select placeholder="Select Region"
-                                                [items]="cordinatorsList" [multiple]="true" bindLabel="name"
-                                                bindValue="name" formControlName="region">
+                                            <ng-select placeholder="Select Region" [items]="cordinatorsList"
+                                                [multiple]="true" bindLabel="name" bindValue="name"
+                                                formControlName="region">
                                             </ng-select>
                                         </div>
                                     </div>
@@ -104,11 +104,10 @@
                                             <label class="form-control-label">
                                                 Vendor location
                                             </label>
-                                            <ng-select placeholder="Select location"
-                                            [items]="CCTLearningLocation" [multiple]="true"
-                                            bindLabel="location_name" bindValue="location_name"
-                                            formControlName="location">
-                                        </ng-select>
+                                            <ng-select placeholder="Select location" [items]="CCTLearningLocation"
+                                                [multiple]="true" bindLabel="location_name" bindValue="location_name"
+                                                formControlName="location">
+                                            </ng-select>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -116,10 +115,9 @@
                                             <label class="form-control-label">
                                                 Training Offers
                                             </label>
-                                            <ng-select placeholder="Please select location"
-                                                [items]="CCTOfferTraining" [multiple]="true"
-                                                bindLabel="training_offers" bindValue="training_offers"
-                                                formControlName="training_offer">
+                                            <ng-select placeholder="Please select location" [items]="CCTOfferTraining"
+                                                [multiple]="true" bindLabel="training_offers"
+                                                bindValue="training_offers" formControlName="training_offer">
                                             </ng-select>
                                         </div>
                                     </div>
@@ -128,7 +126,8 @@
                                             <label class="form-control-label">Other Training Offers
                                             </label>
                                             <input type="text" placeholder="Enter Other Training Offers"
-                                                        class="form-control form_width" formControlName="other_training_offer" />
+                                                class="form-control form_width"
+                                                formControlName="other_training_offer" />
                                         </div>
                                     </div>
                                 </div>
@@ -139,252 +138,252 @@
                                     <button class="btn btn-primary" (click)="filterData()">Apply</button>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header cm-card-header">
-                                <div class="overall_css">
-                                    <span class="card_overall">Overall request Status</span>
-                                    <div class="d-flex">
-                                        <button class="btn btn-primary mr-1"
-                                            [routerLink]="['/dashboard/vendormanagement/create']">
-                                            <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1"> New
-                                                vendor</span>
-                                        </button>
-                                            <button class="btn btn-primary mr-1 fon_12"
-                                            (click)="ratingReport()"><i class="fa fa-star mr-1"
-                                                aria-hidden="true"></i>Rating Report</button>
-                                                <button class="btn btn-secondary mr-1 fon_12"
-                                        (click)="exportExcel()"><i class="fa fa-download mr-1"
-                                            aria-hidden="true"></i>Export</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body card_course_body">
-                                <div class="Course_icon_parent" data-aos="fade-right">
-                                    <div class="Course_icon_child">
-                                        <div class="alig_dashicon" (click)="showRecords(vendorStatus.active)">
-                                            <div class="sub-child-dashicon">
-                                                <div class="fa-icons-des cm-learning">
-                                                    <img src="../../../../assets/images/icon/check.png" />
-                                                </div>
-                                                <p>Active</p>
-                                            </div>
-                                            <span class="number_css">{{vendor_count.active?vendor_count.active:0}}</span>
-                                        </div>
-                                    </div>
-                                    <div class="Course_icon_child">
-                                        <div class="alig_dashicon" (click)="showRecords(vendorStatus.deactive)">
-                                            <div class="sub-child-dashicon">
-                                                <div class="fa-icons-des cm-draft">
-                                                    <img src="../../../../assets/images/icon/drafts.png" />
-                                                </div>
-                                                <p>Inactive</p>
-                                            </div>
-                                            <span class="number_css">{{vendor_count.deactive?vendor_count.deactive:0}}</span>
-                                        </div>
-                                    </div>
-                                    <div class="Course_icon_child">
-                                        <div class="alig_dashicon" (click)="showRecords(vendorStatus.total)">
-                                            <div class="sub-child-dashicon">
-                                                <div class="fa-icons-des cm-all">
-                                                    <img src="../../../../assets/images/icon/viewall.png" />
-                                                </div>
-                                                <p>View All</p>
-                                            </div>
-                                            <span class="number_css">{{vendor_count.total?vendor_count.total:0}}</span>
-                                        </div>
-                                    </div>
+                        </form>
+
+                    </div>
+                    <div class="card">
+                        <div class="card-header cm-card-header">
+                            <div class="overall_css">
+                                <span class="card_overall">Overall request Status</span>
+                                <div class="d-flex">
+                                    <button class="btn btn-primary mr-1"
+                                        [routerLink]="['/dashboard/vendormanagement/create']">
+                                        <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1"> New
+                                            vendor</span>
+                                    </button>
+                                    <button class="btn btn-secondary mr-1 fon_12" (click)="ratingReport()"><i
+                                            class="fa fa-star mr-1" aria-hidden="true"></i>Rating Report</button>
+                                    <button class="btn btn-secondary mr-1 fon_12" (click)="exportExcel()"><i
+                                            class="fa fa-download mr-1" aria-hidden="true"></i>Export</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
-                            <div class="card-header cm-card-header">
-                                <div class="overall_css">
-                                    <div>
-                                        <i class="fa fa-table fa_table" aria-hidden="true "></i>
-                                        <span class="card-title card-title-text card_overall">View all vendor list</span>
-                                    </div>
-                                    <div class="filter_dispaly">
-                                        <div class="form-group filter_course">
-                                            <label class="label_course">Search</label>
-                                            <input type="text " name="search " autocomplete="off" [(ngModel)]="searchText"
-                                                placeholder="Type to Search"
-                                                class="form-control ng-untouched ng-pristine ng-valid form_width"
-                                                ng-reflect-name="search" />
+                        <div class="card-body card_course_body">
+                            <div class="Course_icon_parent" data-aos="fade-right">
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="showRecords(vendorStatus.active)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des cm-learning">
+                                                <img src="../../../../assets/images/icon/check.png" />
+                                            </div>
+                                            <p>Active</p>
                                         </div>
+                                        <span class="number_css">{{vendor_count.active?vendor_count.active:0}}</span>
+                                    </div>
+                                </div>
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="showRecords(vendorStatus.deactive)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des cm-draft">
+                                                <img src="../../../../assets/images/icon/drafts.png" />
+                                            </div>
+                                            <p>Inactive</p>
+                                        </div>
+                                        <span
+                                            class="number_css">{{vendor_count.deactive?vendor_count.deactive:0}}</span>
+                                    </div>
+                                </div>
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="showRecords(vendorStatus.total)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des cm-all">
+                                                <img src="../../../../assets/images/icon/viewall.png" />
+                                            </div>
+                                            <p>View All</p>
+                                        </div>
+                                        <span class="number_css">{{vendor_count.total?vendor_count.total:0}}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive table_height_scroll">
-                                    <table id="excel-table" class="table table-bordered">
-                                        <thead class="sticky_header">
-                                            <tr class="text-center font-12 wor_br">
-                                                <th scope="col">#</th>
-                                                <th sortable="status" (sort)="onSort($event)">
-                                                     Status
-                                                    <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
-                                                    <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
-                                                </th>
-                                                <th sortable="rating" (sort)="onSort($event)">
-                                                     Rating
-                                                    <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
-                                                    <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
-                                                </th>
-                                                <th sortable="name" (sort)="onSort($event)">
-                                                    Vendor Name
-                                                    <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
-                                                    <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
-                                                </th>
-                                               
-                                                <th sortable="nfps_entity" (sort)="onSort($event)">
-                                                    NFPS entity (Oracle entity)
-                                                    <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
-                                                    <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
-                                                </th>
-                                                <th sortable="region" (sort)="onSort($event)">
-                                                    Vendor Region
-                                                    <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
-                                                    <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
-                                                </th>
-                                                <th sortable="location" (sort)="onSort($event)">
-                                                    Vendor location
-                                                    <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
-                                                    <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
-                                                </th>
-                                                <th sortable="epurchase" (sort)="onSort($event)">
-                                                    Epurchase
-                                                    <i class="fa fa-long-arrow-up arrow_css"
-                                                        aria-hidden="true"></i>
-                                                    <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
-                                                </th>
-                                                <th sortable="global_contract" (sort)="onSort($event)">
-                                                    Do we have a global contact?
-                                                    <i class="fa fa-long-arrow-up arrow_css"
-                                                        aria-hidden="true"></i>
-                                                    <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
-                                                </th>
-                                                <th sortable="orange_contact" (sort)="onSort($event)">
-                                                    PD&L/Orange contact
-                                                    <i class="fa fa-long-arrow-up arrow_css"
-                                                        aria-hidden="true"></i>
-                                                    <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
-                                                </th>
-                                                <th sortable="training_offer" (sort)="onSort($event)">
-                                                    Training offers
-                                                    <i class="fa fa-long-arrow-up arrow_css"
-                                                        aria-hidden="true"></i>
-                                                    <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
-                                                </th>
-    
-                                                <th sortable="other_training_offer" (sort)="onSort($event)">
-                                                    Other training offers
-                                                    <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
-                                                    <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
-                                                </th>
-                                                <th sortable="requester_name" (sort)="onSort($event)">
-                                                    Created by
-                                                    <i class="fa fa-long-arrow-up arrow_css"
-                                                        aria-hidden="true"></i>
-                                                    <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
-                                                </th>
-                                                <th class="text-center">History</th>
-                                                <th class="text-center">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let item of vendorListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber }; let i =index;"
-                                                class="text-center bac_hover-table font-12">
-                                                <td scope="row">{{(((pagination.pageSize *
-                                                    (pagination.pageNumber - 1)) + 1) + i)}}</td>
-                                                <td>
-                                                    <span class="{{item.status}}">{{item.status | titlecase}}</span>
-                                                    <a (click)="statusChange(item)"
-                                                        class="ml-1" data-toggle="tooltip" data-placement="top"
-                                                        title="Status Change">
-                                                        <img src="../../../../assets/images/active.png">
-                                                        <img src="../../../../assets/images/deactive.png">
-                                                    </a>
-                                                </td>
-                                                <td (click)="viewRequest(item)">{{ item.name }}
-                                                </td>
-                                                <td (click)="viewRequest(item)">{{ item.rating }}
-                                                </td>
-                                                <td (click)="viewRequest(item)">{{ item && item.nfps_entity ? item.nfps_entity :
-                                                    "-" }}</td>
-                                                    <td (click)="viewRequest(item)">{{ item && item.region ? item.region :
-                                                        "-" }}</td>
-                                                        <td (click)="viewRequest(item)">{{ item && item.location ? item.location :
-                                                            "-" }}</td>
-                                                <td (click)="viewRequest(item)">
-                                                    <span class="{{item.epurchase === 1 ? 'yes' : 'no'}}">{{ item.epurchase === 1 ? 'Yes' : 'No' }}</span>
-                                                </td>
-                                                <td (click)="viewRequest(item)">
-                                                    <span class="{{item.global_contract === 1 ? 'yes' : 'no'}}">{{ item.global_contract === 1 ? 'Yes' : 'No' }}</span>
-                                                </td>
-                                                <td (click)="viewRequest(item)">{{ item.orange_contact }}
-                                                </td>
-                                                <td (click)="viewRequest(item)">{{ item.training_offer }}
-                                                </td>
-                                                <td (click)="viewRequest(item)">
-                                                    {{ item.other_training_offer }}
-                                                </td>
-                                                <td (click)="viewRequest(item)">
-                                                    {{ item.requester_name }}
-                                                </td>
-                                                <td>
-                                                    <a *ngIf="item.status !== vendorStatus.draft" (click)="openModal(item)" class="re_id">
-                                                        View
-                                                    </a>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="d-flex justify-content-center">
-                                                    <a (click)="editRequest(item)"
-                                                        class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
-                                                        title="Edit">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header cm-card-header">
+                            <div class="overall_css">
+                                <div>
+                                    <i class="fa fa-table fa_table" aria-hidden="true "></i>
+                                    <span class="card-title card-title-text card_overall">View all vendor list</span>
+                                </div>
+                                <div class="filter_dispaly">
+                                    <div class="form-group filter_course">
+                                        <label class="label_course">Search</label>
+                                        <input type="text " name="search " autocomplete="off" [(ngModel)]="searchText"
+                                            placeholder="Type to Search"
+                                            class="form-control ng-untouched ng-pristine ng-valid form_width"
+                                            ng-reflect-name="search" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive table_height_scroll">
+                                <table id="excel-table" class="table table-bordered">
+                                    <thead class="sticky_header">
+                                        <tr class="text-center font-12 wor_br">
+                                            <th scope="col">#</th>
+                                            <th sortable="status" (sort)="onSort($event)">
+                                                Status
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="rating" (sort)="onSort($event)">
+                                                Rating
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="name" (sort)="onSort($event)">
+                                                Vendor Name
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+
+                                            <th sortable="nfps_entity" (sort)="onSort($event)">
+                                                NFPS entity (Oracle entity)
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="region" (sort)="onSort($event)">
+                                                Vendor Region
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="location" (sort)="onSort($event)">
+                                                Vendor location
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="epurchase" (sort)="onSort($event)">
+                                                Epurchase
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true"></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
+                                            </th>
+                                            <th sortable="global_contract" (sort)="onSort($event)">
+                                                Do we have a global contact?
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true"></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
+                                            </th>
+                                            <th sortable="orange_contact" (sort)="onSort($event)">
+                                                PD&L/Orange contact
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true"></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
+                                            </th>
+                                            <th sortable="training_offer" (sort)="onSort($event)">
+                                                Training offers
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true"></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
+                                            </th>
+
+                                            <th sortable="other_training_offer" (sort)="onSort($event)">
+                                                Other training offers
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="requester_name" (sort)="onSort($event)">
+                                                Created by
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true"></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
+                                            </th>
+                                            <th class="text-center">History</th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of vendorListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber }; let i =index;"
+                                            class="text-center bac_hover-table font-12">
+                                            <td scope="row">{{(((pagination.pageSize *
+                                                (pagination.pageNumber - 1)) + 1) + i)}}</td>
+                                            <td>
+                                                <!-- <span class="{{item.status}}">{{item.status | titlecase}}</span> -->
+                                                <a (click)="statusChange(item)" class="ml-1" data-toggle="tooltip"
+                                                    data-placement="top" title="{{item.status | titlecase}}">
+                                                    <img *ngIf="item.status == 'active'"
+                                                        src="../../../../assets/images/active.png">
+                                                    <img *ngIf="item.status != 'active'"
+                                                        src="../../../../assets/images/deactive.png">
+                                                </a>
+                                            </td>
+                                            <td (click)="viewRequest(item)">{{ item.name }}
+                                            </td>
+                                            <td (click)="viewRequest(item)">{{ item.rating }}
+                                            </td>
+                                            <td (click)="viewRequest(item)">{{ item && item.nfps_entity ?
+                                                item.nfps_entity :
+                                                "-" }}</td>
+                                            <td (click)="viewRequest(item)">{{ item && item.region ? item.region :
+                                                "-" }}</td>
+                                            <td (click)="viewRequest(item)">{{ item && item.location ? item.location :
+                                                "-" }}</td>
+                                            <td (click)="viewRequest(item)">
+                                                <span class="{{item.epurchase === 1 ? 'yes' : 'no'}}">{{ item.epurchase
+                                                    === 1 ? 'Yes' : 'No' }}</span>
+                                            </td>
+                                            <td (click)="viewRequest(item)">
+                                                <span class="{{item.global_contract === 1 ? 'yes' : 'no'}}">{{
+                                                    item.global_contract === 1 ? 'Yes' : 'No' }}</span>
+                                            </td>
+                                            <td (click)="viewRequest(item)">{{ item.orange_contact }}
+                                            </td>
+                                            <td (click)="viewRequest(item)">{{ item.training_offer }}
+                                            </td>
+                                            <td (click)="viewRequest(item)">
+                                                {{ item.other_training_offer }}
+                                            </td>
+                                            <td (click)="viewRequest(item)">
+                                                {{ item.requester_name }}
+                                            </td>
+                                            <td>
+                                                <a *ngIf="item.status !== vendorStatus.draft" (click)="openModal(item)"
+                                                    class="re_id">
+                                                    View
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center">
+                                                    <a (click)="editRequest(item)" class="copy_file mr-1"
+                                                        data-toggle="tooltip" data-placement="top" title="Edit">
                                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                     </a>
                                                     <a (click)="deleteRequest(item.id)"
                                                         *ngIf="item.user_id === getprofileDetails.data.id"
-                                                        class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
-                                                        title="Delete">
+                                                        class="copy_file mr-1" data-toggle="tooltip"
+                                                        data-placement="top" title="Delete">
                                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                                     </a>
                                                     <a class="copy_file mr-1" data-toggle="tooltip"
-                                                        (click)="commentRequest(item)" data-placement="top" title="View">
+                                                        (click)="commentRequest(item)" data-placement="top"
+                                                        title="View">
                                                         <i class="fa fa-comments" aria-hidden="true"></i>
                                                     </a>
                                                     <a class="copy_file mr-1" data-toggle="tooltip"
                                                         (click)="viewRequest(item)" data-placement="top" title="View">
                                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                                     </a>
-    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagiantio_dispaly">
+                                <div class="pagintion_ child">
+                                    <p class="cm-pagination-fotter">Showing {{(pagination.pageSize *
+                                        (pagination.pageNumber - 1)) + 1}} to
+                                        {{(this.pagination.pageSize * this.pagination.pageNumber) >
+                                        this.vendorListToShow?.length ? this.vendorListToShow?.length :
+                                        this.pagination.pageSize * this.pagination.pageNumber}} of
+                                        {{this.vendorListToShow?.length}} entries</p>
                                 </div>
-                                <div class="pagiantio_dispaly">
-                                    <div class="pagintion_ child">
-                                        <p class="cm-pagination-fotter">Showing {{(pagination.pageSize *
-                                            (pagination.pageNumber - 1)) + 1}} to
-                                            {{(this.pagination.pageSize * this.pagination.pageNumber) >
-                                            this.vendorListToShow?.length ? this.vendorListToShow?.length :
-                                            this.pagination.pageSize * this.pagination.pageNumber}} of
-                                            {{this.vendorListToShow?.length}} entries</p>
-                                    </div>
-                                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
-                                </div>
+                                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 
     <!-- Button trigger modal -->
 
 
-  
+
 </div>
