@@ -5,6 +5,7 @@ import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive'
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { UserManageService } from 'src/app/shared/services/user-management/user-manage.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-management',
@@ -14,6 +15,7 @@ import { UserManageService } from 'src/app/shared/services/user-management/user-
 export class UserManagementComponent implements OnInit {
 
   userList:any=[];
+  userListToShow:any=[];
   rolesList:any=[];
   searchText:string='';
   first_name : any;
@@ -29,7 +31,7 @@ export class UserManagementComponent implements OnInit {
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
   constructor(
-    private userManageServicse:UserManageService,
+    private userManageService:UserManageService,
     private courceService:CourcesService,
     private commonService:CommonService,
     private router: Router) { }
@@ -39,24 +41,25 @@ export class UserManagementComponent implements OnInit {
     this.getRole();
   }
 
-  getUsername(user:any){
-   let id = user.id;
-   this.first_name = user.first_name;
-   this.last_name = user.last_name;
-   this.email = user.email;
-  }
-
-  addUser(){
-   this.router.navigateByUrl(`/user/create`);
+  getRoleFilterRecords(role:any){
+    console.log("role",role,this.userList);
+     if (role) {
+      this.userListToShow = [...this.userList].filter((a, b) => {
+        return a.role_id == role
+      });
+    }  
+    else{
+      this.userListToShow = this.userList;
+    }
   }
 
   getUsers(){
     this.commonService.showLoading();
-    this.userManageServicse.getUsers().subscribe(
+    this.userManageService.getUsers().subscribe(
       (res: any) => {
         this.commonService.hideLoading();
         this.userList = res.data;
-        console.log('userList',this.userList);
+        this. userListToShow = res.data;
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -69,6 +72,39 @@ export class UserManagementComponent implements OnInit {
     if (user && user.id) {
       this.router.navigateByUrl(`/user/edit/${user.id}`);
     }
+  }
+
+  editRequest(user: any){
+    if (user && user.id) {
+      this.router.navigateByUrl(`/user/edit/${user.id}`);
+    }
+  }
+
+  deleteRequest(userId: any){
+    Swal.fire({
+      title: 'Are you sure want to remove?',
+      text: 'You will not be able to recover this request!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.commonService.showLoading();
+        this.userManageService.changeUserStatus({status:"0"},userId).subscribe((res:any)=>{
+          this.commonService.hideLoading();
+          this.getUsers();
+          Swal.fire(
+            'Deleted!',
+            'Your request has been deleted.',
+            'success'
+          )
+        },(err:any)=>{
+          this.commonService.hideLoading();
+        })
+        
+      }
+    })
   }
 
   onSort({ column, direction }: any) {
@@ -93,7 +129,6 @@ export class UserManagementComponent implements OnInit {
   getRole(){
    this.courceService.getRole().subscribe(
      res=>{
-       console.log('roles are',res.data);
        this.rolesList= res.data;
      },err=>{
       console.log(err);
