@@ -16,7 +16,7 @@ export class UserManageService {
     this.headers.append('Access-Control-Allow-Origin', '*');
   }
 
-  createuser(data:any){
+  createUser(data:any){
     const url = `api/${this.apiVersion}/user/create`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling)); 
   }
@@ -28,8 +28,8 @@ export class UserManageService {
     .pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  updateUser(data:any){
-    const url = `api/${this.apiVersion}/user/update`;
+  updateUser(data:any,id:number){
+    const url = `api/${this.apiVersion}/user/${id}/update`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling)); 
   }
 
@@ -40,4 +40,13 @@ export class UserManageService {
     .pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  changeUserStatus(data: any,id:any) {
+    const url = `api/${this.apiVersion}/user/${id}/status`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  changePassword(data: any,id:number){
+    const url = `api/${this.apiVersion}/user/${id}/password`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
 }

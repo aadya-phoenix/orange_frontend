@@ -8,10 +8,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { ChangePasswordUserComponent } from './change-password-user/change-password-user.component';
 
 
 @NgModule({
-  declarations: [UserManagementComponent, EditUserComponent],
+  declarations: [UserManagementComponent, EditUserComponent, ChangePasswordUserComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
