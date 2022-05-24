@@ -24,7 +24,7 @@ export class CourseCreateComponent implements OnInit {
   languageList: any = [];
   getUserrole: any = {};
   getprofileDetails: any = {};
-  createCourseForm: FormGroup;
+  createCourceForm: FormGroup;
   languageText = "";
   isReviewer = false;
   isPublisher = false;
@@ -41,10 +41,12 @@ export class CourseCreateComponent implements OnInit {
   whocanSee = [];
   preferedInstructor = [];
   availableLanguages = [];
-  learningTypes = [];
+  learningTypes:any = [];
   cctExpiryType = [];
   publisherList = [];
-  course_count = {    
+  remainingText = 500;
+  selectedLearningType: any = {};
+  course_count = {
     closed: 0,
     draft: 0,
     pending: 0,
@@ -54,6 +56,15 @@ export class CourseCreateComponent implements OnInit {
     transferred: 0
   };
   learningType = 1
+  public tools: object = {
+    items: [
+      'UnorderedList']
+  };
+  public yesNo: any = [
+    { id: 'yes', name: 'Yes' },
+    { id: 'no', name: 'No' },
+  ];
+  fileToUpload: any = [];
 
   constructor(private formBuilder: FormBuilder,
     private commonService: CommonService,
@@ -72,18 +83,110 @@ export class CourseCreateComponent implements OnInit {
       const Id = params.get('id');
       this.course_id = Id ? parseInt(Id) : 0;
     });
-    this.createCourseForm = this.formBuilder.group({
-      languages: new FormArray([]),
-      metadata: this.formBuilder.array([]),
-      image: new FormControl('', this.course_id ? [] : [Validators.required]),
-      publication_date: new FormControl('', [Validators.required]),
-      expiry_type: new FormControl('', [Validators.required]),
-      additional_comment: new FormControl('')
+    this.createCourceForm = this.formBuilder.group({
+      title_single: new FormControl('', [Validators.required]),
+      description_single: new FormControl('', [Validators.required]),
+      training_provided_by: new FormControl('', [Validators.required]),
+      duration: new FormControl('', [Validators.required]),
+      objective_single: new FormControl('', [Validators.required]),
+      subject: new FormControl('', [Validators.required]),
+      keyword: new FormControl('', [Validators.required]),
+      available_language: new FormControl('', [Validators.required]),
+      level: new FormControl('', [Validators.required]),
+      email_content_owner: new FormControl('', [Validators.required]),
+      email_training_contact: new FormControl('', [Validators.required]),
+      prerequisite: new FormControl(''),
+      resource: [''],
+      learning_type: new FormControl('', [Validators.required]),
+      additional_comment: new FormControl(''),
+      regional_cordinator: new FormControl('', [Validators.required]),
+      delivery_method: new FormControl('', [Validators.required]),
+      digital: new FormControl('', [Validators.required]),
+      purchase_order: new FormControl('', [Validators.required]),
+      manager_approval: new FormControl('', [Validators.required]),
+      who_see_course: new FormControl(''),
+      email_preffered_instructor: new FormControl('', [Validators.required]),
+      first_session_date: new FormControl('', [Validators.required]),
+      expiry_date: new FormControl('', [Validators.required]),
+      expiry_date_type: new FormControl('', [Validators.required]),
+      entity_business_area: new FormControl('', [Validators.required]),
+      certification: new FormControl('', [Validators.required]),
+      certification_expiry_type: new FormControl('', [Validators.required]),
+      validity_period: new FormControl('', [Validators.required]),
+      external_vendor: new FormControl('', [Validators.required]),
+      external_vendor_name:new FormControl('', [Validators.required]),
+      free_field_content: new FormControl(''),
+      for_whoom_single:new FormControl('', [Validators.required]),
+      learn_more_single: new FormControl(''),
+      learner_guideline: this.formBuilder.array([]),
+      curriculum_content:  this.formBuilder.array([]),
+    });
+    this.createCourceForm.get("learning_type")?.valueChanges.subscribe(x => {
+      debugger;
+      this.selectedLearningType = this.learningTypes.find((y: { id: any; }) => y.id == x);
+      this.learnerguidelineFormArray.push(this.addMorelearnerGuideline('', ''));
+      this.curriculumContentArray.push(this.addMoreCurriculumContent(''));
+      // if (_.includes(x, 'Others')) {
+      // }
+      // else {
+      //   this.createCourceForm.controls.other_training_offer.setValue(null);
+      // }
+    });
+    this.createCourceForm.get("description_single")?.valueChanges.subscribe(() => {
+      this.valueChange();
     });
   }
 
+
+
+
   ngOnInit(): void {
     this.getCordinators();
+  }
+
+  valueChange() {
+    if (this.createCourceForm.value.description_single) {
+      this.remainingText = 500 - this.createCourceForm.value.description_single.length;
+    }
+    else {
+      this.remainingText = 500;
+    }
+  }
+  
+  get learnerguidelineFormArray(): FormArray {
+    return this.createCourceForm.get("learner_guideline") as FormArray;
+  }
+  get curriculumContentArray(): FormArray {
+    return this.createCourceForm.get("curriculum_content") as FormArray;
+  }
+
+  addMorelearnerGuideline(titleval: string, descriptionval: string) {
+    return this.formBuilder.group({
+      title: new FormControl(titleval),
+      description: new FormControl(descriptionval),
+    });
+  }
+
+  addMoreCurriculumContent(descriptionval: string) {
+    return this.formBuilder.group({
+      description: new FormControl(descriptionval),
+    });
+  }
+
+  addLearnerGuideline(titleval: string, descriptionval: string) {
+    return this.learnerguidelineFormArray.push(this.addMorelearnerGuideline(titleval, descriptionval));
+  }
+
+  addCurriculumContenttocurriculum(descriptionval: string) {
+    return this.curriculumContentArray.push(this.addMoreCurriculumContent(descriptionval));
+  }
+
+  removeLearnerGuideline(i: any) {
+    this.learnerguidelineFormArray.removeAt(i);
+  }
+
+  removeCurriculumContenttocurriculum(i: any) {
+    this.curriculumContentArray.removeAt(i);
   }
 
   //get regional cordinators
@@ -301,6 +404,48 @@ export class CourseCreateComponent implements OnInit {
     );
   }
 
+
+  handleFileInput(event: any) {
+    console.log("event is", event.target.files[0]);
+    this.FileConvertintoBytearray(event.target.files[0], async (f) => { // creating array bytes
+
+      let objectdata: any = {
+        fileName: f.name,
+        base64FileBytes: this.byteArrayTobase64(f.bytes),
+        attachmentId: - (this.fileToUpload.length + 1)
+      };
+      this.fileToUpload.push(objectdata);
+    });
+  }
+
+  byteArrayTobase64(arr: any[]) {
+    let base64: string = "";
+    for (var i = 0; i < arr.length; i++) {
+      base64 += String.fromCharCode(arr[i]);
+    }
+    return window.btoa(base64);
+  }
+
+  FileConvertintoBytearray(file: any, cb: (arg0: any) => void) { // making File to Array Bytes    
+    const fileReader = new FileReader();
+    fileReader.readAsArrayBuffer(file);
+    fileReader.onloadend = function () {
+      const arrayBuffer: any = fileReader.result;
+      const bytes = new Uint8Array(arrayBuffer);
+      const array_bytes = Array.from(bytes);
+      file.bytes = array_bytes;
+      cb(file);
+    };
+  }
+
+  get_learningType(event: any, target: any) {
+    this.learningType = event.target.value;
+    setTimeout(() => {
+      var topOfElement = target.offsetTop;
+      window.scroll({ top: topOfElement, behavior: "smooth" });
+    }, 200);
+  }
+
   getPublisher() {
     this.courseService.getNewPublisherByLearningType(this.learningType).subscribe(
       (res: any) => {
@@ -316,5 +461,8 @@ export class CourseCreateComponent implements OnInit {
     );
   }
 
- 
+
+
+
+
 }
