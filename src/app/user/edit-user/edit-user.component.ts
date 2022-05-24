@@ -35,8 +35,8 @@ export class EditUserComponent implements OnInit {
     private router: Router,) { 
     this.createUserForm = this.formBuilder.group({
       email: new FormControl('', [Validators.required,Validators.pattern(emailregexp)]),
-      password: new FormControl('', this.isCreate ? [Validators.required,Validators.pattern(passwordRegexp)] : []),
-      confirm_password: new FormControl('', this.isCreate ? [Validators.required,Validators.pattern(passwordRegexp)] : []),
+      password: new FormControl('', []),
+      confirm_password: new FormControl('', []),
       first_name: new FormControl('', [Validators.required]),
       last_name: new FormControl('', [Validators.required]),
       role_id: new FormControl('', [Validators.required]),
@@ -53,9 +53,15 @@ export class EditUserComponent implements OnInit {
       if(this.user_id){
        this.isCreate = false ;
        this.getUserDetails();
+       this.createUserForm.get('password')?.clearValidators();
+       this.createUserForm.get('confirm_password')?.clearValidators();
+       this.createUserForm.get('password')?.setValue(null);
+       this.createUserForm.get('confirm_password')?.setValue(null);
       }
       else{
         this.isCreate = true;
+        this.createUserForm.get('password')?.setValidators([Validators.required, Validators.pattern(passwordRegexp)]);
+        this.createUserForm.get('confirm_password')?.setValidators([Validators.required, Validators.pattern(passwordRegexp)]);
       }
     });
     this.getRole();
@@ -68,6 +74,7 @@ export class EditUserComponent implements OnInit {
    }
    else{
     this.isRegion = false;
+    this.createUserForm.get('region_id')?.setValue(null);
   }
   }
 
@@ -86,6 +93,7 @@ export class EditUserComponent implements OnInit {
     this.isSubmitted = true;
     if (this.createUserForm.invalid) {
       return;
+      
     }
     const body = this.createUserForm.value;
     !this.user_id ? this.create(body) : this.update(body);
@@ -177,9 +185,12 @@ export class EditUserComponent implements OnInit {
   }
 
   setPassword() {
+    this.commonService.showLoading();
     if (this.user_id) {
       this.router.navigateByUrl(`/user/change-password/${this.user_id}`);
+      this.commonService.hideLoading();
     }
+    
   }
 
   getRegionalCordinator(){
