@@ -16,10 +16,28 @@ export class UserManageService {
     this.headers.append('Access-Control-Allow-Origin', '*');
   }
 
+  createuser(data:any){
+    const url = `api/${this.apiVersion}/user/create`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling)); 
+  }
+
   getUsers(){
     const url = `/api/${this.apiVersion}/users`;
     return this.http
     .get(url, this.http.headers)
     .pipe(catchError(this.commmonService.Errorhandling));
   }
+
+  updateUser(data:any){
+    const url = `api/${this.apiVersion}/user/update`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling)); 
+  }
+
+  getUserDetails(id:number){
+    const url = `/api/${this.apiVersion}/user/${id}/detail`;
+    return this.http
+    .get(url, this.http.headers)
+    .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
 }
