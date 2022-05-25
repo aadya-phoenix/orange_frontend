@@ -11,6 +11,7 @@ import { CourcesService } from '../shared/services/cources/cources.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  modules = dataConstant.Modules;
   pendingRequestCount = {
     carousel_pending: 0,
     course_pending: 0,
@@ -57,7 +58,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl(`/dashboard/back-office?status=${status}`);
   }
 
-  getFavourite(){
+  getFavourite(module:any){
     console.log("favourite course");
   }
   
