@@ -108,10 +108,10 @@
                                             <input type="text " placeholder="Enter Email"
                                                 class="form-control form_width" formControlName="email" />
                                             <div class="error_message"
-                                            *ngIf="(createUserForm.controls['email'].invalid && (createUserForm.controls['email'].dirty || createUserForm.controls['email'].touched)) || isSubmitted">
+                                            *ngIf="(createUserForm.controls['email'].invalid && (createUserForm.controls['email'].dirty || createUserForm.controls['email'].touched)) ">
                                             Email is not valid.
                                             <div class="error_message"
-                                             *ngIf="createUserForm.controls['email'].errors?.required">
+                                             *ngIf="createUserForm.controls['email'].errors?.required   || isSubmitted">
                                               Email cannot be blank
                                                   </div>
                                               </div>    
@@ -124,11 +124,11 @@
                                                 Enter Password </label>
                                             <input type="password" placeholder="Enter Username"
                                                 class="form-control form_width" formControlName="password" />
-                                            <div class="error_message" *ngIf="(createUserForm.controls['password'].invalid && (createUserForm.controls['password'].dirty || createUserForm.controls['password'].touched)) || isSubmitted"
+                                            <div class="error_message" *ngIf="(createUserForm.controls['password'].invalid && (createUserForm.controls['password'].dirty || createUserForm.controls['password'].touched)) "
                                                 class="error_message">
                                                 Please Enter Valid Password.
                                                 <div class="error_message"
-                                                    *ngIf="createUserForm.controls['password'].errors?.required">
+                                                    *ngIf="createUserForm.controls['password'].errors?.required || isSubmitted">
                                                     Password cannot be blank
                                                 </div>
                                             </div>
@@ -142,7 +142,7 @@
                                                 class="form-control form_width" formControlName="confirm_password"
                                                 (keyup)=getConfirm_paassword() />
 
-                                            <div *ngIf="(createUserForm.controls['confirm_password'].invalid && (createUserForm.controls['confirm_password'].dirty || createUserForm.controls['confirm_password'].touched)) || isSubmitted"
+                                            <div *ngIf="(createUserForm.controls['confirm_password'].invalid && (createUserForm.controls['confirm_password'].dirty || createUserForm.controls['confirm_password'].touched))"
                                                 class="error_message">
                                                 Please Enter Valid Password
                                                 <div class="error_message" *ngIf="notmatched">
