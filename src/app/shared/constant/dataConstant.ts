@@ -27,9 +27,7 @@ export const dataConstant = {
   NumbersOnlyPattern:'^[0-9]+$',
   EuroCurrencyPattern:'^[0-9,]*$',
   CurrencyPattern:'^(?!0\.00)\d{1,3}(,\d{3})*(\.\d\d)?$',
- /*  PasswordPattern:'^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$', */
- /*  PasswordPattern:'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})$', */
- PasswordPattern:'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$',
+  PasswordPattern:'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$',
   Ratings: [{id:1, value:'Very Bad'},{id:2, value:'Bad'},{id:3, value:'Okay'},{id:4, value:'Good'},{id:5, value:'Excellent'}],
   CarouselStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
   BackOfficeStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
