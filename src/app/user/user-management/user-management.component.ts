@@ -22,6 +22,8 @@ export class UserManagementComponent implements OnInit {
   last_name : any;
   email  : any;
 
+  activeUserList =[{id:1,name:'Active'},{id:0,name:'InActive'}];
+
   pagination = {
     page: 1,
     pageNumber: 1,
@@ -42,10 +44,31 @@ export class UserManagementComponent implements OnInit {
   }
 
   getRoleFilterRecords(role:any){
-    console.log("role",role,this.userList);
      if (role) {
       this.userListToShow = [...this.userList].filter((a, b) => {
         return a.role_id == role
+      });
+    }  
+    else{
+      this.userListToShow = this.userList;
+    }
+  }
+
+  getActiveFilterRecords(status:any){
+    if (status) {
+      this.userListToShow = [...this.userList].filter((a, b) => {
+        return a.status == status
+      });
+    }  
+    else{
+      this.userListToShow = this.userList;
+    }
+  }
+
+  getPdlFilterRecords(member:any){
+    if (member) {
+      this.userListToShow = [...this.userList].filter((a, b) => {
+        return a.pdl_member == member
       });
     }  
     else{

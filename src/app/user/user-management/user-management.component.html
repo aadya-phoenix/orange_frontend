@@ -50,7 +50,23 @@
                               
                                    
                                 <div class="filter_dispaly">
-                                    
+                                    <div class="form-group filter_course mr-1">
+                                        <label class="label_course">Filter by Active / InActive Users</label>
+                                        <select class="form-control  form_width" (change)="getActiveFilterRecords($event.target.value)"
+                                         >
+                                          <option selected='selected' value=''>View All</option>
+                                         <option *ngFor="let status of activeUserList"
+                                         [value]="status.id">{{status.name}}</option>
+                                        </select>
+                                      </div>  
+                                      <div class="form-group filter_course mr-1">
+                                        <label class="label_course">Filter by PD&L Members</label>
+                                        <select class="form-control  form_width" (change)="getPdlFilterRecords($event.target.value)"
+                                         >
+                                          <option selected='selected' value=''>View All</option>
+                                         <option value="1">PD&L Members</option>
+                                        </select>
+                                    </div>  
                                     <div class="form-group filter_course mr-1">
                                       <label class="label_course">Filter by Role</label>
                                       <select class="form-control  form_width" (change)="getRoleFilterRecords($event.target.value)"
@@ -130,11 +146,6 @@
                                                     class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                     title="Edit">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                </a>
-                                                <a (click)="deleteRequest(item.id)"
-                                                    class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
-                                                    title="Delete">
-                                                    <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </a>
                                             </td>
                                         </tr>

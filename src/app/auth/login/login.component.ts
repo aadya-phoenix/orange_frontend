@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
           if (res) {
             localStorage.setItem('loginDetails', JSON.stringify(res));
             this.router.navigate(['/dashboard']);
+            this.lastLogin();
             this.authService.getProfileDetails().subscribe((profile) => {
               console.log(profile);
               this.authService.getRoles().subscribe((res: any) => {
@@ -74,5 +75,13 @@ export class LoginComponent implements OnInit {
     } else {
       this.loginForm.markAllAsTouched();
     }
+  }
+
+  lastLogin(){
+    this.authService.lastLogin().subscribe(res=>{
+
+    },err=>{
+      console.log(err);
+    })
   }
 }

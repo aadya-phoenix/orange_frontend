@@ -36,23 +36,6 @@
     </div>
     <div class="content mt-3">
         <div class="animated fadeIn">
-            <!-- <div class="card" *ngIf="!isCreate">
-                <div class="card-body">
-                    <div class="Requs_btn_inl">
-                        <div class="Requs_btn_inl-child">
-                            <button class="btn btn-default btn_requst ml-2 " data-toggle="modal">
-                                <i class="fa fa-edit mr-1" aria-hidden="true"></i>Edit
-                            </button>
-                            <button class="btn btn-default btn_requst ml-2">
-                                <i class="fa fa-floppy-o mr-1" aria-hidden="true"></i>Save
-                            </button>
-                            <button class="btn btn-default btn_requst ml-2" data-toggle="modal">
-                                <i class="fa fa-trash mr-1" aria-hidden="true"></i>Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <form [formGroup]="createUserForm">
                 <div class="row">
                     <div class="col-md-12">
@@ -64,10 +47,6 @@
                              (click)="save()">
                                 <i class="fa fa-edit mr-1" aria-hidden="true"></i>Update
                             </button>
-                            <button *ngIf="!isCreate" class="btn btn-secondary" data-toggle="modal"
-                            (click)="delete()">
-                                <i class="fa fa-trash mr-1" aria-hidden="true"></i>Delete User
-                            </button>
                             </div>
                         <div class="card">
                            
@@ -76,7 +55,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">First Name</label>
-                                            <input type="text" placeholder="Enter Firstname"
+                                            <input type="text"
                                                 class="form-control form_width" formControlName="first_name" />
                                               <div
                                               *ngIf="(createUserForm.controls['first_name'].invalid && (createUserForm.controls['first_name'].dirty || createUserForm.controls['first_name'].touched)) || isSubmitted">
@@ -91,7 +70,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Last Name</label>
-                                            <input type="text" placeholder="Enter Lastname"
+                                            <input type="text" 
                                                 class="form-control form_width" formControlName="last_name" />
                                              <div
                                               *ngIf="(createUserForm.controls['last_name'].invalid && (createUserForm.controls['last_name'].dirty || createUserForm.controls['last_name'].touched)) || isSubmitted">
@@ -105,7 +84,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">Email </label>
-                                            <input type="text " placeholder="Enter Email"
+                                            <input type="text" 
                                                 class="form-control form_width" formControlName="email" />
                                             <div class="error_message"
                                             *ngIf="(createUserForm.controls['email'].invalid && (createUserForm.controls['email'].dirty || createUserForm.controls['email'].touched)) ">
@@ -122,7 +101,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Enter Password </label>
-                                            <input type="password" placeholder="Enter Username"
+                                            <input type="password" 
                                                 class="form-control form_width" formControlName="password" />
                                             <div class="error_message" *ngIf="(createUserForm.controls['password'].invalid && (createUserForm.controls['password'].dirty || createUserForm.controls['password'].touched)) "
                                                 class="error_message">
@@ -138,7 +117,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Confirm Password</label>
-                                            <input type="password" placeholder="Enter Username"
+                                            <input type="password" 
                                                 class="form-control form_width" formControlName="confirm_password"
                                                 (keyup)=getConfirm_paassword() />
 
@@ -155,7 +134,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">Role</label>
-                                            <ng-select placeholder="Please select role" [items]="rolesList"
+                                            <ng-select  [items]="rolesList"
                                                 (change)="getSelectedRole($event)" [multiple]="false" bindLabel="role"
                                                 bindValue="id" formControlName="role_id">
                                             </ng-select>
@@ -171,7 +150,7 @@
                                     <div class="col-sm-4" *ngIf="isRegion">
                                         <div class="form-group">
                                             <label class="form-control-label">Region</label>
-                                            <ng-select placeholder="Please select region" [items]="regionList"
+                                            <ng-select  [items]="regionList"
                                                 [multiple]="false" bindLabel="name" bindValue="id"
                                                 formControlName="region_id">
                                             </ng-select>
@@ -186,12 +165,13 @@
                                     </div>
                                     
                                 </div>
-                                
-                                    <div class="">
-                                       
-                                        <input type="checkbox" 
-                                            formControlName="pdl_member" class="mr-1"/> <label class="">PD&L Member</label>
-                                    
+                                <div class="">
+                                  <input type="checkbox"  formControlName="pdl_member" class="mr-1"/> <label class="mr-2">PD&L Member</label>
+                                  <input type="checkbox"  formControlName="status" class="mr-1"/> <label class="mr-2">Is Active</label>
+                                  <input type="checkbox"  formControlName="admin" class="mr-1"/>
+                                  <label class="mr-2">Admin</label>
+                                  <input type="checkbox"  formControlName="staff" class="mr-1"/>
+                                  <label class="mr-2">Staff</label>
                                 </div>
                             </div>
                             
@@ -204,10 +184,18 @@
                                  <div class="form-group">
                                    <label class="form-control-label">Last Login</label>
                                    <div class="d-flex align-items-center">
-                                   <span class="form_data">{{user_details?.last_login}}</span>
+                                   <span class="form_data">{{user_details?.last_login | date: dateTimeFormate}}</span>
                                    </div>
                                 </div>
                                 </div>
+                                <div class="col-sm-6 mt-2">
+                                    <div class="form-group">
+                                      <label class="form-control-label">Joining Date</label>
+                                      <div class="d-flex align-items-center">
+                                      <span class="form_data">{{user_details?.created_at | date: dateTimeFormate}}</span>
+                                      </div>
+                                   </div>
+                                   </div>
                             </div>
                         </div>
                     </div>

@@ -80,6 +80,11 @@ export class AuthenticationService {
     .pipe(catchError(this.Errorhandling));
   }
 
+  lastLogin() {
+    const url = `/api/${this.apiVersion}/user/last-login`;
+    return this.http.post(url, {}).pipe(catchError(this.Errorhandling));
+  }
+
   logOut() {
     localStorage.clear();
     console.log('sdsds');

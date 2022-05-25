@@ -16,7 +16,7 @@ const emailregexp = dataConstant.EmailPattren;
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
-
+  dateTimeFormate = dataConstant.dateTimeFormate;
   createUserForm: FormGroup;
   user_id:any;
   user_details:any;
@@ -42,6 +42,9 @@ export class EditUserComponent implements OnInit {
       role_id: new FormControl('', [Validators.required]),
       region_id: new FormControl('', []),
       pdl_member: new FormControl(false, []),
+      status: new FormControl(true, []),
+      admin: new FormControl(false, []),
+      staff: new FormControl(true, []),
     },
     { validators: passwordMatchingValidatior } );
   }
@@ -69,11 +72,13 @@ export class EditUserComponent implements OnInit {
   }
 
   getSelectedRole(event:any){
-   if(event.id == 3){
+   if(event.id == 3 || event.id == 5){
      this.isRegion = true;
+     this.createUserForm.get('region_id')?.setValidators([Validators.required]);
    }
    else{
     this.isRegion = false;
+    this.createUserForm.get('region_id')?.clearValidators();
     this.createUserForm.get('region_id')?.setValue(null);
   }
   }
@@ -129,33 +134,6 @@ export class EditUserComponent implements OnInit {
     );
   }
 
-  delete(){
-    Swal.fire({
-      title: 'Are you sure want to remove?',
-      text: 'You will not be able to recover this request!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, keep it'
-    }).then((result) => {
-      if (result.value) {
-        this.commonService.showLoading();
-        this.userManageService.changeUserStatus({status:"0"},this.user_id).subscribe((res:any)=>{
-          this.commonService.hideLoading();
-          this.router.navigateByUrl(`/user`);
-          Swal.fire(
-            'Deleted!',
-            'Your request has been deleted.',
-            'success'
-          )
-        },(err:any)=>{
-          this.commonService.hideLoading();
-        })
-        
-      }
-    })
-  }
-
   getUserDetails() {
     this.commonService.showLoading();
     this.userManageService.getUserDetails(this.user_id).subscribe(
@@ -175,6 +153,13 @@ export class EditUserComponent implements OnInit {
             this.isRegion = false;
           }
           this.createUserForm.controls.pdl_member.setValue(this.user_details.pdl_member == "1" ? true : false);
+          this.createUserForm.controls.status.setValue(this.user_details.status == "1" ? true : false);
+          if(this.user_details.admin){
+          this.createUserForm.controls.admin.setValue(this.user_details.admin == "1" ? true : false);
+           }
+          if(this.user_details.staff){
+          this.createUserForm.controls.staff.setValue(this.user_details.staff == "1" ? true : false);
+           }
           }
       },
       (err: any) => {
@@ -205,7 +190,10 @@ export class EditUserComponent implements OnInit {
   getRole(){
     this.courceService.getRole().subscribe(
       res=>{
-        this.rolesList= res.data;
+        let roles = res.data;
+        this.rolesList = roles.filter((a:any) => {
+          return a.status == 1
+        });
       },err=>{
        console.log(err);
      });
