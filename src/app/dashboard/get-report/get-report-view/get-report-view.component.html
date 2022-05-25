@@ -7,7 +7,7 @@
                     <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
                         <span class="font-20 text_white">Get a report.</span>
-                        <span class="divider_req"></span>
+                        <span class="divider1"></span>
                         <span class="title-detail mt-6">Request a report, this is your one stop shop for all your
                             reporting needs.</span>
                     </div>
@@ -46,11 +46,12 @@
                 <span>View Get a report Request</span>
                 <span class="cc-text_css"> ({{ requestdata.request_id }}) -
                 </span>
-                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status | titlecase
+                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status_new | titlecase
                     }}</span>
             </p>
         </div>
     </div>
+  
     <div class="content">
         <div class="animated fadeIn">
             <div class="mb-2" *ngIf="isUpdate() || isPublish() || isForward() || isReject()">
@@ -58,10 +59,10 @@
                     <div class="Requs_btn_inl-child">
                         
                         <button type="button" class="btn btn-primary mr-2" *ngIf="isPublish()"
-                            (click)="statusChangeRequest(GetReportStatus.close)">
-                            <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Close</span>
+                            (click)="statusChangeRequest(GetReportStatus.publish)">
+                            <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Close Request</span>
                         </button>
-                        <button type="button" class="btn btn-secondary" *ngIf="isForward()"
+                        <button type="button" class="btn btn-secondary  mr-2" *ngIf="isForward()"
                             (click)="forwardRequest()">
                             <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Transfer to Data Analyst</span>
                         </button>
@@ -70,12 +71,12 @@
                             (click)="updateRequest()">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">Update</span>
                         </button>
-                        <button type="button" class="btn btn-secondary" *ngIf="isReject()"
+                        <button type="button" class="btn btn-secondary  mr-2" *ngIf="isReject()"
                             (click)="statusChangeRequest(GetReportStatus.reject)">
                             <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                         </button>
                     </div>
-                    <button type="button" class="btn btn-secondary ml-2" *ngIf="isOtherRoc()" (click)="transferToOtherRoc()">
+                    <button type="button" class="btn btn-secondary" *ngIf="isOtherRoc()" (click)="transferToOtherRoc()">
                         <i class="fa fa-exchange" aria-hidden="true"></i><span class="pl-1">Transfer to Other ROC</span>
                     </button>
                 </div>
@@ -86,9 +87,13 @@
                     <div class="card border-radius-0">
                         <div class="card-header card_header_view">
                             <p>Get a report Details</p>
+                            <div *ngIf="requestdata.status_new == GetReportStatus.closed">
+                                <a href="{{requestdata.attachUrl}}" class="text_white">
+                                 Download Report <i class="fa fa-download text_orange ml-1" aria-hidden="true"></i>
+                                </a>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            
+                        <div class="card-body">                      
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Requester Name</label>
@@ -99,7 +104,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Report Type</label>
@@ -110,7 +114,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.report_type =='Training'">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Training Title</label>
@@ -121,7 +124,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.transcript_status">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Transcript Status</label>
@@ -132,7 +134,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.report_type !='Training'">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Certification Title</label>
@@ -143,7 +144,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.certification_vendor">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Certification Vendor</label>
@@ -154,7 +154,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.certification_domain">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Certification Domain</label>
@@ -165,7 +164,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.certification_status">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Certification Status</label>
@@ -175,9 +173,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
-                            
+                                </div>                           
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.region_name">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Regions</label>
@@ -199,10 +195,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
-                           
-                            
+                                </div>                            
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.business_unit">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Business Unit</label>
@@ -232,8 +225,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>                     
-                            
+                                </div>                                                 
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">All available history</label>
@@ -243,9 +235,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
-                            
+                                </div>                            
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.start_date">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Start Date</label>
@@ -255,8 +245,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
+                                </div>                           
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.end_date">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">End Date</label>
@@ -266,9 +255,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
-                            
+                                </div>                            
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.contact_person">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Contact Person</label>
@@ -278,8 +265,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
+                                </div>                          
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.report_purpose">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Report Purpose</label>
@@ -289,9 +275,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                           
-                            
+                                </div>                           
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Deadline</label>
@@ -301,8 +285,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
+                                </div>                           
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.attachment">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Attachment</label>
@@ -313,9 +296,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
-                           
+                                </div>                          
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.additional_comment">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Additional Comments</label>
@@ -325,8 +306,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                            
+                                </div>                           
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Regional Training Coordinator</label>
@@ -337,49 +317,47 @@
                                         </div>
                                     </div>
                                 </div>
-                            
-
                         </div>
-                        <div class="card-body">
-                            <div class="card mb-0" >
-                                <div class="card-header color-orange">
-                                    <div class="d-flex justify-content-between">
-                                        <span class="row">
-                                            View History <h5 class="card-title ml-1">
-                                                <b class="color-orange"> ({{requestdata.request_id}})</b>
-                                            </h5>
-                                        </span>
-                                    </div>
+                    </div>
+                    <div class="">
+                        <div class="card mb-0" >
+                            <div class="card-header color-orange">
+                                <div class="d-flex justify-content-between">
+                                    <span class="row">
+                                        View History <h5 class="card-title ml-1">
+                                            <b class="color-orange"> ({{requestdata.request_id}})</b>
+                                        </h5>
+                                    </span>
                                 </div>
-                                <div class="card-body">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr class="font-14 text-center">
-                                                <th scope="col">Sr.No</th>
-                                                <th scope="col">Submitted by</th>
-                                                <th scope="col">Sent to</th>
-                                                <th scope="col">Last Modified</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Comments</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let history of historyList;let i = index" class="text-center font-13">
-                                                <th scope="row">{{i+1}}</th>
-                                                <td>{{ history && history.transfer_by_name ? history.transfer_by_name : history.action_by_name}}
-                                                </td>
-                                                <td>{{history && history.transfer_by_name ? history.transfer_to_name : '-'}}</td>
-                                                <td>{{ history.updated_at | date: "short"}}</td>
-                                                <td>
-                                                    {{history.status | titlecase}}
-                                                </td>
-                                                <td>
-                                                    <p style="width: 154px; overflow-y: auto;font-size: 12px;">{{history.status_comment}}</p>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr class="font-14 text-center">
+                                            <th scope="col">Sr.No</th>
+                                            <th scope="col">Submitted by</th>
+                                            <th scope="col">Sent to</th>
+                                            <th scope="col">Last Modified</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Comments</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let history of historyList;let i = index" class="text-center font-13">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{ history && history.transfer_by_name ? history.transfer_by_name : history.action_by_name}}
+                                            </td>
+                                            <td>{{history && history.transfer_by_name ? history.transfer_to_name : '-'}}</td>
+                                            <td>{{ history.updated_at | date: "short"}}</td>
+                                            <td>
+                                                {{history.status | titlecase}}
+                                            </td>
+                                            <td>
+                                                <p style="width: 154px; overflow-y: auto;font-size: 12px;">{{history.status_comment}}</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

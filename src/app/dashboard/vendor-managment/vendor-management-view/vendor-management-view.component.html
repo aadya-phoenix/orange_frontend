@@ -7,7 +7,7 @@
                     <img src="../../../../assets/images/manage vendor.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
                         <span class="breade_text_span1">Manage Vendors</span>
-                        <span class="divider_req"></span>
+                        <span class="divider"></span>
                         <span class="breade_text_span">View and manage details about external vendor workshops and
                             internal PD&L workshops.</span>
                     </div>
@@ -62,26 +62,24 @@
                             </div>
                             <div class="card-body card_width">
                                 <div class="rate_star d-flex">
-                                    <a class="minimize_rating"><span>-</span></a>
                                     <div class="rate">
                                         <input type="radio" id="star5" name="rate" [value]="5" [(ngModel)]="model"
                                             disabled />
                                         <label for="star5" title="Excellent">5 stars</label>
                                         <input type="radio" id="star4" name="rate" [value]="4" [(ngModel)]="model"
                                             disabled />
-                                        <label for="star4" title="text">4 stars</label>
+                                        <label for="star4" title="Good">4 stars</label>
                                         <input type="radio" id="star3" name="rate" [value]="3" [(ngModel)]="model"
                                             disabled />
-                                        <label for="star3" title="text">3 stars</label>
+                                        <label for="star3" title="Okay">3 stars</label>
                                         <input type="radio" id="star2" name="rate" [value]="2" [(ngModel)]="model"
                                             disabled />
-                                        <label for="star2" title="text">2 stars</label>
+                                        <label for="star2" title="Bad">2 stars</label>
                                         <input type="radio" id="star1" name="rate" [value]="1" [(ngModel)]="model"
                                             disabled />
-                                        <label for="star1" title="text">1 star</label>
+                                        <label for="star1" title="Very Bad">1 star</label>
                                     </div>
-                                    <button class="btn btn-secondary not_rated"><span class="fon_12">Not
-                                            Rated</span></button>
+                                    <button class="btn btn-secondary not_rated"><span class="fon_12">{{RatingList[model-1] ? RatingList[model-1].value : 'Not Rated'}}</span></button>
                                 </div>
                             </div>
                         </div>
@@ -103,24 +101,8 @@
                                         </thead>
                                         <tbody>
                                             <tr class="fon_13" *ngFor="let item of requestdata.rating;let i = index ">
-                                                <td class="p-0">
-                                                    <div class="rate">
-                                                        <input type="radio" id="star5" name="rate_{{i}}" [value]="5"
-                                                            [(ngModel)]="item.rating" disabled />
-                                                        <label for="star5" title="Excellent">5 stars</label>
-                                                        <input type="radio" id="star4" name="rate_{{i}}" [value]="4"
-                                                            [(ngModel)]="item.rating" disabled />
-                                                        <label for="star4" title="text">4 stars</label>
-                                                        <input type="radio" id="star3" name="rate_{{i}}" [value]="3"
-                                                            [(ngModel)]="item.rating" disabled />
-                                                        <label for="star3" title="text">3 stars</label>
-                                                        <input type="radio" id="star2" name="rate_{{i}}" [value]="2"
-                                                            [(ngModel)]="item.rating" disabled />
-                                                        <label for="star2" title="text">2 stars</label>
-                                                        <input type="radio" id="star1" name="rate_{{i}}" [value]="1"
-                                                            [(ngModel)]="item.rating" disabled />
-                                                        <label for="star1" title="text">1 star</label>
-                                                    </div>
+                                                <td>
+                                                    {{RatingList[item.rating-1].value}}
                                                 </td>
                                                 <td>{{ item.comment}}</td>
                                                 <td>{{ item.submitted_by_name}}</td>

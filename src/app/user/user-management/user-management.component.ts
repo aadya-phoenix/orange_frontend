@@ -1,0 +1,137 @@
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Router } from '@angular/router';
+import * as _ from 'lodash';
+import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
+import { CommonService } from 'src/app/shared/services/common/common.service';
+import { CourcesService } from 'src/app/shared/services/cources/cources.service';
+import { UserManageService } from 'src/app/shared/services/user-management/user-manage.service';
+import Swal from 'sweetalert2';
+
+@Component({
+  selector: 'app-user-management',
+  templateUrl: './user-management.component.html',
+  styleUrls: ['./user-management.component.scss']
+})
+export class UserManagementComponent implements OnInit {
+
+  userList:any=[];
+  userListToShow:any=[];
+  rolesList:any=[];
+  searchText:string='';
+  first_name : any;
+  last_name : any;
+  email  : any;
+
+  pagination = {
+    page: 1,
+    pageNumber: 1,
+    pageSize: 10
+  }
+
+  @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
+
+  constructor(
+    private userManageService:UserManageService,
+    private courceService:CourcesService,
+    private commonService:CommonService,
+    private router: Router) { }
+
+  ngOnInit(): void {
+    this.getUsers();
+    this.getRole();
+  }
+
+  getRoleFilterRecords(role:any){
+    console.log("role",role,this.userList);
+     if (role) {
+      this.userListToShow = [...this.userList].filter((a, b) => {
+        return a.role_id == role
+      });
+    }  
+    else{
+      this.userListToShow = this.userList;
+    }
+  }
+
+  getUsers(){
+    this.commonService.showLoading();
+    this.userManageService.getUsers().subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        this.userList = res.data;
+        this. userListToShow = res.data;
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    );
+  }
+
+  viewRequest(user: any) {
+    if (user && user.id) {
+      this.router.navigateByUrl(`/user/edit/${user.id}`);
+    }
+  }
+
+  editRequest(user: any){
+    if (user && user.id) {
+      this.router.navigateByUrl(`/user/edit/${user.id}`);
+    }
+  }
+
+  deleteRequest(userId: any){
+    Swal.fire({
+      title: 'Are you sure want to remove?',
+      text: 'You will not be able to recover this request!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.commonService.showLoading();
+        this.userManageService.changeUserStatus({status:"0"},userId).subscribe((res:any)=>{
+          this.commonService.hideLoading();
+          this.getUsers();
+          Swal.fire(
+            'Deleted!',
+            'Your request has been deleted.',
+            'success'
+          )
+        },(err:any)=>{
+          this.commonService.hideLoading();
+        })
+        
+      }
+    })
+  }
+
+  onSort({ column, direction }: any) {
+    this.headers.forEach((header: { sortable: any; direction: string; }) => {
+      if (header.sortable !== column) {
+        header.direction = '';
+      }
+    });
+
+    if (direction && column) {
+      this.userList = _.orderBy(this.userList, column, direction);
+    }
+    else {
+      this.userList = this.userList;
+    }
+  }
+
+  pageChanged(event: any) {
+    this.pagination.pageNumber = event;
+  }
+
+  getRole(){
+   this.courceService.getRole().subscribe(
+     res=>{
+       this.rolesList= res.data;
+     },err=>{
+      console.log(err);
+    });
+  }
+}

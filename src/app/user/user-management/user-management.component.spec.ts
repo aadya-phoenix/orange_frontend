@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GetReportForwardComponent } from './get-report-forward.component';
+import { UserManagementComponent } from './user-management.component';
 
-describe('GetReportForwardComponent', () => {
-  let component: GetReportForwardComponent;
-  let fixture: ComponentFixture<GetReportForwardComponent>;
+describe('UserManagementComponent', () => {
+  let component: UserManagementComponent;
+  let fixture: ComponentFixture<UserManagementComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GetReportForwardComponent ]
+      declarations: [ UserManagementComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GetReportForwardComponent);
+    fixture = TestBed.createComponent(UserManagementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

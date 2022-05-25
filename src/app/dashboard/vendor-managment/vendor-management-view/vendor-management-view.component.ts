@@ -19,6 +19,7 @@ export class VendorManagementViewComponent implements OnInit {
   activeIds: any = [];
   dateFormate = dataConstant.dateFormate;
   model = 0;
+  RatingList = dataConstant.Ratings;
   VendorStatus = dataConstant.VendorStatus;
   constructor(private route: ActivatedRoute,
     private vendorService: VendorService,

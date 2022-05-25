@@ -66,13 +66,13 @@ export class VendorManagementViewReportComponent implements OnInit {
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.filterForm = this.fb.group({
-      status: new FormControl('', []),
+      status: new FormControl(null, []),
       created_by: new FormControl('', []),
       vendor_name: new FormControl('', []),
       epurchase: new FormControl('', []),
       other_training_offer: new FormControl('', []),
-      overall_rating: new FormControl('', []),
-      nfps_entity: new FormControl('', []),
+      overall_rating: new FormControl(null, []),
+      nfps_entity: new FormControl(null, []),
       region: new FormControl('', []),
       location: new FormControl('', []),
       training_offer: new FormControl('', []),
@@ -213,13 +213,13 @@ export class VendorManagementViewReportComponent implements OnInit {
   
   reset() {
     this.filterForm.setValue({
-      status:'',
+      status:null,
       created_by: '',
       vendor_name: '',
       epurchase: '',
       other_training_offer: '',
-      overall_rating: '',
-      nfps_entity: '',
+      overall_rating: null,
+      nfps_entity: null,
       region: '',
       location:'',
       training_offer: '',
@@ -278,6 +278,9 @@ export class VendorManagementViewReportComponent implements OnInit {
       data: item.id,
       objectDetail: item
     };
+    modalRef.componentInstance.passEntry.subscribe((res: any) => {
+      this.filterData()
+    });
   }
 
   deleteRequest(vendor_id: number){

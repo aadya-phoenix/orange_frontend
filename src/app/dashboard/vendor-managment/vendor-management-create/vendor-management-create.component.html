@@ -7,7 +7,7 @@
                     <img src="../../../../assets/images/manage vendor.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
                         <span class="breade_text_span1">Manage Vendors</span>
-                        <span class="divider_req"></span>
+                        <span class="divider"></span>
                         <span class="breade_text_span">View and manage details about external vendor workshops and
                             internal PD&L workshops.</span>
                     </div>
@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="card-body card_width">
                                     <div class="row">
-                                        <div class="col-sm-12 col-md-4">
+                                        <div class="col-sm-4">
                                             <div class="d-flex align-items-center">
                                                 <div class="form-group w-100">
                                                     <label class="form-control-label">
@@ -87,7 +87,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-12 col-md-4">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     Vendor Region<span class="text-danger-ligth">* </span>
@@ -105,7 +105,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12 col-md-4">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     Vendor location<span class="text-danger-ligth">* </span>
@@ -124,7 +124,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12 col-md-4">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     Vendor address<span class="text-danger-ligth">* </span>
@@ -140,7 +140,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12 col-md-4">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     Website<span class="text-danger-ligth">* </span>
@@ -160,7 +162,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12 col-md-4">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     NFPS entity(Oracle entity)<span class="text-danger-ligth">* </span>
@@ -178,7 +180,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12 col-md-4">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     Epurchase
@@ -188,9 +190,10 @@
                                                 </ng-select>
                                             </div>
                                         </div>
+                                    
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-12 col-md-4">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     Do we have global contact ?
@@ -200,7 +203,7 @@
                                                 </ng-select>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12 col-md-4" *ngIf="orange_contact">
+                                        <div class="col-sm-4" *ngIf="orange_contact">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     PD&L/Orange contact<span class="text-danger-ligth">* </span>
@@ -218,7 +221,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-12 col-md-4">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     Training Offers<span class="text-danger-ligth">* </span>
@@ -237,7 +240,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12 col-md-4" *ngIf="other_training_offer">
+                                        <div class="col-sm-4" *ngIf="other_training_offer">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     Other training offers
@@ -247,26 +250,24 @@
                                                     formControlName="other_training_offer" />
                                             </div>
                                         </div>
-                                    </div>
+                                        </div>
                                 </div>
                             </div>
-                            <div class="card" formArrayName="contact">
-                                <div class="card-header card_header_vendor">
-                                    <strong _ngcontent-jet-c125=""> Vendors Point of contact </strong>
-                                </div>
-                                <div class="card-body card_width"
-                                    *ngFor="let cont of contactFormArray.controls; let i = index">
-                                    <div class="card">
-                                        <div class="card-header justify-content-end card_header_vendor">
+                            <div class="" formArrayName="contact">
+                                
+                               
+                                    <div class="card" *ngFor="let cont of contactFormArray.controls; let i = index">
+                                        <div class="card-header justify-content-between align-item-center card_header_vendor">
+                                            <strong _ngcontent-jet-c125=""> Vendors Point of contact </strong>
                                             <div class="d-flex">
                                                 <button class="btn btn-primary btn_contact mr-1" (click)="addContact()">
                                                     <span class="fon_12"><i class="fa fa-plus" aria-hidden="true"></i>
-                                                        Add More Contact</span>
+                                                        Add More</span>
                                                 </button>
                                                 <button class="btn btn-secondary btn_contact"
-                                                    (click)="removeContact(cont)">
+                                                    (click)="removeContact(cont)" *ngIf="i > 0">
                                                     <span class="fon_12"><i class="fa fa-minus" aria-hidden="true"></i>
-                                                        Remove Contact</span>
+                                                        Remove</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -337,7 +338,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                
                             </div>
                             <div class="card">
                                 <div class="card-header">

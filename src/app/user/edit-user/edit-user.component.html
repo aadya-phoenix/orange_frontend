@@ -1,0 +1,219 @@
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-8">
+            <div class="page-header float-left bac_trasparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="breade_text_span1">User Management</span>
+                        <span class="divider_req"></span>
+                        <span class="breade_text_span"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 float-right">
+            <div class="page-header float-right bac_trasparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bac_trasparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home text_white"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">User Management</span>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">Users</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <!-- <div class="card" *ngIf="!isCreate">
+                <div class="card-body">
+                    <div class="Requs_btn_inl">
+                        <div class="Requs_btn_inl-child">
+                            <button class="btn btn-default btn_requst ml-2 " data-toggle="modal">
+                                <i class="fa fa-edit mr-1" aria-hidden="true"></i>Edit
+                            </button>
+                            <button class="btn btn-default btn_requst ml-2">
+                                <i class="fa fa-floppy-o mr-1" aria-hidden="true"></i>Save
+                            </button>
+                            <button class="btn btn-default btn_requst ml-2" data-toggle="modal">
+                                <i class="fa fa-trash mr-1" aria-hidden="true"></i>Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <form [formGroup]="createUserForm">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-2 ml-1">
+                            <button *ngIf="!isCreate" class="btn btn-secondary mr-1"
+                            (click)="setPassword()">Change Password</button>
+                            <button *ngIf="isCreate" class="btn btn-secondary mr-1" type="submit" (click)="save()"> Save</button>
+                             <button  *ngIf="!isCreate" class="btn btn-secondary mr-1" data-toggle="modal"
+                             (click)="save()">
+                                <i class="fa fa-edit mr-1" aria-hidden="true"></i>Update
+                            </button>
+                            <button *ngIf="!isCreate" class="btn btn-secondary" data-toggle="modal"
+                            (click)="delete()">
+                                <i class="fa fa-trash mr-1" aria-hidden="true"></i>Delete User
+                            </button>
+                            </div>
+                        <div class="card">
+                           
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">First Name</label>
+                                            <input type="text" placeholder="Enter Firstname"
+                                                class="form-control form_width" formControlName="first_name" />
+                                              <div
+                                              *ngIf="(createUserForm.controls['first_name'].invalid && (createUserForm.controls['first_name'].dirty || createUserForm.controls['first_name'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="createUserForm.controls['first_name'].errors?.required">
+                                                  First Name cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Last Name</label>
+                                            <input type="text" placeholder="Enter Lastname"
+                                                class="form-control form_width" formControlName="last_name" />
+                                             <div
+                                              *ngIf="(createUserForm.controls['last_name'].invalid && (createUserForm.controls['last_name'].dirty || createUserForm.controls['last_name'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="createUserForm.controls['last_name'].errors?.required">
+                                                  Last Name cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Email </label>
+                                            <input type="text " placeholder="Enter Email"
+                                                class="form-control form_width" formControlName="email" />
+                                            <div class="error_message"
+                                            *ngIf="(createUserForm.controls['email'].invalid && (createUserForm.controls['email'].dirty || createUserForm.controls['email'].touched)) ">
+                                            Email is not valid.
+                                            <div class="error_message"
+                                             *ngIf="createUserForm.controls['email'].errors?.required   || isSubmitted">
+                                              Email cannot be blank
+                                                  </div>
+                                              </div>    
+                                        </div>
+                                    </div>
+                                    <ng-container *ngIf="isCreate">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Enter Password </label>
+                                            <input type="password" placeholder="Enter Username"
+                                                class="form-control form_width" formControlName="password" />
+                                            <div class="error_message" *ngIf="(createUserForm.controls['password'].invalid && (createUserForm.controls['password'].dirty || createUserForm.controls['password'].touched)) "
+                                                class="error_message">
+                                                Please Enter Valid Password.
+                                                <div class="error_message"
+                                                    *ngIf="createUserForm.controls['password'].errors?.required || isSubmitted">
+                                                    Password cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Confirm Password</label>
+                                            <input type="password" placeholder="Enter Username"
+                                                class="form-control form_width" formControlName="confirm_password"
+                                                (keyup)=getConfirm_paassword() />
+
+                                            <div *ngIf="(createUserForm.controls['confirm_password'].invalid && (createUserForm.controls['confirm_password'].dirty || createUserForm.controls['confirm_password'].touched))"
+                                                class="error_message">
+                                                Please Enter Valid Password
+                                                <div class="error_message" *ngIf="notmatched">
+                                                    Password and confirm not match</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     </ng-container>
+                                   
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Role</label>
+                                            <ng-select placeholder="Please select role" [items]="rolesList"
+                                                (change)="getSelectedRole($event)" [multiple]="false" bindLabel="role"
+                                                bindValue="id" formControlName="role_id">
+                                            </ng-select>
+                                            <div
+                                            *ngIf="(createUserForm.controls['role_id'].invalid && (createUserForm.controls['role_id'].dirty || createUserForm.controls['role_id'].touched)) || isSubmitted">
+                                            <div class="error_message"
+                                             *ngIf="createUserForm.controls['role_id'].errors?.required">
+                                              Role cannot be blank
+                                                  </div>
+                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" *ngIf="isRegion">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Region</label>
+                                            <ng-select placeholder="Please select region" [items]="regionList"
+                                                [multiple]="false" bindLabel="name" bindValue="id"
+                                                formControlName="region_id">
+                                            </ng-select>
+                                            <div
+                                            *ngIf="(createUserForm.controls['region_id'].invalid && (createUserForm.controls['region_id'].dirty || createUserForm.controls['region_id'].touched)) || isSubmitted">
+                                            <div class="error_message"
+                                             *ngIf="createUserForm.controls['region_id'].errors?.required">
+                                             Region cannot be blank
+                                             </div>
+                                             </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                                    <div class="">
+                                       
+                                        <input type="checkbox" 
+                                            formControlName="pdl_member" class="mr-1"/> <label class="">PD&L Member</label>
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div *ngIf="!isCreate" class="card">
+                            <div _ngcontent-qub-c7="" class="card-header card_header_view">
+                                <p >Login  Details</p></div>
+                            <div class="card-body">
+                              <div class="col-sm-6 mt-2">
+                                 <div class="form-group">
+                                   <label class="form-control-label">Last Login</label>
+                                   <div class="d-flex align-items-center">
+                                   <span class="form_data">{{user_details?.last_login}}</span>
+                                   </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

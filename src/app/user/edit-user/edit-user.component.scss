@@ -1,71 +1,3 @@
-.rate {
-    float: left;
-    height: 46px;
-    padding: 0 10px;
-}
-.rate:not(:checked) > input {
-    position:absolute;
-    top:-9999px;
-}
-.rate:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
-    color:#ccc;
-}
-.rate:not(:checked) > label:before {
-    content: '★ ';
-}
-.rate > input:checked ~ label {
-    color: #ffc700;    
-}
-// .rate:not(:checked) > label:hover,
-// .rate:not(:checked) > label:hover ~ label {
-//     color: #deb217;  
-// }
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-    color: #c59b08;
-}
-// .rate > input:disabled + label:hover,
-// .rate > input:disabled + label:hover ~ label,
-// .rate > input:disabled ~ label:hover,
-// .rate > input:disabled ~ label:hover ~ label,
-// .rate > label:hover ~ input:disabled ~ label {
-//     color: #ccc;
-// }
-.card_width{
-    padding: 6px 6px !important;
-}
-.minimize_rating{
-    height: 19px;
-    width: 19px;
-    margin-top: 7px;
-    background: #000;
-    border-radius: 9px;
-    color: #fff;
-}
-.minimize_rating span{
-    position: relative;
-    top: -6px;
-    left: 5px;
-    font-size: 26px;
-}
-.not_rated{
-    padding: 0px;
-    width: 100px;
-    height: 30px;
-    display: flex;
-    background: transparent;
-    color: #000;
-    justify-content: center;
-}
 .view-re_css {
     font-size: 17px;
     font-weight: 500;
@@ -77,6 +9,11 @@
 .modal-dialog {
     max-width: 900px !important;
     margin: 1.875rem auto;
+}
+.form_data{
+    border-bottom: 1px solid grey;
+    padding: 6px 1px;
+    font-size: 16px;
 }
 .border_user {
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
@@ -96,14 +33,10 @@
     font-weight: bold;
     color: red;
 }
-.carousl_view_mini .card #panel-0-header{
-    background-color: #000  !important;
-}
 .card-header {
     border-bottom: 1px solid #00000020 !important;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
-    
 }
 .card_header_view p{
     color: #ffff;
@@ -184,12 +117,6 @@ ul {
     color: #666;
     word-break: break-word;
 }
-// .card-header {
-//     color: #ffffff !important;
-//     background: #000 !important;
-//     padding: 0px 10px !important;
-//     border-radius: 0px !important;
-// }
 .form_data1 {
     width: 100%;
     border: 1px solid grey;
@@ -254,5 +181,76 @@ ul {
     }
     .Requs_btn_inl-child1 .btn {
         width: 98%;
+    }
+}
+
+.btn_requst {
+    box-shadow: 0 16px 26px -10px rgb(63 106 216 / 56%), 0 4px 25px 0 rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(63 106 216 / 20%);
+    border-radius: 0.25rem;
+    background: #ff7900;
+    border-color: #ff7900;
+    color: #fff;
+}
+
+.error_message {
+    font-size: 11px;
+    margin-top: 3px;
+    font-weight: bold;
+    color: red;
+}
+.form-group .ng-touched.ng-invalid {
+    border-color: red !important;
+}
+
+.form-group .ng-pristine.ng-invalid.ng-touched ::ng-deep .ng-select-container {
+    border-color: red !important;
+}
+
+
+.tran_chekbox {
+    width: 26px;
+    height: 21px;
+}
+
+.trans_chk-label {
+    position: relative;
+    top: -3px;
+}
+
+.dis_inline_trans_header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-height {
+    height: 319px;
+    overflow-y: scroll;
+}
+
+.card .card-footer {
+    background-color: #ffffff;
+}
+
+.col-sm-5 {
+    flex: 0 0 48.666667%;
+    max-width: 48.666667%;
+}
+
+.trans_choose {
+    background: grey;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .Requs_btn_inl-child {
+        display: flex;
+        margin-bottom: 15px;
+    }
+    .dis_inline_trans_header {
+        flex-direction: column;
+    }
+    .col-sm-5 {
+        flex: 0 0 100%;
+        max-width: 100%;
     }
 }
