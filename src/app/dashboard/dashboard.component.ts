@@ -19,24 +19,29 @@ export class DashboardComponent implements OnInit {
   };
   getUserrole: any;
   courcesList: any;
+  profileDetails:any;
   RoleID = dataConstant.RoleID;
   isReviewer = false;
   isPublisher = false;
   isRequester = false;
+  isPdlMember = false;
   pendingFlag: boolean = true;
   lableConstant: any = { french: {}, english: {} };
+  baseUrl = dataConstant.BaseUrl;
   constructor(private courseService: CourcesService, private router: Router,
     private authService: AuthenticationService,
     private commonService: CommonService) {
     this.getUserrole = this.authService.getRolefromlocal();
+    this.profileDetails = this.authService.getProfileDetailsfromlocal();
+    console.log("userrole",this.authService.getProfileDetailsfromlocal())
     this.isReviewer = this.getUserrole.id === this.RoleID.BackOfficeReviewer;
     this.isPublisher = this.getUserrole.id === this.RoleID.BackOfficePublisher;
     this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
+    this.isPdlMember = this.profileDetails.data.pdl_member;
   }
 
   navigatetoPending(status: any) {
     let statusobj = { status: status };
-    console.log("status obj", status);
     this.router.navigateByUrl('/dashboard/cources', {
       state: statusobj,
     });
@@ -52,8 +57,13 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl(`/dashboard/back-office?status=${status}`);
   }
 
+  getFavourite(){
+    console.log("favourite course");
+  }
   
-
+  getFavouriteList(){
+    console.log("favourite list");
+  }
 
   getpendingCourses() {
     this.commonService.showLoading();
@@ -80,5 +90,13 @@ export class DashboardComponent implements OnInit {
     // setTimeout(() => {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     // },1000);
+  }
+
+  sendEmail(link:any){
+    console.log("link",link)
+    var email ='';
+    var subject = '';
+    var emailBody = this.baseUrl+link;
+    window.location.href = "mailto:"+email+"?subject="+subject+"&body="+emailBody;
   }
 }

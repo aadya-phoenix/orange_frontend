@@ -35,6 +35,7 @@ export const dataConstant = {
   VendorStatus: { total: 'total', active:'active', deactive:'deactive'},
   GetReportStatus: {total: 'total', closed: 'closed', close: 'close',draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
   ImageUrl: 'https://orange.mindscroll.info/public/public',
+  BaseUrl:'https://orange.mindscroll.info',
   ExporType : {course:'course', session:'session', carousel:'carousel', back_office:'back_office', vendor:'vendor', vendor_rating:'vendor_rating', get_report:'get_report'},
   RoleID: {
     RequesterID: 2,
@@ -45,6 +46,14 @@ export const dataConstant = {
     Roc: 3,
     DataAnalyst:11
   },
-  Laungauges : { EN:'EN', FR:'FR'}
+  Laungauges : { EN:'EN', FR:'FR'},
+  Modules:{
+    course:'course',
+    session:'session',
+    carousel:'carousel',
+    backOffice:'back-office',
+    vendor:'vendor',
+    getReport:'get-report',
+  }
 }
 
