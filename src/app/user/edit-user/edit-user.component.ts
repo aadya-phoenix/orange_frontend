@@ -95,8 +95,11 @@ export class EditUserComponent implements OnInit {
   }
 
   save(){
+    const newbody = this.createUserForm.value;
+    console.log("body",newbody);
     this.isSubmitted = true;
     if (this.createUserForm.invalid) {
+      console.log("invalid");
       return;
       
     }
@@ -108,9 +111,15 @@ export class EditUserComponent implements OnInit {
     this.commonService.showLoading();
     this.userManageService.createUser(body).subscribe(
       (res: any) => {
+        if (res.status === 1 && res.message === 'Success'){
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('User', 'Successfully Created.');
         this.router.navigateByUrl(`/user/edit/${res.data.id}`);
+        }
+        else{
+          this.commonService.toastErrorMsg('Error',res.message);
+          this.commonService.hideLoading();
+        }
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -123,9 +132,15 @@ export class EditUserComponent implements OnInit {
     this.commonService.showLoading();
     this.userManageService.updateUser(body,this.user_id).subscribe(
       (res: any) => {
+        if (res.status === 1 && res.message === 'Success'){
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('User', 'Successfully Updated.');
         this.router.navigateByUrl(`/user`);
+       }
+       else{
+        this.commonService.toastErrorMsg('Error',res.message);
+        this.commonService.hideLoading();
+       }
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -160,6 +175,10 @@ export class EditUserComponent implements OnInit {
           if(this.user_details.staff){
           this.createUserForm.controls.staff.setValue(this.user_details.staff == "1" ? true : false);
            }
+          }
+          else{
+            this.commonService.toastErrorMsg('Error',res.message);
+            this.commonService.hideLoading();
           }
       },
       (err: any) => {

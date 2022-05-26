@@ -47,9 +47,15 @@ export class ChangePasswordUserComponent implements OnInit {
     this.commonService.showLoading();
     this.userManageServicse.changePassword(body,this.user_id).subscribe(
       (res: any) => {
+        if (res.status === 1 && res.message === 'Success'){
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('Password', 'Successfully Changed.');
         this.router.navigateByUrl(`/user/edit/${this.user_id}`);
+        }
+        else{
+          this.commonService.toastErrorMsg('Error',res.message);
+          this.commonService.hideLoading();
+        }
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -67,5 +73,5 @@ export class ChangePasswordUserComponent implements OnInit {
     else{
       this.notmatched = false;
     }
-    }
+  }
 }

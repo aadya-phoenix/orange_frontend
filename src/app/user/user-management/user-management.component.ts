@@ -76,6 +76,17 @@ export class UserManagementComponent implements OnInit {
     }
   }
 
+  getAdminFilterRecords(admin:any){
+    if (admin) {
+      this.userListToShow = [...this.userList].filter((a, b) => {
+        return a.admin == admin
+      });
+    }  
+    else{
+      this.userListToShow = this.userList;
+    }
+  }
+
   getUsers(){
     this.commonService.showLoading();
     this.userManageService.getUsers().subscribe(
@@ -152,7 +163,10 @@ export class UserManagementComponent implements OnInit {
   getRole(){
    this.courceService.getRole().subscribe(
      res=>{
-       this.rolesList= res.data;
+      let roles = res.data;
+      this.rolesList = roles.filter((a:any) => {
+        return a.status == 1
+      });
      },err=>{
       console.log(err);
     });

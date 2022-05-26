@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
   pendingFlag: boolean = true;
   lableConstant: any = { french: {}, english: {} };
   baseUrl = dataConstant.BaseUrl;
+  isFavourite = false;
   constructor(private courseService: CourcesService, private router: Router,
     private authService: AuthenticationService,
     private commonService: CommonService) {
@@ -59,7 +60,20 @@ export class DashboardComponent implements OnInit {
   }
 
   getFavourite(module:any){
-    console.log("favourite course");
+    this.isFavourite = !this.isFavourite;
+    const body = {module:module, favorite:this.isFavourite}
+    console.log("favourite course",body);
+    this.commonService.showLoading();
+    this.courseService.getFavourites(body).subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        console.log(err);
+      }
+    );
+    
   }
   
   getFavouriteList(){

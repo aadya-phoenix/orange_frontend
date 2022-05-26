@@ -244,6 +244,12 @@ export class CourcesService {
         .pipe(catchError(this.Errorhandling));
      }
 
+     //favouriteModules
+     getFavourites(data:any){
+      const url = `/api/${this.apiVersion}/user/wishlist`;
+      return this.http.post(url,data).pipe(catchError(this.Errorhandling));  
+     }
+
       //getBackupRegionalCordinator
       getBackupRegionalCordinator(){
         const url = `/api/${this.apiVersion}/backup/regional-cordinator`;
