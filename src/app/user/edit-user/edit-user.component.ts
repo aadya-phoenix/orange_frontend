@@ -26,6 +26,8 @@ export class EditUserComponent implements OnInit {
   isCreate = false;
   notmatched = false ;
   isSubmitted = false;
+  isLearningType =false;
+  learningTypes:any=[];
 
   constructor(private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -39,8 +41,9 @@ export class EditUserComponent implements OnInit {
       confirm_password: new FormControl('', []),
       first_name: new FormControl('', [Validators.required]),
       last_name: new FormControl('', [Validators.required]),
-      role_id: new FormControl('', [Validators.required]),
+      role_id: new FormControl('', []),
       region_id: new FormControl('', []),
+      learning_type:new FormControl('', []),
       pdl_member: new FormControl(false, []),
       status: new FormControl(true, []),
       admin: new FormControl(false, []),
@@ -69,15 +72,24 @@ export class EditUserComponent implements OnInit {
     });
     this.getRole();
     this.getRegionalCordinator();
+    this.getLearningType();
   }
 
   getSelectedRole(event:any){
    if(event.id == 3 || event.id == 5){
      this.isRegion = true;
+     this.isLearningType = false;
      this.createUserForm.get('region_id')?.setValidators([Validators.required]);
+   }
+   else if(event.id == 4){
+     this.isLearningType =true;
+     this.isRegion = false;
+     this.createUserForm.get('region_id')?.clearValidators();
+     this.createUserForm.get('region_id')?.setValue(null);
    }
    else{
     this.isRegion = false;
+    this.isLearningType = false;
     this.createUserForm.get('region_id')?.clearValidators();
     this.createUserForm.get('region_id')?.setValue(null);
   }
@@ -95,13 +107,9 @@ export class EditUserComponent implements OnInit {
   }
 
   save(){
-    const newbody = this.createUserForm.value;
-    console.log("body",newbody);
     this.isSubmitted = true;
     if (this.createUserForm.invalid) {
-      console.log("invalid");
       return;
-      
     }
     const body = this.createUserForm.value;
     !this.user_id ? this.create(body) : this.update(body);
@@ -111,7 +119,7 @@ export class EditUserComponent implements OnInit {
     this.commonService.showLoading();
     this.userManageService.createUser(body).subscribe(
       (res: any) => {
-        if (res.status === 1 && res.message === 'Success'){
+        if (res.status === 1){
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('User', 'Successfully Created.');
         this.router.navigateByUrl(`/user/edit/${res.data.id}`);
@@ -132,7 +140,7 @@ export class EditUserComponent implements OnInit {
     this.commonService.showLoading();
     this.userManageService.updateUser(body,this.user_id).subscribe(
       (res: any) => {
-        if (res.status === 1 && res.message === 'Success'){
+        if (res.status == 1 ){
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('User', 'Successfully Updated.');
         this.router.navigateByUrl(`/user`);
@@ -154,7 +162,7 @@ export class EditUserComponent implements OnInit {
     this.userManageService.getUserDetails(this.user_id).subscribe(
       (res: any) => {
         this.commonService.hideLoading();
-        if (res.status === 1 && res.message === 'Success') {
+        if (res.status === 1 ) {
           this.user_details = res.data;
           this.createUserForm.controls.email.setValue(this.user_details.email);
           this.createUserForm.controls.first_name.setValue(this.user_details.first_name);
@@ -216,5 +224,14 @@ export class EditUserComponent implements OnInit {
       },err=>{
        console.log(err);
      });
+  }
+
+  getLearningType(){
+    this.courceService.getLearningType().subscribe(
+      res=>{
+        this.learningTypes= res.data;
+      },err=>{
+       console.log(err);
+     });  
   }
 }

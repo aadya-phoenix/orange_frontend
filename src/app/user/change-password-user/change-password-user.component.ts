@@ -47,7 +47,7 @@ export class ChangePasswordUserComponent implements OnInit {
     this.commonService.showLoading();
     this.userManageServicse.changePassword(body,this.user_id).subscribe(
       (res: any) => {
-        if (res.status === 1 && res.message === 'Success'){
+        if (res.status === 1 ){
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('Password', 'Successfully Changed.');
         this.router.navigateByUrl(`/user/edit/${this.user_id}`);

@@ -29,7 +29,93 @@ export class DashboardComponent implements OnInit {
   pendingFlag: boolean = true;
   lableConstant: any = { french: {}, english: {} };
   baseUrl = dataConstant.BaseUrl;
-  isFavourite = false;
+
+  isCourseFavourite = false;
+  isSessionFavourite = false;
+  isCarouselFavourite = false;
+  isBackOfficeFavourite = false;
+  isDesignFavourite = false;
+  isGetReportFavourite = false;
+  isAccessLearningFavourite = false;
+  isSmeFavourite = false;
+  isVendorFavourite = false;
+
+  modulesArray=[{
+    tabClass: 'tab-pane fade show active', aria_labelledby:'pills-home-tab',
+    id:'pills-home', routerLink:'/dashboard/cources', image:'../../assets/images/first.jpg',
+    lableConstantModule : this.lableConstant.create_new_course,
+    lableConstantCatalog: this.lableConstant.request_course_catalog,
+    navigateTo: '',
+    pendingRequestCount : this.pendingRequestCount.course_pending,
+    getFavouriteModule: this.modules.course,
+   },{
+    tabClass: 'tab-pane fade show active', aria_labelledby:'pills-home-tab',
+    id:'pills-home', routerLink:'/dashboard/sct', image:'../../assets/images/Open course session.jpg ',
+    lableConstantModule : this.lableConstant.open_course_session,
+    lableConstantCatalog: this.lableConstant.request_create_session,
+    navigateTo: '',
+    pendingRequestCount : this.pendingRequestCount.session_pending,
+    getFavouriteModule: this.modules.session,
+   },{
+    tabClass: 'tab-pane fade show active', aria_labelledby:'pills-home-tab',
+    id:'pills-home', routerLink:'/dashboard/olcarousel', 
+    image:'../../assets/images/Promote on Carousel.jpg',
+    lableConstantModule : this.lableConstant.promote_on_carousel,
+    lableConstantCatalog: this.lableConstant.request_create_entity,
+    navigateTo:'',
+    pendingRequestCount : this.pendingRequestCount.carousel_pending,
+    getFavouriteModule: this.modules.carousel,
+   },{
+    tabClass: 'tab-pane fade show active', aria_labelledby:'pills-home-tab',
+    id:'pills-home', routerLink:'/dashboard/back-office', image:'../../assets/images/4.jpg',
+    lableConstantModule : this.lableConstant.request_back_office_role,
+    lableConstantCatalog: this.lableConstant.request_specific_role,
+    navigateTo:'',
+    pendingRequestCount : this.pendingRequestCount.office_role_pending,
+    getFavouriteModule: this.modules.backOffice,
+   },{
+    tabClass: 'tab-pane fade', aria_labelledby:'pills-profile-tab',
+    id:'pills-profile', routerLink:'', image:'../../assets/images/Design learning module.jpg',
+    lableConstantModule : this.lableConstant.design_learning_module,
+    lableConstantCatalog: this.lableConstant.request_learning_team,
+    navigateTo: '',
+    pendingRequestCount : '',
+    getFavouriteModule: this.modules.design,
+   },{
+    tabClass: 'tab-pane fade', aria_labelledby:'pills-profile-tab',
+    id:'pills-profile', routerLink:'/dashboard/olreport', image:'../../assets/images/get a report.jpg',
+    lableConstantModule : this.lableConstant.get_a_report,
+    lableConstantCatalog: this.lableConstant.request_training_vc_report,
+    navigateTo:'',
+    pendingRequestCount : this.pendingRequestCount.course_pending,
+    getFavouriteModule: this.modules.getReport,
+   },{
+    tabClass: 'tab-pane fade', aria_labelledby:'pills-profile-tab',
+    id:'pills-profile', routerLink:'', image:'../../assets/images/Access Learning Needs tool(DNA).jpg',
+    lableConstantModule : this.lableConstant.access_learning_tool,
+    lableConstantCatalog: this.lableConstant.dna_tool_feature,
+    navigateTo:'',
+    pendingRequestCount : '',
+    getFavouriteModule: '',
+   },{
+    tabClass: 'tab-pane fade', aria_labelledby:'pills-profile-tab',
+    id:'pills-profile', routerLink:'', image:'../../assets/images/SME_DB.jpg',
+    lableConstantModule : this.lableConstant.sme_database,
+    lableConstantCatalog: this.lableConstant.sme_learning_community_feature,
+    navigateTo:'',
+    pendingRequestCount : '',
+    getFavouriteModule: '',
+   },{ 
+    tabClass: 'tab-pane fade', aria_labelledby:'pills-contact-tab',
+    id:'pills-contact', routerLink:'/dashboard/vendormanagement',
+    image:'../../assets/images/manage vendor.jpg',
+    lableConstantModule : this.lableConstant.manage_vendors,
+    lableConstantCatalog: this.lableConstant.view_manage_workshops,
+    navigateTo:'',
+    pendingRequestCount : '',
+    getFavouriteModule: this.modules.vendor,
+   }];
+  
   constructor(private courseService: CourcesService, private router: Router,
     private authService: AuthenticationService,
     private commonService: CommonService) {
@@ -60,8 +146,45 @@ export class DashboardComponent implements OnInit {
   }
 
   getFavourite(module:any){
-    this.isFavourite = !this.isFavourite;
-    const body = {module:module, favorite:this.isFavourite}
+    let favourite ;
+    if(module == this.modules.course){
+      this.isCourseFavourite = !this.isCourseFavourite;
+      favourite = this.isCourseFavourite;
+    }
+    if(module == this.modules.session){
+      this.isSessionFavourite = !this.isSessionFavourite;
+      favourite = this.isSessionFavourite;
+    }
+    if(module ==  this.modules.carousel){
+      this.isCarouselFavourite = !this.isCarouselFavourite;
+      favourite = this.isCarouselFavourite;
+    }
+    if(module ==  this.modules.backOffice){
+      this.isBackOfficeFavourite = !this.isBackOfficeFavourite;
+      favourite = this.isBackOfficeFavourite;
+    }
+    if(module ==  this.modules.design){
+      this.isDesignFavourite = !this.isDesignFavourite;
+      favourite = this.isDesignFavourite;
+    }
+    if(module ==  this.modules.getReport){
+      this.isGetReportFavourite = !this.isGetReportFavourite;
+      favourite = this.isGetReportFavourite;
+    }
+    if(module == this.modules.access){
+      this.isAccessLearningFavourite = !this.isAccessLearningFavourite;
+      favourite = this.isAccessLearningFavourite;
+    }
+    if(module == this.modules.sme){
+      this.isSmeFavourite = !this.isSmeFavourite;
+      favourite = this.isSmeFavourite;
+    }
+    if(module ==  this.modules.vendor){
+      this.isVendorFavourite = !this.isVendorFavourite;
+      favourite = this.isVendorFavourite;
+    }
+    
+    const body = {module:module, favorite:favourite}
     console.log("favourite course",body);
     this.commonService.showLoading();
     this.courseService.getFavourites(body).subscribe(

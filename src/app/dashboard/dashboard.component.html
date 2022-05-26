@@ -39,6 +39,50 @@
                 </li>
             </ul>
         </div>
+          <!--  <ng-container *ngFor="let item of modulesArray">
+            <div  class= item.tabClass id=item.id role="tabpanel" aria-labelledby=item.aria_labelledby>
+                <div class="course_box ">
+                    <div class="course_box_child">
+                        <div>
+                            <a [routerLink]="[ item.routerLink] ">
+                                <div class="img_div ">
+                                    <img src= item.image/>
+                                </div>
+                                <div class="text_div_sec ">
+                                    <a [routerLink]="[ '/dashboard/cources'] "
+                                        class="create_course color-orange">{{item.lableConstantModule}}</a>
+
+                                    <p class="p__text_divcss text-center " data-toggle="tooltip" data-placement="top"
+                                        title=" {{item.lableConstantCatalog}}">
+                                        {{item.lableConstantCatalog}}
+                                    </p>
+                                </div>
+                            </a>
+                            <div class="sec_footer ">
+                                <div class="footer_sec_ano">
+                                    <button [disabled]="pendingFlag" (click)="navigateTo">
+                                        <p class="footer_p"
+                                            [ngClass]="{'backgound_green': item.pendingRequestCount === 0}">
+                                            {{item.pendingRequestCount}}</p>
+                                    </button>
+                                    <span class="text_white">{{lableConstant.pending}}</span>
+                                </div>
+                                <div class="p-2 bd-highlight ">
+                                    <a (click)="sendEmail('item.routerLink')">
+                                      <img src="../../assets/images/share.png " class="mr-2 w_22" />
+                                    </a>
+                                    <a (click)="getFavourite(item.getFavouriteModule)">
+                                        <img  *ngIf="!isFavourite"
+                                      src="../../assets/images/star.png " class="width_22" />
+                                      <img src="../../assets/images/yellow_star.png " *ngIf="isFavourite" class="width_22" />
+                                        </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            </ng-container> -->
         <div class="tab-content border-0" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <div class="course_box ">
@@ -72,7 +116,9 @@
                                       <img src="../../assets/images/share.png " class="mr-2 w_22" />
                                     </a>
                                     <a (click)="getFavourite(modules.course)">
-                                        <img src="../../assets/images/star.png " class="w_22" />
+                                        <img  *ngIf="!isCourseFavourite"
+                                        src="../../assets/images/star.png " class="width_22" />
+                                        <img src="../../assets/images/yellow_star.png " *ngIf="isCourseFavourite" class="width_22" />
                                     </a>
                                 </div>
                             </div>
@@ -107,7 +153,9 @@
                                  <img src="../../assets/images/share.png " class="mr-2 width_22" />
                                 </a>
                                 <a (click)="getFavourite(modules.session)">
-                                    <img src="../../assets/images/star.png " class="width_22" />
+                                    <img  *ngIf="!isSessionFavourite"
+                                        src="../../assets/images/star.png " class="width_22" />
+                                        <img src="../../assets/images/yellow_star.png " *ngIf="isSessionFavourite" class="width_22" />
                                 </a>
                             </div>
                         </div>
@@ -141,7 +189,9 @@
                               <img src="../../assets/images/share.png " class="mr-2 width_22" />
                             </a>
                               <a (click)="getFavourite(modules.carousel)">
-                                <img src="../../assets/images/star.png " class="width_22" />
+                                <img  *ngIf="!isCarouselFavourite"
+                                src="../../assets/images/star.png " class="width_22" />
+                                <img src="../../assets/images/yellow_star.png " *ngIf="isCarouselFavourite" class="width_22" />
                               </a>
                             </div>
                         </div>
@@ -175,7 +225,9 @@
                               <img src="../../assets/images/share.png " class="mr-2 width_22" />
                               </a>
                               <a (click)="getFavourite(modules.backOffice)">
-                                <img src="../../assets/images/star.png " class="width_22" />
+                                <img  *ngIf="!isBackOfficeFavourite"
+                                  src="../../assets/images/star.png " class="width_22" />
+                                  <img src="../../assets/images/yellow_star.png " *ngIf="isBackOfficeFavourite" class="width_22" />
                               </a>
                             </div>
                         </div>
@@ -207,7 +259,9 @@
                               <img src="../../assets/images/share.png " class="mr-2 width_22" />
                             </a>
                               <a >
-                                <img src="../../assets/images/star.png " class="width_22" />
+                                <img  *ngIf="!isDesignFavourite"
+                                src="../../assets/images/star.png " class="width_22" />
+                                <img src="../../assets/images/yellow_star.png " *ngIf="isDesignFavourite" class="width_22" />
                               </a>
                             </div>
                         </div>
@@ -236,7 +290,9 @@
                               <img src="../../assets/images/share.png " class="mr-2 width_22" />
                               </a>
                               <a (click)="getFavourite(modules.getReport)">
-                                <img src="../../assets/images/star.png " class="width_22" />
+                                <img  *ngIf="!isGetReportFavourite"
+                                src="../../assets/images/star.png " class="width_22" />
+                                <img src="../../assets/images/yellow_star.png " *ngIf="isGetReportFavourite" class="width_22" />
                               </a>
                             </div>
                         </div>
@@ -266,7 +322,9 @@
                             <div class="p-2 bd-highlight ">
                              <img src="../../assets/images/share.png " class="mr-2 width_22" />
                              <a >
-                                <img src="../../assets/images/star.png " class="width_22" />
+                                <img  *ngIf="!isAccessLearningFavourite"
+                                 src="../../assets/images/star.png " class="width_22" />
+                                 <img src="../../assets/images/yellow_star.png " *ngIf="isAccessLearningFavourite" class="width_22" />
                              </a>
                             </div>
                         </div>
@@ -295,7 +353,9 @@
                             <div class="p-2 bd-highlight ">
                               <img src="../../assets/images/share.png " class="mr-2 width_22" />
                               <a >
-                                <img src="../../assets/images/star.png " class="width_22 star_css" />
+                                <img  *ngIf="!isSmeFavourite"
+                                  src="../../assets/images/star.png " class="width_22" />
+                                  <img src="../../assets/images/yellow_star.png " *ngIf="isSmeFavourite" class="width_22" />
                               </a>
                             </div>
                         </div>
@@ -326,7 +386,9 @@
                             <div class="p-2 bd-highlight ">
                               <img src="../../assets/images/share.png " class="mr-2 width_22" />
                               <a (click)="getFavourite(modules.vendor)">
-                                <img src="../../assets/images/star.png " class="width_22" />
+                                <img  *ngIf="!isVendorFavourite"
+                                  src="../../assets/images/star.png " class="width_22" />
+                                  <img src="../../assets/images/yellow_star.png " *ngIf="isVendorFavourite" class="width_22" />
                               </a>
                             </div>
                         </div>
