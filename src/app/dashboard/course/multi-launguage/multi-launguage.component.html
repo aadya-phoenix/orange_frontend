@@ -11,10 +11,10 @@
         <form [formGroup]="multiLaungaugeForm">
             <div class="row">
                 <div class="col-sm-12" formArrayName="titleArr"
-                    *ngFor="let language of availableLanguages;let i =index;">
+                *ngFor="let language of titlecontrol.controls; let i = index">
                     <div class="form-group">
                         <div [formGroupName]="i">
-                            <label class="form-control-label">{{language.name}}</label>
+                            <label class="form-control-label">{{this.availableLanguages[i].name}}</label>
                             <textarea class="form-control form_width-textarea" maxlength="500" rows="3"
                                 placeholder="Enter" formControlName="value"></textarea>
                         </div>

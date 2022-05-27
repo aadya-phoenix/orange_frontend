@@ -32,6 +32,8 @@ export class MultiLaunguageComponent implements OnInit {
     this.getLanguages();
   }
 
+
+
   //get Languages
   getLanguages() {
     this.commonService.showLoading();
@@ -40,8 +42,12 @@ export class MultiLaunguageComponent implements OnInit {
         this.commonService.hideLoading();
         this.availableLanguages = res.data;
         this.availableLanguages.forEach((element: any) => {
+          let controlValue = ''
+          if(this.props?.data){
+            controlValue = this.props?.data?.find((x: {}) => Object.keys(x) == element.slug);
+          }
           this.titlecontrol.push(this.fb.group({
-            value: new FormControl(''),
+            value: controlValue ? new FormControl(`${controlValue[element.slug]}`): new FormControl(''),
           }));
         });
 

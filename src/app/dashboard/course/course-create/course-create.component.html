@@ -65,7 +65,7 @@
                                 <strong _ngcontent-jet-c125=""> Course Details </strong>
                             </div>
                             <div class="card-body card_width">
-                                <div class="col-sm-6">
+                                <div class="col-sm-6"  [ngClass]="{'col-sm-12': !isPlaylist()}">
                                     <div class="d-flex align-items-center">
                                         <div class="form-group w-100">
                                             <label class="form-control-label">
@@ -85,11 +85,54 @@
                                             </div>
                                         </div>
                                         <div class="mt_top_11">
-                                            <a href="" data-toggle="modal" data-target="#titleModal_playlist"
+                                            <a (click)="multilaungauge('title')"
                                                 class="d-flex flex-column align-items-end">
                                                 <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
                                             </a>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6" *ngIf="!isPlaylist()">
+                                    <div class="form-group">
+                                        <label class="form-control-label">
+                                            Training provided by <span class="text_red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="right"
+                                                    ngbTooltip="If the training is provided by the Sales Academy, please select 'IB Sales Academy'. Otherwise, select 'Orange Business Services'">
+                                                </i>
+                                            </a>
+                                        </label>
+
+                                        <ng-select placeholder="Please select training provided" [items]="vendorType"
+                                            bindLabel="name" bindValue="name" formControlName="training_provided_by"
+                                            class="w_100">
+                                        </ng-select>
+                                        <div class="error_message"
+                                            *ngIf="createCourceForm.controls['training_provided_by'].hasError('required') && createCourceForm.controls['training_provided_by'].touched">
+                                            Training Provided By cannot be blank
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6" *ngIf="!isPlaylist()">
+                                    <div class="form-group">
+                                        <label class="form-control-label">
+                                            Training hours/duration (HH:MM)
+                                            <span class="text_red">* </span>
+                                            <a>
+                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                    data-toggle="tooltip" data-placement="right"
+                                                    ngbTooltip="Please indicate the learning activity duration in hours : minutes."></i>
+                                            </a>
+                                        </label>
+                                        <input type="text" (keyup)="numbersOnly($event)"
+                                            placeholder="Enter Training hours/duration (HH:MM) "
+                                            class="form-control form_width" formControlName="duration" maxlength="5" />
+                                        <div class="error_message"
+                                            *ngIf="createCourceForm.controls['duration'].hasError('required') && createCourceForm.controls['duration'].touched">
+                                            Training hours/duration cannot be blank
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -115,63 +158,19 @@
                                             </div>
                                         </div>
                                         <div class="">
-                                            <a href="" data-toggle="modal" data-target="#commonDescription_playlist"
+                                            <a (click)="multilaungauge('description')"
                                                 class="d-flex flex-column align-items-end">
                                                 <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Training provided by <span class="text_red">* </span>
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="right"
-                                                    ngbTooltip="If the training is provided by the Sales Academy, please select 'IB Sales Academy'. Otherwise, select 'Orange Business Services'">
-                                                </i>
-                                            </a>
-                                        </label>
-
-                                        <ng-select placeholder="Please select training provided"
-                                            [items]="vendorType" bindLabel="name" bindValue="name"
-                                            formControlName="training_provided_by" class="w_100">
-                                        </ng-select>
-                                        <div class="error_message"
-                                            *ngIf="createCourceForm.controls['training_provided_by'].hasError('required') && createCourceForm.controls['training_provided_by'].touched">
-                                            Training Provided By cannot be blank
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Training hours/duration (HH:MM)
-                                            <span class="text_red">* </span>
-                                            <a>
-                                                <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="right"
-                                                    ngbTooltip="Please indicate the learning activity duration in hours : minutes."></i>
-                                            </a>
-                                        </label>
-                                        <input type="text" (keyup)="numbersOnly($event)"
-                                            placeholder="Enter Training hours/duration (HH:MM) "
-                                            class="form-control form_width" formControlName="duration"
-                                            maxlength="5" />
-                                        <div class="error_message"
-                                            *ngIf="createCourceForm.controls['duration'].hasError('required') && createCourceForm.controls['duration'].touched">
-                                            Training hours/duration cannot be blank
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 mb_boot_10">
+                                <div class="col-sm-6 mb_boot_10" *ngIf="!isPlaylist()">
                                     <div class="form-group w-100">
                                         <label>Objective</label>
                                         <div class="editControls"></div>
-                                        <ejs-richtexteditor id='defaultRTE'
-                                            formControlName="objective_single" [toolbarSettings]='tools'>
+                                        <ejs-richtexteditor id='defaultRTE' formControlName="objective_single"
+                                            [toolbarSettings]='tools'>
                                         </ejs-richtexteditor>
                                     </div>
                                     <div class="error_message"
@@ -179,7 +178,7 @@
                                         Objectives cannot be blank
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-6" *ngIf="!isPlaylist()">
                                     <div class="form-group">
                                         <label class="form-control-label">
                                             Subject <span class="text_red">* </span>
@@ -190,9 +189,8 @@
                                                 </i>
                                             </a>
                                         </label>
-                                        <ng-select  placeholder="Please select subject" [items]="cctSubjects"
-                                            bindLabel="name" bindValue="id" formControlName="subject"
-                                            class="w_100">
+                                        <ng-select placeholder="Please select subject" [items]="cctSubjects"
+                                            bindLabel="name" bindValue="id" formControlName="subject" class="w_100">
                                         </ng-select>
                                         <span class="error_message"
                                             *ngIf="createCourceForm.controls['subject'].hasError('required') && createCourceForm.controls['subject'].touched">
@@ -200,7 +198,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-6" *ngIf="!isPlaylist()">
                                     <div class="form-group">
                                         <label class="form-control-label">
                                             Keywords <span class="text_red">* </span>
@@ -211,8 +209,8 @@
                                                 </i>
                                             </a>
                                         </label>
-                                        <input type="text" placeholder="Enter Keywords"
-                                            class="form-control form_width" formControlName="keyword" />
+                                        <input type="text" placeholder="Enter Keywords" class="form-control form_width"
+                                            formControlName="keyword" />
                                         <div class="error_message"
                                             *ngIf="createCourceForm.controls['keyword'].hasError('required') && createCourceForm.controls['keyword'].touched">
                                             Keywords cannot be blank
@@ -220,21 +218,19 @@
 
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-6" *ngIf="!isPlaylist()">
                                     <div class="form-group">
                                         <label class="form-control-label">
                                             Available Languages <span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                    data-toggle="tooltip" data-placement="right"
-                                                    ngbTooltip="Null">
+                                                    data-toggle="tooltip" data-placement="right" ngbTooltip="Null">
                                                 </i>
                                             </a>
                                         </label>
-                                        <ng-select placeholder="Please select language"
-                                            [items]="availableLanguages" bindLabel="name" bindValue="id"
-                                            [multiple]=true formControlName="available_language"
-                                            class="w_100">
+                                        <ng-select placeholder="Please select language" [items]="availableLanguages"
+                                            bindLabel="name" bindValue="id" [multiple]=true
+                                            formControlName="available_language" class="w_100">
                                         </ng-select>
                                         <div class="error_message"
                                             *ngIf="createCourceForm.controls['available_language'].hasError('required') && createCourceForm.controls['available_language'].touched">
@@ -242,7 +238,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-6" *ngIf="!isPlaylist()">
                                     <div class="form-group">
                                         <label class="form-control-label">
                                             Level <span class="text_red">* </span>
@@ -253,9 +249,8 @@
                                                 </i>
                                             </a>
                                         </label>
-                                        <ng-select placeholder="Please select level"
-                                            [items]="cctLevel" bindLabel="name" bindValue="id"
-                                            formControlName="level" class="w_100">
+                                        <ng-select placeholder="Please select level" [items]="cctLevel" bindLabel="name"
+                                            bindValue="id" formControlName="level" class="w_100">
                                         </ng-select>
                                         <div class="error_message"
                                             *ngIf="createCourceForm.controls['level'].hasError('required') && createCourceForm.controls['level'].touched">
@@ -263,7 +258,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-6" *ngIf="!isPlaylist()">
                                     <div class="form-group">
                                         <label class="form-control-label w-7">
                                             Email of Content Owner
@@ -276,15 +271,14 @@
                                             </a>
                                         </label>
                                         <input type="text" placeholder="Email of Content Owner"
-                                            class="form-control form_width"
-                                            formControlName="email_content_owner" />
+                                            class="form-control form_width" formControlName="email_content_owner" />
                                         <div class="error_message"
                                             *ngIf="createCourceForm.controls['email_content_owner'].hasError('required') && createCourceForm.controls['email_content_owner'].touched">
                                             Email of Content Owner cannot be blank
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-6" *ngIf="!isPlaylist()">
                                     <div class="form-group">
                                         <label class="form-control-label">
                                             Email of Training Contact
@@ -297,8 +291,7 @@
                                             </a>
                                         </label>
                                         <input type="text" placeholder="Enter Email of Training Contact"
-                                            class="form-control form_width"
-                                            formControlName="email_training_contact" />
+                                            class="form-control form_width" formControlName="email_training_contact" />
                                         <div class="error_message"
                                             *ngIf="createCourceForm.controls['email_training_contact'].hasError('required') && createCourceForm.controls['email_training_contact'].touched">
                                             Email of Training Contact cannot be blank
@@ -306,7 +299,7 @@
 
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-6" *ngIf="!isPlaylist()">
                                     <div class="form-group">
                                         <label class="form-control-label">
                                             Prerequisite
@@ -322,7 +315,7 @@
                                             formControlName="prerequisite"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-6" *ngIf="!isPlaylist()">
                                     <div class="form-group">
                                         <label class="form-control-label">
                                             Resources
@@ -335,9 +328,8 @@
                                         </label>
                                         <div>
                                             <div class="upload_field mb-2 w_100">
-                                                <input type="file" id="exampleInputFile"
-                                                    formControlName="resource" class="upload_css"
-                                                    (change)="handleFileInput($event)" />
+                                                <input type="file" id="exampleInputFile" formControlName="resource"
+                                                    class="upload_css" (change)="handleFileInput($event)" />
                                             </div>
                                             <!-- <span *ngIf="isFileResouce" class="text_orange">
                                                 Click here to <a href="{{isFileResouce}}"
@@ -357,13 +349,12 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group fonr_min_height">
-                                            <select class="form-control form_width"
-                                                name="list " id="list " accesskey="target"
-                                                formControlName="learning_type"
-                                                (change)="get_learningType($event, learningTypeDetails)">
-                                                <option hidden disabled selected='selected' value=''> - Select Learning Type - </option>
-                                                <option *ngFor="let learning of learningTypes"
-                                                    [value]="learning.id">
+                                            <select class="form-control form_width" name="list " id="list "
+                                                accesskey="target" formControlName="learning_type"
+                                                (change)="get_learningType($event)">
+                                                <option hidden disabled selected='selected' value=''> - Select Learning
+                                                    Type - </option>
+                                                <option *ngFor="let learning of learningTypes" [value]="learning.id">
                                                     {{ learning.name }}
                                                 </option>
                                             </select>
@@ -380,7 +371,178 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" *ngIf="isPlaylist()">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Playlist url <span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="right"
+                                                        ngbTooltip="From your browser, copy and paste the URL of your Playlist.">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <input type="text" class="form-control form_width" formControlName="url" />
+                                            <div class="error_message"
+                                                *ngIf="createCourceForm.controls['url'].invalid && (createCourceForm.controls['url'].dirty ||createCourceForm.controls['url'].touched)">
+                                                Playlist url is not a valid URL
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6" *ngIf="isPlaylist()">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Number of learning objects
+                                                <span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="right"
+                                                        ngbTooltip="Indicate how many Learning Objects/Modules are in your Playlist (max. 20).">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <input type="text" class="form-control form_width"
+                                                formControlName="video_link" />
+
+                                            <div class="error_message"
+                                                *ngIf="createCourceForm.controls['video_link'].hasError('required') && createCourceForm.controls['video_link'].touched">
+                                                Number of learning objects cannot be blank
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6" *ngIf="isPlaylist()">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Email of playlist creator
+                                                <span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="right"
+                                                        ngbTooltip="From your browser, copy and paste the URL of your Playlist.">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <input type="text" [(ngModel)]="showPlaylistEmail"
+                                                placeholder="Enter Email of playlist creator"
+                                                class="form-control form_width" formControlName="for_whoom" />
+                                            <div class="error_message"
+                                                *ngIf="createCourceForm.controls['for_whoom'].hasError('required') && createCourceForm.controls['for_whoom'].touched">
+                                                Email of playlist creator cannot be blank
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!--colend-->
+                                    <div class="col-sm-6" *ngIf="isPlaylist()">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Is the target audience of your Playlist from one region
+                                                only? <span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="right"
+                                                        ngbTooltip='Select: "Yes" if your Playlist is aimed at OBS employees in one Region only. "No" if your Playlist is not aimed at OBS employees in only one Region.'>
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <ng-select placeholder="Please select" (change)="targetAudience($event)"
+                                                [(ngModel)]="target_audience_selected" [items]="yesNo" bindLabel="name"
+                                                bindValue="id" formControlName="level" class="w_100">
+                                            </ng-select>
+                                            <div class="error_message"
+                                                *ngIf="createCourceForm.controls['level'].hasError('required') && createCourceForm.controls['level'].touched">
+                                                Is the target audience of your Playlist from one region only?
+                                                cannot
+                                                be blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--colend-->
+                                    <div class="col-sm-6" *ngIf="isPlaylist() && regionTargetAudience">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Region of Target Audience
+                                                <span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="right"
+                                                        ngbTooltip='Americas" if your Playlist is aimed at OBS employees in the Americas Region only.
+                                                   - "Asia Pacific" if your Playlist is aimed at OBS employees in the Asia Pacific Region only.
+                                                   - "Europe" if your Playlist is aimed at OBS employees in the Europe Region only.
+                                                   - "France" if your Playlist is aimed at OBS employees in the France Region only.
+                                                   - "Middle East, Africa and Russia" if your Playlist is aimed at OBS employees in the Middle East, Africa and Russia Region only.'>
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <select class="form-control form_width" formControlName="who_see_course">
+                                                <option value="">Please select</option>
+                                                <option *ngFor="let whosee of cordinatorsList" [value]="whosee.id">
+                                                    {{whosee.name}}</option>
+                                            </select>
+                                            <div class="error_message"
+                                                *ngIf="createCourceForm.controls['who_see_course'].hasError('required') && createCourceForm.controls['who_see_course'].touched">
+                                                Region of Target Audience cannot be blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--colend-->
+                                    <div class="col-sm-6" *ngIf="isPlaylist() && !regionTargetAudience">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Target audience <span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="right"
+                                                        ngbTooltip="Select:
+                                                     - 'OBS employees in specific Functions/Divisions' if your Playlist is aimed at OBS employees in one or more OBS Functions/Divisions.
+                                                     - 'All OBS employees' if your Playlist is aimed at all OBS employees">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <select class="form-control form_width" formControlName="target_audience"
+                                                (change)="targetAudiencePlaylsit($event)">
+                                                <option value="">Please select</option>
+                                                <option value="1">OBS employees in specific Functions/Divisions
+                                                </option>
+                                                <option value="2">All OBS employees</option>
+                                            </select>
+                                            <div class="error_message"
+                                                *ngIf="createCourceForm.controls['target_audience'].hasError('required') && createCourceForm.controls['target_audience'].touched">
+                                                Target audience cannot be blank
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6" *ngIf="isPlaylist() && !regionTargetAudience">
+                                        <div class="form-group" *ngIf="!regionTargetAudiencePlaylist">
+                                            <label class="form-control-label">
+                                                OBS employees in specific Functions/Divisions
+                                                <span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="right"
+                                                        ngbTooltip="Select the organizational hierarchy of the Function/Division of the target audience of the Playlist it appears in the Group Directory, for example: Orange/OBS/EQUANT/HR/PEOPLE DEV">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <select class="form-control form_width"
+                                                formControlName="email_preffered_instructor">
+                                                <option value="">Please select Employee</option>
+                                                <option *ngFor="let instructor of preferedInstructor"
+                                                    [value]="instructor.email_id">
+                                                    {{instructor.email_id}}
+                                                </option>
+
+                                            </select>
+                                            <div class="error_message"
+                                                *ngIf="createCourceForm.controls['email_preffered_instructor'].hasError('required') && createCourceForm.controls['email_preffered_instructor'].touched">
+                                                OBS employees in specific Functions/Divisions cannot be blank
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6" *ngIf="isILTAndvILT()">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Delivery Method <span class="text_red">* </span>
@@ -392,7 +554,7 @@
                                                 </a>
                                             </label>
 
-                                            <ng-select  placeholder="Please select Delivery method"
+                                            <ng-select placeholder="Please select Delivery method"
                                                 [items]="deliveryMethod" bindLabel="name" bindValue="id"
                                                 formControlName="delivery_method" class="w_100">
                                             </ng-select>
@@ -402,7 +564,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" *ngIf="isILTAndvILT() || isCurriculum() || isWebBased()">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Does this course integrate digital ?
@@ -414,9 +576,8 @@
                                                     </i>
                                                 </a>
                                             </label>
-                                            <ng-select placeholder="Please select" [items]="yesNo"
-                                                bindLabel="name" bindValue="id" formControlName="digital"
-                                                class="w_100">
+                                            <ng-select placeholder="Please select" [items]="yesNo" bindLabel="name"
+                                                bindValue="id" formControlName="digital" class="w_100">
                                             </ng-select>
                                             <div class="error_message"
                                                 *ngIf="createCourceForm.controls['digital'].hasError('required') && createCourceForm.controls['digital'].touched">
@@ -424,7 +585,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" *ngIf="isILTAndvILT() || isWebBased()">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Purchase order required?
@@ -435,13 +596,12 @@
                                                     </i>
                                                 </a>
                                             </label>
-                                            <ng-select placeholder="Please select" [items]="yesNo"
-                                                bindLabel="name" bindValue="id" formControlName="purchase_order"
-                                                class="w_100">
+                                            <ng-select placeholder="Please select" [items]="yesNo" bindLabel="name"
+                                                bindValue="id" formControlName="purchase_order" class="w_100">
                                             </ng-select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" *ngIf="isILTAndvILT() || isCurriculum()">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Manager Approval <span class="text_red">* </span>
@@ -452,9 +612,8 @@
                                                     </i>
                                                 </a>
                                             </label>
-                                            <ng-select placeholder="Please select" [items]="yesNo"
-                                                bindLabel="name" bindValue="id"
-                                                formControlName="manager_approval" class="w_100">
+                                            <ng-select placeholder="Please select" [items]="yesNo" bindLabel="name"
+                                                bindValue="id" formControlName="manager_approval" class="w_100">
                                             </ng-select>
                                             <div class="error_message"
                                                 *ngIf="createCourceForm.controls['manager_approval'].hasError('required') && createCourceForm.controls['manager_approval'].touched">
@@ -462,27 +621,26 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" *ngIf="isILTAndvILT() || isCurriculum()">
                                         <div class="d-flex align-items-center">
                                             <div class="form-group w-100">
                                                 <label class="form-control-label">
                                                     Who can see my course?
                                                     <a>
-                                                        <i class="fa fa-info-circle info_circle"
-                                                            aria-hidden="true" data-toggle="tooltip"
-                                                            data-placement="right" ngbTooltip="Null">
+                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                            data-toggle="tooltip" data-placement="right"
+                                                            ngbTooltip="Null">
                                                         </i>
                                                     </a>
                                                 </label>
-                                                <ng-select [(ngModel)]="showILTWhoSee"
-                                                    placeholder="Please select" [items]="whocanSee"
-                                                    bindLabel="name" bindValue="id"
+                                                <ng-select [(ngModel)]="showILTWhoSee" placeholder="Please select"
+                                                    [items]="whocanSee" bindLabel="name" bindValue="id"
                                                     formControlName="who_see_course" class="w_100">
                                                 </ng-select>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" *ngIf="isILTAndvILT()">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Email of the preferred Instructor<span class="text_red">
@@ -490,8 +648,7 @@
                                                 </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                        data-toggle="tooltip" data-placement="left"
-                                                        ngbTooltip="Email of the Instructors who have the knowledge required to deliver the course (maximum 5 Instructors).
+                                                        data-toggle="tooltip" data-placement="left" ngbTooltip="Email of the Instructors who have the knowledge required to deliver the course (maximum 5 Instructors).
                       Prerequisite: An Instructor must already have the Instructor (INS) role in Orange Learning to be assigned as a preferred Instructor.
                       If a preferred Instructor does not already have the Instructor (INS) role in Orange Learning, please submit a 'Request for back office role' in PD&L Tools before submitting your CCT.
                       If the event is delivered by an external supplier, please select 'External' from the list.">
@@ -499,9 +656,8 @@
                                                 </a>
                                             </label>
                                             <ng-select placeholder="Please select Instructor"
-                                                [items]="preferedInstructor" [multiple]="true"
-                                                bindLabel="email_id" bindValue="email_id"
-                                                formControlName="email_preffered_instructor">
+                                                [items]="preferedInstructor" [multiple]="true" bindLabel="email_id"
+                                                bindValue="email_id" formControlName="email_preffered_instructor">
                                             </ng-select>
                                             <div class="error_message"
                                                 *ngIf="createCourceForm.controls['email_preffered_instructor'].hasError('required') && createCourceForm.controls['email_preffered_instructor'].touched">
@@ -509,7 +665,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" *ngIf="isILTAndvILT()">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Date of first session
@@ -532,7 +688,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" *ngIf="isILTAndvILT() || isCurriculum()">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Expiry Date
@@ -548,7 +704,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" *ngIf="isILTAndvILT()">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Expiry Type <span class="text_red
@@ -560,8 +716,7 @@
                                                     </i>
                                                 </a>
                                             </label>
-                                            <select class="form-control form_width"
-                                                formControlName="expiry_date_type">
+                                            <select class="form-control form_width" formControlName="expiry_date_type">
                                                 <option value="">Please Select expiry</option>
                                                 <option *ngFor="let cctExpiry of cctExpiryperiod"
                                                     [value]="cctExpiry.id">
@@ -571,7 +726,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" *ngIf="isILTAndvILT()">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Entity/Business area
@@ -583,29 +738,28 @@
                                                     </i>
                                                 </a>
                                             </label>
-                                            <ng-select  placeholder="Please select Entity" [items]="entityList"
+                                            <ng-select placeholder="Please select Entity" [items]="entityList"
                                                 bindLabel="division" bindValue="id"
                                                 formControlName="entity_business_area" class="w_100">
                                             </ng-select>
                                         </div>
                                     </div>
                                     <div class="w_100">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6" *ngIf="isILTAndvILT() || isCurriculum() || isWebBased()">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     Certification <span class="text_red">* </span>
                                                     <a>
-                                                        <i class="fa fa-info-circle info_circle"
-                                                            aria-hidden="true" data-toggle="tooltip"
-                                                            data-placement="right"
+                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                            data-toggle="tooltip" data-placement="right"
                                                             ngbTooltip="Indicates whether the event leads to a certification or not.">
                                                         </i>
                                                     </a>
                                                 </label>
                                                 <ng-select placeholder="Please select"
                                                     (change)="certificationType($event)" [items]="yesNo"
-                                                    bindLabel="name" bindValue="id"
-                                                    formControlName="certification" class="w_100">
+                                                    bindLabel="name" bindValue="id" formControlName="certification"
+                                                    class="w_100">
                                                 </ng-select>
                                                 <div class="error_message"
                                                     *ngIf="createCourceForm.controls['certification'].hasError('required') && createCourceForm.controls['certification'].touched">
@@ -614,7 +768,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" *ngIf="showCertificateExpiry">
+                                    <div class="col-sm-6"
+                                        *ngIf="(isILTAndvILT() || isCurriculum() || isWebBased()) && showCertificateExpiry">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Certification expiry type
@@ -629,8 +784,7 @@
                                             <select class="form-control form_width"
                                                 formControlName="certification_expiry_type">
                                                 <option value="">Please select option</option>
-                                                <option *ngFor="let cctExpiry of cctExpiryType"
-                                                    [value]="cctExpiry.id">
+                                                <option *ngFor="let cctExpiry of cctExpiryType" [value]="cctExpiry.id">
                                                     {{ cctExpiry.name }}
                                                 </option>
                                             </select>
@@ -640,7 +794,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" *ngIf="showCertificateExpiry">
+                                    <div class="col-sm-6"
+                                        *ngIf="(isILTAndvILT() || isCurriculum() || isWebBased()) && showCertificateExpiry">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Validity period <span class="text_red">* </span>
@@ -651,11 +806,9 @@
                                                     </i>
                                                 </a>
                                             </label>
-                                            <select class="form-control form_width"
-                                                formControlName="validity_period">
+                                            <select class="form-control form_width" formControlName="validity_period">
                                                 <option value="">Please select validity</option>
-                                                <option *ngFor="let validity of validityPeriod"
-                                                    [value]="validity.id">
+                                                <option *ngFor="let validity of validityPeriod" [value]="validity.id">
                                                     {{ validity.name }}
                                                 </option>
                                             </select>
@@ -665,7 +818,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" *ngIf="isILTAndvILT() || isWebBased()">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 External vendor <span class="text_red">* </span>
@@ -678,9 +831,8 @@
                                                 </a>
                                             </label>
 
-                                            <ng-select placeholder="Please select" 
-                                                (change)="externalVendor($event)" [items]="yesNo"
-                                                bindLabel="name" bindValue="id"
+                                            <ng-select placeholder="Please select" (change)="externalVendor($event)"
+                                                [items]="yesNo" bindLabel="name" bindValue="id"
                                                 formControlName="external_vendor" class="w_100">
                                             </ng-select>
                                             <div class="error_message"
@@ -689,7 +841,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" *ngIf="externalVendorname">
+                                    <div class="col-sm-6"
+                                        *ngIf="(isILTAndvILT() || isWebBased()) && externalVendorname">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 External vendor name
@@ -713,38 +866,35 @@
                                     </div>
 
                                     <div class="w_100">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6" *ngIf="isILTAndvILT()">
                                             <div class="form-group">
                                                 <label class="form-control-label">
                                                     Free field content
                                                     <a>
-                                                        <i class="fa fa-info-circle info_circle"
-                                                            aria-hidden="true" data-toggle="tooltip"
-                                                            data-placement="right" ngbTooltip="">
+                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                            data-toggle="tooltip" data-placement="right" ngbTooltip="">
                                                         </i>
                                                     </a>
                                                 </label>
-                                                <textarea
-                                                    class="form-control form_width-textarea" rows="3"
+                                                <textarea class="form-control form_width-textarea" rows="3"
                                                     placeholder="Enter Free field content" maxlength="500"
                                                     formControlName="free_field_content"></textarea>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6" *ngIf="isILTAndvILT() || isCurriculum()">
                                             <div class="d-flex align-items-center">
                                                 <div class="form-group w_100">
                                                     <label class="form-control-label">
                                                         For Whom? <span class="text_red">* </span>
                                                         <a>
-                                                            <i class="fa fa-info-circle info_circle"
-                                                                aria-hidden="true" data-toggle="tooltip"
-                                                                data-placement="right"
+                                                            <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                                data-toggle="tooltip" data-placement="right"
                                                                 ngbTooltip="Define the target audience for whom the course is designed.">
                                                             </i>
                                                         </a>
                                                     </label>
-                                                    <textarea class="form-control form_width-textarea"
-                                                        rows="3" maxlength="500"
+                                                    <textarea class="form-control form_width-textarea" rows="3"
+                                                        maxlength="500"
                                                         placeholder="List the target audience for this training course’ (examples: All OBS Employees, All Customer Facing Employees, All Project Managers,…etc)"
                                                         formControlName="for_whoom_single"></textarea>
                                                     <div class="error_message"
@@ -754,7 +904,7 @@
 
                                                 </div>
                                                 <div class="">
-                                                    <a data-toggle="modal" data-target="#exampleModal"
+                                                    <a (click)="multilaungauge('for_whoom')"
                                                         class="d-flex flex-column align-items-end">
                                                         <img src="../../../../assets/images/icon/lang.png"
                                                             class="langu_css" />
@@ -763,15 +913,14 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6" *ngIf="isILTAndvILT() || isCurriculum()">
                                             <div class="d-flex align-items-center">
                                                 <div class="form-group w_100">
                                                     <label class="form-control-label">
                                                         Learn more
                                                         <a>
-                                                            <i class="fa fa-info-circle info_circle"
-                                                                aria-hidden="true" data-toggle="tooltip"
-                                                                data-placement="right"
+                                                            <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                                data-toggle="tooltip" data-placement="right"
                                                                 ngbTooltip="If you wish, add a link enabling users to access additional information about the program.">
                                                             </i>
                                                         </a>
@@ -784,7 +933,7 @@
                                                         Learn more is not a valid URL</div>
                                                 </div>
                                                 <div class="mt_top_11">
-                                                    <a data-toggle="modal" data-target="#learnMoreModal"
+                                                    <a (click)="multilaungauge('learn_more')"
                                                         class="d-flex flex-column align-items-end">
                                                         <img src="../../../../assets/images/icon/lang.png"
                                                             class="langu_css" />
@@ -796,33 +945,136 @@
                                     </div>
                                 </div>
 
-                                <table class="table table-bordered" formArrayName="curriculum_content">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Curriculum Content</th>
-                                        <th scope="col" class="w_12">Add</th>
-                                    </tr>
-                                    <tr  *ngFor="let curriculum of curriculumContentArray.controls;let i = index;">
-                                        <td [formGroupName]="i">
-                                            <input type="text" placeholder="Enter Curriculum Content"
-                                                class="form-control form_width"
-                                                formControlName="description" />
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-success mr-2 mb-1"
-                                                (click)="addCurriculumContenttocurriculum('')">
-                                                +
-                                            </button>
-                                            <button class="btn btn-danger" *ngIf="i > 0"
-                                                (click)="removeCurriculumContenttocurriculum(i)">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </thead>
-                            </table>
+                                <div class="row" *ngIf="isVideoBased()">
 
-                                <table class="table table-bordered" formArrayName="learner_guideline">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Uploaded video URL <span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="right"
+                                                        ngbTooltip="Upload your video file in MP4 format. Maximum file size is 500 MB">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <textarea class="form-control form_width-textarea" rows="3"
+                                                placeholder="Enter Uploaded video URL" maxlength="500"
+                                                formControlName="video_link"></textarea>
+                                            <!-- <span class="charcter_limit">{{remainingText}} characters
+                                                remaining</span> -->
+                                            <div class="error_message"
+                                                *ngIf="createCourceForm.controls['video_link'].invalid && (createCourceForm.controls['video_link'].dirty || createCourceForm.controls['video_link'].touched)">
+                                                Uploaded video URL is not a valid URL
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" *ngIf="isMaterialBased()">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Material Source<span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="right"
+                                                        ngbTooltip="Select the URL option to make reference to an external resource/site or select Upload Material to upload one of the following file types: doc, docx, xls, xlsx, ppt, pptx, pps, ppsx, pdf, jpeg, jpe, jpg, gif, zip (maximum file size is 50 MB).">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <div>
+                                                <input type="radio" id="chkurl" formControlName="materialBased"
+                                                    value="url" class="mr-1" />
+                                                <label for="chkurl" class="mr-2">URL</label>
+                                                <input type="radio" id="chkupload" formControlName="materialBased"
+                                                    value="upload" class="mr-1" />
+                                                <label for="chkupload" class="mr-2">Uploaded Material</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row" *ngIf="isMaterialBased() && materialBased == 'upload'">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Material Source<span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="right"
+                                                        ngbTooltip="Please upload that you wish to associate with the learning Material.">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="upload_field w_100">
+                                                    <input type="file" id="exampleInputFile"
+                                                        formControlName="material_source"
+                                                        (change)="handleFileInput_Material($event)" />
+                                                    <div class="error_message"
+                                                        *ngIf="createCourceForm.controls['material_source'].hasError('required') && createCourceForm.controls['material_source'].touched">
+                                                        Material Source cannot be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="isMaterialBased() && materialBased == 'url'">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                URL<span class="text_red">* </span>
+                                                <a>
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="right"
+                                                        ngbTooltip="Please upload that you wish to associate with the learning Material.">
+                                                    </i>
+                                                </a>
+                                            </label>
+                                            <div class="url_field">
+                                                <input type="text" placeholder="Enter URL"
+                                                    class="form-control form_width" formControlName="url" />
+                                                <div class="error_message"
+                                                    *ngIf="createCourceForm.controls['url'].invalid && (createCourceForm.controls['url'].dirty || createCourceForm.controls['url'].touched)">
+                                                    Material Source URL is not a valid URL
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table class="table table-bordered" formArrayName="curriculum_content"
+                                    *ngIf="isCurriculum()">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Curriculum Content</th>
+                                            <th scope="col" class="w_12">Add</th>
+                                        </tr>
+                                        <tr *ngFor="let curriculum of curriculumContentArray.controls;let i = index;">
+                                            <td [formGroupName]="i">
+                                                <input type="text" placeholder="Enter Curriculum Content"
+                                                    class="form-control form_width" formControlName="description" />
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-success mr-2 mb-1"
+                                                    (click)="addCurriculumContenttocurriculum('')">
+                                                    +
+                                                </button>
+                                                <button class="btn btn-danger" *ngIf="i > 0"
+                                                    (click)="removeCurriculumContenttocurriculum(i)">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                </table>
+
+                                <table class="table table-bordered" formArrayName="learner_guideline"
+                                    *ngIf="isILTAndvILT() || isCurriculum()">
                                     <thead>
                                         <tr>
                                             <th scope="col">Learner Guidelines</th>
@@ -835,9 +1087,9 @@
                                                     class="form-control form_width" formControlName="title" />
                                             </td>
                                             <td [formGroupName]="i">
-                                                <textarea class="form-control form_width-textarea w-100"
-                                                    rows="3" placeholder="Enter Learner Guidelines Description"
-                                                    maxlength="500" formControlName="description"></textarea>
+                                                <textarea class="form-control form_width-textarea w-100" rows="3"
+                                                    placeholder="Enter Learner Guidelines Description" maxlength="500"
+                                                    formControlName="description"></textarea>
                                             </td>
                                             <td>
                                                 <button class="btn btn-success mr-2 mb-1"
@@ -919,16 +1171,16 @@
                                 </p>
                             </div>
                             <div class="card-footer d-flex justify-content-start">
-                                <!-- <button *ngIf="getUserrole.id != 4 && getUserrole.id == 2"
-                                    class="btn btn-primary" (click)="createUpdateCourse('pending')">
+                                <button *ngIf="isSubmit()"
+                                  class="btn btn-primary"
+                                    (click)="createUpdateCourse('pending')">
                                     Submit
                                 </button>
-                                <button
-                                    *ngIf="showStatus !='reject' &&( getprofileDetails.data.id == user_id  || user_id == undefined)"
+                                <button *ngIf="isDraft()"
                                     class="btn btn-secondary ml-1" (click)="createUpdateCourse('draft')">
                                     Save as draft
                                 </button>
-                                <button class="btn btn-primary ml-1" data-toggle="modal"
+                                <!-- <button class="btn btn-primary ml-1" data-toggle="modal"
                                     data-target="#transfertoPublisher" (click)="getPublisher()"
                                     *ngIf="getUserrole.id == 3 && (showrejectbutton != getprofileDetails.data.id || showStatus =='draft')">
                                     <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1"> Transfer
