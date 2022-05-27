@@ -168,13 +168,20 @@ export class EditUserComponent implements OnInit {
           this.createUserForm.controls.first_name.setValue(this.user_details.first_name);
           this.createUserForm.controls.last_name.setValue(this.user_details.last_name);
           this.createUserForm.controls.role_id.setValue(this.user_details.role_id);
-          if(this.user_details.role_id == 3){
+          if(this.user_details.role_id == 3 || this.user_details.role_id == 5){
           this.createUserForm.controls.region_id.setValue(this.user_details.region_id);
           this.isRegion = true;
           }
           else{
             this.isRegion = false;
           }
+          if(this.user_details.role_id == 4){
+            this.createUserForm.controls.learning_type.setValue(this.user_details.learning_type);
+            this. isLearningType = true;
+            }
+            else{
+              this. isLearningType = false;
+            }
           this.createUserForm.controls.pdl_member.setValue(this.user_details.pdl_member == "1" ? true : false);
           this.createUserForm.controls.status.setValue(this.user_details.status == "1" ? true : false);
           if(this.user_details.admin){

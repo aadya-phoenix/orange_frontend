@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   };
   getUserrole: any;
   courcesList: any;
-  profileDetails:any;
+  profileDetails: any;
   RoleID = dataConstant.RoleID;
   isReviewer = false;
   isPublisher = false;
@@ -40,99 +40,158 @@ export class DashboardComponent implements OnInit {
   isSmeFavourite = false;
   isVendorFavourite = false;
 
-  modulesArray=[{
-    tabClass: 'tab-pane fade show active', aria_labelledby:'pills-home-tab',
-    id:'pills-home', routerLink:'/dashboard/cources', image:'../../assets/images/first.jpg',
-    lableConstantModule : this.lableConstant.create_new_course,
-    lableConstantCatalog: this.lableConstant.request_course_catalog,
-    navigateTo: '',
-    pendingRequestCount : this.pendingRequestCount.course_pending,
-    getFavouriteModule: this.modules.course,
-   },{
-    tabClass: 'tab-pane fade show active', aria_labelledby:'pills-home-tab',
-    id:'pills-home', routerLink:'/dashboard/sct', image:'../../assets/images/Open course session.jpg ',
-    lableConstantModule : this.lableConstant.open_course_session,
-    lableConstantCatalog: this.lableConstant.request_create_session,
-    navigateTo: '',
-    pendingRequestCount : this.pendingRequestCount.session_pending,
-    getFavouriteModule: this.modules.session,
-   },{
-    tabClass: 'tab-pane fade show active', aria_labelledby:'pills-home-tab',
-    id:'pills-home', routerLink:'/dashboard/olcarousel', 
-    image:'../../assets/images/Promote on Carousel.jpg',
-    lableConstantModule : this.lableConstant.promote_on_carousel,
-    lableConstantCatalog: this.lableConstant.request_create_entity,
-    navigateTo:'',
-    pendingRequestCount : this.pendingRequestCount.carousel_pending,
-    getFavouriteModule: this.modules.carousel,
-   },{
-    tabClass: 'tab-pane fade show active', aria_labelledby:'pills-home-tab',
-    id:'pills-home', routerLink:'/dashboard/back-office', image:'../../assets/images/4.jpg',
-    lableConstantModule : this.lableConstant.request_back_office_role,
-    lableConstantCatalog: this.lableConstant.request_specific_role,
-    navigateTo:'',
-    pendingRequestCount : this.pendingRequestCount.office_role_pending,
-    getFavouriteModule: this.modules.backOffice,
-   },{
-    tabClass: 'tab-pane fade', aria_labelledby:'pills-profile-tab',
-    id:'pills-profile', routerLink:'', image:'../../assets/images/Design learning module.jpg',
-    lableConstantModule : this.lableConstant.design_learning_module,
-    lableConstantCatalog: this.lableConstant.request_learning_team,
-    navigateTo: '',
-    pendingRequestCount : '',
-    getFavouriteModule: this.modules.design,
-   },{
-    tabClass: 'tab-pane fade', aria_labelledby:'pills-profile-tab',
-    id:'pills-profile', routerLink:'/dashboard/olreport', image:'../../assets/images/get a report.jpg',
-    lableConstantModule : this.lableConstant.get_a_report,
-    lableConstantCatalog: this.lableConstant.request_training_vc_report,
-    navigateTo:'',
-    pendingRequestCount : this.pendingRequestCount.course_pending,
-    getFavouriteModule: this.modules.getReport,
-   },{
-    tabClass: 'tab-pane fade', aria_labelledby:'pills-profile-tab',
-    id:'pills-profile', routerLink:'', image:'../../assets/images/Access Learning Needs tool(DNA).jpg',
-    lableConstantModule : this.lableConstant.access_learning_tool,
-    lableConstantCatalog: this.lableConstant.dna_tool_feature,
-    navigateTo:'',
-    pendingRequestCount : '',
-    getFavouriteModule: '',
-   },{
-    tabClass: 'tab-pane fade', aria_labelledby:'pills-profile-tab',
-    id:'pills-profile', routerLink:'', image:'../../assets/images/SME_DB.jpg',
-    lableConstantModule : this.lableConstant.sme_database,
-    lableConstantCatalog: this.lableConstant.sme_learning_community_feature,
-    navigateTo:'',
-    pendingRequestCount : '',
-    getFavouriteModule: '',
-   },{ 
-    tabClass: 'tab-pane fade', aria_labelledby:'pills-contact-tab',
-    id:'pills-contact', routerLink:'/dashboard/vendormanagement',
-    image:'../../assets/images/manage vendor.jpg',
-    lableConstantModule : this.lableConstant.manage_vendors,
-    lableConstantCatalog: this.lableConstant.view_manage_workshops,
-    navigateTo:'',
-    pendingRequestCount : '',
-    getFavouriteModule: this.modules.vendor,
-   }];
-  
+  favoriteList: any = [];
+
+  isCourseShow = true;
+  isSessionShow = true;
+  isCarouselShow = true;
+  isBackOfficeShow = true;
+  isDesignShow = true;
+  isGetReportShow = true;
+  isAccessLearningShow = true;
+  isSmeShow = true;
+  isVendorShow = true;
+
+  modulesArray_tab1: any = [];
+  modulesArray_tab2: any = [];
+  modulesArray_tab3: any = [];
+
   constructor(private courseService: CourcesService, private router: Router,
     private authService: AuthenticationService,
     private commonService: CommonService) {
     this.getUserrole = this.authService.getRolefromlocal();
     this.profileDetails = this.authService.getProfileDetailsfromlocal();
-    console.log("userrole",this.authService.getProfileDetailsfromlocal())
     this.isReviewer = this.getUserrole.id === this.RoleID.BackOfficeReviewer;
     this.isPublisher = this.getUserrole.id === this.RoleID.BackOfficePublisher;
     this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
-    this.isPdlMember = this.profileDetails.data.pdl_member;
+    if (this.profileDetails.data.pdl_member) {
+      this.isPdlMember = this.profileDetails.data.pdl_member;
+    }
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+    if (this.lableConstant) {
+      this.modulesArray_tab1 = [
+        {
+          id: 'course', name:'Create new cource',
+          routerLink: '/dashboard/cources', image: '../../assets/images/first.jpg',
+          lableConstantModule: this.lableConstant.create_new_course,
+          lableConstantCatalog: this.lableConstant.request_course_catalog,
+          navigateTo: '',
+          favourite: false, showFavourite: true,
+          pendingRequestCount: this.pendingRequestCount.course_pending,
+          setFavouriteModule: this.modules.course,
+        }, {
+          id: 'session', name:'Open cource session(s)',
+          routerLink: '/dashboard/sct', image: '../../assets/images/Open course session.jpg ',
+          lableConstantModule: this.lableConstant.open_course_session,
+          lableConstantCatalog: this.lableConstant.request_create_session,
+          navigateTo: '',
+          favourite: false, showFavourite: true,
+          pendingRequestCount: this.pendingRequestCount.session_pending,
+          setFavouriteModule: this.modules.session,
+        }, {
+          id: 'corousel', name:'Promote on Carousel',
+          routerLink: '/dashboard/olcarousel',
+          image: '../../assets/images/Promote on Carousel.jpg',
+          lableConstantModule: this.lableConstant.promote_on_carousel,
+          lableConstantCatalog: this.lableConstant.request_create_entity,
+          navigateTo: '',
+          favourite: false, showFavourite: true,
+          pendingRequestCount: this.pendingRequestCount.carousel_pending,
+          setFavouriteModule: this.modules.carousel,
+        }, {
+          id: 'back_office', name:'Request back-office role',
+          routerLink: '/dashboard/back-office', image: '../../assets/images/4.jpg',
+          lableConstantModule: this.lableConstant.request_back_office_role,
+          lableConstantCatalog: this.lableConstant.request_specific_role,
+          navigateTo: '',
+          favourite: false, showFavourite: true,
+          pendingRequestCount: this.pendingRequestCount.office_role_pending,
+          setFavouriteModule: this.modules.backOffice,
+        }];
+
+      this.modulesArray_tab2 = [
+        {
+          id: 'design', name:'Design learning Module',
+          routerLink: '', image: '../../assets/images/Design learning module.jpg',
+          lableConstantModule: this.lableConstant.design_learning_module,
+          lableConstantCatalog: this.lableConstant.request_learning_team,
+          navigateTo: '',
+          favourite: false, showFavourite: true,
+          pendingRequestCount: '',
+          setFavouriteModule: this.modules.design,
+        }, {
+          id: 'get_report', name:'Get a Report',
+          routerLink: '/dashboard/olreport', image: '../../assets/images/get a report.jpg',
+          lableConstantModule: this.lableConstant.get_a_report,
+          lableConstantCatalog: this.lableConstant.request_training_vc_report,
+          navigateTo: '',
+          favourite: false, showFavourite: true,
+          pendingRequestCount: this.pendingRequestCount.course_pending,
+          setFavouriteModule: this.modules.getReport,
+        }, {
+          id: 'access', name:'Access Learning Needs Tool(DNA)',
+          routerLink: '', image: '../../assets/images/Access Learning Needs tool(DNA).jpg',
+          lableConstantModule: this.lableConstant.access_learning_tool,
+          lableConstantCatalog: this.lableConstant.dna_tool_feature,
+          navigateTo: '',
+          favourite: false, showFavourite: true,
+          pendingRequestCount: '',
+          setFavouriteModule: this.modules.access,
+        }, {
+          id: 'sme', name:'SME Database',
+          routerLink: '', image: '../../assets/images/SME_DB.jpg',
+          lableConstantModule: this.lableConstant.sme_database,
+          lableConstantCatalog: this.lableConstant.sme_learning_community_feature,
+          navigateTo: '',
+          favourite: false, showFavourite: true,
+          pendingRequestCount: '',
+          setFavouriteModule: this.modules.sme,
+        }
+      ];
+
+      this.modulesArray_tab3 = [{
+        id: 'vendor', name:'Manage Vendors',
+        routerLink: '/dashboard/vendormanagement',
+        image: '../../assets/images/manage vendor.jpg',
+        lableConstantModule: this.lableConstant.manage_vendors,
+        lableConstantCatalog: this.lableConstant.view_manage_workshops,
+        navigateTo: '',
+        favourite: false, showFavourite: true,
+        pendingRequestCount: '',
+        setFavouriteModule: this.modules.vendor,
+      }]
+    }
   }
 
-  navigatetoPending(status: any) {
-    let statusobj = { status: status };
+  ngOnInit(): void {
+    this.getFavouriteList();
+    this.getpendingCourses();
+    if (this.getUserrole.id == 2) {
+      this.pendingFlag = true;
+    }
+    else {
+      this.pendingFlag = false;
+    }
+    // setTimeout(() => {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+    // },1000);
+  }
+
+  navigatetoPending(module:any){
+    if(module == this.modules.course){
+    let statusobj = { status: 'pending' };
     this.router.navigateByUrl('/dashboard/cources', {
       state: statusobj,
     });
+   }
+   if(module == this.modules.carousel){
+    const status = this.isRequester ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
+    this.router.navigateByUrl(`/dashboard/olcarousel?status=${status}`);
+   }
+   if(module == this.modules.backOffice){
+    const status = this.isRequester ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
+    this.router.navigateByUrl(`/dashboard/back-office?status=${status}`);
+   }
   }
 
   navigatetoPendingCarousel() {
@@ -145,49 +204,29 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl(`/dashboard/back-office?status=${status}`);
   }
 
-  getFavourite(module:any){
-    let favourite ;
-    if(module == this.modules.course){
-      this.isCourseFavourite = !this.isCourseFavourite;
-      favourite = this.isCourseFavourite;
+  setFavourite(module: any) {
+    let favorite;
+    for (let item of this.modulesArray_tab1) {
+      if (module == item.id) {
+        item.favourite = !item.favourite;
+        favorite = item.favourite;
+      }
     }
-    if(module == this.modules.session){
-      this.isSessionFavourite = !this.isSessionFavourite;
-      favourite = this.isSessionFavourite;
+    for (let item of this.modulesArray_tab2) {
+      if (module == item.id) {
+        item.favourite = !item.favourite;
+        favorite = item.favourite;
+      }
     }
-    if(module ==  this.modules.carousel){
-      this.isCarouselFavourite = !this.isCarouselFavourite;
-      favourite = this.isCarouselFavourite;
+    for (let item of this.modulesArray_tab3) {
+      if (module == item.id) {
+        item.favourite = !item.favourite;
+        favorite = item.favourite;
+      }
     }
-    if(module ==  this.modules.backOffice){
-      this.isBackOfficeFavourite = !this.isBackOfficeFavourite;
-      favourite = this.isBackOfficeFavourite;
-    }
-    if(module ==  this.modules.design){
-      this.isDesignFavourite = !this.isDesignFavourite;
-      favourite = this.isDesignFavourite;
-    }
-    if(module ==  this.modules.getReport){
-      this.isGetReportFavourite = !this.isGetReportFavourite;
-      favourite = this.isGetReportFavourite;
-    }
-    if(module == this.modules.access){
-      this.isAccessLearningFavourite = !this.isAccessLearningFavourite;
-      favourite = this.isAccessLearningFavourite;
-    }
-    if(module == this.modules.sme){
-      this.isSmeFavourite = !this.isSmeFavourite;
-      favourite = this.isSmeFavourite;
-    }
-    if(module ==  this.modules.vendor){
-      this.isVendorFavourite = !this.isVendorFavourite;
-      favourite = this.isVendorFavourite;
-    }
-    
-    const body = {module:module, favorite:favourite}
-    console.log("favourite course",body);
+    const body = { module: module, favorite: favorite }
     this.commonService.showLoading();
-    this.courseService.getFavourites(body).subscribe(
+    this.courseService.setFavourites(body).subscribe(
       (res: any) => {
         this.commonService.hideLoading();
       },
@@ -196,11 +235,73 @@ export class DashboardComponent implements OnInit {
         console.log(err);
       }
     );
-    
   }
-  
-  getFavouriteList(){
-    console.log("favourite list");
+
+  getFavouriteList() {
+    this.commonService.showLoading();
+    this.courseService.getFavourites().subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        this.favoriteList = res.data;
+        if (this.favoriteList && this.favoriteList.length) {
+          this.favoriteList.forEach((module: any) => {
+            let tab1module = this.modulesArray_tab1.find((x: { setFavouriteModule: any; }) => x.setFavouriteModule == module.module);
+            if (tab1module) {
+              tab1module.favourite = true;
+            }
+            else {
+              let tab2module = this.modulesArray_tab2.find((x: { setFavouriteModule: any; }) => x.setFavouriteModule == module.module);
+              if (tab2module) {
+                tab2module.favourite = true;
+              }
+              else {
+                let tab3module = this.modulesArray_tab3.find((x: { setFavouriteModule: any; }) => x.setFavouriteModule == module.module);
+                if (tab3module) {
+                  tab3module.favourite = true;
+                }
+              }
+            }
+          });
+          // for(let module of this.favoriteList){
+          //  for(let item of this.modulesArray_tab1){
+          //   if(module.module == item.setFavouriteModule){
+          //     item.favourite =true;
+          //   }
+
+          //  }
+          //  for(let item of this.modulesArray_tab2){
+          //   if(module.module == item.setFavouriteModule){
+          //     item.favourite =true;
+          //   }
+          //  }
+          //  for(let item of this.modulesArray_tab3){
+          //   if(module.module == item.setFavouriteModule){
+          //     item.favourite =true;
+          //   }
+          //  }
+          // }
+        }
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        console.log(err);
+      }
+    );
+  }
+
+  onlyFavourite() {
+   for(let module of this.modulesArray_tab1){
+     module.showFavourite = module.favourite;
+     console.log("module1",module)
+   }
+   for(let module2 of this.modulesArray_tab2){
+    module2.showFavourite = module2.favourite;
+    console.log("module2",module);
+   }
+   for(let module3 of this.modulesArray_tab3){
+    module3.showFavourite = module3.favourite;
+    console.log("module3",module);
+   }
   }
 
   getpendingCourses() {
@@ -217,24 +318,11 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
-    this.getpendingCourses();
-    if (this.getUserrole.id == 2) {
-      this.pendingFlag = true;
-    }
-    else {
-      this.pendingFlag = false;
-    }
-    // setTimeout(() => {
-    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
-    // },1000);
-  }
-
-  sendEmail(link:any){
-    console.log("link",link)
-    var email ='';
+  sendEmail(name:any) {
+     console.log("link", name)
+  /*  var email = '';
     var subject = '';
-    var emailBody = this.baseUrl+link;
-    window.location.href = "mailto:"+email+"?subject="+subject+"&body="+emailBody;
+    var emailBody = this.baseUrl + link;
+    window.location.href = "mailto:" + email + "?subject=" + subject + "&body=" + emailBody; */
   }
 }
