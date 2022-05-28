@@ -72,7 +72,7 @@ export class DashboardComponent implements OnInit {
       this.modulesArray_tab1 = [
         {
           id: 'course', name:'Create new cource',
-          routerLink: '/dashboard/cources', image: '../../assets/images/first.jpg',
+          routerLink: '/dashboard/cct', image: '../../assets/images/first.jpg',
           lableConstantModule: this.lableConstant.create_new_course,
           lableConstantCatalog: this.lableConstant.request_course_catalog,
           navigateTo: '',
