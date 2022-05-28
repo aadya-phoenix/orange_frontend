@@ -27,9 +27,7 @@ export const dataConstant = {
   NumbersOnlyPattern:'^[0-9]+$',
   EuroCurrencyPattern:'^[0-9,]*$',
   CurrencyPattern:'^(?!0\.00)\d{1,3}(,\d{3})*(\.\d\d)?$',
- /*  PasswordPattern:'^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$', */
- /*  PasswordPattern:'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})$', */
- PasswordPattern:'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$',
+  PasswordPattern:'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$',
   Ratings: [{id:1, value:'Very Bad'},{id:2, value:'Bad'},{id:3, value:'Okay'},{id:4, value:'Good'},{id:5, value:'Excellent'}],
   CourseStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish', reject: 'reject', expired: 'expired' },
   CarouselStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
@@ -38,6 +36,7 @@ export const dataConstant = {
   VendorStatus: { total: 'total', active:'active', deactive:'deactive'},
   GetReportStatus: {total: 'total', closed: 'closed', close: 'close',draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
   ImageUrl: 'https://orange.mindscroll.info/public/public',
+  BaseUrl:'https://orange.mindscroll.info',
   ExporType : {course:'course', session:'session', carousel:'carousel', back_office:'back_office', vendor:'vendor', vendor_rating:'vendor_rating', get_report:'get_report'},
   RoleID: {
     RequesterID: 2,
@@ -83,6 +82,17 @@ export const dataConstant = {
       "description": "A playlist is a collection of learning content, selected either from the Orange Learning catalogue or from other platforms and available via a shared link in Orange Learning. This form enables you to request the conversion of a private playlist into a public playlist in order to easily share the knowledge with learners in a path-like structure. Public playlists are available to their target audience in the Orange Learning catalogue."
     }
   ],
-  Laungauges: { EN: 'EN', FR: 'FR' }
+  Laungauges : { EN:'EN', FR:'FR'},
+  Modules:{
+    course:'course',
+    session:'session',
+    carousel:'carousel',
+    backOffice:'back-office',
+    access:'access',
+    sme:'sme',
+    vendor:'vendor',
+    getReport:'get-report',
+    design: 'design'
+  }
 }
 

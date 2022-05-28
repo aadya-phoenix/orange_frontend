@@ -16,7 +16,7 @@ const emailregexp = dataConstant.EmailPattren;
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
-
+  dateTimeFormate = dataConstant.dateTimeFormate;
   createUserForm: FormGroup;
   user_id:any;
   user_details:any;
@@ -26,6 +26,8 @@ export class EditUserComponent implements OnInit {
   isCreate = false;
   notmatched = false ;
   isSubmitted = false;
+  isLearningType =false;
+  learningTypes:any=[];
 
   constructor(private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -39,9 +41,13 @@ export class EditUserComponent implements OnInit {
       confirm_password: new FormControl('', []),
       first_name: new FormControl('', [Validators.required]),
       last_name: new FormControl('', [Validators.required]),
-      role_id: new FormControl('', [Validators.required]),
+      role_id: new FormControl('', []),
       region_id: new FormControl('', []),
+      learning_type:new FormControl('', []),
       pdl_member: new FormControl(false, []),
+      status: new FormControl(true, []),
+      admin: new FormControl(false, []),
+      staff: new FormControl(true, []),
     },
     { validators: passwordMatchingValidatior } );
   }
@@ -66,14 +72,25 @@ export class EditUserComponent implements OnInit {
     });
     this.getRole();
     this.getRegionalCordinator();
+    this.getLearningType();
   }
 
   getSelectedRole(event:any){
-   if(event.id == 3){
+   if(event.id == 3 || event.id == 5){
      this.isRegion = true;
+     this.isLearningType = false;
+     this.createUserForm.get('region_id')?.setValidators([Validators.required]);
+   }
+   else if(event.id == 4){
+     this.isLearningType =true;
+     this.isRegion = false;
+     this.createUserForm.get('region_id')?.clearValidators();
+     this.createUserForm.get('region_id')?.setValue(null);
    }
    else{
     this.isRegion = false;
+    this.isLearningType = false;
+    this.createUserForm.get('region_id')?.clearValidators();
     this.createUserForm.get('region_id')?.setValue(null);
   }
   }
@@ -93,7 +110,6 @@ export class EditUserComponent implements OnInit {
     this.isSubmitted = true;
     if (this.createUserForm.invalid) {
       return;
-      
     }
     const body = this.createUserForm.value;
     !this.user_id ? this.create(body) : this.update(body);
@@ -103,9 +119,15 @@ export class EditUserComponent implements OnInit {
     this.commonService.showLoading();
     this.userManageService.createUser(body).subscribe(
       (res: any) => {
+        if (res.status === 1){
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('User', 'Successfully Created.');
         this.router.navigateByUrl(`/user/edit/${res.data.id}`);
+        }
+        else{
+          this.commonService.toastErrorMsg('Error',res.message);
+          this.commonService.hideLoading();
+        }
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -118,9 +140,15 @@ export class EditUserComponent implements OnInit {
     this.commonService.showLoading();
     this.userManageService.updateUser(body,this.user_id).subscribe(
       (res: any) => {
+        if (res.status == 1 ){
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('User', 'Successfully Updated.');
         this.router.navigateByUrl(`/user`);
+       }
+       else{
+        this.commonService.toastErrorMsg('Error',res.message);
+        this.commonService.hideLoading();
+       }
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -129,52 +157,43 @@ export class EditUserComponent implements OnInit {
     );
   }
 
-  delete(){
-    Swal.fire({
-      title: 'Are you sure want to remove?',
-      text: 'You will not be able to recover this request!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, keep it'
-    }).then((result) => {
-      if (result.value) {
-        this.commonService.showLoading();
-        this.userManageService.changeUserStatus({status:"0"},this.user_id).subscribe((res:any)=>{
-          this.commonService.hideLoading();
-          this.router.navigateByUrl(`/user`);
-          Swal.fire(
-            'Deleted!',
-            'Your request has been deleted.',
-            'success'
-          )
-        },(err:any)=>{
-          this.commonService.hideLoading();
-        })
-        
-      }
-    })
-  }
-
   getUserDetails() {
     this.commonService.showLoading();
     this.userManageService.getUserDetails(this.user_id).subscribe(
       (res: any) => {
         this.commonService.hideLoading();
-        if (res.status === 1 && res.message === 'Success') {
+        if (res.status === 1 ) {
           this.user_details = res.data;
           this.createUserForm.controls.email.setValue(this.user_details.email);
           this.createUserForm.controls.first_name.setValue(this.user_details.first_name);
           this.createUserForm.controls.last_name.setValue(this.user_details.last_name);
           this.createUserForm.controls.role_id.setValue(this.user_details.role_id);
-          if(this.user_details.role_id == 3){
+          if(this.user_details.role_id == 3 || this.user_details.role_id == 5){
           this.createUserForm.controls.region_id.setValue(this.user_details.region_id);
           this.isRegion = true;
           }
           else{
             this.isRegion = false;
           }
+          if(this.user_details.role_id == 4){
+            this.createUserForm.controls.learning_type.setValue(this.user_details.learning_type);
+            this. isLearningType = true;
+            }
+            else{
+              this. isLearningType = false;
+            }
           this.createUserForm.controls.pdl_member.setValue(this.user_details.pdl_member == "1" ? true : false);
+          this.createUserForm.controls.status.setValue(this.user_details.status == "1" ? true : false);
+          if(this.user_details.admin){
+          this.createUserForm.controls.admin.setValue(this.user_details.admin == "1" ? true : false);
+           }
+          if(this.user_details.staff){
+          this.createUserForm.controls.staff.setValue(this.user_details.staff == "1" ? true : false);
+           }
+          }
+          else{
+            this.commonService.toastErrorMsg('Error',res.message);
+            this.commonService.hideLoading();
           }
       },
       (err: any) => {
@@ -205,9 +224,21 @@ export class EditUserComponent implements OnInit {
   getRole(){
     this.courceService.getRole().subscribe(
       res=>{
-        this.rolesList= res.data;
+        let roles = res.data;
+        this.rolesList = roles.filter((a:any) => {
+          return a.status == 1
+        });
       },err=>{
        console.log(err);
      });
+  }
+
+  getLearningType(){
+    this.courceService.getLearningType().subscribe(
+      res=>{
+        this.learningTypes= res.data;
+      },err=>{
+       console.log(err);
+     });  
   }
 }

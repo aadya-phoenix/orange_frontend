@@ -1,9 +1,5 @@
 <div id="right-panel" class="right-panel">
-    <!-- Header-->
     <app-header></app-header>
-    <!-- /header -->
-    <!-- Header-->
-
     <div class="breadcrumbs cm_breadcums">
         <div class="col-sm-8">
             <div class="page-header float-left">
@@ -17,17 +13,15 @@
                 </div>
             </div>
         </div>
-
         <div class="col-sm-4 float-right ">
-            <div class="page-header float-right ">
+            <div class="page-header float-right" (click)="onlyFavourite()">
                 <div class="page-title d-flex end_just mt-3">
-                    <i class="fa fa-star star-css "></i>
-                    <span class="mt-1 ml-1 see-fav ">{{lableConstant.see_favourites}}</span>
+                    <i class="fa fa-star star-css"></i>
+                    <span class="mt-1 ml-1 see-fav" >{{lableConstant.see_favourites}}</span>
                 </div>
             </div>
         </div>
     </div>
-
     <div>
         <div class="tabbed round ">
             <ul class="nav nav-pills" id="pills-tab" role="tablist">
@@ -39,332 +33,152 @@
                     <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
                         aria-controls="pills-profile" aria-selected="false">{{lableConstant.ld_request}}</a>
                 </li>
-                <li class="nav-item" role="presentation">
+              <!--   *ngIf="isPdlMember" -->
+                <li class="nav-item" role="presentation" >
                     <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
                         aria-controls="pills-contact" aria-selected="false">{{lableConstant.internal_tools}}</a>
                 </li>
             </ul>
         </div>
-        <div class="tab-content border-0" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                <div class="course_box ">
-                    <div class="course_box_child">
+           
+                <div class="tab-content border-0" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div class="course_box ">
+                     <ng-container *ngFor="let item of modulesArray_tab1">
+                       <div class="course_box_child" *ngIf="item.showFavourite">
                         <div>
-                            <a [routerLink]="[ '/dashboard/cct'] ">
+                            <a [routerLink]="[ item.routerLink] ">
                                 <div class="img_div ">
-                                    <img src="../../assets/images/first.jpg " />
+                                    <img [src]= item.image/>
                                 </div>
                                 <div class="text_div_sec ">
                                     <a [routerLink]="[ '/dashboard/cct'] "
                                         class="create_course color-orange">{{lableConstant.create_new_course}}</a>
 
-                                    <p class="p__text_divcss text-center "data-toggle="tooltip" data-placement="top" title=" {{lableConstant.request_course_catalog}}">
-                                        {{lableConstant.request_course_catalog}}
+                                    <p class="p__text_divcss text-center " data-toggle="tooltip" data-placement="top"
+                                        title=" {{item.lableConstantCatalog}}">
+                                        {{item.lableConstantCatalog}}
                                     </p>
-
-                                    <!--text_div_sec-->
                                 </div>
                             </a>
                             <div class="sec_footer ">
-
                                 <div class="footer_sec_ano">
-                                    <button [disabled]="pendingFlag" (click)="navigatetoPending('pending')">
+                                    <button [disabled]="pendingFlag" (click)="navigateTo">
                                         <p class="footer_p"
-                                            [ngClass]="{'backgound_green': pendingRequestCount.course_pending === 0}">
-                                            {{pendingRequestCount.course_pending}}</p>
+                                            [ngClass]="{'backgound_green': item.pendingRequestCount === 0}">
+                                            {{item.pendingRequestCount}}</p>
                                     </button>
                                     <span class="text_white">{{lableConstant.pending}}</span>
                                 </div>
-
-
-
                                 <div class="p-2 bd-highlight ">
-                                    <img src="../../assets/images/share.png " class="mr-2 w_22" />
-                                    <img src="../../assets/images/star.png " class="w_22" />
+                                    <a (click)="sendEmail('item.routerLink')">
+                                      <img src="../../assets/images/share.png " class="mr-2 w_22" />
+                                    </a>
+                                    <a (click)="setFavourite(item.setFavouriteModule)">
+                                        <img  *ngIf="!item.favourite"
+                                      src="../../assets/images/star.png " class="width_22" />
+                                      <img src="../../assets/images/yellow_star.png " *ngIf="item.favourite" class="width_22" />
+                                        </a>
                                 </div>
                             </div>
-                            <!--sec_footer-->
                         </div>
-                        <!--maindiv-->
+                    </div> 
+                </ng-container> 
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <div class="course_box" >
+                        <ng-container *ngFor="let item of modulesArray_tab2">
+                            <div class="course_box_child" *ngIf="item.showFavourite">
+                             <div>
+                                 <a [routerLink]="[ item.routerLink] ">
+                                     <div class="img_div ">
+                                         <img [src]= item.image/>
+                                     </div>
+                                     <div class="text_div_sec ">
+                                         <a [routerLink]="[ '/dashboard/cources'] "
+                                             class="create_course color-orange">{{item.lableConstantModule}}</a>
+     
+                                         <p class="p__text_divcss text-center " data-toggle="tooltip" data-placement="top"
+                                             title=" {{item.lableConstantCatalog}}">
+                                             {{item.lableConstantCatalog}}
+                                         </p>
+                                     </div>
+                                 </a>
+                                 <div class="sec_footer ">
+                                     <div class="footer_sec_ano">
+                                         <button [disabled]="pendingFlag" (click)="navigateTo">
+                                             <p class="footer_p"
+                                                 [ngClass]="{'backgound_green': item.pendingRequestCount === 0}">
+                                                 {{item.pendingRequestCount}}</p>
+                                         </button>
+                                         <span class="text_white">{{lableConstant.pending}}</span>
+                                     </div>
+                                     <div class="p-2 bd-highlight ">
+                                         <a (click)="sendEmail('item.routerLink')">
+                                           <img src="../../assets/images/share.png " class="mr-2 w_22" />
+                                         </a>
+                                         <a (click)="setFavourite(item.setFavouriteModule)">
+                                             <img  *ngIf="!item.favourite"
+                                           src="../../assets/images/star.png " class="width_22" />
+                                           <img src="../../assets/images/yellow_star.png " *ngIf="item.favourite" class="width_22" />
+                                             </a>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div> 
+                     </ng-container> 
                     </div>
-                    <!--cole end-->
-                    <div class="course_box_child">
-                        <a [routerLink]="[ '/dashboard/sct'] ">
-
-                            <div class="img_div ">
-                                <img src="../../assets/images/Open course session.jpg " />
-                            </div>
-                            <div class="text_div_sec ">
-                                <a [routerLink]="[ '/dashboard/sct'] "
-                                    class="create_course ">{{lableConstant.open_course_session}}
-                                </a>
-
-                                <p class="p__text_divcss text-center " data-toggle="tooltip" data-placement="top" title="   {{lableConstant.request_create_session}}">
-                                    {{lableConstant.request_create_session}}
-                                </p>
-
-                                <!--text_div_sec-->
-                            </div>
-                        </a>
-                        <div class="sec_footer ">
-                            <div class="footer_sec_ano ">
-                                <button [disabled]="pendingFlag" (click)="navigatetoPending('pending')">
-                                    <p class="footer_p"
-                                        [ngClass]="{'backgound_green': pendingRequestCount.session_pending === 0}">
-                                        {{pendingRequestCount.session_pending}}</p>
-                                </button>
-                                <span class="text_white">{{lableConstant.pending}}</span>
-                            </div>
-
-                            <div class="p-2 bd-highlight ">
-                                <img src="../../assets/images/share.png " class="mr-2 width_22" />
-                                <img src="../../assets/images/star.png " class="width_22" />
-                            </div>
-                        </div>
-                        <!--sec_footer-->
+                </div>
+                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                    <div class="course_box" >
+                        <ng-container *ngFor="let item of modulesArray_tab3">
+                            <div class="course_box_child course_box_child_width" *ngIf="item.showFavourite">
+                             <div>
+                                 <a [routerLink]="[ item.routerLink] ">
+                                     <div class="img_div ">
+                                         <img [src]= item.image/>
+                                     </div>
+                                     <div class="text_div_sec ">
+                                         <a [routerLink]="[ '/dashboard/cources'] "
+                                             class="create_course color-orange">{{item.lableConstantModule}}</a>
+     
+                                         <p class="p__text_divcss text-center " data-toggle="tooltip" data-placement="top"
+                                             title=" {{item.lableConstantCatalog}}">
+                                             {{item.lableConstantCatalog}}
+                                         </p>
+                                     </div>
+                                 </a>
+                                 <div class="sec_footer ">
+                                     <div class="footer_sec_ano">
+                                         <button [disabled]="pendingFlag" (click)="navigateToPending(item.setFavouriteModule)">
+                                             <p class="footer_p"
+                                                 [ngClass]="{'backgound_green': item.pendingRequestCount === 0}">
+                                                 {{item.pendingRequestCount}}</p>
+                                         </button>
+                                         <span class="text_white">{{lableConstant.pending}}</span>
+                                     </div>
+                                     <div class="p-2 bd-highlight ">
+                                         <a (click)="sendEmail(item.name)">
+                                           <img src="../../assets/images/share.png " class="mr-2 w_22" />
+                                         </a>
+                                         <a (click)="setFavourite(item.setFavouriteModule)">
+                                             <img  *ngIf="!item.favourite"
+                                           src="../../assets/images/star.png " class="width_22" />
+                                           <img src="../../assets/images/yellow_star.png " *ngIf="item.favourite" class="width_22" />
+                                             </a>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div> 
+                     </ng-container> 
                     </div>
-                    <!--cole end-->
-                    <div class="course_box_child">
-                        <a [routerLink]="[ '/dashboard/olcarousel'] ">
-
-                            <div class="img_div ">
-                                <img src="../../assets/images/Promote on Carousel.jpg" />
-                            </div>
-                            <div class="text_div_sec ">
-                                <a [routerLink]="[ '/dashboard/olcarousel'] "
-                                    class="create_course ">{{lableConstant.promote_on_carousel}}
-                                </a>
-
-                                <p class="p__text_divcss text-center " data-toggle="tooltip" data-placement="top" title="  {{lableConstant.request_create_entity}}">
-                                    {{lableConstant.request_create_entity}}
-                                </p>
-
-                                <!--text_div_sec-->
-                            </div>
-                        </a>
-                        <div class="sec_footer ">
-                            <div class="footer_sec_ano ">
-                                <button [disabled]="pendingFlag" (click)="navigatetoPendingCarousel()">
-                                    <p class="footer_p"
-                                        [ngClass]="{'backgound_green': pendingRequestCount.carousel_pending === 0}">
-                                        {{pendingRequestCount.carousel_pending}}</p>
-                                </button>
-                                <span class="text_white">{{lableConstant.pending}}</span>
-                            </div>
-
-                            <div class="p-2 bd-highlight ">
-                                <img src="../../assets/images/share.png " class="mr-2 width_22" />
-                                <img src="../../assets/images/star.png " class="width_22" />
-                            </div>
-                        </div>
-                        <!--sec_footer-->
-                    </div>
-                    <!--cole end-->
-                    <div class="course_box_child">
-                        <a [routerLink]="[ '/dashboard/back-office'] ">
-
-                            <div class="img_div ">
-                                <img src="../../assets/images/4.jpg " />
-                            </div>
-                            <div class="text_div_sec ">
-                                <a [routerLink]="[ '/dashboard/back-office'] "
-                                    class="create_course ">{{lableConstant.request_back_office_role}}
-                                </a>
-
-                                <p class="p__text_divcss text-center " data-toggle="tooltip" data-placement="top" title="  {{lableConstant.request_specific_role}}">
-                                    {{lableConstant.request_specific_role}}
-                                </p>
-
-                                <!--text_div_sec-->
-                            </div>
-                        </a>
-                        <div class="sec_footer ">
-                            <div class="footer_sec_ano">
-                                <button [disabled]="pendingFlag" (click)="navigatetoPendingBackOffice()">
-                                    <p class="footer_p"
-                                        [ngClass]="{'backgound_green': pendingRequestCount.office_role_pending === 0}">
-                                        {{pendingRequestCount.office_role_pending}}</p>
-                                </button>
-                                <span class="text_white">{{lableConstant.pending}}</span>
-                            </div>
-
-                            <div class="p-2 bd-highlight ">
-                                <img src="../../assets/images/share.png " class="mr-2 width_22" />
-                                <img src="../../assets/images/star.png " class="width_22" />
-                            </div>
-                        </div>
-                        <!--sec_footer-->
-                    </div>
-                    <!--cole end-->
                 </div>
             </div>
-            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <div class="course_box ">
-                    <div class="course_box_child">
-                        <a>
-                            <div class="img_div ">
-                                <img src="../../assets/images/Design learning module.jpg" />
-                            </div>
-                            <div class="text_div_sec ">
-                                <a class="create_course ">{{lableConstant.design_learning_module}}</a>
-
-                                <p class="p__text_divcss text-center " data-toggle="tooltip" data-placement="top" title="  {{lableConstant.request_learning_team}}">
-                                    {{lableConstant.request_learning_team}}
-                                </p>
-
-                                <!--text_div_sec-->
-                            </div>
-                        </a>
-                        <div class="sec_footer ">
-                            <div class="footer_sec_ano ">
-                                <p class="footer_p ">0</p>
-                                <span class="text_white">{{lableConstant.pending}}</span>
-                            </div>
-
-                            <div class="p-2 bd-highlight ">
-                                <img src="../../assets/images/share.png " class="mr-2 width_22" />
-                                <img src="../../assets/images/star.png " class="width_22" />
-                            </div>
-                        </div>
-                        <!--sec_footer-->
-                    </div>
-                    <!--cole end-->
-                    <div class="course_box_child ">
-                        <a [routerLink]="[ '/dashboard/olreport'] ">
-                            <div class="img_div ">
-                                <img src="../../assets/images/get a report.jpg" />
-                            </div>
-                            <div class="text_div_sec ">
-                                <a class="create_course"
-                                [routerLink]="[ '/dashboard/olreport'] ">{{lableConstant.get_a_report}}</a>
-
-                                <p class="p__text_divcss text-center d-flex flex-column" data-toggle="tooltip" data-placement="top" title="  {{lableConstant.request_training_vc_report}}">
-
-                                    {{lableConstant.request_training_vc_report}}
-                                </p>
-
-                                <!--text_div_sec-->
-                            </div>
-                        </a>
-                        <div class="sec_footer ">
-                            <div class="footer_sec_ano ">
-                                <p class="footer_p ">0</p>
-                                <span class="text_white">{{lableConstant.pending}}</span>
-                            </div>
-
-                            <div class="p-2 bd-highlight ">
-                                <img src="../../assets/images/share.png " class="mr-2 width_22" />
-                                <img src="../../assets/images/star.png " class="width_22" />
-                            </div>
-                        </div>
-                        <!--sec_footer-->
-                    </div>
-                    <!--cole end-->
-                    <div class="course_box_child ">
-                        <a>
-                            <div class="img_div ">
-                                <img src="../../assets/images/Access Learning Needs tool(DNA).jpg" />
-                            </div>
-                            <div class="text_div_sec ">
-                                <a href="creatnew.html " class="create_course ">{{lableConstant.access_learning_tool}}
-                                </a>
-
-                                <p class="p__text_divcss text-center d-flex flex-column" data-toggle="tooltip" data-placement="top" title=" {{lableConstant.dna_tool_feature}}">
-                                    {{lableConstant.dna_tool_feature}}
-                                    <!-- <a  data-toggle="modal" data-target="#exampleModal1" class="text_orange fon_weight_read">
-                                    Read More
-                                </a>    -->
-                                </p>
-
-                                <!--text_div_sec-->
-                            </div>
-                        </a>
-                        <div class="sec_footer ">
-                            <div class="footer_sec_ano ">
-                                <p class="footer_p ">0</p>
-                                <span class="text_white">{{lableConstant.pending}}</span>
-                            </div>
-
-                            <div class="p-2 bd-highlight ">
-                                <img src="../../assets/images/share.png " class="mr-2 width_22" />
-                                <img src="../../assets/images/star.png " class="width_22" />
-                            </div>
-                        </div>
-                        <!--sec_footer-->
-                    </div>
-                    <!--cole end-->
-                    <div class="course_box_child ">
-                        <a>
-                            <div class="img_div ">
-                                <img src="../../assets/images/SME_DB.jpg" />
-                            </div>
-                            <div class="text_div_sec ">
-                                <a class="create_course ">{{lableConstant.sme_database}}</a>
-
-                                <p class="p__text_divcss text-center d-flex flex-column" data-toggle="tooltip" data-placement="top" title="{{lableConstant.sme_learning_community_feature}}">
-                                    {{lableConstant.sme_learning_community_feature}}
-                                    <!-- <a  data-toggle="modal" data-target="#exampleModal2" class="text_orange fon_weight_read">
-                                    Read More
-                                </a>  -->
-                                </p>
-
-                                <!--text_div_sec-->
-                            </div>
-                        </a>
-                        <div class="sec_footer ">
-                            <div class="footer_sec_ano ">
-                                <p class="footer_p ">0</p>
-                                <span class="text_white">{{lableConstant.pending}}</span>
-                            </div>
-
-                            <div class="p-2 bd-highlight ">
-                                <img src="../../assets/images/share.png " class="mr-2 width_22" />
-                                <img src="../../assets/images/star.png " class="width_22" />
-                            </div>
-                        </div>
-                        <!--sec_footer-->
-                    </div>
-                    <!--cole end-->
-                </div>
-            </div>
-            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <div class="course_box">
-                    <div class="course_box_child course_box_child_width">
-                        <a [routerLink]="[ '/dashboard/vendormanagement'] ">
-                            <div class="img_div ">
-                                <img src="../../assets/images/manage vendor.jpg" />
-                            </div>
-                            <div class="text_div_sec ">
-                                <a class="create_course ">{{lableConstant.manage_vendors}}</a>
-
-                                <p class="p__text_divcss text-center " data-toggle="tooltip" data-placement="top" title="  {{lableConstant.view_manage_workshops}}">
-                                    {{lableConstant.view_manage_workshops}}
-                                </p>
-
-                                <!--text_div_sec-->
-                            </div>
-                        </a>
-                        <div class="sec_footer ">
-                            <div class="footer_sec_ano ">
-                                <p class="footer_p ">2</p>
-                                <span class="text_white">{{lableConstant.pending}}</span>
-                            </div>
-                            <div class="p-2 bd-highlight ">
-                                <img src="../../assets/images/share.png " class="mr-2 width_22" />
-                                <img src="../../assets/images/star.png " class="width_22" />
-                            </div>
-                        </div>
-                        <!--sec_footer-->
-                    </div>
-                    <!--cole end-->
-                </div>
-            </div>
-        </div>
+            
+        
     </div>
-
-
 </div>
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -396,7 +210,6 @@
                 <p class="fon_15 text-center">
                     {{lableConstant.dna_tool_feature}}</p>
             </div>
-
         </div>
     </div>
 </div>
@@ -412,7 +225,6 @@
             <div class="modal-body">
                 <p class="fon_15 text-center">{{lableConstant.sme_learning_community_feature}}</p>
             </div>
-
         </div>
     </div>
 </div>
