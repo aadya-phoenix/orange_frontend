@@ -1355,7 +1355,7 @@ aria-hidden="true">
         <div class="modal-footer">
             <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
             <button type="button" class="btn btn-primary" data-dismiss="modal"
-                (click)="createUpdateCoursePublisher('transfer')">
+                (click)="createUpdateCoursePublisher()">
                 Submit
             </button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -1364,6 +1364,65 @@ aria-hidden="true">
 </div>
 <!-- </ng-template> -->
 </div>
+</div>
+<!-- publish -->
+<div class="modal fade mt_top_50" id="publish" tabindex="-1" aria-labelledby="publishLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg " role="document">
+        <div class="modal-content ">
+            <div class="modal-body">
+                <form [formGroup]="publishForm">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+
+                                <label>Comments</label>
+                                <!--  formControlName="additional_comment" -->
+                                <!-- formControlName="additional_comment" -->
+                                <textarea class="form-control form_width-textarea" maxlength="500" rows="3"
+                                    formControlName="status_comment" placeholder="Enter Your Comments"></textarea>
+                                <!-- <span class="charcter_limit">{{remainingText}} characters
+                                        remaining</span> -->
+                            </div>
+                        </div>
+                        <!--col end-->
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Orange Learning Intranet URL(SSO)</label>
+                                <input type="text " placeholder="Enter Orange Learning Intranet URL(SSO) "
+                                    class="form-control form_width" formControlName="intranet_url" />
+                                <div class="error_message"
+                                    *ngIf="publishForm.controls['intranet_url'].invalid && (publishForm.controls['intranet_url'].dirty || publishForm.controls['intranet_url'].touched)">
+                                    Orange Learning Intranet URL is not a valid URL</div>
+                            </div>
+                        </div>
+                        <!--col end-->
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Orange Learning Internet URL</label>
+                                <input type="text " placeholder="Enter Orange Learning Internet URL "
+                                    class="form-control form_width" formControlName="internet_url" />
+                                <div class="error_message"
+                                    *ngIf="publishForm.controls['internet_url'].invalid && (publishForm.controls['internet_url'].dirty || publishForm.controls['internet_url'].touched)">
+                                    Orange Learning Internet URL is not a valid URL</div>
+                            </div>
+                        </div>
+                        <!--col end-->
+                    </div>
+                </form>
+                <!--row-->
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    (click)="createUpdateCourse('publish')">
+                    Publish
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+    <!-- </ng-template> -->
 </div>
 <!--Reject-->
 <div class="modal fade mt_top_50" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

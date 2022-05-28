@@ -30,8 +30,10 @@ export class CourseCreateComponent implements OnInit {
   course_details: any = {};
   languageList: any = [];
   getUserrole: any = {};
-  getprofileDetails: any = {};
+  getprofileDetails: any;
+  showrejectbutton: any;
   createCourceForm: FormGroup;
+  public publishForm!: FormGroup;
   languageText = "";
   isReviewer = false;
   isPublisher = false;
@@ -133,6 +135,17 @@ export class CourseCreateComponent implements OnInit {
       learner_guideline: this.formBuilder.array([]),
       curriculum_content: this.formBuilder.array([]),
       materialBased: new FormControl('')
+    });
+    this.publishForm = this.formBuilder.group({
+      intranet_url: new FormControl('', [
+        Validators.required,
+        Validators.pattern(dataConstant.UrlPattern),
+      ]),
+      internet_url: new FormControl('', [
+        Validators.required,
+        Validators.pattern(dataConstant.UrlPattern),
+      ]),
+      status_comment: new FormControl(''),
     });
     this.createCourceForm.get("learning_type")?.valueChanges.subscribe(x => {
       this.selectedLearningType = this.learningTypes.find((y: { id: any; }) => y.id == x);
@@ -809,18 +822,8 @@ export class CourseCreateComponent implements OnInit {
           this.createCourceForm.controls.learning_type.setValue(this.course_details.learning_type);
           this.createCourceForm.controls.additional_comment.setValue(this.course_details.additional_comment);
           this.createCourceForm.controls.regional_cordinator.setValue(this.course_details.regional_cordinator);
-       
+          this.setrejectbutton()
           this.commonService.hideLoading();
-          // this.createOlcarouselForm.controls.expiry_type.setValue(this.course_details.expiry_type);
-          // this.createOlcarouselForm.controls.additional_comment.setValue(this.course_details.additional_comment);
-          // this.createOlcarouselForm.controls.publication_date.setValue(new Date(this.course_details.publication_date).toISOString().slice(0, 10));
-          // // this.createOlcarouselForm.controls.image.setValue(this.course_details.image);
-          // this.course_details.imageUrl = `${dataConstant.ImageUrl}/${this.course_details.image}`;
-          // this.course_details.image = null;
-          // if(this.getprofileDetails.data.id != this.course_details.user_id){
-          //   this.isCreater = false;
-          // }
-          // this.launguageFormBind();
         }
       },
       (err: any) => {
@@ -828,6 +831,17 @@ export class CourseCreateComponent implements OnInit {
         this.commonService.toastErrorMsg('Error', err.message);
       }
     );
+  }
+
+  setrejectbutton() {
+    if(this.course_id){
+    this.courseService.courseHistory(this.course_id).subscribe((res: any) => {
+      if (res && res.status == 1) {
+        let history = res.data;
+        this.showrejectbutton = history[history.length - 1].action_by;
+      }
+    })
+  }
   }
 
 
@@ -989,6 +1003,12 @@ export class CourseCreateComponent implements OnInit {
     body.status = status;
     if(this.selectedPublisherId){
       body.publisher_id = this.selectedPublisherId;
+    }
+    if (status == "publish") {
+      console.log("publisheddd");
+      body.intranet_url = this.publishForm.value.intranet_url;
+      body.internet_url = this.publishForm.value.internet_url;
+      body.status_comment = this.publishForm.value.status_comment;
     }
     const englishSlug: any = 'english';
     if (body.title_single) {
