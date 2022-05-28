@@ -169,12 +169,12 @@
                                     <div class="form-group w-100">
                                         <label>Objective</label>
                                         <div class="editControls"></div>
-                                        <ejs-richtexteditor id='defaultRTE' formControlName="objective_single"
+                                        <ejs-richtexteditor id='defaultRTE' formControlName="objective"
                                             [toolbarSettings]='tools'>
                                         </ejs-richtexteditor>
                                     </div>
                                     <div class="error_message"
-                                        *ngIf="createCourceForm.controls['objective_single'].hasError('required') && createCourceForm.controls['objective_single'].touched">
+                                        *ngIf="createCourceForm.controls['objective'].hasError('required') && createCourceForm.controls['objective'].touched">
                                         Objectives cannot be blank
                                     </div>
                                 </div>
@@ -1127,7 +1127,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row" *ngIf="getUserrole.id === 2">
+                                <div class="row" *ngIf="isRequester">
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
@@ -1180,7 +1180,7 @@
                                     class="btn btn-secondary ml-1" (click)="createUpdateCourse('draft')">
                                     Save as draft
                                 </button>
-                                <!-- <button class="btn btn-primary ml-1" data-toggle="modal"
+                                <button class="btn btn-primary ml-1" data-toggle="modal"
                                     data-target="#transfertoPublisher" (click)="getPublisher()"
                                     *ngIf="getUserrole.id == 3 && (showrejectbutton != getprofileDetails.data.id || showStatus =='draft')">
                                     <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1"> Transfer
@@ -1199,7 +1199,7 @@
                                 (click)="getPublisher()">
                                 <i class="fa fa-times" aria-hidden="true"></i> <span
                                     class="pl-1">Reject</span>
-                            </button> -->
+                            </button>
                             </div>
                         </div>
                     </form>
@@ -1328,6 +1328,74 @@
                 </button>
             </div>
             <!--ROW END-->
+        </div>
+    </div>
+    <!----Transfer to publisher-->
+<div class="modal fade mar_top_250" id="transfertoPublisher" tabindex="-1" aria-labelledby="transfertoPublisherLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-lg " role="document ">
+    <div class="modal-content ">
+        <div class="modal-body ">
+            <div class="row ">
+                <div class="col-sm-12 ">
+                    <div class="form-group ">
+                        <label>Transfer to Publisher</label>
+                        <select name="select " id="select " class="form-control" [(ngModel)]="selectedPublisherId"
+                            (change)="getPublisherselected($event)">
+                            <option hidden disabled selected='selected' value="0 ">Please select</option>
+                            <option *ngFor="let publisher of publisherList" [value]="publisher.id">
+                                {{publisher.first_name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <!--col end-->
+            </div>
+            <!--row-->
+        </div>
+        <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+            <button type="button" class="btn btn-primary" data-dismiss="modal"
+                (click)="createUpdateCoursePublisher('transfer')">
+                Submit
+            </button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+<!-- </ng-template> -->
+</div>
+</div>
+<!--Reject-->
+<div class="modal fade mt_top_50" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="text_orange fon_14">Reject Request</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Comments</label>
+                            <textarea class="form-control form_width-textarea" maxlength="500"
+                                [(ngModel)]="rejectcomment" rows="3 " placeholder="Enter Your Comments ">
+                </textarea>
+                            <!-- <span class="charcter_limit">{{remainingText}} characters
+                    remaining</span> -->
+                        </div>
+                    </div>
+                    <!--col end-->
+                </div>
+                <!--row-->
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="reject()">
+                    Submit
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>

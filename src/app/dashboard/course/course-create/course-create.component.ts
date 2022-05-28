@@ -6,6 +6,7 @@ import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
+import { brotliCompressSync } from 'zlib';
 import { MultiLaunguageComponent } from '../multi-launguage/multi-launguage.component';
 
 @Component({
@@ -17,6 +18,8 @@ export class CourseCreateComponent implements OnInit {
   showCertificateExpiry = false;
   externalVendorname = false;
   isSubmitted = false;
+  selectedPublisherId = null;
+  rejectcomment= null;
   today = new Date();
   minDate = {};
   RoleID = dataConstant.RoleID;
@@ -115,7 +118,7 @@ export class CourseCreateComponent implements OnInit {
       learn_more: new FormControl(''),
       training_provided_by: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
-      objective_single: new FormControl('', [Validators.required]),
+      objective: new FormControl('', [Validators.required]),
       subject: new FormControl('', [Validators.required]),
       keyword: new FormControl('', [Validators.required]),
       available_language: new FormControl('', [Validators.required]),
@@ -133,7 +136,7 @@ export class CourseCreateComponent implements OnInit {
     });
     this.createCourceForm.get("learning_type")?.valueChanges.subscribe(x => {
       this.selectedLearningType = this.learningTypes.find((y: { id: any; }) => y.id == x);
-      if(this.isRequester){
+      if(!this.isRequester){
         this.createCourceForm.removeControl('regional_cordinator');
       }
       if (this.isILTAndvILT()) {
@@ -152,11 +155,10 @@ export class CourseCreateComponent implements OnInit {
         this.createCourceForm.addControl('free_field_content', new FormControl(''));
         this.createCourceForm.addControl('for_whoom_single', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('learn_more_single', new FormControl(''));
-        this.learnerguidelineFormArray.push(this.addMorelearnerGuideline('', ''));
         this.createCourceForm.removeControl('video_link');
         this.createCourceForm.addControl('training_provided_by', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('duration', new FormControl('', [Validators.required]));
-        this.createCourceForm.addControl('objective_single', new FormControl('', [Validators.required]));
+        this.createCourceForm.addControl('objective', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('subject', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('keyword', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('available_language', new FormControl('', [Validators.required]));
@@ -166,14 +168,16 @@ export class CourseCreateComponent implements OnInit {
         this.createCourceForm.addControl('prerequisite', new FormControl(''));
         this.createCourceForm.addControl('resource', new FormControl(''));
         if(this.course_details.id){
-          this.createCourceForm.controls.delivery_method.setValue(this.course_details.delivery_method);
+          this.createCourceForm.controls.delivery_method.setValue(JSON.parse(this.course_details.delivery_method));
           this.createCourceForm.controls.digital.setValue(this.course_details.digital);
           this.createCourceForm.controls.purchase_order.setValue(this.course_details.purchase_order);
           this.createCourceForm.controls.manager_approval.setValue(this.course_details.manager_approval);
-          this.createCourceForm.controls.who_see_course.setValue(this.course_details.who_see_course);
+          this.createCourceForm.controls.who_see_course.setValue(Number(this.course_details.who_see_course));
           this.createCourceForm.controls.email_preffered_instructor.setValue(JSON.parse(this.course_details.email_preffered_instructor));
           this.createCourceForm.controls.first_session_date.setValue(this.course_details.first_session_date);
           this.createCourceForm.controls.expiry_date.setValue(this.course_details.expiry_date);
+          this.createCourceForm.controls.expiry_date_type.setValue(this.course_details.expiry_date_type);
+          this.createCourceForm.controls.entity_business_area.setValue(this.course_details.entity_business_area);
           this.createCourceForm.controls.certification.setValue(this.course_details.certification);
           this.createCourceForm.controls.external_vendor.setValue(this.course_details.external_vendor);
           this.createCourceForm.controls.free_field_content.setValue(this.course_details.free_field_content);
@@ -185,6 +189,15 @@ export class CourseCreateComponent implements OnInit {
             this.createCourceForm.controls.learn_more_single.setValue(this.courseService.getTText(this.course_details.learn_more));
             this.createCourceForm.controls.learn_more.setValue(JSON.parse(this.course_details.learn_more));
           }
+          if(this.course_details.learner_guideline){
+            const learner_guideline = JSON.parse(this.course_details.learner_guideline);
+            learner_guideline.forEach((element: any) => {
+              this.learnerguidelineFormArray.push(this.addMorelearnerGuideline(element.title, element.description));
+            });
+          }
+        }
+        else{
+          this.learnerguidelineFormArray.push(this.addMorelearnerGuideline('', ''));
         }
       }
       if (this.isVideoBased()) {
@@ -209,7 +222,7 @@ export class CourseCreateComponent implements OnInit {
         this.createCourceForm.addControl('video_link', new FormControl('', [Validators.required, Validators.pattern(dataConstant.UrlPattern)]));
         this.createCourceForm.addControl('training_provided_by', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('duration', new FormControl('', [Validators.required]));
-        this.createCourceForm.addControl('objective_single', new FormControl('', [Validators.required]));
+        this.createCourceForm.addControl('objective', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('subject', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('keyword', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('available_language', new FormControl('', [Validators.required]));
@@ -245,7 +258,7 @@ export class CourseCreateComponent implements OnInit {
         this.createCourceForm.removeControl('video_link');
         this.createCourceForm.addControl('training_provided_by', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('duration', new FormControl('', [Validators.required]));
-        this.createCourceForm.addControl('objective_single', new FormControl('', [Validators.required]));
+        this.createCourceForm.addControl('objective', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('subject', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('keyword', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('available_language', new FormControl('', [Validators.required]));
@@ -266,7 +279,6 @@ export class CourseCreateComponent implements OnInit {
         this.createCourceForm.addControl('certification', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('for_whoom_single', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('learn_more_single', new FormControl(''));
-        this.learnerguidelineFormArray.push(this.addMorelearnerGuideline('', ''));
         this.createCourceForm.removeControl('video_link');
         this.createCourceForm.removeControl('delivery_method');
         this.createCourceForm.removeControl('purchase_order');
@@ -277,10 +289,9 @@ export class CourseCreateComponent implements OnInit {
         this.createCourceForm.removeControl('external_vendor');
         this.createCourceForm.removeControl('external_vendor_name');
         this.createCourceForm.removeControl('free_field_content');
-        this.curriculumContentArray.push(this.addMoreCurriculumContent(''));
         this.createCourceForm.addControl('training_provided_by', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('duration', new FormControl('', [Validators.required]));
-        this.createCourceForm.addControl('objective_single', new FormControl('', [Validators.required]));
+        this.createCourceForm.addControl('objective', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('subject', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('keyword', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('available_language', new FormControl('', [Validators.required]));
@@ -292,7 +303,7 @@ export class CourseCreateComponent implements OnInit {
         if(this.course_details.id){
           this.createCourceForm.controls.digital.setValue(this.course_details.digital);
           this.createCourceForm.controls.manager_approval.setValue(this.course_details.manager_approval);
-          this.createCourceForm.controls.who_see_course.setValue(this.course_details.who_see_course);
+          this.createCourceForm.controls.who_see_course.setValue(Number(this.course_details.who_see_course));
           this.createCourceForm.controls.expiry_date.setValue(this.course_details.expiry_date);
           this.createCourceForm.controls.certification.setValue(this.course_details.certification);
           if(this.course_details.for_whoom){
@@ -303,6 +314,22 @@ export class CourseCreateComponent implements OnInit {
             this.createCourceForm.controls.learn_more_single.setValue(this.courseService.getTText(this.course_details.learn_more));
             this.createCourceForm.controls.learn_more.setValue(JSON.parse(this.course_details.learn_more));
           }
+          if(this.course_details.learner_guideline){
+            const learner_guideline = JSON.parse(this.course_details.learner_guideline);
+            learner_guideline.forEach((element: any) => {
+              this.learnerguidelineFormArray.push(this.addMorelearnerGuideline(element.title, element.description));
+            });
+          }
+          if(this.course_details.curriculum_content){
+            const curriculum_content = JSON.parse(this.course_details.curriculum_content);
+            curriculum_content.forEach((element: any) => {
+              this.curriculumContentArray.push(this.addMoreCurriculumContent(element.description));
+            });
+          }
+        }
+        else{
+          this.learnerguidelineFormArray.push(this.addMorelearnerGuideline('', ''));
+          this.curriculumContentArray.push(this.addMoreCurriculumContent(''));
         }
       }
       if (this.isWebBased()) {
@@ -323,7 +350,7 @@ export class CourseCreateComponent implements OnInit {
         this.createCourceForm.removeControl('free_field_content');
         this.createCourceForm.addControl('training_provided_by', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('duration', new FormControl('', [Validators.required]));
-        this.createCourceForm.addControl('objective_single', new FormControl('', [Validators.required]));
+        this.createCourceForm.addControl('objective', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('subject', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('keyword', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('available_language', new FormControl('', [Validators.required]));
@@ -335,14 +362,14 @@ export class CourseCreateComponent implements OnInit {
         if(this.course_details.id){
           this.createCourceForm.controls.digital.setValue(this.course_details.digital);
           this.createCourceForm.controls.purchase_order.setValue(this.course_details.purchase_order);
-          this.createCourceForm.controls.who_see_course.setValue(this.course_details.who_see_course);
+          this.createCourceForm.controls.who_see_course.setValue(Number(this.course_details.who_see_course));
           this.createCourceForm.controls.external_vendor.setValue(this.course_details.external_vendor);
         }
       }
       if (this.isPlaylist()) {
         this.createCourceForm.removeControl('training_provided_by');
         this.createCourceForm.removeControl('duration');
-        this.createCourceForm.removeControl('objective_single');
+        this.createCourceForm.removeControl('objective');
         this.createCourceForm.removeControl('subject');
         this.createCourceForm.removeControl('keyword');
         this.createCourceForm.removeControl('available_language');
@@ -382,8 +409,8 @@ export class CourseCreateComponent implements OnInit {
           this.createCourceForm.controls.url.setValue(this.course_details.url);
           this.createCourceForm.controls.video_link.setValue(this.course_details.video_link);
           this.createCourceForm.controls.for_whoom.setValue(this.course_details.for_whoom);
-          this.createCourceForm.controls.level.setValue(this.course_details.level);
-          this.createCourceForm.controls.who_see_course.setValue(this.course_details.who_see_course);
+          this.createCourceForm.controls.level.setValue(JSON.parse(this.course_details.level));
+          this.createCourceForm.controls.who_see_course.setValue(Number(this.course_details.who_see_course));
           this.createCourceForm.controls.target_audience.setValue(this.course_details.target_audience);
           this.createCourceForm.controls.email_preffered_instructor.setValue(JSON.parse(this.course_details.email_preffered_instructor));
         }
@@ -770,11 +797,11 @@ export class CourseCreateComponent implements OnInit {
           
           this.createCourceForm.controls.training_provided_by.setValue(this.course_details.training_provided_by);
           this.createCourceForm.controls.duration.setValue(this.course_details.duration);
-          this.createCourceForm.controls.objective_single.setValue(this.course_details.objective_single);
-          this.createCourceForm.controls.subject.setValue(this.course_details.subject);
+          this.createCourceForm.controls.objective.setValue(this.courseService.getTText(this.course_details.objective));
+          this.createCourceForm.controls.subject.setValue(JSON.parse(this.course_details.subject));
           this.createCourceForm.controls.keyword.setValue(this.course_details.keyword);
           this.createCourceForm.controls.available_language.setValue(JSON.parse(this.course_details.available_language));
-          this.createCourceForm.controls.level.setValue(this.course_details.level);
+          this.createCourceForm.controls.level.setValue(JSON.parse(this.course_details.level));
           this.createCourceForm.controls.email_content_owner.setValue(this.course_details.email_content_owner);
           this.createCourceForm.controls.email_training_contact.setValue(this.course_details.email_training_contact);
           this.createCourceForm.controls.prerequisite.setValue(this.course_details.prerequisite);
@@ -850,9 +877,6 @@ export class CourseCreateComponent implements OnInit {
       (res: any) => {
         console.log(res);
         this.publisherList = res.data;
-        console.log("pub res is", res.data);
-        console.log("this.learningType", this.learningType);
-        console.log("new publisher list", this.publisherList);
       },
       (err: any) => {
         console.log(err);
@@ -872,6 +896,12 @@ export class CourseCreateComponent implements OnInit {
       this.createCourceForm.removeControl('certification_expiry_type');
     }
 
+  }
+
+  createUpdateCoursePublisher(){
+    if(this.selectedPublisherId){
+      this.createUpdateCourse('transfer');
+    }
   }
 
   externalVendor(event: any) {
@@ -939,6 +969,17 @@ export class CourseCreateComponent implements OnInit {
     return true;
   }
 
+  reject() {
+    this.commonService.showLoading();
+    let statusobj = { course_id: this.course_details.id, status: 'reject', status_comment: this.rejectcomment }
+    this.courseService.changeStatus(statusobj).subscribe((res: any) => {
+      this.commonService.hideLoading();
+      this.router.navigate(['/dashboard/cct']);
+    }, (err: any) => {
+      this.commonService.hideLoading();
+    })
+  }
+
   createUpdateCourse(status: string) {
     this.isSubmitted = true;
     if (this.createCourceForm.invalid) {
@@ -946,6 +987,9 @@ export class CourseCreateComponent implements OnInit {
     }
     const body = this.createCourceForm.value;
     body.status = status;
+    if(this.selectedPublisherId){
+      body.publisher_id = this.selectedPublisherId;
+    }
     const englishSlug: any = 'english';
     if (body.title_single) {
       if (body.title) {
