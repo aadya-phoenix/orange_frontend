@@ -331,10 +331,10 @@
                                                 <input type="file" id="exampleInputFile" formControlName="resource"
                                                     class="upload_css" (change)="handleFileInput($event)" />
                                             </div>
-                                            <!-- <span *ngIf="isFileResouce" class="text_orange">
+                                            <span *ngIf="isFileResouce" class="text_orange">
                                                 Click here to <a href="{{isFileResouce}}"
                                                     target="_blank">View</a>
-                                            </span> -->
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -448,7 +448,7 @@
                                                 </a>
                                             </label>
                                             <ng-select placeholder="Please select" (change)="targetAudience($event)"
-                                                [(ngModel)]="target_audience_selected" [items]="yesNo" bindLabel="name"
+                                                [items]="yesNo" bindLabel="name"
                                                 bindValue="id" formControlName="level" class="w_100">
                                             </ng-select>
                                             <div class="error_message"
@@ -460,7 +460,7 @@
                                         </div>
                                     </div>
                                     <!--colend-->
-                                    <div class="col-sm-6" *ngIf="isPlaylist() && regionTargetAudience">
+                                    <!-- <div class="col-sm-6" *ngIf="isPlaylist() && regionTargetAudience">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Region of Target Audience
@@ -486,7 +486,7 @@
                                                 Region of Target Audience cannot be blank
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!--colend-->
                                     <div class="col-sm-6" *ngIf="isPlaylist() && !regionTargetAudience">
                                         <div class="form-group">
@@ -633,7 +633,7 @@
                                                         </i>
                                                     </a>
                                                 </label>
-                                                <ng-select [(ngModel)]="showILTWhoSee" placeholder="Please select"
+                                                <ng-select placeholder="Please select"
                                                     [items]="whocanSee" bindLabel="name" bindValue="id"
                                                     formControlName="who_see_course" class="w_100">
                                                 </ng-select>
@@ -985,7 +985,7 @@
                                             </label>
                                             <div>
                                                 <input type="radio" id="chkurl" formControlName="materialBased"
-                                                    value="url" class="mr-1" />
+                                                    value="url" class="mr-1"/>
                                                 <label for="chkurl" class="mr-2">URL</label>
                                                 <input type="radio" id="chkupload" formControlName="materialBased"
                                                     value="upload" class="mr-1" />
@@ -1019,6 +1019,10 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <span *ngIf="isMaterialSource" class="text_orange">
+                                                Click here to <a href="{{isMaterialSource}}"
+                                                    target="_blank">View</a>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -1106,7 +1110,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card" *ngIf="selectedLearningType.id">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-12">

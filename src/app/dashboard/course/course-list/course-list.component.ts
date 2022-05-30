@@ -61,7 +61,7 @@ export class CourseListComponent implements OnInit {
   ) {
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
-    this.isReviewer = this.getUserrole.id === this.RoleID.CourseReviewer;
+    this.isReviewer = this.getUserrole.id === this.RoleID.Roc;
     this.isPublisher = this.getUserrole.id === this.RoleID.CoursePublisher;
     this.isRequester = this.getUserrole.id === this.RoleID.CourseRequester;
   }

@@ -88,7 +88,7 @@
       <div class="content">
         <div class="animated fadeIn">
           <div class=" mb-2"
-            *ngIf="getUserrole.id != 2 && !routegetdata.issave  && showbuttons =='true' && showrejectbutton != getprofileDetails.data.id">
+            *ngIf="getUserrole.id != 2 && getprofileDetails && showrejectbutton != getprofileDetails.data.id">
            
               <div class="Requs_btn_inl">
                 <div class="Requs_btn_inl-child">
@@ -141,7 +141,7 @@
                               {{routegetdata.intranet_url ? routegetdata.intranet_url : "-" }}
                             </span>
                             <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text"
-                            (click)="copyToClipBoard(routegetdata.titleByLang)" class="ml-1">
+                            (click)="copyToClipBoard(routegetdata.intranet_url)" class="ml-1">
                             <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                          
                             
@@ -156,7 +156,7 @@
                               {{routegetdata.internet_url ? routegetdata.internet_url : "-" }}
                             </span>
                             <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text"
-                            (click)="copyToClipBoard(routegetdata.titleByLang)" class="ml-1">
+                            (click)="copyToClipBoard(routegetdata.internet_url)" class="ml-1">
                             <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                           </div>
                         </div>
@@ -223,7 +223,7 @@
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>{{
                             trainingDurationHours}}</span>
                           <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text"
-                            (click)="copyToClipBoard(routegetdata.trainingDurationHours)">
+                            (click)="copyToClipBoard(trainingDurationHours)">
                             <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
   
@@ -400,9 +400,9 @@
                                                            : "-"
                                                          }} -->
                             </span>
-                            <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
+                            <!-- <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                               (click)="copyToClipBoard(imgUrl)" title="Copy Text">
-                              <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                              <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a> -->
                           </div>
   
                         </div>
@@ -911,9 +911,9 @@
                               Click here to <a href="{{material_sourceUrl}}" target="_blank" class="text_orange">View
                               </a>
                             </span>
-                            <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
+                            <!-- <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                               (click)="copyToClipBoard(routegetdata.material_source)" title="Copy Text">
-                              <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                              <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a> -->
                           </div>
   
                         </div>
