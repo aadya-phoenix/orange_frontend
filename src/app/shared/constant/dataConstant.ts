@@ -48,6 +48,7 @@ export const dataConstant = {
     BackOfficeReviewer: 3,
     BackOfficePublisher: 10,
     Roc: 3,
+    Publisher: 3,
     DataAnalyst: 11
   },
   LearningType: [
