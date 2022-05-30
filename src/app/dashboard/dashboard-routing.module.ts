@@ -12,6 +12,7 @@ const routes: Routes = [
 {path:'olcarousel',loadChildren:()=>import("./carousel/carousel.module").then(m=>m.CarouselModule)},
 {path:'back-office',loadChildren:()=>import("./back-office/back-office.module").then(m=>m.BackOfficeModule)},
 {path:'sct',loadChildren:()=>import("./open-course-session/open-course-session.module").then(m=>m.OpenCourseSessionModule)},
+{path:'dna',loadChildren:()=>import("./dna/dna.module").then(m=>m.DnaModule)},
 {path:'vendormanagement',loadChildren:()=>import("./vendor-managment/vendor-management.module").then(m=>m.VendorManagementModule)},
 {path:'olreport',loadChildren:()=>import("./get-report/get-report.module").then(m=>m.GetReportModule)},
 {path:'set-backup',component:SetBackupComponent},
