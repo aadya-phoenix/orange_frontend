@@ -130,14 +130,14 @@ export class DashboardComponent implements OnInit {
           pendingRequestCount: this.pendingRequestCount.course_pending,
           setFavouriteModule: this.modules.getReport,
         }, {
-          id: 'access', name:'Access Learning Needs Tool(DNA)',
-          routerLink: '', image: '../../assets/images/Access Learning Needs tool(DNA).jpg',
+          id: 'dna', name:'Access Learning Needs Tool(DNA)',
+          routerLink: '/dashboard/dna', image: '../../assets/images/Access Learning Needs tool(DNA).jpg',
           lableConstantModule: this.lableConstant.access_learning_tool,
           lableConstantCatalog: this.lableConstant.dna_tool_feature,
           navigateTo: '',
           favourite: false, showFavourite: true,
           pendingRequestCount: '',
-          setFavouriteModule: this.modules.access,
+          setFavouriteModule: this.modules.dna,
         }, {
           id: 'sme', name:'SME Database',
           routerLink: '', image: '../../assets/images/SME_DB.jpg',

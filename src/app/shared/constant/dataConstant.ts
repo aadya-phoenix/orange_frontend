@@ -88,7 +88,7 @@ export const dataConstant = {
     session:'session',
     carousel:'carousel',
     backOffice:'back-office',
-    access:'access',
+    dna:'dna',
     sme:'sme',
     vendor:'vendor',
     getReport:'get-report',
