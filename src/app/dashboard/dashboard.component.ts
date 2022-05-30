@@ -68,6 +68,7 @@ export class DashboardComponent implements OnInit {
       this.isPdlMember = this.profileDetails.data.pdl_member;
     }
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+    console.log("label constant",this.lableConstant);
     if (this.lableConstant) {
       this.modulesArray_tab1 = [
         {
