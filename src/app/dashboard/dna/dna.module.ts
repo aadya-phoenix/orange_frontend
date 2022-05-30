@@ -8,10 +8,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { DnaLearningFormComponent } from './dna-learning-form/dna-learning-form.component';
+import { DnaListComponent } from './dna-list/dna-list.component';
+import { DnaViewComponent } from './dna-view/dna-view.component';
 
 
 @NgModule({
-  declarations: [DnaDashboardComponent, DnaCreateComponent],
+  declarations: [DnaDashboardComponent, DnaCreateComponent, DnaLearningFormComponent, DnaListComponent, DnaViewComponent],
+  /* entryComponents:[ DnaLearningFormComponent], */
   imports: [
     CommonModule,
     DnaRoutingModule,
