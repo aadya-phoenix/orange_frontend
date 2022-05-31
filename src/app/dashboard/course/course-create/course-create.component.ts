@@ -24,6 +24,7 @@ export class CourseCreateComponent implements OnInit {
   rejectcomment = null;
   today = new Date();
   minDate = {};
+  maxDate = {};
   RoleID = dataConstant.RoleID;
   dateFormate = dataConstant.dateFormate;
   CarouselStatus = dataConstant.CarouselStatus;
@@ -165,7 +166,7 @@ export class CourseCreateComponent implements OnInit {
         this.createCourceForm.addControl('who_see_course', new FormControl(''));
         this.createCourceForm.addControl('email_preffered_instructor', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('first_session_date', new FormControl('', [Validators.required]));
-        this.createCourceForm.addControl('expiry_date', new FormControl('', [Validators.required]));
+        this.createCourceForm.addControl('expiry_date', new FormControl('', []));
         this.createCourceForm.addControl('expiry_date_type', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('entity_business_area', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('certification', new FormControl('', [Validators.required]));
@@ -229,6 +230,9 @@ export class CourseCreateComponent implements OnInit {
           this.createCourceForm.controls.learner_guideline = this.formBuilder.array([]);
           this.learnerguidelineFormArray.push(this.addMorelearnerGuideline('', ''));
         }
+        this.createCourceForm.get("first_session_date")?.valueChanges.subscribe((x)=>{
+          this.maxDate = x;
+        })
       }
       if (this.isVideoBased()) {
         this.createCourceForm.removeControl('delivery_method');
@@ -314,7 +318,7 @@ export class CourseCreateComponent implements OnInit {
         this.createCourceForm.addControl('digital', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('manager_approval', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('who_see_course', new FormControl(''));
-        this.createCourceForm.addControl('expiry_date', new FormControl('', [Validators.required]));
+        this.createCourceForm.addControl('expiry_date', new FormControl('', []));
         this.createCourceForm.addControl('certification', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('for_whoom_single', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('learn_more_single', new FormControl(''));
@@ -489,7 +493,7 @@ export class CourseCreateComponent implements OnInit {
             this.createCourceForm.addControl('email_preffered_instructor',new FormControl('', [Validators.required]));
             this.createCourceForm.controls.email_preffered_instructor.setValue(JSON.parse(this.course_details.email_preffered_instructor));
           }else if (this.course_details.target_audience == 2) {
-            this.regionTargetAudiencePlaylist = true;
+            this.regionTargetAudiencePlaylist = true ;
             this.createCourceForm.removeControl('email_preffered_instructor');
           }
         }
