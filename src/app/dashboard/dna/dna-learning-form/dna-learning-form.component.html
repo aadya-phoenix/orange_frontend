@@ -1,0 +1,136 @@
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-8">
+            <div class="page-header float-left bac_trasparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/3.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="breade_text_span1">Digital learning Needs Analysis</span>
+                        <span class="divider"></span>
+                        <span class="breade_text_span">Digital learning Needs Analysis (DNA) is a tool that gathers learning needs from managers and helps align development needs with the overall business strategy. DNA also helps PD&L team to analyse and plan our learning resources efficiently.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 float-right">
+            <div class="page-header float-right bac_trasparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bac_trasparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home text_white"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/dna']" class="text_white span_dis">Digital learning Needs Analysis</a>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">add New Learning</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="card mb-0">
+    <div class="card-header color-orange">
+        <div class="d-flex justify-content-between">
+            <span class="row">
+                {{title}} <h5 class="card-title ml-1">
+                    <b class="color-orange"></b>
+                </h5>
+            </span>
+        </div>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="createDnaForm">
+            <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="form-control-label">
+                  Learning Title
+                </label>
+                <input  type="text" class="form-control form_width" formControlName="title" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="form-control-label">
+                    No. of Participants
+                </label>
+                <input  type="text" class="form-control form_width" formControlName="number_of_participant" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="form-control-label">
+                    Priority
+                </label>
+                <ng-select  [items]="priorityObj" bindLabel="name"
+                  bindValue="id" 
+                  cformControlName="priority_id"class="w_100">
+                </ng-select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="form-control-label">
+                    Management Code
+                </label>
+                <input  type="text" class="form-control form_width" formControlName="management_code" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="form-control-label">
+                    Delivery Region
+                </label>
+                <ng-select  placeholder="Please select Business Unit" [items]="regionsObj"
+                     bindLabel="region_name"
+                    bindValue="id"  (change)="getEvent($event)" formControlName="region_id" class="w_100">
+                </ng-select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="form-control-label">
+                    Delivery Country
+                </label>
+                <ng-select placeholder="Please select Business Unit" [items]="countriesObj"
+                     bindLabel="country_name"
+                    bindValue="id" formControlName="country" class="w_100">
+                </ng-select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="form-control-label">
+                    Business Unit/M1 Level
+                </label>
+                <ng-select placeholder="Please select Business Unit" [items]="bussinessUnitObj"
+                     bindLabel="team_name"
+                    bindValue="team_name" formControlName="business_unit_id" class="w_100">
+                </ng-select>
+            </div>
+        </div>
+    </div>
+    </form>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-primary mr-1" type="submit">
+            <i aria-hidden="true" class="fa fa-upload">
+            </i> <span class="pl-1">Submit</span>
+        </button>
+        <button class="btn btn-secondary mr-1" type="button">
+            <i aria-hidden="true" class="fa fa-times">
+            </i> <span class="pl-1">Close</span>
+        </button>
+    </div>
+</div>
+</div>
+
