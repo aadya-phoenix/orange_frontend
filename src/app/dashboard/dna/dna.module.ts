@@ -11,10 +11,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { DnaLearningFormComponent } from './dna-learning-form/dna-learning-form.component';
 import { DnaListComponent } from './dna-list/dna-list.component';
 import { DnaViewComponent } from './dna-view/dna-view.component';
+import { DnaCompleteReportComponent } from './dna-complete-report/dna-complete-report.component';
+import { DnaManagerDataComponent } from './dna-manager-data/dna-manager-data.component';
 
 
 @NgModule({
-  declarations: [DnaDashboardComponent, DnaCreateComponent, DnaLearningFormComponent, DnaListComponent, DnaViewComponent],
+  declarations: [DnaDashboardComponent, DnaCreateComponent, DnaLearningFormComponent, DnaListComponent, DnaViewComponent, DnaCompleteReportComponent, DnaManagerDataComponent],
   /* entryComponents:[ DnaLearningFormComponent], */
   imports: [
     CommonModule,

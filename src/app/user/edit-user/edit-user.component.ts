@@ -47,6 +47,7 @@ export class EditUserComponent implements OnInit {
       pdl_member: new FormControl(false, []),
       status: new FormControl(true, []),
       admin: new FormControl(false, []),
+      manager:new FormControl(false, []),
       staff: new FormControl(true, []),
     },
     { validators: passwordMatchingValidatior } );

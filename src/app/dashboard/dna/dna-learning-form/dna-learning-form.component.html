@@ -55,7 +55,14 @@
                 <label class="form-control-label">
                   Learning Title
                 </label>
-                <input  type="text" class="form-control form_width" formControlName="title" />
+                <input  type="text" class="form-control form_width" formControlName="title">
+                <div
+                  *ngIf="(createDnaForm.controls['title'].invalid && (createDnaForm.controls['title'].dirty || createDnaFormm.controls['title'].touched)) || isSubmitted">
+                    <div class="error_message"
+                        *ngIf="createDnaForm.controls['title'].errors?.required">
+                        Learning Title can not be blank
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-sm-4">
@@ -63,7 +70,14 @@
                 <label class="form-control-label">
                     No. of Participants
                 </label>
-                <input  type="text" class="form-control form_width" formControlName="number_of_participant" />
+                <input  type="text" class="form-control form_width" formControlName="number_of_participant">
+                <div
+                  *ngIf="(createDnaForm.controls['number_of_participant'].invalid && (createDnaForm.controls['number_of_participant'].dirty || createDnaFormm.controls['number_of_participant'].touched)) || isSubmitted">
+                    <div class="error_message"
+                        *ngIf="createDnaForm.controls['number_of_participant'].errors?.required">
+                        Number of Participants can not be blank
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-sm-4">
@@ -75,6 +89,13 @@
                   bindValue="id" 
                   cformControlName="priority_id"class="w_100">
                 </ng-select>
+                <div
+                  *ngIf="(createDnaForm.controls['priority_id'].invalid && (createDnaForm.controls['priority_id'].dirty || createDnaFormm.controls['priority_id'].touched)) || isSubmitted">
+                   <div class="error_message"
+                    *ngIf="createDnaForm.controls['priority_id'].errors?.required">
+                     Priority can not be blank
+                   </div>
+                </div>
             </div>
         </div>
         <div class="col-sm-4">
@@ -82,7 +103,14 @@
                 <label class="form-control-label">
                     Management Code
                 </label>
-                <input  type="text" class="form-control form_width" formControlName="management_code" />
+                <input  type="text" class="form-control form_width" formControlName="management_code">
+                <div
+                  *ngIf="(createDnaForm.controls['management_code'].invalid && (createDnaForm.controls['management_code'].dirty || createDnaFormm.controls['management_code'].touched)) || isSubmitted">
+                   <div class="error_message"
+                    *ngIf="createDnaForm.controls['management_code'].errors?.required">
+                    Management Code can not be blank
+                   </div>
+                </div>
             </div>
         </div>
         <div class="col-sm-4">
@@ -94,6 +122,13 @@
                      bindLabel="region_name"
                     bindValue="id"  (change)="getEvent($event)" formControlName="region_id" class="w_100">
                 </ng-select>
+                <div
+                  *ngIf="(createDnaForm.controls['region_name'].invalid && (createDnaForm.controls['region_name'].dirty || createDnaFormm.controls['region_name'].touched)) || isSubmitted">
+                   <div class="error_message"
+                    *ngIf="createDnaForm.controls['region_name'].errors?.required">
+                    Delivery Region can not be blank
+                   </div>
+                </div>
             </div>
         </div>
         <div class="col-sm-4">
@@ -105,6 +140,13 @@
                      bindLabel="country_name"
                     bindValue="id" formControlName="country" class="w_100">
                 </ng-select>
+                <div
+                  *ngIf="(createDnaForm.controls['country_name'].invalid && (createDnaForm.controls['country_name'].dirty || createDnaFormm.controls['country_name'].touched)) || isSubmitted">
+                   <div class="error_message"
+                    *ngIf="createDnaForm.controls['country_name'].errors?.required">
+                    Delivery Country can not be blank
+                   </div>
+                </div>
             </div>
         </div>
         <div class="col-sm-4">
@@ -116,6 +158,13 @@
                      bindLabel="team_name"
                     bindValue="team_name" formControlName="business_unit_id" class="w_100">
                 </ng-select>
+                <div
+                  *ngIf="(createDnaForm.controls['business_unit_id'].invalid && (createDnaForm.controls['business_unit_id'].dirty || createDnaFormm.controls['business_unit_id'].touched)) || isSubmitted">
+                   <div class="error_message"
+                    *ngIf="createDnaForm.controls['business_unit_id'].errors?.required">
+                    Business Unit/M1 Level can not be blank
+                   </div>
+                </div>
             </div>
         </div>
     </div>

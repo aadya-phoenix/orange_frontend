@@ -40,7 +40,7 @@ export class DnaLearningFormComponent implements OnInit {
       number_of_participant: new FormControl('', [Validators.required]),
       priority_id: new FormControl('', [Validators.required]),
       management_code: new FormControl('', [Validators.required]),
-      region_id: new FormControl(''),
+      region_id: new FormControl('',[Validators.required]),
       country: new FormControl('', [Validators.required]),
       business_unit_id: new FormControl('', [Validators.required]),
     });
