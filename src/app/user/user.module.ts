@@ -9,10 +9,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { ChangePasswordUserComponent } from './change-password-user/change-password-user.component';
+import { LearningNeedsComponent } from './learning-needs/learning-needs.component';
 
 
 @NgModule({
-  declarations: [UserManagementComponent, EditUserComponent, ChangePasswordUserComponent],
+  declarations: [UserManagementComponent, EditUserComponent, ChangePasswordUserComponent, LearningNeedsComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

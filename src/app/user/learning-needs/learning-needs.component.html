@@ -1,0 +1,145 @@
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-8">
+            <div class="page-header float-left bac_trasparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="breade_text_span1">User Management</span>
+                        <span class="divider_req"></span>
+                        <span class="breade_text_span"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 float-right">
+            <div class="page-header float-right bac_trasparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bac_trasparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home text_white"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">User Management</span>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">Users</span>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">Learning Needs</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="content mt-3">
+        <div class="animated fadeIn">
+            <form [formGroup]="learningNeedForm">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Tracker Name</label>
+                                            <input type="text"
+                                                class="form-control form_width" formControlName="tracker_name" />
+                                             <!--  <div
+                                              *ngIf="(createUserForm.controls['first_name'].invalid && (createUserForm.controls['first_name'].dirty || createUserForm.controls['first_name'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="createUserForm.controls['first_name'].errors?.required">
+                                                  First Name cannot be blank
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Tracker Description</label>
+                                            <textarea type="text" class="form-control form_width-textarea" formControlName="tracker_desc">
+                                             </textarea>
+                                              <!-- <div
+                                              *ngIf="(createUserForm.controls['first_name'].invalid && (createUserForm.controls['first_name'].dirty || createUserForm.controls['first_name'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="createUserForm.controls['first_name'].errors?.required">
+                                                  First Name cannot be blank
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Start Date</label>
+                                            <input type="date"
+                                                class="form-control form_width" formControlName="start_date" />
+                                              <!-- <div
+                                              *ngIf="(createUserForm.controls['first_name'].invalid && (createUserForm.controls['first_name'].dirty || createUserForm.controls['first_name'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="createUserForm.controls['first_name'].errors?.required">
+                                                  First Name cannot be blank
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">End Date</label>
+                                            <input type="date"
+                                                class="form-control form_width" formControlName="end_date" />
+                                              <!-- <div
+                                              *ngIf="(createUserForm.controls['first_name'].invalid && (createUserForm.controls['first_name'].dirty || createUserForm.controls['first_name'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="createUserForm.controls['first_name'].errors?.required">
+                                                  First Name cannot be blank
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Type</label>
+                                            <ng-select                                             [items]="" bindLabel="name" bindValue="id"
+                                            formControlName="type" class="w_100">
+                                            </ng-select>
+                                              <!-- <div
+                                              *ngIf="(createUserForm.controls['first_name'].invalid && (createUserForm.controls['first_name'].dirty || createUserForm.controls['first_name'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="createUserForm.controls['first_name'].errors?.required">
+                                                  First Name cannot be blank
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Training DB</label>
+                                            <ng-select                                             [items]="" bindLabel="name" bindValue="id"
+                                            formControlName="training_db" class="w_100">
+                                            </ng-select>
+                                              <!-- <div
+                                              *ngIf="(createUserForm.controls['first_name'].invalid && (createUserForm.controls['first_name'].dirty || createUserForm.controls['first_name'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                                  *ngIf="createUserForm.controls['first_name'].errors?.required">
+                                                  First Name cannot be blank
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary mr-1" type="submit" 
+                                (click)="save()"> <i class="fa fa-upload mr-1" aria-hidden="true"></i>Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
