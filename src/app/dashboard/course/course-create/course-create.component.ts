@@ -465,27 +465,24 @@ export class CourseCreateComponent implements OnInit {
         this.createCourceForm.addControl('video_link', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('for_whoom', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('level', new FormControl('no', [Validators.required]));
-        this.createCourceForm.addControl('who_see_course', new FormControl('', [Validators.required]));
-        this.createCourceForm.addControl('target_audience', new FormControl('1', [Validators.required]));
-        this.createCourceForm.addControl('email_preffered_instructor', new FormControl('', [Validators.required]));
+        this.createCourceForm.addControl('target_audience',new FormControl('', [Validators.required]));
+        this.createCourceForm.addControl('email_preffered_instructor',new FormControl('', [Validators.required]));
         if (this.course_details.id) {
           this.createCourceForm.controls.url.setValue(this.course_details.url);
           this.createCourceForm.controls.video_link.setValue(this.course_details.video_link);
           this.createCourceForm.controls.for_whoom.setValue(this.course_details.for_whoom);
           this.createCourceForm.controls.level.setValue(this.course_details.level);
-          this.createCourceForm.controls.who_see_course.setValue(Number(this.course_details.who_see_course));
-          
           this.createCourceForm.controls.email_preffered_instructor.setValue(JSON.parse(this.course_details.email_preffered_instructor));
           if (this.course_details.level == 'yes') {
             this.regionTargetAudience = true;
-            this.createCourceForm.addControl('who_see_course',new FormControl('', [Validators.required]));
+            this.createCourceForm.addControl('who_see_course',new FormControl(Number(this.course_details.who_see_course), [Validators.required]));
             this.createCourceForm.removeControl('target_audience');
             this.createCourceForm.removeControl('email_preffered_instructor');
           }
           else if (this.course_details.level == 'no') {
             this.regionTargetAudience = false;
-            this.createCourceForm.addControl('target_audience',new FormControl(this.course_details.target_audience, [Validators.required]));
-            this.createCourceForm.addControl('email_preffered_instructor',new FormControl('', [Validators.required]));
+            this.createCourceForm.controls.target_audience.setValue(this.course_details.target_audience);
+            this.createCourceForm.controls.email_preffered_instructor.setValue(this.course_details.email_preffered_instructor);
             this.createCourceForm.removeControl('who_see_course');
           }
           if (this.course_details.target_audience == 1) {
@@ -1139,7 +1136,6 @@ export class CourseCreateComponent implements OnInit {
     }
     const body = this.createCourceForm.value;
     body.status = status;
-    debugger;
     if (this.selectedPublisherId) {
       body.publisher_id = this.selectedPublisherId;
     }

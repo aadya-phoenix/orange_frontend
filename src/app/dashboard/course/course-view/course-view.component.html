@@ -87,10 +87,8 @@
 
     <div class="content">
       <div class="animated fadeIn">
-        <div class=" mb-2"
-          *ngIf="getUserrole.id != 2 && getprofileDetails && showrejectbutton != getprofileDetails.data.id">
-
-          <div class="Requs_btn_inl">
+        <div class="mb-2">
+          <div class="Requs_btn_inl" *ngIf="getUserrole.id != 2 && getprofileDetails && showrejectbutton != getprofileDetails.data.id">
             <div class="Requs_btn_inl-child">
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#publishModal"
                 *ngIf="getUserrole.id == 4 && status != 'publish' && showrejectbutton != getprofileDetails.data.id">
@@ -120,15 +118,14 @@
                 <i class="fa fa-exchange" aria-hidden="true"></i><span class="pl-1">Transfer to Other ROC</span>
               </button>
             </div>
-
           </div>
-          <!--colensd-->
+          <div *ngIf="status == 'publish' && routegetdata.learning_type == '1'">
+            <button type="button" class="btn btn-primary" (click)="beautificationTemplate()">
+              <i class="fa fa-linode" aria-hidden="true"></i><span class="pl-1">Beautification Template</span>
+            </button>
+          </div>
         </div>
-        <div class="pull-right" *ngIf="status == 'publish' && routegetdata.learning_type == '1'">
-          <button type="button" class="btn btn-secondary ml-2" (click)="beautificationTemplate()">
-            <i class="fa fa-linode" aria-hidden="true"></i><span class="pl-1">Beautification Template</span>
-          </button>
-        </div>
+       
         <div class="row">
           <div class="col-md-12">
             <div class="back_img_viewbac">
