@@ -65,7 +65,7 @@
                                 <strong _ngcontent-jet-c125=""> Course Details </strong>
                             </div>
                             <div class="card-body card_width">
-                                <div class="col-sm-6"  [ngClass]="{'col-sm-12': !isPlaylist()}">
+                                <div class="col-sm-6" [ngClass]="{'col-sm-12': !isPlaylist()}">
                                     <div class="d-flex align-items-center">
                                         <div class="form-group w-100">
                                             <label class="form-control-label">
@@ -166,7 +166,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6 mb_boot_10" *ngIf="!isPlaylist()">
-                                    <div class="form-group w-100">
+                                    <!-- <div class="form-group w-100">
                                         <label>Objective</label>
                                         <div class="editControls"></div>
                                         <ejs-richtexteditor id='defaultRTE' formControlName="objective"
@@ -176,6 +176,38 @@
                                     <div class="error_message"
                                         *ngIf="createCourceForm.controls['objective'].hasError('required') && createCourceForm.controls['objective'].touched">
                                         Objectives cannot be blank
+                                    </div> -->
+                                    <div class="form-group w-100">
+                                        <label>Objective</label>
+                                    <table class="table table-bordered" formArrayName="objective">
+                                        <thead>
+                                            <!-- <tr>
+                                                <th scope="col">Objective</th>
+                                                <th scope="col" class="w_12">Add</th>
+                                            </tr> -->
+                                            <tr
+                                                *ngFor="let obje of objectiveContentArray.controls;let i = index;">
+                                                <td [formGroupName]="i">
+                                                    <input type="text" placeholder="Enter Objective"
+                                                        class="form-control form_width" formControlName="description" />
+                                                    <div class="error_message"
+                                                        *ngIf="(objectiveContentArray.controls[i].controls['description'].invalid && (objectiveContentArray.controls[i].controls['description'].dirty || objectiveContentArray.controls[i].controls['description'].touched)) || isSubmitted ">
+                                                        Objectives cannot be blank
+                                                    </div>
+                                                </td>
+                                                <td class="btn-width">
+                                                    <button class="btn btn-success mr-2 mb-1"
+                                                        (click)="addObjectiveContent('')">
+                                                        +
+                                                    </button>
+                                                    <button class="btn btn-danger" *ngIf="i > 0"
+                                                        (click)="removeObjectiveContent(i)">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                    </table>
                                     </div>
                                 </div>
                                 <div class="col-sm-6" *ngIf="!isPlaylist()">
@@ -332,8 +364,7 @@
                                                     class="upload_css" (change)="handleFileInput($event)" />
                                             </div>
                                             <span *ngIf="isFileResouce" class="text_orange">
-                                                Click here to <a href="{{isFileResouce}}"
-                                                    target="_blank">View</a>
+                                                Click here to <a href="{{isFileResouce}}" target="_blank">View</a>
                                             </span>
                                         </div>
                                     </div>
@@ -448,8 +479,8 @@
                                                 </a>
                                             </label>
                                             <ng-select placeholder="Please select" (change)="targetAudience($event)"
-                                                [items]="yesNo" bindLabel="name"
-                                                bindValue="id" formControlName="level" class="w_100">
+                                                [items]="yesNo" bindLabel="name" bindValue="id" formControlName="level"
+                                                class="w_100">
                                             </ng-select>
                                             <div class="error_message"
                                                 *ngIf="createCourceForm.controls['level'].hasError('required') && createCourceForm.controls['level'].touched">
@@ -460,7 +491,7 @@
                                         </div>
                                     </div>
                                     <!--colend-->
-                                    <!-- <div class="col-sm-6" *ngIf="isPlaylist() && regionTargetAudience">
+                                    <div class="col-sm-6" *ngIf="isPlaylist() && regionTargetAudience">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Region of Target Audience
@@ -486,7 +517,7 @@
                                                 Region of Target Audience cannot be blank
                                             </div>
                                         </div>
-                                    </div> -->
+                                    </div>
                                     <!--colend-->
                                     <div class="col-sm-6" *ngIf="isPlaylist() && !regionTargetAudience">
                                         <div class="form-group">
@@ -633,9 +664,9 @@
                                                         </i>
                                                     </a>
                                                 </label>
-                                                <ng-select placeholder="Please select"
-                                                    [items]="whocanSee" bindLabel="name" bindValue="id"
-                                                    formControlName="who_see_course" class="w_100">
+                                                <ng-select placeholder="Please select" [items]="whocanSee"
+                                                    bindLabel="name" bindValue="id" formControlName="who_see_course"
+                                                    class="w_100">
                                                 </ng-select>
                                             </div>
                                         </div>
@@ -985,7 +1016,7 @@
                                             </label>
                                             <div>
                                                 <input type="radio" id="chkurl" formControlName="materialBased"
-                                                    value="url" class="mr-1"/>
+                                                    value="url" class="mr-1" />
                                                 <label for="chkurl" class="mr-2">URL</label>
                                                 <input type="radio" id="chkupload" formControlName="materialBased"
                                                     value="upload" class="mr-1" />
@@ -1020,8 +1051,7 @@
                                                 </div>
                                             </div>
                                             <span *ngIf="isMaterialSource" class="text_orange">
-                                                Click here to <a href="{{isMaterialSource}}"
-                                                    target="_blank">View</a>
+                                                Click here to <a href="{{isMaterialSource}}" target="_blank">View</a>
                                             </span>
                                         </div>
                                     </div>
@@ -1160,6 +1190,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div *ngIf="isILTAndvILT()">
                                 <p class="text_black">
                                     <b class="text_orange">Note</b>: The cost will not be displayed on the
                                     course
@@ -1174,14 +1205,14 @@
                                     who is the backup for {{item.name}} region.
                                 </p>
                             </div>
+                            </div>
                             <div class="card-footer d-flex justify-content-start">
-                                <button *ngIf="isSubmit()"
-                                  class="btn btn-primary"
+                                <button *ngIf="isSubmit()" class="btn btn-primary"
                                     (click)="createUpdateCourse('pending')">
                                     Submit
                                 </button>
-                                <button *ngIf="isDraft()"
-                                    class="btn btn-secondary ml-1" (click)="createUpdateCourse('draft')">
+                                <button *ngIf="isDraft()" class="btn btn-secondary ml-1"
+                                    (click)="createUpdateCourse('draft')">
                                     Save as draft
                                 </button>
                                 <button class="btn btn-primary ml-1" data-toggle="modal"
@@ -1191,19 +1222,18 @@
                                         to
                                         Publisher</span>
                                 </button>
-                               
+
                                 <button
                                     *ngIf="getUserrole.id == 4 && (showrejectbutton != getprofileDetails.data.id || course_details.status =='draft')"
                                     class="btn btn-primary ml-2" data-toggle="modal" data-target="#publish">
-                                    <i  aria-hidden="true" class="fa fa-upload"></i><span class="pl-1"> Publish</span>
+                                    <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1"> Publish</span>
                                 </button>
                                 <button type="button" class="btn btn-secondary  ml-2" data-toggle="modal"
-                                data-target="#rejectModal"
-                                *ngIf="(getUserrole.id == 3 || getUserrole.id == 4) && course_details.user_id != undefined && showrejectbutton != getprofileDetails.data.id"
-                                (click)="getPublisher()">
-                                <i class="fa fa-times" aria-hidden="true"></i> <span
-                                    class="pl-1">Reject</span>
-                            </button>
+                                    data-target="#rejectModal"
+                                    *ngIf="(getUserrole.id == 3 || getUserrole.id == 4) && course_details.user_id != undefined && showrejectbutton != getprofileDetails.data.id"
+                                    (click)="getPublisher()">
+                                    <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -1335,38 +1365,39 @@
         </div>
     </div>
     <!----Transfer to publisher-->
-<div class="modal fade mar_top_250" id="transfertoPublisher" tabindex="-1" aria-labelledby="transfertoPublisherLabel"
-aria-hidden="true">
-<div class="modal-dialog modal-lg " role="document ">
-    <div class="modal-content ">
-        <div class="modal-body ">
-            <div class="row ">
-                <div class="col-sm-12 ">
-                    <div class="form-group ">
-                        <label>Transfer to Publisher</label>
-                        <select name="select " id="select " class="form-control" [(ngModel)]="selectedPublisherId">
-                            <option hidden disabled selected='selected' value="0 ">Please select</option>
-                            <option *ngFor="let publisher of publisherList" [value]="publisher.id">
-                                {{publisher.first_name}}</option>
-                        </select>
+    <div class="modal fade mar_top_250" id="transfertoPublisher" tabindex="-1"
+        aria-labelledby="transfertoPublisherLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg " role="document ">
+            <div class="modal-content ">
+                <div class="modal-body ">
+                    <div class="row ">
+                        <div class="col-sm-12 ">
+                            <div class="form-group ">
+                                <label>Transfer to Publisher</label>
+                                <select name="select " id="select " class="form-control"
+                                    [(ngModel)]="selectedPublisherId">
+                                    <option hidden disabled selected='selected' value="0 ">Please select</option>
+                                    <option *ngFor="let publisher of publisherList" [value]="publisher.id">
+                                        {{publisher.first_name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--col end-->
                     </div>
+                    <!--row-->
                 </div>
-                <!--col end-->
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                        (click)="createUpdateCoursePublisher()">
+                        Submit
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
-            <!--row-->
         </div>
-        <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-            <button type="button" class="btn btn-primary" data-dismiss="modal"
-                (click)="createUpdateCoursePublisher()">
-                Submit
-            </button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
+        <!-- </ng-template> -->
     </div>
-</div>
-<!-- </ng-template> -->
-</div>
 </div>
 <!-- publish -->
 <div class="modal fade mt_top_50" id="publish" tabindex="-1" aria-labelledby="publishLabel" aria-hidden="true">

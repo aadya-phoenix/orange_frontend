@@ -13,6 +13,7 @@ import { CourseCreateComponent } from './course-create/course-create.component';
 import { CourseViewComponent } from './course-view/course-view.component';
 import { CourseCompleteReportComponent } from './course-complete-report/course-complete-report.component';
 import { MultiLaunguageComponent } from './multi-launguage/multi-launguage.component';
+import { CourseBeautificationTemplateComponent } from './course-beautification-template/course-beautification-template.component';
 
 @NgModule({
   declarations: [
@@ -21,9 +22,10 @@ import { MultiLaunguageComponent } from './multi-launguage/multi-launguage.compo
     CourseCreateComponent,
     CourseViewComponent,
     CourseCompleteReportComponent,
-    MultiLaunguageComponent
+    MultiLaunguageComponent,
+    CourseBeautificationTemplateComponent
   ],
-  entryComponents:[CourseHistoryComponent, MultiLaunguageComponent],
+  entryComponents:[CourseHistoryComponent, MultiLaunguageComponent, CourseBeautificationTemplateComponent],
   imports: [
     CommonModule,
     CourseRoutingModule,

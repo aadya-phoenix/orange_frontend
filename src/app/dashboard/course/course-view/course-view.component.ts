@@ -6,6 +6,7 @@ import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
+import { CourseBeautificationTemplateComponent } from '../course-beautification-template/course-beautification-template.component';
 const urlregex = dataConstant.UrlPattern;
 @Component({
   selector: 'app-course-view',
@@ -88,7 +89,7 @@ export class CourseViewComponent implements OnInit {
           }
           this.routegetdata['titleByLang'] = this.courseService.getTText(this.routegetdata['title']);
           this.routegetdata['descriptionByLang'] = this.courseService.getTText(this.routegetdata['description']);
-          this.routegetdata['objectiveByLang'] = this.courseService.getTText(this.routegetdata['objective']);
+          this.routegetdata['objectiveByLang'] = JSON.parse(this.routegetdata['objective']);
           this.routegetdata['learn_moreByLang'] = this.courseService.getTText(this.routegetdata['learn_more']);
           this.routegetdata['for_whoomByLang'] = this.courseService.getTText(this.routegetdata['for_whoom']);
           this.routegetdata['for_whomByLang'] = this.courseService.getTText(this.routegetdata['for_whom']);
@@ -103,10 +104,11 @@ export class CourseViewComponent implements OnInit {
             this.purchaseOrder = this.routegetdata.purchase_order.split('#')[0];
           }
           if (this.routegetdata.resource) {
-            this.imgUrl = `https://orange.mindscroll.info/public/public/${this.routegetdata.resource}`;
+            this.imgUrl = `${dataConstant.ImageUrl}/${this.routegetdata.resource}`;
           }
+          debugger;
           if (this.routegetdata.material_source) {
-            this.material_sourceUrl = `https://orange.mindscroll.info/public/public/${this.routegetdata.material_source}`;
+            this.material_sourceUrl = `${dataConstant.ImageUrl}/${this.routegetdata.material_source}`;
           }
           this.setrejectbutton(this.routegetdata.id);
           this.getPublisher();
@@ -122,6 +124,19 @@ export class CourseViewComponent implements OnInit {
         this.commonService.hideLoading();
       }
     );
+  }
+
+  beautificationTemplate(item: any) {
+    const modalRef = this.modalService.open(CourseBeautificationTemplateComponent, {
+      centered: true,
+      // size: 'xl',
+      modalDialogClass: 'large-width',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      data: this.routegetdata.id,
+      objectDetail: this.routegetdata
+    };
   }
 
 
