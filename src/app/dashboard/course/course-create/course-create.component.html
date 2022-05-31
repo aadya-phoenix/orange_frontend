@@ -80,7 +80,7 @@
                                                 formControlName="title_single" />
 
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['title_single'].hasError('required') && createCourceForm.controls['title_single'].touched">
+                                                *ngIf="(createCourceForm.controls['title_single'].invalid && (createCourceForm.controls['title_single'].dirty || createCourceForm.controls['title_single'].touched || isSubmitted))">
                                                 Title cannot be blank
                                             </div>
                                         </div>
@@ -109,7 +109,7 @@
                                             class="w_100">
                                         </ng-select>
                                         <div class="error_message"
-                                            *ngIf="createCourceForm.controls['training_provided_by'].hasError('required') && createCourceForm.controls['training_provided_by'].touched">
+                                        *ngIf="(createCourceForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
                                             Training Provided By cannot be blank
                                         </div>
                                     </div>
@@ -129,7 +129,7 @@
                                             placeholder="Enter Training hours/duration (HH:MM) "
                                             class="form-control form_width" formControlName="duration" maxlength="5" />
                                         <div class="error_message"
-                                            *ngIf="createCourceForm.controls['duration'].hasError('required') && createCourceForm.controls['duration'].touched">
+                                        *ngIf="(createCourceForm.controls['duration'].invalid && (createCourceForm.controls['duration'].dirty || createCourceForm.controls['duration'].touched || isSubmitted))">
                                             Training hours/duration cannot be blank
                                         </div>
 
@@ -153,7 +153,7 @@
                                             <span class="charcter_limit">{{remainingText}} characters
                                                 remaining</span>
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['description_single'].hasError('required') && createCourceForm.controls['description_single'].touched">
+                                            *ngIf="(createCourceForm.controls['description_single'].invalid && (createCourceForm.controls['description_single'].dirty || createCourceForm.controls['description_single'].touched || isSubmitted))">
                                                 Description cannot be blank
                                             </div>
                                         </div>
@@ -191,7 +191,7 @@
                                                     <input type="text" placeholder="Enter Objective"
                                                         class="form-control form_width" formControlName="description" />
                                                     <div class="error_message"
-                                                        *ngIf="(objectiveContentArray.controls[i].controls['description'].invalid && (objectiveContentArray.controls[i].controls['description'].dirty || objectiveContentArray.controls[i].controls['description'].touched)) || isSubmitted ">
+                                                        *ngIf="(objectiveContentArray.controls[i].controls['description'].invalid && (objectiveContentArray.controls[i].controls['description'].dirty || objectiveContentArray.controls[i].controls['description'].touched || isSubmitted))">
                                                         Objectives cannot be blank
                                                     </div>
                                                 </td>
@@ -225,7 +225,7 @@
                                             bindLabel="name" bindValue="id" formControlName="subject" class="w_100">
                                         </ng-select>
                                         <span class="error_message"
-                                            *ngIf="createCourceForm.controls['subject'].hasError('required') && createCourceForm.controls['subject'].touched">
+                                        *ngIf="(createCourceForm.controls['subject'].invalid && (createCourceForm.controls['subject'].dirty || createCourceForm.controls['subject'].touched || isSubmitted))">
                                             Subject cannot be blank
                                         </span>
                                     </div>
@@ -244,7 +244,7 @@
                                         <input type="text" placeholder="Enter Keywords" class="form-control form_width"
                                             formControlName="keyword" />
                                         <div class="error_message"
-                                            *ngIf="createCourceForm.controls['keyword'].hasError('required') && createCourceForm.controls['keyword'].touched">
+                                        *ngIf="(createCourceForm.controls['keyword'].invalid && (createCourceForm.controls['keyword'].dirty || createCourceForm.controls['keyword'].touched || isSubmitted))">
                                             Keywords cannot be blank
                                         </div>
 
@@ -265,7 +265,7 @@
                                             formControlName="available_language" class="w_100">
                                         </ng-select>
                                         <div class="error_message"
-                                            *ngIf="createCourceForm.controls['available_language'].hasError('required') && createCourceForm.controls['available_language'].touched">
+                                        *ngIf="(createCourceForm.controls['available_language'].invalid && (createCourceForm.controls['available_language'].dirty || createCourceForm.controls['available_language'].touched || isSubmitted))">
                                             Available Languages cannot be blank
                                         </div>
                                     </div>
@@ -285,7 +285,7 @@
                                             bindValue="id" formControlName="level" class="w_100">
                                         </ng-select>
                                         <div class="error_message"
-                                            *ngIf="createCourceForm.controls['level'].hasError('required') && createCourceForm.controls['level'].touched">
+                                        *ngIf="(createCourceForm.controls['level'].invalid && (createCourceForm.controls['level'].dirty || createCourceForm.controls['level'].touched || isSubmitted))">
                                             Level cannot be blank
                                         </div>
                                     </div>
@@ -305,7 +305,7 @@
                                         <input type="text" placeholder="Email of Content Owner"
                                             class="form-control form_width" formControlName="email_content_owner" />
                                         <div class="error_message"
-                                            *ngIf="createCourceForm.controls['email_content_owner'].hasError('required') && createCourceForm.controls['email_content_owner'].touched">
+                                        *ngIf="(createCourceForm.controls['email_content_owner'].invalid && (createCourceForm.controls['email_content_owner'].dirty || createCourceForm.controls['email_content_owner'].touched || isSubmitted))">
                                             Email of Content Owner cannot be blank
                                         </div>
                                     </div>
@@ -325,7 +325,7 @@
                                         <input type="text" placeholder="Enter Email of Training Contact"
                                             class="form-control form_width" formControlName="email_training_contact" />
                                         <div class="error_message"
-                                            *ngIf="createCourceForm.controls['email_training_contact'].hasError('required') && createCourceForm.controls['email_training_contact'].touched">
+                                        *ngIf="(createCourceForm.controls['email_training_contact'].invalid && (createCourceForm.controls['email_training_contact'].dirty || createCourceForm.controls['email_training_contact'].touched || isSubmitted))">
                                             Email of Training Contact cannot be blank
                                         </div>
 
@@ -389,6 +389,10 @@
                                                     {{ learning.name }}
                                                 </option>
                                             </select>
+                                            <div class="error_message"
+                                            *ngIf="(createCourceForm.controls['learning_type'].invalid && (createCourceForm.controls['learning_type'].dirty || createCourceForm.controls['learning_type'].touched || isSubmitted))">
+                                                Learning type cannot be blank
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -415,7 +419,7 @@
                                             </label>
                                             <input type="text" class="form-control form_width" formControlName="url" />
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['url'].invalid && (createCourceForm.controls['url'].dirty ||createCourceForm.controls['url'].touched)">
+                                            *ngIf="(createCourceForm.controls['url'].invalid && (createCourceForm.controls['url'].dirty || createCourceForm.controls['url'].touched || isSubmitted))">
                                                 Playlist url is not a valid URL
                                             </div>
 
@@ -437,7 +441,7 @@
                                                 formControlName="video_link" />
 
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['video_link'].hasError('required') && createCourceForm.controls['video_link'].touched">
+                                            *ngIf="(createCourceForm.controls['video_link'].invalid && (createCourceForm.controls['video_link'].dirty || createCourceForm.controls['video_link'].touched || isSubmitted))">
                                                 Number of learning objects cannot be blank
                                             </div>
                                         </div>
@@ -459,7 +463,7 @@
                                                 placeholder="Enter Email of playlist creator"
                                                 class="form-control form_width" formControlName="for_whoom" />
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['for_whoom'].hasError('required') && createCourceForm.controls['for_whoom'].touched">
+                                            *ngIf="(createCourceForm.controls['for_whoom'].invalid && (createCourceForm.controls['for_whoom'].dirty || createCourceForm.controls['for_whoom'].touched || isSubmitted))">
                                                 Email of playlist creator cannot be blank
                                             </div>
 
@@ -483,7 +487,7 @@
                                                 class="w_100">
                                             </ng-select>
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['level'].hasError('required') && createCourceForm.controls['level'].touched">
+                                            *ngIf="(createCourceForm.controls['level'].invalid && (createCourceForm.controls['level'].dirty || createCourceForm.controls['level'].touched || isSubmitted))">
                                                 Is the target audience of your Playlist from one region only?
                                                 cannot
                                                 be blank
@@ -513,7 +517,7 @@
                                                     {{whosee.name}}</option>
                                             </select>
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['who_see_course'].hasError('required') && createCourceForm.controls['who_see_course'].touched">
+                                            *ngIf="(createCourceForm.controls['who_see_course'].invalid && (createCourceForm.controls['who_see_course'].dirty || createCourceForm.controls['who_see_course'].touched || isSubmitted))">
                                                 Region of Target Audience cannot be blank
                                             </div>
                                         </div>
@@ -540,7 +544,7 @@
                                                 <option value="2">All OBS employees</option>
                                             </select>
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['target_audience'].hasError('required') && createCourceForm.controls['target_audience'].touched">
+                                            *ngIf="(createCourceForm.controls['target_audience'].invalid && (createCourceForm.controls['target_audience'].dirty || createCourceForm.controls['target_audience'].touched || isSubmitted))">
                                                 Target audience cannot be blank
                                             </div>
                                         </div>
@@ -567,7 +571,7 @@
 
                                             </select>
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['email_preffered_instructor'].hasError('required') && createCourceForm.controls['email_preffered_instructor'].touched">
+                                            *ngIf="(createCourceForm.controls['email_preffered_instructor'].invalid && (createCourceForm.controls['email_preffered_instructor'].dirty || createCourceForm.controls['email_preffered_instructor'].touched || isSubmitted))">
                                                 OBS employees in specific Functions/Divisions cannot be blank
                                             </div>
                                         </div>
@@ -590,7 +594,7 @@
                                                 formControlName="delivery_method" class="w_100">
                                             </ng-select>
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['delivery_method'].hasError('required') && createCourceForm.controls['delivery_method'].touched">
+                                            *ngIf="(createCourceForm.controls['delivery_method'].invalid && (createCourceForm.controls['delivery_method'].dirty || createCourceForm.controls['delivery_method'].touched || isSubmitted))">
                                                 Delivery Method cannot be blank
                                             </div>
                                         </div>
@@ -611,7 +615,7 @@
                                                 bindValue="id" formControlName="digital" class="w_100">
                                             </ng-select>
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['digital'].hasError('required') && createCourceForm.controls['digital'].touched">
+                                            *ngIf="(createCourceForm.controls['digital'].invalid && (createCourceForm.controls['digital'].dirty || createCourceForm.controls['digital'].touched || isSubmitted))">
                                                 Does this course integrate digital ? cannot be blank
                                             </div>
                                         </div>
@@ -647,7 +651,7 @@
                                                 bindValue="id" formControlName="manager_approval" class="w_100">
                                             </ng-select>
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['manager_approval'].hasError('required') && createCourceForm.controls['manager_approval'].touched">
+                                            *ngIf="(createCourceForm.controls['manager_approval'].invalid && (createCourceForm.controls['manager_approval'].dirty || createCourceForm.controls['manager_approval'].touched || isSubmitted))">
                                                 Manager Approval cannot be blank
                                             </div>
                                         </div>
@@ -691,7 +695,7 @@
                                                 bindValue="email_id" formControlName="email_preffered_instructor">
                                             </ng-select>
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['email_preffered_instructor'].hasError('required') && createCourceForm.controls['email_preffered_instructor'].touched">
+                                            *ngIf="(createCourceForm.controls['email_preffered_instructor'].invalid && (createCourceForm.controls['email_preffered_instructor'].dirty || createCourceForm.controls['email_preffered_instructor'].touched || isSubmitted))">
                                                 Email of the preferred Instructor cannot be blank
                                             </div>
                                         </div>
@@ -710,9 +714,9 @@
                                                 </a>
                                             </label>
                                             <input type="date" class="form-control form_width"
-                                                formControlName="first_session_date" />
+                                                formControlName="first_session_date" min="{{minDate}}" />
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['first_session_date'].hasError('required') && createCourceForm.controls['first_session_date'].touched">
+                                            *ngIf="(createCourceForm.controls['first_session_date'].invalid && (createCourceForm.controls['first_session_date'].dirty || createCourceForm.controls['first_session_date'].touched || isSubmitted))">
                                                 Date of first session cannot be blank
                                             </div>
 
@@ -731,7 +735,7 @@
                                                 </a>
                                             </label>
                                             <input type="date" class="form-control form_width"
-                                                formControlName="expiry_date" />
+                                                formControlName="expiry_date" min="{{maxDate}}" />
                                         </div>
                                     </div>
 
@@ -754,6 +758,10 @@
                                                     {{ cctExpiry.name }}
                                                 </option>
                                             </select>
+                                            <div class="error_message"
+                                            *ngIf="(createCourceForm.controls['expiry_date_type'].invalid && (createCourceForm.controls['expiry_date_type'].dirty || createCourceForm.controls['expiry_date_type'].touched || isSubmitted))">
+                                                Expiry Type cannot be blank
+                                            </div>
                                         </div>
                                     </div>
 
@@ -773,6 +781,10 @@
                                                 bindLabel="division" bindValue="id"
                                                 formControlName="entity_business_area" class="w_100">
                                             </ng-select>
+                                            <div class="error_message"
+                                            *ngIf="(createCourceForm.controls['entity_business_area'].invalid && (createCourceForm.controls['entity_business_area'].dirty || createCourceForm.controls['entity_business_area'].touched || isSubmitted))">
+                                            Entity/Business area cannot be blank
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="w_100">
@@ -793,7 +805,7 @@
                                                     class="w_100">
                                                 </ng-select>
                                                 <div class="error_message"
-                                                    *ngIf="createCourceForm.controls['certification'].hasError('required') && createCourceForm.controls['certification'].touched">
+                                                *ngIf="(createCourceForm.controls['certification'].invalid && (createCourceForm.controls['certification'].dirty || createCourceForm.controls['certification'].touched || isSubmitted))">
                                                     Certification cannot be blank
                                                 </div>
                                             </div>
@@ -820,7 +832,7 @@
                                                 </option>
                                             </select>
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['certification_expiry_type'].hasError('required') && createCourceForm.controls['certification_expiry_type'].touched">
+                                            *ngIf="(createCourceForm.controls['certification_expiry_type'].invalid && (createCourceForm.controls['certification_expiry_type'].dirty || createCourceForm.controls['certification_expiry_type'].touched || isSubmitted))">
                                                 Certification expiry type cannot be blank
                                             </div>
                                         </div>
@@ -844,7 +856,7 @@
                                                 </option>
                                             </select>
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['validity_period'].hasError('required') && createCourceForm.controls['validity_period'].touched">
+                                                *ngIf="(createCourceForm.controls['validity_period'].invalid && (createCourceForm.controls['validity_period'].dirty || createCourceForm.controls['validity_period'].touched || isSubmitted))">
                                                 Validity period cannot be blank
                                             </div>
                                         </div>
@@ -867,7 +879,7 @@
                                                 formControlName="external_vendor" class="w_100">
                                             </ng-select>
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['external_vendor'].hasError('required') && createCourceForm.controls['external_vendor'].touched">
+                                            *ngIf="(createCourceForm.controls['external_vendor'].invalid && (createCourceForm.controls['external_vendor'].dirty || createCourceForm.controls['external_vendor'].touched || isSubmitted))">
                                                 External vendor cannot be blank
                                             </div>
                                         </div>
@@ -890,7 +902,7 @@
                                                 formControlName="external_vendor_name" class="w_100">
                                             </ng-select>
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['external_vendor_name'].hasError('required') && createCourceForm.controls['external_vendor_name'].touched">
+                                            *ngIf="(createCourceForm.controls['external_vendor_name'].invalid && (createCourceForm.controls['external_vendor_name'].dirty || createCourceForm.controls['external_vendor_name'].touched || isSubmitted))">
                                                 External vendor name cannot be blank
                                             </div>
                                         </div>
@@ -929,7 +941,7 @@
                                                         placeholder="List the target audience for this training course’ (examples: All OBS Employees, All Customer Facing Employees, All Project Managers,…etc)"
                                                         formControlName="for_whoom_single"></textarea>
                                                     <div class="error_message"
-                                                        *ngIf="createCourceForm.controls['for_whoom_single'].hasError('required') && createCourceForm.controls['for_whoom_single'].touched">
+                                                    *ngIf="(createCourceForm.controls['for_whoom_single'].invalid && (createCourceForm.controls['for_whoom_single'].dirty || createCourceForm.controls['for_whoom_single'].touched || isSubmitted))">
                                                         For Whom? cannot be blank
                                                     </div>
 
@@ -960,7 +972,7 @@
                                                         class="form-control form_width"
                                                         formControlName="learn_more_single" />
                                                     <div class="error_message"
-                                                        *ngIf="createCourceForm.controls['learn_more_single'].invalid && (createCourceForm.controls['learn_more_single'].dirty || createCourceForm.controls['learn_more_single'].touched)">
+                                                    *ngIf="(createCourceForm.controls['learn_more_single'].invalid && (createCourceForm.controls['learn_more_single'].dirty || createCourceForm.controls['learn_more_single'].touched || isSubmitted))">
                                                         Learn more is not a valid URL</div>
                                                 </div>
                                                 <div class="mt_top_11">
@@ -995,7 +1007,7 @@
                                             <!-- <span class="charcter_limit">{{remainingText}} characters
                                                 remaining</span> -->
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['video_link'].invalid && (createCourceForm.controls['video_link'].dirty || createCourceForm.controls['video_link'].touched)">
+                                            *ngIf="(createCourceForm.controls['video_link'].invalid && (createCourceForm.controls['video_link'].dirty || createCourceForm.controls['video_link'].touched || isSubmitted))">
                                                 Uploaded video URL is not a valid URL
                                             </div>
                                         </div>
@@ -1045,7 +1057,7 @@
                                                         formControlName="material_source"
                                                         (change)="handleFileInput_Material($event)" />
                                                     <div class="error_message"
-                                                        *ngIf="createCourceForm.controls['material_source'].hasError('required') && createCourceForm.controls['material_source'].touched">
+                                                    *ngIf="(createCourceForm.controls['material_source'].invalid && (createCourceForm.controls['material_source'].dirty || createCourceForm.controls['material_source'].touched || isSubmitted))">
                                                         Material Source cannot be blank
                                                     </div>
                                                 </div>
@@ -1072,7 +1084,7 @@
                                                 <input type="text" placeholder="Enter URL"
                                                     class="form-control form_width" formControlName="url" />
                                                 <div class="error_message"
-                                                    *ngIf="createCourceForm.controls['url'].invalid && (createCourceForm.controls['url'].dirty || createCourceForm.controls['url'].touched)">
+                                                *ngIf="(createCourceForm.controls['url'].invalid && (createCourceForm.controls['url'].dirty || createCourceForm.controls['url'].touched || isSubmitted))">
                                                     Material Source URL is not a valid URL
                                                 </div>
 
@@ -1184,7 +1196,7 @@
                                                 </option>
                                             </select>
                                             <div class="error_message"
-                                                *ngIf="createCourceForm.controls['regional_cordinator'].hasError('required') && createCourceForm.controls['regional_cordinator'].touched">
+                                            *ngIf="(createCourceForm.controls['regional_cordinator'].invalid && (createCourceForm.controls['regional_cordinator'].dirty || createCourceForm.controls['regional_cordinator'].touched || isSubmitted))">
                                                 Regional Training Cordinator cannot be blank
                                             </div>
                                         </div>
