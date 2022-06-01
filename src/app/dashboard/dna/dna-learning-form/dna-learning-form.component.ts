@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DnaService } from 'src/app/shared/services/dna/dna.service';
@@ -23,13 +23,14 @@ export class DnaLearningFormComponent implements OnInit {
   priorityObj: any = [];
   regionsObj: any = [];
   bussinessUnitObj:any = [];
-
+  trackerId:number=0;
   regionId:number=0;
   title ='Add New Learning';
   isSubmitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
+    private route:ActivatedRoute,
     private generalDrpdownsService: GeneralDropdownsService,
     private dnaService:DnaService,
     private getReportService:GetReportService,
@@ -48,6 +49,10 @@ export class DnaLearningFormComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      const Id = params.get('id');
+      this.trackerId = Id ? parseInt(Id) : 0;
+    });
     this.getBpStatus();
     this.getLocations();
     this.getPriority();
@@ -62,17 +67,20 @@ export class DnaLearningFormComponent implements OnInit {
  
   save(status:any){
     this.isSubmitted = true;
-    if (this.createDnaForm.invalid) {
-      return;
-    }
     const body = this.createDnaForm.value;
     body.status = status;
+    body.tracker_id = this.trackerId;
+    if (this.createDnaForm.invalid) {
+      console.log("invalid",body);
+      return;
+    }
+    
     this.commonService.showLoading();
     this.dnaService.create(body).subscribe(
       (res: any) => {
         if(res == 1){
         this.commonService.hideLoading();
-        this.commonService.toastSuccessMsg('New Learning', 'Successfully Saved.');
+        this.commonService.toastSuccessMsg('New Learning', 'Successfully Created.');
         this.router.navigateByUrl(`/dashboard/dna/create`);
         }
         else{
@@ -85,6 +93,10 @@ export class DnaLearningFormComponent implements OnInit {
         this.commonService.toastErrorMsg('Error', err.message);
       }
     );
+  }
+
+  CreateNew(city:any){
+    console.log("city",city)
   }
 
   getBusinessUnits(){

@@ -9,8 +9,8 @@ import { DnaViewComponent } from './dna-view/dna-view.component';
 
 const routes: Routes = [
  {path:'',component:DnaDashboardComponent,canActivate:[AuthenticationServiceGuard]},
- {path:'create',component:DnaCreateComponent,canActivate:[AuthenticationServiceGuard]},
-{path:'add-new',component:DnaLearningFormComponent,canActivate:[AuthenticationServiceGuard]},
+ {path:'create/:id',component:DnaCreateComponent,canActivate:[AuthenticationServiceGuard]},
+{path:'add-new/:id',component:DnaLearningFormComponent,canActivate:[AuthenticationServiceGuard]},
 {path:'view',component:DnaViewComponent,canActivate:[AuthenticationServiceGuard]},
 {path:'view-complete-report',component:DnaCompleteReportComponent,canActivate:[AuthenticationServiceGuard]} 
 ];

@@ -58,4 +58,18 @@ export class GeneralDropdownsService {
       .get(url, this.http.headers)
       .pipe(catchError(this.commmonService.Errorhandling));
   }
+
+  getDnaType(){
+    const url = `/api/${this.apiVersion}/cct-dna-type`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  getTrainingData(){
+    const url = `/api/${this.apiVersion}/cct-training-data`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
 }
