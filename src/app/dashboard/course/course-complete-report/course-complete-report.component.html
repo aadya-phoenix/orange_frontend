@@ -348,12 +348,12 @@
                                             class="text-center bac_hover-table font-12">
                                             <td scope="row">{{(((pagination.pageSize *
                                                 (pagination.pageNumber - 1)) + 1) + i)}}</td>
-                                            <td class="re_id">{{ item.request_id }}</td>
-                                            <td *ngIf="!isRequester"> <a *ngIf="item.status != 'draft'"
+                                            <td class="re_id" (click)="viewRequest(item)">{{ item.request_id }}</td>
+                                            <td *ngIf="!isRequester" > <a *ngIf="item.status != 'draft'"
                                                     (click)="openModal(item)" class="text-primary">
                                                     View
                                                 </a></td>
-                                            <td class="text-center">
+                                            <td class="text-center" (click)="viewRequest(item)">
                                                 <span *ngIf="!item.status">
                                                     Pending
                                                 </span>
@@ -361,17 +361,17 @@
                                                     {{ item.status_new | titlecase }}
                                                 </p>
                                             </td>
-                                            <td>{{ item.titleByLang | titlecase}}</td>
-                                            <td>{{ item.email_content_owner}}</td>
-                                            <td *ngIf="!isRequester">{{item.send_to}}</td>
-                                            <td>{{ item.learning_type_name}}</td>
-                                            <td>{{ item.created_at | date: dateTimeFormate}}</td>
-                                            <td *ngIf="!isRequester">{{ item.roc_name}}</td>
-                                            <td *ngIf="!isRequester">{{ item.created_at | date: dateTimeFormate}}</td>
+                                            <td (click)="viewRequest(item)">{{ item.titleByLang | titlecase}}</td>
+                                            <td (click)="viewRequest(item)">{{ item.email_content_owner}}</td>
+                                            <td (click)="viewRequest(item)" *ngIf="!isRequester">{{item.send_to}}</td>
+                                            <td (click)="viewRequest(item)">{{ item.learning_type_name}}</td>
+                                            <td (click)="viewRequest(item)">{{ item.created_at | date: dateTimeFormate}}</td>
+                                            <td (click)="viewRequest(item)" *ngIf="!isRequester">{{ item.roc_name}}</td>
+                                            <td (click)="viewRequest(item)" *ngIf="!isRequester">{{ item.created_at | date: dateTimeFormate}}</td>
 
-                                            <td *ngIf="!isRequester">{{item.roc_response_time }}</td>
-                                            <td *ngIf="!isRequester">{{item.publisher_name}}</td>
-                                            <td>{{item.updated_at | date: dateTimeFormate}}</td>
+                                            <td (click)="viewRequest(item)" *ngIf="!isRequester">{{item.roc_response_time }}</td>
+                                            <td (click)="viewRequest(item)" *ngIf="!isRequester">{{item.publisher_name}}</td>
+                                            <td (click)="viewRequest(item)">{{item.updated_at | date: dateTimeFormate}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

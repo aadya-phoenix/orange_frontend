@@ -106,7 +106,6 @@ export class CourseViewComponent implements OnInit {
           if (this.routegetdata.resource) {
             this.imgUrl = `${dataConstant.ImageUrl}/${this.routegetdata.resource}`;
           }
-          debugger;
           if (this.routegetdata.material_source) {
             this.material_sourceUrl = `${dataConstant.ImageUrl}/${this.routegetdata.material_source}`;
           }

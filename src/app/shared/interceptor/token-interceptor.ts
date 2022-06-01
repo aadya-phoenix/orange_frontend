@@ -62,7 +62,6 @@ export class TokenInterceptor implements HttpInterceptor {
             }
           } else {
             //this.authService.logOut();
-           
           }
         }
         // if (error.error && error.error.text) {
@@ -72,7 +71,8 @@ export class TokenInterceptor implements HttpInterceptor {
         else {
           console.log(error);
         }
-        return of(error);
+        return next.handle(request);
+        // return of(error);
       })
     );
   }

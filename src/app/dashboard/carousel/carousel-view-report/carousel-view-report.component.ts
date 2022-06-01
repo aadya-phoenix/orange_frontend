@@ -138,7 +138,6 @@ export class CarouselViewReportComponent implements OnInit {
   }
 
   filterData() {
-    debugger;
     const data = this.filterForm.value;
     this.refreshCarousel(data);
   }

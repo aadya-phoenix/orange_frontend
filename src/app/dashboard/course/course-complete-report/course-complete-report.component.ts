@@ -121,7 +121,7 @@ export class CourseCompleteReportComponent implements OnInit {
 
   viewRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/olcourse/view/${item.id}`);
+      this.router.navigateByUrl(`/dashboard/cct/view/${item.id}`);
     }
   }
 
@@ -182,7 +182,6 @@ export class CourseCompleteReportComponent implements OnInit {
   }
 
   filterData() {
-    debugger;
     const data = this.filterForm.value;
     this.refreshCourse(data);
   }

@@ -76,7 +76,7 @@ export class DashboardComponent implements OnInit {
           routerLink: '/dashboard/cct', image: '../../assets/images/first.jpg',
           lableConstantModule: this.lableConstant.create_new_course,
           lableConstantCatalog: this.lableConstant.request_course_catalog,
-          navigateTo: '',
+          navigateTo: this.modules.course,
           favourite: false, showFavourite: true,
           pendingRequestCount: this.pendingRequestCount.course_pending,
           setFavouriteModule: this.modules.course,
@@ -85,7 +85,7 @@ export class DashboardComponent implements OnInit {
           routerLink: '/dashboard/sct', image: '../../assets/images/Open course session.jpg ',
           lableConstantModule: this.lableConstant.open_course_session,
           lableConstantCatalog: this.lableConstant.request_create_session,
-          navigateTo: '',
+          navigateTo: this.modules.session,
           favourite: false, showFavourite: true,
           pendingRequestCount: this.pendingRequestCount.session_pending,
           setFavouriteModule: this.modules.session,
@@ -95,7 +95,7 @@ export class DashboardComponent implements OnInit {
           image: '../../assets/images/Promote on Carousel.jpg',
           lableConstantModule: this.lableConstant.promote_on_carousel,
           lableConstantCatalog: this.lableConstant.request_create_entity,
-          navigateTo: '',
+          navigateTo: this.modules.carousel,
           favourite: false, showFavourite: true,
           pendingRequestCount: this.pendingRequestCount.carousel_pending,
           setFavouriteModule: this.modules.carousel,
@@ -104,7 +104,7 @@ export class DashboardComponent implements OnInit {
           routerLink: '/dashboard/back-office', image: '../../assets/images/4.jpg',
           lableConstantModule: this.lableConstant.request_back_office_role,
           lableConstantCatalog: this.lableConstant.request_specific_role,
-          navigateTo: '',
+          navigateTo: this.modules.backOffice,
           favourite: false, showFavourite: true,
           pendingRequestCount: this.pendingRequestCount.office_role_pending,
           setFavouriteModule: this.modules.backOffice,
@@ -125,7 +125,7 @@ export class DashboardComponent implements OnInit {
           routerLink: '/dashboard/olreport', image: '../../assets/images/get a report.jpg',
           lableConstantModule: this.lableConstant.get_a_report,
           lableConstantCatalog: this.lableConstant.request_training_vc_report,
-          navigateTo: '',
+          navigateTo: this.modules.getReport,
           favourite: false, showFavourite: true,
           pendingRequestCount: this.pendingRequestCount.course_pending,
           setFavouriteModule: this.modules.getReport,
@@ -179,11 +179,10 @@ export class DashboardComponent implements OnInit {
   }
 
   navigatetoPending(module:any){
+    if(this.pendingFlag) return;
     if(module == this.modules.course){
-    let statusobj = { status: 'pending' };
-    this.router.navigateByUrl('/dashboard/cources', {
-      state: statusobj,
-    });
+    const status = this.isRequester ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
+    this.router.navigateByUrl(`/dashboard/cct?status=${status}`);
    }
    if(module == this.modules.carousel){
     const status = this.isRequester ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
@@ -311,6 +310,25 @@ export class DashboardComponent implements OnInit {
       (res: any) => {
         this.commonService.hideLoading();
         this.pendingRequestCount = res.data;
+        this.modulesArray_tab1.forEach((element: any) => {
+          if(element.id == 'course'){
+            element.pendingRequestCount = this.pendingRequestCount.course_pending;
+          }
+          if(element.id == 'session'){
+            element.pendingRequestCount = this.pendingRequestCount.session_pending;
+          }
+          if(element.id == 'corousel'){
+            element.pendingRequestCount = this.pendingRequestCount.carousel_pending;
+          }
+          if(element.id == 'back_office'){
+            element.pendingRequestCount = this.pendingRequestCount.office_role_pending;
+          }
+        });
+        this.modulesArray_tab2.forEach((element: any) => {
+          if(element.id == 'get_report'){
+            element.pendingRequestCount = this.pendingRequestCount.course_pending;
+          }
+        });
       },
       (err: any) => {
         this.commonService.hideLoading();

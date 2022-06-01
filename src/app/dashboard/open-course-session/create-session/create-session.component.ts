@@ -448,7 +448,6 @@ export class CreateSessionComponent implements OnInit {
   }
 
   newEmailParticipants(arr:any){
-    debugger;
     return _.map(arr,(e)=>{this.preferedInstructor.push(e);
     });
   }
