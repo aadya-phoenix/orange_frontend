@@ -66,7 +66,7 @@ export class CourseViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.id){
+    if (this.id) {
       this.getCourseDetails();
     }
   }
@@ -96,7 +96,7 @@ export class CourseViewComponent implements OnInit {
           this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
           this.status = this.routegetdata.status;
           this.transfer_user_id = this.routegetdata.transfer_user_id;
-          if(this.routegetdata.showbuttons){
+          if (this.routegetdata.showbuttons) {
             let no = this.routegetdata.showbuttons.split('#').length;
             this.showbuttons = this.routegetdata.showbuttons.split('#')[no - 1];
           }
@@ -119,7 +119,7 @@ export class CourseViewComponent implements OnInit {
         }
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -140,25 +140,28 @@ export class CourseViewComponent implements OnInit {
 
 
   getPublisher() {
+    this.commonService.showLoading();
     this.authService.getUserRoles().subscribe((res: any) => {
-      //  console.log("roles are",res);
+      this.commonService.hideLoading();
       this.publisherList = res.data['4'];
       this.roleuserlist = res.data;
-      console.log(this.publisherList)
     }, (err: any) => {
-      console.log(err)
+      this.commonService.hideLoading();
+      this.commonService.errorHandling(err);
     })
   }
 
   //get Languages
   getLanguages() {
+    this.commonService.showLoading();
     this.courseService.getLanguages().subscribe(
       (res: any) => {
-        console.log(res);
+        this.commonService.hideLoading();
         this.availableLanguages = res.data;
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -196,19 +199,24 @@ export class CourseViewComponent implements OnInit {
   }
 
   getDetailsOfCourse() {
+    this.commonService.showLoading();
     this.courseService.courseDetail(this.routegetdata.id).subscribe((res: any) => {
       this.coursedetail = res.data;
+      this.commonService.hideLoading();
     }, (err: any) => {
+      this.commonService.hideLoading();
+      this.commonService.errorHandling(err);
     })
   }
 
   transferOtherroc() {
+    this.commonService.showLoading();
     this.authService.getUserRoles().subscribe((res: any) => {
-      console.log(res);
+      this.commonService.hideLoading();
       this.otherRocsList = res.data['3'];
-      console.log(this.otherRocsList)
     }, (err: any) => {
-      console.log(err)
+      this.commonService.hideLoading();
+      this.commonService.errorHandling(err);
     })
   }
 
@@ -237,8 +245,6 @@ export class CourseViewComponent implements OnInit {
 
   getTrainingHours() {
     let str = this.routegetdata.duration;
-    console.log("duyration", str);
-    console.log("duation", this.routegetdata.duration);
     if (this.routegetdata.duration != undefined) {
       let hours = str.match(/(.*):/g).pop().replace(":", "");
       let min = str.match(/:(.*)/g).pop().replace(":", "");
@@ -254,39 +260,39 @@ export class CourseViewComponent implements OnInit {
   }
 
   PublishRequest() {
+    if (this.publishForm.invalid) {
+      return;
+    }
     let transferobj = { course_id: this.routegetdata.id, transfer_id: this.selectedPublisher, status: 'publish', intranet_url: this.publishForm.value.intranet_url, internet_url: this.publishForm.value.internet_url, status_comment: this.publishForm.value.status_comment };
-    if (this.publishForm.valid) {
-      this.courseService.courceStatus(transferobj).subscribe(
-        (res: any) => {
-          console.log(res);
-          if (res) {
-            this.router.navigate(['/dashboard/cct']);
-          }
-        },
-        (err: any) => {
-          console.log(err);
+    this.commonService.showLoading();
+    this.courseService.courceStatus(transferobj).subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        if (res) {
+          this.router.navigate(['/dashboard/cct']);
         }
-      );
-    }
-    else {
-      console.log("form invalid");
-    }
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
+      }
+    );
   }
   reject() {
     let statusobj = { course_id: this.routegetdata.id, status: 'reject', status_comment: this.rejectcomment }
+    this.commonService.showLoading();
     this.courseService.changeStatus(statusobj).subscribe((res: any) => {
-      console.log(res);
+      this.commonService.hideLoading();
       this.router.navigate(['/dashboard/cct']);
     }, (err: any) => {
-      console.log(err)
+      this.commonService.hideLoading();
+      this.commonService.errorHandling(err);
     })
   }
 
   getRoc(event: any) {
     this.selectedotherRoc = event.target.value;
-    console.log(this.selectedotherRoc)
     let region = this.roleuserlist[3];
-    console.log(region);
     let user = region.filter((d: any) => d.region_id === event.target.value);
 
     region.forEach((field: any) => {
@@ -295,7 +301,6 @@ export class CourseViewComponent implements OnInit {
         //alert(this.selectedotherRoc);
       }
     });
-    console.log(user);
     //  .map((res: any) => {
     //  this.selectedotherRoc = res.id;
     //  alert(this.selectedotherRoc)
@@ -304,36 +309,31 @@ export class CourseViewComponent implements OnInit {
   }
 
   getNewPublisherByLearningType() {
+    this.commonService.showLoading();
     this.courseService.getNewPublisherByLearningType(this.routegetdata.learning_type).subscribe(
       (res: any) => {
-        console.log("pub new", res);
+        this.commonService.hideLoading();
         this.newPublisherList = res.data;
       }, (err: any) => {
-        console.log(err);
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
       });
   }
 
   getPublisherselected(event: any) {
     this.selectedPublisher = event.target.value;
-    console.log(this.selectedPublisher)
   }
 
   transfertoOtherRoc() {
     if (this.selectedotherRoc) {
       let transferobj = { course_id: this.routegetdata.id, status: 'pending', transfer_id: this.selectedotherRoc, status_comment: this.transfercomment };
+      this.commonService.showLoading();
       this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
-        console.log(res);
-        //this.router.navigate(['/dashboard/cources']);
-        // let transferobj1 = { course_id: this.routegetdata.id, status: 'pending' };
-        // // Commenting it as it is not required : ANkur : 7Apr
-        // this.courseService.courceStatus(transferobj1).subscribe((res: any) => {
-        //   console.log(res);
+        this.commonService.hideLoading();
         this.router.navigate(['/dashboard/cources']);
-        // }, (err: any) => {
-        //   console.log(err)
-        // })
       }, (err: any) => {
-        console.log(err)
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
       })
     }
   }
@@ -341,11 +341,13 @@ export class CourseViewComponent implements OnInit {
   transfertoPublisher() {
     if (this.selectedPublisher) {
       let transferobj = { course_id: this.routegetdata.id, transfer_id: this.selectedPublisher };
+      this.commonService.showLoading();
       this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
-        console.log(res);
+        this.commonService.hideLoading();
         this.router.navigate(['/dashboard/cources']);
       }, (err: any) => {
-        console.log(err)
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
       })
     }
   }
@@ -353,16 +355,13 @@ export class CourseViewComponent implements OnInit {
 
   getImageUrl(): void {
     this.imgUrl = `https://orange.mindscroll.info/public/public/${this.routegetdata.resource}`;
-    console.log("this.imgUrl", this.imgUrl);
     return this.imgUrl;
   }
   setrejectbutton(id: any) {
     this.courseService.courseHistory(id).subscribe((res: any) => {
-      console.log(res);
       if (res && res.status == 1) {
         let history = res.data;
         this.showrejectbutton = history[history.length - 1].action_by;
-        console.log("showrejectbutton", this.showrejectbutton)
       }
     })
   }
@@ -372,13 +371,15 @@ export class CourseViewComponent implements OnInit {
   }
 
   getCordinators() {
+    this.commonService.showLoading();
     this.courseService.getNewregionalCordinator().subscribe(
       (res: any) => {
-        console.log(res);
+        this.commonService.hideLoading();
         this.cordinatorsList = res.data;
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
+        this.commonService.hideLoading();
       }
     );
   }

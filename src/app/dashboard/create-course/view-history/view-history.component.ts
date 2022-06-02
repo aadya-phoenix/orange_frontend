@@ -34,7 +34,7 @@ export class ViewHistoryComponent implements OnInit {
 
   deleteRequest(){
      this.courseService.deleteCourse({course_id :this.copyDeletecourse.id}).subscribe((res:any)=>{
-      console.log(res);
+      
       this.onClose();
     },(err:any)=>{
       console.log(err)
@@ -43,7 +43,7 @@ export class ViewHistoryComponent implements OnInit {
 
   copyRequest(){
     this.courseService.copyCourse({course_id :this.copyDeletecourse.id}).subscribe((res:any)=>{
-     console.log(res);
+     
      let dataobj = res.data;
      let iscopyy={copy:true};
      let totalObj = {...res.data,...iscopyy}

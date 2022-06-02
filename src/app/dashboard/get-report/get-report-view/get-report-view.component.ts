@@ -67,7 +67,7 @@ export class GetReportViewComponent implements OnInit {
         }
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -80,6 +80,10 @@ export class GetReportViewComponent implements OnInit {
       if (res && res.status == 1) {
         this.historyList = res.data;
       }
+    },
+    (err: any) => {
+      this.commonService.errorHandling(err);
+      this.commonService.hideLoading();
     });
   }
 
@@ -225,6 +229,7 @@ export class GetReportViewComponent implements OnInit {
           this.router.navigate(['/dashboard/olreport']);
         },(err:any)=>{
           this.commonService.hideLoading();
+          this.commonService.errorHandling(err);
         })
         
       }

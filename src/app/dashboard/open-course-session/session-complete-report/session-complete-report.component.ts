@@ -93,7 +93,7 @@ export class SessionCompleteReportComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -116,7 +116,7 @@ export class SessionCompleteReportComponent implements OnInit {
       }
     }
    },(err: any) => {
-        console.log(err);
+        
    });
 
   }
@@ -205,7 +205,7 @@ export class SessionCompleteReportComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }

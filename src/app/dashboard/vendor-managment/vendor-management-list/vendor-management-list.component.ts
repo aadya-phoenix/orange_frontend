@@ -131,7 +131,7 @@ export class VendorManagementListComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err); 
       }
     );
   }
@@ -163,6 +163,7 @@ export class VendorManagementListComponent implements OnInit {
             )
           },(err:any)=>{
             this.commonService.hideLoading();
+            this.commonService.errorHandling(err); 
           })
           
         }
@@ -190,6 +191,7 @@ export class VendorManagementListComponent implements OnInit {
             )
           },(err:any)=>{
             this.commonService.hideLoading();
+            this.commonService.errorHandling(err); 
           })
           
         }

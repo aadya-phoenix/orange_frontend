@@ -49,7 +49,6 @@ export class RequestDetailComponent implements OnInit {
     this.routegetdata = this.router.getCurrentNavigation()?.extras.state;
     if (this.routegetdata == undefined) {
       this.routegetdata = localStorage.getItem('routegetdata');
-      console.log("route", this.routegetdata);
       this.routegetdata = JSON.parse(this.routegetdata);
     }
     this.learnerGuidelines = JSON.parse(this.routegetdata['learner_guideline']);
@@ -75,21 +74,16 @@ export class RequestDetailComponent implements OnInit {
     else {
       localStorage.setItem('routegetdata', JSON.stringify(this.routegetdata));
     }
-    console.log("route", this.routegetdata);
   }
 
   saveChange() {
-    console.log('save')
   }
 
   getPublisher() {
     this.authService.getUserRoles().subscribe((res: any) => {
-      //  console.log("roles are",res);
       this.publisherList = res.data['4'];
       this.roleuserlist = res.data;
-      console.log(this.publisherList)
     }, (err: any) => {
-      console.log(err)
     })
   }
 
@@ -97,11 +91,11 @@ export class RequestDetailComponent implements OnInit {
   getLanguages() {
     this.courseService.getLanguages().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.availableLanguages = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -147,11 +141,9 @@ export class RequestDetailComponent implements OnInit {
 
   transferOtherroc() {
     this.authService.getUserRoles().subscribe((res: any) => {
-      console.log(res);
+      
       this.otherRocsList = res.data['3'];
-      console.log(this.otherRocsList)
     }, (err: any) => {
-      console.log(err)
     })
   }
 
@@ -204,13 +196,13 @@ export class RequestDetailComponent implements OnInit {
     if (this.publishForm.valid) {
       this.courseService.courceStatus(transferobj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             this.router.navigate(['/dashboard/cources']);
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
     }
@@ -221,7 +213,7 @@ export class RequestDetailComponent implements OnInit {
   reject() {
     let statusobj = { course_id: this.routegetdata.id, status: 'reject', status_comment: this.rejectcomment }
     this.courseService.changeStatus(statusobj).subscribe((res: any) => {
-      console.log(res);
+      
       this.router.navigate(['/dashboard/cources']);
     }, (err: any) => {
       console.log(err)
@@ -255,7 +247,7 @@ export class RequestDetailComponent implements OnInit {
         console.log("pub new", res);
         this.newPublisherList = res.data;
       }, (err: any) => {
-        console.log(err);
+        
       });
   }
 
@@ -268,12 +260,12 @@ export class RequestDetailComponent implements OnInit {
     if (this.selectedotherRoc) {
       let transferobj = { course_id: this.routegetdata.id, status: 'pending', transfer_id: this.selectedotherRoc, status_comment: this.transfercomment};
       this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
-        console.log(res);
+        
         //this.router.navigate(['/dashboard/cources']);
         // let transferobj1 = { course_id: this.routegetdata.id, status: 'pending' };
         // // Commenting it as it is not required : ANkur : 7Apr
         // this.courseService.courceStatus(transferobj1).subscribe((res: any) => {
-        //   console.log(res);
+        //   
         this.router.navigate(['/dashboard/cources']);
         // }, (err: any) => {
         //   console.log(err)
@@ -288,7 +280,7 @@ export class RequestDetailComponent implements OnInit {
     if (this.selectedPublisher) {
       let transferobj = { course_id: this.routegetdata.id, transfer_id: this.selectedPublisher };
       this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
-        console.log(res);
+        
         this.router.navigate(['/dashboard/cources']);
       }, (err: any) => {
         console.log(err)
@@ -355,7 +347,7 @@ export class RequestDetailComponent implements OnInit {
   }
   setrejectbutton(id: any) {
     this.courseService.courseHistory(id).subscribe((res: any) => {
-      console.log(res);
+      
       if (res && res.status == 1) {
         let history = res.data;
         this.showrejectbutton = history[history.length - 1].action_by;
@@ -371,11 +363,11 @@ export class RequestDetailComponent implements OnInit {
   getCordinators() {
     this.courseService.getNewregionalCordinator().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.cordinatorsList = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }

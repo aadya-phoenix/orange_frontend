@@ -42,7 +42,6 @@ export class GetReportPublishComponent implements OnInit {
     this.title = this.props.title;
     this.status = this.props.status;
     this.status_show = this.props.status_show;
-     console.log("ststus",this.status)
     this.publishGetReportForm = this.formBuilder.group({
       report_attachment:new FormControl('',[]),
       status_comment: new FormControl('', this.props.status == this.GetReportStatus.close ? [] : [Validators.required]),
@@ -74,7 +73,7 @@ export class GetReportPublishComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err);
       }
     );
   }

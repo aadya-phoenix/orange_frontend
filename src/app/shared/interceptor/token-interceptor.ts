@@ -68,9 +68,8 @@ export class TokenInterceptor implements HttpInterceptor {
         //     this.toastr.error(error.error.text);
         //     this.authService.loginSub.next(error.error.text);
         // }
-        else {
-          console.log(error);
-        }
+        // else {
+        // }
         return next.handle(request);
         // return of(error);
       })

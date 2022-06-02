@@ -591,11 +591,9 @@ export class CourseCreateComponent implements OnInit {
   }
 
   numbersOnly(val: any) {
-    console.log(val.key);
     let ctrl = this.createCourceForm.get('duration') as FormControl;
     let y = ctrl.value
     y = y.replace(/\D/g, '');
-    console.log(y)
     if (y.length == 3 && val.key > 6) {
       y = y.substring(0, 2);
     }
@@ -700,7 +698,7 @@ export class CourseCreateComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -712,7 +710,7 @@ export class CourseCreateComponent implements OnInit {
         this.getvendorType();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -725,7 +723,7 @@ export class CourseCreateComponent implements OnInit {
         this.getvendor();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -740,7 +738,7 @@ export class CourseCreateComponent implements OnInit {
         this.getLevel();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -754,7 +752,7 @@ export class CourseCreateComponent implements OnInit {
         this.getSubjects();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -768,7 +766,7 @@ export class CourseCreateComponent implements OnInit {
         this.getValidityPeriod();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -782,7 +780,7 @@ export class CourseCreateComponent implements OnInit {
         this.getTotalCourse();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -796,7 +794,7 @@ export class CourseCreateComponent implements OnInit {
         this.getEntitylist();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -811,7 +809,7 @@ export class CourseCreateComponent implements OnInit {
         this.getDeliveryMethod();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -825,7 +823,7 @@ export class CourseCreateComponent implements OnInit {
         this.getWhocansee();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -839,7 +837,7 @@ export class CourseCreateComponent implements OnInit {
         this.getPreferedInstructor();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -854,7 +852,7 @@ export class CourseCreateComponent implements OnInit {
         this.getLanguages();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -869,7 +867,7 @@ export class CourseCreateComponent implements OnInit {
         this.getLearningType();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -884,7 +882,7 @@ export class CourseCreateComponent implements OnInit {
         this.getExpiryType();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -904,7 +902,7 @@ export class CourseCreateComponent implements OnInit {
         }
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -949,7 +947,7 @@ export class CourseCreateComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -967,7 +965,6 @@ export class CourseCreateComponent implements OnInit {
 
 
   handleFileInput(event: any) {
-    console.log("event is", event.target.files[0]);
     this.FileConvertintoBytearray(event.target.files[0], async (f) => { // creating array bytes
 
       let objectdata: any = {
@@ -1020,13 +1017,15 @@ export class CourseCreateComponent implements OnInit {
   }
 
   getPublisher() {
+    this.commonService.showLoading();
     this.courseService.getNewPublisherByLearningType(this.learningType).subscribe(
       (res: any) => {
-        console.log(res);
-        this.publisherList = res.data;
+        this.commonService.hideLoading();
+         this.publisherList = res.data;
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -1148,6 +1147,7 @@ export class CourseCreateComponent implements OnInit {
       this.router.navigate(['/dashboard/cct']);
     }, (err: any) => {
       this.commonService.hideLoading();
+      this.commonService.errorHandling(err);
     })
   }
 
@@ -1175,7 +1175,6 @@ export class CourseCreateComponent implements OnInit {
       });
     }
     if (status == "publish") {
-      console.log("publisheddd");
       body.intranet_url = this.publishForm.value.intranet_url;
       body.internet_url = this.publishForm.value.internet_url;
       body.status_comment = this.publishForm.value.status_comment;
@@ -1242,7 +1241,7 @@ export class CourseCreateComponent implements OnInit {
           this.router.navigateByUrl(`/dashboard/cct/view/${res.data.id}`);
         },
         (err: any) => {
-          console.log(err);
+          this.commonService.errorHandling(err);
           this.commonService.toastErrorMsg('Error', err.message);
         }
       );
@@ -1258,7 +1257,7 @@ export class CourseCreateComponent implements OnInit {
         },
         (err: any) => {
           this.commonService.hideLoading();
-          this.commonService.toastErrorMsg('Error', err.message);
+          this.commonService.errorHandling(err);
         }
       );
     }

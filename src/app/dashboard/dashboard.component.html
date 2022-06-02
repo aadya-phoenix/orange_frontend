@@ -17,7 +17,7 @@
             <div class="page-header float-right" (click)="onlyFavourite()">
                 <div class="page-title d-flex end_just mt-3">
                     <i class="fa fa-star star-css"></i>
-                    <span class="mt-1 ml-1 see-fav" >{{lableConstant.see_favourites}}</span>
+                    <span class="mt-1 ml-1 see-fav">{{lableConstant.see_favourites}}</span>
                 </div>
             </div>
         </div>
@@ -33,23 +33,22 @@
                     <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
                         aria-controls="pills-profile" aria-selected="false">{{lableConstant.ld_request}}</a>
                 </li>
-              <!--   *ngIf="isPdlMember" -->
-                <li class="nav-item" role="presentation" >
+                <!--   *ngIf="isPdlMember" -->
+                <li class="nav-item" role="presentation">
                     <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
                         aria-controls="pills-contact" aria-selected="false">{{lableConstant.internal_tools}}</a>
                 </li>
             </ul>
         </div>
-           
-                <div class="tab-content border-0" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                        <div class="course_box ">
-                     <ng-container *ngFor="let item of modulesArray_tab1">
-                       <div class="course_box_child" *ngIf="item.showFavourite">
-                        <div>
+
+        <div class="tab-content border-0" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="row">
+                    <ng-container *ngFor="let item of modulesArray_tab1">
+                        <div class="col-md-3 col-sm-12 mb-2" *ngIf="item.showFavourite">
                             <a [routerLink]="[item.routerLink]">
                                 <div class="img_div ">
-                                    <img [src]= item.image/>
+                                    <img [src]=item.image />
                                 </div>
                                 <div class="text_div_sec ">
                                     <a [routerLink]="[item.routerLink]"
@@ -63,7 +62,7 @@
                             </a>
                             <div class="sec_footer">
                                 <div class="footer_sec_ano" (click)="navigatetoPending(item.navigateTo)">
-                                    <button >
+                                    <button>
                                         <p class="footer_p"
                                             [ngClass]="{'backgound_green': item.pendingRequestCount === 0}">
                                             {{item.pendingRequestCount}}</p>
@@ -72,111 +71,109 @@
                                 </div>
                                 <div class="p-2 bd-highlight ">
                                     <a (click)="sendEmail('item.routerLink')">
-                                      <img src="../../assets/images/share.png " class="mr-2 w_22" />
+                                        <img src="../../assets/images/share.png " class="mr-2 w_22" />
                                     </a>
-                                    <a (click)="setFavourite(item.setFavouriteModule)">
-                                        <img  *ngIf="!item.favourite"
-                                      src="../../assets/images/star.png " class="width_22" />
-                                      <img src="../../assets/images/yellow_star.png " *ngIf="item.favourite" class="width_22" />
-                                        </a>
+                                    <a (click)="setFavourite(item)">
+                                        <img *ngIf="!item.favourite" src="../../assets/images/star.png "
+                                            class="width_22" />
+                                        <img src="../../assets/images/yellow_star.png " *ngIf="item.favourite"
+                                            class="width_22" />
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    </div> 
-                </ng-container> 
-                  </div>
-                </div>
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    <div class="course_box" >
-                        <ng-container *ngFor="let item of modulesArray_tab2">
-                            <div class="course_box_child" *ngIf="item.showFavourite">
-                             <div>
-                                 <a [routerLink]="[ item.routerLink] ">
-                                     <div class="img_div ">
-                                         <img [src]= item.image/>
-                                     </div>
-                                     <div class="text_div_sec ">
-                                         <a [routerLink]="[ '/dashboard/cources'] "
-                                             class="create_course color-orange">{{item.lableConstantModule}}</a>
-     
-                                         <p class="p__text_divcss text-center " data-toggle="tooltip" data-placement="top"
-                                             title=" {{item.lableConstantCatalog}}">
-                                             {{item.lableConstantCatalog}}
-                                         </p>
-                                     </div>
-                                 </a>
-                                 <div class="sec_footer">
-                                     <div class="footer_sec_ano" (click)="navigatetoPending(item.navigateTo)">
-                                         <button>
-                                             <p class="footer_p"
-                                                 [ngClass]="{'backgound_green': item.pendingRequestCount === 0}">
-                                                 {{item.pendingRequestCount}}</p>
-                                         </button>
-                                         <span class="text_white">{{lableConstant.pending}}</span>
-                                     </div>
-                                     <div class="p-2 bd-highlight ">
-                                         <a (click)="sendEmail('item.routerLink')">
-                                           <img src="../../assets/images/share.png " class="mr-2 w_22" />
-                                         </a>
-                                         <a (click)="setFavourite(item.setFavouriteModule)">
-                                             <img  *ngIf="!item.favourite"
-                                           src="../../assets/images/star.png " class="width_22" />
-                                           <img src="../../assets/images/yellow_star.png " *ngIf="item.favourite" class="width_22" />
-                                             </a>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div> 
-                     </ng-container> 
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                    <div class="course_box" >
-                        <ng-container *ngFor="let item of modulesArray_tab3">
-                            <div class="course_box_child course_box_child_width" *ngIf="item.showFavourite">
-                             <div>
-                                 <a [routerLink]="[ item.routerLink] ">
-                                     <div class="img_div ">
-                                         <img [src]= item.image/>
-                                     </div>
-                                     <div class="text_div_sec ">
-                                         <a [routerLink]="[ '/dashboard/cources'] "
-                                             class="create_course color-orange">{{item.lableConstantModule}}</a>
-     
-                                         <p class="p__text_divcss text-center " data-toggle="tooltip" data-placement="top"
-                                             title=" {{item.lableConstantCatalog}}">
-                                             {{item.lableConstantCatalog}}
-                                         </p>
-                                     </div>
-                                 </a>
-                                 <div class="sec_footer">
-                                     <div class="footer_sec_ano" (click)="navigatetoPending(item.navigateTo)">
-                                         <button>
-                                             <p class="footer_p"
-                                                 [ngClass]="{'backgound_green': item.pendingRequestCount === 0}">
-                                                 {{item.pendingRequestCount}}</p>
-                                         </button>
-                                         <span class="text_white">{{lableConstant.pending}}</span>
-                                     </div>
-                                     <div class="p-2 bd-highlight ">
-                                         <a (click)="sendEmail(item.name)">
-                                           <img src="../../assets/images/share.png " class="mr-2 w_22" />
-                                         </a>
-                                         <a (click)="setFavourite(item.setFavouriteModule)">
-                                             <img  *ngIf="!item.favourite"
-                                           src="../../assets/images/star.png " class="width_22" />
-                                           <img src="../../assets/images/yellow_star.png " *ngIf="item.favourite" class="width_22" />
-                                             </a>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div> 
-                     </ng-container> 
-                    </div>
+                    </ng-container>
                 </div>
             </div>
-            
-        
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="row">
+                    <ng-container *ngFor="let item of modulesArray_tab2">
+                        <div class="col-md-3 col-sm-12 mb-2" *ngIf="item.showFavourite">
+                            <a [routerLink]="[ item.routerLink] ">
+                                <div class="img_div ">
+                                    <img [src]=item.image />
+                                </div>
+                                <div class="text_div_sec ">
+                                    <a [routerLink]="[ '/dashboard/cources'] "
+                                        class="create_course color-orange">{{item.lableConstantModule}}</a>
+
+                                    <p class="p__text_divcss text-center " data-toggle="tooltip" data-placement="top"
+                                        title=" {{item.lableConstantCatalog}}">
+                                        {{item.lableConstantCatalog}}
+                                    </p>
+                                </div>
+                            </a>
+                            <div class="sec_footer">
+                                <div class="footer_sec_ano" (click)="navigatetoPending(item.navigateTo)">
+                                    <button>
+                                        <p class="footer_p"
+                                            [ngClass]="{'backgound_green': item.pendingRequestCount === 0}">
+                                            {{item.pendingRequestCount}}</p>
+                                    </button>
+                                    <span class="text_white">{{lableConstant.pending}}</span>
+                                </div>
+                                <div class="p-2 bd-highlight ">
+                                    <a (click)="sendEmail('item.routerLink')">
+                                        <img src="../../assets/images/share.png " class="mr-2 w_22" />
+                                    </a>
+                                    <a (click)="setFavourite(item)">
+                                        <img *ngIf="!item.favourite" src="../../assets/images/star.png "
+                                            class="width_22" />
+                                        <img src="../../assets/images/yellow_star.png " *ngIf="item.favourite"
+                                            class="width_22" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <div class="row">
+                    <ng-container *ngFor="let item of modulesArray_tab3">
+                        <div class="col-md-3 col-sm-12 mb-2" *ngIf="item.showFavourite">
+                            <a [routerLink]="[ item.routerLink] ">
+                                <div class="img_div ">
+                                    <img [src]=item.image />
+                                </div>
+                                <div class="text_div_sec ">
+                                    <a [routerLink]="[ '/dashboard/cources'] "
+                                        class="create_course color-orange">{{item.lableConstantModule}}</a>
+
+                                    <p class="p__text_divcss text-center " data-toggle="tooltip" data-placement="top"
+                                        title=" {{item.lableConstantCatalog}}">
+                                        {{item.lableConstantCatalog}}
+                                    </p>
+                                </div>
+                            </a>
+                            <div class="sec_footer">
+                                <div class="footer_sec_ano" (click)="navigatetoPending(item.navigateTo)">
+                                    <button>
+                                        <p class="footer_p"
+                                            [ngClass]="{'backgound_green': item.pendingRequestCount === 0}">
+                                            {{item.pendingRequestCount}}</p>
+                                    </button>
+                                    <span class="text_white">{{lableConstant.pending}}</span>
+                                </div>
+                                <div class="p-2 bd-highlight ">
+                                    <a (click)="sendEmail(item.name)">
+                                        <img src="../../assets/images/share.png " class="mr-2 w_22" />
+                                    </a>
+                                    <a (click)="setFavourite(item)">
+                                        <img *ngIf="!item.favourite" src="../../assets/images/star.png "
+                                            class="width_22" />
+                                        <img src="../../assets/images/yellow_star.png " *ngIf="item.favourite"
+                                            class="width_22" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </div>
 <!-- Modal -->

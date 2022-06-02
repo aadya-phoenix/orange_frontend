@@ -1,5 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
@@ -50,15 +50,22 @@ export class SessionsListComponent implements OnInit {
     private courseSessionService:CourseSessionService,
     private authService: AuthenticationService,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
-    console.log(this.getprofileDetails);
     
   }
 
   ngOnInit(): void {
+    this.route.queryParams
+      .subscribe(params => {
+        if(params?.status){
+          this.selectedStatus = params?.status;
+        }
+      }
+    );
     this.refreshSessions();
   }
 
@@ -98,11 +105,11 @@ export class SessionsListComponent implements OnInit {
       if (res.status === 1 && res.message === 'Success') {
           this.sessionList = res.data.session;
           this.session_count = res.data.session_count;
-          this.getrecords(this.courseSessionStatus.total)
+          this.getrecords(this.selectedStatus)
        }
      },(err: any) => {
       this.commonService.hideLoading();
-      console.log(err);
+      this.commonService.errorHandling(err);
     });
   }
 
@@ -153,6 +160,7 @@ export class SessionsListComponent implements OnInit {
             )
          },(err:any)=>{
           this.commonService.hideLoading();
+          this.commonService.errorHandling(err);
         })   
        }
      })
@@ -179,6 +187,7 @@ export class SessionsListComponent implements OnInit {
         )
       },(err:any)=>{
         this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
       });
     }
   });

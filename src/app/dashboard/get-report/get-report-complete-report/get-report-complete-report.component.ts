@@ -96,12 +96,11 @@ export class GetReportCompleteReportComponent implements OnInit {
     this.commonService.showLoading();
     this.courceService.getRoleUsers().subscribe((res: any) => {
       this.rocObj = res.data[this.RoleID.Roc];
-      console.log("roc ob",this.rocObj)
       this.commonService.hideLoading();
     },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       });
   }
 
@@ -149,7 +148,6 @@ export class GetReportCompleteReportComponent implements OnInit {
       (res: any) => {
         this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
-          console.log("reports",res.data);
           this.reportList = res.data.get_report;
           this.report_count = res.data.get_report_count;
           this.showRecords(this.reportStatus.total);
@@ -157,7 +155,7 @@ export class GetReportCompleteReportComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -202,7 +200,7 @@ export class GetReportCompleteReportComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }

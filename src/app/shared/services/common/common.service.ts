@@ -35,6 +35,10 @@ export class CommonService {
     this.toastr.warning(message, title, timeOut);
   }
 
+  public errorHandling(error:any){
+    this.toastErrorMsg(error.error.error, error.error.message);
+  }
+
   //show loader
   public showLoading() {
     this.spinner.show();

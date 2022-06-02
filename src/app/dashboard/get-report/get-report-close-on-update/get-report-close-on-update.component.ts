@@ -39,7 +39,6 @@ export class GetReportCloseOnUpdateComponent implements OnInit {
     this.objectDetail = this.props.objectDetail ? this.props.objectDetail : '';
     this.title = this.props.title;
     this.status = this.props.status;
-     console.log("ststus",this.status)
     this.publishGetReportForm = this.formBuilder.group({
       report_attachment:new FormControl('',[]),
       status_comment: new FormControl('', this.props.status == this.GetReportStatus.close ? [] : [Validators.required]),
@@ -71,7 +70,7 @@ export class GetReportCloseOnUpdateComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err);
       }
     );
   }

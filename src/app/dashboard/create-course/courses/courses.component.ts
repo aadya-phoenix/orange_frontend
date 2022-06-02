@@ -88,13 +88,11 @@ export class CoursesComponent implements OnInit {
       this.allCourses = this.pendingRequests;
       this.getrecords(this.pendingRequests);
     }
-    console.log("profile details", this.getprofileDetails)
 
   }
 
   openModal(course: any) {
     this.courceService.courseHistory(course.id).subscribe((res: any) => {
-      // console.log(res);
       if (res && res.status == 1) {
         const modalRef = this.modalService.open(ViewHistoryComponent, {
           centered: true,
@@ -144,8 +142,6 @@ export class CoursesComponent implements OnInit {
     } else {
       this.courcesList = this.allCourses;
     }
-    // console.log("eventtarget", event.target.value);
-    //this.getrecords(event.target.value);
   }
 
   getNewFilterRecords(event: any) {
@@ -159,18 +155,13 @@ export class CoursesComponent implements OnInit {
     } else {
       this.courcesList = this.allCourses;
     }
-    // console.log("eventtarget", event.target.value);
-    //this.getrecords(event.target.value);
   }
   getrecords(data: any) {
     this.courcesList = data;
     this.courcesListData = this.courcesList.map((x: any) => Object.assign({}, x));
-    // console.log(this.courcesList);
   }
 
   refreshCourses() {
-    // console.log(this.service.page);
-    // console.log(this.service.pageSize);
     this.pendingRequests = [];
     this.rejectedRequests = [];
     this.draftRequests = [];
@@ -178,18 +169,14 @@ export class CoursesComponent implements OnInit {
 
     this.courceService.getCources().subscribe(
       (res: any) => {
-        // console.log(res);
         if (res.status == 1 && res.message == 'Success') {
           this.i = 0;
           this.j = 0;
           this.coursedata = res.data.course;
           this.course_count = res.data.course_count;
           for (this.i = 0; this.i < this.coursedata.length; this.i++) {
-            // console.log(this.coursedata[this.i].request_id);
             this.coursedata[this.i]['titleByLang'] = this.courceService.getTText(this.coursedata[this.i]['title']);
             if (this.coursedata[this.i].request_id != "" && this.coursedata[this.i].request_id != null) {
-              //this.historylaststatus=this.GetCourseHistory(this.coursedata[this.i].id);
-              //// console.log(this.historylaststatus + " - " +this.coursedata[this.i].id)
               this.courcesList[this.j] = this.coursedata[this.i]
               if (this.getUserrole.id == 3) {
                 if (((this.coursedata[this.i].publisher_status === 'reject' && this.coursedata[this.i].transfer_user_id != null) || (this.coursedata[this.i].status === 'pending') && this.coursedata[this.i].transfer_user_id == null && this.coursedata[this.i].user_id != this.getprofileDetails.data.id)) {
@@ -269,11 +256,7 @@ export class CoursesComponent implements OnInit {
           //let course = this.courcesList;
           //this.courcesList = course.filter((d: any) => d.user_id == this.getprofileDetails.data.id || );
           //this.allCourses = this.allcoursedata;
-          // console.log(this.allCourses);
           if (this.routegetdata && this.routegetdata.status) {
-            // console.log('this.routegetdata', this.routegetdata)
-            // console.log('this.cou', this.courcesList.filter((course: any) => course.status == this.routegetdata.status))
-            //this.courcesList = this.courcesList.filter((course: any) => course.status == this.routegetdata.status)
             this.courcesList = this.pendingRequests;
           }
 
@@ -299,26 +282,22 @@ export class CoursesComponent implements OnInit {
           //   //if(course.status === 'publish'){
           //   //  this.closedRequests.push(course)
           //   //}
-          //   // console.log(this.draftRequests)
           // })
         }
       },
       (err: any) => {
-        // console.log(err);
       }
     );
   }
 
   getRequest(cource: any) {
     this.courceService.courseDetail(cource.id).subscribe((res: any) => {
-      // console.log(res);
       let coursedetail = res.data;
       let username = { user_name: cource.user_name, showbuttons: cource.purchase_order }
       this.router.navigateByUrl('/dashboard/cources/request-detail', {
         state: { ...coursedetail, ...username },
       });
     }, (err: any) => {
-      // console.log(err)
     });
 
 
@@ -328,7 +307,6 @@ export class CoursesComponent implements OnInit {
     this.router.navigateByUrl('/dashboard/cources/create-cource', {
       state: course,
     });
-    // console.log(course)
   }
 
   deleteRequest(course: any) {
@@ -347,12 +325,9 @@ export class CoursesComponent implements OnInit {
       this.refreshCourses();
     });
     this.routegetdata = '';
-    // // console.log(course);
     // this.courceService.deleteCourse({course_id :course.id}).subscribe((res:any)=>{
-    //   // console.log(res);
     //   this.refreshCourses();
     // },(err:any)=>{
-    //   // console.log(err)
     // })
   }
 
@@ -372,44 +347,30 @@ export class CoursesComponent implements OnInit {
       this.refreshCourses();
     });
     this.routegetdata = '';
-    // // console.log(course);
-    // this.courceService.copyCourse({course_id :course.id}).subscribe((res:any)=>{
-    //   // console.log(res);
-    //   this.refreshCourses();
-    // },(err:any)=>{
-    //   // console.log(err)
-    // })
-
   }
 
   //getLearning type
   getLearningType() {
     this.courceService.getLearningType().subscribe(
       (res: any) => {
-        // console.log(res);
         this.learningTypes = res.data;
       },
       (err: any) => {
-        // console.log(err);
       }
     );
   }
 
   pageChanged(event: any) {
-    // console.log(event);
     this.pageNumber = event;
     this.startPageEntry = (this.pageSize * (this.pageNumber - 1)) + 1;
     this.endPageEntry = this.pageSize * this.pageNumber;
   }
   newPageChanged(event: any) {
-    // console.log(event);
     this.newPageNumber = event;
     this.newstartPageEntry = (this.pageSize * (this.newPageNumber - 1)) + 1;
     this.newendPageEntry = this.pageSize * this.newPageNumber;
   }
   ngOnInit(): void {
-    // // console.log(this.getUserrole);
-    // console.log(this.routegetdata)
     this.refreshCourses();
     this.getLearningType();
     if (this.routegetdata) {
@@ -423,7 +384,6 @@ export class CoursesComponent implements OnInit {
   }
   GetCourseHistory(id: any): any {
     this.courceService.courseHistory(id).subscribe((res: any) => {
-      // console.log(res);
       if (res && res.status == 1) {
         let history = res.data;
         return history[history.length - 1].status;

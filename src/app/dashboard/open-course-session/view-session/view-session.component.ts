@@ -79,7 +79,6 @@ export class ViewSessionComponent implements OnInit {
           this.sessiondata = res.data;
           this.status = this.sessiondata.status;
           this.status_show = this.sessiondata.status_show;
-          console.log("session data",this.sessiondata);
 
           this.sessiondata.metadata.forEach((element:any) => {
             element.email = JSON.parse(element.email_participant);
@@ -93,7 +92,7 @@ export class ViewSessionComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -101,11 +100,11 @@ export class ViewSessionComponent implements OnInit {
   getCordinators() {
     this.courseService.getNewregionalCordinator().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.cordinatorsList = res.data;
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -136,10 +135,10 @@ export class ViewSessionComponent implements OnInit {
   reject() {
     let statusobj = { session_id: this.id, status: 'reject', status_comment: this.rejectcomment }
     this.courseSessionService.changeStatusSession(statusobj).subscribe((res: any) => {
-      console.log(res);
+      
       this.router.navigate(['/dashboard/sct']);
     }, (err: any) => {
-      console.log(err)
+      this.commonService.errorHandling(err);
     })
   }
 
@@ -148,18 +147,17 @@ export class ViewSessionComponent implements OnInit {
     if (this.publishForm.valid) {
       this.courseSessionService.changeStatusSession(publishobj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             this.router.navigate(['/dashboard/sct']);
           }
         },
         (err: any) => {
-          console.log(err);
+          this.commonService.errorHandling(err);
         }
       );
     }
     else {
-      console.log("form invalid");
     }
   }
 
@@ -167,18 +165,16 @@ export class ViewSessionComponent implements OnInit {
     this.authService.getUserRoles().subscribe((res: any) => {    
       this.roleuserlist = res.data;
     }, (err: any) => {
-      console.log(err)
+      this.commonService.errorHandling(err);
     })
   }
 
   getRoc(event:any){
     let region = this.roleuserlist[3];
-    console.log(region);
 
     region.forEach((field: any) => {
       if (field.region_id == event.target.value) {
         this.selectedotherRoc = field.id;
-        console.log(this.selectedotherRoc);
       }
     });
   }
@@ -187,10 +183,10 @@ export class ViewSessionComponent implements OnInit {
     if (this.selectedotherRoc) {
       let transferobj = { session_id: this.id, status: 'pending', transfer_id: this.selectedotherRoc, status_comment: this.transfercomment};
       this.courseSessionService.courseSessionTransfer(transferobj).subscribe((res: any) => {
-        console.log(res);
+        
         this.router.navigate(['/dashboard/sct']);
       }, (err: any) => {
-        console.log(err)
+        this.commonService.errorHandling(err);
       })
     }
   }

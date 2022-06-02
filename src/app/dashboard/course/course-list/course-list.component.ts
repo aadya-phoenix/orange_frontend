@@ -88,6 +88,7 @@ export class CourseListComponent implements OnInit {
         },
         (err: any) => {
           this.commonService.hideLoading();
+          this.commonService.errorHandling(err);
         }
       );
     }
@@ -164,7 +165,6 @@ export class CourseListComponent implements OnInit {
     // else {
     //   this.courcesList = this.allCourses;
     // }
-    // console.log("eventtarget", event.target.value);
     //this.getrecords(event.target.value);
   }
 
@@ -184,7 +184,7 @@ export class CourseListComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -215,6 +215,7 @@ export class CourseListComponent implements OnInit {
             )
           },(err:any)=>{
             this.commonService.hideLoading();
+            this.commonService.errorHandling(err);
           })
           
         }
@@ -242,6 +243,7 @@ export class CourseListComponent implements OnInit {
             )
           },(err:any)=>{
             this.commonService.hideLoading();
+            this.commonService.errorHandling(err);
           })
           
         }

@@ -66,7 +66,7 @@ export class VendorManagementViewComponent implements OnInit {
         }
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err); 
         this.commonService.hideLoading();
       }
     );

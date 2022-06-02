@@ -48,16 +48,13 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       this.authService.register(this.registerForm.value).subscribe(
         (res: any) => {
-          console.log(res);
           if(res){
             this.router.navigate(['/login'])
           }
         },
         (err: any) => {
-          console.log(err);
         }
       );
-      console.log(this.registerForm.value);
     } else {
       this.registerForm.markAllAsTouched();
     }

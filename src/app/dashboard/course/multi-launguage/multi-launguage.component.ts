@@ -53,6 +53,7 @@ export class MultiLaunguageComponent implements OnInit {
 
       },
       (err: any) => {
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );

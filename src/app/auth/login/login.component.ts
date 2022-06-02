@@ -51,12 +51,10 @@ export class LoginComponent implements OnInit {
       this.commonService.showLoading();
       this.authService.login(this.loginForm.value).subscribe(
         (res: any) => {
-          console.log(res);
           if (res) {
             localStorage.setItem('loginDetails', JSON.stringify(res));
             this.lastLogin();
             this.authService.getProfileDetails().subscribe((profile) => {
-              console.log(profile);
               this.authService.getRoles().subscribe((res: any) => {
                 allroles = res.data;
                 allroles.find((currentrole: any) => {
@@ -65,7 +63,6 @@ export class LoginComponent implements OnInit {
                   }
                 });
                 this.commonService.hideLoading();
-                console.log(roleObj);
                 localStorage.setItem('role', JSON.stringify(roleObj));
                 // localStorage.setItem('role',JSON.stringify(this.encrypt.encryptUsingAES256(roleObj)));
               });
@@ -81,7 +78,7 @@ export class LoginComponent implements OnInit {
         },
         (error) => {
           this.incorrectCredential = error.status == 401;
-          this.commonService.toastErrorMsg(error.error.error, error.error.message);
+          this.commonService.errorHandling(error);
           this.commonService.hideLoading();
         }
       );
@@ -93,7 +90,7 @@ export class LoginComponent implements OnInit {
   lastLogin() {
     this.authService.lastLogin().subscribe(res => {
     }, err => {
-      console.log(err);
+      this.commonService.errorHandling(err);
     })
   }
 }

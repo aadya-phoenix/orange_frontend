@@ -100,7 +100,7 @@ export class CourseCompleteReportComponent implements OnInit {
         this.learningTypes = res.data;
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -115,7 +115,7 @@ export class CourseCompleteReportComponent implements OnInit {
     },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       });
   }
 
@@ -202,7 +202,7 @@ export class CourseCompleteReportComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -231,7 +231,7 @@ export class CourseCompleteReportComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }

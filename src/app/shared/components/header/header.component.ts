@@ -74,7 +74,7 @@ export class HeaderComponent implements OnInit {
         this.lastName = this.userName.last_name;
       }
     }, (err: any) => {
-      console.log(err);
+      this.commonService.errorHandling(err); 
       this.commonService.hideLoading();
     });
   }
@@ -91,7 +91,7 @@ export class HeaderComponent implements OnInit {
           (this.pendingRequestCount.session_pending ? this.pendingRequestCount.session_pending : 0)
       },
       (err: any) => {
-        this.commonService.toastErrorMsg(err.error.error, err.error.message);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -121,7 +121,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    console.log('he')
     this.authService.logOut();
     localStorage.removeItem('userName');
   }

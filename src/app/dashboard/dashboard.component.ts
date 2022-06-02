@@ -68,7 +68,6 @@ export class DashboardComponent implements OnInit {
       this.isPdlMember = this.profileDetails.data.pdl_member;
     }
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
-    console.log("label constant",this.lableConstant);
     if (this.lableConstant) {
       this.modulesArray_tab1 = [
         {
@@ -204,35 +203,41 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl(`/dashboard/back-office?status=${status}`);
   }
 
-  setFavourite(module: any) {
-    let favorite;
-    for (let item of this.modulesArray_tab1) {
-      if (module == item.id) {
-        item.favourite = !item.favourite;
-        favorite = item.favourite;
-      }
-    }
-    for (let item of this.modulesArray_tab2) {
-      if (module == item.id) {
-        item.favourite = !item.favourite;
-        favorite = item.favourite;
-      }
-    }
-    for (let item of this.modulesArray_tab3) {
-      if (module == item.id) {
-        item.favourite = !item.favourite;
-        favorite = item.favourite;
-      }
-    }
-    const body = { module: module, favorite: favorite }
+  setFavourite(item: any) {
+    // let favorite;
+    // for (let item of this.modulesArray_tab1) {
+    //   if (module == item.id) {
+    //     item.favourite = !item.favourite;
+    //     favorite = item.favourite;
+    //   }
+    // }
+    // for (let item of this.modulesArray_tab2) {
+    //   if (module == item.id) {
+    //     item.favourite = !item.favourite;
+    //     favorite = item.favourite;
+    //   }
+    // }
+    // for (let item of this.modulesArray_tab3) {
+    //   if (module == item.id) {
+    //     item.favourite = !item.favourite;
+    //     favorite = item.favourite;
+    //   }
+    // }
+    const body = { module: item.setFavouriteModule, favorite: !item.favourite }
     this.commonService.showLoading();
     this.courseService.setFavourites(body).subscribe(
       (res: any) => {
+        if(!res.status){
+          this.commonService.toastErrorMsg("Error", res.message);  
+        }
+        else{
+          item.favourite = !item.favourite;
+        }
         this.commonService.hideLoading();
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -284,7 +289,7 @@ export class DashboardComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -292,15 +297,12 @@ export class DashboardComponent implements OnInit {
   onlyFavourite() {
    for(let module of this.modulesArray_tab1){
      module.showFavourite = module.favourite;
-     console.log("module1",module)
-   }
+    }
    for(let module2 of this.modulesArray_tab2){
     module2.showFavourite = module2.favourite;
-    console.log("module2",module);
-   }
+    }
    for(let module3 of this.modulesArray_tab3){
     module3.showFavourite = module3.favourite;
-    console.log("module3",module);
    }
   }
 
@@ -332,13 +334,13 @@ export class DashboardComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }
 
   sendEmail(name:any) {
-     console.log("link", name)
+    //  console.log("link", name)
   /*  var email = '';
     var subject = '';
     var emailBody = this.baseUrl + link;
