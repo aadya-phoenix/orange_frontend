@@ -186,10 +186,13 @@ export class EditUserComponent implements OnInit {
           this.createUserForm.controls.pdl_member.setValue(this.user_details.pdl_member == "1" ? true : false);
           this.createUserForm.controls.status.setValue(this.user_details.status == "1" ? true : false);
           if(this.user_details.admin){
-          this.createUserForm.controls.admin.setValue(this.user_details.admin == "1" ? true : false);
+           this.createUserForm.controls.admin.setValue(this.user_details.admin == "1" ? true : false);
            }
+           if(this.user_details.manager){
+            this.createUserForm.controls.manager.setValue(this.user_details.manager == "1" ? true : false);
+             }
           if(this.user_details.staff){
-          this.createUserForm.controls.staff.setValue(this.user_details.staff == "1" ? true : false);
+           this.createUserForm.controls.staff.setValue(this.user_details.staff == "1" ? true : false);
            }
           }
           else{

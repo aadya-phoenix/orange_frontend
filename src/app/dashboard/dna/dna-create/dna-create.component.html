@@ -53,18 +53,17 @@
                     <div class="row">
                         <div class="col-sm-2 text-center">
                             <div class="main_section">
-                                <div class="digital_learning">
-                                    <h4 class="bus_h4 text_orange">liberal political party in France. On 5 May 2022, the
-                                        party changed ...</h4>
+                                <div class="digital_learning" *ngFor="let item of learningListToShow">
+                                    <h4 class="bus_h4 text_orange">{{item.title}}</h4>
                                     <div class="d-flex justify-content-center">
-                                        <span class="text_digi">Text</span>
-                                        <span class="border_lr">Text</span>
-                                        <span class="text_digi1">Text</span>
+                                        <span class="text_digi">{{item.priority_name}}</span>
+                                        <span class="border_lr">{{item.number_of_participant}}</span>
+                                        <span class="text_digi1">{{item.priority_name}}</span>
                                     </div>
                                     <div class="d-flex justify-content-end digi_footer">
-                                        <i class="fa fa-share-square-o mr-1" aria-hidden="true"></i>
-                                        <i class="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>
-                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        <a (click)="share(item)"><i class="fa fa-share-square-o mr-1" aria-hidden="true"></i></a>
+                                        <a (click)="update(item)"> <i class="fa fa-pencil-square-o mr-1" aria-hidden="true"></i></a>
+                                        <a (click)="delete(item)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                     </div>
                                 </div>   
                             </div>

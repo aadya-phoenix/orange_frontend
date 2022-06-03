@@ -365,7 +365,6 @@ export class GetReportCreateComponent implements OnInit {
 
   dateFormat(date:any){
     const newdate = new Date(date);
-    const newdate1 =  `${newdate.getFullYear()}-${newdate.getMonth()+1}-${newdate.getDate()}`; 
     return this.datepipe.transform(newdate,'yyyy-MM-dd');
   }
 

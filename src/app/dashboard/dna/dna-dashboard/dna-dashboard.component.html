@@ -56,19 +56,21 @@
                                             <h4 class="">{{item.title}}</h4>
                                             <span class="font_weight">{{item.type}}</span>
                                             <div class="btn_section">
-                                                <button class="btn btn-primary" (click)="addLearning(item.id)"><span>Start</span> </button>
-                                                <button class="btn btn-primary"><span>View Report</span> </button>
+
+                                                <button class="btn btn-primary"  (click)="addLearning(item)"><span>Start</span> </button>
+                                                <button class="btn btn-primary" (click)="viewReport(item)" ><span>View Report</span> </button>
+                                                <button class="btn btn-primary" (click)="managerData(item)"><span>Manager Report</span> </button>
                                             </div>
                                             <p class="fon_12 text_orange">Click Start Button to add learning need.</p>
                                         </div>
                                         <div class="date_section">
                                             <div class="star_adte_div">
                                                 <h4>Start Date</h4>
-                                                <p>{{item.open_date}}</p>
+                                                <p>{{item.open_date | date: dateFormate}}</p>
                                             </div>
                                             <div class="star_adte_div">
                                                 <h4>End Date</h4>
-                                                <p>{{item.close_date}}</p>
+                                                <p>{{item.close_date | date: dateFormate}}</p>
                                             </div>
                                             <div class="star_adte_div">
                                                 <h4>Total Request Date</h4>
@@ -80,102 +82,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-sm-4 text-center">
-                                    <div class="main_section">
-                                        <div class="text_section">
-                                            <img src="../../../../assets/images/worl_co.png">
-                                            <h4 class="">liberal political party in France. On 5 May 2022, the party
-                                                changed ...</h4>
-                                            <span class="font_weight">FRENCH</span>
-                                            <div class="btn_section">
-                                                <button class="btn btn-primary"><span>Start</span> </button>
-                                                <button class="btn btn-primary"><span>View Report</span> </button>
-                                            </div>
-                                            <p class="fon_12 text_orange">Click Start Button to add learning need.</p>
-                                        </div>
-                                        <div class="date_section">
-                                            <div class="star_adte_div">
-                                                <h4>Start Date</h4>
-                                                <p>12-2-2022</p>
-                                            </div>
-                                            <div class="star_adte_div">
-                                                <h4>Start Date</h4>
-                                                <p>12-2-2022</p>
-                                            </div>
-                                            <div class="star_adte_div">
-                                                <h4>Total Request Date</h4>
-                                                <span>
-                                                    <p class="p_pen_close">Pending - 0</p>
-                                                    <p class="p_pen_close">Closed - 12</p>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 text-center">
-                                    <div class="main_section">
-                                        <div class="text_section">
-                                            <img src="../../../../assets/images/worl_co.png">
-                                            <h4 class="">liberal political party in France. On 5 May 2022, the party
-                                                changed ...</h4>
-                                            <span class="font_weight">FRENCH</span>
-                                            <div class="btn_section">
-                                                <button class="btn btn-primary"><span>Start</span> </button>
-                                                <button class="btn btn-primary"><span>View Report</span> </button>
-                                            </div>
-                                            <p class="fon_12 text_orange">Click Start Button to add learning need.</p>
-                                        </div>
-                                        <div class="date_section">
-                                            <div class="star_adte_div">
-                                                <h4>Start Date</h4>
-                                                <p>12-2-2022</p>
-                                            </div>
-                                            <div class="star_adte_div">
-                                                <h4>Start Date</h4>
-                                                <p>12-2-2022</p>
-                                            </div>
-                                            <div class="star_adte_div">
-                                                <h4>Total Request Date</h4>
-                                                <span>
-                                                    <p class="p_pen_close">Pending - 0</p>
-                                                    <p class="p_pen_close">Closed - 12</p>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 text-center">
-                                    <div class="main_section">
-                                        <div class="text_section">
-                                            <img src="../../../../assets/images/worl_co.png">
-                                            <h4 class="">liberal political party in France. On 5 May 2022, the party
-                                                changed ...</h4>
-                                            <span class="font_weight">FRENCH</span>
-                                            <div class="btn_section">
-                                                <button class="btn btn-primary"><span>Start</span> </button>
-                                                <button class="btn btn-primary"><span>View Report</span> </button>
-                                            </div>
-                                            <p class="fon_12 text_orange">Click Start Button to add learning need.</p>
-                                        </div>
-                                        <div class="date_section">
-                                            <div class="star_adte_div">
-                                                <h4>Start Date</h4>
-                                                <p>12-2-2022</p>
-                                            </div>
-                                            <div class="star_adte_div">
-                                                <h4>Start Date</h4>
-                                                <p>12-2-2022</p>
-                                            </div>
-                                            <div class="star_adte_div">
-                                                <h4>Total Request Date</h4>
-                                                <span>
-                                                    <p class="p_pen_close">Pending - 0</p>
-                                                    <p class="p_pen_close">Closed - 12</p>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -191,7 +97,22 @@
                                 <div class="col-sm-4 text-center">
                                     <div class="main_section1">
                                         <div class="text_section">
-
+                                            <h4 class="">liberal political party in France. On 5 May 2022, the party
+                                                changed ...</h4>
+                                            <span class="que_mark"><i class="fa fa-question-circle color-black"
+                                                    aria-hidden="true"></i></span>
+                                            <div class="btn_section">
+                                                <button class="btn btn-primary" (click)="review()"><span>Start Review</span> </button>
+                                                <button class="btn btn-primary" 
+                                                (click)="completeReport()"><span>View Report</span> </button>
+                                            </div>
+                                            <p class="fon_12 text_orange">Click Start Button to add learning need.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 text-center">
+                                    <div class="main_section1">
+                                        <div class="text_section">
                                             <h4 class="">liberal political party in France. On 5 May 2022, the party
                                                 changed ...</h4>
                                             <span class="que_mark"><i class="fa fa-question-circle color-black"
@@ -202,31 +123,11 @@
                                             </div>
                                             <p class="fon_12 text_orange">Click Start Button to add learning need.</p>
                                         </div>
-                                        <!--text-->
-
-
                                     </div>
                                 </div>
                                 <div class="col-sm-4 text-center">
                                     <div class="main_section1">
                                         <div class="text_section">
-
-                                            <h4 class="">liberal political party in France. On 5 May 2022, the party
-                                                changed ...</h4>
-                                            <span class="que_mark"><i class="fa fa-question-circle color-black"
-                                                    aria-hidden="true"></i></span>
-                                            <div class="btn_section">
-                                                <button class="btn btn-primary"><span>Start Review</span> </button>
-                                                <button class="btn btn-primary"><span>View Report</span> </button>
-                                            </div>
-                                            <p class="fon_12 text_orange">Click Start Button to add learning need.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 text-center">
-                                    <div class="main_section1">
-                                        <div class="text_section">
-
                                             <h4 class="">liberal political party in France. On 5 May 2022, the party
                                                 changed ...</h4>
                                             <span class="que_mark"><i class="fa fa-question-circle color-black"

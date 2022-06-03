@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 
 @Component({
-  selector: 'app-dna-manager-data',
-  templateUrl: './dna-manager-data.component.html',
-  styleUrls: ['./dna-manager-data.component.scss']
+  selector: 'app-dna-view-rpt',
+  templateUrl: './dna-view-rpt.component.html',
+  styleUrls: ['./dna-view-rpt.component.scss']
 })
-export class DnaManagerDataComponent implements OnInit {
+export class DnaViewRptComponent implements OnInit {
 
   dnaStatus = dataConstant.DnaStatus;
   selectedStatus = this.dnaStatus.total;
@@ -37,4 +37,5 @@ export class DnaManagerDataComponent implements OnInit {
       this.dnaListToShow = this.dnaList.filter((x: any) => { if (x.status_show === type) { return x } }).map((x: any) => Object.assign({}, x));
     }
   }
+
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
 import { UserManagementComponent } from './user-management/user-management.component';
@@ -15,6 +15,7 @@ import { CreateTrackerComponent } from './dna/create-tracker/create-tracker.comp
 
 @NgModule({
   declarations: [UserManagementComponent, EditUserComponent, ChangePasswordUserComponent, LearningNeedsComponent, CreateTrackerComponent],
+  providers:[DatePipe],
   imports: [
     CommonModule,
     UserRoutingModule,

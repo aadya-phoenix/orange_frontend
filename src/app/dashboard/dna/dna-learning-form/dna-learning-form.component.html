@@ -55,14 +55,28 @@
                 <label class="form-control-label">
                   Learning Title
                 </label>
-                <input  type="text" class="form-control form_width" formControlName="title">
+                <!-- <p-autoComplete formControlName="title" [suggestions]="titleList"
+                    (completeMethod)="filterCountry($event)" field="name" [dropdown]="true">
+                    <ng-template let-country pTemplate="item">
+                        <div class="country-item">
+                            <div>{{country.training_title}}</div>
+                        </div>
+                    </ng-template> 
+                </p-autoComplete>-->
+                <!--  <div>
+                  <p-autoComplete formControlName="title" [suggestions]="titleList" (completeMethod)="filterTitle($event)" field="training_title" [minLength]="1"></p-autoComplete>     
+                 </div> -->
+                <ng-select  [items]="titleList" bindLabel="training_title"
+                  bindValue="id" 
+                  formControlName="learning_id"class="w_100">
+                </ng-select>
                 <div
                   *ngIf="(createDnaForm.controls['title'].invalid && (createDnaForm.controls['title'].dirty || createDnaForm.controls['title'].touched)) || isSubmitted">
                     <div class="error_message"
                         *ngIf="createDnaForm.controls['title'].errors?.required">
                         Learning Title can not be blank
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
         <div class="col-sm-4">
@@ -98,12 +112,30 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4" *ngIf="!isFrance">
             <div class="form-group">
                 <label class="form-control-label">
                     Management Code
                 </label>
                 <input  type="text" class="form-control form_width" formControlName="management_code">
+                <div
+                  *ngIf="(createDnaForm.controls['management_code'].invalid && (createDnaForm.controls['management_code'].dirty || createDnaForm.controls['management_code'].touched)) || isSubmitted">
+                   <div class="error_message"
+                    *ngIf="createDnaForm.controls['management_code'].errors?.required">
+                    Management Code can not be blank
+                   </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4" *ngIf="isFrance">
+            <div class="form-group">
+                <label class="form-control-label">
+                    Domain  Training
+                </label>
+                <ng-select  placeholder="Please select Business Unit" [items]="domainObj"
+                     bindLabel="domain_name"
+                    bindValue="id"  (change)="getEvent($event)" formControlName="domain_training_id" class="w_100">
+                </ng-select>
                 <div
                   *ngIf="(createDnaForm.controls['management_code'].invalid && (createDnaForm.controls['management_code'].dirty || createDnaForm.controls['management_code'].touched)) || isSubmitted">
                    <div class="error_message"
@@ -131,7 +163,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4" *ngIf="isCountry">
             <div class="form-group">
                 <label class="form-control-label">
                     Delivery Country
@@ -171,11 +203,12 @@
     </form>
     </div>
     <div class="card-footer">
-        <button class="btn btn-primary mr-1" type="submit" (click)="save('pending')">
+        <button class="btn btn-primary mr-1" type="submit" (click)="save()">
             <i aria-hidden="true" class="fa fa-upload">
             </i> <span class="pl-1">Submit</span>
         </button>
-        <button class="btn btn-secondary mr-1" type="button">
+        <button class="btn btn-secondary mr-1" type="button" 
+        (click)="close()">
             <i aria-hidden="true" class="fa fa-times">
             </i> <span class="pl-1">Close</span>
         </button>

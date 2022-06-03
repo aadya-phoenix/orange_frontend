@@ -33,7 +33,7 @@ export class DnaService {
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  getDnaDetails(id: number) {
+  getFormDetails(id: number) {
     const url = `/api/${this.apiVersion}/digital-learning/${id}/detail`;
     return this.http
       .get(url, this.http.headers)
@@ -58,6 +58,13 @@ export class DnaService {
   delete(data:any){
     const url = `api/${this.apiVersion}/digital-learning/delete`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  getTitleDropdown(type_id:number){
+    const url = `/api/${this.apiVersion}/cct-training-course/${type_id}`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
   }
 
   createTracker(data:any){

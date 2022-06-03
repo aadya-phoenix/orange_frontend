@@ -6,6 +6,7 @@ import { CommonService } from 'src/app/shared/services/common/common.service';
 import { GeneralDropdownsService } from 'src/app/shared/services/general-dropdowns/general-dropdowns.service';
 import * as _ from 'lodash';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-learning-needs',
@@ -27,11 +28,9 @@ export class LearningNeedsComponent implements OnInit {
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
   constructor(
-    private formBuilder: FormBuilder,
-    private courceService:CourcesService,
     private dnaService:DnaService,
-    private generalService:GeneralDropdownsService,
-    private commonService:CommonService) {
+    private commonService:CommonService,
+    private router:Router) {
       
      }
 
@@ -49,6 +48,12 @@ export class LearningNeedsComponent implements OnInit {
   }
 
   view(item:any){}
+
+  editRequest(item :any){
+    if (item && item.id) {
+      this.router.navigateByUrl(`/user/dna/create/${item.id}`);
+    }
+  }
 
   onSort({ column, direction }: any) {
     this.headers.forEach((header: { sortable: any; direction: string; }) => {
