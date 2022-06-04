@@ -139,7 +139,7 @@ export class DashboardComponent implements OnInit {
           setFavouriteModule: this.modules.dna,
         }, {
           id: 'sme', name:'SME Database',
-          routerLink: '', image: '../../assets/images/SME_DB.jpg',
+          routerLink: '/dashboard/smedb', image: '../../assets/images/SME_DB.jpg',
           lableConstantModule: this.lableConstant.sme_database,
           lableConstantCatalog: this.lableConstant.sme_learning_community_feature,
           navigateTo: '',

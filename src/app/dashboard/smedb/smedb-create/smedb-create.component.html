@@ -1,0 +1,566 @@
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-8">
+            <div class="page-header float-left bac_trasparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/SME_DB.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="breade_text_span1">SME Database</span>
+                        <span class="divider"></span>
+                        <span class="breade_text_span">The SME learning Community is one of the enablers for OBS to
+                            become a Learning organization by enabling a co-development environment through sharing
+                            knowledge and hands-on experience on the latest industry technologies and practices.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 float-right">
+            <div class="page-header float-right bac_trasparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bac_trasparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home text_white"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/smedb']" class="text_white">Create new SME</a>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">New Request</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card_header_common">
+        <div class="d-flex justify-content-between media_creat_couse_col">
+            <div class="d-flex align-items-center">
+                <img src="../../../../assets/images/formm.png" class="form_img_req" />
+                <p class="mt-2 ml-2 mb-2 view-re_css">
+                    <span class="comlte_css">Complete this form and click on the submit button</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="content mt-1">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <form [formGroup]="createSmedbForm" enctype="multipart/form-data">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong _ngcontent-jet-c125=""> SME Database </strong>
+                            </div>
+                            <div class="card-body card_width">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="d-flex align-items-center">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Phone no. <span class="text_red">* </span>
+                                                </label>
+                                                <input type="text" placeholder="Enter Phone no"
+                                                    class="form-control form_width" formControlName="phone_no" />
+                                                <div class="error_message"
+                                                    *ngIf="(createSmedbForm.controls['phone_no'].invalid && (createSmedbForm.controls['phone_no'].dirty || createSmedbForm.controls['phone_no'].touched || isSubmitted))">
+                                                    Phone no. cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-sm-12">
+                                        <div class="d-flex align-items-center">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Volunteered for domain/expertise/training <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <ng-select
+                                                    placeholder="Please select a volunteered for domain/expertise/training"
+                                                    [items]="" bindLabel="name" bindValue="name" [multiple]=true
+                                                    class="w_100">
+                                                </ng-select>
+                                                <!-- <div class="error_message"
+                                        *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                            Training Provided By cannot be blank
+                                        </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="d-flex align-items-center">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Are you currently available? <span class="text_red">* </span>
+                                                </label>
+                                                <ng-select placeholder="Please select your availability" [items]=""
+                                                    bindLabel="name" bindValue="name" [multiple]=false class="w_100">
+                                                </ng-select>
+                                                <!-- formControlName="title_single" -->
+                                                <!-- <div class="error_message"
+                                                *ngIf="(createCourceForm.controls['title_single'].invalid && (createCourceForm.controls['title_single'].dirty || createCourceForm.controls['title_single'].touched || isSubmitted))">
+                                                Title cannot be blank
+                                            </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="d-flex align-items-center">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    When you are not available - Start date <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <input type="date" class="form-control form_width" />
+                                                <!-- <div class="error_message"
+                                        *ngIf="(createCourceForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                            Training Provided By cannot be blank
+                                        </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="d-flex align-items-center">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    When you are not available - End date <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <input type="date" class="form-control form_width" />
+                                                <!-- <div class="error_message"
+                                        *ngIf="(createCourceForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                            Training Provided By cannot be blank
+                                        </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="d-flex align-items-center">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Contact person in PD&L <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <ng-select placeholder="Please select contact person in PD&L" [items]=""
+                                                    bindLabel="name" bindValue="name" [multiple]=false class="w_100">
+                                                </ng-select>
+                                                <!-- <div class="error_message"
+                                        *ngIf="(createCourceForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                            Training Provided By cannot be blank
+                                        </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="manage-checkbox">
+                                                <input type="checkbox" class="mr-1">Save as draft</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-start">
+                                    <div class="d-flex justify-content-start">
+                                        <button class="btn btn-primary">
+                                            Procced
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="tabbed round ">
+                                <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link active" id="id-content-support" data-toggle="pill"
+                                            href="#content-support" role="tab" aria-controls="content-support"
+                                            aria-selected="true">Content support</a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" id="id-delivery" data-toggle="pill"
+                                            href="#delivery" role="tab" aria-controls="delivery"
+                                            aria-selected="false">Delivery</a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" id="id-voice-over" data-toggle="pill"
+                                            href="#voice-over" role="tab" aria-controls="voice-over"
+                                            aria-selected="false">Voice-over for eLearning</a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" id="id-professional-certi" data-toggle="pill"
+                                            href="#professional-certi" role="tab" aria-controls="professional-certi"
+                                            aria-selected="false">Professional certifications</a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" id="id-comments" data-toggle="pill"
+                                            href="#comments" role="tab" aria-controls="comments"
+                                            aria-selected="false">Comments</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="tab-content border-0 bg-white pb-5" id="pills-tabContent">
+                                <div class="pull-right mb-2 row">
+                                    <button class="btn btn-primary">
+                                        <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i> Previous
+                                    </button>
+                                    <button class="btn btn-primary">
+                                        Next <i class="fa fa-arrow-right ml-2" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <div class="tab-pane fade show active mt-5" id="content-support" role="tabpanel"
+                                    aria-labelledby="id-content-support">
+                                    <div class="row">
+                                        <div class="col-md-5 col-sm-12">
+                                            <!-- [formGroupName]="i" -->
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Title <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <ng-select placeholder="Please select title" [items]="" bindLabel="name"
+                                                    bindValue="name" [multiple]=true class="w_100">
+                                                </ng-select>
+                                                <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-sm-12">
+                                            <!-- <td class="p-1"> -->
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Level <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <ng-select placeholder="Please select level" [items]="" bindLabel="name"
+                                                    bindValue="name" [multiple]=true class="w_100">
+                                                </ng-select>
+                                                <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                            </div>
+                                            <!-- </td> -->
+                                        </div>
+                                        <div class="col-md-2 col-sm-12 mt-35">
+                                            <button class="btn btn-success mr-2">
+                                                <!-- (click)="addObjectiveContent('')" -->
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button class="btn btn-danger">
+                                                <!-- (click)="removeObjectiveContent(i)" -->
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade mt-5" id="delivery" role="tabpanel"
+                                    aria-labelledby="id-delivery">
+                                    <div class="row">
+                                        <div class="col-md-5 col-sm-12">
+                                            <!-- [formGroupName]="i" -->
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Title <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <ng-select placeholder="Please select title" [items]="" bindLabel="name"
+                                                    bindValue="name" [multiple]=true class="w_100">
+                                                </ng-select>
+                                                <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-sm-12">
+                                            <!-- <td class="p-1"> -->
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Level <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <ng-select placeholder="Please select level" [items]="" bindLabel="name"
+                                                    bindValue="name" [multiple]=true class="w_100">
+                                                </ng-select>
+                                                <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                            </div>
+                                            <!-- </td> -->
+                                        </div>
+                                        <div class="col-md-2 col-sm-12 mt-35">
+                                            <button class="btn btn-success mr-2">
+                                                <!-- (click)="addObjectiveContent('')" -->
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button class="btn btn-danger">
+                                                <!-- (click)="removeObjectiveContent(i)" -->
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 col-sm-12">
+                                            <!-- [formGroupName]="i" -->
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Previous experience in delivery/facilitation of training <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <ng-select placeholder="Please select title" [items]="" bindLabel="name"
+                                                    bindValue="name" [multiple]=true class="w_100">
+                                                </ng-select>
+                                                <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-sm-12">
+                                            <!-- <td class="p-1"> -->
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Would you need help? <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <ng-select placeholder="Please select level" [items]="" bindLabel="name"
+                                                    bindValue="name" [multiple]=true class="w_100">
+                                                </ng-select>
+                                                <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                            </div>
+                                            <!-- </td> -->
+                                        </div>
+                                        <div class="col-md-10 col-sm-12">
+                                            <!-- <td class="p-1"> -->
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    How can we help you? <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <label class="form-control-label">
+                                                    Provide a brief of experience <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <textarea class="form-control form_width-textarea" rows="3"
+                                            placeholder="Enter Prerequisite" maxlength="500"
+                                            formControlName="prerequisite"></textarea>
+                                                <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                            </div>
+                                            <!-- </td> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade mt-5" id="voice-over" role="tabpanel"
+                                    aria-labelledby="id-voice-over">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <!-- [formGroupName]="i" -->
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Laungauge <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <ng-select placeholder="Please select title" [items]="" bindLabel="name"
+                                                    bindValue="name" [multiple]=true class="w_100">
+                                                </ng-select>
+                                                <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <!-- [formGroupName]="i" -->
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Other Laungauge <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <input type="text" placeholder="Enter other laungauge"
+                                                class="form-control form_width" formControlName="email_training_contact" />
+                                                <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <!-- <td class="p-1"> -->
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Male or female voice <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <ng-select placeholder="Please select level" [items]="" bindLabel="name"
+                                                    bindValue="name" [multiple]=true class="w_100">
+                                                </ng-select>
+                                                <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                            </div>
+                                            <!-- </td> -->
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <!-- <td class="p-1"> -->
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Previous experience in voice-over <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <ng-select placeholder="Please select level" [items]="" bindLabel="name"
+                                                    bindValue="name" [multiple]=true class="w_100">
+                                                </ng-select>
+                                                <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                            </div>
+                                            <!-- </td> -->
+                                        </div>
+                                        <div class="col-md-12 col-sm-12">
+                                            <!-- <td class="p-1"> -->
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                   Provice a brief of experience <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <label class="form-control-label">
+                                                    Provide a brief of experience <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <textarea class="form-control form_width-textarea" rows="3"
+                                            placeholder="Enter Prerequisite" maxlength="500"
+                                            formControlName="prerequisite"></textarea>
+                                                <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                            </div>
+                                            <!-- </td> -->
+                                        </div>
+                                        <div class="custom-dropzone col-md-12" ngx-dropzone [accept]="'video/*'" (change)="onFilesAdded($event)">
+                                            <ngx-dropzone-label>
+                                                <div>
+                                                    <h2>My custom dropzone II</h2>
+                                                </div>
+                                            </ngx-dropzone-label>
+                                            <ngx-dropzone-video-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true"
+                                                (removed)="onRemove(f)">
+                                                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                            </ngx-dropzone-video-preview>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade mt-5" id="professional-certi" role="tabpanel"
+                                    aria-labelledby="id-professional-certi">
+                                    <div class="row">
+                                        <div class="col-md-5 col-sm-12">
+                                            <!-- [formGroupName]="i" -->
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Certification Title <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <input type="text" placeholder="Enter other laungauge"
+                                                class="form-control form_width" formControlName="email_training_contact" />
+                                                <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-sm-12">
+                                            <!-- [formGroupName]="i" -->
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Year of completion <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <input type="text" placeholder="Enter other laungauge"
+                                                class="form-control form_width" formControlName="email_training_contact" />
+                                                <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-12 mt-35">
+                                            <button class="btn btn-success mr-2">
+                                                <!-- (click)="addObjectiveContent('')" -->
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button class="btn btn-danger">
+                                                <!-- (click)="removeObjectiveContent(i)" -->
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade mt-5" id="comments" role="tabpanel"
+                                    aria-labelledby="id-comments">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="manage-checkbox">
+                                                    <input type="checkbox" class="mr-1">I am agree with OBS SME Community</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                   Other Comments
+                                                </label>
+                                                <textarea class="form-control form_width-textarea" rows="3"
+                                            placeholder="Enter Comments" maxlength="500"
+                                            formControlName="prerequisite"></textarea>
+                                                <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pull-right mb-2 row">
+                                    <button class="btn btn-primary">
+                                        <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i> Previous
+                                    </button>
+                                    <button class="btn btn-primary">
+                                        Next <i class="fa fa-arrow-right ml-2" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

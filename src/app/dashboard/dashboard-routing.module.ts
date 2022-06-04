@@ -15,6 +15,7 @@ const routes: Routes = [
 {path:'dna',loadChildren:()=>import("./dna/dna.module").then(m=>m.DnaModule)},
 {path:'vendormanagement',loadChildren:()=>import("./vendor-managment/vendor-management.module").then(m=>m.VendorManagementModule)},
 {path:'olreport',loadChildren:()=>import("./get-report/get-report.module").then(m=>m.GetReportModule)},
+{path:'smedb',loadChildren:()=>import("./smedb/smedb.module").then(m=>m.SmedbModule)},
 {path:'set-backup',component:SetBackupComponent},
 {path:'sctworkflow', component:SessionPublisherComponent}
 ];
