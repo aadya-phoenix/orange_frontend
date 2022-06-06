@@ -55,21 +55,29 @@
                 <label class="form-control-label">
                   Learning Title
                 </label>
-                <!-- <p-autoComplete formControlName="title" [suggestions]="titleList"
-                    (completeMethod)="filterCountry($event)" field="name" [dropdown]="true">
-                    <ng-template let-country pTemplate="item">
-                        <div class="country-item">
-                            <div>{{country.training_title}}</div>
-                        </div>
-                    </ng-template> 
-                </p-autoComplete>-->
-                <!--  <div>
-                  <p-autoComplete formControlName="title" [suggestions]="titleList" (completeMethod)="filterTitle($event)" field="training_title" [minLength]="1"></p-autoComplete>     
-                 </div> -->
-                <ng-select  [items]="titleList" bindLabel="training_title"
-                  bindValue="id" 
-                  formControlName="learning_id"class="w_100">
+                <ng-select container="body" placement="bottom"   [items]="titleList" bindLabel="training_title"
+                  bindValue="id"   addTagText="Create New" 
+                  [addTag]="createNew"
+                  formControlName="learning_id"class="w_100" (change)="getTitle($event)">
+                  <ng-template ng-option-tmp let-item="item">
+                    <div title="Description: {{item.training_description}}">{{item.training_title}}</div>
+                    </ng-template>
                 </ng-select>
+                <div
+                  *ngIf="(createDnaForm.controls['title'].invalid && (createDnaForm.controls['title'].dirty || createDnaForm.controls['title'].touched)) || isSubmitted">
+                    <div class="error_message"
+                        *ngIf="createDnaForm.controls['title'].errors?.required">
+                        Learning Title can not be blank
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="col-sm-12" *ngIf="isDescription">
+            <div class="form-group">
+                <label class="form-control-label">
+                  Description
+                </label>
+                <input  type="text" class="form-control form_width" formControlName="description">
                 <div
                   *ngIf="(createDnaForm.controls['title'].invalid && (createDnaForm.controls['title'].dirty || createDnaForm.controls['title'].touched)) || isSubmitted">
                     <div class="error_message"
@@ -100,7 +108,7 @@
                     Priority
                 </label>
                 <ng-select  [items]="priorityObj" bindLabel="name"
-                  bindValue="id"  [addTag]="CreateNew"
+                  bindValue="id"  
                   formControlName="priority_id"class="w_100">
                 </ng-select>
                 <div
@@ -134,7 +142,7 @@
                 </label>
                 <ng-select  placeholder="Please select Business Unit" [items]="domainObj"
                      bindLabel="domain_name"
-                    bindValue="id"  (change)="getEvent($event)" formControlName="domain_training_id" class="w_100">
+                    bindValue="id" formControlName="domain_training_id" class="w_100">
                 </ng-select>
                 <div
                   *ngIf="(createDnaForm.controls['management_code'].invalid && (createDnaForm.controls['management_code'].dirty || createDnaForm.controls['management_code'].touched)) || isSubmitted">

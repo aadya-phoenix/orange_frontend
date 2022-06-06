@@ -61,6 +61,13 @@ export class DnaCreateComponent implements OnInit {
     });
   }
 
+  
+  viewReport(){
+    if (this.trackerId) {
+      this.router.navigateByUrl(`/dashboard/dna/view/${this.trackerId}`); 
+      }
+  }
+
   update(item:any){
     if(item){
     this.router.navigateByUrl(`/dashboard/dna/update/${this.trackerId}/${item.id}`);

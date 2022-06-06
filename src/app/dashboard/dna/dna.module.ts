@@ -13,7 +13,6 @@ import { DnaListComponent } from './dna-list/dna-list.component';
 import { DnaViewComponent } from './dna-view/dna-view.component';
 import { DnaCompleteReportComponent } from './dna-complete-report/dna-complete-report.component';
 import { DnaManagerDataComponent } from './dna-manager-data/dna-manager-data.component';
-import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DnaViewRptComponent } from './dna-view-rpt/dna-view-rpt.component';
 
 @NgModule({
@@ -26,7 +25,6 @@ import { DnaViewRptComponent } from './dna-view-rpt/dna-view-rpt.component';
     NgxPaginationModule,
     NgSelectModule,
     NgbModule,
-    AutoCompleteModule
   ]
 })
 export class DnaModule { }

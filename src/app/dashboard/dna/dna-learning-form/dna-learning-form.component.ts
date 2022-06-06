@@ -33,6 +33,7 @@ export class DnaLearningFormComponent implements OnInit {
   formId : number=0;
   title ='Add New Learning';
   isSubmitted = false;
+  isDescription = false;
   isCountry = true;
   type:any;
 
@@ -46,14 +47,15 @@ export class DnaLearningFormComponent implements OnInit {
     private router:Router) { 
 
     this.createDnaForm = this.formBuilder.group({
-      learning_id:new FormControl('', [Validators.required]),
+      learning_id:new FormControl('', []),
       title: new FormControl('', []),
+      description: new FormControl('', []),
       number_of_participant: new FormControl('', [Validators.required]),
       priority_id: new FormControl('', [Validators.required]),
       management_code: new FormControl('', []),
       region_id: new FormControl('',[Validators.required]),
       domain_training_id: new FormControl('',[]),
-      country: new FormControl('', [Validators.required]),
+      country: new FormControl('', []),
       business_unit_id: new FormControl('', [Validators.required]),
     });
   }
@@ -87,6 +89,16 @@ export class DnaLearningFormComponent implements OnInit {
    
   
   }
+
+  getTitle(event:any){
+    console.log("event",event);
+   if(event && event.id){
+    this.isDescription = false;
+   }
+   else{
+     this.isDescription = true;
+   }
+  }
  
   save(){
     this.isSubmitted = true;
@@ -95,13 +107,13 @@ export class DnaLearningFormComponent implements OnInit {
     if (this.createDnaForm.invalid) {
       return;
     }
-    if(this.formId){
+     if(this.formId){
       body.digital_learning_id = this.formId;
       this.update(body);
     }
     else{
       this.create(body);
-    }    
+    }  
   }
 
   create(body:any){
@@ -159,8 +171,8 @@ export class DnaLearningFormComponent implements OnInit {
         if(this.form_details.management_code){
           this.createDnaForm.controls.management_code.setValue(this.form_details.management_code);
         }
-        if(this.form_details.domain_id){
-          this.createDnaForm.controls.domain_id.setValue(this.form_details.domain_id);
+        if(this.form_details.domain_training_id){
+          this.createDnaForm.controls.domain_training_id.setValue(this.form_details.domain_training_id);
         }
         this.createDnaForm.controls.region_id.setValue(this.form_details.region_id);
         if(this.form_details.country){
@@ -186,10 +198,13 @@ export class DnaLearningFormComponent implements OnInit {
     this.router.navigateByUrl(`/dashboard/dna/create/${this.trackerId}`);  
   }
 
-  CreateNew(city:any){
-    console.log("city",city)
+  createNew = (term:string) =>{
+    console.log(term);
+    this.titleList = [...this.titleList, {training_title: term}];
+    this.isDescription = true;
+    this.createDnaForm.controls.title.setValue(term);     
   }
-
+ 
   getTrackerDetail(){
     this.commonService.showLoading();
     this.dnaService.getTrackerDetail(this.trackerId).subscribe(
