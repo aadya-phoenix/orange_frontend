@@ -72,4 +72,12 @@ export class GeneralDropdownsService {
       .get(url, this.http.headers)
       .pipe(catchError(this.commmonService.Errorhandling));
   }
+
+  getBusinessUnits(){
+    const url = `/api/${this.apiVersion}/cct-business-units`;
+    return this.http
+    .get(url, this.http.headers)
+    .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
 }

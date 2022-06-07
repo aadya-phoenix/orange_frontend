@@ -7,6 +7,7 @@ import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
+import { GeneralDropdownsService } from 'src/app/shared/services/general-dropdowns/general-dropdowns.service';
 import { GetReportService } from 'src/app/shared/services/get-report/get-report.service';
 import Swal from 'sweetalert2';
 import { GetReportCloseOnUpdateComponent } from '../get-report-close-on-update/get-report-close-on-update.component';
@@ -79,6 +80,7 @@ export class GetReportCreateComponent implements OnInit {
     private modalService: NgbModal,
     private authService: AuthenticationService,
     private getReportService: GetReportService,
+    private generalDrpdownsService: GeneralDropdownsService,
     private courseService:CourcesService,
     private datepipe:DatePipe) {
     this.minStartDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
@@ -591,7 +593,7 @@ export class GetReportCreateComponent implements OnInit {
 
   getBusinessUnits(){
     this.commonService.showLoading();
-    this.getReportService.getBusinessUnits().subscribe(
+    this.generalDrpdownsService.getBusinessUnits().subscribe(
       (res: any) => {
         this.commonService.hideLoading();
         this.businessUnitsObj = res.data;

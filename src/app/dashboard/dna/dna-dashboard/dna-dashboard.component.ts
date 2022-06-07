@@ -14,6 +14,9 @@ export class DnaDashboardComponent implements OnInit {
   dateFormate = dataConstant.dateFormate;
   trackerObj:any = [];
   today = new Date();
+  trackerId:number=0;
+  learningList:any=[];
+  learningListToShow:any=[];
 
   constructor(
     private dnaService:DnaService,
@@ -25,6 +28,7 @@ export class DnaDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTrackerList();
+    this.getLearningList();
   }
 
   addLearning(item:any){
@@ -51,6 +55,25 @@ export class DnaDashboardComponent implements OnInit {
 
   review(){
     this.router.navigateByUrl(`/dashboard/dna/view-rpt`); 
+  }
+
+  getLearningList(){
+    this.commonService.showLoading();
+    this.dnaService.getDna().subscribe(
+      (res: any) => {
+        if(res.status == 1){
+        this.commonService.hideLoading();
+        this.learningList = res.data.digital_learning;
+        this.learningListToShow = this.learningList.filter((x:any)=>x.tracker_id === this.trackerId);
+        }
+        else{
+          this.commonService.hideLoading();
+          this.commonService.toastErrorMsg('Error', res.message);
+        }
+      },(err:any)=>{
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      });
   }
 
   getTrackerList(){

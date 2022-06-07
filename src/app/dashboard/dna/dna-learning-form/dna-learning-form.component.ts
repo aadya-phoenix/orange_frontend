@@ -45,7 +45,6 @@ export class DnaLearningFormComponent implements OnInit {
     private getReportService:GetReportService,
     private commonService: CommonService,
     private router:Router) { 
-
     this.createDnaForm = this.formBuilder.group({
       learning_id:new FormControl('', []),
       title: new FormControl('', []),
@@ -81,13 +80,12 @@ export class DnaLearningFormComponent implements OnInit {
    this.regionId = region.id;
    if(region.region_name == 'Global'){
      this.isCountry = false;
+     this.createDnaForm.get('country')?.setValue(null);
    }
    else{
     this.isCountry = true;
     this.getCountries();
    }
-   
-  
   }
 
   getTitle(event:any){
@@ -228,7 +226,7 @@ export class DnaLearningFormComponent implements OnInit {
   }
 
   getBusinessUnits(){
-    this.getReportService.getBusinessUnits().subscribe( (res: any) => {
+    this.generalDrpdownsService.getBusinessUnits().subscribe( (res: any) => {
       this.commonService.hideLoading();
       this.bussinessUnitObj = res.data;
     },
