@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DnaService } from 'src/app/shared/services/dna/dna.service';
 
@@ -12,6 +13,12 @@ import { DnaService } from 'src/app/shared/services/dna/dna.service';
 export class DnaDashboardComponent implements OnInit {
 
   dateFormate = dataConstant.dateFormate;
+  RoleID = dataConstant.RoleID;
+  isRom = false;
+  isBussinessConsultant = false;
+  isLearningPartner = false;
+  isDomainExpert = false;
+  getUserrole: any = {};
   trackerObj:any = [];
   today = new Date();
   trackerId:number=0;
@@ -19,10 +26,16 @@ export class DnaDashboardComponent implements OnInit {
   learningListToShow:any=[];
 
   constructor(
+    private authService: AuthenticationService,
     private dnaService:DnaService,
     private commonService:CommonService,
     private router:Router
   ) { 
+    this.getUserrole = this.authService.getRolefromlocal();
+    this.isRom = this.getUserrole.id == this.RoleID.Rom;
+    this.isBussinessConsultant = this.getUserrole.id == this.RoleID.BussinessConsultant;
+    this.isLearningPartner = this.getUserrole.id == this.RoleID.LearningPartner;
+    this.isDomainExpert = this.getUserrole.id == this.RoleID.DomainExpert;
     this.today.setHours(0,0,0,0);
   }
 
@@ -54,7 +67,12 @@ export class DnaDashboardComponent implements OnInit {
   }
 
   review(){
+    if(this.isDomainExpert || this.isLearningPartner || this.isRom){
     this.router.navigateByUrl(`/dashboard/dna/view-rpt`); 
+    }
+    if(this.isBussinessConsultant){
+      this.router.navigateByUrl(`/dashboard/dna/view-bp`); 
+    }
   }
 
   getLearningList(){
@@ -64,7 +82,7 @@ export class DnaDashboardComponent implements OnInit {
         if(res.status == 1){
         this.commonService.hideLoading();
         this.learningList = res.data.digital_learning;
-        this.learningListToShow = this.learningList.filter((x:any)=>x.tracker_id === this.trackerId);
+        //this.learningListToShow = this.learningList.filter((x:any)=>x.tracker_id === this.trackerId);
         }
         else{
           this.commonService.hideLoading();

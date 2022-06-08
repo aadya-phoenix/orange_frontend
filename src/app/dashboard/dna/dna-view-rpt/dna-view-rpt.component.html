@@ -120,6 +120,34 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="card-header cm-card-header">
+                            <div class="overall_css">
+                                <div>
+                                    <div class="filter_dispaly">
+                                        <div _ngcontent-cue-c109=" " class="form-group filter_course mr-2">
+                                            <label _ngcontent-cue-c109=" " class="label_course text_black">Comments</label>
+                                            <input _ngcontent-cue-c109=" " type="text " name="search " autocomplete="off "
+                                              [(ngModel)]="searchText" placeholder=" "
+                                              class="form-control ng-untouched ng-pristine ng-valid form_width" ng-reflect-name="search " />
+                                          </div>
+                                        <div class="form-group filter_course mr-2">
+                                            <label class="label_course">Learning Status</label>
+                                            <select class="form-control  form_width" (change)="getStatus($event.target.value)"
+                                             >
+                                              <option selected='selected' value=''>Learning Status</option>
+                                             <option [value]="1">Closed</option>
+                                            </select>
+                                          </div> 
+                                          <button class=" btn btn-primary btn_adduser mt-3"
+                                          (click)="submit()" data-toggle="modal" 
+                                    >
+                                        <i class="fa fa-plus mr-1" aria-hidden="true"></i><span>Submit</span>
+                                      </button> 
+                                          
+                                        </div>
+                                </div> 
+                        </div>
+                        </div>
                         <div class="card-body">
                             <div class="table-responsive table_height_scroll">
                                 <table id="bootstrap-data-table-export " class="table table-striped table-bordered">
@@ -167,46 +195,35 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <tr >
-                                            <td class="request_id" >
-                                            </td>
-                                            <td ></td>
-                                            <td >
-                                            </td>
-                                            <td >
-                                            </td>
-                                            <td >
-                                            </td>
-                                            <td> 
-                                            </td>
-                                            <td >
-                                            </td>
-                                            <td>
-                                         
-                                            </td>
-                                            <td>
-                                                
-                                            </td>
-                                            <td>
-                                            
-                                            </td>
+                                        <tr *ngFor="let item of learningList | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber } ; let i = index;"
+                                        class="text-center bac_hover-table font-12">
+                                            <td> <input type="checkbox"></td>
+                                            <td>{{item.email}}</td>
+                                            <td>{{item.learning_type}}</td>
+                                            <td>{{item.learning_type}}</td>
+                                            <td>{{item.title}}</td>
+                                            <td>{{item.number_of_participant}}</td>
+                                            <td>{{item.priority_name}}</td>
+                                            <td>{{item.country}}</td>
+                                            <td>{{item.management_code}}</td>
+                                            <td>{{item.business_unit_name}}</td>
+                                            <td>{{item.status}}</td>
                                             <td></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                           <!--  <div class="pagiantio_dispaly">
+                             <div class="pagiantio_dispaly">
                                 <div class="pagintion_ child">
                                     <p class="cm-pagination-fotter">Showing {{(pagination.pageSize *
                                         (pagination.pageNumber - 1)) + 1}} to
                                         {{(this.pagination.pageSize * this.pagination.pageNumber) >
-                                        this.backOfficeListToShow?.length ? this.backOfficeListToShow?.length :
+                                        this.learningList?.length ? this.learningList?.length :
                                         this.pagination.pageSize * this.pagination.pageNumber}} of
-                                        {{this.backOfficeListToShow?.length}} entries</p>
+                                        {{this.learningList?.length}} entries</p>
                                 </div>
                                 <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
-                            </div> -->
+                            </div> 
                         </div>
                     </div>
                 </div>

@@ -5,11 +5,11 @@ import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DnaService } from 'src/app/shared/services/dna/dna.service';
 
 @Component({
-  selector: 'app-dna-view-rpt',
-  templateUrl: './dna-view-rpt.component.html',
-  styleUrls: ['./dna-view-rpt.component.scss']
+  selector: 'app-dna-view-bp',
+  templateUrl: './dna-view-bp.component.html',
+  styleUrls: ['./dna-view-bp.component.scss']
 })
-export class DnaViewRptComponent implements OnInit {
+export class DnaViewBpComponent implements OnInit {
 
   dnaStatus = dataConstant.DnaStatus;
   selectedStatus = this.dnaStatus.total;

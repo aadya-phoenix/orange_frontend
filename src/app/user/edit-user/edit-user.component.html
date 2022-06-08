@@ -151,7 +151,6 @@
                                         <div class="form-group">
                                             <label class="form-control-label">Region</label>
                                             <ng-select  [items]="regionList" 
-                                            (change)="getRegion($event)"
                                                 [multiple]="false" bindLabel="name" bindValue="id"
                                                 formControlName="region_id">
                                             </ng-select>
@@ -173,43 +172,6 @@
                                             </ng-select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4" *ngIf="isCountry">
-                                        <div class="form-group">
-                                            <label class="form-control-label">
-                                                Country
-                                            </label>
-                                            <ng-select  [items]="countriesObj"
-                                                 bindLabel="country_name"
-                                                bindValue="country_name" formControlName="country" class="w_100">
-                                            </ng-select>
-                                           
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4" *ngIf="isDomain">
-                                        <div class="form-group">
-                                            <label class="form-control-label">
-                                                Domain  Training
-                                            </label>
-                                            <ng-select [items]="domainObj"
-                                                 bindLabel="domain_name"
-                                                bindValue="id" formControlName="domain_training_id" class="w_100">
-                                            </ng-select>
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4" *ngIf="isBussinessUnit">
-                                        <div class="form-group">
-                                            <label class="form-control-label">
-                                                Business Unit/M1 Level
-                                            </label>
-                                            <ng-select  [items]="bussinessUnitObj"
-                                                 bindLabel="team_name"
-                                                bindValue="id" formControlName="business_unit_id" class="w_100">
-                                            </ng-select>
-                                          
-                                        </div>
-                                    </div>
-                                    
                                 </div>
                                 <div class="">
                                   <input type="checkbox"  formControlName="pdl_member" class="mr-1"/> <label class="mr-2">PD&L Member</label>
@@ -221,8 +183,7 @@
                                   <input type="checkbox"  formControlName="staff" class="mr-1"/>
                                   <label class="mr-2">Staff</label>
                                 </div>
-                            </div>
-                            
+                            </div> 
                         </div>
                         <div *ngIf="!isCreate" class="card">
                             <div _ngcontent-qub-c7="" class="card-header card_header_view">
