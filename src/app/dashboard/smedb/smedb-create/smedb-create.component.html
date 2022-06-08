@@ -1,0 +1,583 @@
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-8">
+            <div class="page-header float-left bac_trasparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/SME_DB.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="breade_text_span1">SME Database</span>
+                        <span class="divider"></span>
+                        <span class="breade_text_span">The SME learning Community is one of the enablers for OBS to
+                            become a Learning organization by enabling a co-development environment through sharing
+                            knowledge and hands-on experience on the latest industry technologies and practices.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 float-right">
+            <div class="page-header float-right bac_trasparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bac_trasparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home text_white"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/smedb']" class="text_white">Create new SME</a>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">New Request</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card_header_common">
+        <div class="d-flex justify-content-between media_creat_couse_col">
+            <div class="d-flex align-items-center">
+                <img src="../../../../assets/images/formm.png" class="form_img_req" />
+                <p class="mt-2 ml-2 mb-2 view-re_css">
+                    <span class="comlte_css">Complete this form and click on the submit button</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="content mt-1">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong _ngcontent-jet-c125=""> SME Database </strong>
+                        </div>
+                        <div class="card-body card_width">
+                            <form [formGroup]="createSmedbForm" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="d-flex align-items-center">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Phone no. <span class="text_red">* </span>
+                                                </label>
+                                                <input type="text" placeholder="Enter Phone no"
+                                                    class="form-control form_width" formControlName="phone" />
+                                                <div class="error_message"
+                                                    *ngIf="(createSmedbForm.controls['phone'].invalid && (createSmedbForm.controls['phone'].dirty || createSmedbForm.controls['phone'].touched || isSubmitted))">
+                                                    Phone no. cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-sm-12">
+                                        <div class="d-flex align-items-center">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Volunteered for domain/expertise/training <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <ng-select
+                                                    placeholder="Please select a volunteered for domain/expertise/training"
+                                                    formControlName="domain" [items]="CCTDomainExpert" bindLabel="name"
+                                                    bindValue="slug" [multiple]=true class="w_100">
+                                                </ng-select>
+                                                <div class="error_message"
+                                                    *ngIf="(createSmedbForm.controls['domain'].invalid && (createSmedbForm.controls['domain'].dirty || createSmedbForm.controls['domain'].touched || isSubmitted))">
+                                                    Volunteered for domain/expertise/training cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="d-flex align-items-center">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Are you currently available? <span class="text_red">* </span>
+                                                </label>
+                                                <ng-select placeholder="Please select your availability" [items]="yesNo"
+                                                    bindLabel="name" bindValue="id" formControlName="available"
+                                                    [multiple]=false class="w_100">
+                                                </ng-select>
+                                                <div class="error_message"
+                                                    *ngIf="(createSmedbForm.controls['available'].invalid && (createSmedbForm.controls['available'].dirty || createSmedbForm.controls['available'].touched || isSubmitted))">
+                                                    Title cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="d-flex align-items-center">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label" *ngIf="isAvailable">
+                                                    When you are not available - Start date <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <label class="form-control-label" *ngIf="!isAvailable">
+                                                    When will you be available starting? <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <input type="date" class="form-control form_width"
+                                                    formControlName="start_date" min="{{minDate}}" />
+                                                <div class="error_message"
+                                                    *ngIf="(createSmedbForm.controls['start_date'].invalid && (createSmedbForm.controls['start_date'].dirty || createSmedbForm.controls['start_date'].touched || isSubmitted))">
+                                                    Start date cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12" *ngIf="isAvailable">
+                                        <div class="d-flex align-items-center">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    When you are not available - End date <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <input type="date" class="form-control form_width"
+                                                    formControlName="end_date" min="{{maxDate}}" />
+                                                <div class="error_message"
+                                                    *ngIf="(createSmedbForm.controls['end_date'].invalid && (createSmedbForm.controls['end_date'].dirty || createSmedbForm.controls['end_date'].touched || isSubmitted))">
+                                                    End date cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="d-flex align-items-center">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Contact person in PD&L <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <ng-select placeholder="Please select contact person in PD&L"
+                                                    [items]="ContcatPersion" formControlName="contact_person_id"
+                                                    bindLabel="email" bindValue="id" groupBy="role" [multiple]=false
+                                                    class="w_100">
+                                                </ng-select>
+                                                <div class="error_message"
+                                                    *ngIf="(createSmedbForm.controls['contact_person_id'].invalid && (createSmedbForm.controls['contact_person_id'].dirty || createSmedbForm.controls['contact_person_id'].touched || isSubmitted))">
+                                                    Contact person in PD&L cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="manage-checkbox">
+                                                <input type="checkbox" formControlName="isStatus" class="mr-1">Save as
+                                                draft</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-start" *ngIf="!sme_id">
+                                    <div class="d-flex justify-content-start">
+                                        <button class="btn btn-primary" (click)="saveSME()">
+                                            Procced
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div *ngIf="sme_details && sme_details.id">
+                        <!-- *ngIf="sme_details && sme_details.id" -->
+                        <div class="tabbed round ">
+                            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                                <li class="nav-item" role="presentation"
+                                    *ngIf="sme_details.domain.includes('content-support')">
+                                    <a class="nav-link active" id="id-content-support" data-toggle="pill"
+                                        href="#content-support" role="tab" aria-controls="content-support"
+                                        aria-selected="true">Content support</a>
+                                </li>
+                                <li class="nav-item" role="presentation"
+                                    *ngIf="sme_details.domain.includes('delivery')">
+                                    <a class="nav-link" id="id-delivery" data-toggle="pill" href="#delivery" role="tab"
+                                        aria-controls="delivery" aria-selected="false">Delivery</a>
+                                </li>
+                                <li class="nav-item" role="presentation"
+                                    *ngIf="sme_details.domain.includes('voice-over-learning')">
+                                    <a class="nav-link" id="id-voice-over" data-toggle="pill" href="#voice-over"
+                                        role="tab" aria-controls="voice-over" aria-selected="false">Voice-over for
+                                        eLearning</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="id-professional-certi" data-toggle="pill"
+                                        href="#professional-certi" role="tab" aria-controls="professional-certi"
+                                        aria-selected="false">Professional certifications</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="id-comments" data-toggle="pill" href="#comments" role="tab"
+                                        aria-controls="comments" aria-selected="false">Comments</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="tab-content border-0 bg-white pb-5" id="pills-tabContent">
+                            <!-- <div class="pull-right mb-2 row">
+                                <button class="btn btn-primary">
+                                    <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i> Previous
+                                </button>
+                                <button class="btn btn-primary">
+                                    Next <i class="fa fa-arrow-right ml-2" aria-hidden="true"></i>
+                                </button>
+                            </div> -->
+                            <div class="tab-pane fade show active mt-5" id="content-support" role="tabpanel"
+                                aria-labelledby="id-content-support"
+                                *ngIf="sme_details.domain.includes('content-support')">
+                                <form [formGroup]="contentSupportForm" enctype="multipart/form-data">
+                                    <div formArrayName="content-support">
+                                        <div class="row"
+                                            *ngFor="let contentSup of contentSupportFormArray.controls; let i = index">
+                                            <div class="col-md-5 col-sm-12" [formGroupName]="i">
+                                                <div class="form-group w-100">
+                                                    <label class="form-control-label">
+                                                        Title <span class="text_red">*
+                                                        </span>
+                                                    </label>
+                                                    <ng-select placeholder="Please select title"
+                                                        [items]="CCTDomainSkills" bindLabel="expertise" bindValue="expertise"
+                                                        groupBy="domain" formControlName="title" [multiple]=false
+                                                        class="w_100">
+                                                    </ng-select>
+                                                    <div class="error_message"
+                                                        *ngIf="(contentSupportFormArray.controls[i].controls['title'].invalid && (contentSupportFormArray.controls[i].controls['title'].dirty || contentSupportFormArray.controls[i].controls['title'].touched || isSubmitted))">
+                                                        Title cannot be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 col-sm-12" [formGroupName]="i">
+                                                <div class="form-group w-100">
+                                                    <label class="form-control-label">
+                                                        Level <span class="text_red">*
+                                                        </span>
+                                                    </label>
+                                                    <ng-select placeholder="Please select level" [items]="CCTLevel"
+                                                        bindLabel="sme_level" bindValue="sme_level" formControlName="level"
+                                                        [multiple]=false class="w_100">
+                                                    </ng-select>
+                                                    <div class="error_message"
+                                                        *ngIf="(contentSupportFormArray.controls[i].controls['level'].invalid && (contentSupportFormArray.controls[i].controls['level'].dirty || contentSupportFormArray.controls[i].controls['level'].touched || isSubmitted))">
+                                                        Level cannot be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-12 mt-35" [formGroupName]="i">
+                                                <button class="btn btn-success mr-2"
+                                                    (click)="addLearnerGuideline(0)">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                                <button class="btn btn-danger" (click)="removeContentSupport(i)"
+                                                    *ngIf="i > 0">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade mt-5" id="delivery" role="tabpanel"
+                                *ngIf="sme_details.domain.includes('delivery')" aria-labelledby="id-delivery">
+                                <form [formGroup]="deliveryForm" enctype="multipart/form-data">
+                                    <div formArrayName="delivery">
+                                        <div class="row"
+                                            *ngFor="let contentSup of deliveryFormArray.controls; let i = index">
+                                            <div class="col-md-5 col-sm-12" [formGroupName]="i">
+                                                <div class="form-group w-100">
+                                                    <label class="form-control-label">
+                                                        Title <span class="text_red">*
+                                                        </span>
+                                                    </label>
+                                                    <ng-select placeholder="Please select title"
+                                                        [items]="CCTDomainSkills" bindLabel="expertise" bindValue="expertise"
+                                                        groupBy="domain" formControlName="title" [multiple]=false
+                                                        class="w_100">
+                                                    </ng-select>
+                                                    <div class="error_message"
+                                                        *ngIf="(deliveryFormArray.controls[i].controls['title'].invalid && (deliveryFormArray.controls[i].controls['title'].dirty || deliveryFormArray.controls[i].controls['title'].touched || isSubmitted))">
+                                                        Title cannot be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 col-sm-12" [formGroupName]="i">
+                                                <div class="form-group w-100">
+                                                    <label class="form-control-label">
+                                                        Level <span class="text_red">*
+                                                        </span>
+                                                    </label>
+                                                    <ng-select placeholder="Please select level" [items]="CCTLevel"
+                                                        bindLabel="sme_level" bindValue="sme_level" formControlName="level"
+                                                        [multiple]=false class="w_100">
+                                                    </ng-select>
+                                                    <div class="error_message"
+                                                        *ngIf="(deliveryFormArray.controls[i].controls['level'].invalid && (deliveryFormArray.controls[i].controls['level'].dirty || deliveryFormArray.controls[i].controls['level'].touched || isSubmitted))">
+                                                        Level cannot be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-12 mt-35" [formGroupName]="i">
+                                                <button class="btn btn-success mr-2"
+                                                    (click)="addDelivery(0,'','','','','')">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                                <button class="btn btn-danger" (click)="removeDelivery(i)"
+                                                    *ngIf="i > 0">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col-md-5 col-sm-12" [formGroupName]="i">
+                                                <div class="form-group w-100">
+                                                    <label class="form-control-label">
+                                                        Previous experience in delivery/facilitation of training <span
+                                                            class="text_red">*
+                                                        </span>
+                                                    </label>
+                                                    <ng-select placeholder="Please select title" [items]="yesNo"
+                                                        bindLabel="name" bindValue="id"
+                                                        formControlName="previous_experience" [multiple]=false
+                                                        class="w_100">
+                                                    </ng-select>
+                                                    <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createSmedbForm.controls['training_provided_by'].dirty || createSmedbForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 col-sm-12" [formGroupName]="i">
+                                                <div class="form-group w-100">
+                                                    <label class="form-control-label">
+                                                        Would you need help? <span class="text_red">*
+                                                        </span>
+                                                    </label>
+                                                    <ng-select placeholder="Please select level" [items]="yesNo"
+                                                        bindLabel="name" bindValue="id" formControlName="need_help"
+                                                        [multiple]=false class="w_100">
+                                                    </ng-select>
+                                                    <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createSmedbForm.controls['training_provided_by'].dirty || createSmedbForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10 col-sm-12" [formGroupName]="i">
+                                                <div class="form-group w-100">
+                                                    <label class="form-control-label">
+                                                        How can we help you? <span class="text_red">*
+                                                        </span>
+                                                    </label>
+                                                    <label class="form-control-label">
+                                                        Provide a brief of experience <span class="text_red">*
+                                                        </span>
+                                                    </label>
+                                                    <textarea class="form-control form_width-textarea" rows="3"
+                                                        placeholder="Enter Prerequisite" maxlength="500"
+                                                        formControlName="comment"></textarea>
+                                                    <!-- <div class="error_message"
+                                                *ngIf="(createSmedbForm.controls['training_provided_by'].invalid && (createSmedbForm.controls['training_provided_by'].dirty || createSmedbForm.controls['training_provided_by'].touched || isSubmitted))">
+                                                    Training Provided By cannot be blank
+                                                </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade mt-5" id="voice-over" role="tabpanel"
+                                *ngIf="sme_details.domain.includes('voice-over-learning')"
+                                aria-labelledby="id-voice-over">
+                                <form [formGroup]="voiceOverLearningForm" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Laungauge <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <ng-select placeholder="Please select laungauge" [items]="availableLanguages"
+                                                    bindLabel="name" bindValue="slug" [multiple]=true
+                                                    formControlName="language" class="w_100">
+                                                </ng-select>
+                                                <div class="error_message"
+                                                    *ngIf="(voiceOverLearningForm.controls['language'].invalid && (voiceOverLearningForm.controls['language'].dirty || voiceOverLearningForm.controls['language'].touched || isSubmitted))">
+                                                    Laungauge cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Other Laungauge
+                                                </label>
+                                                <input type="text" placeholder="Enter other laungauge"
+                                                    class="form-control form_width" formControlName="other_language" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Male or female voice <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <ng-select placeholder="Please select level" [items]="gender_voice"
+                                                    bindLabel="name" bindValue="id" [multiple]=false class="w_100"
+                                                    formControlName="gender_voice">
+                                                </ng-select>
+                                                <div class="error_message"
+                                                    *ngIf="(voiceOverLearningForm.controls['gender_voice'].invalid && (voiceOverLearningForm.controls['gender_voice'].dirty || voiceOverLearningForm.controls['gender_voice'].touched || isSubmitted))">
+                                                    Male or female voice cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Previous experience in voice-over <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <ng-select placeholder="Please select level" [items]="yesNo"
+                                                    bindLabel="name" bindValue="id" [multiple]=false class="w_100"
+                                                    formControlName="previous_experience">
+                                                </ng-select>
+                                                <div class="error_message"
+                                                    *ngIf="(voiceOverLearningForm.controls['previous_experience'].invalid && (voiceOverLearningForm.controls['previous_experience'].dirty || voiceOverLearningForm.controls['previous_experience'].touched || isSubmitted))">
+                                                    Previous experience in voice-over cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Provice a brief of experience <span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <textarea class="form-control form_width-textarea" rows="3"
+                                                    placeholder="Enter brief of experience" maxlength="500"
+                                                    formControlName="comment"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="custom-dropzone col-md-12" ngx-dropzone [accept]="'video/*'"
+                                            (change)="onFilesAdded($event)">
+                                            <ngx-dropzone-label>
+                                                <div>
+                                                    <h2>My custom dropzone II</h2>
+                                                </div>
+                                            </ngx-dropzone-label>
+                                            <ngx-dropzone-video-preview ngProjectAs="ngx-dropzone-preview"
+                                                *ngFor="let f of files" [file]="f" [removable]="true"
+                                                (removed)="onRemove(f)">
+                                                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                            </ngx-dropzone-video-preview>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade mt-5" id="professional-certi" role="tabpanel"
+                                aria-labelledby="id-professional-certi">
+                                <form [formGroup]="professionalCertificationsForm" enctype="multipart/form-data">
+                                    <div formArrayName="professional-certifications">
+                                        <div class="row" *ngFor="let data of professionalCertificationsFormArray.controls; let i = index">
+                                            <div class="col-md-5 col-sm-12" [formGroupName]="i">
+                                                <div class="form-group w-100">
+                                                    <label class="form-control-label">
+                                                        Certification Title <span class="text_red">*
+                                                        </span>
+                                                    </label>
+                                                    <input type="text" placeholder="Enter Certification Title"
+                                                        class="form-control form_width"
+                                                        formControlName="certification_title" />
+                                                    <div class="error_message"
+                                                        *ngIf="professionalCertificationsFormArray.controls[i].controls['certification_title'] && (professionalCertificationsFormArray.controls[i].controls['certification_title'].invalid && (professionalCertificationsFormArray.controls[i].controls['certification_title'].dirty || professionalCertificationsFormArray.controls[i].controls['certification_title'].touched || isSubmitted))">
+                                                        Title cannot be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 col-sm-12" [formGroupName]="i">
+                                                <div class="form-group w-100">
+                                                    <label class="form-control-label">
+                                                        Year of completion <span class="text_red">*
+                                                        </span>
+                                                    </label>
+                                                    <input type="text" placeholder="Enter Year of completion"
+                                                        class="form-control form_width"
+                                                        formControlName="completion_year" />
+                                                    <div class="error_message"
+                                                        *ngIf="professionalCertificationsFormArray.controls[i].controls['completion_year'] && (professionalCertificationsFormArray.controls[i].controls['completion_year'].invalid && (professionalCertificationsFormArray.controls[i].controls['completion_year'].dirty || professionalCertificationsFormArray.controls[i].controls['completion_year'].touched || isSubmitted))">
+                                                        Year of completion cannot be blank
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-12 mt-35" [formGroupName]="i">
+                                                <button class="btn btn-success mr-2"
+                                                    (click)="addProfessionalCertification(0, '','')">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                                <button class="btn btn-danger"
+                                                    (click)="removeProfessionalCertification(i)" *ngIf="i > 0">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade mt-5" id="comments" role="tabpanel" aria-labelledby="id-comments">
+                                <form [formGroup]="commentsForm" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="manage-checkbox">
+                                                    <input type="checkbox" formControlName="agree" class="mr-1">I am
+                                                    agree with OBS SME
+                                                    Community</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group w-100">
+                                                <label class="form-control-label">
+                                                    Other Comments
+                                                </label>
+                                                <textarea class="form-control form_width-textarea" rows="3"
+                                                    placeholder="Enter Comments" maxlength="500"
+                                                    formControlName="other_comment"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- <div class="pull-right mb-2 row">
+                                <button class="btn btn-primary">
+                                    <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i> Previous
+                                </button>
+                                <button class="btn btn-primary">
+                                    Next <i class="fa fa-arrow-right ml-2" aria-hidden="true"></i>
+                                </button>
+                            </div> -->
+                        </div>
+
+                        <div class="d-flex justify-content-start mt-2" *ngIf="sme_id">
+                            <div class="d-flex justify-content-start">
+                                <button class="btn btn-primary" (click)="saveSME()">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
