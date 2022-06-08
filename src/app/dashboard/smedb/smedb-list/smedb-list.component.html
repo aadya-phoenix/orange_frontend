@@ -53,13 +53,27 @@
                                             ngbTooltip="Provide the date on which this entry should be removed from the Orange Learning Carousel. If the Expiry Date is unknown, the entry will be available in the Carousel for a maximum of 3 months."></i>
                                     </a>
                                 </span>
+                                <div class="d-flex">
+                                    <button class="btn btn-secondary" [routerLink]="['/dashboard/smedb/view-complete-report']">
+                                        <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> View
+                                      all activity report
+                                      </button>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-body card_course_body p-3">
+                        <div class="card-body card_course_body p-3" *ngIf="smeList.length == 0">
                             Click to <b>"Add"</b> button to begin.
                             <div class="d-flex mt-2">
                                 <button class="btn btn-primary" [routerLink]="['/dashboard/smedb/create']">
                                     <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1">Add</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body card_course_body p-3" *ngIf="smeList.length > 0">
+                            Click on <b>"View"</b> button to see your data.
+                            <div class="d-flex mt-2">
+                                <button class="btn btn-primary" [routerLink]="['/dashboard/smedb/create']">
+                                    <i class="fa fa-eye" aria-hidden="true"></i><span class="pl-1">View</span>
                                 </button>
                             </div>
                         </div>
