@@ -8,6 +8,7 @@ import { DnaLearningFormComponent } from './dna-learning-form/dna-learning-form.
 import { DnaManagerDataComponent } from './dna-manager-data/dna-manager-data.component';
 import { DnaUserEditComponent } from './dna-user-edit/dna-user-edit.component';
 import { DnaUserComponent } from './dna-user/dna-user.component';
+import { DnaViewBpComponent } from './dna-view-bp/dna-view-bp.component';
 import { DnaViewRptComponent } from './dna-view-rpt/dna-view-rpt.component';
 import { DnaViewComponent } from './dna-view/dna-view.component';
 
@@ -20,8 +21,8 @@ const routes: Routes = [
  {path:'add-new/:id',component:DnaLearningFormComponent,canActivate:[AuthenticationServiceGuard]},
  {path:'managersdata/:id',component:DnaManagerDataComponent, canActivate:[AuthenticationServiceGuard]},
  {path:'view/:id',component:DnaViewComponent,canActivate:[AuthenticationServiceGuard]},
- {path:'view-rpt',component:DnaViewRptComponent,canActivate:[AuthenticationServiceGuard]},
- {path:'view-bp',component:DnaViewComponent,canActivate:[AuthenticationServiceGuard]},
+ {path:'view-rpt/:id',component:DnaViewRptComponent,canActivate:[AuthenticationServiceGuard]},
+ {path:'view-bp/:id',component:DnaViewBpComponent,canActivate:[AuthenticationServiceGuard]},
  {path:'view-complete-report',component:DnaCompleteReportComponent,canActivate:[AuthenticationServiceGuard]} 
 ];
 

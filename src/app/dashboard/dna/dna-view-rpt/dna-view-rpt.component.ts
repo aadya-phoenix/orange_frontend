@@ -31,7 +31,10 @@ export class DnaViewRptComponent implements OnInit {
     publish: 0
   }
   searchText: any;
+  statusComment:string='';
   trackerId:number = 0;
+  selectedId = 0;
+  learningIds:any = [];
 
   pagination = {
     page: 1,
@@ -49,15 +52,37 @@ export class DnaViewRptComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.trackerId = Id ? parseInt(Id) : 0;
+      this.getLearningList();
     });
-    this.getLearningList();
+    
   }
 
   getStatus(event:any){
 
   }
 
-  submit(){}
+  selectedItems(item:any){
+    this.learningIds.push(item.id);
+  }
+
+  submit(){
+    const body = {} as any;
+    body.digital_learning_id = this.learningIds;
+    body.status  = this.dnaStatus.close;
+    body.status_comment = this.statusComment;
+    this.dnaService.dnaChangeStatus(body).subscribe((res: any) => {
+      if(res.status == 1){
+      this.commonService.hideLoading();
+      }
+      else{
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', res.message);
+      }
+    },(err:any)=>{
+      this.commonService.hideLoading();
+      this.commonService.toastErrorMsg('Error', err.message);
+    })
+  }
 
   getLearningList(){
     this.commonService.showLoading();
@@ -65,8 +90,7 @@ export class DnaViewRptComponent implements OnInit {
       (res: any) => {
         if(res.status == 1){
         this.commonService.hideLoading();
-        this.learningList = res.data.digital_learning;
-        this.learningListToShow = this.learningList.filter((x:any)=>x.tracker_id === this.trackerId);
+        this.learningList = res.data.digital_learning[this.trackerId];
         }
         else{
           this.commonService.hideLoading();

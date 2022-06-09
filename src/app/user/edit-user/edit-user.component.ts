@@ -52,11 +52,7 @@ export class EditUserComponent implements OnInit {
       admin: new FormControl(false, []),
       manager:new FormControl(false, []),
       staff: new FormControl(true, []),
-      domain_training_id: new FormControl('', []),
-      country: new FormControl('', []),
-      business_unit_id: new FormControl('', []),
-    },
-    { validators: passwordMatchingValidatior } );
+    });
   }
 
   ngOnInit(): void {
@@ -124,6 +120,7 @@ export class EditUserComponent implements OnInit {
     }
     const body = this.createUserForm.value;
     !this.user_id ? this.create(body) : this.update(body);
+   
   }
 
   create(body:any){

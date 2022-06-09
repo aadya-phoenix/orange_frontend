@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DnaService } from 'src/app/shared/services/dna/dna.service';
+import { DnaForwardComponent } from '../dna-forward/dna-forward.component';
 
 @Component({
   selector: 'app-dna-view-bp',
@@ -32,6 +34,9 @@ export class DnaViewBpComponent implements OnInit {
   }
   searchText: any;
   trackerId:number = 0;
+  isDisabled = false;
+  learningIds:any = [];
+  titleList:any=[];
 
   pagination = {
     page: 1,
@@ -41,6 +46,7 @@ export class DnaViewBpComponent implements OnInit {
   constructor(
     private commonService: CommonService,
     private dnaService:DnaService,
+    private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -49,15 +55,37 @@ export class DnaViewBpComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.trackerId = Id ? parseInt(Id) : 0;
+      this.getLearningList();
     });
-    this.getLearningList();
   }
 
   getStatus(event:any){
+  }
 
+  forward(){
+    
   }
 
   submit(){}
+
+  selectedItems(item:any){
+    this.learningIds.push(item.id);
+    this.titleList.push(this.learningList.find((y:any)=> y.id == item.id));
+  }
+
+  openModal() {
+    const modalRef = this.modalService.open(DnaForwardComponent, {
+      centered: true,
+      size: 'xl',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      title: 'Forward Request',
+      data: this.learningIds,
+      objectDetail: this.titleList,
+      type: 'forward'
+    };
+  }
 
   getLearningList(){
     this.commonService.showLoading();
@@ -65,8 +93,7 @@ export class DnaViewBpComponent implements OnInit {
       (res: any) => {
         if(res.status == 1){
         this.commonService.hideLoading();
-        this.learningList = res.data.digital_learning;
-        this.learningListToShow = this.learningList.filter((x:any)=>x.tracker_id === this.trackerId);
+        this.learningList = res.data.digital_learning[this.trackerId];
         }
         else{
           this.commonService.hideLoading();

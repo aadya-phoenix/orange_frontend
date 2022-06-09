@@ -111,12 +111,12 @@
                         <div class="card-body">
                             <div class="row">
                               <!--    -->
-                                <div class="col-sm-4">
+                                <div class="col-sm-4" *ngFor="let item of requestedTrackerList">
                                     <div class="card">
                                         <div class="card-header card_header_Dna">
                                             <div class="header_data1">
                                                 <div class="mt-2">
-                                                    <h4 class="font_size">Review: <i
+                                                    <h4 class="font_size">Review:{{item.title}} <i
                                                        class="fa fa-question-circle ml-1" aria-hidden="true"></i></h4>
                                                 </div>
                                             </div>
@@ -128,7 +128,7 @@
                                                 </div>    
                                             </div>
                                             <div class="button_dna">
-                                                <button class="btn btn-primary mr-1" (click)=" review()">
+                                                <button class="btn btn-primary mr-1" (click)=" review(item.id)">
                                                     <i class="fa fa-arrow-circle-o-left mr-1" aria-hidden="true"></i>
                                                     <span>Start Review</span></button>
                                                 <button class="btn btn-success"><span>Full Report</span></button>
@@ -136,56 +136,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-sm-4">
-                                    <div class="card">
-                                        <div class="card-header card_header_Dna">
-                                            <div class="header_data1">
-                                                <div class="mt-2">
-                                                    <h4 class="font_size">Review Learning needs: 2019 <i
-                                                      class="fa fa-question-circle ml-1" aria-hidden="true"></i></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="date_amin">
-                                                <div class="start_date">
-                                                    <h4 class="font_size">Click "Start Review" of your regional needs </h4>
-                                                </div>
-                                            </div>    
-                                            <div class="button_dna">
-                                                <button class="btn btn-primary mr-1">
-                                                    <i class="fa fa-arrow-circle-o-left mr-1" aria-hidden="true"></i>
-                                                    <span>Start Review</span></button>
-                                                <button class="btn btn-success"><span>Full Report</span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="card">
-                                        <div class="card-header card_header_Dna">
-                                            <div class="header_data1">
-                                                <div class="mt-2">
-                                                    <h4 class="font_size">Review Learning needs: 2019 <i
-                                                       class="fa fa-question-circle ml-1" aria-hidden="true"></i></h4>  
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="date_amin">
-                                                <div class="start_date">
-                                                    <h4 class="font_size">Click "Start Review" of your regional needs </h4>
-                                                </div>
-                                            </div>    
-                                            <div class="button_dna">
-                                                <button class="btn btn-primary mr-1">
-                                                    <i class="fa fa-arrow-circle-o-left mr-1" aria-hidden="true"></i>
-                                                    <span>Start Review</span></button>
-                                                <button class="btn btn-success"><span>Full Report</span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>

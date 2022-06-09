@@ -24,6 +24,7 @@ export class DnaDashboardComponent implements OnInit {
   trackerId:number=0;
   learningList:any=[];
   learningListToShow:any=[];
+  requestedTrackerList:any = [];
 
   constructor(
     private authService: AuthenticationService,
@@ -41,7 +42,7 @@ export class DnaDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTrackerList();
-    this.getLearningList();
+   
   }
 
   addLearning(item:any){
@@ -66,12 +67,12 @@ export class DnaDashboardComponent implements OnInit {
     this.router.navigateByUrl(`/dashboard/dna/view-complete-report`); 
   }
 
-  review(){
+  review(itemId:any){
     if(this.isDomainExpert || this.isLearningPartner || this.isRom){
-    this.router.navigateByUrl(`/dashboard/dna/view-rpt`); 
+    this.router.navigateByUrl(`/dashboard/dna/view-rpt/${itemId}`); 
     }
     if(this.isBussinessConsultant){
-      this.router.navigateByUrl(`/dashboard/dna/view-bp`); 
+      this.router.navigateByUrl(`/dashboard/dna/view-bp/${itemId}`); 
     }
   }
 
@@ -80,15 +81,17 @@ export class DnaDashboardComponent implements OnInit {
     this.dnaService.getDna().subscribe(
       (res: any) => {
         if(res.status == 1){
-        this.commonService.hideLoading();
-        this.learningList = res.data.digital_learning;
-        //this.learningListToShow = this.learningList.filter((x:any)=>x.tracker_id === this.trackerId);
+         this.commonService.hideLoading();
+         this.learningList = res.data.digital_learning;
+         for (const item in  this.learningList){
+           this.requestedTrackerList.push(this.trackerObj.find((y:any)=> y.id == item));
+         }
         }
         else{
           this.commonService.hideLoading();
           this.commonService.toastErrorMsg('Error', res.message);
         }
-      },(err:any)=>{
+       },(err:any)=>{
         this.commonService.hideLoading();
         this.commonService.toastErrorMsg('Error', err.message);
       });
@@ -97,6 +100,7 @@ export class DnaDashboardComponent implements OnInit {
   getTrackerList(){
   this.dnaService.getTrackerList().subscribe((res:any)=>{
     this.trackerObj = res.data.tracker;
+    this.getLearningList();
   },
   err=>{
 
