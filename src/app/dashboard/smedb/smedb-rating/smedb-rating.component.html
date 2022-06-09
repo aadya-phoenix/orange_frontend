@@ -59,14 +59,17 @@
                             </div>
 
                         </div>
+                        <div class="mb-1 mt-0" *ngIf="!isRatingSubmitted">
+                            <button class="btn btn-primary" (click)="submitRating()">Submit</button>
+                        </div>
                     </div>
                 </form>
+               
             </div>
+           
         </div>
         <!--card-->
-        <div class="mb-1 mt-0" *ngIf="!isRatingSubmitted">
-            <button class="btn btn-primary" (click)="submitRating()">Submit</button>
-        </div>
+       
         <div class="card" *ngIf="isRatingSubmitted">
             <div class="card-header color-black">
                 You have already submitted feedback for this SME. you can see AME all feedback from the PD&L in the
@@ -74,11 +77,11 @@
             </div>
         </div>
         <div class="card">
-            <div class="card-header">
+            <div class="card-header header_border_0">
                 <div class="table-responsive table_height_scroll">
                     <table class="table table-striped table-bordered" id="table table-striped table-bordered">
                         <thead>
-                            <tr class="sticky_header fon_13">
+                            <tr class="sticky_header fon_13 text-center">
                                 <th scope="col">Rating</th>
                                 <th scope="col">Rating Comments</th>
                                 <th scope="col">Submitted By</th>
