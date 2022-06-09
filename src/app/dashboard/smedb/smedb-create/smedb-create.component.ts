@@ -9,6 +9,7 @@ import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { SMEService } from 'src/app/shared/services/sme/sme.service';
 import { UserManageService } from 'src/app/shared/services/user-management/user-manage.service';
+import { SmedbTermsComponent } from '../smedb-terms/smedb-terms.component';
 
 @Component({
   selector: 'app-smedb-create',
@@ -91,7 +92,6 @@ export class SmedbCreateComponent implements OnInit {
       other_comment: new FormControl('')
     });
 
-
     this.createSmedbForm.get("available")?.valueChanges.subscribe((x) => {
       if (x === 'yes') {
         this.isAvailable = true;
@@ -108,6 +108,17 @@ export class SmedbCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCCTDomainExpert();
+  }
+
+  showTerms(){
+    const x = this.commentsForm.get("agree")?.value;
+    if(!x){
+      const modalRef = this.modalService.open(SmedbTermsComponent, {
+        centered: true,
+        size: 'lg',
+        windowClass: 'alert-popup',
+      });
+    }
   }
 
   getCCTDomainExpert() {
@@ -398,6 +409,7 @@ export class SmedbCreateComponent implements OnInit {
         (res: any) => {
           if (res && res.status == 1) {
             this.commonService.toastSuccessMsg('SME Database', res.message);
+            this.router.navigateByUrl(`/dashboard/smedb/view/${res.data.id}`);
           } else {
             this.commonService.toastErrorMsg('Error', res.message);
           }
@@ -423,6 +435,7 @@ export class SmedbCreateComponent implements OnInit {
         (res: any) => {
           if (res && res.status == 1) {
             this.commonService.toastSuccessMsg('SME Database', res.message);
+            this.router.navigateByUrl(`/dashboard/smedb/view/${this.sme_id}`);
           } else {
             this.commonService.toastErrorMsg('Error', res.message);
           }

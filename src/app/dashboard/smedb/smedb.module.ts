@@ -14,6 +14,7 @@ import { SmedbViewReportComponent } from './smedb-view-report/smedb-view-report.
 import { SmedbRatingComponent } from './smedb-rating/smedb-rating.component';
 import { SmedbStatusComponent } from './smedb-status/smedb-status.component';
 import { SmedbHistoryComponent } from './smedb-history/smedb-history.component';
+import { SmedbTermsComponent } from './smedb-terms/smedb-terms.component';
 
 @NgModule({
   declarations: [
@@ -23,9 +24,10 @@ import { SmedbHistoryComponent } from './smedb-history/smedb-history.component';
     SmedbViewReportComponent,
     SmedbRatingComponent,
     SmedbStatusComponent,
-    SmedbHistoryComponent
+    SmedbHistoryComponent,
+    SmedbTermsComponent
   ],
-  entryComponents:[SmedbRatingComponent, SmedbStatusComponent, SmedbHistoryComponent],
+  entryComponents:[SmedbRatingComponent, SmedbStatusComponent, SmedbHistoryComponent, SmedbTermsComponent],
   imports: [
     CommonModule,
     SmedbRoutingModule,
