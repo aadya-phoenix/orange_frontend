@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DnaService } from 'src/app/shared/services/dna/dna.service';
+import { GeneralDropdownsService } from 'src/app/shared/services/general-dropdowns/general-dropdowns.service';
 import { DnaForwardComponent } from '../dna-forward/dna-forward.component';
 
 @Component({
@@ -13,13 +15,21 @@ import { DnaForwardComponent } from '../dna-forward/dna-forward.component';
 })
 export class DnaViewBpComponent implements OnInit {
 
+  RoleID = dataConstant.RoleID;
+  getUserrole: any = {};
   dnaStatus = dataConstant.DnaStatus;
   selectedStatus = this.dnaStatus.total;
   dnaList: any = [];
   dnaListToShow: any = [];
+  priorityObj: any = [];
+  countriesObj:any =[];
+  bussinessUnitObj:any = [];
+  regionsObj:any = [];
 
   learningList:any= [];
   learningListToShow:any= [];
+  isDomainExpert = false;
+  isBussinessConsultant = false;
 
   dna_count = {
     total: 0,
@@ -37,6 +47,7 @@ export class DnaViewBpComponent implements OnInit {
   isDisabled = false;
   learningIds:any = [];
   titleList:any=[];
+  isChecked=false;
 
   pagination = {
     page: 1,
@@ -44,12 +55,18 @@ export class DnaViewBpComponent implements OnInit {
     pageSize: 10
   }
   constructor(
+    private authService:AuthenticationService,
     private commonService: CommonService,
+    private generalDrpdownsService: GeneralDropdownsService,
     private dnaService:DnaService,
     private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {
+    this.getUserrole = this.authService.getRolefromlocal();
+    this.isDomainExpert = this.getUserrole.id == this.RoleID.DomainExpert;
+    this.isBussinessConsultant = this.getUserrole.id == this.RoleID.BussinessConsultant;
+   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -57,30 +74,91 @@ export class DnaViewBpComponent implements OnInit {
       this.trackerId = Id ? parseInt(Id) : 0;
       this.getLearningList();
     });
+    this.getPriority();
+    this. getCountries();
+    this. getRegions();
+    this.getBusinessUnits();
   }
 
   getStatus(event:any){
   }
 
-  forward(){
-    
+  getBUFilterRecords(item:any){
+    if (item) {
+      this.learningListToShow = [...this.learningList].filter((a, b) => {
+        return a.business_unit_id == item
+      });
+    }  
+    else{
+      this.learningListToShow = this.learningList;
+    }
+  }
+ 
+  getPriorityFilterRecords(item:any){
+    if (item) {
+      this.learningListToShow = [...this.learningList].filter((a, b) => {
+        return a.priority_id == item
+      });
+    }  
+    else{
+      this.learningListToShow = this.learningList;
+    }
   }
 
-  submit(){}
+  getRegionFilterRecords(item:any){
+    if (item) {
+      this.learningListToShow = [...this.learningList].filter((a, b) => {
+        return a.region_id == item
+      });
+    }  
+    else{
+      this.learningListToShow = this.learningList;
+    }
+  }
+
+  getCountryFilterRecords(item:any){
+    if (item) {
+      this.learningListToShow = [...this.learningList].filter((a, b) => {
+        return a.country == item
+      });
+    }  
+    else{
+      this.learningListToShow = this.learningList;
+    }
+  }
 
   selectedItems(item:any){
+    item.isChecked = !item.isChecked;
+    if(item.isChecked == true){
     this.learningIds.push(item.id);
-    this.titleList.push(this.learningList.find((y:any)=> y.id == item.id));
+    }
+    else{
+      this.learningIds.pop(item.id);
+    }
   }
 
-  openModal() {
+  checkAllOptions() {
+    this.learningIds=[];
+    this.isChecked = !this.isChecked;
+    this.learningList.forEach((val:any) => { val.isChecked = this.isChecked });
+    this.learningListToShow = this.learningList.filter((y:any)=> y.status == this.dnaStatus.pending);
+    this.learningListToShow.forEach((val:any)=>{
+      this.learningIds.push(val.id);
+    });
+  }
+
+  viewRequest(item:any){
+    this.router.navigateByUrl(`/dashboard/dna/update/${this.trackerId}/${item.id}`);
+  }
+
+  openModal(status:any) {
     const modalRef = this.modalService.open(DnaForwardComponent, {
       centered: true,
       size: 'xl',
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
-      title: 'Forward Request',
+      title: status == 'close' ? 'Close Request' : 'Forward Request',
       data: this.learningIds,
       objectDetail: this.titleList,
       type: 'forward'
@@ -94,6 +172,7 @@ export class DnaViewBpComponent implements OnInit {
         if(res.status == 1){
         this.commonService.hideLoading();
         this.learningList = res.data.digital_learning[this.trackerId];
+        this.learningListToShow = res.data.digital_learning[this.trackerId];
         }
         else{
           this.commonService.hideLoading();
@@ -103,6 +182,60 @@ export class DnaViewBpComponent implements OnInit {
         this.commonService.hideLoading();
         this.commonService.toastErrorMsg('Error', err.message);
       });
+  }
+
+  getPriority(){
+    this.commonService.showLoading();
+    this.generalDrpdownsService.getPriority().subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        this.priorityObj = res.data;
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    );
+  }
+
+  getCountries(){
+    this.commonService.showLoading();
+    this.generalDrpdownsService.getCountries().subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        this.countriesObj= res.data;
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    );
+  }
+
+  getRegions(){
+    this.commonService.showLoading();
+    this.generalDrpdownsService.getRegions().subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+       this.regionsObj = res.data;
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    );
+  }
+
+  getBusinessUnits(){
+    this.generalDrpdownsService.getBusinessUnits().subscribe( (res: any) => {
+      this.commonService.hideLoading();
+      this.bussinessUnitObj = res.data;
+    },
+    (err: any) => {
+      this.commonService.hideLoading();
+      this.commonService.toastErrorMsg('Error', err.message);
+    }
+  );
   }
 
   showRecords(type: string) {

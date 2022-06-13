@@ -2,150 +2,236 @@
     <app-header></app-header>
     <div class="breadcrumbs cm_breadcums">
         <div class="col-sm-8">
-            <div class="page-header float-left bac_trasparent">
+            <div class="page-header float-left">
                 <div class="page-title d-flex align-items-center">
-                    <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
+                    <img src="../../../../assets/images/first.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
                         <span class="breade_text_span1">Digital learning Needs Analysis</span>
                         <span class="divider"></span>
-                        <span class="breade_text_span">Digital learning Needs Analysis (DNA) is a tool that gathers learning needs from managers and helps align development needs with the overall business strategy. DNA also helps PD&L team to analyse and plan our learning resources efficiently.</span>
+                        <span class="breade_text_span">Digital learning Needs Analysis (DNA)
+                            is a tool that gathers
+                            learning needs from managers and helps align development needs with the overall business
+                            strategy. DNA also helps PD&L team to analyse and plan our learning resources
+                            efficiently.</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-sm-4 float-right">
-            <div class="page-header float-right bac_trasparent">
+            <div class="page-header float-right">
                 <div class="page-title d-flex end_just">
-                    <ol class="breadcrumb text-right bac_trasparent">
+                    <ol class="breadcrumb text-right">
                         <li>
-                            <a [routerLink]="['/dashboard']">
-                                <i class="fa fa-home text_white"></i>
+                            <a [routerLink]="['/dashboard']" class="text_white">
+                                <i class="fa fa-home" aria-colcount=""></i>
                             </a>
                         </li>
                         <li>
                             <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/dna']" class="text_white span_dis">Digital learning Needs Analysis</a>
-                        </li>
-                        <li>
-                            <span class="text_white span_dis">View</span>
+                            <span class="text_white span_dis">Digital learning Needs Analysis</span>
                         </li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
-    <div class="content mt-2">
+    <div class="content mt-1">
         <div class="animated fadeIn">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-sm-2">
+                    <ul class="rotaete_text">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+
+                    </ul>
+                </div>
+                <div class="col-sm-10">
                     <div class="card">
-                        <div class="card-body card_course_body">
-                            <div class="Course_icon_parent" data-aos="fade-right">
-                                <div class="Course_icon_child" >
-                                    <div class="alig_dashicon" (click)="showRecords(dnaStatus.pending)">
-                                        <div class="sub-child-dashicon">
-                                            <div class="fa-icons-des bac_yellow">
-                                                <img src="../../../../assets/images/icon/pending.png" />
+                        <div class="card-header">
+                            <p class="mb-0 text_orange">Regional Operation Manager</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="card bac_card_total">
+                                        <div class="card-body">
+                                            <div class="d-flex just_spa align-items-center">
+                                                <h5 class="mb-0">0</h5>
+                                                <img src="../../../../assets/images/icon/all.png" class="imae_card_pen">
                                             </div>
+                                        </div>
+                                        <div class="card-footer card_footer_dash">
+                                            <p>Total Request</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="card bac_card_pen">
+                                        <div class="card-body">
+                                            <div class="d-flex just_spa align-items-center">
+                                                <h5 class="mb-0">0</h5>
+                                                <img src="../../../../assets/images/icon/pending.png"
+                                                    class="imae_card_pen">
+                                            </div>
+                                        </div>
+                                        <div class="card-footer card_footer_dash">
                                             <p>Pending</p>
                                         </div>
-                                        <span
-                                            class="number_css ">{{dna_count.pending?dna_count.pending:0}}</span>
                                     </div>
                                 </div>
-                                <div class="Course_icon_child" >
-                                    <div class="alig_dashicon" (click)="showRecords(dnaStatus.pending)">
-                                        <div class="sub-child-dashicon">
-                                            <div class="fa-icons-des bac_red">
-                                                <img src="../../../../assets/images/icon/transfer.png" />
+                                <div class="col-sm-3">
+                                    <div class="card bac_card_closed">
+                                        <div class="card-body">
+                                            <div class="d-flex just_spa align-items-center">
+                                                <h5 class="mb-0">0</h5>
+                                                <img src="../../../../assets/images/icon/check.png"
+                                                    class="imae_card_pen">
                                             </div>
-                                            <p>Forwarded To ROM</p>
                                         </div>
-                                        <span
-                                            class="number_css ">{{dna_count.pending?dna_count.pending:0}}</span>
-                                    </div>
-                                </div>
-                                <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(dnaStatus.closed)">
-                                        <div class="sub-child-dashicon">
-                                            <div class="fa-icons-des cm-learning">
-                                                <img src="../../../../assets/images/icon/check.png" />
-                                            </div>
+                                        <div class="card-footer card_footer_dash">
                                             <p>Closed</p>
                                         </div>
-                                        <span
-                                            class="number_css pub_lished">{{dna_count.closed?dna_count.closed:0}}</span>
                                     </div>
                                 </div>
-                                <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(dnaStatus.transferred)">
-                                        <div class="sub-child-dashicon">
-                                            <div class="fa-icons-des bac_red">
-                                                <img src="../../../../assets/images/icon/transfer.png" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <p class="mb-0 text_orange">Business Consultant</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="card bac_card_total">
+                                        <div class="card-body">
+                                            <div class="d-flex just_spa align-items-center">
+                                                <h5 class="mb-0">0</h5>
+                                                <img src="../../../../assets/images/icon/all.png" class="imae_card_pen">
                                             </div>
-                                            <p>Digital Learning</p>
                                         </div>
-                                        <span
-                                            class="number_css fow_warded">{{dna_count.transferred?dna_count.transferred:0}}</span>
+                                        <div class="card-footer card_footer_dash">
+                                            <p>Total Request</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(dnaStatus.total)">
-                                        <div class="sub-child-dashicon">
-                                            <div class="fa-icons-des cm-all">
-                                                <img src="../../../../assets/images/icon/viewall.png" />
+                                <div class="col-sm-3">
+                                    <div class="card bac_card_pen">
+                                        <div class="card-body">
+                                            <div class="d-flex just_spa align-items-center">
+                                                <h5 class="mb-0">0</h5>
+                                                <img src="../../../../assets/images/icon/pending.png"
+                                                    class="imae_card_pen">
                                             </div>
-                                            <p>View All</p>
                                         </div>
-                                        <span class="number_css">{{dna_count.total?dna_count.total:0}}</span>
+                                        <div class="card-footer card_footer_dash">
+                                            <p>Pending</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="card bac_card_closed">
+                                        <div class="card-body">
+                                            <div class="d-flex just_spa align-items-center">
+                                                <h5 class="mb-0">0</h5>
+                                                <img src="../../../../assets/images/icon/check.png"
+                                                    class="imae_card_pen">
+                                            </div>
+                                        </div>
+                                        <div class="card-footer card_footer_dash">
+                                            <p>Closed</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="card bac_card_parti">
+                                        <div class="card-body">
+                                            <div class="d-flex just_spa align-items-center">
+                                                <h5 class="mb-0">0</h5>
+                                                <img src="../../../../assets/images/icon/group.png"
+                                                    class="imae_card_pen">
+                                            </div>
+                                        </div>
+                                        <div class="card-footer card_footer_dash">
+                                            <p>Total no of participants</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="content">
-        <div class="animated fadeIn">
-            <div class="row">
-                <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header cm-card-header">
-                            <div class="overall_css">
-                                <div>
-                                    <i class="fa fa-table fa_table" aria-hidden="true "></i>
-                                    <span class="card-title card-title-text card_overall">My Request</span>
-                                </div>
-                                <div class="filter_dispaly">
-                                    <div class="form-group filter_course">
-                                        <label class="label_course">Search</label>
-                                        <input type="text " name="search " autocomplete="off" [(ngModel)]="searchText"
-                                            placeholder="Type to Search"
-                                            class="form-control ng-untouched ng-pristine ng-valid form_width"
-                                            ng-reflect-name="search" />
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="card-header">
+                            <p class="mb-0 text_orange">Strategic level</p>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive table_height_scroll">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="card bac_card_total_deafult">
+                                        <div class="card-body">
+                                            <div class="d-flex just_spa align-items-center">
+                                                <h5 class="mb-0">0</h5>
+                                                <i class="fa fa-bell bell_noti" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+
+                                        <p class="def_bell_text">Total Request</p>
+
+                                    </div>
+                                </div>
+                                <!--colen-->
+                                <div class="col-sm-3">
+                                    <div class="card bac_card_total_deafult1">
+                                        <div class="card-body">
+                                            <div class="d-flex just_spa align-items-center">
+                                                <h5 class="mb-0">0</h5>
+                                                <i class="fa fa-bell bell_noti" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+
+                                        <p class="def_bell_text">Total Request</p>
+
+                                    </div>
+                                </div>
+                                <!--colen-->
+
+                                <div class="col-sm-3">
+                                    <div class="card bac_card_total_deafult2">
+                                        <div class="card-body">
+                                            <div class="d-flex just_spa align-items-center">
+                                                <h5 class="mb-0">0</h5>
+                                                <i class="fa fa-bell bell_noti" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+
+                                        <p class="def_bell_text">Total Request</p>
+
+                                    </div>
+                                </div>
+                                <!--colen-->
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
                                 <table id="bootstrap-data-table-export " class="table table-striped table-bordered">
                                     <thead class="sticky_header">
                                         <tr class="text-center font-13">
                                             <th sortable="request_id" >
-                                                Details
+                                                Learning Type
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
                                             <th sortable="request_id" >
-                                                <input type="checkbox">
-                                            </th>
-                                            <th sortable="request_id" >
-                                                Priority
+                                                Orange Learning Training Name
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
@@ -154,51 +240,110 @@
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
-
-                                            <th sortable="first_name" >
-                                                Learning Title<i class="fa fa-long-arrow-up arrow_css"
-                                                    aria-hidden="true"></i>
-                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
+                                            <th sortable="request_id" >
+                                                 Training Provider
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="request_id" >
+                                                Training Contact
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="request_id" >
+                                                Created By
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="request_id" >
+                                                Source of Training
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
                                             <th sortable="last_name" >
                                                 No. of Participants<i class="fa fa-long-arrow-up arrow_css"
                                                     aria-hidden="true"></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
                                             </th>
-
-                                            <th sortable="created_at" >
-                                                Region Of Training
+                                            
+                                            <th sortable="request_id" >
+                                                Priority
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
-                                            <th class="text-center">country Of Training</th>
-                                            <th class="text-center">Management Code</th>
-                                            <th class="text-center">Business Conultant Status</th>
-                                            <th class="text-center">Comments</th>
-                                            <th class="text-center">Closed By</th>
+                                            <th sortable="request_id" >
+                                               Region of Training
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="request_id" >
+                                                Country of Training
+                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                             </th>
+                                             <th sortable="request_id" >
+                                                Management Code
+                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                             </th>
+                                             <th sortable="request_id" >
+                                                Business Unit
+                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                             </th>
+                                             <th sortable="request_id" >
+                                                Other Business Unit/ M1 Level
+                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                             </th>
+                                             <th class="text-center">Manageger</th>
+                                             <th class="text-center">Business Conultant</th>
+                                             <th class="text-center">Business Conultant Status</th>
+                                             <th sortable="first_name" >
+                                                 Comments<i class="fa fa-long-arrow-up arrow_css"
+                                                     aria-hidden="true"></i>
+                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
+                                             </th>
+                                             <th sortable="created_at" >
+                                                 ROM
+                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                             </th>
+                                            <th class="text-center">Created Date</th>
+                                            <th class="text-center">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr *ngFor="let item of learningListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber } ; let i = index;"
+                                        class="text-center bac_hover-table font-12">
+                                            <td></td>
+                                            <td>{{item.title}}</td>
+                                            <td>{{item.training_type}}</td>
+                                            <td>{{item.training_provider}}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>{{item.number_of_participant}}</td>
+                                            <td>{{item.priority_name}}</td>
+                                            <td>{{item.region_name}}</td>
+                                            <td>{{item.country}}</td>
+                                            <td>{{item.management_code}}</td>
+                                            <td>{{item.business_unit_name}}</td>
+                                            <td></td>
+                                            <td>{{item.requester_email}}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>{{item.created_at | date: dateFormate}}</td>
+                                            <td>{{item.status}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                           <!--  <div class="pagiantio_dispaly">
-                                <div class="pagintion_ child">
-                                    <p class="cm-pagination-fotter">Showing {{(pagination.pageSize *
-                                        (pagination.pageNumber - 1)) + 1}} to
-                                        {{(this.pagination.pageSize * this.pagination.pageNumber) >
-                                        this.backOfficeListToShow?.length ? this.backOfficeListToShow?.length :
-                                        this.pagination.pageSize * this.pagination.pageNumber}} of
-                                        {{this.backOfficeListToShow?.length}} entries</p>
-                                </div>
-                                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
-                            </div> -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

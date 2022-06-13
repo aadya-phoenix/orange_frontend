@@ -46,15 +46,51 @@
                             <div class="overall_css">
                                 <div>
                                     <i class="fa fa-table fa_table" aria-hidden="true "></i>
-                                    <span class="card-title card-title-text card_overall">My Request</span>
+                                    <span class="card-title card-title-text card_overall">Report</span>
                                 </div>
                                 <div class="filter_dispaly">
-                                    <div class="form-group filter_course">
-                                        <label class="label_course">Search</label>
-                                        <input type="text " name="search " autocomplete="off" [(ngModel)]="searchText"
-                                            placeholder="Type to Search"
+                                    <div class="form-group filter_course mr-1">
+                                        <label class="label_course">Filter by Priority</label>
+                                        <select class="form-control  form_width"
+                                            (change)="getPriorityFilterRecords($event.target.value)">
+                                            <option selected='selected' value=''>View All</option>
+                                            <option *ngFor="let item of priorityObj" [value]="item.id">{{item.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group filter_course mr-1">
+                                        <label class="label_course">Filter by Country</label>
+                                        <select class="form-control  form_width"
+                                            (change)="getCountryFilterRecords($event.target.value)">
+                                            <option selected='selected' value=''>View All</option>
+                                            <option *ngFor="let item of countriesObj" [value]="item.country_name">
+                                                {{item.country_name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group filter_course mr-1">
+                                        <label class="label_course">Filter by Business Unit</label>
+                                        <select class="form-control  form_width"
+                                            (change)="getBUFilterRecords($event.target.value)">
+                                            <option selected='selected' value=''>View All</option>
+                                            <option *ngFor="let item of bussinessUnitObj" [value]="item.id">
+                                                {{item.team_name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group filter_course mr-1">
+                                        <label class="label_course">Filter by Region</label>
+                                        <select class="form-control  form_width"
+                                            (change)="getRegionFilterRecords($event.target.value)">
+                                            <option selected='selected' value=''>View All</option>
+                                            <option *ngFor="let item of regionsObj" [value]="item.id">
+                                                {{item.region_name}}</option>
+                                        </select>
+                                    </div>
+                                    <div _ngcontent-cue-c109=" " class="form-group filter_course mr-1">
+                                        <label _ngcontent-cue-c109=" " class="label_course text_black">Search</label>
+                                        <input _ngcontent-cue-c109=" " type="text " name="search " autocomplete="off "
+                                            [(ngModel)]="searchText" placeholder=" "
                                             class="form-control ng-untouched ng-pristine ng-valid form_width"
-                                            ng-reflect-name="search" />
+                                            ng-reflect-name="search " />
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +132,7 @@
                                     <tbody>
                                         <tr *ngFor="let item of learningListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber }"
                                         class="text-center bac_hover-table font-12">
-                                        <td class="request_id" >{{ item.learning_type ? item.learning_type :
+                                        <td>{{ item.training_type ? item.training_type :
                                             "-"  }}
                                         </td>
                                         <td >{{ item.title }}</td>

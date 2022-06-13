@@ -63,15 +63,15 @@ export class DnaDashboardComponent implements OnInit {
       }
   }
 
-  completeReport(){
-    this.router.navigateByUrl(`/dashboard/dna/view-complete-report`); 
+  completeReport(itemId:any){
+    this.router.navigateByUrl(`/dashboard/dna/view-complete-report/${itemId}`); 
   }
 
   review(itemId:any){
-    if(this.isDomainExpert || this.isLearningPartner || this.isRom){
+    if(this.isLearningPartner || this.isRom){
     this.router.navigateByUrl(`/dashboard/dna/view-rpt/${itemId}`); 
     }
-    if(this.isBussinessConsultant){
+    if(this.isDomainExpert || this.isBussinessConsultant){
       this.router.navigateByUrl(`/dashboard/dna/view-bp/${itemId}`); 
     }
   }

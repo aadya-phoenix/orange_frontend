@@ -120,10 +120,63 @@
                                     <i class="fa fa-table fa_table" aria-hidden="true "></i>
                                     <span class="card-title card-title-text card_overall">Report</span>
                                 </div>
+                                <div class="filter_dispaly">
+                                    <div class="form-group filter_course mr-1">
+                                        <label class="label_course">Filter by Priority</label>
+                                        <select class="form-control  form_width"
+                                            (change)="getPriorityFilterRecords($event.target.value)">
+                                            <option selected='selected' value=''>View All</option>
+                                            <option *ngFor="let item of priorityObj" [value]="item.id">{{item.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group filter_course mr-1">
+                                        <label class="label_course">Filter by Country</label>
+                                        <select class="form-control  form_width"
+                                            (change)="getCountryFilterRecords($event.target.value)">
+                                            <option selected='selected' value=''>View All</option>
+                                            <option *ngFor="let item of countriesObj" [value]="item.country_name">
+                                                {{item.country_name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group filter_course mr-1">
+                                        <label class="label_course">Filter by Business Unit</label>
+                                        <select class="form-control  form_width"
+                                            (change)="getBUFilterRecords($event.target.value)">
+                                            <option selected='selected' value=''>View All</option>
+                                            <option *ngFor="let item of bussinessUnitObj" [value]="item.id">
+                                                {{item.team_name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group filter_course mr-1">
+                                        <label class="label_course">Filter by Region</label>
+                                        <select class="form-control  form_width"
+                                            (change)="getRegionFilterRecords($event.target.value)">
+                                            <option selected='selected' value=''>View All</option>
+                                            <option *ngFor="let item of regionsObj" [value]="item.id">
+                                                {{item.region_name}}</option>
+                                        </select>
+                                    </div>
+                                    <div _ngcontent-cue-c109=" " class="form-group filter_course mr-1">
+                                        <label _ngcontent-cue-c109=" " class="label_course text_black">Search</label>
+                                        <input _ngcontent-cue-c109=" " type="text " name="search " autocomplete="off "
+                                            [(ngModel)]="searchText" placeholder=" "
+                                            class="form-control ng-untouched ng-pristine ng-valid form_width"
+                                            ng-reflect-name="search " />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header cm-card-header">
+                            <div class="overall_css">
                                  <div class="filter_dispaly">
-                                    <button class="btn btn-primary btn_adduser mt-3 mr-2"      data-toggle="modal" (click)="openModal()">
+                                    <button class="btn btn-primary btn_adduser mt-3 mr-2"      data-toggle="modal" *ngIf="isBussinessConsultant" (click)="openModal('forward')">
                                         <i class="fa fa-plus mr-1" aria-hidden="true">
                                         </i><span>Forward the Request</span>
+                                    </button>
+                                    <button class="btn btn-primary btn_adduser mt-3 mr-2"      data-toggle="modal" *ngIf="isDomainExpert" (click)="openModal('close')">
+                                        <i class="fa fa-plus mr-1" aria-hidden="true">
+                                        </i><span>Close Request</span>
                                     </button>
                                   </div>                             
                                   </div>                                
@@ -138,8 +191,8 @@
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
-                                            <th sortable="request_id" >
-                                                <input type="checkbox" >
+                                            <th sortable="request_id" (click)="checkAllOptions()">
+                                                <input type="checkbox" [checked]="isChecked">
                                             </th>
                                             <th sortable="request_id" >
                                                 Priority
@@ -176,10 +229,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let item of learningList | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber } ; let i = index;"
+                                        <tr *ngFor="let item of learningListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber } ; let i = index;"
                                         class="text-center bac_hover-table font-12">
-                                            <td></td>
-                                            <td> <input type="checkbox" [attr.disabled]="item.status == dnaStatus.close ? true : null" (click)="selectedItems(item)"></td>
+                                            <td><a class="copy_file mr-1" data-toggle="tooltip"
+                                                (click)="viewRequest(item)" data-placement="top" title="View">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                            </a></td>
+                                            <td> <input type="checkbox" [checked]="item.isChecked"
+                                                [attr.disabled]="item.status == dnaStatus.close ? true : null"
+                                                (click)="selectedItems(item)">
+                                            </td>
                                             <td>{{item.user_email}}</td>
                                             <td>{{item.learning_type}}</td>
                                             <td>{{item.learning_type}}</td>
@@ -195,17 +254,17 @@
                                     </tbody>
                                 </table>
                             </div>
-                           <!--  <div class="pagiantio_dispaly">
+                           <div class="pagiantio_dispaly">
                                 <div class="pagintion_ child">
                                     <p class="cm-pagination-fotter">Showing {{(pagination.pageSize *
                                         (pagination.pageNumber - 1)) + 1}} to
                                         {{(this.pagination.pageSize * this.pagination.pageNumber) >
-                                        this.backOfficeListToShow?.length ? this.backOfficeListToShow?.length :
+                                        this.learningListToShow?.length ? this.learningListToShow?.length :
                                         this.pagination.pageSize * this.pagination.pageNumber}} of
-                                        {{this.backOfficeListToShow?.length}} entries</p>
+                                        {{this.learningListToShow?.length}} entries</p>
                                 </div>
                                 <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>

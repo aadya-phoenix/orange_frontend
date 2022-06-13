@@ -27,8 +27,8 @@ export class DnaCreateComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.trackerId = Id ? parseInt(Id) : 0;
+      this.getLearningList();
     });
-    this.getLearningList();
   }
 
   createNew() {
@@ -81,8 +81,7 @@ export class DnaCreateComponent implements OnInit {
       (res: any) => {
         if(res.status == 1){
         this.commonService.hideLoading();
-        this.learningList = res.data.digital_learning;
-        this.learningListToShow = this.learningList.filter((x:any)=>x.tracker_id === this.trackerId);
+        this.learningListToShow = res.data.digital_learning[this.trackerId];
         }
         else{
           this.commonService.hideLoading();

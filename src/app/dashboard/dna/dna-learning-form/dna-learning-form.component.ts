@@ -27,6 +27,8 @@ export class DnaLearningFormComponent implements OnInit {
   titleList: any = [];
   form_details: any;
   tracker_details:any;
+  training_type:string='';
+  training_provider:string='';
   trackerId: number = 0;
   trainingId: number = 0;
   regionId: number=0;
@@ -89,7 +91,8 @@ export class DnaLearningFormComponent implements OnInit {
   }
 
   getTitle(event:any){
-    console.log("event",event);
+   this.training_type = event.training_type;
+   this.training_provider = event.training_provider;
    if(event && event.id){
     this.isDescription = false;
    }
@@ -100,11 +103,13 @@ export class DnaLearningFormComponent implements OnInit {
  
   save(){
     this.isSubmitted = true;
-    const body = this.createDnaForm.value;
-    body.tracker_id = this.trackerId;
     if (this.createDnaForm.invalid) {
       return;
     }
+    const body = this.createDnaForm.value;
+    body.tracker_id = this.trackerId;
+    body.training_type = this.training_type;
+    body.training_provider = this.training_provider;
      if(this.formId){
       body.digital_learning_id = this.formId;
       this.update(body);

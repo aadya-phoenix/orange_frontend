@@ -23,7 +23,7 @@ const routes: Routes = [
  {path:'view/:id',component:DnaViewComponent,canActivate:[AuthenticationServiceGuard]},
  {path:'view-rpt/:id',component:DnaViewRptComponent,canActivate:[AuthenticationServiceGuard]},
  {path:'view-bp/:id',component:DnaViewBpComponent,canActivate:[AuthenticationServiceGuard]},
- {path:'view-complete-report',component:DnaCompleteReportComponent,canActivate:[AuthenticationServiceGuard]} 
+ {path:'view-complete-report/:id',component:DnaCompleteReportComponent,canActivate:[AuthenticationServiceGuard]} 
 ];
 
 @NgModule({

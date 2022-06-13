@@ -50,6 +50,13 @@ export class DnaService {
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  dnaFullReport(id:number){
+    const url = `/api/${this.apiVersion}/digital-learning/${id}/filter`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
   dnaFilter(data:any){
     const url = `api/${this.apiVersion}/digital-learning/filter`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
