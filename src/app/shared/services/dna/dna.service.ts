@@ -33,7 +33,7 @@ export class DnaService {
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  getDnaDetails(id: number) {
+  getFormDetails(id: number) {
     const url = `/api/${this.apiVersion}/digital-learning/${id}/detail`;
     return this.http
       .get(url, this.http.headers)
@@ -50,6 +50,13 @@ export class DnaService {
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  dnaFullReport(id:number){
+    const url = `/api/${this.apiVersion}/digital-learning/${id}/filter`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
   dnaFilter(data:any){
     const url = `api/${this.apiVersion}/digital-learning/filter`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
@@ -57,6 +64,54 @@ export class DnaService {
 
   delete(data:any){
     const url = `api/${this.apiVersion}/digital-learning/delete`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  getTitleDropdown(type_id:number){
+    const url = `/api/${this.apiVersion}/cct-training-course/${type_id}`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  createTracker(data:any){
+    const url = `/api/${this.apiVersion}/dna-tracker/create`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  updateTracker(data: any) {
+    const url = `/api/${this.apiVersion}/dna-tracker/update`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  getTrackerList(){
+    const url = `/api/${this.apiVersion}/dna-tracker`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  getTrackerDetail(id: number){
+    const url = `/api/${this.apiVersion}/dna-tracker/${id}/detail`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  getTrackerHistoty(id: number){
+    const url = `/api/${this.apiVersion}/dna-tracker/${id}/history`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  deleteTracker(data:any){
+    const url = `api/${this.apiVersion}/dna-tracker/delete`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  changeTrackerStatus(data:any){
+    const url = `api/${this.apiVersion}/dna-tracker/status`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 }

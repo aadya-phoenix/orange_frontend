@@ -172,9 +172,9 @@ export class BackOfficeListComponent implements OnInit {
           
         }
       })
-   }
+  }
 
-    copyRequest(back_office_id: number) {
+  copyRequest(back_office_id: number) {
       Swal.fire({
         title: 'Are you sure you want to copy?',
         text: 'You will copy this request',
@@ -200,5 +200,5 @@ export class BackOfficeListComponent implements OnInit {
           
         }
       })
-    }
+  }
 }

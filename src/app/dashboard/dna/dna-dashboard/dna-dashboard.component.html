@@ -8,7 +8,10 @@
                     <div class="d-flex flex-column ml-3">
                         <span class="breade_text_span1">Digital learning Needs Analysis</span>
                         <span class="divider"></span>
-                        <span class="breade_text_span">Digital learning Needs Analysis (DNA) is a tool that gathers learning needs from managers and helps align development needs with the overall business strategy. DNA also helps PD&L team to analyse and plan our learning resources efficiently.</span>
+                        <span class="breade_text_span">Digital learning Needs Analysis (DNA) is a tool that gathers
+                        learning needs from managers and helps align development needs with the overall business
+                        strategy. DNA also helps PD&L team to analyse and plan our learning resources
+                        efficiently.</span>
                     </div>
                 </div>
             </div>
@@ -29,6 +32,280 @@
                             <span class="text_white span_dis">Digital learning Needs Analysis</span>
                         </li>
                     </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content mt-1">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="header_data">
+                                <h4>Year Data 2022</h4>
+                                <button class=" btn btn-primary btn_adduser mt-3" [routerLink]="['/dashboard/dna/user']" data-toggle="modal">
+                                    <i class="fa fa-plus mr-1" aria-hidden="true"></i><span>User Management</span>
+                                </button>
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-4" *ngFor="let item of trackerObj">
+                                    <div class="card">
+                                        <div class="card-header card_header_Dna">
+                                            <div class="header_data1">
+                                                <div class="mt-2">
+                                                    <h4 class="font_size">{{item.title}}</h4>
+                                                    <h4 class="font_size1">{{item.type_name}}</h4>
+                                                </div>
+                                                <div class="wor_col_img">
+                                                    <img src="../../../../assets/images/worl_co.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="date_amin">
+                                                <div class="start_date">
+                                                    <h4 class="font_size">Start Date</h4>
+                                                    <span class="font_size1">{{item.open_date | date: dateFormate}}</span>
+                                                </div>
+                                                <div class="end_date">
+                                                    <h4 class="font_size">End Date</h4>
+                                                    <span class="font_size1">{{item.close_date | date: dateFormate}}</span>
+                                                </div>
+                                                <div class="total_re">
+                                                    <h4 class="font_size">Total Request</h4>
+                                                    <span class="font_size1">Pending:0</span>
+                                                    <div class="tota_re_divider"></div>
+                                                    <span class="font_size1">Closed:12</span>
+                                                </div>
+                                            </div>   
+                                            <div class="button_dna">
+                                                <button class="btn btn-primary mr-1"
+                                                (click)="addLearning(item)">
+                                                    <i class="fa fa-arrow-circle-o-left mr-1" 
+                                                     aria-hidden="true"></i>
+                                                    <span>Start</span></button>
+                                                    <button class="btn btn-primary mr-1"
+                                                    (click)="viewReport(item)">
+                                                        <span>View</span></button>
+                                                <button class="btn btn-secondary"
+                                                (click)="managerData(item)"><span>Manager Report</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="header_data">
+                                <h4>Year Data 2022</h4>
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                              <!--    -->
+                                <div class="col-sm-4" *ngFor="let item of requestedTrackerList">
+                                    <div class="card">
+                                        <div class="card-header card_header_Dna">
+                                            <div class="header_data1">
+                                                <div class="mt-2">
+                                                    <h4 class="font_size">Review:{{item.title}} <i
+                                                       class="fa fa-question-circle ml-1" aria-hidden="true"></i></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="date_amin">
+                                                <div class="start_date">
+                                                    <h4 class="font_size">Click "Start Review" of your regional needs </h4>
+                                                </div>    
+                                            </div>
+                                            <div class="button_dna">
+                                                <button class="btn btn-primary mr-1" (click)=" review(item.id)">
+                                                    <i class="fa fa-arrow-circle-o-left mr-1" aria-hidden="true"></i>
+                                                    <span>Start Review</span></button>
+                                                <button class="btn btn-success" (click)="completeReport(item.id)"
+                                                ><span>Full Report</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="header_data">
+                                <h4>Year Data 2022</h4>
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <div class="card mt-2">
+                                        <div class="card-body  card_body_consu">
+                                            <div class="consu_img">
+                                                <img src="../../../../assets/images/worl_co.png">
+                                            </div>
+                                            <div class="cosn_data">
+                                                <h4>Click "Start Review" of your regional needs </h4>
+                                                <span>loremspamloremspam</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="card mt-2">
+                                        <div class="card-body  card_body_consu">
+                                            <div class="consu_img">
+                                                <img src="../../../../assets/images/worl_co.png">
+                                            </div>
+                                            <div class="cosn_data">
+                                                <h4>Click "Start Review" of your regional needs </h4>
+                                                <span>loremspamloremspam</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="card mt-2">
+                                        <div class="card-body  card_body_consu">
+                                            <div class="consu_img">
+                                                <img src="../../../../assets/images/worl_co.png">
+                                            </div>
+                                            <div class="cosn_data">
+                                                <h4>Click "Start Review" of your regional needs </h4>
+                                                <span>loremspamloremspam</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="card mt-2">
+                                        <div class="card-body  card_body_consu">
+                                            <div class="consu_img">
+                                                <img src="../../../../assets/images/worl_co.png">
+                                            </div>
+                                            <div class="cosn_data">
+                                                <h4>Click "Start Review" of your regional needs </h4>
+                                                <span>loremspamloremspam</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="card mt-2">
+    
+                                        <div class="card-body  card_body_consu">
+                                            <div class="consu_img">
+                                                <img src="../../../../assets/images/worl_co.png">
+                                            </div>
+                                            <div class="cosn_data">
+                                                <h4>Click "Start Review" of your regional needs </h4>
+                                                <span>loremspamloremspam</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="card mt-2">
+                                        <div class="card-body  card_body_consu">
+                                            <div class="consu_img">
+                                                <img src="../../../../assets/images/worl_co.png">
+                                            </div>
+                                            <div class="cosn_data">
+                                                <h4>Click "Start Review" of your regional needs </h4>
+                                                <span>loremspamloremspam</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="header_data">
+                                <h4>Year Data 2022</h4>
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="card mt-2">
+                                        <div class="card-body  card_body_consu">
+                                            <div class="cosn_data1">
+                                                <h4><span class="text_orange">Click</span> "Start Review" of your regional
+                                                    needs </h4>
+                                            </div>
+                                            <div class="counters">
+                                                <p>Medium</p>
+                                                <p><i class="fa fa-camera-retro mr-1" aria-hidden="true"></i>Event</p>
+                                                <p class="border_right"><i class="fa fa-camera-retro mr-1"
+                                                   aria-hidden="true"></i>Event</p>
+                                            </div>
+                                            <div class="icons_data">
+                                                <i class="fa fa-share-square-o" aria-hidden="true"></i>
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="card mt-2">
+                                        <div class="card-body  card_body_consu">
+                                          <div class="cosn_data1">
+                                                <h4><span class="text_orange">Click</span> "Start Review" of your regional
+                                                    needs </h4>
+                                            </div>
+                                            <div class="counters">
+                                                <p>Medium</p>
+                                                <p><i class="fa fa-camera-retro mr-1" aria-hidden="true"></i>Event</p>
+                                                <p class="border_right"><i class="fa fa-camera-retro mr-1"
+                                                aria-hidden="true"></i>Event</p>
+                                            </div>
+                                            <div class="icons_data">
+                                                <i class="fa fa-share-square-o" aria-hidden="true"></i>
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="card mt-2">
+                                        <div class="card-body  card_body_consu">
+                                            <div class="cosn_data1">
+                                                <h4><span class="text_orange">Click</span> "Start Review" of your regional
+                                                    needs </h4>
+                                            </div>
+                                            <div class="counters">
+                                                <p>Medium</p>
+                                                <p><i class="fa fa-camera-retro mr-1" aria-hidden="true"></i>Event</p>
+                                                <p class="border_right"><i class="fa fa-camera-retro mr-1"
+                                                aria-hidden="true"></i>Event</p>
+                                            </div>
+                                            <div class="icons_data">
+                                                <i class="fa fa-share-square-o" aria-hidden="true"></i>
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
                 </div>
             </div>
         </div>

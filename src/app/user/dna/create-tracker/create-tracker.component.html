@@ -48,7 +48,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">Tracker Name</label>
                                             <input type="text"
-                                                class="form-control form_width" formControlName="tracker_name" />
+                                                class="form-control form_width" formControlName="title" />
                                              <!--  <div
                                               *ngIf="(createUserForm.controls['first_name'].invalid && (createUserForm.controls['first_name'].dirty || createUserForm.controls['first_name'].touched)) || isSubmitted">
                                               <div class="error_message"
@@ -61,7 +61,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">Tracker Description</label>
-                                            <textarea type="text" class="form-control form_width-textarea" formControlName="tracker_desc">
+                                            <textarea type="text" class="form-control form_width-textarea" formControlName="description">
                                              </textarea>
                                               <!-- <div
                                               *ngIf="(createUserForm.controls['first_name'].invalid && (createUserForm.controls['first_name'].dirty || createUserForm.controls['first_name'].touched)) || isSubmitted">
@@ -76,7 +76,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">Start Date</label>
                                             <input type="date"
-                                                class="form-control form_width" formControlName="start_date" />
+                                                class="form-control form_width" formControlName="open_date" />
                                               <!-- <div
                                               *ngIf="(createUserForm.controls['first_name'].invalid && (createUserForm.controls['first_name'].dirty || createUserForm.controls['first_name'].touched)) || isSubmitted">
                                               <div class="error_message"
@@ -90,7 +90,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label">End Date</label>
                                             <input type="date"
-                                                class="form-control form_width" formControlName="end_date" />
+                                                class="form-control form_width" formControlName="close_date" />
                                               <!-- <div
                                               *ngIf="(createUserForm.controls['first_name'].invalid && (createUserForm.controls['first_name'].dirty || createUserForm.controls['first_name'].touched)) || isSubmitted">
                                               <div class="error_message"
@@ -103,7 +103,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">Type</label>
-                                            <ng-select                                             [items]="" bindLabel="name" bindValue="id"
+                                            <ng-select                                             [items]="typeObj" bindLabel="name" bindValue="id"
                                             formControlName="type" class="w_100">
                                             </ng-select>
                                               <!-- <div
@@ -118,8 +118,8 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">Training DB</label>
-                                            <ng-select                                             [items]="" bindLabel="name" bindValue="id"
-                                            formControlName="training_db" class="w_100">
+                                            <ng-select                                             [items]="trainingDataObj" bindLabel="name" bindValue="id"
+                                            formControlName="training_data" class="w_100">
                                             </ng-select>
                                               <!-- <div
                                               *ngIf="(createUserForm.controls['first_name'].invalid && (createUserForm.controls['first_name'].dirty || createUserForm.controls['first_name'].touched)) || isSubmitted">
@@ -133,8 +133,15 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button class="btn btn-primary mr-1" type="submit" 
-                                (click)="save()"> <i class="fa fa-upload mr-1" aria-hidden="true"></i>Save</button>
+                                <button *ngIf="isCreate" class="btn btn-primary mr-1" type="submit" 
+                                (click)="save('active')"> <i class="fa fa-upload mr-1" aria-hidden="true"></i>Save</button>
+                                <button *ngIf="!isCreate" class="btn btn-primary mr-1" data-toggle="modal" (click)="save('active')">
+                                    <i class="fa fa-edit mr-1" aria-hidden="true"></i>Update
+                                </button>
+                                <button *ngIf="!isCreate" class="btn btn-secondary mr-1" data-toggle="modal" (click)="delete()">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>Delete
+                                </button>
+                               
                             </div>
                         </div>
                     </div>

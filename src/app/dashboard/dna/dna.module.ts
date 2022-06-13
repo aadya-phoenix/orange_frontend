@@ -11,18 +11,24 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { DnaLearningFormComponent } from './dna-learning-form/dna-learning-form.component';
 import { DnaListComponent } from './dna-list/dna-list.component';
 import { DnaViewComponent } from './dna-view/dna-view.component';
-
+import { DnaCompleteReportComponent } from './dna-complete-report/dna-complete-report.component';
+import { DnaManagerDataComponent } from './dna-manager-data/dna-manager-data.component';
+import { DnaViewRptComponent } from './dna-view-rpt/dna-view-rpt.component';
+import { DnaUserComponent } from './dna-user/dna-user.component';
+import { DnaUserEditComponent } from './dna-user-edit/dna-user-edit.component';
+import { DnaViewBpComponent } from './dna-view-bp/dna-view-bp.component';
+import { DnaForwardComponent } from './dna-forward/dna-forward.component';
 
 @NgModule({
-  declarations: [DnaDashboardComponent, DnaCreateComponent, DnaLearningFormComponent, DnaListComponent, DnaViewComponent],
-  /* entryComponents:[ DnaLearningFormComponent], */
+  declarations: [DnaDashboardComponent, DnaCreateComponent, DnaLearningFormComponent, DnaListComponent, DnaViewComponent, DnaCompleteReportComponent, DnaManagerDataComponent, DnaViewRptComponent, DnaUserComponent, DnaUserEditComponent, DnaViewBpComponent, DnaForwardComponent],
+  entryComponents:[ DnaForwardComponent],
   imports: [
     CommonModule,
     DnaRoutingModule,
     SharedModule,
     NgxPaginationModule,
     NgSelectModule,
-    NgbModule
+    NgbModule,
   ]
 })
 export class DnaModule { }

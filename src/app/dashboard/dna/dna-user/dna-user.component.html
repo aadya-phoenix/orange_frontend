@@ -1,0 +1,160 @@
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-8">
+            <div class="page-header float-left bac_trasparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/3.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="breade_text_span1">Digital learning Needs Analysis</span>
+                        <span class="divider"></span>
+                        <span class="breade_text_span">Digital learning Needs Analysis (DNA) is a tool that gathers
+                        learning needs from managers and helps align development needs with the overall business
+                        strategy. DNA also helps PD&L team to analyse and plan our learning resources
+                        efficiently.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 float-right">
+            <div class="page-header float-right bac_trasparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bac_trasparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home text_white"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">Digital learning Needs Analysis</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header cm-card-header">
+                            <div class="overall_css">
+                              <div>
+                                 <i class="fa fa-table fa_table" aria-hidden="true "></i>
+                                 <span class="card-title card-title-text card_overall">My Request</span>
+                                </div>                                
+                                <div class="filter_dispaly">  
+                                    <div class="form-group filter_course mr-1">
+                                      <label class="label_course">Filter by Role</label>
+                                      <select class="form-control  form_width" (change)="getRoleFilterRecords($event.target.value)"
+                                       >
+                                        <option selected='selected' value=''>View All</option>
+                                       <option *ngFor="let role of rolesList"
+                                       [value]="role.id">{{role.role}}</option>
+                                      </select>
+                                    </div>                 
+                                    <div _ngcontent-cue-c109=" " class="form-group filter_course mr-1">
+                                      <label _ngcontent-cue-c109=" " class="label_course text_black">Search</label>
+                                      <input _ngcontent-cue-c109=" " type="text " name="search " autocomplete="off "
+                                        [(ngModel)]="searchText" placeholder=" "
+                                        class="form-control ng-untouched ng-pristine ng-valid form_width" ng-reflect-name="search " />
+                                    </div>
+                                  </div>                                
+                            </div>                 
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive table_height_scroll">
+                                <table id="bootstrap-data-table-export " class="table table-striped table-bordered">
+                                    <thead class="sticky_header">
+                                        <tr class="text-center font-13">
+                                            <th sortable="user_name" (sort)="onSort($event)">
+                                                Username
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true" ></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="email" (sort)="onSort($event)">
+                                                Email
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="first_name" (sort)="onSort($event)">
+                                                First Name<i class="fa fa-long-arrow-up arrow_css"
+                                                    aria-hidden="true"></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
+                                            </th>
+                                            <th sortable="last_name" (sort)="onSort($event)">
+                                                Last Name<i class="fa fa-long-arrow-up arrow_css"
+                                                    aria-hidden="true"></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
+                                            </th>
+                                            <th sortable="role" (sort)="onSort($event)">
+                                                Role
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="pdl_member" (sort)="onSort($event)">
+                                                PD&L Member
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="admin" (sort)="onSort($event)">
+                                                Admin
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="is_active" (sort)="onSort($event)">
+                                                Is Active
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of userListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber }"
+                                            class="text-center bac_hover-table font-12">
+                                            <td (click)="viewRequest(item)" >{{ item && item.name ? item.name :
+                                                "-" }}</td>
+                                             <td (click)="viewRequest(item)">{{ item && item.email ? item.email :
+                                                "-" }}</td>
+                                            <td (click)="viewRequest(item)">{{ item.first_name }}
+                                            </td>
+                                            <td (click)="viewRequest(item)">{{ item.last_name }}
+                                            </td>
+                                            <td (click)="viewRequest(item)">{{ item.role }}</td>
+                                            <td (click)="viewRequest(item)">{{ item.pdl_member == 1 ? 'Yes' : 'No' }}</td>
+                                            <td (click)="viewRequest(item)">{{ item.admin == 1 ? 'Yes' : 'No' }}</td>
+                                            <td (click)="viewRequest(item)">{{ item.status == 1 ? 'Yes' : 'No'  }}</td>
+                                            <td class="text-center">
+                                                <a (click)="viewRequest(item)"
+                                                    class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
+                                                    title="Edit">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagiantio_dispaly">
+                                <div class="pagintion_ child">
+                                    <p class="cm-pagination-fotter">Showing {{(pagination.pageSize *
+                                        (pagination.pageNumber - 1)) + 1}} to
+                                        {{(this.pagination.pageSize * this.pagination.pageNumber) >
+                                        this.userList?.length ? this.userList?.length :
+                                        this.pagination.pageSize * this.pagination.pageNumber}} of
+                                        {{this.userList?.length}} entries</p>
+                                </div>
+                                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>

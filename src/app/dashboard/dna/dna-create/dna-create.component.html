@@ -33,7 +33,43 @@
             </div>
         </div>
     </div>
-    <button class=" btn btn-primary btn_adduser mt-3" (click)="createNew()" data-toggle="modal">
-       <i class="fa fa-plus mr-1" aria-hidden="true"></i><span>Add Learning</span>
-    </button>
+    <div class="card">
+        <div class="card-body">
+            <div class="card">
+                <div class="card-header cm-card-header">
+                    <div class="learing_head">
+                        <div>
+                            <span class="card_overall color-black fon_12">Click the Add Learning button to Begin</span>
+                            <button (click)="createNew()" class="btn btn-primary hei_27 ml-1"><span class="fon_12">Add Learning</span></button>
+                            <button (click)="viewReport()" class="btn btn-primary hei_27 ml-1"><span class="fon_12">List of Employee Learning</span></button>
+                        </div>
+                        <div class="form-group mb-0">
+                            <input type="text" class="form-control form_width" placeholder="search..">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-2 text-center">
+                            <div class="main_section">
+                                <div class="digital_learning" *ngFor="let item of learningListToShow">
+                                    <h4 class="bus_h4 text_orange">{{item.title}}</h4>
+                                    <div class="d-flex justify-content-center">
+                                        <span class="text_digi">{{item.priority_name}}</span>
+                                        <span class="border_lr">{{item.number_of_participant}}</span>
+                                        <span class="text_digi1">{{item.priority_name}}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-end digi_footer">
+                                        <a (click)="share(item)"><i class="fa fa-share-square-o mr-1" aria-hidden="true"></i></a>
+                                        <a (click)="update(item)"> <i class="fa fa-pencil-square-o mr-1" aria-hidden="true"></i></a>
+                                        <a (click)="delete(item)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

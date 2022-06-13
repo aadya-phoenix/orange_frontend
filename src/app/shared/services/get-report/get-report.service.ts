@@ -67,13 +67,6 @@ export class GetReportService {
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  getBusinessUnits(){
-    const url = `/api/${this.apiVersion}/cct-business-units`;
-    return this.http
-    .get(url, this.http.headers)
-    .pipe(catchError(this.commmonService.Errorhandling));
-  }
-
   getCertificationStatus(){
     const url = `/api/${this.apiVersion}/cct-certification-status`;
     return this.http

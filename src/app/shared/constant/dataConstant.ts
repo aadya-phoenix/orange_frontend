@@ -50,6 +50,10 @@ export const dataConstant = {
     CarouselPublisher: 8,
     BackOfficeReviewer: 3,
     BackOfficePublisher: 10,
+    LearningPartner: 13,
+    BussinessConsultant: 12,
+    DomainExpert:14,
+    Rom:5,
     Roc: 3,
     Publisher: 3,
     DataAnalyst: 11
