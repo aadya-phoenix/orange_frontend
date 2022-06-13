@@ -33,6 +33,10 @@ export class BackOfficeHistoryComponent implements OnInit {
         if (res && res.status == 1) {
           this.historyList = res.data;
         }
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
       });
     }
   }

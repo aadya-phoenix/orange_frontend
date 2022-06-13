@@ -1,0 +1,112 @@
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-8">
+            <div class="page-header float-left bac_trasparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/SME_DB.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="breade_text_span1">SME Database</span>
+                        <span class="divider"></span>
+                        <span class="breade_text_span">The SME learning Community is one of the enablers for OBS to
+                            become a Learning organization by enabling a co-development environment through sharing
+                            knowledge and hands-on experience on the latest industry technologies and practices.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 float-right">
+            <div class="page-header float-right bac_trasparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bac_trasparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home text_white"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">Create new SME</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content mt-2">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header cm-card-header">
+                            <div class="overall_css">
+                                <span class="card_overall">
+                                    Your details
+                                    <a>
+                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                            data-bs-toggle="tooltip" data-bs-placement="right"
+                                            ngbTooltip="Provide the date on which this entry should be removed from the Orange Learning Carousel. If the Expiry Date is unknown, the entry will be available in the Carousel for a maximum of 3 months."></i>
+                                    </a>
+                                </span>
+                                <div class="d-flex">
+                                    <button class="btn btn-secondary" [routerLink]="['/dashboard/smedb/view-complete-report']">
+                                        <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> View
+                                      all activity report
+                                      </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body card_course_body p-3" *ngIf="smeList.length == 0">
+                            Click to <b>"Add"</b> button to begin.
+                            <div class="d-flex mt-2">
+                                <button class="btn btn-primary" [routerLink]="['/dashboard/smedb/create']">
+                                    <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1">Add</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body card_course_body p-3" *ngIf="smeList.length > 0">
+                            Click on <b>"View"</b> button to see your data.
+                            <div class="d-flex mt-2">
+                                <button class="btn btn-primary" [routerLink]="['/dashboard/smedb/create']">
+                                    <i class="fa fa-eye" aria-hidden="true"></i><span class="pl-1">View</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content mt-2">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header cm-card-header">
+                            <div class="overall_css">
+                                <span class="card_overall">
+                                    Subject matter experts in my team
+                                    <a>
+                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                            data-bs-toggle="tooltip" data-bs-placement="right"
+                                            ngbTooltip="Provide the date on which this entry should be removed from the Orange Learning Carousel. If the Expiry Date is unknown, the entry will be available in the Carousel for a maximum of 3 months."></i>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-body card_course_body p-3">
+                            No SME found in your team.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

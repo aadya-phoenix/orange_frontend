@@ -143,7 +143,7 @@ export class GetReportCreateComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -302,12 +302,10 @@ export class GetReportCreateComponent implements OnInit {
   }
 
   getRocStatus(event:any){
-    console.log("event roc",event.id);
     this.rocStatus = event.id;
   }
 
   save(status:any){
-    console.log("status",status);
     this.isSubmitted = true;
     if (this.getReportForm.invalid) {
       return;
@@ -336,7 +334,7 @@ export class GetReportCreateComponent implements OnInit {
         },
         (err: any) => {
           this.commonService.hideLoading();
-          this.commonService.toastErrorMsg('Error', err.message);
+          this.commonService.errorHandling(err);
         }
       );
     }
@@ -351,7 +349,7 @@ export class GetReportCreateComponent implements OnInit {
         },
         (err: any) => {
           this.commonService.hideLoading();
-          this.commonService.toastErrorMsg('Error', err.message);
+          this.commonService.errorHandling(err);
         }
       );
     }
@@ -439,7 +437,7 @@ export class GetReportCreateComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err);
       }
     );
     }
@@ -477,7 +475,7 @@ export class GetReportCreateComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err);
       }
     );
   } 
@@ -559,7 +557,6 @@ export class GetReportCreateComponent implements OnInit {
   getRocAction(event:any){
    this.getComment = true;
    let rocaction = event.target.value;
-   console.log("roc action",rocaction);
    if(rocaction == 'roc'){
      this.isRocAction = true;
    }
@@ -573,7 +570,7 @@ export class GetReportCreateComponent implements OnInit {
     this.courseService.getNewregionalCordinator().subscribe((res: any) => {
        this.rocObj = res.data;
      },(err: any) => {
-       console.log(err);
+      this.commonService.errorHandling(err);
      });
   }
 
@@ -586,7 +583,7 @@ export class GetReportCreateComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -600,7 +597,7 @@ export class GetReportCreateComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -614,7 +611,7 @@ export class GetReportCreateComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -628,7 +625,7 @@ export class GetReportCreateComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -642,7 +639,7 @@ export class GetReportCreateComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -652,7 +649,7 @@ export class GetReportCreateComponent implements OnInit {
      (res: any) => {
        this.countryObj = res.data;
      },(err: any) => {
-       console.log(err);
+      this.commonService.errorHandling(err);
      });
   }
 

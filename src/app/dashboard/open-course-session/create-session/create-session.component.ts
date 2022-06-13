@@ -149,9 +149,7 @@ export class CreateSessionComponent implements OnInit {
   }
 
   addBreak(index: any): void {
-    console.log("meta array",index);
     (<FormArray>(<FormGroup>this.metadataArray.controls[index]).controls.break).push(this.breakGroup());
-    
   }
 
   removeBreak(sessIndex: any,breakIndex:any): void{
@@ -168,7 +166,7 @@ export class CreateSessionComponent implements OnInit {
         this.session_count = res.data.session_count;
       }
     }, (err: any) => {
-      console.log(err);
+      this.commonService.errorHandling(err);
     });
   }
 
@@ -183,7 +181,6 @@ export class CreateSessionComponent implements OnInit {
         this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
           this.session_details = res.data;
-          console.log("session_status",res.data);
           this.session_status = this.session_details.status;
   
           this.createSessionForm.controls.title.setValue(this.session_details.title);
@@ -211,7 +208,7 @@ export class CreateSessionComponent implements OnInit {
          }
         }, err => {
           this.commonService.hideLoading();
-          this.commonService.toastErrorMsg('Error', err.message);
+          this.commonService.errorHandling(err);
         });
       }
   }
@@ -220,7 +217,7 @@ export class CreateSessionComponent implements OnInit {
    this.courseService.getNewregionalCordinator().subscribe((res: any) => {
       this.rocObj = res.data;
     },(err: any) => {
-      console.log(err);
+      this.commonService.errorHandling(err);
     });
   }
 
@@ -229,7 +226,7 @@ export class CreateSessionComponent implements OnInit {
      (res: any) => {
        this.deliveryMethod = res.data;
      },(err: any) => {
-       console.log(err);
+      this.commonService.errorHandling(err);
      });
   }
 
@@ -238,7 +235,7 @@ export class CreateSessionComponent implements OnInit {
      (res: any) => {
        this.countryObj = res.data;
      },(err: any) => {
-       console.log(err);
+      this.commonService.errorHandling(err);
      });
   }
   //preferred instructor
@@ -247,7 +244,7 @@ export class CreateSessionComponent implements OnInit {
      (res: any) => {
        this.preferedInstructor = _.map(res.data, function(x) { return {'email_id':x.email_id}});
      },(err: any) => {
-       console.log(err);
+      this.commonService.errorHandling(err);
      });
   }
 
@@ -256,7 +253,7 @@ export class CreateSessionComponent implements OnInit {
      (res: any) => {
        this.timeZoneObj = res.data;
      },(err: any) => {
-       console.log(err);
+      this.commonService.errorHandling(err);
      });
   }
 
@@ -265,12 +262,11 @@ export class CreateSessionComponent implements OnInit {
       (res: any) => {
         this.vendor = res.data;
       },(err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
       });
   }
 
   copySession(session: any) {
-    console.log("session",session.value);
     this.sessionCopyVal = session.value;
     this.breaksCopyArray=[];
     if(session.value.break != undefined){
@@ -358,24 +354,21 @@ export class CreateSessionComponent implements OnInit {
       if(status =='publish'){
         sessionObj. status_comment =  this.publishComment;
       }
-      console.log("session value", sessionObj);
       if (this.session_id == 0) {
-        console.log("session id",this.session_id);
         this.commonService.showLoading();
         this.courseSessionService.createSession(sessionObj).subscribe(
           (res: any) => {
             this.commonService.hideLoading();
             this.commonService.toastSuccessMsg('Session', 'Successfully Created.');
             this.router.navigate(['/dashboard/sct']);
-            console.log("res is", res);
           },
           (err: any) => {
+            this.commonService.errorHandling(err);
           }
         );
       }
       else {
         sessionObj.session_id = this.session_id;
-        console.log("not session id",this.session_id);
         this.commonService.showLoading();
         this.courseSessionService.updateSession(sessionObj).subscribe(
           (res: any) => {
@@ -384,12 +377,12 @@ export class CreateSessionComponent implements OnInit {
             this.router.navigate(['/dashboard/sct']);
           },
           (err: any) => {
+            this.commonService.errorHandling(err);
           }
         );
       }
     }
     else {
-      console.log("invalid form");
       return;
     }
   }
@@ -405,12 +398,7 @@ export class CreateSessionComponent implements OnInit {
       const wsname : string = wb.SheetNames[0];
 
       const ws:XLSX.WorkSheet = wb.Sheets[wsname];
-
-      console.log(ws);
-
       this.data = (XLSX.utils.sheet_to_json(ws,{header:1}));
-
-      console.log(this.data);
 
       for(let item of this.data){
         for(let newitem of item){
@@ -419,11 +407,9 @@ export class CreateSessionComponent implements OnInit {
           });
         }
       }
-      console.log("newdata",this.preferedInstructor);
      // this.newEmailParticipants(this.newdata);
       /* this.data.map((e:any)=>{
           e.email_id=e;
-          console.log("e",e);
       }); */
     };
     reader.readAsBinaryString(target.files[0]);
@@ -448,7 +434,6 @@ export class CreateSessionComponent implements OnInit {
   }
 
   newEmailParticipants(arr:any){
-    debugger;
     return _.map(arr,(e)=>{this.preferedInstructor.push(e);
     });
   }
@@ -462,7 +447,7 @@ export class CreateSessionComponent implements OnInit {
          this.sessionPub=false;
        }
     },err=>{
-      console.log(err);
+      this.commonService.errorHandling(err);
     });
    }
 
@@ -493,13 +478,13 @@ export class CreateSessionComponent implements OnInit {
    let publishobj = { session_id: this.session_id, status: 'publish', status_comment: this.publishComment };
      this.courseSessionService.changeStatusSession(publishobj).subscribe(
        (res: any) => {
-         console.log(res);
+         
          if (res) {
            this.router.navigate(['/dashboard/sct']);
          }
        },
        (err: any) => {
-         console.log(err);
+        this.commonService.errorHandling(err);
        }
      );
   }
@@ -507,10 +492,10 @@ export class CreateSessionComponent implements OnInit {
   reject() {
     let statusobj = { session_id: this.session_id, status: 'reject', status_comment: this.rejectcomment }
     this.courseSessionService.changeStatusSession(statusobj).subscribe((res: any) => {
-      console.log(res);
+      
       this.router.navigate(['/dashboard/sct']);
     }, (err: any) => {
-      console.log(err)
+      this.commonService.errorHandling(err);
     })
   }
 
@@ -520,7 +505,7 @@ export class CreateSessionComponent implements OnInit {
         this.backupCordinatorsList = res.data;
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -531,7 +516,6 @@ export class CreateSessionComponent implements OnInit {
    let ctrl = this.metaArrayControl.controls['duration'] as FormControl;
     let y = ctrl.value
     y = y.replace(/\D/g, '');
-    console.log(y)
     if (y.length == 3 && val.key > 6) {
       y = y.substring(0, 2);
     }

@@ -138,7 +138,6 @@ export class CarouselViewReportComponent implements OnInit {
   }
 
   filterData() {
-    debugger;
     const data = this.filterForm.value;
     this.refreshCarousel(data);
   }
@@ -156,7 +155,7 @@ export class CarouselViewReportComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -181,7 +180,7 @@ export class CarouselViewReportComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }

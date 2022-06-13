@@ -121,7 +121,7 @@ export class ViewCompleteReportComponent implements OnInit {
 
     this.courceService.getCourseWithoutFilter().subscribe(
       (res: any) => {
-        // console.log(res);
+        // 
         if (res.status == 1 && res.message == 'Success') {
           this.i = 0;
           this.j = 0;
@@ -211,7 +211,7 @@ export class ViewCompleteReportComponent implements OnInit {
         }
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -253,11 +253,11 @@ export class ViewCompleteReportComponent implements OnInit {
   getLearningType() {
     this.courceService.getLearningType().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.learningTypes = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -268,7 +268,7 @@ export class ViewCompleteReportComponent implements OnInit {
       this.roles = res.data;
     },
       (err: any) => {
-        console.log(err);
+        
       });
     this.courceService.getRoleUsers().subscribe((res: any) => {
       console.log("res data is ", res.data);
@@ -305,7 +305,7 @@ export class ViewCompleteReportComponent implements OnInit {
       console.log("publisher is", this.publisherObj);
     },
       (err: any) => {
-        console.log(err);
+        
       });
 
   }
@@ -317,7 +317,7 @@ export class ViewCompleteReportComponent implements OnInit {
         // this.departments = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -416,7 +416,7 @@ export class ViewCompleteReportComponent implements OnInit {
         }
       },
         (err: any) => {
-          console.log(err);
+          
         });
     }
     else {
@@ -431,7 +431,7 @@ export class ViewCompleteReportComponent implements OnInit {
   }
   openModal(course: any) {
     this.courceService.courseHistory(course.id).subscribe((res: any) => {
-      console.log(res);
+      
       if (res && res.status == 1) {
         const modalRef = this.modalService.open(ViewHistoryComponent, {
           centered: true,
@@ -490,7 +490,7 @@ export class ViewCompleteReportComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        
       }
     );
   }

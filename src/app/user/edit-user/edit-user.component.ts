@@ -139,7 +139,7 @@ export class EditUserComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -160,7 +160,7 @@ export class EditUserComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -207,7 +207,7 @@ export class EditUserComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -226,7 +226,7 @@ export class EditUserComponent implements OnInit {
       res=>{
         this.regionList= res.data;
       },err=>{
-       console.log(err);
+        this.commonService.errorHandling(err);
      });
   }
 
@@ -238,7 +238,7 @@ export class EditUserComponent implements OnInit {
           return a.status == 1
         });
       },err=>{
-       console.log(err);
+        this.commonService.errorHandling(err);
      });
   }
 
@@ -247,7 +247,7 @@ export class EditUserComponent implements OnInit {
       res=>{
         this.learningTypes= res.data;
       },err=>{
-       console.log(err);
+        this.commonService.errorHandling(err);
      });  
   }
 }

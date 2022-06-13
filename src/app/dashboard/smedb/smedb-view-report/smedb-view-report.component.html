@@ -1,0 +1,227 @@
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-8">
+            <div class="page-header float-left bac_trasparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/SME_DB.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="breade_text_span1">SME Database</span>
+                        <span class="divider"></span>
+                        <span class="breade_text_span">The SME learning Community is one of the enablers for OBS to
+                            become a Learning organization by enabling a co-development environment through sharing
+                            knowledge and hands-on experience on the latest industry technologies and practices.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 float-right">
+            <div class="page-header float-right bac_trasparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bac_trasparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home text_white"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/smedb']" class="text_white">Create new SME</a>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">View complete report</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content mt-2">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header cm-card-header">
+                            <div class="overall_css">
+                                <span class="card_overall">SME Added In the database</span>
+                            </div>
+                        </div>
+                        <div class="card-body card_course_body">
+                            <div class="Course_icon_parent" data-aos="fade-right">
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="showRecords(smeStatus.contecntSupport)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des cm-draft">
+                                                <img src="../../../../assets/images/icon/drafts.png" />
+                                            </div>
+                                            <p>Content Support Expert</p>
+                                        </div>
+                                        <span
+                                            class="number_css conte_test_left">{{sme_count.contecntSupport?sme_count.contecntSupport:0}}</span>
+                                    </div>
+                                </div>
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="showRecords(smeStatus.delivery)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des cm-submit">
+                                                <img src="../../../../assets/images/icon/closed.png" />
+                                            </div>
+                                            <p>Delivery Expert</p>
+                                        </div>
+                                        <span
+                                            class="number_css sub_mitted">{{sme_count.delivery?sme_count.delivery:0}}</span>
+                                    </div>
+                                </div>
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="showRecords(smeStatus.voiceOver)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des bac_yellow">
+                                                <img src="../../../../assets/images/icon/pending.png" />
+                                            </div>
+                                            <p>Voice over for a eLearning</p>
+                                        </div>
+                                        <span class="number_css voice_left">{{sme_count.voiceOver?sme_count.voiceOver:0}}</span>
+                                    </div>
+                                </div>
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="showRecords(smeStatus.total)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des cm-all">
+                                                <img src="../../../../assets/images/icon/viewall.png" />
+                                            </div>
+
+                                            <p>View All</p>
+                                        </div>
+                                        <span class="number_css">{{sme_count.total?sme_count.total:0}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header cm-card-header">
+                            <div class="overall_css">
+                                <div>
+                                    <i class="fa fa-table fa_table" aria-hidden="true "></i>
+                                    <span class="card-title card-title-text card_overall">View All Request Status</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive table_height_scroll">
+                                <table id="bootstrap-data-table-export " class="table table-striped table-bordered">
+                                    <thead class="sticky_header">
+                                        <tr class="text-center font-13">
+                                            <th scope="col">#</th>
+                                            <th sortable="request_id" (sort)="onSort($event)">
+                                                RequestID
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="phone" (sort)="onSort($event)">
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                                Phone no
+                                            </th>
+                                            <th sortable="domain" (sort)="onSort($event)">
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                                Volunteered domain expertise
+                                            </th>
+                                            <th sortable="contact_person_id" (sort)="onSort($event)">
+                                                PD&L contcat person
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="sme_status" (sort)="onSort($event)">
+                                                Status<i class="fa fa-long-arrow-up arrow_css" aria-hidden="true"></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
+                                            </th>
+
+                                            <th sortable="created_at" (sort)="onSort($event)">
+                                                Created Date<i class="fa fa-long-arrow-up arrow_css"
+                                                    aria-hidden="true"></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
+                                            </th>
+
+                                            <th>
+                                                PD&L feedback
+                                            </th>
+                                            <th sortable="status" (sort)="onSort($event)">
+                                                PD&L Status
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th>
+                                                History
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of smeListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber }; let i =index;"
+                                            class="text-center bac_hover-table font-12">
+                                            <td scope="row">{{(((pagination.pageSize *
+                                                (pagination.pageNumber - 1)) + 1) + i)}}</td>
+                                            <td class="request_id" (click)="viewRequest(item)">{{ item.request_id }}
+                                            </td>
+                                            <td (click)="viewRequest(item)">{{ item.phone }}
+                                            </td>
+                                            <td (click)="viewRequest(item)">
+                                                {{ item.domain }}
+                                            </td>
+                                            <td (click)="viewRequest(item)">
+                                                {{ item.contact_person_id }}
+                                            </td>
+                                            <td (click)="viewRequest(item)">{{ item.status | titlecase }}</td>
+                                            <td (click)="viewRequest(item)">{{ item.created_at | date: dateTimeFormate
+                                                }}
+                                            </td>
+                                            <td> <a *ngIf="item.status !== smeStatus.draft"
+                                                    (click)="openRatingModal(item)" class="re_id">
+                                                    Add/View feedback
+                                                </a>
+                                            </td>
+                                            <td (click)="statusChange(item)">{{ item.sme_status | titlecase }}
+                                            </td>
+                                            <td>
+                                                <a *ngIf="item.status !== smeStatus.draft" (click)="openModal(item)"
+                                                    class="re_id">
+                                                    View
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagiantio_dispaly">
+                                <div class="pagintion_ child">
+                                    <p class="cm-pagination-fotter">Showing {{(pagination.pageSize *
+                                        (pagination.pageNumber - 1)) + 1}} to
+                                        {{(this.pagination.pageSize * this.pagination.pageNumber) >
+                                        this.smeListToShow?.length ? this.smeListToShow?.length :
+                                        this.pagination.pageSize * this.pagination.pageNumber}} of
+                                        {{this.smeListToShow?.length}} entries</p>
+                                </div>
+                                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

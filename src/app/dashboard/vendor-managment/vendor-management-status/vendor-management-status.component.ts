@@ -60,11 +60,10 @@ export class VendorManagementStatusComponent implements OnInit {
         this.commonService.toastSuccessMsg('Vendor', `Successfully ${this.props.status}.`);
         this.modalService.close();
         this.passEntry.next();
-        // this.router.navigate(['/dashboard/vendormanagement/report']);
-      },
+       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err); 
       }
     );
   }

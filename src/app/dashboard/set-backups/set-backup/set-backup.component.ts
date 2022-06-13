@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
+import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 
 @Component({
@@ -33,7 +34,7 @@ export class SetBackupComponent implements OnInit {
   region_id:number=0
 
   constructor(private courseService: CourcesService,
-    private authService: AuthenticationService, private router: Router) {
+    private authService: AuthenticationService, private router: Router, private commonService: CommonService ) {
     this.getUserrole = this.authService.getRolefromlocal();
     this.getProfileDetails();
     this.getRoleUsers();
@@ -52,7 +53,6 @@ export class SetBackupComponent implements OnInit {
       }
     }
     else{
-    console.log("getUserrole",this.getUserrole);
     this.getRocs();
     }
     if(localStorage.getItem('assignedPublisher')){
@@ -66,23 +66,20 @@ export class SetBackupComponent implements OnInit {
       }
     }
     else{
-    console.log("getUserrole",this.getUserrole);
     this.getPublisher();
     }
   }
 
   getRocs(){
     this.courseService.getNewregionalCordinator().subscribe((res:any)=>{
-      console.log("getregionalCordinator()",res.data);
           this.rocObj = res.data;
     },(err:any)=>{
-      console.log(err);
+      this.commonService.errorHandling(err);  
     });
   }
 
   getUser(event: any){
    let id = event.target.value;
-    console.log("role new users",this.roleUsers);
     for(let item of this.roleUsers.data[3]){
       if (item.region_id == id) {
         this.userid = item.id;
@@ -109,10 +106,8 @@ export class SetBackupComponent implements OnInit {
 
   getPublisherUser(event:any){
     this.id = event.target.value;
-    console.log("id",this.id);
     for(let item of this.publisherObj){
       if(this.id == item.id){
-        console.log("item",item);
         this.publisherUsername = item.first_name +" "+ item.last_name;
         this.publisherEmail= item.email;
         this.assignedPublish= item.first_name +" "+ item.last_name;
@@ -120,7 +115,6 @@ export class SetBackupComponent implements OnInit {
     }
   }
   assignBackup(){
-    console.log("id is ", this.id);
     this.assignFlag = true;
     this.getRocDropdown = false;
     this.getPublisherDropdown =  false;
@@ -133,9 +127,8 @@ export class SetBackupComponent implements OnInit {
     }
     
      this.courseService.assignBackup(totalObj).subscribe((res:any)=>{
-      console.log("assign backup", res.data);
     },(err:any)=>{
-      console.log(err);
+      this.commonService.errorHandling(err); 
     }); 
     let assignRocObject={
       userid:this.userid,
@@ -160,10 +153,9 @@ export class SetBackupComponent implements OnInit {
 
   getPublisher(){
     this.courseService.getNewPublisher().subscribe((res:any)=>{
-      console.log("publishers",res.data);
           this.publisherObj = res.data;
     },(err:any)=>{
-      console.log(err);
+      this.commonService.errorHandling(err); 
     });
   }
   
@@ -176,7 +168,7 @@ export class SetBackupComponent implements OnInit {
     this.courseService.removeBackup().subscribe((res:any)=>{
       location.reload();
     },(err:any)=>{
-      console.log(err);
+      this.commonService.errorHandling(err); 
     });
     
     /* this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
@@ -186,13 +178,11 @@ export class SetBackupComponent implements OnInit {
 
   getProfileDetails(){
     this.authService.getProfileDetails().subscribe(res=>{
-      console.log("publisher/roc data",res.data);
       this.backup_id = res.data.transfer_id;
       if(this.backup_id){
         this.assignFlag = true;
         this.courseService.getRoleUsers().subscribe((res: any) => {
           this.roleUsers = res;
-          console.log("role users",this.roleUsers);
           for(let item of this.roleUsers.data[3]){
             if (item.id == this.backup_id) {
               this.region_id = item.region_id;
@@ -209,7 +199,7 @@ export class SetBackupComponent implements OnInit {
             }
           };
         },err=>{
-          console.log(err);
+          this.commonService.errorHandling(err); 
         });
        
       
@@ -219,7 +209,7 @@ export class SetBackupComponent implements OnInit {
         
       }
     },err=>{
-      console.log(err);
+      this.commonService.errorHandling(err); 
     });
   }
 
@@ -227,7 +217,7 @@ export class SetBackupComponent implements OnInit {
     this.courseService.getRoleUsers().subscribe((res: any) => {
       this.roleUsers = res;
     },err=>{
-      console.log(err);
+      this.commonService.errorHandling(err); 
     });
   }
 }

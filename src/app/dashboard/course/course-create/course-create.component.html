@@ -167,28 +167,13 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6 mb_boot_10" *ngIf="!isPlaylist()">
-                                    <!-- <div class="form-group w-100">
-                                        <label>Objective</label>
-                                        <div class="editControls"></div>
-                                        <ejs-richtexteditor id='defaultRTE' formControlName="objective"
-                                            [toolbarSettings]='tools'>
-                                        </ejs-richtexteditor>
-                                    </div>
-                                    <div class="error_message"
-                                        *ngIf="createCourceForm.controls['objective'].hasError('required') && createCourceForm.controls['objective'].touched">
-                                        Objectives cannot be blank
-                                    </div> -->
                                     <div class="form-group w-100">
                                         <label>Objective</label>
                                     <table class="table table-bordered" formArrayName="objective">
                                         <thead>
-                                            <!-- <tr>
-                                                <th scope="col">Objective</th>
-                                                <th scope="col" class="w_12">Add</th>
-                                            </tr> -->
                                             <tr
                                                 *ngFor="let obje of objectiveContentArray.controls;let i = index;">
-                                                <td [formGroupName]="i">
+                                                <td class="p-1" [formGroupName]="i">
                                                     <input type="text" placeholder="Enter Objective"
                                                         class="form-control form_width" formControlName="description" />
                                                     <div class="error_message"
@@ -196,12 +181,12 @@
                                                         Objectives cannot be blank
                                                     </div>
                                                 </td>
-                                                <td class="btn-width">
-                                                    <button class="btn btn-success mr-2 mb-1"
+                                                <td class="btn-width p-1">
+                                                    <button class="btn btn-success mr-2 py-1"
                                                         (click)="addObjectiveContent('')">
                                                         +
                                                     </button>
-                                                    <button class="btn btn-danger" *ngIf="i > 0"
+                                                    <button class="btn btn-danger py-1" *ngIf="i > 0"
                                                         (click)="removeObjectiveContent(i)">
                                                         <i class="fa fa-trash"></i>
                                                     </button>

@@ -11,6 +11,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgbdSortableHeader } from './directives/sorting.directive';
 
 import { RouterModule } from '@angular/router';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
 
@@ -28,7 +29,8 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     Ng2SearchPipeModule,
-    RouterModule
+    RouterModule,
+    NgxDropzoneModule
     //NgbModule,
   ],
   exports: [

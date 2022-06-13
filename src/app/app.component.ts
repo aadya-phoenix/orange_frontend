@@ -24,7 +24,7 @@ export class AppComponent {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err);
       }
     );
   }

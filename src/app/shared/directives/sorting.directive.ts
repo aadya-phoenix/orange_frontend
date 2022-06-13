@@ -30,6 +30,5 @@ export class NgbdSortableHeader {
   rotate() {
     this.direction = rotate[this.direction];
     this.sort.emit({ column: this.sortable, direction: this.direction });
-    console.log(this.sortable);
   }
 }

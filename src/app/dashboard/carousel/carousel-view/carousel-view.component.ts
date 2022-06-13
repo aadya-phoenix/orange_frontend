@@ -64,7 +64,7 @@ export class CarouselViewComponent implements OnInit {
         }
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -166,7 +166,7 @@ export class CarouselViewComponent implements OnInit {
               },
               (err: any) => {
                 this.commonService.hideLoading();
-                this.commonService.toastErrorMsg('Error', err.message);
+                this.commonService.errorHandling(err);
               }
             );
           

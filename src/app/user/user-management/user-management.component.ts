@@ -97,7 +97,7 @@ export class UserManagementComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -129,6 +129,7 @@ export class UserManagementComponent implements OnInit {
           )
         },(err:any)=>{
           this.commonService.hideLoading();
+          this.commonService.errorHandling(err);
         })
         
       }
@@ -162,7 +163,7 @@ export class UserManagementComponent implements OnInit {
         return a.status == 1
       });
      },err=>{
-      console.log(err);
+      this.commonService.errorHandling(err);
     });
   }
 }

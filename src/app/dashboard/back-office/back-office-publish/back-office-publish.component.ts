@@ -68,7 +68,7 @@ export class BackOfficePublishComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err);
       }
     );
   }

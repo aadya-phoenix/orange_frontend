@@ -100,7 +100,7 @@ export class CourseCompleteReportComponent implements OnInit {
         this.learningTypes = res.data;
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err);
         this.commonService.hideLoading();
       }
     );
@@ -115,13 +115,13 @@ export class CourseCompleteReportComponent implements OnInit {
     },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       });
   }
 
   viewRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/olcourse/view/${item.id}`);
+      this.router.navigateByUrl(`/dashboard/cct/view/${item.id}`);
     }
   }
 
@@ -182,7 +182,6 @@ export class CourseCompleteReportComponent implements OnInit {
   }
 
   filterData() {
-    debugger;
     const data = this.filterForm.value;
     this.refreshCourse(data);
   }
@@ -203,7 +202,7 @@ export class CourseCompleteReportComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -232,7 +231,7 @@ export class CourseCompleteReportComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }

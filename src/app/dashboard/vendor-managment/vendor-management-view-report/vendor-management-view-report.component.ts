@@ -93,12 +93,11 @@ export class VendorManagementViewReportComponent implements OnInit {
     this.commonService.showLoading();
     this.courseService.getNewregionalCordinator().subscribe(
       (res: any) => {
-        console.log(res);
         this.cordinatorsList = res.data;
         this.getCCTLearningLocation();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err); 
         this.commonService.hideLoading();
       }
     );
@@ -112,7 +111,7 @@ export class VendorManagementViewReportComponent implements OnInit {
         this.getCCTNfpsEntity();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err); 
         this.commonService.hideLoading();
       }
     );
@@ -127,6 +126,7 @@ export class VendorManagementViewReportComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
+        this.commonService.errorHandling(err); 
       }
     );
   }
@@ -140,6 +140,7 @@ export class VendorManagementViewReportComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
+        this.commonService.errorHandling(err); 
       }
     );
   }
@@ -153,7 +154,7 @@ export class VendorManagementViewReportComponent implements OnInit {
         this.refreshCourses({});
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err); 
         this.commonService.hideLoading();
       }
     );
@@ -251,7 +252,7 @@ export class VendorManagementViewReportComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err); 
       }
     );
   }
@@ -304,6 +305,7 @@ export class VendorManagementViewReportComponent implements OnInit {
             )
           },(err:any)=>{
             this.commonService.hideLoading();
+            this.commonService.errorHandling(err); 
           })
           
         }
@@ -340,7 +342,7 @@ export class VendorManagementViewReportComponent implements OnInit {
         },
         (err: any) => {
           this.commonService.hideLoading();
-          console.log(err);
+          this.commonService.errorHandling(err); 
         }
       );
     }

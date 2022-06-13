@@ -3,30 +3,25 @@
         <div class="d-flex justify_content">
             Beautification Template
             <a (click)="closeModal()" class="text_black"><i class="fa fa-times" aria-hidden="true"></i></a>
-
         </div>
     </div>
     <div class="card-body">
+        <div class="mb-2">
+            <button type="button" class="btn btn-primary" (click)="copyToClipBoardSource()">
+              <i class="fa fa-copy" aria-hidden="true"></i><span class="pl-1">Source code copy to clipboard</span>
+            </button>
+          </div>
+        <!-- <section [innerHTML]="templateData"></section> -->
         <section>
             <div class="for-whom">
-                <div class="img_class">
-                    <div class="img_border-css">
-                        <img
-                            src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-user-user-flatart-icons-outline-flatarticons-9.png" />
-                    </div>
-                </div>
+                <img src="https://orange.csod.com/clientimg/orange/welcome/Core/pq.png" />
                 <div class="heading_class">
                     <p class="header_p">For Whom ?</p>
                     <span>{{courseDetail.for_whoom}}</span>
                 </div>
             </div>
             <div class="for-whom border_css">
-                <div class="img_class" style="background-color: #a885db;">
-                    <div class="img_border-css">
-                        <img
-                            src="https://img.icons8.com/external-vitaliy-gorbachev-fill-vitaly-gorbachev/60/000000/external-document-business-vitaliy-gorbachev-fill-vitaly-gorbachev-4.png" />
-                    </div>
-                </div>
+                <img src="https://orange.csod.com/clientimg/orange/welcome/Core/pr.png" />
                 <div class="heading_class">
                     <p class="header_p">Prerequisite</p>
                     <span> {{courseDetail.prerequisite}}</span>
@@ -39,8 +34,6 @@
                         <span>{{courseDetail.description}}</span>
                     </div>
                 </div>
-                <!-- <div class="border_divider ">
-                </div> -->
                 <div class="for-whom mt-2">
                     <div class="heading_class ">
                         <p class="header_p">Objectives</p>
@@ -51,8 +44,6 @@
                             <span class="span_text">{{data.description}}</span>
                         </li>
                     </ul>
-                    <!-- <div class="border_divider ">
-                    </div> -->
                 </div>
             </div>
 
@@ -60,9 +51,8 @@
                 <div class="for-whom">
                     <div class="heading_class">
                         <p class="header_p">More Information</p>
-                        <a href="">For Whom ?</a>
                         <div class="contact-button">
-                            <a href=""><img
+                            <a  href="mailto:{{courseDetail.email_training_contact}}?subject=Request information for:{{courseDetail.titleByLang}}"><img
                                     src="https://img.icons8.com/windows/32/000000/secured-letter--v3.png" />Contacts</a>
                         </div>
                     </div>

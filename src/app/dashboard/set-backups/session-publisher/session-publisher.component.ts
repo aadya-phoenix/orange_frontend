@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourseSessionService } from 'src/app/shared/services/course_session/course-session.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class SessionPublisherComponent implements OnInit {
   status:string='';
   onOffFlag:boolean =false;
 
-  constructor(private courseSessionService:CourseSessionService) { }
+  constructor(private courseSessionService:CourseSessionService, private commonService: CommonService) { }
 
   ngOnInit(): void {
    this.getSessionPublisherStatus();
@@ -26,12 +27,11 @@ export class SessionPublisherComponent implements OnInit {
          this.onOffFlag=false;
        }
     },err=>{
-      console.log(err);
+      this.commonService.errorHandling(err);
     });
    }
 
   save(){
-    console.log("session publisher",this.onOffFlag);
     if(this.onOffFlag){
       this.status = 'on';
     }
@@ -39,10 +39,10 @@ export class SessionPublisherComponent implements OnInit {
       this.status = 'off';
     }
     this.courseSessionService.setSessionPublisherStatus({status:this.status}).subscribe((res:any)=>{
-     console.log("status",this.status);
-     console.log(res);
+     
      localStorage.setItem('sessionPublisher',JSON.stringify(this.onOffFlag));
-    },err=>{    
+    },err=>{  
+      this.commonService.errorHandling(err);  
    }); 
   }
 }

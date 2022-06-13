@@ -18,7 +18,8 @@ export class AuthenticationServiceGuard implements CanActivate {
     private router: Router
   ) {}
 
-  canActivate(): boolean {
+  canActivate(next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): boolean {
     const loginDetails: any = this.authService.getLoginDetails();
     const role: any = this.authService.getRolefromlocal();
 
@@ -28,7 +29,7 @@ export class AuthenticationServiceGuard implements CanActivate {
     ) {
       return true;
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login'],{queryParams:{'redirectURL':state.url}});
       return false;
     }
   }

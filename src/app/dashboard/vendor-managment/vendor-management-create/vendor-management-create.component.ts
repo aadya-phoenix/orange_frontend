@@ -149,12 +149,11 @@ export class VendorManagementCreateComponent implements OnInit {
     this.commonService.showLoading();
     this.courseService.getNewregionalCordinator().subscribe(
       (res: any) => {
-        console.log(res);
         this.cordinatorsList = res.data;
         this.getCCTContactPoint();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err); 
         this.commonService.hideLoading();
       }
     );
@@ -168,7 +167,7 @@ export class VendorManagementCreateComponent implements OnInit {
         this.getCCTLearningLocation();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err); 
         this.commonService.hideLoading();
       }
     );
@@ -178,12 +177,11 @@ export class VendorManagementCreateComponent implements OnInit {
     this.commonService.showLoading();
     this.vendorService.getCCTLearningLocation().subscribe(
       (res: any) => {
-        console.log(res);
         this.CCTLearningLocation = res.data;
         this.getCCTNfpsEntity();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err); 
         this.commonService.hideLoading();
       }
     );
@@ -197,7 +195,7 @@ export class VendorManagementCreateComponent implements OnInit {
         this.getCCTOfferTraining();
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err); 
         this.commonService.hideLoading();
       }
     );
@@ -206,7 +204,6 @@ export class VendorManagementCreateComponent implements OnInit {
     this.commonService.showLoading();
     this.vendorService.getCCTOfferTraining().subscribe(
       (res: any) => {
-        console.log(res);
         this.CCTOfferTraining = res.data;
         this.commonService.hideLoading();
         if (this.vendor_id) {
@@ -218,7 +215,7 @@ export class VendorManagementCreateComponent implements OnInit {
         }
       },
       (err: any) => {
-        console.log(err);
+        this.commonService.errorHandling(err); 
         this.commonService.hideLoading();
       }
     );
@@ -281,7 +278,7 @@ export class VendorManagementCreateComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', err.message);
+        this.commonService.errorHandling(err); 
       }
     );
   }
@@ -329,7 +326,7 @@ export class VendorManagementCreateComponent implements OnInit {
         },
         (err: any) => {
           this.commonService.hideLoading();
-          this.commonService.toastErrorMsg('Error', err.message);
+          this.commonService.errorHandling(err); 
         }
       );
     }
@@ -344,7 +341,7 @@ export class VendorManagementCreateComponent implements OnInit {
         },
         (err: any) => {
           this.commonService.hideLoading();
-          this.commonService.toastErrorMsg('Error', err.message);
+          this.commonService.errorHandling(err); 
         }
       );
     }

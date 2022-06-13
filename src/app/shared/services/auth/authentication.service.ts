@@ -24,7 +24,6 @@ export class AuthenticationService {
   register(data: any) {
     const url = `/api/${this.apiVersion}/register`;
     const urllive=`${this.basePath}register`;
-    console.log(data);
     return this.http.post(url, data);
   }
 
@@ -37,7 +36,6 @@ export class AuthenticationService {
     let totalObj = { ...grantObj, ...clienSecret, ...data };
     const url = `/oauth/token`;
     const urllive=`${this.basePath}oauth/token`;
-    console.log(data);
     return this.http.post(url, totalObj);
   }
 
@@ -87,7 +85,6 @@ export class AuthenticationService {
 
   logOut() {
     localStorage.clear();
-    console.log('sdsds');
     this.router.navigate(['/login']);
   }
 

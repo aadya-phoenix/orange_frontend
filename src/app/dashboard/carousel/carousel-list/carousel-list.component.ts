@@ -138,7 +138,7 @@ export class CarouselListComponent implements OnInit {
       },
       (err: any) => {
         this.commonService.hideLoading();
-        console.log(err);
+        this.commonService.errorHandling(err);
       }
     );
   }
@@ -169,6 +169,7 @@ export class CarouselListComponent implements OnInit {
             )
           },(err:any)=>{
             this.commonService.hideLoading();
+            this.commonService.errorHandling(err);
           })
           
         }
@@ -196,6 +197,7 @@ export class CarouselListComponent implements OnInit {
             )
           },(err:any)=>{
             this.commonService.hideLoading();
+            this.commonService.errorHandling(err);
           })
           
         }

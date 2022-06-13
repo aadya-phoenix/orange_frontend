@@ -338,7 +338,6 @@ export class CreateNewCourseComponent implements OnInit {
     this.getUserrole = this.authService.getRolefromlocal();
     //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
     this.lang = environment.lang;
-    console.log(this.router.getCurrentNavigation()?.extras.state)
 
     if (this.router.getCurrentNavigation()?.extras.state != undefined) {
 
@@ -355,7 +354,6 @@ export class CreateNewCourseComponent implements OnInit {
       //  this.learnerGuidelines = JSON.parse(this.routergetdata['learner_guideline']);
       this.subjectId = Number(this.routergetdata['subject']);
       this.showlevel = Number(this.routergetdata.level);
-      console.log(this.routergetdata)
       this.showtitle = this.courceService.getTText(this.routergetdata.title);
       this.showobjective = this.courceService.getTText(this.routergetdata.objective);
       this.showdescription = this.courceService.getTText(this.routergetdata.description)
@@ -384,8 +382,6 @@ export class CreateNewCourseComponent implements OnInit {
         }
       }
       //for (let l in learner_guide) {
-      //  console.log(l[0])
-      //  console.log(l[this.j][1])
       //  this.addLearnerGuideline(l[this.j][0], l[this.j][1]);
       //  //this.t.push({ title: l[this.j][0], description: l[this.j][1] })
       //  //this.j = this.j + 1;
@@ -404,7 +400,6 @@ export class CreateNewCourseComponent implements OnInit {
         //this.showILTExiryType = Number(this.routergetdata.entity_business_area)
         this.showILTRegional = Number(this.routergetdata.regional_cordinator)
         this.showILTVendorName = this.routergetdata.external_vendor_name
-        console.log("prefered instructor", this.showILTEmail);
         if (this.routergetdata.certification == "yes") {
           this.showCertificateExpiry = true
         }
@@ -553,11 +548,11 @@ export class CreateNewCourseComponent implements OnInit {
   getCordinators() {
     this.courceService.getNewregionalCordinator().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.cordinatorsList = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -567,7 +562,7 @@ export class CreateNewCourseComponent implements OnInit {
         this.backupCordinatorsList = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -575,11 +570,11 @@ export class CreateNewCourseComponent implements OnInit {
   /*  getNewPublisherId(){
      this.courceService.getNewPublisherId(id).subscribe(
        (res: any) => {
-         console.log(res);
+         
          this.publisherNewList = res.data;
        },
        (err: any) => {
-         console.log(err);
+         
        }
      );
    } */
@@ -588,10 +583,9 @@ export class CreateNewCourseComponent implements OnInit {
     this.courceService.getVendortype().subscribe(
       (res: any) => {
         this.vendorType = res.data;
-        console.log(this.vendorType);
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -603,7 +597,7 @@ export class CreateNewCourseComponent implements OnInit {
         this.vendor = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -612,10 +606,9 @@ export class CreateNewCourseComponent implements OnInit {
     this.courceService.getcctLevel().subscribe(
       (res: any) => {
         this.cctLevel = res.data;
-        console.log("cct level", this.cctLevel);
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -624,10 +617,9 @@ export class CreateNewCourseComponent implements OnInit {
     this.courceService.getSubjects().subscribe(
       (res: any) => {
         this.cctSubjects = res.data;
-        console.log(this.cctSubjects);
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -636,10 +628,9 @@ export class CreateNewCourseComponent implements OnInit {
     this.courceService.getValidityperiod().subscribe(
       (res: any) => {
         this.validityPeriod = res.data;
-        console.log(this.validityPeriod);
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -647,11 +638,11 @@ export class CreateNewCourseComponent implements OnInit {
   getEntitylist() {
     this.courceService.getEntitylist().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.entityList = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -659,11 +650,11 @@ export class CreateNewCourseComponent implements OnInit {
   getDeliveryMethod() {
     this.courceService.getDeliveryMethod().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.deliveryMethod = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -671,11 +662,11 @@ export class CreateNewCourseComponent implements OnInit {
   getWhocansee() {
     this.courceService.whoSeeCourse().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.whocanSee = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -684,11 +675,11 @@ export class CreateNewCourseComponent implements OnInit {
   getPreferedInstructor() {
     this.courceService.getpreferedInstructor().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.preferedInstructor = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -697,11 +688,11 @@ export class CreateNewCourseComponent implements OnInit {
   getLanguages() {
     this.courceService.getLanguages().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.availableLanguages = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -710,11 +701,11 @@ export class CreateNewCourseComponent implements OnInit {
   getLearningType() {
     this.courceService.getLearningType().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.learningTypes = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -723,11 +714,11 @@ export class CreateNewCourseComponent implements OnInit {
   getExpiryType() {
     this.courceService.getExpiryType().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.cctExpiryType = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -735,14 +726,11 @@ export class CreateNewCourseComponent implements OnInit {
   getPublisher() {
     this.courceService.getNewPublisherByLearningType(this.learningType).subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.publisherList = res.data;
-        console.log("pub res is", res.data);
-        console.log("this.learningType", this.learningType);
-        console.log("new publisher list", this.publisherList);
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -753,7 +741,7 @@ export class CreateNewCourseComponent implements OnInit {
         this.course_count = res.data.course_count;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -1012,7 +1000,6 @@ export class CreateNewCourseComponent implements OnInit {
     //this.addLearnerGuideline();
     //this.addLearnerGuidelinetocurriculum();
     //this.pushtoTitlearray();
-    //console.log(this.commonCreateCourceForm.value);
 
     if (this.routergetdata != undefined) {
       //alert("1")
@@ -1029,7 +1016,6 @@ export class CreateNewCourseComponent implements OnInit {
         this.formatArrayData(this.totalObjnew, this.commonCreateCourceForm_playlist, 'title_single', 'titleArr');
         let setdata = JSON.parse(this.routergetdata.title);
         let newSetData = JSON.parse(this.routergetdata.description);
-        console.log("descriptiondata " + newSetData)
         this.languageValueSet(this.commonCreateCourceForm_playlist, 'title_single', 'titleArr', setdata);
         this.languageValueSet(this.commonCreateCourceForm_playlist, 'description_single', 'descriptionArr', newSetData);
         this.formCtrlSub = this.commonCreateCourceForm_playlist.valueChanges
@@ -1130,10 +1116,7 @@ export class CreateNewCourseComponent implements OnInit {
 
       if (this.learningType == "1") {
         let learner_guide = JSON.parse(this.routergetdata.learner_guideline);
-        console.log(learner_guide)
         learner_guide.forEach((element: { title: string; description: string; }) => {
-          console.log(element.title)
-          console.log(element.description)
           this.addLearnerGuideline(element.title, element.description);
         });
         this.iltandViltForm.patchValue(this.routergetdata);
@@ -1161,16 +1144,11 @@ export class CreateNewCourseComponent implements OnInit {
       }
       else if (this.learningType == "4") {
         let learner_guide = JSON.parse(this.routergetdata.learner_guideline);
-        console.log(learner_guide)
         learner_guide.forEach((element: { title: string; description: string; }) => {
-          console.log(element.title)
-          console.log(element.description)
           this.addLearnerGuidelinetocurriculum(element.title, element.description);
         });
         let curr_content = JSON.parse(this.routergetdata.curriculum_content);
-        console.log(curr_content)
         curr_content.forEach((element: { description: string; }) => {
-          console.log(element.description)
           this.addCurriculumContenttocurriculum(element.description);
         });
         this.currriculumForm.patchValue(this.routergetdata);
@@ -1182,10 +1160,8 @@ export class CreateNewCourseComponent implements OnInit {
         this.routergetdata.email_preffered_instructor = JSON.parse(this.routergetdata.email_preffered_instructor);
         this.commonCreateCourceForm_playlist.patchValue(this.routergetdata);
         this.pushtoTitlearray(this.commonCreateCourceForm_playlist);
-        debugger;
         this.playlistForm.patchValue(this.routergetdata);
       }
-      console.log(this.routergetdata);
 
 
       //this.commonCreateCourceForm.value.subject = this.routergetdata.subject;
@@ -1270,13 +1246,10 @@ export class CreateNewCourseComponent implements OnInit {
     //debugger
     this.courceService.getLanguages().subscribe(
       (res: any) => {
-        console.log('language', res);
-        console.log('rawvalue', formObj);
         let languages = res.data;
         let i = 0;
         let languageData: any = [];
         for (let index in languages) {
-          console.log(languages[index]);
           const languageLength = formObj.controls.titleArr as FormArray;
           const descriptionFormArr = formObj.controls.descriptionArr as FormArray;
           const objectiveFormArr = formObj.controls.objectiveArr as FormArray;
@@ -1333,13 +1306,10 @@ export class CreateNewCourseComponent implements OnInit {
         //  this.titlearray.push(
         //   this.fb.group({languageData })
         //   )
-        console.log(formObj);
-        console.log('languageData', languageData);
-
         // this.titlearray.push(languageData)
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
 
@@ -1371,8 +1341,6 @@ export class CreateNewCourseComponent implements OnInit {
 
 
   gettitlelanguage() {
-    debugger;
-    console.log(this.commonCreateCourceForm.value);
   }
 
   addMorelearnerGuideline(titleval: string, descriptionval: string) {
@@ -1389,7 +1357,6 @@ export class CreateNewCourseComponent implements OnInit {
   }
 
   addLearnerGuideline(titleval: string, descriptionval: string) {
-    //console.log(this.t);
     return this.t.push(this.addMorelearnerGuideline(titleval, descriptionval));
   }
 
@@ -1423,10 +1390,6 @@ export class CreateNewCourseComponent implements OnInit {
       const controlErrors: any = formObj.get(key)?.errors;
       if (controlErrors != null) {
         Object.keys(controlErrors).forEach((keyError) => {
-          console.log(
-            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ',
-            controlErrors[keyError]
-          );
         });
       }
     });
@@ -1475,8 +1438,6 @@ export class CreateNewCourseComponent implements OnInit {
     }
   }
   createNewCource_Save(commonformObj: FormGroup, formObj: FormGroup, status: any) {
-    console.log("status video is ", status);
-    console.log(this.learnerGuidearray);
     let savetype = { status: status };
     let courseid = { course_id: this.routergetdata == undefined ? null : this.routergetdata.id, resource_ext: '', material_source_ext: '' };
 
@@ -1665,10 +1626,8 @@ export class CreateNewCourseComponent implements OnInit {
       ...commonformObj.value,
       ...courseid
     };
-    console.log("total obj is", totalObj);
     if (this.learningType != "6") {
       this.fileToUpload.forEach(element => {
-        console.log("element is", element)
         totalObj.resource_ext = element.fileName.split('.')[1]
         totalObj.resource = element.base64FileBytes
       });
@@ -1676,7 +1635,6 @@ export class CreateNewCourseComponent implements OnInit {
 
     if (this.learningType == "3") {
       this.fileToUpload_Material.forEach(element => {
-        console.log(element)
         totalObj.material_source_ext = element.fileName.split('.')[1]
         totalObj.material_source = element.base64FileBytes
       });
@@ -1684,7 +1642,6 @@ export class CreateNewCourseComponent implements OnInit {
 
     this.getFormValidationErrors(formObj);
     if (formObj.valid && commonformObj.valid) {
-      console.log(totalObj);
       if (totalObj.learning_type == null || totalObj.learning_type == "") {
         totalObj.learning_type = this.learningType.toString();
       }
@@ -1692,47 +1649,42 @@ export class CreateNewCourseComponent implements OnInit {
         if (this.routergetdata == undefined) {
           this.courceService.createCource(totalObj).subscribe(
             (res: any) => {
-              console.log(res);
+              
               if (res) {
                 this.courceService.courseDetail(res.data.id).subscribe((res: any) => {
-                  console.log(res);
+                  
                   let coursedetail = res.data;
-                  console.log(coursedetail)
                   let username = { showbuttons: '#false' }
                   this.router.navigateByUrl('/dashboard/cources/request-detail', {
                     state: { ...coursedetail, ...username },
                   });
                 }, (err: any) => {
-                  console.log(err)
                 })
               }
             },
             (err: any) => {
-              console.log(err);
+              
             }
           );
         }
         else {
-          console.log(totalObj)
           this.courceService.updateCourse(totalObj).subscribe(
             (res: any) => {
-              console.log(res);
+              
               if (res) {
                 this.courceService.courseDetail(this.routergetdata.id).subscribe((res: any) => {
-                  console.log(res);
+                  
                   let coursedetail = res.data;
-                  console.log(coursedetail)
                   let username = { showbuttons: '#false' }
                   this.router.navigateByUrl('/dashboard/cources/request-detail', {
                     state: { ...coursedetail, ...username },
                   });
                 }, (err: any) => {
-                  console.log(err)
                 })
               }
             },
             (err: any) => {
-              console.log(err);
+              
             }
           );
         }
@@ -1743,7 +1695,7 @@ export class CreateNewCourseComponent implements OnInit {
           totalObj.publisher_id = this.selectedPublisherId;
           this.courceService.updateCourse(totalObj).subscribe(
             (res: any) => {
-              console.log(res);
+              
               if (res) {
                 // this.router.navigate(['/dashboard/cources']);
                 if (this.routergetdata) {
@@ -1751,15 +1703,14 @@ export class CreateNewCourseComponent implements OnInit {
                 }
                 // let transferobj = { course_id: this.courseId, transfer_id: this.selectedPublisherId };
                 // this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
-                //   console.log(res);
+                //   
                 this.router.navigate(['/dashboard/cources']);
                 // }, (err: any) => {
-                //   console.log(err)
                 // })
               }
             },
             (err: any) => {
-              console.log(err);
+              
             }
           );
         }
@@ -1767,7 +1718,7 @@ export class CreateNewCourseComponent implements OnInit {
           totalObj.publisher_id = this.selectedPublisherId;
           this.courceService.createCource(totalObj).subscribe(
             (res: any) => {
-              console.log(res);
+              
               if (res) {
                 // this.router.navigate(['/dashboard/cources']);
                 if (this.routergetdata) {
@@ -1775,21 +1726,19 @@ export class CreateNewCourseComponent implements OnInit {
                 }
                 // let transferobj = { course_id: this.courseId, transfer_id: this.selectedPublisherId };
                 // this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
-                //   console.log(res);
+                //   
                 this.router.navigate(['/dashboard/cources']);
                 // }, (err: any) => {
-                //   console.log(err)
                 // })
               }
             },
             (err: any) => {
-              console.log(err);
+              
             }
           );
         }
       }
       else if (status == "publish") {
-        console.log("publisheddd");
         totalObj.intranet_url = this.publishForm.value.intranet_url;
         totalObj.internet_url = this.publishForm.value.internet_url;
         totalObj.publisher_id = this.selectedPublisherId;
@@ -1797,10 +1746,8 @@ export class CreateNewCourseComponent implements OnInit {
         this.getFormValidationErrors(this.publishForm);
         if (totalObj.course_id) {
           if (this.publishForm.valid) {
-            console.log("form valid");
             this.courceService.updateCourse(totalObj).subscribe(
               (res: any) => {
-                console.log("update course", res);
                 if (res) {
                   if (this.routergetdata) {
                     this.corseId = this.routergetdata.id;
@@ -1808,31 +1755,30 @@ export class CreateNewCourseComponent implements OnInit {
                   // let transferobj = { course_id: this.corseId , transfer_id: this.selectedPublisherId, status: 'publish', intranet_url: this.publishForm.value.intranet_url, internet_url: this.publishForm.value.internet_url };
                   // this.courceService.courceStatus(transferobj).subscribe(
                   //   (res: any) => {
-                  //     console.log(res);
+                  //     
                   //     if (res) {
                   this.router.navigate(['/dashboard/cources']);
                   //     }
                   //   },
                   //   (err: any) => {
-                  //     console.log(err);
+                  //     
                   //   }
                   // );
                 }
               },
               (err: any) => {
-                console.log(err);
+                
               }
             );
           }
           else {
             this.publishForm.markAllAsTouched();
-            console.log("invalid publish form")
           }
         }
         else {
           this.courceService.createCource(totalObj).subscribe(
             (res: any) => {
-              console.log(res);
+              
               if (res) {
                 // this.router.navigate(['/dashboard/cources']);
                 if (this.routergetdata) {
@@ -1840,21 +1786,19 @@ export class CreateNewCourseComponent implements OnInit {
                 }
                 // let transferobj = { course_id: this.courseId, transfer_id: this.selectedPublisherId };
                 // this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
-                //   console.log(res);
+                //   
                 this.router.navigate(['/dashboard/cources']);
                 // }, (err: any) => {
-                //   console.log(err)
                 // })
               }
             },
             (err: any) => {
-              console.log(err);
+              
             }
           );
         }
       }
     } else {
-      console.log("form is invalid");
       commonformObj.markAllAsTouched();
       formObj.markAllAsTouched();
     }
@@ -1862,14 +1806,12 @@ export class CreateNewCourseComponent implements OnInit {
   reject() {
     let statusobj = { course_id: this.routergetdata.id, status: 'reject', status_comment: this.rejectcomment }
     this.courceService.changeStatus(statusobj).subscribe((res: any) => {
-      console.log(res);
+      
       this.router.navigate(['/dashboard/cources']);
     }, (err: any) => {
-      console.log(err)
     })
   }
   curriculumSubmit() {
-    console.log(this.currriculumForm.value);
   }
 
   scrollToElement($element: any): void {
@@ -1878,7 +1820,6 @@ export class CreateNewCourseComponent implements OnInit {
   }
 
   certificationType(event: any) {
-    console.log(event);
     if (event.id == 'yes') {
       this.showCertificateExpiry = true;
       this.iltandViltForm
@@ -1921,7 +1862,6 @@ export class CreateNewCourseComponent implements OnInit {
     }
   }
   targetAudiencePlaylsit(event: any) {
-    console.log("event is", event.target.value)
     if (event.target.value == 2) {
       this.regionTargetAudiencePlaylist = true;
       this.playlistForm.get('email_preffered_instructor')?.setValidators(Validators.required);
@@ -1936,7 +1876,6 @@ export class CreateNewCourseComponent implements OnInit {
     }
   }
   certificationType_Curriculum(event: any) {
-    console.log(event.id);
     if (event.id == 'yes') {
       this.showCertificateExpiry_Curriculum = true;
       this.currriculumForm
@@ -1957,7 +1896,6 @@ export class CreateNewCourseComponent implements OnInit {
 
   }
   certificationType_Webbased(event: any) {
-    console.log(event.id);
     if (event.id == 'yes') {
       this.showCertificateExpiry_Webbased = true;
       this.webbasedForm
@@ -2048,7 +1986,6 @@ export class CreateNewCourseComponent implements OnInit {
   }
 
   get_learningType(event: any, target: any) {
-    // console.log(event.target.value);
     this.learningType = event.target.value;
     // let selectedLid = this.requiredFields[this.learningType];
     setTimeout(() => {
@@ -2068,7 +2005,6 @@ export class CreateNewCourseComponent implements OnInit {
   }
 
   getPublisherselected(event: any) {
-    console.log(event.target.value);
     this.selectedPublisherId = event.target.value;
   }
 
@@ -2083,14 +2019,12 @@ export class CreateNewCourseComponent implements OnInit {
     this.curriculumEditor.refreshUI();
   }
   //getallFormValidationErrors(formObj: FormGroup, name:any) {
-  //	console.log("name = "+name);
   //	if(formObj){
   //		Object.keys(formObj.controls).forEach(key => {
   //			if(key){
   //	  const controlErrors: ValidationErrors = formObj.get(key).errors;
   //	  if (controlErrors != null) {
   //			Object.keys(controlErrors).forEach(keyError => {
-  //			  console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
   //			});
   //		  }
   //			}
@@ -2098,7 +2032,6 @@ export class CreateNewCourseComponent implements OnInit {
   //}
   // }
   //validateforms(){
-  //	console.log("working");
   //	this.getallFormValidationErrors(this.commonCreateCourceForm, 'commonCreateCourceForm');
   //	this.getallFormValidationErrors(this.iltandViltForm, 'iltandViltForm');
   //	this.getallFormValidationErrors(this.materialbasedForm, 'materialbasedForm');
@@ -2110,8 +2043,6 @@ export class CreateNewCourseComponent implements OnInit {
     var $duration = $durationEvent.target.value;
 
 
-    console.log($duration);
-    console.log("uuuu");
     if (!$duration.includes(":")) {
       if ($duration.length == 2) {
         $duration = "00:" + $duration;
@@ -2127,7 +2058,6 @@ export class CreateNewCourseComponent implements OnInit {
       var durationObj = { duration: $duration };
       this.commonCreateCourceForm.patchValue(durationObj);
     } else {
-      console.log("aa");
     }
 
   }
@@ -2140,11 +2070,9 @@ export class CreateNewCourseComponent implements OnInit {
     }
   }
   numbersOnly(val: any) {
-    console.log(val.key);
     let ctrl = this.commonCreateCourceForm.get('duration') as FormControl;
     let y = ctrl.value
     y = y.replace(/\D/g, '');
-    console.log(y)
     if (y.length == 3 && val.key > 6) {
       y = y.substring(0, 2);
     }
@@ -2170,7 +2098,6 @@ export class CreateNewCourseComponent implements OnInit {
     }
   }
   languageValueSet(formObj: FormGroup, fieldName: string, fieldArr: string, setdata: any) {
-    console.log(formObj.get(fieldName))
     let ctrl = formObj.get(fieldName) as FormControl;
     this.formCtrlSub = ctrl.valueChanges
       .debounceTime(500)
@@ -2178,18 +2105,15 @@ export class CreateNewCourseComponent implements OnInit {
 
         var fdata = formObj.value;
         if (fdata[fieldName] != '') {
-          console.log(fdata[fieldArr])
           for (let x in fdata[fieldArr]) {
 
             for (let y in setdata) {
-              console.log(Object.keys(setdata[y])[0])
               if (fdata[fieldArr][x]['name'] == Object.keys(setdata[y])[0]) {
                 fdata[fieldArr][x]['value'] = Object.values(setdata[y])[0];
               }
             }
           }
           this.fieldArrObj[fieldArr] = fdata[fieldArr];
-          console.log(this.fieldArrObj);
           formObj.patchValue(this.fieldArrObj);
         }
       });
@@ -2207,24 +2131,20 @@ export class CreateNewCourseComponent implements OnInit {
             }
           }
           this.fieldArrObj[fieldArr] = fdata[fieldArr];
-          console.log(this.fieldArrObj);
           formObj.patchValue(this.fieldArrObj);
         }
       });
   }
   //  languageValueSet(formObj: FormGroup, fieldName: string, fieldArr: string) {
-  //    console.log(formObj.value);
   ////this.formCtrlSub = formObj.get(fieldName).valueChanges
   //      //.debounceTime(500)
   //  //.subscribe((data: any) => {
   //    //alert("language");
   //        let fdata = formObj.value;
-  //    console.log(fdata[fieldName]);
 
 
   //	  if(fdata[fieldName] != ''){
   //      for (let x in fdata[fieldArr]) {
-  //        console.log(fdata[fieldArr][x]['name'] + ":" + this.lang)
   //			if(fdata[fieldArr][x]['name'] == this.lang){
   //					fdata[fieldArr][x]['value'] = fdata[fieldName];
   //			}
@@ -2266,7 +2186,6 @@ export class CreateNewCourseComponent implements OnInit {
         fdata[fieldName] = e.target.result;
         let pdata = {};
         //pdata[fieldName] = "fgfgffhg";
-        console.log(pdata);
         //this.cardImageBase64 = fileInput.target.files[0];
         let ctrl = this.commonCreateCourceForm.get('resource') as FormControl;
         ctrl.setValue(fileInput.target.files[0]);
@@ -2277,7 +2196,6 @@ export class CreateNewCourseComponent implements OnInit {
     }
   }
   handleFileInput(event: any) {
-    console.log("event is", event.target.files[0]);
     this.FileConvertintoBytearray(event.target.files[0], async (f) => { // creating array bytes
 
       let objectdata: any = {
@@ -2319,13 +2237,10 @@ export class CreateNewCourseComponent implements OnInit {
   }
   setrejectbutton(id: any) {
     this.courceService.courseHistory(id).subscribe((res: any) => {
-      console.log(res);
+      
       if (res && res.status == 1) {
         let history = res.data;
         this.showrejectbutton = history[history.length - 1].action_by;
-        console.log(" this.showrejectbutton" + this.showrejectbutton);
-        console.log("history", res.data);
-        console.log("getprofileDetails.data.id", this.getprofileDetails.data.id);
       }
     })
   }

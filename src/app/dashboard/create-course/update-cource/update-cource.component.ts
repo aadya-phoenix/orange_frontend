@@ -224,11 +224,11 @@ export class UpdateCourceComponent implements OnInit {
   getCordinators() {
     this.courceService.getregionalCordinator().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.cordinatorsList = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -240,7 +240,7 @@ export class UpdateCourceComponent implements OnInit {
         console.log(this.vendorType);
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -252,7 +252,7 @@ export class UpdateCourceComponent implements OnInit {
         console.log(this.cctLevel);
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -264,7 +264,7 @@ export class UpdateCourceComponent implements OnInit {
         console.log(this.cctSubjects);
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -276,7 +276,7 @@ export class UpdateCourceComponent implements OnInit {
         console.log(this.validityPeriod);
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -284,11 +284,11 @@ export class UpdateCourceComponent implements OnInit {
   getEntitylist() {
     this.courceService.getEntitylist().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.entityList = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -296,11 +296,11 @@ export class UpdateCourceComponent implements OnInit {
   getDeliveryMethod() {
     this.courceService.getDeliveryMethod().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.deliveryMethod = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -308,11 +308,11 @@ export class UpdateCourceComponent implements OnInit {
   getWhocansee() {
     this.courceService.whoSeeCourse().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.whocanSee = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -321,11 +321,11 @@ export class UpdateCourceComponent implements OnInit {
   getPreferedInstructor() {
     this.courceService.getpreferedInstructor().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.preferedInstructor = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -334,11 +334,11 @@ export class UpdateCourceComponent implements OnInit {
   getLanguages() {
     this.courceService.getLanguages().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.availableLanguages = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -347,11 +347,11 @@ export class UpdateCourceComponent implements OnInit {
   getLearningType() {
     this.courceService.getLearningType().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.learningTypes = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -360,18 +360,18 @@ export class UpdateCourceComponent implements OnInit {
   getExpiryType() {
     this.courceService.getExpiryType().subscribe(
       (res: any) => {
-        console.log(res);
+        
         this.cctExpiryType = res.data;
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
 
   getPublisher(){
     this.authService.getUserRoles().subscribe((res:any)=>{
-      console.log(res);
+      
       this.publisherList = res.data['4'];
       console.log(this.publisherList)
     },(err:any)=>{
@@ -402,10 +402,10 @@ export class UpdateCourceComponent implements OnInit {
             this.closedRequests.push(course);
           }
         });
-        console.log(res);
+        
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
   }
@@ -819,7 +819,7 @@ export class UpdateCourceComponent implements OnInit {
       }
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             let statedata = this.routergetdata;
             let saveobj = { issave: true, ...courseid };
@@ -831,7 +831,7 @@ export class UpdateCourceComponent implements OnInit {
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
       console.log(totalObj);
@@ -850,13 +850,13 @@ export class UpdateCourceComponent implements OnInit {
       
     //  this.courceService.updateCourse(totalObj).subscribe(
     //    (res: any) => {
-    //      console.log(res);
+    //      
     //      if (res) {
     //        this.router.navigate(['/dashboard/cources']);
     //      }
     //    },
     //    (err: any) => {
-    //      console.log(err);
+    //      
     //    }
     //  );
     //}
@@ -914,7 +914,7 @@ export class UpdateCourceComponent implements OnInit {
       }
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             let statedata = this.routergetdata;
             let saveobj = { issave: true, ...courseid };
@@ -927,7 +927,7 @@ export class UpdateCourceComponent implements OnInit {
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
     } else {
@@ -991,7 +991,7 @@ export class UpdateCourceComponent implements OnInit {
       }
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             let statedata = this.routergetdata;
             let saveobj = { issave: true, ...courseid };
@@ -1004,7 +1004,7 @@ export class UpdateCourceComponent implements OnInit {
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
     } else {
@@ -1068,9 +1068,9 @@ export class UpdateCourceComponent implements OnInit {
       }
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
-            console.log(res);
+            
             let statedata = this.routergetdata;
             let saveobj = { issave: true, ...courseid };
             let stateobj = { ...statedata, ...saveobj };
@@ -1082,7 +1082,7 @@ export class UpdateCourceComponent implements OnInit {
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
     } else {
@@ -1146,7 +1146,7 @@ export class UpdateCourceComponent implements OnInit {
       }
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             let statedata = this.routergetdata;
             let saveobj = { issave: true, ...courseid };
@@ -1159,7 +1159,7 @@ export class UpdateCourceComponent implements OnInit {
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
     } else {
@@ -1223,7 +1223,7 @@ export class UpdateCourceComponent implements OnInit {
       }
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             let statedata = this.routergetdata;
             let saveobj = { issave: true, ...courseid };
@@ -1236,7 +1236,7 @@ export class UpdateCourceComponent implements OnInit {
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
     } else {
@@ -1265,13 +1265,13 @@ export class UpdateCourceComponent implements OnInit {
       console.log(totalObj);
       this.courceService.createCource(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             this.router.navigate(['/dashboard/cources']);
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
     } else {
@@ -1317,13 +1317,13 @@ export class UpdateCourceComponent implements OnInit {
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             debugger
            // this.router.navigate(['/dashboard/cources']);
             let transferobj ={ course_id:this.routergetdata.id ,transfer_id:this.selectedPublisherId};
             this.courceService.courseTransfer(transferobj).subscribe((res:any)=>{
-              console.log(res);
+              
               this.router.navigate(['/dashboard/cources']);
             },(err:any)=>{
               console.log(err)
@@ -1331,7 +1331,7 @@ export class UpdateCourceComponent implements OnInit {
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
       console.log(totalObj);
@@ -1357,13 +1357,13 @@ export class UpdateCourceComponent implements OnInit {
     if (this.videobasedForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             debugger
             // this.router.navigate(['/dashboard/cources']);
             let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId };
             this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
-              console.log(res);
+              
               this.router.navigate(['/dashboard/cources']);
             }, (err: any) => {
               console.log(err)
@@ -1371,7 +1371,7 @@ export class UpdateCourceComponent implements OnInit {
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
       console.log(totalObj);
@@ -1397,13 +1397,13 @@ export class UpdateCourceComponent implements OnInit {
     if (this.materialbasedForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             debugger
             // this.router.navigate(['/dashboard/cources']);
             let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId };
             this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
-              console.log(res);
+              
               this.router.navigate(['/dashboard/cources']);
             }, (err: any) => {
               console.log(err)
@@ -1411,7 +1411,7 @@ export class UpdateCourceComponent implements OnInit {
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
       console.log(totalObj);
@@ -1437,13 +1437,13 @@ export class UpdateCourceComponent implements OnInit {
     if (this.currriculumForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             debugger
             // this.router.navigate(['/dashboard/cources']);
             let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId };
             this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
-              console.log(res);
+              
               this.router.navigate(['/dashboard/cources']);
             }, (err: any) => {
               console.log(err)
@@ -1451,7 +1451,7 @@ export class UpdateCourceComponent implements OnInit {
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
       console.log(totalObj);
@@ -1477,13 +1477,13 @@ export class UpdateCourceComponent implements OnInit {
     if (this.webbasedForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             debugger
             // this.router.navigate(['/dashboard/cources']);
             let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId };
             this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
-              console.log(res);
+              
               this.router.navigate(['/dashboard/cources']);
             }, (err: any) => {
               console.log(err)
@@ -1491,7 +1491,7 @@ export class UpdateCourceComponent implements OnInit {
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
       console.log(totalObj);
@@ -1517,13 +1517,13 @@ export class UpdateCourceComponent implements OnInit {
     if (this.playlistForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             debugger
             // this.router.navigate(['/dashboard/cources']);
             let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId };
             this.courceService.courseTransfer(transferobj).subscribe((res: any) => {
-              console.log(res);
+              
               this.router.navigate(['/dashboard/cources']);
             }, (err: any) => {
               console.log(err)
@@ -1531,7 +1531,7 @@ export class UpdateCourceComponent implements OnInit {
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
       console.log(totalObj);
@@ -1577,26 +1577,26 @@ export class UpdateCourceComponent implements OnInit {
     if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             debugger
             // this.router.navigate(['/dashboard/cources']);
             let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId, status: 'publish' };
             this.courceService.courceStatus(transferobj).subscribe(
               (res: any) => {
-                console.log(res);
+                
                 if (res) {
                   this.router.navigate(['/dashboard/cources']);
                 }
               },
               (err: any) => {
-                console.log(err);
+                
               }
             );
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
       console.log(totalObj);
@@ -1623,13 +1623,13 @@ export class UpdateCourceComponent implements OnInit {
     //if (this.iltandViltForm.valid && this.commonCreateCourceForm.valid) {
     //  this.courceService.courceStatus(transferobj).subscribe(
     //    (res: any) => {
-    //      console.log(res);
+    //      
     //      if (res) {
     //        this.router.navigate(['/dashboard/cources']);
     //      }
     //    },
     //    (err: any) => {
-    //      console.log(err);
+    //      
     //    }
     //  );
     //  console.log(totalObj);
@@ -1655,26 +1655,26 @@ export class UpdateCourceComponent implements OnInit {
     if (this.videobasedForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             debugger
             // this.router.navigate(['/dashboard/cources']);
             let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId, status: 'publish' };
             this.courceService.courceStatus(transferobj).subscribe(
               (res: any) => {
-                console.log(res);
+                
                 if (res) {
                   this.router.navigate(['/dashboard/cources']);
                 }
               },
               (err: any) => {
-                console.log(err);
+                
               }
             );
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
       console.log(totalObj);
@@ -1700,26 +1700,26 @@ export class UpdateCourceComponent implements OnInit {
     if (this.materialbasedForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             debugger
             // this.router.navigate(['/dashboard/cources']);
             let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId, status: 'publish' };
             this.courceService.courceStatus(transferobj).subscribe(
               (res: any) => {
-                console.log(res);
+                
                 if (res) {
                   this.router.navigate(['/dashboard/cources']);
                 }
               },
               (err: any) => {
-                console.log(err);
+                
               }
             );
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
       console.log(totalObj);
@@ -1745,26 +1745,26 @@ export class UpdateCourceComponent implements OnInit {
     if (this.currriculumForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             debugger
             // this.router.navigate(['/dashboard/cources']);
             let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId, status: 'publish' };
             this.courceService.courceStatus(transferobj).subscribe(
               (res: any) => {
-                console.log(res);
+                
                 if (res) {
                   this.router.navigate(['/dashboard/cources']);
                 }
               },
               (err: any) => {
-                console.log(err);
+                
               }
             );
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
       console.log(totalObj);
@@ -1790,26 +1790,26 @@ export class UpdateCourceComponent implements OnInit {
     if (this.webbasedForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             debugger
             // this.router.navigate(['/dashboard/cources']);
             let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId, status: 'publish' };
             this.courceService.courceStatus(transferobj).subscribe(
               (res: any) => {
-                console.log(res);
+                
                 if (res) {
                   this.router.navigate(['/dashboard/cources']);
                 }
               },
               (err: any) => {
-                console.log(err);
+                
               }
             );
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
       console.log(totalObj);
@@ -1835,26 +1835,26 @@ export class UpdateCourceComponent implements OnInit {
     if (this.playlistForm.valid && this.commonCreateCourceForm.valid) {
       this.courceService.updateCourse(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             debugger
             // this.router.navigate(['/dashboard/cources']);
             let transferobj = { course_id: this.routergetdata.id, transfer_id: this.selectedPublisherId, status: 'publish' };
             this.courceService.courceStatus(transferobj).subscribe(
               (res: any) => {
-                console.log(res);
+                
                 if (res) {
                   this.router.navigate(['/dashboard/cources']);
                 }
               },
               (err: any) => {
-                console.log(err);
+                
               }
             );
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
       console.log(totalObj);
@@ -1882,13 +1882,13 @@ export class UpdateCourceComponent implements OnInit {
     if (this.createCourceForm.valid) {
       this.courceService.createCource(totalObj).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             this.router.navigate(['/dashboard/cources']);
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
     } else {
@@ -1917,13 +1917,13 @@ export class UpdateCourceComponent implements OnInit {
       console.log(this.createCourceForm.value);
       this.courceService.createCource(this.createCourceForm.value).subscribe(
         (res: any) => {
-          console.log(res);
+          
           if (res) {
             this.router.navigate(['/dashboard/cources']);
           }
         },
         (err: any) => {
-          console.log(err);
+          
         }
       );
     } else {
@@ -2040,7 +2040,7 @@ export class UpdateCourceComponent implements OnInit {
   reject() {
     let statusobj = { course_id: this.routergetdata.id, status: 'reject', status_comment: this.rejectcomment }
     this.courceService.changeStatus(statusobj).subscribe((res: any) => {
-      console.log(res);
+      
       this.router.navigate(['/dashboard/cources']);
     }, (err: any) => {
       console.log(err)
@@ -2147,7 +2147,7 @@ export class UpdateCourceComponent implements OnInit {
         // this.titlearray.push(languageData)
       },
       (err: any) => {
-        console.log(err);
+        
       }
     );
 
@@ -2160,7 +2160,7 @@ export class UpdateCourceComponent implements OnInit {
   pushtoTitlearray() {
     return this.addtitlemultilanguage();
     // this.courceService.getLanguages().subscribe((res:any)=>{
-    //   console.log(res);
+    //   
     //   let languages = res.data;
     //   for(let index in languages){
     //     this.titlearray.push(this.fb.group({
