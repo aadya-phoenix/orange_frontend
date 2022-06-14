@@ -4,6 +4,7 @@ import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DnaService } from 'src/app/shared/services/dna/dna.service';
 import { GeneralDropdownsService } from 'src/app/shared/services/general-dropdowns/general-dropdowns.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dna-view-rpt',
@@ -28,12 +29,14 @@ export class DnaViewRptComponent implements OnInit {
     total: 0,
     draft: 0,
     closed: 0,
+    close: 0,
     rejected: 0,
     pending: 0,
     submitted: 0,
     transferred: 0,
     expired: 0,
-    publish: 0
+    publish: 0,
+    digital_learning:0
   }
   searchText: any;
   statusComment:string='';
@@ -145,18 +148,28 @@ export class DnaViewRptComponent implements OnInit {
     body.status  = this.dnaStatus.close;
     body.status_comment = this.statusComment;
     body.strategic = '';
-    this.dnaService.dnaChangeStatus(body).subscribe((res: any) => {
-      if(res.status == 1){
-      this.commonService.hideLoading();
-      this.router.navigateByUrl('dashboard/dna');
+    Swal.fire({
+      title: 'Are you sure want to Close this request?',
+      //text: 'You will not be able to undo this request!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Close it!',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.commonService.showLoading();
+        this.dnaService.dnaChangeStatus(body).subscribe((res:any)=>{
+          Swal.fire(
+            'Closed!',
+            'Your request has been Closed.',
+            'success'
+          )
+          this.commonService.hideLoading();
+          this.router.navigateByUrl('dashboard/dna');
+        },(err:any)=>{
+          this.commonService.hideLoading();
+        });
       }
-      else{
-        this.commonService.hideLoading();
-        this.commonService.toastErrorMsg('Error', res.message);
-      }
-    },(err:any)=>{
-      this.commonService.hideLoading();
-      this.commonService.toastErrorMsg('Error', err.message);
     });
   }
 
@@ -168,6 +181,7 @@ export class DnaViewRptComponent implements OnInit {
         this.commonService.hideLoading();
         this.learningList = res.data.digital_learning[this.trackerId];
         this.learningListToShow = res.data.digital_learning[this.trackerId];
+        this.dna_count = res.data.digital_learning_count[this.trackerId];
         this.learningListToShow.forEach((element:any) => {
           element.isChecked = false;
         });

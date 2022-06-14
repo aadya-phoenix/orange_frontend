@@ -18,6 +18,7 @@ export class DnaForwardComponent implements OnInit {
 
   dnaStatus = dataConstant.DnaStatus;
   dnaForwardForm: FormGroup;
+  trackerId:number=0;
 
   public titleLists: any;
   public modalType: any;
@@ -53,6 +54,9 @@ export class DnaForwardComponent implements OnInit {
     this.dnaService.dnaChangeStatus(body).subscribe((res: any) => {
       if(res.status == 1){
       this.commonService.hideLoading();
+      this.commonService.toastSuccessMsg('Request', 'Successfully Transfered.');
+      this.modalService.close();
+      this.router.navigateByUrl(`/dashboard/dna/view-bp/${this.trackerId}`); 
       }
       else{
         this.commonService.hideLoading();

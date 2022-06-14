@@ -35,12 +35,14 @@ export class DnaViewBpComponent implements OnInit {
     total: 0,
     draft: 0,
     closed: 0,
+    close: 0,
     rejected: 0,
     pending: 0,
     submitted: 0,
     transferred: 0,
     expired: 0,
-    publish: 0
+    publish: 0,
+    digital_learning:0
   }
   searchText: any;
   trackerId:number = 0;
@@ -171,7 +173,8 @@ export class DnaViewBpComponent implements OnInit {
       (res: any) => {
         if(res.status == 1){
         this.commonService.hideLoading();
-        this.learningList = res.data.digital_learning[this.trackerId];
+        this.learningList = res.data.digital_learning;
+        this.dna_count = res.data.all_count[this.trackerId];
         this.learningListToShow = res.data.digital_learning[this.trackerId];
         }
         else{
