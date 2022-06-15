@@ -37,6 +37,7 @@ export class DnaViewBpComponent implements OnInit {
     closed: 0,
     close: 0,
     rejected: 0,
+    forwarded:0,
     pending: 0,
     submitted: 0,
     transferred: 0,
@@ -80,9 +81,6 @@ export class DnaViewBpComponent implements OnInit {
     this. getCountries();
     this. getRegions();
     this.getBusinessUnits();
-  }
-
-  getStatus(event:any){
   }
 
   getBUFilterRecords(item:any){
@@ -130,6 +128,8 @@ export class DnaViewBpComponent implements OnInit {
   }
 
   selectedItems(item:any){
+    this.titleList = [];
+    this.learningIds = [];
     item.isChecked = !item.isChecked;
     if(item.isChecked == true){
     this.learningIds.push(item.id);
@@ -137,15 +137,34 @@ export class DnaViewBpComponent implements OnInit {
     else{
       this.learningIds.pop(item.id);
     }
+    if(this.learningIds.length != 0){
+     this.learningList.forEach((item: any) => {
+      let title = this.learningIds.find((x: any) => x == item.id);
+      if (title) {
+        this.titleList.push(item.title);
+      }
+    });
+   }
   }
 
   checkAllOptions() {
+    let newList=[];
     this.learningIds=[];
+    this.titleList = [];
     this.isChecked = !this.isChecked;
     this.learningList.forEach((val:any) => { val.isChecked = this.isChecked });
-    this.learningListToShow = this.learningList.filter((y:any)=> y.status == this.dnaStatus.pending);
-    this.learningListToShow.forEach((val:any)=>{
+    if(this.isChecked == false){
+      return;
+    }
+    newList = this.learningList.filter((y:any)=> y.status == this.dnaStatus.pending);
+    newList.forEach((val:any)=>{
       this.learningIds.push(val.id);
+    });
+    this.learningList.forEach((item: any) => {
+      let title = this.learningIds.find((x: any) => x == item.id);
+      if (title) {
+        this.titleList.push(item.title);
+      }
     });
   }
 
@@ -154,6 +173,9 @@ export class DnaViewBpComponent implements OnInit {
   }
 
   openModal(status:any) {
+    if(this.learningIds.length == 0){
+      return;
+    }
     const modalRef = this.modalService.open(DnaForwardComponent, {
       centered: true,
       size: 'xl',
@@ -163,6 +185,7 @@ export class DnaViewBpComponent implements OnInit {
       title: status == 'close' ? 'Close Request' : 'Forward Request',
       data: this.learningIds,
       objectDetail: this.titleList,
+      trackerId:this.trackerId,
       type: 'forward'
     };
   }
@@ -173,7 +196,7 @@ export class DnaViewBpComponent implements OnInit {
       (res: any) => {
         if(res.status == 1){
         this.commonService.hideLoading();
-        this.learningList = res.data.digital_learning;
+        this.learningList = res.data.digital_learning[this.trackerId];
         this.dna_count = res.data.all_count[this.trackerId];
         this.learningListToShow = res.data.digital_learning[this.trackerId];
         }

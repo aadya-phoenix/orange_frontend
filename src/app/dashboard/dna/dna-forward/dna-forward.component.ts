@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DnaService } from 'src/app/shared/services/dna/dna.service';
 
@@ -16,9 +17,13 @@ export class DnaForwardComponent implements OnInit {
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
 
+  RoleID = dataConstant.RoleID;
+  getUserrole: any = {};
   dnaStatus = dataConstant.DnaStatus;
   dnaForwardForm: FormGroup;
   trackerId:number=0;
+  isDomainExpert = false;
+  isBussinessConsultant = false;
 
   public titleLists: any;
   public modalType: any;
@@ -28,6 +33,7 @@ export class DnaForwardComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalService: NgbActiveModal,
+    private authService:AuthenticationService,
     private dnaService: DnaService,
     private commonService: CommonService,
     private router: Router
@@ -36,25 +42,35 @@ export class DnaForwardComponent implements OnInit {
       strategic: new FormControl('', []),
       status_comment: new FormControl('', [])
     });
+    this.getUserrole = this.authService.getRolefromlocal();
+    this.isDomainExpert = this.getUserrole.id == this.RoleID.DomainExpert;
+    this.isBussinessConsultant = this.getUserrole.id == this.RoleID.BussinessConsultant;
   }
 
   ngOnInit(): void {
+    this.title =  this.props.title;
     this.titleLists = this.props.objectDetail ? this.props.objectDetail : '';
     this.learningIds = this.props.data;
+    this.trackerId = this.props.trackerId;
   }
 
-  forward(){
+  forward(status:any){
     if (this.dnaForwardForm.invalid) {
       return;
     }
     const body = this.dnaForwardForm.value;
     body.digital_learning_id = this.learningIds;
-    body.status  = this.dnaStatus.pending;
+    body.status  = status;
 
     this.dnaService.dnaChangeStatus(body).subscribe((res: any) => {
       if(res.status == 1){
       this.commonService.hideLoading();
-      this.commonService.toastSuccessMsg('Request', 'Successfully Transfered.');
+      if(status = this.dnaStatus.pending){
+      this.commonService.toastSuccessMsg('Request', 'Successfully Forwarded.');
+      }
+      else{
+        this.commonService.toastSuccessMsg('Request', 'Successfully Closed.');
+      }
       this.modalService.close();
       this.router.navigateByUrl(`/dashboard/dna/view-bp/${this.trackerId}`); 
       }

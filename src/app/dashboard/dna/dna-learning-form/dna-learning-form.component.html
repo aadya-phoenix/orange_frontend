@@ -145,50 +145,91 @@
                     bindValue="id" formControlName="domain_training_id" class="w_100">
                 </ng-select>
                 <div
-                  *ngIf="(createDnaForm.controls['management_code'].invalid && (createDnaForm.controls['management_code'].dirty || createDnaForm.controls['management_code'].touched)) || isSubmitted">
+                  *ngIf="(createDnaForm.controls['domain_training_id'].invalid && (createDnaForm.controls['domain_training_id'].dirty || createDnaForm.controls['domain_training_id'].touched)) || isSubmitted">
                    <div class="error_message"
-                    *ngIf="createDnaForm.controls['management_code'].errors?.required">
-                    Management Code can not be blank
+                    *ngIf="createDnaForm.controls['domain_training_id'].errors?.required">
+                    Domain  Training can not be blank
                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label class="form-control-label">
-                    Delivery Region
-                </label>
-                <ng-select  [items]="regionsObj"
-                     bindLabel="region_name"
-                    bindValue="id"  (change)="getEvent($event)" formControlName="region_id" class="w_100">
-                </ng-select>
-                <div
-                  *ngIf="(createDnaForm.controls['region_id'].invalid && (createDnaForm.controls['region_id'].dirty || createDnaForm.controls['region_id'].touched)) || isSubmitted">
-                   <div class="error_message"
-                    *ngIf="createDnaForm.controls['region_id'].errors?.required">
-                    Delivery Region can not be blank
-                   </div>
+        <ng-container *ngIf="!isFrance">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="form-control-label">
+                        Delivery Region
+                    </label>
+                    <ng-select  [items]="regionsObj"
+                         bindLabel="region_name"
+                        bindValue="id"  (change)="getEvent($event)" formControlName="region_id" class="w_100">
+                    </ng-select>
+                    <div
+                      *ngIf="(createDnaForm.controls['region_id'].invalid && (createDnaForm.controls['region_id'].dirty || createDnaForm.controls['region_id'].touched)) || isSubmitted">
+                       <div class="error_message"
+                        *ngIf="createDnaForm.controls['region_id'].errors?.required">
+                        Delivery Region can not be blank
+                       </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-4" *ngIf="isCountry">
-            <div class="form-group">
-                <label class="form-control-label">
-                    Delivery Country
-                </label>
-                <ng-select  [items]="countriesObj"
-                     bindLabel="country_name"
-                    bindValue="country_name" formControlName="country" class="w_100">
-                </ng-select>
-                <div
-                  *ngIf="(createDnaForm.controls['country'].invalid && (createDnaForm.controls['country'].dirty || createDnaForm.controls['country'].touched)) || isSubmitted">
-                   <div class="error_message"
-                    *ngIf="createDnaForm.controls['country'].errors?.required">
-                    Delivery Country can not be blank
-                   </div>
+            <div class="col-sm-4" *ngIf="isCountry">
+                <div class="form-group">
+                    <label class="form-control-label">
+                        Delivery Country
+                    </label>
+                    <ng-select  [items]="countriesObj"
+                         bindLabel="country_name"
+                        bindValue="country_name" formControlName="country" class="w_100">
+                    </ng-select>
+                    <div
+                      *ngIf="(createDnaForm.controls['country'].invalid && (createDnaForm.controls['country'].dirty || createDnaForm.controls['country'].touched)) || isSubmitted">
+                       <div class="error_message"
+                        *ngIf="createDnaForm.controls['country'].errors?.required">
+                        Delivery Country can not be blank
+                       </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </ng-container>
+        <ng-container *ngIf="isFrance">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="form-control-label">
+                        Delivery Region
+                    </label>
+                    <ng-select  [items]="regionObj"
+                         bindLabel="region_name"
+                        bindValue="id"  (change)="getEvent($event)" formControlName="region_id" class="w_100">
+                    </ng-select>
+                    <div
+                      *ngIf="(createDnaForm.controls['region_id'].invalid && (createDnaForm.controls['region_id'].dirty || createDnaForm.controls['region_id'].touched)) || isSubmitted">
+                       <div class="error_message"
+                        *ngIf="createDnaForm.controls['region_id'].errors?.required">
+                        Delivery Region can not be blank
+                       </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4" >
+                <div class="form-group">
+                    <label class="form-control-label">
+                        Delivery Location
+                    </label>
+                    <ng-select  [items]="locationsObj"
+                         bindLabel="location_name"
+                        bindValue="location_name" formControlName="location" class="w_100">
+                    </ng-select>
+                    <div
+                      *ngIf="(createDnaForm.controls['location'].invalid && (createDnaForm.controls['location'].dirty || createDnaForm.controls['location'].touched)) || isSubmitted">
+                       <div class="error_message"
+                        *ngIf="createDnaForm.controls['location'].errors?.required">
+                        Delivery Country can not be blank
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        
         <div class="col-sm-4">
             <div class="form-group">
                 <label class="form-control-label">

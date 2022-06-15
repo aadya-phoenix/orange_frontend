@@ -51,7 +51,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="hide_button_admin">
-                                        <button class="btn btn-primary">User Management</button>
+                                        <button [routerLink]="[ '/dashboard/dna/user']" class="btn btn-primary">User Management</button>
                                         </div>
                                     <div class="row">
                                         <div class="col-sm-3" *ngFor="let item of trackerObj">
@@ -77,8 +77,11 @@
                                                     <p class="text_white fon_12 font_weight mt-1">Click Start button to see
                                                         added learning need.</p>
                                                     <div class="mb-2 buttonstart_ma">
-                                                        <button class="btn btn-primary" (click)="addLearning(item)"><span
-                                                                class="fon_12">Start</span></button>
+                                                        <button class="btn btn-primary" *ngIf="item.isStart"
+                                                        (click)="addLearning(item)"><span
+                                                        class="fon_12">Start</span></button>
+                                                        <button class="btn btn-primary" *ngIf="!item.isStart" (click)="viewReport(item)"><span
+                                                            class="fon_12">View</span></button>
                                                         <button class="btn btn-secondary ml-1"
                                                         (click)="managerData(item)"><span class="fon_12">Manager
                                                                 Report</span></button>
@@ -110,7 +113,7 @@
                                                                         <img
                                                                             src="../../../../assets/images/worl_co.png">
                                                                     </div>
-                                                                    <a href="" (click)="completeReport(item.id)" class="color_balck fon_12 mt-2">Full
+                                                                    <a (click)="completeReport(item.id)" class="color_balck fon_12 mt-2">Full
                                                                         report <i class="fa fa-arrow-right ml-1"
                                                                             aria-hidden="true"></i></a>
                                                                 </div>
