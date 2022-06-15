@@ -16,6 +16,7 @@ export class DnaCreateComponent implements OnInit {
   trackerId:number=0;
   learningList:any=[];
   learningListToShow:any=[];
+  searchText:string='';
   
   constructor(
     private commonService: CommonService,

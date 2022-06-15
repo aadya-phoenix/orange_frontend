@@ -1,7 +1,7 @@
 <div class="card mb-0">
     <div class="card-header color-orange">
         <div class="d-flex justify-content-between">
-            Forward Request
+            {{title}} 
             <a (click)="closeModal()"><i class="fa fa-times color-black" aria-hidden="true"></i></a>
         </div>
     </div>
@@ -12,15 +12,16 @@
                     <label class="form-control-label">
                         <span> Selected learning objects titles</span>
                     </label>
-                    <h4 *ngFor="let item of titleLists">{{item.title}}</h4>
+                    <h4 *ngFor="let item of titleLists">{{item}}</h4>
                 </div>
             </div>
 
-            <div class="col-sm-12">
+            <div class="col-sm-12" *ngIf="isBussinessConsultant">
                 <div class="form-group">
                     <label class="form-control-label">
                        <span> Select strategic level and enter comments to proceed.</span>
                     </label>
+                    <div>
                     <input type="radio" value="strategic_1" formControlName="strategic" (change)="getStrategic($event)">
                     <strong class="font-16 ml-2">Strategic for BU</strong>
 
@@ -29,6 +30,7 @@
             
                      <input type="radio" value="strategic_3" formControlName="strategic" (change)  ="getStrategic($event)">
                       <strong class="font-16 ml-2">Not a priority or no action required</strong>
+                      </div>
                 </div>
             </div>
             <div class="col-sm-12">
@@ -42,7 +44,8 @@
         </form>
     </div>
     <div class="card-footer">
-        <button class="btn btn-primary mr-1" type="submit" (click)="forward()">Submit</button>
+        <button class="btn btn-primary mr-1" type="submit" *ngIf="isBussinessConsultant" (click)="forward('pending')">Submit</button>
+        <button class="btn btn-primary mr-1" type="submit" *ngIf="isDomainExpert" (click)="forward('close')">Submit</button>
     </div>
 </div>
 

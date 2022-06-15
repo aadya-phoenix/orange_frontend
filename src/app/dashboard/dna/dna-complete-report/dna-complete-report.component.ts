@@ -27,17 +27,51 @@ export class DnaCompleteReportComponent implements OnInit {
     pageNumber: 1,
     pageSize: 10
   }
-
-  dna_count = {
+  business_consultant_count = {
     total: 0,
     draft: 0,
     closed: 0,
+    close: 0,
     rejected: 0,
+    forwarded:0,
     pending: 0,
     submitted: 0,
     transferred: 0,
     expired: 0,
-    publish: 0
+    publish: 0,
+    total_participant: 0
+  };
+  rom_count = {
+    total: 0,
+    draft: 0,
+    closed: 0,
+    close: 0,
+    rejected: 0,
+    forwarded:0,
+    pending: 0,
+    submitted: 0,
+    transferred: 0,
+    expired: 0,
+    publish: 0,
+    total_participant: 0
+  };
+  strategic_count ={
+    strategic_1 :0,
+
+  };
+  dna_count = {
+    total: 0,
+    draft: 0,
+    closed: 0,
+    close: 0,
+    rejected: 0,
+    forwarded:0,
+    pending: 0,
+    submitted: 0,
+    transferred: 0,
+    expired: 0,
+    publish: 0,
+    digital_learning:0
   }
   searchText: any;
   constructor(
@@ -63,6 +97,9 @@ export class DnaCompleteReportComponent implements OnInit {
         if(res.status == 1){
         this.commonService.hideLoading();
         this.learningListToShow = res.data.digital_learning;
+        this.rom_count = res.data.digital_learning_count.rom_count;
+        this.business_consultant_count = res.data.digital_learning_count.business_consultant_count;
+        this.strategic_count = res.data.digital_learning_count.strategic_count;
         }
         else{
           this.commonService.hideLoading();

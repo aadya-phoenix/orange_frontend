@@ -61,7 +61,7 @@
                                         <div class="card bac_card_total">
                                             <div class="card-body">
                                                 <div class="d-flex just_spa align-items-center">
-                                                    <h5 class="mb-0">0</h5>
+                                                    <h5 class="mb-0">{{rom_count.total?rom_count.total:0}}</h5>
                                                     <img src="../../../../assets/images/icon/all.png" class="imae_card_pen">
                                                 </div>
                                             </div>
@@ -74,7 +74,7 @@
                                         <div class="card bac_card_pen">
                                             <div class="card-body">
                                                 <div class="d-flex just_spa align-items-center">
-                                                    <h5 class="mb-0">0</h5>
+                                                    <h5 class="mb-0">{{rom_count.pending?rom_count.pending:0}}</h5>
                                                     <img src="../../../../assets/images/icon/pending.png"
                                                         class="imae_card_pen">
                                                 </div>
@@ -88,7 +88,7 @@
                                         <div class="card bac_card_closed">
                                             <div class="card-body">
                                                 <div class="d-flex just_spa align-items-center">
-                                                    <h5 class="mb-0">0</h5>
+                                                    <h5 class="mb-0">{{rom_count.close?rom_count.close:0}}</h5>
                                                     <img src="../../../../assets/images/icon/check.png"
                                                         class="imae_card_pen">
                                                 </div>
@@ -112,7 +112,7 @@
                                         <div class="card bac_card_total">
                                             <div class="card-body">
                                                 <div class="d-flex just_spa align-items-center">
-                                                    <h5 class="mb-0">0</h5>
+                                                    <h5 class="mb-0">{{business_consultant_count.total ? business_consultant_count.total : 0}}</h5>
                                                     <img src="../../../../assets/images/icon/all.png" class="imae_card_pen">
                                                 </div>
                                             </div>
@@ -125,7 +125,7 @@
                                         <div class="card bac_card_pen">
                                             <div class="card-body">
                                                 <div class="d-flex just_spa align-items-center">
-                                                    <h5 class="mb-0">0</h5>
+                                                    <h5 class="mb-0">{{business_consultant_count.pending ? business_consultant_count.pending : 0}}</h5>
                                                     <img src="../../../../assets/images/icon/pending.png"
                                                         class="imae_card_pen">
                                                 </div>
@@ -139,13 +139,13 @@
                                         <div class="card bac_card_closed">
                                             <div class="card-body">
                                                 <div class="d-flex just_spa align-items-center">
-                                                    <h5 class="mb-0">0</h5>
+                                                    <h5 class="mb-0">{{business_consultant_count.forwarded ? business_consultant_count.forwarded : 0}}</h5>
                                                     <img src="../../../../assets/images/icon/check.png"
                                                         class="imae_card_pen">
                                                 </div>
                                             </div>
                                             <div class="card-footer card_footer_dash">
-                                                <p>Closed</p>
+                                                <p>Forwarded to ROM</p>
                                             </div>
                                         </div>
                                     </div>
@@ -153,7 +153,7 @@
                                         <div class="card bac_card_parti">
                                             <div class="card-body">
                                                 <div class="d-flex just_spa align-items-center">
-                                                    <h5 class="mb-0">0</h5>
+                                                    <h5 class="mb-0">{{business_consultant_count.total_participant ? business_consultant_count.total_participant : 0}}</h5>
                                                     <img src="../../../../assets/images/icon/group.png"
                                                         class="imae_card_pen">
                                                 </div>
@@ -181,7 +181,7 @@
                                                 </div>
                                             </div>
     
-                                            <p class="def_bell_text">Total Request</p>
+                                            <p class="def_bell_text">Strategic for BU</p>
     
                                         </div>
                                     </div>
@@ -195,7 +195,7 @@
                                                 </div>
                                             </div>
     
-                                            <p class="def_bell_text">Total Request</p>
+                                            <p class="def_bell_text">Not Strategic but action required</p>
     
                                         </div>
                                     </div>
@@ -210,7 +210,7 @@
                                                 </div>
                                             </div>
     
-                                            <p class="def_bell_text">Total Request</p>
+                                            <p class="def_bell_text">Not a priority or no action required</p>
     
                                         </div>
                                     </div>
@@ -306,7 +306,7 @@
                                                  <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                  <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                              </th>
-                                             <th class="text-center">Manageger</th>
+                                             <th class="text-center">Manager</th>
                                              <th class="text-center">Business Conultant</th>
                                              <th class="text-center">Business Conultant Status</th>
                                              <th sortable="first_name" >
@@ -326,12 +326,12 @@
                                     <tbody>
                                         <tr *ngFor="let item of learningListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber } ; let i = index;"
                                         class="text-center bac_hover-table font-12">
-                                            <td></td>
+                                            <td>{{item.training_provider == 'Orange Business Services' ?'Orange Learning' : 'Other Learning'}}</td>
                                             <td>{{item.title}}</td>
                                             <td>{{item.training_type}}</td>
                                             <td>{{item.training_provider}}</td>
                                             <td></td>
-                                            <td></td>
+                                            <td>{{item.learning_training_data.created_by}}</td>
                                             <td></td>
                                             <td>{{item.number_of_participant}}</td>
                                             <td>{{item.priority_name}}</td>

@@ -22,6 +22,7 @@ export class DnaLearningFormComponent implements OnInit {
   locationsObj: any = [];
   priorityObj: any = [];
   regionsObj: any = [];
+  regionObj:any = [];
   domainObj: any = [];
   bussinessUnitObj:any = [];
   titleList: any = [];
@@ -29,6 +30,8 @@ export class DnaLearningFormComponent implements OnInit {
   tracker_details:any;
   training_type:string='';
   training_provider:string='';
+  training_hours:any;
+  training_description:string ='';
   trackerId: number = 0;
   trainingId: number = 0;
   regionId: number=0;
@@ -57,6 +60,7 @@ export class DnaLearningFormComponent implements OnInit {
       region_id: new FormControl('',[Validators.required]),
       domain_training_id: new FormControl('',[]),
       country: new FormControl('', []),
+      location: new FormControl('', []),
       business_unit_id: new FormControl('', [Validators.required]),
     });
   }
@@ -76,6 +80,7 @@ export class DnaLearningFormComponent implements OnInit {
     this.getRegions();
     this.getBusinessUnits();
     this.getDomain();
+    this.getLocations();
   }
 
   getEvent(region:any){
@@ -93,6 +98,8 @@ export class DnaLearningFormComponent implements OnInit {
   getTitle(event:any){
    this.training_type = event.training_type;
    this.training_provider = event.training_provider;
+   this.training_description = event.training_description;
+   this.training_hours = event.training_hours;
    if(event && event.id){
     this.isDescription = false;
    }
@@ -110,6 +117,8 @@ export class DnaLearningFormComponent implements OnInit {
     body.tracker_id = this.trackerId;
     body.training_type = this.training_type;
     body.training_provider = this.training_provider;
+    body.training_description = this.training_description;
+    body.training_hours = this.training_hours;
      if(this.formId){
       body.digital_learning_id = this.formId;
       this.update(body);
@@ -276,7 +285,23 @@ export class DnaLearningFormComponent implements OnInit {
     this.generalDrpdownsService.getRegions().subscribe(
       (res: any) => {
         this.commonService.hideLoading();
-       this.regionsObj = res.data;
+        this.regionsObj = res.data;
+        this.regionObj = this.regionsObj.filter((x:any)=>x.id === 5);
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    );
+  }
+
+  getLocations(){
+    this.commonService.showLoading();
+    this.generalDrpdownsService.getLocations().subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        let locations = res.data;
+        this.locationsObj = locations.filter((x:any)=>x.region_id === 5);
       },
       (err: any) => {
         this.commonService.hideLoading();
