@@ -48,56 +48,57 @@
                                     <i class="fa fa-table fa_table" aria-hidden="true "></i>
                                     <span class="card-title card-title-text card_overall">Report</span>
                                 </div>
-                                <button class=" btn btn-primary btn_adduser" (click)="redirect()" data-toggle="modal">
+                                <div class="filter_dispaly">
+                                    <div class="form-group filter_course mr-1">
+                                        <label class="label_course">Filter by Priority</label>
+                                        <select class="form-control  form_width"
+                                            (change)="getPriorityFilterRecords($event.target.value)">
+                                            <option selected='selected' value=''>View All</option>
+                                            <option *ngFor="let item of priorityObj" [value]="item.id">{{item.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group filter_course mr-1">
+                                        <label class="label_course">Filter by Country</label>
+                                        <select class="form-control  form_width"
+                                            (change)="getCountryFilterRecords($event.target.value)">
+                                            <option selected='selected' value=''>View All</option>
+                                            <option *ngFor="let item of countriesObj" [value]="item.country_name">
+                                                {{item.country_name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group filter_course mr-1">
+                                        <label class="label_course">Filter by Business Unit</label>
+                                        <select class="form-control  form_width"
+                                            (change)="getBUFilterRecords($event.target.value)">
+                                            <option selected='selected' value=''>View All</option>
+                                            <option *ngFor="let item of bussinessUnitObj" [value]="item.id">
+                                                {{item.team_name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group filter_course mr-1">
+                                        <label class="label_course">Filter by Region</label>
+                                        <select class="form-control  form_width"
+                                            (change)="getRegionFilterRecords($event.target.value)">
+                                            <option selected='selected' value=''>View All</option>
+                                            <option *ngFor="let item of regionsObj" [value]="item.id">
+                                                {{item.region_name}}</option>
+                                        </select>
+                                    </div>
+                                    <div _ngcontent-cue-c109=" " class="form-group filter_course mr-1">
+                                        <label _ngcontent-cue-c109=" " class="label_course text_black">Search</label>
+                                        <input _ngcontent-cue-c109=" " type="text " name="search " autocomplete="off "
+                                            [(ngModel)]="searchText" placeholder=" "
+                                            class="form-control ng-untouched ng-pristine ng-valid form_width"
+                                            ng-reflect-name="search " />
+                                    </div>
+                                </div>
+                                <!-- <button class=" btn btn-primary btn_adduser" (click)="redirect()" data-toggle="modal">
                                    <span class="fon_12">Go to Previous Page</span>
-                                </button>
+                                </button> -->
                             </div>
                            
-                            <div class="filter_dispaly">
-                                <div class="form-group filter_course mr-1">
-                                    <label class="label_course">Filter by Priority</label>
-                                    <select class="form-control  form_width"
-                                        (change)="getPriorityFilterRecords($event.target.value)">
-                                        <option selected='selected' value=''>View All</option>
-                                        <option *ngFor="let item of priorityObj" [value]="item.id">{{item.name}}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="form-group filter_course mr-1">
-                                    <label class="label_course">Filter by Country</label>
-                                    <select class="form-control  form_width"
-                                        (change)="getCountryFilterRecords($event.target.value)">
-                                        <option selected='selected' value=''>View All</option>
-                                        <option *ngFor="let item of countriesObj" [value]="item.country_name">
-                                            {{item.country_name}}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group filter_course mr-1">
-                                    <label class="label_course">Filter by Business Unit</label>
-                                    <select class="form-control  form_width"
-                                        (change)="getBUFilterRecords($event.target.value)">
-                                        <option selected='selected' value=''>View All</option>
-                                        <option *ngFor="let item of bussinessUnitObj" [value]="item.id">
-                                            {{item.team_name}}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group filter_course mr-1">
-                                    <label class="label_course">Filter by Region</label>
-                                    <select class="form-control  form_width"
-                                        (change)="getRegionFilterRecords($event.target.value)">
-                                        <option selected='selected' value=''>View All</option>
-                                        <option *ngFor="let item of regionsObj" [value]="item.id">
-                                            {{item.region_name}}</option>
-                                    </select>
-                                </div>
-                                <div _ngcontent-cue-c109=" " class="form-group filter_course mr-1">
-                                    <label _ngcontent-cue-c109=" " class="label_course text_black">Search</label>
-                                    <input _ngcontent-cue-c109=" " type="text " name="search " autocomplete="off "
-                                        [(ngModel)]="searchText" placeholder=" "
-                                        class="form-control ng-untouched ng-pristine ng-valid form_width"
-                                        ng-reflect-name="search " />
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="card-body">
                             <div class="table-responsive table_height_scroll">
