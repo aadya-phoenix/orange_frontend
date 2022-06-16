@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit {
     this.isReviewer = this.getUserrole.id === this.RoleID.BackOfficeReviewer;
     this.isPublisher = this.getUserrole.id === this.RoleID.BackOfficePublisher;
     this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
-    if (this.profileDetails.data.pdl_member) {
+    if (this.profileDetails.data?.pdl_member) {
       this.isPdlMember = this.profileDetails.data.pdl_member;
     }
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;

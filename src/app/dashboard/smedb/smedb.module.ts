@@ -8,13 +8,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 import { SmedbListComponent } from './smedb-list/smedb-list.component';
 import { SmedbCreateComponent } from './smedb-create/smedb-create.component';
-import { NgxDropzoneModule } from 'ngx-dropzone';
 import { SmedbViewComponent } from './smedb-view/smedb-view.component';
 import { SmedbViewReportComponent } from './smedb-view-report/smedb-view-report.component';
 import { SmedbRatingComponent } from './smedb-rating/smedb-rating.component';
 import { SmedbStatusComponent } from './smedb-status/smedb-status.component';
 import { SmedbHistoryComponent } from './smedb-history/smedb-history.component';
 import { SmedbTermsComponent } from './smedb-terms/smedb-terms.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SmedbTermsComponent } from './smedb-terms/smedb-terms.component';
     NgSelectModule,
     RichTextEditorAllModule,
     NgbModule,
-   NgxDropzoneModule
+    NgxDropzoneModule,
+    NgxAudioPlayerModule
   ],
 })
 export class SmedbModule {}

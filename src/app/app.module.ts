@@ -9,17 +9,17 @@ import { AuthorizationServiceGuard } from './shared/services/guards/authorizatio
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxSpinnerModule } from "ngx-spinner";
-import { NgxDropzoneModule } from 'ngx-dropzone';
+
 
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, NgxSpinnerModule, HttpClientModule, ToastrModule.forRoot(), 
-  //  NgxDropzoneModule
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, NgxSpinnerModule, HttpClientModule, ToastrModule.forRoot(),
+    //  NgxDropzoneModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

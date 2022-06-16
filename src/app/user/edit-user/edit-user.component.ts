@@ -5,6 +5,7 @@ import {  passwordMatchingValidatior } from 'src/app/shared/constant/customValid
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
+import { GeneralDropdownsService } from 'src/app/shared/services/general-dropdowns/general-dropdowns.service';
 import { UserManageService } from 'src/app/shared/services/user-management/user-manage.service';
 import Swal from 'sweetalert2';
 const passwordRegexp = dataConstant.PasswordPattern;
@@ -28,6 +29,8 @@ export class EditUserComponent implements OnInit {
   isSubmitted = false;
   isLearningType =false;
   learningTypes:any=[];
+  roleId:number=0;
+  regionId: number=0;
 
   constructor(private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -47,9 +50,9 @@ export class EditUserComponent implements OnInit {
       pdl_member: new FormControl(false, []),
       status: new FormControl(true, []),
       admin: new FormControl(false, []),
+      manager:new FormControl(false, []),
       staff: new FormControl(true, []),
-    },
-    { validators: passwordMatchingValidatior } );
+    });
   }
 
   ngOnInit(): void {
@@ -73,26 +76,30 @@ export class EditUserComponent implements OnInit {
     this.getRole();
     this.getRegionalCordinator();
     this.getLearningType();
+  
   }
 
   getSelectedRole(event:any){
-   if(event.id == 3 || event.id == 5){
+    this.roleId = event.id;
+    if(this.roleId == 3 ){
      this.isRegion = true;
      this.isLearningType = false;
      this.createUserForm.get('region_id')?.setValidators([Validators.required]);
-   }
-   else if(event.id == 4){
+     this.createUserForm.get('learning_type')?.setValue(null);
+    }
+    else if(this.roleId == 4){
      this.isLearningType =true;
      this.isRegion = false;
      this.createUserForm.get('region_id')?.clearValidators();
      this.createUserForm.get('region_id')?.setValue(null);
-   }
-   else{
-    this.isRegion = false;
-    this.isLearningType = false;
-    this.createUserForm.get('region_id')?.clearValidators();
-    this.createUserForm.get('region_id')?.setValue(null);
-  }
+    }
+    else{
+     this.isRegion = false;
+     this.isLearningType = false;
+     this.createUserForm.get('region_id')?.clearValidators();
+     this.createUserForm.get('region_id')?.setValue(null);
+     this.createUserForm.get('learning_type')?.setValue(null);
+    }
   }
 
   getConfirm_paassword(){
@@ -113,6 +120,7 @@ export class EditUserComponent implements OnInit {
     }
     const body = this.createUserForm.value;
     !this.user_id ? this.create(body) : this.update(body);
+   
   }
 
   create(body:any){
@@ -122,7 +130,7 @@ export class EditUserComponent implements OnInit {
         if (res.status === 1){
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('User', 'Successfully Created.');
-        this.router.navigateByUrl(`/user/edit/${res.data.id}`);
+        this.router.navigateByUrl(`/user`);
         }
         else{
           this.commonService.toastErrorMsg('Error',res.message);
@@ -164,31 +172,32 @@ export class EditUserComponent implements OnInit {
         this.commonService.hideLoading();
         if (res.status === 1 ) {
           this.user_details = res.data;
-          this.createUserForm.controls.email.setValue(this.user_details.email);
-          this.createUserForm.controls.first_name.setValue(this.user_details.first_name);
-          this.createUserForm.controls.last_name.setValue(this.user_details.last_name);
-          this.createUserForm.controls.role_id.setValue(this.user_details.role_id);
-          if(this.user_details.role_id == 3 || this.user_details.role_id == 5){
-          this.createUserForm.controls.region_id.setValue(this.user_details.region_id);
-          this.isRegion = true;
+          if(this.user_details.role_id === 3 ){
+            this.isRegion = true;
+            this.createUserForm.controls.region_id.setValue(this.user_details.region_id);
           }
           else{
             this.isRegion = false;
           }
+          this.createUserForm.controls.email.setValue(this.user_details.email);
+          this.createUserForm.controls.first_name.setValue(this.user_details.first_name);
+          this.createUserForm.controls.last_name.setValue(this.user_details.last_name);
+          this.createUserForm.controls.role_id.setValue(this.user_details.role_id);
           if(this.user_details.role_id == 4){
             this.createUserForm.controls.learning_type.setValue(this.user_details.learning_type);
             this. isLearningType = true;
             }
-            else{
-              this. isLearningType = false;
-            }
+
           this.createUserForm.controls.pdl_member.setValue(this.user_details.pdl_member == "1" ? true : false);
           this.createUserForm.controls.status.setValue(this.user_details.status == "1" ? true : false);
           if(this.user_details.admin){
-          this.createUserForm.controls.admin.setValue(this.user_details.admin == "1" ? true : false);
+           this.createUserForm.controls.admin.setValue(this.user_details.admin == "1" ? true : false);
            }
+           if(this.user_details.manager){
+            this.createUserForm.controls.manager.setValue(this.user_details.manager == "1" ? true : false);
+             }
           if(this.user_details.staff){
-          this.createUserForm.controls.staff.setValue(this.user_details.staff == "1" ? true : false);
+           this.createUserForm.controls.staff.setValue(this.user_details.staff == "1" ? true : false);
            }
           }
           else{

@@ -108,12 +108,6 @@ export class UserManagementComponent implements OnInit {
     }
   }
 
-  editRequest(user: any){
-    if (user && user.id) {
-      this.router.navigateByUrl(`/user/edit/${user.id}`);
-    }
-  }
-
   deleteRequest(userId: any){
     Swal.fire({
       title: 'Are you sure want to remove?',

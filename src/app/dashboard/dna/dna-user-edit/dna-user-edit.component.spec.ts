@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DnaListComponent } from './dna-list.component';
+import { DnaUserEditComponent } from './dna-user-edit.component';
 
-describe('DnaListComponent', () => {
-  let component: DnaListComponent;
-  let fixture: ComponentFixture<DnaListComponent>;
+describe('DnaUserEditComponent', () => {
+  let component: DnaUserEditComponent;
+  let fixture: ComponentFixture<DnaUserEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DnaListComponent ]
+      declarations: [ DnaUserEditComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DnaListComponent);
+    fixture = TestBed.createComponent(DnaUserEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -13,7 +13,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-sm-4 float-right">
             <div class="page-header float-right bac_trasparent">
                 <div class="page-title d-flex end_just">
@@ -40,28 +39,28 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="mb-2 ml-1">
-                            <button *ngIf="!isCreate" class="btn btn-secondary mr-1"
-                            (click)="setPassword()">Change Password</button>
-                            <button *ngIf="isCreate" class="btn btn-secondary mr-1" type="submit" (click)="save()"> Save</button>
-                             <button  *ngIf="!isCreate" class="btn btn-secondary mr-1" data-toggle="modal"
-                             (click)="save()">
+                            <button *ngIf="!isCreate" class="btn btn-secondary mr-1" (click)="setPassword()">Change
+                                Password</button>
+                            <button *ngIf="isCreate" class="btn btn-secondary mr-1" type="submit" (click)="save()">
+                                Save</button>
+                            <button *ngIf="!isCreate" class="btn btn-secondary mr-1" data-toggle="modal"
+                                (click)="save()">
                                 <i class="fa fa-edit mr-1" aria-hidden="true"></i>Update
                             </button>
-                            </div>
+                        </div>
                         <div class="card">
-                           
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">First Name</label>
-                                            <input type="text"
-                                                class="form-control form_width" formControlName="first_name" />
-                                              <div
-                                              *ngIf="(createUserForm.controls['first_name'].invalid && (createUserForm.controls['first_name'].dirty || createUserForm.controls['first_name'].touched)) || isSubmitted">
-                                              <div class="error_message"
-                                                  *ngIf="createUserForm.controls['first_name'].errors?.required">
-                                                  First Name cannot be blank
+                                            <input type="text" class="form-control form_width"
+                                                formControlName="first_name" />
+                                            <div
+                                                *ngIf="(createUserForm.controls['first_name'].invalid && (createUserForm.controls['first_name'].dirty || createUserForm.controls['first_name'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createUserForm.controls['first_name'].errors?.required">
+                                                    First Name cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -70,13 +69,13 @@
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Last Name</label>
-                                            <input type="text" 
-                                                class="form-control form_width" formControlName="last_name" />
-                                             <div
-                                              *ngIf="(createUserForm.controls['last_name'].invalid && (createUserForm.controls['last_name'].dirty || createUserForm.controls['last_name'].touched)) || isSubmitted">
-                                              <div class="error_message"
-                                                  *ngIf="createUserForm.controls['last_name'].errors?.required">
-                                                  Last Name cannot be blank
+                                            <input type="text" class="form-control form_width"
+                                                formControlName="last_name" />
+                                            <div
+                                                *ngIf="(createUserForm.controls['last_name'].invalid && (createUserForm.controls['last_name'].dirty || createUserForm.controls['last_name'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createUserForm.controls['last_name'].errors?.required">
+                                                    Last Name cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -84,127 +83,129 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">Email </label>
-                                            <input type="text" 
-                                                class="form-control form_width" formControlName="email" />
+                                            <input type="text" class="form-control form_width"
+                                                formControlName="email" />
                                             <div class="error_message"
-                                            *ngIf="(createUserForm.controls['email'].invalid && (createUserForm.controls['email'].dirty || createUserForm.controls['email'].touched)) ">
-                                            Email is not valid.
-                                            <div class="error_message"
-                                             *ngIf="createUserForm.controls['email'].errors?.required   || isSubmitted">
-                                              Email cannot be blank
-                                                  </div>
-                                              </div>    
-                                        </div>
-                                    </div>
-                                    <ng-container *ngIf="isCreate">
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label class="form-control-label">
-                                                Enter Password </label>
-                                            <input type="password" 
-                                                class="form-control form_width" formControlName="password" />
-                                            <div class="error_message" *ngIf="(createUserForm.controls['password'].invalid && (createUserForm.controls['password'].dirty || createUserForm.controls['password'].touched)) "
-                                                class="error_message">
-                                                Please Enter Valid Password.
+                                                *ngIf="(createUserForm.controls['email'].invalid && (createUserForm.controls['email'].dirty || createUserForm.controls['email'].touched)) ">
+                                                Email is not valid.
                                                 <div class="error_message"
-                                                    *ngIf="createUserForm.controls['password'].errors?.required || isSubmitted">
-                                                    Password cannot be blank
+                                                    *ngIf="createUserForm.controls['email'].errors?.required   || isSubmitted">
+                                                    Email cannot be blank
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label class="form-control-label">
-                                                Confirm Password</label>
-                                            <input type="password" 
-                                                class="form-control form_width" formControlName="confirm_password"
-                                                (keyup)=getConfirm_paassword() />
-
-                                            <div *ngIf="(createUserForm.controls['confirm_password'].invalid && (createUserForm.controls['confirm_password'].dirty || createUserForm.controls['confirm_password'].touched))"
-                                                class="error_message">
-                                                Please Enter Valid Password
-                                                <div class="error_message" *ngIf="notmatched">
-                                                    Password and confirm not match</div>
+                                    <ng-container *ngIf="isCreate">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label">
+                                                    Enter Password </label>
+                                                <input type="password" class="form-control form_width"
+                                                    formControlName="password" />
+                                                <div class="error_message"
+                                                    *ngIf="(createUserForm.controls['password'].invalid && (createUserForm.controls['password'].dirty || createUserForm.controls['password'].touched)) "
+                                                    class="error_message">
+                                                    Please Enter Valid Password.
+                                                    <div class="error_message"
+                                                        *ngIf="createUserForm.controls['password'].errors?.required || isSubmitted">
+                                                        Password cannot be blank
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                     </ng-container>
-                                   
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label">
+                                                    Confirm Password</label>
+                                                <input type="password" class="form-control form_width"
+                                                    formControlName="confirm_password" (keyup)=getConfirm_paassword() />
+
+                                                <div *ngIf="(createUserForm.controls['confirm_password'].invalid && (createUserForm.controls['confirm_password'].dirty || createUserForm.controls['confirm_password'].touched))"
+                                                    class="error_message">
+                                                    Please Enter Valid Password
+                                                    <div class="error_message" *ngIf="notmatched">
+                                                        Password and confirm not match</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-container>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">Role</label>
-                                            <ng-select  [items]="rolesList"
-                                                (change)="getSelectedRole($event)" [multiple]="false" bindLabel="role"
-                                                bindValue="id" formControlName="role_id">
+                                            <ng-select [items]="rolesList" (change)="getSelectedRole($event)"
+                                                [multiple]="false" bindLabel="role" bindValue="id"
+                                                formControlName="role_id">
                                             </ng-select>
                                             <div
-                                            *ngIf="(createUserForm.controls['role_id'].invalid && (createUserForm.controls['role_id'].dirty || createUserForm.controls['role_id'].touched)) || isSubmitted">
-                                            <div class="error_message"
-                                             *ngIf="createUserForm.controls['role_id'].errors?.required">
-                                              Role cannot be blank
-                                                  </div>
-                                             </div>
+                                                *ngIf="(createUserForm.controls['role_id'].invalid && (createUserForm.controls['role_id'].dirty || createUserForm.controls['role_id'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createUserForm.controls['role_id'].errors?.required">
+                                                    Role cannot be blank
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4" *ngIf="isRegion">
                                         <div class="form-group">
                                             <label class="form-control-label">Region</label>
-                                            <ng-select  [items]="regionList"
-                                                [multiple]="false" bindLabel="name" bindValue="id"
-                                                formControlName="region_id">
+                                            <ng-select [items]="regionList" [multiple]="false" bindLabel="name"
+                                                bindValue="id" formControlName="region_id">
                                             </ng-select>
                                             <div
-                                            *ngIf="(createUserForm.controls['region_id'].invalid && (createUserForm.controls['region_id'].dirty || createUserForm.controls['region_id'].touched)) || isSubmitted">
-                                            <div class="error_message"
-                                             *ngIf="createUserForm.controls['region_id'].errors?.required">
-                                             Region cannot be blank
-                                             </div>
-                                             </div>
+                                                *ngIf="(createUserForm.controls['region_id'].invalid && (createUserForm.controls['region_id'].dirty || createUserForm.controls['region_id'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createUserForm.controls['region_id'].errors?.required">
+                                                    Region cannot be blank
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4" *ngIf="isLearningType">
                                         <div class="form-group">
                                             <label class="form-control-label">Learning Types</label>
-                                            <ng-select  [items]="learningTypes"
-                                                [multiple]="true" bindLabel="name" bindValue="id"
-                                                formControlName="region_id">
+                                            <ng-select [items]="learningTypes" [multiple]="true" bindLabel="name"
+                                                bindValue="id" formControlName="learning_type">
                                             </ng-select>
                                         </div>
                                     </div>
-                                    
                                 </div>
                                 <div class="">
-                                  <input type="checkbox"  formControlName="pdl_member" class="mr-1"/> <label class="mr-2">PD&L Member</label>
-                                  <input type="checkbox"  formControlName="status" class="mr-1"/> <label class="mr-2">Is Active</label>
-                                  <input type="checkbox"  formControlName="admin" class="mr-1"/>
-                                  <label class="mr-2">Admin</label>
-                                  <input type="checkbox"  formControlName="staff" class="mr-1"/>
-                                  <label class="mr-2">Staff</label>
+                                    <input type="checkbox" formControlName="pdl_member" class="mr-1" /> <label
+                                        class="mr-2">PD&L Member</label>
+                                    <input type="checkbox" formControlName="status" class="mr-1" /> <label
+                                        class="mr-2">Is Active</label>
+                                    <input type="checkbox" formControlName="admin" class="mr-1" />
+                                    <label class="mr-2">Admin</label>
+                                    <input type="checkbox" formControlName="manager" class="mr-1" />
+                                    <label class="mr-2">Manager</label>
+                                    <input type="checkbox" formControlName="staff" class="mr-1" />
+                                    <label class="mr-2">Staff</label>
                                 </div>
                             </div>
-                            
                         </div>
                         <div *ngIf="!isCreate" class="card">
                             <div _ngcontent-qub-c7="" class="card-header card_header_view">
-                                <p >Login  Details</p></div>
+                                <p>Login Details</p>
+                            </div>
                             <div class="card-body">
-                              <div class="col-sm-6 mt-2">
-                                 <div class="form-group">
-                                   <label class="form-control-label">Last Login</label>
-                                   <div class="d-flex align-items-center">
-                                   <span class="form_data">{{user_details?.last_login | date: dateTimeFormate}}</span>
-                                   </div>
-                                </div>
+                                <div class="col-sm-6 mt-2">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Last Login</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">{{user_details?.last_login | date:
+                                                dateTimeFormate}}</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6 mt-2">
                                     <div class="form-group">
-                                      <label class="form-control-label">Joining Date</label>
-                                      <div class="d-flex align-items-center">
-                                      <span class="form_data">{{user_details?.created_at | date: dateTimeFormate}}</span>
-                                      </div>
-                                   </div>
-                                   </div>
+                                        <label class="form-control-label">Joining Date</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">{{user_details?.created_at | date:
+                                                dateTimeFormate}}</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -212,5 +213,4 @@
             </form>
         </div>
     </div>
-
 </div>

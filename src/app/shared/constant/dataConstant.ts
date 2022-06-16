@@ -36,7 +36,7 @@ export const dataConstant = {
   CourseSessionStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish:'publish' , reject: 'reject' },
   VendorStatus: { total: 'total', active:'active', deactive:'deactive'},
   GetReportStatus: {total: 'total', closed: 'closed', close: 'close',draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
-  DnaStatus:{ total: 'total', closed: 'closed', close: 'close',draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'
+  DnaStatus:{ total: 'total', closed: 'closed', close: 'close',draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired' ,forwarded:'forwarded'
   },
   ImageUrl: 'https://orange.mindscroll.info/public/public',
   BaseUrl:'https://orange.mindscroll.info',
@@ -50,6 +50,10 @@ export const dataConstant = {
     CarouselPublisher: 8,
     BackOfficeReviewer: 3,
     BackOfficePublisher: 10,
+    LearningPartner: 13,
+    BussinessConsultant: 12,
+    DomainExpert:14,
+    Rom:5,
     Roc: 3,
     Publisher: 3,
     DataAnalyst: 11
@@ -100,6 +104,7 @@ export const dataConstant = {
   },
   ModuleList:{
     name: 'course', id:'course',
-  }
+  },
+  SMETabs: { contecntSupport: 'content-support', delivery: 'delivery', voiceOver: 'voice-over-learning', professionalCertifications:'professional-certifications', comments:'comments'}
 }
 

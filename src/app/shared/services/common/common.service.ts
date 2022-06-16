@@ -36,7 +36,11 @@ export class CommonService {
   }
 
   public errorHandling(error:any){
-    this.toastErrorMsg(error.error.error, error.error.message);
+    if(error?.error){
+    this.toastErrorMsg(error?.error?.error, error?.error?.message);
+    }else{
+      this.toastErrorMsg(error,'');
+    }
   }
 
   public LastFewYearsList(){

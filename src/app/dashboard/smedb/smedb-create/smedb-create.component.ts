@@ -4,12 +4,16 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TABLE_HORIZONTAL_SPLIT } from '@syncfusion/ej2-angular-richtexteditor';
 import * as _ from 'lodash';
+import { Track } from 'ngx-audio-player';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { SMEService } from 'src/app/shared/services/sme/sme.service';
 import { UserManageService } from 'src/app/shared/services/user-management/user-manage.service';
+import { brotliCompressSync } from 'zlib';
 import { SmedbTermsComponent } from '../smedb-terms/smedb-terms.component';
+// import { Track } from 'ngx-audio-player';
 
 @Component({
   selector: 'app-smedb-create',
@@ -33,11 +37,20 @@ export class SmedbCreateComponent implements OnInit {
   CCTLevel = [];
   isSubmitted = false;
   isAvailable = true;
-  files: File[] = [];
+  files: any = [];
   minDate = {};
   maxDate = {};
   today = new Date();
-
+  SMETabs = dataConstant.SMETabs;
+  selectedTab = this.SMETabs.contecntSupport;
+  msaapDisplayTitle = false;
+  msaapDisplayPlayList = false;
+  msaapDisplayVolumeControls = true;
+  msaapDisplayRepeatControls = false;
+  msaapDisplayArtist = false;
+  msaapDisplayDuration = false;
+  msaapDisablePositionSlider = true;
+  msaapPlaylist: Track[] = [];
   public yesNo: any = [
     { id: 'yes', name: 'Yes' },
     { id: 'no', name: 'No' },
@@ -69,10 +82,10 @@ export class SmedbCreateComponent implements OnInit {
       start_date: new FormControl('', [Validators.required]),
       end_date: new FormControl('', [Validators.required]),
       contact_person_id: new FormControl('', [Validators.required]),
-      isStatus: new FormControl(true),
+      isStatus: new FormControl(false),
     });
 
-    this.contentSupportForm = this.formBuilder.group({'content-support': this.formBuilder.array([]) });
+    this.contentSupportForm = this.formBuilder.group({ 'content-support': this.formBuilder.array([]) });
     this.addLearnerGuideline(0, '', '');
 
     this.deliveryForm = this.formBuilder.group({ 'delivery': this.formBuilder.array([]) });
@@ -103,16 +116,31 @@ export class SmedbCreateComponent implements OnInit {
     });
     this.createSmedbForm.get("start_date")?.valueChanges.subscribe((x) => {
       this.maxDate = x;
-    })
+    });
+
+
   }
 
   ngOnInit(): void {
     this.getCCTDomainExpert();
   }
 
-  showTerms(){
+  changeTab(tab:string){
+    this.selectedTab = tab;
+  }
+
+  handleFileInput(event: any) {
+    const fsize = event.target.files[0].size;
+    const file = Math.round((fsize / 1024) / 1024);
+    this.commonService.FileConvertintoBytearray(event.target.files[0], async (f) => {
+      // creating array bytes
+      this.files = { file: this.commonService.byteArrayTobase64(f.bytes), ext: f.name.split('.').pop() };
+    });
+  }
+
+  showTerms() {
     const x = this.commentsForm.get("agree")?.value;
-    if(!x){
+    if (!x) {
       const modalRef = this.modalService.open(SmedbTermsComponent, {
         centered: true,
         size: 'lg',
@@ -277,13 +305,14 @@ export class SmedbCreateComponent implements OnInit {
       const end_date = new Date(this.sme_details.end_date);
       this.sme_details.start_date = `${start_date.getFullYear()}-${("0" + (start_date.getMonth() + 1)).slice(-2)}-${("0" + start_date.getDate()).slice(-2)}`;
       this.sme_details.end_date = `${end_date.getFullYear()}-${("0" + (end_date.getMonth() + 1)).slice(-2)}-${("0" + end_date.getDate()).slice(-2)}`;
+      this.sme_details.isStatus = this.sme_details.status == 'draft' ? true : false;
       this.createSmedbForm.patchValue(this.sme_details);
     }
     if (this.sme_details.metadata) {
       if (this.sme_details.domain.includes('content-support')) {
         this.contentSupportForm.controls["content-support"] = this.formBuilder.array([]);
         this.sme_details.metadata["content-support"].forEach((x: any) => {
-          this.addLearnerGuideline(x.id, x.level, x.title);
+          this.addLearnerGuideline(x.id, x.title, x.level);
         })
       }
       if (this.sme_details.domain.includes('delivery')) {
@@ -293,7 +322,7 @@ export class SmedbCreateComponent implements OnInit {
         })
       }
       if (this.sme_details.domain.includes('voice-over-learning')) {
-        this.deliveryForm.controls["voice-over-learning"] = this.formBuilder.array([]);
+        this.voiceOverLearningForm.controls["voice-over-learning"] = this.formBuilder.array([]);
         this.sme_details.metadata["voice-over-learning"].forEach((x: any) => {
           this.voiceOverLearningForm.controls.language.setValue(JSON.parse(x.language));
           this.voiceOverLearningForm.controls.other_language.setValue(x.other_language);
@@ -301,11 +330,16 @@ export class SmedbCreateComponent implements OnInit {
           this.voiceOverLearningForm.controls.previous_experience.setValue(x.previous_experience);
           this.voiceOverLearningForm.controls.comment.setValue(x.comment);
           if (x.voice_recording) {
-
+            this.msaapPlaylist.push(
+              {
+                title: x.language,
+                link: `${dataConstant.ImageUrl}/${x.voice_recording}`
+              },
+            );
           }
         })
       }
-      this.deliveryForm.controls["professional-certifications"] = this.formBuilder.array([]);
+      this.professionalCertificationsForm.controls["professional-certifications"] = this.formBuilder.array([]);
       this.sme_details.metadata["professional-certifications"].forEach((x: any) => {
         this.addProfessionalCertification(x.id, x.certification_title, x.completion_year);
       })
@@ -380,25 +414,34 @@ export class SmedbCreateComponent implements OnInit {
     this.professionalCertificationsFormArray.removeAt(i);
   }
 
+  changePerviousExperience() {
+
+  }
+
 
   saveSME() {
     this.isSubmitted = true;
     if (this.createSmedbForm.invalid) {
       return;
     }
-    if (this.commentsForm.invalid) {
-      return;
-    }
-    if (this.professionalCertificationsForm.invalid) {
-      return;
-    }
-    if (this.sme_details.domain.includes('content-support') && this.contentSupportForm.invalid) {
+    if (this.sme_details.domain.includes('content-support') && this.contentSupportForm.controls["content-support"].invalid) {
+      this.selectedTab = this.SMETabs.contecntSupport;
       return;
     }
     if (this.sme_details.domain.includes('delivery') && this.deliveryForm.invalid) {
+      this.selectedTab = this.SMETabs.delivery;
       return;
     }
     if (this.sme_details.domain.includes('voice-over-learning') && this.voiceOverLearningForm.invalid) {
+      this.selectedTab = this.SMETabs.voiceOver;
+      return;
+    }
+    if (this.sme_id && this.professionalCertificationsForm.controls["professional-certifications"].invalid) {
+      this.selectedTab = this.SMETabs.professionalCertifications;
+      return;
+    }
+    if (this.sme_id && this.commentsForm.invalid) {
+      this.selectedTab = this.SMETabs.comments;
       return;
     }
     const body = this.createSmedbForm.value;
@@ -424,11 +467,15 @@ export class SmedbCreateComponent implements OnInit {
     else {
       body.sme_id = this.sme_id;
       body.metadata = {
-        "content-support": this.contentSupportForm.value["content-support"],
+        "content-support": this.contentSupportForm.controls["content-support"].value,
         "delivery": this.deliveryForm.value["delivery"],
         "voice-over-learning": this.voiceOverLearningForm.value,
         "professional-certifications": this.professionalCertificationsForm.value["professional-certifications"],
         "comments": this.commentsForm.value
+      }
+      if (this.files && this.files.file) {
+        body.metadata["voice-over-learning"].voice_recording = this.files.file;
+        body.metadata["voice-over-learning"].voice_recording_ext = this.files.ext;
       }
       this.commonService.showLoading();
       this.smeService.update(body).subscribe(
