@@ -70,17 +70,17 @@ export class DnaLearningFormComponent implements OnInit {
       const Id = params.get('id');
       const form_id = params.get('form_id');
       this.trackerId = Id ? parseInt(Id) : 0;
-      this.formId = form_id ? parseInt(form_id) : 0;
       this.getTrackerDetail();
+      this.formId = form_id ? parseInt(form_id) : 0;
     });
-    if(this.formId){
-      this.getFormDetails();
-    }
     this.getPriority();
     this.getRegions();
     this.getBusinessUnits();
     this.getDomain();
     this.getLocations();
+    if(this.formId){
+      this.getFormDetails();
+    }
   }
 
   getEvent(region:any){
@@ -178,6 +178,12 @@ export class DnaLearningFormComponent implements OnInit {
         this.commonService.hideLoading();
         this.form_details = res.data;
         this.createDnaForm.controls.learning_id.setValue(this.form_details.learning_id);
+        if(!this.form_details.learning_id){
+          this.titleList = [...this.titleList, {training_title: this.form_details.title}];
+          console.log("title",this.titleList)
+          this.isDescription = true;
+          this.createDnaForm.controls.description.setValue(this.form_details.description);
+        }
         this.createDnaForm.controls.priority_id.setValue(this.form_details.priority_id);
         this.createDnaForm.controls.number_of_participant.setValue(this.form_details.number_of_participant);
         if(this.form_details.management_code){
@@ -225,9 +231,9 @@ export class DnaLearningFormComponent implements OnInit {
         this.commonService.hideLoading();
         this.tracker_details = res.data;
         this.trainingId = this.tracker_details.training_data;
+        this.getTitleDropdown();
         this.type = this.tracker_details.type;
         this.type == 1 ? this.isFrance = true : this.isFrance = false;
-        this.getTitleDropdown();
         }
         else{
           this.commonService.hideLoading();

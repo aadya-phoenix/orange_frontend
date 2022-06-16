@@ -100,6 +100,7 @@ export class DnaCompleteReportComponent implements OnInit {
         this.rom_count = res.data.digital_learning_count.rom_count;
         this.business_consultant_count = res.data.digital_learning_count.business_consultant_count;
         this.strategic_count = res.data.digital_learning_count.strategic_count;
+        console.log("counts",this.rom_count,this.business_consultant_count,this.strategic_count)
         }
         else{
           this.commonService.hideLoading();

@@ -64,7 +64,9 @@ export class DnaDashboardComponent implements OnInit {
   }
 
   completeReport(itemId:any){
+    if(this.isLearningPartner || this.isRom || this.isDomainExpert || this.isBussinessConsultant){
     this.router.navigateByUrl(`/dashboard/dna/view-complete-report/${itemId}`); 
+    }
   }
 
   review(itemId:any){

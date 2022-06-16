@@ -266,9 +266,9 @@ export class DnaViewBpComponent implements OnInit {
 
   showRecords(type: string) {
     if (type === this.dnaStatus.total) {
-      this.dnaListToShow = this.dnaList.map((x: any) => Object.assign({}, x));
+      this.learningListToShow = this.learningList.map((x: any) => Object.assign({}, x));
     } else {
-      this.dnaListToShow = this.dnaList.filter((x: any) => { if (x.status_show === type) { return x } }).map((x: any) => Object.assign({}, x));
+      this.learningListToShow = this.learningList.filter((x: any) => { if (x.status_show === type) { return x } }).map((x: any) => Object.assign({}, x));
     }
   }
 

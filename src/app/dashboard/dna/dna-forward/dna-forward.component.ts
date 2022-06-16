@@ -24,6 +24,8 @@ export class DnaForwardComponent implements OnInit {
   trackerId:number=0;
   isDomainExpert = false;
   isBussinessConsultant = false;
+  isRom = false
+  isLearningPartner = false;
 
   public titleLists: any;
   public modalType: any;
@@ -43,8 +45,10 @@ export class DnaForwardComponent implements OnInit {
       status_comment: new FormControl('', [])
     });
     this.getUserrole = this.authService.getRolefromlocal();
-    this.isDomainExpert = this.getUserrole.id == this.RoleID.DomainExpert;
+    this.isRom = this.getUserrole.id == this.RoleID.Rom;
     this.isBussinessConsultant = this.getUserrole.id == this.RoleID.BussinessConsultant;
+    this.isLearningPartner = this.getUserrole.id == this.RoleID.LearningPartner;
+    this.isDomainExpert = this.getUserrole.id == this.RoleID.DomainExpert;
   }
 
   ngOnInit(): void {
@@ -65,14 +69,14 @@ export class DnaForwardComponent implements OnInit {
     this.dnaService.dnaChangeStatus(body).subscribe((res: any) => {
       if(res.status == 1){
       this.commonService.hideLoading();
-      if(status = this.dnaStatus.pending){
+      if(status == this.dnaStatus.pending){
       this.commonService.toastSuccessMsg('Request', 'Successfully Forwarded.');
       }
       else{
         this.commonService.toastSuccessMsg('Request', 'Successfully Closed.');
       }
       this.modalService.close();
-      this.router.navigateByUrl(`/dashboard/dna/view-bp/${this.trackerId}`); 
+        this.router.navigateByUrl(`/dashboard/dna`); 
       }
       else{
         this.commonService.hideLoading();
