@@ -97,6 +97,9 @@ export const dataConstant = {
     vendor:'vendor',
     getReport:'get-report',
     design: 'design'
+  },
+  ModuleList:{
+    name: 'course', id:'course',
   }
 }
 

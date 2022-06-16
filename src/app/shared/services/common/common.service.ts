@@ -39,6 +39,17 @@ export class CommonService {
     this.toastErrorMsg(error.error.error, error.error.message);
   }
 
+  public LastFewYearsList(){
+    let yearsList = [];
+    var date = new Date();
+    date.getFullYear();
+    for (let index = 0; index < 20; index++) {
+        const year = date.getFullYear()-index
+        yearsList.push({name:year, id : year});      
+    }
+    return yearsList;
+  }
+
   //show loader
   public showLoading() {
     this.spinner.show();

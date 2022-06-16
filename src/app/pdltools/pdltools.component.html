@@ -1,0 +1,65 @@
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-8">
+            <div class="page-header float-left bac_trasparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="breade_text_span1">PD&L Dashboard</span>
+                        <span class="divider_req"></span>
+                        <span class="breade_text_span"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 float-right">
+            <div class="page-header float-right bac_trasparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bac_trasparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home text_white"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">PD&L Dashboard</span>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">PD&L Tools</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group w-100">
+                    <label class="form-control-label">
+                        Select Year
+                    </label>
+                    <ng-select placeholder="Please select year" [items]="yearsList"
+                        bindLabel="name" bindValue="id" [multiple]=false class="w_100"
+                        [(ngModule)]="year">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group w-100">
+                    <label class="form-control-label">
+                        Select Module
+                    </label>
+                    <ng-select placeholder="Please select module" [items]="moduleList"
+                        bindLabel="name" bindValue="id" [multiple]=false class="w_100"
+                        [(ngModule)]="module">
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
