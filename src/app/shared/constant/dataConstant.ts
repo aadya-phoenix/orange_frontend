@@ -101,6 +101,7 @@ export const dataConstant = {
     vendor:'vendor',
     getReport:'get-report',
     design: 'design'
-  }
+  },
+  SMETabs: { contecntSupport: 'content-support', delivery: 'delivery', voiceOver: 'voice-over-learning', professionalCertifications:'professional-certifications', comments:'comments'}
 }
 

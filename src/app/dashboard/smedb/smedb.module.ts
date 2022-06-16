@@ -15,6 +15,7 @@ import { SmedbStatusComponent } from './smedb-status/smedb-status.component';
 import { SmedbHistoryComponent } from './smedb-history/smedb-history.component';
 import { SmedbTermsComponent } from './smedb-terms/smedb-terms.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     NgSelectModule,
     RichTextEditorAllModule,
     NgbModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    NgxAudioPlayerModule
   ],
 })
 export class SmedbModule {}

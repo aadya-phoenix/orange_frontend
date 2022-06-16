@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Track } from 'ngx-audio-player';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CarouselService } from 'src/app/shared/services/carousel/carousel.service';
@@ -31,6 +32,13 @@ export class SmedbViewComponent implements OnInit {
   professionalCertificationsData = [];
   commentsData = [];
   voiceOverLearningData= [];
+  msaapDisplayTitle = false;
+  msaapDisplayPlayList = false;
+  msaapDisplayVolumeControls = true;
+  msaapDisplayRepeatControls = false;
+  msaapDisplayArtist = false;
+  msaapDisplayDuration = false;
+  msaapDisablePositionSlider = true;
   constructor(private route: ActivatedRoute,
     private smeService: SMEService,
     private authService: AuthenticationService,
@@ -79,6 +87,17 @@ export class SmedbViewComponent implements OnInit {
             }
             if (this.requestdata.metadata["voice-over-learning"]) {
               this.voiceOverLearningData = this.requestdata.metadata["voice-over-learning"];
+              this.voiceOverLearningData.forEach((element:any) => {
+                if(element.voice_recording){
+                  element.msaapPlaylist = [];
+                  element.msaapPlaylist.push(
+                    {
+                      title: element.language,
+                      link: `${dataConstant.ImageUrl}/${element.voice_recording}`
+                    },
+                  );
+                }
+              });
               // this.activeIds.push(`panel-voice-over-learning`);
             }
           }
