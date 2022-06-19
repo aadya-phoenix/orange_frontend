@@ -299,7 +299,20 @@
                                                 <td>{{ item.other_language }}</td>
                                                 <td>{{ item.gender_voice }}</td>
                                                 <td>{{ item.previous_experience }}</td>
-                                                <td>{{ item.voice_recording }}</td>
+                                                <td>
+                                                    <div *ngIf="item.voice_recording && item.voice_recording.length > 0">
+                                                        <ngx-audio-player [playlist]="item.msaapPlaylist"
+                                                            [displayTitle]="msaapDisplayTitle" [autoPlay]="false"
+                                                            muted="muted" [displayPlaylist]="msaapDisplayPlayList"
+                                                            [pageSizeOptions]="msaapPageSizeOptions"
+                                                            [displayArtist]="msaapDisplayArtist"
+                                                            [displayDuration]="msaapDisplayDuration" [expanded]="true"
+                                                            (trackEnded)="onEnded($event)"
+                                                            [displayVolumeControls]="msaapDisplayVolumeControls"
+                                                            [displayRepeatControls]="msaapDisplayRepeatControls"
+                                                            [disablePositionSlider]="msaapDisablePositionSlider">
+                                                        </ngx-audio-player>
+                                                    </div></td>
                                                 <td>{{ requestdata.status }}</td>
                                                 <td>{{ requestdata.created_at | date: dateFormate }}</td>
                                                 <td>{{ requestdata.updated_at | date: dateFormate}}</td>
