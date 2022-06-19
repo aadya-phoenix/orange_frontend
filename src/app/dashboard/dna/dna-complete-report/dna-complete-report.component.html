@@ -42,15 +42,30 @@
             <div class="card">
                 <div class="card-body">
                 <div class="w_100 d-flex">
-                    <div class="w_20">
-                        <ul class="rotaete_text">
-                            <li>1</li>
-                            <li>2</li>
-                            <li>3</li>
-    
-                        </ul>
+                    <div class="mr-3">
+                        <div>
+                            <div class="top_circle">
+                            
+                            </div>
+                            <div class="line_hieght">
+                            </div>
+                            
+                            <div class="top_circle mt_26_minus">
+                            
+                            </div>
+                            <div class="line_hieght">
+                            </div>
+                            <div class="top_circle mt_26_minus">
+                            
+                            </div>
+                            <div class="line_hieght">
+                            </div>
+                            
+                            </div>
+                                
+                                
                     </div>
-                    <div class="w_80">
+                    <div class="w-100">
                         <div class="card">
                             <div class="card-header">
                                 <p class="mb-0 text_orange">Regional Operation Manager</p>
@@ -327,11 +342,11 @@
                                         <tr *ngFor="let item of learningListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber } ; let i = index;"
                                         class="text-center bac_hover-table font-12">
                                             <td>{{item.training_provider == 'Orange Business Services' ?'Orange Learning' : 'Other Learning'}}</td>
-                                            <td>{{item.title}}</td>
-                                            <td>{{item.training_type}}</td>
-                                            <td>{{item.training_provider}}</td>
+                                            <td>{{item?.title}}</td>
+                                            <td>{{item?.training_type}}</td>
+                                            <td>{{item?.training_provider}}</td>
                                             <td></td>
-                                            <td>{{item.learning_training_data.created_by}}</td>
+                                            <td>{{item?.learning_training_data?.created_by}}</td>
                                             <td></td>
                                             <td>{{item.number_of_participant}}</td>
                                             <td>{{item.priority_name}}</td>

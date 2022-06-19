@@ -92,15 +92,21 @@
                                     </div>
                                     </div>
                                 </div>
+                                <ngb-accordion #a="ngbAccordion" activeIds="custom-panel-1"> 
                               <div class="row mt-1">
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 ng_container_header">
+                                    <ngb-panel id="custom-panel-1">
+                                   
                                     <div class="card">
+                                        <ng-template ngbPanelHeader>
                                         <div class="card-header bac_white">
                                             <div class="d-flex justify_content align-items-center">
                                                 <p class="mb-0 text_balck">PDL & Review</p>
-                                                <i class="fa fa-minus text_balck" aria-hidden="true"></i>
+                                                <button ngbPanelToggle class="btn btn-link btn_minimize p-0"><span>-</span></button>
                                             </div>
                                         </div>
+                                    </ng-template>
+                                    <ng-template ngbPanelContent>
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-sm-4" *ngFor="let item of requestedTrackerList">
@@ -135,9 +141,12 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </ng-template>
                                     </div>
+                                </ngb-panel>
                                 </div>
                             </div>
+                        </ngb-accordion>
                         </div>
                     </div>
                 </div>

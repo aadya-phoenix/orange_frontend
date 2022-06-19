@@ -24,11 +24,14 @@ export class DnaForwardComponent implements OnInit {
   trackerId:number=0;
   isDomainExpert = false;
   isBussinessConsultant = false;
+  isRom = false
+  isLearningPartner = false;
 
-  public titleLists: any;
+  public titleLists: any=[];
   public modalType: any;
   public title: any;
   public learningIds:any;
+  learningList:any=[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,15 +46,23 @@ export class DnaForwardComponent implements OnInit {
       status_comment: new FormControl('', [])
     });
     this.getUserrole = this.authService.getRolefromlocal();
-    this.isDomainExpert = this.getUserrole.id == this.RoleID.DomainExpert;
+    this.isRom = this.getUserrole.id == this.RoleID.Rom;
     this.isBussinessConsultant = this.getUserrole.id == this.RoleID.BussinessConsultant;
+    this.isLearningPartner = this.getUserrole.id == this.RoleID.LearningPartner;
+    this.isDomainExpert = this.getUserrole.id == this.RoleID.DomainExpert;
   }
 
   ngOnInit(): void {
     this.title =  this.props.title;
-    this.titleLists = this.props.objectDetail ? this.props.objectDetail : '';
+    this.learningList =  this.props.objectDetail ? this.props.objectDetail : '';
     this.learningIds = this.props.data;
     this.trackerId = this.props.trackerId;
+    this.learningList.forEach((item: any) => {
+      let title = this.learningIds.find((x: any) => x == item.id);
+      if (title) {
+        this.titleLists.push(item.title);
+      }
+    });
   }
 
   forward(status:any){
@@ -65,14 +76,14 @@ export class DnaForwardComponent implements OnInit {
     this.dnaService.dnaChangeStatus(body).subscribe((res: any) => {
       if(res.status == 1){
       this.commonService.hideLoading();
-      if(status = this.dnaStatus.pending){
+      if(status == this.dnaStatus.pending){
       this.commonService.toastSuccessMsg('Request', 'Successfully Forwarded.');
       }
       else{
         this.commonService.toastSuccessMsg('Request', 'Successfully Closed.');
       }
       this.modalService.close();
-      this.router.navigateByUrl(`/dashboard/dna/view-bp/${this.trackerId}`); 
+        this.router.navigateByUrl(`/dashboard/dna`); 
       }
       else{
         this.commonService.hideLoading();
@@ -83,8 +94,6 @@ export class DnaForwardComponent implements OnInit {
       this.commonService.toastErrorMsg('Error', err.message);
     })
   }
-
-  getStrategic(event:any){}
 
   closeModal() {
     this.modalService.close();

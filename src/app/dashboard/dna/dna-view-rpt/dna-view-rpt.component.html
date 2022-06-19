@@ -45,68 +45,63 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-2 col_20">
-                                    <div class="card bac_card_total">
-                                        <div class="card-body">
-                                            <div class="d-flex just_spa align-items-center">
-                                                <h5 class="mb-0">{{dna_count.total?dna_count.total:0}}</h5>
-                                                <img src="../../../../assets/images/icon/all.png" class="imae_card_pen">
+                        <div class="card-header cm-card-header">
+                            <div class="overall_css">
+                                <span class="card_overall">Overall request Status</span>
+                            </div>
+                        </div>
+                        <div class="card-body card_course_body">
+                            <div class="Course_icon_parent" data-aos="fade-right">
+                                <div class="Course_icon_child" >
+                                    <div class="alig_dashicon" (click)="showRecords(dnaStatus.pending)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des bac_yellow">
+                                                <img src="../../../../assets/images/icon/pending.png" />
                                             </div>
-                                        </div>
-                                        <div class="card-footer card_footer_dash">
-                                            <p>Total Request</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2 col_20">
-                                    <div class="card bac_card_pen">
-                                        <div class="card-body">
-                                            <div class="d-flex just_spa align-items-center">
-                                                <h5 class="mb-0">{{dna_count.pending?dna_count.pending:0}}</h5>
-                                                <img src="../../../../assets/images/icon/pending.png"
-                                                    class="imae_card_pen">
-                                            </div>
-                                        </div>
-                                        <div class="card-footer card_footer_dash">
                                             <p>Pending</p>
                                         </div>
+                                        <span
+                                            class="number_css ">{{dna_count.pending?dna_count.pending:0}}</span>
                                     </div>
                                 </div>
-                                
-                                <div class="col-sm-2 col_20" >
-                                    <div class="card bac_card_pen">
-                                        <div class="card-body">
-                                            <div class="d-flex just_spa align-items-center">
-                                                <h5 class="mb-0">{{dna_count.digital_learning?dna_count.digital_learning:0}}</h5>
-                                                <img src="../../../../assets/images/icon/pending.png"
-                                                    class="imae_card_pen">
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="showRecords(dnaStatus.closed)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des cm-learning">
+                                                <img src="../../../../assets/images/icon/check.png" />
                                             </div>
+                                            <p>Closed</p>
                                         </div>
-                                        <div class="card-footer card_footer_dash">
+                                        <span
+                                            class="number_css pub_lished">{{dna_count.close?dna_count.close:0}}</span>
+                                    </div>
+                                </div>
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="showRecords(dnaStatus.digital_learning)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des cm-reject">
+                                                <img src="../../../../assets/images/icon/laptop.png" />
+                                            </div>
                                             <p>Digital Learning</p>
                                         </div>
+                                        <span
+                                            class="number_css">{{dna_count.digital_learning?dna_count.digital_learning:0}}</span>
                                     </div>
                                 </div>
-                          
-                        <div class="col-sm-2 col_20">
-                            <div class="card bac_card_closed">
-                                <div class="card-body">
-                                    <div class="d-flex just_spa align-items-center">
-                                        <h5 class="mb-0">{{dna_count.close?dna_count.close:0}}</h5>
-                                        <img src="../../../../assets/images/icon/check.png"
-                                            class="imae_card_pen">
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="showRecords(dnaStatus.total)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des cm-all">
+                                                <img src="../../../../assets/images/icon/viewall.png" />
+                                            </div>
+
+                                            <p>Total Requests</p>
+                                        </div>
+                                        <span class="number_css">{{dna_count.total?dna_count.total:0}}</span>
                                     </div>
-                                </div>
-                                <div class="card-footer card_footer_dash">
-                                    <p>Requests Closed</p>
                                 </div>
                             </div>
                         </div>
-                        
-                    </div>
-                </div>
                     </div>
                 </div>
             </div>
@@ -151,15 +146,6 @@
                                                 {{item.team_name}}</option>
                                         </select>
                                     </div>
-                                    <div class="form-group filter_course mr-1">
-                                        <label class="label_course">Filter by Status</label>
-                                        <select class="form-control  form_width"
-                                            (change)="getStatusFilterRecords($event.target.value)">
-                                            <option selected='selected' value=''>View All</option>
-                                            <option value="closed">Closed</option>
-                                            <option value="pending">Pending</option>
-                                        </select>
-                                    </div>
                                     <div _ngcontent-cue-c109=" " class="form-group filter_course mr-1">
                                         <label _ngcontent-cue-c109=" " class="label_course text_black">Search</label>
                                         <input _ngcontent-cue-c109=" " type="text " name="search " autocomplete="off "
@@ -174,25 +160,9 @@
                             <div class="overall_css1">
 
                                 <div class="filter_dispaly">
-                                    <div _ngcontent-cue-c109=" " class="form-group filter_course mr-2">
-                                        <label _ngcontent-cue-c109=" " class="label_course text_black">Comments</label>
-                                        <textarea row="4"type="text " name="search " autocomplete="off "
-                                        [(ngModel)]="statusComment" placeholder=" "
-                                        class="form-control ng-untouched ng-pristine ng-valid form_width-textarea"
-                                        ng-reflect-name="search "></textarea>
-                                       
-                                    </div>
-                                    <div class="form-group filter_course mr-2">
-                                        <label class="label_course">Learning Status</label>
-                                        <select class="form-control  form_width"
-                                            (change)="getStatus($event.target.value)">
-                                            <option selected='selected' value=''>Learning Status</option>
-                                            <option [value]="1">Closed</option>
-                                        </select>
-                                    </div>
-                                    <button class=" btn btn-primary btn_add_submit mt-3" (click)="submit()"
+                                    <button class=" btn btn-primary btn_add_submit mt-3" (click)="openModal()"
                                         data-toggle="modal">
-                                       <span class="fon_12">Submit</span>
+                                       <span class="fon_12">Close Request</span>
                                     </button>
 
                                 </div>
@@ -247,20 +217,20 @@
                                     <tbody>
                                         <tr *ngFor="let item of learningListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber } ; let i = index;"
                                             class="text-center bac_hover-table font-12">
-                                            <td> <input type="checkbox" [checked]="item.isChecked"
+                                            <td> <input type="checkbox" (click)="selectedItems(item)" [checked]="item.isChecked"
                                                     [attr.disabled]="item.status == dnaStatus.close ? true : null"
-                                                    (click)="selectedItems(item)">
+                                                    >
                                             </td>
                                             <td>{{item.user_email}}</td>
                                             <td>{{item.training_type}}</td>
-                                            <td>{{item.learning_type}}</td>
+                                            <td>{{item.training_provider == 'Orange Business Services' ?'Orange Learning' : 'Other Learning'}}</td>
                                             <td>{{item.title}}</td>
                                             <td>{{item.number_of_participant}}</td>
                                             <td>{{item.priority_name}}</td>
                                             <td>{{item.country}}</td>
                                             <td>{{item.management_code}}</td>
                                             <td>{{item.business_unit_name}}</td>
-                                            <td>{{item.status}}</td>
+                                            <td  [ngClass]="item.status_show">{{item.status_show}}</td>
                                             <td>{{item.comments}}</td>
                                         </tr>
                                     </tbody>
