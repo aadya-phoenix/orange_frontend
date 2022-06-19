@@ -47,7 +47,6 @@ export class DnaLearningFormComponent implements OnInit {
     private route:ActivatedRoute,
     private generalDrpdownsService: GeneralDropdownsService,
     private dnaService:DnaService,
-    private getReportService:GetReportService,
     private commonService: CommonService,
     private router:Router) { 
     this.createDnaForm = this.formBuilder.group({
@@ -78,9 +77,7 @@ export class DnaLearningFormComponent implements OnInit {
     this.getBusinessUnits();
     this.getDomain();
     this.getLocations();
-    if(this.formId){
-      this.getFormDetails();
-    }
+   
   }
 
   getEvent(region:any){
@@ -175,12 +172,12 @@ export class DnaLearningFormComponent implements OnInit {
     this.dnaService. getFormDetails(this.formId).subscribe(
       (res: any) => {
         if(res.status == 1){
-        this.commonService.hideLoading();
+      
         this.form_details = res.data;
         this.createDnaForm.controls.learning_id.setValue(this.form_details.learning_id);
         if(!this.form_details.learning_id){
-          this.titleList = [...this.titleList, {training_title: this.form_details.title}];
-          console.log("title",this.titleList)
+          this.titleList = [...this.titleList, {training_title: this.form_details.title,id:-1}];
+          this.createDnaForm.controls.learning_id.setValue(-1);
           this.isDescription = true;
           this.createDnaForm.controls.description.setValue(this.form_details.description);
         }
@@ -201,6 +198,7 @@ export class DnaLearningFormComponent implements OnInit {
           this.isCountry = false;
         }
         this.createDnaForm.controls.business_unit_id.setValue(this.form_details.business_unit_id);
+        this.commonService.hideLoading();
         }
         else{
           this.commonService.hideLoading();
@@ -228,12 +226,13 @@ export class DnaLearningFormComponent implements OnInit {
     this.dnaService.getTrackerDetail(this.trackerId).subscribe(
       (res: any) => {
         if(res.status == 1){
-        this.commonService.hideLoading();
+        
         this.tracker_details = res.data;
         this.trainingId = this.tracker_details.training_data;
         this.getTitleDropdown();
         this.type = this.tracker_details.type;
         this.type == 1 ? this.isFrance = true : this.isFrance = false;
+        this.commonService.hideLoading();
         }
         else{
           this.commonService.hideLoading();
@@ -330,25 +329,14 @@ export class DnaLearningFormComponent implements OnInit {
     );
   }
  
-  filterTitle(event:any){
-    let filtered :any[]= [];
-    let query = event.query;
-   /*  for (let i = 0; i < this.heroes.length; i++) {
-      let heroe = this.heroes[i];
-      if (heroe.superhero.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-        filtered.push(heroe);
-      }
-    }
-    this.filteredHeros = filtered; */
-    console.log(query);  // When I print this to the console I can see the 
- // search results in the console, however I can't get them to show up in the autocomplete
-  }
-
   getTitleDropdown(){
     this.dnaService.getTitleDropdown(this.trainingId).subscribe(
       (res: any) => {
-      this.commonService.hideLoading();
       this.titleList = res.data;
+      if(this.formId){
+        this.getFormDetails();
+      }
+      this.commonService.hideLoading();
     },
     (err: any) => {
       this.commonService.hideLoading();

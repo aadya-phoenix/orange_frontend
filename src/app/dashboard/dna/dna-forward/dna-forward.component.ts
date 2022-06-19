@@ -27,10 +27,11 @@ export class DnaForwardComponent implements OnInit {
   isRom = false
   isLearningPartner = false;
 
-  public titleLists: any;
+  public titleLists: any=[];
   public modalType: any;
   public title: any;
   public learningIds:any;
+  learningList:any=[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,9 +54,15 @@ export class DnaForwardComponent implements OnInit {
 
   ngOnInit(): void {
     this.title =  this.props.title;
-    this.titleLists = this.props.objectDetail ? this.props.objectDetail : '';
+    this.learningList =  this.props.objectDetail ? this.props.objectDetail : '';
     this.learningIds = this.props.data;
     this.trackerId = this.props.trackerId;
+    this.learningList.forEach((item: any) => {
+      let title = this.learningIds.find((x: any) => x == item.id);
+      if (title) {
+        this.titleLists.push(item.title);
+      }
+    });
   }
 
   forward(status:any){
@@ -87,8 +94,6 @@ export class DnaForwardComponent implements OnInit {
       this.commonService.toastErrorMsg('Error', err.message);
     })
   }
-
-  getStrategic(event:any){}
 
   closeModal() {
     this.modalService.close();

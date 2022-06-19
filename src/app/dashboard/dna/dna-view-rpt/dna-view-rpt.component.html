@@ -217,9 +217,9 @@
                                     <tbody>
                                         <tr *ngFor="let item of learningListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber } ; let i = index;"
                                             class="text-center bac_hover-table font-12">
-                                            <td> <input type="checkbox" [checked]="item.isChecked"
+                                            <td> <input type="checkbox" (click)="selectedItems(item)" [checked]="item.isChecked"
                                                     [attr.disabled]="item.status == dnaStatus.close ? true : null"
-                                                    (click)="selectedItems(item)">
+                                                    >
                                             </td>
                                             <td>{{item.user_email}}</td>
                                             <td>{{item.training_type}}</td>

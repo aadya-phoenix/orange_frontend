@@ -111,22 +111,21 @@ export class DnaViewRptComponent implements OnInit {
   }
 
   selectedItems(item:any){
-    this.titleList = [];
-    this.learningIds = [];
     item.isChecked = !item.isChecked;
     if(item.isChecked == true){
-    this.learningIds.push(item.id);
+      if(this.learningIds.length != 0){
+        this.learningIds.forEach((x:any)=>{
+          if(x != item.id){
+            this.learningIds.push(item.id);
+          }
+        });
+      }
+      else{
+        this.learningIds.push(item.id);
+      }
     }
     else{
       this.learningIds.pop(item.id);
-    }
-    if(this.learningIds.length != 0){
-      this.learningList.forEach((item: any) => {
-       let title = this.learningIds.find((x: any) => x == item.id);
-       if (title) {
-         this.titleList.push(item.title);
-       }
-     });
     }
   }
 
@@ -139,7 +138,11 @@ export class DnaViewRptComponent implements OnInit {
     if(this.isChecked == false){
       return;
     }
-    newList = this.learningList.filter((y:any)=> y.status == this.dnaStatus.pending);
+    newList = this.learningList.filter((y:any)=> {
+      if(y.status == this.dnaStatus.pending){ 
+      return y;
+      }
+    });
     newList.forEach((val:any)=>{
       this.learningIds.push(val.id);
     });
@@ -155,6 +158,13 @@ export class DnaViewRptComponent implements OnInit {
     if(this.learningIds.length == 0){
       return;
     }
+ /*    this.titleList = [];
+    this.learningList.forEach((item: any) => {
+      let title = this.learningIds.find((x: any) => x == item.id);
+      if (title) {
+        this.titleList.push(item.title);
+      }
+    }); */
     const modalRef = this.modalService.open(DnaForwardComponent, {
       centered: true,
       size: 'xl',
@@ -163,7 +173,7 @@ export class DnaViewRptComponent implements OnInit {
     modalRef.componentInstance.props = {
       title:  'Close Request' ,
       data: this.learningIds,
-      objectDetail: this.titleList,
+      objectDetail: this.learningList,
       trackerId:this.trackerId,
       type: 'forward'
     };
