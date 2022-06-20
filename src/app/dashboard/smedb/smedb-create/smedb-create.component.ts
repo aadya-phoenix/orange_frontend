@@ -130,11 +130,12 @@ export class SmedbCreateComponent implements OnInit {
   }
 
   handleFileInput(event: any) {
+    this.files = [];
     const fsize = event.target.files[0].size;
     const file = Math.round((fsize / 1024) / 1024);
     this.commonService.FileConvertintoBytearray(event.target.files[0], async (f) => {
       // creating array bytes
-      this.files = { file: this.commonService.byteArrayTobase64(f.bytes), ext: f.name.split('.').pop() };
+      this.files.push({ file: this.commonService.byteArrayTobase64(f.bytes), ext: f.name.split('.').pop() });
     });
   }
 
@@ -473,9 +474,9 @@ export class SmedbCreateComponent implements OnInit {
         "professional-certifications": this.professionalCertificationsForm.value["professional-certifications"],
         "comments": this.commentsForm.value
       }
-      if (this.files && this.files.file) {
-        body.metadata["voice-over-learning"].voice_recording = this.files.file;
-        body.metadata["voice-over-learning"].voice_recording_ext = this.files.ext;
+      if (this.files && this.files.length > 0) {
+        body.metadata["voice-over-learning"].voice_recording = this.files;
+        //body.metadata["voice-over-learning"].voice_recording_ext = this.files.ext;
       }
       this.commonService.showLoading();
       this.smeService.update(body).subscribe(

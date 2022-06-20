@@ -8,6 +8,7 @@ import { CarouselService } from 'src/app/shared/services/carousel/carousel.servi
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { SMEService } from 'src/app/shared/services/sme/sme.service';
 import Swal from 'sweetalert2';
+import { SmedbStatusComponent } from '../smedb-status/smedb-status.component';
 
 @Component({
   selector: 'app-smedb-view',
@@ -26,7 +27,7 @@ export class SmedbViewComponent implements OnInit {
   isReviewer = false;
   isPublisher = false;
   isRequester = false;
-  CarouselStatus = dataConstant.CarouselStatus;
+  SMEStatus = dataConstant.SMEStatus;
   contentSupportData = [];
   deliveryData = [];
   professionalCertificationsData = [];
@@ -120,114 +121,67 @@ export class SmedbViewComponent implements OnInit {
   }
 
   isUpdate() {
-    if (this.requestdata?.status === this.CarouselStatus.publish || this.requestdata?.status === this.CarouselStatus.expired || (this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status === this.CarouselStatus.pending)) {
-      return false;
-    }
-    if (this.requestdata?.status === this.CarouselStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id) {
-      return false;
-    }
-    if (this.requestdata?.status === this.CarouselStatus.draft) {
+    if (this.requestdata?.status === this.SMEStatus.draft && this.requestdata?.user_id == this.getprofileDetails.data.id) {
       return true;
     }
-    if (!this.requestdata?.transfer_user_id && this.requestdata?.status === this.CarouselStatus.pending && this.isRequester) {
-      return false;
-    }
-    if (this.requestdata?.user_id != this.getprofileDetails.data.id && this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isReviewer) {
-      return false;
-    }
-    return true;
+    return false;
   }
-  isPublish() {
-    if (this.requestdata?.status === this.CarouselStatus.publish || this.requestdata?.status === this.CarouselStatus.expired || this.requestdata?.status === this.CarouselStatus.draft) {
-      return false;
+  isApprove() {
+    if (this.requestdata?.status === this.SMEStatus.pending && this.requestdata?.user_id != this.getprofileDetails.data.id) {
+      return true;
     }
-    if (this.requestdata?.status === this.CarouselStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id) {
-      return false;
-    }
-    if (!this.isPublisher) {
-      return false;
-    }
-    if (this.requestdata?.user_id != this.getprofileDetails.data.id && this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isReviewer) {
-      return false;
-    }
-    return true;
+    return false;
   }
-  isForward() {
-    if (this.requestdata?.status === this.CarouselStatus.publish || this.requestdata?.status === this.CarouselStatus.expired || this.requestdata?.status === this.CarouselStatus.reject || this.requestdata?.status === this.CarouselStatus.draft) {
-      return false;
-    }
-    if (this.requestdata?.status === this.CarouselStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id) {
-      return false;
-    }
-    if (!this.isReviewer) {
-      return false;
-    }
-    if (this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isReviewer) {
-      return false;
-    }
-
-    return true;
-  }
+  
   isReject() {
-    if (this.requestdata?.status === this.CarouselStatus.publish || this.requestdata?.status === this.CarouselStatus.expired || this.requestdata?.status === this.CarouselStatus.reject) {
-      return false;
+    if (this.requestdata?.status === this.SMEStatus.pending && this.requestdata?.user_id != this.getprofileDetails.data.id) {
+      return true;
     }
-    if (this.requestdata?.status === this.CarouselStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id) {
-      return false;
-    }
-    if (this.isRequester) {
-      return false;
-    }
-    if (this.requestdata?.status === this.CarouselStatus.draft) {
-      return false;
-    }
-    if (this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isReviewer) {
-      return false;
-    }
-    return true;
+    return false;
   }
 
-  forwardRequest() {
-    // Swal.fire({
-    //   title: 'Are you sure want to transfer?',
-    //   text: 'Request will be transfer to the publisher!',
-    //   icon: 'question',
-    //   showCancelButton: true,
-    //   confirmButtonText: 'Yes, move it!',
-    //   cancelButtonText: 'No, keep it'
-    // }).then((result) => {
-    //   if (result.value) {
-    //     var data = {
-    //       carousel_id: this.requestdata.id,
-    //     };
-    //       this.commonService.showLoading();
-    //       this.smeService.carouselTransfer(data).subscribe(
-    //         (res: any) => {
-    //           this.commonService.hideLoading();
-    //           this.commonService.toastSuccessMsg('Carousel', 'Successfully Transfered.');
-    //           this.getCarouselDetails();
-    //         },
-    //         (err: any) => {
-    //           this.commonService.hideLoading();
-    //           this.commonService.errorHandling(err);
-    //         }
-    //       );
+  approveRequest() {
+    Swal.fire({
+      title: 'Are you sure that you want to approved this request?',
+      text: 'SME Database',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        var data = {
+          sme_id: this.requestdata.id,
+          status:'approve'
+        };
+          this.commonService.showLoading();
+          this.smeService.SMEDatabaseStatus(data).subscribe(
+            (res: any) => {
+              this.commonService.hideLoading();
+              this.commonService.toastSuccessMsg('SME Database', 'Successfully Transfered.');
+              this.getCarouselDetails();
+            },
+            (err: any) => {
+              this.commonService.hideLoading();
+              this.commonService.errorHandling(err);
+            }
+          );
 
-    //   }
-    // })
+      }
+    })
   }
 
   statusChangeRequest(status: any) {
-    // const modalRef = this.modalService.open(CarouselPublishComponent, {
-    //   centered: true,
-    //   size: 'lg',
-    //   windowClass: 'alert-popup',
-    // });
-    // modalRef.componentInstance.props = {
-    //   title: `Request ${status == this.CarouselStatus.reject ? "Reject" : "Publish"}`,
-    //   status: status,
-    //   data: this.requestdata.id,
-    //   objectDetail: this.requestdata
-    // };
+    const modalRef = this.modalService.open(SmedbStatusComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      title: `Add your comments"}`,
+      status: this.SMEStatus.reject,
+      data: this.requestdata.id,
+      objectDetail: this.requestdata
+    };
   }
 }

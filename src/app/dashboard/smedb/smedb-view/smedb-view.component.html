@@ -48,28 +48,26 @@
                 <span>View SME Details</span>
                 <span class="cc-text_css"> ({{ requestdata.request_id }}) -
                 </span>
-                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status | titlecase
-                    }}</span>
+                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.action_status }}</span>
             </p>
         </div>
     </div>
     <div class="content">
         <div class="animated fadeIn">
-            <div class="mb-2" *ngIf="isUpdate() || isPublish() || isReject()">
+            <div class="mb-2" *ngIf="isUpdate() || isApprove() || isReject()">
                 <div class="Requs_btn_inl">
                     <div class="Requs_btn_inl-child">
-                        <button type="button" class="btn btn-primary mr-2" *ngIf="isPublish()"
-                            (click)="statusChangeRequest(CarouselStatus.publish)">
-                            <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
-                        </button>
-                        <button type="button" class="btn mr-2" *ngIf="isUpdate()"
-                            [ngClass]="(isPublish() || isForward()) ?  'btn-secondary'  : 'btn-primary'"
+                        <button type="button" class="btn mr-2 btn-primary" *ngIf="isUpdate()"
                             (click)="updateRequest()">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">Update</span>
                         </button>
+                        <button type="button" class="btn btn-secondary" *ngIf="isApprove()"
+                            (click)="statusChangeRequest(CarouselStatus.reject)">
+                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Approve Request</span>
+                        </button>
                         <button type="button" class="btn btn-secondary" *ngIf="isReject()"
                             (click)="statusChangeRequest(CarouselStatus.reject)">
-                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Send back to SME</span>
                         </button>
                     </div>
                 </div>

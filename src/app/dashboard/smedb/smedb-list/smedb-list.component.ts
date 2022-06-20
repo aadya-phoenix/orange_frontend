@@ -12,6 +12,7 @@ import { SMEService } from 'src/app/shared/services/sme/sme.service';
 })
 export class SmedbListComponent implements OnInit {
   smeList: any = [];
+  smeContcatPerson: any = [];
   sme_count = {
     total: 0,
     draft: 0,
@@ -33,10 +34,29 @@ export class SmedbListComponent implements OnInit {
     this.commonService.showLoading();
     this.smeService.getSMEDatabase().subscribe(
       (res: any) => {
-        this.commonService.hideLoading();
+        this.SMEContactPerson();
         if (res.status === 1 && res.message === 'Success') {
           this.smeList = res.data.sme;
           this.sme_count = res.data.sme_count;
+        }
+        else{
+          this.commonService.toastErrorMsg("Error", res.message);
+        }
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
+      }
+    );
+  }
+
+  SMEContactPerson() {
+    this.commonService.showLoading();
+    this.smeService.SMEContactPerson().subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        if (res.status === 1 && res.message === 'Success') {
+          this.smeContcatPerson = res.data;
         }
         else{
           this.commonService.toastErrorMsg("Error", res.message);
