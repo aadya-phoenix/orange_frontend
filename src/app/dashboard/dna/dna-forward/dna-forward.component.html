@@ -22,13 +22,13 @@
                        <span> Select strategic level and enter comments to proceed.</span>
                     </label>
                     <div>
-                    <input type="radio" value="strategic_1" formControlName="strategic" (change)="getStrategic($event)">
+                    <input type="radio" value="Strategic for BU" formControlName="strategic" (change)="getStrategic($event)">
                     <strong class="fon_12 ml-1 text_orange mr-2">Strategic for BU</strong>
 
-                     <input type="radio" value="strategic_2" formControlName="strategic" (change)="getStrategic($event)">
+                     <input type="radio" value="Not strategic but action required" formControlName="strategic" (change)="getStrategic($event)">
                      <strong class="fon_12 ml-1 text_orange mr-2">Not strategic but action required</strong>
             
-                     <input type="radio" value="strategic_3" formControlName="strategic" (change)  ="getStrategic($event)">
+                     <input type="radio" value="Not a priority or no action required" formControlName="strategic" (change)  ="getStrategic($event)">
                       <strong class="fon_12 ml-1 text_orange mr-2">Not a priority or no action required</strong>
                       </div>
                 </div>
@@ -45,7 +45,7 @@
     </div>
     <div class="card-footer">
         <button class="btn btn-primary mr-1" type="submit" *ngIf="isBussinessConsultant" (click)="forward('pending')">Submit</button>
-        <button class="btn btn-primary mr-1" type="submit" *ngIf="isDomainExpert" (click)="forward('close')">Submit</button>
+        <button class="btn btn-primary mr-1" type="submit" *ngIf="!isBussinessConsultant" (click)="forward('close')">Submit</button>
     </div>
 </div>
 

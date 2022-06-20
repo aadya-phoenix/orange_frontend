@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DnaService } from 'src/app/shared/services/dna/dna.service';
 import { GeneralDropdownsService } from 'src/app/shared/services/general-dropdowns/general-dropdowns.service';
 import Swal from 'sweetalert2';
+import { DnaForwardComponent } from '../dna-forward/dna-forward.component';
 
 @Component({
   selector: 'app-dna-view-rpt',
@@ -15,11 +17,9 @@ export class DnaViewRptComponent implements OnInit {
 
   dnaStatus = dataConstant.DnaStatus;
   selectedStatus = this.dnaStatus.total;
-  dnaList: any = [];
   priorityObj: any = [];
   countriesObj:any =[];
   bussinessUnitObj:any = [];
-  dnaListToShow: any = [];
   status:string = '';
 
   learningList:any= [];
@@ -43,6 +43,7 @@ export class DnaViewRptComponent implements OnInit {
   trackerId:number = 0;
   selectedId = 0;
   learningIds:any = [];
+  titleList:any=[];
   isChecked=false;
 
   pagination = {
@@ -54,6 +55,7 @@ export class DnaViewRptComponent implements OnInit {
     private commonService: CommonService,
     private dnaService:DnaService,
     private generalDrpdownsService: GeneralDropdownsService,
+    private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -91,17 +93,6 @@ export class DnaViewRptComponent implements OnInit {
     }
   }
 
-  getStatusFilterRecords(item:any){
-    if (item) {
-      this.learningListToShow = [...this.learningList].filter((a, b) => {
-        return a.status == item
-      });
-    }  
-    else{
-      this.learningListToShow = this.learningList;
-    }
-  }
-
   getCountryFilterRecords(item:any){
     if (item) {
       this.learningListToShow = [...this.learningList].filter((a, b) => {
@@ -122,7 +113,16 @@ export class DnaViewRptComponent implements OnInit {
   selectedItems(item:any){
     item.isChecked = !item.isChecked;
     if(item.isChecked == true){
-    this.learningIds.push(item.id);
+      if(this.learningIds.length != 0){
+        this.learningIds.forEach((x:any)=>{
+          if(x != item.id){
+            this.learningIds.push(item.id);
+          }
+        });
+      }
+      else{
+        this.learningIds.push(item.id);
+      }
     }
     else{
       this.learningIds.pop(item.id);
@@ -130,13 +130,53 @@ export class DnaViewRptComponent implements OnInit {
   }
 
   checkAllOptions() {
+    let newList=[];
     this.learningIds=[];
+    this.titleList = [];
     this.isChecked = !this.isChecked;
     this.learningList.forEach((val:any) => { val.isChecked = this.isChecked });
-    this.learningListToShow = this.learningList.filter((y:any)=> y.status == this.dnaStatus.pending);
-    this.learningListToShow.forEach((val:any)=>{
+    if(this.isChecked == false){
+      return;
+    }
+    newList = this.learningList.filter((y:any)=> {
+      if(y.status == this.dnaStatus.pending){ 
+      return y;
+      }
+    });
+    newList.forEach((val:any)=>{
       this.learningIds.push(val.id);
     });
+    this.learningList.forEach((item: any) => {
+      let title = this.learningIds.find((x: any) => x == item.id);
+      if (title) {
+        this.titleList.push(item.title);
+      }
+    });
+  }
+
+  openModal() {
+    if(this.learningIds.length == 0){
+      return;
+    }
+ /*    this.titleList = [];
+    this.learningList.forEach((item: any) => {
+      let title = this.learningIds.find((x: any) => x == item.id);
+      if (title) {
+        this.titleList.push(item.title);
+      }
+    }); */
+    const modalRef = this.modalService.open(DnaForwardComponent, {
+      centered: true,
+      size: 'xl',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      title:  'Close Request' ,
+      data: this.learningIds,
+      objectDetail: this.learningList,
+      trackerId:this.trackerId,
+      type: 'forward'
+    };
   }
 
   submit(){
@@ -238,9 +278,9 @@ export class DnaViewRptComponent implements OnInit {
 
   showRecords(type: string) {
     if (type === this.dnaStatus.total) {
-      this.dnaListToShow = this.dnaList.map((x: any) => Object.assign({}, x));
+      this.learningListToShow = this.learningList.map((x: any) => Object.assign({}, x));
     } else {
-      this.dnaListToShow = this.dnaList.filter((x: any) => { if (x.status_show === type) { return x } }).map((x: any) => Object.assign({}, x));
+      this.learningListToShow = this.learningList.filter((x: any) => { if (x.status_show === type) { return x } }).map((x: any) => Object.assign({}, x));
     }
   }
 
