@@ -346,6 +346,7 @@
                                                             </label>
                                                             <ng-select placeholder="Please select title" [items]="yesNo"
                                                                 bindLabel="name" bindValue="id"
+                                                                (change)="changePerviousExperience(contentSup)"
                                                                 formControlName="previous_experience" [multiple]=false
                                                                 class="w_100">
                                                             </ng-select>
@@ -355,7 +356,7 @@
                                                             </div> -->
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-5 col-sm-12" [formGroupName]="i">
+                                                    <div class="col-md-5 col-sm-12" [formGroupName]="i" *ngIf="!contentSup.isPrevious">
                                                         <div class="form-group w-100">
                                                             <label class="form-control-label">
                                                                 Would you need help? <span class="text_red">*
@@ -372,13 +373,13 @@
                                                             </div> -->
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-10 col-sm-12" [formGroupName]="i">
+                                                    <div class="col-md-10 col-sm-12" [formGroupName]="i" >
                                                         <div class="form-group w-100">
-                                                            <label class="form-control-label">
+                                                            <label class="form-control-label" *ngIf="!contentSup.isPrevious">
                                                                 How can we help you? <span class="text_red">*
                                                                 </span>
                                                             </label>
-                                                            <label class="form-control-label">
+                                                            <label class="form-control-label" *ngIf="contentSup.isPrevious">
                                                                 Provide a brief of experience <span class="text_red">*
                                                                 </span>
                                                             </label>

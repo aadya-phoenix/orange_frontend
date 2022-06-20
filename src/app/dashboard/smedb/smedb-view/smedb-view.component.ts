@@ -89,14 +89,18 @@ export class SmedbViewComponent implements OnInit {
             if (this.requestdata.metadata["voice-over-learning"]) {
               this.voiceOverLearningData = this.requestdata.metadata["voice-over-learning"];
               this.voiceOverLearningData.forEach((element:any) => {
+                element.language = JSON.parse(element.language).join(', ');
                 if(element.voice_recording){
                   element.msaapPlaylist = [];
-                  element.msaapPlaylist.push(
-                    {
-                      title: element.language,
-                      link: `${dataConstant.ImageUrl}/${element.voice_recording}`
-                    },
-                  );
+                  const voice_recording = JSON.parse(element.voice_recording);
+                  voice_recording.forEach((file: any) => {
+                    element.msaapPlaylist.push(
+                      {
+                        title: element.language,
+                        link: `${dataConstant.ImageUrl}/${file}`
+                      },
+                    );
+                  });
                 }
               });
               // this.activeIds.push(`panel-voice-over-learning`);
@@ -121,12 +125,15 @@ export class SmedbViewComponent implements OnInit {
   }
 
   isUpdate() {
-    if (this.requestdata?.status === this.SMEStatus.draft && this.requestdata?.user_id == this.getprofileDetails.data.id) {
+    if ((this.requestdata?.manager_status  && this.requestdata?.manager_status === this.SMEStatus.reject || this.requestdata?.status === this.SMEStatus.draft|| this.requestdata?.status === this.SMEStatus.reject) && this.requestdata?.user_id == this.getprofileDetails.data.id) {
       return true;
     }
     return false;
   }
   isApprove() {
+    if(this.getprofileDetails.data.manager && this.requestdata?.manager_status  && (this.requestdata?.manager_status === this.SMEStatus.reject|| this.requestdata?.manager_status === this.SMEStatus.approve)){
+      return false;  
+    }
     if (this.requestdata?.status === this.SMEStatus.pending && this.requestdata?.user_id != this.getprofileDetails.data.id) {
       return true;
     }
@@ -134,6 +141,9 @@ export class SmedbViewComponent implements OnInit {
   }
   
   isReject() {
+    if(this.getprofileDetails.data.manager && this.requestdata?.manager_status  && (this.requestdata?.manager_status === this.SMEStatus.reject|| this.requestdata?.manager_status === this.SMEStatus.approve)){
+      return false;  
+    }
     if (this.requestdata?.status === this.SMEStatus.pending && this.requestdata?.user_id != this.getprofileDetails.data.id) {
       return true;
     }
@@ -178,10 +188,14 @@ export class SmedbViewComponent implements OnInit {
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
-      title: `Add your comments"}`,
+      title: `Add your comments`,
       status: this.SMEStatus.reject,
+      isSMEStatus: false,
       data: this.requestdata.id,
       objectDetail: this.requestdata
     };
+    modalRef.componentInstance.passEntry.subscribe((res: any) => {
+      this.getCarouselDetails();
+    });
   }
 }

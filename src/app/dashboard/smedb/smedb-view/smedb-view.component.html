@@ -61,12 +61,12 @@
                             (click)="updateRequest()">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">Update</span>
                         </button>
-                        <button type="button" class="btn btn-secondary" *ngIf="isApprove()"
-                            (click)="statusChangeRequest(CarouselStatus.reject)">
+                        <button type="button" class="btn btn-primary mr-1" *ngIf="isApprove()"
+                            (click)="approveRequest()">
                             <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Approve Request</span>
                         </button>
                         <button type="button" class="btn btn-secondary" *ngIf="isReject()"
-                            (click)="statusChangeRequest(CarouselStatus.reject)">
+                            (click)="statusChangeRequest(SMEStatus.reject)">
                             <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Send back to SME</span>
                         </button>
                     </div>
@@ -173,7 +173,7 @@
                                     <label for="exampleInputEmail1">Status</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
-                                            {{ requestdata.status | titlecase }}
+                                            {{ requestdata.action_status}}
                                         </span>
                                     </div>
                                 </div>
@@ -293,7 +293,7 @@
                                             <tr *ngFor="let item of voiceOverLearningData; let i =index;"
                                                 class="text-center bac_hover-table font-12">
                                                 <td scope="row">{{1 + i}}</td>
-                                                <td>{{ item.language }}</td>
+                                                <td>{{ item.language | titlecase}}</td>
                                                 <td>{{ item.other_language }}</td>
                                                 <td>{{ item.gender_voice }}</td>
                                                 <td>{{ item.previous_experience }}</td>

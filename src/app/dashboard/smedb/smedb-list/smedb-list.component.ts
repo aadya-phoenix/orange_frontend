@@ -12,6 +12,7 @@ import { SMEService } from 'src/app/shared/services/sme/sme.service';
 })
 export class SmedbListComponent implements OnInit {
   smeList: any = [];
+  getprofileDetails: any = {};
   smeContcatPerson: any = [];
   sme_count = {
     total: 0,
@@ -24,7 +25,9 @@ export class SmedbListComponent implements OnInit {
     private authService: AuthenticationService,
     private modalService: NgbModal,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router) { 
+      this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
+    }
 
   ngOnInit(): void {
     this.getSMEDatabase();
@@ -36,7 +39,7 @@ export class SmedbListComponent implements OnInit {
       (res: any) => {
         this.SMEContactPerson();
         if (res.status === 1 && res.message === 'Success') {
-          this.smeList = res.data.sme;
+          this.smeList = res.data.sme.filter((x: { user_id: any; }) => x.user_id == this.getprofileDetails.data.id);
           this.sme_count = res.data.sme_count;
         }
         else{
@@ -68,5 +71,12 @@ export class SmedbListComponent implements OnInit {
       }
     );
   }
+
+  viewRequest(item: any) {
+    if (item && item.id) {
+      this.router.navigateByUrl(`/dashboard/smedb/view/${item.id}`);
+    }
+  }
+
 
 }
