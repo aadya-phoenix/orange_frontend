@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { DnaRoutingModule } from './dna-routing.module';
 import { DnaDashboardComponent } from './dna-dashboard/dna-dashboard.component';
@@ -17,10 +17,13 @@ import { DnaUserComponent } from './dna-user/dna-user.component';
 import { DnaUserEditComponent } from './dna-user-edit/dna-user-edit.component';
 import { DnaViewBpComponent } from './dna-view-bp/dna-view-bp.component';
 import { DnaForwardComponent } from './dna-forward/dna-forward.component';
+import { DnaTrackerComponent } from './dna-tracker/dna-tracker.component';
+import { DnaTrackerCreateComponent } from './dna-tracker-create/dna-tracker-create.component';
 
 @NgModule({
-  declarations: [DnaDashboardComponent, DnaCreateComponent, DnaLearningFormComponent,  DnaViewComponent, DnaCompleteReportComponent, DnaManagerDataComponent, DnaViewRptComponent, DnaUserComponent, DnaUserEditComponent, DnaViewBpComponent, DnaForwardComponent],
+  declarations: [DnaDashboardComponent, DnaCreateComponent, DnaLearningFormComponent,  DnaViewComponent, DnaCompleteReportComponent, DnaManagerDataComponent, DnaViewRptComponent, DnaUserComponent, DnaUserEditComponent, DnaViewBpComponent, DnaForwardComponent, DnaTrackerComponent, DnaTrackerCreateComponent],
   entryComponents:[ DnaForwardComponent],
+  providers:[DatePipe],
   imports: [
     CommonModule,
     DnaRoutingModule,

@@ -60,7 +60,9 @@
                   [addTag]="createNew"
                   formControlName="learning_id"class="w_100" (change)="getTitle($event)">
                   <ng-template ng-option-tmp let-item="item">
-                    <div title="Description: {{item.training_description}}">{{item.training_title}}</div>
+                    <div ngbTooltip="Description: {{item.training_description}}
+                    Training hour: {{item.training_hours}} | Training Type: {{item.training_type}}" placement="end" >{{item.training_title}}                      
+                    </div>
                     </ng-template>
                 </ng-select>
                 <div
@@ -78,13 +80,13 @@
                   Description
                 </label>
                 <input  type="text" class="form-control form_width" formControlName="description">
-                <div
-                  *ngIf="(createDnaForm.controls['title'].invalid && (createDnaForm.controls['title'].dirty || createDnaForm.controls['title'].touched)) || isSubmitted">
+               <!--  <div
+                  *ngIf="(createDnaForm.controls['description'].invalid && (createDnaForm.controls['description'].dirty || createDnaForm.controls['description'].touched)) || isSubmitted">
                     <div class="error_message"
-                        *ngIf="createDnaForm.controls['title'].errors?.required">
+                        *ngIf="createDnaForm.controls['description'].errors?.required">
                         Learning Title can not be blank
                     </div>
-                </div> 
+                </div> --> 
             </div>
         </div>
         <div class="col-sm-4">
@@ -153,13 +155,13 @@
                 </div>
             </div>
         </div>
-        <ng-container *ngIf="!isFrance">
+     
             <div class="col-sm-4">
                 <div class="form-group">
                     <label class="form-control-label">
                         Delivery Region
                     </label>
-                    <ng-select  [items]="regionsObj"
+                    <ng-select  [items]="isFrance ? regionObj : regionsObj"
                          bindLabel="region_name"
                         bindValue="id"  (change)="getEvent($event)" formControlName="region_id" class="w_100">
                     </ng-select>
@@ -172,7 +174,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4" *ngIf="isCountry">
+            <div class="col-sm-4" *ngIf="isCountry && !isFrance">
                 <div class="form-group">
                     <label class="form-control-label">
                         Delivery Country
@@ -190,27 +192,9 @@
                     </div>
                 </div>
             </div>
-        </ng-container>
-        <ng-container *ngIf="isFrance">
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label class="form-control-label">
-                        Delivery Region
-                    </label>
-                    <ng-select  [items]="regionObj"
-                         bindLabel="region_name"
-                        bindValue="id"  (change)="getEvent($event)" formControlName="region_id" class="w_100">
-                    </ng-select>
-                    <div
-                      *ngIf="(createDnaForm.controls['region_id'].invalid && (createDnaForm.controls['region_id'].dirty || createDnaForm.controls['region_id'].touched)) || isSubmitted">
-                       <div class="error_message"
-                        *ngIf="createDnaForm.controls['region_id'].errors?.required">
-                        Delivery Region can not be blank
-                       </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4" >
+    
+
+            <div class="col-sm-4" *ngIf="isFrance">
                 <div class="form-group">
                     <label class="form-control-label">
                         Delivery Location
@@ -223,12 +207,12 @@
                       *ngIf="(createDnaForm.controls['location'].invalid && (createDnaForm.controls['location'].dirty || createDnaForm.controls['location'].touched)) || isSubmitted">
                        <div class="error_message"
                         *ngIf="createDnaForm.controls['location'].errors?.required">
-                        Delivery Country can not be blank
+                        Delivery Location can not be blank
                        </div>
                     </div>
                 </div>
             </div>
-        </ng-container>
+    
         
         <div class="col-sm-4">
             <div class="form-group">
