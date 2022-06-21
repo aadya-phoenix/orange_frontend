@@ -73,7 +73,7 @@
                                             <p>Closed</p>
                                         </div>
                                         <span
-                                            class="number_css pub_lished">{{dna_count.close?dna_count.close:0}}</span>
+                                            class="number_css">{{dna_count.close?dna_count.close:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
@@ -85,7 +85,7 @@
                                             <p>Digital Learning</p>
                                         </div>
                                         <span
-                                            class="number_css">{{dna_count.digital_learning?dna_count.digital_learning:0}}</span>
+                                            class="number_css digi_left">{{dna_count.digital_learning?dna_count.digital_learning:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
@@ -97,7 +97,7 @@
 
                                             <p>Total Requests</p>
                                         </div>
-                                        <span class="number_css">{{dna_count.total?dna_count.total:0}}</span>
+                                        <span class="number_css tot_left">{{dna_count.total?dna_count.total:0}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -230,7 +230,7 @@
                                             <td>{{item.country}}</td>
                                             <td>{{item.management_code}}</td>
                                             <td>{{item.business_unit_name}}</td>
-                                            <td  [ngClass]="item.status_show">{{item.status_show}}</td>
+                                            <td ><span [ngClass]="item.status_show">{{item.status_show | titlecase}}</span></td>
                                             <td>{{item.comments}}</td>
                                         </tr>
                                     </tbody>

@@ -70,7 +70,6 @@ export class DnaDashboardComponent implements OnInit {
   }
 
   review(itemId:any){
-    console.log("isRom",this.isRom)
     if(this.isLearningPartner || this.isRom){
     this.router.navigateByUrl(`/dashboard/dna/view-rpt/${itemId}`); 
     }
@@ -105,7 +104,6 @@ export class DnaDashboardComponent implements OnInit {
     this.trackerObj = res.data.tracker;
     this.trackerObj.forEach((element:any) => {
       element.close_date = new Date( element.close_date);
-      console.log("close",element.close_date,this.today);
       if(element.close_date > this.today){
         element.isStart = true;
       }
@@ -113,7 +111,6 @@ export class DnaDashboardComponent implements OnInit {
         element.isStart = false;
       }
     });
-    console.log("tracker",this.trackerObj);
     this.getLearningList();
   },
   err=>{
