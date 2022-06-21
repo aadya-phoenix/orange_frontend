@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TABLE_HORIZONTAL_SPLIT } from '@syncfusion/ej2-angular-richtexteditor';
 import * as _ from 'lodash';
 import { Track } from 'ngx-audio-player';
+import { elementAt } from 'rxjs-compat/operator/elementAt';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
@@ -37,6 +38,7 @@ export class SmedbCreateComponent implements OnInit {
   CCTLevel = [];
   isSubmitted = false;
   isAvailable = true;
+  isProcced = false;
   files: any = [];
   minDate = {};
   maxDate = {};
@@ -51,6 +53,7 @@ export class SmedbCreateComponent implements OnInit {
   msaapDisplayDuration = false;
   msaapDisablePositionSlider = true;
   msaapPlaylist: Track[] = [];
+  getprofileDetails: any = {};
   public yesNo: any = [
     { id: 'yes', name: 'Yes' },
     { id: 'no', name: 'No' },
@@ -69,6 +72,7 @@ export class SmedbCreateComponent implements OnInit {
     private userManageService: UserManageService,
     private courceService: CourcesService,
     private smeService: SMEService) {
+    this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.sme_id = Id ? parseInt(Id) : 0;
@@ -86,10 +90,10 @@ export class SmedbCreateComponent implements OnInit {
     });
 
     this.contentSupportForm = this.formBuilder.group({ 'content-support': this.formBuilder.array([]) });
-    this.addLearnerGuideline(0, '', '');
+    // this.addLearnerGuideline(0, '', '');
 
     this.deliveryForm = this.formBuilder.group({ 'delivery': this.formBuilder.array([]) });
-    this.addDelivery(0, '', '', '', '', '');
+    // this.addDelivery(0, '', '', '', '', '', true, false);
     this.voiceOverLearningForm = this.formBuilder.group({
       language: new FormControl('', [Validators.required]),
       other_language: new FormControl(''),
@@ -99,13 +103,13 @@ export class SmedbCreateComponent implements OnInit {
       comment: new FormControl('', [Validators.required]),
     });
     this.professionalCertificationsForm = this.formBuilder.group({ 'professional-certifications': this.formBuilder.array([]) });
-    this.addProfessionalCertification(0, '', '');
+    // this.addProfessionalCertification(0, '', '');
     this.commentsForm = this.formBuilder.group({
       agree: new FormControl('', [Validators.required]),
       other_comment: new FormControl('')
     });
 
-    this.createSmedbForm.get("available")?.valueChanges.subscribe((x) => {
+    this.createSmedbForm.get("available")?.valueChanges.subscribe((x: string) => {
       if (x === 'yes') {
         this.isAvailable = true;
         this.createSmedbForm.addControl('end_date', new FormControl('', [Validators.required]));
@@ -114,7 +118,7 @@ export class SmedbCreateComponent implements OnInit {
         this.createSmedbForm.removeControl('end_date');
       }
     });
-    this.createSmedbForm.get("start_date")?.valueChanges.subscribe((x) => {
+    this.createSmedbForm.get("start_date")?.valueChanges.subscribe((x: {}) => {
       this.maxDate = x;
     });
 
@@ -125,17 +129,22 @@ export class SmedbCreateComponent implements OnInit {
     this.getCCTDomainExpert();
   }
 
-  changeTab(tab:string){
+  changeTab(tab: string) {
     this.selectedTab = tab;
   }
 
   handleFileInput(event: any) {
+    this.files = [];
     const fsize = event.target.files[0].size;
     const file = Math.round((fsize / 1024) / 1024);
-    this.commonService.FileConvertintoBytearray(event.target.files[0], async (f) => {
-      // creating array bytes
-      this.files = { file: this.commonService.byteArrayTobase64(f.bytes), ext: f.name.split('.').pop() };
-    });
+    debugger;
+    for (let index = 0; index < event.target.files.length; index++) {
+      const element = event.target.files[index];
+      this.commonService.FileConvertintoBytearray(element, async (f) => {
+        // creating array bytes
+        this.files.push({ file: this.commonService.byteArrayTobase64(f.bytes), ext: f.name.split('.').pop() });
+      });
+    }
   }
 
   showTerms() {
@@ -255,7 +264,9 @@ export class SmedbCreateComponent implements OnInit {
     this.userManageService.getUsers().subscribe(
       (res: any) => {
         if (res && res.status == 1) {
-          this.ContcatPersion = res.data.filter((x: { role: string; }) => x.role != 'Staff');
+          this.ContcatPersion = res.data.filter((x: {
+            pdl_member: number;
+          }) => x.pdl_member == 1);
           this.getSMEDatabase();
         }
         else {
@@ -274,13 +285,14 @@ export class SmedbCreateComponent implements OnInit {
     this.smeService.getSMEDatabase().subscribe(
       (res: any) => {
         this.commonService.hideLoading();
+        debugger;
         if (res.status === 1 && res.message === 'Success') {
           if (res.data.sme && res.data.sme.length) {
             if (this.sme_id) {
               this.sme_details = res.data.sme.find((x: { id: number; }) => x.id == this.sme_id);
             }
             else {
-              this.sme_details = res.data.sme[0];
+              this.sme_details = res.data.sme.find((x: { user_id: any; }) => x.user_id == this.getprofileDetails.data.id);
               this.sme_id = this.sme_details.id;
             }
             this.bindFormData()
@@ -308,45 +320,80 @@ export class SmedbCreateComponent implements OnInit {
       this.sme_details.isStatus = this.sme_details.status == 'draft' ? true : false;
       this.createSmedbForm.patchValue(this.sme_details);
     }
-    if (this.sme_details.metadata) {
+    if (this.isProcced) {
       if (this.sme_details.domain.includes('content-support')) {
         this.contentSupportForm.controls["content-support"] = this.formBuilder.array([]);
-        this.sme_details.metadata["content-support"].forEach((x: any) => {
-          this.addLearnerGuideline(x.id, x.title, x.level);
-        })
+        if (this.sme_details.metadata && this.sme_details.metadata["content-support"]?.length > 0) {
+          this.sme_details.metadata["content-support"].forEach((x: any) => {
+            this.addLearnerGuideline(x.id, x.title, x.level);
+          })
+        }
+        else {
+          this.addLearnerGuideline(0, '', '');
+        }
       }
       if (this.sme_details.domain.includes('delivery')) {
         this.deliveryForm.controls["delivery"] = this.formBuilder.array([]);
-        this.sme_details.metadata["delivery"].forEach((x: any) => {
-          this.addDelivery(x.id, x.level, x.title, x.previous_experience, x.need_help, x.comment);
-        })
+        if (this.sme_details.metadata && this.sme_details.metadata["delivery"]?.length > 0) {
+          this.sme_details.metadata["delivery"].forEach((x: any) => {
+            this.addDelivery(x.id, x.level, x.title, x.previous_experience, x.need_help, x.comment, x.previous_experience == 'yes' ? true : false, x.need_help == 'yes' ? true : false);
+          })
+        } else {
+          this.addDelivery(0, '', '', '', '', '', true, false);
+        }
       }
       if (this.sme_details.domain.includes('voice-over-learning')) {
-        this.voiceOverLearningForm.controls["voice-over-learning"] = this.formBuilder.array([]);
-        this.sme_details.metadata["voice-over-learning"].forEach((x: any) => {
-          this.voiceOverLearningForm.controls.language.setValue(JSON.parse(x.language));
-          this.voiceOverLearningForm.controls.other_language.setValue(x.other_language);
-          this.voiceOverLearningForm.controls.gender_voice.setValue(x.gender_voice);
-          this.voiceOverLearningForm.controls.previous_experience.setValue(x.previous_experience);
-          this.voiceOverLearningForm.controls.comment.setValue(x.comment);
-          if (x.voice_recording) {
-            this.msaapPlaylist.push(
-              {
-                title: x.language,
-                link: `${dataConstant.ImageUrl}/${x.voice_recording}`
-              },
-            );
-          }
-        })
+        if (this.sme_details.metadata && this.sme_details.metadata["voice-over-learning"]?.length > 0) {
+          this.voiceOverLearningForm.controls["voice-over-learning"] = this.formBuilder.array([]);
+          this.sme_details.metadata["voice-over-learning"].forEach((x: any) => {
+            this.voiceOverLearningForm.controls.language.setValue(JSON.parse(x.language));
+            this.voiceOverLearningForm.controls.other_language.setValue(x.other_language);
+            this.voiceOverLearningForm.controls.gender_voice.setValue(x.gender_voice);
+            this.voiceOverLearningForm.controls.previous_experience.setValue(x.previous_experience);
+            this.voiceOverLearningForm.controls.comment.setValue(x.comment);
+            if (x.voice_recording) {
+              const voice_recording = JSON.parse(x.voice_recording);
+              voice_recording.forEach((element: any) => {
+                this.msaapPlaylist.push(
+                  {
+                    title: x.language,
+                    link: `${dataConstant.ImageUrl}/${element}`
+                  },
+                );
+              })
+            }
+          })
+        }
+        else {
+          this.voiceOverLearningForm = this.formBuilder.group({
+            language: new FormControl('', [Validators.required]),
+            other_language: new FormControl(''),
+            gender_voice: new FormControl('', [Validators.required]),
+            voice_recording: [],
+            previous_experience: new FormControl('', [Validators.required]),
+            comment: new FormControl('', [Validators.required]),
+          });
+        }
       }
       this.professionalCertificationsForm.controls["professional-certifications"] = this.formBuilder.array([]);
-      this.sme_details.metadata["professional-certifications"].forEach((x: any) => {
-        this.addProfessionalCertification(x.id, x.certification_title, x.completion_year);
-      })
-      this.sme_details.metadata["comments"].forEach((x: any) => {
-        this.commentsForm.controls.agree.setValue(x.agree);
-        this.commentsForm.controls.other_comment.setValue(x.other_comment);
-      })
+      if (this.sme_details.metadata && this.sme_details.metadata["professional-certifications"]?.length > 0) {
+        this.sme_details.metadata["professional-certifications"].forEach((x: any) => {
+          this.addProfessionalCertification(x.id, x.certification_title, x.completion_year);
+        })
+      } else {
+        this.addProfessionalCertification(0, '', '');
+      }
+      if (this.sme_details.metadata && this.sme_details.metadata["comments"]) {
+        this.sme_details.metadata["comments"].forEach((x: any) => {
+          this.commentsForm.controls.agree.setValue(x.agree);
+          this.commentsForm.controls.other_comment.setValue(x.other_comment);
+        })
+      } else {
+        this.commentsForm = this.formBuilder.group({
+          agree: new FormControl('', [Validators.required]),
+          other_comment: new FormControl('')
+        });
+      }
     }
   }
 
@@ -379,7 +426,7 @@ export class SmedbCreateComponent implements OnInit {
     this.contentSupportFormArray.removeAt(i);
   }
 
-  addMoreDelivery(id: number, title: string, level: string, previous_experience: string, need_help: string, comment: string) {
+  addMoreDelivery(id: number, title: string, level: string, previous_experience: string, need_help: string, comment: string, isPrevious: boolean, isNeedHelp: boolean) {
     return this.formBuilder.group({
       id: new FormControl(id),
       title: new FormControl(title, [Validators.required]),
@@ -387,11 +434,13 @@ export class SmedbCreateComponent implements OnInit {
       previous_experience: new FormControl(previous_experience, [Validators.required]),
       need_help: new FormControl(need_help, [Validators.required]),
       comment: new FormControl(comment, [Validators.required]),
+      isPrevious: isPrevious,
+      isNeedHelp: isNeedHelp
     });
   }
 
-  addDelivery(id: number, titleval: string, descriptionval: string, previous_experience: string, need_help: string, comment: string) {
-    return this.deliveryFormArray.push(this.addMoreDelivery(id, titleval, descriptionval, previous_experience, need_help, comment));
+  addDelivery(id: number, titleval: string, descriptionval: string, previous_experience: string, need_help: string, comment: string, isPrevious: boolean, isNeedHelp: boolean) {
+    return this.deliveryFormArray.push(this.addMoreDelivery(id, titleval, descriptionval, previous_experience, need_help, comment, isPrevious, isNeedHelp));
   }
 
   removeDelivery(i: any) {
@@ -414,8 +463,15 @@ export class SmedbCreateComponent implements OnInit {
     this.professionalCertificationsFormArray.removeAt(i);
   }
 
-  changePerviousExperience() {
+  changePerviousExperience(item: any) {
+    item.controls.isPrevious.setValue(item.value.previous_experience == 'yes' ? true : false);
+  }
 
+  changeNeedHelp(item: any) {
+    item.controls.isNeedHelp.setValue(item.value.need_help == 'yes' ? true : false);
+    // if(!item.value.isNeedHelp){
+    //   this.createSmedbForm.removeControl('end_date');
+    // }
   }
 
 
@@ -424,25 +480,27 @@ export class SmedbCreateComponent implements OnInit {
     if (this.createSmedbForm.invalid) {
       return;
     }
-    if (this.sme_details.domain.includes('content-support') && this.contentSupportForm.controls["content-support"].invalid) {
-      this.selectedTab = this.SMETabs.contecntSupport;
-      return;
-    }
-    if (this.sme_details.domain.includes('delivery') && this.deliveryForm.invalid) {
-      this.selectedTab = this.SMETabs.delivery;
-      return;
-    }
-    if (this.sme_details.domain.includes('voice-over-learning') && this.voiceOverLearningForm.invalid) {
-      this.selectedTab = this.SMETabs.voiceOver;
-      return;
-    }
-    if (this.sme_id && this.professionalCertificationsForm.controls["professional-certifications"].invalid) {
-      this.selectedTab = this.SMETabs.professionalCertifications;
-      return;
-    }
-    if (this.sme_id && this.commentsForm.invalid) {
-      this.selectedTab = this.SMETabs.comments;
-      return;
+    if (this.sme_details.domain && this.isProcced) {
+      if (this.sme_details.domain.includes('content-support') && this.contentSupportForm.controls["content-support"].invalid) {
+        this.selectedTab = this.SMETabs.contecntSupport;
+        return;
+      }
+      if (this.sme_details.domain.includes('delivery') && this.deliveryForm.controls["delivery"].invalid) {
+        this.selectedTab = this.SMETabs.delivery;
+        return;
+      }
+      if (this.sme_details.domain.includes('voice-over-learning') && this.voiceOverLearningForm.invalid) {
+        this.selectedTab = this.SMETabs.voiceOver;
+        return;
+      }
+      if (this.sme_id && this.professionalCertificationsForm.controls["professional-certifications"].invalid) {
+        this.selectedTab = this.SMETabs.professionalCertifications;
+        return;
+      }
+      if (this.sme_id && this.commentsForm.invalid) {
+        this.selectedTab = this.SMETabs.comments;
+        return;
+      }
     }
     const body = this.createSmedbForm.value;
     body.status = body.isStatus ? 'draft' : 'pending';
@@ -452,7 +510,9 @@ export class SmedbCreateComponent implements OnInit {
         (res: any) => {
           if (res && res.status == 1) {
             this.commonService.toastSuccessMsg('SME Database', res.message);
-            this.router.navigateByUrl(`/dashboard/smedb/view/${res.data.id}`);
+            this.isProcced = true;
+            this.getSMEDatabase();
+            //this.router.navigateByUrl(`/dashboard/smedb/view/${res.data.id}`);
           } else {
             this.commonService.toastErrorMsg('Error', res.message);
           }
@@ -466,23 +526,40 @@ export class SmedbCreateComponent implements OnInit {
     }
     else {
       body.sme_id = this.sme_id;
-      body.metadata = {
-        "content-support": this.contentSupportForm.controls["content-support"].value,
-        "delivery": this.deliveryForm.value["delivery"],
-        "voice-over-learning": this.voiceOverLearningForm.value,
-        "professional-certifications": this.professionalCertificationsForm.value["professional-certifications"],
-        "comments": this.commentsForm.value
+      if (this.isProcced) {
+        body.matadata_update = 1;
+        body.metadata = {
+          "professional-certifications": this.professionalCertificationsForm.value["professional-certifications"],
+          "comments": this.commentsForm.value
+        }
+        if (this.sme_details.domain.includes('content-support')) {
+          body.metadata["content-support"] = this.contentSupportForm.controls["content-support"].value;
+        }
+        if (this.sme_details.domain.includes('delivery')) {
+          body.metadata["delivery"] = this.deliveryForm.value["delivery"];
+        }
+        if (this.sme_details.domain.includes('voice-over-learning')) {
+          body.metadata["voice-over-learning"] = this.voiceOverLearningForm.value;
+        }
+        if (this.files && this.files.length > 0) {
+          body.metadata["voice-over-learning"].voice_recording = this.files;
+        }
       }
-      if (this.files && this.files.file) {
-        body.metadata["voice-over-learning"].voice_recording = this.files.file;
-        body.metadata["voice-over-learning"].voice_recording_ext = this.files.ext;
+      else if (this.sme_details.metadata) {
+        body.matadata_update = 0;
       }
       this.commonService.showLoading();
       this.smeService.update(body).subscribe(
         (res: any) => {
           if (res && res.status == 1) {
             this.commonService.toastSuccessMsg('SME Database', res.message);
-            this.router.navigateByUrl(`/dashboard/smedb/view/${this.sme_id}`);
+            if (this.isProcced) {
+              this.router.navigateByUrl(`/dashboard/smedb/view/${this.sme_id}`);
+            }
+            else {
+              this.isProcced = true;
+              this.getSMEDatabase();
+            }
           } else {
             this.commonService.toastErrorMsg('Error', res.message);
           }

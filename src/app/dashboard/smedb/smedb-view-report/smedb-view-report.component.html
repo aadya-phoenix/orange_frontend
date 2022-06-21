@@ -186,16 +186,22 @@
                                             <td (click)="viewRequest(item)">
                                                 {{ item.contact_person_id }}
                                             </td>
-                                            <td (click)="viewRequest(item)">{{ item.status | titlecase }}</td>
-                                            <td (click)="viewRequest(item)">{{ item.created_at | date: dateTimeFormate
-                                                }}
-                                            </td>
+                                            <td (click)="viewRequest(item)">{{ item.action_status }}</td>
+                                            <td (click)="viewRequest(item)">{{ item.created_at | date: dateTimeFormate }} </td>
                                             <td> <a *ngIf="item.status !== smeStatus.draft"
                                                     (click)="openRatingModal(item)" class="re_id">
                                                     Add/View feedback
                                                 </a>
                                             </td>
-                                            <td (click)="statusChange(item)">{{ item.sme_status | titlecase }}
+                                            <td >
+                                                <a (click)="statusChange(item)" class="ml-1" data-toggle="tooltip"
+                                                data-placement="top" title="{{item.sme_status | titlecase}}">
+                                                <img *ngIf="item.sme_status == 'active'"
+                                                    src="../../../../assets/images/active.png">
+                                                <img *ngIf="item.sme_status != 'active'"
+                                                    src="../../../../assets/images/deactive.png">
+                                            </a>
+                                                <!-- {{ item.sme_status | titlecase }} -->
                                             </td>
                                             <td>
                                                 <a *ngIf="item.status !== smeStatus.draft" (click)="openModal(item)"

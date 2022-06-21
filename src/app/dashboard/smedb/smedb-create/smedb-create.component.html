@@ -183,7 +183,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-start" *ngIf="!sme_id">
+                                <div class="d-flex justify-content-start" *ngIf="!isProcced">
                                     <div class="d-flex justify-content-start">
                                         <button class="btn btn-primary" (click)="saveSME()">
                                             Procced
@@ -193,7 +193,7 @@
                             </form>
                         </div>
                     </div>
-                    <div *ngIf="sme_details && sme_details.id">
+                    <div *ngIf="sme_details && sme_details.id && this.isProcced">
                         <div class="card">
                             <div class="card-header">
                                 <div class="tabbed round ">
@@ -329,7 +329,7 @@
                                                     </div>
                                                     <div class="col-md-2 col-sm-12 mt-35" [formGroupName]="i">
                                                         <button class="btn btn-success mr-2"
-                                                            (click)="addDelivery(0,'','','','','')">
+                                                            (click)="addDelivery(0,'','','','','',true, false)">
                                                             <i class="fa fa-plus"></i>
                                                         </button>
                                                         <button class="btn btn-danger" (click)="removeDelivery(i)"
@@ -346,6 +346,7 @@
                                                             </label>
                                                             <ng-select placeholder="Please select title" [items]="yesNo"
                                                                 bindLabel="name" bindValue="id"
+                                                                (change)="changePerviousExperience(contentSup)"
                                                                 formControlName="previous_experience" [multiple]=false
                                                                 class="w_100">
                                                             </ng-select>
@@ -356,13 +357,14 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-5 col-sm-12" [formGroupName]="i">
-                                                        <div class="form-group w-100">
+                                                        <div class="form-group w-100" *ngIf="!contentSup.value.isPrevious">
                                                             <label class="form-control-label">
                                                                 Would you need help? <span class="text_red">*
                                                                 </span>
                                                             </label>
                                                             <ng-select placeholder="Please select level" [items]="yesNo"
                                                                 bindLabel="name" bindValue="id"
+                                                                (change)="changeNeedHelp(contentSup)"
                                                                 formControlName="need_help" [multiple]=false
                                                                 class="w_100">
                                                             </ng-select>
@@ -372,13 +374,13 @@
                                                             </div> -->
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-10 col-sm-12" [formGroupName]="i">
+                                                    <div class="col-md-10 col-sm-12" [formGroupName]="i" *ngIf="!contentSup.value.isPrevious && contentSup.value.isNeedHelp">
                                                         <div class="form-group w-100">
-                                                            <label class="form-control-label">
+                                                            <label class="form-control-label" *ngIf="!contentSup.value.isPrevious">
                                                                 How can we help you? <span class="text_red">*
                                                                 </span>
                                                             </label>
-                                                            <label class="form-control-label">
+                                                            <label class="form-control-label" *ngIf="contentSup.value.isPrevious">
                                                                 Provide a brief of experience <span class="text_red">*
                                                                 </span>
                                                             </label>
@@ -477,7 +479,7 @@
                                                         Upload sample of voice recording
                                                     </label>
                                                     <input type="file" id="voice_recording"
-                                                        class="form-control form_width mb-2" accept="audio/*"
+                                                        class="form-control form_width mb-2" multiple="true" accept="audio/*"
                                                         formControlName="voice_recording"
                                                         (change)="handleFileInput($event)" />
                                                 </div>
