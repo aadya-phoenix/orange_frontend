@@ -73,7 +73,7 @@
                                     <label class="label_course">Trackers</label>
                                     <select class="form-control  form_width"
                                         (change)="getTracker($event.target.value)">
-                                        <option selected='selected' value=''>View All</option>
+                                        <option selected='selected' value=''></option>
                                         <option *ngFor="let item of trackerObj" [value]="item.id">
                                             {{item.title}}</option>
                                     </select>
@@ -347,7 +347,7 @@
                                             <td>{{item?.title}}</td>
                                             <td>{{item?.training_type}}</td>
                                             <td>{{item?.training_provider}}</td>
-                                            <td></td>
+                                            <td>{{item?.learning_training_data?.training_contact}}</td>
                                             <td>{{item?.learning_training_data?.created_by}}</td>
                                             <td>{{item.training_provider == 'Orange Business Services' ?'Orange Learning' : 'Other Learning'}}</td>
                                             <td>{{item.number_of_participant}}</td>

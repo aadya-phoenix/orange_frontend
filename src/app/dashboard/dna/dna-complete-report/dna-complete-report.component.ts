@@ -105,11 +105,11 @@ export class DnaCompleteReportComponent implements OnInit {
   getTrackerList(){
     this.dnaService.getTrackerList().subscribe((res:any)=>{
       this.trackerObj = res.data.tracker;
-      this.trackerObj = this.trackerObj.filter((y:any)=> {
+     /*  this.trackerObj = this.trackerObj.filter((y:any)=> {
         if(y.id != this.trackerId){ 
         return y;
         }
-      });
+      }); */
     },
     err=>{
     });
