@@ -8,7 +8,10 @@
                     <div class="d-flex flex-column ml-3">
                         <span class="breade_text_span1">Digital learning Needs Analysis</span>
                         <span class="divider"></span>
-                        <span class="breade_text_span">Digital learning Needs Analysis (DNA) is a tool that gathers learning needs from managers and helps align development needs with the overall business strategy. DNA also helps PD&L team to analyse and plan our learning resources efficiently.</span>
+                        <span class="breade_text_span">Digital learning Needs Analysis (DNA) is a tool that gathers
+                            learning needs from managers and helps align development needs with the overall business
+                            strategy. DNA also helps PD&L team to analyse and plan our learning resources
+                            efficiently.</span>
                     </div>
                 </div>
             </div>
@@ -26,7 +29,8 @@
                             <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/dna']" class="text_white span_dis">Digital learning Needs Analysis</a>
+                            <a [routerLink]="['/dashboard/dna']" class="text_white span_dis">Digital learning Needs
+                                Analysis</a>
                         </li>
                         <li>
                             <span class="text_white span_dis">add New Learning</span>
@@ -37,215 +41,217 @@
         </div>
     </div>
 
-<div class="card mb-0">
-    <div class="card-header color-orange">
-        <div class="d-flex justify-content-between">
-            <span class="row">
-                {{title}} <h5 class="card-title ml-1">
-                    <b class="color-orange"></b>
-                </h5>
-            </span>
-        </div>
-    </div>
-    <div class="card-body">
-        <form [formGroup]="createDnaForm">
-            <div class="row">
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label class="form-control-label">
-                  Learning Title
-                </label>
-                <ng-select container="body" placement="bottom"   [items]="titleList" bindLabel="training_title"
-                  bindValue="id"   addTagText="Create New" 
-                  [addTag]="createNew"
-                  formControlName="learning_id"class="w_100" (change)="getTitle($event)">
-                  <ng-template ng-option-tmp let-item="item">
-                    <div ngbTooltip="Description: {{item.training_description}}
-                    Training hour: {{item.training_hours}} | Training Type: {{item.training_type}}" placement="end" >{{item.training_title}}                      
-                    </div>
-                    </ng-template>
-                </ng-select>
-                <div
-                  *ngIf="(createDnaForm.controls['title'].invalid && (createDnaForm.controls['title'].dirty || createDnaForm.controls['title'].touched)) || isSubmitted">
-                    <div class="error_message"
-                        *ngIf="createDnaForm.controls['title'].errors?.required">
-                        Learning Title can not be blank
-                    </div>
-                </div> 
+    <div class="card mb-0">
+        <div class="card-header color-orange">
+            <div class="d-flex justify-content-between">
+                <span class="row">
+                    {{title}} <h5 class="card-title ml-1">
+                        <b class="color-orange"></b>
+                    </h5>
+                </span>
             </div>
         </div>
-        <div class="col-sm-12" *ngIf="isDescription">
-            <div class="form-group">
-                <label class="form-control-label">
-                  Description
-                </label>
-                <input  type="text" class="form-control form_width" formControlName="description">
-               <!--  <div
+        <div class="card-body">
+            <form [formGroup]="createDnaForm">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Learning Title
+                            </label>
+                            <ng-select container="body" placement="bottom" [items]="titleList"
+                                bindLabel="training_title" bindValue="id" addTagText="Create New" [addTag]="createNew"
+                                formControlName="learning_id" class="w_100" (change)="getTitle($event)">
+                                <ng-template ng-option-tmp let-item="item">
+                                    <div ngbTooltip="Description: {{item.training_description}}
+                                     Training hour: {{item.training_hours}} | Training Type: {{item.training_type}}" placement="end">
+                                        {{item.training_title}}
+                                    </div>
+                                </ng-template>
+                            </ng-select>
+                            <div
+                                *ngIf="(createDnaForm.controls['title'].invalid && (createDnaForm.controls['title'].dirty || createDnaForm.controls['title'].touched)) || isSubmitted">
+                                <div class="error_message" *ngIf="createDnaForm.controls['title'].errors?.required">
+                                    Learning Title can not be blank
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12" *ngIf="isDescription">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Description
+                            </label>
+                            <input type="text" class="form-control form_width" formControlName="description">
+                            <!--  <div
                   *ngIf="(createDnaForm.controls['description'].invalid && (createDnaForm.controls['description'].dirty || createDnaForm.controls['description'].touched)) || isSubmitted">
                     <div class="error_message"
                         *ngIf="createDnaForm.controls['description'].errors?.required">
                         Learning Title can not be blank
                     </div>
-                </div> --> 
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label class="form-control-label">
-                    No. of Participants
-                </label>
-                <input  type="text" class="form-control form_width" formControlName="number_of_participant">
-                <div
-                  *ngIf="(createDnaForm.controls['number_of_participant'].invalid && (createDnaForm.controls['number_of_participant'].dirty || createDnaForm.controls['number_of_participant'].touched)) || isSubmitted">
-                    <div class="error_message"
-                        *ngIf="createDnaForm.controls['number_of_participant'].errors?.required">
-                        Number of Participants can not be blank
+                </div> -->
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label class="form-control-label">
-                    Priority
-                </label>
-                <ng-select  [items]="priorityObj" bindLabel="name"
-                  bindValue="id"  
-                  formControlName="priority_id"class="w_100">
-                </ng-select>
-                <div
-                  *ngIf="(createDnaForm.controls['priority_id'].invalid && (createDnaForm.controls['priority_id'].dirty || createDnaForm.controls['priority_id'].touched)) || isSubmitted">
-                   <div class="error_message"
-                    *ngIf="createDnaForm.controls['priority_id'].errors?.required">
-                     Priority can not be blank
-                   </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4" *ngIf="!isFrance">
-            <div class="form-group">
-                <label class="form-control-label">
-                    Management Code
-                </label>
-                <input  type="text" class="form-control form_width" formControlName="management_code">
-                <div
-                  *ngIf="(createDnaForm.controls['management_code'].invalid && (createDnaForm.controls['management_code'].dirty || createDnaForm.controls['management_code'].touched)) || isSubmitted">
-                   <div class="error_message"
-                    *ngIf="createDnaForm.controls['management_code'].errors?.required">
-                    Management Code can not be blank
-                   </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4" *ngIf="isFrance">
-            <div class="form-group">
-                <label class="form-control-label">
-                    Domain  Training
-                </label>
-                <ng-select  [items]="domainObj"
-                     bindLabel="domain_name"
-                    bindValue="id" formControlName="domain_training_id" class="w_100">
-                </ng-select>
-                <div
-                  *ngIf="(createDnaForm.controls['domain_training_id'].invalid && (createDnaForm.controls['domain_training_id'].dirty || createDnaForm.controls['domain_training_id'].touched)) || isSubmitted">
-                   <div class="error_message"
-                    *ngIf="createDnaForm.controls['domain_training_id'].errors?.required">
-                    Domain  Training can not be blank
-                   </div>
-                </div>
-            </div>
-        </div>
-     
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label class="form-control-label">
-                        Delivery Region
-                    </label>
-                    <ng-select  [items]="isFrance ? regionObj : regionsObj"
-                         bindLabel="region_name"
-                        bindValue="id"  (change)="getEvent($event)" formControlName="region_id" class="w_100">
-                    </ng-select>
-                    <div
-                      *ngIf="(createDnaForm.controls['region_id'].invalid && (createDnaForm.controls['region_id'].dirty || createDnaForm.controls['region_id'].touched)) || isSubmitted">
-                       <div class="error_message"
-                        *ngIf="createDnaForm.controls['region_id'].errors?.required">
-                        Delivery Region can not be blank
-                       </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                No. of Participants
+                            </label>
+                            <input type="text" class="form-control form_width" formControlName="number_of_participant">
+                            <div
+                                *ngIf="(createDnaForm.controls['number_of_participant'].invalid && (createDnaForm.controls['number_of_participant'].dirty || createDnaForm.controls['number_of_participant'].touched)) || isSubmitted">
+                                <div class="error_message"
+                                    *ngIf="createDnaForm.controls['number_of_participant'].errors?.required">
+                                    Number of Participants can not be blank
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-sm-4" *ngIf="isCountry && !isFrance">
-                <div class="form-group">
-                    <label class="form-control-label">
-                        Delivery Country
-                    </label>
-                    <ng-select  [items]="countriesObj"
-                         bindLabel="country_name"
-                        bindValue="country_name" formControlName="country" class="w_100">
-                    </ng-select>
-                    <div
-                      *ngIf="(createDnaForm.controls['country'].invalid && (createDnaForm.controls['country'].dirty || createDnaForm.controls['country'].touched)) || isSubmitted">
-                       <div class="error_message"
-                        *ngIf="createDnaForm.controls['country'].errors?.required">
-                        Delivery Country can not be blank
-                       </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Priority
+                            </label>
+                            <ng-select [items]="priorityObj" bindLabel="name" bindValue="id"
+                                formControlName="priority_id" class="w_100">
+                            </ng-select>
+                            <div
+                                *ngIf="(createDnaForm.controls['priority_id'].invalid && (createDnaForm.controls['priority_id'].dirty || createDnaForm.controls['priority_id'].touched)) || isSubmitted">
+                                <div class="error_message"
+                                    *ngIf="createDnaForm.controls['priority_id'].errors?.required">
+                                    Priority can not be blank
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-    
+                    <div class="col-sm-4" *ngIf="!isFrance">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Management Code
+                            </label>
+                            <input type="text" class="form-control form_width" formControlName="management_code">
+                            <div
+                                *ngIf="(createDnaForm.controls['management_code'].invalid && (createDnaForm.controls['management_code'].dirty || createDnaForm.controls['management_code'].touched)) || isSubmitted">
+                                <div class="error_message"
+                                    *ngIf="createDnaForm.controls['management_code'].errors?.required">
+                                    Management Code can not be blank
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" *ngIf="isFrance">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Domain Training
+                            </label>
+                            <ng-select [items]="domainObj" bindLabel="domain_name" bindValue="id"
+                                formControlName="domain_training_id" class="w_100">
+                            </ng-select>
+                            <div
+                                *ngIf="(createDnaForm.controls['domain_training_id'].invalid && (createDnaForm.controls['domain_training_id'].dirty || createDnaForm.controls['domain_training_id'].touched)) || isSubmitted">
+                                <div class="error_message"
+                                    *ngIf="createDnaForm.controls['domain_training_id'].errors?.required">
+                                    Domain Training can not be blank
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="col-sm-4" *ngIf="isFrance">
-                <div class="form-group">
-                    <label class="form-control-label">
-                        Delivery Location
-                    </label>
-                    <ng-select  [items]="locationsObj"
-                         bindLabel="location_name"
-                        bindValue="location_name" formControlName="location" class="w_100">
-                    </ng-select>
-                    <div
-                      *ngIf="(createDnaForm.controls['location'].invalid && (createDnaForm.controls['location'].dirty || createDnaForm.controls['location'].touched)) || isSubmitted">
-                       <div class="error_message"
-                        *ngIf="createDnaForm.controls['location'].errors?.required">
-                        Delivery Location can not be blank
-                       </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Delivery Region
+                            </label>
+                            <ng-select [items]="isFrance ? regionObj : regionsObj" bindLabel="region_name"
+                                bindValue="id" (change)="getEvent($event)" formControlName="region_id" class="w_100">
+                            </ng-select>
+                            <div
+                                *ngIf="(createDnaForm.controls['region_id'].invalid && (createDnaForm.controls['region_id'].dirty || createDnaForm.controls['region_id'].touched)) || isSubmitted">
+                                <div class="error_message" *ngIf="createDnaForm.controls['region_id'].errors?.required">
+                                    Delivery Region can not be blank
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" *ngIf="isCountry && !isFrance">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Delivery Country
+                            </label>
+                            <ng-select [items]="countriesObj" bindLabel="country_name" bindValue="country_name"
+                                formControlName="country" class="w_100">
+                            </ng-select>
+                            <div
+                                *ngIf="(createDnaForm.controls['country'].invalid && (createDnaForm.controls['country'].dirty || createDnaForm.controls['country'].touched)) || isSubmitted">
+                                <div class="error_message" *ngIf="createDnaForm.controls['country'].errors?.required">
+                                    Delivery Country can not be blank
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4" *ngIf="isFrance">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Delivery Location
+                            </label>
+                            <ng-select [items]="locationsObj" bindLabel="location_name" bindValue="location_name"
+                                formControlName="location" class="w_100">
+                            </ng-select>
+                            <div
+                                *ngIf="(createDnaForm.controls['location'].invalid && (createDnaForm.controls['location'].dirty || createDnaForm.controls['location'].touched)) || isSubmitted">
+                                <div class="error_message" *ngIf="createDnaForm.controls['location'].errors?.required">
+                                    Delivery Location can not be blank
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Business Unit/M1 Level
+                            </label>
+                            <ng-select [items]="bussinessUnitObj" bindLabel="team_name" bindValue="id"
+                                (change)="getOtherBusinessUnit($event)" formControlName="business_unit_id"
+                                class="w_100">
+                            </ng-select>
+                            <div
+                                *ngIf="(createDnaForm.controls['business_unit_id'].invalid && (createDnaForm.controls['business_unit_id'].dirty || createDnaForm.controls['business_unit_id'].touched)) || isSubmitted">
+                                <div class="error_message"
+                                    *ngIf="createDnaForm.controls['business_unit_id'].errors?.required">
+                                    Business Unit/M1 Level can not be blank
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" *ngIf="isOtherBU">
+                        <div class="form-group">
+                            <label class="form-control-label">
+                                Other Business Unit
+                            </label>
+                            <input type="text" class="form-control form_width" formControlName="other_bussiness_unit">
+                            <div
+                                *ngIf="(createDnaForm.controls['other_bussiness_unit'].invalid && (createDnaForm.controls['other_bussiness_unit'].dirty || createDnaForm.controls['other_bussiness_unit'].touched)) || isSubmitted">
+                                <div class="error_message"
+                                    *ngIf="createDnaForm.controls['other_bussiness_unit'].errors?.required">
+                                    Other Bussiness Unit can not be blank
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-    
-        
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label class="form-control-label">
-                    Business Unit/M1 Level
-                </label>
-                <ng-select [items]="bussinessUnitObj"
-                     bindLabel="team_name"
-                    bindValue="id" formControlName="business_unit_id" class="w_100">
-                </ng-select>
-                <div
-                  *ngIf="(createDnaForm.controls['business_unit_id'].invalid && (createDnaForm.controls['business_unit_id'].dirty || createDnaForm.controls['business_unit_id'].touched)) || isSubmitted">
-                   <div class="error_message"
-                    *ngIf="createDnaForm.controls['business_unit_id'].errors?.required">
-                    Business Unit/M1 Level can not be blank
-                   </div>
-                </div>
-            </div>
+            </form>
         </div>
-    </div>
-    </form>
-    </div>
-    <div class="card-footer">
-        <button class="btn btn-primary mr-1" type="submit" (click)="save()">
-            <i aria-hidden="true" class="fa fa-upload">
-            </i> <span class="pl-1">Submit</span>
-        </button>
-        <button class="btn btn-secondary mr-1" type="button" 
-        (click)="close()">
-            <i aria-hidden="true" class="fa fa-times">
-            </i> <span class="pl-1">Close</span>
-        </button>
+        <div class="card-footer">
+            <button class="btn btn-primary mr-1" type="submit" (click)="save()">
+                <i aria-hidden="true" class="fa fa-upload">
+                </i> <span class="pl-1">Submit</span>
+            </button>
+            <button class="btn btn-secondary mr-1" type="button" (click)="close()">
+                <i aria-hidden="true" class="fa fa-times">
+                </i> <span class="pl-1">Close</span>
+            </button>
+        </div>
     </div>
 </div>
-</div>
-

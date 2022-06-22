@@ -38,6 +38,7 @@ export class DnaLearningFormComponent implements OnInit {
   formId : number=0;
   title ='Add New Learning';
   isSubmitted = false;
+  isOtherBU = false;
   isDescription = false;
   isCountry = true;
   type:any;
@@ -121,8 +122,21 @@ export class DnaLearningFormComponent implements OnInit {
      this.createDnaForm.addControl('description', new FormControl('', [Validators.required]));
    }
   }
+
+  getOtherBusinessUnit(item:any){
+    if(item.id == 8){
+      this.isOtherBU = true;
+      this.createDnaForm.addControl('other_bussiness_unit', new FormControl('', [Validators.required]));
+    }
+    else{
+      this.isOtherBU = false;
+      this.createDnaForm.removeControl('other_bussiness_unit');
+    }
+  console.log("item",item);  
+  }
  
   save(){
+    console.log("data",this.createDnaForm.value);
     this.isSubmitted = true;
     if (this.createDnaForm.invalid) {
       return;
@@ -195,6 +209,7 @@ export class DnaLearningFormComponent implements OnInit {
           this.titleList = [...this.titleList, {training_title: this.form_details.title,id:-1}];
           this.createDnaForm.controls.learning_id.setValue(-1);
           this.isDescription = true;
+          this.createDnaForm.addControl('description', new FormControl('', [Validators.required]));
           this.createDnaForm.controls.description.setValue(this.form_details.description);
         }
         this.createDnaForm.controls.priority_id.setValue(this.form_details.priority_id);
@@ -233,6 +248,7 @@ export class DnaLearningFormComponent implements OnInit {
   createNew = (term:string) =>{
     this.titleList = [...this.titleList, {training_title: term}];
     this.isDescription = true;
+    this.createDnaForm.addControl('description', new FormControl('', [Validators.required]));
     this.createDnaForm.controls.title.setValue(term);     
   }
  
