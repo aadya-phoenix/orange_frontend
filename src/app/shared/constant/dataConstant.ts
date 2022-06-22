@@ -102,9 +102,9 @@ export const dataConstant = {
     getReport:'get-report',
     design: 'design'
   },
-  ModuleList:{
-    name: 'course', id:'course',
-  },
+  ModuleList:[{
+    name: 'Course', id:'course'
+  }],
   SMETabs: { contecntSupport: 'content-support', delivery: 'delivery', voiceOver: 'voice-over-learning', professionalCertifications:'professional-certifications', comments:'comments'}
 }
 
