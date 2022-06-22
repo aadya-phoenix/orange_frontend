@@ -40,6 +40,11 @@ export class DnaService {
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  getManagerData(data: any) {
+    const url = `api/${this.apiVersion}/user/${data}/manager-staff`;
+    return this.http.get(url, this.http.headers).pipe(catchError(this.commmonService.Errorhandling))
+  }
+
   dnaHistory(data: any) {
     const url = `api/${this.apiVersion}/digital-learning/${data}/history`;
     return this.http.get(url, this.http.headers).pipe(catchError(this.commmonService.Errorhandling))

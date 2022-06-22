@@ -1,19 +1,16 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { DnaService } from 'src/app/shared/services/dna/dna.service';
-import { CourcesService } from 'src/app/shared/services/cources/cources.service';
-import { CommonService } from 'src/app/shared/services/common/common.service';
-import { GeneralDropdownsService } from 'src/app/shared/services/general-dropdowns/general-dropdowns.service';
+import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
-import { Router } from '@angular/router';
+import { CommonService } from 'src/app/shared/services/common/common.service';
+import { DnaService } from 'src/app/shared/services/dna/dna.service';
 
 @Component({
-  selector: 'app-learning-needs',
-  templateUrl: './learning-needs.component.html',
-  styleUrls: ['./learning-needs.component.scss']
+  selector: 'app-dna-tracker',
+  templateUrl: './dna-tracker.component.html',
+  styleUrls: ['./dna-tracker.component.scss']
 })
-export class LearningNeedsComponent implements OnInit {
+export class DnaTrackerComponent implements OnInit {
 
   trackerObjList:any=[];
   searchText : string ='';
@@ -47,11 +44,13 @@ export class LearningNeedsComponent implements OnInit {
     });
   }
 
-  view(item:any){}
+  create(){
+    this.router.navigateByUrl('/dashboard/dna/tracker/create'); 
+  }
 
   editRequest(item :any){
     if (item && item.id) {
-      this.router.navigateByUrl(`/user/dna/create/${item.id}`);
+      this.router.navigateByUrl(`/dashboard/dna/tracker/edit/${item.id}`);
     }
   }
 

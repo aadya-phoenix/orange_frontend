@@ -156,7 +156,7 @@ export class DnaViewBpComponent implements OnInit {
       return;
     }
     newList = this.learningList.filter((y:any)=> {
-      if(y.status == this.dnaStatus.pending){ 
+      if(y.status_show == this.dnaStatus.pending){ 
       return y;
       }
     });
@@ -202,6 +202,19 @@ export class DnaViewBpComponent implements OnInit {
         this.learningList = res.data.digital_learning[this.trackerId];
         this.dna_count = res.data.all_count[this.trackerId];
         this.learningListToShow = res.data.digital_learning[this.trackerId];
+        this.learningList.forEach((x:any)=>{
+          if(x.strategic){
+           if(x.strategic == 'strategic_1'){
+            x.strategic_name = 'Strategic for BU';
+           }
+           if(x.strategic == 'strategic_2'){
+            x.strategic_name = 'Not strategic but action required';
+           }
+           if(x.strategic == 'strategic_3'){
+            x.strategic_name = 'Not a priority or no action required';
+           }
+          }
+         })
         }
         else{
           this.commonService.hideLoading();

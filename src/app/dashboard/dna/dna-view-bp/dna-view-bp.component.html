@@ -73,7 +73,7 @@
                                             <p>Closed</p>
                                         </div>
                                         <span
-                                            class="number_css pub_lished">{{dna_count.close?dna_count.close:0}}</span>
+                                            class="number_css">{{dna_count.close?dna_count.close:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child" *ngIf="isBussinessConsultant">
@@ -85,7 +85,7 @@
                                             <p>Forwarded</p>
                                         </div>
                                         <span
-                                            class="number_css">{{dna_count.forwarded?dna_count.forwarded:0}}</span>
+                                            class="number_css for_left">{{dna_count.forwarded?dna_count.forwarded:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child" *ngIf="isBussinessConsultant">
@@ -97,7 +97,7 @@
                                             <p>Digital Learning</p>
                                         </div>
                                         <span
-                                            class="number_css">{{dna_count.digital_learning?dna_count.digital_learning:0}}</span>
+                                            class="number_css digi_left">{{dna_count.digital_learning?dna_count.digital_learning:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
@@ -109,7 +109,7 @@
 
                                             <p>Total Requests</p>
                                         </div>
-                                        <span class="number_css">{{dna_count.total?dna_count.total:0}}</span>
+                                        <span class="number_css digi_left">{{dna_count.total?dna_count.total:0}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -256,7 +256,7 @@
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a></td>
                                             <td> <input type="checkbox" [checked]="item.isChecked"
-                                                    [attr.disabled]="item.status == dnaStatus.close ? true : null"
+                                                    [attr.disabled]="item.status_show == dnaStatus.closed || item.status_show == dnaStatus.forwarded ? true : null"
                                                     (click)="selectedItems(item)">
                                             </td>
                                             <td>{{item.priority_name}}</td>
@@ -268,9 +268,9 @@
                                             <td *ngIf="isDomainExpert"></td>
                                             <td *ngIf="isBussinessConsultant">{{item.country}}</td>
                                             <td *ngIf="isBussinessConsultant">{{item.management_code}}</td>
-                                            <td *ngIf="isBussinessConsultant">{{item.strategic}}</td>
+                                            <td *ngIf="isBussinessConsultant">{{item.strategic_name}}</td>
                                             <td *ngIf="isBussinessConsultant">{{item.comments}}</td>
-                                            <td *ngIf="isDomainExpert">{{item.status}}</td>
+                                            <td *ngIf="isDomainExpert"><span [ngClass]="item.status_show">{{item.status_show | titlecase}}</span></td>
                                             <td >{{item.closed_by_name}}</td>
                                         </tr>
                                     </tbody>

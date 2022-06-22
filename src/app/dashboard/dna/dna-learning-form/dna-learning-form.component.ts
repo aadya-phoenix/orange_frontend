@@ -38,6 +38,7 @@ export class DnaLearningFormComponent implements OnInit {
   formId : number=0;
   title ='Add New Learning';
   isSubmitted = false;
+  isOtherBU = false;
   isDescription = false;
   isCountry = true;
   type:any;
@@ -52,14 +53,13 @@ export class DnaLearningFormComponent implements OnInit {
     this.createDnaForm = this.formBuilder.group({
       learning_id:new FormControl('', []),
       title: new FormControl('', []),
-      description: new FormControl('', []),
+     // description: new FormControl('', []),
       number_of_participant: new FormControl('', [Validators.required]),
-      priority_id: new FormControl('', [Validators.required]),
-      management_code: new FormControl('', []),
+      priority_id: new FormControl('', [Validators.required]),    
       region_id: new FormControl('',[Validators.required]),
-      domain_training_id: new FormControl('',[]),
-      country: new FormControl('', []),
-      location: new FormControl('', []),
+     // management_code:'',
+     // domain_training_id: new FormControl('',[]),
+     // location: new FormControl('', []),
       business_unit_id: new FormControl('', [Validators.required]),
     });
   }
@@ -72,19 +72,35 @@ export class DnaLearningFormComponent implements OnInit {
       this.getTrackerDetail();
       this.formId = form_id ? parseInt(form_id) : 0;
     });
+    if(this.isFranceType()){
+      this.createDnaForm.addControl('domain_training_id', new FormControl('', [Validators.required]));
+      this.createDnaForm.addControl('location', new FormControl('', [Validators.required]));
+      this.createDnaForm.removeControl('management_code');
+      this.createDnaForm.removeControl('country'); 
+    }
+    else{
+      this.createDnaForm.addControl('management_code', new FormControl('', [Validators.required]));
+      this.createDnaForm.addControl('country', new FormControl('', [Validators.required]));
+      this.createDnaForm.removeControl('domain_training_id'); 
+      this.createDnaForm.removeControl('location'); 
+    }
+    
     this.getPriority();
     this.getRegions();
     this.getBusinessUnits();
     this.getDomain();
-    this.getLocations();
-   
+    this.getLocations();   
+  }
+
+  isFranceType() {
+    return  this.type == 1;
   }
 
   getEvent(region:any){
    this.regionId = region.id;
    if(region.region_name == 'Global'){
      this.isCountry = false;
-     this.createDnaForm.get('country')?.setValue(null);
+     this.createDnaForm.removeControl('country');
    }
    else{
     this.isCountry = true;
@@ -99,13 +115,28 @@ export class DnaLearningFormComponent implements OnInit {
    this.training_hours = event.training_hours;
    if(event && event.id){
     this.isDescription = false;
+    this.createDnaForm.removeControl('description'); 
    }
    else{
      this.isDescription = true;
+     this.createDnaForm.addControl('description', new FormControl('', [Validators.required]));
    }
+  }
+
+  getOtherBusinessUnit(item:any){
+    if(item.id == 8){
+      this.isOtherBU = true;
+      this.createDnaForm.addControl('other_bussiness_unit', new FormControl('', [Validators.required]));
+    }
+    else{
+      this.isOtherBU = false;
+      this.createDnaForm.removeControl('other_bussiness_unit');
+    }
+  console.log("item",item);  
   }
  
   save(){
+    console.log("data",this.createDnaForm.value);
     this.isSubmitted = true;
     if (this.createDnaForm.invalid) {
       return;
@@ -171,14 +202,14 @@ export class DnaLearningFormComponent implements OnInit {
     this.commonService.showLoading();
     this.dnaService. getFormDetails(this.formId).subscribe(
       (res: any) => {
-        if(res.status == 1){
-      
+        if(res.status == 1){  
         this.form_details = res.data;
         this.createDnaForm.controls.learning_id.setValue(this.form_details.learning_id);
         if(!this.form_details.learning_id){
           this.titleList = [...this.titleList, {training_title: this.form_details.title,id:-1}];
           this.createDnaForm.controls.learning_id.setValue(-1);
           this.isDescription = true;
+          this.createDnaForm.addControl('description', new FormControl('', [Validators.required]));
           this.createDnaForm.controls.description.setValue(this.form_details.description);
         }
         this.createDnaForm.controls.priority_id.setValue(this.form_details.priority_id);
@@ -215,9 +246,9 @@ export class DnaLearningFormComponent implements OnInit {
   }
 
   createNew = (term:string) =>{
-    console.log(term);
     this.titleList = [...this.titleList, {training_title: term}];
     this.isDescription = true;
+    this.createDnaForm.addControl('description', new FormControl('', [Validators.required]));
     this.createDnaForm.controls.title.setValue(term);     
   }
  
@@ -232,6 +263,18 @@ export class DnaLearningFormComponent implements OnInit {
         this.getTitleDropdown();
         this.type = this.tracker_details.type;
         this.type == 1 ? this.isFrance = true : this.isFrance = false;
+        if(this.isFrance){
+          this.createDnaForm.addControl('domain_training_id', new FormControl('', [Validators.required]));
+          this.createDnaForm.addControl('location', new FormControl('', [Validators.required]));
+          this.createDnaForm.removeControl('management_code');
+          this.createDnaForm.removeControl('country');
+        }
+        else{
+          this.createDnaForm.addControl('management_code', new FormControl('', [Validators.required]));
+          this.createDnaForm.addControl('country', new FormControl('', [Validators.required]));
+          this.createDnaForm.removeControl('domain_training_id'); 
+          this.createDnaForm.removeControl('location'); 
+        }
         this.commonService.hideLoading();
         }
         else{

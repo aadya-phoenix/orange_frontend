@@ -125,7 +125,11 @@ export class DnaViewRptComponent implements OnInit {
       }
     }
     else{
-      this.learningIds.pop(item.id);
+      this.learningIds = this.learningIds.filter((x:any)=>{
+       if(x!= item.id){
+        return x;
+       }
+      });
     }
   }
 
@@ -157,7 +161,7 @@ export class DnaViewRptComponent implements OnInit {
   openModal() {
     if(this.learningIds.length == 0){
       return;
-    }
+    }    
  /*    this.titleList = [];
     this.learningList.forEach((item: any) => {
       let title = this.learningIds.find((x: any) => x == item.id);

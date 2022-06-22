@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
@@ -10,11 +10,11 @@ import { GeneralDropdownsService } from 'src/app/shared/services/general-dropdow
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-create-tracker',
-  templateUrl: './create-tracker.component.html',
-  styleUrls: ['./create-tracker.component.scss']
+  selector: 'app-dna-tracker-create',
+  templateUrl: './dna-tracker-create.component.html',
+  styleUrls: ['./dna-tracker-create.component.scss']
 })
-export class CreateTrackerComponent implements OnInit {
+export class DnaTrackerCreateComponent implements OnInit {
   dateFormate = dataConstant.dateFormate;
   learningNeedForm: FormGroup;
   languageObj:any=[];
@@ -42,7 +42,7 @@ export class CreateTrackerComponent implements OnInit {
         type: new FormControl('', []),
         training_data: new FormControl('', []),
       });
-     }
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -115,6 +115,7 @@ export class CreateTrackerComponent implements OnInit {
   }
 
   update(body:any){
+    body.tracker_id = this.tracker_id;
     this.commonService.showLoading();
     this.dnaService.updateTracker(body).subscribe(
       (res: any) => {
