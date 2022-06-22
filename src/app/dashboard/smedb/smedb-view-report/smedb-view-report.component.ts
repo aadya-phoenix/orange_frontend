@@ -109,7 +109,8 @@ export class SmedbViewReportComponent implements OnInit {
       title: `Request ${item.sme_status == this.smeStatus.active ? "Deactive" : "Active"}`,
       status: item.sme_status == this.smeStatus.active ? this.smeStatus.deactive :  this.smeStatus.active,
       data: item.id,
-      objectDetail: item
+      objectDetail: item,
+      isSMEStatus: true,
     };
     modalRef.componentInstance.passEntry.subscribe((res: any) => {
       this.filterData()

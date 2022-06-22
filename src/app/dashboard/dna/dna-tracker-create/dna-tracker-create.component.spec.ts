@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateTrackerComponent } from './create-tracker.component';
+import { DnaTrackerCreateComponent } from './dna-tracker-create.component';
 
-describe('CreateTrackerComponent', () => {
-  let component: CreateTrackerComponent;
-  let fixture: ComponentFixture<CreateTrackerComponent>;
+describe('DnaTrackerCreateComponent', () => {
+  let component: DnaTrackerCreateComponent;
+  let fixture: ComponentFixture<DnaTrackerCreateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateTrackerComponent ]
+      declarations: [ DnaTrackerCreateComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateTrackerComponent);
+    fixture = TestBed.createComponent(DnaTrackerCreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

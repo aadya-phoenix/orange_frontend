@@ -16,6 +16,7 @@ export class SmedbStatusComponent implements OnInit {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   publishSMEForm: FormGroup;
   isSubmitted = false;
+  isSMEStatus= false;
   status = '';
   SMEStatus = dataConstant.SMEStatus;
   constructor(private formBuilder: FormBuilder,
@@ -35,6 +36,7 @@ export class SmedbStatusComponent implements OnInit {
     this.objectDetail = this.props.objectDetail ? this.props.objectDetail : '';
     this.title = this.props.title;
     this.status = this.props.status;
+    this.isSMEStatus = this.props.isSMEStatus;
     this.publishSMEForm.get("status_comment")?.valueChanges.subscribe(() => {
       this.valueChange();
     });
@@ -45,12 +47,32 @@ export class SmedbStatusComponent implements OnInit {
     if (this.publishSMEForm.invalid) {
       return;
     }
-    var data = {
-      sme_id: this.props.objectDetail.id,
-      status_comment: this.publishSMEForm.value.status_comment,
-      sme_status: this.props.status
-    };
     this.commonService.showLoading();
+    if(this.isSMEStatus){
+      const data = {
+        sme_id: this.props.objectDetail.id,
+        status_comment: this.publishSMEForm.value.status_comment,
+        sme_status: this.props.status
+      };
+      this.SMEService.SMEStatus(data).subscribe(
+        (res: any) => {
+          this.commonService.hideLoading();
+          this.commonService.toastSuccessMsg('SME Datbase', `Successfully ${this.props.status}.`);
+          this.modalService.close();
+          this.passEntry.next();
+         },
+        (err: any) => {
+          this.commonService.hideLoading();
+          this.commonService.errorHandling(err); 
+        }
+      );
+    }
+    else{
+      const data = {
+        sme_id: this.props.objectDetail.id,
+        status_comment: this.publishSMEForm.value.status_comment,
+        status: this.props.status
+      };
     this.SMEService.SMEDatabaseStatus(data).subscribe(
       (res: any) => {
         this.commonService.hideLoading();
@@ -63,6 +85,7 @@ export class SmedbStatusComponent implements OnInit {
         this.commonService.errorHandling(err); 
       }
     );
+    }
   }
 
   closeModal() {

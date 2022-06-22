@@ -9,12 +9,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { ChangePasswordUserComponent } from './change-password-user/change-password-user.component';
-import { LearningNeedsComponent } from './dna/learning-needs/learning-needs.component';
-import { CreateTrackerComponent } from './dna/create-tracker/create-tracker.component';
-
 
 @NgModule({
-  declarations: [UserManagementComponent, EditUserComponent, ChangePasswordUserComponent, LearningNeedsComponent, CreateTrackerComponent],
+  declarations: [UserManagementComponent, EditUserComponent, ChangePasswordUserComponent],
   providers:[DatePipe],
   imports: [
     CommonModule,

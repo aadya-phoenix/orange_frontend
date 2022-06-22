@@ -57,16 +57,22 @@
                     <div class="row  mb-4">
                         <div class="col-sm-3" *ngFor="let item of learningListToShow | filter: searchText">
                            <div class="digital_learning">
-                            <h4 class="bus_h4 text_orange">{{item.title}}</h4>
+                            <h4 class="bus_h4 text_orange" ngbTooltip="{{item.learning_training_data ? item.learning_training_data.training_description : item.description}}">{{item.title}}</h4>
                             <div class="d-flex justify-content-center">
                                 <span class="text_digi">{{item.priority_name}}</span>
-                                <span class="border_lr">{{item.number_of_participant}}</span>
-                                <span class="text_digi1">{{item.training_type}}</span>
+                                <span class="border_lr">
+                                    <img src="../../../../assets/images/icon/useregroup.png" class="img_user_lap mr-1">
+                                    <span class="top_posi">{{item.number_of_participant}} </span>
+                                </span>
+                                <span class="text_digi1"><img src="../../../../assets/images/icon/laptop.png" class="img_user_lap mr-1">
+                                    <span>{{item.training_type}}
+                                    </span>
+                                    </span>
                             </div>
                             <div class="d-flex justify-content-end digi_footer">
-                                <a (click)="share(item)"><i class="fa fa-share-square-o mr-1" aria-hidden="true"></i></a>
-                                <a (click)="update(item)"> <i class="fa fa-pencil-square-o mr-1" aria-hidden="true"></i></a>
-                                <a (click)="delete(item)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                <a (click)="share(item)" ngbTooltip="Orange Learning Direct URL"><i class="fa fa-share-square-o mr-1" aria-hidden="true"></i></a>
+                                <a (click)="update(item)" ngbTooltip="Update Added Learning"> <i class="fa fa-pencil-square-o mr-1" aria-hidden="true"></i></a>
+                                <a (click)="delete(item)" ngbTooltip="Delete Added Learning"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                             </div>
                         </div>  
                         </div> 

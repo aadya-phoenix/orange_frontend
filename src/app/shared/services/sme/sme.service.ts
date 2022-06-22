@@ -58,9 +58,9 @@ export class SMEService {
   }
 
   getSMEDatabaseReport(data: any) {
-    const url = `/api/${this.apiVersion}/sme-database/filter`;
+    const url = `/api/${this.apiVersion}/sme-database`;
     return this.http
-      .post(url, data)
+      .get(url, this.http.headers)
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
@@ -95,9 +95,15 @@ export class SMEService {
   }
 
   SMEDatabaseStatus(data: any) {
+    const url = `api/${this.apiVersion}/sme-database/status`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  SMEStatus(data: any) {
     const url = `api/${this.apiVersion}/sme-database/sme-status`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
+
 
   SMEDatabaseTransfer(data: any) {
     const url = `api/${this.apiVersion}/sme-database/transfer`;
@@ -106,6 +112,11 @@ export class SMEService {
 
   SMERatingList(sme_id: any) {
     const url = `api/${this.apiVersion}/sme-database/${sme_id}/rating`;
+    return this.http.get(url,this.http.headers).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  SMEContactPerson() {
+    const url = `api/${this.apiVersion}/sme-database/contact-person`;
     return this.http.get(url,this.http.headers).pipe(catchError(this.commmonService.Errorhandling));
   }
 

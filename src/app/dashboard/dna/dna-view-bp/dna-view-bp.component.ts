@@ -128,23 +128,22 @@ export class DnaViewBpComponent implements OnInit {
   }
 
   selectedItems(item:any){
-    this.titleList = [];
-    this.learningIds = [];
     item.isChecked = !item.isChecked;
     if(item.isChecked == true){
-    this.learningIds.push(item.id);
+      if(this.learningIds.length != 0){
+        this.learningIds.forEach((x:any)=>{
+          if(x != item.id){
+            this.learningIds.push(item.id);
+          }
+        });
+      }
+      else{
+        this.learningIds.push(item.id);
+      }
     }
     else{
       this.learningIds.pop(item.id);
     }
-    if(this.learningIds.length != 0){
-     this.learningList.forEach((item: any) => {
-      let title = this.learningIds.find((x: any) => x == item.id);
-      if (title) {
-        this.titleList.push(item.title);
-      }
-    });
-   }
   }
 
   checkAllOptions() {
@@ -156,7 +155,11 @@ export class DnaViewBpComponent implements OnInit {
     if(this.isChecked == false){
       return;
     }
-    newList = this.learningList.filter((y:any)=> y.status == this.dnaStatus.pending);
+    newList = this.learningList.filter((y:any)=> {
+      if(y.status_show == this.dnaStatus.pending){ 
+      return y;
+      }
+    });
     newList.forEach((val:any)=>{
       this.learningIds.push(val.id);
     });
@@ -172,7 +175,7 @@ export class DnaViewBpComponent implements OnInit {
     this.router.navigateByUrl(`/dashboard/dna/update/${this.trackerId}/${item.id}`);
   }
 
-  openModal(status:any) {
+  openModal() {
     if(this.learningIds.length == 0){
       return;
     }
@@ -182,9 +185,9 @@ export class DnaViewBpComponent implements OnInit {
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
-      title: status == 'close' ? 'Close Request' : 'Forward Request',
+      title:  'Close Request' ,
       data: this.learningIds,
-      objectDetail: this.titleList,
+      objectDetail: this.learningList,
       trackerId:this.trackerId,
       type: 'forward'
     };
@@ -199,6 +202,19 @@ export class DnaViewBpComponent implements OnInit {
         this.learningList = res.data.digital_learning[this.trackerId];
         this.dna_count = res.data.all_count[this.trackerId];
         this.learningListToShow = res.data.digital_learning[this.trackerId];
+        this.learningList.forEach((x:any)=>{
+          if(x.strategic){
+           if(x.strategic == 'strategic_1'){
+            x.strategic_name = 'Strategic for BU';
+           }
+           if(x.strategic == 'strategic_2'){
+            x.strategic_name = 'Not strategic but action required';
+           }
+           if(x.strategic == 'strategic_3'){
+            x.strategic_name = 'Not a priority or no action required';
+           }
+          }
+         })
         }
         else{
           this.commonService.hideLoading();
@@ -266,9 +282,9 @@ export class DnaViewBpComponent implements OnInit {
 
   showRecords(type: string) {
     if (type === this.dnaStatus.total) {
-      this.dnaListToShow = this.dnaList.map((x: any) => Object.assign({}, x));
+      this.learningListToShow = this.learningList.map((x: any) => Object.assign({}, x));
     } else {
-      this.dnaListToShow = this.dnaList.filter((x: any) => { if (x.status_show === type) { return x } }).map((x: any) => Object.assign({}, x));
+      this.learningListToShow = this.learningList.filter((x: any) => { if (x.status_show === type) { return x } }).map((x: any) => Object.assign({}, x));
     }
   }
 

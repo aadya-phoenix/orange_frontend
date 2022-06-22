@@ -45,81 +45,75 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-2 col_20">
-                                    <div class="card bac_card_total">
-                                        <div class="card-body">
-                                            <div class="d-flex just_spa align-items-center">
-                                                <h5 class="mb-0">{{dna_count.total?dna_count.total:0}}</h5>
-                                                <img src="../../../../assets/images/icon/all.png" class="imae_card_pen">
+                        <div class="card-header cm-card-header">
+                            <div class="overall_css">
+                                <span class="card_overall">Overall request Status</span>
+                            </div>
+                        </div>
+                        <div class="card-body card_course_body">
+                            <div class="Course_icon_parent" data-aos="fade-right">
+                                <div class="Course_icon_child" >
+                                    <div class="alig_dashicon" (click)="showRecords(dnaStatus.pending)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des bac_yellow">
+                                                <img src="../../../../assets/images/icon/pending.png" />
                                             </div>
-                                        </div>
-                                        <div class="card-footer card_footer_dash">
-                                            <p>Total Request</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2 col_20">
-                                    <div class="card bac_card_pen">
-                                        <div class="card-body">
-                                            <div class="d-flex just_spa align-items-center">
-                                                <h5 class="mb-0">{{dna_count.pending?dna_count.pending:0}}</h5>
-                                                <img src="../../../../assets/images/icon/pending.png"
-                                                    class="imae_card_pen">
-                                            </div>
-                                        </div>
-                                        <div class="card-footer card_footer_dash">
                                             <p>Pending</p>
                                         </div>
+                                        <span
+                                            class="number_css ">{{dna_count.pending?dna_count.pending:0}}</span>
                                     </div>
                                 </div>
-                                <div class="col-sm-2 col_20" *ngIf="isBussinessConsultant">
-                                    <div class="card bac_card_parti">
-                                        <div class="card-body">
-                                            <div class="d-flex just_spa align-items-center">
-                                                <h5 class="mb-0">{{dna_count.forwarded?dna_count.forwarded:0}}</h5>
-                                                <img src="../../../../assets/images/icon/group.png"
-                                                    class="imae_card_pen">
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="showRecords(dnaStatus.closed)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des cm-learning">
+                                                <img src="../../../../assets/images/icon/check.png" />
                                             </div>
+                                            <p>Closed</p>
                                         </div>
-                                        <div class="card-footer card_footer_dash">
-                                            <p>Forwarded to ROM</p>
-                                        </div>
+                                        <span
+                                            class="number_css">{{dna_count.close?dna_count.close:0}}</span>
                                     </div>
                                 </div>
-                                <div class="col-sm-2 col_20" *ngIf="isBussinessConsultant">
-                                    <div class="card bac_card_pen">
-                                        <div class="card-body">
-                                            <div class="d-flex just_spa align-items-center">
-                                                <h5 class="mb-0">{{dna_count.digital_learning?dna_count.digital_learning:0}}</h5>
-                                                <img src="../../../../assets/images/icon/pending.png"
-                                                    class="imae_card_pen">
+                                <div class="Course_icon_child" *ngIf="isBussinessConsultant">
+                                    <div class="alig_dashicon" (click)="showRecords(dnaStatus.forwarded)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des bac_red">
+                                                <img src="../../../../assets/images/icon/transfer.png" />
                                             </div>
+                                            <p>Forwarded</p>
                                         </div>
-                                        <div class="card-footer card_footer_dash">
+                                        <span
+                                            class="number_css for_left">{{dna_count.forwarded?dna_count.forwarded:0}}</span>
+                                    </div>
+                                </div>
+                                <div class="Course_icon_child" *ngIf="isBussinessConsultant">
+                                    <div class="alig_dashicon" (click)="showRecords(dnaStatus.digital_learning)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des cm-reject">
+                                                <img src="../../../../assets/images/icon/laptop.png" />
+                                            </div>
                                             <p>Digital Learning</p>
                                         </div>
+                                        <span
+                                            class="number_css digi_left">{{dna_count.digital_learning?dna_count.digital_learning:0}}</span>
                                     </div>
                                 </div>
-                          
-                        <div class="col-sm-2 col_20">
-                            <div class="card bac_card_closed">
-                                <div class="card-body">
-                                    <div class="d-flex just_spa align-items-center">
-                                        <h5 class="mb-0">{{dna_count.close?dna_count.close:0}}</h5>
-                                        <img src="../../../../assets/images/icon/check.png"
-                                            class="imae_card_pen">
+                                <div class="Course_icon_child">
+                                    <div class="alig_dashicon" (click)="showRecords(dnaStatus.total)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des cm-all">
+                                                <img src="../../../../assets/images/icon/viewall.png" />
+                                            </div>
+
+                                            <p>Total Requests</p>
+                                        </div>
+                                        <span class="number_css digi_left">{{dna_count.total?dna_count.total:0}}</span>
                                     </div>
-                                </div>
-                                <div class="card-footer card_footer_dash">
-                                    <p>Requests Closed</p>
                                 </div>
                             </div>
                         </div>
-                        
-                    </div>
-                </div>
                     </div>
                 </div>
             </div>
@@ -262,7 +256,7 @@
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a></td>
                                             <td> <input type="checkbox" [checked]="item.isChecked"
-                                                    [attr.disabled]="item.status == dnaStatus.close ? true : null"
+                                                    [attr.disabled]="item.status_show == dnaStatus.closed || item.status_show == dnaStatus.forwarded ? true : null"
                                                     (click)="selectedItems(item)">
                                             </td>
                                             <td>{{item.priority_name}}</td>
@@ -274,9 +268,9 @@
                                             <td *ngIf="isDomainExpert"></td>
                                             <td *ngIf="isBussinessConsultant">{{item.country}}</td>
                                             <td *ngIf="isBussinessConsultant">{{item.management_code}}</td>
-                                            <td *ngIf="isBussinessConsultant">{{item.business_unit_name}}</td>
+                                            <td *ngIf="isBussinessConsultant">{{item.strategic_name}}</td>
                                             <td *ngIf="isBussinessConsultant">{{item.comments}}</td>
-                                            <td *ngIf="isDomainExpert">{{item.status}}</td>
+                                            <td *ngIf="isDomainExpert"><span [ngClass]="item.status_show">{{item.status_show | titlecase}}</span></td>
                                             <td >{{item.closed_by_name}}</td>
                                         </tr>
                                     </tbody>
