@@ -32,7 +32,7 @@ export class SmedbViewComponent implements OnInit {
   deliveryData = [];
   professionalCertificationsData = [];
   commentsData = [];
-  voiceOverLearningData= [];
+  voiceOverLearningData:any= [];
   msaapDisplayTitle = false;
   msaapDisplayPlayList = false;
   msaapDisplayVolumeControls = true;
@@ -87,19 +87,20 @@ export class SmedbViewComponent implements OnInit {
               // this.activeIds.push(`panel-comments`);
             }
             if (this.requestdata.metadata["voice-over-learning"]) {
-              this.voiceOverLearningData = this.requestdata.metadata["voice-over-learning"];
-              this.voiceOverLearningData.forEach((element:any) => {
+              //this.voiceOverLearningData = this.requestdata.metadata["voice-over-learning"];
+              this.requestdata.metadata["voice-over-learning"].forEach((element:any) => {
                 element.language = JSON.parse(element.language).join(', ');
                 if(element.voice_recording){
-                  element.msaapPlaylist = [];
                   const voice_recording = JSON.parse(element.voice_recording);
                   voice_recording.forEach((file: any) => {
+                    element.msaapPlaylist = [];
                     element.msaapPlaylist.push(
                       {
                         title: element.language,
                         link: `${dataConstant.ImageUrl}/${file}`
                       },
                     );
+                    this.voiceOverLearningData.push(element);
                   });
                 }
               });

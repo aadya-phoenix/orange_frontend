@@ -374,7 +374,7 @@
                                                             </div> -->
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-10 col-sm-12" [formGroupName]="i" *ngIf="!contentSup.value.isPrevious && contentSup.value.isNeedHelp">
+                                                    <div class="col-md-10 col-sm-12" [formGroupName]="i" *ngIf="contentSup.value.isPrevious || (!contentSup.value.isPrevious && contentSup.value.isNeedHelp)">
                                                         <div class="form-group w-100">
                                                             <label class="form-control-label" *ngIf="!contentSup.value.isPrevious">
                                                                 How can we help you? <span class="text_red">*
@@ -419,7 +419,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 col-sm-12">
+                                                <div class="col-md-6 col-sm-12" *ngIf="other_language">
                                                     <div class="form-group w-100">
                                                         <label class="form-control-label">
                                                             Other Laungauge
@@ -462,7 +462,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12 col-sm-12">
+                                                <div class="col-md-12 col-sm-12" *ngIf="previous_voice">
                                                     <div class="form-group w-100">
                                                         <label class="form-control-label">
                                                             Provice a brief of experience <span class="text_red">*
@@ -473,7 +473,7 @@
                                                             formControlName="comment"></textarea>
                                                     </div>
                                                 </div>
-                                                <div class="flex">
+                                                <div class="flex col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-control-label">
                                                         Upload sample of voice recording
@@ -484,7 +484,8 @@
                                                         (change)="handleFileInput($event)" />
                                                 </div>
                                                 <div *ngIf="msaapPlaylist && msaapPlaylist.length > 0">
-                                                    <ngx-audio-player [playlist]="msaapPlaylist"
+                                                    <div *ngFor="let file of msaapPlaylist">
+                                                    <ngx-audio-player [playlist]="file"
                                                         [displayTitle]="msaapDisplayTitle" [autoPlay]="false"
                                                         muted="muted" [displayPlaylist]="msaapDisplayPlayList"
                                                         [pageSizeOptions]="msaapPageSizeOptions"
@@ -495,6 +496,7 @@
                                                         [displayRepeatControls]="msaapDisplayRepeatControls"
                                                         [disablePositionSlider]="msaapDisablePositionSlider">
                                                     </ngx-audio-player>
+                                                </div>
                                                 </div>
                                             </div>
                                                 <!-- <div class="custom-dropzone col-md-12" ngx-dropzone [accept]="'video/*'"
