@@ -33,6 +33,13 @@ export class DnaService {
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  getUserDigitalLearning(id: number){
+    const url = `/api/${this.apiVersion}/digital-learning/${id}`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
   getFormDetails(id: number) {
     const url = `/api/${this.apiVersion}/digital-learning/${id}/detail`;
     return this.http

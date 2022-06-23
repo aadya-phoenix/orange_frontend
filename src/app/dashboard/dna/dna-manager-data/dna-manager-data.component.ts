@@ -77,7 +77,7 @@ export class DnaManagerDataComponent implements OnInit {
 
   getLearningList(){
     this.commonService.showLoading();
-    this.dnaService.getDna().subscribe(
+    this.dnaService.getUserDigitalLearning(this.userId).subscribe(
       (res: any) => {
         if(res.status == 1){
         this.commonService.hideLoading();
