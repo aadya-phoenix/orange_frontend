@@ -43,6 +43,8 @@ export class SmedbCreateComponent implements OnInit {
   minDate = {};
   maxDate = {};
   today = new Date();
+  other_language = false;
+  previous_voice = false;
   SMETabs = dataConstant.SMETabs;
   selectedTab = this.SMETabs.contecntSupport;
   msaapDisplayTitle = false;
@@ -52,7 +54,7 @@ export class SmedbCreateComponent implements OnInit {
   msaapDisplayArtist = false;
   msaapDisplayDuration = false;
   msaapDisablePositionSlider = true;
-  msaapPlaylist: Track[] = [];
+  msaapPlaylist:any =[];
   getprofileDetails: any = {};
   public yesNo: any = [
     { id: 'yes', name: 'Yes' },
@@ -99,8 +101,7 @@ export class SmedbCreateComponent implements OnInit {
       other_language: new FormControl(''),
       gender_voice: new FormControl('', [Validators.required]),
       voice_recording: [],
-      previous_experience: new FormControl('', [Validators.required]),
-      comment: new FormControl('', [Validators.required]),
+      previous_experience: new FormControl('', [Validators.required])
     });
     this.professionalCertificationsForm = this.formBuilder.group({ 'professional-certifications': this.formBuilder.array([]) });
     // this.addProfessionalCertification(0, '', '');
@@ -121,7 +122,25 @@ export class SmedbCreateComponent implements OnInit {
     this.createSmedbForm.get("start_date")?.valueChanges.subscribe((x: {}) => {
       this.maxDate = x;
     });
-
+    this.voiceOverLearningForm.get("language")?.valueChanges.subscribe(x => {
+      if (_.includes(x, 'Others')) {
+        this.other_language = true;
+      }
+      else {
+        this.other_language = false;
+        this.voiceOverLearningForm.controls.other_language.setValue(null);
+      }
+    });
+    this.voiceOverLearningForm.get("previous_experience")?.valueChanges.subscribe(x => {
+      if (x == 'yes') {
+        this.previous_voice = true;
+        this.voiceOverLearningForm.addControl('comment', new FormControl(null, [Validators.required]));
+      }
+      else {
+        this.previous_voice = false;
+        this.voiceOverLearningForm.removeControl('comment');
+      }
+    });
 
   }
 
@@ -285,7 +304,6 @@ export class SmedbCreateComponent implements OnInit {
     this.smeService.getSMEDatabase().subscribe(
       (res: any) => {
         this.commonService.hideLoading();
-        debugger;
         if (res.status === 1 && res.message === 'Success') {
           if (res.data.sme && res.data.sme.length) {
             if (this.sme_id) {
@@ -350,16 +368,22 @@ export class SmedbCreateComponent implements OnInit {
             this.voiceOverLearningForm.controls.other_language.setValue(x.other_language);
             this.voiceOverLearningForm.controls.gender_voice.setValue(x.gender_voice);
             this.voiceOverLearningForm.controls.previous_experience.setValue(x.previous_experience);
-            this.voiceOverLearningForm.controls.comment.setValue(x.comment);
+            if(x.previous_experience == 'yes'){
+              this.previous_voice = true;
+              this.voiceOverLearningForm.addControl('comment', new FormControl(x.comment, [Validators.required]));
+            }
             if (x.voice_recording) {
               const voice_recording = JSON.parse(x.voice_recording);
               voice_recording.forEach((element: any) => {
-                this.msaapPlaylist.push(
+                
+                const msaapPlaylist = [
                   {
                     title: x.language,
                     link: `${dataConstant.ImageUrl}/${element}`
-                  },
-                );
+                  }
+                ];
+
+                this.msaapPlaylist.push(msaapPlaylist)
               })
             }
           })
@@ -465,10 +489,20 @@ export class SmedbCreateComponent implements OnInit {
 
   changePerviousExperience(item: any) {
     item.controls.isPrevious.setValue(item.value.previous_experience == 'yes' ? true : false);
+    if(item.controls.isPrevious.value){
+      item.removeControl('need_help')
+    }else{
+      item.addControl('need_help', new FormControl(null, [Validators.required]))
+    }
   }
 
   changeNeedHelp(item: any) {
     item.controls.isNeedHelp.setValue(item.value.need_help == 'yes' ? true : false);
+    if(!item.controls.isNeedHelp.value){
+      item.removeControl('comment')
+    }else{
+      item.addControl('comment', new FormControl(null, [Validators.required]))
+    }
     // if(!item.value.isNeedHelp){
     //   this.createSmedbForm.removeControl('end_date');
     // }
@@ -525,6 +559,7 @@ export class SmedbCreateComponent implements OnInit {
       );
     }
     else {
+      debugger;
       body.sme_id = this.sme_id;
       if (this.isProcced) {
         body.matadata_update = 1;
@@ -536,7 +571,7 @@ export class SmedbCreateComponent implements OnInit {
           body.metadata["content-support"] = this.contentSupportForm.controls["content-support"].value;
         }
         if (this.sme_details.domain.includes('delivery')) {
-          body.metadata["delivery"] = this.deliveryForm.value["delivery"];
+          body.metadata["delivery"] =  this.deliveryForm.controls["delivery"].value;
         }
         if (this.sme_details.domain.includes('voice-over-learning')) {
           body.metadata["voice-over-learning"] = this.voiceOverLearningForm.value;
