@@ -57,7 +57,7 @@
             <span>
               {{ routegetdata.learning_type_name }} {{ routegetdata.delivery_method_name }}
             </span>
-            <span class="text_orange">Request Status - {{ routegetdata.status_new | titlecase }}</span>
+            <span class="text_orange fon_weight_read">Request Status - {{ routegetdata.status_new | titlecase }}</span>
           </p>
         </div>
 
@@ -140,7 +140,7 @@
                           <span class="form_data" onkeyup="textAreaAdjust(this)">
                             {{routegetdata.intranet_url ? routegetdata.intranet_url : "-" }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text"
+                          <a  data-toggle="tooltip" data-placement="top" title="Copy Text"
                             (click)="copyToClipBoard(routegetdata.intranet_url)" class="ml-1">
                             <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
 
@@ -155,7 +155,7 @@
                           <span class="form_data" onkeyup="textAreaAdjust(this)">
                             {{routegetdata.internet_url ? routegetdata.internet_url : "-" }}
                           </span>
-                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text"
+                          <a  data-toggle="tooltip" data-placement="top" title="Copy Text"
                             (click)="copyToClipBoard(routegetdata.internet_url)" class="ml-1">
                             <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
@@ -775,7 +775,7 @@
 
                     </div>
                     <!--cole dn-->
-                    <div class="col-sm-12">
+                    <div class="col-sm-12">Translatform_data
                       <div class="form-group">
                         <label for="exampleInputEmail1">Learn more</label>
                         <div class="d-flex align-items-center">
@@ -1743,10 +1743,13 @@
                     <label class="form-control-label">{{getLabel(item)}}</label>
 
                   </div>
-                  <div class="d-flex">
-                    <span class="form_data1" onkeyup="textAreaAdjust(this)">
+                  <div class="d-flex align-items-center">
+                    <span class="form_data" onkeyup="textAreaAdjust(this)">
                       {{getValue(item)}}
                     </span>
+                    <a  data-toggle="tooltip" data-placement="top" title="Copy Text"
+                    (click)="copyToClipBoard(routegetdata.internet_url)" class="ml-1">
+                    <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                   </div>
                 </div>
               </div>
