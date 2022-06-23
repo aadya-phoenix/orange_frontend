@@ -20,6 +20,7 @@ import { DnaForwardComponent } from './dna-forward/dna-forward.component';
 import { DnaTrackerComponent } from './dna-tracker/dna-tracker.component';
 import { DnaTrackerCreateComponent } from './dna-tracker-create/dna-tracker-create.component';
 
+
 @NgModule({
   declarations: [DnaDashboardComponent, DnaCreateComponent, DnaLearningFormComponent,  DnaViewComponent, DnaCompleteReportComponent, DnaManagerDataComponent, DnaViewRptComponent, DnaUserComponent, DnaUserEditComponent, DnaViewBpComponent, DnaForwardComponent, DnaTrackerComponent, DnaTrackerCreateComponent],
   entryComponents:[ DnaForwardComponent],
@@ -31,6 +32,7 @@ import { DnaTrackerCreateComponent } from './dna-tracker-create/dna-tracker-crea
     NgxPaginationModule,
     NgSelectModule,
     NgbModule,
+
   ]
 })
 export class DnaModule { }
