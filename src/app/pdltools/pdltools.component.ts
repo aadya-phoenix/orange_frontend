@@ -20,6 +20,10 @@ export class PdltoolsComponent implements AfterViewInit {
   courceData: any = {};
   sessionData: any = {};
   reportData: any = {};
+  publisherReportData:any = [];
+  rocReportData:any = [];
+  rocData: any = [];
+  publisherData: any = [];
   modules = dataConstant.Modules;
   year = null;
   selectedModule = null;
@@ -29,10 +33,7 @@ export class PdltoolsComponent implements AfterViewInit {
     this.moduleList = dataConstant.ModuleList;
   }
   public ngAfterViewInit(): void {
-    this.createChartGauge();
-    this.createChartPie();
-    this.createChartColumn();
-    this.createChartLine();
+    
   }
 
   getNewData() {
@@ -61,9 +62,30 @@ export class PdltoolsComponent implements AfterViewInit {
       (res: any) => {
         if (res && res.status == 1) {
           this.courceData = res.data;
+          this.publisherReportData = [];
+          this.rocReportData = [];
+          this.rocData = Object.entries(this.courceData.roc_activity);
+          this.publisherData = Object.entries(this.courceData.publisher_activity);
+          Object.entries(this.courceData.publisher_activity).forEach((element: any, index:any) => {
+            const data = {
+              name: element[0],
+              data: Object.keys(element[1].monthly).map((key) => element[1].monthly[key].total)
+            }
+            this.publisherReportData.push(data);
+          });
+          this.rocData.forEach((element: any, index:any) => {
+            const data = {
+              name: element[0],
+              data: Object.keys(element[1].monthly).map((key) => element[1].monthly[key].total)
+            }
+            this.rocReportData.push(data);
+          });
         } else {
           this.commonService.toastErrorMsg('Error', res.message);
         }
+        this.createChartColumn();
+        this.createChartLine('chart-publisher','Publisher Activity Report',this.publisherReportData);
+        this.createChartLine('chart-roc','ROC Activity Report',this.rocReportData);
         this.commonService.hideLoading();
       },
       (err: any) => {
@@ -177,9 +199,9 @@ export class PdltoolsComponent implements AfterViewInit {
       }],
     } as any);
 
-    setInterval(() => {
-      chart.series[0].points[0].update(this.getRandomNumber(0, 100));
-    }, 1000);
+    // setInterval(() => {
+    //   chart.series[0].points[0].update(this.getRandomNumber(0, 100));
+    // }, 1000);
   }
 
   private createChartPie(): void {
@@ -216,13 +238,13 @@ export class PdltoolsComponent implements AfterViewInit {
       }],
     } as any);
 
-    setInterval(() => {
-      date.setDate(date.getDate() + 1);
-      chart.series[0].addPoint({
-        name: `${date.getDate()}/${date.getMonth() + 1}`,
-        y: this.getRandomNumber(0, 1000),
-      }, true, true);
-    }, 1500);
+    // setInterval(() => {
+    //   date.setDate(date.getDate() + 1);
+    //   chart.series[0].addPoint({
+    //     name: `${date.getDate()}/${date.getMonth() + 1}`,
+    //     y: this.getRandomNumber(0, 1000),
+    //   }, true, true);
+    // }, 1500);
   }
 
   private createChartColumn(): void {
@@ -241,67 +263,45 @@ export class PdltoolsComponent implements AfterViewInit {
       chart: {
         type: 'column',
         options3d: {
-            enabled: true,
-            alpha: 15,
-            beta: 15,
-            viewDistance: 25,
-            depth: 40
-        }
-    },
+          enabled: true
+                }
+      },
       title: {
-        text: 'Column Chart',
+        text: `Overall Progress ${this.year}`,
       },
       credits: {
         enabled: false,
       },
       xAxis: {
-        categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas'],
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         labels: {
-            skew3d: true,
-            style: {
-                fontSize: '16px'
-            }
+          skew3d: true,
+          style: {
+            fontSize: '16px'
+          }
         }
-    },
+      },
 
-    yAxis: {
-        allowDecimals: false,
-        min: 0,
+      yAxis: {
         title: {
-            text: 'Number of fruits',
-            skew3d: true
+          text: null
         }
-    },
+      },
+      series: [{
+        name: 'Total Requests',
+        data: Object.keys(this.courceData.monthly).map((key) => this.courceData.monthly[key].total)
+      }],
 
-    tooltip: {
+      tooltip: {
         headerFormat: '<b>{point.key}</b><br>',
-        pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: {point.y} / {point.stackTotal}'
-    },
+        pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: {point.y}'
+      },
 
-    plotOptions: {
-        column: {
-            stacking: 'normal',
-            depth: 40
-        }
-    },
-
-    series: [{
-        name: 'John',
-        data: [5, 3, 4, 7, 2],
-        stack: 'male'
-    }, {
-        name: 'Joe',
-        data: [3, 4, 4, 2, 5],
-        stack: 'male'
-    }, {
-        name: 'Jane',
-        data: [2, 5, 6, 2, 1],
-        stack: 'female'
-    }, {
-        name: 'Janet',
-        data: [3, 0, 4, 4, 3],
-        stack: 'female'
-    }]
+      // plotOptions: {
+      //   column: {
+      //     depth: 25
+      //   }
+      // }
     } as any);
 
     // setInterval(() => {
@@ -313,52 +313,64 @@ export class PdltoolsComponent implements AfterViewInit {
     // }, 1500);
   }
 
-  private createChartLine(): void {
-    let date = new Date();
-    const data: any[] = [];
-
-    for (let i = 0; i < 10; i++) {
-      date.setDate(new Date().getDate() + i);
-      data.push([`${date.getDate()}/${date.getMonth() + 1}`, this.getRandomNumber(0, 1000)]);
-    }
-
-    const chart = Highcharts.chart('chart-line', {
+  private createChartLine(chartname:string,title:string, data:any): void {
+    const chart = Highcharts.chart(chartname, {
       chart: {
-        type: 'line',
-      },
-      title: {
-        text: 'Line Chart',
-      },
+        type: 'column'
+    },
+    title: {
+        text:title
+    },
+    subtitle: {
+      text:`Month wise ${this.year}`
+  },
+    xAxis: {
+        categories: [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Requests'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: data,
       credits: {
         enabled: false,
-      },
-      legend: {
-        enabled: false,
-      },
-      yAxis: {
-        title: {
-          text: null,
-        }
-      },
-      xAxis: {
-        type: 'category',
-      },
-      tooltip: {
-        headerFormat: `<div>Date: {point.key}</div>`,
-        pointFormat: `<div>{series.name}: {point.y}</div>`,
-        shared: true,
-        useHTML: true,
-      },
-      series: [{
-        name: 'Amount',
-        data,
-      }],
+      }
     } as any);
 
-    setInterval(() => {
-      date.setDate(date.getDate() + 1);
-      chart.series[0].addPoint([`${date.getDate()}/${date.getMonth() + 1}`, this.getRandomNumber(0, 1000)], true, true);
-    }, 1500);
+    // setInterval(() => {
+    //   date.setDate(date.getDate() + 1);
+    //   chart.series[0].addPoint([`${date.getDate()}/${date.getMonth() + 1}`, this.getRandomNumber(0, 1000)], true, true);
+    // }, 1500);
   }
 
 }
