@@ -7,7 +7,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PdltoolsRoutingModule } from './pdltools-routing.module';
 import { PdltoolsComponent } from './pdltools.component';
 
-
 @NgModule({
   declarations: [PdltoolsComponent],
   imports: [
@@ -16,7 +15,7 @@ import { PdltoolsComponent } from './pdltools.component';
     SharedModule,
     NgSelectModule,
     NgxPaginationModule,
-    NgbModule
+    NgbModule,
   ]
 })
 export class PdltoolsModule { }

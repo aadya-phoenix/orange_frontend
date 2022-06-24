@@ -43,9 +43,8 @@
                     <label class="form-control-label">
                         Select Year
                     </label>
-                    <ng-select placeholder="Please select year" [items]="yearsList"
-                        bindLabel="name" bindValue="id" [multiple]=false class="w_100"
-                        [(ngModule)]="year">
+                    <ng-select placeholder="Please select year" [items]="yearsList" bindLabel="name" bindValue="id"
+                        [multiple]=false class="w_100" [(ngModel)]="year" (change)="getNewData()">
                     </ng-select>
                 </div>
             </div>
@@ -54,11 +53,80 @@
                     <label class="form-control-label">
                         Select Module
                     </label>
-                    <ng-select placeholder="Please select module" [items]="moduleList"
-                        bindLabel="name" bindValue="id" [multiple]=false class="w_100"
-                        [(ngModule)]="module">
+                    <ng-select placeholder="Please select module" [items]="moduleList" bindLabel="name" bindValue="id"
+                        [multiple]=false class="w_100" [(ngModel)]="selectedModule" (change)="getNewData()">
                     </ng-select>
                 </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="courceData.overall">
+            <div class="col-lg-3 col-6 col-sm-12 mb-2">
+                <div class="small-box cm-draft">
+                    <div class="counter_dispaly">
+                        <div class="inner">
+                            <p>Total Request</p>
+                            <h3 class="font-weight-bolder">{{courceData.overall.total}}</h3>
+                        </div>
+                        <div class="icon">
+                            <img src="../../../../assets/images/icon/viewall.png" class="icon_img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6 col-sm-12 mb-2">
+                <div class="small-box cm-learning">
+                    <div class="counter_dispaly">
+                        <div class="inner">
+                            <p>Published Request</p>
+                            <h3 class="font-weight-bolder">{{courceData.overall.publish}}</h3>
+                        </div>
+                        <div class="icon">
+                            <img src="../../../../assets/images/icon/check.png" class="icon_img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6 col-sm-12 mb-2">
+                <div class="small-box bac_yellow">
+                    <div class="counter_dispaly">
+                        <div class="inner">
+                            <p>Pending Request</p>
+                            <h3 class="font-weight-bolder">{{courceData.overall.pending}}</h3>
+                        </div>
+                        <div class="icon">
+                            <img src="../../../../assets/images/icon/pending.png" class="icon_img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6 col-sm-12 mb-2">
+                <div class="small-box cm-reject">
+                    <div class="counter_dispaly">
+                        <div class="inner">
+                            <p>Rejected Request</p>
+                            <h3 class="font-weight-bolder">{{courceData.overall.reject}}</h3>
+                        </div>
+                        <div class="icon">
+                            <img src="../../../../assets/images/icon/reject.png" class="icon_img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-6">
+                <div id="chart-gauge"></div>
+            </div>
+            <div class="col-6">
+                <div id="chart-pie"></div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-6">
+                <div id="chart-column"></div>
+            </div>
+            <div class="col-6">
+                <div id="chart-line"></div>
             </div>
         </div>
     </div>
