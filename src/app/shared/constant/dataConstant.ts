@@ -43,8 +43,8 @@ export const dataConstant = {
   ExporType : {course:'course', session:'session', carousel:'carousel', back_office:'back_office', vendor:'vendor', vendor_rating:'vendor_rating', get_report:'get_report'},
   RoleID: {
     RequesterID: 2,
-    CourseReviewer: 7,
-    CoursePublisher: 8,
+    CourseReviewer: 3,
+    CoursePublisher: 4,
     CourseRequester: 2,
     CarouselReviewer: 7,
     CarouselPublisher: 8,
