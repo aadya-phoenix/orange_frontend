@@ -6,9 +6,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PdltoolsRoutingModule } from './pdltools-routing.module';
 import { PdltoolsComponent } from './pdltools.component';
+import { PdltoolsDetailsComponent } from './pdltools-details/pdltools-details.component';
 
 @NgModule({
-  declarations: [PdltoolsComponent],
+  declarations: [PdltoolsComponent, PdltoolsDetailsComponent],
   imports: [
     CommonModule,
     PdltoolsRoutingModule,
