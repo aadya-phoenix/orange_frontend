@@ -30,30 +30,18 @@ export class DnaCompleteReportComponent implements OnInit {
   }
   business_consultant_count = {
     total: 0,
-    draft: 0,
     closed: 0,
     close: 0,
-    rejected: 0,
     forwarded:0,
     pending: 0,
-    submitted: 0,
-    transferred: 0,
-    expired: 0,
-    publish: 0,
     total_participant: 0
   };
   rom_count = {
     total: 0,
-    draft: 0,
     closed: 0,
     close: 0,
-    rejected: 0,
     forwarded:0,
     pending: 0,
-    submitted: 0,
-    transferred: 0,
-    expired: 0,
-    publish: 0,
     total_participant: 0
   };
   strategic_count ={
@@ -63,19 +51,23 @@ export class DnaCompleteReportComponent implements OnInit {
   };
   dna_count = {
     total: 0,
-    draft: 0,
     closed: 0,
     close: 0,
-    rejected: 0,
     forwarded:0,
     pending: 0,
-    submitted: 0,
-    transferred: 0,
-    expired: 0,
-    publish: 0,
     digital_learning:0
   }
+  domain_training = {
+    total: 0,
+    closed: 0,
+    close: 0,
+    forwarded:0,
+    pending: 0,
+    total_participant: 0
+  }
+  domain_wise_count ={ };
   searchText: any;
+  isFrance = false;
   constructor(
     private commonService: CommonService,
     private dnaService:DnaService,
@@ -105,11 +97,6 @@ export class DnaCompleteReportComponent implements OnInit {
   getTrackerList(){
     this.dnaService.getTrackerList().subscribe((res:any)=>{
       this.trackerObj = res.data.tracker;
-     /*  this.trackerObj = this.trackerObj.filter((y:any)=> {
-        if(y.id != this.trackerId){ 
-        return y;
-        }
-      }); */
     },
     err=>{
     });
@@ -125,6 +112,8 @@ export class DnaCompleteReportComponent implements OnInit {
         this.rom_count = res.data.digital_learning_count.rom_count;
         this.business_consultant_count = res.data.digital_learning_count.business_consultant_count;
         this.strategic_count = res.data.digital_learning_count.strategic_count;
+        this.domain_training = res.data.digital_learning_count.domain_training;
+        this.domain_wise_count = res.data.digital_learning_count.domain_wise;
         this.learningListToShow.forEach((x:any)=>{
           if(x.strategic){
            if(x.strategic == 'strategic_1'){

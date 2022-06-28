@@ -30,7 +30,7 @@
                             <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
                         </li>
                         <li>
-                            <span class="text_white span_dis">Digital learning Needs Analysis</span>
+                            <span class="text_white span_dis">DNA</span>
                         </li>
                     </ol>
                 </div>
@@ -77,6 +77,7 @@
                                     </select>
                                     </div><!--colend-->
                                     </div>
+                       <ng-container>
                         <div class="card">
                             <div class="card-header">
                                 <p class="mb-0 font-13">Regional Operation Manager</p>
@@ -248,7 +249,141 @@
                                 </div>
                             </div>
                         </div>
-                       
+                       </ng-container>  
+                    <!--     <ng-container>
+                        <div class="card">
+                            <div class="card-header">
+                                <p class="mb-0 font-13">Domain Training</p>
+                                <div class="form-group filter_course mr-1" >   
+                                </div>
+                            </div>
+                            <div class="card-body pa_4_0">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="Course_icon_child" >
+                                             <div class="alig_dashicon">
+                                                 <div class="sub-child-dashicon">
+                                                     <div class="fa-icons-des bac_yellow">
+                                                         <img src="../../../../assets/images/icon/pending.png" />
+                                                     </div>
+                                                     <p>Pending</p>
+                                                 </div>
+                                                 <span
+                                                     class="number_css">{{domain_training.pending?domain_training.pending:0}}</span>
+                                             </div>
+                                         </div>
+                                         </div>
+                                         <div class="col-sm-3">
+                                            <div class="Course_icon_child">
+                                                <div class="alig_dashicon" >
+                                                    <div class="sub-child-dashicon">
+                                                        <div class="fa-icons-des cm-learning">
+                                                            <img src="../../../../assets/images/icon/check.png" />
+                                                        </div>
+                                                        <p>Requets Closed</p>
+                                                    </div>
+                                                    <span
+                                                        class="number_css">{{domain_training.close?domain_training.close:0}}</span>
+                                                </div>
+                                            </div>
+                                         </div>
+                                  <div class="col-sm-3">
+                                    <div class="Course_icon_child">
+                                        <div class="alig_dashicon">
+                                            <div class="sub-child-dashicon">
+                                                <div class="fa-icons-des cm-all">
+                                                    <img src="../../../../assets/images/icon/viewall.png" />
+                                                </div>
+    
+                                                <p>Total Requests</p>
+                                            </div>
+                                            <span class="number_css tot_left">{{domain_training.total?domain_training.total:0}}</span>
+                                        </div>
+                                    </div>
+                                   </div>
+                                   <div class="col-sm-3">
+                                    <div class="Course_icon_child">
+                                        <div class="alig_dashicon">
+                                            <div class="sub-child-dashicon">
+                                                <div class="fa-icons-des cm-reject">
+                                                    <img src="../../../../assets/images/icon/group.png" />
+                                                </div>
+                                                <p>Total No Of Participants</p>
+                                            </div>
+                                            <span
+                                                class="number_css tot_left_pa">{{ domain_training.total_participant ? domain_training.total_participant : 0 }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <p class="mb-0 font-13">Domain Wise</p>
+                            </div>
+                            <div class="card-body pa_4_0">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="Course_icon_child">
+                                            <div class="alig_dashicon" >
+                                                <div class="sub-child-dashicon">
+                                                    <div class="fa-icons-des cm-all">
+                                                        <img src="../../../../assets/images/icon/viewall.png" />
+                                                    </div>
+        
+                                                    <p>Cloud</p>
+                                                </div>
+                                                <span class="number_css tot_left">{{domain_wise_count.Cloud ? domain_wise_count.Cloud : 0}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   <div class="col-sm-3">
+                                        <div class="Course_icon_child" >
+                                            <div class="alig_dashicon" >
+                                                <div class="sub-child-dashicon">
+                                                    <div class="fa-icons-des bac_yellow">
+                                                        <img src="../../../../assets/images/icon/pending.png" />
+                                                    </div>
+                                                    <p>Compétences B2B</p>
+                                                </div>
+                                                <span
+                                                    class="number_css ">{{domain_wise_count.Compétences B2B ? domain_wise_count.Compétences B2B : 0}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="Course_icon_child" >
+                                            <div class="alig_dashicon">
+                                                <div class="sub-child-dashicon">
+                                                    <div class="fa-icons-des bac_red">
+                                                        <img src="../../../../assets/images/icon/transfer.png" />
+                                                    </div>
+                                                    <p>Compétences managériales</p>
+                                                </div>
+                                                <span
+                                                    class="number_css for_left">{{domain_wise_count.Compétences managériales ? domain_wise_count.Compétences managériales : 0}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="Course_icon_child">
+                                            <div class="alig_dashicon">
+                                                <div class="sub-child-dashicon">
+                                                    <div class="fa-icons-des cm-reject">
+                                                        <img src="../../../../assets/images/icon/group.png" />
+                                                    </div>
+                                                    <p>Compétences transverses</p>
+                                                </div>
+                                                <span
+                                                    class="number_css tot_left_pa">{{ domain_wise_count.Compétences transverses ? domain_wise_count.Compétences transverses : 0 }}</span>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                       </ng-container>-->
                     </div>
                 </div>
                 </div>
