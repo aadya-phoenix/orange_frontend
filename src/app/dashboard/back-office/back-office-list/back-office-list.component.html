@@ -45,7 +45,7 @@
                         <div class="card-header cm-card-header">
                             <div class="overall_css">
                                 <span class="card_overall">Overall request Status</span>
-                                <div class="d-flex">
+                                <div class="cct_button_oversta">
                                     <button class="btn btn-secondary" [routerLink]="['/dashboard/back-office/view-complete-report']">
                                         <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> View
                                         all activity report
@@ -235,6 +235,7 @@
                                                 </p>
                                             </td>
                                             <td class="text-center">
+                                                <div class="d-flex">
                                                 <a (click)="copyRequest(item.id)" class="copy_file mr-1" *ngIf="item.status_show === backOfficeStatus.submitted"
                                                     data-toggle="tooltip" data-placement="top" title="Copy">
                                                     <i class="fa fa-files-o" aria-hidden="true"></i>
@@ -255,6 +256,7 @@
                                                     (click)="viewRequest(item)" data-placement="top" title="View">
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
