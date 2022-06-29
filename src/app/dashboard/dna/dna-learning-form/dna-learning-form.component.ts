@@ -136,7 +136,6 @@ export class DnaLearningFormComponent implements OnInit {
   }
  
   save(){
-    console.log("data",this.createDnaForm.value);
     this.isSubmitted = true;
     if (this.createDnaForm.invalid) {
       return;
