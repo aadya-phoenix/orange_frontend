@@ -16,11 +16,20 @@ import { DesignLearningService } from 'src/app/shared/services/design-learning/d
 export class DesignLearningListComponent implements OnInit {
 
   dateFormate = dataConstant.dateFormate;
+  dateTimeFormate = dataConstant.dateTimeFormate;
   designStatus = dataConstant.DesignStatus;
   designListToShow:any=[];
   designList:any =[];
   selectedStatus:any;
-  design_count:any={}
+  design_count:any={
+    closed: 0,
+    draft: 0,
+    pending: 0,
+    rejected: 0,
+    submitted: 0,
+    total: 0,
+    transferred: 0
+  }
   searchText:string='';
 
   pagination = {
@@ -48,8 +57,8 @@ export class DesignLearningListComponent implements OnInit {
     this.designService.getModules().subscribe(
       (res: any) => {
         if (res.status === 1 && res.message === 'Success') {
-          this.designList = res.data.course;
-          this.design_count = res.data.course_count;
+          this.designList = res.data.new_learning;
+          this.design_count = res.data.new_learning_count;
           this.showRecords(this.designStatus.total);
         }
         this.commonService.hideLoading();
@@ -136,7 +145,9 @@ export class DesignLearningListComponent implements OnInit {
       type: 'viewhistory'
     }; */
   }
-  viewRequest(item: any){}
+  viewRequest(item: any){
+    this.router.navigateByUrl(`dashboard/designlearning/view/${item.id}`);
+  }
 
   onSort({ column, direction }: any) {
     this.headers.forEach((header: { sortable: any; direction: string; }) => {

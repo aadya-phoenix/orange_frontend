@@ -7,11 +7,10 @@
           <div class="page-title d-flex align-items-center">
             <img src="../../../../assets/images/first.jpg" class="home_Css_img" />
             <div class="d-flex flex-column ml-3">
-              <span class="breade_text_span1">Create new course </span>
+              <span class="breade_text_span1">Design learning Module</span>
               <span class="divider"></span>
-              <span class="breade_text_span">People Development & Learning Strives on
-                Providing you with the
-                best customer service we can drive</span>
+              <span class="breade_text_span">Request the development of new learning modules for your team or
+                our organization.</span>
             </div>
           </div>
         </div>
@@ -114,7 +113,7 @@
                                             <div class="fa-icons-des cm-learning">
                                                 <img src="../../../../assets/images/icon/check.png" />
                                             </div>
-                                            <p>Published</p>
+                                            <p>Closed</p>
                                         </div>
                                         <span
                                             class="number_css pub_left">{{design_count.closed?design_count.closed:0}}</span>
@@ -207,21 +206,18 @@
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
                                             </th>
                                             <th sortable="status"  (sort)="onSort($event)">
-                                                Status<i class="fa fa-long-arrow-up arrow_css"
-                                                    aria-hidden="true"></i>
-                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
+                                                Status
                                             </th>
                                             <th sortable="edit" (sort)="onSort($event)">
                                               View/Edit request
-                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
-                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
-                                            <th sortable="commn" (sort)="onSort($event)">View/Send communication</th>
-                                            <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
-                                            <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
-                                            <th sortable="rating" (sort)="onSort($event)">Customer Rating
-                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
-                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            <th sortable="commn" (sort)="onSort($event)">
+                                                View/Send communication</th>
+                                            <th sortable="rating" (sort)="onSort($event)">
+                                                Customer Rating
+                                            </th>
+                                            <th sortable="rating" (sort)="onSort($event)">
+                                                Actions
                                             </th>
                                         </tr>
                                     </thead>
@@ -230,49 +226,56 @@
                                             class="text-center bac_hover-table font-12">
                                             <td class="request_id" (click)="viewRequest(item)">{{ item.request_id }}
                                             </td>
-                                            <td (click)="viewRequest(item)">{{ item && item.user_name ? item.user_name :
-                                                "-" }}</td>
-                                            <td (click)="viewRequest(item)">{{ item.titleByLang }}
+                                            <td (click)="viewRequest(item)">{{ item.created_at | date: dateTimeFormate}}</td>
+                                            <td (click)="viewRequest(item)">{{ item.user_name | titlecase }}
                                             </td>
-                                            <td (click)="viewRequest(item)">{{ item.learning_type_name }}
+                                            <td (click)="viewRequest(item)">
                                             </td>
                                             <td  (click)="getRequest(cource)">
-                                              {{item.transfer_user_name ? item.transfer_user_name : '-'}}
+                                             
                                             </td>
-                                            <td (click)="viewRequest(item)">{{ item.updated_at | date: dateTimeFormate }}
+                                            <td class="text-center">
+                                                <p [ngClass]="item.status">
+                                                    {{ (item.status ? item.status : 'Pending') | titlecase }}
+                                                </p>
+                                            </td>
+                                            <td> <a class="copy_file mr-1 re_id" data-toggle="tooltip"
+                                                (click)="viewRequest(item)" data-placement="top" title="View">
+                                                <i class="fa fa-eye " aria-hidden="true"></i>
+                                            </a>
                                             </td>
                                             <td>
                                                 <a *ngIf="item.status !== designStatus.draft" (click)="openModal(item)" class="re_id">
                                                     View
                                                 </a>
                                             </td>
-                                            <td class="text-center">
-                                                <p [ngClass]="item.status">
-                                                    {{ (item.status_new ? item.status_new : 'Pending') | titlecase }}
-                                                </p>
+                                            <td>
+                                             
                                             </td>
                                             <td class="text-center">
-                                                <a (click)="copyRequest(item.id)" class="copy_file mr-1" *ngIf="item.status_show === designStatus.submitted"
-                                                    data-toggle="tooltip" data-placement="top" title="Copy">
-                                                    <i class="fa fa-files-o" aria-hidden="true"></i>
-                                                </a>
-                                                <a (click)="editRequest(item)"
-                                                    *ngIf="item.status_show === designStatus.draft || (item.status === designStatus.reject && item.user_id === getprofileDetails.data.id)"
-                                                    class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
-                                                    title="Edit">
-                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                </a>
-                                                <a (click)="deleteRequest(item.id)"
-                                                    *ngIf="item.status_show === designStatus.draft"
-                                                    class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
-                                                    title="Delete">
-                                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                                </a>
-                                                <a class="copy_file mr-1" data-toggle="tooltip"
-                                                    (click)="viewRequest(item)" data-placement="top" title="View">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </a>
-                                            </td>
+                                                <div class="d-flex">
+                                                  <a (click)="copyRequest(item.id)" class="copy_file mr-1" 
+                                                      data-toggle="tooltip" data-placement="top" title="Copy">
+                                                      <i class="fa fa-files-o" aria-hidden="true"></i>
+                                                  </a>
+                                                  <a (click)="editRequest(item)"
+                                                    
+                                                      class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
+                                                      title="Edit">
+                                                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                  </a>
+                                                  <a (click)="deleteRequest(item.id)"
+                                                     
+                                                      class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
+                                                      title="Delete">
+                                                      <i class="fa fa-trash" aria-hidden="true"></i>
+                                                  </a>
+                                                  <a class="copy_file mr-1" data-toggle="tooltip"
+                                                      (click)="viewRequest(item)" data-placement="top" title="View">
+                                                      <i class="fa fa-eye" aria-hidden="true"></i>
+                                                  </a>
+                                                  </div>
+                                              </td>
                                         </tr>
                                     </tbody>
                                 </table>
