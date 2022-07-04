@@ -30,7 +30,7 @@
                             <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
                         </li>
                         <li>
-                            <span class="text_white span_dis">Digital learning Needs Analysis</span>
+                            <span class="text_white span_dis">DNA</span>
                         </li>
                     </ol>
                 </div>
@@ -39,11 +39,13 @@
     </div>
     <div class="content mt-1">
         <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
                 <div class="w_100 d-flex">
                     <div class="mr-3">
-                        <div>
+                        <div class="mt_66">
                             <div class="top_circle">
                             
                             </div>
@@ -53,12 +55,12 @@
                             <div class="top_circle mt_26_minus">
                             
                             </div>
-                            <div class="line_hieght">
+                            <div class="line_hieght respo_sec_linehei">
                             </div>
                             <div class="top_circle mt_26_minus">
                             
                             </div>
-                            <div class="line_hieght">
+                            <div class="line_hieght height_108">
                             </div>
                             
                             </div>
@@ -66,22 +68,29 @@
                                 
                     </div>
                     <div class="w-100">
-                        <div class="card">
-                            <div class="card-header">
-                                <p class="mb-0 text_orange">Regional Operation Manager</p>
-                                <div class="form-group filter_course mr-1" >
-                                    <label class="label_course">Trackers</label>
-                                    <select class="form-control  form_width"
+                        <div class="row mb-2">
+                            <div class="col-sm-3">
+                                <label class="label_course">Trackers</label>
+                        <select class="form-control  form_width"
                                         (change)="getTracker($event.target.value)">
                                         <option selected='selected' value=''></option>
                                         <option *ngFor="let item of trackerObj" [value]="item.id">
                                             {{item.title}}</option>
                                     </select>
+                                    </div><!--colend-->
+                                    </div>
+                       <ng-container>
+                        <div class="card">
+                            <div class="card-header">
+                                <p class="mb-0 font-13">Regional Operation Manager</p>
+                                <div class="form-group filter_course mr-1" >
+                                   
+                                    
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <div class="row">
-                                  <div class="col-sm-3">
+                            <div class="card-body pa_4_0">
+                              
+                                  <div class="Course_icon_parent">
                                     <div class="Course_icon_child">
                                         <div class="alig_dashicon">
                                             <div class="sub-child-dashicon">
@@ -94,8 +103,7 @@
                                             <span class="number_css tot_left">{{rom_count.total?rom_count.total:0}}</span>
                                         </div>
                                     </div>
-                                   </div>
-                                   <div class="col-sm-3">
+                                   
                                    <div class="Course_icon_child" >
                                         <div class="alig_dashicon">
                                             <div class="sub-child-dashicon">
@@ -108,8 +116,7 @@
                                                 class="number_css">{{rom_count.pending?rom_count.pending:0}}</span>
                                         </div>
                                     </div>
-                                    </div>
-                                    <div class="col-sm-3">
+                                   
                                     <div class="Course_icon_child">
                                         <div class="alig_dashicon" >
                                             <div class="sub-child-dashicon">
@@ -122,17 +129,17 @@
                                                 class="number_css">{{rom_count.close?rom_count.close:0}}</span>
                                         </div>
                                     </div>
-                                 </div>
+                                
                                 </div>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-header">
-                                <p class="mb-0 text_orange">Business Consultant</p>
+                                <p class="mb-0 font-13">Business Consultant</p>
                             </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">
+                            <div class="card-body pa_4_0">
+                                <div class="Course_icon_parent">
+                                    
                                         <div class="Course_icon_child">
                                             <div class="alig_dashicon" >
                                                 <div class="sub-child-dashicon">
@@ -145,8 +152,7 @@
                                                 <span class="number_css tot_left">{{business_consultant_count.total ? business_consultant_count.total : 0}}</span>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-3">
+                                    
                                         <div class="Course_icon_child" >
                                             <div class="alig_dashicon" >
                                                 <div class="sub-child-dashicon">
@@ -159,8 +165,7 @@
                                                     class="number_css ">{{business_consultant_count.pending ? business_consultant_count.pending : 0}}</span>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-3">
+                                    
                                         <div class="Course_icon_child" >
                                             <div class="alig_dashicon">
                                                 <div class="sub-child-dashicon">
@@ -173,8 +178,7 @@
                                                     class="number_css for_left">{{business_consultant_count.forwarded ? business_consultant_count.forwarded : 0}}</span>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-3">
+                                   
                                         <div class="Course_icon_child">
                                             <div class="alig_dashicon">
                                                 <div class="sub-child-dashicon">
@@ -187,73 +191,208 @@
                                                     class="number_css tot_left_pa">{{ business_consultant_count.total_participant ? business_consultant_count.total_participant : 0 }}</span>
                                             </div>
                                         </div>
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-header">
-                                <p class="mb-0 text_orange">Strategic level</p>
+                                <p class="mb-0 font-13">Strategic level</p>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body pa_4_0">
+                                <div class="Course_icon_parent">
+                                   
+                                        <div class="Course_icon_child">
+                                            <div class="alig_dashicon" >
+                                                <div class="sub-child-dashicon">
+                                                    <div class="fa-icons-des cm-all_grey">
+                                                    <i class="fa fa-bell-o bell_icon_dna"></i>
+                                                    </div>
+                                                    <p>Strategic for BU</p>
+                                                </div>
+                                                <span class="number_css sta_left top_2">{{strategic_count.strategic_1 ? strategic_count.strategic_1 : 0}}</span>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="Course_icon_child">
+                                            <div class="alig_dashicon" >
+                                                <div class="sub-child-dashicon">
+                                                    <div class="fa-icons-des cm-all_grey">
+                                                        <i class="fa fa-bell-o bell_icon_dna"></i>
+                                                    </div>
+        
+                                                    <p>Not Strategic but action required</p>
+                                                </div>
+                                                <span class="number_css no_str_b_left top_2">{{strategic_count.strategic_2 ? strategic_count.strategic_2 : 0}}</span>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="Course_icon_child">
+                                            <div class="alig_dashicon" >
+                                                <div class="sub-child-dashicon">
+                                                    <div class="fa-icons-des cm-all_grey">
+                                                        <i class="fa fa-bell-o bell_icon_dna"></i>
+                                                    </div>
+        
+                                                    <p>Not a priority or no action required</p>
+                                                </div>
+                                                <span class="number_css no_str_b1_left top_2">{{strategic_count.strategic_3 ? strategic_count.strategic_3 : 0}}</span>
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                       </ng-container>  
+                    <!--     <ng-container>
+                        <div class="card">
+                            <div class="card-header">
+                                <p class="mb-0 font-13">Domain Training</p>
+                                <div class="form-group filter_course mr-1" >   
+                                </div>
+                            </div>
+                            <div class="card-body pa_4_0">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="Course_icon_child" >
+                                             <div class="alig_dashicon">
+                                                 <div class="sub-child-dashicon">
+                                                     <div class="fa-icons-des bac_yellow">
+                                                         <img src="../../../../assets/images/icon/pending.png" />
+                                                     </div>
+                                                     <p>Pending</p>
+                                                 </div>
+                                                 <span
+                                                     class="number_css">{{domain_training.pending?domain_training.pending:0}}</span>
+                                             </div>
+                                         </div>
+                                         </div>
+                                         <div class="col-sm-3">
+                                            <div class="Course_icon_child">
+                                                <div class="alig_dashicon" >
+                                                    <div class="sub-child-dashicon">
+                                                        <div class="fa-icons-des cm-learning">
+                                                            <img src="../../../../assets/images/icon/check.png" />
+                                                        </div>
+                                                        <p>Requets Closed</p>
+                                                    </div>
+                                                    <span
+                                                        class="number_css">{{domain_training.close?domain_training.close:0}}</span>
+                                                </div>
+                                            </div>
+                                         </div>
+                                  <div class="col-sm-3">
+                                    <div class="Course_icon_child">
+                                        <div class="alig_dashicon">
+                                            <div class="sub-child-dashicon">
+                                                <div class="fa-icons-des cm-all">
+                                                    <img src="../../../../assets/images/icon/viewall.png" />
+                                                </div>
+    
+                                                <p>Total Requests</p>
+                                            </div>
+                                            <span class="number_css tot_left">{{domain_training.total?domain_training.total:0}}</span>
+                                        </div>
+                                    </div>
+                                   </div>
+                                   <div class="col-sm-3">
+                                    <div class="Course_icon_child">
+                                        <div class="alig_dashicon">
+                                            <div class="sub-child-dashicon">
+                                                <div class="fa-icons-des cm-reject">
+                                                    <img src="../../../../assets/images/icon/group.png" />
+                                                </div>
+                                                <p>Total No Of Participants</p>
+                                            </div>
+                                            <span
+                                                class="number_css tot_left_pa">{{ domain_training.total_participant ? domain_training.total_participant : 0 }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <p class="mb-0 font-13">Domain Wise</p>
+                            </div>
+                            <div class="card-body pa_4_0">
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="Course_icon_child">
                                             <div class="alig_dashicon" >
                                                 <div class="sub-child-dashicon">
-                                                    <div class="fa-icons-des cm-all_grey">
+                                                    <div class="fa-icons-des cm-all">
                                                         <img src="../../../../assets/images/icon/viewall.png" />
                                                     </div>
-                                                    <p>Strategic for BU</p>
+        
+                                                    <p>Cloud</p>
                                                 </div>
-                                                <span class="number_css sta_left">{{strategic_count.strategic_1 ? strategic_count.strategic_1 : 0}}</span>
+                                                <span class="number_css tot_left">{{domain_wise_count.Cloud ? domain_wise_count.Cloud : 0}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   <div class="col-sm-3">
+                                        <div class="Course_icon_child" >
+                                            <div class="alig_dashicon" >
+                                                <div class="sub-child-dashicon">
+                                                    <div class="fa-icons-des bac_yellow">
+                                                        <img src="../../../../assets/images/icon/pending.png" />
+                                                    </div>
+                                                    <p>Compétences B2B</p>
+                                                </div>
+                                                <span
+                                                    class="number_css ">{{domain_wise_count.Compétences B2B ? domain_wise_count.Compétences B2B : 0}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="Course_icon_child" >
+                                            <div class="alig_dashicon">
+                                                <div class="sub-child-dashicon">
+                                                    <div class="fa-icons-des bac_red">
+                                                        <img src="../../../../assets/images/icon/transfer.png" />
+                                                    </div>
+                                                    <p>Compétences managériales</p>
+                                                </div>
+                                                <span
+                                                    class="number_css for_left">{{domain_wise_count.Compétences managériales ? domain_wise_count.Compétences managériales : 0}}</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="Course_icon_child">
-                                            <div class="alig_dashicon" >
+                                            <div class="alig_dashicon">
                                                 <div class="sub-child-dashicon">
-                                                    <div class="fa-icons-des cm-all_grey">
-                                                        <img src="../../../../assets/images/icon/viewall.png" />
+                                                    <div class="fa-icons-des cm-reject">
+                                                        <img src="../../../../assets/images/icon/group.png" />
                                                     </div>
-        
-                                                    <p>Not Strategic but action required</p>
+                                                    <p>Compétences transverses</p>
                                                 </div>
-                                                <span class="number_css no_str_b_left">{{strategic_count.strategic_2 ? strategic_count.strategic_2 : 0}}</span>
+                                                <span
+                                                    class="number_css tot_left_pa">{{ domain_wise_count.Compétences transverses ? domain_wise_count.Compétences transverses : 0 }}</span>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="Course_icon_child">
-                                            <div class="alig_dashicon" >
-                                                <div class="sub-child-dashicon">
-                                                    <div class="fa-icons-des cm-all_grey">
-                                                        <img src="../../../../assets/images/icon/viewall.png" />
-                                                    </div>
-        
-                                                    <p>Not a priority or no action required</p>
-                                                </div>
-                                                <span class="number_css no_str_b1_left">{{strategic_count.strategic_3 ? strategic_count.strategic_3 : 0}}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--colen-->
+                                    </div> 
                                 </div>
                             </div>
                         </div>
-                       
+                       </ng-container>-->
                     </div>
                 </div>
                 </div>
                 </div><!--card-->
-           
-            <div class="row">
-              
-                <div class="col-sm-12">
+            </div>
+        </div>
+    </div>
+</div>
+                <div class="content mt-1">
+                    <div class="animated fadeIn">
+                        <div class="row">
+                            <div class="col-sm-12">
                     <div class="card">
                         <div class="card-body">
-                            
+                           
                             <div class="table-responsive table_height_scroll">
                                 <table  class="table table-striped table-bordered">
                                     <thead class="sticky_header">
@@ -370,9 +509,8 @@
                             </div>
                                         </div>
                     </div><!--card-->
-                </div>
-            </div>
-        </div>
-    </div>
-   
-    </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+     </div>

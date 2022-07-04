@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModule } from 'src/app/shared/shared.module';
+import {TreeModule} from 'primeng/tree';
 import { DnaLearningFormComponent } from './dna-learning-form/dna-learning-form.component';
 import { DnaViewComponent } from './dna-view/dna-view.component';
 import { DnaCompleteReportComponent } from './dna-complete-report/dna-complete-report.component';
@@ -20,6 +21,7 @@ import { DnaForwardComponent } from './dna-forward/dna-forward.component';
 import { DnaTrackerComponent } from './dna-tracker/dna-tracker.component';
 import { DnaTrackerCreateComponent } from './dna-tracker-create/dna-tracker-create.component';
 
+
 @NgModule({
   declarations: [DnaDashboardComponent, DnaCreateComponent, DnaLearningFormComponent,  DnaViewComponent, DnaCompleteReportComponent, DnaManagerDataComponent, DnaViewRptComponent, DnaUserComponent, DnaUserEditComponent, DnaViewBpComponent, DnaForwardComponent, DnaTrackerComponent, DnaTrackerCreateComponent],
   entryComponents:[ DnaForwardComponent],
@@ -31,6 +33,7 @@ import { DnaTrackerCreateComponent } from './dna-tracker-create/dna-tracker-crea
     NgxPaginationModule,
     NgSelectModule,
     NgbModule,
+    TreeModule
   ]
 })
 export class DnaModule { }

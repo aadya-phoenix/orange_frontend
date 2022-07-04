@@ -925,7 +925,7 @@ export class CourseCreateComponent implements OnInit {
           this.createCourceForm.controls.subject.setValue(JSON.parse(this.course_details.subject));
           this.createCourceForm.controls.keyword.setValue(this.course_details.keyword);
           this.createCourceForm.controls.available_language.setValue(JSON.parse(this.course_details.available_language));
-          this.createCourceForm.controls.level.setValue(this.course_details.level);
+          this.createCourceForm.controls.level.setValue(Number(this.course_details.level));
           this.createCourceForm.controls.email_content_owner.setValue(this.course_details.email_content_owner);
           this.createCourceForm.controls.email_training_contact.setValue(this.course_details.email_training_contact);
           this.createCourceForm.controls.prerequisite.setValue(this.course_details.prerequisite);
@@ -957,7 +957,7 @@ export class CourseCreateComponent implements OnInit {
       this.courseService.courseHistory(this.course_id).subscribe((res: any) => {
         if (res && res.status == 1) {
           let history = res.data;
-          this.showrejectbutton = history[history.length - 1].action_by;
+          this.showrejectbutton = history[history.length - 1] ? history[history.length - 1].action_by : '';
         }
       })
     }

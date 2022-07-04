@@ -68,6 +68,7 @@ export class DashboardComponent implements OnInit {
       this.isPdlMember = this.profileDetails.data.pdl_member;
     }
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+    console.log("lable",this.lableConstant)
     if (this.lableConstant) {
       this.modulesArray_tab1 = [
         {
@@ -112,7 +113,7 @@ export class DashboardComponent implements OnInit {
       this.modulesArray_tab2 = [
         {
           id: 'design', name:'Design learning Module',
-          routerLink: '', image: '../../assets/images/Design learning module.jpg',
+          routerLink: '/dashboard/designlearning', image: '../../assets/images/Design learning module.jpg',
           lableConstantModule: this.lableConstant.design_learning_module,
           lableConstantCatalog: this.lableConstant.request_learning_team,
           navigateTo: '',
@@ -137,7 +138,8 @@ export class DashboardComponent implements OnInit {
           favourite: false, showFavourite: true,
           pendingRequestCount: '',
           setFavouriteModule: this.modules.dna,
-        }, {
+        }, 
+        {
           id: 'sme', name:'SME Database',
           routerLink: '/dashboard/smedb', image: '../../assets/images/SME_DB.jpg',
           lableConstantModule: this.lableConstant.sme_database,

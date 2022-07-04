@@ -1,0 +1,323 @@
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-7">
+            <div class="page-header float-left bg-transparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="font-20 text_white">Design learning Module</span>
+                        <span class="divider_req"></span>
+                        <span class="title-detail mt-6">Request the development of new learning modules for your team or
+                            our organization.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-5 float-right">
+            <div class="page-header float-right bg-transparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bg-transparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home text_white"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/designlearning']" class="text_white">Create New Learning</a>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">View</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center justify_content card_header_common">
+        <div class="d-flex">
+            <img src="../../../../assets/images/formm.png" class="ml-2 form_img_req" />
+            <p class="mt-2 ml-2 mb-2 view-re_css">
+                <span>View Design Learning Request</span>
+                <span class="cc-text_css"> ({{ requestdata.request_id }}) -
+                </span>
+                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status |
+                    titlecase
+                    }}</span>
+            </p>
+        </div>
+    </div>
+    <div class="content">
+        <div class="animated fadeIn">
+            <!--  <div class="mb-2" *ngIf="isUpdate() || isPublish() || isForward() || isReject()">
+                <div class="Requs_btn_inl">
+                    <div class="Requs_btn_inl-child">
+                        <button type="button" class="btn btn-primary mr-2" *ngIf="isForward()"
+                            (click)="forwardRequest()">
+                            <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Transfer to
+                                Publisher</span>
+                        </button>
+                        <button type="button" class="btn btn-primary mr-2" *ngIf="isPublish()"
+                            (click)="statusChangeRequest(BackOfficeStatus.publish)">
+                            <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
+                        </button>
+                        <button type="button" class="btn mr-2" *ngIf="isUpdate()"
+                            [ngClass]="(isPublish() || isForward()) ?  'btn-secondary'  : 'btn-primary'"
+                            (click)="updateRequest()">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">Update</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" *ngIf="isReject()"
+                            (click)="statusChangeRequest(BackOfficeStatus.reject)">
+                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-secondary ml-2" *ngIf="isOtherRoc()" (click)="transferToOtherRoc()">
+                        <i class="fa fa-exchange" aria-hidden="true"></i><span class="pl-1">Transfer to Other ROC</span>
+                    </button>
+                </div>
+            </div> -->
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <div class="card border-radius-0">
+                        <div class="card-header card_header_view">
+                            <p>Design Learning Details</p>
+                        </div>
+                        <div class="card-body">
+                            
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Program/Project Name</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{requestdata.project_name}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> Key Sponsor</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                               {{requestdata.key_sponsor}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Requestor</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{requestdata.requestor}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Requested Date</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.created_at | date: dateFormate }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Requestor's Department</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                               {{ requestdata.requestor_department_name }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> Other Main Contributors</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                               {{ requestdata.contributor }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Budget</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.budget}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Please explain issue, problem, or
+                                            requirement.</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.explain_purpose}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Please mention the objectives of the learning solution</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.objective}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> What is the level of knowledge to be acquired by learners through the
+                                            learning solution?</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.knowledge}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">What are the success factors for the program?</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.success_factor}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Please specify the Impact of the learning solution.</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.impact}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Who is the learner/ target audience?</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.target_audience}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">What are the KPIs for the project?</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.kpi}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Please explain if you have any learning solution in mind?</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.learning_solution}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">What is the desired duration of the learning solution?</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.duration}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> What is the size of the target audience (people attending/accessing the learning program)?</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.size_target_audience}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> By when do you want to launch the program?</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.launch_date}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> Are they in the same location? If not, please indicate
+                                            where they are located?</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.audience_location}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">What do you want people to be doing differently
+                                            at the
+                                            end of this program?</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.learn_target_audience}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>                         
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Comments</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.comment }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>                            
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Attachments</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.agree == "1" ? "Yes" : "No"}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                          </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

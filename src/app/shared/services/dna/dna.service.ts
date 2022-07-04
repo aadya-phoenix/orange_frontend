@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -11,6 +12,7 @@ export class DnaService {
   public basePath = environment.baseUrl;
   public apiVersion = environment.apiVersion;
   public headers = new Headers({});
+  public params = new HttpParams();
 
   constructor(private http: HttpService, private commmonService: CommonService) {
     this.headers.append('Access-Control-Allow-Origin', '*');
@@ -30,6 +32,14 @@ export class DnaService {
     const url = `/api/${this.apiVersion}/digital-learning`;
     return this.http
       .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  getUserDigitalLearning(id: any){
+    const params = new HttpParams().set('uid',id);
+    const url = `/api/${this.apiVersion}/digital-learning`;
+    return this.http
+      .getParams(url, this.http.headers,params)
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 

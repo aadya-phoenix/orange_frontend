@@ -41,14 +41,15 @@ export class MultiLaunguageComponent implements OnInit {
       (res: any) => {
         this.commonService.hideLoading();
         this.availableLanguages = res.data;
+        this.availableLanguages = this.availableLanguages.filter((x: { slug: string; }) => x.slug != 'english');
         this.availableLanguages.forEach((element: any) => {
-          let controlValue = ''
-          if(this.props?.data){
-            controlValue = this.props?.data?.find((x: {}) => Object.keys(x) == element.slug);
-          }
-          this.titlecontrol.push(this.fb.group({
-            value: controlValue ? new FormControl(`${controlValue[element.slug]}`): new FormControl(''),
-          }));
+            let controlValue = ''
+            if (this.props?.data) {
+              controlValue = this.props?.data?.find((x: {}) => Object.keys(x) == element.slug);
+            }
+            this.titlecontrol.push(this.fb.group({
+              value: controlValue ? new FormControl(`${controlValue[element.slug]}`) : new FormControl(''),
+            }));
         });
 
       },

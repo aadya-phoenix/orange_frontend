@@ -1,0 +1,471 @@
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-8">
+            <div class="page-header float-left bg-transparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="breade_text_span1">Design learning Module</span>
+                        <span class="divider_req"></span>
+                        <span class="breade_text_span">Request the development of new learning modules for your team or
+                            our organization.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 float-right">
+            <div class="page-header float-right bg-transparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bg-transparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home text_white"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/designlearning']" class="text_white">Create new Module</a>
+                        </li>
+                        <!--   <li>
+                            <span class="text_white span_dis">{{ back_office_id === 0 ? 'New Request' : 'Update
+                                Request'}}</span>
+
+                        </li> -->
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form [formGroup]="createDesignForm">
+        <div class="content mt-1">
+            <div class="animated fadeIn">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                        <div class="col-sm-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong _ngcontent-jet-c125=""> Team Details </strong>
+                            </div>
+                            <div class="card-body card_width">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Program/Project Name <span class="text-danger-ligth">* </span>
+                                            </label>
+                                            <input type="text" formControlName="project_name"
+                                                class="form-control form_width" />
+                                            <div
+                                                *ngIf="(createDesignForm.controls['project_name'].invalid && (createDesignForm.controls['project_name'].dirty || createDesignForm.controls['project_name'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['project_name'].errors?.required">
+                                                    Project Name cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Key Sponsor <span class="text-danger-ligth">* </span>
+                                            </label>
+                                            <input type="text" formControlName="key_sponsor"
+                                                class="form-control form_width" />
+                                            <div
+                                                *ngIf="(createDesignForm.controls['key_sponsor'].invalid && (createDesignForm.controls['key_sponsor'].dirty || createDesignForm.controls['key_sponsor'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['key_sponsor'].errors?.required">
+                                                    Key Sponsor cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Requestor <span class="text-danger-ligth">* </span>
+                                            </label>
+                                            <input type="text" formControlName="requestor"
+                                                class="form-control form_width" />
+                                            <div
+                                                *ngIf="(createDesignForm.controls['requestor'].invalid && (createDesignForm.controls['requestor'].dirty || createDesignForm.controls['requestor'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['requestor'].errors?.required">
+                                                    Requestor cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Requestor's Department <span class="text-danger-ligth">* </span>
+                                            </label>
+                                            <ng-select [items]="bussinessUnitObj" 
+                                            bindLabel="team_name" bindValue="id"
+                                            (change)="getOtherBusinessUnit($event)" formControlName="requestor_department"
+                                            class="w_100">
+                                             </ng-select>
+                                            <div
+                                                *ngIf="(createDesignForm.controls['requestor_department'].invalid && (createDesignForm.controls['requestor_department'].dirty || createDesignForm.controls['requestor_department'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['requestor_department'].errors?.required">
+                                                    Requestor's Department cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!--     <div class="col-sm-4" *ngIf="isOtherBU">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Other Business Unit
+                                            </label>
+                                            <input type="text" class="form-control form_width" formControlName="other_bussiness_unit">
+                                            <div
+                                                *ngIf="(createDesignForm.controls['other_bussiness_unit'].invalid && (createDesignForm.controls['other_bussiness_unit'].dirty || createDesignForm.controls['other_bussiness_unit'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['other_bussiness_unit'].errors?.required">
+                                                    Other Bussiness Unit can not be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Other Main Contributors<span class="text-danger-ligth">*</span>
+                                            </label>
+                                            <input type="text" formControlName="contributor"
+                                                class="form-control form_width" />
+                                            <div
+                                                *ngIf="(createDesignForm.controls['contributor'].invalid && (createDesignForm.controls['contributor'].dirty || createDesignForm.controls['contributor'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['contributor'].errors?.required">
+                                                    Other Main Contributorst cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Budget
+                                            </label>
+                                            <input type="text" formControlName="budget"
+                                                class="form-control form_width" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12" *ngIf="isUpdate">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Project Manager <span class="text-danger-ligth">*</span>
+                                            </label>
+                                            <input type="text" class="form-control form_width"
+                                                formControlName="project_manager" />
+                                            <div
+                                                *ngIf="(createDesignForm.controls['project_manager'].invalid && (createDesignForm.controls['project_manager'].dirty || createDesignForm.controls['project_manager'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['project_manager'].errors?.required">
+                                                    Project Manager cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="text-center">
+                                <img src="../../../../assets/images/design_learn_form.png">
+                            </div>
+                            </div>
+                            </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <strong _ngcontent-jet-c125=""> Details </strong>
+                            </div>
+                            <div class="card-body card_width">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Please Explain the purpose of the project, issue, problem, or
+                                                requirement.
+                                            </label><span class="text-danger-ligth">*</span>
+                                            <textarea class="form-control form_width-textarea" maxlength="500" rows="3"
+                                                formControlName="explain_purpose"></textarea>
+                                            <div
+                                                *ngIf="(createDesignForm.controls['explain_purpose'].invalid && (createDesignForm.controls['explain_purpose'].dirty || createDesignForm.controls['explain_purpose'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['explain_purpose'].errors?.required">
+                                                    Purpose of the Project cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Please mention the objectives of the learning solution:
+                                            </label><span class="text-danger-ligth">*</span>
+                                            <textarea class="form-control form_width-textarea" maxlength="500" rows="3"
+                                                formControlName="objective"></textarea>
+                                            <div
+                                                *ngIf="(createDesignForm.controls['objective'].invalid && (createDesignForm.controls['objective'].dirty || createDesignForm.controls['objective'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['objective'].errors?.required">
+                                                    Objectives of the learning solution cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                What is the level of knowledge to be acquired by learners through the
+                                                learning solution?
+                                                <span class="text-danger-ligth">* </span>
+                                            </label>
+                                            <textarea class="form-control form_width-textarea" maxlength="500" rows="3"
+                                                formControlName="knowledge"></textarea>
+                                            <div
+                                                *ngIf="(createDesignForm.controls['knowledge'].invalid && (createDesignForm.controls['knowledge'].dirty || createDesignForm.controls['knowledge'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['knowledge'].errors?.required">
+                                                    Level of knowledge cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                What are the success factors for the program?
+                                                <span class="text_red">* </span>
+                                            </label>
+                                            <input type="text" class="form-control form_width"
+                                                formControlName="success_factor" />
+                                            <div
+                                                *ngIf="(createDesignForm.controls['success_factor'].invalid && (createDesignForm.controls['success_factor'].dirty || createDesignForm.controls['success_factor'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['success_factor'].errors?.required">
+                                                    Success Factors cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Please specify the Impact of the learning solution.
+                                                <span class="text_red">* </span>
+                                            </label>
+                                            <input type="text" class="form-control form_width"
+                                                formControlName="impact" />
+                                            <div
+                                                *ngIf="(createDesignForm.controls['impact'].invalid && (createDesignForm.controls['impact'].dirty || createDesignForm.controls['impact'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['impact'].errors?.required">
+                                                    Impact of the learning solution cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Who is the learner/ target audience?
+                                                <span class="text_red">* </span>
+                                            </label>
+                                            <input type="text" class="form-control form_width"
+                                                formControlName="target_audience" />
+                                            <div
+                                                *ngIf="(createDesignForm.controls['target_audience'].invalid && (createDesignForm.controls['target_audience'].dirty || createDesignForm.controls['target_audience'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['target_audience'].errors?.required">
+                                                    Learner/ Target audience cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                What are the KPIs for the project?
+                                                <span class="text_red">* </span>
+                                            </label>
+                                            <input type="text" class="form-control form_width" formControlName="kpi" />
+                                            <div
+                                                *ngIf="(createDesignForm.controls['kpi'].invalid && (createDesignForm.controls['kpi'].dirty || createDesignForm.controls['kpi'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['kpi'].errors?.required">
+                                                    KPIs for the project cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Please explain if you have any learning solution in mind?
+                                                <span class="text_red">* </span>
+                                            </label>
+                                            <input type="text" class="form-control form_width"
+                                                formControlName="learning_solution" />
+                                            <div
+                                                *ngIf="(createDesignForm.controls['learning_solution'].invalid && (createDesignForm.controls['learning_solution'].dirty || createDesignForm.controls['learning_solution'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['learning_solution'].errors?.required">
+                                                    Learning Solution cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                What is the desired duration of the learning solution?
+                                                <span class="text_red">* </span>
+                                            </label>
+                                            <input type="text" class="form-control form_width"
+                                                formControlName="duration" />
+                                            <div
+                                                *ngIf="(createDesignForm.controls['duration'].invalid && (createDesignForm.controls['duration'].dirty || createDesignForm.controls['duration'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['duration'].errors?.required">
+                                                    Duration of the learning solution cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                What is the size of the target audience?
+                                                <span class="text_red">* </span>
+                                            </label>
+                                            <input type="text" class="form-control form_width"
+                                                formControlName="size_target_audience" />
+                                            <div
+                                                *ngIf="(createDesignForm.controls['size_target_audience'].invalid && (createDesignForm.controls['size_target_audience'].dirty || createDesignForm.controls['size_target_audience'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['size_target_audience'].errors?.required">
+                                                    Size of the target audience cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                By when do you want to launch the program?
+                                                <span class="text_red">* </span>
+                                            </label>
+                                            <input type="date" class="form-control form_width"
+                                                formControlName="launch_date" />
+                                            <div
+                                                *ngIf="(createDesignForm.controls['launch_date'].invalid && (createDesignForm.controls['launch_date'].dirty || createDesignForm.controls['launch_date'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['launch_date'].errors?.required">
+                                                    Launch date cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Are the target audience in the same location? If not, please indicate
+                                                where they are located?
+                                                <span class="text_red">* </span>
+                                            </label>
+                                            <input type="text" class="form-control form_width"
+                                                formControlName="audience_location" />
+                                            <div
+                                                *ngIf="(createDesignForm.controls['audience_location'].invalid && (createDesignForm.controls['audience_location'].dirty || createDesignForm.controls['audience_location'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['audience_location'].errors?.required">
+                                                    Location of the target audience cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                What do you want the learners/target audience to do differently at the
+                                                end of this program?
+                                                <span class="text_red">* </span>
+                                            </label>
+                                            <input type="text" class="form-control form_width"
+                                                formControlName="learn_target_audience" />
+                                            <div
+                                                *ngIf="(createDesignForm.controls['learn_target_audience'].invalid && (createDesignForm.controls['learn_target_audience'].dirty || createDesignForm.controls['learn_target_audience'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['learn_target_audience'].errors?.required">
+                                                    What do you want the learners/target audience to do differently at
+                                                    the end of this program cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Comments
+                                                <span class="text_red">* </span>
+                                            </label>
+                                            <input type="text" class="form-control form_width"
+                                                formControlName="comment" />
+                                            <div
+                                                *ngIf="(createDesignForm.controls['comment'].invalid && (createDesignForm.controls['comment'].dirty || createDesignForm.controls['comment'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['comment'].errors?.required">
+                                                    Comments cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Attachments.
+                                                <span class="text_red">* </span>
+                                            </label>
+                                            <input type="file" class="form-control form_width"  (change)="handleFileInput($event)"
+                                                formControlName="attachment" />
+                                            <div
+                                                *ngIf="(createDesignForm.controls['attachment'].invalid && (createDesignForm.controls['attachment'].dirty || createDesignForm.controls['attachment'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createDesignForm.controls['attachment'].errors?.required">
+                                                    Attachment of the learning solution cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-primary mr-1" (click)="save(designStatus.pending)" type="submit">
+                                        <i aria-hidden="true" class="fa fa-upload">
+                                        </i> <span class="pl-1">Submit</span>
+                                    </button>
+                                    <button class="btn btn-secondary" (click)="save(designStatus.draft)">Save
+                                        as draft
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
