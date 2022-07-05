@@ -1,0 +1,29 @@
+<div class="card mb-0">
+    <div class="card-header color-orange">
+        <div class="d-flex justify-content-between">
+           {{title}}
+            <a (click)="closeModal()"><i class="fa fa-times color-black" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="forwardDesignForm">
+            <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Comment <span class="text-danger-ligth" *ngIf="status == designStatus.reject">* </span></label>
+                  <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"
+                  formControlName="status_comment"></textarea>
+                   <div *ngIf="(forwardDesignForm.controls['status_comment'].invalid &&     (forwardDesignForm.controls['status_comment'].dirty || forwardDesignForm.controls['status_comment'].touched)) || isSubmitted ">
+                        <div class="error_message"
+                            *ngIf="forwardDesignForm.controls['status_comment'].errors?.required">
+                            Comments cannot be blank
+                        </div>
+                    </div>
+                </div>
+              </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-primary mr-1" type="submit" (click)="submit()">{{status == designStatus.reject ? 'Reject' : 'Submit'}}</button>
+        <button class="btn btn-secondary" type="submit" (click)="closeModal()">Cancel</button>
+    </div>
+</div>

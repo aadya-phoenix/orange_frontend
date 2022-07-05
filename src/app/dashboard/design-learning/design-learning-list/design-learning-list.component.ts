@@ -7,6 +7,7 @@ import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive'
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DesignLearningService } from 'src/app/shared/services/design-learning/design-learning.service';
+import { DesignLearningHistoryComponent } from '../design-learning-history/design-learning-history.component';
 
 @Component({
   selector: 'app-design-learning-list',
@@ -18,6 +19,7 @@ export class DesignLearningListComponent implements OnInit {
   dateFormate = dataConstant.dateFormate;
   dateTimeFormate = dataConstant.dateTimeFormate;
   designStatus = dataConstant.DesignStatus;
+  RoleID = dataConstant.RoleID;
   designListToShow:any=[];
   designList:any =[];
   selectedStatus:any;
@@ -31,6 +33,10 @@ export class DesignLearningListComponent implements OnInit {
     transferred: 0
   }
   searchText:string='';
+  isDesigner = false;
+  isHeadDesigner = false;
+  getUserrole: any = {};
+  getprofileDetails: any = {};
 
   pagination = {
     page: 1,
@@ -46,7 +52,12 @@ export class DesignLearningListComponent implements OnInit {
     private router: Router,
     private designService: DesignLearningService,
     private authService: AuthenticationService,
-  ) { }
+  ) {
+    this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
+    this.getUserrole = this.authService.getRolefromlocal();
+    this.isDesigner = this.getUserrole.id === this.RoleID.DesignTeam;
+    this.isHeadDesigner = this.getUserrole.id === this.RoleID.HeadOfDesign;
+   }
 
   ngOnInit(): void {
     this.refreshModules();
@@ -71,9 +82,9 @@ export class DesignLearningListComponent implements OnInit {
   }
 
   editRequest(item: any) {
-    /* if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/cct/update/${item.id}`);
-    } */
+     if (item && item.id) {
+      this.router.navigateByUrl(`/dashboard/designlearning/update/${item.id}`);
+    }
   }
 
   deleteRequest(course_id: number){
@@ -129,10 +140,10 @@ export class DesignLearningListComponent implements OnInit {
           
         }
       }) */
-   }
+  }
 
-   openModal(item: any) {
-  /*   const modalRef = this.modalService.open(CourseHistoryComponent, {
+  openModal(item: any) {
+     const modalRef = this.modalService.open(DesignLearningHistoryComponent, {
       centered: true,
       size: 'xl',
       modalDialogClass: 'large-width',
@@ -143,8 +154,9 @@ export class DesignLearningListComponent implements OnInit {
       data: item.id,
       objectDetail: item,
       type: 'viewhistory'
-    }; */
+    }; 
   }
+
   viewRequest(item: any){
     this.router.navigateByUrl(`dashboard/designlearning/view/${item.id}`);
   }
@@ -176,6 +188,5 @@ export class DesignLearningListComponent implements OnInit {
     }
     this.selectedStatus = type;
   }
-
 
 }
