@@ -67,10 +67,41 @@ export class DesignLearningService {
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  delete(data:any){
+    const url = `api/${this.apiVersion}/new-learning/delete`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  /* copy(data:any){
+    const url = `api/${this.apiVersion}/new-learning/copy`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  } */
+
   changeStatus(data: any) {
     const url = `api/${this.apiVersion}/new-learning/status`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  designRatings(data: any) {
+    const url = `api/${this.apiVersion}/new-learning/${data.new_learning_id}/rating`;
+    delete data.sme_id;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  designRatingList(id: any) {
+    const url = `api/${this.apiVersion}/new-learning/${id}/rating`;
+    return this.http.get(url,this.http.headers).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  sendDesignChats(data: any) {
+    const url = `api/${this.apiVersion}/new-learning/${data.new_learning_id}/chat`;
+    delete data.sme_id;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  getDesignChats(id: any) {
+    const url = `api/${this.apiVersion}/new-learning/${id}/chat`;
+    return this.http.get(url,this.http.headers).pipe(catchError(this.commmonService.Errorhandling));
+  }
 
 }

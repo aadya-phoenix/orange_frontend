@@ -22,6 +22,12 @@ export class DesignLearningForwardComponent implements OnInit {
   status:string='';
   designStatus = dataConstant.DesignStatus;
   RoleID = dataConstant.RoleID;
+  isChange = false;
+  public statusObj: any = [
+    { id: 'design_started', name: 'Design Started' },
+    { id: 'development_started', name: 'Development Started' },
+    { id: 'close', name: 'Close Request' },
+  ];
 
   constructor(private formBuilder: FormBuilder,
     private modalService: NgbActiveModal,
@@ -44,24 +50,34 @@ export class DesignLearningForwardComponent implements OnInit {
     this.forwardDesignForm = this.formBuilder.group({
       status_comment: new FormControl('', this.status == this.designStatus.reject ? [Validators.required] : []),
     });
-    if(this.status == this.designStatus.forward){
+
+    if(this.status == 'change'){
+      this.title = 'Change Status';
+      this.forwardDesignForm.addControl('status', new FormControl(null, [Validators.required]));
+      this.isChange = true;
+    }
+    if(this.status == this.designStatus.forwarded){
       this.title = 'Send for Approval';
+      this.forwardDesignForm.removeControl('status');
     }
     if(this.status == this.designStatus.reject){
       this.title = 'Reject Request';
+      this.forwardDesignForm.removeControl('status');
     }
     if(this.status == this.designStatus.approve){
       this.title = 'Approve Request';
+      this.forwardDesignForm.removeControl('status');
     }
+   
   }
 
   submit() {
-    this.objectDetail.status_comment = this.forwardDesignForm.controls.status_comment.value;
     this.isSubmitted = true;
     if (this.forwardDesignForm.invalid) {
       return;
     }
-    if(this.status == this.designStatus.forward){
+    if(this.status == this.designStatus.forwarded){
+      this.objectDetail.status_comment = this.forwardDesignForm.controls.status_comment.value;
        this.commonService.showLoading();
        this.designService.update(this.objectDetail).subscribe(
          (res: any) => {
@@ -76,10 +92,12 @@ export class DesignLearningForwardComponent implements OnInit {
          });
       }
 
-    if(this.status == this.designStatus.reject || this.status == this.designStatus.approve){
+    if(this.status == this.designStatus.reject || this.status == this.designStatus.approve || 
+      this.status == 'change'){
       const body = this.forwardDesignForm.value;
       body.new_learning_id = this.designId;
-      body.status = this.status;
+      this.status == this.designStatus.reject || this.status == this.designStatus.approve ?
+      body.status = this.status : '';
       this.commonService.showLoading();
       this.designService.changeStatus(body).subscribe(
         (res: any) => {

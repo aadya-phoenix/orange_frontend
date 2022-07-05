@@ -93,16 +93,18 @@ export class DesignLearningCreateComponent implements OnInit {
     });
     this.getBusinessUnits();
     this.getProjectManager();
-    if(this.isDesigner || this.isHeadDesigner){
-       this.show_fields = true;
+    if(this.isHeadDesigner){
        this.createDesignForm.addControl('project_manager', new FormControl(null, [Validators.required]));
-       this.createDesignForm.addControl('who_create', new FormControl(null, [Validators.required]));
      }
      else {
-       this.show_fields = false;
        this.createDesignForm.removeControl('project_manager');
-       this.createDesignForm.removeControl('who_create');
      }
+     if(this.isDesigner){
+      this.createDesignForm.addControl('who_create', new FormControl(null, [Validators.required]));
+    }
+    else {
+      this.createDesignForm.removeControl('who_create');
+    }
   }
 
   handleFileInput(event: any) {
@@ -135,6 +137,13 @@ export class DesignLearningCreateComponent implements OnInit {
           this.createDesignForm.controls.requestor.setValue(this.design_details.requestor);
           this.createDesignForm.controls.budget.setValue(this.design_details.budget);
           this.createDesignForm.controls.requestor_department.setValue(this.design_details.requestor_department);
+          if(this.design_details.other_requestor_department){
+            this.isOtherBU =true;
+            this.createDesignForm.controls.other_requestor_department.setValue(this.design_details.other_requestor_department);
+          }
+          else{
+            this.isOtherBU = false;
+          }
           this.createDesignForm.controls.contributor.setValue(this.design_details.contributor);
           this.createDesignForm.controls.explain_purpose.setValue(this.design_details.explain_purpose);
           this.createDesignForm.controls.objective.setValue(this.design_details.objective);
@@ -170,13 +179,13 @@ export class DesignLearningCreateComponent implements OnInit {
   }
 
   getOtherBusinessUnit(item:any){
-    if(item.id == 8){
+    if(item?.id == 8){
       this.isOtherBU = true;
-      this.createDesignForm.addControl('other_bussiness_unit', new FormControl('', [Validators.required]));
+      this.createDesignForm.addControl('other_requestor_department', new FormControl('', [Validators.required]));
     }
     else{
       this.isOtherBU = false;
-      this.createDesignForm.removeControl('other_bussiness_unit');
+      this.createDesignForm.removeControl('other_requestor_department');
     }
   }
 

@@ -96,7 +96,7 @@
                                     </div>
                                 </div>
                                 <div class="Course_icon_child" *ngIf="isDesigner">
-                                    <div class="alig_dashicon" (click)="showRecords(designStatus.transferred)">
+                                    <div class="alig_dashicon" (click)="showRecords(designStatus.forwarded)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des bac_red">
                                                 <img src="../../../../assets/images/icon/transfer.png" />
@@ -104,10 +104,22 @@
                                             <p>Forwarded</p>
                                         </div>
                                         <span
-                                            class="number_css">{{design_count.transferred?design_count.transferred:0}}</span>
+                                            class="number_css">{{design_count.forwarded?design_count.forwarded:0}}</span>
                                     </div>
                                 </div>
-                                <div class="Course_icon_child">
+                                <div class="Course_icon_child" *ngIf="isHeadDesigner">
+                                    <div class="alig_dashicon" (click)="showRecords(designStatus.approve)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des cm-learning">
+                                                <img src="../../../../assets/images/icon/check.png" />
+                                            </div>
+                                            <p>Approved</p>
+                                        </div>
+                                        <span
+                                            class="number_css pub_left">{{design_count.approve?design_count.approve:0}}</span>
+                                    </div>
+                                </div>
+                                <div class="Course_icon_child" *ngIf="!isHeadDesigner">
                                     <div class="alig_dashicon" (click)="showRecords(designStatus.closed)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-learning">
@@ -248,17 +260,21 @@
                                                     View
                                                 </a>
                                             </td>
-                                            <td>
-                                            </td>
+                                            <td> <a *ngIf="item.status !== designStatus.draft"
+                                                (click)="openRatingModal(item)" class="re_id">
+                                                Add/View Rating
+                                            </a>
+                                        </td>
                                             <td class="text-center">
                                                 <div class="d-flex">
-                                                  <a (click)="copyRequest(item.id)" *ngIf="item.status_show === designStatus.submitted" class="copy_file mr-1" 
+                                                <!--   <a (click)="copyRequest(item.id)" *ngIf="item.status_show === designStatus.submitted" class="copy_file mr-1" 
                                                       data-toggle="tooltip" data-placement="top" title="Copy">
                                                       <i class="fa fa-files-o" aria-hidden="true"></i>
-                                                  </a>
+                                                  </a> -->
                                                   <a (click)="editRequest(item)"
                                                   *ngIf="item.status_show === designStatus.draft || 
-                                                  (isDesigner && item.status_show === designStatus.pending) ||(item.status === designStatus.reject && item.user_id === getprofileDetails.data.id)"
+                                                  (isDesigner && item.status_show === designStatus.pending) || 
+                                                  (isHeadDesigner && item.status_show === designStatus.pending)  ||(item.status === designStatus.reject && item.user_id === getprofileDetails.data.id)"
                                                       class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                       title="Edit">
                                                       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

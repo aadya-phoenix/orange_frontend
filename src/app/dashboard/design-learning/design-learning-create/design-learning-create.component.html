@@ -121,21 +121,21 @@
                                             </div>
                                         </div>
                                     </div>
-                                <!--     <div class="col-sm-4" *ngIf="isOtherBU">
+                                   <div class="col-sm-6" *ngIf="isOtherBU">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Other Business Unit
+                                                Other Requestor's Department
                                             </label>
-                                            <input type="text" class="form-control form_width" formControlName="other_bussiness_unit">
+                                            <input type="text" class="form-control form_width" formControlName="other_requestor_department">
                                             <div
-                                                *ngIf="(createDesignForm.controls['other_bussiness_unit'].invalid && (createDesignForm.controls['other_bussiness_unit'].dirty || createDesignForm.controls['other_bussiness_unit'].touched)) || isSubmitted">
+                                                *ngIf="(createDesignForm.controls['other_requestor_department'].invalid && (createDesignForm.controls['other_requestor_department'].dirty || createDesignForm.controls['other_requestor_department'].touched)) || isSubmitted">
                                                 <div class="error_message"
-                                                    *ngIf="createDesignForm.controls['other_bussiness_unit'].errors?.required">
+                                                    *ngIf="createDesignForm.controls['other_requestor_department'].errors?.required">
                                                     Other Bussiness Unit can not be blank
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> -->
+                                    </div> 
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
@@ -161,7 +161,7 @@
                                                 class="form-control form_width" />
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-sm-12" *ngIf = "show_fields">
+                                    <div class="col-md-6 col-sm-12" *ngIf ="isHeadDesigner">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Project Manager <span class="text-danger-ligth">*</span>
@@ -235,6 +235,13 @@
                                                 What is the level of knowledge to be acquired by learners through the
                                                 learning solution?
                                                 <span class="text-danger-ligth">* </span>
+                                                <a>
+                                                    <i  class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-bs-toggle="tooltip" placement="right"
+                                                        ngbTooltip="Information/overview only to update learners.
+                                                        Detailed knowledge transfer to the learners, specific to their roles.
+                                                         "></i>
+                                                </a>
                                             </label>
                                             <textarea class="form-control form_width-textarea" maxlength="500" rows="3"
                                                 formControlName="knowledge"></textarea>
@@ -252,6 +259,12 @@
                                             <label class="form-control-label">
                                                 What are the success factors for the program?
                                                 <span class="text_red">* </span>
+                                                <a>
+                                                    <i  class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-bs-toggle="tooltip" placement="right"
+                                                        ngbTooltip="(for example, 100% - all identified learners target audience to attend trainings)?
+                                                         "></i>
+                                                </a>
                                             </label>
                                             <input type="text" class="form-control form_width"
                                                 formControlName="success_factor" />
@@ -439,7 +452,7 @@
                                             </div>
                                         </div>
                                     </div> 
-                                    <div class="col-sm-6" *ngIf="show_fields">
+                                    <div class="col-sm-6" *ngIf="isDesigner">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                Who will Create it/ Deliver it ?
@@ -471,12 +484,12 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <button class="btn btn-primary mr-1" *ngIf="!isHeadDesigner || !isDesigner"(click)="save(designStatus.pending)" type="submit">
+                                    <button class="btn btn-primary mr-1" *ngIf="!isHeadDesigner &&!isDesigner"(click)="save(designStatus.pending)" type="submit">
                                         <i aria-hidden="true" class="fa fa-upload">
                                         </i> <span class="pl-1">Submit</span>
                                     </button>
                                     <button class="btn btn-primary mr-1" *ngIf="isDesigner"
-                                    (click)="openModal(designStatus.forward)" type="submit">
+                                    (click)="openModal(designStatus.forwarded)" type="submit">
                                         <i aria-hidden="true" class="fa fa-upload">
                                         </i> <span class="pl-1">Send for Approval</span>
                                     </button>
