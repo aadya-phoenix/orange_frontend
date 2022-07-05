@@ -83,7 +83,7 @@
                                             class="number_css sub_mitted">{{design_count.submitted?design_count.submitted:0}}</span>
                                     </div>
                                 </div>
-                                <div class="Course_icon_child" >
+                                <div class="Course_icon_child" *ngIf="isDesigner || isHeadDesigner" >
                                     <div class="alig_dashicon" (click)="showRecords(designStatus.pending)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des bac_yellow">
@@ -95,7 +95,7 @@
                                             class="number_css ">{{design_count.pending?design_count.pending:0}}</span>
                                     </div>
                                 </div>
-                                <div class="Course_icon_child">
+                                <div class="Course_icon_child" *ngIf="isDesigner">
                                     <div class="alig_dashicon" (click)="showRecords(designStatus.transferred)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des bac_red">
@@ -116,11 +116,11 @@
                                             <p>Closed</p>
                                         </div>
                                         <span
-                                            class="number_css pub_left">{{design_count.closed?design_count.closed:0}}</span>
+                                            class="number_css pub_left">{{design_count.close?design_count.close:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(designStatus.rejected)">
+                                    <div class="alig_dashicon" (click)="showRecords(designStatus.reject)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-reject">
                                                 <img src="../../../../assets/images/icon/reject.png" />
@@ -128,7 +128,7 @@
                                             <p>Rejected</p>
                                         </div>
                                         <span
-                                            class="number_css">{{design_count.rejected?design_count.rejected:0}}</span>
+                                            class="number_css">{{design_count.reject?design_count.reject:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
@@ -208,9 +208,8 @@
                                             <th sortable="status"  (sort)="onSort($event)">
                                                 Status
                                             </th>
-                                            <th sortable="edit" (sort)="onSort($event)">
-                                              View/Edit request
-                                            </th>
+                                            <th sortable="commn" (sort)="onSort($event)">
+                                                History</th>
                                             <th sortable="commn" (sort)="onSort($event)">
                                                 View/Send communication</th>
                                             <th sortable="rating" (sort)="onSort($event)">
@@ -229,20 +228,15 @@
                                             <td (click)="viewRequest(item)">{{ item.created_at | date: dateTimeFormate}}</td>
                                             <td (click)="viewRequest(item)">{{ item.user_name | titlecase }}
                                             </td>
-                                            <td (click)="viewRequest(item)">
+                                            <td (click)="viewRequest(item)">{{ item.requestor_department_name}}
                                             </td>
-                                            <td  (click)="getRequest(cource)">
-                                             
+                                            <td>
+                                             {{ item?.project_manager_name  | titlecase }}
                                             </td>
                                             <td class="text-center">
-                                                <p [ngClass]="item.status">
-                                                    {{ (item.status ? item.status : 'Pending') | titlecase }}
+                                                <p >
+                                                    {{ (item.action_status ? item.action_status : 'Pending') | titlecase }}
                                                 </p>
-                                            </td>
-                                            <td> <a class="copy_file mr-1 re_id" data-toggle="tooltip"
-                                                (click)="viewRequest(item)" data-placement="top" title="View">
-                                                <i class="fa fa-eye " aria-hidden="true"></i>
-                                            </a>
                                             </td>
                                             <td>
                                                 <a *ngIf="item.status !== designStatus.draft" (click)="openModal(item)" class="re_id">
@@ -250,22 +244,27 @@
                                                 </a>
                                             </td>
                                             <td>
-                                             
+                                                <a >
+                                                    View
+                                                </a>
+                                            </td>
+                                            <td>
                                             </td>
                                             <td class="text-center">
                                                 <div class="d-flex">
-                                                  <a (click)="copyRequest(item.id)" class="copy_file mr-1" 
+                                                  <a (click)="copyRequest(item.id)" *ngIf="item.status_show === designStatus.submitted" class="copy_file mr-1" 
                                                       data-toggle="tooltip" data-placement="top" title="Copy">
                                                       <i class="fa fa-files-o" aria-hidden="true"></i>
                                                   </a>
                                                   <a (click)="editRequest(item)"
-                                                    
+                                                  *ngIf="item.status_show === designStatus.draft || 
+                                                  (isDesigner && item.status_show === designStatus.pending) ||(item.status === designStatus.reject && item.user_id === getprofileDetails.data.id)"
                                                       class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                       title="Edit">
                                                       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                   </a>
                                                   <a (click)="deleteRequest(item.id)"
-                                                     
+                                                  *ngIf="item.status_show === designStatus.draft"
                                                       class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                       title="Delete">
                                                       <i class="fa fa-trash" aria-hidden="true"></i>

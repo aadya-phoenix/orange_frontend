@@ -43,6 +43,11 @@ export class DesignLearningService {
       .pipe(catchError(this.commmonService.Errorhandling));  
   }
 
+  forwardRequest(data: any){
+    const url = `/api/${this.apiVersion}/new-learning/transfer`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling)); 
+  }
+
   filter(data: any){
     const url = `api/${this.apiVersion}/new-learning/filter`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
@@ -55,7 +60,7 @@ export class DesignLearningService {
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  getHistory(id:number){
+  history(id:number){
     const url = `/api/${this.apiVersion}/new-learning/${id}/history`;
     return this.http
       .get(url, this.http.headers)

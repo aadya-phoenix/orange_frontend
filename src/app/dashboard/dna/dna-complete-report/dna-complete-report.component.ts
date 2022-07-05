@@ -79,18 +79,25 @@ export class DnaCompleteReportComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.trackerId = Id ? parseInt(Id) : 0;
+      this.getTrackerList();
       this.getLearningList(this.trackerId);
+      let tracker = this.trackerObj.find((x: any) => x.id == this.trackerId);
+      tracker.type_name == 'France' ?  this.isFrance = true : this.isFrance = false;
     });
-    this.getTrackerList();
+    
   }
 
   getTracker(event:any){
    let selectedTrackerId = event;
    if(event){
     this.getLearningList(selectedTrackerId);
+    let selectedTracker = this.trackerObj.find((x: any) => x.id == event);
+    selectedTracker.type_name == 'France' ?  this.isFrance = true : this.isFrance = false;
    }
    else{
     this.getLearningList(this.trackerId);
+    let tracker = this.trackerObj.find((x: any) => x.id == this.trackerId);
+    tracker.type_name == 'France' ?  this.isFrance = true : this.isFrance = false;
    }
   }
 

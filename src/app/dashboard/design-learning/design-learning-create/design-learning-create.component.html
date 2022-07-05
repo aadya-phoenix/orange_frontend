@@ -30,11 +30,11 @@
                         <li>
                             <a [routerLink]="['/dashboard/designlearning']" class="text_white">Create new Module</a>
                         </li>
-                        <!--   <li>
-                            <span class="text_white span_dis">{{ back_office_id === 0 ? 'New Request' : 'Update
+                        <li>
+                            <span class="text_white span_dis">{{ designId === 0 ? 'New Request' : 'Update
                                 Request'}}</span>
 
-                        </li> -->
+                        </li> 
                     </ol>
                 </div>
             </div>
@@ -161,14 +161,17 @@
                                                 class="form-control form_width" />
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-sm-12" *ngIf="isUpdate">
+                                    <div class="col-md-6 col-sm-12" *ngIf = "show_fields">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Project Manager <span class="text-danger-ligth">*</span>
                                             </label>
-                                            <input type="text" class="form-control form_width"
-                                                formControlName="project_manager" />
-                                            <div
+                                            <ng-select [items]="projectManagerList" 
+                                            bindLabel="first_name" bindValue="id"
+                                            formControlName="project_manager"
+                                            class="w_100">
+                                             </ng-select>
+                                             <div
                                                 *ngIf="(createDesignForm.controls['project_manager'].invalid && (createDesignForm.controls['project_manager'].dirty || createDesignForm.controls['project_manager'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createDesignForm.controls['project_manager'].errors?.required">
@@ -267,8 +270,11 @@
                                                 Please specify the Impact of the learning solution.
                                                 <span class="text_red">* </span>
                                             </label>
-                                            <input type="text" class="form-control form_width"
-                                                formControlName="impact" />
+                                            <ng-select [items]="impactObj" 
+                                            bindLabel="name" bindValue="id"
+                                            formControlName="impact"
+                                            class="w_100">
+                                             </ng-select>
                                             <div
                                                 *ngIf="(createDesignForm.controls['impact'].invalid && (createDesignForm.controls['impact'].dirty || createDesignForm.controls['impact'].touched)) || isSubmitted">
                                                 <div class="error_message"
@@ -432,32 +438,58 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div> 
+                                    <div class="col-sm-6" *ngIf="show_fields">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                               Who will Create it/ Deliver it ?
+                                               <span class="text-danger-ligth">* </span>
+                                            </label>
+                                            <input type="text" class="form-control form_width"
+                                                formControlName="who_create" />
+                                              <div
+                                              *ngIf="(createDesignForm.controls['who_create'].invalid && (createDesignForm.controls['who_create'].dirty || createDesignForm.controls['who_create'].touched)) || isSubmitted">
+                                              <div class="error_message"
+                                               *ngIf="createDesignForm.controls['who_create'].errors?.required">
+                                               Who will Create cannot be blank
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Attachments.
-                                                <span class="text_red">* </span>
                                             </label>
                                             <input type="file" class="form-control form_width"  (change)="handleFileInput($event)"
                                                 formControlName="attachment" />
-                                            <div
-                                                *ngIf="(createDesignForm.controls['attachment'].invalid && (createDesignForm.controls['attachment'].dirty || createDesignForm.controls['attachment'].touched)) || isSubmitted">
-                                                <div class="error_message"
-                                                    *ngIf="createDesignForm.controls['attachment'].errors?.required">
-                                                    Attachment of the learning solution cannot be blank
-                                                </div>
-                                            </div>
+                                            <span class="pt-2" *ngIf="design_details.attachUrl">
+                                              Click here to <a href="{{design_details.attachUrl}}" target="_blank"
+                                                        style="color:#ff7900">View</a>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <button class="btn btn-primary mr-1" (click)="save(designStatus.pending)" type="submit">
+                                    <button class="btn btn-primary mr-1" *ngIf="!isHeadDesigner || !isDesigner"(click)="save(designStatus.pending)" type="submit">
                                         <i aria-hidden="true" class="fa fa-upload">
                                         </i> <span class="pl-1">Submit</span>
                                     </button>
-                                    <button class="btn btn-secondary" (click)="save(designStatus.draft)">Save
-                                        as draft
+                                    <button class="btn btn-primary mr-1" *ngIf="isDesigner"
+                                    (click)="openModal(designStatus.forward)" type="submit">
+                                        <i aria-hidden="true" class="fa fa-upload">
+                                        </i> <span class="pl-1">Send for Approval</span>
+                                    </button>
+                                    <button class="btn btn-primary mr-1" *ngIf="isHeadDesigner"(click)="openModal(designStatus.approve)" type="submit">
+                                        <i aria-hidden="true" class="fa fa-upload">
+                                        </i> <span class="pl-1">Approve</span>
+                                    </button>
+                                    <button class="btn btn-secondary" *ngIf="isDraft()"
+                                    (click)="save(designStatus.draft) ">Save as draft
+                                    </button>
+                                    <button class="btn btn-secondary mr-1" type="submit" 
+                                    *ngIf="(this.isDesigner || this.isHeadDesigner) && design_details_status == designStatus.pending"
+                                     (click)="openModal(designStatus.reject)"><i  aria-hidden="true"  class="fa fa-times"></i><span class="pl-1">Reject</span>
                                     </button>
                                 </div>
                             </div>

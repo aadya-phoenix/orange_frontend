@@ -9,6 +9,7 @@ import { DesignLearningViewComponent } from './design-learning-view/design-learn
 const routes: Routes = [
   {path:'',component:DesignLearningListComponent,canActivate:[AuthenticationServiceGuard]},
   {path:'create',component:DesignLearningCreateComponent,canActivate:[AuthenticationServiceGuard]},
+  {path:'update/:id',component:DesignLearningCreateComponent,canActivate:[AuthenticationServiceGuard]},
   {path:'view/:id',component:DesignLearningViewComponent,canActivate:[AuthenticationServiceGuard]},
   {path:'view-complete-report',component:DesignLearningCompleteReportComponent,canActivate:[AuthenticationServiceGuard]}, 
 ];
