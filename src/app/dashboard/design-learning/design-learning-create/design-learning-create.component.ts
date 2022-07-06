@@ -33,6 +33,7 @@ export class DesignLearningCreateComponent implements OnInit {
   designAttachment = { file: '', ext: '' };
   isDesigner = false;
   isHeadDesigner = false;
+  isBusinessConsultant = false;
   getUserrole: any = {};
   getprofileDetails: any = {};
   show_fields = false;
@@ -56,6 +57,7 @@ export class DesignLearningCreateComponent implements OnInit {
     this.getUserrole = this.authService.getRolefromlocal();
     this.isDesigner = this.getUserrole.id === this.RoleID.DesignTeam;
     this.isHeadDesigner = this.getUserrole.id === this.RoleID.HeadOfDesign;
+    this.isBusinessConsultant = this.getUserrole.id === this.RoleID.BussinessConsultant;
 
     this.createDesignForm = this.formBuilder.group({
       project_name: new FormControl('', [Validators.required]),
@@ -99,9 +101,9 @@ export class DesignLearningCreateComponent implements OnInit {
      else {
        this.createDesignForm.removeControl('project_manager');
      }
-     if(this.isDesigner){
+     if(this.isHeadDesigner || this.isDesigner){
       this.createDesignForm.addControl('who_create', new FormControl(null, [Validators.required]));
-    }
+     }
     else {
       this.createDesignForm.removeControl('who_create');
     }
@@ -190,6 +192,7 @@ export class DesignLearningCreateComponent implements OnInit {
   }
 
   save(status:any){
+   
     this.isSubmitted = true;
     if (this.createDesignForm.invalid) {
       return;

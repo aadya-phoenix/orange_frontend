@@ -72,6 +72,12 @@
                             <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Change Status</span>
                         </button>
                     </div>
+                    <div class="Requs_btn_inl-child" *ngIf="requestdata.design_status == designStatus.close && requestdata.user_id === getprofileDetails.data.id">
+                        <button type="button" class="btn btn-primary mr-2" 
+                            (click)="openModal('feedback')">
+                            <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Feedback</span>
+                        </button>
+                    </div>
                 </div>
             </div> 
             <div class="row mb-3">

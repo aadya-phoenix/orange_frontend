@@ -90,7 +90,7 @@ export class DnaUserComponent implements OnInit {
 
   viewRequest(user: any) {
     if (user && user.id) {
-      this.router.navigateByUrl(`dashboard/tracker/edit/${user.id}`);
+      this.router.navigateByUrl(`dashboard/dna/user/edit/${user.id}`);
     }
   }
 
