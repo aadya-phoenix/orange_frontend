@@ -15,6 +15,7 @@ import { DesignLearningForwardComponent } from '../design-learning-forward/desig
 export class DesignLearningViewComponent implements OnInit {
 
   dateFormate = dataConstant.dateFormate;
+  dateTimeFormate = dataConstant.dateTimeFormate;
   id = 0;
   RoleID = dataConstant.RoleID;
   designStatus = dataConstant.DesignStatus;

@@ -17,7 +17,7 @@ import { DesignLearningRatingComponent } from './design-learning-rating/design-l
 
 @NgModule({
   declarations: [DesignLearningCreateComponent, DesignLearningListComponent, DesignLearningCompleteReportComponent, DesignLearningViewComponent, DesignLearningForwardComponent, DesignLearningHistoryComponent, DesignLearningChatComponent, DesignLearningRatingComponent],
-  entryComponents:[DesignLearningForwardComponent, DesignLearningHistoryComponent,DesignLearningRatingComponent],
+  entryComponents:[DesignLearningForwardComponent, DesignLearningHistoryComponent,DesignLearningRatingComponent,DesignLearningChatComponent],
   providers:[DatePipe],
   imports: [
     CommonModule,

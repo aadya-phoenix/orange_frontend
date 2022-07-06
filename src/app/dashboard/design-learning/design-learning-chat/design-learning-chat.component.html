@@ -1,1 +1,69 @@
-<p>design-learning-chat works!</p>
+<div class="">
+    <div class="card mb-0" >
+        <div class="card-header color-orange">
+            <div class="d-flex justify-content-between">
+                <span class="row">
+                    Status Details <h5 class="card-title ml-1">
+                        <b class="color-orange"> ({{objectDetail.request_id}})</b>
+                        
+                    </h5>
+                </span>
+                <a (click)="closeModal()"><i class="fa fa-times color-black" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive table_height_scroll">
+            <table class="table table-bordered">
+                <thead class="sticky_header">
+                    <tr class="text-center font-13">
+                        <th scope="col">Posted Date</th>
+                        <th scope="col">Posted by Owner</th>
+                        <th scope="col">Communication Log</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let chat of chatList" class="text-center font-13">
+                        <td>{{ chat.action_by_name}}</td>
+                        <td>{{chat.transfer_to_name ? chat.transfer_to_name : '-'}}</td>
+                        <td>{{ chat.updated_at | date: "short"}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                  <label> Add Comment </label>
+                  <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"
+                  [(ngModel)]="comment"></textarea>
+                </div>
+            </div>
+                <button class="btn btn-primary mr-1" type="submit" (click)="submit()">Submit</button>
+            
+            <div class="table-responsive table_height_scroll">
+                <table class="table table-bordered">
+                    <thead class="sticky_header">
+                        <tr class="text-center font-13">
+                            <th scope="col">Posted Date</th>
+                            <th scope="col">Posted by Owner</th>
+                            <th scope="col">Communication Log</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let chat of chatList" class="text-center font-13">
+                            <td>{{ chat.created_at | date: "short"}}</td>
+                            <td>{{chat.submitted_by_name ? chat.submitted_by_name : '-'}}</td>
+                            <td>{{ chat.comment }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                      <label> Add Comment </label>
+                      <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"
+                      [(ngModel)]="comment"></textarea>
+                </div>
+                    <button class="btn btn-primary mr-1" type="submit" (click)="submit()">Submit</button>
+             </div>
+    </div>
+</div>

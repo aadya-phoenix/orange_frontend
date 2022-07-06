@@ -66,13 +66,13 @@
                             <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                         </button>
                     </div> -->
-                    <div class="Requs_btn_inl-child" *ngIf="isDesigner">
+                    <div class="Requs_btn_inl-child" *ngIf="isDesigner && requestdata.head_status == designStatus.approve && requestdata.design_status != designStatus.close">
                         <button type="button" class="btn btn-primary mr-2" 
                             (click)="openModal('change')">
                             <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Change Status</span>
                         </button>
                     </div>
-                    <div class="Requs_btn_inl-child" *ngIf="requestdata.design_status == designStatus.close && requestdata.user_id === getprofileDetails.data.id">
+                    <div class="Requs_btn_inl-child" *ngIf="requestdata.design_status == designStatus.close && requestdata.user_id === getprofileDetails.data.id && requestdata.status != designStatus.close">
                         <button type="button" class="btn btn-primary mr-2" 
                             (click)="openModal('feedback')">
                             <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Feedback</span>
@@ -258,7 +258,7 @@
                                         <label for="exampleInputEmail1">Please specify the Impact of the learning solution.</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
-                                                {{ requestdata.impact}}
+                                                {{ requestdata.impact | titlecase}}
                                             </span>
                                         </div>
                                     </div>
@@ -318,7 +318,7 @@
                                         <label for="exampleInputEmail1"> By when do you want to launch the program?</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
-                                                {{ requestdata.launch_date}}
+                                                {{ requestdata.launch_date | date:dateTimeFormate}}
                                             </span>
                                         </div>
                                     </div>
@@ -367,16 +367,6 @@
                                         </div>
                                     </div>
                                 </div>                         
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Attachments</label>
-                                        <div class="d-flex align-items-center">
-                                            <span class="form_data">
-                                                {{ requestdata.agree == "1" ? "Yes" : "No"}}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="text-center">

@@ -96,13 +96,13 @@ export class DesignLearningCreateComponent implements OnInit {
     this.getBusinessUnits();
     this.getProjectManager();
     if(this.isHeadDesigner){
-       this.createDesignForm.addControl('project_manager', new FormControl(null, [Validators.required]));
+       this.createDesignForm.addControl('project_manager', new FormControl(null, []));
      }
      else {
        this.createDesignForm.removeControl('project_manager');
      }
      if(this.isHeadDesigner || this.isDesigner){
-      this.createDesignForm.addControl('who_create', new FormControl(null, [Validators.required]));
+      this.createDesignForm.addControl('who_create', new FormControl(null, []));
      }
     else {
       this.createDesignForm.removeControl('who_create');
@@ -202,7 +202,7 @@ export class DesignLearningCreateComponent implements OnInit {
     body.attachment_ext = this.designAttachment.ext;
     body.status = status; 
      if(this.designId){
-      body.digital_learning_id = this.designId;
+      body.new_learning_id = this.designId;
       this.update(body);
     }
     else{

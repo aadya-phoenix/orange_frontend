@@ -8,6 +8,7 @@ import { AuthenticationService } from 'src/app/shared/services/auth/authenticati
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DesignLearningService } from 'src/app/shared/services/design-learning/design-learning.service';
 import Swal from 'sweetalert2';
+import { DesignLearningChatComponent } from '../design-learning-chat/design-learning-chat.component';
 import { DesignLearningHistoryComponent } from '../design-learning-history/design-learning-history.component';
 import { DesignLearningRatingComponent } from '../design-learning-rating/design-learning-rating.component';
 
@@ -160,6 +161,20 @@ export class DesignLearningListComponent implements OnInit {
 
   openRatingModal(item: any) {
     const modalRef = this.modalService.open(DesignLearningRatingComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      title: 'View History',
+      data: item.id,
+      objectDetail: item,
+      type: 'viewhistory'
+    };
+  }
+
+  openChatModal(item: any) {
+    const modalRef = this.modalService.open(DesignLearningChatComponent, {
       centered: true,
       size: 'lg',
       windowClass: 'alert-popup',

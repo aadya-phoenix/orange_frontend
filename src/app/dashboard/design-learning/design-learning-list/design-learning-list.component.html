@@ -242,7 +242,7 @@
                                             </td>
                                             <td (click)="viewRequest(item)">{{ item.requestor_department_name}}
                                             </td>
-                                            <td>
+                                            <td (click)="viewRequest(item)">
                                              {{ item?.project_manager_name  | titlecase }}
                                             </td>
                                             <td class="text-center">
@@ -256,12 +256,12 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a data-toggle="tooltip" data-placement="top"
+                                                <a data-toggle="tooltip" data-placement="top"  (click)="openChatModal(item)"
                                                 title="Chat">
                                                     <img src="../../../../assets/images/icon/chat.png">
                                                 </a>
                                             </td>
-                                            <td> <a *ngIf="item.status !== designStatus.draft"
+                                            <td> <a *ngIf="item.status_show == designStatus.closed && item.user_id === getprofileDetails.data.id "
                                                 (click)="openRatingModal(item)" class="re_id">
                                                 Add/View Rating
                                             </a>

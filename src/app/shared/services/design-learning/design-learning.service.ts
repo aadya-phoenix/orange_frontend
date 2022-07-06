@@ -93,8 +93,8 @@ export class DesignLearningService {
     return this.http.get(url,this.http.headers).pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  sendDesignChats(data: any) {
-    const url = `api/${this.apiVersion}/new-learning/${data.new_learning_id}/chat`;
+  setDesignChats(data: any) {
+    const url = `api/${this.apiVersion}/new-learning/${data.id}/chat`;
     delete data.sme_id;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
