@@ -169,7 +169,7 @@
                                                         Project Manager <span class="text-danger-ligth">*</span>
                                                     </label>
                                                     <ng-select [items]="projectManagerList" 
-                                                    bindLabel="first_name" bindValue="id"
+                                                    bindLabel="user_name" bindValue="id"
                                                     formControlName="project_manager"
                                                     class="w_100">
                                                      </ng-select>
@@ -458,7 +458,7 @@
                                             </div>
                                         </div>
                                     </div> 
-                                    <div class="col-sm-6" *ngIf="isDesigner">
+                                    <div class="col-sm-6" *ngIf="isDesigner || isHeadDesigner">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                Who will Create it/ Deliver it ?
@@ -491,8 +491,10 @@
                                 </div>
                                
                             </div>
+                            
                             <div class="card-footer">
-                                <button class="btn btn-primary mr-1" *ngIf="!isHeadDesigner &&!isDesigner"(click)="save(designStatus.pending)" type="submit">
+                                <button class="btn btn-primary mr-1" *ngIf="(!isHeadDesigner &&!isDesigner && (design_details_status == designStatus.draft
+                                || design_details_status == designStatus.reject || !design_details_status)) ||(isBusinessConsultant && !design_details_status)"(click)="save(designStatus.pending)" type="submit">
                                     <i aria-hidden="true" class="fa fa-upload">
                                     </i> <span class="pl-1">Submit</span>
                                 </button>
@@ -509,8 +511,8 @@
                                 (click)="save(designStatus.draft) ">Save as draft
                                 </button>
                                 <button class="btn btn-secondary mr-1" type="submit" 
-                                *ngIf="(this.isDesigner || this.isHeadDesigner) && design_details_status == designStatus.pending"
-                                 (click)="openModal(designStatus.reject)"><i  aria-hidden="true"  class="fa fa-times"></i><span class="pl-1">Reject</span>
+                                *ngIf="(this.isDesigner || this.isHeadDesigner) && design_details_status == designStatus.pending && design_details.head_status"
+                                (click)="openModal(designStatus.reject)"><i  aria-hidden="true"  class="fa fa-times"></i><span class="pl-1">Reject</span>
                                 </button>
                             </div>
                         </div>

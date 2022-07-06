@@ -15,6 +15,7 @@ import { DesignLearningForwardComponent } from '../design-learning-forward/desig
 export class DesignLearningViewComponent implements OnInit {
 
   dateFormate = dataConstant.dateFormate;
+  dateTimeFormate = dataConstant.dateTimeFormate;
   id = 0;
   RoleID = dataConstant.RoleID;
   designStatus = dataConstant.DesignStatus;
@@ -22,6 +23,7 @@ export class DesignLearningViewComponent implements OnInit {
   historyList:any=[];
   isDesigner = false;
   isHeadDesigner = false;
+  isBusinessConsultant = false;
   getUserrole: any = {};
   getprofileDetails: any = {};
 
@@ -37,6 +39,7 @@ export class DesignLearningViewComponent implements OnInit {
     this.getUserrole = this.authService.getRolefromlocal();
     this.isDesigner = this.getUserrole.id === this.RoleID.DesignTeam;
     this.isHeadDesigner = this.getUserrole.id === this.RoleID.HeadOfDesign;
+    this.isBusinessConsultant =  this.getUserrole.id === this.RoleID.BussinessConsultant;
   }
 
   ngOnInit(): void {

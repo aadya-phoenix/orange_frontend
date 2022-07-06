@@ -36,7 +36,87 @@
         </div>
       </div>
     </div>
-    <!-- Button trigger modal -->
+
+    <form [formGroup]="filterForm">
+        <div class="content mt-3">
+            <div class="animated fadeIn">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="card">
+                            <div class="card-body card_padding">
+                                <div class="row">
+                                    <div class="col-sm-4 col_width_20">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Start Date
+                                            </label>
+                                            <input type="date" class="form-control form_width"
+                                                formControlName="start_date" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col_width_20">
+                                        <div class="form-group">
+                                            <label class="form-control-label">End Date
+                                            </label>
+                                            <input type="date" class="form-control form_width"
+                                                formControlName="end_date" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col_width_20">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Reporting Period
+                                            </label>
+                                            <select class="form-control form_width" formControlName="reporting_period"
+                                                [attr.disabled]="addDate ? 'disabled' : null">
+                                                <option value="">Please select</option>
+                                                <option value="7">Last 7 days</option>
+                                                <option value="30">Last 30 days</option>
+                                                <option value="60">Last 60 days</option>
+                                                <option value="90">Last 90 days</option>
+                                                <option value="All">All time</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+            
+                                    <div class="col-sm-4 col_width_20">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Status
+                                            </label>
+                                            <select formControlName="status" class="form-control form_width">
+                                                <option value="">Please select</option>
+                                                <option value="pending">Pending</option>
+                                                <option value="draft">Draft</option>
+                                                <option value="close">Closed</option>
+                                                <option value="reject">Rejected</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div  class="col-sm-4 col_width_20">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Requestor's Department 
+                                            </label>
+                                            <select class="form-control form_width" formControlName="requestor_department">
+                                                <option value="">Please select</option>
+                                                <option *ngFor="let item of bussinessUnitObj" [value]="item.id">{{item.team_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-center">
+                                    <button class="btn btn-secondary mr-1" (click)="reset()">Reset</button>
+                                    <button class="btn btn-primary" (click)="filterData()">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
     <div class="content mt-2">
         <div class="animated fadeIn">
             <div class="row">
@@ -44,18 +124,7 @@
                     <div class="card">
                         <div class="card-header cm-card-header">
                             <div class="overall_css">
-                                <span class="card_overall">Overall request Status</span>
-                                <div class="d-flex filter_dispaly">
-                                    <button class="btn btn-secondary filter_course" [routerLink]="['/dashboard/designlearning/view-complete-report']">
-                                        <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> View
-                                      all activity report
-                                      </button>
-                                    <button class="btn btn-primary ml-1 filter_course"
-                                        [routerLink]="['/dashboard/designlearning/create']">
-                                        <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1"> New
-                                            request</span>
-                                    </button>
-                                </div>
+                                <span class="card_overall">All request Report</span>
                             </div>
                         </div>
                         <div class="card-body card_course_body">
@@ -91,8 +160,7 @@
                                             </div>
                                             <p>Pending</p>
                                         </div>
-                                        <span
-                                            class="number_css ">{{design_count.pending?design_count.pending:0}}</span>
+                                        <span class="number_css ">{{design_count.pending?design_count.pending:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
@@ -104,7 +172,7 @@
                                             <p>Forwarded</p>
                                         </div>
                                         <span
-                                            class="number_css">{{design_count.transferred?design_count.transferred:0}}</span>
+                                            class="number_css">{{design_count.forwarded?design_count.forwarded:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
@@ -113,10 +181,9 @@
                                             <div class="fa-icons-des cm-learning">
                                                 <img src="../../../../assets/images/icon/check.png" />
                                             </div>
-                                            <p>Published</p>
+                                            <p>Closed</p>
                                         </div>
-                                        <span
-                                            class="number_css pub_left">{{design_count.closed?design_count.closed:0}}</span>
+                                        <span class="number_css">{{design_count.closed?design_count.closed:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
@@ -137,7 +204,7 @@
                                             <div class="fa-icons-des cm-all">
                                                 <img src="../../../../assets/images/icon/viewall.png" />
                                             </div>
-  
+
                                             <p>View All</p>
                                         </div>
                                         <span class="number_css">{{design_count.total?design_count.total:0}}</span>
@@ -224,19 +291,20 @@
                                             <td class="request_id" (click)="viewRequest(item)">{{ item.request_id }}
                                             </td>
                                             <td (click)="viewRequest(item)">{{ item.created_at | date: dateTimeFormate}}</td>
-                                            <td (click)="viewRequest(item)">{{ item.user_name | titlecase }}
+                                            <td (click)="viewRequest(item)">{{ item.requester_name | titlecase }}
                                             </td>
                                             <td (click)="viewRequest(item)">
+                                                {{item.requestor_department_name}}
                                             </td>
-                                            <td  (click)="getRequest(cource)">
-                                             
+                                            <td>
+                                             {{item.project_manager_name}}
                                             </td>
                                             <td class="text-center">
                                                 <p [ngClass]="item.status">
-                                                    {{ (item.status_new ? item.status_new : 'Pending') | titlecase }}
+                                                    {{ (item.status_show ? item.status_show : 'Pending') | titlecase }}
                                                 </p>
                                             </td>
-                                            <td (click)="viewRequest(item)">{{ item.updated_at | date: dateTimeFormate }}
+                                            <td (click)="viewRequest(item)">
                                             </td>
                                             <td>
                                                 <a *ngIf="item.status !== designStatus.draft" (click)="openModal(item)" class="re_id">

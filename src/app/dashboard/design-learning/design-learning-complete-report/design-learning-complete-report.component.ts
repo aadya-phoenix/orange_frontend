@@ -1,4 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
@@ -7,6 +8,7 @@ import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive'
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DesignLearningService } from 'src/app/shared/services/design-learning/design-learning.service';
+import { GeneralDropdownsService } from 'src/app/shared/services/general-dropdowns/general-dropdowns.service';
 
 @Component({
   selector: 'app-design-learning-complete-report',
@@ -18,8 +20,10 @@ export class DesignLearningCompleteReportComponent implements OnInit {
   dateFormate = dataConstant.dateFormate;
   dateTimeFormate = dataConstant.dateTimeFormate;
   designStatus = dataConstant.DesignStatus;
+  public filterForm!: FormGroup;
   designListToShow:any=[];
   designList:any =[];
+  bussinessUnitObj:any=[];
   selectedStatus:any;
   design_count:any={
     closed: 0,
@@ -30,6 +34,7 @@ export class DesignLearningCompleteReportComponent implements OnInit {
     total: 0,
     transferred: 0
   }
+  addDate = false;
   searchText:string='';
 
   pagination = {
@@ -40,21 +45,36 @@ export class DesignLearningCompleteReportComponent implements OnInit {
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
   constructor(
+    private fb: FormBuilder,
     private commonService: CommonService,
     private modalService: NgbModal,
     private route: ActivatedRoute,
+    private generalDrpdownsService:GeneralDropdownsService,
     private router: Router,
     private designService: DesignLearningService,
     private authService: AuthenticationService,
-  ) { }
+  ) {
+    this.filterForm = this.fb.group({
+      start_date: new FormControl('', []),
+      end_date: new FormControl('', []),
+      reporting_period: new FormControl('', []),
+      status: new FormControl('', []),
+      requestor_department: new FormControl('', []),
+
+    });
+    this.filterForm.controls.start_date.valueChanges.subscribe((x: any) => {
+      this.addDate = x ? true : false;
+    })
+   }
 
   ngOnInit(): void {
-    this.refreshModules();
+    this.getBusinessUnits();
+    this.refreshModules({});
   }
 
-  refreshModules() {
+  refreshModules(data:any) {
     this.commonService.showLoading();
-    this.designService.filter({}).subscribe(
+    this.designService.filter(data).subscribe(
       (res: any) => {
         if (res.status === 1 && res.message === 'Success') {
           this.designList = res.data.new_learning;
@@ -69,68 +89,7 @@ export class DesignLearningCompleteReportComponent implements OnInit {
       }
     );
   }
-
-  editRequest(item: any) {
-    /* if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/cct/update/${item.id}`);
-    } */
-  }
-
-  deleteRequest(course_id: number){
-    /*   Swal.fire({
-        title: 'Are you sure want to remove?',
-        text: 'You will not be able to recover this request!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, keep it'
-      }).then((result) => {
-        if (result.value) {
-          this.commonService.showLoading();
-          this.courceService.deleteCourse({course_id :course_id}).subscribe((res:any)=>{
-            this.refreshCourses();
-            Swal.fire(
-              'Deleted!',
-              'Your request has been deleted.',
-              'success'
-            )
-          },(err:any)=>{
-            this.commonService.hideLoading();
-            this.commonService.errorHandling(err);
-          })
-          
-        }
-      }) */
-  }
-
-  copyRequest(course_id: number) {
-     /*  Swal.fire({
-        title: 'Are you sure you want to copy?',
-        text: 'You will copy this request',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, copy it!',
-        cancelButtonText: 'No'
-      }).then((result) => {
-        if (result.value) {
-          this.commonService.showLoading();
-          this.designService.copyCourse({course_id :course_id}).subscribe((res:any)=>{
-            this.commonService.hideLoading();
-            this.refreshModules();
-            Swal.fire(
-              'Copied!',
-              'Your request has been copyed.',
-              'success'
-            )
-          },(err:any)=>{
-            this.commonService.hideLoading();
-            this.commonService.errorHandling(err);
-          })
-          
-        }
-      }) */
-   }
-
+    
    openModal(item: any) {
   /*   const modalRef = this.modalService.open(CourseHistoryComponent, {
       centered: true,
@@ -145,7 +104,6 @@ export class DesignLearningCompleteReportComponent implements OnInit {
       type: 'viewhistory'
     }; */
   }
-  viewRequest(item: any){}
 
   onSort({ column, direction }: any) {
     this.headers.forEach((header: { sortable: any; direction: string; }) => {
@@ -173,6 +131,35 @@ export class DesignLearningCompleteReportComponent implements OnInit {
       this.designListToShow = this.designList.filter((x: any) => { if (x.status_show === type) { return x } }).map((x: any) => Object.assign({}, x));
     }
     this.selectedStatus = type;
+  }
+
+  getBusinessUnits(){
+    this.generalDrpdownsService.getBusinessUnits().subscribe( (res: any) => {
+      this.commonService.hideLoading();
+      this.bussinessUnitObj = res.data;
+    },
+    (err: any) => {
+      this.commonService.hideLoading();
+      this.commonService.toastErrorMsg('Error', err.message);
+    });
+  }
+
+  reset() {
+    this.filterForm.setValue({
+      start_date: '',
+      end_date: '',
+      reporting_period: '',
+      learning_type: '',
+      status: '',
+      department: '',
+      roc: '',
+      publisher: '',
+    });
+    this.refreshModules({});
+  }
+  filterData(){
+    const data = this.filterForm.value;
+    this.refreshModules(data);
   }
 
 

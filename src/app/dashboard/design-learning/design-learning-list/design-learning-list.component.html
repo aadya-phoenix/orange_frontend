@@ -119,7 +119,7 @@
                                             class="number_css pub_left">{{design_count.approve?design_count.approve:0}}</span>
                                     </div>
                                 </div>
-                                <div class="Course_icon_child" *ngIf="!isHeadDesigner">
+                                <div class="Course_icon_child" >
                                     <div class="alig_dashicon" (click)="showRecords(designStatus.closed)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-learning">
@@ -128,11 +128,11 @@
                                             <p>Closed</p>
                                         </div>
                                         <span
-                                            class="number_css pub_left">{{design_count.close?design_count.close:0}}</span>
+                                            class="number_css pub_left">{{design_count.closed?design_count.closed:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(designStatus.reject)">
+                                    <div class="alig_dashicon" (click)="showRecords(designStatus.rejected)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-reject">
                                                 <img src="../../../../assets/images/icon/reject.png" />
@@ -242,7 +242,7 @@
                                             </td>
                                             <td (click)="viewRequest(item)">{{ item.requestor_department_name}}
                                             </td>
-                                            <td>
+                                            <td (click)="viewRequest(item)">
                                              {{ item?.project_manager_name  | titlecase }}
                                             </td>
                                             <td class="text-center">
@@ -256,12 +256,12 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a data-toggle="tooltip" data-placement="top"
+                                                <a data-toggle="tooltip" data-placement="top"  (click)="openChatModal(item)"
                                                 title="Chat">
                                                     <img src="../../../../assets/images/icon/chat.png">
                                                 </a>
                                             </td>
-                                            <td> <a *ngIf="item.status !== designStatus.draft"
+                                            <td> <a *ngIf="item.status_show == designStatus.closed && item.user_id === getprofileDetails.data.id "
                                                 (click)="openRatingModal(item)" class="re_id">
                                                 Add/View Rating
                                             </a>
@@ -274,7 +274,7 @@
                                                   </a> -->
                                                   <a (click)="editRequest(item)"
                                                   *ngIf="item.status_show === designStatus.draft || 
-                                                  (isDesigner && item.status_show === designStatus.pending) || 
+                                                  (isDesigner && item.status_show === designStatus.pending && item.head_status !=  designStatus.approve && item.design_status != designStatus.close) || 
                                                   (isHeadDesigner && item.status_show === designStatus.pending)  ||(item.status === designStatus.reject && item.user_id === getprofileDetails.data.id)"
                                                       class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                       title="Edit">
