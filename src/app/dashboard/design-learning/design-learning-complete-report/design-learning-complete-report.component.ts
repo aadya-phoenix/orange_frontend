@@ -54,7 +54,7 @@ export class DesignLearningCompleteReportComponent implements OnInit {
 
   refreshModules() {
     this.commonService.showLoading();
-    this.designService.getModules().subscribe(
+    this.designService.filter({}).subscribe(
       (res: any) => {
         if (res.status === 1 && res.message === 'Success') {
           this.designList = res.data.new_learning;

@@ -12,11 +12,12 @@ import { DesignLearningViewComponent } from './design-learning-view/design-learn
 import { DesignLearningForwardComponent } from './design-learning-forward/design-learning-forward.component';
 import { DesignLearningHistoryComponent } from './design-learning-history/design-learning-history.component';
 import { DesignLearningChatComponent } from './design-learning-chat/design-learning-chat.component';
+import { DesignLearningRatingComponent } from './design-learning-rating/design-learning-rating.component';
 
 
 @NgModule({
-  declarations: [DesignLearningCreateComponent, DesignLearningListComponent, DesignLearningCompleteReportComponent, DesignLearningViewComponent, DesignLearningForwardComponent, DesignLearningHistoryComponent, DesignLearningChatComponent],
-  entryComponents:[DesignLearningForwardComponent, DesignLearningHistoryComponent],
+  declarations: [DesignLearningCreateComponent, DesignLearningListComponent, DesignLearningCompleteReportComponent, DesignLearningViewComponent, DesignLearningForwardComponent, DesignLearningHistoryComponent, DesignLearningChatComponent, DesignLearningRatingComponent],
+  entryComponents:[DesignLearningForwardComponent, DesignLearningHistoryComponent,DesignLearningRatingComponent],
   providers:[DatePipe],
   imports: [
     CommonModule,

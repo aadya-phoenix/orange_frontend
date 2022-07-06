@@ -7,7 +7,9 @@ import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive'
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DesignLearningService } from 'src/app/shared/services/design-learning/design-learning.service';
+import Swal from 'sweetalert2';
 import { DesignLearningHistoryComponent } from '../design-learning-history/design-learning-history.component';
+import { DesignLearningRatingComponent } from '../design-learning-rating/design-learning-rating.component';
 
 @Component({
   selector: 'app-design-learning-list',
@@ -87,8 +89,8 @@ export class DesignLearningListComponent implements OnInit {
     }
   }
 
-  deleteRequest(course_id: number){
-    /*   Swal.fire({
+  deleteRequest(item_id: number){
+     Swal.fire({
         title: 'Are you sure want to remove?',
         text: 'You will not be able to recover this request!',
         icon: 'warning',
@@ -98,8 +100,8 @@ export class DesignLearningListComponent implements OnInit {
       }).then((result) => {
         if (result.value) {
           this.commonService.showLoading();
-          this.courceService.deleteCourse({course_id :course_id}).subscribe((res:any)=>{
-            this.refreshCourses();
+          this.designService.delete({new_learning_id :item_id}).subscribe((res:any)=>{
+            this.refreshModules();
             Swal.fire(
               'Deleted!',
               'Your request has been deleted.',
@@ -109,13 +111,12 @@ export class DesignLearningListComponent implements OnInit {
             this.commonService.hideLoading();
             this.commonService.errorHandling(err);
           })
-          
         }
-      }) */
+      }) 
   }
 
-  copyRequest(course_id: number) {
-     /*  Swal.fire({
+  /* copyRequest(item_id: number) {
+      Swal.fire({
         title: 'Are you sure you want to copy?',
         text: 'You will copy this request',
         icon: 'warning',
@@ -125,7 +126,7 @@ export class DesignLearningListComponent implements OnInit {
       }).then((result) => {
         if (result.value) {
           this.commonService.showLoading();
-          this.designService.copyCourse({course_id :course_id}).subscribe((res:any)=>{
+          this.designService.copy({new_learning_id :item_id}).subscribe((res:any)=>{
             this.commonService.hideLoading();
             this.refreshModules();
             Swal.fire(
@@ -139,8 +140,8 @@ export class DesignLearningListComponent implements OnInit {
           })
           
         }
-      }) */
-  }
+      }) 
+  } */
 
   openModal(item: any) {
      const modalRef = this.modalService.open(DesignLearningHistoryComponent, {
@@ -155,6 +156,20 @@ export class DesignLearningListComponent implements OnInit {
       objectDetail: item,
       type: 'viewhistory'
     }; 
+  }
+
+  openRatingModal(item: any) {
+    const modalRef = this.modalService.open(DesignLearningRatingComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      title: 'View History',
+      data: item.id,
+      objectDetail: item,
+      type: 'viewhistory'
+    };
   }
 
   viewRequest(item: any){

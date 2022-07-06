@@ -54,9 +54,9 @@
     </div>
     <div class="content">
         <div class="animated fadeIn">
-          <div class="mb-2" *ngIf="isHeadDesigner">
+          <div class="mb-2" >
                 <div class="Requs_btn_inl">
-                    <div class="Requs_btn_inl-child" >
+                  <!--   <div class="Requs_btn_inl-child" *ngIf="isHeadDesigner">
                         <button type="button" class="btn btn-primary mr-2" 
                             (click)="openModal(designStatus.approve)">
                             <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Approve </span>
@@ -64,6 +64,12 @@
                         <button type="button" class="btn btn-secondary"
                             (click)="openModal(designStatus.reject)">
                             <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                        </button>
+                    </div> -->
+                    <div class="Requs_btn_inl-child" *ngIf="isDesigner">
+                        <button type="button" class="btn btn-primary mr-2" 
+                            (click)="openModal('change')">
+                            <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Change Status</span>
                         </button>
                     </div>
                 </div>
@@ -164,6 +170,16 @@
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                                {{ requestdata.requestor_department_name }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.other_requestor_department">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Other Requestor's Department</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                               {{ requestdata.requestdata.other_requestor_department }}
                                             </span>
                                         </div>
                                     </div>

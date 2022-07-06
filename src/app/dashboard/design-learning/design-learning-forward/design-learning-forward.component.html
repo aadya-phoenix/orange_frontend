@@ -7,6 +7,22 @@
     </div>
     <div class="card-body">
         <form [formGroup]="forwardDesignForm">
+            <div class="col-sm-6" *ngIf="isChange">
+                <div class="form-group">
+                  <label>Change Status <span class="text-danger-ligth" *ngIf="status == designStatus.reject">* </span></label>
+                  <ng-select [items]="statusObj" 
+                  bindLabel="name" bindValue="id"
+                  formControlName="status"
+                  class="w_100">
+                   </ng-select>
+                   <div *ngIf="(forwardDesignForm.controls['status'].invalid && (forwardDesignForm.controls['status'].dirty || forwardDesignForm.controls['status'].touched)) || isSubmitted ">
+                        <div class="error_message"
+                            *ngIf="forwardDesignForm.controls['status'].errors?.required">
+                            Status cannot be blank
+                        </div>
+                    </div>
+                </div>
+              </div>
             <div class="col-sm-12">
                 <div class="form-group">
                   <label>Comment <span class="text-danger-ligth" *ngIf="status == designStatus.reject">* </span></label>

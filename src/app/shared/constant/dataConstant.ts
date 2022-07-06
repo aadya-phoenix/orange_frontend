@@ -30,6 +30,8 @@ export const dataConstant = {
   PasswordPattern:'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$',
   Ratings: [{id:1, value:'Very Bad'},{id:2, value:'Bad'},{id:3, value:'Okay'},{id:4, value:'Good'},{id:5, value:'Excellent'}],
 
+  DesignRatings: [{id:1, value:'Poor'},{id:2, value:'Below Average'},{id:3, value:'Average'},{id:4, value:'Above Average'},{id:5, value:'Excellent'}],
+
   CourseStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish', reject: 'reject', expired: 'expired' },
   CarouselStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
   SMEStatus: { total: 'total', contecntSupport: 'content-support', delivery: 'delivery', voiceOver: 'voice-over-learning', active: 'active', deactive:'deactive', draft:'draft', pending:'pending', reject: 'reject', approve:'approve'},
