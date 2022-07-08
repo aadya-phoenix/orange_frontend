@@ -7,9 +7,9 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/manage vendor.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="breade_text_span1">Manage Vendors</span>
+                        <span class="breade_text_span1">{{lableConstant.manage_vendors}}</span>
                         <span class="divider"></span>
-                        <span class="breade_text_span">View and manage details about external vendor workshops and internal PD&L workshops.</span>
+                        <span class="breade_text_span">{{lableConstant.view_manage_workshops}}</span>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
                             <span class="text_white span_dis">Create New Vendor</span>
@@ -44,16 +44,14 @@
                     <div class="card">
                         <div class="card-header cm-card-header">
                             <div class="overall_css">
-                                <span class="card_overall">Overall request Status</span>
+                                <span class="card_overall">{{lableConstant.Overall_request_Status}}</span>
                                 <div class="cct_button_oversta">
                                     <button class="btn btn-secondary" [routerLink]="['/dashboard/vendormanagement/report']">
-                                        <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> View
-                                        all activity report
+                                        <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> {{lableConstant.View_all_activity_report}}
                                       </button>
                                     <button class="btn btn-primary ml-1"
                                         [routerLink]="['/dashboard/vendormanagement/create']">
-                                        <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1"> New
-                                            request</span>
+                                        <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1"> {{lableConstant.New_Request}}</span>
                                     </button>
                                 </div>
                             </div>
@@ -88,7 +86,7 @@
                                             <div class="fa-icons-des cm-all">
                                                 <img src="../../../../assets/images/icon/viewall.png" />
                                             </div>
-                                            <p>View All</p>
+                                            <p>{{lableConstant.View_All}}</p>
                                         </div>
                                         <span class="number_css">{{vendor_count.total?vendor_count.total:0}}</span>
                                     </div>
@@ -111,11 +109,11 @@
                             <div class="overall_css">
                                 <div>
                                     <i class="fa fa-table fa_table" aria-hidden="true "></i>
-                                    <span class="card-title card-title-text card_overall">My Request</span>
+                                    <span class="card-title card-title-text card_overall">{{lableConstant.My_Request}}</span>
                                 </div>
                                 <div class="filter_dispaly">
                                     <div class="form-group filter_course">
-                                        <label class="label_course">Search</label>
+                                        <label class="label_course">{{lableConstant.Search}}</label>
                                         <input type="text " name="search " autocomplete="off" [(ngModel)]="searchText"
                                             placeholder="Type to Search"
                                             class="form-control ng-untouched ng-pristine ng-valid form_width"

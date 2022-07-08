@@ -6,10 +6,9 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/3.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="font-20 text_white">Promote on Carousel</span>
+                        <span class="breade_text_span1">{{lableConstant.promote_on_carousel}}</span>
                         <span class="divider"></span>
-                        <span class="title-detail mt-6">
-                            Request the creation of a new entry in the Orange Learning Carousel</span>
+                        <span class="breade_text_span">{{lableConstant.request_create_entity}}</span>
                     </div>
                 </div>
             </div>
@@ -25,7 +24,7 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
                             <a [routerLink]="['/dashboard/olcarousel']" class="text_white">Create new Carousel</a>
@@ -47,7 +46,7 @@
                 <span>View Carousel Request</span>
                 <span class="cc-text_css"> ({{ requestdata.request_id }}) -
                 </span>
-                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status_new | titlecase
+                <span spellcheck="text_orange" class="text_orange">{{lableConstant.Request_Status}} - {{ requestdata.status_new | titlecase
                     }}</span>
             </p>
         </div>
@@ -60,8 +59,7 @@
                     <div class="Requs_btn_inl-child">
                         <button type="button" class="btn btn-primary mr-2" *ngIf="isForward()"
                             (click)="forwardRequest()">
-                            <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Transfer to
-                                Publisher</span>
+                            <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">{{lableConstant.Transfer_to_Publisher}}</span>
                         </button>
                         <button type="button" class="btn btn-primary mr-2" *ngIf="isPublish()"
                             (click)="statusChangeRequest(CarouselStatus.publish)">
@@ -70,7 +68,7 @@
                         <button type="button" class="btn mr-2" *ngIf="isUpdate()"
                             [ngClass]="(isPublish() || isForward()) ?  'btn-secondary'  : 'btn-primary'"
                             (click)="updateRequest()">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">Update</span>
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">{{lableConstant.Update}}</span>
                         </button>
                         <button type="button" class="btn btn-secondary" *ngIf="isReject()"
                             (click)="statusChangeRequest(CarouselStatus.reject)">
@@ -87,7 +85,7 @@
                         <ngb-panel id="panel-{{i}}" class="mr-1 w_100  ">
                            
                             <ng-template ngbPanelTitle>
-                                <span>Carousal {{i+1}}</span>
+                                <span>Carousel {{i+1}}</span>
                             </ng-template>
                             
                             <ng-template ngbPanelContent>
@@ -104,7 +102,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Title</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Title}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data" onkeyup="textAreaAdjust(this)">
                                                     {{meta.title}}
@@ -114,7 +112,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Description</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Description}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data" onkeyup="textAreaAdjust(this)">
                                                     {{meta.description}}
@@ -134,7 +132,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Show carousal only to manager</label>
+                                            <label for="exampleInputEmail1">Show carousel only to manager</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data" onkeyup="textAreaAdjust(this)">
                                                     {{meta.display_manager===1?'Yes':'No'}}
@@ -151,7 +149,7 @@
                 <div class="col-sm-6">
                     <div class="card border-radius-0">
                         <div class="card-header card_header_view">
-                            <p>Carousal Details</p>
+                            <p>Carousel Details</p>
                         </div>
                         <div class="card-body">
                             <div class="col-sm-12 col-md-12">
@@ -167,7 +165,7 @@
 
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Expiry Type</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.Expiry_Type}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{requestdata.expiry_type_name}} ({{ requestdata.expiry_date | date:
@@ -179,7 +177,7 @@
 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Additional Comments</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.Additional_Comments}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.additional_comment }}

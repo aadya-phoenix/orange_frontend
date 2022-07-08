@@ -6,10 +6,9 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/3.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="breade_text_span1">Promote on Carousel</span>
+                        <span class="breade_text_span1">{{lableConstant.promote_on_carousel}}</span>
                         <span class="divider"></span>
-                        <span class="breade_text_span">
-                            Request the creation of a new entry in the Orange Learning Carousel</span>
+                        <span class="breade_text_span">{{lableConstant.request_create_entity}}</span>
                     </div>
                 </div>
             </div>
@@ -25,14 +24,13 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
                             <a [routerLink]="['/dashboard/olcarousel']" class="text_white">Create new Carousel</a>
                         </li>
                         <li>
-                            <span class="text_white span_dis">{{ carousel_id === 0 ? 'New Request' : 'Update Request'}}</span>
-
+                            <span class="text_white span_dis">{{ carousel_id === 0 ? lableConstant.New_Request : 'Update Request'}}</span>
                         </li>
                     </ol>
                 </div>
@@ -44,12 +42,12 @@
             <div class="d-flex align-items-center">
                 <img src="../../../../assets/images/formm.png" class="form_img_req" />
                 <p class="mt-2 ml-2 mb-2 view-re_css">
-                <span class="comlte_css">Complete this form and click on the submit button</span>
+                <span class="comlte_css">{{lableConstant.Complete_this_form_and_click_on_the_submit_button}}</span>
                 </p>
             </div>
             <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample"
                 role="button" aria-expanded="false" aria-controls="collapseExample">
-                View overall request status<img src="../../../../assets/images/Viewreq.png"
+                {{lableConstant.View_overall_request_status}}<img src="../../../../assets/images/Viewreq.png"
                     class="ml-2" width="40" />
             </a>
         </div>
@@ -62,7 +60,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="header_div_promt row">
-                                    <strong class="font-16 col-md-12">I want my entry to appear in the following Carousel(s).</strong>
+                                    <strong class="font-16 col-md-12">{{lableConstant.I_want_entry_following_Carousel}}</strong>
                                     <div class="chkbox_css_header ml-2 mt-2">
                                         <label formArrayName="languages"
                                             *ngFor="let language of lauguageFormArray.controls; let i = index"
@@ -91,11 +89,11 @@
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <label class="form-control-label">
-                                                            Title <span class="text-danger-ligth">* </span>
+                                                            {{lableConstant.Title}} <span class="text-danger-ligth">* </span>
                                                             <a>
                                                                 <i class="fa fa-info-circle info_circle"
                                                                     aria-hidden="true" placement="right"
-                                                                    ngbTooltip="Provide an attractive, catchy and clear title for the Carousel entry (maximum 32 characters including spaces). "></i>
+                                                                    ngbTooltip="{{lableConstant.Provide_attractive_Carousel_entry}}"></i>
                                                             </a>
                                                         </label>
                                                         <input type="text" placeholder="Enter Title"  maxlength="32" 
@@ -104,7 +102,7 @@
                                                             *ngIf="(carouselFormArray.controls[i].controls['title'].invalid && (carouselFormArray.controls[i].controls['title'].dirty || carouselFormArray.controls[i].controls['title'].touched)) || isSubmitted ">
                                                             <div class="error_message"
                                                                 *ngIf="carouselFormArray.controls[i].controls['title'].errors?.required">
-                                                                Title cannot be blank
+                                                                {{lableConstant.Title}} cannot be blank
                                                             </div>
                                                         </div>
                                                     </div>
@@ -112,7 +110,7 @@
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <label class="form-control-label">
-                                                            Description <span class="text-danger-ligth">* </span>
+                                                            {{lableConstant.Description}} <span class="text-danger-ligth">* </span>
                                                             <a>
                                                                 <i class="fa fa-info-circle info_circle"
                                                                     aria-hidden="true" data-bs-toggle="tooltip"
@@ -127,7 +125,7 @@
                                                             *ngIf="(carouselFormArray.controls[i].controls['description'].invalid && (carouselFormArray.controls[i].controls['description'].dirty || carouselFormArray.controls[i].controls['description'].touched)) || isSubmitted ">
                                                             <div class="error_message"
                                                                 *ngIf="carouselFormArray.controls[i].controls['description'].errors?.required">
-                                                                Description cannot be blank
+                                                                {{lableConstant.Description}} cannot be blank
                                                             </div>
                                                         </div>
                                                     </div>
@@ -176,7 +174,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="header_div_promt">
-                                    <strong class="font-16">Other Details</strong>
+                                    <strong class="font-16">{{lableConstant.Other_Details}}</strong>
                                 </div>
                             </div>
                             <div class="card-body card_width">
@@ -209,7 +207,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Requested Publication Date <span class="text-danger-ligth">* </span>
+                                                {{lableConstant.Requested_Publication_Date}} <span class="text-danger-ligth">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-bs-toggle="tooltip" data-bs-placement="right"
@@ -222,7 +220,7 @@
                                                 *ngIf="(createOlcarouselForm.controls['publication_date'].invalid && (createOlcarouselForm.controls['publication_date'].dirty || createOlcarouselForm.controls['publication_date'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createOlcarouselForm.controls['publication_date'].errors?.required">
-                                                    Requested Publication Date cannot be blank
+                                                    {{lableConstant.Requested_Publication_Date}} cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -230,7 +228,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Expiry Type <span class="text-danger-ligth">* </span>
+                                                {{lableConstant.Expiry_Type}} <span class="text-danger-ligth">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-bs-toggle="tooltip" data-bs-placement="right"
@@ -248,7 +246,7 @@
                                                 *ngIf="(createOlcarouselForm.controls['expiry_type'].invalid && (createOlcarouselForm.controls['expiry_type'].dirty || createOlcarouselForm.controls['expiry_type'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createOlcarouselForm.controls['expiry_type'].errors?.required">
-                                                    Expiry Type cannot be blank
+                                                    {{lableConstant.Expiry_Type}} cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -256,7 +254,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Additional Comments
+                                                {{lableConstant.Additional_Comments}}
                                             </label>
                                             <textarea class="form-control form_width-textarea" maxlength="500" rows="3"
                                                 formControlName="additional_comment"
@@ -294,12 +292,11 @@
                             </div>
                             <div class="card-footer">
                                 <button class="btn btn-primary mr-1" type="submit"  *ngIf="isSubmit()"
-                                    (click)="saveCarousel('pending')"> <i class="fa fa-upload" aria-hidden="true"></i>{{ isReviewer ? 'Transfer To Publisher': 'Submit' }}</button>
+                                    (click)="saveCarousel('pending')"> <i class="fa fa-upload mr-1" aria-hidden="true"></i>{{ isReviewer ?  lableConstant.Transfer_to_Publisher: 'Submit' }}</button>
                                 <button class="btn btn-primary mr-1" type="submit" *ngIf="isPublish()"
-                                    (click)="saveCarousel('publish')"><i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Publish</span></button>
+                                    (click)="saveCarousel('publish')"><i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1"> Publish</span></button>
                                 <button class="btn btn-secondary mr-1" type="submit" *ngIf="isReject()" (click)="statusChangeRequest(CarouselStatus.reject)"><i  aria-hidden="true" class="fa fa-times"></i><span class="pl-1">Reject</span></button>
-                                <button class="btn btn-secondary" *ngIf="isDraft()" (click)="saveCarousel('draft')">Save
-                                    as draft</button>
+                                <button class="btn btn-secondary" *ngIf="isDraft()" (click)="saveCarousel('draft')">{{lableConstant.Save_as_draft}}</button>
                             </div>
                         </div>
                     </div>
@@ -312,7 +309,7 @@
     <div class="collapse" id="collapseExample">
         <div class="card card-body req_status-card">
             <div class="card_header reqst_header">
-                <p>Overall request Status</p>
+                <p>{{lableConstant.Overall_request_Status}}</p>
                 <i class="fa fa-times fa_cross mr-2" aria-hidden="true" data-toggle="collapse" href="#collapseExample"
                     role="button" aria-expanded="false" aria-controls="collapseExample"></i>
             </div>
@@ -323,7 +320,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/draftsbl.png" />
                             </div>
-                            <p>Draft</p>
+                            <p>{{lableConstant.Draft}}</p>
                             <span class="number_css">
                                 {{carousel_count.draft}}
                             </span>
@@ -337,7 +334,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/closedbl.png" />
                             </div>
-                            <p>Submitted</p>
+                            <p>{{lableConstant.Submitted}}</p>
                             <span class="number_css">
                                 {{carousel_count.submitted}}
                             </span>
@@ -351,7 +348,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/pendingbl.png" />
                             </div>
-                            <p>Pending</p>
+                            <p>{{lableConstant.pending}}</p>
                             <span class="number_css">
                                 {{carousel_count.pending}}
                             </span>
@@ -379,7 +376,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/checkbl.png" />
                             </div>
-                            <p data-toggle="tooltip" data-placement="top" title="Active in Orange Learning">Active in ....</p>
+                            <p data-toggle="tooltip" data-placement="top" title="lableConstant.Active_in_Orange_Learning">{{lableConstant.Active_in_Orange_Learning}}</p>
                             <span class="number_css">
                                 {{carousel_count.closed?carousel_count.closed:0}}
                             </span>
@@ -393,7 +390,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/rejectbl.png" />
                             </div>
-                            <p>Rejected</p>
+                            <p>{{lableConstant.Rejected}}</p>
                             <span class="number_css">
                                 {{carousel_count.rejected?carousel_count.rejected:0}}
                             </span>
@@ -407,7 +404,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/expiredbl.png" />
                             </div>
-                            <p>Expired</p>
+                            <p>{{lableConstant.Expired}}</p>
                             <span class="number_css">
                                 {{carousel_count.expired?carousel_count.expired:0}}
                             </span>
@@ -418,7 +415,7 @@
             <div class="view-comple-req_div">
                 <button class="btn btn-primary view-comple-req justify-content-center p-1"
                     [routerLink]="['/dashboard/cources/view-complete-report']">
-                    <i class="fa fa-database mr-1" aria-hidden="true"></i>View all activity Request
+                    <i class="fa fa-database mr-1" aria-hidden="true"></i>{{lableConstant.View_all_activity_report}}
                 </button>
             </div>
             <!--ROW END-->

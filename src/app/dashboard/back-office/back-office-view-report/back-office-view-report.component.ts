@@ -18,6 +18,7 @@ import { BackOfficeHistoryComponent } from '../back-office-history/back-office-h
   styleUrls: ['./back-office-view-report.component.scss']
 })
 export class BackOfficeViewReportComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
   public filterForm!: FormGroup;
   backOfficeStatus = dataConstant.BackOfficeStatus;
   dateTimeFormate = dataConstant.dateTimeFormate;
@@ -63,6 +64,7 @@ export class BackOfficeViewReportComponent implements OnInit {
     private router: Router,
     private courceService: CourcesService
   ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.isReviewer = this.getUserrole.id === this.RoleID.BackOfficeReviewer;
@@ -114,7 +116,7 @@ export class BackOfficeViewReportComponent implements OnInit {
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
-      title: 'View History',
+      title: this.lableConstant.View_History,
       data: item.id,
       objectDetail: item,
       type: 'viewhistory'

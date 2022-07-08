@@ -1,1 +1,102 @@
-<p>pdltools-details works!</p>
+<div class="card mb-0">
+    <div class="card-header text_orange">
+        <div class="d-flex justify_content">
+            {{title}}
+            <a (click)="closeModal()" class="text_black"><i class="fa fa-times" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title fon_0.9">
+            <b>{{selectedUser}}</b>
+            <span></span>
+            <!-- <b class="ml-1">({{detail| json}})</b> -->
+        </h5>
+        <div class="row">
+            <div class="col-12">
+                <ngb-accordion #acc="ngbAccordion" class="d-flex" *ngFor="let item of detail | keyvalue">
+                    <ngb-panel id="panel-content-support" class="mr-1 w_100  ">
+                        <ng-template ngbPanelTitle>
+                            <table class="table table-bordered mb-0">
+                                <tbody>
+                                    <tr class="text-center bac_hover-table font-12">
+                                        <td>{{item.key}}
+                                        </td>
+                                        <td>
+                                            Submitted: {{item.value.count.submitted}}
+                                        </td>
+                                        <td>
+                                            Pending: {{item.value.count.pending}}
+                                        </td>
+                                        <td>
+                                            Rejected: {{item.value.count.rejected}}
+                                        </td>
+                                        <td>
+                                            Published: {{item.value.count.closed}}
+                                        </td>
+                                        <td>
+                                            Total: {{item.value.count.total}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ng-template>
+
+                        <ng-template ngbPanelContent>
+                            <div class="table-responsive table_height_scroll p-2">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr class="fon_15 text-center">
+                                            <th scope="col">RequestID</th>
+                                            <th scope="col">Learning title</th>
+                                            <th scope="col">Requester name</th>
+                                            <th scope="col">Request to</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Request date</th>
+                                            <th scope="col">Process date</th>
+                                            <th scope="col">Response time</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of item.value.course"
+                                            class="text-center bac_hover-table font-12">
+                                            <td>{{data.request_id}}
+                                            </td>
+                                            <td>
+                                                {{data.training_provided_by}}
+                                            </td>
+                                            <td>
+                                                {{data.requester_name}}
+                                            </td>
+                                            <td>
+                                                {{data.requester_email}}
+                                            </td>
+                                            <td>
+                                                {{data.status_show}}
+                                            </td>
+                                            <td>
+                                                {{data.created_at | date:'dd-MM-yyyy'}}
+                                            </td>
+                                            <td>
+                                                {{data.updated_at | date:'dd-MM-yyyy'}}
+                                            </td>
+                                            <td>
+                                                {{data.response_time}}
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ng-template>
+                    </ngb-panel>
+                </ngb-accordion>
+
+            </div>
+            <div class="col-6">
+
+            </div>
+        </div>
+    </div>
+</div>

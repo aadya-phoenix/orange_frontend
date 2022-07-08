@@ -16,7 +16,7 @@ import { VendorManagementHistoryComponent } from '../vendor-management-history/v
   styleUrls: ['./vendor-management-list.component.scss']
 })
 export class VendorManagementListComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {}};
   vendorStatus = dataConstant.VendorStatus;
   dateTimeFormate = dataConstant.dateTimeFormate;
   dateFormate = dataConstant.dateFormate;
@@ -51,6 +51,7 @@ export class VendorManagementListComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
   }
@@ -79,7 +80,7 @@ export class VendorManagementListComponent implements OnInit {
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
-      title: 'View History',
+      title: this.lableConstant.View_History,
       data: item.id,
       objectDetail: item,
       type: 'viewhistory'

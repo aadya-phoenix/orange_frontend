@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <div class="content">
+    <div class="content"> 
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="form-group w-100">
@@ -59,6 +59,7 @@
                 </div>
             </div>
         </div>
+        <div *ngIf="year && selectedModule == 'course'">
         <div class="row bg-white mx-0">
             <div class="col-md-6 p-0 pt-2" *ngIf="courceData.overall">
                 <div class="col-md-6 col-sm-12 mb-2">
@@ -115,7 +116,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div id="chart-column"></div>
+                <div id="comp-chart-column"></div>
             </div>
         </div>
         <div class="row mt-2">
@@ -180,7 +181,7 @@
                                     {{rocData[item.key][1].overall.total}}
                                 </td>
                                 <td>
-                                    <a class="re_id">
+                                    <a class="re_id" (click)="openModal(rocData[item.key])">
                                         View
                                     </a>
                                 </td>
@@ -257,5 +258,100 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-2">
+            <div class="col-6">
+                <div class="table-responsive table_height_scroll">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="font-14 text-center sticky_header">
+                                <th scope="col">Month</th>
+                                <th scope="col">Complete process time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center font-13">
+                                <td>Jan</td>
+                                <td>7 day 18 hours 25 minutes</td>
+                            </tr>
+                            <tr class="text-center font-13">
+                                <td>Feb</td>
+                                <td>7 day 18 hours 25 minutes</td>
+                            </tr>
+                            <tr class="text-center font-13">
+                                <td>Mar</td>
+                                <td>7 day 18 hours 25 minutes</td>
+                            </tr>
+                            <tr class="text-center font-13">
+                                <td>Apr</td>
+                                <td>7 day 18 hours 25 minutes</td>
+                            </tr>
+                            <tr class="text-center font-13">
+                                <td>May</td>
+                                <td>7 day 18 hours 25 minutes</td>
+                            </tr>
+                            <tr class="text-center font-13">
+                                <td>Jun</td>
+                                <td>7 day 18 hours 25 minutes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+            </div>
+            <div class="col-6">
+                <div id="comp-chart-line"></div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6">
+                <div id="comp-chart-roc-month"></div>
+            </div>
+            <div class="col-6">
+                <div id="comp-chart-publisher-month"></div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6">
+                <div class="table-responsive table_height_scroll">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="font-14 text-center sticky_header">
+                                <th scope="col">Departments</th>
+                                <th scope="col">Total Records</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center font-13">
+                                <td>Human Resources</td>
+                                <td>138</td>
+                            </tr>
+                            <tr class="text-center font-13">
+                                <td>Orange Intl Networks Infrastruct & Svcs(OINIS)</td>
+                                <td>9</td>
+                            </tr>
+                            <tr class="text-center font-13">
+                                <td>Hosted staff/ INNOV & Others-EQ</td>
+                                <td>1</td>
+                            </tr>
+                            <tr class="text-center font-13">
+                                <td>Sales & Marketing Americas</td>
+                                <td>9</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+            </div>
+            <div class="col-6">
+                <div id="comp-depart-activities"></div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6">
+                <div id="comp-chart-pie-roc"></div>
+            </div>
+            <div class="col-6">
+                <div id="comp-chart-pie-publisher"></div>
+            </div>
+        </div>
+    </div>
     </div>
 </div>

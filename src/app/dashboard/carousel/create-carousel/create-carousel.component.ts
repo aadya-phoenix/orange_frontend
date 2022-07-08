@@ -18,6 +18,7 @@ const emailregexp = dataConstant.EmailPattren;
   styleUrls: ['./create-carousel.component.scss']
 })
 export class CreateCarouselComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
   today = new Date();
   minDate = {};
   RoleID = dataConstant.RoleID;
@@ -58,6 +59,7 @@ export class CreateCarouselComponent implements OnInit {
     private modalService: NgbModal,
     private authService: AuthenticationService,
     private carouselService: CarouselService) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.minDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.getUserrole = this.authService.getRolefromlocal();

@@ -5,6 +5,8 @@ import * as Highcharts from 'highcharts';
 import HighchartsMore from 'highcharts/highcharts-more';
 import HighchartsSolidGauge from 'highcharts/modules/solid-gauge';
 import { PldtoolsService } from '../shared/services/pldtools/pldtools.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PdltoolsDetailsComponent } from './pdltools-details/pdltools-details.component';
 
 HighchartsMore(Highcharts);
 HighchartsSolidGauge(Highcharts);
@@ -28,7 +30,7 @@ export class PdltoolsComponent implements AfterViewInit {
   year = null;
   selectedModule = null;
 
-  constructor(private commonService: CommonService, private pldtoolsService: PldtoolsService) {
+  constructor(private commonService: CommonService, private pldtoolsService: PldtoolsService,  private modalService: NgbModal) {
     this.yearsList = this.commonService.LastFewYearsList();
     this.moduleList = dataConstant.ModuleList;
   }
@@ -51,6 +53,21 @@ export class PdltoolsComponent implements AfterViewInit {
         this.getReportData();
       }
     }
+  }
+
+  openModal(item: any) {
+    const modalRef = this.modalService.open(PdltoolsDetailsComponent, {
+      centered: true,
+      size: 'xl',
+      modalDialogClass: 'large-width',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      title: 'Regional Operations Coordinator Activities report',
+      data: item.id,
+      objectDetail: item,
+      type: 'rocactivity'
+    };
   }
 
   private getCourceData() {
@@ -86,6 +103,11 @@ export class PdltoolsComponent implements AfterViewInit {
         this.createChartColumn();
         this.createChartLine('chart-publisher','Publisher Activity Report',this.publisherReportData);
         this.createChartLine('chart-roc','ROC Activity Report',this.rocReportData);
+        this.createMonthWiseLinechart('comp-chart-publisher-month',`Publisher month wise average time ${this.year}`,this.publisherReportData)
+        this.createMonthWiseLinechart('comp-chart-roc-month',`ROC month wise average time ${this.year}`,this.rocReportData)
+        this.createPieChart();
+        this.CreateLinechart();
+        this.createChartDepartActivities();
         this.commonService.hideLoading();
       },
       (err: any) => {
@@ -142,124 +164,9 @@ export class PdltoolsComponent implements AfterViewInit {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 
-  private createChartGauge(): void {
-    const chart = Highcharts.chart('chart-gauge', {
-      chart: {
-        type: 'solidgauge',
-      },
-      title: {
-        text: 'Gauge Chart',
-      },
-      credits: {
-        enabled: false,
-      },
-      pane: {
-        startAngle: -90,
-        endAngle: 90,
-        center: ['50%', '85%'],
-        size: '160%',
-        background: {
-          innerRadius: '60%',
-          outerRadius: '100%',
-          shape: 'arc',
-        },
-      },
-      yAxis: {
-        min: 0,
-        max: 100,
-        stops: [
-          [0.1, '#55BF3B'], // green
-          [0.5, '#DDDF0D'], // yellow
-          [0.9, '#DF5353'], // red
-        ],
-        minorTickInterval: null,
-        tickAmount: 2,
-        labels: {
-          y: 16,
-        },
-      },
-      plotOptions: {
-        solidgauge: {
-          dataLabels: {
-            y: -25,
-            borderWidth: 0,
-            useHTML: true,
-          },
-        },
-      },
-      tooltip: {
-        enabled: false,
-      },
-      series: [{
-        name: null,
-        data: [this.getRandomNumber(0, 100)],
-        dataLabels: {
-          format: '<div style="text-align: center"><span style="font-size: 1.25rem">{y}</span></div>',
-        },
-      }],
-    } as any);
-
-    // setInterval(() => {
-    //   chart.series[0].points[0].update(this.getRandomNumber(0, 100));
-    // }, 1000);
-  }
-
-  private createChartPie(): void {
-    let date = new Date();
-    const data: any[] = [];
-
-    for (let i = 0; i < 5; i++) {
-      date.setDate(new Date().getDate() + i);
-      data.push({
-        name: `${date.getDate()}/${date.getMonth() + 1}`,
-        y: this.getRandomNumber(0, 1000),
-      });
-    }
-
-    const chart = Highcharts.chart('chart-pie', {
-      chart: {
-        type: 'pie',
-      },
-      title: {
-        text: 'Pie Chart',
-      },
-      credits: {
-        enabled: false,
-      },
-      tooltip: {
-        headerFormat: `<span class="mb-2">Date: {point.key}</span><br>`,
-        pointFormat: '<span>Amount: {point.y}</span>',
-        useHTML: true,
-      },
-      series: [{
-        name: null,
-        innerSize: '50%',
-        data,
-      }],
-    } as any);
-
-    // setInterval(() => {
-    //   date.setDate(date.getDate() + 1);
-    //   chart.series[0].addPoint({
-    //     name: `${date.getDate()}/${date.getMonth() + 1}`,
-    //     y: this.getRandomNumber(0, 1000),
-    //   }, true, true);
-    // }, 1500);
-  }
-
+ 
   private createChartColumn(): void {
-    let date = new Date();
-    const data: any[] = [];
-
-    for (let i = 0; i < 10; i++) {
-      date.setDate(new Date().getDate() + i);
-      data.push({
-        name: `${date.getDate()}/${date.getMonth() + 1}`,
-        y: this.getRandomNumber(0, 1000),
-      });
-    }
-
-    const chart = Highcharts.chart('chart-column' as any, {
+    const chart = Highcharts.chart('comp-chart-column' as any, {
       chart: {
         type: 'column',
         options3d: {
@@ -296,21 +203,179 @@ export class PdltoolsComponent implements AfterViewInit {
         headerFormat: '<b>{point.key}</b><br>',
         pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: {point.y}'
       },
+    } as any);
+  }
 
-      // plotOptions: {
-      //   column: {
-      //     depth: 25
-      //   }
-      // }
+  private createChartDepartActivities(): void {
+    const chart = Highcharts.chart('comp-depart-activities' as any, {
+      chart: {
+        type: 'column',
+        options3d: {
+          enabled: true
+                }
+      },
+      title: {
+        text: `Department wise activities report ${this.year}`,
+      },
+      credits: {
+        enabled: false,
+      },
+      xAxis: {
+        categories: ['Human Resources', 'Orange Intl Networks Infrastruct & Svcs(OINIS)', 'Hosted staff/ INNOV & Others-EQ', 'Sales & Marketing Americas'],
+        labels: {
+          skew3d: true,
+          style: {
+            fontSize: '16px'
+          }
+        }
+      },
+
+      yAxis: {
+        title: {
+          text: null
+        }
+      },
+      series: [{
+        name: 'Total Requests',
+        data: [138,9,1,9]
+      }],
+
+      tooltip: {
+        headerFormat: '<b>{point.key}</b><br>',
+        pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: {point.y}'
+      },
+    } as any);
+  }
+
+  private CreateLinechart():void {
+    const chart = Highcharts.chart('comp-chart-line' as any, {
+      chart: {
+        type: 'line'
+    },
+    title: {
+        text: 'ROC month wise average process time 2022'
+    },
+    xAxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    },
+    yAxis: {
+        title: {
+            text: 'Response Time'
+        }
+    },
+    credits: {
+      enabled: false,
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: [{
+        name: 'Process Time',
+        data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+    }]
+    } as any);
+  }
+
+  private createMonthWiseLinechart(chartname:string,title:string, data:any):void {
+    const chart = Highcharts.chart(chartname as any, {
+      chart: {
+        type: 'line'
+    },
+    title: {
+        text: title
+    },
+    xAxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    },
+    yAxis: {
+        title: {
+            text: 'Response Time'
+        }
+    },
+    credits: {
+      enabled: false,
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: data
+    } as any);
+  }
+
+  private createPieChart():void{
+    Highcharts.chart('comp-chart-pie-roc' as any, {
+      chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45
+        }
+    },
+    title: {
+        text: 'ROC Activity Report'
+    },
+    subtitle: {
+        text: ''
+    },
+    plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 45
+        }
+    },
+    series: [{
+        name: 'Published Request',
+        data: [
+            ['Summit Maggu', 8],
+            ['Irina Sipratova', 3],
+            ['Chaimaa Hafez', 1],
+            ['Daniela Hlucha', 6],
+            ['Fernanda Bernstorff', 8]
+        ]
+    }]
     } as any);
 
-    // setInterval(() => {
-    //   date.setDate(date.getDate() + 1);
-    //   chart.series[0].addPoint({
-    //     name: `${date.getDate()}/${date.getMonth() + 1}`,
-    //     y: this.getRandomNumber(0, 1000),
-    //   }, true, true);
-    // }, 1500);
+    Highcharts.chart('comp-chart-pie-publisher' as any, {
+      chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45
+        }
+    },
+    title: {
+        text: 'Publisher Activity Report'
+    },
+    subtitle: {
+        text: ''
+    },
+    plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 45
+        }
+    },
+    series: [{
+        name: 'Published Request',
+        data: [
+            ['Tracy Stevens', 8],
+            ['Bernard Siefert', 5],
+            ['Francoise Latreille', 1],
+            ['Girish Chand Pandey', 2],
+            ['Fatma Elarini', 10]
+        ]
+    }]
+    } as any);
   }
 
   private createChartLine(chartname:string,title:string, data:any): void {
@@ -366,11 +431,6 @@ export class PdltoolsComponent implements AfterViewInit {
         enabled: false,
       }
     } as any);
-
-    // setInterval(() => {
-    //   date.setDate(date.getDate() + 1);
-    //   chart.series[0].addPoint([`${date.getDate()}/${date.getMonth() + 1}`, this.getRandomNumber(0, 1000)], true, true);
-    // }, 1500);
   }
 
 }

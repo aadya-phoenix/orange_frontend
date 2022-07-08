@@ -10,6 +10,7 @@ import { PdltoolsDetailsComponent } from './pdltools-details/pdltools-details.co
 
 @NgModule({
   declarations: [PdltoolsComponent, PdltoolsDetailsComponent],
+  entryComponents:[PdltoolsDetailsComponent],
   imports: [
     CommonModule,
     PdltoolsRoutingModule,

@@ -22,6 +22,7 @@ const emailregexp = dataConstant.EmailPattren;
   styleUrls: ['./create-back-office.component.scss']
 })
 export class CreateBackOfficeComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
   today = new Date();
   minDate = {};
   RoleID = dataConstant.RoleID;
@@ -71,6 +72,7 @@ export class CreateBackOfficeComponent implements OnInit {
     private authService: AuthenticationService,
     private backOfficeService: BackOfficeService,
     private datepipe: DatePipe) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.minDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.getUserrole = this.authService.getRolefromlocal();

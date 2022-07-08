@@ -17,6 +17,7 @@ import { CarouselHistoryComponent } from '../carousel-history/carousel-history.c
   styleUrls: ['./carousel-view-report.component.scss']
 })
 export class CarouselViewReportComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
   public filterForm!: FormGroup;
   carouselStatus = dataConstant.CarouselStatus;
   dateTimeFormate = dataConstant.dateTimeFormate;
@@ -59,6 +60,7 @@ export class CarouselViewReportComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router
   ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.isReviewer = this.getUserrole.id === this.RoleID.CarouselReviewer;
