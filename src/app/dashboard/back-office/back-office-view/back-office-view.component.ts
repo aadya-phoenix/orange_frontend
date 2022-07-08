@@ -17,6 +17,7 @@ import { BackOfficeTransferToOtherRocComponent } from '../back-office-transfer-t
   styleUrls: ['./back-office-view.component.scss']
 })
 export class BackOfficeViewComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
   id = 0;
   requestdata: any = {};
   getUserrole: any = {};
@@ -34,6 +35,7 @@ export class BackOfficeViewComponent implements OnInit {
     private commonService: CommonService,
     private modalService: NgbModal,
     private router: Router) {
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
       this.getUserrole = this.authService.getRolefromlocal();
       this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
       this.isReviewer = this.getUserrole.id === this.RoleID.BackOfficeReviewer;

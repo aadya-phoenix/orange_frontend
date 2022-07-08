@@ -1,0 +1,357 @@
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-8">
+            <div class="page-header float-left bac_trasparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="breade_text_span1">PD&L Dashboard</span>
+                        <span class="divider_req"></span>
+                        <span class="breade_text_span"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 float-right">
+            <div class="page-header float-right bac_trasparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bac_trasparent">
+                        <li>
+                            <a [routerLink]="['/dashboard']">
+                                <i class="fa fa-home text_white"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">PD&L Dashboard</span>
+                        </li>
+                        <li>
+                            <span class="text_white span_dis">PD&L Tools</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content"> 
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group w-100">
+                    <label class="form-control-label">
+                        Select Year
+                    </label>
+                    <ng-select placeholder="Please select year" [items]="yearsList" bindLabel="name" bindValue="id"
+                        [multiple]=false class="w_100" [(ngModel)]="year" (change)="getNewData()">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group w-100">
+                    <label class="form-control-label">
+                        Select Module
+                    </label>
+                    <ng-select placeholder="Please select module" [items]="moduleList" bindLabel="name" bindValue="id"
+                        [multiple]=false class="w_100" [(ngModel)]="selectedModule" (change)="getNewData()">
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="year && selectedModule == 'course'">
+        <div class="row bg-white mx-0">
+            <div class="col-md-6 p-0 pt-2" *ngIf="courceData.overall">
+                <div class="col-md-6 col-sm-12 mb-2">
+                    <div class="small-box cm-draft">
+                        <div class="counter_dispaly">
+                            <div class="inner">
+                                <p>Total Request</p>
+                                <h3 class="font-weight-bolder">{{courceData.overall.total}}</h3>
+                            </div>
+                            <div class="icon">
+                                <img src="../../../../assets/images/icon/viewall.png" class="icon_img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 mb-2">
+                    <div class="small-box cm-learning">
+                        <div class="counter_dispaly">
+                            <div class="inner">
+                                <p>Published Request</p>
+                                <h3 class="font-weight-bolder">{{courceData.overall.publish}}</h3>
+                            </div>
+                            <div class="icon">
+                                <img src="../../../../assets/images/icon/check.png" class="icon_img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 mb-2">
+                    <div class="small-box bac_yellow">
+                        <div class="counter_dispaly">
+                            <div class="inner">
+                                <p>Pending Request</p>
+                                <h3 class="font-weight-bolder">{{courceData.overall.pending}}</h3>
+                            </div>
+                            <div class="icon">
+                                <img src="../../../../assets/images/icon/pending.png" class="icon_img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 mb-2">
+                    <div class="small-box cm-reject">
+                        <div class="counter_dispaly">
+                            <div class="inner">
+                                <p>Rejected Request</p>
+                                <h3 class="font-weight-bolder">{{courceData.overall.reject}}</h3>
+                            </div>
+                            <div class="icon">
+                                <img src="../../../../assets/images/icon/reject.png" class="icon_img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id="comp-chart-column"></div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6">
+                <div id="chart-roc"></div>
+            </div>
+            <div class="col-6">
+                <div id="chart-publisher"></div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6" *ngIf="rocData && rocData.length > 0">
+                <div class="table-responsive table_height_scroll">
+                    <table id="bootstrap-data-table-export " class="table table-striped table-bordered">
+                        <thead class="sticky_header">
+                            <tr class="text-center font-13">
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Submitted
+                                </th>
+                                <th>
+                                    Pending
+                                </th>
+                                <th>
+                                    Rejected
+                                </th>
+                                <th>
+                                    Published
+                                </th>
+                                <th>
+                                    Total
+                                </th>
+                                <th>
+                                    LA details
+                                </th>
+                                <th>
+                                    Response time
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- {{rocData | json}} -->
+                            <tr *ngFor="let item of rocData | keyvalue"
+                                class="text-center bac_hover-table font-12">
+                                <td>{{ rocData[item.key][0] }}
+                                </td>
+                                <td>
+                                    {{rocData[item.key][1].overall.submitted}}
+                                </td>
+                                <td>
+                                    {{rocData[item.key][1].overall.pending}}
+                                </td>
+                                <td>
+                                    {{rocData[item.key][1].overall.rejected}}
+                                </td>
+                                <td>
+                                    {{rocData[item.key][1].overall.closed}}
+                                </td>
+                                <td>
+                                    {{rocData[item.key][1].overall.total}}
+                                </td>
+                                <td>
+                                    <a class="re_id" (click)="openModal(rocData[item.key])">
+                                        View
+                                    </a>
+                                </td>
+                                <td>
+                                    {{rocData[item.key][1].overall.response_time}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-6" *ngIf="publisherData && publisherData.length > 0">
+                <div class="table-responsive table_height_scroll">
+                    <table id="bootstrap-data-table-export " class="table table-striped table-bordered">
+                        <thead class="sticky_header">
+                            <tr class="text-center font-13">
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Submitted
+                                </th>
+                                <th>
+                                    Pending
+                                </th>
+                                <th>
+                                    Rejected
+                                </th>
+                                <th>
+                                    Published
+                                </th>
+                                <th>
+                                    Total
+                                </th>
+                                <th>
+                                    LA details
+                                </th>
+                                <th>
+                                    Response time
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of publisherData | keyvalue"
+                                class="text-center bac_hover-table font-12">
+                                <td>{{ publisherData[item.key][0] }}
+                                </td>
+                                <td>
+                                    {{publisherData[item.key][1].overall.submitted}}
+                                </td>
+                                <td>
+                                    {{publisherData[item.key][1].overall.pending}}
+                                </td>
+                                <td>
+                                    {{publisherData[item.key][1].overall.rejected}}
+                                </td>
+                                <td>
+                                    {{publisherData[item.key][1].overall.closed}}
+                                </td>
+                                <td>
+                                    {{publisherData[item.key][1].overall.total}}
+                                </td>
+                                <td>
+                                    <a class="re_id">
+                                        View
+                                    </a>
+                                </td>
+                                <td>
+                                    {{publisherData[item.key][1].overall.response_time}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6">
+                <div class="table-responsive table_height_scroll">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="font-14 text-center sticky_header">
+                                <th scope="col">Month</th>
+                                <th scope="col">Complete process time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center font-13">
+                                <td>Jan</td>
+                                <td>7 day 18 hours 25 minutes</td>
+                            </tr>
+                            <tr class="text-center font-13">
+                                <td>Feb</td>
+                                <td>7 day 18 hours 25 minutes</td>
+                            </tr>
+                            <tr class="text-center font-13">
+                                <td>Mar</td>
+                                <td>7 day 18 hours 25 minutes</td>
+                            </tr>
+                            <tr class="text-center font-13">
+                                <td>Apr</td>
+                                <td>7 day 18 hours 25 minutes</td>
+                            </tr>
+                            <tr class="text-center font-13">
+                                <td>May</td>
+                                <td>7 day 18 hours 25 minutes</td>
+                            </tr>
+                            <tr class="text-center font-13">
+                                <td>Jun</td>
+                                <td>7 day 18 hours 25 minutes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+            </div>
+            <div class="col-6">
+                <div id="comp-chart-line"></div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6">
+                <div id="comp-chart-roc-month"></div>
+            </div>
+            <div class="col-6">
+                <div id="comp-chart-publisher-month"></div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6">
+                <div class="table-responsive table_height_scroll">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="font-14 text-center sticky_header">
+                                <th scope="col">Departments</th>
+                                <th scope="col">Total Records</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center font-13">
+                                <td>Human Resources</td>
+                                <td>138</td>
+                            </tr>
+                            <tr class="text-center font-13">
+                                <td>Orange Intl Networks Infrastruct & Svcs(OINIS)</td>
+                                <td>9</td>
+                            </tr>
+                            <tr class="text-center font-13">
+                                <td>Hosted staff/ INNOV & Others-EQ</td>
+                                <td>1</td>
+                            </tr>
+                            <tr class="text-center font-13">
+                                <td>Sales & Marketing Americas</td>
+                                <td>9</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+            </div>
+            <div class="col-6">
+                <div id="comp-depart-activities"></div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6">
+                <div id="comp-chart-pie-roc"></div>
+            </div>
+            <div class="col-6">
+                <div id="comp-chart-pie-publisher"></div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>

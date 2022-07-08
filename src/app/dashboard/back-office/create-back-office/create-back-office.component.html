@@ -6,9 +6,9 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="breade_text_span1">Request back-office role</span>
+                        <span class="breade_text_span1">{{lableConstant.request_back_office_role}}</span>
                         <span class="divider_req"></span>
-                        <span class="breade_text_span">Request a specific Orange Learning role.</span>
+                        <span class="breade_text_span">{{lableConstant.request_specific_role}}</span>
                     </div>
                 </div>
             </div>
@@ -24,14 +24,13 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
                             <a [routerLink]="['/dashboard/back-office']" class="text_white">Create new back office</a>
                         </li>
                         <li>
-                            <span class="text_white span_dis">{{ back_office_id === 0 ? 'New Request' : 'Update
-                                Request'}}</span>
+                            <span class="text_white span_dis">{{ back_office_id === 0 ? lableConstant.New_Request : 'Update Request'}}</span>
 
                         </li>
                     </ol>
@@ -43,11 +42,10 @@
         <div class="d-flex justify-content-between media_creat_couse_col">
             <div class="d-flex align-items-center">
                 <img src="../../../../assets/images/formm.png" class="ml-2" width="40" />
-                <span class="comlte_css">Complete this form and click on the submit button</span>
+                <span class="comlte_css">{{lableConstant.Complete_this_form_and_click_on_the_submit_button}}</span>
             </div>
             <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample"
-                role="button" aria-expanded="false" aria-controls="collapseExample">
-                View overall request status<img src="../../../../assets/images/Viewreq.png"
+                role="button" aria-expanded="false" aria-controls="collapseExample">{{lableConstant.View_overall_request_status}}<img src="../../../../assets/images/Viewreq.png"
                     class="ml-2" width="40" />
             </a>
         </div>
@@ -71,7 +69,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Email Address <span class="text-danger-ligth">* </span>
+                                                {{lableConstant.Email_Address}} <span class="text-danger-ligth">* </span>
                                             </label>
                                             <ng-select placeholder="Please select email" [items]="preferedInstructor"
                                                 [multiple]="false" bindLabel="email_id" bindValue="email_id"
@@ -81,7 +79,7 @@
                                                 *ngIf="(createBackOfficeForm.controls['email'].invalid && (createBackOfficeForm.controls['email'].dirty || createBackOfficeForm.controls['email'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createBackOfficeForm.controls['email'].errors?.required">
-                                                    Email Address cannot be blank
+                                                    {{lableConstant.Email_Address}} cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -105,7 +103,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                First Name <span class="text-danger-ligth">* </span>
+                                                {{lableConstant.First_Name}} <span class="text-danger-ligth">* </span>
                                             </label>
                                             <input type="text" placeholder="Enter First Name"
                                                 formControlName="first_name" class="form-control form_width" />
@@ -113,7 +111,7 @@
                                                 *ngIf="(createBackOfficeForm.controls['first_name'].invalid && (createBackOfficeForm.controls['first_name'].dirty || createBackOfficeForm.controls['first_name'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createBackOfficeForm.controls['first_name'].errors?.required">
-                                                    Frist Name cannot be blank
+                                                    {{lableConstant.First_Name}} cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -121,7 +119,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Last Name <span class="text-danger-ligth">* </span>
+                                                {{lableConstant.Last_Name}} <span class="text-danger-ligth">* </span>
                                             </label>
                                             <input type="text" placeholder="Enter Last Name" formControlName="last_name"
                                                 class="form-control form_width" />
@@ -129,7 +127,7 @@
                                                 *ngIf="(createBackOfficeForm.controls['last_name'].invalid && (createBackOfficeForm.controls['last_name'].dirty || createBackOfficeForm.controls['last_name'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createBackOfficeForm.controls['last_name'].errors?.required">
-                                                    Last Name cannot be blank
+                                                    {{lableConstant.Last_Name}} cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -137,7 +135,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Entity
+                                                {{lableConstant.Entity}}
                                             </label>
                                             <ng-select placeholder="Please Select Entity" [items]="entityList"
                                                 [multiple]="false" bindLabel="division_id" bindValue="id"
@@ -148,7 +146,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Course to be delivered <span class="text-danger-ligth">* </span>
+                                                {{lableConstant.Course_to_be_delivered}} <span class="text-danger-ligth">* </span>
                                             </label>
                                             <input type="text" placeholder="Enter Title" formControlName="course_deliver"
                                                 class="form-control form_width" />
@@ -156,7 +154,7 @@
                                                 *ngIf="(createBackOfficeForm.controls['course_deliver'].invalid && (createBackOfficeForm.controls['course_deliver'].dirty || createBackOfficeForm.controls['course_deliver'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createBackOfficeForm.controls['course_deliver'].errors?.required">
-                                                    Course to be delivered can not be blank
+                                                    {{lableConstant.Course_to_be_delivered}} can not be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -164,11 +162,11 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Date of the first session <span class="text-danger-ligth">* </span>
+                                                {{lableConstant.Date_of_the_first_session}} <span class="text-danger-ligth">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-bs-toggle="tooltip" data-bs-placement="right"
-                                                        ngbTooltip="Upon receipt of a correctly completed request, the entry will appear in the Orange Learning BackOffice within 3-5 business days."></i>
+                                                        ngbTooltip="{{lableConstant.Upon_receipt_correctly_completed_request}}"></i>
                                                 </a>
                                             </label>
                                             <input type="date" class="form-control form_width"
@@ -177,7 +175,7 @@
                                                 *ngIf="(createBackOfficeForm.controls['first_session_date'].invalid && (createBackOfficeForm.controls['first_session_date'].dirty || createBackOfficeForm.controls['first_session_date'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createBackOfficeForm.controls['first_session_date'].errors?.required">
-                                                    Date of the first session cannot be blank
+                                                    {{lableConstant.Date_of_the_first_session}} cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -185,7 +183,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Additional Comments
+                                                {{lableConstant.Additional_Comments}}
                                             </label>
                                             <textarea class="form-control form_width-textarea" maxlength="500" rows="3"
                                                 formControlName="additional_comment"
@@ -195,11 +193,11 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Orange Learning Role <span class="text-danger-ligth">* </span>
+                                                {{lableConstant.Orange_Learning_Role}} <span class="text-danger-ligth">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-bs-toggle="tooltip" data-bs-placement="right"
-                                                        ngbTooltip="Upon receipt of a correctly completed request, the entry will appear in the Orange Learning BackOffice within 3-5 business days."></i>
+                                                        ngbTooltip="{{lableConstant.Upon_receipt_correctly_completed_request}}"></i>
                                                 </a>
                                             </label>
                                             <ng-select placeholder="Please select email" [items]="cctLearningRole"
@@ -210,7 +208,7 @@
                                                 *ngIf="(createBackOfficeForm.controls['learning_role'].invalid && (createBackOfficeForm.controls['learning_role'].dirty || createBackOfficeForm.controls['learning_role'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createBackOfficeForm.controls['learning_role'].errors?.required">
-                                                    Orange Learning Role cannot be blank
+                                                    {{lableConstant.Orange_Learning_Role}} cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -218,7 +216,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Instructor Delivery Perimeter<span class="text-danger-ligth">* </span>
+                                                {{lableConstant.Instructor_Delivery_Perimeter}}<span class="text-danger-ligth">* </span>
                                             </label>
                                             <ng-select placeholder="Please select Delivery" [items]="cctDeliveryPerimeter"
                                                 [multiple]="true" bindLabel="name" bindValue="name"
@@ -228,7 +226,7 @@
                                                 *ngIf="(createBackOfficeForm.controls['course_deliver'].invalid && (createBackOfficeForm.controls['course_deliver'].dirty || createBackOfficeForm.controls['course_deliver'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createBackOfficeForm.controls['course_deliver'].errors?.required">
-                                                    Course to be delivered can not be blank
+                                                    {{lableConstant.Instructor_Delivery_Perimeter}} can not be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -242,7 +240,7 @@
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        ngbTooltip="If you selected Yes in the Certification field, please select how long the certification is valid.">
+                                                        ngbTooltip="{{lableConstant.If_you_selected_Certification_valid}}">
                                                     </i>
                                                 </a>
                                             </label>
@@ -274,8 +272,7 @@
                                     <div class="col-sm-12">
                                         <label (change)="agreeChange()">
                                             <input type="checkbox" formControlName="agree">
-                                            <span class="mr-1 ml-1 font-13">As an instructor on Orange Learning i hereby
-                                                agree to...</span>
+                                            <span class="mr-1 ml-1 font-13">{{lableConstant.instructor_Orange_Learning_hereby}}</span>
                                         </label>
                                         <div
                                             *ngIf="(createBackOfficeForm.controls['agree'].invalid && (createBackOfficeForm.controls['agree'].dirty || createBackOfficeForm.controls['agree'].touched)) || isSubmitted">
@@ -312,7 +309,7 @@
                             </div>
                             <div class="card-footer">
                                 <button class="btn btn-primary mr-1" type="submit" *ngIf="isSubmit()"
-                                    (click)="saveBackOffice('pending')"> <i class="fa fa-upload mr-1" aria-hidden="true"></i>{{ isReviewer ? 'Transfer To Publisher':
+                                    (click)="saveBackOffice('pending')"> <i class="fa fa-upload mr-1" aria-hidden="true"></i>{{ isReviewer ? lableConstant.Transfer_to_Publisher:
                                     'Submit'
                                     }}</button>
                                 <button class="btn btn-primary mr-1" type="submit" *ngIf="isPublish()"
@@ -322,8 +319,7 @@
                                     (click)="statusChangeRequest(BackOfficeStatus.reject)"><i aria-hidden="true"
                                         class="fa fa-times"></i><span class="pl-1">Reject</span></button>
                                 <button class="btn btn-secondary" *ngIf="isDraft()"
-                                    (click)="saveBackOffice('draft')">Save
-                                    as draft</button>
+                                    (click)="saveBackOffice('draft')">{{lableConstant.Save_as_draft}}</button>
                             </div>
                         </div>
                     </div>
@@ -336,7 +332,7 @@
     <div class="collapse" id="collapseExample">
         <div class="card card-body req_status-card">
             <div class="card_header reqst_header">
-                <p>Overall request Status</p>
+                <p>{{lableConstant.Overall_request_Status}}</p>
                 <i class="fa fa-times fa_cross mr-2" aria-hidden="true" data-toggle="collapse" href="#collapseExample"
                     role="button" aria-expanded="false" aria-controls="collapseExample"></i>
             </div>
@@ -347,7 +343,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/draftsbl.png" />
                             </div>
-                            <p>Draft</p>
+                            <p>{{lableConstant.Draft}}</p>
                             <span class="number_css">
                                 {{back_office_count.draft}}
                             </span>
@@ -361,7 +357,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/closedbl.png" />
                             </div>
-                            <p>Submitted</p>
+                            <p>{{lableConstant.Submitted}}</p>
                             <span class="number_css">
                                 {{back_office_count.submitted}}
                             </span>
@@ -375,7 +371,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/pendingbl.png" />
                             </div>
-                            <p>Pending</p>
+                            <p>{{lableConstant.pending}}</p>
                             <span class="number_css">
                                 {{back_office_count.pending}}
                             </span>
@@ -403,7 +399,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/checkbl.png" />
                             </div>
-                            <p>Published</p>
+                            <p>{{lableConstant.Published}}</p>
                             <span class="number_css">
                                 {{back_office_count.closed?back_office_count.closed:0}}
                             </span>
@@ -417,7 +413,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/rejectbl.png" />
                             </div>
-                            <p>Rejected</p>
+                            <p>{{lableConstant.Rejected}}</p>
                             <span class="number_css">
                                 {{back_office_count.rejected?back_office_count.rejected:0}}
                             </span>
@@ -428,8 +424,8 @@
             <!--ROW END-->
             <div class="view-comple-req_div">
                 <button class="btn btn-primary view-comple-req justify-content-center p-1"
-                    [routerLink]="['/dashboard/olcarousel/view-complete-report']">
-                    <i class="fa fa-database mr-1" aria-hidden="true"></i>View all activity Report
+                    [routerLink]="['/dashboard/back-office/view-complete-report']">
+                    <i class="fa fa-database mr-1" aria-hidden="true"></i>{{lableConstant.View_all_activity_report}}
                 </button>
             </div>
             <!--ROW END-->

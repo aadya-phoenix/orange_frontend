@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./back-office-list.component.scss']
 })
 export class BackOfficeListComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
   backOfficeStatus = dataConstant.BackOfficeStatus;
   dateTimeFormate = dataConstant.dateTimeFormate;
   dateFormate = dataConstant.dateFormate;
@@ -56,6 +57,7 @@ export class BackOfficeListComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.isReviewer = this.getUserrole.id === this.RoleID.BackOfficeReviewer;
@@ -87,7 +89,7 @@ export class BackOfficeListComponent implements OnInit {
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
-      title: 'View History',
+      title: this.lableConstant.View_History,
       data: item.id,
       objectDetail: item,
       type: 'viewhistory'
