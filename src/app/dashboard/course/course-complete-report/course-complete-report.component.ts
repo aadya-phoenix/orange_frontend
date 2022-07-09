@@ -17,7 +17,7 @@ import { CourseHistoryComponent } from '../course-history/course-history.compone
   styleUrls: ['./course-complete-report.component.scss']
 })
 export class CourseCompleteReportComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   public filterForm!: FormGroup;
   courseStatus = dataConstant.CourseStatus;
   dateTimeFormate = dataConstant.dateTimeFormate;
@@ -62,6 +62,7 @@ export class CourseCompleteReportComponent implements OnInit {
     private courceService: CourcesService,
     private router: Router
   ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.isReviewer = this.getUserrole.id === this.RoleID.CourseReviewer;

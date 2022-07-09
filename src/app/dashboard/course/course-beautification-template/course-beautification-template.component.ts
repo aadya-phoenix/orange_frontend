@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 
@@ -10,10 +11,12 @@ import { CourcesService } from 'src/app/shared/services/cources/cources.service'
   styleUrls: ['./course-beautification-template.component.scss']
 })
 export class CourseBeautificationTemplateComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
-  constructor(private modalService: NgbActiveModal, private courseService: CourcesService, private router: Router, private commonService: CommonService) { }
+  constructor(private modalService: NgbActiveModal, private courseService: CourcesService, private router: Router, private commonService: CommonService) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+  }
   public courseHistory: any;
   public courseDetail: any;
   public modalType: any;

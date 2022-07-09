@@ -9,11 +9,9 @@
         <div class="page-title d-flex align-items-center">
           <img src="../../../../assets/images/first.jpg" class="home_Css_img" />
           <div class="d-flex flex-column ml-3">
-            <span class="breade_text_span1">Create new course </span>
+            <span class="breade_text_span1">{{lableConstant.create_new_course}}</span>
             <span class="divider"></span>
-            <span class="breade_text_span">People Development & Learning Strives on
-              Providing you with the
-              best customer service we can drive</span>
+            <span class="breade_text_span">{{lableConstant.development_customer_service}}</span>
           </div>
         </div>
       </div>
@@ -30,13 +28,13 @@
               </a>
             </li>
             <li>
-              <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+              <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
             </li>
             <li>
-              <a [routerLink]="['/dashboard/cct']" class="text_white">Create new Course</a>
+              <a [routerLink]="['/dashboard/cct']" class="text_white">{{lableConstant.create_new_course}}</a>
             </li>
             <li>
-              <span class="text_white span_dis">View</span>
+              <span class="text_white span_dis">{{lableConstant.View}}</span>
 
             </li>
           </ol>
@@ -51,13 +49,13 @@
         <div class="d-flex">
           <img src="../../../../assets/images/formm.png" class="ml-2 form_img_req" />
           <p class="mt-2 ml-2 mb-2 view-re_css">
-            <span>View Request</span>
+            <span>{{lableConstant.View_Request}}</span>
             <span class="cc-text_css">({{ routegetdata.request_id }}) -
             </span>
             <span>
               {{ routegetdata.learning_type_name }} {{ routegetdata.delivery_method_name }}
             </span>
-            <span class="text_orange fon_weight_read">Request Status - {{ routegetdata.status_new | titlecase }}</span>
+            <span class="text_orange fon_weight_read">{{lableConstant.Request_Status}} - {{ routegetdata.status_new | titlecase }}</span>
           </p>
         </div>
 
@@ -73,7 +71,7 @@
                 <div class="Requs_btn_inl">
                   <div class="Requs_btn_inl-child">
                     <button class="btn btn-primary" (click)="updateCource()"> <i class="fa fa-pencil-square-o"
-                        aria-hidden="true"></i> <span class="pl-1">Update</span></button>
+                        aria-hidden="true"></i> <span class="pl-1">{{lableConstant.Update}}</span></button>
                   </div>
                 </div>
               </div>
@@ -88,7 +86,8 @@
     <div class="content">
       <div class="animated fadeIn">
         <div class="mb-2">
-          <div class="Requs_btn_inl" *ngIf="getUserrole.id != 2 && getprofileDetails && showrejectbutton != getprofileDetails.data.id">
+          <div class="Requs_btn_inl"
+            *ngIf="getUserrole.id != 2 && getprofileDetails && showrejectbutton != getprofileDetails.data.id">
             <div class="Requs_btn_inl-child">
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#publishModal"
                 *ngIf="getUserrole.id == 4 && status != 'publish' && showrejectbutton != getprofileDetails.data.id">
@@ -98,13 +97,13 @@
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
                 *ngIf="getUserrole.id == 3 && status != 'publish' && showrejectbutton != getprofileDetails.data.id"
                 (click)="getPublisher()">
-                <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1"> Transfer to Publisher</span>
+                <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1"> {{lableConstant.Transfer_to_Publisher}}</span>
 
               </button>
 
               <button class="btn btn-secondary ml-2" (click)="updateCource()"
                 *ngIf="status != 'publish' && showrejectbutton != getprofileDetails.data.id">
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">Update</span>
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.Update}}</span>
               </button>
               <button type="button" class="btn btn-secondary ml-2" data-toggle="modal" data-target="#rejectModal"
                 *ngIf="(getUserrole.id == 3 || getUserrole.id == 4) && status != 'publish' && showrejectbutton != getprofileDetails.data.id"
@@ -125,7 +124,7 @@
             </button>
           </div>
         </div>
-       
+
         <div class="row">
           <div class="col-md-12">
             <div class="back_img_viewbac">
@@ -140,7 +139,7 @@
                           <span class="form_data" onkeyup="textAreaAdjust(this)">
                             {{routegetdata.intranet_url ? routegetdata.intranet_url : "-" }}
                           </span>
-                          <a  data-toggle="tooltip" data-placement="top" title="Copy Text"
+                          <a data-toggle="tooltip" data-placement="top" title="Copy Text"
                             (click)="copyToClipBoard(routegetdata.intranet_url)" class="ml-1">
                             <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
 
@@ -155,7 +154,7 @@
                           <span class="form_data" onkeyup="textAreaAdjust(this)">
                             {{routegetdata.internet_url ? routegetdata.internet_url : "-" }}
                           </span>
-                          <a  data-toggle="tooltip" data-placement="top" title="Copy Text"
+                          <a data-toggle="tooltip" data-placement="top" title="Copy Text"
                             (click)="copyToClipBoard(routegetdata.internet_url)" class="ml-1">
                             <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
@@ -172,13 +171,13 @@
             <div class="col-md-6">
               <div class="card card_req_width">
                 <div class="card-header card_header_view">
-                  <p>Common Course Details</p>
+                  <p>{{lableConstant.Common_Course_Details}}</p>
                 </div>
                 <!--card-header-->
                 <div class="card-body">
                   <div class="col-sm-12">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Title</label>
+                      <label for="exampleInputEmail1">{{lableConstant.Title}}</label>
                       <div class="d-flex align-items-center">
                         <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                           {{
@@ -203,7 +202,7 @@
 
                   <div class="col-sm-12" *ngIf="routegetdata.learning_type != '6'">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Training Provided By</label>
+                      <label for="exampleInputEmail1">{{lableConstant.Training_provided_by}}</label>
                       <div class="d-flex align-items-center">
                         <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>{{
                           routegetdata.training_provided_by}}</span>
@@ -233,7 +232,7 @@
                   <!--cole dn-->
                   <div class="col-sm-12" *ngIf="routegetdata.learning_type ">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Description</label>
+                      <label for="exampleInputEmail1">{{lableConstant.Description}}</label>
                       <div class="d-flex align-items-center">
                         <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>{{
                           routegetdata.descriptionByLang }}</span>
@@ -255,11 +254,12 @@
                   <div class="col-sm-12 col_12" *ngIf="routegetdata.learning_type != '6'">
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Objective</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Objective}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data pl-3 overflow-auto">
                             <ul>
-                              <li *ngFor="let data of routegetdata.objectiveByLang" class="justify-content-between mb-2">
+                              <li *ngFor="let data of routegetdata.objectiveByLang"
+                                class="justify-content-between mb-2">
                                 <span>{{data.description}}</span>
                                 <a *ngIf="getUserrole.id==4" class="pull-right mt-1" data-toggle="tooltip"
                                   data-placement="top" (click)="copyToClipBoard(data.description)" title="Copy Text">
@@ -274,7 +274,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Subject</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Subject}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>{{
                             routegetdata.subject_name }}</span>
@@ -287,7 +287,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Keywords</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Keywords}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>{{ routegetdata.keyword
                             }}</span>
@@ -300,7 +300,7 @@
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Available Language</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Available_Languages}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -317,7 +317,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Level</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Level}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -337,7 +337,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Email of content owner</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Email_of_Content_Owner}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>{{
                             routegetdata.email_content_owner }}</span>
@@ -353,7 +353,7 @@
 
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Email of training contact</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Email_of_Training_Contact}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -373,7 +373,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Prerequisite</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Prerequisite}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -393,7 +393,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Resources</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Resources}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             Click here to <a href="{{imgUrl}}" target="_blank" class="text_orange">View</a>
@@ -423,7 +423,7 @@
             <div class="col-md-6">
               <div class="card card_req_width">
                 <div class="card-header card_header_view">
-                  <p><span class="mr-1">Training Type:</span>{{ routegetdata.learning_type_name }}</p>
+                  <p><span class="mr-1">{{lableConstant.Training_Type}}:</span>{{ routegetdata.learning_type_name }}</p>
                 </div>
                 <!--card-header-->
                 <div class="card-body">
@@ -435,7 +435,7 @@
                                             <div>&nbsp;</div> -->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Delivery Method</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Delivery_Method}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -452,7 +452,7 @@
                     <div class="col-sm-12">
                       <div class="form-group">
 
-                        <label for="exampleInputEmail1"> Does this course integrate digital?</label>
+                        <label for="exampleInputEmail1"> {{lableConstant.Does_this_course_integrate_digital}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -469,7 +469,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Purchase order required</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Purchase_order_required}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -486,7 +486,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Manage Approval</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Manager_Approval}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -509,7 +509,7 @@
 
                     <div class="col-sm-12" *ngIf="routegetdata.who_see_course_name">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Who can see?</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Who_can_see_my_course}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -529,7 +529,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Email of the preffered Instructor</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Email_of_the_preferred_Instructor}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)"
                             id="exampleInputEmail1" disabled>
@@ -546,7 +546,7 @@
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Date of first session</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Date_of_first_session}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -565,7 +565,7 @@
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Expiry Date</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Expiry_Date}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -584,7 +584,7 @@
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Expiry Type</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Expiry_Type}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -600,7 +600,7 @@
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Entity/Business area</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Entity_Business_area}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -617,7 +617,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Certification</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Certification}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -679,7 +679,7 @@
                     </div>
                     <div class="col-sm-12" *ngIf="routegetdata.external_vendor">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">External Vendor</label>
+                        <label for="exampleInputEmail1">{{lableConstant.External_vendor}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -753,7 +753,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">For Whom ?</label>
+                        <label for="exampleInputEmail1">{{lableConstant.For_Whom}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -777,7 +777,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12">Translatform_data
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Learn more</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Learn_more}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -800,7 +800,7 @@
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Learner Guidelines</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Learner_Guidelines}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" disabled>
                             <span *ngFor="let learner of learnerGuidelines">
@@ -817,7 +817,7 @@
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Learner Guidelines Description</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Learner_Guidelines_Description}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" disabled>
                             <span *ngFor="let learner of learnerGuidelines">
@@ -859,7 +859,7 @@
                                             <div>&nbsp;</div> -->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Uploaded video URL</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Uploaded_video_URL}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -903,7 +903,7 @@
                     </div>
                     <div class="col-sm-12" *ngIf="routegetdata.material_source">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Uploaded Material</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Uploaded_Material}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             Click here to <a href="{{material_sourceUrl}}" target="_blank" class="text_orange">View
@@ -926,7 +926,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1"> Does this course integrate digital?</label>
+                        <label for="exampleInputEmail1"> {{lableConstant.Does_this_course_integrate_digital}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -942,7 +942,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1"> Manager Approval</label>
+                        <label for="exampleInputEmail1"> {{lableConstant.Manager_Approval}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -974,7 +974,7 @@
                                             </div> -->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Expiry Date</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Expiry_Date}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -993,7 +993,7 @@
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Learn more</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Learn_more}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1029,7 +1029,7 @@
                                             </div> -->
                     <div class="col-sm-12" *ngIf="routegetdata.who_see_course_name">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Who can see my course?</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Who_can_see_my_course}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1063,7 +1063,7 @@
                                             </div> -->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">For Whom ?</label>
+                        <label for="exampleInputEmail1">{{lableConstant.For_Whom}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1083,7 +1083,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Curriculum content</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Curriculum_Content}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" disabled>
                             <span *ngFor="let curr of curriculumContent">
@@ -1101,7 +1101,7 @@
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Certification</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Certification}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1162,7 +1162,7 @@
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Learner Guidelines</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Learner_Guidelines}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" disabled>
                             <span *ngFor="let learner of learnerGuidelines">
@@ -1179,7 +1179,7 @@
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Learner Guidelines Description</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Learner_Guidelines_Description}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" disabled>
                             <span *ngFor="let learner of learnerGuidelines">
@@ -1223,7 +1223,7 @@
 
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1"> Does this course integrate digital?</label>
+                        <label for="exampleInputEmail1"> {{lableConstant.Does_this_course_integrate_digital}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1240,7 +1240,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Purchase order required</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Purchase_order_required}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1257,7 +1257,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Certification</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Certification}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1318,7 +1318,7 @@
                     </div>
                     <div class="col-sm-12" *ngIf="routegetdata.external_vendor">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">External Vendor</label>
+                        <label for="exampleInputEmail1">{{lableConstant.External_vendor}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1481,7 +1481,7 @@
                   <div class="col-sm-12 col_12">
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Additional comments</label>
+                        <label for="exampleInputEmail1">{{lableConstant.Additional_Comments}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1548,7 +1548,7 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="form-group">
-                <label>Transfer to Publisher</label>
+                <label>{{lableConstant.Transfer_to_Publisher}}</label>
                 <select name="select " id="select " class="form-control form_width1"
                   (change)="getPublisherselected($event)">
                   <option hidden disabled selected='selected'>Please select</option>
@@ -1569,7 +1569,7 @@
           <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="transfertoPublisher()">
             Submit
           </button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
         </div>
       </div>
     </div>
@@ -1600,7 +1600,7 @@
           <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="reject()">
             Submit
           </button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
         </div>
       </div>
     </div>
@@ -1647,7 +1647,7 @@
             </div>
             <div class="col-sm-12">
               <div class="form-group">
-                <label>Comment</label>
+                <label>{{lableConstant.Comments}}</label>
                 <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"
                   [(ngModel)]="transfercomment"></textarea>
               </div>
@@ -1663,7 +1663,7 @@
           <button type="button" data-dismiss="modal" (click)="transfertoOtherRoc()" class="btn btn-primary btn_requst">
             Submit
           </button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
         </div>
       </div>
     </div>
@@ -1682,7 +1682,7 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-group">
-                  <label>Comments</label>
+                  <label>{{lableConstant.Comments}}</label>
                   <textarea class="form-control form_width-textarea" formControlName="status_comment" rows="3"
                     placeholder="Enter Comments"></textarea>
                 </div>
@@ -1719,7 +1719,7 @@
           <button type="button" class="btn btn-primary btn_requst" data-dismiss="modal" (click)="PublishRequest()">
             Submit
           </button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
         </div>
       </div>
     </div>
@@ -1747,9 +1747,9 @@
                     <span class="form_data" onkeyup="textAreaAdjust(this)">
                       {{getValue(item)}}
                     </span>
-                    <a  data-toggle="tooltip" data-placement="top" title="Copy Text"
-                    (click)="copyToClipBoard(routegetdata.internet_url)" class="ml-1">
-                    <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                    <a data-toggle="tooltip" data-placement="top" title="Copy Text"
+                      (click)="copyToClipBoard(routegetdata.internet_url)" class="ml-1">
+                      <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                   </div>
                 </div>
               </div>
@@ -1761,7 +1761,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary cancel_button" data-dismiss="modal">
-            Close
+            {{lableConstant.Close}}
           </button>
         </div>
       </div>
