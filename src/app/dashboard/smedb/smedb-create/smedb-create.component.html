@@ -7,11 +7,9 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/SME_DB.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="breade_text_span1">SME Database</span>
+                        <span class="breade_text_span1">{{lableConstant.sme_database}}</span>
                         <span class="divider"></span>
-                        <span class="breade_text_span">The SME learning Community is one of the enablers for OBS to
-                            become a Learning organization by enabling a co-development environment through sharing
-                            knowledge and hands-on experience on the latest industry technologies and practices.</span>
+                        <span class="breade_text_span">{{lableConstant.sme_learning_community_feature}}</span>
                     </div>
                 </div>
             </div>
@@ -27,13 +25,13 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
                             <a [routerLink]="['/dashboard/smedb']" class="text_white">Create new SME</a>
                         </li>
                         <li>
-                            <span class="text_white span_dis">New Request</span>
+                            <span class="text_white span_dis">{{lableConstant.New_Request}}</span>
                         </li>
                     </ol>
                 </div>
@@ -46,7 +44,7 @@
             <div class="d-flex align-items-center">
                 <img src="../../../../assets/images/formm.png" class="form_img_req" />
                 <p class="mt-2 ml-2 mb-2 view-re_css">
-                    <span class="comlte_css">Complete this form and click on the submit button</span>
+                    <span class="comlte_css">{{lableConstant.Complete_this_form_and_click_on_the_submit_button}}</span>
                 </p>
             </div>
         </div>
@@ -57,7 +55,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong _ngcontent-jet-c125=""> SME Database </strong>
+                            <strong _ngcontent-jet-c125=""> {{lableConstant.sme_database}} </strong>
                         </div>
                         <div class="card-body card_width">
                             <form [formGroup]="createSmedbForm" enctype="multipart/form-data">
@@ -111,7 +109,7 @@
                                                 </ng-select>
                                                 <div class="error_message"
                                                     *ngIf="(createSmedbForm.controls['available'].invalid && (createSmedbForm.controls['available'].dirty || createSmedbForm.controls['available'].touched || isSubmitted))">
-                                                    Title cannot be blank
+                                                    Are you currently available? cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -178,8 +176,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="manage-checkbox">
-                                                <input type="checkbox" formControlName="isStatus" class="mr-1">Save as
-                                                draft</label>
+                                                <input type="checkbox" formControlName="isStatus" class="mr-1">{{lableConstant.Save_as_draft}}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -212,9 +209,7 @@
                                         <li class="nav-item" role="presentation"
                                             *ngIf="sme_details.domain.includes('voice-over-learning')">
                                             <a class="nav-link" id="id-voice-over" data-toggle="pill" href="#voice-over" [ngClass]="{'active': selectedTab == SMETabs.voiceOver}"
-                                                role="tab" aria-controls="voice-over" aria-selected="false"  (click)="changeTab(SMETabs.voiceOver)">Voice-over
-                                                for
-                                                eLearning</a>
+                                                role="tab" aria-controls="voice-over" aria-selected="false"  (click)="changeTab(SMETabs.voiceOver)">Voice-over for eLearning</a>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <a class="nav-link" id="id-professional-certi" data-toggle="pill"
@@ -223,7 +218,7 @@
                                         </li>
                                         <li class="nav-item" role="presentation" >
                                             <a class="nav-link" id="id-comments" data-toggle="pill" href="#comments" [ngClass]="{'active': selectedTab == SMETabs.comments}"
-                                                role="tab" aria-controls="comments" aria-selected="false" (click)="changeTab(SMETabs.comments)">Comments</a>
+                                                role="tab" aria-controls="comments" aria-selected="false" (click)="changeTab(SMETabs.comments)">{{lableConstant.Comments}}</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -243,7 +238,7 @@
 
                                                         <div class="form-group w-100">
                                                             <label class="form-control-label">
-                                                                Title <span class="text_red">*
+                                                                {{lableConstant.Title}} <span class="text_red">*
                                                                 </span>
                                                             </label>
                                                             <ng-select placeholder="Please select title"
@@ -253,14 +248,14 @@
                                                             </ng-select>
                                                             <div class="error_message"
                                                                 *ngIf="(contentSupportFormArray.controls[i].controls['title'].invalid && (contentSupportFormArray.controls[i].controls['title'].dirty || contentSupportFormArray.controls[i].controls['title'].touched || isSubmitted))">
-                                                                Title cannot be blank
+                                                                {{lableConstant.Title}} cannot be blank
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-5 col-sm-12" [formGroupName]="i">
                                                         <div class="form-group w-100">
                                                             <label class="form-control-label">
-                                                                Level <span class="text_red">*
+                                                                {{lableConstant.Level}} <span class="text_red">*
                                                                 </span>
                                                             </label>
                                                             <ng-select placeholder="Please select level"
@@ -270,7 +265,7 @@
                                                             </ng-select>
                                                             <div class="error_message"
                                                                 *ngIf="(contentSupportFormArray.controls[i].controls['level'].invalid && (contentSupportFormArray.controls[i].controls['level'].dirty || contentSupportFormArray.controls[i].controls['level'].touched || isSubmitted))">
-                                                                Level cannot be blank
+                                                                {{lableConstant.Level}} cannot be blank
                                                             </div>
                                                         </div>
                                                     </div>
@@ -297,7 +292,7 @@
                                                     <div class="col-md-5 col-sm-12" [formGroupName]="i">
                                                         <div class="form-group w-100">
                                                             <label class="form-control-label">
-                                                                Title <span class="text_red">*
+                                                                {{lableConstant.Title}} <span class="text_red">*
                                                                 </span>
                                                             </label>
                                                             <ng-select placeholder="Please select title"
@@ -307,14 +302,14 @@
                                                             </ng-select>
                                                             <div class="error_message"
                                                                 *ngIf="(deliveryFormArray.controls[i].controls['title'].invalid && (deliveryFormArray.controls[i].controls['title'].dirty || deliveryFormArray.controls[i].controls['title'].touched || isSubmitted))">
-                                                                Title cannot be blank
+                                                                {{lableConstant.Title}} cannot be blank
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-5 col-sm-12" [formGroupName]="i">
                                                         <div class="form-group w-100">
                                                             <label class="form-control-label">
-                                                                Level <span class="text_red">*
+                                                                {{lableConstant.Level}} <span class="text_red">*
                                                                 </span>
                                                             </label>
                                                             <ng-select placeholder="Please select level"
@@ -324,7 +319,7 @@
                                                             </ng-select>
                                                             <div class="error_message"
                                                                 *ngIf="(deliveryFormArray.controls[i].controls['level'].invalid && (deliveryFormArray.controls[i].controls['level'].dirty || deliveryFormArray.controls[i].controls['level'].touched || isSubmitted))">
-                                                                Level cannot be blank
+                                                                {{lableConstant.Level}} cannot be blank
                                                             </div>
                                                         </div>
                                                     </div>
@@ -526,7 +521,7 @@
                                                     <div class="col-md-5 col-sm-12" [formGroupName]="i">
                                                         <div class="form-group w-100">
                                                             <label class="form-control-label">
-                                                                Certification Title <span class="text_red">*
+                                                                {{lableConstant.Certification}} {{lableConstant.Title}} <span class="text_red">*
                                                                 </span>
                                                             </label>
                                                             <input type="text" placeholder="Enter Certification Title"
@@ -534,7 +529,7 @@
                                                                 formControlName="certification_title" />
                                                             <div class="error_message"
                                                                 *ngIf="professionalCertificationsFormArray.controls[i].controls['certification_title'] && (professionalCertificationsFormArray.controls[i].controls['certification_title'].invalid && (professionalCertificationsFormArray.controls[i].controls['certification_title'].dirty || professionalCertificationsFormArray.controls[i].controls['certification_title'].touched || isSubmitted))">
-                                                                Title cannot be blank
+                                                                {{lableConstant.Title}} cannot be blank
                                                             </div>
                                                         </div>
                                                     </div>
@@ -575,9 +570,7 @@
                                                     <div class="form-group">
                                                         <label class="manage-checkbox">
                                                             <input type="checkbox" formControlName="agree" class="mr-1"
-                                                                (click)="showTerms()">I am
-                                                            agree with OBS SME
-                                                            Community</label>
+                                                                (click)="showTerms()">I am agree with OBS SME Community</label>
                                                     </div>
                                                 </div>
                                             </div>
