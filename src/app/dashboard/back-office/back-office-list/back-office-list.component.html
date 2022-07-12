@@ -7,9 +7,9 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="breade_text_span1">Request back-office role</span>
+                        <span class="breade_text_span1">{{lableConstant.request_back_office_role}}</span>
                         <span class="divider_req"></span>
-                        <span class="breade_text_span">Request a specific Orange Learning role.</span>
+                        <span class="breade_text_span">{{lableConstant.request_specific_role}}</span>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
                             <span class="text_white span_dis">Create New Back Office</span>
@@ -44,16 +44,14 @@
                     <div class="card">
                         <div class="card-header cm-card-header">
                             <div class="overall_css">
-                                <span class="card_overall">Overall request Status</span>
+                                <span class="card_overall">{{lableConstant.Overall_request_Status}}</span>
                                 <div class="cct_button_oversta">
                                     <button class="btn btn-secondary" [routerLink]="['/dashboard/back-office/view-complete-report']">
-                                        <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> View
-                                        all activity report
+                                        <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> {{lableConstant.View_all_activity_report}}
                                       </button>
                                     <button class="btn btn-primary ml-1"
                                         [routerLink]="['/dashboard/back-office/create']">
-                                        <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1"> New
-                                            request</span>
+                                        <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1"> {{lableConstant.New_Request}}</span>
                                     </button>
                                 </div>
                             </div>
@@ -66,7 +64,7 @@
                                             <div class="fa-icons-des cm-draft">
                                                 <img src="../../../../assets/images/icon/drafts.png" />
                                             </div>
-                                            <p>Draft</p>
+                                            <p>{{lableConstant.Draft}}</p>
                                         </div>
                                         <span class="number_css">{{back_office_count.draft?back_office_count.draft:0}}</span>
                                     </div>
@@ -77,7 +75,7 @@
                                             <div class="fa-icons-des cm-submit">
                                                 <img src="../../../../assets/images/icon/closed.png" />
                                             </div>
-                                            <p>Submitted</p>
+                                            <p>{{lableConstant.Submitted}}</p>
                                         </div>
                                         <span
                                             class="number_css sub_mitted">{{back_office_count.submitted?back_office_count.submitted:0}}</span>
@@ -89,7 +87,7 @@
                                             <div class="fa-icons-des bac_yellow">
                                                 <img src="../../../../assets/images/icon/pending.png" />
                                             </div>
-                                            <p>Pending</p>
+                                            <p>{{lableConstant.pending}}</p>
                                         </div>
                                         <span
                                             class="number_css ">{{back_office_count.pending?back_office_count.pending:0}}</span>
@@ -113,7 +111,7 @@
                                             <div class="fa-icons-des cm-learning">
                                                 <img src="../../../../assets/images/icon/check.png" />
                                             </div>
-                                            <p>Published</p>
+                                            <p>{{lableConstant.Published}}</p>
                                         </div>
                                         <span
                                             class="number_css pub_lished">{{back_office_count.closed?back_office_count.closed:0}}</span>
@@ -125,7 +123,7 @@
                                             <div class="fa-icons-des cm-reject">
                                                 <img src="../../../../assets/images/icon/reject.png" />
                                             </div>
-                                            <p>Rejected</p>
+                                            <p>{{lableConstant.Rejected}}</p>
                                         </div>
                                         <span
                                             class="number_css">{{back_office_count.rejected?back_office_count.rejected:0}}</span>
@@ -138,7 +136,7 @@
                                                 <img src="../../../../assets/images/icon/viewall.png" />
                                             </div>
 
-                                            <p>View All</p>
+                                            <p>{{lableConstant.View_All}}</p>
                                         </div>
                                         <span class="number_css">{{back_office_count.total?back_office_count.total:0}}</span>
                                     </div>
@@ -161,11 +159,11 @@
                             <div class="overall_css">
                                 <div>
                                     <i class="fa fa-table fa_table" aria-hidden="true "></i>
-                                    <span class="card-title card-title-text card_overall">My Request</span>
+                                    <span class="card-title card-title-text card_overall">{{lableConstant.My_Request}}</span>
                                 </div>
                                 <div class="filter_dispaly">
                                     <div class="form-group filter_course">
-                                        <label class="label_course">Search</label>
+                                        <label class="label_course">{{lableConstant.Search}}</label>
                                         <input type="text " name="search " autocomplete="off" [(ngModel)]="searchText"
                                             placeholder="Type to Search"
                                             class="form-control ng-untouched ng-pristine ng-valid form_width"
@@ -191,12 +189,12 @@
                                             </th>
 
                                             <th sortable="first_name" (sort)="onSort($event)">
-                                                First Name<i class="fa fa-long-arrow-up arrow_css"
+                                                {{lableConstant.First_Name}}<i class="fa fa-long-arrow-up arrow_css"
                                                     aria-hidden="true"></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
                                             </th>
                                             <th sortable="last_name" (sort)="onSort($event)">
-                                                Last Name<i class="fa fa-long-arrow-up arrow_css"
+                                                {{lableConstant.Last_Name}}<i class="fa fa-long-arrow-up arrow_css"
                                                     aria-hidden="true"></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
                                             </th>
@@ -207,7 +205,7 @@
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
                                             <th class="text-center">History</th>
-                                            <th class="text-center">Status</th>
+                                            <th class="text-center">{{lableConstant.Status}}</th>
                                             <th class="text-center">Actions</th>
                                         </tr>
                                     </thead>

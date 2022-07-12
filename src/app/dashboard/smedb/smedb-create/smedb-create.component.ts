@@ -122,7 +122,7 @@ export class SmedbCreateComponent implements OnInit {
     this.createSmedbForm.get("start_date")?.valueChanges.subscribe((x: {}) => {
       this.maxDate = x;
     });
-    this.voiceOverLearningForm.get("language")?.valueChanges.subscribe(x => {
+    this.voiceOverLearningForm.get("language")?.valueChanges.subscribe((x: any) => {
       if (_.includes(x, 'Others')) {
         this.other_language = true;
       }
@@ -131,7 +131,7 @@ export class SmedbCreateComponent implements OnInit {
         this.voiceOverLearningForm.controls.other_language.setValue(null);
       }
     });
-    this.voiceOverLearningForm.get("previous_experience")?.valueChanges.subscribe(x => {
+    this.voiceOverLearningForm.get("previous_experience")?.valueChanges.subscribe((x: string) => {
       if (x == 'yes') {
         this.previous_voice = true;
         this.voiceOverLearningForm.addControl('comment', new FormControl(null, [Validators.required]));
@@ -559,7 +559,6 @@ export class SmedbCreateComponent implements OnInit {
       );
     }
     else {
-      debugger;
       body.sme_id = this.sme_id;
       if (this.isProcced) {
         body.matadata_update = 1;

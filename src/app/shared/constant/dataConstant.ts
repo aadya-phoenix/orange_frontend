@@ -109,6 +109,13 @@ export const dataConstant = {
     getReport:'get-report',
     design: 'design'
   },
+  ModuleList:[{
+    name: 'Course', id:'course'
+  },{
+    name: 'Course Session', id:'session'
+  },{
+    name: 'Get a Report', id:'get-report'
+  }],
   SMETabs: { contecntSupport: 'content-support', delivery: 'delivery', voiceOver: 'voice-over-learning', professionalCertifications:'professional-certifications', comments:'comments'}
 }
 

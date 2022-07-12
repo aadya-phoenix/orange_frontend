@@ -18,6 +18,11 @@ const routes: Routes = [
     path: 'user',
     loadChildren: () =>
       import('./user/user.module').then((m) => m.UserModule),
+  },
+  {
+    path: 'pdltools',
+    loadChildren: () =>
+      import('./pdltools/pdltools.module').then((m) => m.PdltoolsModule),
   }
   // {
   //   path: 'cources',

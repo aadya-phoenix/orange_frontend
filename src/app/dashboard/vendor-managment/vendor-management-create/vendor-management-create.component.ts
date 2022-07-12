@@ -19,6 +19,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./vendor-management-create.component.scss']
 })
 export class VendorManagementCreateComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {}};
   today = new Date();
   minDate = {};
   RoleID = dataConstant.RoleID;
@@ -75,6 +76,7 @@ export class VendorManagementCreateComponent implements OnInit {
     private courseService: CourcesService,
     private authService: AuthenticationService,
     private vendorService: VendorService) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.minDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.getUserrole = this.authService.getRolefromlocal();

@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./carousel-list.component.scss']
 })
 export class CarouselListComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
   carouselStatus = dataConstant.CarouselStatus;
   dateTimeFormate = dataConstant.dateTimeFormate;
   dateFormate = dataConstant.dateFormate;
@@ -59,6 +60,7 @@ export class CarouselListComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.isReviewer = this.getUserrole.id === this.RoleID.CarouselReviewer;

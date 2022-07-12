@@ -6,9 +6,9 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="font-20 text_white">Request back-office role</span>
+                        <span class="breade_text_span1">{{lableConstant.request_back_office_role}}</span>
                         <span class="divider_req"></span>
-                        <span class="title-detail mt-6">Request a specific Orange Learning role.</span>
+                        <span class="breade_text_span">{{lableConstant.request_specific_role}}</span>
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
                             <a [routerLink]="['/dashboard/back-office']" class="text_white">Create New Back Office</a>
@@ -45,7 +45,7 @@
                 <span>View Back Office Request</span>
                 <span class="cc-text_css"> ({{ requestdata.request_id }}) -
                 </span>
-                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status_new | titlecase
+                <span spellcheck="text_orange" class="text_orange">{{lableConstant.Request_Status}} - {{ requestdata.status_new | titlecase
                     }}</span>
             </p>
         </div>
@@ -57,8 +57,7 @@
                     <div class="Requs_btn_inl-child">
                         <button type="button" class="btn btn-primary mr-2" *ngIf="isForward()"
                             (click)="forwardRequest()">
-                            <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Transfer to
-                                Publisher</span>
+                            <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">{{lableConstant.Transfer_to_Publisher}}</span>
                         </button>
                         <button type="button" class="btn btn-primary mr-2" *ngIf="isPublish()"
                             (click)="statusChangeRequest(BackOfficeStatus.publish)">
@@ -67,7 +66,7 @@
                         <button type="button" class="btn mr-2" *ngIf="isUpdate()"
                             [ngClass]="(isPublish() || isForward()) ?  'btn-secondary'  : 'btn-primary'"
                             (click)="updateRequest()">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">Update</span>
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">{{lableConstant.Update}}</span>
                         </button>
                         <button type="button" class="btn btn-secondary" *ngIf="isReject()"
                             (click)="statusChangeRequest(BackOfficeStatus.reject)">
@@ -84,13 +83,13 @@
                 <div class="col-sm-12">
                     <div class="card border-radius-0">
                         <div class="card-header card_header_view">
-                            <p>Back Office Details</p>
+                            <p>{{lableConstant.Back_Office_Details}}</p>
                         </div> 
                         <div class="card-body">
                             <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Email Address</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.Email_Address}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{requestdata.email}}
@@ -112,7 +111,7 @@
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">First Name</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.First_Name}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{requestdata.first_name}}
@@ -123,7 +122,7 @@
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Last Name</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.Last_Name}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.last_name}}
@@ -134,7 +133,7 @@
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Entity</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.Entity}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.entity_name}}
@@ -145,7 +144,7 @@
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Course to be delivered</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.Course_to_be_delivered}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.course_deliver}}
@@ -156,7 +155,7 @@
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Date of the first session</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.Date_of_the_first_session}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.first_session_date | date: dateFormate }}
@@ -167,7 +166,7 @@
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Additional Comments</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.Additional_Comments}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.additional_comment}}
@@ -179,7 +178,7 @@
                            <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Orange Learning Role</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.Orange_Learning_Role}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.learning_role_name}}
@@ -191,7 +190,7 @@
                           <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Instructor Delivery Perimeter</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.Instructor_Delivery_Perimeter}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.delivery_perimeter}}
@@ -215,7 +214,7 @@
                             <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">As an instructor on orange learning i hereby agree to</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.instructor_Orange_Learning_hereby}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.agree == "1" ? "Yes" : "No"}}
