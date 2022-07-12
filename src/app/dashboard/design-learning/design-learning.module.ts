@@ -13,6 +13,7 @@ import { DesignLearningForwardComponent } from './design-learning-forward/design
 import { DesignLearningHistoryComponent } from './design-learning-history/design-learning-history.component';
 import { DesignLearningChatComponent } from './design-learning-chat/design-learning-chat.component';
 import { DesignLearningRatingComponent } from './design-learning-rating/design-learning-rating.component';
+import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { DesignLearningRatingComponent } from './design-learning-rating/design-l
     SharedModule,
     NgxPaginationModule,
     NgSelectModule,
-    NgbModule
+    NgbModule,
+    RichTextEditorAllModule,
   ]
 })
 export class DesignLearningModule { }

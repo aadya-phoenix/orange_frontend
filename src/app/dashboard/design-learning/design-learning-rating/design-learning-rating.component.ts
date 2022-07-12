@@ -16,23 +16,29 @@ import { DesignLearningService } from 'src/app/shared/services/design-learning/d
 export class DesignLearningRatingComponent implements OnInit {
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
-  publishDesignForm: FormGroup;
+  ratingDesignForm: FormGroup;
   isSubmitted = false;
   status = '';
   ratings: any = [];
   model = 0;
   RatingList = dataConstant.DesignRatings;
   isRatingSubmitted = false;
+  isRating = false
   selectedRatings = {}
   designStatus = dataConstant.DesignStatus;
   getprofileDetails: any;
+  public feedbackObj: any = [
+    { id: 'close', name: 'Close' },
+    { id: 'reject', name: 'Reject' },
+  ];
   constructor(private formBuilder: FormBuilder,
     private modalService: NgbActiveModal,
     private designService: DesignLearningService,
     private commonService: CommonService,
     private authService: AuthenticationService,
     private router: Router) {
-      this.publishDesignForm = this.formBuilder.group({
+      this.ratingDesignForm = this.formBuilder.group({
+        status: new FormControl('', [Validators.required]),
         status_comment: new FormControl('', [Validators.required]),
       });
       this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
@@ -44,7 +50,7 @@ export class DesignLearningRatingComponent implements OnInit {
   remainingText: any = 500;
   ngOnInit(): void {
     this.objectDetail = this.props.objectDetail ? this.props.objectDetail : '';
-    this.publishDesignForm.get("status_comment")?.valueChanges.subscribe(() => {
+    this.ratingDesignForm.get("status_comment")?.valueChanges.subscribe(() => {
       this.valueChange();
     });
     this.designRatingList();
@@ -74,13 +80,13 @@ export class DesignLearningRatingComponent implements OnInit {
 
   submitRating() {
     this.isSubmitted = true;
-    if (this.publishDesignForm.invalid) {
+    if (this.ratingDesignForm.invalid) {
       return;
     }
     var data = {
       new_learning_id: this.props.objectDetail.id,
       rating: this.model,
-      comment: this.publishDesignForm.value.status_comment,
+      comment: this.ratingDesignForm.value.status_comment,
     };
     this.commonService.showLoading();
     this.designService.designRatings(data).subscribe(
@@ -106,12 +112,22 @@ export class DesignLearningRatingComponent implements OnInit {
   }
 
   valueChange() {
-    if (this.publishDesignForm.value.status_comment) {
-      this.remainingText = 500 - this.publishDesignForm.value.status_comment.length;
+    if (this.ratingDesignForm.value.status_comment) {
+      this.remainingText = 500 - this.ratingDesignForm.value.status_comment.length;
     }
     else {
       this.remainingText = 500;
     }
   }
 
+  getFeedback(event:any){
+   if (event.id =='close'){
+     this.isRating = true;
+   }
+  else{
+    this.isRating = false;
+  }
+  }
+  
+  submit(){}
 }

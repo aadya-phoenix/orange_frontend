@@ -224,8 +224,10 @@
                                             <label class="form-control-label">
                                                 Please mention the objectives of the learning solution:
                                             </label><span class="text-danger-ligth">*</span>
-                                            <textarea class="form-control form_width-textarea" maxlength="500" 
-                                                formControlName="objective"></textarea>
+                                            <div class="editControls"></div>
+                                            <ejs-richtexteditor id='defaultRTE' [(ngModel)]="showobjective"
+                                                formControlName="objective" [toolbarSettings]='tools'>
+                                            </ejs-richtexteditor>
                                             <div
                                                 *ngIf="(createDesignForm.controls['objective'].invalid && (createDesignForm.controls['objective'].dirty || createDesignForm.controls['objective'].touched)) || isSubmitted">
                                                 <div class="error_message"
@@ -441,7 +443,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Comments
@@ -458,6 +460,19 @@
                                             </div>
                                         </div>
                                     </div> 
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Attachments.
+                                            </label>
+                                            <input type="file" class="form-control form_width"  (change)="handleFileInput($event)"
+                                                formControlName="attachment" />
+                                            <span class="pt-2" *ngIf="design_details.attachUrl">
+                                              Click here to <a href="{{design_details.attachUrl}}" target="_blank"
+                                                        style="color:#ff7900">View</a>
+                                            </span>
+                                        </div>
+                                    </div>
                                     <div class="col-sm-6" *ngIf="isDesigner || isHeadDesigner">
                                         <div class="form-group">
                                             <label class="form-control-label">
@@ -475,21 +490,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label">
-                                                Attachments.
-                                            </label>
-                                            <input type="file" class="form-control form_width"  (change)="handleFileInput($event)"
-                                                formControlName="attachment" />
-                                            <span class="pt-2" *ngIf="design_details.attachUrl">
-                                              Click here to <a href="{{design_details.attachUrl}}" target="_blank"
-                                                        style="color:#ff7900">View</a>
-                                            </span>
-                                        </div>
-                                    </div>
                                 </div>
-                               
                             </div>
                             
                             <div class="card-footer">
@@ -511,7 +512,8 @@
                                 (click)="save(designStatus.draft) ">Save as draft
                                 </button>
                                 <button class="btn btn-secondary mr-1" type="submit" 
-                                *ngIf="(this.isDesigner || this.isHeadDesigner) && design_details_status == designStatus.pending && design_details.head_status"
+                                *ngIf="(this.isDesigner || this.isHeadDesigner) && 
+                                (design_details_status == designStatus.pending) && (design_details.head_status != designStatus.reject && design_details.head_status != designStatus.approve)"
                                 (click)="openModal(designStatus.reject)"><i  aria-hidden="true"  class="fa fa-times"></i><span class="pl-1">Reject</span>
                                 </button>
                             </div>

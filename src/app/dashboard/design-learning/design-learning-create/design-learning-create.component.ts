@@ -23,6 +23,7 @@ export class DesignLearningCreateComponent implements OnInit {
   designStatus = dataConstant.DesignStatus;
   RoleID = dataConstant.RoleID;
   designId:any=0;
+  showobjective: any;
   bussinessUnitObj:any=[];
   projectManagerList:any=[];
   design_details:any={};
@@ -42,6 +43,10 @@ export class DesignLearningCreateComponent implements OnInit {
     { id: 'medium', name: 'Medium' },
     { id: 'low', name: 'Low' },
   ];
+  public tools: object = {
+    items: [
+      'UnorderedList']
+  };
   constructor(
     private formBuilder: FormBuilder,
     private commonService: CommonService,
@@ -141,10 +146,12 @@ export class DesignLearningCreateComponent implements OnInit {
           this.createDesignForm.controls.requestor_department.setValue(this.design_details.requestor_department);
           if(this.design_details.other_requestor_department){
             this.isOtherBU =true;
+            this.createDesignForm.addControl('other_requestor_department', new FormControl('', [Validators.required]));
             this.createDesignForm.controls.other_requestor_department.setValue(this.design_details.other_requestor_department);
           }
           else{
             this.isOtherBU = false;
+            this.createDesignForm.removeControl('other_requestor_department');
           }
           this.createDesignForm.controls.contributor.setValue(this.design_details.contributor);
           this.createDesignForm.controls.explain_purpose.setValue(this.design_details.explain_purpose);
@@ -162,6 +169,7 @@ export class DesignLearningCreateComponent implements OnInit {
           this.createDesignForm.controls.comment.setValue(this.design_details.comment);
           this.createDesignForm.controls.learn_target_audience.setValue(this.design_details.learn_target_audience);
           if(this.design_details.project_manager){
+            this.createDesignForm.addControl('project_manager', new FormControl(null, []));
             this.createDesignForm.controls.project_manager.setValue(this.design_details.project_manager);
           }
           if(this.design_details.who_create){
@@ -356,13 +364,16 @@ export class DesignLearningCreateComponent implements OnInit {
 
   isReject(){
     console.log("this.design_details_status",this.design_details_status);
-    if (!this.isDesigner || !this.isHeadDesigner) {
-      return false;
+    if (this.isDesigner || this.isHeadDesigner) {
+      return true;
     }
-     if (this.design_details_status == this.designStatus.draft || this.design_details_status == this.designStatus.close)  {
-      return false;
+    if (this.design_details?.head_status != this.designStatus.reject || this.design_details?.head_status != this.designStatus.approve)  {
+      return true;
     } 
-    return true;
+     if (this.design_details_status == this.designStatus.pending)  {
+      return true;
+    } 
+    return false;
   }
 
   getBusinessUnits(){

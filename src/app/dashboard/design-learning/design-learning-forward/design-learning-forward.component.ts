@@ -19,20 +19,19 @@ export class DesignLearningForwardComponent implements OnInit {
   designId:number = 0;
   forwardDesignForm: FormGroup;
   isSubmitted = false;
+  projectManagerList:any=[];
   status:string='';
   designStatus = dataConstant.DesignStatus;
   RoleID = dataConstant.RoleID;
   isChange = false;
   isFeedback = false;
+  isApprove = false;
   public statusObj: any = [
     { id: 'design_start', name: 'Design Started' },
     { id: 'development_start', name: 'Development Started' },
     { id: 'close', name: 'Close Request' },
   ];
-  public feedbackObj: any = [
-    { id: 'close', name: 'Close' },
-    { id: 'reject', name: 'Reject' },
-  ];
+
 
   constructor(private formBuilder: FormBuilder,
     private modalService: NgbActiveModal,
@@ -55,6 +54,7 @@ export class DesignLearningForwardComponent implements OnInit {
     this.forwardDesignForm = this.formBuilder.group({
       status_comment: new FormControl('', this.status == this.designStatus.reject ? [Validators.required] : []),
     });
+    this.getProjectManager();
 
     if(this.status == 'change'){
       this.title = 'Change Status';
@@ -67,7 +67,7 @@ export class DesignLearningForwardComponent implements OnInit {
       this.isFeedback = true;
     }
     if(this.status == this.designStatus.forwarded){
-      this.title = 'Send for Approval';
+      this.title = 'Send for Approval ( PD&L Management )';
       this.forwardDesignForm.removeControl('status');
     }
     if(this.status == this.designStatus.reject){
@@ -76,6 +76,8 @@ export class DesignLearningForwardComponent implements OnInit {
     }
     if(this.status == this.designStatus.approve){
       this.title = 'Approve Request';
+      this.isApprove = true;
+      this.forwardDesignForm.addControl('project_manager', new FormControl(null, [Validators.required]));
       this.forwardDesignForm.removeControl('status');
     }
    
@@ -86,13 +88,18 @@ export class DesignLearningForwardComponent implements OnInit {
     if (this.forwardDesignForm.invalid) {
       return;
     }
-    if(this.status == this.designStatus.forwarded){
+    if(this.status == this.designStatus.forwarded || this.status == this.designStatus.approve){
       this.objectDetail.status_comment = this.forwardDesignForm.controls.status_comment.value;
        this.commonService.showLoading();
        this.designService.update(this.objectDetail).subscribe(
          (res: any) => {
            this.commonService.hideLoading();
-           this.commonService.toastSuccessMsg('New Learning Module', 'Successfully Sent for Approval.');
+           if(this.status == this.designStatus.approve){
+            this.commonService.toastSuccessMsg('New Learning Module', 'Successfully Sent for Approval.');
+           }
+           if(this.status == this.designStatus.forwarded){
+            this.commonService.toastSuccessMsg('New Learning Module', 'Successfully Approved.');
+           }
            this.modalService.close();
            this.router.navigate(['/dashboard/designlearning']);
          },
@@ -102,11 +109,11 @@ export class DesignLearningForwardComponent implements OnInit {
          });
       }
 
-    if(this.status == this.designStatus.reject || this.status == this.designStatus.approve || 
+    if(this.status == this.designStatus.reject  || 
       this.status == 'change' || this.status == 'feedback'){
       const body = this.forwardDesignForm.value;
       body.new_learning_id = this.designId;
-      this.status == this.designStatus.reject || this.status == this.designStatus.approve ?
+      this.status == this.designStatus.reject  ?
       body.status = this.status : '';
       this.commonService.showLoading();
       this.designService.changeStatus(body).subscribe(
@@ -114,9 +121,6 @@ export class DesignLearningForwardComponent implements OnInit {
           this.commonService.hideLoading();
           if(body.status == this.designStatus.reject){
           this.commonService.toastSuccessMsg('New Learning Module', 'Successfully Rejected.');
-          }
-          if(body.status == this.designStatus.approve){
-          this.commonService.toastSuccessMsg('New Learning Module', 'Successfully Approved.');   
           }
           if(body.status == this.designStatus.close){
             this.commonService.toastSuccessMsg('New Learning Module', 'Successfully Closed.');   
@@ -129,6 +133,17 @@ export class DesignLearningForwardComponent implements OnInit {
           this.commonService.errorHandling(err);
         });
     }
+  }
+
+  getProjectManager(){
+    this.designService.getProjectManager().subscribe( (res: any) => {
+      this.commonService.hideLoading();
+      this.projectManagerList = res.data;
+    },
+    (err: any) => {
+      this.commonService.hideLoading();
+      this.commonService.toastErrorMsg('Error', err.message);
+    });
   }
 
   closeModal() {
