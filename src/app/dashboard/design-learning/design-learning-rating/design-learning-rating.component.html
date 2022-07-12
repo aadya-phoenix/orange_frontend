@@ -1,9 +1,33 @@
-<div class="card card_detial mb-0">
+<div class="card card_detial mb-0" >
+    <div class="card-header text_orange">
+        <div class="d-flex justify_content">
+            Feedback
+            <a (click)="closeModal()" class="text_black"><i class="fa fa-times" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <div class="card-body">
+ <div class="col-sm-6" >
+    <div class="form-group">
+      <label>Feedback <span class="text-danger-ligth">* </span></label>
+      <ng-select [items]="feedbackObj" (change)="getFeedback($event)"
+      bindLabel="name" bindValue="id"
+      [(ngModel)]="status"
+      class="w_100">
+       </ng-select>
+<!--        <div *ngIf="(forwardDesignForm.controls['status'].invalid && (forwardDesignForm.controls['status'].dirty || forwardDesignForm.controls['status'].touched)) || isSubmitted ">
+            <div class="error_message"
+                *ngIf="forwardDesignForm.controls['status'].errors?.required">
+                Status cannot be blank
+            </div>
+        </div> -->
+    </div>
+  </div>  
+  </div>
+
+  <ng-container *ngIf="isRating">
     <div class="card-header text_orange">
         <div class="d-flex justify_content">
             Submit your Rating
-            <a (click)="closeModal()" class="text_black"><i class="fa fa-times" aria-hidden="true"></i></a>
-
         </div>
     </div>
     <div class="card-body">
@@ -36,8 +60,8 @@
                 <label class="text_balck">Rating</label>
             </div>
             <div class="card-body">
-                <form [formGroup]="publishDesignForm">
-                    <div class="col-sm-12">
+                <form [formGroup]="ratingDesignForm">    
+                      <div class="col-sm-12">
                         <div class="form-group">
                             <label class="form-control-label">
                                 Comments <span class="text-danger-ligth">* </span>
@@ -48,54 +72,22 @@
                             <span class="charcter_limit ">{{remainingText}} characters
                                 remaining</span>
                             <div
-                                *ngIf="(publishDesignForm.controls['status_comment'].invalid && (publishDesignForm.controls['status_comment'].dirty || publishDesignForm.controls['status_comment'].touched)) || isSubmitted ">
+                                *ngIf="(ratingDesignForm.controls['status_comment'].invalid && (ratingDesignForm.controls['status_comment'].dirty || ratingDesignForm.controls['status_comment'].touched)) || isSubmitted ">
                                 <div class="error_message"
-                                    *ngIf="publishDesignForm.controls['status_comment'].errors?.required">
+                                    *ngIf="ratingDesignForm.controls['status_comment'].errors?.required">
                                     Comments cannot be blank
                                 </div>
                             </div>
+                        </div>
 
-                        </div>
-                        <div class="mb-1 mt-0" *ngIf="!isRatingSubmitted">
-                            <button class="btn btn-primary" (click)="submitRating()">Submit</button>
-                        </div>
                     </div>
                 </form>
-               
-            </div>
-           
-        </div>
-    
-       
-   <div class="mb-2" *ngIf="isRatingSubmitted">
-            <div class="">
-                You have already submitted Rating for this Module.
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header header_border_0">
-                <div class="table-responsive table_height_scroll">
-                    <table class="table table-striped table-bordered" id="table table-striped table-bordered">
-                        <thead>
-                            <tr class="sticky_header fon_13 text-center">
-                                <th scope="col">Rating</th>
-                                <th scope="col">Rating Comments</th>
-                                <th scope="col">Submitted By</th>
-                                <th scope="col">Created Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="fon_13 text-center" *ngFor="let item of ratings;let i = index ">
-                                <td>
-                                    {{RatingList[item.rating-1].value}}
-                                </td>
-                                <td>{{ item.comment}}</td>
-                                <td>{{ item.submitted_by_name}}</td>
-                                <td>{{ item.created_at | date: dateTimeFormate }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </div>
     </div> 
+</ng-container>
+<div class="card-footer">
+    <button class="btn btn-primary mr-1" type="submit" (click)="submit()">Submit</button>
+    <button class="btn btn-secondary" type="submit" (click)="closeModal()">Cancel</button>
+</div>
+</div>

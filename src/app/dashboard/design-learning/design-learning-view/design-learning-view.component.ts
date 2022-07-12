@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/shared/services/auth/authenticati
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DesignLearningService } from 'src/app/shared/services/design-learning/design-learning.service';
 import { DesignLearningForwardComponent } from '../design-learning-forward/design-learning-forward.component';
+import { DesignLearningRatingComponent } from '../design-learning-rating/design-learning-rating.component';
 
 @Component({
   selector: 'app-design-learning-view',
@@ -51,6 +52,12 @@ export class DesignLearningViewComponent implements OnInit {
     });
   }
 
+  update(item:any){
+    if (item && item.id) {
+      this.router.navigateByUrl(`/dashboard/designlearning/update/${item.id}`);
+    }
+  }
+
   getLearningDetails() {
     this.commonService.showLoading();
     this.designService.detail(this.id).subscribe(
@@ -94,6 +101,20 @@ export class DesignLearningViewComponent implements OnInit {
       data: this.id,
      // objectDetail: body,
       status: status
+    };
+  }
+
+  openRatingModal(item: any) {
+    const modalRef = this.modalService.open(DesignLearningRatingComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      title: 'View History',
+      data: item.id,
+      objectDetail: item,
+      type: 'viewhistory'
     };
   }
 }

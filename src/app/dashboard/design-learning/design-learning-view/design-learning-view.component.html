@@ -56,7 +56,7 @@
         <div class="animated fadeIn">
           <div class="mb-2" >
                 <div class="Requs_btn_inl">
-                  <!--   <div class="Requs_btn_inl-child" *ngIf="isHeadDesigner">
+                     <div class="Requs_btn_inl-child" *ngIf="isHeadDesigner  && requestdata.user_id != getprofileDetails.data.id">
                         <button type="button" class="btn btn-primary mr-2" 
                             (click)="openModal(designStatus.approve)">
                             <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Approve </span>
@@ -65,7 +65,17 @@
                             (click)="openModal(designStatus.reject)">
                             <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                         </button>
-                    </div> -->
+                    </div>
+                    <div class="Requs_btn_inl-child" *ngIf="isDesigner && requestdata.head_status != designStatus.approve">
+                        <button type="button" class="btn btn-primary mr-2" 
+                            (click)="update(requestdata)">
+                            <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Update</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary"
+                            (click)="openModal(designStatus.reject)">
+                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                        </button>
+                    </div>
                     <div class="Requs_btn_inl-child" *ngIf="isDesigner && requestdata.head_status == designStatus.approve && requestdata.design_status != designStatus.close">
                         <button type="button" class="btn btn-primary mr-2" 
                             (click)="openModal('change')">
@@ -74,7 +84,7 @@
                     </div>
                     <div class="Requs_btn_inl-child" *ngIf="requestdata.design_status == designStatus.close && requestdata.user_id === getprofileDetails.data.id && requestdata.status != designStatus.close">
                         <button type="button" class="btn btn-primary mr-2" 
-                            (click)="openModal('feedback')">
+                            (click)="openRatingModal(requestdata)">
                             <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Feedback</span>
                         </button>
                     </div>
@@ -124,6 +134,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="card border-radius-0">
                         <div class="card-header card_header_view">
                             <p>Design Learning Details</p>
@@ -186,7 +197,7 @@
                                         <label for="exampleInputEmail1">Other Requestor's Department</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
-                                               {{ requestdata.requestdata.other_requestor_department }}
+                                               {{ requestdata.other_requestor_department }}
                                             </span>
                                         </div>
                                     </div>
@@ -226,9 +237,9 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Please mention the objectives of the learning solution</label>
                                         <div class="d-flex align-items-center">
-                                            <span class="form_data">
-                                                {{ requestdata.objective}}
-                                            </span>
+                                            <span class="form_data pl-3" onkeyup="textAreaAdjust(this)" [innerHTML]="requestdata.objective"
+                                            disabled>
+                                           </span>
                                         </div>
                                     </div>
                                 </div>

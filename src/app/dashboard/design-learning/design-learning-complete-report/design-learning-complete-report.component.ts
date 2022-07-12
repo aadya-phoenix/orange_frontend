@@ -149,11 +149,8 @@ export class DesignLearningCompleteReportComponent implements OnInit {
       start_date: '',
       end_date: '',
       reporting_period: '',
-      learning_type: '',
       status: '',
-      department: '',
-      roc: '',
-      publisher: '',
+      requestor_department: '',
     });
     this.refreshModules({});
   }

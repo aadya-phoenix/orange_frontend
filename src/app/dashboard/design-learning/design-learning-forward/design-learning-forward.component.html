@@ -23,22 +23,24 @@
                     </div>
                 </div>
               </div>
-              <div class="col-sm-6" *ngIf="isFeedback">
+              <div class="col-sm-6" *ngIf="isApprove">
                 <div class="form-group">
-                  <label>Feedback <span class="text-danger-ligth">* </span></label>
-                  <ng-select [items]="feedbackObj" 
-                  bindLabel="name" bindValue="id"
-                  formControlName="status"
+                  <label>Project Manager <span class="text-danger-ligth">* </span></label>
+                  <ng-select [items]="projectManagerList" 
+                  bindLabel="user_name" bindValue="id"
+                  formControlName="project_manager"
                   class="w_100">
                    </ng-select>
-                   <div *ngIf="(forwardDesignForm.controls['status'].invalid && (forwardDesignForm.controls['status'].dirty || forwardDesignForm.controls['status'].touched)) || isSubmitted ">
+                   <div *ngIf="(forwardDesignForm.controls['project_manager'].invalid && (forwardDesignForm.controls['project_manager'].dirty || forwardDesignForm.controls['project_manager'].touched)) || isSubmitted ">
                         <div class="error_message"
-                            *ngIf="forwardDesignForm.controls['status'].errors?.required">
-                            Status cannot be blank
+                            *ngIf="forwardDesignForm.controls['project_manager'].errors?.required">
+                            Project Manager cannot be blank
                         </div>
                     </div>
                 </div>
               </div>
+             
+      
               
             <div class="col-sm-12">
                 <div class="form-group">
