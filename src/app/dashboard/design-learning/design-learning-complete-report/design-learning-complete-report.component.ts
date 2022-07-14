@@ -9,6 +9,7 @@ import { AuthenticationService } from 'src/app/shared/services/auth/authenticati
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DesignLearningService } from 'src/app/shared/services/design-learning/design-learning.service';
 import { GeneralDropdownsService } from 'src/app/shared/services/general-dropdowns/general-dropdowns.service';
+import { DesignLearningHistoryComponent } from '../design-learning-history/design-learning-history.component';
 
 @Component({
   selector: 'app-design-learning-complete-report',
@@ -42,6 +43,8 @@ export class DesignLearningCompleteReportComponent implements OnInit {
     pageNumber: 1,
     pageSize: 10
   }
+  ratingObj: any=[{id:5, name:'Excellent'}, {id:4, name:'Above Average'}, {id:3, name:'Average'}, 
+  {id:2, name:'Below Average'}, {id:1, name:'Poor'}]
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
   constructor(
@@ -60,7 +63,7 @@ export class DesignLearningCompleteReportComponent implements OnInit {
       reporting_period: new FormControl('', []),
       status: new FormControl('', []),
       requestor_department: new FormControl('', []),
-
+      rating: new FormControl('', []),
     });
     this.filterForm.controls.start_date.valueChanges.subscribe((x: any) => {
       this.addDate = x ? true : false;
@@ -78,6 +81,23 @@ export class DesignLearningCompleteReportComponent implements OnInit {
       (res: any) => {
         if (res.status === 1 && res.message === 'Success') {
           this.designList = res.data.new_learning;
+          this.designList.forEach((x:any)=> {
+            if(x.overall_rating == 1){
+              x.overall_rating_name = 'Poor';
+            }
+            else if(x.overall_rating == 2){
+              x.overall_rating_name = 'Below Average';
+            }
+            else if(x.overall_rating == 3){
+              x.overall_rating_name = 'Average';
+            }
+            else if(x.overall_rating == 4){
+              x.overall_rating_name = 'Above Average';
+            }
+            else{
+              x.overall_rating_name = 'Excellent';
+            }
+           });
           this.design_count = res.data.new_learning_count;
           this.showRecords(this.designStatus.total);
         }
@@ -90,20 +110,20 @@ export class DesignLearningCompleteReportComponent implements OnInit {
     );
   }
     
-   openModal(item: any) {
-  /*   const modalRef = this.modalService.open(CourseHistoryComponent, {
-      centered: true,
-      size: 'xl',
-      modalDialogClass: 'large-width',
-      windowClass: 'alert-popup',
-    });
-    modalRef.componentInstance.props = {
-      title: 'View History',
-      data: item.id,
-      objectDetail: item,
-      type: 'viewhistory'
-    }; */
-  }
+  openModal(item: any) {
+    const modalRef = this.modalService.open(DesignLearningHistoryComponent, {
+     centered: true,
+     size: 'xl',
+     modalDialogClass: 'large-width',
+     windowClass: 'alert-popup',
+   });
+   modalRef.componentInstance.props = {
+     title: 'View History',
+     data: item.id,
+     objectDetail: item,
+     type: 'viewhistory'
+   }; 
+ }
 
   onSort({ column, direction }: any) {
     this.headers.forEach((header: { sortable: any; direction: string; }) => {
@@ -151,6 +171,7 @@ export class DesignLearningCompleteReportComponent implements OnInit {
       reporting_period: '',
       status: '',
       requestor_department: '',
+      rating:''
     });
     this.refreshModules({});
   }

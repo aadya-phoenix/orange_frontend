@@ -8,7 +8,7 @@
             <img src="../../../../assets/images/first.jpg" class="home_Css_img" />
             <div class="d-flex flex-column ml-3">
               <span class="breade_text_span1">Design learning Module</span>
-              <span class="divider"></span>
+              <span class="divider_req"></span>
               <span class="breade_text_span">Request the development of new learning modules for your team or
                 our organization.</span>
             </div>
@@ -261,9 +261,9 @@
                                                     <img src="../../../../assets/images/icon/chat.png">
                                                 </a>
                                             </td>
-                                            <td> <a *ngIf="item.status_show == designStatus.closed && item.user_id === getprofileDetails.data.id "
-                                                (click)="openRatingModal(item)" class="re_id">
-                                                Add/View Rating
+                                            <td> <a *ngIf="item.status_show == designStatus.closed"
+                                             class="re_id">
+                                               {{item.overall_rating_name}}
                                             </a>
                                         </td>
                                             <td class="text-center">
@@ -275,7 +275,7 @@
                                                   <a (click)="editRequest(item)"
                                                   *ngIf="item.status_show === designStatus.draft || 
                                                   (isDesigner && item.status_show === designStatus.pending && item.head_status !=  designStatus.approve && item.design_status != designStatus.close) || 
-                                                  (isHeadDesigner && item.status_show === designStatus.pending)  ||(item.status === designStatus.reject && item.user_id === getprofileDetails.data.id)"
+                                                    (item.status === designStatus.reject && item.user_id === getprofileDetails.data.id)"
                                                       class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                       title="Edit">
                                                       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

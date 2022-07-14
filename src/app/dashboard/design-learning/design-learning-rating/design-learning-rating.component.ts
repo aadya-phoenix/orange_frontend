@@ -18,9 +18,14 @@ export class DesignLearningRatingComponent implements OnInit {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   ratingDesignForm: FormGroup;
   isSubmitted = false;
+  isSelected = false;
+  statusFeedback = '';
+  statusChange = '';
   status = '';
   ratings: any = [];
   model = 0;
+  isFeedback = false;
+  isChange = false;
   RatingList = dataConstant.DesignRatings;
   isRatingSubmitted = false;
   isRating = false
@@ -31,6 +36,11 @@ export class DesignLearningRatingComponent implements OnInit {
     { id: 'close', name: 'Close' },
     { id: 'reject', name: 'Reject' },
   ];
+  public statusObj: any = [
+    { id: 'design_start', name: 'Design Started' },
+    { id: 'development_start', name: 'Development Started' },
+    { id: 'close', name: 'Close Request' },
+  ];
   constructor(private formBuilder: FormBuilder,
     private modalService: NgbActiveModal,
     private designService: DesignLearningService,
@@ -38,7 +48,6 @@ export class DesignLearningRatingComponent implements OnInit {
     private authService: AuthenticationService,
     private router: Router) {
       this.ratingDesignForm = this.formBuilder.group({
-        status: new FormControl('', [Validators.required]),
         status_comment: new FormControl('', [Validators.required]),
       });
       this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
@@ -50,10 +59,18 @@ export class DesignLearningRatingComponent implements OnInit {
   remainingText: any = 500;
   ngOnInit(): void {
     this.objectDetail = this.props.objectDetail ? this.props.objectDetail : '';
+    this.status = this.props.status;
     this.ratingDesignForm.get("status_comment")?.valueChanges.subscribe(() => {
       this.valueChange();
     });
-    this.designRatingList();
+    if(this.status == this.designStatus.feedback){
+      this.title = 'Feedback';
+      this.isFeedback = true;
+    }
+    if(this.status == this.designStatus.change){
+      this.title = 'Change Status';
+      this.isChange = true;
+    }
   }
 
   designRatingList() {
@@ -121,13 +138,52 @@ export class DesignLearningRatingComponent implements OnInit {
   }
 
   getFeedback(event:any){
-   if (event.id =='close'){
+    event.id ? this.isSelected = true : this.isSelected = false;
+   if (event.id == this.designStatus.close){
      this.isRating = true;
    }
   else{
     this.isRating = false;
   }
   }
+
+  getStatus(event:any){
+    event.id ? this.isSelected = true : this.isSelected = false;
+    if(this.objectDetail.user_id == this.getprofileDetails.data.id && event.id == this.designStatus.close){
+      this.isRating = true;
+    }
+    else{
+      this.isRating = false;
+    }
+  }
   
-  submit(){}
+  submit(){
+    this.isSubmitted = true;
+    if (this.ratingDesignForm.invalid) {
+      return;
+    }
+    var body = {
+      new_learning_id: this.props.objectDetail.id,
+      status: this.status == this.designStatus.feedback ? this.statusFeedback : this.statusChange,
+      status_comment: this.ratingDesignForm.value.status_comment,
+    };
+    this.commonService.showLoading();
+    this.designService.changeStatus(body).subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        if(body.status == this.designStatus.reject){
+        this.commonService.toastSuccessMsg('New Learning Module', 'Successfully Rejected.');
+        }
+        if(body.status == this.designStatus.close){
+          this.submitRating();
+          this.commonService.toastSuccessMsg('New Learning Module', 'Successfully Closed.');   
+        }
+        this.modalService.close();
+        this.router.navigate(['/dashboard/designlearning']);
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
+      });
+  }
 }

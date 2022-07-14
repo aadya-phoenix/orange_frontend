@@ -8,7 +8,7 @@
             <img src="../../../../assets/images/first.jpg" class="home_Css_img" />
             <div class="d-flex flex-column ml-3">
               <span class="breade_text_span1">Design learning Module</span>
-              <span class="divider"></span>
+              <span class="divider_req"></span>
               <span class="breade_text_span">Request the development of new learning modules for your team or
                 our organization.</span>
             </div>
@@ -64,7 +64,7 @@
                                     </div>
                                     <div class="col-sm-4 col_width_20">
                                         <div class="form-group">
-                                            <label class="form-control-label">Reporting Period
+                                            <label class="form-control-label">Project Period
                                             </label>
                                             <select class="form-control form_width" formControlName="reporting_period"
                                                 [attr.disabled]="addDate ? 'disabled' : null">
@@ -99,6 +99,16 @@
                                             <select class="form-control form_width" formControlName="requestor_department">
                                                 <option value="">Please select</option>
                                                 <option *ngFor="let item of bussinessUnitObj" [value]="item.id">{{item.team_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div  class="col-sm-4 col_width_20">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Rating 
+                                            </label>
+                                            <select class="form-control form_width" formControlName="rating">
+                                                <option value="">Please select</option>
+                                                <option *ngFor="let item of ratingObj" [value]="item.id">{{item.name}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -164,7 +174,7 @@
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(designStatus.transferred)">
+                                    <div class="alig_dashicon" (click)="showRecords(designStatus.forwarded)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des bac_red">
                                                 <img src="../../../../assets/images/icon/transfer.png" />
@@ -252,6 +262,11 @@
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
+                                            <th sortable="request_id" (sort)="onSort($event)">
+                                                Project Name
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
                                             <th sortable="request_date" (sort)="onSort($event)">
                                                 Requested Date
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
@@ -276,10 +291,8 @@
                                                 Status
                                             </th>
                                             <th sortable="edit" (sort)="onSort($event)">
-                                              View/Edit request
+                                              History
                                             </th>
-                                            <th sortable="commn" (sort)="onSort($event)">
-                                                View/Send communication</th>
                                             <th sortable="rating" (sort)="onSort($event)">
                                                 Customer Rating
                                             </th>
@@ -289,6 +302,8 @@
                                         <tr *ngFor="let item of designListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber }"
                                             class="text-center bac_hover-table font-12">
                                             <td class="request_id" (click)="viewRequest(item)">{{ item.request_id }}
+                                            </td>
+                                            <td  (click)="viewRequest(item)">{{ item.project_name | titlecase }}
                                             </td>
                                             <td (click)="viewRequest(item)">{{ item.created_at | date: dateTimeFormate}}</td>
                                             <td (click)="viewRequest(item)">{{ item.requester_name | titlecase }}
@@ -300,18 +315,17 @@
                                              {{item.project_manager_name}}
                                             </td>
                                             <td class="text-center">
-                                                <p [ngClass]="item.status">
-                                                    {{ (item.status_show ? item.status_show : 'Pending') | titlecase }}
-                                                </p>
-                                            </td>
-                                            <td (click)="viewRequest(item)">
+                                                    {{ item.action_status | titlecase }}
                                             </td>
                                             <td>
                                                 <a *ngIf="item.status !== designStatus.draft" (click)="openModal(item)" class="re_id">
                                                     View
                                                 </a>
-                                            </td>
-                                            <td>
+                                            </td>                                          
+                                            <td><a *ngIf="item.status_show == designStatus.closed"
+                                                class="re_id">
+                                                  {{item.overall_rating_name}}
+                                               </a>
                                                 </td>
                                         </tr>
                                     </tbody>

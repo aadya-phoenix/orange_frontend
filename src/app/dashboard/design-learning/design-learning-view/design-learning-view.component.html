@@ -46,7 +46,7 @@
                 <span>View Design Learning Request</span>
                 <span class="cc-text_css"> ({{ requestdata.request_id }}) -
                 </span>
-                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status |
+                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status_show |
                     titlecase
                     }}</span>
             </p>
@@ -56,7 +56,7 @@
         <div class="animated fadeIn">
           <div class="mb-2" >
                 <div class="Requs_btn_inl">
-                     <div class="Requs_btn_inl-child" *ngIf="isHeadDesigner  && requestdata.user_id != getprofileDetails.data.id">
+                     <div class="Requs_btn_inl-child" *ngIf="isApprove()">
                         <button type="button" class="btn btn-primary mr-2" 
                             (click)="openModal(designStatus.approve)">
                             <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Approve </span>
@@ -66,27 +66,32 @@
                             <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                         </button>
                     </div>
-                    <div class="Requs_btn_inl-child" *ngIf="isDesigner && requestdata.head_status != designStatus.approve">
+                    <div class="Requs_btn_inl-child" *ngIf="isDesigner && requestdata.head_status != designStatus.approve && requestdata.status_show == designStatus.pending">
                         <button type="button" class="btn btn-primary mr-2" 
                             (click)="update(requestdata)">
                             <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Update</span>
                         </button>
-                        <button type="button" class="btn btn-secondary"
+                        <button type="button" class="btn btn-secondary" *ngIf=" !requestdata.head_status"
                             (click)="openModal(designStatus.reject)">
                             <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                         </button>
                     </div>
                     <div class="Requs_btn_inl-child" *ngIf="isDesigner && requestdata.head_status == designStatus.approve && requestdata.design_status != designStatus.close">
                         <button type="button" class="btn btn-primary mr-2" 
-                            (click)="openModal('change')">
+                            (click)="openRatingModal(designStatus.change)">
                             <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Change Status</span>
                         </button>
                     </div>
-                    <div class="Requs_btn_inl-child" *ngIf="requestdata.design_status == designStatus.close && requestdata.user_id === getprofileDetails.data.id && requestdata.status != designStatus.close">
+                    <div class="Requs_btn_inl-child d-flex justify-content-between w_100 align-items-center" *ngIf="requestdata.design_status == designStatus.close && requestdata.user_id === getprofileDetails.data.id && requestdata.status != designStatus.close">
                         <button type="button" class="btn btn-primary mr-2" 
-                            (click)="openRatingModal(requestdata)">
+                            (click)="openRatingModal(designStatus.feedback)">
                             <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Feedback</span>
                         </button>
+                       <!-- <div class="d-flex ratin_god">
+                        <label class="fon_13 mb-0">Rating:</label>
+                        <span class="fon_13 text_orange">Good</span>
+                        
+                        </div> -->
                     </div>
                 </div>
             </div> 
@@ -126,7 +131,7 @@
                                                 {{history.status | titlecase}}
                                             </td>
                                             <td>
-                                                <p style="width: 154px; overflow-y: auto;font-size: 12px;">{{history.status_comment}}</p>
+                                                <p style="width: 154px; overflow-y: auto;font-size: 12px;margin: auto;">{{history.status_comment}}</p>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -137,11 +142,11 @@
                     
                     <div class="card border-radius-0">
                         <div class="card-header card_header_view">
-                            <p>Design Learning Details</p>
+                            <p>Design Learning Team Details</p>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-8">
+                              <div class="col-sm-8">
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Program/Project Name</label>
@@ -222,6 +227,32 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.project_manager_name">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Project Manager</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.project_manager_name}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>                        
+                              </div>
+                              <div class="col-sm-4">
+                                  <div class="text-center">
+                                      <img src="../../../../assets/images/design_learn_form.png">
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                     </div>
+                     <div class="card border-radius-0">
+                        <div class="card-header card_header_view">
+                            <p>Design Learning Details</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Please explain issue, problem, or
@@ -379,11 +410,6 @@
                                     </div>
                                 </div>                         
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="text-center">
-                                        <img src="../../../../assets/images/design_learn_form.png">
-                                    </div>
-                                    </div>
                                 </div>
                           </div>
                      </div>

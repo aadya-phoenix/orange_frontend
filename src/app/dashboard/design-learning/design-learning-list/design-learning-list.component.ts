@@ -72,6 +72,23 @@ export class DesignLearningListComponent implements OnInit {
       (res: any) => {
         if (res.status === 1 && res.message === 'Success') {
           this.designList = res.data.new_learning;
+          this.designList.forEach((x:any)=> {
+            if(x.overall_rating == 1){
+              x.overall_rating_name = 'Poor';
+            }
+            else if(x.overall_rating == 2){
+              x.overall_rating_name = 'Below Average';
+            }
+            else if(x.overall_rating == 3){
+              x.overall_rating_name = 'Average';
+            }
+            else if(x.overall_rating == 4){
+              x.overall_rating_name = 'Above Average';
+            }
+            else{
+              x.overall_rating_name = 'Excellent';
+            }
+           });
           this.design_count = res.data.new_learning_count;
           this.showRecords(this.designStatus.total);
         }

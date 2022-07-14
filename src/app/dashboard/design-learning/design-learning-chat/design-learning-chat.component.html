@@ -12,24 +12,6 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="table-responsive table_height_scroll">
-            <table class="table table-bordered">
-                <thead class="sticky_header">
-                    <tr class="text-center font-13">
-                        <th scope="col">Posted Date</th>
-                        <th scope="col">Posted by Owner</th>
-                        <th scope="col">Communication Log</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let chat of chatList" class="text-center font-13">
-                        <td>{{ chat.action_by_name}}</td>
-                        <td>{{chat.transfer_to_name ? chat.transfer_to_name : '-'}}</td>
-                        <td>{{ chat.updated_at | date: "short"}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
             <div class="col-sm-12">
                 <div class="form-group">
                   <label> Add Comment </label>
@@ -57,13 +39,5 @@
                     </tbody>
                 </table>
                 </div>
-                <div class="col-sm-12">
-                    <div class="form-group">
-                      <label> Add Comment </label>
-                      <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"
-                      [(ngModel)]="comment"></textarea>
-                </div>
-                    <button class="btn btn-primary mr-1" type="submit" (click)="submit()">Submit</button>
-             </div>
     </div>
 </div>

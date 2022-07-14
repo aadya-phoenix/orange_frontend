@@ -303,6 +303,7 @@ export class DesignLearningCreateComponent implements OnInit {
       this.create(body);
       return;
     }
+    this.design_details_status == this.designStatus.reject ? body.status = this.designStatus.pending:
     body.status = status;
     body.new_learning_id = this.designId;
     const modalRef = this.modalService.open(DesignLearningForwardComponent, {
