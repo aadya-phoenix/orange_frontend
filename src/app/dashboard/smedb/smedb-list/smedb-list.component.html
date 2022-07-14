@@ -7,11 +7,9 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/SME_DB.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="breade_text_span1">SME Database</span>
+                        <span class="breade_text_span1">{{lableConstant.sme_database}}</span>
                         <span class="divider"></span>
-                        <span class="breade_text_span">The SME learning Community is one of the enablers for OBS to
-                            become a Learning organization by enabling a co-development environment through sharing
-                            knowledge and hands-on experience on the latest industry technologies and practices.</span>
+                        <span class="breade_text_span">{{lableConstant.sme_learning_community_feature}}</span>
                     </div>
                 </div>
             </div>
@@ -27,7 +25,7 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
                             <span class="text_white span_dis">Create new SME</span>
@@ -55,17 +53,16 @@
                                 </span>
                                 <div class="d-flex">
                                     <button class="btn btn-secondary" [routerLink]="['/dashboard/smedb/view-complete-report']">
-                                        <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> View
-                                      all activity report
+                                        <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> {{lableConstant.View_all_activity_report}}
                                       </button>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body card_course_body p-3" *ngIf="smeList.length == 0">
-                            Click to <b>"Add"</b> button to begin.
+                            Click to <b>"{{lableConstant.Add}}"</b> button to begin.
                             <div class="d-flex mt-2">
                                 <button class="btn btn-primary" [routerLink]="['/dashboard/smedb/create']">
-                                    <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1">Add</span>
+                                    <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1">{{lableConstant.Add}}</span>
                                 </button>
                             </div>
                         </div>

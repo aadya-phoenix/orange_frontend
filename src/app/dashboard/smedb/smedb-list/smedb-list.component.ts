@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { SMEService } from 'src/app/shared/services/sme/sme.service';
@@ -11,6 +12,7 @@ import { SMEService } from 'src/app/shared/services/sme/sme.service';
   styleUrls: ['./smedb-list.component.scss']
 })
 export class SmedbListComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
   smeList: any = [];
   getprofileDetails: any = {};
   smeContcatPerson: any = [];
@@ -26,6 +28,7 @@ export class SmedbListComponent implements OnInit {
     private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router) { 
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
       this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     }
 

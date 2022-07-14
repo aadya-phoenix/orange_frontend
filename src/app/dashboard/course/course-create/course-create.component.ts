@@ -15,6 +15,7 @@ import { MultiLaunguageComponent } from '../multi-launguage/multi-launguage.comp
   styleUrls: ['./course-create.component.scss']
 })
 export class CourseCreateComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
   showCertificateExpiry = false;
   externalVendorname = false;
   regionTargetAudience = false;
@@ -106,6 +107,7 @@ export class CourseCreateComponent implements OnInit {
     private modalService: NgbModal,
     private authService: AuthenticationService,
     private courseService: CourcesService) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.minDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.getUserrole = this.authService.getRolefromlocal();
@@ -195,15 +197,15 @@ export class CourseCreateComponent implements OnInit {
         if (this.course_details.id) {
           this.createCourceForm.controls.delivery_method.setValue(JSON.parse(this.course_details.delivery_method));
           this.createCourceForm.controls.digital.setValue(this.course_details.digital);
-          if(this.course_details.purchase_order){
-          this.createCourceForm.controls.purchase_order.setValue(this.course_details.purchase_order);
+          if (this.course_details.purchase_order) {
+            this.createCourceForm.controls.purchase_order.setValue(this.course_details.purchase_order);
           }
           this.createCourceForm.controls.manager_approval.setValue(this.course_details.manager_approval);
           this.createCourceForm.controls.who_see_course.setValue(Number(this.course_details.who_see_course));
           this.createCourceForm.controls.email_preffered_instructor.setValue(JSON.parse(this.course_details.email_preffered_instructor));
           this.createCourceForm.controls.first_session_date.setValue(this.course_details.first_session_date);
-          if(this.course_details.expiry_date){
-          this.createCourceForm.controls.expiry_date.setValue(this.course_details.expiry_date);
+          if (this.course_details.expiry_date) {
+            this.createCourceForm.controls.expiry_date.setValue(this.course_details.expiry_date);
           }
           this.createCourceForm.controls.expiry_date_type.setValue(this.course_details.expiry_date_type);
           this.createCourceForm.controls.entity_business_area.setValue(JSON.parse(this.course_details.entity_business_area));
@@ -370,8 +372,8 @@ export class CourseCreateComponent implements OnInit {
           this.createCourceForm.controls.digital.setValue(this.course_details.digital);
           this.createCourceForm.controls.manager_approval.setValue(this.course_details.manager_approval);
           this.createCourceForm.controls.who_see_course.setValue(Number(this.course_details.who_see_course));
-          if(this.course_details.expiry_date){
-          this.createCourceForm.controls.expiry_date.setValue(this.course_details.expiry_date);
+          if (this.course_details.expiry_date) {
+            this.createCourceForm.controls.expiry_date.setValue(this.course_details.expiry_date);
           }
           this.createCourceForm.controls.certification.setValue(this.course_details.certification);
           if (this.course_details.certification == 'yes') {
@@ -444,8 +446,8 @@ export class CourseCreateComponent implements OnInit {
         if (this.course_details.id) {
           this.createCourceForm.controls.digital.setValue(this.course_details.digital);
           this.createCourceForm.controls.certification.setValue(this.course_details.certification);
-          if(this.course_details.purchase_order){
-          this.createCourceForm.controls.purchase_order.setValue(this.course_details.purchase_order);
+          if (this.course_details.purchase_order) {
+            this.createCourceForm.controls.purchase_order.setValue(this.course_details.purchase_order);
           }
           this.createCourceForm.controls.external_vendor.setValue(this.course_details.external_vendor);
           if (this.course_details.external_vendor == 'yes') {
@@ -1021,7 +1023,7 @@ export class CourseCreateComponent implements OnInit {
     this.courseService.getNewPublisherByLearningType(this.learningType).subscribe(
       (res: any) => {
         this.commonService.hideLoading();
-         this.publisherList = res.data;
+        this.publisherList = res.data;
       },
       (err: any) => {
         this.commonService.hideLoading();
