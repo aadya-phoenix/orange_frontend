@@ -23,10 +23,18 @@ export class EditUserComponent implements OnInit {
   user_details:any;
   rolesList:any=[];
   regionList:any=[];
+  regionDnaObj:any=[];
+  domainObj: any = [];
+  countriesObj:any =[];
+  bussinessUnitObj:any = [];
   isRegion = false;
+  isNewRegion = true;
   isCreate = false;
   notmatched = false ;
   isSubmitted = false;
+  isDomain = false;
+  isBussinessUnit = false;
+  isCountry = false;
   isLearningType =false;
   learningTypes:any=[];
   roleId:number=0;
@@ -36,17 +44,18 @@ export class EditUserComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userManageService:UserManageService,
     private courceService:CourcesService,
+    private generalDrpdownsService: GeneralDropdownsService,
     private commonService:CommonService,
     private router: Router,) { 
     this.createUserForm = this.formBuilder.group({
       email: new FormControl('', [Validators.required,Validators.pattern(emailregexp)]),
-      password: new FormControl('', []),
-      confirm_password: new FormControl('', []),
+     // password: new FormControl('', []),
+     // confirm_password: new FormControl('', []),
       first_name: new FormControl('', [Validators.required]),
       last_name: new FormControl('', [Validators.required]),
       role_id: new FormControl('', []),
-      region_id: new FormControl('', []),
-      learning_type:new FormControl('', []),
+      //region_id: new FormControl('', []),
+      learning_type:new FormControl([''], []),
       pdl_member: new FormControl(false, []),
       status: new FormControl(true, []),
       admin: new FormControl(false, []),
@@ -62,15 +71,19 @@ export class EditUserComponent implements OnInit {
       if(this.user_id){
        this.isCreate = false ;
        this.getUserDetails();
-       this.createUserForm.get('password')?.clearValidators();
+       this.createUserForm.removeControl('password');
+       this.createUserForm.removeControl('confirm_password');
+       /* this.createUserForm.get('password')?.clearValidators();
        this.createUserForm.get('confirm_password')?.clearValidators();
        this.createUserForm.get('password')?.setValue(null);
-       this.createUserForm.get('confirm_password')?.setValue(null);
+       this.createUserForm.get('confirm_password')?.setValue(null); */
       }
       else{
         this.isCreate = true;
-        this.createUserForm.get('password')?.setValidators([Validators.required, Validators.pattern(passwordRegexp)]);
-        this.createUserForm.get('confirm_password')?.setValidators([Validators.required, Validators.pattern(passwordRegexp)]);
+        this.createUserForm.addControl('password', new FormControl(null, [Validators.required, Validators.pattern(passwordRegexp)]));
+        this.createUserForm.addControl('confirm_password', new FormControl(null, [Validators.required, Validators.pattern(passwordRegexp)]));
+      /*   this.createUserForm.get('password')?.setValidators([Validators.required, Validators.pattern(passwordRegexp)]);
+        this.createUserForm.get('confirm_password')?.setValidators([Validators.required, Validators.pattern(passwordRegexp)]); */
       }
     });
     this.getRole();
@@ -81,18 +94,27 @@ export class EditUserComponent implements OnInit {
 
   getSelectedRole(event:any){
     this.roleId = event.id;
-    if(this.roleId == 3 ){
-     this.isRegion = true;
-     this.isLearningType = false;
-     this.createUserForm.get('region_id')?.setValidators([Validators.required]);
-     this.createUserForm.get('learning_type')?.setValue(null);
+    if(this.roleId == 3 || 5){
+     //this.isRegion = true;
+    // this.isLearningType = false;
+     this.createUserForm.addControl('region_id', new FormControl(null, [Validators.required]));
+     this.createUserForm.removeControl('learning_type');
     }
     else if(this.roleId == 4){
      this.isLearningType =true;
      this.isRegion = false;
-     this.createUserForm.get('region_id')?.clearValidators();
-     this.createUserForm.get('region_id')?.setValue(null);
+     this.createUserForm.removeControl('region_id');
     }
+    if(this.roleId == 5 || this.roleId == 13){
+      this.isRegion = true;
+      this.isDomain = false;
+      this.isBussinessUnit = false;
+      this.isCountry = false;
+      this.createUserForm.get('region_id')?.setValidators([Validators.required]);
+      this.createUserForm.get('business_unit_id')?.setValue(null);
+      this.createUserForm.get('domain_training_id')?.setValue(null);
+      this.createUserForm.get('country')?.setValue(null);
+     }
     else{
      this.isRegion = false;
      this.isLearningType = false;
@@ -102,6 +124,20 @@ export class EditUserComponent implements OnInit {
     }
   }
 
+  isRegions(){
+   if(this.roleId == 3){
+     return true;
+   }
+  return false;
+  }
+
+  isDnaRegions(){
+    if(this.roleId == 3){
+      return true;
+    }
+   return false;
+  } 
+  
   getConfirm_paassword(){
   const password = this.createUserForm.get('password') as FormControl;
   const confirmPassword = this.createUserForm.get('confirm_password') as FormControl;
@@ -249,5 +285,60 @@ export class EditUserComponent implements OnInit {
       },err=>{
         this.commonService.errorHandling(err);
      });  
+  }
+
+  getRegions(){
+    this.commonService.showLoading();
+    this.generalDrpdownsService.getRegions().subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+       this.regionDnaObj = res.data;
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    );
+  }
+
+  getCountries(){
+   this.commonService.showLoading();
+   this.generalDrpdownsService.getCountries().subscribe(
+     (res: any) => {
+       this.commonService.hideLoading();
+       let regions = res.data;
+       this.countriesObj = regions.filter((x:any)=>x.region_id === this.regionId);
+     },
+     (err: any) => {
+       this.commonService.hideLoading();
+       this.commonService.toastErrorMsg('Error', err.message);
+     }
+   );
+  }
+ 
+  getBusinessUnits(){
+    this.generalDrpdownsService.getBusinessUnits().subscribe( (res: any) => {
+      this.commonService.hideLoading();
+      this.bussinessUnitObj = res.data;
+    },
+    (err: any) => {
+      this.commonService.hideLoading();
+      this.commonService.toastErrorMsg('Error', err.message);
+    }
+  );
+  }
+ 
+  getDomain(){
+    this.commonService.showLoading();
+    this.generalDrpdownsService.getDomain().subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        this.domainObj = res.data;
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    ); 
   }
 }

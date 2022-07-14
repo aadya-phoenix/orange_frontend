@@ -56,12 +56,12 @@ export class DesignLearningForwardComponent implements OnInit {
     });
     this.getProjectManager();
 
-    if(this.status == 'change'){
+    if(this.status == this.designStatus.change){
       this.title = 'Change Status';
       this.forwardDesignForm.addControl('status', new FormControl(null, [Validators.required]));
       this.isChange = true;
     }
-    if(this.status == 'feedback'){
+    if(this.status == this.designStatus.feedback){
       this.title = 'Feedback';
       this.forwardDesignForm.addControl('status', new FormControl(null, [Validators.required]));
       this.isFeedback = true;
@@ -90,6 +90,9 @@ export class DesignLearningForwardComponent implements OnInit {
     }
     if(this.status == this.designStatus.forwarded || this.status == this.designStatus.approve){
       this.objectDetail.status_comment = this.forwardDesignForm.controls.status_comment.value;
+      if(this.status == this.designStatus.approve){
+        this.objectDetail.project_manager = this.forwardDesignForm.controls.project_manager.value;
+      }
        this.commonService.showLoading();
        this.designService.update(this.objectDetail).subscribe(
          (res: any) => {
@@ -110,7 +113,7 @@ export class DesignLearningForwardComponent implements OnInit {
       }
 
     if(this.status == this.designStatus.reject  || 
-      this.status == 'change' || this.status == 'feedback'){
+      this.status == this.designStatus.change || this.status == this.designStatus.feedback){
       const body = this.forwardDesignForm.value;
       body.new_learning_id = this.designId;
       this.status == this.designStatus.reject  ?

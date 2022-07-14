@@ -92,6 +92,8 @@ export class DesignLearningViewComponent implements OnInit {
   }
 
   openModal(status: any) {
+    this.requestdata.status = status;
+    this.requestdata.new_learning_id = this.id;
     const modalRef = this.modalService.open(DesignLearningForwardComponent, {
       centered: true,
       size: 'xl',
@@ -99,12 +101,12 @@ export class DesignLearningViewComponent implements OnInit {
     });
     modalRef.componentInstance.props = {
       data: this.id,
-     // objectDetail: body,
+      objectDetail: this.requestdata,
       status: status
     };
   }
 
-  openRatingModal(item: any) {
+  openRatingModal(status: any) {
     const modalRef = this.modalService.open(DesignLearningRatingComponent, {
       centered: true,
       size: 'lg',
@@ -112,9 +114,16 @@ export class DesignLearningViewComponent implements OnInit {
     });
     modalRef.componentInstance.props = {
       title: 'View History',
-      data: item.id,
-      objectDetail: item,
-      type: 'viewhistory'
+      data: this.id,
+      objectDetail: this.requestdata,
+      status: status
     };
+  }
+
+  isApprove(){
+    if(this.isHeadDesigner  && this.requestdata.user_id != this.getprofileDetails.data.id  && this.requestdata.status_show == this.designStatus.pending && !this.requestdata.head_status){
+      return true;
+    }
+    return false;
   }
 }
