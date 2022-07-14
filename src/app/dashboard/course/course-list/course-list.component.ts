@@ -16,6 +16,7 @@ import { CourseHistoryComponent } from '../course-history/course-history.compone
   styleUrls: ['./course-list.component.scss']
 })
 export class CourseListComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
   courseStatus = dataConstant.CourseStatus;
   dateTimeFormate = dataConstant.dateTimeFormate;
   dateFormate = dataConstant.dateFormate;
@@ -59,6 +60,7 @@ export class CourseListComponent implements OnInit {
     private courceService: CourcesService,
     private authService: AuthenticationService,
   ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.isReviewer = this.getUserrole.id === this.RoleID.Roc;

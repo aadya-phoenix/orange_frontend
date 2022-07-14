@@ -22,6 +22,7 @@ import { SmedbTermsComponent } from '../smedb-terms/smedb-terms.component';
   styleUrls: ['./smedb-create.component.scss']
 })
 export class SmedbCreateComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
   createSmedbForm: FormGroup;
   contentSupportForm: FormGroup;
   deliveryForm: FormGroup;
@@ -74,6 +75,7 @@ export class SmedbCreateComponent implements OnInit {
     private userManageService: UserManageService,
     private courceService: CourcesService,
     private smeService: SMEService) {
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');

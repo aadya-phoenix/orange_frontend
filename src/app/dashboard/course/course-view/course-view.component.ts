@@ -14,6 +14,7 @@ const urlregex = dataConstant.UrlPattern;
   styleUrls: ['./course-view.component.scss']
 })
 export class CourseViewComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
   id = 0;
   public publishForm!: FormGroup;
   public learnerGuidelines: any = [];
@@ -45,6 +46,7 @@ export class CourseViewComponent implements OnInit {
   translateData = [];
   rejectcomment: any;
   constructor(private route: ActivatedRoute, private commonService: CommonService, private fb: FormBuilder, private authService: AuthenticationService, private router: Router, private modalService: NgbModal, private courseService: CourcesService) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.publishForm = this.fb.group({
       intranet_url: new FormControl('', [
         Validators.required,

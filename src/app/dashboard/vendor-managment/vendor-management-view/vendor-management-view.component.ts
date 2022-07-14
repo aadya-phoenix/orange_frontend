@@ -12,6 +12,7 @@ import { VendorService } from 'src/app/shared/services/vendor/vendor.service';
   styleUrls: ['./vendor-management-view.component.scss']
 })
 export class VendorManagementViewComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {}};
   id = 0;
   requestdata: any = {};
   getUserrole: any = {};
@@ -26,6 +27,7 @@ export class VendorManagementViewComponent implements OnInit {
     private authService: AuthenticationService,
     private commonService: CommonService,
     private router: Router) {
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
       this.getUserrole = this.authService.getRolefromlocal();
       this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
      }
