@@ -1187,7 +1187,7 @@ export class CourseCreateComponent implements OnInit {
           body.title[body.title.indexOf(controlValue)][`${englishSlug}`] = body.title_single
         }
         else {
-          body.title = [{ english: body.title_single }];
+          body.title.push({ english: body.title_single });
         }
       } else {
         body.title = [{ english: body.title_single }];;
@@ -1200,7 +1200,7 @@ export class CourseCreateComponent implements OnInit {
           body.description[body.description.indexOf(controlValue)][`${englishSlug}`] = body.description_single
         }
         else {
-          body.description = [{ english: body.description_single }];
+          body.description.push({ english: body.description_single });
         }
       } else {
         body.description = [{ english: body.description_single }];;
@@ -1213,7 +1213,7 @@ export class CourseCreateComponent implements OnInit {
           body.for_whoom[body.for_whoom.indexOf(controlValue)][`${englishSlug}`] = body.for_whoom_single
         }
         else {
-          body.for_whoom = [{ english: body.for_whoom_single }];
+          body.for_whoom.push({ english: body.for_whoom_single });
         }
       } else {
         body.for_whoom = [{ english: body.for_whoom_single }];;
@@ -1226,7 +1226,7 @@ export class CourseCreateComponent implements OnInit {
           body.learn_more[body.learn_more.indexOf(controlValue)][`${englishSlug}`] = body.learn_more_single
         }
         else {
-          body.learn_more = [{ english: body.learn_more_single }];
+          body.learn_more.push({ english: body.learn_more_single });
         }
       } else {
         body.learn_more = [{ english: body.learn_more_single }];;
