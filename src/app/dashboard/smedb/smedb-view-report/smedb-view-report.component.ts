@@ -104,7 +104,6 @@ export class SmedbViewReportComponent implements OnInit {
       size: 'lg',
       windowClass: 'alert-popup',
     });
-    debugger;
     modalRef.componentInstance.props = {
       title: `Request ${item.sme_status == this.smeStatus.active ? "Deactive" : "Active"}`,
       status: item.sme_status == this.smeStatus.active ? this.smeStatus.deactive :  this.smeStatus.active,
