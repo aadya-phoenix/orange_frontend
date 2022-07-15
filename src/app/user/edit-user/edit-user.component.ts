@@ -28,7 +28,7 @@ export class EditUserComponent implements OnInit {
   countriesObj:any =[];
   bussinessUnitObj:any = [];
   isRegion = false;
-  isNewRegion = true;
+  isDnaRegion = true;
   isCreate = false;
   notmatched = false ;
   isSubmitted = false;
@@ -55,7 +55,7 @@ export class EditUserComponent implements OnInit {
       last_name: new FormControl('', [Validators.required]),
       role_id: new FormControl('', []),
       //region_id: new FormControl('', []),
-      learning_type:new FormControl([''], []),
+    //  learning_type:new FormControl([''], []),
       pdl_member: new FormControl(false, []),
       status: new FormControl(true, []),
       admin: new FormControl(false, []),
@@ -73,17 +73,11 @@ export class EditUserComponent implements OnInit {
        this.getUserDetails();
        this.createUserForm.removeControl('password');
        this.createUserForm.removeControl('confirm_password');
-       /* this.createUserForm.get('password')?.clearValidators();
-       this.createUserForm.get('confirm_password')?.clearValidators();
-       this.createUserForm.get('password')?.setValue(null);
-       this.createUserForm.get('confirm_password')?.setValue(null); */
       }
       else{
         this.isCreate = true;
         this.createUserForm.addControl('password', new FormControl(null, [Validators.required, Validators.pattern(passwordRegexp)]));
         this.createUserForm.addControl('confirm_password', new FormControl(null, [Validators.required, Validators.pattern(passwordRegexp)]));
-      /*   this.createUserForm.get('password')?.setValidators([Validators.required, Validators.pattern(passwordRegexp)]);
-        this.createUserForm.get('confirm_password')?.setValidators([Validators.required, Validators.pattern(passwordRegexp)]); */
       }
     });
     this.getRole();
@@ -94,27 +88,49 @@ export class EditUserComponent implements OnInit {
 
   getSelectedRole(event:any){
     this.roleId = event.id;
-    if(this.roleId == 3 || 5){
-     //this.isRegion = true;
-    // this.isLearningType = false;
+    if(this.roleId == 3 ){
+     this.isRegion = true;
+     this.isLearningType = false;
+     this.isDnaRegion = false;
      this.createUserForm.addControl('region_id', new FormControl(null, [Validators.required]));
      this.createUserForm.removeControl('learning_type');
     }
     else if(this.roleId == 4){
      this.isLearningType =true;
      this.isRegion = false;
+     this.createUserForm.addControl('learning_type', new FormControl(null, [Validators.required]));
      this.createUserForm.removeControl('region_id');
     }
-    if(this.roleId == 5 || this.roleId == 13){
-      this.isRegion = true;
+    else if(this.roleId == 5 || this.roleId == 13){
+      this.isDnaRegion = true;
       this.isDomain = false;
       this.isBussinessUnit = false;
       this.isCountry = false;
-      this.createUserForm.get('region_id')?.setValidators([Validators.required]);
+      this.createUserForm.addControl('region_id', new FormControl(null, [Validators.required]));
+      this.createUserForm.removeControl('learning_type');
       this.createUserForm.get('business_unit_id')?.setValue(null);
       this.createUserForm.get('domain_training_id')?.setValue(null);
       this.createUserForm.get('country')?.setValue(null);
      }
+     else if(this.roleId == 6){
+      this.isBussinessUnit = true;
+      this.isLearningType = false;
+      this.isRegion = false;
+      this.createUserForm.addControl('business_unit_id', new FormControl(null, [Validators.required]));
+      this.createUserForm.addControl('learning_type', new FormControl(null, [Validators.required]));
+      this.createUserForm.removeControl('region_id');
+      this.createUserForm.removeControl('country');
+     }
+     else if(this.roleId == 13){
+      this.isCountry = true;
+      this.isLearningType = false;
+      this.isRegion = false;
+      this.createUserForm.addControl('country', new FormControl(null, [Validators.required]));
+      this.createUserForm.addControl('business_unit_id', new FormControl(null, [Validators.required]));
+      this.createUserForm.addControl('learning_type', new FormControl(null, [Validators.required]));
+      this.createUserForm.removeControl('region_id');
+     }
+
     else{
      this.isRegion = false;
      this.isLearningType = false;
@@ -124,20 +140,6 @@ export class EditUserComponent implements OnInit {
     }
   }
 
-  isRegions(){
-   if(this.roleId == 3){
-     return true;
-   }
-  return false;
-  }
-
-  isDnaRegions(){
-    if(this.roleId == 3){
-      return true;
-    }
-   return false;
-  } 
-  
   getConfirm_paassword(){
   const password = this.createUserForm.get('password') as FormControl;
   const confirmPassword = this.createUserForm.get('confirm_password') as FormControl;

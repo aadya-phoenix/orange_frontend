@@ -20,6 +20,7 @@ const eurocurrencyregex= dataConstant.EuroCurrencyPattern;
   styleUrls: ['./create-session.component.scss']
 })
 export class CreateSessionComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
   today = new Date();
   minStartDate = {};
   meridian = true;
@@ -77,6 +78,7 @@ export class CreateSessionComponent implements OnInit {
     private route: ActivatedRoute,
     private modalService: NgbModal
   ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.minStartDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
 
     this.createSessionForm = this.fb.group({
