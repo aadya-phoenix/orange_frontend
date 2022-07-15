@@ -1,0 +1,64 @@
+<div class="card mb-0">
+    <div class="card-header color-orange">
+        <div class="d-flex justify-content-between">
+           {{title}}
+            <a (click)="closeModal()"><i class="fa fa-times color-black" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="forwardDesignForm">
+            <div class="col-sm-6" *ngIf="isChange">
+                <div class="form-group">
+                  <label>Change Status <span class="text-danger-ligth">* </span></label>
+                  <ng-select [items]="statusObj" 
+                  bindLabel="name" bindValue="id"
+                  formControlName="status"
+                  class="w_100">
+                   </ng-select>
+                   <div *ngIf="(forwardDesignForm.controls['status'].invalid && (forwardDesignForm.controls['status'].dirty || forwardDesignForm.controls['status'].touched)) || isSubmitted ">
+                        <div class="error_message"
+                            *ngIf="forwardDesignForm.controls['status'].errors?.required">
+                            Status cannot be blank
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-sm-6" *ngIf="isApprove">
+                <div class="form-group">
+                  <label>Project Manager <span class="text-danger-ligth">* </span></label>
+                  <ng-select [items]="projectManagerList" 
+                  bindLabel="user_name" bindValue="id"
+                  formControlName="project_manager"
+                  class="w_100">
+                   </ng-select>
+                   <div *ngIf="(forwardDesignForm.controls['project_manager'].invalid && (forwardDesignForm.controls['project_manager'].dirty || forwardDesignForm.controls['project_manager'].touched)) || isSubmitted ">
+                        <div class="error_message"
+                            *ngIf="forwardDesignForm.controls['project_manager'].errors?.required">
+                            Project Manager cannot be blank
+                        </div>
+                    </div>
+                </div>
+              </div>
+             
+      
+              
+            <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Comment <span class="text-danger-ligth" *ngIf="status == designStatus.reject">* </span></label>
+                  <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"
+                  formControlName="status_comment"></textarea>
+                   <div *ngIf="(forwardDesignForm.controls['status_comment'].invalid &&     (forwardDesignForm.controls['status_comment'].dirty || forwardDesignForm.controls['status_comment'].touched)) || isSubmitted ">
+                        <div class="error_message"
+                            *ngIf="forwardDesignForm.controls['status_comment'].errors?.required">
+                            Comments cannot be blank
+                        </div>
+                    </div>
+                </div>
+              </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-primary mr-1" type="submit" (click)="submit()">{{status == designStatus.reject ? 'Reject' : 'Submit'}}</button>
+        <button class="btn btn-secondary" type="submit" (click)="closeModal()">Cancel</button>
+    </div>
+</div>

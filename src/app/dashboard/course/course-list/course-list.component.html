@@ -7,11 +7,9 @@
         <div class="page-title d-flex align-items-center">
           <img src="../../../../assets/images/first.jpg" class="home_Css_img" />
           <div class="d-flex flex-column ml-3">
-            <span class="breade_text_span1">Create new course </span>
+            <span class="breade_text_span1">{{lableConstant.create_new_course}}</span>
             <span class="divider"></span>
-            <span class="breade_text_span">People Development & Learning Strives on
-              Providing you with the
-              best customer service we can drive</span>
+            <span class="breade_text_span">{{lableConstant.development_customer_service}}</span>
           </div>
         </div>
       </div>
@@ -27,10 +25,10 @@
               </a>
             </li>
             <li>
-              <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+              <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
             </li>
             <li>
-              <span class="text_white span_dis">Create new Course</span>
+              <span class="text_white span_dis">{{lableConstant.create_new_course}}</span>
             </li>
           </ol>
         </div>
@@ -45,16 +43,14 @@
                   <div class="card">
                       <div class="card-header cm-card-header">
                           <div class="overall_css">
-                              <span class="card_overall">Overall request Status</span>
+                              <span class="card_overall">{{lableConstant.Overall_request_Status}}</span>
                               <div class="cct_button_oversta">
                                   <button class="btn btn-secondary" [routerLink]="['/dashboard/cct/view-complete-report']">
-                                      <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> View
-                                    all activity report
+                                      <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> {{lableConstant.View_all_activity_report}}
                                     </button>
                                   <button class="btn btn-primary ml-1"
                                       [routerLink]="['/dashboard/cct/create']">
-                                      <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1"> New
-                                          request</span>
+                                      <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1"> {{lableConstant.New_Request}}</span>
                                   </button>
                               </div>
                           </div>
@@ -67,7 +63,7 @@
                                           <div class="fa-icons-des cm-draft">
                                               <img src="../../../../assets/images/icon/drafts.png" />
                                           </div>
-                                          <p>Draft</p>
+                                          <p>{{lableConstant.Draft}}</p>
                                       </div>
                                       <span class="number_css">{{course_count.draft?course_count.draft:0}}</span>
                                   </div>
@@ -78,7 +74,7 @@
                                           <div class="fa-icons-des cm-submit">
                                               <img src="../../../../assets/images/icon/closed.png" />
                                           </div>
-                                          <p>Submitted</p>
+                                          <p>{{lableConstant.Submitted}}</p>
                                       </div>
                                       <span
                                           class="number_css sub_mitted">{{course_count.submitted?course_count.submitted:0}}</span>
@@ -90,7 +86,7 @@
                                           <div class="fa-icons-des bac_yellow">
                                               <img src="../../../../assets/images/icon/pending.png" />
                                           </div>
-                                          <p>Pending</p>
+                                          <p>{{lableConstant.pending}}</p>
                                       </div>
                                       <span
                                           class="number_css ">{{course_count.pending?course_count.pending:0}}</span>
@@ -114,7 +110,7 @@
                                           <div class="fa-icons-des cm-learning">
                                               <img src="../../../../assets/images/icon/check.png" />
                                           </div>
-                                          <p>Published</p>
+                                          <p>{{lableConstant.Published}}</p>
                                       </div>
                                       <span
                                           class="number_css pub_left">{{course_count.closed?course_count.closed:0}}</span>
@@ -126,7 +122,7 @@
                                           <div class="fa-icons-des cm-reject">
                                               <img src="../../../../assets/images/icon/reject.png" />
                                           </div>
-                                          <p>Rejected</p>
+                                          <p>{{lableConstant.Rejected}}</p>
                                       </div>
                                       <span
                                           class="number_css">{{course_count.rejected?course_count.rejected:0}}</span>
@@ -139,7 +135,7 @@
                                               <img src="../../../../assets/images/icon/viewall.png" />
                                           </div>
 
-                                          <p>View All</p>
+                                          <p>{{lableConstant.View_All}}</p>
                                       </div>
                                       <span class="number_css">{{course_count.total?course_count.total:0}}</span>
                                   </div>
@@ -162,32 +158,32 @@
                           <div class="overall_css">
                               <div>
                                   <i class="fa fa-table fa_table" aria-hidden="true "></i>
-                                  <span class="card-title card-title-text card_overall">My Request</span>
+                                  <span class="card-title card-title-text card_overall">{{lableConstant.My_Request}}</span>
                               </div>
                               <div class="filter_dispaly">
                                 <div class="form-group filter_course mr-1">
-                                  <label class="label_course">Filter by Learning Type</label>
+                                  <label class="label_course">{{lableConstant.Filter_by_Learning_Type}}</label>
                                   <select class="form-control  form_width" [(ngModel)]="selectedLearningType"
                                     (change)="getLearningTypeFilterRecords()">
-                                    <option selected='selected' value=''>View All</option>
+                                    <option selected='selected' value=''>{{lableConstant.View_All}}</option>
                                     <option *ngFor="let learning of learningTypes" [value]="learning.id">
                                       {{ learning.name }}
                                     </option>
                                   </select>
                                 </div>
                                 <div class="form-group filter_course mr-1">
-                                  <label class="label_course">Filter by Training Status</label>
+                                  <label class="label_course">{{lableConstant.Filter_by_Training_Status}}</label>
                                   <select class="form-control  form_width" (change)="getLearningTypeFilterRecords()" [(ngModel)]="selectedStatus">
-                                    <option selected='selected' value="total">View All</option>
-                                    <option *ngIf="isReviewer || isPublisher"  value="pending">Pending</option>
-                                    <option value="submitted">Submitted</option>
-                                    <option value="draft">Draft</option>
-                                    <option value="closed">Published</option>
-                                    <option value="rejected">Rejected</option>
+                                    <option selected='selected' value="total">{{lableConstant.Filter_by_Learning_Type}}</option>
+                                    <option *ngIf="isReviewer || isPublisher"  value="pending">{{lableConstant.pending}}</option>
+                                    <option value="submitted">{{lableConstant.Submitted}}</option>
+                                    <option value="draft">{{lableConstant.Draft}}</option>
+                                    <option value="closed">{{lableConstant.Published}}</option>
+                                    <option value="rejected">{{lableConstant.Rejected}}</option>
                                   </select>
                                 </div>
                                   <div class="form-group filter_course">
-                                      <label class="label_course">Search</label>
+                                      <label class="label_course">{{lableConstant.Search}}</label>
                                       <input type="text " name="search " autocomplete="off" [(ngModel)]="searchText"
                                           placeholder="Type to Search"
                                           class="form-control ng-untouched ng-pristine ng-valid form_width"
@@ -235,7 +231,7 @@
                                               <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                           </th>
                                           <th class="text-center">History</th>
-                                          <th class="text-center">Status</th>
+                                          <th class="text-center">{{lableConstant.Status}}</th>
                                           <th class="text-center">Actions</th>
                                       </tr>
                                   </thead>

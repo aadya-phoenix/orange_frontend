@@ -30,11 +30,11 @@
                         <li>
                             <a [routerLink]="['/dashboard/designlearning']" class="text_white">Create new Module</a>
                         </li>
-                        <!--   <li>
-                            <span class="text_white span_dis">{{ back_office_id === 0 ? 'New Request' : 'Update
+                        <li>
+                            <span class="text_white span_dis">{{ designId === 0 ? 'New Request' : 'Update
                                 Request'}}</span>
 
-                        </li> -->
+                        </li> 
                     </ol>
                 </div>
             </div>
@@ -47,145 +47,155 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
                                 <strong _ngcontent-jet-c125=""> Team Details </strong>
                             </div>
-                            <div class="card-body card_width">
+                            <div class="card-body card_width pb-0">
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label">
-                                                Program/Project Name <span class="text-danger-ligth">* </span>
-                                            </label>
-                                            <input type="text" formControlName="project_name"
-                                                class="form-control form_width" />
-                                            <div
-                                                *ngIf="(createDesignForm.controls['project_name'].invalid && (createDesignForm.controls['project_name'].dirty || createDesignForm.controls['project_name'].touched)) || isSubmitted">
-                                                <div class="error_message"
-                                                    *ngIf="createDesignForm.controls['project_name'].errors?.required">
-                                                    Project Name cannot be blank
+                                    <div class="col-sm-8">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">
+                                                        Program/Project Name <span class="text-danger-ligth">* </span>
+                                                    </label>
+                                                    <input type="text" formControlName="project_name"
+                                                        class="form-control form_width" />
+                                                    <div
+                                                        *ngIf="(createDesignForm.controls['project_name'].invalid && (createDesignForm.controls['project_name'].dirty || createDesignForm.controls['project_name'].touched)) || isSubmitted">
+                                                        <div class="error_message"
+                                                            *ngIf="createDesignForm.controls['project_name'].errors?.required">
+                                                            Project Name cannot be blank
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">
+                                                        Key Sponsor <span class="text-danger-ligth">* </span>
+                                                    </label>
+                                                    <input type="text" formControlName="key_sponsor"
+                                                        class="form-control form_width" />
+                                                    <div
+                                                        *ngIf="(createDesignForm.controls['key_sponsor'].invalid && (createDesignForm.controls['key_sponsor'].dirty || createDesignForm.controls['key_sponsor'].touched)) || isSubmitted">
+                                                        <div class="error_message"
+                                                            *ngIf="createDesignForm.controls['key_sponsor'].errors?.required">
+                                                            Key Sponsor cannot be blank
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">
+                                                        Requestor <span class="text-danger-ligth">* </span>
+                                                    </label>
+                                                    <input type="text" formControlName="requestor"
+                                                        class="form-control form_width" />
+                                                    <div
+                                                        *ngIf="(createDesignForm.controls['requestor'].invalid && (createDesignForm.controls['requestor'].dirty || createDesignForm.controls['requestor'].touched)) || isSubmitted">
+                                                        <div class="error_message"
+                                                            *ngIf="createDesignForm.controls['requestor'].errors?.required">
+                                                            Requestor cannot be blank
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">
+                                                        Requestor's Department <span class="text-danger-ligth">* </span>
+                                                    </label>
+                                                    <ng-select [items]="bussinessUnitObj" 
+                                                    bindLabel="team_name" bindValue="id"
+                                                    (change)="getOtherBusinessUnit($event)" formControlName="requestor_department"
+                                                    class="w_100">
+                                                     </ng-select>
+                                                    <div
+                                                        *ngIf="(createDesignForm.controls['requestor_department'].invalid && (createDesignForm.controls['requestor_department'].dirty || createDesignForm.controls['requestor_department'].touched)) || isSubmitted">
+                                                        <div class="error_message"
+                                                            *ngIf="createDesignForm.controls['requestor_department'].errors?.required">
+                                                            Requestor's Department cannot be blank
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           <div class="col-sm-6" *ngIf="isOtherBU">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">
+                                                        Other Requestor's Department
+                                                    </label>
+                                                    <input type="text" class="form-control form_width" formControlName="other_requestor_department">
+                                                    <div
+                                                        *ngIf="(createDesignForm.controls['other_requestor_department'].invalid && (createDesignForm.controls['other_requestor_department'].dirty || createDesignForm.controls['other_requestor_department'].touched)) || isSubmitted">
+                                                        <div class="error_message"
+                                                            *ngIf="createDesignForm.controls['other_requestor_department'].errors?.required">
+                                                            Other Bussiness Unit can not be blank
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">
+                                                        Other Main Contributors<span class="text-danger-ligth">*</span>
+                                                    </label>
+                                                    <input type="text" formControlName="contributor"
+                                                        class="form-control form_width" />
+                                                    <div
+                                                        *ngIf="(createDesignForm.controls['contributor'].invalid && (createDesignForm.controls['contributor'].dirty || createDesignForm.controls['contributor'].touched)) || isSubmitted">
+                                                        <div class="error_message"
+                                                            *ngIf="createDesignForm.controls['contributor'].errors?.required">
+                                                            Other Main Contributorst cannot be blank
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">
+                                                        Budget
+                                                    </label>
+                                                    <input type="text" formControlName="budget"
+                                                        class="form-control form_width" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12" *ngIf ="isHeadDesigner">
+                                                <div class="form-group">
+                                                    <label class="form-control-label mb-0 font_bold">
+                                                        Project Manager <span class="text-danger-ligth">*</span>
+                                                    </label>
+                                                    <ng-select [items]="projectManagerList" 
+                                                    bindLabel="user_name" bindValue="id"
+                                                    formControlName="project_manager"
+                                                    class="w_100">
+                                                     </ng-select>
+                                                     <div
+                                                        *ngIf="(createDesignForm.controls['project_manager'].invalid && (createDesignForm.controls['project_manager'].dirty || createDesignForm.controls['project_manager'].touched)) || isSubmitted">
+                                                        <div class="error_message"
+                                                            *ngIf="createDesignForm.controls['project_manager'].errors?.required">
+                                                            Project Manager cannot be blank
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label">
-                                                Key Sponsor <span class="text-danger-ligth">* </span>
-                                            </label>
-                                            <input type="text" formControlName="key_sponsor"
-                                                class="form-control form_width" />
-                                            <div
-                                                *ngIf="(createDesignForm.controls['key_sponsor'].invalid && (createDesignForm.controls['key_sponsor'].dirty || createDesignForm.controls['key_sponsor'].touched)) || isSubmitted">
-                                                <div class="error_message"
-                                                    *ngIf="createDesignForm.controls['key_sponsor'].errors?.required">
-                                                    Key Sponsor cannot be blank
-                                                </div>
+                                        </div><!--colend-->
+                                        <div class="col-sm-4">
+                                            <div class="text-center">
+                                                <img src="../../../../assets/images/design_learn_form.png">
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label">
-                                                Requestor <span class="text-danger-ligth">* </span>
-                                            </label>
-                                            <input type="text" formControlName="requestor"
-                                                class="form-control form_width" />
-                                            <div
-                                                *ngIf="(createDesignForm.controls['requestor'].invalid && (createDesignForm.controls['requestor'].dirty || createDesignForm.controls['requestor'].touched)) || isSubmitted">
-                                                <div class="error_message"
-                                                    *ngIf="createDesignForm.controls['requestor'].errors?.required">
-                                                    Requestor cannot be blank
-                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label">
-                                                Requestor's Department <span class="text-danger-ligth">* </span>
-                                            </label>
-                                            <ng-select [items]="bussinessUnitObj" 
-                                            bindLabel="team_name" bindValue="id"
-                                            (change)="getOtherBusinessUnit($event)" formControlName="requestor_department"
-                                            class="w_100">
-                                             </ng-select>
-                                            <div
-                                                *ngIf="(createDesignForm.controls['requestor_department'].invalid && (createDesignForm.controls['requestor_department'].dirty || createDesignForm.controls['requestor_department'].touched)) || isSubmitted">
-                                                <div class="error_message"
-                                                    *ngIf="createDesignForm.controls['requestor_department'].errors?.required">
-                                                    Requestor's Department cannot be blank
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <!--     <div class="col-sm-4" *ngIf="isOtherBU">
-                                        <div class="form-group">
-                                            <label class="form-control-label">
-                                                Other Business Unit
-                                            </label>
-                                            <input type="text" class="form-control form_width" formControlName="other_bussiness_unit">
-                                            <div
-                                                *ngIf="(createDesignForm.controls['other_bussiness_unit'].invalid && (createDesignForm.controls['other_bussiness_unit'].dirty || createDesignForm.controls['other_bussiness_unit'].touched)) || isSubmitted">
-                                                <div class="error_message"
-                                                    *ngIf="createDesignForm.controls['other_bussiness_unit'].errors?.required">
-                                                    Other Bussiness Unit can not be blank
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                    <div class="col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label">
-                                                Other Main Contributors<span class="text-danger-ligth">*</span>
-                                            </label>
-                                            <input type="text" formControlName="contributor"
-                                                class="form-control form_width" />
-                                            <div
-                                                *ngIf="(createDesignForm.controls['contributor'].invalid && (createDesignForm.controls['contributor'].dirty || createDesignForm.controls['contributor'].touched)) || isSubmitted">
-                                                <div class="error_message"
-                                                    *ngIf="createDesignForm.controls['contributor'].errors?.required">
-                                                    Other Main Contributorst cannot be blank
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label">
-                                                Budget
-                                            </label>
-                                            <input type="text" formControlName="budget"
-                                                class="form-control form_width" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12" *ngIf="isUpdate">
-                                        <div class="form-group">
-                                            <label class="form-control-label">
-                                                Project Manager <span class="text-danger-ligth">*</span>
-                                            </label>
-                                            <input type="text" class="form-control form_width"
-                                                formControlName="project_manager" />
-                                            <div
-                                                *ngIf="(createDesignForm.controls['project_manager'].invalid && (createDesignForm.controls['project_manager'].dirty || createDesignForm.controls['project_manager'].touched)) || isSubmitted">
-                                                <div class="error_message"
-                                                    *ngIf="createDesignForm.controls['project_manager'].errors?.required">
-                                                    Project Manager cannot be blank
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </div><!--row-->
+                               
                             </div>
                         </div>
+                       
                         </div>
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <img src="../../../../assets/images/design_learn_form.png">
-                            </div>
-                            </div>
+                       
                             </div>
                         <div class="card">
                             <div class="card-header">
@@ -199,7 +209,7 @@
                                                 Please Explain the purpose of the project, issue, problem, or
                                                 requirement.
                                             </label><span class="text-danger-ligth">*</span>
-                                            <textarea class="form-control form_width-textarea" maxlength="500" rows="3"
+                                            <textarea class="form-control form_width-textarea" maxlength="500" 
                                                 formControlName="explain_purpose"></textarea>
                                             <div
                                                 *ngIf="(createDesignForm.controls['explain_purpose'].invalid && (createDesignForm.controls['explain_purpose'].dirty || createDesignForm.controls['explain_purpose'].touched)) || isSubmitted">
@@ -215,8 +225,10 @@
                                             <label class="form-control-label">
                                                 Please mention the objectives of the learning solution:
                                             </label><span class="text-danger-ligth">*</span>
-                                            <textarea class="form-control form_width-textarea" maxlength="500" rows="3"
-                                                formControlName="objective"></textarea>
+                                            <div class="editControls"></div>
+                                            <ejs-richtexteditor id='defaultRTE' 
+                                                formControlName="objective" [toolbarSettings]='tools'>
+                                            </ejs-richtexteditor>
                                             <div
                                                 *ngIf="(createDesignForm.controls['objective'].invalid && (createDesignForm.controls['objective'].dirty || createDesignForm.controls['objective'].touched)) || isSubmitted">
                                                 <div class="error_message"
@@ -226,14 +238,21 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-sm-12">
+                                    <div class="col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 What is the level of knowledge to be acquired by learners through the
                                                 learning solution?
                                                 <span class="text-danger-ligth">* </span>
+                                                <a>
+                                                    <i  class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-bs-toggle="tooltip" placement="right"
+                                                        ngbTooltip="Information/overview only to update learners.
+                                                        Detailed knowledge transfer to the learners, specific to their roles.
+                                                         "></i>
+                                                </a>
                                             </label>
-                                            <textarea class="form-control form_width-textarea" maxlength="500" rows="3"
+                                            <textarea class="form-control form_width-textarea" maxlength="500" 
                                                 formControlName="knowledge"></textarea>
                                             <div
                                                 *ngIf="(createDesignForm.controls['knowledge'].invalid && (createDesignForm.controls['knowledge'].dirty || createDesignForm.controls['knowledge'].touched)) || isSubmitted">
@@ -249,6 +268,12 @@
                                             <label class="form-control-label">
                                                 What are the success factors for the program?
                                                 <span class="text_red">* </span>
+                                                <a>
+                                                    <i  class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-bs-toggle="tooltip" placement="right"
+                                                        ngbTooltip="(for example, 100% - all identified learners target audience to attend trainings)?
+                                                         "></i>
+                                                </a>
                                             </label>
                                             <input type="text" class="form-control form_width"
                                                 formControlName="success_factor" />
@@ -267,8 +292,11 @@
                                                 Please specify the Impact of the learning solution.
                                                 <span class="text_red">* </span>
                                             </label>
-                                            <input type="text" class="form-control form_width"
-                                                formControlName="impact" />
+                                            <ng-select [items]="impactObj" 
+                                            bindLabel="name" bindValue="id"
+                                            formControlName="impact"
+                                            class="w_100">
+                                             </ng-select>
                                             <div
                                                 *ngIf="(createDesignForm.controls['impact'].invalid && (createDesignForm.controls['impact'].dirty || createDesignForm.controls['impact'].touched)) || isSubmitted">
                                                 <div class="error_message"
@@ -379,7 +407,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Are the target audience in the same location? If not, please indicate
@@ -397,7 +425,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 What do you want the learners/target audience to do differently at the
@@ -416,14 +444,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Comments
                                                 <span class="text_red">* </span>
                                             </label>
-                                            <input type="text" class="form-control form_width"
-                                                formControlName="comment" />
+                                            <textarea class="form-control form_width-textarea" formControlName="comment"></textarea>
+                                           
                                             <div
                                                 *ngIf="(createDesignForm.controls['comment'].invalid && (createDesignForm.controls['comment'].dirty || createDesignForm.controls['comment'].touched)) || isSubmitted">
                                                 <div class="error_message"
@@ -432,34 +460,72 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> 
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Attachments.
-                                                <span class="text_red">* </span>
                                             </label>
                                             <input type="file" class="form-control form_width"  (change)="handleFileInput($event)"
                                                 formControlName="attachment" />
-                                            <div
-                                                *ngIf="(createDesignForm.controls['attachment'].invalid && (createDesignForm.controls['attachment'].dirty || createDesignForm.controls['attachment'].touched)) || isSubmitted">
-                                                <div class="error_message"
-                                                    *ngIf="createDesignForm.controls['attachment'].errors?.required">
-                                                    Attachment of the learning solution cannot be blank
-                                                </div>
-                                            </div>
+                                            <span class="pt-2" *ngIf="design_details.attachUrl">
+                                              Click here to <a href="{{design_details.attachUrl}}" target="_blank"
+                                                        style="color:#ff7900">View</a>
+                                            </span>
                                         </div>
                                     </div>
+                                  
                                 </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-primary mr-1" (click)="save(designStatus.pending)" type="submit">
-                                        <i aria-hidden="true" class="fa fa-upload">
-                                        </i> <span class="pl-1">Submit</span>
-                                    </button>
-                                    <button class="btn btn-secondary" (click)="save(designStatus.draft)">Save
-                                        as draft
-                                    </button>
-                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <label class="form-control-label mb-0 font_bold text_balck">
+                                        Who will Create it/ Deliver it ?
+                                        <span class="text-danger-ligth">* </span>
+                                     </label>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-12" *ngIf="isDesigner || isHeadDesigner">
+                                                <div class="form-group">
+                                                    
+                                                    <input type="text" class="form-control form_width"
+                                                        formControlName="who_create" />
+                                                      <div
+                                                      *ngIf="(createDesignForm.controls['who_create'].invalid && (createDesignForm.controls['who_create'].dirty || createDesignForm.controls['who_create'].touched)) || isSubmitted">
+                                                      <div class="error_message"
+                                                       *ngIf="createDesignForm.controls['who_create'].errors?.required">
+                                                       Who will Create cannot be blank
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary mr-1" *ngIf="(!isHeadDesigner &&!isDesigner && (design_details_status == designStatus.draft
+                                || design_details_status == designStatus.reject || !design_details_status)) ||(isBusinessConsultant && !design_details_status)"(click)="save(designStatus.pending)" type="submit">
+                                    <i aria-hidden="true" class="fa fa-upload">
+                                    </i> <span class="pl-1">Submit</span>
+                                </button>
+                                <button class="btn btn-primary mr-1" *ngIf="isDesigner"
+                                (click)="openModal(designStatus.forwarded)" type="submit">
+                                    <i aria-hidden="true" class="fa fa-upload">
+                                    </i> <span class="pl-1">Send for Approval</span>
+                                </button>
+                                <button class="btn btn-primary mr-1" *ngIf="isHeadDesigner"(click)="openModal(designStatus.approve)" type="submit">
+                                    <i aria-hidden="true" class="fa fa-upload">
+                                    </i> <span class="pl-1">Approve</span>
+                                </button>
+                                <button class="btn btn-secondary" *ngIf="isDraft()"
+                                (click)="save(designStatus.draft) ">Save as draft
+                                </button>
+                                <button class="btn btn-secondary mr-1" type="submit" 
+                                *ngIf="(this.isDesigner || this.isHeadDesigner) && 
+                                (design_details_status == designStatus.pending) && (design_details.head_status != designStatus.reject && design_details.head_status != designStatus.approve)"
+                                (click)="openModal(designStatus.reject)"><i  aria-hidden="true"  class="fa fa-times"></i><span class="pl-1">Reject</span>
+                                </button>
                             </div>
                         </div>
                     </div>

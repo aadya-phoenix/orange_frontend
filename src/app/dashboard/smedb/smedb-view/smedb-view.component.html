@@ -7,11 +7,9 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/SME_DB.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="breade_text_span1">SME Database</span>
+                        <span class="breade_text_span1">{{lableConstant.sme_database}}</span>
                         <span class="divider"></span>
-                        <span class="breade_text_span">The SME learning Community is one of the enablers for OBS to
-                            become a Learning organization by enabling a co-development environment through sharing
-                            knowledge and hands-on experience on the latest industry technologies and practices.</span>
+                        <span class="breade_text_span">{{lableConstant.sme_learning_community_feature}}</span>
                     </div>
                 </div>
             </div>
@@ -27,7 +25,7 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
                             <a [routerLink]="['/dashboard/smedb']" class="text_white">Create new SME</a>
@@ -48,7 +46,7 @@
                 <span>View SME Details</span>
                 <span class="cc-text_css"> ({{ requestdata.request_id }}) -
                 </span>
-                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.action_status }}</span>
+                <span spellcheck="text_orange" class="text_orange">{{lableConstant.Request_Status}} - {{ requestdata.action_status }}</span>
             </p>
         </div>
     </div>
@@ -59,7 +57,7 @@
                     <div class="Requs_btn_inl-child">
                         <button type="button" class="btn mr-2 btn-primary" *ngIf="isUpdate()"
                             (click)="updateRequest()">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">Update</span>
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">{{lableConstant.Update}}</span>
                         </button>
                         <button type="button" class="btn btn-primary mr-1" *ngIf="isApprove()"
                             (click)="approveRequest()">
@@ -170,7 +168,7 @@
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Status</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.Status}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.action_status}}
@@ -195,9 +193,9 @@
                                         <thead class="sticky_header">
                                             <tr class="text-center font-13">
                                                 <th>#</th>
-                                                <th> Title </th>
-                                                <th> Level </th>
-                                                <th> status </th>
+                                                <th> {{lableConstant.Title}} </th>
+                                                <th> {{lableConstant.Level}} </th>
+                                                <th> {{lableConstant.Status}} </th>
                                                 <th> Date created </th>
                                                 <th> Date Modified</th>
                                             </tr>
@@ -233,13 +231,13 @@
                                         <thead class="sticky_header">
                                             <tr class="text-center font-13">
                                                 <th>#</th>
-                                                <th> Title </th>
-                                                <th> Level </th>
+                                                <th> {{lableConstant.Title}} </th>
+                                                <th> {{lableConstant.Level}} </th>
                                                 <th> Previous experience in delivery/facilitation of training </th>
                                                 <th> Provide a brief of experience </th>
                                                 <th> Would you need help? </th>
                                                 <th> How can we help you? </th>
-                                                <th> status </th>
+                                                <th> {{lableConstant.Status}} </th>
                                                 <th> Date created </th>
                                                 <th> Date Modified</th>
                                             </tr>
@@ -284,7 +282,7 @@
                                                 <th> Male or female voice </th>
                                                 <th> Previous experience in voice-over </th>
                                                 <th> Uploaded a semple voice recording </th>
-                                                <th> status </th>
+                                                <th> {{lableConstant.Status}} </th>
                                                 <th> Date created </th>
                                                 <th> Date Modified</th>
                                             </tr>
@@ -337,7 +335,7 @@
                                                 <th>#</th>
                                                 <th> Certification Title </th>
                                                 <th> Year of completion </th>
-                                                <th> status </th>
+                                                <th> {{lableConstant.Status}} </th>
                                                 <th> Date created </th>
                                                 <th> Date Modified</th>
                                             </tr>

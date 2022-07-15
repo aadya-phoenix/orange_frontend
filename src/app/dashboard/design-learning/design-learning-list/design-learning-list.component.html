@@ -8,7 +8,7 @@
             <img src="../../../../assets/images/first.jpg" class="home_Css_img" />
             <div class="d-flex flex-column ml-3">
               <span class="breade_text_span1">Design learning Module</span>
-              <span class="divider"></span>
+              <span class="divider_req"></span>
               <span class="breade_text_span">Request the development of new learning modules for your team or
                 our organization.</span>
             </div>
@@ -45,12 +45,12 @@
                         <div class="card-header cm-card-header">
                             <div class="overall_css">
                                 <span class="card_overall">Overall request Status</span>
-                                <div class="d-flex">
-                                    <button class="btn btn-secondary" [routerLink]="['/dashboard/designlearning/view-complete-report']">
+                                <div class="d-flex filter_dispaly">
+                                    <button class="btn btn-secondary filter_course" [routerLink]="['/dashboard/designlearning/view-complete-report']">
                                         <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> View
                                       all activity report
                                       </button>
-                                    <button class="btn btn-primary ml-1"
+                                    <button class="btn btn-primary ml-1 filter_course"
                                         [routerLink]="['/dashboard/designlearning/create']">
                                         <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1"> New
                                             request</span>
@@ -83,7 +83,7 @@
                                             class="number_css sub_mitted">{{design_count.submitted?design_count.submitted:0}}</span>
                                     </div>
                                 </div>
-                                <div class="Course_icon_child" >
+                                <div class="Course_icon_child" *ngIf="isDesigner || isHeadDesigner" >
                                     <div class="alig_dashicon" (click)="showRecords(designStatus.pending)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des bac_yellow">
@@ -95,8 +95,8 @@
                                             class="number_css ">{{design_count.pending?design_count.pending:0}}</span>
                                     </div>
                                 </div>
-                                <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(designStatus.transferred)">
+                                <div class="Course_icon_child" *ngIf="isDesigner">
+                                    <div class="alig_dashicon" (click)="showRecords(designStatus.forwarded)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des bac_red">
                                                 <img src="../../../../assets/images/icon/transfer.png" />
@@ -104,10 +104,22 @@
                                             <p>Forwarded</p>
                                         </div>
                                         <span
-                                            class="number_css">{{design_count.transferred?design_count.transferred:0}}</span>
+                                            class="number_css">{{design_count.forwarded?design_count.forwarded:0}}</span>
                                     </div>
                                 </div>
-                                <div class="Course_icon_child">
+                                <div class="Course_icon_child" *ngIf="isHeadDesigner">
+                                    <div class="alig_dashicon" (click)="showRecords(designStatus.approve)">
+                                        <div class="sub-child-dashicon">
+                                            <div class="fa-icons-des cm-learning">
+                                                <img src="../../../../assets/images/icon/check.png" />
+                                            </div>
+                                            <p>Approved</p>
+                                        </div>
+                                        <span
+                                            class="number_css pub_left">{{design_count.approve?design_count.approve:0}}</span>
+                                    </div>
+                                </div>
+                                <div class="Course_icon_child" >
                                     <div class="alig_dashicon" (click)="showRecords(designStatus.closed)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-learning">
@@ -128,7 +140,7 @@
                                             <p>Rejected</p>
                                         </div>
                                         <span
-                                            class="number_css">{{design_count.rejected?design_count.rejected:0}}</span>
+                                            class="number_css">{{design_count.reject?design_count.reject:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
@@ -208,9 +220,8 @@
                                             <th sortable="status"  (sort)="onSort($event)">
                                                 Status
                                             </th>
-                                            <th sortable="edit" (sort)="onSort($event)">
-                                              View/Edit request
-                                            </th>
+                                            <th sortable="commn" (sort)="onSort($event)">
+                                                History</th>
                                             <th sortable="commn" (sort)="onSort($event)">
                                                 View/Send communication</th>
                                             <th sortable="rating" (sort)="onSort($event)">
@@ -229,20 +240,15 @@
                                             <td (click)="viewRequest(item)">{{ item.created_at | date: dateTimeFormate}}</td>
                                             <td (click)="viewRequest(item)">{{ item.user_name | titlecase }}
                                             </td>
-                                            <td (click)="viewRequest(item)">
+                                            <td (click)="viewRequest(item)">{{ item.requestor_department_name}}
                                             </td>
-                                            <td  (click)="getRequest(cource)">
-                                             
+                                            <td (click)="viewRequest(item)">
+                                             {{ item?.project_manager_name  | titlecase }}
                                             </td>
                                             <td class="text-center">
-                                                <p [ngClass]="item.status">
-                                                    {{ (item.status ? item.status : 'Pending') | titlecase }}
-                                                </p>
-                                            </td>
-                                            <td> <a class="copy_file mr-1 re_id" data-toggle="tooltip"
-                                                (click)="viewRequest(item)" data-placement="top" title="View">
-                                                <i class="fa fa-eye " aria-hidden="true"></i>
-                                            </a>
+                                               
+                                                    {{ (item.action_status ? item.action_status : 'Pending') | titlecase }}
+                                               
                                             </td>
                                             <td>
                                                 <a *ngIf="item.status !== designStatus.draft" (click)="openModal(item)" class="re_id">
@@ -250,22 +256,32 @@
                                                 </a>
                                             </td>
                                             <td>
-                                             
+                                                <a data-toggle="tooltip" data-placement="top"  (click)="openChatModal(item)"
+                                                title="Chat">
+                                                    <img src="../../../../assets/images/icon/chat.png">
+                                                </a>
                                             </td>
+                                            <td> <a *ngIf="item.status_show == designStatus.closed"
+                                             class="re_id">
+                                               {{item.overall_rating_name}}
+                                            </a>
+                                        </td>
                                             <td class="text-center">
-                                                <div class="d-flex">
-                                                  <a (click)="copyRequest(item.id)" class="copy_file mr-1" 
+                                                <div class="d-flex justify-content-center">
+                                                <!--   <a (click)="copyRequest(item.id)" *ngIf="item.status_show === designStatus.submitted" class="copy_file mr-1" 
                                                       data-toggle="tooltip" data-placement="top" title="Copy">
                                                       <i class="fa fa-files-o" aria-hidden="true"></i>
-                                                  </a>
+                                                  </a> -->
                                                   <a (click)="editRequest(item)"
-                                                    
+                                                  *ngIf="item.status_show === designStatus.draft || 
+                                                  (isDesigner && item.status_show === designStatus.pending && item.head_status !=  designStatus.approve && item.design_status != designStatus.close) || 
+                                                    (item.status === designStatus.reject && item.user_id === getprofileDetails.data.id)"
                                                       class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                       title="Edit">
                                                       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                   </a>
                                                   <a (click)="deleteRequest(item.id)"
-                                                     
+                                                  *ngIf="item.status_show === designStatus.draft"
                                                       class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                       title="Delete">
                                                       <i class="fa fa-trash" aria-hidden="true"></i>

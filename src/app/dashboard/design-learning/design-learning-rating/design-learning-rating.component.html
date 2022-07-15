@@ -1,0 +1,104 @@
+<div class="card card_detial mb-0">
+    <div class="card-header text_orange">
+        <div class="d-flex justify_content">
+            {{title}}
+            <a (click)="closeModal()" class="text_black"><i class="fa fa-times" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="col-sm-6" *ngIf="isChange">
+            <div class="form-group">
+              <label>Change Status <span class="text-danger-ligth">* </span></label>
+              <ng-select [items]="statusObj" (change)="getStatus($event)"
+              bindLabel="name" bindValue="id"
+              [(ngModel)]="statusChange"
+              class="w_100">
+               </ng-select>
+<!--                <div *ngIf="(forwardDesignForm.controls['status'].invalid && (forwardDesignForm.controls['status'].dirty || forwardDesignForm.controls['status'].touched)) || isSubmitted ">
+                    <div class="error_message"
+                        *ngIf="forwardDesignForm.controls['status'].errors?.required">
+                        Status cannot be blank
+                    </div>
+                </div> -->
+            </div>
+          </div>
+        <div class="col-sm-6" *ngIf="isFeedback">
+            <div class="form-group">
+                <label>Feedback <span class="text-danger-ligth">* </span></label>
+                <ng-select [items]="feedbackObj" (change)="getFeedback($event)" bindLabel="name" bindValue="id"
+                    [(ngModel)]="statusFeedback" class="w_100">
+                </ng-select>
+                <!--        <div *ngIf="(forwardDesignForm.controls['status'].invalid && (forwardDesignForm.controls['status'].dirty || forwardDesignForm.controls['status'].touched)) || isSubmitted ">
+            <div class="error_message"
+                *ngIf="forwardDesignForm.controls['status'].errors?.required">
+                Status cannot be blank
+            </div>
+        </div> -->
+            </div>
+        </div>
+    </div>
+
+    <ng-container *ngIf="isRating">
+        <div class="card-header text_orange">
+            <div class="d-flex justify_content">
+                Submit your Rating
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="card">
+                <div class="card-body card_width">
+                    <div>
+                        <label>Rating <span class="text_red">* </span></label>
+                        <div class="rate_star d-flex">
+                            <div class="rate">
+                                <input type="radio" id="star5" name="rate" [value]="5" [(ngModel)]="model"
+                                    (ngModelChange)="changeRating()" />
+                                <label for="star5" title="Excellent">5 stars</label>
+                                <input type="radio" id="star4" name="rate" [value]="4" [(ngModel)]="model" />
+                                <label for="star4" title="Above Average">4 stars</label>
+                                <input type="radio" id="star3" name="rate" [value]="3" [(ngModel)]="model" />
+                                <label for="star3" title="Average">3 stars</label>
+                                <input type="radio" id="star2" name="rate" [value]="2" [(ngModel)]="model" />
+                                <label for="star2" title="Below Average">2 stars</label>
+                                <input type="radio" id="star1" name="rate" [value]="1" [(ngModel)]="model" />
+                                <label for="star1" title="Poor">1 star</label>
+                            </div>
+                            <button class="btn btn-secondary not_rated"><span class="fon_12">{{RatingList[model-1] ?
+                                    RatingList[model-1].value : 'Not Rated'}}</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <div class="card mb-1" *ngIf="isSelected">
+        <div class="card-body">
+            <form [formGroup]="ratingDesignForm">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="form-control-label">
+                            Comments <span class="text-danger-ligth">* </span>
+                        </label>
+                        <textarea class="form-control form_width-textarea mb-2" maxlength="500" rows="3"
+                            formControlName="status_comment" placeholder="Enter Comments"
+                            (change)="valueChange()"></textarea>
+                        <span class="charcter_limit ">{{remainingText}} characters
+                            remaining</span>
+                        <div
+                            *ngIf="(ratingDesignForm.controls['status_comment'].invalid && (ratingDesignForm.controls['status_comment'].dirty || ratingDesignForm.controls['status_comment'].touched)) || isSubmitted ">
+                            <div class="error_message"
+                                *ngIf="ratingDesignForm.controls['status_comment'].errors?.required">
+                                Comments cannot be blank
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-primary mr-1" type="submit" (click)="submit()">Submit</button>
+        <button class="btn btn-secondary" type="submit" (click)="closeModal()">Cancel</button>
+    </div>
+</div>

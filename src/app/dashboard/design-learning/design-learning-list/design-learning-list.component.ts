@@ -7,6 +7,10 @@ import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive'
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DesignLearningService } from 'src/app/shared/services/design-learning/design-learning.service';
+import Swal from 'sweetalert2';
+import { DesignLearningChatComponent } from '../design-learning-chat/design-learning-chat.component';
+import { DesignLearningHistoryComponent } from '../design-learning-history/design-learning-history.component';
+import { DesignLearningRatingComponent } from '../design-learning-rating/design-learning-rating.component';
 
 @Component({
   selector: 'app-design-learning-list',
@@ -18,6 +22,7 @@ export class DesignLearningListComponent implements OnInit {
   dateFormate = dataConstant.dateFormate;
   dateTimeFormate = dataConstant.dateTimeFormate;
   designStatus = dataConstant.DesignStatus;
+  RoleID = dataConstant.RoleID;
   designListToShow:any=[];
   designList:any =[];
   selectedStatus:any;
@@ -31,6 +36,10 @@ export class DesignLearningListComponent implements OnInit {
     transferred: 0
   }
   searchText:string='';
+  isDesigner = false;
+  isHeadDesigner = false;
+  getUserrole: any = {};
+  getprofileDetails: any = {};
 
   pagination = {
     page: 1,
@@ -46,7 +55,12 @@ export class DesignLearningListComponent implements OnInit {
     private router: Router,
     private designService: DesignLearningService,
     private authService: AuthenticationService,
-  ) { }
+  ) {
+    this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
+    this.getUserrole = this.authService.getRolefromlocal();
+    this.isDesigner = this.getUserrole.id === this.RoleID.DesignTeam;
+    this.isHeadDesigner = this.getUserrole.id === this.RoleID.HeadOfDesign;
+   }
 
   ngOnInit(): void {
     this.refreshModules();
@@ -58,6 +72,23 @@ export class DesignLearningListComponent implements OnInit {
       (res: any) => {
         if (res.status === 1 && res.message === 'Success') {
           this.designList = res.data.new_learning;
+          this.designList.forEach((x:any)=> {
+            if(x.overall_rating == 1){
+              x.overall_rating_name = 'Poor';
+            }
+            else if(x.overall_rating == 2){
+              x.overall_rating_name = 'Below Average';
+            }
+            else if(x.overall_rating == 3){
+              x.overall_rating_name = 'Average';
+            }
+            else if(x.overall_rating == 4){
+              x.overall_rating_name = 'Above Average';
+            }
+            else{
+              x.overall_rating_name = 'Excellent';
+            }
+           });
           this.design_count = res.data.new_learning_count;
           this.showRecords(this.designStatus.total);
         }
@@ -71,13 +102,13 @@ export class DesignLearningListComponent implements OnInit {
   }
 
   editRequest(item: any) {
-    /* if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/cct/update/${item.id}`);
-    } */
+     if (item && item.id) {
+      this.router.navigateByUrl(`/dashboard/designlearning/update/${item.id}`);
+    }
   }
 
-  deleteRequest(course_id: number){
-    /*   Swal.fire({
+  deleteRequest(item_id: number){
+     Swal.fire({
         title: 'Are you sure want to remove?',
         text: 'You will not be able to recover this request!',
         icon: 'warning',
@@ -87,8 +118,8 @@ export class DesignLearningListComponent implements OnInit {
       }).then((result) => {
         if (result.value) {
           this.commonService.showLoading();
-          this.courceService.deleteCourse({course_id :course_id}).subscribe((res:any)=>{
-            this.refreshCourses();
+          this.designService.delete({new_learning_id :item_id}).subscribe((res:any)=>{
+            this.refreshModules();
             Swal.fire(
               'Deleted!',
               'Your request has been deleted.',
@@ -98,13 +129,12 @@ export class DesignLearningListComponent implements OnInit {
             this.commonService.hideLoading();
             this.commonService.errorHandling(err);
           })
-          
         }
-      }) */
+      }) 
   }
 
-  copyRequest(course_id: number) {
-     /*  Swal.fire({
+  /* copyRequest(item_id: number) {
+      Swal.fire({
         title: 'Are you sure you want to copy?',
         text: 'You will copy this request',
         icon: 'warning',
@@ -114,7 +144,7 @@ export class DesignLearningListComponent implements OnInit {
       }).then((result) => {
         if (result.value) {
           this.commonService.showLoading();
-          this.designService.copyCourse({course_id :course_id}).subscribe((res:any)=>{
+          this.designService.copy({new_learning_id :item_id}).subscribe((res:any)=>{
             this.commonService.hideLoading();
             this.refreshModules();
             Swal.fire(
@@ -128,11 +158,11 @@ export class DesignLearningListComponent implements OnInit {
           })
           
         }
-      }) */
-   }
+      }) 
+  } */
 
-   openModal(item: any) {
-  /*   const modalRef = this.modalService.open(CourseHistoryComponent, {
+  openModal(item: any) {
+     const modalRef = this.modalService.open(DesignLearningHistoryComponent, {
       centered: true,
       size: 'xl',
       modalDialogClass: 'large-width',
@@ -143,8 +173,37 @@ export class DesignLearningListComponent implements OnInit {
       data: item.id,
       objectDetail: item,
       type: 'viewhistory'
-    }; */
+    }; 
   }
+
+  openRatingModal(item: any) {
+    const modalRef = this.modalService.open(DesignLearningRatingComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      title: 'View History',
+      data: item.id,
+      objectDetail: item,
+      type: 'viewhistory'
+    };
+  }
+
+  openChatModal(item: any) {
+    const modalRef = this.modalService.open(DesignLearningChatComponent, {
+      centered: true,
+      size: 'lg',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      title: 'View History',
+      data: item.id,
+      objectDetail: item,
+      type: 'viewhistory'
+    };
+  }
+
   viewRequest(item: any){
     this.router.navigateByUrl(`dashboard/designlearning/view/${item.id}`);
   }
@@ -176,6 +235,5 @@ export class DesignLearningListComponent implements OnInit {
     }
     this.selectedStatus = type;
   }
-
 
 }

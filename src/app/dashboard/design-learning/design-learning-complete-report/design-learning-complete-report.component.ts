@@ -1,4 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
@@ -7,6 +8,8 @@ import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive'
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DesignLearningService } from 'src/app/shared/services/design-learning/design-learning.service';
+import { GeneralDropdownsService } from 'src/app/shared/services/general-dropdowns/general-dropdowns.service';
+import { DesignLearningHistoryComponent } from '../design-learning-history/design-learning-history.component';
 
 @Component({
   selector: 'app-design-learning-complete-report',
@@ -18,8 +21,10 @@ export class DesignLearningCompleteReportComponent implements OnInit {
   dateFormate = dataConstant.dateFormate;
   dateTimeFormate = dataConstant.dateTimeFormate;
   designStatus = dataConstant.DesignStatus;
+  public filterForm!: FormGroup;
   designListToShow:any=[];
   designList:any =[];
+  bussinessUnitObj:any=[];
   selectedStatus:any;
   design_count:any={
     closed: 0,
@@ -30,6 +35,7 @@ export class DesignLearningCompleteReportComponent implements OnInit {
     total: 0,
     transferred: 0
   }
+  addDate = false;
   searchText:string='';
 
   pagination = {
@@ -37,27 +43,61 @@ export class DesignLearningCompleteReportComponent implements OnInit {
     pageNumber: 1,
     pageSize: 10
   }
+  ratingObj: any=[{id:5, name:'Excellent'}, {id:4, name:'Above Average'}, {id:3, name:'Average'}, 
+  {id:2, name:'Below Average'}, {id:1, name:'Poor'}]
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
   constructor(
+    private fb: FormBuilder,
     private commonService: CommonService,
     private modalService: NgbModal,
     private route: ActivatedRoute,
+    private generalDrpdownsService:GeneralDropdownsService,
     private router: Router,
     private designService: DesignLearningService,
     private authService: AuthenticationService,
-  ) { }
+  ) {
+    this.filterForm = this.fb.group({
+      start_date: new FormControl('', []),
+      end_date: new FormControl('', []),
+      reporting_period: new FormControl('', []),
+      status: new FormControl('', []),
+      requestor_department: new FormControl('', []),
+      rating: new FormControl('', []),
+    });
+    this.filterForm.controls.start_date.valueChanges.subscribe((x: any) => {
+      this.addDate = x ? true : false;
+    })
+   }
 
   ngOnInit(): void {
-    this.refreshModules();
+    this.getBusinessUnits();
+    this.refreshModules({});
   }
 
-  refreshModules() {
+  refreshModules(data:any) {
     this.commonService.showLoading();
-    this.designService.getModules().subscribe(
+    this.designService.filter(data).subscribe(
       (res: any) => {
         if (res.status === 1 && res.message === 'Success') {
           this.designList = res.data.new_learning;
+          this.designList.forEach((x:any)=> {
+            if(x.overall_rating == 1){
+              x.overall_rating_name = 'Poor';
+            }
+            else if(x.overall_rating == 2){
+              x.overall_rating_name = 'Below Average';
+            }
+            else if(x.overall_rating == 3){
+              x.overall_rating_name = 'Average';
+            }
+            else if(x.overall_rating == 4){
+              x.overall_rating_name = 'Above Average';
+            }
+            else{
+              x.overall_rating_name = 'Excellent';
+            }
+           });
           this.design_count = res.data.new_learning_count;
           this.showRecords(this.designStatus.total);
         }
@@ -69,83 +109,21 @@ export class DesignLearningCompleteReportComponent implements OnInit {
       }
     );
   }
-
-  editRequest(item: any) {
-    /* if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/cct/update/${item.id}`);
-    } */
-  }
-
-  deleteRequest(course_id: number){
-    /*   Swal.fire({
-        title: 'Are you sure want to remove?',
-        text: 'You will not be able to recover this request!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, keep it'
-      }).then((result) => {
-        if (result.value) {
-          this.commonService.showLoading();
-          this.courceService.deleteCourse({course_id :course_id}).subscribe((res:any)=>{
-            this.refreshCourses();
-            Swal.fire(
-              'Deleted!',
-              'Your request has been deleted.',
-              'success'
-            )
-          },(err:any)=>{
-            this.commonService.hideLoading();
-            this.commonService.errorHandling(err);
-          })
-          
-        }
-      }) */
-  }
-
-  copyRequest(course_id: number) {
-     /*  Swal.fire({
-        title: 'Are you sure you want to copy?',
-        text: 'You will copy this request',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, copy it!',
-        cancelButtonText: 'No'
-      }).then((result) => {
-        if (result.value) {
-          this.commonService.showLoading();
-          this.designService.copyCourse({course_id :course_id}).subscribe((res:any)=>{
-            this.commonService.hideLoading();
-            this.refreshModules();
-            Swal.fire(
-              'Copied!',
-              'Your request has been copyed.',
-              'success'
-            )
-          },(err:any)=>{
-            this.commonService.hideLoading();
-            this.commonService.errorHandling(err);
-          })
-          
-        }
-      }) */
-   }
-
-   openModal(item: any) {
-  /*   const modalRef = this.modalService.open(CourseHistoryComponent, {
-      centered: true,
-      size: 'xl',
-      modalDialogClass: 'large-width',
-      windowClass: 'alert-popup',
-    });
-    modalRef.componentInstance.props = {
-      title: 'View History',
-      data: item.id,
-      objectDetail: item,
-      type: 'viewhistory'
-    }; */
-  }
-  viewRequest(item: any){}
+    
+  openModal(item: any) {
+    const modalRef = this.modalService.open(DesignLearningHistoryComponent, {
+     centered: true,
+     size: 'xl',
+     modalDialogClass: 'large-width',
+     windowClass: 'alert-popup',
+   });
+   modalRef.componentInstance.props = {
+     title: 'View History',
+     data: item.id,
+     objectDetail: item,
+     type: 'viewhistory'
+   }; 
+ }
 
   onSort({ column, direction }: any) {
     this.headers.forEach((header: { sortable: any; direction: string; }) => {
@@ -173,6 +151,33 @@ export class DesignLearningCompleteReportComponent implements OnInit {
       this.designListToShow = this.designList.filter((x: any) => { if (x.status_show === type) { return x } }).map((x: any) => Object.assign({}, x));
     }
     this.selectedStatus = type;
+  }
+
+  getBusinessUnits(){
+    this.generalDrpdownsService.getBusinessUnits().subscribe( (res: any) => {
+      this.commonService.hideLoading();
+      this.bussinessUnitObj = res.data;
+    },
+    (err: any) => {
+      this.commonService.hideLoading();
+      this.commonService.toastErrorMsg('Error', err.message);
+    });
+  }
+
+  reset() {
+    this.filterForm.setValue({
+      start_date: '',
+      end_date: '',
+      reporting_period: '',
+      status: '',
+      requestor_department: '',
+      rating:''
+    });
+    this.refreshModules({});
+  }
+  filterData(){
+    const data = this.filterForm.value;
+    this.refreshModules(data);
   }
 
 
