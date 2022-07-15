@@ -59,9 +59,9 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="year && selectedModule == 'course'">
+        <div *ngIf="year && selectedModule">
         <div class="row bg-white mx-0">
-            <div class="col-md-6 p-0 pt-2" *ngIf="courceData.overall">
+            <div class="col-md-6 p-0 pt-2" *ngIf="selectedModule == modules.course || selectedModule == modules.session || selectedModule == modules.carousel || selectedModule == modules.backOffice || selectedModule == modules.sme">
                 <div class="col-md-6 col-sm-12 mb-2">
                     <div class="small-box cm-draft">
                         <div class="counter_dispaly">
@@ -110,6 +110,47 @@
                             </div>
                             <div class="icon">
                                 <img src="../../../../assets/images/icon/reject.png" class="icon_img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 p-0 pt-2" *ngIf="selectedModule == modules.getReport">
+                <div class="col-md-6 col-sm-12 mb-2">
+                    <div class="small-box cm-draft">
+                        <div class="counter_dispaly">
+                            <div class="inner">
+                                <p>Total Request</p>
+                                <h3 class="font-weight-bolder">{{courceData.overall.overall.total}}</h3>
+                            </div>
+                            <div class="icon">
+                                <img src="../../../../assets/images/icon/viewall.png" class="icon_img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 mb-2">
+                    <div class="small-box cm-learning">
+                        <div class="counter_dispaly">
+                            <div class="inner">
+                                <p>Training</p>
+                                <h3 class="font-weight-bolder">{{courceData.overall.overall.report_type.Training}}</h3>
+                            </div>
+                            <div class="icon">
+                                <img src="../../../../assets/images/icon/check.png" class="icon_img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 mb-2">
+                    <div class="small-box bac_yellow">
+                        <div class="counter_dispaly">
+                            <div class="inner">
+                                <p>Certifications</p>
+                                <h3 class="font-weight-bolder">{{courceData.overall.overall.report_type.Certifications}}</h3>
+                            </div>
+                            <div class="icon">
+                                <img src="../../../../assets/images/icon/pending.png" class="icon_img">
                             </div>
                         </div>
                     </div>

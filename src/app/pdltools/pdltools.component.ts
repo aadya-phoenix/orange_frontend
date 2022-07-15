@@ -52,6 +52,15 @@ export class PdltoolsComponent implements AfterViewInit {
       if (this.selectedModule === this.modules.getReport) {
         this.getReportData();
       }
+      if (this.selectedModule === this.modules.carousel) {
+        this.getCarouselData();
+      }
+      if (this.selectedModule === this.modules.backOffice) {
+        this.getBackOfficeRoleData();
+      }
+      if (this.selectedModule === this.modules.sme) {
+        this.getSMEDatabaseData();
+      }
     }
   }
 
@@ -100,7 +109,7 @@ export class PdltoolsComponent implements AfterViewInit {
         } else {
           this.commonService.toastErrorMsg('Error', res.message);
         }
-        this.createChartColumn();
+        this.createChartColumn(this.courceData);
         this.createChartLine('chart-publisher','Publisher Activity Report',this.publisherReportData);
         this.createChartLine('chart-roc','ROC Activity Report',this.rocReportData);
         this.createMonthWiseLinechart('comp-chart-publisher-month',`Publisher month wise average time ${this.year}`,this.publisherReportData)
@@ -126,9 +135,36 @@ export class PdltoolsComponent implements AfterViewInit {
       (res: any) => {
         if (res && res.status == 1) {
           this.sessionData = res.data;
+          this.courceData = res.data;
+          this.publisherReportData = [];
+          this.rocReportData = [];
+          this.rocData = Object.entries(this.sessionData.roc_activity);
+          this.publisherData = Object.entries(this.sessionData.session_publisher_activity);
+          Object.entries(this.sessionData.session_publisher_activity).forEach((element: any, index:any) => {
+            const data = {
+              name: element[0],
+              data: Object.keys(element[1].monthly).map((key) => element[1].monthly[key].total)
+            }
+            this.publisherReportData.push(data);
+          });
+          this.rocData.forEach((element: any, index:any) => {
+            const data = {
+              name: element[0],
+              data: Object.keys(element[1].monthly).map((key) => element[1].monthly[key].total)
+            }
+            this.rocReportData.push(data);
+          });
         } else {
           this.commonService.toastErrorMsg('Error', res.message);
         }
+        this.createChartColumn(this.sessionData);
+        this.createChartLine('chart-publisher','Publisher Activity Report',this.publisherReportData);
+        this.createChartLine('chart-roc','ROC Activity Report',this.rocReportData);
+        this.createMonthWiseLinechart('comp-chart-publisher-month',`Publisher month wise average time ${this.year}`,this.publisherReportData)
+        this.createMonthWiseLinechart('comp-chart-roc-month',`ROC month wise average time ${this.year}`,this.rocReportData)
+        this.createPieChart();
+        this.CreateLinechart();
+        this.createChartDepartActivities();
         this.commonService.hideLoading();
       },
       (err: any) => {
@@ -147,9 +183,36 @@ export class PdltoolsComponent implements AfterViewInit {
       (res: any) => {
         if (res && res.status == 1) {
           this.reportData = res.data;
+          this.courceData = res.data;
+          this.publisherReportData = [];
+          this.rocReportData = [];
+          this.rocData = Object.entries(this.reportData.roc_activity);
+          this.publisherData = Object.entries(this.reportData.data_analyst_activity);
+          Object.entries(this.reportData.data_analyst_activity).forEach((element: any, index:any) => {
+            const data = {
+              name: element[0],
+              data: Object.keys(element[1].monthly).map((key) => element[1].monthly[key].total)
+            }
+            this.publisherReportData.push(data);
+          });
+          this.rocData.forEach((element: any, index:any) => {
+            const data = {
+              name: element[0],
+              data: Object.keys(element[1].monthly).map((key) => element[1].monthly[key].total)
+            }
+            this.rocReportData.push(data);
+          });
         } else {
           this.commonService.toastErrorMsg('Error', res.message);
         }
+        this.createChartColumn(this.reportData);
+        this.createChartLine('chart-publisher','Data Analyst Activity Report',this.publisherReportData);
+        this.createChartLine('chart-roc','ROC Activity Report',this.rocReportData);
+        this.createMonthWiseLinechart('comp-chart-publisher-month',`Publisher month wise average time ${this.year}`,this.publisherReportData)
+        this.createMonthWiseLinechart('comp-chart-roc-month',`ROC month wise average time ${this.year}`,this.rocReportData)
+        this.createPieChart();
+        this.CreateLinechart();
+        this.createChartDepartActivities();
         this.commonService.hideLoading();
       },
       (err: any) => {
@@ -160,12 +223,151 @@ export class PdltoolsComponent implements AfterViewInit {
   }
 
 
-  private getRandomNumber(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min + 1) + min)
+  private getCarouselData() {
+    const body = {
+      year: this.year
+    }
+    this.commonService.showLoading();
+    this.pldtoolsService.getCarouselData(body).subscribe(
+      (res: any) => {
+        if (res && res.status == 1) {
+          this.reportData = res.data;
+          this.courceData = res.data;
+          this.publisherReportData = [];
+          this.rocReportData = [];
+          // this.rocData = Object.entries(this.reportData.roc_activity);
+          // this.publisherData = Object.entries(this.reportData.data_analyst_activity);
+          // Object.entries(this.reportData.data_analyst_activity).forEach((element: any, index:any) => {
+          //   const data = {
+          //     name: element[0],
+          //     data: Object.keys(element[1].monthly).map((key) => element[1].monthly[key].total)
+          //   }
+          //   this.publisherReportData.push(data);
+          // });
+          // this.rocData.forEach((element: any, index:any) => {
+          //   const data = {
+          //     name: element[0],
+          //     data: Object.keys(element[1].monthly).map((key) => element[1].monthly[key].total)
+          //   }
+          //   this.rocReportData.push(data);
+          // });
+        } else {
+          this.commonService.toastErrorMsg('Error', res.message);
+        }
+        this.createChartColumn(this.reportData);
+        this.createChartLine('chart-publisher','Data Analyst Activity Report',this.publisherReportData);
+        this.createChartLine('chart-roc','ROC Activity Report',this.rocReportData);
+        this.createMonthWiseLinechart('comp-chart-publisher-month',`Publisher month wise average time ${this.year}`,this.publisherReportData)
+        this.createMonthWiseLinechart('comp-chart-roc-month',`ROC month wise average time ${this.year}`,this.rocReportData)
+        this.createPieChart();
+        this.CreateLinechart();
+        this.createChartDepartActivities();
+        this.commonService.hideLoading();
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
+      }
+    );
   }
 
+  private getBackOfficeRoleData() {
+    const body = {
+      year: this.year
+    }
+    this.commonService.showLoading();
+    this.pldtoolsService.getBackOfficeRoleData(body).subscribe(
+      (res: any) => {
+        if (res && res.status == 1) {
+          this.reportData = res.data;
+          this.courceData = res.data;
+          this.publisherReportData = [];
+          this.rocReportData = [];
+          // this.rocData = Object.entries(this.reportData.roc_activity);
+          // this.publisherData = Object.entries(this.reportData.data_analyst_activity);
+          // Object.entries(this.reportData.data_analyst_activity).forEach((element: any, index:any) => {
+          //   const data = {
+          //     name: element[0],
+          //     data: Object.keys(element[1].monthly).map((key) => element[1].monthly[key].total)
+          //   }
+          //   this.publisherReportData.push(data);
+          // });
+          // this.rocData.forEach((element: any, index:any) => {
+          //   const data = {
+          //     name: element[0],
+          //     data: Object.keys(element[1].monthly).map((key) => element[1].monthly[key].total)
+          //   }
+          //   this.rocReportData.push(data);
+          // });
+        } else {
+          this.commonService.toastErrorMsg('Error', res.message);
+        }
+        this.createChartColumn(this.reportData);
+        this.createChartLine('chart-publisher','Data Analyst Activity Report',this.publisherReportData);
+        this.createChartLine('chart-roc','ROC Activity Report',this.rocReportData);
+        this.createMonthWiseLinechart('comp-chart-publisher-month',`Publisher month wise average time ${this.year}`,this.publisherReportData)
+        this.createMonthWiseLinechart('comp-chart-roc-month',`ROC month wise average time ${this.year}`,this.rocReportData)
+        this.createPieChart();
+        this.CreateLinechart();
+        this.createChartDepartActivities();
+        this.commonService.hideLoading();
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
+      }
+    );
+  }
+
+  private getSMEDatabaseData() {
+    const body = {
+      year: this.year
+    }
+    this.commonService.showLoading();
+    this.pldtoolsService.getSMEDatabaseData(body).subscribe(
+      (res: any) => {
+        if (res && res.status == 1) {
+          this.reportData = res.data;
+          this.courceData = res.data;
+          this.publisherReportData = [];
+          this.rocReportData = [];
+          // this.rocData = Object.entries(this.reportData.roc_activity);
+          // this.publisherData = Object.entries(this.reportData.data_analyst_activity);
+          // Object.entries(this.reportData.data_analyst_activity).forEach((element: any, index:any) => {
+          //   const data = {
+          //     name: element[0],
+          //     data: Object.keys(element[1].monthly).map((key) => element[1].monthly[key].total)
+          //   }
+          //   this.publisherReportData.push(data);
+          // });
+          // this.rocData.forEach((element: any, index:any) => {
+          //   const data = {
+          //     name: element[0],
+          //     data: Object.keys(element[1].monthly).map((key) => element[1].monthly[key].total)
+          //   }
+          //   this.rocReportData.push(data);
+          // });
+        } else {
+          this.commonService.toastErrorMsg('Error', res.message);
+        }
+        this.createChartColumn(this.reportData);
+        this.createChartLine('chart-publisher','Data Analyst Activity Report',this.publisherReportData);
+        this.createChartLine('chart-roc','ROC Activity Report',this.rocReportData);
+        this.createMonthWiseLinechart('comp-chart-publisher-month',`Publisher month wise average time ${this.year}`,this.publisherReportData)
+        this.createMonthWiseLinechart('comp-chart-roc-month',`ROC month wise average time ${this.year}`,this.rocReportData)
+        this.createPieChart();
+        this.CreateLinechart();
+        this.createChartDepartActivities();
+        this.commonService.hideLoading();
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
+      }
+    );
+  }
  
-  private createChartColumn(): void {
+  private createChartColumn(data:any): void {
     const chart = Highcharts.chart('comp-chart-column' as any, {
       chart: {
         type: 'column',
@@ -196,7 +398,7 @@ export class PdltoolsComponent implements AfterViewInit {
       },
       series: [{
         name: 'Total Requests',
-        data: Object.keys(this.courceData.monthly).map((key) => this.courceData.monthly[key].total)
+        data: Object.keys(data.monthly).map((key) => data.monthly[key].total)
       }],
 
       tooltip: {
