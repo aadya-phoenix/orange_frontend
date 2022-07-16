@@ -255,13 +255,13 @@ export class PdltoolsComponent implements AfterViewInit {
           this.commonService.toastErrorMsg('Error', res.message);
         }
         this.createChartColumn(this.reportData);
-        this.createChartLine('chart-publisher','Data Analyst Activity Report',this.publisherReportData);
-        this.createChartLine('chart-roc','ROC Activity Report',this.rocReportData);
-        this.createMonthWiseLinechart('comp-chart-publisher-month',`Publisher month wise average time ${this.year}`,this.publisherReportData)
-        this.createMonthWiseLinechart('comp-chart-roc-month',`ROC month wise average time ${this.year}`,this.rocReportData)
-        this.createPieChart();
-        this.CreateLinechart();
-        this.createChartDepartActivities();
+        // this.createChartLine('chart-publisher','Data Analyst Activity Report',this.publisherReportData);
+        // this.createChartLine('chart-roc','ROC Activity Report',this.rocReportData);
+        // this.createMonthWiseLinechart('comp-chart-publisher-month',`Publisher month wise average time ${this.year}`,this.publisherReportData)
+        // this.createMonthWiseLinechart('comp-chart-roc-month',`ROC month wise average time ${this.year}`,this.rocReportData)
+        // this.createPieChart();
+        // this.CreateLinechart();
+        // this.createChartDepartActivities();
         this.commonService.hideLoading();
       },
       (err: any) => {
@@ -303,13 +303,13 @@ export class PdltoolsComponent implements AfterViewInit {
           this.commonService.toastErrorMsg('Error', res.message);
         }
         this.createChartColumn(this.reportData);
-        this.createChartLine('chart-publisher','Data Analyst Activity Report',this.publisherReportData);
-        this.createChartLine('chart-roc','ROC Activity Report',this.rocReportData);
-        this.createMonthWiseLinechart('comp-chart-publisher-month',`Publisher month wise average time ${this.year}`,this.publisherReportData)
-        this.createMonthWiseLinechart('comp-chart-roc-month',`ROC month wise average time ${this.year}`,this.rocReportData)
-        this.createPieChart();
-        this.CreateLinechart();
-        this.createChartDepartActivities();
+        // this.createChartLine('chart-publisher','Data Analyst Activity Report',this.publisherReportData);
+        // this.createChartLine('chart-roc','ROC Activity Report',this.rocReportData);
+        // this.createMonthWiseLinechart('comp-chart-publisher-month',`Publisher month wise average time ${this.year}`,this.publisherReportData)
+        // this.createMonthWiseLinechart('comp-chart-roc-month',`ROC month wise average time ${this.year}`,this.rocReportData)
+        // this.createPieChart();
+        // this.CreateLinechart();
+        // this.createChartDepartActivities();
         this.commonService.hideLoading();
       },
       (err: any) => {
@@ -327,10 +327,7 @@ export class PdltoolsComponent implements AfterViewInit {
     this.pldtoolsService.getSMEDatabaseData(body).subscribe(
       (res: any) => {
         if (res && res.status == 1) {
-          this.reportData = res.data;
           this.courceData = res.data;
-          this.publisherReportData = [];
-          this.rocReportData = [];
           // this.rocData = Object.entries(this.reportData.roc_activity);
           // this.publisherData = Object.entries(this.reportData.data_analyst_activity);
           // Object.entries(this.reportData.data_analyst_activity).forEach((element: any, index:any) => {
@@ -350,14 +347,14 @@ export class PdltoolsComponent implements AfterViewInit {
         } else {
           this.commonService.toastErrorMsg('Error', res.message);
         }
-        this.createChartColumn(this.reportData);
-        this.createChartLine('chart-publisher','Data Analyst Activity Report',this.publisherReportData);
-        this.createChartLine('chart-roc','ROC Activity Report',this.rocReportData);
-        this.createMonthWiseLinechart('comp-chart-publisher-month',`Publisher month wise average time ${this.year}`,this.publisherReportData)
-        this.createMonthWiseLinechart('comp-chart-roc-month',`ROC month wise average time ${this.year}`,this.rocReportData)
-        this.createPieChart();
-        this.CreateLinechart();
-        this.createChartDepartActivities();
+        this.createChartColumn(this.courceData);
+        // this.createChartLine('chart-publisher','Data Analyst Activity Report',this.publisherReportData);
+        // this.createChartLine('chart-roc','ROC Activity Report',this.rocReportData);
+        // this.createMonthWiseLinechart('comp-chart-publisher-month',`Publisher month wise average time ${this.year}`,this.publisherReportData)
+        // this.createMonthWiseLinechart('comp-chart-roc-month',`ROC month wise average time ${this.year}`,this.rocReportData)
+        // this.createPieChart();
+        // this.CreateLinechart();
+        // this.createChartDepartActivities();
         this.commonService.hideLoading();
       },
       (err: any) => {
@@ -515,69 +512,69 @@ export class PdltoolsComponent implements AfterViewInit {
   }
 
   private createPieChart():void{
-    Highcharts.chart('comp-chart-pie-roc' as any, {
-      chart: {
-        type: 'pie',
-        options3d: {
-            enabled: true,
-            alpha: 45
-        }
-    },
-    title: {
-        text: 'ROC Activity Report'
-    },
-    subtitle: {
-        text: ''
-    },
-    plotOptions: {
-        pie: {
-            innerSize: 100,
-            depth: 45
-        }
-    },
-    series: [{
-        name: 'Published Request',
-        data: [
-            ['Summit Maggu', 8],
-            ['Irina Sipratova', 3],
-            ['Chaimaa Hafez', 1],
-            ['Daniela Hlucha', 6],
-            ['Fernanda Bernstorff', 8]
-        ]
-    }]
-    } as any);
+    // Highcharts.chart('comp-chart-pie-roc' as any, {
+    //   chart: {
+    //     type: 'pie',
+    //     options3d: {
+    //         enabled: true,
+    //         alpha: 45
+    //     }
+    // },
+    // title: {
+    //     text: 'ROC Activity Report'
+    // },
+    // subtitle: {
+    //     text: ''
+    // },
+    // plotOptions: {
+    //     pie: {
+    //         innerSize: 100,
+    //         depth: 45
+    //     }
+    // },
+    // series: [{
+    //     name: 'Published Request',
+    //     data: [
+    //         ['Summit Maggu', 8],
+    //         ['Irina Sipratova', 3],
+    //         ['Chaimaa Hafez', 1],
+    //         ['Daniela Hlucha', 6],
+    //         ['Fernanda Bernstorff', 8]
+    //     ]
+    // }]
+    // } as any);
 
-    Highcharts.chart('comp-chart-pie-publisher' as any, {
-      chart: {
-        type: 'pie',
-        options3d: {
-            enabled: true,
-            alpha: 45
-        }
-    },
-    title: {
-        text: 'Publisher Activity Report'
-    },
-    subtitle: {
-        text: ''
-    },
-    plotOptions: {
-        pie: {
-            innerSize: 100,
-            depth: 45
-        }
-    },
-    series: [{
-        name: 'Published Request',
-        data: [
-            ['Tracy Stevens', 8],
-            ['Bernard Siefert', 5],
-            ['Francoise Latreille', 1],
-            ['Girish Chand Pandey', 2],
-            ['Fatma Elarini', 10]
-        ]
-    }]
-    } as any);
+    // Highcharts.chart('comp-chart-pie-publisher' as any, {
+    //   chart: {
+    //     type: 'pie',
+    //     options3d: {
+    //         enabled: true,
+    //         alpha: 45
+    //     }
+    // },
+    // title: {
+    //     text: 'Publisher Activity Report'
+    // },
+    // subtitle: {
+    //     text: ''
+    // },
+    // plotOptions: {
+    //     pie: {
+    //         innerSize: 100,
+    //         depth: 45
+    //     }
+    // },
+    // series: [{
+    //     name: 'Published Request',
+    //     data: [
+    //         ['Tracy Stevens', 8],
+    //         ['Bernard Siefert', 5],
+    //         ['Francoise Latreille', 1],
+    //         ['Girish Chand Pandey', 2],
+    //         ['Fatma Elarini', 10]
+    //     ]
+    // }]
+    // } as any);
   }
 
   private createChartLine(chartname:string,title:string, data:any): void {

@@ -61,7 +61,7 @@
         </div>
         <div *ngIf="year && selectedModule">
         <div class="row bg-white mx-0">
-            <div class="col-md-6 p-0 pt-2" *ngIf="selectedModule == modules.course || selectedModule == modules.session || selectedModule == modules.carousel || selectedModule == modules.backOffice || selectedModule == modules.sme">
+            <div class="col-md-6 p-0 pt-2" *ngIf="courceData.overall && (selectedModule == modules.course || selectedModule == modules.session || selectedModule == modules.carousel || selectedModule == modules.backOffice)">
                 <div class="col-md-6 col-sm-12 mb-2">
                     <div class="small-box cm-draft">
                         <div class="counter_dispaly">
@@ -156,11 +156,52 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6 p-0 pt-2" *ngIf="selectedModule == modules.sme">
+                <div class="col-md-6 col-sm-12 mb-2">
+                    <div class="small-box cm-draft">
+                        <div class="counter_dispaly">
+                            <div class="inner">
+                                <p>Total Request</p>
+                                <h3 class="font-weight-bolder">{{courceData.overall.total}}</h3>
+                            </div>
+                            <div class="icon">
+                                <img src="../../../../assets/images/icon/viewall.png" class="icon_img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 mb-2">
+                    <div class="small-box cm-learning">
+                        <div class="counter_dispaly">
+                            <div class="inner">
+                                <p>Approved</p>
+                                <h3 class="font-weight-bolder">{{courceData.overall.approve}}</h3>
+                            </div>
+                            <div class="icon">
+                                <img src="../../../../assets/images/icon/check.png" class="icon_img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 mb-2">
+                    <div class="small-box bac_yellow">
+                        <div class="counter_dispaly">
+                            <div class="inner">
+                                <p>Pending</p>
+                                <h3 class="font-weight-bolder">{{courceData.overall.pending}}</h3>
+                            </div>
+                            <div class="icon">
+                                <img src="../../../../assets/images/icon/pending.png" class="icon_img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-6">
                 <div id="comp-chart-column"></div>
             </div>
         </div>
-        <div class="row mt-2">
+        <div class="row mt-2" *ngIf="selectedModule == modules.course || selectedModule == modules.session">
             <div class="col-6">
                 <div id="chart-roc"></div>
             </div>
@@ -168,7 +209,7 @@
                 <div id="chart-publisher"></div>
             </div>
         </div>
-        <div class="row mt-2">
+        <div class="row mt-2" *ngIf="selectedModule == modules.course || selectedModule == modules.session">
             <div class="col-6" *ngIf="rocData && rocData.length > 0">
                 <div class="table-responsive table_height_scroll">
                     <table id="bootstrap-data-table-export " class="table table-striped table-bordered">
@@ -299,7 +340,7 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-2">
+        <div class="row mt-2" *ngIf="selectedModule == modules.course || selectedModule == modules.session">
             <div class="col-6">
                 <div class="table-responsive table_height_scroll">
                     <table class="table table-bordered">
@@ -342,7 +383,7 @@
                 <div id="comp-chart-line"></div>
             </div>
         </div>
-        <div class="row mt-2">
+        <div class="row mt-2" *ngIf="selectedModule == modules.course || selectedModule == modules.session">
             <div class="col-6">
                 <div id="comp-chart-roc-month"></div>
             </div>
@@ -350,7 +391,7 @@
                 <div id="comp-chart-publisher-month"></div>
             </div>
         </div>
-        <div class="row mt-2">
+        <div class="row mt-2" *ngIf="selectedModule == modules.course || selectedModule == modules.session">
             <div class="col-6">
                 <div class="table-responsive table_height_scroll">
                     <table class="table table-bordered">
@@ -385,14 +426,14 @@
                 <div id="comp-depart-activities"></div>
             </div>
         </div>
-        <div class="row mt-2">
+        <!-- <div class="row mt-2">
             <div class="col-6">
                 <div id="comp-chart-pie-roc"></div>
             </div>
             <div class="col-6">
                 <div id="comp-chart-pie-publisher"></div>
             </div>
-        </div>
+        </div> -->
     </div>
     </div>
 </div>
