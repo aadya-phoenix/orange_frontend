@@ -17,6 +17,7 @@ import { CommonService } from 'src/app/shared/services/common/common.service';
   styleUrls: ['./sessions-list.component.scss']
 })
 export class SessionsListComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
   courseSessionStatus = dataConstant.CourseSessionStatus;
   sessionList: any = [];
   sessionListToView: any = [];
@@ -53,6 +54,7 @@ export class SessionsListComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
   ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     
