@@ -178,6 +178,15 @@ export class DashboardComponent implements OnInit {
     // },1000);
   }
 
+  isOrangeLearningRelated(){
+    return this.modulesArray_tab1.filter((x: { showFavourite: any; }) => x.showFavourite).length > 0 ? true : false;
+  }
+  isLearningAndDevelopment(){
+    return this.modulesArray_tab2.filter((x: { showFavourite: any; }) => x.showFavourite).length > 0 ? true : false;
+  }
+  isPdlMemberTab(){
+    return this.modulesArray_tab3.filter((x: { showFavourite: any; }) => x.showFavourite).length > 0 ? true : false
+  }
   navigatetoPending(module:any){
     if(this.pendingFlag) return;
     if(module == this.modules.course){
