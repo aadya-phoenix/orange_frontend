@@ -28,14 +28,16 @@ export class PdltoolsComponent implements AfterViewInit {
   publisherData: any = [];
   modules = dataConstant.Modules;
   year = null;
-  selectedModule = null;
+  selectedModule: any;
 
   constructor(private commonService: CommonService, private pldtoolsService: PldtoolsService,  private modalService: NgbModal) {
     this.yearsList = this.commonService.LastFewYearsList();
+    this.year = this.yearsList[0].id;
     this.moduleList = dataConstant.ModuleList;
+    this.selectedModule = this.modules.course;
   }
   public ngAfterViewInit(): void {
-    
+    this.getNewData();
   }
 
   getNewData() {
