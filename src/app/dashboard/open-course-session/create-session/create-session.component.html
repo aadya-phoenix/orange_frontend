@@ -7,9 +7,9 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/second.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="breade_text_span1">Create new session </span>
+                        <span class="breade_text_span1">{{lableConstant.open_course_session}}</span>
                         <span class="divider"></span>
-                        <span class="breade_text_span">Request the creation of one or more sessions in Orange Learning.</span>
+                        <span class="breade_text_span">{{lableConstant.request_create_session}}</span>
                     </div>
                 </div>
             </div>
@@ -24,13 +24,13 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
                             <a [routerLink]="['/dashboard/sct']" class="text_white">Create new Session</a>
                         </li>
                         <li>
-                            <a  class="text_white">New request</a>
+                            <a  class="text_white">{{lableConstant.New_Request}}</a>
                         </li>
                     </ol>
                 </div>
@@ -43,12 +43,12 @@
 
                 <img src="../../../../assets/images/formm.png" class="form_img_req" />
                 <p class="mt-2 ml-2 mb-2 view-re_css">
-                <span>Complete this form and click on the submit button</span>
+                <span>{{lableConstant.Complete_this_form_and_click_on_the_submit_button}}</span>
             </p>
             </div>
             <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample"
                 role="button" aria-expanded="false" aria-controls="collapseExample">
-                View overall request status<img src="../../../../assets/images/Viewreq.png"
+                {{lableConstant.View_overall_request_status}}<img src="../../../../assets/images/Viewreq.png"
                     class="ml-2 w_40" />
             </a>
         </div>
@@ -59,14 +59,14 @@
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-12">
-                    <p class="indicate_css"><span class="text_red">*</span>Indicates required field</p>
+                    <p class="indicate_css"><span class="text_red">*</span>{{lableConstant.Indicates_required_field}}</p>
                     <div class="card">
                         <div class="card-body card_width">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Event Title <span class="text_red">* </span>
+                                            {{lableConstant.Event_Title}}<span class="text_red">* </span>
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                 data-bs-toggle="tooltip" placement="right"
@@ -80,7 +80,7 @@
                                              *ngIf="(createSessionForm.controls['title'].invalid && (createSessionForm.controls['title'].dirty || createSessionForm.controls['title'].touched)) || isSubmitted">
                                              <div class="error_message"
                                                  *ngIf="createSessionForm.controls['title'].errors?.required">
-                                                 Event Title cannot be blank
+                                                 {{lableConstant.Event_Title}} cannot be blank
                                              </div>
                                          </div>
         
@@ -90,7 +90,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Select your region <span class="text_red">* </span>
+                                            {{lableConstant.Select_your_region}} <span class="text_red">* </span>
                                         </label>
                                         <ng-select placeholder="Please Select Region" [items]="rocObj" bindLabel="name" [readonly]="session_status =='pending'"
                                             bindValue="id" formControlName="region_id" class="w_100">
@@ -99,7 +99,7 @@
                                               *ngIf="(createSessionForm.controls['region_id'].invalid && (createSessionForm.controls['region_id'].dirty || createSessionForm.controls['region_id'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="createSessionForm.controls['region_id'].errors?.required">
-                                                  Region cannot be blank
+                                                  {{lableConstant.Region_Name}} cannot be blank
                                               </div>
                                              </div>
                                         
@@ -127,12 +127,12 @@
                             <ng-template ngbPanelHeader>
                             <div class="card-header">
                                 <div class="heeader_button">
-                                    <strong _ngcontent-jet-c125=""> Session:{{i+1}} </strong>
+                                    <strong _ngcontent-jet-c125=""> {{lableConstant.Session}}:{{i+1}} </strong>
                                     <div class="button_div d-flex">
                                        
-                                        <button (click)="copySession(session)" class="btn btn-primary btn_creat_session1"><span class="fon_12">Copy Session</span>
+                                        <button (click)="copySession(session)" class="btn btn-primary btn_creat_session1"><span class="fon_12">{{lableConstant.Copy_session}}</span>
                                         </button>
-                                        <button (click)="addMetadata()" class="btn btn-success btn_creat_session1"><span class="fon_12">Add the Session </span>
+                                        <button (click)="addMetadata()" class="btn btn-success btn_creat_session1"><span class="fon_12">{{lableConstant.Add_the_session}}</span>
                                         </button>
                                         <button *ngIf="i > 0" (click)="removeMetadata(i)" class="btn btn-danger btn_creat_session1"><span class="fon_12">Remove</span>
                                         </button>
@@ -148,11 +148,11 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Delivery Method <span class="text_red">* </span>
+                                                {{lableConstant.Delivery_Method}}<span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        ngbTooltip="The delivery method selected will apply to all sessions detailed below.">
+                                                        ngbTooltip="{{lableConstant.delivery_method_selected}}">
                                                     </i>
                                                 </a>
                                             </label>
@@ -164,7 +164,7 @@
                                              *ngIf="(metadataArray.controls[i].controls['delivery_method'].invalid && (metadataArray.controls[i].controls['delivery_method'].dirty || metadataArray.controls[i].controls['delivery_method'].touched)) || isSubmitted">
                                              <div class="error_message"
                                                  *ngIf="metadataArray.controls[i].controls['delivery_method'].errors?.required">
-                                                 Delivery Method cannot be blank
+                                                 {{lableConstant.Delivery_Method}} cannot be blank
                                              </div>
                                          </div>
                                            
@@ -174,11 +174,11 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Country <span class="text_red">* </span>
+                                                {{lableConstant.Country}} <span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        ngbTooltip="Please select the country.">
+                                                        ngbTooltip="{{Please_select_the_country}}">
                                                     </i>
                                                 </a>
                                             </label>
@@ -190,7 +190,7 @@
                                              *ngIf="(metadataArray.controls[i].controls['country'].invalid && (metadataArray.controls[i].controls['country'].dirty || metadataArray.controls[i].controls['country'].touched)) || isSubmitted">
                                              <div class="error_message"
                                                  *ngIf="metadataArray.controls[i].controls['country'].errors?.required">
-                                                 Country cannot be blank
+                                                 {{lableConstant.Country}} cannot be blank
                                              </div>
                                             </div>
                                         </div>
@@ -199,7 +199,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Location
+                                               {{lableConstant.Location}}
                                             </label>
                                             <input type="text" class="form-control form_width"
                                                 placeholder="Enter Location" formControlName="location">
@@ -207,7 +207,7 @@
                                              *ngIf="(metadataArray.controls[i].controls['location'].invalid && (metadataArray.controls[i].controls['location'].dirty || metadataArray.controls[i].controls['location'].touched)) || isSubmitted">
                                              <div class="error_message"
                                                  *ngIf="metadataArray.controls[i].controls['location'].errors?.required">
-                                                 Location cannot be blank
+                                                 {{lableConstant.Location}} cannot be blank
                                              </div>
                                             </div>
                                             

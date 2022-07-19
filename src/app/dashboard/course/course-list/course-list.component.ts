@@ -180,7 +180,7 @@ export class CourseListComponent implements OnInit {
             element.titleByLang = this.courceService.getTText(element.title);
           });
           this.course_count = res.data.course_count;
-          this.showRecords(this.courseStatus.total);
+          this.showRecords(this.selectedStatus);
         }
         this.commonService.hideLoading();
       },

@@ -1,0 +1,37 @@
+<div class="card mb-0">
+    <a class="btn-close-icon" (click)="closeModal()"><i class="fa fa-times" aria-hidden="true"></i></a>
+    <div class="card-body">
+        <div class="login">
+            <div class="main_body">
+                <div class="main_box">
+                    <div class="text-center parent_main_box">
+                        <img src="../../../assets/images/Small_Logo_RGB.png" alt="logo" />
+                    </div>
+                    <div class="form-field">
+                        <h4 class="text-center mb-3 fon_40">
+                            <b>Switch User</b>
+                            <div class="fon_15">Sign in to start your session</div>
+                        </h4>
+                        <form [formGroup]="loginForm">
+                            <div class="form-group w-100">
+                                <label class="form-control-label">
+                                    User <span class="text_red">*
+                                    </span>
+                                </label>
+                                <ng-select placeholder="Please select email" [items]="emails" bindLabel="name"
+                                    bindValue="id" [multiple]=false class="w_100" formControlName="email">
+                                </ng-select>
+                                <div class="error_message"
+                                    *ngIf="(loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched || isSubmitted))">
+                                    User cannot be blank
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-default btn_login justify-content-center"
+                                value="Click Me" (click)="login()">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

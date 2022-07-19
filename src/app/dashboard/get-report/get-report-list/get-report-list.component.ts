@@ -67,6 +67,13 @@ export class GetReportListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.queryParams
+    .subscribe(params => {
+      if(params?.status){
+        this.selectedStatus = params?.status;
+      }
+    }
+  );
     this.refreshReports();
   }
   
@@ -122,7 +129,7 @@ export class GetReportListComponent implements OnInit {
         if (res.status === 1 && res.message === 'Success') {
           this.reportList = res.data.get_report;
           this.report_count = res.data.get_report_count;
-          this.showRecords(this.reportStatus.total);
+          this.showRecords(this.selectedStatus);
         }
       },
       (err: any) => {

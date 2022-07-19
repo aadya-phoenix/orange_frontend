@@ -126,7 +126,8 @@
                     <span class="bell_icon_number "><span>{{totalNotification}}</span></span>
 
                 </a>
-                <div class="dropdown-menu drop_show dropshow_main-cs " aria-labelledby="navbarDropdownMenuLink" *ngIf="totalNotification > 0">
+                <div class="dropdown-menu drop_show dropshow_main-cs " aria-labelledby="navbarDropdownMenuLink"
+                    *ngIf="totalNotification > 0">
                     <div class="text-box_div ">
                         <div class="nav_p ">
                             <div id="myDIV">
@@ -136,15 +137,19 @@
                                 </button>
                                 <button class="btn_active notifi_nowrap" *ngIf="pendingRequestCount.session_pending > 0"
                                     (click)="navigatetoPending(modules.session)">
-                                    You have {{pendingRequestCount.session_pending}} pending request in Open Course Session
+                                    You have {{pendingRequestCount.session_pending}} pending request in Open Course
+                                    Session
                                 </button>
-                                <button class="btn_active notifi_nowrap" *ngIf="pendingRequestCount.carousel_pending > 0"
+                                <button class="btn_active notifi_nowrap"
+                                    *ngIf="pendingRequestCount.carousel_pending > 0"
                                     (click)="navigatetoPending(modules.carousel)">
                                     You have {{pendingRequestCount.carousel_pending}} pending request in Carousel
                                 </button>
-                                <button class="btn_active notifi_nowrap" *ngIf="pendingRequestCount.office_role_pending > 0"
+                                <button class="btn_active notifi_nowrap"
+                                    *ngIf="pendingRequestCount.office_role_pending > 0"
                                     (click)="navigatetoPending(modules.backOffice)">
-                                    You have {{pendingRequestCount.office_role_pending}} pending request in Back Office Role
+                                    You have {{pendingRequestCount.office_role_pending}} pending request in Back Office
+                                    Role
                                 </button>
                             </div>
                         </div>
@@ -236,16 +241,13 @@
                             <!-- <span class="email ">Web Developer</span> -->
                         </div>
                     </div>
-                    <div class="text-box_div " (click)="logout() ">
-
-                        <div class="nav_p ">
-                            <div id="myDIV ">
-                                <button class="btn_active "><i class="fa fa-exchange mr-3 fon_16"
-                                        aria-hidden="true "></i><span class="fon_16">Switch User</span></button>
-                                <button class="btn_active"><i class=" fa fa-sign-out mr-3 fon_16"
+                    <div class="text-box_div">
+                        <div class="nav_p">
+                            <div id="myDIV">
+                                <button class="btn_active" (click)="switchUser()"><i class="fa fa-exchange mr-3 fon_16"
+                                        aria-hidden="true"></i><span class="fon_16">Switch User</span></button>
+                                <button class="btn_active" (click)="logout()"><i class=" fa fa-sign-out mr-3 fon_16"
                                         aria-hidden="true "></i><span class="fon_16">Logout</span></button>
-
-
                             </div>
                         </div>
                     </div>

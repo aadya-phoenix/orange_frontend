@@ -12,6 +12,8 @@ import { CourcesService } from '../shared/services/cources/cources.service';
 })
 export class DashboardComponent implements OnInit {
   modules = dataConstant.Modules;
+  isFavoutite = false;
+  activeTab = 'pills-home';
   pendingRequestCount = {
     carousel_pending: 0,
     course_pending: 0,
@@ -71,7 +73,7 @@ export class DashboardComponent implements OnInit {
     if (this.lableConstant) {
       this.modulesArray_tab1 = [
         {
-          id: 'course', name:'Create new cource',
+          id: 'course', name: 'Create new cource',
           routerLink: '/dashboard/cct', image: '../../assets/images/first.jpg',
           lableConstantModule: this.lableConstant.create_new_course,
           lableConstantCatalog: this.lableConstant.request_course_catalog,
@@ -80,7 +82,7 @@ export class DashboardComponent implements OnInit {
           pendingRequestCount: this.pendingRequestCount.course_pending,
           setFavouriteModule: this.modules.course,
         }, {
-          id: 'session', name:'Open cource session(s)',
+          id: 'session', name: 'Open cource session(s)',
           routerLink: '/dashboard/sct', image: '../../assets/images/Open course session.jpg ',
           lableConstantModule: this.lableConstant.open_course_session,
           lableConstantCatalog: this.lableConstant.request_create_session,
@@ -89,7 +91,7 @@ export class DashboardComponent implements OnInit {
           pendingRequestCount: this.pendingRequestCount.session_pending,
           setFavouriteModule: this.modules.session,
         }, {
-          id: 'corousel', name:'Promote on Carousel',
+          id: 'corousel', name: 'Promote on Carousel',
           routerLink: '/dashboard/olcarousel',
           image: '../../assets/images/Promote on Carousel.jpg',
           lableConstantModule: this.lableConstant.promote_on_carousel,
@@ -99,7 +101,7 @@ export class DashboardComponent implements OnInit {
           pendingRequestCount: this.pendingRequestCount.carousel_pending,
           setFavouriteModule: this.modules.carousel,
         }, {
-          id: 'back_office', name:'Request back-office role',
+          id: 'back_office', name: 'Request back-office role',
           routerLink: '/dashboard/back-office', image: '../../assets/images/4.jpg',
           lableConstantModule: this.lableConstant.request_back_office_role,
           lableConstantCatalog: this.lableConstant.request_specific_role,
@@ -111,16 +113,16 @@ export class DashboardComponent implements OnInit {
 
       this.modulesArray_tab2 = [
         {
-          id: 'design', name:'Design learning Module',
+          id: 'design', name: 'Design learning Module',
           routerLink: '/dashboard/designlearning', image: '../../assets/images/Design learning module.jpg',
           lableConstantModule: this.lableConstant.design_learning_module,
           lableConstantCatalog: this.lableConstant.request_learning_team,
-          navigateTo: '',
+          navigateTo: this.modules.design,
           favourite: false, showFavourite: true,
-          pendingRequestCount: '',
+          pendingRequestCount: 0,
           setFavouriteModule: this.modules.design,
         }, {
-          id: 'get_report', name:'Get a Report',
+          id: 'get_report', name: 'Get a Report',
           routerLink: '/dashboard/olreport', image: '../../assets/images/get a report.jpg',
           lableConstantModule: this.lableConstant.get_a_report,
           lableConstantCatalog: this.lableConstant.request_training_vc_report,
@@ -129,36 +131,36 @@ export class DashboardComponent implements OnInit {
           pendingRequestCount: this.pendingRequestCount.course_pending,
           setFavouriteModule: this.modules.getReport,
         }, {
-          id: 'dna', name:'Access Learning Needs Tool(DNA)',
+          id: 'dna', name: 'Access Learning Needs Tool(DNA)',
           routerLink: '/dashboard/dna', image: '../../assets/images/Access Learning Needs tool(DNA).jpg',
           lableConstantModule: this.lableConstant.access_learning_tool,
           lableConstantCatalog: this.lableConstant.dna_tool_feature,
-          navigateTo: '',
+          navigateTo:  this.modules.dna,
           favourite: false, showFavourite: true,
-          pendingRequestCount: '',
+          pendingRequestCount: 0,
           setFavouriteModule: this.modules.dna,
-        }, 
+        },
         {
-          id: 'sme', name:'SME Database',
+          id: 'sme', name: 'SME Database',
           routerLink: '/dashboard/smedb', image: '../../assets/images/SME_DB.jpg',
           lableConstantModule: this.lableConstant.sme_database,
           lableConstantCatalog: this.lableConstant.sme_learning_community_feature,
-          navigateTo: '',
+          navigateTo:  this.modules.sme,
           favourite: false, showFavourite: true,
-          pendingRequestCount: '',
+          pendingRequestCount: 0,
           setFavouriteModule: this.modules.sme,
         }
       ];
 
       this.modulesArray_tab3 = [{
-        id: 'vendor', name:'Manage Vendors',
+        id: 'vendor', name: 'Manage Vendors',
         routerLink: '/dashboard/vendormanagement',
         image: '../../assets/images/manage vendor.jpg',
         lableConstantModule: this.lableConstant.manage_vendors,
         lableConstantCatalog: this.lableConstant.view_manage_workshops,
-        navigateTo: '',
+        navigateTo:  this.modules.vendor,
         favourite: false, showFavourite: true,
-        pendingRequestCount: '',
+        pendingRequestCount: 0,
         setFavouriteModule: this.modules.vendor,
       }]
     }
@@ -178,31 +180,47 @@ export class DashboardComponent implements OnInit {
     // },1000);
   }
 
-  isOrangeLearningRelated(){
-    return this.modulesArray_tab1.filter((x: { showFavourite: any; }) => x.showFavourite).length > 0 ? true : false;
-  }
-  isLearningAndDevelopment(){
-    return this.modulesArray_tab2.filter((x: { showFavourite: any; }) => x.showFavourite).length > 0 ? true : false;
-  }
-  isPdlMemberTab(){
-    return this.modulesArray_tab3.filter((x: { showFavourite: any; }) => x.showFavourite).length > 0 ? true : false
-  }
-  navigatetoPending(module:any){
-    if(this.pendingFlag) return;
-    if(module == this.modules.course){
-    const status = this.isRequester ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
-    this.router.navigateByUrl(`/dashboard/cct?status=${status}`);
-   }
-   if(module == this.modules.carousel){
-    const status = this.isRequester ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
-    this.router.navigateByUrl(`/dashboard/olcarousel?status=${status}`);
-   }
-   if(module == this.modules.backOffice){
-    const status = this.isRequester ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
-    this.router.navigateByUrl(`/dashboard/back-office?status=${status}`);
-   }
+  activeTabChange(activeTab: string){
+    this.activeTab = activeTab;
   }
 
+  isOrangeLearningRelated() {
+    return this.modulesArray_tab1.filter((x: { showFavourite: any; }) => x.showFavourite).length > 0 ? true : false;
+  }
+  isLearningAndDevelopment() {
+    return this.modulesArray_tab2.filter((x: { showFavourite: any; }) => x.showFavourite).length > 0 ? true : false;
+  }
+  isPdlMemberTab() {
+    return this.modulesArray_tab3.filter((x: { showFavourite: any; }) => x.showFavourite).length > 0 ? true : false
+  }
+  navigatetoPending(module: any) {
+    if (this.pendingFlag) return;
+    if (module == this.modules.course) {
+      const status = this.getUserrole.id === this.RoleID.CourseRequester ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
+      this.router.navigateByUrl(`/dashboard/cct?status=${status}`);
+    }
+    if (module == this.modules.carousel) {
+      const status = this.getUserrole.id === this.RoleID.RequesterID ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
+      this.router.navigateByUrl(`/dashboard/olcarousel?status=${status}`);
+    }
+    if (module == this.modules.backOffice) {
+      const status = this.getUserrole.id === this.RoleID.RequesterID ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
+      this.router.navigateByUrl(`/dashboard/back-office?status=${status}`);
+    }
+    if (module == this.modules.session) {
+      const status = dataConstant.BackOfficeStatus.pending;
+      this.router.navigateByUrl(`/dashboard/sct?status=${status}`);
+    }
+    if (module == this.modules.design) {
+      const status = (this.getUserrole.id === this.RoleID.DesignTeam || this.getUserrole.id === this.RoleID.HeadOfDesign) ? dataConstant.BackOfficeStatus.pending : dataConstant.BackOfficeStatus.submitted
+      this.router.navigateByUrl(`/dashboard/designlearning?status=${status}`);
+    }
+    if (module == this.modules.getReport) {
+      const status = this.getUserrole.id === this.RoleID.RequesterID ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
+      this.router.navigateByUrl(`/dashboard/olreport?status=${status}`);
+    }
+  }
+  
   navigatetoPendingCarousel() {
     const status = this.isRequester ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
     this.router.navigateByUrl(`/dashboard/olcarousel?status=${status}`);
@@ -237,10 +255,10 @@ export class DashboardComponent implements OnInit {
     this.commonService.showLoading();
     this.courseService.setFavourites(body).subscribe(
       (res: any) => {
-        if(!res.status){
-          this.commonService.toastErrorMsg("Error", res.message);  
+        if (!res.status) {
+          this.commonService.toastErrorMsg("Error", res.message);
         }
-        else{
+        else {
           item.favourite = !item.favourite;
         }
         this.commonService.hideLoading();
@@ -305,15 +323,31 @@ export class DashboardComponent implements OnInit {
   }
 
   onlyFavourite() {
-   for(let module of this.modulesArray_tab1){
-     module.showFavourite = module.favourite;
+    this.isFavoutite = true;
+    this.activeTab = 'pills-home';
+    for (let module of this.modulesArray_tab1) {
+      module.showFavourite = module.favourite;
     }
-   for(let module2 of this.modulesArray_tab2){
-    module2.showFavourite = module2.favourite;
+    for (let module2 of this.modulesArray_tab2) {
+      module2.showFavourite = module2.favourite;
     }
-   for(let module3 of this.modulesArray_tab3){
-    module3.showFavourite = module3.favourite;
-   }
+    for (let module3 of this.modulesArray_tab3) {
+      module3.showFavourite = module3.favourite;
+    }
+  }
+
+  showAll() {
+    this.isFavoutite = false;
+    this.activeTab = 'pills-home';
+    this.modulesArray_tab1.forEach((element: { showFavourite: boolean; }) => {
+      element.showFavourite = true;
+    });
+    this.modulesArray_tab2.forEach((element: { showFavourite: boolean; })  => {
+      element.showFavourite = true;
+    });
+    this.modulesArray_tab3.forEach((element: { showFavourite: boolean; })  => {
+      element.showFavourite = true;
+    });
   }
 
   getpendingCourses() {
@@ -323,21 +357,21 @@ export class DashboardComponent implements OnInit {
         this.commonService.hideLoading();
         this.pendingRequestCount = res.data;
         this.modulesArray_tab1.forEach((element: any) => {
-          if(element.id == 'course'){
+          if (element.id == 'course') {
             element.pendingRequestCount = this.pendingRequestCount.course_pending;
           }
-          if(element.id == 'session'){
+          if (element.id == 'session') {
             element.pendingRequestCount = this.pendingRequestCount.session_pending;
           }
-          if(element.id == 'corousel'){
+          if (element.id == 'corousel') {
             element.pendingRequestCount = this.pendingRequestCount.carousel_pending;
           }
-          if(element.id == 'back_office'){
+          if (element.id == 'back_office') {
             element.pendingRequestCount = this.pendingRequestCount.office_role_pending;
           }
         });
         this.modulesArray_tab2.forEach((element: any) => {
-          if(element.id == 'get_report'){
+          if (element.id == 'get_report') {
             element.pendingRequestCount = this.pendingRequestCount.course_pending;
           }
         });
@@ -349,11 +383,11 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  sendEmail(name:any) {
+  sendEmail(name: any) {
     //  console.log("link", name)
-  /*  var email = '';
-    var subject = '';
-    var emailBody = this.baseUrl + link;
-    window.location.href = "mailto:" + email + "?subject=" + subject + "&body=" + emailBody; */
+    /*  var email = '';
+      var subject = '';
+      var emailBody = this.baseUrl + link;
+      window.location.href = "mailto:" + email + "?subject=" + subject + "&body=" + emailBody; */
   }
 }

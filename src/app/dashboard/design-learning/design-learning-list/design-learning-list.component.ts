@@ -25,7 +25,7 @@ export class DesignLearningListComponent implements OnInit {
   RoleID = dataConstant.RoleID;
   designListToShow:any=[];
   designList:any =[];
-  selectedStatus:any;
+  selectedStatus= this.designStatus.total;
   design_count:any={
     closed: 0,
     draft: 0,
@@ -63,6 +63,13 @@ export class DesignLearningListComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.route.queryParams
+    .subscribe(params => {
+      if(params?.status){
+        this.selectedStatus = params?.status;
+      }
+    }
+  );
     this.refreshModules();
   }
 
@@ -90,7 +97,7 @@ export class DesignLearningListComponent implements OnInit {
             }
            });
           this.design_count = res.data.new_learning_count;
-          this.showRecords(this.designStatus.total);
+          this.showRecords(this.selectedStatus);
         }
         this.commonService.hideLoading();
       },
