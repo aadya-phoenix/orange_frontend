@@ -12,6 +12,7 @@ import { NgbdSortableHeader } from './directives/sorting.directive';
 
 import { RouterModule } from '@angular/router';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { SwitchUserComponent } from '../dashboard/switch-user/switch-user.component';
 
 
 
@@ -29,10 +30,12 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     FormsModule,
     ReactiveFormsModule,
     Ng2SearchPipeModule,
+    NgSelectModule,
     RouterModule,
-    NgxDropzoneModule
-    //NgbModule,
+    NgxDropzoneModule,
+    NgbModule,
   ],
+  entryComponents:[SwitchUserComponent],
   exports: [
     InputfieldDirective,
     HeaderComponent,
@@ -43,8 +46,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     PriceDirective,
     Ng2SearchPipeModule,
     NgbdSortableHeader,
-    
-    //NgSelectModule
+    NgSelectModule
   ],
   providers: [],
 })

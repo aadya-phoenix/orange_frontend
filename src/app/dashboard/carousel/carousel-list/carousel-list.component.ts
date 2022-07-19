@@ -135,7 +135,7 @@ export class CarouselListComponent implements OnInit {
         if (res.status === 1 && res.message === 'Success') {
           this.carouselList = res.data.carousel;
           this.carousel_count = res.data.carousel_count;
-          this.showRecords(this.carouselStatus.total);
+          this.showRecords(this.selectedStatus);
         }
       },
       (err: any) => {

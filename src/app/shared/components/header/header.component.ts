@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SwitchUserComponent } from 'src/app/dashboard/switch-user/switch-user.component';
 import { dataConstant } from '../../constant/dataConstant';
 import { AuthenticationService } from '../../services/auth/authentication.service';
 import { CommonService } from '../../services/common/common.service';
@@ -30,6 +32,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authService: AuthenticationService,
     private commonService: CommonService,
+    private modalService: NgbModal,
     private router: Router) {
     this.getUserrole = this.authService.getRolefromlocal();
     //this.getUserrole = JSON.parse(this.authService.getRolefromlocal());
@@ -123,6 +126,13 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authService.logOut();
     localStorage.removeItem('userName');
+  }
+
+  switchUser(){
+      const modalRef = this.modalService.open(SwitchUserComponent, {
+        centered: true,
+        windowClass: 'alert-popup',
+      });
   }
 
 }
