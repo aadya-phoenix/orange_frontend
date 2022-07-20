@@ -45,5 +45,14 @@ export class PldtoolsService {
     const url = `/api/${this.apiVersion}/dashboard-report/sme-database`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
+  getLearningModuleData(data: any, id:number) {
+    const url = `/api/${this.apiVersion}/dashboard-report/${id}/digital-learning`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  getDNAModuleData(data: any, id:number) {
+    const url = `/api/${this.apiVersion}/dashboard-report/${id}/digital-learning`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
 
 }

@@ -396,8 +396,7 @@ export class SmedbCreateComponent implements OnInit {
             other_language: new FormControl(''),
             gender_voice: new FormControl('', [Validators.required]),
             voice_recording: [],
-            previous_experience: new FormControl('', [Validators.required]),
-            comment: new FormControl('', [Validators.required]),
+            previous_experience: new FormControl('', [Validators.required])
           });
         }
       }
