@@ -18,7 +18,7 @@
                    <div *ngIf="(forwardDesignForm.controls['status'].invalid && (forwardDesignForm.controls['status'].dirty || forwardDesignForm.controls['status'].touched)) || isSubmitted ">
                         <div class="error_message"
                             *ngIf="forwardDesignForm.controls['status'].errors?.required">
-                            Status cannot be blank
+                            {{lableConstant.Status}} cannot be blank
                         </div>
                     </div>
                 </div>
@@ -44,13 +44,13 @@
               
             <div class="col-sm-12">
                 <div class="form-group">
-                  <label>Comment <span class="text-danger-ligth" *ngIf="status == designStatus.reject">* </span></label>
+                  <label>{{lableConstant.Comments}} <span class="text-danger-ligth" *ngIf="status == designStatus.reject">* </span></label>
                   <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"
                   formControlName="status_comment"></textarea>
                    <div *ngIf="(forwardDesignForm.controls['status_comment'].invalid &&     (forwardDesignForm.controls['status_comment'].dirty || forwardDesignForm.controls['status_comment'].touched)) || isSubmitted ">
                         <div class="error_message"
                             *ngIf="forwardDesignForm.controls['status_comment'].errors?.required">
-                            Comments cannot be blank
+                            {{lableConstant.Comments}} cannot be blank
                         </div>
                     </div>
                 </div>

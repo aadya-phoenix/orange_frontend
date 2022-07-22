@@ -16,6 +16,7 @@ export class DesignLearningForwardComponent implements OnInit {
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
 
+  lableConstant: any = { french: {}, english: {} };
   designId:number = 0;
   forwardDesignForm: FormGroup;
   isSubmitted = false;
@@ -38,6 +39,7 @@ export class DesignLearningForwardComponent implements OnInit {
     private designService: DesignLearningService,
     private commonService: CommonService,
     private router: Router) {
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
       this.forwardDesignForm = this.formBuilder.group({
         status_comment: new FormControl('', []),
       });
@@ -72,6 +74,10 @@ export class DesignLearningForwardComponent implements OnInit {
     }
     if(this.status == this.designStatus.reject){
       this.title = 'Reject Request';
+      this.forwardDesignForm.removeControl('status');
+    }
+    if(this.status == this.designStatus.onHold){
+      this.title = 'On Hold Request';
       this.forwardDesignForm.removeControl('status');
     }
     if(this.status == this.designStatus.approve){
@@ -112,12 +118,15 @@ export class DesignLearningForwardComponent implements OnInit {
          });
       }
 
-    if(this.status == this.designStatus.reject  || 
+    if(this.status == this.designStatus.reject  || this.status == this.designStatus.onHold ||
       this.status == this.designStatus.change || this.status == this.designStatus.feedback){
       const body = this.forwardDesignForm.value;
       body.new_learning_id = this.designId;
       this.status == this.designStatus.reject  ?
       body.status = this.status : '';
+      if(this.status == this.designStatus.onHold){
+        body.status = this.status;
+      }
       this.commonService.showLoading();
       this.designService.changeStatus(body).subscribe(
         (res: any) => {

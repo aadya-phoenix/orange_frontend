@@ -10,7 +10,7 @@ import { DnaService } from 'src/app/shared/services/dna/dna.service';
   styleUrls: ['./dna-complete-report.component.scss']
 })
 export class DnaCompleteReportComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   dnaStatus = dataConstant.DnaStatus;
   selectedStatus = this.dnaStatus.total;
   dateFormate = dataConstant.dateFormate;
@@ -73,7 +73,9 @@ export class DnaCompleteReportComponent implements OnInit {
     private dnaService:DnaService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -81,8 +83,6 @@ export class DnaCompleteReportComponent implements OnInit {
       this.trackerId = Id ? parseInt(Id) : 0;
       this.getTrackerList();
       this.getLearningList(this.trackerId);
-      let tracker = this.trackerObj.find((x: any) => x.id == this.trackerId);
-      tracker.type_name == 'France' ?  this.isFrance = true : this.isFrance = false;
     });
     
   }
@@ -104,6 +104,8 @@ export class DnaCompleteReportComponent implements OnInit {
   getTrackerList(){
     this.dnaService.getTrackerList().subscribe((res:any)=>{
       this.trackerObj = res.data.tracker;
+      let tracker = this.trackerObj.find((x: any) => x.id == this.trackerId);
+      tracker.type_name == 'France' ?  this.isFrance = true : this.isFrance = false;
     },
     err=>{
     });

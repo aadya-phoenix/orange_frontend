@@ -18,7 +18,7 @@ import { GetReportCloseOnUpdateComponent } from '../get-report-close-on-update/g
   styleUrls: ['./get-report-create.component.scss']
 })
 export class GetReportCreateComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   today = new Date();
   minStartDate = {};
   selectedStartDate :any={};
@@ -83,6 +83,7 @@ export class GetReportCreateComponent implements OnInit {
     private generalDrpdownsService: GeneralDropdownsService,
     private courseService:CourcesService,
     private datepipe:DatePipe) {
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.minStartDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
 
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();

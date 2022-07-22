@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DnaService } from 'src/app/shared/services/dna/dna.service';
 import { GeneralDropdownsService } from 'src/app/shared/services/general-dropdowns/general-dropdowns.service';
@@ -13,7 +14,7 @@ import { GetReportService } from 'src/app/shared/services/get-report/get-report.
   styleUrls: ['./dna-learning-form.component.scss']
 })
 export class DnaLearningFormComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   public modalType: any;
   createDnaForm: FormGroup;
   isFrance = false;
@@ -50,6 +51,7 @@ export class DnaLearningFormComponent implements OnInit {
     private dnaService:DnaService,
     private commonService: CommonService,
     private router:Router) { 
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.createDnaForm = this.formBuilder.group({
       learning_id:new FormControl('', []),
       title: new FormControl('', []),

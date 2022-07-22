@@ -17,7 +17,7 @@ import { DesignLearningHistoryComponent } from '../design-learning-history/desig
   styleUrls: ['./design-learning-complete-report.component.scss']
 })
 export class DesignLearningCompleteReportComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   dateFormate = dataConstant.dateFormate;
   dateTimeFormate = dataConstant.dateTimeFormate;
   designStatus = dataConstant.DesignStatus;
@@ -57,6 +57,7 @@ export class DesignLearningCompleteReportComponent implements OnInit {
     private designService: DesignLearningService,
     private authService: AuthenticationService,
   ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.filterForm = this.fb.group({
       start_date: new FormControl('', []),
       end_date: new FormControl('', []),

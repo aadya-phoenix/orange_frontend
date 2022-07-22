@@ -11,7 +11,7 @@ import { GeneralDropdownsService } from 'src/app/shared/services/general-dropdow
   styleUrls: ['./dna-view.component.scss']
 })
 export class DnaViewComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   dnaStatus = dataConstant.DnaStatus;
   selectedStatus = this.dnaStatus.total;
   learningList: any = [];
@@ -40,7 +40,9 @@ export class DnaViewComponent implements OnInit {
     private generalDrpdownsService: GeneralDropdownsService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {

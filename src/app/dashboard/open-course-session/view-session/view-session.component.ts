@@ -16,7 +16,7 @@ const urlregex = dataConstant.UrlPattern;
   styleUrls: ['./view-session.component.scss']
 })
 export class ViewSessionComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   public publishForm!: FormGroup;
   
   id = 0;
@@ -43,6 +43,7 @@ export class ViewSessionComponent implements OnInit {
     private router: Router,
     private datepipe: DatePipe
   ) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
   }
 

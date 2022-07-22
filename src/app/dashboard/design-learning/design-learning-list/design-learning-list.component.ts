@@ -18,7 +18,7 @@ import { DesignLearningRatingComponent } from '../design-learning-rating/design-
   styleUrls: ['./design-learning-list.component.scss']
 })
 export class DesignLearningListComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   dateFormate = dataConstant.dateFormate;
   dateTimeFormate = dataConstant.dateTimeFormate;
   designStatus = dataConstant.DesignStatus;
@@ -56,6 +56,7 @@ export class DesignLearningListComponent implements OnInit {
     private designService: DesignLearningService,
     private authService: AuthenticationService,
   ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.getUserrole = this.authService.getRolefromlocal();
     this.isDesigner = this.getUserrole.id === this.RoleID.DesignTeam;

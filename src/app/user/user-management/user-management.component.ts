@@ -1,6 +1,7 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
@@ -13,6 +14,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./user-management.component.scss']
 })
 export class UserManagementComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
 
   userList:any=[];
   userListToShow:any=[];
@@ -36,7 +38,9 @@ export class UserManagementComponent implements OnInit {
     private userManageService:UserManageService,
     private courceService:CourcesService,
     private commonService:CommonService,
-    private router: Router) { }
+    private router: Router) {
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+     }
 
   ngOnInit(): void {
     this.getUsers();

@@ -17,7 +17,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./design-learning-create.component.scss']
 })
 export class DesignLearningCreateComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   createDesignForm: FormGroup;
   dateFormate = dataConstant.dateFormate;
   designStatus = dataConstant.DesignStatus;
@@ -58,6 +58,7 @@ export class DesignLearningCreateComponent implements OnInit {
     private route: ActivatedRoute,
     private datepipe:DatePipe
   ) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.getUserrole = this.authService.getRolefromlocal();
     this.isDesigner = this.getUserrole.id === this.RoleID.DesignTeam;

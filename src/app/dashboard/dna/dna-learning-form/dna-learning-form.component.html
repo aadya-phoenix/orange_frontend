@@ -8,10 +8,7 @@
                     <div class="d-flex flex-column ml-3">
                         <span class="breade_text_span1">Digital learning Needs Analysis</span>
                         <span class="divider"></span>
-                        <span class="breade_text_span">Digital learning Needs Analysis (DNA) is a tool that gathers
-                            learning needs from managers and helps align development needs with the overall business
-                            strategy. DNA also helps PD&L team to analyse and plan our learning resources
-                            efficiently.</span>
+                        <span class="breade_text_span">{{lableConstant.dna_tool_feature}}</span>
                     </div>
                 </div>
             </div>
@@ -26,13 +23,13 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
                             <a [routerLink]="['/dashboard/dna']" class="text_white span_dis">DNA</a>
                         </li>
                         <li>
-                            <span class="text_white span_dis">add New Learning</span>
+                            <span class="text_white span_dis">Add New Learning</span>
                         </li>
                     </ol>
                 </div>
@@ -79,7 +76,7 @@
                     <div class="col-sm-12" *ngIf="isDescription">
                         <div class="form-group">
                             <label class="form-control-label">
-                                Description
+                                {{lableConstant.Description}}
                             </label>
                             <input type="text" class="form-control form_width" formControlName="description">
                             <!--  <div
@@ -126,14 +123,14 @@
                     <div class="col-sm-4" *ngIf="!isFrance">
                         <div class="form-group">
                             <label class="form-control-label">
-                                Management Code
+                                {{lableConstant.Management_Code}}
                             </label>
                             <input type="text" class="form-control form_width" formControlName="management_code">
                             <div
                                 *ngIf="(createDnaForm.controls['management_code'].invalid && (createDnaForm.controls['management_code'].dirty || createDnaForm.controls['management_code'].touched)) || isSubmitted">
                                 <div class="error_message"
                                     *ngIf="createDnaForm.controls['management_code'].errors?.required">
-                                    Management Code can not be blank
+                                    {{lableConstant.Management_Code}} can not be blank
                                 </div>
                             </div>
                         </div>
@@ -249,7 +246,7 @@
             </button>
             <button class="btn btn-secondary mr-1" type="button" (click)="close()">
                 <i aria-hidden="true" class="fa fa-times">
-                </i> <span class="pl-1">Close</span>
+                </i> <span class="pl-1">{{lableConstant.Close}}</span>
             </button>
         </div>
     </div>

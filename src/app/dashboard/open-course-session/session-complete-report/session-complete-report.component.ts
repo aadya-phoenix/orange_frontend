@@ -18,7 +18,7 @@ import { SessionHistoryComponent } from '../session-history/session-history.comp
   styleUrls: ['./session-complete-report.component.scss']
 })
 export class SessionCompleteReportComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   public filterForm!: FormGroup;
   dateTimeFormate = dataConstant.dateTimeFormate;
   courseSessionStatus = dataConstant.CourseSessionStatus;
@@ -61,6 +61,7 @@ export class SessionCompleteReportComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router
   ) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
 

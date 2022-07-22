@@ -17,7 +17,7 @@ import { GetReportHistoryComponent } from '../get-report-history/get-report-hist
   styleUrls: ['./get-report-list.component.scss']
 })
 export class GetReportListComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   report_id:number=0;
   reportStatus= dataConstant.GetReportStatus;
   attachUrl = dataConstant.ImageUrl;
@@ -59,6 +59,8 @@ export class GetReportListComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.isRoc = this.getUserrole.id === this.RoleID.Roc;

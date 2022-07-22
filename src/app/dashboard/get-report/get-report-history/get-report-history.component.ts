@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { GetReportService } from 'src/app/shared/services/get-report/get-report.service';
 
@@ -12,7 +13,11 @@ export class GetReportHistoryComponent implements OnInit {
 
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
-  constructor(private modalService: NgbActiveModal, private getReportService: GetReportService,  private commonService: CommonService) { }
+  
+  lableConstant: any = { french: {}, english: {} };
+  constructor(private modalService: NgbActiveModal, private getReportService: GetReportService,  private commonService: CommonService) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+   }
   public historyList: any;
   public objectDetail: any;
   public modalType: any;

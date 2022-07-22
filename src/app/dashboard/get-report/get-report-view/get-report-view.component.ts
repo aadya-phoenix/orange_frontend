@@ -15,7 +15,7 @@ import { GetReportTransferToOtherRocComponent } from '../get-report-transfer-to-
   styleUrls: ['./get-report-view.component.scss']
 })
 export class GetReportViewComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   id = 0;
   requestdata: any = {};
   getUserrole: any = {};
@@ -35,6 +35,7 @@ export class GetReportViewComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router
   ) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.isRoc = this.getUserrole.id == this.RoleID.Roc;

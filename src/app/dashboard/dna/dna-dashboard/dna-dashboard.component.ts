@@ -11,7 +11,7 @@ import { DnaService } from 'src/app/shared/services/dna/dna.service';
   styleUrls: ['./dna-dashboard.component.scss']
 })
 export class DnaDashboardComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   dateFormate = dataConstant.dateFormate;
   RoleID = dataConstant.RoleID;
   isRom = false;
@@ -32,6 +32,7 @@ export class DnaDashboardComponent implements OnInit {
     private commonService:CommonService,
     private router:Router
   ) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.isRom = this.getUserrole.id == this.RoleID.Rom;
     this.isBussinessConsultant = this.getUserrole.id == this.RoleID.BussinessConsultant;

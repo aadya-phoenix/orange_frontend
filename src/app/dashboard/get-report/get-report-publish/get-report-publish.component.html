@@ -20,7 +20,7 @@
                 <div class="form-group">
                     
                     <label class="form-control-label">
-                        Comments <span class="text-danger-ligth">* </span>
+                        {{lableConstant.Comments}} <span class="text-danger-ligth">* </span>
                     </label>
                     <textarea class="form-control form_width-textarea mb-2" maxlength="500" rows="3"
                         formControlName="status_comment" placeholder="Enter Comments" (change)="valueChange()"></textarea>
@@ -30,7 +30,7 @@
                         *ngIf="(publishGetReportForm.controls['status_comment'].invalid && (publishGetReportForm.controls['status_comment'].dirty || publishGetReportForm.controls['status_comment'].touched)) || isSubmitted ">
                         <div class="error_message"
                             *ngIf="publishGetReportForm.controls['status_comment'].errors?.required">
-                            Comments cannot be blank
+                            {{lableConstant.Comments}} cannot be blank
                         </div>
                     </div>
 

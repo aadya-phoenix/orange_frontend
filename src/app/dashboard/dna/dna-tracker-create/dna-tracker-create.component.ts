@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./dna-tracker-create.component.scss']
 })
 export class DnaTrackerCreateComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
   dateFormate = dataConstant.dateFormate;
   learningNeedForm: FormGroup;
   languageObj:any=[];
@@ -34,6 +35,7 @@ export class DnaTrackerCreateComponent implements OnInit {
     private route:ActivatedRoute,
     private router:Router,
     private datepipe:DatePipe) {
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
       this.learningNeedForm = this.formBuilder.group({
         title: new FormControl('', [Validators.required]),
         description: new FormControl('', []),

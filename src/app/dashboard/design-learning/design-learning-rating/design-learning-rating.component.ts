@@ -16,6 +16,8 @@ import { DesignLearningService } from 'src/app/shared/services/design-learning/d
 export class DesignLearningRatingComponent implements OnInit {
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
+
+  lableConstant: any = { french: {}, english: {} };
   ratingDesignForm: FormGroup;
   isSubmitted = false;
   isSelected = false;
@@ -39,6 +41,7 @@ export class DesignLearningRatingComponent implements OnInit {
   public statusObj: any = [
     { id: 'design_start', name: 'Design Started' },
     { id: 'development_start', name: 'Development Started' },
+    { id: 'on_hold', name: 'On Hold' },
     { id: 'close', name: 'Close Request' },
   ];
   constructor(private formBuilder: FormBuilder,
@@ -47,6 +50,7 @@ export class DesignLearningRatingComponent implements OnInit {
     private commonService: CommonService,
     private authService: AuthenticationService,
     private router: Router) {
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
       this.ratingDesignForm = this.formBuilder.group({
         status_comment: new FormControl('', [Validators.required]),
       });

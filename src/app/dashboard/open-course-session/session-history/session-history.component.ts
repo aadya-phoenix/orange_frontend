@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourseSessionService } from 'src/app/shared/services/course_session/course-session.service';
 
@@ -11,9 +12,12 @@ import { CourseSessionService } from 'src/app/shared/services/course_session/cou
 export class SessionHistoryComponent implements OnInit {
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
+  lableConstant: any = { french: {}, english: {} };
   constructor(
   private modalService: NgbActiveModal, private courseSessionService: CourseSessionService,
-  private commonService: CommonService) { }
+  private commonService: CommonService) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+  }
   public historyList: any;
   public objectDetail: any;
   public modalType: any;

@@ -8,11 +8,7 @@
                     <div class="d-flex flex-column ml-3">
                         <span class="breade_text_span1">Digital learning Needs Analysis</span>
                         <span class="divider"></span>
-                        <span class="breade_text_span">Digital learning Needs Analysis (DNA)
-                            is a tool that gathers
-                            learning needs from managers and helps align development needs with the overall business
-                            strategy. DNA also helps PD&L team to analyse and plan our learning resources
-                            efficiently.</span>
+                        <span class="breade_text_span">{{lableConstant.dna_tool_feature}}</span>
                     </div>
                 </div>
             </div>
@@ -27,7 +23,7 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
                             <span class="text_white span_dis">DNA</span>
@@ -114,7 +110,7 @@
                                                                     <img
                                                                         src="../../../../assets/images/icon/pending.png" />
                                                                 </div>
-                                                                <p>Pending</p>
+                                                                <p>{{lableConstant.pending}}</p>
                                                             </div>
                                                             <span
                                                                 class="number_css">{{rom_count.pending?rom_count.pending:0}}</span>
@@ -168,7 +164,7 @@
                                                                     <img
                                                                         src="../../../../assets/images/icon/pending.png" />
                                                                 </div>
-                                                                <p>Pending</p>
+                                                                <p>{{lableConstant.pending}}</p>
                                                             </div>
                                                             <span
                                                                 class="number_css ">{{business_consultant_count.pending
@@ -281,7 +277,7 @@
                                                      <div class="fa-icons-des bac_yellow">
                                                          <img src="../../../../assets/images/icon/pending.png" />
                                                      </div>
-                                                     <p>Pending</p>
+                                                     <p>{{lableConstant.pending}}</p>
                                                  </div>
                                                  <span
                                                      class="number_css">{{domain_training.pending?domain_training.pending:0}}</span>
@@ -295,7 +291,7 @@
                                                         <div class="fa-icons-des cm-learning">
                                                             <img src="../../../../assets/images/icon/check.png" />
                                                         </div>
-                                                        <p>Requets Closed</p>
+                                                        <p>Requests Closed</p>
                                                     </div>
                                                     <span
                                                         class="number_css">{{domain_training.close?domain_training.close:0}}</span>
@@ -349,7 +345,7 @@
         
                                                     <p>Cloud</p>
                                                 </div>
-                                                <span class="number_css tot_left">{{ 0}}</span>
+                                                <span class="number_css tot_left">{{domain_wise_count['Cloud']}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -363,7 +359,8 @@
                                                     <p>Compétences B2B</p>
                                                 </div>
                                                 <span
-                                                    class="number_css ">{{ 0}}</span>
+                                                    class="number_css ">
+                                                    {{domain_wise_count['Compétences B2B']}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -377,7 +374,7 @@
                                                     <p>Compétences managériales</p>
                                                 </div>
                                                 <span
-                                                    class="number_css for_left">{{0}}</span>
+                                                    class="number_css for_left"> {{domain_wise_count['Compétences managériales']}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -391,7 +388,68 @@
                                                     <p>Compétences transverses</p>
                                                 </div>
                                                 <span
-                                                    class="number_css tot_left_pa">{{  0 }}</span>
+                                                    class="number_css tot_left_pa">
+                                                    {{                                       domain_wise_count['Compétences transverses'] }}</span>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-3">
+                                        <div class="Course_icon_child">
+                                            <div class="alig_dashicon">
+                                                <div class="sub-child-dashicon">
+                                                    <div class="fa-icons-des cm-reject">
+                                                        <img src="../../../../assets/images/icon/group.png" />
+                                                    </div>
+                                                    <p>Cyber sécurité</p>
+                                                </div>
+                                                <span
+                                                    class="number_css tot_left_pa">
+                                                    {{                                       domain_wise_count['Cyber sécurité'] }}</span>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-3">
+                                        <div class="Course_icon_child">
+                                            <div class="alig_dashicon">
+                                                <div class="sub-child-dashicon">
+                                                    <div class="fa-icons-des cm-reject">
+                                                        <img src="../../../../assets/images/icon/group.png" />
+                                                    </div>
+                                                    <p>Data Analyse & AI</p>
+                                                </div>
+                                                <span
+                                                    class="number_css tot_left_pa">
+                                                    {{                                       domain_wise_count['Data Analyse & AI'] }}</span>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-3">
+                                        <div class="Course_icon_child">
+                                            <div class="alig_dashicon">
+                                                <div class="sub-child-dashicon">
+                                                    <div class="fa-icons-des cm-reject">
+                                                        <img src="../../../../assets/images/icon/group.png" />
+                                                    </div>
+                                                    <p>Software & API</p>
+                                                </div>
+                                                <span
+                                                    class="number_css tot_left_pa">
+                                                    {{                                       domain_wise_count['Software & API'] }}</span>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-3">
+                                        <div class="Course_icon_child">
+                                            <div class="alig_dashicon">
+                                                <div class="sub-child-dashicon">
+                                                    <div class="fa-icons-des cm-reject">
+                                                        <img src="../../../../assets/images/icon/group.png" />
+                                                    </div>
+                                                    <p>Virtualisation / SDN</p>
+                                                </div>
+                                                <span
+                                                    class="number_css tot_left_pa">
+                                                    {{                                       domain_wise_count['Virtualisation / SDN'] }}</span>
                                             </div>
                                         </div>
                                     </div> 
@@ -423,7 +481,7 @@
                                                 Orange Learning Training Name
                                             </th>
                                             <th sortable="user_name">
-                                                Learning Type
+                                                {{lableConstant.Learning_Type}}
                                             </th>
                                             <th sortable="request_id">
                                                 Training Provider
@@ -453,10 +511,10 @@
                                                 Location of Training
                                             </th>
                                             <th sortable="request_id" *ngIf="!isFrance">
-                                                Management Code
+                                                {{lableConstant.Management_Code}}
                                             </th>
                                             <th sortable="request_id">
-                                                Business Unit
+                                                {{lableConstant.Business_Unit}}
                                             </th>
                                             <th sortable="request_id">
                                                 Other Business Unit/ M1 Level
@@ -465,14 +523,14 @@
                                             <th class="text-center" *ngIf="!isFrance">Business Conultant</th>
                                             <th class="text-center" *ngIf="!isFrance">Business Conultant Status</th>
                                             <th sortable="first_name" *ngIf="!isFrance">
-                                                Comments
+                                               {{ lableConstant.Comments}}
                                             </th>
                                             <th sortable="created_at" *ngIf="!isFrance">
                                                 ROM
                                             </th>
                                             <th class="text-center">Created Date</th>
                                             <th class="text-center" *ngIf="isFrance">Domain Training</th>
-                                            <th class="text-center">Status</th>
+                                            <th class="text-center">{{lableConstant.Status}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
