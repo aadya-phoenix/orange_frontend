@@ -70,7 +70,7 @@
                                             <a>
                                                 <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                 data-bs-toggle="tooltip" placement="right"
-                                                ngbTooltip="Provide the course name as it appears in the Orange Learning catalog.">
+                                                ngbTooltip="{{lableConstant.Provide_course_appears_catalog}}">
                                                 </i>
                                             </a>
                                         </label>
@@ -178,7 +178,7 @@
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        ngbTooltip="{{Please_select_the_country}}">
+                                                        ngbTooltip="{{lableConstant.Please_select_the_country}}">
                                                     </i>
                                                 </a>
                                             </label>
@@ -217,7 +217,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Instructor Name
+                                                {{lableConstant.Instructor_Name}}
                                             </label>
                                             <input type="text" class="form-control form_width"
                                                 placeholder="Enter Instructor Name" formControlName="instructor_name">
@@ -225,17 +225,17 @@
                                               *ngIf="(metadataArray.controls[i].controls['instructor_name'].invalid && (metadataArray.controls[i].controls['instructor_name'].dirty || metadataArray.controls[i].controls['instructor_name'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['instructor_name'].errors?.required">
-                                                  Instructor Name cannot be blank
+                                                  {{lableConstant.Instructor_Name}} cannot be blank
                                               </div>
                                              </div>
                                             
                                         </div>
                                     </div>
-                                    <!--col-->
-                                    <div class="col-sm-12">
+                                   <!--  *ngIf="!metadataArray.controls[i].controls['attachment'].value" -->
+                                    <div class="col-sm-12" >
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Email ID of participants <span class="text_red">* </span>
+                                                {{lableConstant.Email_ID_of_participants}} <span class="text_red">* </span>
                                             </label>
 
                                             <ng-select placeholder="Please select Instructor"
@@ -246,17 +246,36 @@
                                               *ngIf="(metadataArray.controls[i].controls['email_participant'].invalid && (metadataArray.controls[i].controls['email_participant'].dirty || metadataArray.controls[i].controls['email_participant'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['email_participant'].errors?.required">
-                                                  Email ID of participants cannot be blank
+                                                  {{lableConstant.Email_ID_of_participants}} cannot be blank
                                               </div>
                                              </div>
                                             
                                         </div>
                                     </div>
+                                  <!--   <div class="col-sm-8" *ngIf="metadataArray.controls[i].controls['attachment'].value">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                {{lableConstant.Email_ID_of_participants}} 
+                                            </label>
+
+                                            <input type="text" class="form-control form_width"
+                                            formControlName="email_participant">                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                               Upload Excel 
+                                            </label>
+                                            <input type="file" id="attachment" class="form-control form_width" formControlName="attachment"
+                                            (change)="onFileChange($event,i)" />
+                                        </div>
+                                    </div> -->
                                     <!--col-->
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Start Date<span class="text_red">* </span>
+                                               {{lableConstant.Start_Date}}<span class="text_red">* </span>
                                             </label>
                                             <input type="date" class="form-control form_width"
                                                 formControlName="start_date" min="{{minStartDate}}">
@@ -264,7 +283,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['start_date'].invalid && (metadataArray.controls[i].controls['start_date'].dirty || metadataArray.controls[i].controls['start_date'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['start_date'].errors?.required">
-                                                  Start Date cannot be blank
+                                                  {{lableConstant.Start_Date}} cannot be blank
                                               </div>
                                              </div>
                                             
@@ -274,7 +293,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Start Time<span class="text_red">* </span>
+                                               {{lableConstant.Start_Time}}<span class="text_red">* </span>
                                             </label>
                                               <!--  <input [ngxTimepicker]="picker">
                                                <ngx-material-timepicker></ngx-material-timepicker>  -->
@@ -286,7 +305,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['start_time'].invalid && (metadataArray.controls[i].controls['start_time'].dirty || metadataArray.controls[i].controls['start_time'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['start_time'].errors?.required">
-                                                  Start Time cannot be blank
+                                                  {{lableConstant.Start_Time}} cannot be blank
                                               </div>
                                              </div>
                                             
@@ -296,7 +315,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                End Date<span class="text_red">* </span>
+                                               {{lableConstant.End_Date}}<span class="text_red">* </span>
                                             </label>
                                             <input type="date" class="form-control form_width"
                                                 formControlName="end_date" [min]="metadataArray.controls[i].controls['start_date'].value">
@@ -304,7 +323,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['end_date'].invalid && (metadataArray.controls[i].controls['end_date'].dirty || metadataArray.controls[i].controls['end_date'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['end_date'].errors?.required">
-                                                  End Date cannot be blank
+                                                  {{lableConstant.End_Date}} cannot be blank
                                               </div>
                                              </div>
                                             
@@ -314,7 +333,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                End Time<span class="text_red">* </span>
+                                                {{lableConstant.End_Time}}<span class="text_red">* </span>
                                             </label>
                                             <input type="time" class="form-control form_width"
                                                 formControlName="end_time">
@@ -322,7 +341,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['end_time'].invalid && (metadataArray.controls[i].controls['end_time'].dirty || metadataArray.controls[i].controls['end_time'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['end_time'].errors?.required">
-                                                  End Time cannot be blank
+                                                  {{lableConstant.End_Time}} cannot be blank
                                               </div>
                                              </div>
                                             
@@ -332,11 +351,11 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Time Zone
+                                                {{lableConstant.Time_Zone}}
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        ngbTooltip="Please indicate the time zone of the instructor.">
+                                                        ngbTooltip="{{lableConstant.Please_indicate_time_zone}}">
                                                     </i>
                                                 </a>
                                             </label>
@@ -354,9 +373,9 @@
                                         <table  formArrayName="break" class="table table-bordered">
                                             <thead *ngFor="let item of session.controls.break.controls; let idx = index;">
                                                 <tr class="white_space">
-                                                    <th scope="col">Break Description</th>
-                                                    <th scope="col">Break Duration</th>
-                                                    <th scope="col" class="w_add">Add</th>
+                                                    <th scope="col">{{lableConstant.Break_Description}}</th>
+                                                    <th scope="col">{{lableConstant.Break_Duration}}</th>
+                                                    <th scope="col" class="w_add">{{lableConstant.Add}}</th>
                                                 </tr>
                                                 <tr >
                                                     <td [formGroupName]="idx"  class="d-flex">
@@ -370,7 +389,7 @@
                                                     <!-- (keyup)="numbersOnly($event,i,idx)" -->
                                                     <td>
                                                         <button (click)="addBreak(i)" class="btn btn-primary btn_creat_session mb-1">
-                                                           <span class="fon_12"> Add Break </span></button>
+                                                           <span class="fon_12">{{lableConstant.Add_break}}</span></button>
                                                         <button  *ngIf="idx > 0" (click)="removeBreak(i,idx)" class="btn btn-secondary btn_creat_session">
                                                             <span class="fon_12"> Remove Break </span>   
                                                         </button>
@@ -387,7 +406,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Comments
+                                                {{lableConstant.Comments}}
                                             </label>
                                             <textarea class="form-control form_width-textarea" rows="3"
                                                 formControlName="comment"></textarea>
@@ -399,11 +418,11 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Minimum Registration <span class="text_red">* </span>
+                                                {{lableConstant.Minimum_Registration}} <span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        ngbTooltip="Please indicate the minimum number of participants required for the session to take place.">
+                                                        ngbTooltip="{{lableConstant.indicate_minimum_number_participants}}">
                                                     </i>
                                                 </a>
                                             </label>
@@ -414,7 +433,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['min_registration'].invalid && (metadataArray.controls[i].controls['min_registration'].dirty || metadataArray.controls[i].controls['min_registration'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['min_registration'].errors?.required">
-                                                  Minimum Registration cannot be blank
+                                                  {{lableConstant.Minimum_Registration}} cannot be blank
                                               </div>
                                              </div>
                                             
@@ -424,11 +443,11 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Maximum Registration <span class="text_red">* </span>
+                                                {{lableConstant.Maximum_Registration}} <span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        ngbTooltip="Please indicate the maximum number of participants allowed to register on the session.">
+                                                        ngbTooltip="{{lableConstant.indicate_maximum_number_participants}}">
                                                     </i>
                                                 </a>
                                             </label>
@@ -439,7 +458,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['max_registration'].invalid && (metadataArray.controls[i].controls['max_registration'].dirty || metadataArray.controls[i].controls['max_registration'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['max_registration'].errors?.required">
-                                                  Maximum Registration cannot be blank
+                                                  {{lableConstant.Maximum_Registration}} cannot be blank
                                               </div>
                                              </div>
                                             
@@ -449,7 +468,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Registration Deadline<span class="text_red">* </span>
+                                                {{lableConstant.Registration_Deadline}}<span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="top" title="">
@@ -462,7 +481,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['registration_deadline'].invalid && (metadataArray.controls[i].controls['registration_deadline'].dirty || metadataArray.controls[i].controls['registration_deadline'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['registration_deadline'].errors?.required">
-                                                  Registration Deadline cannot be blank
+                                                  {{lableConstant.Registration_Deadline}} cannot be blank
                                               </div>
                                              </div>
                                             
@@ -474,11 +493,11 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Availability <span class="text_red">* </span>
+                                                {{lableConstant.Availability}} <span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        ngbTooltip="Please indicate if the session should be restricted to a specific target audience: e.g. employees in a specific location, specific business unit, specific users.">
+                                                        ngbTooltip="{{lableConstant.indicate_session_restricted}}">
                                                     </i>
                                                 </a>
                                             </label>
@@ -488,7 +507,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['availability'].invalid && (metadataArray.controls[i].controls['availability'].dirty || metadataArray.controls[i].controls['availability'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['availability'].errors?.required">
-                                                  Availability cannot be blank
+                                                  {{lableConstant.Availability}} cannot be blank
                                               </div>
                                              </div>
                                             
@@ -498,11 +517,11 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Manager Approval
+                                                {{lableConstant.Manager_Approval}}
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        ngbTooltip="Please indicate if learners require manager approval to register for this session.">
+                                                        ngbTooltip="{{lableConstant.Please_indicate_learners_manager_approval}}">
                                                     </i>
                                                 </a>
                                             </label>
@@ -517,11 +536,11 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                External vendor <span class="text_red">* </span>
+                                                {{lableConstant.External_vendor}}<span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        ngbTooltip="Please indicate if the session is delivered by an external training provider.">
+                                                        ngbTooltip="{{lableConstant.indicate_session_delivered_training_provider}}">
                                                     </i>
                                                 </a>
                                             </label>
@@ -532,7 +551,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['external_vendor'].invalid && (metadataArray.controls[i].controls['external_vendor'].dirty || metadataArray.controls[i].controls['external_vendor'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['external_vendor'].errors?.required">
-                                                  External vendor cannot be blank
+                                                  {{lableConstant.External_vendor}} cannot be blank
                                               </div>
                                              </div>
                                             
@@ -546,7 +565,7 @@
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="top"
-                                                        title="Please indicate if the session is delivered by an external training provider.">
+                                                        title="{{lableConstant.indicate_session_delivered_training_provider}}">
                                                     </i>
                                                 </a>
                                             </label>
@@ -569,14 +588,11 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Training cost per participant
+                                                {{lableConstant.Training_cost_per_participant}}
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="left"
-                                                        ngbTooltip="Training delivered by Orange instructors has a standard cost of 20 Euros per hour per participant. Example: A course with the duration of 7 hours will have a training cost of 140 Euros.
-                                                    The cost of training delivered by an external instructor will be advertised as a cost per participant on the basis of 10 participants per session. The final cost will vary according to the number of participants.
-                                                    Example: A session costing a total of 2000 Euros will be advertised as a cost of 200 Euros per participant. If the final number of participants is 8, the final cost per participant will be 250 Euros. If the final number of participants is 12, the final cost per participant will be 166,50 Euros.
-                                                    Your Training Coordinator will update training costs on Orange Learning if required.">
+                                                        ngbTooltip="{{lableConstant.Training_delivered_by_Orange_instructors_cost}}">
                                                     </i>
                                                 </a>
                                             </label>
@@ -613,7 +629,7 @@
                             <button class="btn btn-primary mr-1" type="submit"
                                 (click)="createSession('pending')">Submit</button>
                             <button class="btn btn-secondary" *ngIf=" session_status != 'reject'" (click)="createSession('draft')">
-                                Save as draft
+                                {{lableConstant.Save_as_draft}}
                             </button>
                         </div>
                          <div class="card-footer1" *ngIf ="getUserrole.id == 3">
@@ -622,7 +638,7 @@
                             <button *ngIf="(!sessionPub && session_status != 'reject') || session_status == 'pending' " class="btn btn-primary mr-1" data-target="#publishModal" data-toggle="modal">  <i class="fa fa-upload" aria-hidden="true"></i>
                                 <span class="pl-1"> Publish</span></button>
                             <button *ngIf="session_id == 0 || sessionPub && session_status != 'pending' || session_status == 'draft'" class="btn btn-secondary" (click)="createSession('draft')">
-                                Save as draft
+                                {{lableConstant.Save_as_draft}}
                             </button>
                             <!-- <button *ngIf="session_id != 0 && (!sessionPub || session_status == 'pending') && (session_status != 'draft' && session_status != 'reject')" class="btn btn-secondary" data-target="#rejectModal" data-toggle="modal" >
                                 <i class="fa fa-times" aria-hidden="true"></i> <span
@@ -637,7 +653,7 @@
                             <button class="btn btn-primary mr-1" type="submit"
                                  data-target="#publishModal" data-toggle="modal">Publish</button>
                                 <button *ngIf="session_id == 0" class="btn btn-secondary" (click)="createSession('draft')">
-                                    Save as draft
+                                    {{lableConstant.Save_as_draft}}
                                 </button>
                             <button *ngIf="session_id != 0" class="btn btn-secondary" data-toggle="modal" data-target="#rejectModal">
                                 <i class="fa fa-times" aria-hidden="true"></i> <span
@@ -663,7 +679,7 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-group">
-                  <label>Comments</label>
+                  <label>{{lableConstant.Comments}}</label>
                   <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments" [(ngModel)]="publishComment"></textarea>
                 </div>
               </div>
@@ -675,7 +691,7 @@
           <button type="button" class="btn btn-primary btn_requst" data-dismiss="modal" (click)="createSession('publish')">
             Submit
           </button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
         </div>
       </div>
     </div>
@@ -705,7 +721,7 @@
           <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="reject()">
             Submit
           </button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
         </div>
       </div>
     </div>
@@ -714,7 +730,7 @@
 <div class="collapse" id="collapseExample">
     <div class="card card-body req_status-card">
         <div class="card_header reqst_header">
-            <p>Overall request Status</p>
+            <p>{{lableConstant.Overall_request_Status}}</p>
             <i class="fa fa-times fa_cross mr-2" aria-hidden="true" data-toggle="collapse" href="#collapseExample"
                 role="button" aria-expanded="false" aria-controls="collapseExample"></i>
         </div>
@@ -726,7 +742,7 @@
                             <img src="../../../../assets/images/icon/draftsbl.png" />
                         </div>
 
-                        <p>Draft</p>
+                        <p>{{lableConstant.Draft}}</p>
                         <span class="number_css">
                             {{
                             session_count.draft
@@ -743,7 +759,7 @@
                             <img src="../../../../assets/images/icon/closedbl.png" />
                         </div>
 
-                        <p>Submitted</p>
+                        <p>{{lableConstant.Submitted}}</p>
                         <span class="number_css">
                             {{
                             session_count.submitted
@@ -760,7 +776,7 @@
                             <img src="../../../../assets/images/icon/pendingbl.png" />
                         </div>
 
-                        <p>Pending</p>
+                        <p>{{lableConstant.pending}}</p>
                         <span class="number_css">
                             {{
                             session_count.pending
@@ -777,7 +793,7 @@
                             <img src="../../../../assets/images/icon/checkbl.png" />
                         </div>
 
-                        <p>Published</p>
+                        <p>{{lableConstant.Published}}</p>
                         <span class="number_css">
                             {{
                             session_count.closed
@@ -794,7 +810,7 @@
                             <img src="../../../../assets/images/icon/rejectbl.png" />
                         </div>
 
-                        <p>Rejected</p>
+                        <p>{{lableConstant.Rejected}}</p>
                         <span class="number_css">
                             {{
                             session_count.rejected
@@ -809,7 +825,7 @@
         <div class="view-comple-req_div">
             <button class="btn btn-primary view-comple-req justify-content-center p-1"
                 [routerLink]="['/dashboard/cources/view-complete-report']">
-                <i class="fa fa-database mr-1" aria-hidden="true"></i>View all activity Request
+                <i class="fa fa-database mr-1" aria-hidden="true"></i>{{lableConstant.View_all_activity_report}}
             </button>
         </div>
         <!--ROW END-->

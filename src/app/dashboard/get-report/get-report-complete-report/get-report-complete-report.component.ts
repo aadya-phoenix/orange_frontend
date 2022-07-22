@@ -18,6 +18,7 @@ import { GetReportHistoryComponent } from '../get-report-history/get-report-hist
   styleUrls: ['./get-report-complete-report.component.scss']
 })
 export class GetReportCompleteReportComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
   public filterForm!: FormGroup;
   dateTimeFormate = dataConstant.dateTimeFormate;
   dateFormate = dataConstant.dateFormate;
@@ -68,6 +69,7 @@ export class GetReportCompleteReportComponent implements OnInit {
     private router: Router,
     private courceService: CourcesService
   ) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.isRoc = this.getUserrole.id === this.RoleID.Roc;

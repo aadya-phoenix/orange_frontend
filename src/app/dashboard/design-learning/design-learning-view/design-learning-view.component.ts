@@ -14,7 +14,7 @@ import { DesignLearningRatingComponent } from '../design-learning-rating/design-
   styleUrls: ['./design-learning-view.component.scss']
 })
 export class DesignLearningViewComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   dateFormate = dataConstant.dateFormate;
   dateTimeFormate = dataConstant.dateTimeFormate;
   id = 0;
@@ -36,6 +36,7 @@ export class DesignLearningViewComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router
   ) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.getUserrole = this.authService.getRolefromlocal();
     this.isDesigner = this.getUserrole.id === this.RoleID.DesignTeam;
@@ -120,8 +121,22 @@ export class DesignLearningViewComponent implements OnInit {
     };
   }
 
+  isOnHold(){
+    if(this.isHeadDesigner  && this.requestdata.user_id != this.getprofileDetails.data.id  && this.  requestdata.status_show == this.designStatus.pending && 
+      this.requestdata.head_status != this.designStatus.approve &&  this.requestdata.head_status != this.designStatus.reject){
+      return true;
+    }
+    return false;
+  }
+
+  isReject(){
+   if (this.isHeadDesigner  && this.requestdata.user_id != this.getprofileDetails.data.id  && this.requestdata.status_show == this.designStatus.pending && (!this.requestdata.head_status || this.requestdata.head_status == this.designStatus.onHold)){
+      return true;
+    }
+    return false;
+  }
   isApprove(){
-    if(this.isHeadDesigner  && this.requestdata.user_id != this.getprofileDetails.data.id  && this.requestdata.status_show == this.designStatus.pending && !this.requestdata.head_status){
+    if(this.isHeadDesigner  && this.requestdata.user_id != this.getprofileDetails.data.id  && this.requestdata.status_show == this.designStatus.pending && (!this.requestdata.head_status || this.requestdata.head_status == this.designStatus.onHold)){
       return true;
     }
     return false;

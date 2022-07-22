@@ -1,6 +1,7 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DnaService } from 'src/app/shared/services/dna/dna.service';
@@ -11,7 +12,7 @@ import { DnaService } from 'src/app/shared/services/dna/dna.service';
   styleUrls: ['./dna-tracker.component.scss']
 })
 export class DnaTrackerComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   trackerObjList:any=[];
   searchText : string ='';
   trainingDataObj:any = [];
@@ -28,7 +29,7 @@ export class DnaTrackerComponent implements OnInit {
     private dnaService:DnaService,
     private commonService:CommonService,
     private router:Router) {
-      
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
      }
 
   ngOnInit(): void {

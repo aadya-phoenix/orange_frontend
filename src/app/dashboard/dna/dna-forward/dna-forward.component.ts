@@ -17,6 +17,7 @@ export class DnaForwardComponent implements OnInit {
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
 
+  lableConstant: any = { french: {}, english: {} };
   RoleID = dataConstant.RoleID;
   getUserrole: any = {};
   dnaStatus = dataConstant.DnaStatus;
@@ -41,6 +42,7 @@ export class DnaForwardComponent implements OnInit {
     private commonService: CommonService,
     private router: Router
   ) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.dnaForwardForm = this.formBuilder.group({
       strategic: new FormControl('', []),
       status_comment: new FormControl('', [])
@@ -83,7 +85,7 @@ export class DnaForwardComponent implements OnInit {
         this.commonService.toastSuccessMsg('Request', 'Successfully Closed.');
       }
       this.modalService.close();
-        this.router.navigateByUrl(`/dashboard/dna`); 
+      this.passEntry.next();
       }
       else{
         this.commonService.hideLoading();
@@ -94,8 +96,8 @@ export class DnaForwardComponent implements OnInit {
       this.commonService.toastErrorMsg('Error', err.message);
     })
   }
-
   closeModal() {
+    this.passEntry.next();
     this.modalService.close();
   }
 

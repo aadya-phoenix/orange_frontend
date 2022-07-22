@@ -45,7 +45,8 @@
                                 Save</button>
                             <button *ngIf="!isCreate" class="btn btn-secondary mr-1" data-toggle="modal"
                                 (click)="save()">
-                                <i class="fa fa-edit mr-1" aria-hidden="true"></i>Update
+                                <i class="fa fa-edit mr-1" aria-hidden="true"></i>
+                                {{lableConstant.Update}}
                             </button>
                         </div>
                         <div class="card">
@@ -53,14 +54,15 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label class="form-control-label">First Name</label>
+                                            <label class="form-control-label">
+                                                {{lableConstant.First_Name}}</label>
                                             <input type="text" class="form-control form_width"
                                                 formControlName="first_name" />
                                             <div
                                                 *ngIf="(createUserForm.controls['first_name'].invalid && (createUserForm.controls['first_name'].dirty || createUserForm.controls['first_name'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createUserForm.controls['first_name'].errors?.required">
-                                                    First Name cannot be blank
+                                                    {{lableConstant.First_Name}} cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -68,14 +70,14 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Last Name</label>
+                                                {{lableConstant.Last_Name}}</label>
                                             <input type="text" class="form-control form_width"
                                                 formControlName="last_name" />
                                             <div
                                                 *ngIf="(createUserForm.controls['last_name'].invalid && (createUserForm.controls['last_name'].dirty || createUserForm.controls['last_name'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createUserForm.controls['last_name'].errors?.required">
-                                                    Last Name cannot be blank
+                                                    {{lableConstant.Last_Name}} cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -162,16 +164,17 @@
                                     </div>
                                     <div class="col-sm-4" *ngIf="isLearningType">
                                         <div class="form-group">
-                                            <label class="form-control-label">Learning Types</label>
+                                            <label class="form-control-label">
+                                                {{lableConstant.Learning_Type}}</label>
                                             <ng-select [items]="learningTypes" [multiple]="true" bindLabel="name"
                                                 bindValue="id" formControlName="learning_type">
                                             </ng-select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4" *ngIf="isRegion">
+                                    <div class="col-sm-4" *ngIf="isDnaRegion">
                                         <div class="form-group">
                                             <label class="form-control-label">Region</label>
-                                            <ng-select  [items]="regionObj" 
+                                            <ng-select  [items]="regionDnaObj" 
                                             (change)="getSelectedRegion($event)"
                                                 [multiple]="false" bindLabel="region_name" bindValue="id"
                                                 formControlName="region_id">
@@ -188,7 +191,7 @@
                                     <div class="col-sm-4" *ngIf="isCountry">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Country
+                                                {{lableConstant.Country}}
                                             </label>
                                             <ng-select  [items]="countriesObj"
                                                  bindLabel="country_name"
@@ -199,7 +202,7 @@
                                     <div class="col-sm-4" *ngIf="isDomain">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Domain  Training
+                                                Domain Training
                                             </label>
                                             <ng-select [items]="domainObj"
                                                  bindLabel="domain_name"

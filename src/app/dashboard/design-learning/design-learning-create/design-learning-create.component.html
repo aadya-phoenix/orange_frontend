@@ -6,10 +6,9 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="breade_text_span1">Design learning Module</span>
+                        <span class="breade_text_span1">{{lableConstant.design_learning_module}}</span>
                         <span class="divider_req"></span>
-                        <span class="breade_text_span">Request the development of new learning modules for your team or
-                            our organization.</span>
+                        <span class="breade_text_span">{{lableConstant.request_learning_team}}</span>
                     </div>
                 </div>
             </div>
@@ -25,13 +24,13 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
                             <a [routerLink]="['/dashboard/designlearning']" class="text_white">Create new Module</a>
                         </li>
                         <li>
-                            <span class="text_white span_dis">{{ designId === 0 ? 'New Request' : 'Update
+                            <span class="text_white span_dis">{{ designId === 0 ? lableConstant.New_Request : 'Update
                                 Request'}}</span>
 
                         </li> 
@@ -447,7 +446,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Comments
+                                                {{lableConstant.Comments}}
                                                 <span class="text_red">* </span>
                                             </label>
                                             <textarea class="form-control form_width-textarea" formControlName="comment"></textarea>
@@ -456,7 +455,7 @@
                                                 *ngIf="(createDesignForm.controls['comment'].invalid && (createDesignForm.controls['comment'].dirty || createDesignForm.controls['comment'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createDesignForm.controls['comment'].errors?.required">
-                                                    Comments cannot be blank
+                                                    {{lableConstant.Comments}} cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -464,20 +463,20 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Attachments.
+                                                {{lableConstant.Attachments}}
                                             </label>
                                             <input type="file" class="form-control form_width"  (change)="handleFileInput($event)"
                                                 formControlName="attachment" />
                                             <span class="pt-2" *ngIf="design_details.attachUrl">
-                                              Click here to <a href="{{design_details.attachUrl}}" target="_blank"
-                                                        style="color:#ff7900">View</a>
+                                               <a href="{{design_details.attachUrl}}" target="_blank"
+                                                        style="color:#ff7900">{{lableConstant.Click_here_to_View_resource}}</a>
                                             </span>
                                         </div>
                                     </div>
                                   
                                 </div>
                             </div>
-                            <div class="card">
+                            <div class="card" *ngIf="isDesigner || isHeadDesigner">
                                 <div class="card-header">
                                     <label class="form-control-label mb-0 font_bold text_balck">
                                         Who will Create it/ Deliver it ?
@@ -486,7 +485,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-sm-12" *ngIf="isDesigner || isHeadDesigner">
+                                            <div class="col-sm-12" >
                                                 <div class="form-group">
                                                     
                                                     <input type="text" class="form-control form_width"
@@ -519,7 +518,7 @@
                                     </i> <span class="pl-1">Approve</span>
                                 </button>
                                 <button class="btn btn-secondary" *ngIf="isDraft()"
-                                (click)="save(designStatus.draft) ">Save as draft
+                                (click)="save(designStatus.draft) ">{{lableConstant.Save_as_draft}}
                                 </button>
                                 <button class="btn btn-secondary mr-1" type="submit" 
                                 *ngIf="(this.isDesigner || this.isHeadDesigner) && 

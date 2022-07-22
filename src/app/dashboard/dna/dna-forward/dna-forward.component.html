@@ -12,7 +12,12 @@
                     <label class="form-control-label">
                         <span> Selected learning objects titles</span>
                     </label>
-                    <h4 *ngFor="let item of titleLists" class="fon_12 text_orange">{{item}}</h4>
+                    <div>
+                        <ul>
+                            <li *ngFor="let item of titleLists">     <h4  class="fon_12 text_orange">{{item}}</h4></li>
+                            </ul>
+               
+                    </div>
                 </div>
             </div>
 
@@ -36,7 +41,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">
-                        <span>  Comments</span>
+                        <span>  {{ lableConstant.Comments}}</span>
                     </label>
                     <textarea class="form-control form_width-textarea" maxlength="500" rows="3" formControlName="status_comment" maxlength="500"></textarea>
                 </div>

@@ -6,9 +6,9 @@
             <div class="page-title d-flex align-items-center">
               <img src="../../../../assets/images/second.jpg" class="home_Css_img" />
               <div class="d-flex flex-column ml-3">
-                <span class="breade_text_span1">Open Course Session </span>
+                <span class="breade_text_span1">{{lableConstant.open_course_session}}</span>
                 <span class="divider"></span>
-                <span class="breade_text_span">Request the creation of one or more sessions in Orange Learning.</span>
+                <span class="breade_text_span">{{lableConstant.request_create_session}}</span>
               </div>
             </div>
           </div>
@@ -24,13 +24,13 @@
                   </a>
                 </li>
                 <li>
-                  <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                  <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                 </li>
                 <li>
                   <a [routerLink]="['/dashboard']" class="text_white">Create new Session</a>
                 </li>
                 <li>
-                  <a class="text_white">View</a>
+                  <a class="text_white">{{lableConstant.View}}</a>
                 </li>
               </ol>
             </div>
@@ -42,11 +42,11 @@
           <div class="d-flex">
             <img src="../../../../assets/images/formm.png" class="ml-2 form_img_req" />
             <p class="mt-2 ml-2 mb-2 view-re_css">
-              <span>View Session Request</span>
+              <span>{{lableConstant.View_Request}}</span>
               <span class="cc-text_css">({{ sessiondata.request_id }}) -
               </span>
               <span>
-                Request Status - {{sessiondata.status_new  | titlecase
+                {{lableConstant.Request_Status}} - {{sessiondata.status_new  | titlecase
                 }}
               </span>
             
@@ -63,7 +63,7 @@
                     <div class="Requs_btn_inl">
                         <div class="Requs_btn_inl-child">
                             <button class="btn btn-primary" (click)="updateSession()">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">Update</span>
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.Update}}</span>
                               </button>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                               <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
                             </button>
                             <button class="btn btn-secondary ml-2" (click)="updateSession()">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">Update</span>
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.Update}}</span>
                           </button>
                           <button type="button" class="btn btn-secondary ml-2" data-toggle="modal"
                             data-target="#rejectModal">
@@ -89,7 +89,7 @@
                         <div class="Requs_btn_inl-child1">
                             <button type="button" class="btn btn-secondary ml-2" data-toggle="modal"
                             data-target="#transferotherRoc" (click)="getCordinators()">
-                            <i class="fa fa-exchange" aria-hidden="true"></i><span class="pl-1">Transfer to Other ROC</span>
+                            <i class="fa fa-exchange" aria-hidden="true"></i><span class="pl-1">{{lableConstant.Transfer_to_other_Regional_Training_Coordinator}}</span>
                         </button>
                             </div>                          
                     </div>
@@ -104,7 +104,7 @@
                               <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
                             </button>
                             <button class="btn btn-secondary ml-2" (click)="updateSession()">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">Update</span>
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.Update}}</span>
                           </button>
                           <button type="button" class="btn btn-secondary ml-2" data-toggle="modal"
                             data-target="#rejectModal">
@@ -123,7 +123,7 @@
                     <div class="card-body">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Title</label>
+                                <label for="exampleInputEmail1">{{lableConstant.Title}}</label>
                                 <div class="d-flex align-items-center">
                                     <span class="form_data">
                                         {{ sessiondata.title }}
@@ -134,7 +134,7 @@
 
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Region</label>
+                                <label for="exampleInputEmail1">{{lableConstant.Region_Name}}</label>
                                 <div class="d-flex align-items-center">
                                     <span class=" form_data">
                                         {{ sessiondata.region_name }}
@@ -149,13 +149,13 @@
                     <ngb-accordion #acc="ngbAccordion" *ngFor="let meta of sessiondata.metadata; let i = index">
                         <ngb-panel>
                             <ng-template ngbPanelTitle>
-                                <span>Session: {{i+1}}</span>
+                                <span>{{lableConstant.Session}}: {{i+1}}</span>
                             </ng-template>
                             <ng-template ngbPanelContent>
                                 <div class="card-body p-2">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Delivery Method</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Delivery_Method}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">
                                                     {{meta.delivery_method_name}}
@@ -165,7 +165,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Country</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Country}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">
                                                     {{meta.country_name}}
@@ -175,7 +175,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Location</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Location}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">
                                                     {{meta.location}}
@@ -185,7 +185,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Instructor Name</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Instructor_Name}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">
                                                     {{meta.instructor_name}}
@@ -195,7 +195,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Email Id of Participants</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Email_ID_of_participants}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">
                                                 <span *ngFor="let item of meta.email" class="d-flex" >
@@ -207,7 +207,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Start Date</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Start_Date}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">
                                                     {{meta.start_date}}
@@ -217,7 +217,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Start Time</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Start_Time}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">
                                                     {{meta.start_time}}
@@ -227,7 +227,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">End Date</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.End_Date}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">
                                                     {{meta.end_date}}
@@ -237,7 +237,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">End Time</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.End_Time}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">
                                                     {{meta.end_time}}
@@ -248,7 +248,7 @@
             
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">TimeZone</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Time_Zone}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">
                                                     {{meta.time_zone_name}}
@@ -258,7 +258,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Break Description</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Break_Description}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">
                                                 <span *ngFor="let item of meta.break_data" class="d-flex">
@@ -270,7 +270,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Break Duration</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Break_Duration}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">                         
                                                 <span *ngFor="let item of meta.break_data" class="d-flex" >
@@ -282,7 +282,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Comments</label>
+                                            <label for="exampleInputEmail1"> {{lableConstant.Comments}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">  
                                                     {{meta.comment}}
@@ -292,7 +292,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Minimum Registration</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Minimum_Registration}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">  
                                                     {{meta.min_registration}}
@@ -302,7 +302,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Maximum Registration</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Maximum_Registration}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">  
                                                     {{meta.max_registration}}
@@ -312,7 +312,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Registration Deadline</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Registration_Deadline}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">  
                                                     {{meta.registration_deadline}}
@@ -322,7 +322,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Availability</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Availability}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">  
                                                     {{meta.availability}}
@@ -332,7 +332,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Manager Approval</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Manager_Approval}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">  
                                                     {{meta.manager_approval}}
@@ -342,7 +342,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">External vendor</label>
+                                            <label for="exampleInputEmail1"> {{lableConstant.External_vendor}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">  
                                                     {{meta.external_vendor}}
@@ -362,7 +362,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Training cost per participant</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Training_cost_per_participant}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">  
                                                   {{meta.training_cost_euro}}
@@ -396,7 +396,7 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-group">
-                  <label>Comments</label>
+                  <label> {{lableConstant.Comments}}</label>
                   <textarea class="form-control form_width-textarea" formControlName="status_comment" rows="3" placeholder="Enter Comments"></textarea>
                 </div>
               </div>
@@ -432,7 +432,7 @@
           <button type="button" class="btn btn-primary btn_requst" data-dismiss="modal" (click)="publishRequest()">
             Submit
           </button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
         </div>
       </div>
     </div>
@@ -449,7 +449,7 @@
               <div class="row">
                 <div class="col-sm-12">
                   <div class="form-group">
-                    <label>Comments</label>
+                    <label>{{lableConstant.Comments}}</label>
                     <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"
                       [(ngModel)]="rejectcomment"></textarea>
                   </div>
@@ -462,7 +462,7 @@
               <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="reject()">
                 Submit
               </button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
             </div>
           </div>
         </div>
@@ -474,7 +474,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="reject_req_h4">
-              Transfer the requet to other ROC
+              {{lableConstant.Transfer_to_other_Regional_Training_Coordinator}}
             </h4>
           </div>
   
@@ -493,7 +493,7 @@
               </div>
               <div class="col-sm-12">
                 <div class="form-group">
-                  <label>Comment</label>
+                  <label>{{lableConstant.Comments}}</label>
                   <textarea class="form-control form_width-textarea" rows="3" placeholder="Enter Comments"
                     [(ngModel)]="transfercomment"></textarea>
                 </div>
@@ -506,7 +506,7 @@
             <button type="button" data-dismiss="modal" (click)="transfertoOtherRoc()" class="btn btn-primary btn_requst">
               Submit
             </button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
           </div>
         </div>
       </div>

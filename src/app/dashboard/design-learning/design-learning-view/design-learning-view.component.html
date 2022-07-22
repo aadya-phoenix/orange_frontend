@@ -6,10 +6,9 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="font-20 text_white">Design learning Module</span>
+                        <span class="font-20 text_white">{{lableConstant.design_learning_module}}</span>
                         <span class="divider_req"></span>
-                        <span class="title-detail mt-6">Request the development of new learning modules for your team or
-                            our organization.</span>
+                        <span class="title-detail mt-6">{{lableConstant.request_learning_team}}</span>
                     </div>
                 </div>
             </div>
@@ -25,10 +24,10 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/designlearning']" class="text_white">Create New Learning</a>
+                            <a [routerLink]="['/dashboard/designlearning']" class="text_white">{{lableConstant.request_learning_team}}</a>
                         </li>
                         <li>
                             <span class="text_white span_dis">View</span>
@@ -46,7 +45,7 @@
                 <span>View Design Learning Request</span>
                 <span class="cc-text_css"> ({{ requestdata.request_id }}) -
                 </span>
-                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status_show |
+                <span spellcheck="text_orange" class="text_orange">{{lableConstant.Request_Status}} - {{ requestdata.status_show |
                     titlecase
                     }}</span>
             </p>
@@ -56,12 +55,16 @@
         <div class="animated fadeIn">
           <div class="mb-2" >
                 <div class="Requs_btn_inl">
-                     <div class="Requs_btn_inl-child" *ngIf="isApprove()">
-                        <button type="button" class="btn btn-primary mr-2" 
-                            (click)="openModal(designStatus.approve)">
+                     <div class="Requs_btn_inl-child" *ngIf="isHeadDesigner">
+                        <button type="button" *ngIf="isApprove()" class="btn btn-primary mr-2" 
+                            (click)="openModal(designStatus.approve)" >
                             <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Approve </span>
                         </button>
-                        <button type="button" class="btn btn-secondary"
+                        <button type="button" class="btn btn-secondary" *ngIf="isOnHold()"
+                        (click)="openModal(designStatus.onHold)">
+                       <span class="pl-1">OnHold</span>
+                       </button>
+                        <button type="button" *ngIf="isReject()" class="btn btn-secondary"
                             (click)="openModal(designStatus.reject)">
                             <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
                         </button>
@@ -69,7 +72,7 @@
                     <div class="Requs_btn_inl-child" *ngIf="isDesigner && requestdata.head_status != designStatus.approve && requestdata.status_show == designStatus.pending">
                         <button type="button" class="btn btn-primary mr-2" 
                             (click)="update(requestdata)">
-                            <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">Update</span>
+                            <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">{{lableConstant.Update}}</span>
                         </button>
                         <button type="button" class="btn btn-secondary" *ngIf=" !requestdata.head_status"
                             (click)="openModal(designStatus.reject)">
@@ -102,7 +105,7 @@
                             <div class="card-header color-orange">
                                 <div class="d-flex justify-content-between">
                                     <span class="row">
-                                        View History <h5 class="card-title ml-1">
+                                        {{lableConstant.View_History}} <h5 class="card-title ml-1">
                                             <b class="color-orange"> ({{requestdata.request_id}})</b>
                                         </h5>
                                     </span>
@@ -116,8 +119,8 @@
                                             <th scope="col">Submitted by</th>
                                             <th scope="col">Sent to</th>
                                             <th scope="col">Last Modified</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Comments</th>
+                                            <th scope="col">{{lableConstant.Status}}</th>
+                                            <th scope="col">{{lableConstant.Comments}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -390,7 +393,7 @@
                                 </div>                         
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Comments</label>
+                                        <label for="exampleInputEmail1">{{lableConstant.Comments}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                                 {{ requestdata.comment }}
@@ -400,11 +403,11 @@
                                 </div>   
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.attachment">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Attachment</label>
+                                        <label for="exampleInputEmail1"> {{lableConstant.Attachments}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
-                                                Click here to <a class="text_orange" href="{{requestdata.attachUrl}}"
-                                                    target="_blank">View</a>.
+                                                <a class="text_orange" href="{{requestdata.attachUrl}}"
+                                                    target="_blank">{{lableConstant.Click_here_to_View_resource}}</a>.
                                             </span>
                                         </div>
                                     </div>

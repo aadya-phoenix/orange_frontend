@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./get-report-publish.component.scss']
 })
 export class GetReportPublishComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   publishGetReportForm: FormGroup;
@@ -26,6 +26,7 @@ export class GetReportPublishComponent implements OnInit {
     private getReportService: GetReportService,
     private commonService: CommonService,
     private router: Router) {
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
       this.publishGetReportForm = this.formBuilder.group({
         status_comment: new FormControl('', [Validators.required]),
       });

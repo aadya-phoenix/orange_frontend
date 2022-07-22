@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DnaService } from 'src/app/shared/services/dna/dna.service';
 import Swal from 'sweetalert2';
@@ -12,7 +13,7 @@ import { DnaLearningFormComponent } from '../dna-learning-form/dna-learning-form
   styleUrls: ['./dna-create.component.scss']
 })
 export class DnaCreateComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   trackerId:number=0;
   learningList:any=[];
   learningListToShow:any=[];
@@ -25,6 +26,7 @@ export class DnaCreateComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.trackerId = Id ? parseInt(Id) : 0;

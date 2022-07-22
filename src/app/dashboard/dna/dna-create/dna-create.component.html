@@ -8,7 +8,7 @@
                     <div class="d-flex flex-column ml-3">
                         <span class="breade_text_span1">Digital learning Needs Analysis</span>
                         <span class="divider"></span>
-                        <span class="breade_text_span">Digital learning Needs Analysis (DNA) is a tool that gathers learning needs from managers and helps align development needs with the overall business strategy. DNA also helps PD&L team to analyse and plan our learning resources efficiently.</span>
+                        <span class="breade_text_span">{{lableConstant.dna_tool_feature}}</span>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
                             <span class="text_white span_dis">DNA</span>
@@ -33,7 +33,7 @@
             </div>
         </div>
     </div>
-    <div class="card">
+    <div class="card bac_grey">
         <div class="card-header cm-card-header">
             <div class="learing_head">
                
@@ -56,7 +56,32 @@
             <div class="row">
                 <div class="col-sm-12 text-center">
                     <div class="row  mb-4">
-                        <div class="col-sm-3" *ngFor="let item of learningListToShow | filter: searchText">
+                        <div class="col-sm-3 mb-4" *ngFor="let item of learningListToShow | filter: searchText">
+                            <div class="main_box_lear">
+                                <div class="lear_box">
+                             
+                                 
+                                        <p class="text_hight_css" ngbTooltip="Priority">{{item.priority_name}}</p>
+                                        <img *ngIf="!item.is_digital" src="../../../../assets/images/icon/calendaro.png" class="calender_css">
+                                        <img *ngIf="item.is_digital" src="../../../../assets/images/icon/laptop.png" class="calender_css">
+                                  
+                                    </div>
+                                    <p class="mb-2 fon_12 mt-2 line_hei_one" 
+                                    ngbTooltip="{{item.learning_training_data ? item.learning_training_data.training_description : item.description}}">{{item.title}}</p>
+                                    <div class="lear_box">
+                             
+                                 <div class="d-flex">
+                                      <img src="../../../../assets/images/icon/useregroup.png" ngbTooltip="No of Participants" class="img_user_lap ml-1">
+                                      <span>{{item.number_of_participant}}</span>
+                                </div>
+                                <div>
+                                    <a (click)="update(item)" ngbTooltip="Update Added Learning"> <i class="fa fa-pencil-square-o mr-1" aria-hidden="true"></i></a>
+                                    <a (click)="delete(item)" ngbTooltip="Delete Added Learning"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            </div>
+                                  </div>
+                                  </div><!--lear-->
+                            </div><!--colend-->
+                        <!-- <div class="col-sm-3" *ngFor="let item of learningListToShow | filter: searchText">
                            <div class="digital_learning">
                             <h4 class="bus_h4 text_orange" ngbTooltip="{{item.learning_training_data ? item.learning_training_data.training_description : item.description}}">{{item.title}}</h4>
                             <div class="d-flex justify-content-center">
@@ -76,11 +101,11 @@
                                 <a (click)="delete(item)" ngbTooltip="Delete Added Learning"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                             </div>
                         </div>  
-                        </div> 
+                        </div>  -->
                     </div>
                 </div>
 
-                <div class="col-sm-3">
+             <!--    <div class="col-sm-3">
                     <div class="main_box_lear">
                         <div class="lear_box">
                      
@@ -102,8 +127,8 @@
                             <a  ngbTooltip="Delete Added Learning"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                     </div>
                           </div>
-                          </div><!--lear-->
-                    </div><!--colend-->
+                          </div>
+              </div> -->
             </div>
         </div>
     </div>

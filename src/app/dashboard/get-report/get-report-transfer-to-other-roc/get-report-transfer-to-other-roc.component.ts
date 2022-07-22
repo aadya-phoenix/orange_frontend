@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { GetReportService } from 'src/app/shared/services/get-report/get-report.service';
@@ -14,6 +15,8 @@ import { GetReportService } from 'src/app/shared/services/get-report/get-report.
 export class GetReportTransferToOtherRocComponent implements OnInit {
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
+
+  lableConstant: any = { french: {}, english: {} };
   cordinatorsList: any = [];
   publishGetReportForm: FormGroup;
   isSubmitted = false;
@@ -23,6 +26,7 @@ export class GetReportTransferToOtherRocComponent implements OnInit {
     private getReportService: GetReportService,
     private commonService: CommonService,
     private router: Router) { 
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
       this.publishGetReportForm = this.formBuilder.group({
         publisher_id: new FormControl('', [Validators.required]),
         status_comment: new FormControl('')

@@ -14,7 +14,7 @@ import { DnaForwardComponent } from '../dna-forward/dna-forward.component';
   styleUrls: ['./dna-view-rpt.component.scss']
 })
 export class DnaViewRptComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   dnaStatus = dataConstant.DnaStatus;
   selectedStatus = this.dnaStatus.total;
   priorityObj: any = [];
@@ -58,7 +58,9 @@ export class DnaViewRptComponent implements OnInit {
     private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english; 
+   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -181,6 +183,9 @@ export class DnaViewRptComponent implements OnInit {
       trackerId:this.trackerId,
       type: 'forward'
     };
+    modalRef.componentInstance.passEntry.subscribe((res: any) => {
+      this.getLearningList()
+    });
   }
 
   submit(){

@@ -39,7 +39,7 @@ export class CreateSessionComponent implements OnInit {
   };
   public deliveryMethod: any;
   public preferedInstructor: any;
-
+  newInstructorObj:any=[];
   countryObj: any;
   timeZoneObj: any;
   coursesList: any;
@@ -84,7 +84,9 @@ export class CreateSessionComponent implements OnInit {
     this.createSessionForm = this.fb.group({
       title: new FormControl('', [Validators.required]),
       region_id: new FormControl('', [Validators.required]),
-      metadata: this.fb.array([]),
+      metadata: this.fb.array([
+        
+      ]),
     });
 
     this.getUserrole = this.authService.getRolefromlocal();
@@ -114,6 +116,7 @@ export class CreateSessionComponent implements OnInit {
       country: new FormControl('', [Validators.required]),
       location: new FormControl('', [Validators.required]),
       instructor_name: new FormControl('', [Validators.required]),
+      attachment:  new FormControl('', []),
       email_participant: new FormControl('', [Validators.required]),
       start_date: new FormControl('', [Validators.required]),
       start_time: new FormControl('', [Validators.required]),
@@ -389,7 +392,7 @@ export class CreateSessionComponent implements OnInit {
     }
   }
 
-  onFileChange(event:any){
+  onFileChange(event:any,index:number){
     const target = event.target;
     const reader:FileReader = new FileReader();
     reader.onload =(e:any)=>{
@@ -404,11 +407,16 @@ export class CreateSessionComponent implements OnInit {
 
       for(let item of this.data){
         for(let newitem of item){
-          this.preferedInstructor.push({
-            email_id:newitem,
+          this.newInstructorObj.push({
+            email_id:newitem, 
           });
         }
       }
+      console.log("",this.data);
+      let array = [] as any;
+      array =
+      (<FormArray>this.createSessionForm.controls['metadata']).at(index);
+      array['controls'].email_participant?.setValue(this.data);
      // this.newEmailParticipants(this.newdata);
       /* this.data.map((e:any)=>{
           e.email_id=e;
@@ -423,7 +431,7 @@ export class CreateSessionComponent implements OnInit {
       this.getExternalVendor();
       this.metaControl =
         (<FormArray>this.createSessionForm.controls['metadata']).at(index);
-      this.metaControl['controls'].external_vendor_name?.setValidators(Validators.required);;
+      this.metaControl['controls'].external_vendor_name?.setValidators(Validators.required);
     }
     else {
       this.metaControl = [];

@@ -12,7 +12,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./dna-manager-data.component.scss']
 })
 export class DnaManagerDataComponent implements OnInit {
-  
+  lableConstant: any = { french: {}, english: {} };
   RoleID = dataConstant.RoleID;
   getUserrole: any ;
   getprofileDetails: any;
@@ -47,10 +47,10 @@ export class DnaManagerDataComponent implements OnInit {
     private commonService: CommonService,
     private dnaService:DnaService,
   ) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.userId = this.getprofileDetails.data.id;
-  
   }
 
   ngOnInit(): void {

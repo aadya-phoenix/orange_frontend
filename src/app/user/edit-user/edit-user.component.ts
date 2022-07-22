@@ -17,6 +17,7 @@ const emailregexp = dataConstant.EmailPattren;
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
   dateTimeFormate = dataConstant.dateTimeFormate;
   createUserForm: FormGroup;
   user_id:any;
@@ -28,7 +29,7 @@ export class EditUserComponent implements OnInit {
   countriesObj:any =[];
   bussinessUnitObj:any = [];
   isRegion = false;
-  isDnaRegion = true;
+  isDnaRegion = false;
   isCreate = false;
   notmatched = false ;
   isSubmitted = false;
@@ -47,6 +48,7 @@ export class EditUserComponent implements OnInit {
     private generalDrpdownsService: GeneralDropdownsService,
     private commonService:CommonService,
     private router: Router,) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.createUserForm = this.formBuilder.group({
       email: new FormControl('', [Validators.required,Validators.pattern(emailregexp)]),
      // password: new FormControl('', []),
@@ -83,7 +85,8 @@ export class EditUserComponent implements OnInit {
     this.getRole();
     this.getRegionalCordinator();
     this.getLearningType();
-  
+    this.getBusinessUnits();
+    this.getRegions();
   }
 
   getSelectedRole(event:any){
@@ -92,51 +95,90 @@ export class EditUserComponent implements OnInit {
      this.isRegion = true;
      this.isLearningType = false;
      this.isDnaRegion = false;
+     this.isCountry = false;
+     this.isDomain = false;
+     this.isBussinessUnit = false;
      this.createUserForm.addControl('region_id', new FormControl(null, [Validators.required]));
      this.createUserForm.removeControl('learning_type');
+     this.createUserForm.removeControl('business_unit_id');
+     this.createUserForm.removeControl('domain_training_id');
+     this.createUserForm.removeControl('country');
     }
     else if(this.roleId == 4){
      this.isLearningType =true;
      this.isRegion = false;
+     this.isDnaRegion = false;
+     this.isCountry = false;
+     this.isDomain = false;
+     this.isBussinessUnit = false;
      this.createUserForm.addControl('learning_type', new FormControl(null, [Validators.required]));
      this.createUserForm.removeControl('region_id');
+     this.createUserForm.removeControl('business_unit_id');
+     this.createUserForm.removeControl('domain_training_id');
+     this.createUserForm.removeControl('country');
     }
     else if(this.roleId == 5 || this.roleId == 13){
       this.isDnaRegion = true;
+      this.isRegion = false;
+      this.isLearningType = false;
       this.isDomain = false;
       this.isBussinessUnit = false;
       this.isCountry = false;
       this.createUserForm.addControl('region_id', new FormControl(null, [Validators.required]));
       this.createUserForm.removeControl('learning_type');
-      this.createUserForm.get('business_unit_id')?.setValue(null);
-      this.createUserForm.get('domain_training_id')?.setValue(null);
-      this.createUserForm.get('country')?.setValue(null);
+      this.createUserForm.removeControl('business_unit_id');
+      this.createUserForm.removeControl('domain_training_id');
+      this.createUserForm.removeControl('country');
      }
-     else if(this.roleId == 6){
+     else if(this.roleId == 12){
       this.isBussinessUnit = true;
       this.isLearningType = false;
       this.isRegion = false;
+      this.isDomain = false;
+      this.isDnaRegion = false;
+      this.isCountry = false; 
       this.createUserForm.addControl('business_unit_id', new FormControl(null, [Validators.required]));
-      this.createUserForm.addControl('learning_type', new FormControl(null, [Validators.required]));
+      this.createUserForm.removeControl('learning_type');
+      this.createUserForm.removeControl('domain_training_id');
       this.createUserForm.removeControl('region_id');
       this.createUserForm.removeControl('country');
      }
      else if(this.roleId == 13){
       this.isCountry = true;
       this.isLearningType = false;
+      this.isDomain = false;
       this.isRegion = false;
+      this.isBussinessUnit = false;
       this.createUserForm.addControl('country', new FormControl(null, [Validators.required]));
-      this.createUserForm.addControl('business_unit_id', new FormControl(null, [Validators.required]));
-      this.createUserForm.addControl('learning_type', new FormControl(null, [Validators.required]));
-      this.createUserForm.removeControl('region_id');
+      this.createUserForm.removeControl('business_unit_id');
+      this.createUserForm.removeControl('learning_type');
+      this.createUserForm.removeControl('domain_training_id');
      }
-
+    else if(this.roleId == 14){
+      this.isDomain = true;
+      this.isRegion = false;
+      this.isBussinessUnit = false;
+      this.isCountry = false;
+      this.isDnaRegion = false;
+      this.isLearningType = false;
+      this.createUserForm.addControl('domain_training_id', new FormControl(null, [Validators.required]));
+      this.createUserForm.removeControl('region_id');
+      this.createUserForm.removeControl('learning_type');
+      this.createUserForm.removeControl('business_unit_id');
+      this.createUserForm.removeControl('country');
+     }
     else{
      this.isRegion = false;
+     this.isDnaRegion = false;
      this.isLearningType = false;
-     this.createUserForm.get('region_id')?.clearValidators();
-     this.createUserForm.get('region_id')?.setValue(null);
-     this.createUserForm.get('learning_type')?.setValue(null);
+     this.isBussinessUnit = false;
+     this.isCountry = false;
+     this.isDomain = false;
+     this.createUserForm.removeControl('region_id');
+     this.createUserForm.removeControl('learning_type');
+     this.createUserForm.removeControl('business_unit_id');
+     this.createUserForm.removeControl('country');
+     this.createUserForm.removeControl('domain_training_id');
     }
   }
 
@@ -210,22 +252,40 @@ export class EditUserComponent implements OnInit {
         this.commonService.hideLoading();
         if (res.status === 1 ) {
           this.user_details = res.data;
-          if(this.user_details.role_id === 3 ){
-            this.isRegion = true;
-            this.createUserForm.controls.region_id.setValue(this.user_details.region_id);
-          }
-          else{
-            this.isRegion = false;
-          }
           this.createUserForm.controls.email.setValue(this.user_details.email);
           this.createUserForm.controls.first_name.setValue(this.user_details.first_name);
           this.createUserForm.controls.last_name.setValue(this.user_details.last_name);
           this.createUserForm.controls.role_id.setValue(this.user_details.role_id);
-          if(this.user_details.role_id == 4){
+          if(this.user_details.role_id == 3 ){
+            this.isRegion = true;
+            this.createUserForm.addControl('region_id', new FormControl(null, [Validators.required]));
+            this.createUserForm.controls.region_id.setValue(this.user_details.region_id);
+          }
+          if(this.user_details.role_id == 4 ){
+            this.isLearningType = true;
+            this.createUserForm.addControl('learning_type', new FormControl(null, [Validators.required]));
             this.createUserForm.controls.learning_type.setValue(this.user_details.learning_type);
-            this. isLearningType = true;
-            }
-
+          }
+          if(this.user_details.role_id ==  5 || this.user_details.role_id == 13 ){
+            this.isDnaRegion = true;
+            this.createUserForm.addControl('region_id', new FormControl(null, [Validators.required]));
+            this.createUserForm.controls.region_id.setValue(this.user_details.region_id);
+          }
+          if(this.user_details.role_id == 12 ){
+            this.isBussinessUnit = true;
+            this.createUserForm.addControl('business_unit_id', new FormControl(null, [Validators.required]));
+            this.createUserForm.controls.business_unit_id.setValue(this.user_details.business_unit_id);
+          }
+          if(this.user_details.role_id == 13 ){
+            this.isCountry = true;
+            this.createUserForm.addControl('country', new FormControl(null, [Validators.required]));
+            this.createUserForm.controls.country.setValue(this.user_details.country);
+          }
+          if(this.user_details.role_id == 14 ){
+            this.isDomain = true;
+            this.createUserForm.addControl('domain_training_id', new FormControl(null, [Validators.required]));
+            this.createUserForm.controls.domain_training_id.setValue(this.user_details.domain_training_id);
+          }
           this.createUserForm.controls.pdl_member.setValue(this.user_details.pdl_member == "1" ? true : false);
           this.createUserForm.controls.status.setValue(this.user_details.status == "1" ? true : false);
           if(this.user_details.admin){

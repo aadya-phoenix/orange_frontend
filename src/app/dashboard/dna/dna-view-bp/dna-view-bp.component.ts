@@ -14,6 +14,7 @@ import { DnaForwardComponent } from '../dna-forward/dna-forward.component';
   styleUrls: ['./dna-view-bp.component.scss']
 })
 export class DnaViewBpComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {} };
 
   RoleID = dataConstant.RoleID;
   getUserrole: any = {};
@@ -66,6 +67,7 @@ export class DnaViewBpComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.isDomainExpert = this.getUserrole.id == this.RoleID.DomainExpert;
     this.isBussinessConsultant = this.getUserrole.id == this.RoleID.BussinessConsultant;
@@ -191,6 +193,9 @@ export class DnaViewBpComponent implements OnInit {
       trackerId:this.trackerId,
       type: 'forward'
     };
+    modalRef.componentInstance.passEntry.subscribe((res: any) => {
+      this.getLearningList()
+    });
   }
 
   getLearningList(){

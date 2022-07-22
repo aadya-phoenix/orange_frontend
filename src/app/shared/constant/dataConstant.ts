@@ -41,7 +41,7 @@ export const dataConstant = {
   GetReportStatus: {total: 'total', closed: 'closed', close: 'close',draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish' , reject: 'reject', expired:'expired'},
   DnaStatus:{ total: 'total', closed: 'closed', close: 'close',draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', forwarded:'forwarded', digital_learning:'digital_learning'
   },
-  DesignStatus:{ total: 'total', closed: 'closed', close: 'close',draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', reject: 'reject', forwarded:'forwarded', digital_learning:'digital_learning' ,forward:'forward',approve:'approve', feedback:'feedback', change:'change'
+  DesignStatus:{ total: 'total', closed: 'closed', close: 'close',draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', reject: 'reject', forwarded:'forwarded', digital_learning:'digital_learning' ,forward:'forward',approve:'approve', feedback:'feedback', change:'change', onHold:'on_hold'
 },
   ImageUrl: 'https://orange.mindscroll.info/public/public',
   BaseUrl:'https://orange.mindscroll.info',

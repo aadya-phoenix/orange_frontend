@@ -6,10 +6,9 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="font-20 text_white">Get a report.</span>
+                        <span class="font-20 text_white">{{lableConstant.get_a_report}}</span>
                         <span class="divider1"></span>
-                        <span class="title-detail mt-6">Request a report, this is your one stop shop for all your
-                            reporting needs.</span>
+                        <span class="title-detail mt-6"> {{lableConstant.request_training_vc_report}}</span>
                     </div>
                 </div>
             </div>
@@ -25,7 +24,7 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
                             <a [routerLink]="['/dashboard/olreport']" class="text_white">Create New Get a report</a>
@@ -46,7 +45,7 @@
                 <span>View Get a report Request</span>
                 <span class="cc-text_css"> ({{ requestdata.request_id }}) -
                 </span>
-                <span spellcheck="text_orange" class="text_orange">Request Status - {{ requestdata.status_new | titlecase
+                <span spellcheck="text_orange" class="text_orange">{{lableConstant.Request_Status}} - {{ requestdata.status_new | titlecase
                     }}</span>
             </p>
         </div>
@@ -69,7 +68,7 @@
                         <button type="button" class="btn mr-2" *ngIf="isUpdate()"
                             [ngClass]="(isPublish() || isForward()) ?  'btn-secondary'  : 'btn-primary'"
                             (click)="updateRequest()">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">Update</span>
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">{{lableConstant.Update}}</span>
                         </button>
                         <button type="button" class="btn btn-secondary  mr-2" *ngIf="isReject()"
                             (click)="statusChangeRequest(GetReportStatus.reject)">
@@ -77,7 +76,7 @@
                         </button>
                     </div>
                     <button type="button" class="btn btn-secondary" *ngIf="isOtherRoc()" (click)="transferToOtherRoc()">
-                        <i class="fa fa-exchange" aria-hidden="true"></i><span class="pl-1">Transfer to Other ROC</span>
+                        <i class="fa fa-exchange" aria-hidden="true"></i><span class="pl-1">{{lableConstant.Transfer_to_other_Regional_Training_Coordinator}}</span>
                     </button>
                 </div>
 
@@ -106,7 +105,7 @@
                                 </div>
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Report Type</label>
+                                        <label for="exampleInputEmail1">{{lableConstant.Report_Type}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                                 {{requestdata.report_type}}
@@ -116,7 +115,7 @@
                                 </div>
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.report_type =='Training'">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Training Title</label>
+                                        <label for="exampleInputEmail1">{{lableConstant.Training_Title}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                                 {{requestdata.title | titlecase}}
@@ -126,7 +125,7 @@
                                 </div>
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.transcript_status">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Transcript Status</label>
+                                        <label for="exampleInputEmail1">{{lableConstant.Transcript_Status}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                                 {{ requestdata.transcript_status}}
@@ -176,7 +175,7 @@
                                 </div>                           
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.region_name">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Regions</label>
+                                        <label for="exampleInputEmail1">{{lableConstant.Region_Name}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                             <span *ngFor="let item of requestdata.region_name" class="d-flex" >
@@ -188,7 +187,7 @@
                                 </div>
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.country">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Specific Country</label>
+                                        <label for="exampleInputEmail1">{{lableConstant.Specific_Country}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                                 {{ requestdata.country}}
@@ -198,7 +197,7 @@
                                 </div>                            
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.business_unit">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Business Unit</label>
+                                        <label for="exampleInputEmail1">{{lableConstant.Business_Unit}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                                 {{ requestdata.business_unit}}
@@ -218,7 +217,7 @@
                                 </div>
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.management_code">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Management Code</label>
+                                        <label for="exampleInputEmail1">{{lableConstant.Management_Code}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                                 {{ requestdata.management_code}}
@@ -228,7 +227,7 @@
                                 </div>                                                 
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">All available history</label>
+                                        <label for="exampleInputEmail1">{{lableConstant.All_available_history}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                                 {{ requestdata.all_available_history == "1" ? "Yes" : "No"}}
@@ -238,7 +237,7 @@
                                 </div>                            
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.start_date">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Start Date</label>
+                                        <label for="exampleInputEmail1">{{lableConstant.Start_Date}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                                 {{ requestdata.start_date | date: dateFormate }}
@@ -248,7 +247,7 @@
                                 </div>                           
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.end_date">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">End Date</label>
+                                        <label for="exampleInputEmail1">{{lableConstant.End_Date}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                                 {{ requestdata.end_date | date: dateFormate }}
@@ -258,7 +257,7 @@
                                 </div>                            
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.contact_person">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Contact Person</label>
+                                        <label for="exampleInputEmail1">{{lableConstant.Contact_Person}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                                 {{ requestdata.contact_person}}
@@ -268,7 +267,7 @@
                                 </div>                          
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.report_purpose">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Report Purpose</label>
+                                        <label for="exampleInputEmail1">{{lableConstant.Report_Purpose}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                                 {{ requestdata.report_purpose}}
@@ -278,7 +277,7 @@
                                 </div>                           
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Deadline</label>
+                                        <label for="exampleInputEmail1">{{lableConstant.Deadline}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                                 {{ requestdata.deadline | date: dateFormate }}
@@ -288,18 +287,18 @@
                                 </div>                           
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.attachment">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Attachment</label>
+                                        <label for="exampleInputEmail1">{{lableConstant.Attachments}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
-                                                Click here to <a class="text_orange" href="{{requestdata.attachUrl}}"
-                                                    target="_blank">View</a>.
+                                                <a class="text_orange" href="{{requestdata.attachUrl}}"
+                                                    target="_blank">{{lableConstant.Click_here_to_View_resource}}</a>.
                                             </span>
                                         </div>
                                     </div>
                                 </div>                          
                                 <div class="col-sm-12 col-md-6" *ngIf="requestdata.additional_comment">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Additional Comments</label>
+                                        <label for="exampleInputEmail1">{{lableConstant.Additional_Comments}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
                                                 {{ requestdata.additional_comment}}
@@ -324,7 +323,7 @@
                             <div class="card-header color-orange">
                                 <div class="d-flex justify-content-between">
                                     <span class="row">
-                                        View History <h5 class="card-title ml-1">
+                                        {{lableConstant.View_History}}<h5 class="card-title ml-1">
                                             <b class="color-orange"> ({{requestdata.request_id}})</b>
                                         </h5>
                                     </span>
@@ -338,8 +337,8 @@
                                             <th scope="col">Submitted by</th>
                                             <th scope="col">Sent to</th>
                                             <th scope="col">Last Modified</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Comments</th>
+                                            <th scope="col">{{lableConstant.Status}}</th>
+                                            <th scope="col">{{lableConstant.Comments}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

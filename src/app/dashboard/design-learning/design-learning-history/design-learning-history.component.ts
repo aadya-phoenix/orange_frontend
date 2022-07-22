@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DesignLearningService } from 'src/app/shared/services/design-learning/design-learning.service';
 
@@ -10,10 +11,10 @@ import { DesignLearningService } from 'src/app/shared/services/design-learning/d
   styleUrls: ['./design-learning-history.component.scss']
 })
 export class DesignLearningHistoryComponent implements OnInit {
-
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
 
+  lableConstant: any = { french: {}, english: {} };
   public historyList: any;
   public objectDetail: any;
   public modalType: any;
@@ -25,7 +26,9 @@ export class DesignLearningHistoryComponent implements OnInit {
     private designService: DesignLearningService,
     private commonService: CommonService,
     private router: Router
-  ) { }
+  ) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+  }
 
   ngOnInit(): void {
     this.objectDetail = this.props.objectDetail ? this.props.objectDetail : '';

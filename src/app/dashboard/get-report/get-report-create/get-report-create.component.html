@@ -6,10 +6,10 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/3.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="breade_text_span1">Get a report</span>
+                        <span class="breade_text_span1">{{lableConstant.get_a_report}}</span>
                         <span class="divider"></span>
                         <span class="breade_text_span">
-                            Request a report, this is your one stop shop for all your reporting needs.
+                            {{lableConstant.request_training_vc_report}}
                         </span>
                     </div>
                 </div>
@@ -25,13 +25,13 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">Dashboard</a>
+                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/olreport']" class="text_white">Get a report</a>
+                            <a [routerLink]="['/dashboard/olreport']" class="text_white">{{lableConstant.get_a_report}}</a>
                         </li>
                         <li>
-                            <span class="text_white span_dis">{{ report_id === 0 ? 'New Request' : 'Update
+                            <span class="text_white span_dis">{{ report_id === 0 ? lableConstant.New_Request : 'Update
                                 Request'}}</span>
                         </li>
                     </ol>
@@ -44,12 +44,12 @@
             <div class="d-flex align-items-center">
                 <img src="../../../../assets/images/formm.png" class="form_img_req" />
                 <p class="mt-2 ml-2 mb-2 view-re_css">
-                    <span class="comlte_css">Complete this form and click on the submit button</span>
+                    <span class="comlte_css">{{lableConstant.Complete_this_form_and_click_on_the_submit_button}}</span>
                 </p>
             </div>
             <a class="float-right view_overall" data-toggle="collapse" href="#collapseExample" role="button"
                 aria-expanded="false" aria-controls="collapseExample">
-                View overall request status<img src="../../../../assets/images/Viewreq.png" class="ml-2" width="40" />
+                {{lableConstant.View_overall_request_status}}<img src="../../../../assets/images/Viewreq.png" class="ml-2" width="40" />
             </a>
         </div>
     </div>
@@ -64,7 +64,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Report Type <span class="text-danger-ligth">* </span>
+                                                {{lableConstant.Report_Type}} <span class="text-danger-ligth">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         placement="right"
@@ -81,7 +81,7 @@
                                                 *ngIf="(getReportForm.controls['report_type'].invalid && (getReportForm.controls['report_type'].dirty || getReportForm.controls['report_type'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="getReportForm.controls['report_type'].errors?.required">
-                                                    Report Type cannot be blank
+                                                    {{lableConstant.Report_Type}} cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -102,7 +102,7 @@
             <div class="card" *ngIf="!isCertification">
                 <div class="card-header">
                     <div class="header_div_promt">
-                        <strong class="font-16">Training</strong>
+                        <strong class="font-16">{{lableConstant.Training}}</strong>
                     </div>
                 </div>
                 <div class="card-body card_width">
@@ -110,7 +110,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="form-control-label">
-                                    Training Title
+                                    {{lableConstant.Training_Title}}
                                     <span class="text-danger-ligth">* </span>
                                     <a>
                                         <i class="fa fa-info-circle info_circle" aria-hidden="true"
@@ -124,7 +124,7 @@
                                     *ngIf="(getReportForm.controls['title'].invalid && (getReportForm.controls['title'].dirty || getReportForm.controls['title'].touched)) || isSubmitted">
                                     <div class="error_message"
                                         *ngIf="getReportForm.controls['title'].errors?.required">
-                                        Training Title cannot be blank
+                                        {{lableConstant.Training_Title}} cannot be blank
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="form-control-label">
-                                    Transcript Status
+                                    {{lableConstant.Transcript_Status}}
                                     <span class="text-danger-ligth">* </span>
                                     <a>
                                         <i class="fa fa-info-circle info_circle" aria-hidden="true"
@@ -147,7 +147,7 @@
                                     *ngIf="(getReportForm.controls['transcript_status'].invalid && (getReportForm.controls['transcript_status'].dirty || getReportForm.controls['transcript_status'].touched)) || isSubmitted">
                                     <div class="error_message"
                                         *ngIf="getReportForm.controls['transcript_status'].errors?.required">
-                                        Transcript Status cannot be blank
+                                        {{lableConstant.Transcript_Status}} cannot be blank
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@
             <div class="card" *ngIf="isCertification">
                 <div class="card-header">
                     <div class="header_div_promt">
-                        <strong class="font-16">Certification</strong>
+                        <strong class="font-16">{{lableConstant.Certification}}</strong>
                     </div>
                 </div>
                 <div class="card-body card_width">
@@ -267,14 +267,14 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="header_div_promt">
-                                    <strong class="font-16">Target Population</strong>
+                                    <strong class="font-16">{{lableConstant.Target_Population}}</strong>
                                 </div>
                             </div>
                             <div class="card-body card_width">
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Region Name
+                                            {{lableConstant.Region_Name}}
                                         </label>
                                         <ng-select [items]="regionObj" [multiple]="true"
                                             (change)="getRegionName($event)" bindLabel="name" bindValue="name"
@@ -285,7 +285,7 @@
                                 <div class="col-sm-3" *ngIf="isSpecificCountry">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Specific Country
+                                           {{lableConstant.Specific_Country}}
                                         </label>
                                         <ng-select placeholder="Please select Specific Country" [items]="countryObj"
                                             bindLabel="country_name" bindValue="country_name" formControlName="country"
@@ -296,7 +296,7 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Business Unit
+                                            {{lableConstant.Business_Unit}}
                                         </label>
                                         <ng-select placeholder="Please select Business Unit" [items]="businessUnitsObj"
                                             (change)="getOtherBussinessUnit($event)" bindLabel="team_name"
@@ -316,7 +316,7 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Management Code
+                                            {{lableConstant.Management_Code}}
                                         </label>
                                         <input type="text" class="form-control form_width"
                                             formControlName="management_code" />
@@ -327,7 +327,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="header_div_promt">
-                                    <strong class="font-16">Reporting Period</strong>
+                                    <strong class="font-16">{{lableConstant.Reporting_Period}}</strong>
                                 </div>
                             </div>
                             <div class="card-body card_width">
@@ -336,7 +336,7 @@
                                         <div class="mb-2">
                                             <input type="checkbox" (change)="getAvailableHistory($event)"
                                                 formControlName="all_available_history">
-                                            <strong class="font-16 ml-2">All available history</strong>
+                                            <strong class="font-16 ml-2">{{lableConstant.All_available_history}}</strong>
                                         </div>
                                     </div>
                                 </div>
@@ -350,26 +350,26 @@
                                                         <th scope="col"> <input type="radio" value="last_year"
                                                                 formControlName="date_type"
                                                                 (change)="getDate($event)"><strong
-                                                                class="font-16 ml-2">Last year</strong></th>
+                                                                class="font-16 ml-2">{{lableConstant.Last_year}}</strong></th>
                                                         <th scope="col"> <input type="radio" value="this_year"
                                                                 formControlName="date_type" (change)="getDate($event)">
-                                                            <strong class="font-16 ml-2">This year</strong>
+                                                            <strong class="font-16 ml-2">{{lableConstant.This_year}}</strong>
                                                         </th>
                                                         <th scope="col"> <input type="radio" value="last_month"
                                                                 formControlName="date_type" (change)="getDate($event)">
-                                                            <strong class="font-16 ml-2">Last month</strong>
+                                                            <strong class="font-16 ml-2">{{lableConstant.Last_month}}</strong>
                                                         </th>
                                                         <th scope="col"> <input type="radio" value="last_week"
                                                                 formControlName="date_type" (change)="getDate($event)">
-                                                            <strong class="font-16 ml-2">Last week</strong>
+                                                            <strong class="font-16 ml-2">{{lableConstant.Last_week}}</strong>
                                                         </th>
                                                         <th> <input type="radio" value="this_week"
                                                                 formControlName="date_type" (change)="getDate($event)">
-                                                            <strong class="font-16 ml-2">This week</strong>
+                                                            <strong class="font-16 ml-2">{{lableConstant.This_week}}</strong>
                                                         </th>
                                                         <th> <input type="radio" value="custom"
                                                                 formControlName="date_type" (change)="getDate($event)">
-                                                            <strong class="font-16 ml-2">Custom date</strong>
+                                                            <strong class="font-16 ml-2">{{lableConstant.Custom_date}}</strong>
                                                         </th>
                                                     </tr>
                                                 </thead>
@@ -381,7 +381,7 @@
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                                                    Start Date
+                                                   {{lableConstant.Start_Date}}
                                                 </label>
                                                 <input type="date" class="form-control form_width"
                                                     formControlName="start_date"
@@ -393,7 +393,7 @@
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                                                    End Date
+                                                   {{lableConstant.End_Date}}
                                                 </label>
                                                 <input type="date" class="form-control form_width"
                                                     formControlName="end_date"
@@ -408,7 +408,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="header_div_promt">
-                                    <strong class="font-16">Other Information</strong>
+                                    <strong class="font-16">{{lableConstant.Other_Information}}</strong>
                                 </div>
                             </div>
                             <div class="card-body card_width">
@@ -416,7 +416,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Contact Person
+                                                {{lableConstant.Contact_Person}}
                                             </label>
                                             <input type="text" class="form-control form_width"
                                                 formControlName="contact_person" />
@@ -426,7 +426,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Report Purpose
+                                                {{lableConstant.Report_Purpose}}
                                             </label>
                                             <input type="text" class="form-control form_width"
                                                 formControlName="report_purpose" />
@@ -435,7 +435,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Deadline
+                                               {{lableConstant.Deadline}}
                                                 <span class="text-danger-ligth">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
@@ -449,7 +449,7 @@
                                                 *ngIf="(getReportForm.controls['deadline'].invalid && (getReportForm.controls['deadline'].dirty || getReportForm.controls['deadline'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="getReportForm.controls['deadline'].errors?.required">
-                                                    Deadline cannot be blank
+                                                    {{lableConstant.Deadline}} cannot be blank
                                                 </div>
                                             </div>
                                         </div>
@@ -458,20 +458,20 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Attachments
+                                               {{lableConstant.Attachments}}
                                             </label>
                                             <input type="file" id="reportAttachment" class="form-control form_width"
                                                 (change)="handleFileInput($event)" formControlName="attachment" />
                                             <span class="pt-2" *ngIf="get_report_details.attachUrl">
-                                                Click here to <a href="{{get_report_details.attachUrl}}" target="_blank"
-                                                    style="color:#ff7900">View</a>
+                                                <a href="{{get_report_details.attachUrl}}" target="_blank"
+                                                    style="color:#ff7900">{{lableConstant.Click_here_to_View_resource}}</a>
                                             </span>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Additional Comments
+                                                {{lableConstant.Additional_Comments}}
                                             </label>
                                             <textarea type="text" class="form-control form_width-textarea" formControlName="additional_comment"
                                                 maxlength="500" rows="3" (keyup)="valueChange('comment')">
@@ -530,15 +530,14 @@
             <button class="btn btn-secondary mr-1" type="submit" *ngIf="isReject()"
                 (click)="statusChangeRequest(reportStatus.reject)"><i aria-hidden="true" class="fa fa-times"></i><span
                     class="pl-1">Reject</span></button>
-            <button class="btn btn-secondary" *ngIf="isDraft()" (click)="save(reportStatus.draft)">Save
-                as draft
+            <button class="btn btn-secondary" *ngIf="isDraft()" (click)="save(reportStatus.draft)">{{lableConstant.Save_as_draft}}
             </button>
         </div>
     </ng-container>
     <div class="collapse" id="collapseExample">
         <div class="card card-body req_status-card">
             <div class="card_header reqst_header">
-                <p>Overall request Status</p>
+                <p>{{lableConstant.Overall_request_Status}}</p>
                 <i class="fa fa-times fa_cross mr-2" aria-hidden="true" data-toggle="collapse" href="#collapseExample"
                     role="button" aria-expanded="false" aria-controls="collapseExample"></i>
             </div>
@@ -549,7 +548,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/draftsbl.png" />
                             </div>
-                            <p>Draft</p>
+                            <p>{{lableConstant.Draft}}</p>
                             <span class="number_css">
                                 {{report_count.draft}}
                             </span>
@@ -563,7 +562,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/closedbl.png" />
                             </div>
-                            <p>Submitted</p>
+                            <p>{{lableConstant.Submitted}}</p>
                             <span class="number_css">
                                 {{report_count.submitted}}
                             </span>
@@ -577,7 +576,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/pendingbl.png" />
                             </div>
-                            <p>Pending</p>
+                            <p>{{lableConstant.pending}}</p>
                             <span class="number_css">
                                 {{report_count.pending}}
                             </span>
@@ -591,7 +590,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/rejectbl.png" />
                             </div>
-                            <p>Rejected</p>
+                            <p>{{lableConstant.Rejected}}</p>
                             <span class="number_css">
                                 {{report_count.rejected?report_count.rejected:0}}
                             </span>
@@ -603,7 +602,7 @@
             <div class="view-comple-req_div">
                 <button class="btn btn-primary view-comple-req justify-content-center p-1"
                     [routerLink]="['/dashboard/olreport/view-complete-report']">
-                    <i class="fa fa-database mr-1" aria-hidden="true"></i>View all activity Request
+                    <i class="fa fa-database mr-1" aria-hidden="true"></i>{{lableConstant.View_all_activity_report}}
                 </button>
             </div>
             <!--ROW END-->

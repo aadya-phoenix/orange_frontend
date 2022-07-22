@@ -15,6 +15,8 @@ export class GetReportCloseOnUpdateComponent implements OnInit {
 
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
+
+  lableConstant: any = { french: {}, english: {} };
   publishGetReportForm: FormGroup;
   isSubmitted = false;
   status = '';
@@ -24,6 +26,7 @@ export class GetReportCloseOnUpdateComponent implements OnInit {
     private getReportService: GetReportService,
     private commonService: CommonService,
     private router: Router) {
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
       this.publishGetReportForm = this.formBuilder.group({
         status_comment: new FormControl('', [Validators.required]),
       });
