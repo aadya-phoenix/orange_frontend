@@ -88,11 +88,11 @@ export class DnaUserComponent implements OnInit {
     this.router.navigateByUrl('dashboard/dna/tracker');
   }
 
-  viewRequest(user: any) {
+ /*  viewRequest(user: any) {
     if (user && user.id) {
       this.router.navigateByUrl(`dashboard/dna/user/edit/${user.id}`);
     }
-  }
+  } */
 
   onSort({ column, direction }: any) {
     this.headers.forEach((header: { sortable: any; direction: string; }) => {
