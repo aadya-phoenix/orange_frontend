@@ -562,7 +562,7 @@ export class SmedbCreateComponent implements OnInit {
     else {
       body.sme_id = this.sme_id;
       if (this.isProcced) {
-        body.matadata_update = 1;
+        body.metadata_update = 1;
         body.metadata = {
           "professional-certifications": this.professionalCertificationsForm.value["professional-certifications"],
           "comments": this.commentsForm.value
@@ -581,7 +581,7 @@ export class SmedbCreateComponent implements OnInit {
         }
       }
       else if (this.sme_details.metadata) {
-        body.matadata_update = 0;
+        body.metadata_update = 0;
       }
       this.commonService.showLoading();
       this.smeService.update(body).subscribe(

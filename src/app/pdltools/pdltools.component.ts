@@ -19,9 +19,11 @@ HighchartsSolidGauge(Highcharts);
 })
 export class PdltoolsComponent implements AfterViewInit {
   lableConstant: any = { french: {}, english: {} };
+  isShowChart = false;
   yearsList: any = [];
   moduleList: any = [];
   courceData: any = {};
+  newLearningData: any = {};
   smeData: any = {};
   sessionData: any = {};
   dnaData: any = {};
@@ -29,28 +31,33 @@ export class PdltoolsComponent implements AfterViewInit {
   publisherReportData: any = [];
   rocReportData: any = [];
   rocData: any = [];
+  learningStatusData: any = [];
+  dnaStatusData:any = [];
   contentSupportData: any = [];
   deliveryMethodData: any = [];
   voiceOverData: any = [];
   publisherData: any = [];
   activeSMECount: any = [];
+  yearWiseSMEData: any = [];
+  yearWiseDNAData: any = [];
+  yearWiseLearningData: any = [];
   trackerList = [];
-  dnaPriority:any = [];
-  dnaRegion:any = [];
-  dnaCountry:any = [];
+  dnaPriority: any = [];
+  dnaRegion: any = [];
+  dnaCountry: any = [];
   modules = dataConstant.Modules;
   year = null;
-  selectedTracker = null;
+  selectedTracker: any = null;
   selectedModule: any;
 
   constructor(private commonService: CommonService, private pldtoolsService: PldtoolsService, private modalService: NgbModal, private dnaService: DnaService) {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.yearsList = this.commonService.LastFewYearsList();
-    this.year = this.yearsList[0].id;
     this.moduleList = dataConstant.ModuleList;
-    this.selectedModule = this.modules.course;
   }
   public ngAfterViewInit(): void {
+    this.year = this.yearsList[0].id;
+    this.selectedModule = this.modules.course;
     this.getNewData();
   }
 
@@ -81,6 +88,7 @@ export class PdltoolsComponent implements AfterViewInit {
         this.getLearningModuleData();
       }
       if (this.selectedModule === this.modules.dna) {
+        this.selectedTracker = null;
         this.getTrackerList();
       }
     }
@@ -118,10 +126,12 @@ export class PdltoolsComponent implements AfterViewInit {
       year: this.year
     }
     this.commonService.showLoading();
+    this.isShowChart = false;
     this.pldtoolsService.getCourceData(body).subscribe(
       (res: any) => {
         if (res && res.status == 1) {
           this.courceData = res.data;
+          this.isShowChart = true;
           this.publisherReportData = [];
           this.rocReportData = [];
           this.rocData = Object.entries(this.courceData.roc_activity);
@@ -143,14 +153,16 @@ export class PdltoolsComponent implements AfterViewInit {
         } else {
           this.commonService.toastErrorMsg('Error', res.message);
         }
-        this.createChartColumn(this.courceData);
-        this.createChartLine('chart-publisher', 'Publisher Activity Report', this.publisherReportData);
-        this.createChartLine('chart-roc', 'ROC Activity Report', this.rocReportData);
-        this.createMonthWiseLinechart('comp-chart-publisher-month', `Publisher month wise average time ${this.year}`, this.publisherReportData)
-        this.createMonthWiseLinechart('comp-chart-roc-month', `ROC month wise average time ${this.year}`, this.rocReportData)
-        this.createPieChart();
-        this.CreateLinechart();
-        this.createChartDepartActivities();
+        setTimeout(() => {
+          this.createChartColumn(this.courceData);
+          this.createChartLine('chart-publisher', 'Publisher Activity Report', this.publisherReportData);
+          this.createChartLine('chart-roc', 'ROC Activity Report', this.rocReportData);
+          this.createMonthWiseLinechart('comp-chart-publisher-month', `Publisher month wise average time ${this.year}`, this.publisherReportData)
+          this.createMonthWiseLinechart('comp-chart-roc-month', `ROC month wise average time ${this.year}`, this.rocReportData)
+          this.createPieChart();
+          this.CreateLinechart();
+          this.createChartDepartActivities();
+        });
         this.commonService.hideLoading();
       },
       (err: any) => {
@@ -409,6 +421,21 @@ export class PdltoolsComponent implements AfterViewInit {
           Object.keys(this.smeData.sme_status).forEach((element: any) => {
             this.activeSMECount.push([element, this.smeData.sme_status[element]]);
           });
+          this.yearWiseSMEData = []
+          Object.keys(this.smeData.year).forEach((element: any) => {
+            Object.keys(this.smeData.year[element]).forEach((details: any) => {
+              let data = this.yearWiseSMEData.find((x: { name: any; }) => x.name == details);
+              if (data) {
+                data.data.push(this.smeData.year[element][details]);
+              }
+              else {
+                this.yearWiseSMEData.push({
+                  name: details,
+                  data: [this.smeData.year[element][details]]
+                })
+              }
+            });
+          });
           this.createSMEChart();
         } else {
           this.commonService.toastErrorMsg('Error', res.message);
@@ -434,6 +461,13 @@ export class PdltoolsComponent implements AfterViewInit {
           if (res && res.status == 1) {
             this.dnaData = res.data;
             this.dnaPriority = [];
+            this.dnaStatusData = [{ y: 0, color: '#ffd200', key: 'pending' }, { y: 0, color: '#cd3c14', key: 'forwarded' }, { y: 0, color: '#50be87', key: 'closed' }];
+            Object.keys(this.dnaData.status).forEach((element: any) => {
+              let data = this.dnaStatusData.find((x: { key: any; }) => x.key == element);
+              if (data) {
+                data.y = this.dnaData.status[element]
+              }
+            });
             Object.keys(this.dnaData.priority).forEach((element: any) => {
               this.dnaPriority.push([element, this.dnaData.priority[element]]);
             });
@@ -445,6 +479,21 @@ export class PdltoolsComponent implements AfterViewInit {
             Object.keys(this.dnaData.region).forEach((element: any) => {
               this.dnaRegion.push([element, this.dnaData.region[element]]);
             });
+            this.yearWiseDNAData = []
+            // Object.keys(this.dnaData.year).forEach((element: any) => {
+            //   Object.keys(this.dnaData.year[element]).forEach((details: any) => {
+            //     let data = this.yearWiseDNAData.find((x: { name: any; }) => x.name == details);
+            //     if (data) {
+            //       data.data.push(this.dnaData.year[element][details]);
+            //     }
+            //     else {
+            //       this.yearWiseDNAData.push({
+            //         name: details,
+            //         data: [this.dnaData.year[element][details]]
+            //       })
+            //     }
+            //   });
+            // });
             this.createDNAModuleChart();
           } else {
             this.commonService.toastErrorMsg('Error', res.message);
@@ -460,27 +509,51 @@ export class PdltoolsComponent implements AfterViewInit {
   }
 
   private getLearningModuleData() {
-    // const body = {
-    //   year: this.year
-    // }
-    // this.commonService.showLoading();
-    // this.pldtoolsService.getLearningModuleData(body, 1).subscribe(
-    //   (res: any) => {
-    //     if (res && res.status == 1) {
-    //       this.courceData = res.data;
-    setTimeout(() => {
-      this.createLearningModuleChart();
-    }, 2000);
-    //     } else {
-    //       this.commonService.toastErrorMsg('Error', res.message);
-    //     }
-    //     this.commonService.hideLoading();
-    //   },
-    //   (err: any) => {
-    //     this.commonService.hideLoading();
-    //     this.commonService.errorHandling(err);
-    //   }
-    // );
+    const body = {
+      year: this.year
+    }
+    this.commonService.showLoading();
+    this.pldtoolsService.getLearningModuleData(body).subscribe(
+      (res: any) => {
+        if (res && res.status == 1) {
+          this.newLearningData = res.data;
+          this.yearWiseLearningData = [];
+
+          this.learningStatusData = [{ y: 0, color: '#4bb4e6', key: 'draft' }, { y: 0, color: '#a885db', key: 'submitted' }, { y: 0, color: '#ffd200', key: 'pending' },
+          { y: 0, color: '#cd3c14', key: 'forwarded' }, { y: 0, color: '#50be87', key: 'closed' }, { y: 0, color: '#ffb4e6', key: 'reject' }];
+          Object.keys(this.newLearningData.status).forEach((element: any) => {
+            let data = this.learningStatusData.find((x: { key: any; }) => x.key == element);
+            if (data) {
+              data.y = this.newLearningData.status[element]
+            }
+          });
+          Object.keys(this.newLearningData.year).forEach((element: any) => {
+            Object.keys(this.newLearningData.year[element]).forEach((details: any) => {
+              let data = this.yearWiseLearningData.find((x: { name: any; }) => x.name == details);
+              if (data) {
+                data.data.push(this.newLearningData.year[element][details]);
+              }
+              else {
+                let statusData = this.learningStatusData.find((x: { key: any; }) => x.key == details);
+                this.yearWiseLearningData.push({
+                  name: details,
+                  color: statusData ? statusData.color : '',
+                  data: [this.newLearningData.year[element][details]]
+                })
+              }
+            });
+          });
+          this.createLearningModuleChart();
+        } else {
+          this.commonService.toastErrorMsg('Error', res.message);
+        }
+        this.commonService.hideLoading();
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
+      }
+    );
   }
 
   private createSMEChart(): void {
@@ -677,7 +750,7 @@ export class PdltoolsComponent implements AfterViewInit {
         text: 'SME database yearly report'
       },
       xAxis: {
-        categories: ['2018', '2019', '2020', '2021', '2022']
+        categories: Object.keys(this.smeData.year),
       },
       credits: {
 
@@ -720,19 +793,7 @@ export class PdltoolsComponent implements AfterViewInit {
           }
         }
       },
-      series: [{
-        name: 'Pending approval from manager',
-        data: [5, 3, 4, 7, 2]
-      }, {
-        name: 'Save as draft',
-        data: [2, 2, 3, 2, 1]
-      }, {
-        name: 'Added to the SME database',
-        data: [3, 4, 4, 2, 5]
-      }, {
-        name: 'Rejected',
-        data: [3, 4, 4, 2, 5]
-      }]
+      series: this.yearWiseSMEData
     } as any);
   }
 
@@ -751,7 +812,7 @@ export class PdltoolsComponent implements AfterViewInit {
         enabled: false,
       },
       xAxis: {
-        categories: ['Draft', 'Submitted', 'Pending', 'Forwarded', 'Closed', 'Rejected'],
+        categories: ['Draft', 'Submitted', 'Pending', 'Forwarded', 'Closed', 'Rejected'],//Object.keys(this.newLearningData.status),
         labels: {
           skew3d: true,
           style: {
@@ -767,7 +828,86 @@ export class PdltoolsComponent implements AfterViewInit {
       },
       series: [{
         name: 'Requests',
-        data: [10, 20, 50, 10, 5, 7]
+        data: this.learningStatusData
+        //Object.values(this.newLearningData.status),
+      }],
+
+      tooltip: {
+        headerFormat: '<b>{point.key}</b><br>',
+        pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: {point.y}'
+      },
+    } as any);
+
+    Highcharts.chart('comp-design-department' as any, {
+      chart: {
+        type: 'column',
+        options3d: {
+          enabled: true
+        }
+      },
+      title: {
+        text: `Learning Module Department ${this.year}`,
+      },
+      credits: {
+        enabled: false,
+      },
+      xAxis: {
+        categories: Object.keys(this.newLearningData.department),
+        labels: {
+          skew3d: true,
+          style: {
+            fontSize: '16px'
+          }
+        }
+      },
+
+      yAxis: {
+        title: {
+          text: null
+        }
+      },
+      series: [{
+        name: 'Department Requests',
+        data: Object.values(this.newLearningData.department),
+      }],
+
+      tooltip: {
+        headerFormat: '<b>{point.key}</b><br>',
+        pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: {point.y}'
+      },
+    } as any);
+
+    Highcharts.chart('comp-design-project-manager' as any, {
+      chart: {
+        type: 'column',
+        options3d: {
+          enabled: true
+        }
+      },
+      title: {
+        text: `Learning Module Project Manager ${this.year}`,
+      },
+      credits: {
+        enabled: false,
+      },
+      xAxis: {
+        categories: Object.keys(this.newLearningData.project_manager),
+        labels: {
+          skew3d: true,
+          style: {
+            fontSize: '16px'
+          }
+        }
+      },
+
+      yAxis: {
+        title: {
+          text: null
+        }
+      },
+      series: [{
+        name: 'Manager Request(s)',
+        data: Object.values(this.newLearningData.project_manager),
       }],
 
       tooltip: {
@@ -784,7 +924,7 @@ export class PdltoolsComponent implements AfterViewInit {
         text: 'Learning Module yearly report'
       },
       xAxis: {
-        categories: ['2018', '2019', '2020', '2021', '2022']
+        categories: Object.keys(this.newLearningData.year),
       },
       credits: {
         enabled: false,
@@ -826,25 +966,7 @@ export class PdltoolsComponent implements AfterViewInit {
           }
         }
       },
-      series: [{
-        name: 'Draft',
-        data: [5, 3, 4, 7, 2]
-      }, {
-        name: 'Submitted',
-        data: [2, 2, 3, 2, 1]
-      }, {
-        name: 'Pending',
-        data: [3, 4, 4, 2, 5]
-      }, {
-        name: 'Forwarded',
-        data: [3, 4, 4, 2, 5]
-      }, {
-        name: 'Closed',
-        data: [3, 4, 4, 2, 5]
-      }, {
-        name: 'Rejected',
-        data: [3, 4, 4, 2, 5]
-      }]
+      series: this.yearWiseLearningData
     } as any);
   }
 
@@ -857,13 +979,13 @@ export class PdltoolsComponent implements AfterViewInit {
         }
       },
       title: {
-        text: `Learning Module ${this.year}`,
+        text: `Learning Needs Tool(DNA) ${this.year}`,
       },
       credits: {
         enabled: false,
       },
       xAxis: {
-        categories: Object.keys(this.dnaData.status),
+        categories:  ['Pending', 'Forwarded', 'Closed'],
         labels: {
           skew3d: true,
           style: {
@@ -879,7 +1001,7 @@ export class PdltoolsComponent implements AfterViewInit {
       },
       series: [{
         name: 'Requests',
-        data: Object.values(this.dnaData.status)
+        data: this.dnaStatusData
       }],
 
       tooltip: {
@@ -888,67 +1010,58 @@ export class PdltoolsComponent implements AfterViewInit {
       },
     } as any);
 
-    Highcharts.chart('comp-dna-status-yearly' as any, {
-      chart: {
-        type: 'column'
-      },
-      title: {
-        text: 'DNA Module yearly report'
-      },
-      xAxis: {
-        categories: ['2018', '2019', '2020', '2021', '2022']
-      },
-      credits: {
-        enabled: false,
-      },
-      yAxis: {
-        min: 0,
-        title: {
-          text: 'Total request '
-        },
-        stackLabels: {
-          enabled: true,
-          style: {
-            fontWeight: 'bold',
-            color: 'gray',
-            textOutline: 'none'
-          }
-        }
-      },
-      legend: {
-        align: 'right',
-        x: -30,
-        verticalAlign: 'top',
-        y: 25,
-        floating: true,
-        backgroundColor: 'white',
-        borderColor: '#CCC',
-        borderWidth: 1,
-        shadow: false
-      },
-      tooltip: {
-        headerFormat: '<b>{point.x}</b><br/>',
-        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-      },
-      plotOptions: {
-        column: {
-          stacking: 'normal',
-          dataLabels: {
-            enabled: true
-          }
-        }
-      },
-      series: [{
-        name: 'Pending',
-        data: [3, 4, 4, 2, 5]
-      }, {
-        name: 'Forwarded',
-        data: [3, 4, 4, 2, 5]
-      }, {
-        name: 'Closed',
-        data: [3, 4, 4, 2, 5]
-      }]
-    } as any);
+    // Highcharts.chart('comp-dna-status-yearly' as any, {
+    //   chart: {
+    //     type: 'column'
+    //   },
+    //   title: {
+    //     text: 'DNA Module yearly report'
+    //   },
+    //   xAxis: {
+    //     categories: Object.keys(this.dnaData.year),
+    //   },
+    //   credits: {
+    //     enabled: false,
+    //   },
+    //   yAxis: {
+    //     min: 0,
+    //     title: {
+    //       text: 'Total request '
+    //     },
+    //     stackLabels: {
+    //       enabled: true,
+    //       style: {
+    //         fontWeight: 'bold',
+    //         color: 'gray',
+    //         textOutline: 'none'
+    //       }
+    //     }
+    //   },
+    //   legend: {
+    //     align: 'right',
+    //     x: -30,
+    //     verticalAlign: 'top',
+    //     y: 25,
+    //     floating: true,
+    //     backgroundColor: 'white',
+    //     borderColor: '#CCC',
+    //     borderWidth: 1,
+    //     shadow: false
+    //   },
+    //   tooltip: {
+    //     headerFormat: '<b>{point.x}</b><br/>',
+    //     pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+    //   },
+    //   plotOptions: {
+    //     column: {
+    //       stacking: 'normal',
+    //       dataLabels: {
+    //         enabled: true
+    //       }
+    //     }
+    //   },
+    //   series: this.yearWiseDNAData
+    // } as any);
 
     Highcharts.chart('comp-dna-priority' as any, {
       chart: {
@@ -1078,7 +1191,7 @@ export class PdltoolsComponent implements AfterViewInit {
   }
 
   private createChartColumn(data: any): void {
-    const chart = Highcharts.chart('comp-chart-column' as any, {
+    Highcharts.chart('comp-chart-column' as any, {
       chart: {
         type: 'column',
         options3d: {
