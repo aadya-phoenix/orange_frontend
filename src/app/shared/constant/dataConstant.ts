@@ -114,7 +114,17 @@ export const dataConstant = {
   },{
     name: 'Course Session', id:'session'
   },{
+    name: 'Promote on carousel', id:'carousel'
+  },{
+    name: 'Request back-office role', id:'back-office'
+  },{
+    name: 'Learning Module', id:'design'
+  },{
     name: 'Get a Report', id:'get-report'
+  },{
+    name: 'Learning Needs tool(DNA)', id:'dna'
+  },{
+    name: 'SME Database', id:'sme'
   }],
   SMETabs: { contecntSupport: 'content-support', delivery: 'delivery', voiceOver: 'voice-over-learning', professionalCertifications:'professional-certifications', comments:'comments'}
 }
