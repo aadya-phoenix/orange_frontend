@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
   firstName: any;
   lastName: any;
   isRequester = false;
+  isAdmin = false;
   Laungauges = dataConstant.Laungauges;
   selectedLaungauge: any = this.Laungauges.EN;
   totalNotification = 0;
@@ -75,6 +76,7 @@ export class HeaderComponent implements OnInit {
       if (this.userName) {
         this.firstName = this.userName.first_name;
         this.lastName = this.userName.last_name;
+        this.isAdmin = this.userName.admin == 1 ? true: false;
       }
     }, (err: any) => {
       this.commonService.errorHandling(err); 

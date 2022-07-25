@@ -49,4 +49,9 @@ export class UserManageService {
     const url = `api/${this.apiVersion}/user/${id}/password`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
+
+  switchUser(data: any){
+    const url = `api/${this.apiVersion}/user/switch`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
 }

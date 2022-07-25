@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { CarouselService } from 'src/app/shared/services/carousel/carousel.service';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
+import { UserManageService } from 'src/app/shared/services/user-management/user-manage.service';
 
 @Component({
   selector: 'app-switch-user',
@@ -15,24 +17,40 @@ export class SwitchUserComponent implements OnInit {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   isSubmitted = false;
   loginForm: FormGroup;
+  userList: any = [];
   public historyList: any;
   public objectDetail: any;
   public modalType: any;
   public title: any;
   copyDeletecourse: any;
-  public emails: any = [{
-    id:'123', name:'Summit Maggu'
-  },{
-    id:'123', name:'Asia Pacific'
-  }];
-  
-  constructor(private modalService: NgbActiveModal, private carouselService: CarouselService,  private commonService: CommonService, private formBuilder: FormBuilder) {
+
+  constructor(private modalService: NgbActiveModal,
+    private authService: AuthenticationService,
+    private userManageService: UserManageService,
+    private commonService: CommonService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute) {
     this.loginForm = this.formBuilder.group({
-      email: new FormControl('', [Validators.required])
+      uid: new FormControl('', [Validators.required])
     });
-   }
+  }
   ngOnInit(): void {
-    this.setDialogProps(this.props)
+    this.getUsers();
+  }
+
+  getUsers() {
+    this.commonService.showLoading();
+    this.userManageService.getUsers().subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        this.userList = res.data;
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    );
   }
 
   setDialogProps(dialogdata: any) {
@@ -41,9 +59,68 @@ export class SwitchUserComponent implements OnInit {
   closeModal() {
     this.modalService.close();
   }
-  
-  login(){
+
+  login() {
     this.isSubmitted = true;
+    if (this.loginForm.invalid) {
+      return;
+    }
+    const body = this.loginForm.value;
+    this.commonService.showLoading();
+    let allroles;
+    let roleObj: any;
+    this.userManageService.switchUser(body).subscribe(
+      (res: any) => {
+        if (res && res.status) {
+         const tokenDetails = {
+          access_token: res.data,
+          expires_in: 0,
+          refresh_token: "",
+          token_type: "Bearer"
+         } 
+          localStorage.setItem('loginDetails', JSON.stringify(tokenDetails));
+          this.lastLogin();
+          this.authService.getProfileDetails().subscribe((profile) => {
+            this.authService.getRoles().subscribe((res: any) => {
+              allroles = res.data;
+              allroles.find((currentrole: any) => {
+                if (currentrole.id === profile.data.role_id) {
+                  roleObj = currentrole;
+                }
+              });
+              this.commonService.hideLoading();
+              localStorage.setItem('role', JSON.stringify(roleObj));
+            });
+            localStorage.setItem('profileDetails', JSON.stringify(profile));
+            let params = this.route.snapshot.queryParams;
+            if (params['redirectURL']) {
+              this.router.navigate([params['redirectURL']]);
+            } else {
+              this.router.navigate(['/dashboard']).then(() => {
+                window.location.reload();
+              });
+            }
+          });
+          this.commonService.hideLoading();
+          this.modalService.close();
+        }
+        else{
+          this.commonService.toastErrorMsg('Error', res.message);
+          this.commonService.hideLoading();
+        }
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    );
+  }
+
+  lastLogin() {
+    this.authService.lastLogin().subscribe(res => {
+    }, err => {
+      this.commonService.errorHandling(err);
+    })
   }
 
   onClose() {
