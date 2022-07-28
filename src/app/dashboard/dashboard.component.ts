@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { dataConstant } from '../shared/constant/dataConstant';
 import { AuthenticationService } from '../shared/services/auth/authentication.service';
 import { CommonService } from '../shared/services/common/common.service';
@@ -61,7 +60,6 @@ export class DashboardComponent implements OnInit {
 
   constructor(private courseService: CourcesService, private router: Router,
     private authService: AuthenticationService,
-    protected gaService: GoogleAnalyticsService,
     private commonService: CommonService) {
     this.getUserrole = this.authService.getRolefromlocal();
     this.profileDetails = this.authService.getProfileDetailsfromlocal();
@@ -72,7 +70,6 @@ export class DashboardComponent implements OnInit {
       this.isPdlMember = this.profileDetails.data.pdl_member;
     }
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
-    this.gaService.pageView('/dashboard', this.lableConstant.dashboard);
     if (this.lableConstant) {
       this.modulesArray_tab1 = [
         {
