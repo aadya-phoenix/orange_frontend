@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,10 +14,10 @@ import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, NgxSpinnerModule, HttpClientModule, ToastrModule.forRoot(),
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, NgxSpinnerModule, HttpClientModule, ToastrModule.forRoot()
     //  NgxDropzoneModule
   ],
-  providers: [
+  providers: [Title,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

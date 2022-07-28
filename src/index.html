@@ -3,25 +3,23 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Orange</title>
+    <title>PD&L Tools</title>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Raleway:wght@200&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Raleway:wght@200&family=Ubuntu:wght@300&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="Helvetica-Font/Helvetica.ttf">
     <link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet" />
-    
+
     <!-- Boosted CSS -->
-
-
-
 </head>
 
- </script>
 <style>
     body {
         font-family: Helvetica !important;
@@ -30,31 +28,35 @@
 </style>
 
 <body>
-    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-arrow-up"
+            aria-hidden="true"></i></button>
     <app-root></app-root>
 
 
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/boosted@5.1.3/dist/js/boosted.bundle.min.js" integrity="sha384-5thbp4uNEqKgkl5m+rMBhqR+ZCs+3iAaLIghPWAgOv0VKvzGlYKR408MMbmCjmZF" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/boosted@5.1.3/dist/js/boosted.bundle.min.js"
+    integrity="sha384-5thbp4uNEqKgkl5m+rMBhqR+ZCs+3iAaLIghPWAgOv0VKvzGlYKR408MMbmCjmZF"
+    crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 <script>
-$(document).ready(function() {
-    var toggler = document.getElementsByClassName("caret");
-    var i;
-    for (i = 0; i < toggler.length; i++) {
-      toggler[i].addEventListener("click", function() {
-        this.parentElement.querySelector(".nested").classList.toggle("active");
-        this.classList.toggle("caret-down");
-      });
-    }
-});
+    $(document).ready(function () {
+        var toggler = document.getElementsByClassName("caret");
+        var i;
+        for (i = 0; i < toggler.length; i++) {
+            toggler[i].addEventListener("click", function () {
+                this.parentElement.querySelector(".nested").classList.toggle("active");
+                this.classList.toggle("caret-down");
+            });
+        }
+    });
     //Get the button
     var mybutton = document.getElementById("myBtn");
 
     // When the user scrolls down 20px from the top of the document, show the button
-    window.onscroll = function() {
+    window.onscroll = function () {
         scrollFunction()
     };
 
@@ -72,32 +74,57 @@ $(document).ready(function() {
         document.documentElement.scrollTop = 0;
     }
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new boosted.Tooltip(tooltipTriggerEl)
         })
     });
     function textAreaAdjust(element) {
-    element.style.height = "1px";
-    element.style.height = (25+element.scrollHeight)+"px";
+        element.style.height = "1px";
+        element.style.height = (25 + element.scrollHeight) + "px";
     }
 
-$(document).ready(function() {
-  //set initial state.
-  $('#example').change(function() {
-    if($(this).is(":checked")) {
-      $('code').text('Checked');
-    }
-    else {
-      $('code').text('Unchecked');
-    }
-    $('#textbox1').val($(this).is(':checked'));        
-  });
-});
-
-    
+    $(document).ready(function () {
+        //set initial state.
+        $('#example').change(function () {
+            if ($(this).is(":checked")) {
+                $('code').text('Checked');
+            }
+            else {
+                $('code').text('Unchecked');
+            }
+            $('#textbox1').val($(this).is(':checked'));
+        });
+    });
 </script>
 
+<script type="text/javascript">
+    var utag_data = {
+        "site_name": "obslearningjourney",
+        "sub_domain": "Application",
+        "sub_universe": "Application",
+        "universe_code": "APPLI-obslearningjourney",
+        "marketing_domain": "TRANSVERSE",
+        "page_type": "NA", //used for categorization of the pages if needed  - if no, put NA: Non Applicable
+        "page_title": "obslearningjourney", //name of the section, or fictive title for a dynamic page
+        "phase": env_mode, //prod , uat or qa
+        "lang": "en"
+    };
+</script>
+
+<!-- Tealium Universal Tag -->
+<script type="text/javascript">
+    var utag_data = {
+        "site_name": "div-pdltools",
+        "phase": "dev"
+    };
+    (function (a, b, c, d) {
+        a = '//tags.tiqcdn.com/utag/orange/obsit/dev/utag.js';
+        b = document; c = 'script'; d = b.createElement(c); d.src = a;
+        d.type = 'text/java' + c; d.async = true;
+        a = b.getElementsByTagName(c)[0]; a.parentNode.insertBefore(d, a)
+    })();
+</script>
 
 </html>

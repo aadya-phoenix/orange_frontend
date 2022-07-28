@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { EncryptionService } from 'src/app/shared/services/encrypt-decrypt/encryption.service';
-import { PasswordStrengthValidator } from '../password-strength.validators';
 
 @Component({
   selector: 'app-login',

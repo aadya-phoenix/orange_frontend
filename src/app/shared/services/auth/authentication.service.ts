@@ -84,7 +84,11 @@ export class AuthenticationService {
   }
 
   logOut() {
+    const laungauge = localStorage.getItem('laungauge');
     localStorage.clear();
+    if(laungauge){
+      localStorage.setItem('laungauge', laungauge);
+    }
     this.router.navigate(['/login']);
   }
 

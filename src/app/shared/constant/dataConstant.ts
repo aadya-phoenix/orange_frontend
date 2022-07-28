@@ -98,6 +98,12 @@ export const dataConstant = {
     }
   ],
   Laungauges : { EN:'EN', FR:'FR'},
+  TitlePrefix : 'PD&L Tools',
+  TitleList: {
+    login : 'Login',
+    home : 'Home',
+    cct : 'Create new course'
+  },
   Modules:{
     course:'course',
     session:'session',

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { NavigationEnd, Event, Router } from '@angular/router';
 import { threadId } from 'worker_threads';
+import { dataConstant } from './shared/constant/dataConstant';
 import { CommonService } from './shared/services/common/common.service';
 
 @Component({
@@ -10,8 +13,31 @@ import { CommonService } from './shared/services/common/common.service';
 export class AppComponent {
   title = 'orange';
   isLoad = false;
-  constructor(private commonService: CommonService) {
+  constructor(private commonService: CommonService, private router: Router, private titleService: Title) {
     this.languageTranslation();
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        const laungauge = localStorage.getItem('laungauge');
+        let pageName = '';
+        const url  = event.url.split('?')[0];
+        switch (url) {
+          case '/login':
+          case '/':
+            pageName = dataConstant.TitleList.login;
+            break;
+          case '/dashboard':
+            pageName = dataConstant.TitleList.home;
+            break;
+          case '/dashboard/cct':
+            pageName = dataConstant.TitleList.cct;
+            break;
+          default:
+            pageName = '';
+            break;
+        }
+        this.titleService.setTitle(`${dataConstant.TitlePrefix} ${pageName ? ` - ${pageName} - ` : ` - `} ${laungauge ? laungauge : dataConstant.Laungauges.EN}`)
+      }
+    });
   }
 
   languageTranslation() {
