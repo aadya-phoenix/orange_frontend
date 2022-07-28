@@ -102,7 +102,11 @@ export const dataConstant = {
   TitleList: {
     login : 'Login',
     home : 'Home',
-    cct : 'Create new course'
+    cct : 'Create new course',
+    cct_create : 'Create new course - Create',
+    cct_update : 'Create new course - Update',
+    cct_view : 'Create new course - View',
+    cct_report : 'Create new course - View All Activity Report'
   },
   Modules:{
     course:'course',

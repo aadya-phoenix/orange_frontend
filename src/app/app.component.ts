@@ -19,8 +19,8 @@ export class AppComponent {
       if (event instanceof NavigationEnd) {
         const laungauge = localStorage.getItem('laungauge');
         let pageName = '';
-        const url  = event.url.split('?')[0];
-        switch (url) {
+        const url = event.url.split('?')[0];
+        switch (url.replace(/[0-9]/g, '')) {
           case '/login':
           case '/':
             pageName = dataConstant.TitleList.login;
@@ -31,11 +31,29 @@ export class AppComponent {
           case '/dashboard/cct':
             pageName = dataConstant.TitleList.cct;
             break;
+          case '/dashboard/cct/create':
+            pageName = dataConstant.TitleList.cct_create;
+            break;
+          case '/dashboard/cct/update/':
+            pageName = dataConstant.TitleList.cct_update;
+            break;
+          case '/dashboard/cct/view-complete-report':
+            pageName = dataConstant.TitleList.cct_report;
+            break;
+          case '/dashboard/cct/view/':
+            pageName = dataConstant.TitleList.cct_view;
+            break;
           default:
             pageName = '';
             break;
         }
         this.titleService.setTitle(`${dataConstant.TitlePrefix} ${pageName ? ` - ${pageName} - ` : ` - `} ${laungauge ? laungauge : dataConstant.Laungauges.EN}`)
+        try {
+          var windows = window as any;
+          windows.utag.track('view', event.url, event.urlAfterRedirects);
+        } catch (e) {
+          console.error('utag object does not exist on this page');
+        }
       }
     });
   }
