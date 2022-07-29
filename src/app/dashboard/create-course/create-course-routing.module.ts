@@ -10,11 +10,11 @@ import { ViewCompleteReportComponent } from './view-complete-report/view-complet
 
 
 const routes: Routes = [
-    {path:'',component:CoursesComponent,canActivate:[AuthenticationServiceGuard]},
-    {path:'create-cource',component:CreateNewCourseComponent,canActivate:[AuthenticationServiceGuard]},
-    {path:'view-complete-report',component:ViewCompleteReportComponent,canActivate:[AuthenticationServiceGuard]},
-    {path:'request-detail',component:RequestDetailComponent,canActivate:[AuthenticationServiceGuard]},
-    {path:'edit-cource',component:UpdateCourceComponent,canActivate:[AuthenticationServiceGuard]}
+    // {path:'',component:CoursesComponent,canActivate:[AuthenticationServiceGuard]},
+    // {path:'create-cource',component:CreateNewCourseComponent,canActivate:[AuthenticationServiceGuard]},
+    // {path:'view-complete-report',component:ViewCompleteReportComponent,canActivate:[AuthenticationServiceGuard]},
+    // {path:'request-detail',component:RequestDetailComponent,canActivate:[AuthenticationServiceGuard]},
+    // {path:'edit-cource',component:UpdateCourceComponent,canActivate:[AuthenticationServiceGuard]}
 ];
 
 @NgModule({

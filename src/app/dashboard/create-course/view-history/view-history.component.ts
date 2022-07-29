@@ -47,7 +47,7 @@ export class ViewHistoryComponent implements OnInit {
      let dataobj = res.data;
      let iscopyy={copy:true};
      let totalObj = {...res.data,...iscopyy}
-     this.router.navigateByUrl('/dashboard/cources/create-cource', {
+     this.router.navigateByUrl('/dashboard/cct/create-cource', {
       state: totalObj,
     });
      this.onClose();

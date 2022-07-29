@@ -82,7 +82,7 @@ export class CoursesComponent implements OnInit {
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.routegetdata = this.router.getCurrentNavigation()?.extras.state;
     if (!this.routegetdata) {
-      this.router.navigateByUrl('/dashboard/cources');
+      this.router.navigateByUrl('/dashboard/cct');
     }
     else {
       this.allCourses = this.pendingRequests;
@@ -294,7 +294,7 @@ export class CoursesComponent implements OnInit {
     this.courceService.courseDetail(cource.id).subscribe((res: any) => {
       let coursedetail = res.data;
       let username = { user_name: cource.user_name, showbuttons: cource.purchase_order }
-      this.router.navigateByUrl('/dashboard/cources/request-detail', {
+      this.router.navigateByUrl('/dashboard/cct/request-detail', {
         state: { ...coursedetail, ...username },
       });
     }, (err: any) => {
@@ -304,7 +304,7 @@ export class CoursesComponent implements OnInit {
   }
 
   editRequest(course: any) {
-    this.router.navigateByUrl('/dashboard/cources/create-cource', {
+    this.router.navigateByUrl('/dashboard/cct/create', {
       state: course,
     });
   }

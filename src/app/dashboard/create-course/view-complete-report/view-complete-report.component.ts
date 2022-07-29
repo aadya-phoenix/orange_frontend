@@ -83,12 +83,6 @@ export class ViewCompleteReportComponent implements OnInit {
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.routegetdata = this.router.getCurrentNavigation()?.extras.state;
-    /*  if(!this.routegetdata){
-       this.router.navigateByUrl('/dashboard/cources');
-     }
-     else{
-       this.allCourses = this.pendingRequests;
-     } */
   }
 
   ngOnInit(): void {

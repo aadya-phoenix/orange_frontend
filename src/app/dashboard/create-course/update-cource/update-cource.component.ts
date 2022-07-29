@@ -2041,7 +2041,7 @@ export class UpdateCourceComponent implements OnInit {
     let statusobj = { course_id: this.routergetdata.id, status: 'reject', status_comment: this.rejectcomment }
     this.courceService.changeStatus(statusobj).subscribe((res: any) => {
       
-      this.router.navigate(['/dashboard/cources']);
+      this.router.navigate(['/dashboard/cct']);
     }, (err: any) => {
       console.log(err)
     })

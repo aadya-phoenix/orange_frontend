@@ -332,7 +332,7 @@ export class CourseViewComponent implements OnInit {
       this.commonService.showLoading();
       this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
         this.commonService.hideLoading();
-        this.router.navigate(['/dashboard/cources']);
+        this.router.navigate(['/dashboard/cct']);
       }, (err: any) => {
         this.commonService.hideLoading();
         this.commonService.errorHandling(err);
@@ -346,7 +346,7 @@ export class CourseViewComponent implements OnInit {
       this.commonService.showLoading();
       this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
         this.commonService.hideLoading();
-        this.router.navigate(['/dashboard/cources']);
+        this.router.navigate(['/dashboard/cct']);
       }, (err: any) => {
         this.commonService.hideLoading();
         this.commonService.errorHandling(err);
