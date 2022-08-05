@@ -21,7 +21,6 @@ export class AuthenticationServiceGuard implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
     const loginDetails: any = this.authService.getLoginDetails();
-    const role: any = this.authService.getRolefromlocal();
 
     if (
       loginDetails &&

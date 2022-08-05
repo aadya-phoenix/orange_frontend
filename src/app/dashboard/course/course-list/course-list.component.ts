@@ -46,7 +46,7 @@ export class CourseListComponent implements OnInit {
     total: 0,
     transferred: 0
   }
-  getUserrole: any;
+  getUserrole: any = [];
   getprofileDetails: any;
   searchText: any;
 
@@ -63,9 +63,9 @@ export class CourseListComponent implements OnInit {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
-    this.isReviewer = this.getUserrole.id === this.RoleID.Roc;
-    this.isPublisher = this.getUserrole.id === this.RoleID.CoursePublisher;
-    this.isRequester = this.getUserrole.id === this.RoleID.CourseRequester;
+    this.isReviewer = this.getUserrole.includes(this.RoleID.Roc);
+    this.isPublisher =  this.getUserrole.includes(this.RoleID.CoursePublisher); 
+    this.isRequester = this.getUserrole.includes(this.RoleID.CourseRequester);  
   }
 
   ngOnInit(): void {

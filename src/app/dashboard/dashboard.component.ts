@@ -63,9 +63,9 @@ export class DashboardComponent implements OnInit {
     private commonService: CommonService) {
     this.getUserrole = this.authService.getRolefromlocal();
     this.profileDetails = this.authService.getProfileDetailsfromlocal();
-    this.isReviewer = this.getUserrole.id === this.RoleID.BackOfficeReviewer;
-    this.isPublisher = this.getUserrole.id === this.RoleID.BackOfficePublisher;
-    this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
+    this.isReviewer = this.getUserrole.includes(this.RoleID.BackOfficeReviewer);
+    this.isPublisher = this.getUserrole.includes(this.RoleID.BackOfficePublisher);
+    this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
     if (this.profileDetails.data?.pdl_member) {
       this.isPdlMember = this.profileDetails.data.pdl_member;
     }
@@ -169,7 +169,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getFavouriteList();
     this.getpendingCourses();
-    if (this.getUserrole.id == 2) {
+    if (this.getUserrole.includes(2)) {
       this.pendingFlag = true;
     }
     else {
@@ -196,15 +196,15 @@ export class DashboardComponent implements OnInit {
   navigatetoPending(module: any) {
     if (this.pendingFlag) return;
     if (module == this.modules.course) {
-      const status = this.getUserrole.id === this.RoleID.CourseRequester ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
+      const status = this.getUserrole.includes(this.RoleID.CourseRequester) ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
       this.router.navigateByUrl(`/dashboard/cct?status=${status}`);
     }
     if (module == this.modules.carousel) {
-      const status = this.getUserrole.id === this.RoleID.RequesterID ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
+      const status = this.getUserrole.includes(this.RoleID.RequesterID) ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
       this.router.navigateByUrl(`/dashboard/olcarousel?status=${status}`);
     }
     if (module == this.modules.backOffice) {
-      const status = this.getUserrole.id === this.RoleID.RequesterID ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
+      const status = this.getUserrole.includes(this.RoleID.RequesterID) ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
       this.router.navigateByUrl(`/dashboard/back-office?status=${status}`);
     }
     if (module == this.modules.session) {
@@ -212,11 +212,11 @@ export class DashboardComponent implements OnInit {
       this.router.navigateByUrl(`/dashboard/sct?status=${status}`);
     }
     if (module == this.modules.design) {
-      const status = (this.getUserrole.id === this.RoleID.DesignTeam || this.getUserrole.id === this.RoleID.HeadOfDesign) ? dataConstant.BackOfficeStatus.pending : dataConstant.BackOfficeStatus.submitted
+      const status = (this.getUserrole.includes(this.RoleID.DesignTeam) || this.getUserrole.includes(this.RoleID.HeadOfDesign)) ? dataConstant.BackOfficeStatus.pending : dataConstant.BackOfficeStatus.submitted
       this.router.navigateByUrl(`/dashboard/designlearning?status=${status}`);
     }
     if (module == this.modules.getReport) {
-      const status = this.getUserrole.id === this.RoleID.RequesterID ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
+      const status = this.getUserrole.includes(this.RoleID.RequesterID) ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
       this.router.navigateByUrl(`/dashboard/olreport?status=${status}`);
     }
   }

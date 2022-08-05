@@ -458,9 +458,9 @@
                                             </label>
                                             <input type="text" [(ngModel)]="showPlaylistEmail"
                                                 placeholder="Enter Email of playlist creator"
-                                                class="form-control form_width" formControlName="for_whoom" />
+                                                class="form-control form_width" formControlName="email_playlist_creator" />
                                             <div class="error_message"
-                                                *ngIf="(createCourceForm.controls['for_whoom'].invalid && (createCourceForm.controls['for_whoom'].dirty || createCourceForm.controls['for_whoom'].touched || isSubmitted))">
+                                                *ngIf="(createCourceForm.controls['email_playlist_creator'].invalid && (createCourceForm.controls['email_playlist_creator'].dirty || createCourceForm.controls['for_whoom'].touched || isSubmitted))">
                                                 Email of playlist creator cannot be blank
                                             </div>
 
@@ -736,7 +736,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6" *ngIf="isILTAndvILT()">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 {{lableConstant.Expiry_Type}} <span class="text_red
@@ -921,7 +921,7 @@
                                                     formControlName="free_field_content"></textarea>
                                             </div>
                                         </div> -->
-                                        <div class="col-sm-6" *ngIf="isILTAndvILT() || isCurriculum()">
+                                        <div class="col-sm-6">
                                             <div class="d-flex align-items-center">
                                                 <div class="form-group w_100">
                                                     <label class="form-control-label">
@@ -953,7 +953,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6" *ngIf="isILTAndvILT() || isCurriculum()">
+                                        <div class="col-sm-6">
                                             <div class="d-flex align-items-center">
                                                 <div class="form-group w_100">
                                                     <label class="form-control-label">
@@ -1116,8 +1116,7 @@
                                     </thead>
                                 </table>
 
-                                <table class="table table-bordered" formArrayName="learner_guideline"
-                                    *ngIf="isILTAndvILT() || isCurriculum()">
+                                <table class="table table-bordered" formArrayName="learner_guideline">
                                     <thead>
                                         <tr>
                                             <th scope="col">{{lableConstant.Learner_Guidelines}} <a>

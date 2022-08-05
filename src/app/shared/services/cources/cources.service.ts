@@ -194,6 +194,16 @@ export class CourcesService {
         .pipe(catchError(this.Errorhandling));
     }
   
+     //role module
+     getModuleRole(){
+      const url = `/api/${this.apiVersion}/module`;
+      const urllive = `${this.basePath}api/${this.apiVersion}/module`;
+      return this.http
+        .get(url, this.http.headers)
+        .pipe(catchError(this.Errorhandling));
+    }
+  
+
     //role-users
      getRoleUsers(){
       const url = `/api/${this.apiVersion}/role-users`;

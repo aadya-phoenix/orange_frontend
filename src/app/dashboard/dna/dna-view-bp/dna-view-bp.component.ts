@@ -69,8 +69,8 @@ export class DnaViewBpComponent implements OnInit {
   ) {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
-    this.isDomainExpert = this.getUserrole.id == this.RoleID.DomainExpert;
-    this.isBussinessConsultant = this.getUserrole.id == this.RoleID.BussinessConsultant;
+    this.isDomainExpert = this.getUserrole.includes(this.RoleID.DomainExpert);
+    this.isBussinessConsultant = this.getUserrole.includes(this.RoleID.BussinessConsultant);
    }
 
   ngOnInit(): void {

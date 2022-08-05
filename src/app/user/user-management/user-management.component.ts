@@ -50,7 +50,7 @@ export class UserManagementComponent implements OnInit {
   getRoleFilterRecords(role:any){
      if (role) {
       this.userListToShow = [...this.userList].filter((a, b) => {
-        return a.role_id == role
+        return a.role_id.includes(role)
       });
     }  
     else{

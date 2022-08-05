@@ -59,8 +59,8 @@ export class DesignLearningListComponent implements OnInit {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.getUserrole = this.authService.getRolefromlocal();
-    this.isDesigner = this.getUserrole.id === this.RoleID.DesignTeam;
-    this.isHeadDesigner = this.getUserrole.id === this.RoleID.HeadOfDesign;
+    this.isDesigner = this.getUserrole.includes(this.RoleID.DesignTeam);
+    this.isHeadDesigner = this.getUserrole.includes(this.RoleID.HeadOfDesign);
    }
 
   ngOnInit(): void {

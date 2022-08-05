@@ -25,7 +25,7 @@ export class AuthorizationServiceGuard implements CanActivate {
     if (
       loginDetails &&
       loginDetails.access_token &&
-      (role.id == 3 || role.id == 4 || role.id == 5)
+      (role.includes(3) || role.includes(4) || role.includes(5))
     ) {
       return true;
     } else {

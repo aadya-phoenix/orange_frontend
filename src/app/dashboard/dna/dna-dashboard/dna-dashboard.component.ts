@@ -34,10 +34,10 @@ export class DnaDashboardComponent implements OnInit {
   ) { 
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
-    this.isRom = this.getUserrole.id == this.RoleID.Rom;
-    this.isBussinessConsultant = this.getUserrole.id == this.RoleID.BussinessConsultant;
-    this.isLearningPartner = this.getUserrole.id == this.RoleID.LearningPartner;
-    this.isDomainExpert = this.getUserrole.id == this.RoleID.DomainExpert;
+    this.isRom = this.getUserrole.includes(this.RoleID.Rom);
+    this.isBussinessConsultant = this.getUserrole.includes(this.RoleID.BussinessConsultant);
+    this.isLearningPartner = this.getUserrole.includes(this.RoleID.LearningPartner);
+    this.isDomainExpert = this.getUserrole.includes(this.RoleID.DomainExpert);
     this.today.setHours(0,0,0,0);
   }
 

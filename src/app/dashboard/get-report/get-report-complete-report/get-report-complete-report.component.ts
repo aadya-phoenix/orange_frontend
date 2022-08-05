@@ -72,9 +72,9 @@ export class GetReportCompleteReportComponent implements OnInit {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
-    this.isRoc = this.getUserrole.id === this.RoleID.Roc;
-    this.isDataAnalyst = this.getUserrole.id === this.RoleID.DataAnalyst;
-    this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
+    this.isRoc = this.getUserrole.includes(this.RoleID.Roc);
+    this.isDataAnalyst = this.getUserrole.includes(this.RoleID.DataAnalyst);
+    this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
     this.filterForm = this.fb.group({
       start_date: new FormControl('', []),
       end_date: new FormControl('', []),

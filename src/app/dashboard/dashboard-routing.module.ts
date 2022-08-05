@@ -7,7 +7,6 @@ import { SetBackupComponent } from './set-backups/set-backup/set-backup.componen
 
 const routes: Routes = [
 {path:'',component:DashboardComponent},
-{path:'cources',loadChildren:()=>import("./create-course/create-course.module").then(m=>m.CreateCourseModule)},
 {path:'cct',loadChildren:()=>import("./course/course.module").then(m=>m.CourseModule)},
 {path:'olcarousel',loadChildren:()=>import("./carousel/carousel.module").then(m=>m.CarouselModule)},
 {path:'back-office',loadChildren:()=>import("./back-office/back-office.module").then(m=>m.BackOfficeModule)},

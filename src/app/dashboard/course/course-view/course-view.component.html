@@ -774,7 +774,6 @@
                       </div>
 
                     </div>
-                    <!--cole dn-->
                     <div class="col-sm-12">
                       <div class="form-group">
                         <label for="exampleInputEmail1">{{lableConstant.Learn_more}}</label>
@@ -876,6 +875,88 @@
                       </div>
 
                     </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">{{lableConstant.For_Whom}}</label>
+                        <div class="d-flex align-items-center">
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
+                            {{
+                            routegetdata.for_whoomByLang
+                            ? routegetdata.for_whoomByLang
+                            : "-"
+                            }}
+                          </span>
+                          <a data-toggle="modal" data-target="#learnMoreModal"
+                            (click)="changeTranslateData('for_whoom')" class="d-flex flex-column align-items-end w-20">
+                            <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                          </a>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
+                            (click)="copyToClipBoard(routegetdata.for_whoomByLang)" title="Copy Text" class="ml-1">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">{{lableConstant.Learn_more}}</label>
+                        <div class="d-flex align-items-center">
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
+                            {{
+                            routegetdata.learn_moreByLang
+                            ? routegetdata.learn_moreByLang
+                            : "-"
+                            }}
+                          </span>
+                          <a data-toggle="modal" data-target="#learnMoreModal"
+                            (click)="changeTranslateData('learn_more')" class="d-flex flex-column align-items-end w-20">
+                            <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                          </a>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
+                            (click)="copyToClipBoard(routegetdata.learn_moreByLang)" title="Copy Text" class="ml-1">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">{{lableConstant.Learner_Guidelines}}</label>
+                        <div class="d-flex align-items-center">
+                          <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" disabled>
+                            <span *ngFor="let learner of learnerGuidelines">
+                              {{
+                              learner.title }}
+                            </span>
+                          </span>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">{{lableConstant.Learner_Guidelines_Description}}</label>
+                        <div class="d-flex align-items-center">
+                          <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" disabled>
+                            <span *ngFor="let learner of learnerGuidelines">
+
+                              {{ learner.description
+
+                              }}
+                            </span>
+                          </span>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                        </div>
+
+                      </div>
+
+                    </div>
                   </div>
                   <div class="col-sm-12 col_12" *ngIf="routegetdata.learning_type == '3'">
                     <!-- <div class="card-header">
@@ -912,6 +993,88 @@
                           <!-- <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
                               (click)="copyToClipBoard(routegetdata.material_source)" title="Copy Text">
                               <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a> -->
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">{{lableConstant.For_Whom}}</label>
+                        <div class="d-flex align-items-center">
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
+                            {{
+                            routegetdata.for_whoomByLang
+                            ? routegetdata.for_whoomByLang
+                            : "-"
+                            }}
+                          </span>
+                          <a data-toggle="modal" data-target="#learnMoreModal"
+                            (click)="changeTranslateData('for_whoom')" class="d-flex flex-column align-items-end w-20">
+                            <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                          </a>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
+                            (click)="copyToClipBoard(routegetdata.for_whoomByLang)" title="Copy Text" class="ml-1">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">{{lableConstant.Learn_more}}</label>
+                        <div class="d-flex align-items-center">
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
+                            {{
+                            routegetdata.learn_moreByLang
+                            ? routegetdata.learn_moreByLang
+                            : "-"
+                            }}
+                          </span>
+                          <a data-toggle="modal" data-target="#learnMoreModal"
+                            (click)="changeTranslateData('learn_more')" class="d-flex flex-column align-items-end w-20">
+                            <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                          </a>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
+                            (click)="copyToClipBoard(routegetdata.learn_moreByLang)" title="Copy Text" class="ml-1">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">{{lableConstant.Learner_Guidelines}}</label>
+                        <div class="d-flex align-items-center">
+                          <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" disabled>
+                            <span *ngFor="let learner of learnerGuidelines">
+                              {{
+                              learner.title }}
+                            </span>
+                          </span>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">{{lableConstant.Learner_Guidelines_Description}}</label>
+                        <div class="d-flex align-items-center">
+                          <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" disabled>
+                            <span *ngFor="let learner of learnerGuidelines">
+
+                              {{ learner.description
+
+                              }}
+                            </span>
+                          </span>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
                         </div>
 
                       </div>
@@ -1213,7 +1376,88 @@
                                                 </div>
     
                                             </div> -->
-
+                                            <div class="col-sm-12">
+                                              <div class="form-group">
+                                                <label for="exampleInputEmail1">{{lableConstant.For_Whom}}</label>
+                                                <div class="d-flex align-items-center">
+                                                  <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
+                                                    {{
+                                                    routegetdata.for_whoomByLang
+                                                    ? routegetdata.for_whoomByLang
+                                                    : "-"
+                                                    }}
+                                                  </span>
+                                                  <a data-toggle="modal" data-target="#learnMoreModal"
+                                                    (click)="changeTranslateData('for_whoom')" class="d-flex flex-column align-items-end w-20">
+                                                    <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                                                  </a>
+                                                  <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
+                                                    (click)="copyToClipBoard(routegetdata.for_whoomByLang)" title="Copy Text" class="ml-1">
+                                                    <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                                                </div>
+                        
+                                              </div>
+                        
+                                            </div>
+                                            <div class="col-sm-12">
+                                              <div class="form-group">
+                                                <label for="exampleInputEmail1">{{lableConstant.Learn_more}}</label>
+                                                <div class="d-flex align-items-center">
+                                                  <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
+                                                    {{
+                                                    routegetdata.learn_moreByLang
+                                                    ? routegetdata.learn_moreByLang
+                                                    : "-"
+                                                    }}
+                                                  </span>
+                                                  <a data-toggle="modal" data-target="#learnMoreModal"
+                                                    (click)="changeTranslateData('learn_more')" class="d-flex flex-column align-items-end w-20">
+                                                    <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                                                  </a>
+                                                  <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
+                                                    (click)="copyToClipBoard(routegetdata.learn_moreByLang)" title="Copy Text" class="ml-1">
+                                                    <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                                                </div>
+                        
+                                              </div>
+                        
+                                            </div>
+                                            <div class="col-sm-12">
+                                              <div class="form-group">
+                                                <label for="exampleInputEmail1">{{lableConstant.Learner_Guidelines}}</label>
+                                                <div class="d-flex align-items-center">
+                                                  <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" disabled>
+                                                    <span *ngFor="let learner of learnerGuidelines">
+                                                      {{
+                                                      learner.title }}
+                                                    </span>
+                                                  </span>
+                                                  <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text">
+                                                    <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                                                </div>
+                        
+                                              </div>
+                        
+                                            </div>
+                                            <div class="col-sm-12">
+                                              <div class="form-group">
+                                                <label for="exampleInputEmail1">{{lableConstant.Learner_Guidelines_Description}}</label>
+                                                <div class="d-flex align-items-center">
+                                                  <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" disabled>
+                                                    <span *ngFor="let learner of learnerGuidelines">
+                        
+                                                      {{ learner.description
+                        
+                                                      }}
+                                                    </span>
+                                                  </span>
+                                                  <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text">
+                                                    <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                                                </div>
+                        
+                                              </div>
+                        
+                                            </div>
                   </div>
                   <div class="col-sm-12 col_12" *ngIf="routegetdata.learning_type == '5'">
                     <!-- <div class="card-header">
@@ -1352,6 +1596,89 @@
                       </div>
 
                     </div>
+
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">{{lableConstant.For_Whom}}</label>
+                        <div class="d-flex align-items-center">
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
+                            {{
+                            routegetdata.for_whoomByLang
+                            ? routegetdata.for_whoomByLang
+                            : "-"
+                            }}
+                          </span>
+                          <a data-toggle="modal" data-target="#learnMoreModal"
+                            (click)="changeTranslateData('for_whoom')" class="d-flex flex-column align-items-end w-20">
+                            <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                          </a>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
+                            (click)="copyToClipBoard(routegetdata.for_whoomByLang)" title="Copy Text" class="ml-1">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">{{lableConstant.Learn_more}}</label>
+                        <div class="d-flex align-items-center">
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
+                            {{
+                            routegetdata.learn_moreByLang
+                            ? routegetdata.learn_moreByLang
+                            : "-"
+                            }}
+                          </span>
+                          <a data-toggle="modal" data-target="#learnMoreModal"
+                            (click)="changeTranslateData('learn_more')" class="d-flex flex-column align-items-end w-20">
+                            <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                          </a>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
+                            (click)="copyToClipBoard(routegetdata.learn_moreByLang)" title="Copy Text" class="ml-1">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">{{lableConstant.Learner_Guidelines}}</label>
+                        <div class="d-flex align-items-center">
+                          <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" disabled>
+                            <span *ngFor="let learner of learnerGuidelines">
+                              {{
+                              learner.title }}
+                            </span>
+                          </span>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">{{lableConstant.Learner_Guidelines_Description}}</label>
+                        <div class="d-flex align-items-center">
+                          <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" disabled>
+                            <span *ngFor="let learner of learnerGuidelines">
+
+                              {{ learner.description
+
+                              }}
+                            </span>
+                          </span>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                        </div>
+
+                      </div>
+
+                    </div>
                   </div>
                   <div class="col-sm-12 col_12" *ngIf="routegetdata.learning_type == '6'">
                     <!-- <div class="card-header">
@@ -1400,8 +1727,8 @@
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
-                            routegetdata.for_whoom
-                            ? (routegetdata.for_whoom | titlecase)
+                            routegetdata.email_playlist_creator
+                            ? (routegetdata.email_playlist_creator)
                             : "-"
                             }}
                           </span>
@@ -1475,6 +1802,88 @@
                         </div>
 
                       </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">{{lableConstant.For_Whom}}</label>
+                        <div class="d-flex align-items-center">
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
+                            {{
+                            routegetdata.for_whoomByLang
+                            ? routegetdata.for_whoomByLang
+                            : "-"
+                            }}
+                          </span>
+                          <a data-toggle="modal" data-target="#learnMoreModal"
+                            (click)="changeTranslateData('for_whoom')" class="d-flex flex-column align-items-end w-20">
+                            <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                          </a>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
+                            (click)="copyToClipBoard(routegetdata.for_whoomByLang)" title="Copy Text" class="ml-1">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">{{lableConstant.Learn_more}}</label>
+                        <div class="d-flex align-items-center">
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
+                            {{
+                            routegetdata.learn_moreByLang
+                            ? routegetdata.learn_moreByLang
+                            : "-"
+                            }}
+                          </span>
+                          <a data-toggle="modal" data-target="#learnMoreModal"
+                            (click)="changeTranslateData('learn_more')" class="d-flex flex-column align-items-end w-20">
+                            <img src="../../../../assets/images/icon/lang.png" class="langu_css" />
+                          </a>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top"
+                            (click)="copyToClipBoard(routegetdata.learn_moreByLang)" title="Copy Text" class="ml-1">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">{{lableConstant.Learner_Guidelines}}</label>
+                        <div class="d-flex align-items-center">
+                          <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" disabled>
+                            <span *ngFor="let learner of learnerGuidelines">
+                              {{
+                              learner.title }}
+                            </span>
+                          </span>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">{{lableConstant.Learner_Guidelines_Description}}</label>
+                        <div class="d-flex align-items-center">
+                          <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" disabled>
+                            <span *ngFor="let learner of learnerGuidelines">
+
+                              {{ learner.description
+
+                              }}
+                            </span>
+                          </span>
+                          <a *ngIf="getUserrole.id==4" data-toggle="tooltip" data-placement="top" title="Copy Text">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                        </div>
+
+                      </div>
+
                     </div>
                   </div>
                   <!--cole dn-->

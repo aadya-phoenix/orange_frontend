@@ -67,9 +67,9 @@ export class BackOfficeViewReportComponent implements OnInit {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
-    this.isReviewer = this.getUserrole.id === this.RoleID.BackOfficeReviewer;
-    this.isPublisher = this.getUserrole.id === this.RoleID.BackOfficePublisher;
-    this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
+    this.isReviewer = this.getUserrole.includes(this.RoleID.BackOfficeReviewer);
+    this.isPublisher = this.getUserrole.includes(this.RoleID.BackOfficePublisher);
+    this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
     this.filterForm = this.fb.group({
       start_date: new FormControl('', []),
       end_date: new FormControl('', []),

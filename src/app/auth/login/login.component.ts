@@ -54,17 +54,16 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('loginDetails', JSON.stringify(res));
             this.lastLogin();
             this.authService.getProfileDetails().subscribe((profile) => {
-              this.authService.getRoles().subscribe((res: any) => {
-                allroles = res.data;
-                allroles.find((currentrole: any) => {
-                  if (currentrole.id === profile.data.role_id) {
-                    roleObj = currentrole;
-                  }
-                });
-                this.commonService.hideLoading();
-                localStorage.setItem('role', JSON.stringify(roleObj));
-                // localStorage.setItem('role',JSON.stringify(this.encrypt.encryptUsingAES256(roleObj)));
-              });
+              // this.authService.getRoles().subscribe((res: any) => {
+              //   allroles = res.data;
+              //   allroles.find((currentrole: any) => {
+              //     if (currentrole.id === profile.data.role_id) {
+              //       roleObj = currentrole;
+              //     }
+              //   });
+              //   this.commonService.hideLoading();
+              //   localStorage.setItem('role', JSON.stringify(roleObj));
+              // });
               localStorage.setItem('profileDetails', JSON.stringify(profile));
               let params = this.route.snapshot.queryParams;
               if (params['redirectURL']) {

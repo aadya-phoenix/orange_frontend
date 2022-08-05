@@ -61,9 +61,9 @@ export class DesignLearningCreateComponent implements OnInit {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.getUserrole = this.authService.getRolefromlocal();
-    this.isDesigner = this.getUserrole.id === this.RoleID.DesignTeam;
-    this.isHeadDesigner = this.getUserrole.id === this.RoleID.HeadOfDesign;
-    this.isBusinessConsultant = this.getUserrole.id === this.RoleID.BussinessConsultant;
+    this.isDesigner = this.getUserrole.includes(this.RoleID.DesignTeam);
+    this.isHeadDesigner = this.getUserrole.includes(this.RoleID.HeadOfDesign);
+    this.isBusinessConsultant = this.getUserrole.includes(this.RoleID.BussinessConsultant);
 
     this.createDesignForm = this.formBuilder.group({
       project_name: new FormControl('', [Validators.required]),

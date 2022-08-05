@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import * as _ from 'lodash';
 import {  passwordMatchingValidatior } from 'src/app/shared/constant/customValidators';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
@@ -38,7 +39,7 @@ export class EditUserComponent implements OnInit {
   isCountry = false;
   isLearningType =false;
   learningTypes:any=[];
-  roleId:number=0;
+  roleId:any =[];
   regionId: number=0;
 
   constructor(private route: ActivatedRoute,
@@ -90,8 +91,8 @@ export class EditUserComponent implements OnInit {
   }
 
   getSelectedRole(event:any){
-    this.roleId = event.id;
-    if(this.roleId == 3 ){
+    this.roleId = event.map((x: { id: any; }) => x.id);
+    if(this.roleId.includes(3) ){
      this.isRegion = true;
      this.isLearningType = false;
      this.isDnaRegion = false;
@@ -104,7 +105,7 @@ export class EditUserComponent implements OnInit {
      this.createUserForm.removeControl('domain_training_id');
      this.createUserForm.removeControl('country');
     }
-    else if(this.roleId == 4){
+    else if(this.roleId.includes(4)){
      this.isLearningType =true;
      this.isRegion = false;
      this.isDnaRegion = false;
@@ -117,7 +118,7 @@ export class EditUserComponent implements OnInit {
      this.createUserForm.removeControl('domain_training_id');
      this.createUserForm.removeControl('country');
     }
-    else if(this.roleId == 5 || this.roleId == 13){
+    else if(this.roleId.includes(5) || this.roleId.includes(13)){
       this.isDnaRegion = true;
       this.isRegion = false;
       this.isLearningType = false;
@@ -130,7 +131,7 @@ export class EditUserComponent implements OnInit {
       this.createUserForm.removeControl('domain_training_id');
       this.createUserForm.removeControl('country');
      }
-     else if(this.roleId == 12){
+     else if(this.roleId.includes(12)){
       this.isBussinessUnit = true;
       this.isLearningType = false;
       this.isRegion = false;
@@ -143,7 +144,7 @@ export class EditUserComponent implements OnInit {
       this.createUserForm.removeControl('region_id');
       this.createUserForm.removeControl('country');
      }
-     else if(this.roleId == 13){
+     else if(this.roleId.includes(13)){
       this.isCountry = true;
       this.isLearningType = false;
       this.isDomain = false;
@@ -154,7 +155,7 @@ export class EditUserComponent implements OnInit {
       this.createUserForm.removeControl('learning_type');
       this.createUserForm.removeControl('domain_training_id');
      }
-    else if(this.roleId == 14){
+    else if(this.roleId.includes(14)){
       this.isDomain = true;
       this.isRegion = false;
       this.isBussinessUnit = false;
@@ -199,7 +200,25 @@ export class EditUserComponent implements OnInit {
       return;
     }
     const body = this.createUserForm.value;
-    !this.user_id ? this.create(body) : this.update(body);
+    let isValidRole = true;
+    if(body.role_id && body.role_id.length > 0){
+      const roles =Object.values(_.countBy(this.rolesList.filter((x: { id: any; }) => body.role_id.includes(x.id)),'module'));
+      roles.forEach((element: any) => {
+        if(_.gt(element, 1))
+        {
+          isValidRole = false;
+          Swal.fire(
+            'Role!',
+            `One Module have more than one role select. Please select valid role`,
+            'warning'
+          )
+          return;
+        }
+      });
+    }
+    if(isValidRole){
+      !this.user_id ? this.create(body) : this.update(body);
+    }
    
   }
 
@@ -329,11 +348,17 @@ export class EditUserComponent implements OnInit {
   }
 
   getRole(){
-    this.courceService.getRole().subscribe(
+    this.courceService.getModuleRole().subscribe(
       res=>{
         let roles = res.data;
-        this.rolesList = roles.filter((a:any) => {
-          return a.status == 1
+        this.rolesList = [];
+        roles.forEach((module: any) => {
+          module.roles.forEach((element: any) => {
+            if(element.status){
+              element.module = module.module;
+              this.rolesList.push(element);
+            }
+          });
         });
       },err=>{
         this.commonService.errorHandling(err);
