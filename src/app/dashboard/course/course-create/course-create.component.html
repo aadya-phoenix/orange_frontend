@@ -59,7 +59,7 @@
                     <form [formGroup]="createCourceForm" enctype="multipart/form-data">
                         <div class="card">
                             <div class="card-header">
-                                <strong _ngcontent-jet-c125=""> Course Details </strong>
+                                <strong _ngcontent-jet-c125=""> {{lableConstant.course_details}} </strong>
                             </div>
                             <div class="card-body card_width">
                                 <div class="row">
@@ -151,8 +151,7 @@
                                                 <textarea class="form-control form_width-textarea" maxlength="500"
                                                     rows="3" placeholder="Enter Description"
                                                     formControlName="description_single" maxlength="500"></textarea>
-                                                <span class="charcter_limit">{{remainingText}} characters
-                                                    remaining</span>
+                                                <span class="charcter_limit">{{remainingText}} {{lableConstant.characters_remaining}}</span>
                                                 <div class="error_message"
                                                     *ngIf="(createCourceForm.controls['description_single'].invalid && (createCourceForm.controls['description_single'].dirty || createCourceForm.controls['description_single'].touched || isSubmitted))">
                                                     {{lableConstant.Description}} cannot be blank
@@ -371,7 +370,7 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <strong _ngcontent-jet-c125=""> Select learning type </strong>
+                                <strong _ngcontent-jet-c125=""> {{lableConstant.select_learning_type}} </strong>
                             </div>
                             <div class="card-body pb-0">
                                 <div class="row">
@@ -406,7 +405,7 @@
                                     <div class="col-sm-6" *ngIf="isPlaylist()">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Playlist url <span class="text_red">* </span>
+                                                {{lableConstant.playlist_url}} <span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="right"
@@ -425,7 +424,7 @@
                                     <div class="col-sm-6" *ngIf="isPlaylist()">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Number of learning objects
+                                                {{lableConstant.number_of_learning_objects}}
                                                 <span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
@@ -447,7 +446,7 @@
                                     <div class="col-sm-6" *ngIf="isPlaylist()">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Email of playlist creator
+                                                {{lableConstant.email_of_playlist_creator}}
                                                 <span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
@@ -470,8 +469,7 @@
                                     <div class="col-sm-6" *ngIf="isPlaylist()">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Is the target audience of your Playlist from one region
-                                                only? <span class="text_red">* </span>
+                                                {{lableConstant.is_target_audience_playlist_fregional}}<span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="right"
@@ -495,7 +493,7 @@
                                     <div class="col-sm-6" *ngIf="isPlaylist() && regionTargetAudience">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Region of Target Audience
+                                                {{lableConstant.region_of_target_audience}}
                                                 <span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
@@ -523,7 +521,7 @@
                                     <div class="col-sm-6" *ngIf="isPlaylist() && !regionTargetAudience">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Target audience <span class="text_red">* </span>
+                                                {{lableConstant.target_audience}} <span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="right"
@@ -536,7 +534,7 @@
                                             <select class="form-control form_width" formControlName="target_audience"
                                                 (change)="targetAudiencePlaylsit($event)">
                                                 <option value="">Please select</option>
-                                                <option value="1">OBS employees in specific Functions/Divisions
+                                                <option value="1">{{lableConstant.obs_employees_in_specific_functions}}
                                                 </option>
                                                 <option value="2">All OBS employees</option>
                                             </select>
@@ -549,7 +547,7 @@
                                     <div class="col-sm-6" *ngIf="isPlaylist() && !regionTargetAudience">
                                         <div class="form-group" *ngIf="!regionTargetAudiencePlaylist">
                                             <label class="form-control-label">
-                                                OBS employees in specific Functions/Divisions
+                                                {{lableConstant.obs_employees_in_specific_functions}}
                                                 <span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
@@ -812,7 +810,7 @@
                                         *ngIf="(isILTAndvILT() || isCurriculum() || isWebBased()) && showCertificateExpiry">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Certification expiry type
+                                                {{lableConstant.certification_expiry_type}}
                                                 <span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
@@ -838,7 +836,7 @@
                                         *ngIf="(isILTAndvILT() || isCurriculum() || isWebBased()) && showCertificateExpiry">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Validity period <span class="text_red">* </span>
+                                                {{lableConstant.validity_period}} <span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="right"
@@ -885,7 +883,7 @@
                                         *ngIf="(isILTAndvILT() || isWebBased()) && externalVendorname">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                External vendor name
+                                                {{lableConstant.external_vendor_name}}
                                                 <span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
@@ -990,7 +988,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Uploaded video URL <span class="text_red">* </span>
+                                                {{lableConstant.Uploaded_video_URL}} <span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="right"
@@ -1026,7 +1024,7 @@
                                             <div>
                                                 <input type="radio" id="chkurl" formControlName="materialBased"
                                                     value="url" class="mr-1" />
-                                                <label for="chkurl" class="mr-2">URL</label>
+                                                <label for="chkurl" class="mr-2">{{lableConstant.url}}</label>
                                                 <input type="radio" id="chkupload" formControlName="materialBased"
                                                     value="upload" class="mr-1" />
                                                 <label for="chkupload" class="mr-2">{{lableConstant.Uploaded_Material}}</label>
@@ -1044,7 +1042,7 @@
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        ngbTooltip="Please upload that you wish to associate with the learning Material.">
+                                                        ngbTooltip="lableConstant.upload_you_wish_learning_material">
                                                     </i>
                                                 </a>
                                             </label>
@@ -1069,11 +1067,11 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                URL<span class="text_red">* </span>
+                                                {{lableConstant.url}}<span class="text_red">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        ngbTooltip="Please upload that you wish to associate with the learning Material.">
+                                                        ngbTooltip="lableConstant.upload_you_wish_learning_material">
                                                     </i>
                                                 </a>
                                             </label>
@@ -1178,7 +1176,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Request to Regional Operation Cordinator
+                                                {{lableConstant.request_to_roc}}
                                                 <span class="text_red">* </span>
 
                                                 <a>
@@ -1216,7 +1214,7 @@
                             <div class="card-footer d-flex justify-content-start">
                                 <button *ngIf="isSubmit()" class="btn btn-primary"
                                     (click)="createUpdateCourse('pending')">
-                                    Submit
+                                    {{lableConstant.submit}}
                                 </button>
                                 <button *ngIf="isDraft()" class="btn btn-secondary ml-1"
                                     (click)="createUpdateCourse('draft')">
@@ -1231,13 +1229,13 @@
                                 <button
                                     *ngIf="getUserrole.id == 4 && (showrejectbutton != getprofileDetails.data.id || course_details.status =='draft')"
                                     class="btn btn-primary ml-2" data-toggle="modal" data-target="#publish">
-                                    <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1"> Publish</span>
+                                    <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1"> {{lableConstant.publish}}</span>
                                 </button>
                                 <button type="button" class="btn btn-secondary  ml-2" data-toggle="modal"
                                     data-target="#rejectModal"
                                     *ngIf="(getUserrole.id == 3 || getUserrole.id == 4) && course_details.user_id != undefined && showrejectbutton != getprofileDetails.data.id"
                                     (click)="getPublisher()">
-                                    <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                                    <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.reject}}</span>
                                 </button>
                             </div>
                         </div>
@@ -1306,7 +1304,7 @@
                                 <img src="../../../../assets/images/icon/transferbl.png" />
                             </div>
 
-                            <p>Transferred</p>
+                            <p>{{lableConstant.transferred}}</p>
                             <span class="number_css">
                                 {{course_count.transferred}}
                             </span>
@@ -1395,7 +1393,7 @@
                     <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
                     <button type="button" class="btn btn-primary" data-dismiss="modal"
                         (click)="createUpdateCoursePublisher()">
-                        Submit
+                        {{lableConstant.submit}}
                     </button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
                 </div>
@@ -1426,7 +1424,7 @@
                         <!--col end-->
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label>Orange Learning Intranet URL(SSO)</label>
+                                <label>{{lableConstant.orange_learning_intranet_url_sso}}</label>
                                 <input type="text " placeholder="Enter Orange Learning Intranet URL(SSO) "
                                     class="form-control form_width" formControlName="intranet_url" />
                                 <div class="error_message"
@@ -1437,7 +1435,7 @@
                         <!--col end-->
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label>Orange Learning Internet URL</label>
+                                <label>{{lableConstant.orange_learning_internet_url}}</label>
                                 <input type="text " placeholder="Enter Orange Learning Internet URL "
                                     class="form-control form_width" formControlName="internet_url" />
                                 <div class="error_message"
@@ -1454,7 +1452,7 @@
 
                 <button type="button" class="btn btn-primary" data-dismiss="modal"
                     (click)="createUpdateCourse('publish')">
-                    Publish
+                    {{lableConstant.publish}}
                 </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
 
@@ -1468,7 +1466,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="text_orange fon_14">Reject Request</h4>
+                <h4 class="text_orange fon_14">{{lableConstant.reject_request}}</h4>
             </div>
 
             <div class="modal-body">
@@ -1490,7 +1488,7 @@
             <div class="modal-footer">
                 <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
                 <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="reject()">
-                    Submit
+                    {{lableConstant.submit}}
                 </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
             </div>

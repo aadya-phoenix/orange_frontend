@@ -14,6 +14,7 @@ export class SmedbStatusComponent implements OnInit {
 
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
+  lableConstant: any = { french: {}, english: {} };
   publishSMEForm: FormGroup;
   isSubmitted = false;
   isSMEStatus= false;
@@ -23,6 +24,7 @@ export class SmedbStatusComponent implements OnInit {
     private modalService: NgbActiveModal,
     private SMEService: SMEService,
     private commonService: CommonService) {
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
       this.publishSMEForm = this.formBuilder.group({
         status_comment: new FormControl('', [Validators.required]),
       });

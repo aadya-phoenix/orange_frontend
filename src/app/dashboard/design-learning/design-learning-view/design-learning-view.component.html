@@ -66,7 +66,7 @@
                        </button>
                         <button type="button" *ngIf="isReject()" class="btn btn-secondary"
                             (click)="openModal(designStatus.reject)">
-                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.reject}}</span>
                         </button>
                     </div>
                     <div class="Requs_btn_inl-child" *ngIf="isDesigner && requestdata.head_status != designStatus.approve && requestdata.status_show == designStatus.pending">
@@ -76,7 +76,7 @@
                         </button>
                         <button type="button" class="btn btn-secondary" *ngIf=" !requestdata.head_status"
                             (click)="openModal(designStatus.reject)">
-                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.reject}}</span>
                         </button>
                     </div>
                     <div class="Requs_btn_inl-child" *ngIf="isDesigner && requestdata.head_status == designStatus.approve && requestdata.design_status != designStatus.close">
@@ -115,10 +115,10 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr class="font-14 text-center">
-                                            <th scope="col">Sr.No</th>
-                                            <th scope="col">Submitted by</th>
-                                            <th scope="col">Sent to</th>
-                                            <th scope="col">Last Modified</th>
+                                            <th scope="col">{{lableConstant.sr_no}}</th>
+                                            <th scope="col">{{lableConstant.submitted_by}}</th>
+                                            <th scope="col">{{lableConstant.sent_to}}</th>
+                                            <th scope="col">{{lableConstant.last_modified}}</th>
                                             <th scope="col">{{lableConstant.Status}}</th>
                                             <th scope="col">{{lableConstant.Comments}}</th>
                                         </tr>

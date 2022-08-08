@@ -26,10 +26,10 @@
                             <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/vendormanagement']" class="text_white span_dis">Create New Vendor</a>
+                            <a [routerLink]="['/dashboard/vendormanagement']" class="text_white span_dis">{{lableConstant.create_new_vendor}}</a>
                         </li>
                         <li>
-                            <span class="text_white span_dis">New Vendor</span>
+                            <span class="text_white span_dis">{{lableConstant.new_vendor}}</span>
                         </li>
                     </ol>
                 </div>
@@ -55,7 +55,7 @@
                         <div>
                             <div class="card">
                                 <div class="card-header">
-                                    <strong _ngcontent-jet-c125=""> Vendors Details </strong>
+                                    <strong _ngcontent-jet-c125=""> {{lableConstant.vendors_details}} </strong>
                                 </div>
                                 <div class="card-body card_width">
                                     <div class="row">
@@ -63,7 +63,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="form-group w-100">
                                                     <label class="form-control-label">
-                                                        Vendor Name <span class="text_red">* </span>
+                                                        {{lableConstant.vendor_name}} <span class="text_red">* </span>
                                                         <a>
                                                             <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                                 data-bs-toggle="tooltip" placement="top"
@@ -88,7 +88,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                                                    Vendor Region<span class="text-danger-ligth">* </span>
+                                                    {{lableConstant.vendor_region}} <span class="text-danger-ligth">* </span>
                                                 </label>
                                                 <ng-select placeholder="Please select Delivery"
                                                     [items]="cordinatorsList" [multiple]="true" bindLabel="name"
@@ -106,7 +106,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                                                    Vendor location<span class="text-danger-ligth">* </span>
+                                                    {{lableConstant.vendor_location}} <span class="text-danger-ligth">* </span>
                                                 </label>
                                                 <ng-select placeholder="Please select location"
                                                     [items]="CCTLearningLocation" [multiple]="true"
@@ -125,7 +125,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                                                    Vendor address<span class="text-danger-ligth">* </span>
+                                                    {{lableConstant.vendor_address}} <span class="text-danger-ligth">* </span>
                                                 </label>
                                                 <input type="text" placeholder="Enter Title"
                                                     class="form-control form_width" formControlName="address" />
@@ -143,7 +143,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                                                    Website<span class="text-danger-ligth">* </span>
+                                                    {{lableConstant.website}} <span class="text-danger-ligth">* </span>
                                                 </label>
                                                 <input type="text" placeholder="Enter Website"
                                                     class="form-control form_width" formControlName="website" />
@@ -163,7 +163,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                                                    NFPS entity(Oracle entity)<span class="text-danger-ligth">* </span>
+                                                    {{lableConstant.nfps_entity_oracle_entity}} <span class="text-danger-ligth">* </span>
                                                 </label>
                                                 <ng-select placeholder="Please select location" [items]="CCTNfpsEntity"
                                                     [multiple]="true" bindLabel="nfps_entity" bindValue="nfps_entity"
@@ -181,7 +181,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                                                    Epurchase
+                                                    {{lableConstant.epurchase}}
                                                 </label>
                                                 <ng-select [items]="yesnoDropdown" [multiple]="false" bindLabel="name"
                                                     bindValue="value" formControlName="epurchase">
@@ -194,7 +194,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                                                    Do we have global contact ?
+                                                    {{lableConstant.do_we_have_global_contact}}
                                                 </label>
                                                 <ng-select [items]="yesnoDropdown" [multiple]="false" bindLabel="name"
                                                     bindValue="value" formControlName="global_contract">
@@ -204,7 +204,7 @@
                                         <div class="col-sm-4" *ngIf="orange_contact">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                                                    PD&L/Orange contact<span class="text-danger-ligth">* </span>
+                                                    {{lableConstant.pdl_orange_contact}}<span class="text-danger-ligth">* </span>
                                                 </label>
                                                 <input type="text" placeholder="Enter Orange contact"
                                                     class="form-control form_width" formControlName="orange_contact" />
@@ -222,7 +222,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                                                    Training Offers<span class="text-danger-ligth">* </span>
+                                                    {{lableConstant.training_offers}} <span class="text-danger-ligth">* </span>
                                                 </label>
                                                 <ng-select placeholder="Please select location"
                                                     [items]="CCTOfferTraining" [multiple]="true"
@@ -241,7 +241,7 @@
                                         <div class="col-sm-4" *ngIf="other_training_offer">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                                                    Other training offers
+                                                    {{lableConstant.other_training_offers}}
                                                 </label>
                                                 <input type="text" placeholder="Enter Orange contact"
                                                     class="form-control form_width"
@@ -256,16 +256,16 @@
                                
                                     <div class="card" *ngFor="let cont of contactFormArray.controls; let i = index">
                                         <div class="card-header justify-content-between align-item-center card_header_vendor">
-                                            <strong _ngcontent-jet-c125=""> Vendors Point of contact </strong>
+                                            <strong _ngcontent-jet-c125=""> {{lableConstant.vendors_point_of_contact}} </strong>
                                             <div class="d-flex">
                                                 <button class="btn btn-primary btn_contact mr-1" (click)="addContact()">
                                                     <span class="fon_12"><i class="fa fa-plus" aria-hidden="true"></i>
-                                                        Add More</span>
+                                                        {{lableConstant.add_more}}</span>
                                                 </button>
                                                 <button class="btn btn-secondary btn_contact"
                                                     (click)="removeContact(cont)" *ngIf="i > 0">
                                                     <span class="fon_12"><i class="fa fa-minus" aria-hidden="true"></i>
-                                                        Remove</span>
+                                                        {{lableConstant.remove}}</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -273,7 +273,7 @@
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label class="form-control-label">
-                                                        Contact For <span class="text-danger-ligth">* </span>
+                                                        {{lableConstant.contact_for}} <span class="text-danger-ligth">* </span>
                                                         <a>
                                                             <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                                 placement="right"
@@ -312,7 +312,7 @@
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label class="form-control-label">
-                                                        Email Id <span class="text-danger-ligth">* </span>
+                                                        {{lableConstant.email_id}} <span class="text-danger-ligth">* </span>
                                                     </label>
                                                     <input type="text" placeholder="Enter Email Id"
                                                         class="form-control form_width" formControlName="email" />
@@ -328,7 +328,7 @@
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label class="form-control-label">
-                                                        Phone Number
+                                                        {{lableConstant.phone_number}}
                                                     </label>
                                                     <input type="text" placeholder="Enter phone"
                                                         class="form-control form_width" formControlName="phone" />
@@ -347,13 +347,12 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                                                    Other Comments<span class="text-danger-ligth">* </span>
+                                                    {{lableConstant.other_comments}}<span class="text-danger-ligth">* </span>
                                                 </label>
                                                 <textarea class="form-control form_width-textarea mb-2" maxlength="500"
                                                     rows="3" placeholder="Enter  Other Comments"
                                                     formControlName="other_comment" maxlength="500"></textarea>
-                                                <span class="charcter_limit">{{remainingText}} characters
-                                                    remaining</span>
+                                                <span class="charcter_limit">{{remainingText}} {{lableConstant.characters_remaining}}</span>
                                                 <div
                                                     *ngIf="(createVendorForm.controls['other_comment'].invalid && (createVendorForm.controls['other_comment'].dirty || createVendorForm.controls['other_comment'].touched)) || isSubmitted">
                                                     <div class="error_message"
@@ -368,7 +367,7 @@
                             </div>
                             <div class="mb-2">
                                 <button class="btn btn-primary" type="submit"
-                                    (click)="saveVendor('active')">Submit</button>
+                                    (click)="saveVendor('active')">{{lableConstant.submit}}</button>
                             </div>
                         </div>
                     </div>

@@ -223,7 +223,7 @@ export class GetReportViewComponent implements OnInit {
         this.getReportService.getReportTransfer({report_id :this.id}).subscribe((res:any)=>{
           this.commonService.hideLoading();
           Swal.fire(
-            'Transferred!',
+            this.lableConstant.transferred,
             'Your request has been Transferred to Data Analyst.',
             'success'
           )

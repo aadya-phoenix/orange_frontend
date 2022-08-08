@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 
@@ -12,6 +13,7 @@ import { CourcesService } from 'src/app/shared/services/cources/cources.service'
 export class MultiLaunguageComponent implements OnInit {
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
+  lableConstant: any = { french: {}, english: {} };
   public multiLaungaugeForm!: FormGroup;
   valueDetails: any = [];
   availableLanguages: any = [];
@@ -19,6 +21,7 @@ export class MultiLaunguageComponent implements OnInit {
     private modalService: NgbActiveModal,
     private fb: FormBuilder,
     private commonService: CommonService) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.multiLaungaugeForm = this.fb.group({
       titleArr: new FormArray([])
     });

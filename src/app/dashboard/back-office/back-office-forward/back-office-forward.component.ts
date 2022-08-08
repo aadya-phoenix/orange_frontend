@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { BackOfficeService } from 'src/app/shared/services/back-office/back-office.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 
@@ -12,7 +13,7 @@ import { CommonService } from 'src/app/shared/services/common/common.service';
   styleUrls: ['./back-office-forward.component.scss']
 })
 export class BackOfficeForwardComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   publishBackOfficeForm: FormGroup;
@@ -22,6 +23,7 @@ export class BackOfficeForwardComponent implements OnInit {
     private backOfficeService: BackOfficeService,
     private commonService: CommonService,
     private router: Router) {
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.publishBackOfficeForm = this.formBuilder.group({
       publisher_id: new FormControl('', [Validators.required]),
     });

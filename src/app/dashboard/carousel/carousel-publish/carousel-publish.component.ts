@@ -12,7 +12,7 @@ import { CommonService } from 'src/app/shared/services/common/common.service';
   styleUrls: ['./carousel-publish.component.scss']
 })
 export class CarouselPublishComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   publishCarouselForm: FormGroup;
@@ -24,6 +24,7 @@ export class CarouselPublishComponent implements OnInit {
     private carouselService: CarouselService,
     private commonService: CommonService,
     private router: Router) {
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
       this.publishCarouselForm = this.formBuilder.group({
         status_comment: new FormControl('', [Validators.required]),
       });

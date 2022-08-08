@@ -27,10 +27,10 @@
                             <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/back-office']" class="text_white">Create new back office</a>
+                            <a [routerLink]="['/dashboard/back-office']" class="text_white">{{lableConstant.create_new_back_office}}</a>
                         </li>
                         <li>
-                            <span class="text_white span_dis">{{ back_office_id === 0 ? lableConstant.New_Request : 'Update Request'}}</span>
+                            <span class="text_white span_dis">{{ back_office_id === 0 ? lableConstant.New_Request : lableConstant.update_request}}</span>
 
                         </li>
                     </ol>
@@ -59,7 +59,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong _ngcontent-jet-c125=""> Request back-office role Details </strong>
+                                <strong _ngcontent-jet-c125=""> {{lableConstant.request_back_office_role_details}} </strong>
                                 <!-- <button class="btn btn-primary btn_common">
                                    Common Fields
                                  </button> -->
@@ -234,7 +234,7 @@
                                     <div class="col-sm-12" *ngIf="isRequester">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Request to Regional Operation Cordinator
+                                                {{lableConstant.request_to_roc}}
                                                 <span class="text_red">* </span>
 
                                                 <a>
@@ -310,14 +310,14 @@
                             <div class="card-footer">
                                 <button class="btn btn-primary mr-1" type="submit" *ngIf="isSubmit()"
                                     (click)="saveBackOffice('pending')"> <i class="fa fa-upload mr-1" aria-hidden="true"></i>{{ isReviewer ? lableConstant.Transfer_to_Publisher:
-                                    'Submit'
+                                        lableConstant.submit
                                     }}</button>
                                 <button class="btn btn-primary mr-1" type="submit" *ngIf="isPublish()"
                                     (click)="saveBackOffice('publish')"><i aria-hidden="true"
-                                        class="fa fa-upload"></i><span class="pl-1">Publish</span></button>
+                                        class="fa fa-upload"></i><span class="pl-1">{{lableConstant.publish}}</span></button>
                                 <button class="btn btn-secondary mr-1" type="submit" *ngIf="isReject()"
                                     (click)="statusChangeRequest(BackOfficeStatus.reject)"><i aria-hidden="true"
-                                        class="fa fa-times"></i><span class="pl-1">Reject</span></button>
+                                        class="fa fa-times"></i><span class="pl-1">{{lableConstant.reject}}</span></button>
                                 <button class="btn btn-secondary" *ngIf="isDraft()"
                                     (click)="saveBackOffice('draft')">{{lableConstant.Save_as_draft}}</button>
                             </div>
@@ -385,7 +385,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/transferbl.png" />
                             </div>
-                            <p>Forwarded</p>
+                            <p>{{lableConstant.forwarded}}</p>
                             <span class="number_css">
                                 {{back_office_count.transferred?back_office_count.transferred:0}}
                             </span>

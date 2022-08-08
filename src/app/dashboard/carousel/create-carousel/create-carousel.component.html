@@ -27,10 +27,10 @@
                             <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/olcarousel']" class="text_white">Create new Carousel</a>
+                            <a [routerLink]="['/dashboard/olcarousel']" class="text_white">{{lableConstant.create_new_carousel}}</a>
                         </li>
                         <li>
-                            <span class="text_white span_dis">{{ carousel_id === 0 ? lableConstant.New_Request : 'Update Request'}}</span>
+                            <span class="text_white span_dis">{{ carousel_id === 0 ? lableConstant.New_Request : lableConstant.update_request}}</span>
                         </li>
                     </ol>
                 </div>
@@ -80,7 +80,7 @@
                                                 <strong class="font-16">{{carousel.value.languageName}}</strong>
                                                 <div class="chkbox_css_header" *ngIf="isCreater">
                                                     <button class="btn btn-secondary btn-sm"
-                                                        (click)="removeCarousel(carousel)">Remove</button>
+                                                        (click)="removeCarousel(carousel)">{{lableConstant.remove}}</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -133,7 +133,7 @@
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <label class="form-control-label">
-                                                            Link <span class="text-danger-ligth">* </span>
+                                                            {{lableConstant.link}} <span class="text-danger-ligth">* </span>
                                                             <a>
                                                                 <i class="fa fa-info-circle info_circle"
                                                                     aria-hidden="true" data-bs-toggle="tooltip"
@@ -160,8 +160,7 @@
                                                     <div class="form-group mb-0">
                                                         <label class="ml-1 manage-checkbox">
                                                             <input type="checkbox" formControlName="display_manager"
-                                                                class="mr-1">I want my Carousel to be displayed to
-                                                            Managers only</label>
+                                                                class="mr-1">{{lableConstant.carousel_displayed_managers_only}}</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -292,10 +291,10 @@
                             </div>
                             <div class="card-footer">
                                 <button class="btn btn-primary mr-1" type="submit"  *ngIf="isSubmit()"
-                                    (click)="saveCarousel('pending')"> <i class="fa fa-upload mr-1" aria-hidden="true"></i>{{ isReviewer ?  lableConstant.Transfer_to_Publisher: 'Submit' }}</button>
+                                    (click)="saveCarousel('pending')"> <i class="fa fa-upload mr-1" aria-hidden="true"></i>{{ isReviewer ?  lableConstant.Transfer_to_Publisher: lableConstant.submit }}</button>
                                 <button class="btn btn-primary mr-1" type="submit" *ngIf="isPublish()"
-                                    (click)="saveCarousel('publish')"><i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1"> Publish</span></button>
-                                <button class="btn btn-secondary mr-1" type="submit" *ngIf="isReject()" (click)="statusChangeRequest(CarouselStatus.reject)"><i  aria-hidden="true" class="fa fa-times"></i><span class="pl-1">Reject</span></button>
+                                    (click)="saveCarousel('publish')"><i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1"> {{lableConstant.publish}}</span></button>
+                                <button class="btn btn-secondary mr-1" type="submit" *ngIf="isReject()" (click)="statusChangeRequest(CarouselStatus.reject)"><i  aria-hidden="true" class="fa fa-times"></i><span class="pl-1">{{lableConstant.reject}}</span></button>
                                 <button class="btn btn-secondary" *ngIf="isDraft()" (click)="saveCarousel('draft')">{{lableConstant.Save_as_draft}}</button>
                             </div>
                         </div>
@@ -362,7 +361,7 @@
                             <div class="fa-icons-des bg-transparent">
                                 <img src="../../../../assets/images/icon/transferbl.png" />
                             </div>
-                            <p>Forwarded</p>
+                            <p>{{lableConstant.forwarded}}</p>
                             <span class="number_css">
                                 {{carousel_count.transferred?carousel_count.transferred:0}}
                             </span>

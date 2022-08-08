@@ -14,8 +14,7 @@
                     </label>
                     <textarea class="form-control form_width-textarea mb-2" maxlength="500" rows="3"
                         formControlName="status_comment" placeholder="Enter Comments" (change)="valueChange()"></textarea>
-                    <span class="charcter_limit ">{{remainingText}} characters
-                        remaining</span>
+                    <span class="charcter_limit ">{{remainingText}} {{lableConstant.characters_remaining}}</span>
                     <div
                         *ngIf="(publishSMEForm.controls['status_comment'].invalid && (publishSMEForm.controls['status_comment'].dirty || publishSMEForm.controls['status_comment'].touched)) || isSubmitted ">
                         <div class="error_message"
@@ -29,7 +28,7 @@
         </form>
     </div>
     <div class="card-footer">
-        <button class="btn btn-primary mr-1" type="submit" (click)="publishSME()">Submit</button>
-        <button class="btn btn-secondary" type="submit" (click)="closeModal()">Cancel</button>
+        <button class="btn btn-primary mr-1" type="submit" (click)="publishSME()">{{lableConstant.submit}}</button>
+        <button class="btn btn-secondary" type="submit" (click)="closeModal()">{{lableConstant.cancel}}</button>
     </div>
 </div>

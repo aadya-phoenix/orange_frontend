@@ -15,6 +15,7 @@ export class VendorManagementRatingComponent implements OnInit {
 
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
+  lableConstant: any = { french: {}, english: {}};
   publishVendorForm: FormGroup;
   isSubmitted = false;
   status = '';
@@ -28,6 +29,7 @@ export class VendorManagementRatingComponent implements OnInit {
     private vendorService: VendorService,
     private commonService: CommonService,
     private router: Router) {
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
       this.publishVendorForm = this.formBuilder.group({
         status_comment: new FormControl('', [Validators.required]),
       });

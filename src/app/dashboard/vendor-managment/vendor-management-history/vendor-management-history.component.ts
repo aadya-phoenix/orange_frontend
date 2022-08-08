@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { VendorService } from 'src/app/shared/services/vendor/vendor.service';
 
@@ -9,10 +10,12 @@ import { VendorService } from 'src/app/shared/services/vendor/vendor.service';
   styleUrls: ['./vendor-management-history.component.scss']
 })
 export class VendorManagementHistoryComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
-  constructor(private modalService: NgbActiveModal, private vendorService: VendorService,  private commonService: CommonService) { }
+  constructor(private modalService: NgbActiveModal, private vendorService: VendorService,  private commonService: CommonService) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+   }
   public historyList: any;
   public objectDetail: any;
   public modalType: any;

@@ -565,7 +565,7 @@ export class PdltoolsComponent implements AfterViewInit {
         }
       },
       title: {
-        text: `Content Support ${this.year}`,
+        text: `${this.lableConstant.content_support} ${this.year}`,
       },
       credits: {
         enabled: false,
@@ -604,7 +604,7 @@ export class PdltoolsComponent implements AfterViewInit {
         }
       },
       title: {
-        text: `Content Support ${this.year}`,
+        text: `${this.lableConstant.content_support} ${this.year}`,
       },
       credits: {
         enabled: false,
@@ -643,7 +643,7 @@ export class PdltoolsComponent implements AfterViewInit {
         }
       },
       title: {
-        text: `Content Support ${this.year}`,
+        text: `${this.lableConstant.content_support} ${this.year}`,
       },
       credits: {
         enabled: false,

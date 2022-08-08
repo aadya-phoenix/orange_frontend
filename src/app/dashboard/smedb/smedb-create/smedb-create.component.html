@@ -28,7 +28,7 @@
                             <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/smedb']" class="text_white">Create new SME</a>
+                            <a [routerLink]="['/dashboard/smedb']" class="text_white">{{lableConstant.create_new_sme}}</a>
                         </li>
                         <li>
                             <span class="text_white span_dis">{{lableConstant.New_Request}}</span>
@@ -79,7 +79,7 @@
                                         <div class="d-flex align-items-center">
                                             <div class="form-group w-100">
                                                 <label class="form-control-label">
-                                                    Volunteered for domain/expertise/training <span class="text_red">*
+                                                    {{lableConstant.volunteered_for_domain_expertise}} <span class="text_red">*
                                                     </span>
                                                 </label>
                                                 <ng-select
@@ -101,7 +101,7 @@
                                         <div class="d-flex align-items-center">
                                             <div class="form-group w-100">
                                                 <label class="form-control-label">
-                                                    Are you currently available? <span class="text_red">* </span>
+                                                    {{lableConstant.are_you_currently_available}} <span class="text_red">* </span>
                                                 </label>
                                                 <ng-select placeholder="Please select your availability" [items]="yesNo"
                                                     bindLabel="name" bindValue="id" formControlName="available"
@@ -118,11 +118,11 @@
                                         <div class="d-flex align-items-center">
                                             <div class="form-group w-100">
                                                 <label class="form-control-label" *ngIf="isAvailable">
-                                                    When you are not available - Start date <span class="text_red">*
+                                                    {{lableConstant.when_you_are_not_available_start_date}} <span class="text_red">*
                                                     </span>
                                                 </label>
                                                 <label class="form-control-label" *ngIf="!isAvailable">
-                                                    When will you be available starting? <span class="text_red">*
+                                                    {{lableConstant.when_will_you_be_available_starting}} <span class="text_red">*
                                                     </span>
                                                 </label>
                                                 <input type="date" class="form-control form_width"
@@ -138,7 +138,7 @@
                                         <div class="d-flex align-items-center">
                                             <div class="form-group w-100">
                                                 <label class="form-control-label">
-                                                    When you are not available - End date <span class="text_red">*
+                                                    {{lableConstant.when_you_are_not_available_end_date}} <span class="text_red">*
                                                     </span>
                                                 </label>
                                                 <input type="date" class="form-control form_width"
@@ -199,22 +199,22 @@
                                             *ngIf="sme_details.domain.includes('content-support')">
                                             <a class="nav-link active" [ngClass]="{'active': selectedTab == SMETabs.contecntSupport}" id="id-content-support" data-toggle="pill"
                                                 href="#content-support" role="tab" aria-controls="content-support"
-                                                aria-selected="true" (click)="changeTab(SMETabs.contecntSupport)">Content support</a>
+                                                aria-selected="true" (click)="changeTab(SMETabs.contecntSupport)">{{lableConstant.content_support}}</a>
                                         </li>
                                         <li class="nav-item" role="presentation"
                                             *ngIf="sme_details.domain.includes('delivery')">
                                             <a class="nav-link" id="id-delivery" data-toggle="pill" href="#delivery" [ngClass]="{'active': selectedTab == SMETabs.delivery}"
-                                                role="tab" aria-controls="delivery" aria-selected="false" (click)="changeTab(SMETabs.delivery)">Delivery</a>
+                                                role="tab" aria-controls="delivery" aria-selected="false" (click)="changeTab(SMETabs.delivery)">{{lableConstant.Delivery_Method}}</a>
                                         </li>
                                         <li class="nav-item" role="presentation"
                                             *ngIf="sme_details.domain.includes('voice-over-learning')">
                                             <a class="nav-link" id="id-voice-over" data-toggle="pill" href="#voice-over" [ngClass]="{'active': selectedTab == SMETabs.voiceOver}"
-                                                role="tab" aria-controls="voice-over" aria-selected="false"  (click)="changeTab(SMETabs.voiceOver)">Voice-over for eLearning</a>
+                                                role="tab" aria-controls="voice-over" aria-selected="false"  (click)="changeTab(SMETabs.voiceOver)">{{lableConstant.voice_over_for_elearning}}</a>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <a class="nav-link" id="id-professional-certi" data-toggle="pill"
                                                 href="#professional-certi" role="tab" aria-controls="professional-certi" [ngClass]="{'active': selectedTab == SMETabs.professionalCertifications}"
-                                                aria-selected="false" (click)="changeTab(SMETabs.professionalCertifications)">Professional certifications</a>
+                                                aria-selected="false" (click)="changeTab(SMETabs.professionalCertifications)">{{lableConstant.professional_certifications}}</a>
                                         </li>
                                         <li class="nav-item" role="presentation" >
                                             <a class="nav-link" id="id-comments" data-toggle="pill" href="#comments" [ngClass]="{'active': selectedTab == SMETabs.comments}"
@@ -336,7 +336,7 @@
                                                     <div class="col-md-5 col-sm-12" [formGroupName]="i">
                                                         <div class="form-group w-100">
                                                             <label class="form-control-label">
-                                                                Previous experience in delivery/facilitation of training
+                                                                {{lableConstant.previous_experience_in_delivery_facilitation}}
                                                                 <span class="text_red">*
                                                                 </span>
                                                             </label>
@@ -355,7 +355,7 @@
                                                     <div class="col-md-5 col-sm-12" [formGroupName]="i">
                                                         <div class="form-group w-100" *ngIf="!contentSup.value.isPrevious">
                                                             <label class="form-control-label">
-                                                                Would you need help? <span class="text_red">*
+                                                                {{lableConstant.would_you_need_help}} <span class="text_red">*
                                                                 </span>
                                                             </label>
                                                             <ng-select placeholder="Please select level" [items]="yesNo"
@@ -373,11 +373,11 @@
                                                     <div class="col-md-10 col-sm-12" [formGroupName]="i" *ngIf="contentSup.value.isPrevious || (!contentSup.value.isPrevious && contentSup.value.isNeedHelp)">
                                                         <div class="form-group w-100">
                                                             <label class="form-control-label" *ngIf="!contentSup.value.isPrevious">
-                                                                How can we help you? <span class="text_red">*
+                                                               {{lableConstant.how_can_we_help_you}} <span class="text_red">*
                                                                 </span>
                                                             </label>
                                                             <label class="form-control-label" *ngIf="contentSup.value.isPrevious">
-                                                                Provide a brief of experience <span class="text_red">*
+                                                                {{lableConstant.provide_a_brief_of_experience}} <span class="text_red">*
                                                                 </span>
                                                             </label>
                                                             <textarea class="form-control form_width-textarea" rows="3"
@@ -401,7 +401,7 @@
                                                 <div class="col-md-6 col-sm-12">
                                                     <div class="form-group w-100">
                                                         <label class="form-control-label">
-                                                            Laungauge <span class="text_red">*
+                                                            {{lableConstant.laungauge}} <span class="text_red">*
                                                             </span>
                                                         </label>
                                                         <ng-select placeholder="Please select laungauge"
@@ -418,7 +418,7 @@
                                                 <div class="col-md-6 col-sm-12" *ngIf="other_language">
                                                     <div class="form-group w-100">
                                                         <label class="form-control-label">
-                                                            Other Laungauge
+                                                            {{lableConstant.other_laungauge}}
                                                         </label>
                                                         <input type="text" placeholder="Enter other laungauge"
                                                             class="form-control form_width"
@@ -428,7 +428,7 @@
                                                 <div class="col-md-6 col-sm-12">
                                                     <div class="form-group w-100">
                                                         <label class="form-control-label">
-                                                            Male or female voice <span class="text_red">*
+                                                            {{lableConstant.male_or_female_voice}} <span class="text_red">*
                                                             </span>
                                                         </label>
                                                         <ng-select placeholder="Please select level"
@@ -445,7 +445,7 @@
                                                 <div class="col-md-6 col-sm-12">
                                                     <div class="form-group w-100">
                                                         <label class="form-control-label">
-                                                            Previous experience in voice-over <span class="text_red">*
+                                                            {{lableConstant.previous_experience_in_voice_over}} <span class="text_red">*
                                                             </span>
                                                         </label>
                                                         <ng-select placeholder="Please select level" [items]="yesNo"
@@ -472,7 +472,7 @@
                                                 <div class="flex col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-control-label">
-                                                        Upload sample of voice recording
+                                                        {{lableConstant.upload_sample_of_voice_recording}}
                                                     </label>
                                                     <input type="file" id="voice_recording"
                                                         class="form-control form_width mb-2" multiple="true" accept="audio/*"
@@ -536,7 +536,7 @@
                                                     <div class="col-md-5 col-sm-12" [formGroupName]="i">
                                                         <div class="form-group w-100">
                                                             <label class="form-control-label">
-                                                                Year of completion <span class="text_red">*
+                                                                {{lableConstant.year_of_completion}} <span class="text_red">*
                                                                 </span>
                                                             </label>
                                                             <input type="text" placeholder="Enter Year of completion"
@@ -570,7 +570,7 @@
                                                     <div class="form-group">
                                                         <label class="manage-checkbox">
                                                             <input type="checkbox" formControlName="agree" class="mr-1"
-                                                                (click)="showTerms()">I am agree with OBS SME Community</label>
+                                                                (click)="showTerms()">{{lableConstant.i_am_agree_with_obs_sme_community}}</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -578,7 +578,7 @@
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="form-group w-100">
                                                         <label class="form-control-label">
-                                                            Other Comments
+                                                            {{lableConstant.other_comments}}
                                                         </label>
                                                         <textarea class="form-control form_width-textarea" rows="3"
                                                             placeholder="Enter Comments" maxlength="500"
@@ -593,7 +593,7 @@
                                 <div class="d-flex justify-content-start p-0_20" *ngIf="sme_id">
                                     <div class="d-flex justify-content-start">
                                         <button class="btn btn-primary" (click)="saveSME()">
-                                            Submit
+                                           {{lableConstant.submit}}
                                         </button>
                                     </div>
                                 </div>

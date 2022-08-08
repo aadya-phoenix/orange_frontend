@@ -21,6 +21,7 @@ import { VendorManagementStatusComponent } from '../vendor-management-status/ven
 })
 export class VendorManagementViewReportComponent implements OnInit {
   public filterForm!: FormGroup;
+  lableConstant: any = { french: {}, english: {}};
   vendorStatus = dataConstant.VendorStatus;
   status= [{name:'Active', value:'active'},{name:'Deactive', value:'deactive'}];
   overallRatings= [];
@@ -63,6 +64,7 @@ export class VendorManagementViewReportComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.filterForm = this.fb.group({

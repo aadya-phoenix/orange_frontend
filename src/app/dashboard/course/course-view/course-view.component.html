@@ -91,7 +91,7 @@
             <div class="Requs_btn_inl-child">
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#publishModal"
                 *ngIf="getUserrole.id == 4 && status != 'publish' && showrejectbutton != getprofileDetails.data.id">
-                <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
+                <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">{{lableConstant.publish}}</span>
               </button>
 
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
@@ -108,19 +108,19 @@
               <button type="button" class="btn btn-secondary ml-2" data-toggle="modal" data-target="#rejectModal"
                 *ngIf="(getUserrole.id == 3 || getUserrole.id == 4) && status != 'publish' && showrejectbutton != getprofileDetails.data.id"
                 (click)="getPublisher()">
-                <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.reject}}</span>
               </button>
             </div>
             <div class="Requs_btn_inl-child1" *ngIf="getUserrole.id != 4">
               <button type="button" class="btn btn-secondary ml-2" data-toggle="modal" data-target="#transferotherRoc"
                 (click)="transferOtherroc()">
-                <i class="fa fa-exchange" aria-hidden="true"></i><span class="pl-1">Transfer to Other ROC</span>
+                <i class="fa fa-exchange" aria-hidden="true"></i><span class="pl-1">{{lableConstant.transfer_to_other_roc}}</span>
               </button>
             </div>
           </div>
           <div *ngIf="status == 'publish' && routegetdata.learning_type == '1'">
             <button type="button" class="btn btn-primary" (click)="beautificationTemplate()">
-              <i class="fa fa-linode" aria-hidden="true"></i><span class="pl-1">Beautification Template</span>
+              <i class="fa fa-linode" aria-hidden="true"></i><span class="pl-1">{{lableConstant.beautification_template}}</span>
             </button>
           </div>
         </div>
@@ -134,7 +134,7 @@
                     <div class="col-sm-12 col-md-6">
 
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Orange Learning Intranet URL(SSO)</label>
+                        <label for="exampleInputEmail1">{{lableConstant.orange_learning_intranet_url_sso}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)">
                             {{routegetdata.intranet_url ? routegetdata.intranet_url : "-" }}
@@ -149,7 +149,7 @@
                     </div>
                     <div class="col-sm-12 col-md-6">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Orange Learning Internet URL</label>
+                        <label for="exampleInputEmail1">{{lableConstant.orange_learning_internet_url}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)">
                             {{routegetdata.internet_url ? routegetdata.internet_url : "-" }}
@@ -217,7 +217,7 @@
 
                   <div class="col-sm-12" *ngIf="routegetdata.learning_type != '6'">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Training Duration</label>
+                      <label for="exampleInputEmail1">{{lableConstant.training_duration}}</label>
                       <div class="d-flex align-items-center">
                         <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>{{
                           trainingDurationHours}}</span>
@@ -638,7 +638,7 @@
 
                     <div class="col-sm-12" *ngIf="routegetdata.certification_expiry_type_name">
                       <div class="form-group">
-                        <label for="exampleInputEmail1"> Certification Expiry type</label>
+                        <label for="exampleInputEmail1"> {{lableConstant.certification_expiry_type}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -659,7 +659,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12" *ngIf="routegetdata.validity_period_name">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Validity period</label>
+                        <label for="exampleInputEmail1">{{lableConstant.validity_period}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -716,7 +716,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12" *ngIf="routegetdata.external_vendor_name">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">External Vendor name</label>
+                        <label for="exampleInputEmail1">{{lableConstant.external_vendor_name}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -965,7 +965,7 @@
                                             <div>&nbsp;</div> -->
                     <div class="col-sm-12" *ngIf="routegetdata.url">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Material Source URL</label>
+                        <label for="exampleInputEmail1">{{lableConstant.material_source_url}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1284,7 +1284,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12" *ngIf="routegetdata.certification_expiry_type_name">
                       <div class="form-group">
-                        <label for="exampleInputEmail1"> Certification Expiry type name</label>
+                        <label for="exampleInputEmail1"> {{lableConstant.certification_expiry_type_name}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1305,7 +1305,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12" *ngIf="routegetdata.validity_period_name">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Validity period</label>
+                        <label for="exampleInputEmail1">{{lableConstant.validity_period}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1521,7 +1521,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12" *ngIf="routegetdata.certification_expiry_type_name">
                       <div class="form-group">
-                        <label for="exampleInputEmail1"> Certification Expiry type name</label>
+                        <label for="exampleInputEmail1"> {{lableConstant.certification_expiry_type_name}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1542,7 +1542,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12" *ngIf="routegetdata.validity_period_name">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Validity period</label>
+                        <label for="exampleInputEmail1">{{lableConstant.validity_period}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1579,7 +1579,7 @@
                     <!--cole dn-->
                     <div class="col-sm-12" *ngIf="routegetdata.external_vendor_name">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">External Vendor name</label>
+                        <label for="exampleInputEmail1">{{lableConstant.external_vendor_name}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1687,7 +1687,7 @@
                                             <div>&nbsp;</div> -->
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Playlist url</label>
+                        <label for="exampleInputEmail1">{{lableConstant.playlist_url}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1705,7 +1705,7 @@
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Number of learning objects</label>
+                        <label for="exampleInputEmail1">{{lableConstant.number_of_learning_objects}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1723,7 +1723,7 @@
                     </div>
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Email of playlist creator</label>
+                        <label for="exampleInputEmail1">{{lableConstant.email_of_playlist_creator}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1740,8 +1740,7 @@
                     <div class="col-sm-12">
                       <div class="form-group">
                         <label for="exampleInputEmail1">
-                          Is the target audience of your Playlist from one region
-                          only?
+                          {{lableConstant.is_target_audience_playlist_fregional}}
                         </label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
@@ -1757,7 +1756,7 @@
                     </div>
                     <div class="col-sm-12" *ngIf="routegetdata.who_see_course_name">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Region of Target Audience</label>
+                        <label for="exampleInputEmail1">{{lableConstant.region_of_target_audience}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1775,7 +1774,7 @@
                     </div>
                     <div class="col-sm-12" *ngIf="routegetdata.target_audience_name">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Target audience</label>
+                        <label for="exampleInputEmail1">{{lableConstant.target_audience}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1790,7 +1789,7 @@
                     </div>
                     <div class="col-sm-12" *ngIf="routegetdata.email_preffered_instructor">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">OBS employees in specific Functions/Divisions</label>
+                        <label for="exampleInputEmail1">{{lableConstant.obs_employees_in_specific_functions}}</label>
                         <div class="d-flex align-items-center">
                           <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
                             {{
@@ -1976,7 +1975,7 @@
         <div class="modal-footer">
           <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
           <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="transfertoPublisher()">
-            Submit
+            {{lableConstant.submit}}
           </button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
         </div>
@@ -1988,7 +1987,7 @@
     <div class="modal-dialog modal-lg" role="document ">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="reject_req_h4">Reject Request</h4>
+          <h4 class="reject_req_h4">{{lableConstant.reject_request}}</h4>
         </div>
 
         <div class="modal-body">
@@ -2007,7 +2006,7 @@
         <div class="modal-footer">
           <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
           <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="reject()">
-            Submit
+            {{lableConstant.submit}}
           </button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
         </div>
@@ -2070,7 +2069,7 @@
               Close
             </button> -->
           <button type="button" data-dismiss="modal" (click)="transfertoOtherRoc()" class="btn btn-primary btn_requst">
-            Submit
+            {{lableConstant.submit}}
           </button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
         </div>
@@ -2099,7 +2098,7 @@
               <!--col end-->
               <div class="col-sm-12">
                 <div class="form-group">
-                  <label>Orange Learning Intranet URL(SSO)</label>
+                  <label>{{lableConstant.orange_learning_intranet_url_sso}}</label>
                   <input type="text" placeholder="Enter Orange Learning Intranet URL(SSO)"
                     class="form-control form_width1" formControlName="intranet_url" />
                   <div class="error_message"
@@ -2126,7 +2125,7 @@
         <div class="modal-footer">
           <!-- <button type="button " class="btn btn-secondary " data-dismiss="modal ">Close</button> -->
           <button type="button" class="btn btn-primary btn_requst" data-dismiss="modal" (click)="PublishRequest()">
-            Submit
+            {{lableConstant.submit}}
           </button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
         </div>
@@ -2139,7 +2138,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title text_orange" id="exampleModalLabel">
-            Translate
+            {{lableConstant.translate}}
           </h5>
           <!-- Boosted mod: using visually hidden text instead of aria-label -->
         </div>

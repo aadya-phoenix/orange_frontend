@@ -75,14 +75,14 @@
                         <div class="Requs_btn_inl-child">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#publishModal"
                               *ngIf="status != 'publish'">
-                              <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
+                              <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">{{lableConstant.publish}}</span>
                             </button>
                             <button class="btn btn-secondary ml-2" (click)="updateSession()">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.Update}}</span>
                           </button>
                           <button type="button" class="btn btn-secondary ml-2" data-toggle="modal"
                             data-target="#rejectModal">
-                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.reject}}</span>
                           </button>
                          
                         </div>  
@@ -101,14 +101,14 @@
                         <div class="Requs_btn_inl-child">
                             <button type="button" class="btn btn-primary  ml-2" data-toggle="modal" data-target="#publishModal"
                               *ngIf="status != 'publish'">
-                              <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
+                              <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">{{lableConstant.publish}}</span>
                             </button>
                             <button class="btn btn-secondary ml-2" (click)="updateSession()">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.Update}}</span>
                           </button>
                           <button type="button" class="btn btn-secondary ml-2" data-toggle="modal"
                             data-target="#rejectModal">
-                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.reject}}</span>
                           </button>
                         </div>                            
                     </div>
@@ -352,7 +352,7 @@
                                     </div>
                                     <div *ngIf="meta.external_vendor_name" class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">External vendor name</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.external_vendor_name}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data">
                                                     {{meta.external_vendor_name}}
@@ -430,7 +430,7 @@
         <div class="modal-footer">
           <!-- <button type="button " class="btn btn-secondary " data-dismiss="modal ">Close</button> -->
           <button type="button" class="btn btn-primary btn_requst" data-dismiss="modal" (click)="publishRequest()">
-            Submit
+            {{lableConstant.submit}}
           </button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
         </div>
@@ -442,7 +442,7 @@
         <div class="modal-dialog modal-lg" role="document ">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="reject_req_h4">Reject Request</h4>
+              <h4 class="reject_req_h4">{{lableConstant.reject_request}}</h4>
             </div>
     
             <div class="modal-body">
@@ -460,7 +460,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="reject()">
-                Submit
+                {{lableConstant.submit}}
               </button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
             </div>
@@ -504,7 +504,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" data-dismiss="modal" (click)="transfertoOtherRoc()" class="btn btn-primary btn_requst">
-              Submit
+              {{lableConstant.submit}}
             </button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lableConstant.Close}}</button>
           </div>

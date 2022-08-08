@@ -13,7 +13,7 @@ import { SMEService } from 'src/app/shared/services/sme/sme.service';
   styleUrls: ['./smedb-rating.component.scss']
 })
 export class SmedbRatingComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {}};
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   publishSMEForm: FormGroup;
@@ -32,6 +32,7 @@ export class SmedbRatingComponent implements OnInit {
     private commonService: CommonService,
     private authService: AuthenticationService,
     private router: Router) {
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
       this.publishSMEForm = this.formBuilder.group({
         status_comment: new FormControl('', [Validators.required]),
       });

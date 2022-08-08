@@ -12,7 +12,7 @@ import { CommonService } from 'src/app/shared/services/common/common.service';
   styleUrls: ['./back-office-publish.component.scss']
 })
 export class BackOfficePublishComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   publishBackOfficeForm: FormGroup;
@@ -24,6 +24,7 @@ export class BackOfficePublishComponent implements OnInit {
     private backOfficeService: BackOfficeService,
     private commonService: CommonService,
     private router: Router) {
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
       this.publishBackOfficeForm = this.formBuilder.group({
         status_comment: new FormControl('', [Validators.required]),
       });

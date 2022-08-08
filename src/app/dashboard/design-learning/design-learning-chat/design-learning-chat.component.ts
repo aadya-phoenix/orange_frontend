@@ -12,7 +12,7 @@ import { DesignLearningService } from 'src/app/shared/services/design-learning/d
   styleUrls: ['./design-learning-chat.component.scss']
 })
 export class DesignLearningChatComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   designId:number = 0;
   isSubmitted = false;
   status:string='';
@@ -36,7 +36,9 @@ export class DesignLearningChatComponent implements OnInit {
     private designService: DesignLearningService,
     private commonService: CommonService,
     private router: Router
-  ) { }
+  ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+   }
 
   ngOnInit(): void {
     this.objectDetail = this.props.objectDetail ? this.props.objectDetail : '';

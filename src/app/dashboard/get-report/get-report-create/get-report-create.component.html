@@ -476,14 +476,13 @@
                                             <textarea type="text" class="form-control form_width-textarea" formControlName="additional_comment"
                                                 maxlength="500" rows="3" (keyup)="valueChange('comment')">
                                              </textarea>
-                                            <span class="charcter_limit ">{{remainingText}} characters
-                                                remaining</span>
+                                            <span class="charcter_limit ">{{remainingText}} {{lableConstant.characters_remaining}}</span>
                                         </div>
                                     </div>
                                     <div class="col-sm-12" *ngIf="isRequester">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Request to Regional Training Coordinator
+                                                {{lableConstant.request_to_roc}}
                                                 <span class="text-danger-ligth">* </span>
                                                 <a>
                                                     <i class="fa fa-info-circle info_circle" aria-hidden="true"
@@ -517,7 +516,7 @@
         <div class="card-footer">
             <button class="btn btn-primary mr-1" (click)="save(reportStatus.pending)" type="submit" *ngIf="isSubmit()">
                 <i aria-hidden="true" class="fa fa-upload">
-                </i> <span class="pl-1">Submit</span>
+                </i> <span class="pl-1">{{lableConstant.submit}}</span>
             </button>
             <button class="btn btn-primary mr-1" type="submit" *ngIf="isPublish()"
                 (click)="closeRequest(reportStatus.publish)"><i aria-hidden="true" class="fa fa-upload"></i><span
@@ -529,7 +528,7 @@
             </button>
             <button class="btn btn-secondary mr-1" type="submit" *ngIf="isReject()"
                 (click)="statusChangeRequest(reportStatus.reject)"><i aria-hidden="true" class="fa fa-times"></i><span
-                    class="pl-1">Reject</span></button>
+                    class="pl-1">{{lableConstant.reject}}</span></button>
             <button class="btn btn-secondary" *ngIf="isDraft()" (click)="save(reportStatus.draft)">{{lableConstant.Save_as_draft}}
             </button>
         </div>

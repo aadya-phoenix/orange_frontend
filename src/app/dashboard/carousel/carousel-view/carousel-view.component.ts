@@ -183,7 +183,7 @@ export class CarouselViewComponent implements OnInit {
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
-      title: `Request ${status == this.CarouselStatus.reject ? "Reject" : "Publish"}`,
+      title: `Request ${status == this.CarouselStatus.reject ? this.lableConstant.reject : this.lableConstant.publish }`,
       status: status,
       data: this.requestdata.id,
       objectDetail: this.requestdata

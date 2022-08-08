@@ -28,10 +28,10 @@
                             <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/vendormanagement']" class="text_white span_dis">Create New Vendor</a>
+                            <a [routerLink]="['/dashboard/vendormanagement']" class="text_white span_dis">{{lableConstant.create_new_vendor}}</a>
                         </li>
                         <li>
-                            <span class="text_white span_dis">New Vendor</span>
+                            <span class="text_white span_dis">{{lableConstant.new_vendor}}</span>
                         </li>
                     </ol>
                 </div>
@@ -53,19 +53,19 @@
                                     <div class="rate">
                                         <input type="radio" id="star5" name="rate" [value]="5" [(ngModel)]="model"
                                             disabled />
-                                        <label for="star5" title="Excellent">5 stars</label>
+                                        <label for="star5" title="Excellent">5 {{lableConstant.stars}}</label>
                                         <input type="radio" id="star4" name="rate" [value]="4" [(ngModel)]="model"
                                             disabled />
-                                        <label for="star4" title="Good">4 stars</label>
+                                        <label for="star4" title="Good">4 {{lableConstant.stars}}</label>
                                         <input type="radio" id="star3" name="rate" [value]="3" [(ngModel)]="model"
                                             disabled />
-                                        <label for="star3" title="Okay">3 stars</label>
+                                        <label for="star3" title="Okay">3 {{lableConstant.stars}}</label>
                                         <input type="radio" id="star2" name="rate" [value]="2" [(ngModel)]="model"
                                             disabled />
-                                        <label for="star2" title="Bad">2 stars</label>
+                                        <label for="star2" title="Bad">2 {{lableConstant.stars}}</label>
                                         <input type="radio" id="star1" name="rate" [value]="1" [(ngModel)]="model"
                                             disabled />
-                                        <label for="star1" title="Very Bad">1 star</label>
+                                        <label for="star1" title="Very Bad">1 {{lableConstant.star}}</label>
                                     </div>
                                     <button class="btn btn-secondary not_rated"><span class="fon_12">{{RatingList[model-1] ? RatingList[model-1].value : 'Not Rated'}}</span></button>
                                 </div>
@@ -73,7 +73,7 @@
                         </div>
                         <div class="card" *ngIf="requestdata.rating && requestdata.rating.length > 0">
                             <div class="card-header">
-                                <strong _ngcontent-jet-c125=""> User Rating </strong>
+                                <strong _ngcontent-jet-c125=""> {{lableConstant.user_rating}} </strong>
                             </div>
                             <div class="card-body card_width">
                                 <div class="table-responsive table_height_scroll">
@@ -81,10 +81,10 @@
                                         id="table table-striped table-bordered">
                                         <thead>
                                             <tr class="sticky_header fon_13">
-                                                <th scope="col">Rating</th>
-                                                <th scope="col">Rating Comments</th>
-                                                <th scope="col">Submitted By</th>
-                                                <th scope="col">Created Date</th>
+                                                <th scope="col">{{lableConstant.rating}}</th>
+                                                <th scope="col">{{lableConstant.rating_comments}}</th>
+                                                <th scope="col">{{lableConstant.submitted_by}}</th>
+                                                <th scope="col">{{lableConstant.created_date}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -112,12 +112,12 @@
                 <div class="col-sm-12">
                     <div class="card border-radius-0">
                         <div class="card-header card_header_view">
-                            <p>Vendor Details</p>
+                            <p>{{lableConstant.vendor_details}}</p>
                         </div>
                         <div class="card-body">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Vendor Status</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.vendor_status}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{requestdata.status | titlecase }}
@@ -128,7 +128,7 @@
 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Vendor Name</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.vendor_name}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{requestdata.name}}
@@ -150,7 +150,7 @@
 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Vendor location</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.vendor_location}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.location}}
@@ -161,7 +161,7 @@
 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Vendor address</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.vendor_address}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.address}}
@@ -172,7 +172,7 @@
 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Website</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.website}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.website}}
@@ -193,7 +193,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Epurchase</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.epurchase}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.epurchase === 1? 'Yes' : 'No'}}
@@ -203,7 +203,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Do we have global contact</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.do_we_have_global_contact}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.global_contract === 1? 'Yes' : 'No'}}
@@ -213,7 +213,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Other Comments</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.other_comments}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.other_comment}}
@@ -224,7 +224,7 @@
 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Created by</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.created_by}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.requester_name}}
@@ -234,7 +234,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Created At</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.created_at}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.created_at | date: dateFormate}}
@@ -253,14 +253,14 @@
                         <ngb-panel id="panel-{{i}}" class="mr-1 w_100  ">
 
                             <ng-template ngbPanelTitle>
-                                <span>Contact {{i+1}}</span>
+                                <span>{{lableConstant.contact}} {{i+1}}</span>
                             </ng-template>
 
                             <ng-template ngbPanelContent>
                                 <div class="p-2">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Contact For</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.contact_for}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data" onkeyup="textAreaAdjust(this)">
                                                     {{meta.contact_for}}
@@ -270,7 +270,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Contact Person</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.Contact_Person}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data" onkeyup="textAreaAdjust(this)">
                                                     {{meta.person}}
@@ -280,7 +280,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Email id</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.email_id}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data" onkeyup="textAreaAdjust(this)">
                                                     {{meta.email}}

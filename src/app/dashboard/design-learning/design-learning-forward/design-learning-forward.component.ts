@@ -73,7 +73,7 @@ export class DesignLearningForwardComponent implements OnInit {
       this.forwardDesignForm.removeControl('status');
     }
     if(this.status == this.designStatus.reject){
-      this.title = 'Reject Request';
+      this.title = this.lableConstant.reject_request;
       this.forwardDesignForm.removeControl('status');
     }
     if(this.status == this.designStatus.onHold){
@@ -81,7 +81,7 @@ export class DesignLearningForwardComponent implements OnInit {
       this.forwardDesignForm.removeControl('status');
     }
     if(this.status == this.designStatus.approve){
-      this.title = 'Approve Request';
+      this.title = this.lableConstant.approve_request;
       this.isApprove = true;
       this.forwardDesignForm.addControl('project_manager', new FormControl(null, [Validators.required]));
       this.forwardDesignForm.removeControl('status');

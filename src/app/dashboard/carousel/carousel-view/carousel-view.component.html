@@ -27,7 +27,7 @@
                             <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/olcarousel']" class="text_white">Create new Carousel</a>
+                            <a [routerLink]="['/dashboard/olcarousel']" class="text_white">{{lableConstant.create_new_carousel}}</a>
                         </li>
                         <li>
                             <span class="text_white span_dis">View</span>
@@ -43,7 +43,7 @@
         <div class="d-flex">
             <img src="../../../../assets/images/formm.png" class="ml-2 form_img_req" />
             <p class="mt-2 ml-2 mb-2 view-re_css">
-                <span>View Carousel Request</span>
+                <span>{{lableConstant.view_carousel_request}}</span>
                 <span class="cc-text_css"> ({{ requestdata.request_id }}) -
                 </span>
                 <span spellcheck="text_orange" class="text_orange">{{lableConstant.Request_Status}} - {{ requestdata.status_new | titlecase
@@ -63,7 +63,7 @@
                         </button>
                         <button type="button" class="btn btn-primary mr-2" *ngIf="isPublish()"
                             (click)="statusChangeRequest(CarouselStatus.publish)">
-                            <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">Publish</span>
+                            <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">{{lableConstant.publish}}</span>
                         </button>
                         <button type="button" class="btn mr-2" *ngIf="isUpdate()"
                             [ngClass]="(isPublish() || isForward()) ?  'btn-secondary'  : 'btn-primary'"
@@ -72,7 +72,7 @@
                         </button>
                         <button type="button" class="btn btn-secondary" *ngIf="isReject()"
                             (click)="statusChangeRequest(CarouselStatus.reject)">
-                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">Reject</span>
+                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.reject}}</span>
                         </button>
                     </div>
                 </div>
@@ -85,14 +85,14 @@
                         <ngb-panel id="panel-{{i}}" class="mr-1 w_100  ">
                            
                             <ng-template ngbPanelTitle>
-                                <span>Carousel {{i+1}}</span>
+                                <span>{{lableConstant.carousel}} {{i+1}}</span>
                             </ng-template>
                             
                             <ng-template ngbPanelContent>
                                 <div class="p-2">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Language</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.language}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data" onkeyup="textAreaAdjust(this)">
                                                     {{meta.language_slug | titlecase}}
@@ -122,7 +122,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Link</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.link}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data" onkeyup="textAreaAdjust(this)">
                                                  {{meta.link}}
@@ -132,7 +132,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Show carousel only to manager</label>
+                                            <label for="exampleInputEmail1">{{lableConstant.show_carousel_only_to_manager}}</label>
                                             <div class="d-flex align-items-center">
                                                 <span class="form_data" onkeyup="textAreaAdjust(this)">
                                                     {{meta.display_manager===1?'Yes':'No'}}
@@ -149,12 +149,12 @@
                 <div class="col-sm-6">
                     <div class="card border-radius-0">
                         <div class="card-header card_header_view">
-                            <p>Carousel Details</p>
+                            <p>{{lableConstant.carousel_details}}</p>
                         </div>
                         <div class="card-body">
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Request Publish By</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.request_publish_by}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.publication_date | date: dateFormate }}
@@ -188,11 +188,11 @@
 
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Attached Image</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.attached_image}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             Click here to <a class="text_orange" href="{{requestdata.imgUrl}}"
-                                                target="_blank">View</a>.
+                                                target="_blank">{{lableConstant.view}}</a>.
                                         </span>
                                     </div>
                                 </div>

@@ -17,6 +17,7 @@ import { SmedbStatusComponent } from '../smedb-status/smedb-status.component';
   styleUrls: ['./smedb-view-report.component.scss']
 })
 export class SmedbViewReportComponent implements OnInit {
+  lableConstant: any = { french: {}, english: {}};
   smeStatus = dataConstant.SMEStatus;
   dateTimeFormate = dataConstant.dateTimeFormate;
   dateFormate = dataConstant.dateFormate;
@@ -52,6 +53,7 @@ export class SmedbViewReportComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router
   ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.isReviewer = this.getUserrole.includes(this.RoleID.CarouselReviewer);

@@ -13,7 +13,7 @@ import { VendorService } from 'src/app/shared/services/vendor/vendor.service';
   styleUrls: ['./vendor-management-status.component.scss']
 })
 export class VendorManagementStatusComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   publishVendorForm: FormGroup;
@@ -25,6 +25,7 @@ export class VendorManagementStatusComponent implements OnInit {
     private vendorService: VendorService,
     private commonService: CommonService,
     private router: Router) {
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
       this.publishVendorForm = this.formBuilder.group({
         status_comment: new FormControl('', [Validators.required]),
       });

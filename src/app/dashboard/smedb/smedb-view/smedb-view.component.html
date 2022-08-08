@@ -28,7 +28,7 @@
                             <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/smedb']" class="text_white">Create new SME</a>
+                            <a [routerLink]="['/dashboard/smedb']" class="text_white">{{lableConstant.create_new_sme}}</a>
                         </li>
                         <li>
                             <span class="text_white span_dis">View</span>
@@ -43,7 +43,7 @@
         <div class="d-flex">
             <img src="../../../../assets/images/formm.png" class="ml-2 form_img_req" />
             <p class="mt-2 ml-2 mb-2 view-re_css">
-                <span>View SME Details</span>
+                <span>{{lableConstant.view_sme_details}}</span>
                 <span class="cc-text_css"> ({{ requestdata.request_id }}) -
                 </span>
                 <span spellcheck="text_orange" class="text_orange">{{lableConstant.Request_Status}} - {{ requestdata.action_status }}</span>
@@ -61,11 +61,11 @@
                         </button>
                         <button type="button" class="btn btn-primary mr-1" *ngIf="isApprove()"
                             (click)="approveRequest()">
-                            <i class="fa fa-upload" aria-hidden="true"></i> <span class="pl-1">Approve Request</span>
+                            <i class="fa fa-upload" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.approve_request}}</span>
                         </button>
                         <button type="button" class="btn btn-secondary" *ngIf="isReject()"
                             (click)="statusChangeRequest(SMEStatus.reject)">
-                            <i class="fa fa-exchange" aria-hidden="true"></i> <span class="pl-1">Send back to SME</span>
+                            <i class="fa fa-exchange" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.send_back_to_sme}}</span>
                         </button>
                     </div>
                 </div>
@@ -75,12 +75,12 @@
                 <div class="col-sm-12">
                     <div class="card border-radius-0">
                         <div class="card-header card_header_view">
-                            <p>SME Information is as follow</p>
+                            <p>{{lableConstant.sme_information_is_as_follow}}</p>
                         </div>
                         <div class="card-body">
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Requester Name</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.requester_name}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.requester_name}}
@@ -91,7 +91,7 @@
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Available?</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.available}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.available | titlecase }}
@@ -102,7 +102,7 @@
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1"> Volunteered for domain/expertise/training</label>
+                                    <label for="exampleInputEmail1"> {{lableConstant.volunteered_for_domain_expertise}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{requestdata.domain}}
@@ -113,7 +113,7 @@
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">When you are not available - Start date </label>
+                                    <label for="exampleInputEmail1">{{lableConstant.when_you_are_not_available_start_date}} </label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.start_date | date: dateFormate }}
@@ -124,7 +124,7 @@
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">When you are not available - End date</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.when_you_are_not_available_end_date}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.end_date | date: dateFormate}}
@@ -135,7 +135,7 @@
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Created date</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.created_date}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.created_at | date: dateFormate}}
@@ -146,7 +146,7 @@
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Created By</label>
+                                    <label for="exampleInputEmail1">{{lableConstant.created_by}}</label>
                                     <div class="d-flex align-items-center">
                                         <span class="form_data">
                                             {{ requestdata.requester_name}}
@@ -184,7 +184,7 @@
                         <ngb-panel id="panel-content-support" class="mr-1 w_100  ">
                            
                             <ng-template ngbPanelTitle>
-                                <span>Content support</span>
+                                <span>{{lableConstant.content_support}}</span>
                             </ng-template>
                             
                             <ng-template ngbPanelContent>
@@ -233,10 +233,10 @@
                                                 <th>#</th>
                                                 <th> {{lableConstant.Title}} </th>
                                                 <th> {{lableConstant.Level}} </th>
-                                                <th> Previous experience in delivery/facilitation of training </th>
-                                                <th> Provide a brief of experience </th>
-                                                <th> Would you need help? </th>
-                                                <th> How can we help you? </th>
+                                                <th> {{lableConstant.previous_experience_in_delivery_facilitation}} </th>
+                                                <th> {{lableConstant.provide_a_brief_of_experience}} </th>
+                                                <th> {{lableConstant.would_you_need_help}} </th>
+                                                <th> {{lableConstant.how_can_we_help_you}} </th>
                                                 <th> {{lableConstant.Status}} </th>
                                                 <th> Date created </th>
                                                 <th> Date Modified</th>
@@ -277,11 +277,11 @@
                                         <thead class="sticky_header">
                                             <tr class="text-center font-13">
                                                 <th>#</th>
-                                                <th> Laungauge </th>
-                                                <th> Other Laungauge </th>
-                                                <th> Male or female voice </th>
-                                                <th> Previous experience in voice-over </th>
-                                                <th> Uploaded a semple voice recording </th>
+                                                <th> {{lableConstant.laungauge}} </th>
+                                                <th> {{lableConstant.other_laungauge}} </th>
+                                                <th> {{lableConstant.male_or_female_voice}} </th>
+                                                <th> {{lableConstant.previous_experience_in_voice_over}} </th>
+                                                <th> {{lableConstant.upload_sample_of_voice_recording}} </th>
                                                 <th> {{lableConstant.Status}} </th>
                                                 <th> Date created </th>
                                                 <th> Date Modified</th>
@@ -334,7 +334,7 @@
                                             <tr class="text-center font-13">
                                                 <th>#</th>
                                                 <th> Certification Title </th>
-                                                <th> Year of completion </th>
+                                                <th> {{lableConstant.year_of_completion}} </th>
                                                 <th> {{lableConstant.Status}} </th>
                                                 <th> Date created </th>
                                                 <th> Date Modified</th>
@@ -370,7 +370,7 @@
                                         <thead class="sticky_header">
                                             <tr class="text-center font-13">
                                                 <th>#</th>
-                                                <th> Other Comments </th>
+                                                <th> {{lableConstant.other_comments}} </th>
                                             </tr>
                                         </thead>
                                         <tbody>
