@@ -649,6 +649,10 @@ export class CourseCreateComponent implements OnInit {
     this.getCordinators();
   }
 
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
   isILTAndvILT() {
     return this.selectedLearningType.id === this.LearningType[0].id;
   }

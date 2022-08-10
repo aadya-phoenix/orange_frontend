@@ -78,6 +78,10 @@ export class GetReportListComponent implements OnInit {
   );
     this.refreshReports();
   }
+
+  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
+    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  }
   
   viewRequest(item: any) {
     if (item && item.id) {

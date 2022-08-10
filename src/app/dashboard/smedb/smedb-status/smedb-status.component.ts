@@ -44,6 +44,10 @@ export class SmedbStatusComponent implements OnInit {
     });
   }
 
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
   publishSME() {
     this.isSubmitted = true;
     if (this.publishSMEForm.invalid) {

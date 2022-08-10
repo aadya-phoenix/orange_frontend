@@ -49,7 +49,7 @@
                         <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong _ngcontent-jet-c125=""> Team Details </strong>
+                                <strong _ngcontent-jet-c125=""> {{lableConstant.team_details}} </strong>
                             </div>
                             <div class="card-body card_width pb-0">
                                 <div class="row">
@@ -58,7 +58,7 @@
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-control-label">
-                                                        Program/Project Name <span class="text-danger-ligth">* </span>
+                                                        {{lableConstant.program_project_name}} <span class="text-danger-ligth">* </span>
                                                     </label>
                                                     <input type="text" formControlName="project_name"
                                                         class="form-control form_width" />
@@ -66,7 +66,7 @@
                                                         *ngIf="(createDesignForm.controls['project_name'].invalid && (createDesignForm.controls['project_name'].dirty || createDesignForm.controls['project_name'].touched)) || isSubmitted">
                                                         <div class="error_message"
                                                             *ngIf="createDesignForm.controls['project_name'].errors?.required">
-                                                            Project Name cannot be blank
+                                                            {{requiredMessage(this.lableConstant.program_project_name)}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -74,7 +74,7 @@
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-control-label">
-                                                        Key Sponsor <span class="text-danger-ligth">* </span>
+                                                        {{lableConstant.key_sponsor}} <span class="text-danger-ligth">* </span>
                                                     </label>
                                                     <input type="text" formControlName="key_sponsor"
                                                         class="form-control form_width" />
@@ -82,7 +82,7 @@
                                                         *ngIf="(createDesignForm.controls['key_sponsor'].invalid && (createDesignForm.controls['key_sponsor'].dirty || createDesignForm.controls['key_sponsor'].touched)) || isSubmitted">
                                                         <div class="error_message"
                                                             *ngIf="createDesignForm.controls['key_sponsor'].errors?.required">
-                                                            Key Sponsor cannot be blank
+                                                            {{requiredMessage(this.lableConstant.key_sponsor)}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -90,7 +90,7 @@
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-control-label">
-                                                        Requestor <span class="text-danger-ligth">* </span>
+                                                        {{lableConstant.requestor}} <span class="text-danger-ligth">* </span>
                                                     </label>
                                                     <input type="text" formControlName="requestor"
                                                         class="form-control form_width" />
@@ -98,7 +98,7 @@
                                                         *ngIf="(createDesignForm.controls['requestor'].invalid && (createDesignForm.controls['requestor'].dirty || createDesignForm.controls['requestor'].touched)) || isSubmitted">
                                                         <div class="error_message"
                                                             *ngIf="createDesignForm.controls['requestor'].errors?.required">
-                                                            Requestor cannot be blank
+                                                            {{requiredMessage(this.lableConstant.requestor)}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -106,7 +106,7 @@
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-control-label">
-                                                        Requestor's Department <span class="text-danger-ligth">* </span>
+                                                        {{lableConstant.requestors_department}} <span class="text-danger-ligth">* </span>
                                                     </label>
                                                     <ng-select [items]="bussinessUnitObj" 
                                                     bindLabel="team_name" bindValue="id"
@@ -117,7 +117,7 @@
                                                         *ngIf="(createDesignForm.controls['requestor_department'].invalid && (createDesignForm.controls['requestor_department'].dirty || createDesignForm.controls['requestor_department'].touched)) || isSubmitted">
                                                         <div class="error_message"
                                                             *ngIf="createDesignForm.controls['requestor_department'].errors?.required">
-                                                            Requestor's Department cannot be blank
+                                                            {{requiredMessage(this.lableConstant.requestors_department)}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -125,14 +125,14 @@
                                            <div class="col-sm-6" *ngIf="isOtherBU">
                                                 <div class="form-group">
                                                     <label class="form-control-label">
-                                                        Other Requestor's Department
+                                                        {{lableConstant.other_requestors_department}}
                                                     </label>
                                                     <input type="text" class="form-control form_width" formControlName="other_requestor_department">
                                                     <div
                                                         *ngIf="(createDesignForm.controls['other_requestor_department'].invalid && (createDesignForm.controls['other_requestor_department'].dirty || createDesignForm.controls['other_requestor_department'].touched)) || isSubmitted">
                                                         <div class="error_message"
                                                             *ngIf="createDesignForm.controls['other_requestor_department'].errors?.required">
-                                                            Other Bussiness Unit can not be blank
+                                                            {{requiredMessage(this.lableConstant.other_requestors_department)}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -140,7 +140,7 @@
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-control-label">
-                                                        Other Main Contributors<span class="text-danger-ligth">*</span>
+                                                        {{lableConstant.other_main_contributors}}<span class="text-danger-ligth">*</span>
                                                     </label>
                                                     <input type="text" formControlName="contributor"
                                                         class="form-control form_width" />
@@ -148,7 +148,7 @@
                                                         *ngIf="(createDesignForm.controls['contributor'].invalid && (createDesignForm.controls['contributor'].dirty || createDesignForm.controls['contributor'].touched)) || isSubmitted">
                                                         <div class="error_message"
                                                             *ngIf="createDesignForm.controls['contributor'].errors?.required">
-                                                            Other Main Contributorst cannot be blank
+                                                            {{requiredMessage(this.lableConstant.other_main_contributors)}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -156,7 +156,7 @@
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-control-label">
-                                                        Budget
+                                                        {{lableConstant.budget}}
                                                     </label>
                                                     <input type="text" formControlName="budget"
                                                         class="form-control form_width" />
@@ -165,7 +165,7 @@
                                             <div class="col-md-6 col-sm-12" *ngIf ="isHeadDesigner">
                                                 <div class="form-group">
                                                     <label class="form-control-label mb-0 font_bold">
-                                                        Project Manager <span class="text-danger-ligth">*</span>
+                                                        {{lableConstant.project_manager}} <span class="text-danger-ligth">*</span>
                                                     </label>
                                                     <ng-select [items]="projectManagerList" 
                                                     bindLabel="user_name" bindValue="id"
@@ -176,7 +176,7 @@
                                                         *ngIf="(createDesignForm.controls['project_manager'].invalid && (createDesignForm.controls['project_manager'].dirty || createDesignForm.controls['project_manager'].touched)) || isSubmitted">
                                                         <div class="error_message"
                                                             *ngIf="createDesignForm.controls['project_manager'].errors?.required">
-                                                            Project Manager cannot be blank
+                                                            {{requiredMessage(this.lableConstant.project_manager)}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -198,15 +198,14 @@
                             </div>
                         <div class="card">
                             <div class="card-header">
-                                <strong _ngcontent-jet-c125=""> Details </strong>
+                                <strong _ngcontent-jet-c125=""> {{lableConstant.details}} </strong>
                             </div>
                             <div class="card-body card_width">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Please Explain the purpose of the project, issue, problem, or
-                                                requirement.
+                                                {{lableConstant.explain_purpose_project_issue}}
                                             </label><span class="text-danger-ligth">*</span>
                                             <textarea class="form-control form_width-textarea" maxlength="500" 
                                                 formControlName="explain_purpose"></textarea>
@@ -214,7 +213,7 @@
                                                 *ngIf="(createDesignForm.controls['explain_purpose'].invalid && (createDesignForm.controls['explain_purpose'].dirty || createDesignForm.controls['explain_purpose'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createDesignForm.controls['explain_purpose'].errors?.required">
-                                                    Purpose of the Project cannot be blank
+                                                    {{requiredMessage(this.lableConstant.explain_purpose_project_issue)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -222,7 +221,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Please mention the objectives of the learning solution:
+                                               {{lableConstant.mention_the_objectives_of_ls}}
                                             </label><span class="text-danger-ligth">*</span>
                                             <div class="editControls"></div>
                                             <ejs-richtexteditor id='defaultRTE' 
@@ -232,7 +231,7 @@
                                                 *ngIf="(createDesignForm.controls['objective'].invalid && (createDesignForm.controls['objective'].dirty || createDesignForm.controls['objective'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createDesignForm.controls['objective'].errors?.required">
-                                                    Objectives of the learning solution cannot be blank
+                                                    {{requiredMessage(this.lableConstant.mention_the_objectives_of_ls)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -240,8 +239,7 @@
                                     <div class="col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                What is the level of knowledge to be acquired by learners through the
-                                                learning solution?
+                                               {{lableConstant.what_level_of_knowledge_ls}}
                                                 <span class="text-danger-ligth">* </span>
                                                 <a>
                                                     <i  class="fa fa-info-circle info_circle" aria-hidden="true"
@@ -257,7 +255,7 @@
                                                 *ngIf="(createDesignForm.controls['knowledge'].invalid && (createDesignForm.controls['knowledge'].dirty || createDesignForm.controls['knowledge'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createDesignForm.controls['knowledge'].errors?.required">
-                                                    Level of knowledge cannot be blank
+                                                    {{requiredMessage(this.lableConstant.what_level_of_knowledge_ls)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -265,7 +263,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                What are the success factors for the program?
+                                                {{lableConstant.what_success_factors_program}}
                                                 <span class="text_red">* </span>
                                                 <a>
                                                     <i  class="fa fa-info-circle info_circle" aria-hidden="true"
@@ -280,7 +278,7 @@
                                                 *ngIf="(createDesignForm.controls['success_factor'].invalid && (createDesignForm.controls['success_factor'].dirty || createDesignForm.controls['success_factor'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createDesignForm.controls['success_factor'].errors?.required">
-                                                    Success Factors cannot be blank
+                                                    {{requiredMessage(this.lableConstant.what_success_factors_program)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -288,7 +286,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Please specify the Impact of the learning solution.
+                                                {{lableConstant.specify_the_impact_ls}}
                                                 <span class="text_red">* </span>
                                             </label>
                                             <ng-select [items]="impactObj" 
@@ -300,7 +298,7 @@
                                                 *ngIf="(createDesignForm.controls['impact'].invalid && (createDesignForm.controls['impact'].dirty || createDesignForm.controls['impact'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createDesignForm.controls['impact'].errors?.required">
-                                                    Impact of the learning solution cannot be blank
+                                                    {{requiredMessage(this.lableConstant.specify_the_impact_ls)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -308,7 +306,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Who is the learner/ target audience?
+                                                {{lableConstant.who_is_the_learner_target_audience}}
                                                 <span class="text_red">* </span>
                                             </label>
                                             <input type="text" class="form-control form_width"
@@ -317,7 +315,7 @@
                                                 *ngIf="(createDesignForm.controls['target_audience'].invalid && (createDesignForm.controls['target_audience'].dirty || createDesignForm.controls['target_audience'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createDesignForm.controls['target_audience'].errors?.required">
-                                                    Learner/ Target audience cannot be blank
+                                                    {{requiredMessage(this.lableConstant.who_is_the_learner_target_audience)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -325,7 +323,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                What are the KPIs for the project?
+                                                {{lableConstant.what_are_the_kpis_for_the_project}}
                                                 <span class="text_red">* </span>
                                             </label>
                                             <input type="text" class="form-control form_width" formControlName="kpi" />
@@ -333,7 +331,7 @@
                                                 *ngIf="(createDesignForm.controls['kpi'].invalid && (createDesignForm.controls['kpi'].dirty || createDesignForm.controls['kpi'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createDesignForm.controls['kpi'].errors?.required">
-                                                    KPIs for the project cannot be blank
+                                                    {{requiredMessage(this.lableConstant.what_are_the_kpis_for_the_project)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -341,7 +339,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Please explain if you have any learning solution in mind?
+                                                {{lableConstant.explain_any_ls_in_mind}}
                                                 <span class="text_red">* </span>
                                             </label>
                                             <input type="text" class="form-control form_width"
@@ -350,7 +348,7 @@
                                                 *ngIf="(createDesignForm.controls['learning_solution'].invalid && (createDesignForm.controls['learning_solution'].dirty || createDesignForm.controls['learning_solution'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createDesignForm.controls['learning_solution'].errors?.required">
-                                                    Learning Solution cannot be blank
+                                                    {{requiredMessage(this.lableConstant.explain_any_ls_in_mind)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -358,7 +356,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                What is the desired duration of the learning solution?
+                                                {{lableConstant.what_desired_duration_ls}}
                                                 <span class="text_red">* </span>
                                             </label>
                                             <input type="text" class="form-control form_width"
@@ -367,7 +365,7 @@
                                                 *ngIf="(createDesignForm.controls['duration'].invalid && (createDesignForm.controls['duration'].dirty || createDesignForm.controls['duration'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createDesignForm.controls['duration'].errors?.required">
-                                                    Duration of the learning solution cannot be blank
+                                                    {{requiredMessage(this.lableConstant.what_desired_duration_ls)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -375,7 +373,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                What is the size of the target audience?
+                                                {{lableConstant.what_size_of_target_audience}}
                                                 <span class="text_red">* </span>
                                             </label>
                                             <input type="text" class="form-control form_width"
@@ -384,7 +382,7 @@
                                                 *ngIf="(createDesignForm.controls['size_target_audience'].invalid && (createDesignForm.controls['size_target_audience'].dirty || createDesignForm.controls['size_target_audience'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createDesignForm.controls['size_target_audience'].errors?.required">
-                                                    Size of the target audience cannot be blank
+                                                    {{requiredMessage(this.lableConstant.what_size_of_target_audience)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -392,7 +390,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                By when do you want to launch the program?
+                                                {{lableConstant.by_when_launch_the_program}}
                                                 <span class="text_red">* </span>
                                             </label>
                                             <input type="date" class="form-control form_width"
@@ -401,7 +399,7 @@
                                                 *ngIf="(createDesignForm.controls['launch_date'].invalid && (createDesignForm.controls['launch_date'].dirty || createDesignForm.controls['launch_date'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createDesignForm.controls['launch_date'].errors?.required">
-                                                    Launch date cannot be blank
+                                                    {{requiredMessage(this.lableConstant.by_when_launch_the_program)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -409,8 +407,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Are the target audience in the same location? If not, please indicate
-                                                where they are located?
+                                                {{lableConstant.are_target_audience_in_same_location}}
                                                 <span class="text_red">* </span>
                                             </label>
                                             <input type="text" class="form-control form_width"
@@ -419,7 +416,7 @@
                                                 *ngIf="(createDesignForm.controls['audience_location'].invalid && (createDesignForm.controls['audience_location'].dirty || createDesignForm.controls['audience_location'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createDesignForm.controls['audience_location'].errors?.required">
-                                                    Location of the target audience cannot be blank
+                                                    {{requiredMessage(this.lableConstant.are_target_audience_in_same_location)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -427,8 +424,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                What do you want the learners/target audience to do differently at the
-                                                end of this program?
+                                                {{lableConstant.what_learners_target_audience_to_do_differently}}
                                                 <span class="text_red">* </span>
                                             </label>
                                             <input type="text" class="form-control form_width"
@@ -437,8 +433,7 @@
                                                 *ngIf="(createDesignForm.controls['learn_target_audience'].invalid && (createDesignForm.controls['learn_target_audience'].dirty || createDesignForm.controls['learn_target_audience'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createDesignForm.controls['learn_target_audience'].errors?.required">
-                                                    What do you want the learners/target audience to do differently at
-                                                    the end of this program cannot be blank
+                                                    {{requiredMessage(this.lableConstant.what_learners_target_audience_to_do_differently)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -455,7 +450,7 @@
                                                 *ngIf="(createDesignForm.controls['comment'].invalid && (createDesignForm.controls['comment'].dirty || createDesignForm.controls['comment'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createDesignForm.controls['comment'].errors?.required">
-                                                    {{lableConstant.Comments}} cannot be blank
+                                                    {{requiredMessage(this.lableConstant.Comments)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -479,7 +474,7 @@
                             <div class="card" *ngIf="isDesigner || isHeadDesigner">
                                 <div class="card-header">
                                     <label class="form-control-label mb-0 font_bold text_balck">
-                                        Who will Create it/ Deliver it ?
+                                       {{lableConstant.who_will_create_it_deliver_it}}
                                         <span class="text-danger-ligth">* </span>
                                      </label>
                                     </div>
@@ -494,7 +489,7 @@
                                                       *ngIf="(createDesignForm.controls['who_create'].invalid && (createDesignForm.controls['who_create'].dirty || createDesignForm.controls['who_create'].touched)) || isSubmitted">
                                                       <div class="error_message"
                                                        *ngIf="createDesignForm.controls['who_create'].errors?.required">
-                                                       Who will Create cannot be blank
+                                                       {{requiredMessage(this.lableConstant.who_will_create_it_deliver_it)}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -511,11 +506,11 @@
                                 <button class="btn btn-primary mr-1" *ngIf="isDesigner"
                                 (click)="openModal(designStatus.forwarded)" type="submit">
                                     <i aria-hidden="true" class="fa fa-upload">
-                                    </i> <span class="pl-1">Send for Approval</span>
+                                    </i> <span class="pl-1">{{lableConstant.send_for_approval}}</span>
                                 </button>
                                 <button class="btn btn-primary mr-1" *ngIf="isHeadDesigner"(click)="openModal(designStatus.approve)" type="submit">
                                     <i aria-hidden="true" class="fa fa-upload">
-                                    </i> <span class="pl-1">Approve</span>
+                                    </i> <span class="pl-1">{{lableConstant.approve}}</span>
                                 </button>
                                 <button class="btn btn-secondary" *ngIf="isDraft()"
                                 (click)="save(designStatus.draft) ">{{lableConstant.Save_as_draft}}

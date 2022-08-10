@@ -115,6 +115,10 @@ export class DesignLearningCreateComponent implements OnInit {
     }
   }
 
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
   handleFileInput(event: any) {
     const fsize = event.target.files[0].size;
     const file = Math.round((fsize / 1024)/1024);

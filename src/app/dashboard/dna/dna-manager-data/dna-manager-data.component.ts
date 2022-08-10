@@ -61,6 +61,10 @@ export class DnaManagerDataComponent implements OnInit {
     this.getManagerData();
   }
 
+  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
+    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  }
+
   getManagerData(){
     this.commonService.showLoading();
     this.dnaService.getManagerData(this.userId).subscribe(

@@ -6,7 +6,7 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="breade_text_span1">User Management</span>
+                        <span class="breade_text_span1">{{lableConstant.user_management}}</span>
                         <span class="divider_req"></span>
                         <span class="breade_text_span"></span>
                     </div>
@@ -23,10 +23,10 @@
                             </a>
                         </li>
                         <li>
-                            <span class="text_white span_dis">User Management</span>
+                            <span class="text_white span_dis">{{lableConstant.user_management}}</span>
                         </li>
                         <li>
-                            <span class="text_white span_dis">Users</span>
+                            <span class="text_white span_dis">{{lableConstant.users}}</span>
                         </li>
                     </ol>
                 </div>
@@ -62,7 +62,7 @@
                                                 *ngIf="(createUserForm.controls['first_name'].invalid && (createUserForm.controls['first_name'].dirty || createUserForm.controls['first_name'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createUserForm.controls['first_name'].errors?.required">
-                                                    {{lableConstant.First_Name}} cannot be blank
+                                                    {{requiredMessage(this.lableConstant.First_Name)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -77,14 +77,14 @@
                                                 *ngIf="(createUserForm.controls['last_name'].invalid && (createUserForm.controls['last_name'].dirty || createUserForm.controls['last_name'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createUserForm.controls['last_name'].errors?.required">
-                                                    {{lableConstant.Last_Name}} cannot be blank
+                                                    {{requiredMessage(this.lableConstant.Last_Name)}}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label class="form-control-label">Email </label>
+                                            <label class="form-control-label">{{lableConstant.email}} </label>
                                             <input type="text" class="form-control form_width"
                                                 formControlName="email" />
                                             <div class="error_message"
@@ -92,7 +92,7 @@
                                                 Email is not valid.
                                                 <div class="error_message"
                                                     *ngIf="createUserForm.controls['email'].errors?.required   || isSubmitted">
-                                                    Email cannot be blank
+                                                    {{requiredMessage(this.lableConstant.email)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -101,7 +101,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                                                    Enter Password </label>
+                                                    {{lableConstant.enter_password}} </label>
                                                 <input type="password" class="form-control form_width"
                                                     formControlName="password" />
                                                 <div class="error_message"
@@ -110,7 +110,7 @@
                                                     Please Enter Valid Password.
                                                     <div class="error_message"
                                                         *ngIf="createUserForm.controls['password'].errors?.required || isSubmitted">
-                                                        Password cannot be blank
+                                                        {{requiredMessage(this.lableConstant.enter_password)}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -118,7 +118,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label class="form-control-label">
-                                                    Confirm Password</label>
+                                                    {{lableConstant.confirm_password}}</label>
                                                 <input type="password" class="form-control form_width"
                                                     formControlName="confirm_password" (keyup)=getConfirm_paassword() />
 
@@ -133,7 +133,7 @@
                                     </ng-container>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label class="form-control-label">Role</label>
+                                            <label class="form-control-label">{{lableConstant.role}}</label>
                                             <ng-select [items]="rolesList" (change)="getSelectedRole($event)"
                                                 [multiple]="true" bindLabel="role" bindValue="id"
                                                 groupBy="module"
@@ -143,14 +143,14 @@
                                                 *ngIf="(createUserForm.controls['role_id'].invalid && (createUserForm.controls['role_id'].dirty || createUserForm.controls['role_id'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createUserForm.controls['role_id'].errors?.required">
-                                                    Role cannot be blank
+                                                    {{requiredMessage(this.lableConstant.role)}}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4" *ngIf="isRegion">
                                         <div class="form-group">
-                                            <label class="form-control-label">Region</label>
+                                            <label class="form-control-label">{{lableConstant.region}}</label>
                                             <ng-select [items]="regionList" [multiple]="false" bindLabel="name"
                                                 bindValue="id" formControlName="region_id">
                                             </ng-select>
@@ -158,7 +158,7 @@
                                                 *ngIf="(createUserForm.controls['region_id'].invalid && (createUserForm.controls['region_id'].dirty || createUserForm.controls['region_id'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createUserForm.controls['region_id'].errors?.required">
-                                                    Region cannot be blank
+                                                    {{requiredMessage(this.lableConstant.region)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -174,7 +174,7 @@
                                     </div>
                                     <div class="col-sm-4" *ngIf="isDnaRegion">
                                         <div class="form-group">
-                                            <label class="form-control-label">Region</label>
+                                            <label class="form-control-label">{{lableConstant.region}}</label>
                                             <ng-select  [items]="regionDnaObj" 
                                             (change)="getSelectedRegion($event)"
                                                 [multiple]="false" bindLabel="region_name" bindValue="id"
@@ -184,7 +184,7 @@
                                             *ngIf="(createUserForm.controls['region_id'].invalid && (createUserForm.controls['region_id'].dirty || createUserForm.controls['region_id'].touched)) || isSubmitted">
                                             <div class="error_message"
                                              *ngIf="createUserForm.controls['region_id'].errors?.required">
-                                             Region cannot be blank
+                                             {{requiredMessage(this.lableConstant.region)}}
                                              </div>
                                              </div>
                                         </div>
@@ -203,7 +203,7 @@
                                     <div class="col-sm-4" *ngIf="isDomain">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Domain Training
+                                                {{lableConstant.domain_training}}
                                             </label>
                                             <ng-select [items]="domainObj"
                                                  bindLabel="domain_name"
@@ -214,7 +214,7 @@
                                     <div class="col-sm-4" *ngIf="isBussinessUnit">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Business Unit/M1 Level
+                                                {{lableConstant.business_unit_m1_level}}
                                             </label>
                                             <ng-select  [items]="bussinessUnitObj"
                                                  bindLabel="team_name"

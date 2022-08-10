@@ -76,6 +76,10 @@ export class DesignLearningCompleteReportComponent implements OnInit {
     this.refreshModules({});
   }
 
+  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
+    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  }
+
   refreshModules(data:any) {
     this.commonService.showLoading();
     this.designService.filter(data).subscribe(

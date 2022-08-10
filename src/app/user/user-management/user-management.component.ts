@@ -47,6 +47,10 @@ export class UserManagementComponent implements OnInit {
     this.getRole();
   }
 
+  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
+    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  }
+
   getRoleFilterRecords(role:any){
      if (role) {
       this.userListToShow = [...this.userList].filter((a, b) => {

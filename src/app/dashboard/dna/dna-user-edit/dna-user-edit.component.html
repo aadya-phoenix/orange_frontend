@@ -46,7 +46,7 @@
                                 <div class="row">                                   
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label class="form-control-label">Role</label>
+                                            <label class="form-control-label">{{lableConstant.role}}</label>
                                             <ng-select  [items]="rolesList"
                                                 (change)="getSelectedRole($event)" [multiple]="false" bindLabel="role"
                                                 bindValue="id" formControlName="role_id">
@@ -55,14 +55,14 @@
                                             *ngIf="(createUserForm.controls['role_id'].invalid && (createUserForm.controls['role_id'].dirty || createUserForm.controls['role_id'].touched)) || isSubmitted">
                                             <div class="error_message"
                                              *ngIf="createUserForm.controls['role_id'].errors?.required">
-                                              Role cannot be blank
+                                              {{requiredMessage(this.lableConstant.role)}}
                                                   </div>
                                              </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4" *ngIf="isRegion">
                                         <div class="form-group">
-                                            <label class="form-control-label">Region</label>
+                                            <label class="form-control-label">{{lableConstant.region}}</label>
                                             <ng-select  [items]="regionObj" 
                                             (change)="getSelectedRegion($event)"
                                                 [multiple]="false" bindLabel="region_name" bindValue="id"
@@ -72,7 +72,7 @@
                                             *ngIf="(createUserForm.controls['region_id'].invalid && (createUserForm.controls['region_id'].dirty || createUserForm.controls['region_id'].touched)) || isSubmitted">
                                             <div class="error_message"
                                              *ngIf="createUserForm.controls['region_id'].errors?.required">
-                                             Region cannot be blank
+                                             {{requiredMessage(this.lableConstant.region)}}
                                              </div>
                                              </div>
                                         </div>

@@ -26,7 +26,7 @@
                         *ngIf="(publishCarouselForm.controls['publisher_id'].invalid && (publishCarouselForm.controls['publisher_id'].dirty || publishCarouselForm.controls['publisher_id'].touched)) || isSubmitted">
                         <div class="error_message"
                             *ngIf="publishCarouselForm.controls['publisher_id'].errors?.required">
-                            Publisher cannot be blank
+                            {{requiredMessage(this.lableConstant.publisher)}}
                         </div>
                     </div>
                 </div>

@@ -105,6 +105,10 @@ export class CreateBackOfficeComponent implements OnInit {
     this.getTotalCount();
   }
 
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
   //preferred instructor
   getPreferedInstructor() {
     this.commonService.showLoading();

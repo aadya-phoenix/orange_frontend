@@ -47,6 +47,10 @@ export class VendorManagementRatingComponent implements OnInit {
     this.vendorRatingList();
   }
 
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
   vendorRatingList() {
     this.commonService.showLoading();
     this.vendorService.VendorRatingList(this.objectDetail.id).subscribe(

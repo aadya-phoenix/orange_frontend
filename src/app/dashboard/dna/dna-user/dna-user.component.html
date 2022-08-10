@@ -52,7 +52,7 @@
                                       <label class="label_course">Filter by Role</label>
                                       <select class="form-control  form_width" (change)="getRoleFilterRecords($event.target.value)"
                                        >
-                                        <option selected='selected' value=''>View All</option>
+                                        <option selected='selected' value=''>{{lableConstant.View_All}}</option>
                                        <option *ngFor="let role of rolesList"
                                        [value]="role.id">{{role.role}}</option>
                                       </select>
@@ -144,12 +144,12 @@
                             </div>
                             <div class="pagiantio_dispaly">
                                 <div class="pagintion_ child">
-                                    <p class="cm-pagination-fotter">Showing {{(pagination.pageSize *
-                                        (pagination.pageNumber - 1)) + 1}} to
-                                        {{(this.pagination.pageSize * this.pagination.pageNumber) >
+                                    <p class="cm-pagination-fotter">{{showPaginationCount(((pagination.pageSize *
+                                        (pagination.pageNumber - 1)) + 1),
+                                        ((this.pagination.pageSize * this.pagination.pageNumber) >
                                         this.userList?.length ? this.userList?.length :
-                                        this.pagination.pageSize * this.pagination.pageNumber}} of
-                                        {{this.userList?.length}} entries</p>
+                                        this.pagination.pageSize * this.pagination.pageNumber),
+                                        this.userList?.length)}}</p>
                                 </div>
                                 <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                             </div>

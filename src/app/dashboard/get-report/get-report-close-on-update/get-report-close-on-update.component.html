@@ -29,7 +29,7 @@
                         *ngIf="(publishGetReportForm.controls['status_comment'].invalid && (publishGetReportForm.controls['status_comment'].dirty || publishGetReportForm.controls['status_comment'].touched)) || isSubmitted ">
                         <div class="error_message"
                             *ngIf="publishGetReportForm.controls['status_comment'].errors?.required">
-                            {{lableConstant.Comments}} cannot be blank
+                            {{requiredMessage(this.lableConstant.Comments)}}
                         </div>
                     </div>
 
@@ -38,7 +38,7 @@
         </form>
     </div>
     <div class="card-footer">
-        <button class="btn btn-primary mr-1" type="submit" (click)="publishGetReport()">Close Request</button>
+        <button class="btn btn-primary mr-1" type="submit" (click)="publishGetReport()">{{lableConstant.close_request}}</button>
         <button class="btn btn-secondary" type="submit" (click)="closeModal()">{{lableConstant.cancel}}</button>
     </div>
 </div>

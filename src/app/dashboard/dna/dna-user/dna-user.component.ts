@@ -1,6 +1,7 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
@@ -12,7 +13,7 @@ import { UserManageService } from 'src/app/shared/services/user-management/user-
   styleUrls: ['./dna-user.component.scss']
 })
 export class DnaUserComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   userList:any=[];
   userListToShow:any=[];
   rolesList:any=[];
@@ -34,11 +35,18 @@ export class DnaUserComponent implements OnInit {
     private courceService:CourcesService,
     private commonService:CommonService,
     private router: Router
-  ) { }
+  ) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+  }
 
   ngOnInit(): void {
     this.getUsers();
     this.getRole();
+  }
+
+
+  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
+    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
   }
 
   getRoleFilterRecords(role:any){

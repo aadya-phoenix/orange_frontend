@@ -29,7 +29,7 @@
                         *ngIf="(publishGetReportForm.controls['status_comment'].invalid && (publishGetReportForm.controls['status_comment'].dirty || publishGetReportForm.controls['status_comment'].touched)) || isSubmitted ">
                         <div class="error_message"
                             *ngIf="publishGetReportForm.controls['status_comment'].errors?.required">
-                            {{lableConstant.Comments}} cannot be blank
+                            {{requiredMessage(this.lableConstant.Comments)}}
                         </div>
                     </div>
 

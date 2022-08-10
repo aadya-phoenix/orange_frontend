@@ -263,12 +263,12 @@
                                 </div>
                                 <div class="pagiantio_dispaly">
                                     <div class="pagintion_ child">
-                                        <p class="cm-pagination-fotter">Showing {{(pagination.pageSize *
-                                            (pagination.pageNumber - 1)) + 1}} to
-                                            {{(this.pagination.pageSize * this.pagination.pageNumber) >
+                                        <p class="cm-pagination-fotter">{{showPaginationCount(((pagination.pageSize *
+                                            (pagination.pageNumber - 1)) + 1),
+                                            ((this.pagination.pageSize * this.pagination.pageNumber) >
                                             this.vendorListToShow?.length ? this.vendorListToShow?.length :
-                                            this.pagination.pageSize * this.pagination.pageNumber}} of
-                                            {{this.vendorListToShow?.length}} entries</p>
+                                            this.pagination.pageSize * this.pagination.pageNumber),
+                                            this.vendorListToShow?.length)}}</p>
                                     </div>
                                     <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                                 </div>

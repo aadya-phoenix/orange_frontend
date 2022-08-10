@@ -92,6 +92,10 @@ export class CourseCompleteReportComponent implements OnInit {
     this.refreshCourse({});
   }
 
+  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
+    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  }
+
   //getLearning type
   getLearningType() {
     this.commonService.showLoading();

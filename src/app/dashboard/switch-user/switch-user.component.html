@@ -15,7 +15,7 @@
                         <form [formGroup]="loginForm">
                             <div class="form-group w-100">
                                 <label class="form-control-label">
-                                    Email <span class="text_red">*
+                                    {{lableConstant.email}} <span class="text_red">*
                                     </span>
                                 </label>
                                 <ng-select placeholder="Please select email" [items]="userList" bindLabel="email"
@@ -23,7 +23,7 @@
                                 </ng-select>
                                 <div class="error_message"
                                     *ngIf="(loginForm.controls['uid'].invalid && (loginForm.controls['uid'].dirty || loginForm.controls['uid'].touched || isSubmitted))">
-                                    Email cannot be blank
+                                    {{requiredMessage(this.lableConstant.email)}}
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-default btn_login justify-content-center"

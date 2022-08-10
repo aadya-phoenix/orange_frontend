@@ -217,7 +217,7 @@
                                                 <img src="../../../../assets/images/icon/viewall.png" />
                                             </div>
 
-                                            <p>View All</p>
+                                            <p>{{lableConstant.View_All}}</p>
                                         </div>
                                         <span class="number_css">{{design_count.total?design_count.total:0}}</span>
                                     </div>
@@ -335,12 +335,12 @@
                             </div>
                             <div class="pagiantio_dispaly">
                                 <div class="pagintion_ child">
-                                    <p class="cm-pagination-fotter">Showing {{(pagination.pageSize *
-                                        (pagination.pageNumber - 1)) + 1}} to
-                                        {{(this.pagination.pageSize * this.pagination.pageNumber) >
+                                    <p class="cm-pagination-fotter">{{showPaginationCount(((pagination.pageSize *
+                                        (pagination.pageNumber - 1)) + 1), 
+                                        ((this.pagination.pageSize * this.pagination.pageNumber) >
                                         this.designListToShow?.length ? this.designListToShow?.length :
-                                        this.pagination.pageSize * this.pagination.pageNumber}} of
-                                        {{this.designListToShow?.length}} entries</p>
+                                        this.pagination.pageSize * this.pagination.pageNumber),
+                                        this.designListToShow?.length)}}</p>
                                 </div>
                                 <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                             </div>

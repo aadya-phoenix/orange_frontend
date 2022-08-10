@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { UserManageService } from 'src/app/shared/services/user-management/user-manage.service';
@@ -12,7 +13,7 @@ import { UserManageService } from 'src/app/shared/services/user-management/user-
   styleUrls: ['./switch-user.component.scss']
 })
 export class SwitchUserComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   isSubmitted = false;
@@ -31,12 +32,18 @@ export class SwitchUserComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+
     this.loginForm = this.formBuilder.group({
       uid: new FormControl('', [Validators.required])
     });
   }
   ngOnInit(): void {
     this.getUsers();
+  }
+
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
   }
 
   getUsers() {

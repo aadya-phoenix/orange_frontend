@@ -51,6 +51,10 @@ export class SmedbRatingComponent implements OnInit {
     this.SMERatingList();
   }
 
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
   SMERatingList() {
     this.commonService.showLoading();
     this.smeService.SMERatingList(this.objectDetail.id).subscribe(

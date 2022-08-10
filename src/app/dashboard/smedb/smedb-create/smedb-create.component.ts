@@ -150,6 +150,10 @@ export class SmedbCreateComponent implements OnInit {
     this.getCCTDomainExpert();
   }
 
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
   changeTab(tab: string) {
     this.selectedTab = tab;
   }

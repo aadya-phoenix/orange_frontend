@@ -81,6 +81,10 @@ export class SessionCompleteReportComponent implements OnInit {
     this.getRocs();
   }
 
+  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
+    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  }
+
   refreshSessions(data:any){
     this.commonService.showLoading();
     this.courseSessionService.getsessionReport(data).subscribe(

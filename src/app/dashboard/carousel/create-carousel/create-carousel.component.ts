@@ -85,6 +85,10 @@ export class CreateCarouselComponent implements OnInit {
     this.getTotalCourse();
   }
 
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
   getCarouselDetails() {
     this.commonService.showLoading();
     this.carouselService.getCarouselDetails(this.carousel_id).subscribe(

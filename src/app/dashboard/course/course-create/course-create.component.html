@@ -79,7 +79,7 @@
 
                                                 <div class="error_message"
                                                     *ngIf="(createCourceForm.controls['title_single'].invalid && (createCourceForm.controls['title_single'].dirty || createCourceForm.controls['title_single'].touched || isSubmitted))">
-                                                    {{lableConstant.Title}} cannot be blank
+                                                    {{requiredMessage(this.lableConstant.Title)}}
                                                 </div>
                                             </div>
                                             <div class="mt_top_11">
@@ -109,7 +109,7 @@
                                             </ng-select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['training_provided_by'].invalid && (createCourceForm.controls['training_provided_by'].dirty || createCourceForm.controls['training_provided_by'].touched || isSubmitted))">
-                                                {{lableConstant.Training_provided_by}} cannot be blank
+                                                {{requiredMessage(this.lableConstant.Training_provided_by)}} 
                                             </div>
                                         </div>
                                     </div>
@@ -130,7 +130,7 @@
                                                 maxlength="5" />
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['duration'].invalid && (createCourceForm.controls['duration'].dirty || createCourceForm.controls['duration'].touched || isSubmitted))">
-                                                {{lableConstant.Training_hours_duration}} cannot be blank
+                                                {{requiredMessage(this.lableConstant.Training_hours_duration)}}
                                             </div>
 
                                         </div>
@@ -154,7 +154,7 @@
                                                 <span class="charcter_limit">{{remainingText}} {{lableConstant.characters_remaining}}</span>
                                                 <div class="error_message"
                                                     *ngIf="(createCourceForm.controls['description_single'].invalid && (createCourceForm.controls['description_single'].dirty || createCourceForm.controls['description_single'].touched || isSubmitted))">
-                                                    {{lableConstant.Description}} cannot be blank
+                                                    {{requiredMessage(this.lableConstant.Description)}}
                                                 </div>
                                             </div>
                                             <div class="">
@@ -186,7 +186,7 @@
                                                                 formControlName="description" />
                                                             <div class="error_message"
                                                                 *ngIf="(objectiveContentArray.controls[i].controls['description'].invalid && (objectiveContentArray.controls[i].controls['description'].dirty || objectiveContentArray.controls[i].controls['description'].touched || isSubmitted))">
-                                                                {{lableConstant.Objective}} cannot be blank
+                                                                {{requiredMessage(this.lableConstant.Objective)}}
                                                             </div>
                                                         </td>
                                                         <td class="btn-width p-1">
@@ -220,7 +220,7 @@
                                             </ng-select>
                                             <span class="error_message"
                                                 *ngIf="(createCourceForm.controls['subject'].invalid && (createCourceForm.controls['subject'].dirty || createCourceForm.controls['subject'].touched || isSubmitted))">
-                                                {{lableConstant.Subject}} cannot be blank
+                                                {{requiredMessage(this.lableConstant.Subject)}}
                                             </span>
                                         </div>
                                     </div>
@@ -239,7 +239,7 @@
                                                 class="form-control form_width" formControlName="keyword" />
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['keyword'].invalid && (createCourceForm.controls['keyword'].dirty || createCourceForm.controls['keyword'].touched || isSubmitted))">
-                                                {{lableConstant.Keywords}} cannot be blank
+                                                {{requiredMessage(this.lableConstant.Keywords)}}
                                             </div>
 
                                         </div>
@@ -260,7 +260,7 @@
                                             </ng-select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['available_language'].invalid && (createCourceForm.controls['available_language'].dirty || createCourceForm.controls['available_language'].touched || isSubmitted))">
-                                                {{lableConstant.Available_Languages}} cannot be blank
+                                                {{requiredMessage(this.lableConstant.Available_Languages)}}
                                             </div>
                                         </div>
                                     </div>
@@ -280,7 +280,7 @@
                                             </ng-select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['level'].invalid && (createCourceForm.controls['level'].dirty || createCourceForm.controls['level'].touched || isSubmitted))">
-                                                {{lableConstant.Level}} cannot be blank
+                                                {{requiredMessage(this.lableConstant.Level)}}
                                             </div>
                                         </div>
                                     </div>
@@ -300,7 +300,7 @@
                                                 class="form-control form_width" formControlName="email_content_owner" />
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['email_content_owner'].invalid && (createCourceForm.controls['email_content_owner'].dirty || createCourceForm.controls['email_content_owner'].touched || isSubmitted))">
-                                                {{lableConstant.Email_of_Content_Owner}} cannot be blank
+                                                {{requiredMessage(this.lableConstant.Email_of_Content_Owner)}}
                                             </div>
                                         </div>
                                     </div>
@@ -321,7 +321,7 @@
                                                 formControlName="email_training_contact" />
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['email_training_contact'].invalid && (createCourceForm.controls['email_training_contact'].dirty || createCourceForm.controls['email_training_contact'].touched || isSubmitted))">
-                                                {{lableConstant.Email_of_Training_Contact}} cannot be blank
+                                                {{requiredMessage(this.lableConstant.Email_of_Training_Contact)}}
                                             </div>
 
                                         </div>
@@ -387,7 +387,7 @@
                                             </select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['learning_type'].invalid && (createCourceForm.controls['learning_type'].dirty || createCourceForm.controls['learning_type'].touched || isSubmitted))">
-                                                {{lableConstant.Learning_Type}} cannot be blank
+                                                {{requiredMessage(this.lableConstant.Learning_Type)}}
                                             </div>
                                         </div>
                                     </div>
@@ -438,7 +438,7 @@
 
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['video_link'].invalid && (createCourceForm.controls['video_link'].dirty || createCourceForm.controls['video_link'].touched || isSubmitted))">
-                                                Number of learning objects cannot be blank
+                                                {{requiredMessage(this.lableConstant.number_of_learning_objects)}}
                                             </div>
                                         </div>
                                     </div>
@@ -460,7 +460,7 @@
                                                 class="form-control form_width" formControlName="email_playlist_creator" />
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['email_playlist_creator'].invalid && (createCourceForm.controls['email_playlist_creator'].dirty || createCourceForm.controls['for_whoom'].touched || isSubmitted))">
-                                                Email of playlist creator cannot be blank
+                                                {{requiredMessage(this.lableConstant.email_of_playlist_creator)}}
                                             </div>
 
                                         </div>
@@ -483,9 +483,7 @@
                                             </ng-select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['level'].invalid && (createCourceForm.controls['level'].dirty || createCourceForm.controls['level'].touched || isSubmitted))">
-                                                Is the target audience of your Playlist from one region only?
-                                                cannot
-                                                be blank
+                                                {{requiredMessage(this.lableConstant.is_target_audience_playlist_fregional)}}
                                             </div>
                                         </div>
                                     </div>
@@ -513,7 +511,7 @@
                                             </select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['who_see_course'].invalid && (createCourceForm.controls['who_see_course'].dirty || createCourceForm.controls['who_see_course'].touched || isSubmitted))">
-                                                Region of Target Audience cannot be blank
+                                                {{requiredMessage(this.lableConstant.region_of_target_audience)}}
                                             </div>
                                         </div>
                                     </div>
@@ -540,7 +538,7 @@
                                             </select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['target_audience'].invalid && (createCourceForm.controls['target_audience'].dirty || createCourceForm.controls['target_audience'].touched || isSubmitted))">
-                                                Target audience cannot be blank
+                                                {{requiredMessage(this.lableConstant.target_audience)}}
                                             </div>
                                         </div>
                                     </div>
@@ -567,7 +565,7 @@
                                             </select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['email_preffered_instructor'].invalid && (createCourceForm.controls['email_preffered_instructor'].dirty || createCourceForm.controls['email_preffered_instructor'].touched || isSubmitted))">
-                                                OBS employees in specific Functions/Divisions cannot be blank
+                                                {{requiredMessage(this.lableConstant.obs_employees_in_specific_functions)}}
                                             </div>
                                         </div>
                                     </div>
@@ -590,7 +588,7 @@
                                             </ng-select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['delivery_method'].invalid && (createCourceForm.controls['delivery_method'].dirty || createCourceForm.controls['delivery_method'].touched || isSubmitted))">
-                                                {{lableConstant.Delivery_Method}} cannot be blank
+                                                {{requiredMessage(this.lableConstant.Delivery_Method)}}
                                             </div>
                                         </div>
                                     </div>
@@ -611,7 +609,7 @@
                                             </ng-select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['digital'].invalid && (createCourceForm.controls['digital'].dirty || createCourceForm.controls['digital'].touched || isSubmitted))">
-                                                {{lableConstant.Does_this_course_integrate_digital}} cannot be blank
+                                                {{requiredMessage(this.lableConstant.Does_this_course_integrate_digital)}}
                                             </div>
                                         </div>
                                     </div>
@@ -647,7 +645,7 @@
                                             </ng-select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['manager_approval'].invalid && (createCourceForm.controls['manager_approval'].dirty || createCourceForm.controls['manager_approval'].touched || isSubmitted))">
-                                                {{lableConstant.Manager_Approval}} cannot be blank
+                                                {{requiredMessage(this.lableConstant.Manager_Approval)}}
                                             </div>
                                         </div>
                                     </div>
@@ -691,7 +689,7 @@
                                             </ng-select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['email_preffered_instructor'].invalid && (createCourceForm.controls['email_preffered_instructor'].dirty || createCourceForm.controls['email_preffered_instructor'].touched || isSubmitted))">
-                                                {{lableConstant.Email_of_the_preferred_Instructor}} cannot be blank
+                                                {{requiredMessage(this.lableConstant.Email_of_the_preferred_Instructor)}}
                                             </div>
                                         </div>
                                     </div>
@@ -712,7 +710,7 @@
                                                 formControlName="first_session_date" min="{{minDate}}" />
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['first_session_date'].invalid && (createCourceForm.controls['first_session_date'].dirty || createCourceForm.controls['first_session_date'].touched || isSubmitted))">
-                                                {{lableConstant.Date_of_first_session}} cannot be blank
+                                                {{requiredMessage(this.lableConstant.Date_of_first_session)}}
                                             </div>
 
                                         </div>
@@ -755,7 +753,7 @@
                                             </select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['expiry_date_type'].invalid && (createCourceForm.controls['expiry_date_type'].dirty || createCourceForm.controls['expiry_date_type'].touched || isSubmitted))">
-                                                {{lableConstant.Expiry_Type}} cannot be blank
+                                                {{requiredMessage(this.lableConstant.Expiry_Type)}}
                                             </div>
                                         </div>
                                     </div>
@@ -778,7 +776,7 @@
                                             </ng-select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['entity_business_area'].invalid && (createCourceForm.controls['entity_business_area'].dirty || createCourceForm.controls['entity_business_area'].touched || isSubmitted))">
-                                                {{lableConstant.Entity_Business_area}} cannot be blank
+                                                {{requiredMessage(this.lableConstant.Entity_Business_area)}}
                                             </div>
                                         </div>
                                     </div>
@@ -801,7 +799,7 @@
                                                 </ng-select>
                                                 <div class="error_message"
                                                     *ngIf="(createCourceForm.controls['certification'].invalid && (createCourceForm.controls['certification'].dirty || createCourceForm.controls['certification'].touched || isSubmitted))">
-                                                    {{lableConstant.Certification}} cannot be blank
+                                                    {{requiredMessage(this.lableConstant.Certification)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -828,7 +826,7 @@
                                             </select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['certification_expiry_type'].invalid && (createCourceForm.controls['certification_expiry_type'].dirty || createCourceForm.controls['certification_expiry_type'].touched || isSubmitted))">
-                                                Certification expiry type cannot be blank
+                                                {{requiredMessage(this.lableConstant.certification_expiry_type)}}
                                             </div>
                                         </div>
                                     </div>
@@ -852,7 +850,7 @@
                                             </select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['validity_period'].invalid && (createCourceForm.controls['validity_period'].dirty || createCourceForm.controls['validity_period'].touched || isSubmitted))">
-                                                Validity period cannot be blank
+                                                {{requiredMessage(this.lableConstant.validity_period)}}
                                             </div>
                                         </div>
                                     </div>
@@ -875,7 +873,7 @@
                                             </ng-select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['external_vendor'].invalid && (createCourceForm.controls['external_vendor'].dirty || createCourceForm.controls['external_vendor'].touched || isSubmitted))">
-                                                {{lableConstant.External_vendor}} cannot be blank
+                                                {{requiredMessage(this.lableConstant.External_vendor)}}
                                             </div>
                                         </div>
                                     </div>
@@ -898,7 +896,7 @@
                                             </ng-select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['external_vendor_name'].invalid && (createCourceForm.controls['external_vendor_name'].dirty || createCourceForm.controls['external_vendor_name'].touched || isSubmitted))">
-                                                External vendor name cannot be blank
+                                                {{requiredMessage(this.lableConstant.external_vendor_name)}}
                                             </div>
                                         </div>
                                     </div>
@@ -937,7 +935,7 @@
                                                         formControlName="for_whoom_single"></textarea>
                                                     <div class="error_message"
                                                         *ngIf="(createCourceForm.controls['for_whoom_single'].invalid && (createCourceForm.controls['for_whoom_single'].dirty || createCourceForm.controls['for_whoom_single'].touched || isSubmitted))">
-                                                        {{lableConstant.For_Whom}} cannot be blank
+                                                        {{requiredMessage(this.lableConstant.For_Whom)}}
                                                     </div>
 
                                                 </div>
@@ -1053,7 +1051,7 @@
                                                         (change)="handleFileInput_Material($event)" />
                                                     <div class="error_message"
                                                         *ngIf="(createCourceForm.controls['material_source'].invalid && (createCourceForm.controls['material_source'].dirty || createCourceForm.controls['material_source'].touched || isSubmitted))">
-                                                        {{lableConstant.Material_Source}} cannot be blank
+                                                        {{requiredMessage(this.lableConstant.Material_Source)}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -1196,7 +1194,7 @@
                                             </select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['regional_cordinator'].invalid && (createCourceForm.controls['regional_cordinator'].dirty || createCourceForm.controls['regional_cordinator'].touched || isSubmitted))">
-                                                Regional Operation Cordinator cannot be blank
+                                                {{requiredMessage(this.lableConstant.request_to_roc)}}
                                             </div>
                                         </div>
                                     </div>

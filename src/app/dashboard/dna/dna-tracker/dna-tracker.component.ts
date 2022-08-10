@@ -36,6 +36,10 @@ export class DnaTrackerComponent implements OnInit {
   this.getTrackerList();
   }
 
+  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
+    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  }
+
   getTrackerList(){
     this.dnaService.getTrackerList().subscribe((res:any)=>{
       this.trackerObjList = res.data.tracker;

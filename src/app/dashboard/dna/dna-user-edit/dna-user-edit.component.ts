@@ -14,7 +14,7 @@ import { UserManageService } from 'src/app/shared/services/user-management/user-
   styleUrls: ['./dna-user-edit.component.scss']
 })
 export class DnaUserEditComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   dateTimeFormate = dataConstant.dateTimeFormate;
   createUserForm: FormGroup;
   user_id:any;
@@ -41,6 +41,7 @@ export class DnaUserEditComponent implements OnInit {
     private generalDrpdownsService: GeneralDropdownsService,
     private router: Router,
   ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
      this.createUserForm = this.formBuilder.group({
        role_id: new FormControl('', []),
        region_id: new FormControl('', []),
@@ -61,6 +62,10 @@ export class DnaUserEditComponent implements OnInit {
   this.getRegions();
   this.getBusinessUnits();
   this.getDomain();
+  }
+
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
   }
 
   getSelectedRole(event:any){

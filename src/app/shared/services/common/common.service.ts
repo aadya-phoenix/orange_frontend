@@ -134,4 +134,8 @@ export class CommonService {
       .pipe(catchError(this.Errorhandling));
   }
 
+  showPaginationCount(pageStart:any, pageEnd:any, total:any, lableString:any){
+    return lableString.replace('<number>', pageStart).replace('<number>', pageEnd).replace('<number>', total).replace('<nombre>', pageStart).replace('<nombre>', pageEnd).replace('<nombre>', total);
+  }
+
 }

@@ -90,6 +90,10 @@ export class BackOfficeViewReportComponent implements OnInit {
     }
   }
 
+  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
+    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  }
+
   getRoles() {
     this.commonService.showLoading();
     this.courceService.getRoleUsers().subscribe((res: any) => {

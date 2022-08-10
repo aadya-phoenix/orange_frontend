@@ -87,7 +87,7 @@
                             *ngIf="(ratingDesignForm.controls['status_comment'].invalid && (ratingDesignForm.controls['status_comment'].dirty || ratingDesignForm.controls['status_comment'].touched)) || isSubmitted ">
                             <div class="error_message"
                                 *ngIf="ratingDesignForm.controls['status_comment'].errors?.required">
-                               {{ lableConstant.Comments}} cannot be blank
+                                {{requiredMessage(this.lableConstant.Comments)}}
                             </div>
                         </div>
                     </div>

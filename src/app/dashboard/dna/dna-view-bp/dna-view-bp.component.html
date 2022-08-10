@@ -131,7 +131,7 @@
                                         <label class="label_course">Filter by Priority</label>
                                         <select class="form-control  form_width"
                                             (change)="getPriorityFilterRecords($event.target.value)">
-                                            <option selected='selected' value=''>View All</option>
+                                            <option selected='selected' value=''>{{lableConstant.View_All}}</option>
                                             <option *ngFor="let item of priorityObj" [value]="item.id">{{item.name}}
                                             </option>
                                         </select>
@@ -140,7 +140,7 @@
                                         <label class="label_course">Filter by Country</label>
                                         <select class="form-control  form_width"
                                             (change)="getCountryFilterRecords($event.target.value)">
-                                            <option selected='selected' value=''>View All</option>
+                                            <option selected='selected' value=''>{{lableConstant.View_All}}</option>
                                             <option *ngFor="let item of countriesObj" [value]="item.country_name">
                                                 {{item.country_name}}</option>
                                         </select>
@@ -149,7 +149,7 @@
                                         <label class="label_course">Filter by Business Unit</label>
                                         <select class="form-control  form_width"
                                             (change)="getBUFilterRecords($event.target.value)">
-                                            <option selected='selected' value=''>View All</option>
+                                            <option selected='selected' value=''>{{lableConstant.View_All}}</option>
                                             <option *ngFor="let item of bussinessUnitObj" [value]="item.id">
                                                 {{item.team_name}}</option>
                                         </select>
@@ -158,7 +158,7 @@
                                         <label class="label_course">Filter by Region</label>
                                         <select class="form-control  form_width"
                                             (change)="getRegionFilterRecords($event.target.value)">
-                                            <option selected='selected' value=''>View All</option>
+                                            <option selected='selected' value=''>{{lableConstant.View_All}}</option>
                                             <option *ngFor="let item of regionsObj" [value]="item.id">
                                                 {{item.region_name}}</option>
                                         </select>
@@ -282,12 +282,12 @@
                             </div>
                             <div class="pagiantio_dispaly">
                                 <div class="pagintion_ child">
-                                    <p class="cm-pagination-fotter">Showing {{(pagination.pageSize *
-                                        (pagination.pageNumber - 1)) + 1}} to
-                                        {{(this.pagination.pageSize * this.pagination.pageNumber) >
+                                    <p class="cm-pagination-fotter">{{showPaginationCount(((pagination.pageSize *
+                                        (pagination.pageNumber - 1)) + 1),
+                                        ((this.pagination.pageSize * this.pagination.pageNumber) >
                                         this.learningListToShow?.length ? this.learningListToShow?.length :
-                                        this.pagination.pageSize * this.pagination.pageNumber}} of
-                                        {{this.learningListToShow?.length}} entries</p>
+                                        this.pagination.pageSize * this.pagination.pageNumber),
+                                        this.learningListToShow?.length)}}</p>
                                 </div>
                                 <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                             </div>

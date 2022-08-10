@@ -80,7 +80,7 @@
                                              *ngIf="(createSessionForm.controls['title'].invalid && (createSessionForm.controls['title'].dirty || createSessionForm.controls['title'].touched)) || isSubmitted">
                                              <div class="error_message"
                                                  *ngIf="createSessionForm.controls['title'].errors?.required">
-                                                 {{lableConstant.Event_Title}} cannot be blank
+                                                 {{requiredMessage(this.lableConstant.Event_Title)}}
                                              </div>
                                          </div>
         
@@ -99,7 +99,7 @@
                                               *ngIf="(createSessionForm.controls['region_id'].invalid && (createSessionForm.controls['region_id'].dirty || createSessionForm.controls['region_id'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="createSessionForm.controls['region_id'].errors?.required">
-                                                  {{lableConstant.Region_Name}} cannot be blank
+                                                  {{requiredMessage(this.lableConstant.Region_Name)}}
                                               </div>
                                              </div>
                                         
@@ -164,7 +164,7 @@
                                              *ngIf="(metadataArray.controls[i].controls['delivery_method'].invalid && (metadataArray.controls[i].controls['delivery_method'].dirty || metadataArray.controls[i].controls['delivery_method'].touched)) || isSubmitted">
                                              <div class="error_message"
                                                  *ngIf="metadataArray.controls[i].controls['delivery_method'].errors?.required">
-                                                 {{lableConstant.Delivery_Method}} cannot be blank
+                                                 {{requiredMessage(this.lableConstant.Delivery_Method)}}
                                              </div>
                                          </div>
                                            
@@ -190,7 +190,7 @@
                                              *ngIf="(metadataArray.controls[i].controls['country'].invalid && (metadataArray.controls[i].controls['country'].dirty || metadataArray.controls[i].controls['country'].touched)) || isSubmitted">
                                              <div class="error_message"
                                                  *ngIf="metadataArray.controls[i].controls['country'].errors?.required">
-                                                 {{lableConstant.Country}} cannot be blank
+                                                 {{requiredMessage(this.lableConstant.Country)}}
                                              </div>
                                             </div>
                                         </div>
@@ -207,7 +207,7 @@
                                              *ngIf="(metadataArray.controls[i].controls['location'].invalid && (metadataArray.controls[i].controls['location'].dirty || metadataArray.controls[i].controls['location'].touched)) || isSubmitted">
                                              <div class="error_message"
                                                  *ngIf="metadataArray.controls[i].controls['location'].errors?.required">
-                                                 {{lableConstant.Location}} cannot be blank
+                                                 {{requiredMessage(this.lableConstant.Location)}}
                                              </div>
                                             </div>
                                             
@@ -225,7 +225,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['instructor_name'].invalid && (metadataArray.controls[i].controls['instructor_name'].dirty || metadataArray.controls[i].controls['instructor_name'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['instructor_name'].errors?.required">
-                                                  {{lableConstant.Instructor_Name}} cannot be blank
+                                                  {{requiredMessage(this.lableConstant.Instructor_Name)}}
                                               </div>
                                              </div>
                                             
@@ -246,7 +246,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['email_participant'].invalid && (metadataArray.controls[i].controls['email_participant'].dirty || metadataArray.controls[i].controls['email_participant'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['email_participant'].errors?.required">
-                                                  {{lableConstant.Email_ID_of_participants}} cannot be blank
+                                                  {{requiredMessage(this.lableConstant.Email_ID_of_participants)}}
                                               </div>
                                              </div>
                                             
@@ -283,7 +283,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['start_date'].invalid && (metadataArray.controls[i].controls['start_date'].dirty || metadataArray.controls[i].controls['start_date'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['start_date'].errors?.required">
-                                                  {{lableConstant.Start_Date}} cannot be blank
+                                                  {{requiredMessage(this.lableConstant.Start_Date)}}
                                               </div>
                                              </div>
                                             
@@ -305,7 +305,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['start_time'].invalid && (metadataArray.controls[i].controls['start_time'].dirty || metadataArray.controls[i].controls['start_time'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['start_time'].errors?.required">
-                                                  {{lableConstant.Start_Time}} cannot be blank
+                                                  {{requiredMessage(this.lableConstant.Start_Time)}}
                                               </div>
                                              </div>
                                             
@@ -323,7 +323,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['end_date'].invalid && (metadataArray.controls[i].controls['end_date'].dirty || metadataArray.controls[i].controls['end_date'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['end_date'].errors?.required">
-                                                  {{lableConstant.End_Date}} cannot be blank
+                                                  {{requiredMessage(this.lableConstant.End_Date)}}
                                               </div>
                                              </div>
                                             
@@ -341,7 +341,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['end_time'].invalid && (metadataArray.controls[i].controls['end_time'].dirty || metadataArray.controls[i].controls['end_time'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['end_time'].errors?.required">
-                                                  {{lableConstant.End_Time}} cannot be blank
+                                                  {{requiredMessage(this.lableConstant.End_Time)}}
                                               </div>
                                              </div>
                                             
@@ -433,7 +433,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['min_registration'].invalid && (metadataArray.controls[i].controls['min_registration'].dirty || metadataArray.controls[i].controls['min_registration'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['min_registration'].errors?.required">
-                                                  {{lableConstant.Minimum_Registration}} cannot be blank
+                                                  {{requiredMessage(this.lableConstant.Minimum_Registration)}}
                                               </div>
                                              </div>
                                             
@@ -458,7 +458,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['max_registration'].invalid && (metadataArray.controls[i].controls['max_registration'].dirty || metadataArray.controls[i].controls['max_registration'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['max_registration'].errors?.required">
-                                                  {{lableConstant.Maximum_Registration}} cannot be blank
+                                                  {{requiredMessage(this.lableConstant.Maximum_Registration)}}
                                               </div>
                                              </div>
                                             
@@ -481,7 +481,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['registration_deadline'].invalid && (metadataArray.controls[i].controls['registration_deadline'].dirty || metadataArray.controls[i].controls['registration_deadline'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['registration_deadline'].errors?.required">
-                                                  {{lableConstant.Registration_Deadline}} cannot be blank
+                                                  {{requiredMessage(this.lableConstant.Registration_Deadline)}}
                                               </div>
                                              </div>
                                             
@@ -507,7 +507,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['availability'].invalid && (metadataArray.controls[i].controls['availability'].dirty || metadataArray.controls[i].controls['availability'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['availability'].errors?.required">
-                                                  {{lableConstant.Availability}} cannot be blank
+                                                  {{requiredMessage(this.lableConstant.Availability)}}
                                               </div>
                                              </div>
                                             
@@ -551,7 +551,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['external_vendor'].invalid && (metadataArray.controls[i].controls['external_vendor'].dirty || metadataArray.controls[i].controls['external_vendor'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['external_vendor'].errors?.required">
-                                                  {{lableConstant.External_vendor}} cannot be blank
+                                                  {{requiredMessage(this.lableConstant.External_vendor)}}
                                               </div>
                                              </div>
                                             
@@ -577,7 +577,7 @@
                                               *ngIf="(metadataArray.controls[i].controls['external_vendor_name'].invalid && (metadataArray.controls[i].controls['external_vendor_name'].dirty || metadataArray.controls[i].controls['external_vendor_name'].touched)) || isSubmitted">
                                               <div class="error_message"
                                                   *ngIf="metadataArray.controls[i].controls['external_vendor_name'].errors?.required">
-                                                  External vendor name cannot be blank
+                                                  {{requiredMessage(this.lableConstant.external_vendor_name)}}
                                               </div>
                                              </div>
                                            

@@ -77,7 +77,7 @@
                                                         *ngIf="(createVendorForm.controls['region'].invalid && (createVendorForm.controls['region'].dirty || createVendorForm.controls['region'].touched)) || isSubmitted">
                                                         <div class="error_message"
                                                             *ngIf="createVendorForm.controls['region'].errors?.required">
-                                                            Vendor name can not be blank
+                                                            {{requiredMessage(this.lableConstant.vendor_name)}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -98,7 +98,7 @@
                                                     *ngIf="(createVendorForm.controls['region'].invalid && (createVendorForm.controls['region'].dirty || createVendorForm.controls['region'].touched)) || isSubmitted">
                                                     <div class="error_message"
                                                         *ngIf="createVendorForm.controls['region'].errors?.required">
-                                                        Vendor Region can not be blank
+                                                        {{requiredMessage(this.lableConstant.vendor_region)}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -117,7 +117,7 @@
                                                     *ngIf="(createVendorForm.controls['location'].invalid && (createVendorForm.controls['location'].dirty || createVendorForm.controls['location'].touched)) || isSubmitted">
                                                     <div class="error_message"
                                                         *ngIf="createVendorForm.controls['location'].errors?.required">
-                                                        Vendor location can not be blank
+                                                        {{requiredMessage(this.lableConstant.vendor_location)}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -133,7 +133,7 @@
                                                     *ngIf="(createVendorForm.controls['address'].invalid && (createVendorForm.controls['address'].dirty || createVendorForm.controls['address'].touched)) || isSubmitted">
                                                     <div class="error_message"
                                                         *ngIf="createVendorForm.controls['address'].errors?.required">
-                                                        Vendor address can not be blank
+                                                        {{requiredMessage(this.lableConstant.vendor_address)}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -151,7 +151,7 @@
                                                     *ngIf="(createVendorForm.controls['website'].invalid && (createVendorForm.controls['website'].dirty || createVendorForm.controls['website'].touched)) || isSubmitted">
                                                     <div class="error_message"
                                                         *ngIf="createVendorForm.controls['website'].errors?.required">
-                                                        Website can not be blank
+                                                        {{requiredMessage(this.lableConstant.website)}}
                                                     </div>
                                                 </div>
                                                 <div class="error_message"
@@ -173,7 +173,7 @@
                                                     *ngIf="(createVendorForm.controls['nfps_entity'].invalid && (createVendorForm.controls['nfps_entity'].dirty || createVendorForm.controls['nfps_entity'].touched)) || isSubmitted">
                                                     <div class="error_message"
                                                         *ngIf="createVendorForm.controls['nfps_entity'].errors?.required">
-                                                        Vendor nfps_entity can not be blank
+                                                        {{requiredMessage(this.lableConstant.nfps_entity_oracle_entity)}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -212,7 +212,7 @@
                                                     *ngIf="(createVendorForm.controls['orange_contact'].invalid && (createVendorForm.controls['orange_contact'].dirty || createVendorForm.controls['orange_contact'].touched)) || isSubmitted">
                                                     <div class="error_message"
                                                         *ngIf="createVendorForm.controls['orange_contact'].errors?.required">
-                                                        Orange contact can not be blank
+                                                        {{requiredMessage(this.lableConstant.pdl_orange_contact)}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -233,7 +233,7 @@
                                                     *ngIf="(createVendorForm.controls['training_offer'].invalid && (createVendorForm.controls['training_offer'].dirty || createVendorForm.controls['training_offer'].touched)) || isSubmitted">
                                                     <div class="error_message"
                                                         *ngIf="createVendorForm.controls['training_offer'].errors?.required">
-                                                        Vendor training_offer can not be blank
+                                                        {{requiredMessage(this.lableConstant.training_offers)}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -288,7 +288,7 @@
                                                         *ngIf="(contactFormArray.controls[i].controls['contact_for'].invalid && (contactFormArray.controls[i].controls['contact_for'].dirty || contactFormArray.controls[i].controls['contact_for'].touched)) || isSubmitted ">
                                                         <div class="error_message"
                                                             *ngIf="contactFormArray.controls[i].controls['contact_for'].errors?.required">
-                                                            Contact For cannot be blank
+                                                            {{requiredMessage(this.lableConstant.contact_for)}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -304,7 +304,7 @@
                                                         *ngIf="(contactFormArray.controls[i].controls['person'].invalid && (contactFormArray.controls[i].controls['person'].dirty || contactFormArray.controls[i].controls['person'].touched)) || isSubmitted ">
                                                         <div class="error_message"
                                                             *ngIf="contactFormArray.controls[i].controls['person'].errors?.required">
-                                                            {{lableConstant.Contact_Person}} cannot be blank
+                                                            {{requiredMessage(this.lableConstant.Contact_Person)}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -320,7 +320,7 @@
                                                         *ngIf="(contactFormArray.controls[i].controls['email'].invalid && (contactFormArray.controls[i].controls['email'].dirty || contactFormArray.controls[i].controls['email'].touched)) || isSubmitted ">
                                                         <div class="error_message"
                                                             *ngIf="contactFormArray.controls[i].controls['email'].errors?.required">
-                                                            Email Id cannot be blank
+                                                            {{requiredMessage(this.lableConstant.email_id)}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -357,7 +357,7 @@
                                                     *ngIf="(createVendorForm.controls['other_comment'].invalid && (createVendorForm.controls['other_comment'].dirty || createVendorForm.controls['other_comment'].touched)) || isSubmitted">
                                                     <div class="error_message"
                                                         *ngIf="createVendorForm.controls['other_comment'].errors?.required">
-                                                        {{lableConstant.Comments}} can not be blank
+                                                        {{requiredMessage(this.lableConstant.other_comments)}}
                                                     </div>
                                                 </div>
                                             </div>

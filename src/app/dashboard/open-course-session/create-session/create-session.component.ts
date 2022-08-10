@@ -109,6 +109,10 @@ export class CreateSessionComponent implements OnInit {
     this.getBackupRegionalCordinator(); 
   }
 
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
   private metaDataGroup(): FormGroup {
     return this.fb.group({
       metadata_id: '',

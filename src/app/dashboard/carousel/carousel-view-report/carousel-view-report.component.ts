@@ -81,6 +81,10 @@ export class CarouselViewReportComponent implements OnInit {
     this.refreshCarousel({});
   }
 
+  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
+    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  }
+
   viewRequest(item: any) {
     if (item && item.id) {
       this.router.navigateByUrl(`/dashboard/olcarousel/view/${item.id}`);

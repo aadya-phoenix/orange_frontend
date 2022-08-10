@@ -102,7 +102,7 @@
                                                             *ngIf="(carouselFormArray.controls[i].controls['title'].invalid && (carouselFormArray.controls[i].controls['title'].dirty || carouselFormArray.controls[i].controls['title'].touched)) || isSubmitted ">
                                                             <div class="error_message"
                                                                 *ngIf="carouselFormArray.controls[i].controls['title'].errors?.required">
-                                                                {{lableConstant.Title}} cannot be blank
+                                                                {{requiredMessage(this.lableConstant.Title)}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -125,7 +125,7 @@
                                                             *ngIf="(carouselFormArray.controls[i].controls['description'].invalid && (carouselFormArray.controls[i].controls['description'].dirty || carouselFormArray.controls[i].controls['description'].touched)) || isSubmitted ">
                                                             <div class="error_message"
                                                                 *ngIf="carouselFormArray.controls[i].controls['description'].errors?.required">
-                                                                {{lableConstant.Description}} cannot be blank
+                                                                {{requiredMessage(this.lableConstant.Description)}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -147,7 +147,7 @@
                                                             *ngIf="(carouselFormArray.controls[i].controls['link'].invalid && (carouselFormArray.controls[i].controls['link'].dirty || carouselFormArray.controls[i].controls['link'].touched)) || isSubmitted ">
                                                             <div class="error_message"
                                                                 *ngIf="carouselFormArray.controls[i].controls['link'].errors?.required">
-                                                                Link cannot be blank
+                                                                {{requiredMessage(this.lableConstant.link)}}
                                                             </div>
                                                             <div class="error_message"
                                                                 *ngIf="carouselFormArray.controls[i].controls['link'].errors?.pattern">
@@ -194,7 +194,7 @@
                                                 *ngIf="(createOlcarouselForm.controls['image'].invalid && (createOlcarouselForm.controls['image'].dirty || createOlcarouselForm.controls['image'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createOlcarouselForm.controls['image'].errors?.required">
-                                                    Image cannot be blank
+                                                    {{requiredMessage('Images')}}
                                                 </div>
                                             </div>
                                             <span class="pt-2" *ngIf="carousel_details.imageUrl">
@@ -219,7 +219,7 @@
                                                 *ngIf="(createOlcarouselForm.controls['publication_date'].invalid && (createOlcarouselForm.controls['publication_date'].dirty || createOlcarouselForm.controls['publication_date'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createOlcarouselForm.controls['publication_date'].errors?.required">
-                                                    {{lableConstant.Requested_Publication_Date}} cannot be blank
+                                                    {{requiredMessage(this.lableConstant.Requested_Publication_Date)}}
                                                 </div>
                                             </div>
                                         </div>
@@ -245,7 +245,7 @@
                                                 *ngIf="(createOlcarouselForm.controls['expiry_type'].invalid && (createOlcarouselForm.controls['expiry_type'].dirty || createOlcarouselForm.controls['expiry_type'].touched)) || isSubmitted">
                                                 <div class="error_message"
                                                     *ngIf="createOlcarouselForm.controls['expiry_type'].errors?.required">
-                                                    {{lableConstant.Expiry_Type}} cannot be blank
+                                                    {{requiredMessage(this.lableConstant.Expiry_Type)}}
                                                 </div>
                                             </div>
                                         </div>

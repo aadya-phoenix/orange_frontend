@@ -10,7 +10,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label class="form-control-label">
-                        Comments <span class="text-danger-ligth" *ngIf="status != CarouselStatus.publish">* </span>
+                        {{lableConstant.Comments}} <span class="text-danger-ligth" *ngIf="status != CarouselStatus.publish">* </span>
                     </label>
                     <textarea class="form-control form_width-textarea mb-2" maxlength="500" rows="3"
                         formControlName="status_comment" placeholder="Enter Comments" (change)="valueChange()"></textarea>
@@ -19,7 +19,7 @@
                         *ngIf="(publishCarouselForm.controls['status_comment'].invalid && (publishCarouselForm.controls['status_comment'].dirty || publishCarouselForm.controls['status_comment'].touched)) || isSubmitted ">
                         <div class="error_message"
                             *ngIf="publishCarouselForm.controls['status_comment'].errors?.required">
-                            Comments cannot be blank
+                            {{requiredMessage(this.lableConstant.Comments)}}
                         </div>
                     </div>
 

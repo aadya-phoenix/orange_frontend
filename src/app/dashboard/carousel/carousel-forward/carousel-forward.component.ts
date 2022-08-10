@@ -40,6 +40,10 @@ export class CarouselForwardComponent implements OnInit {
     this.getCarouselPublisher();
   }
 
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
   getCarouselPublisher() {
     this.commonService.showLoading();
     this.carouselService.getCarouselPublisher().subscribe(

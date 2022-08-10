@@ -40,6 +40,10 @@ export class BackOfficeForwardComponent implements OnInit {
     this.getBackOfficePublisher();
   }
 
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
   getBackOfficePublisher() {
     this.commonService.showLoading();
     this.backOfficeService.getBackOfficePublisher().subscribe(

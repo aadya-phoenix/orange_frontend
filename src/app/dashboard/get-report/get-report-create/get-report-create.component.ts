@@ -136,6 +136,10 @@ export class GetReportCreateComponent implements OnInit {
     this.getTotalCount();
   }
 
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
   getTotalCount() {
     this.commonService.showLoading();
     this.getReportService.getReportList().subscribe(

@@ -91,6 +91,11 @@ export class VendorManagementRatingReportComponent implements OnInit {
   );
    this.getCordinators();
   }
+
+  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
+    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  }
+  
   getCordinators() {
     this.commonService.showLoading();
     this.courseService.getNewregionalCordinator().subscribe(

@@ -36,6 +36,10 @@ export class BackOfficeTransferToOtherRocComponent implements OnInit {
     this.getCordinators();
   }
 
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
   getCordinators() {
     this.commonService.showLoading();
     this.courseService.getNewregionalCordinator().subscribe(

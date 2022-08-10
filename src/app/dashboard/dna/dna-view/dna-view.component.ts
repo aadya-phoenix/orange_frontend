@@ -57,6 +57,10 @@ export class DnaViewComponent implements OnInit {
     this.getBusinessUnits();
   }
 
+  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
+    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  }
+
   redirect(){
     this.router.navigateByUrl(`/dashboard/dna/create/${this.trackerId}`);
   }

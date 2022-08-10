@@ -291,12 +291,10 @@
                           </div>
                           <div class="pagiantio_dispaly">
                               <div class="pagintion_ child">
-                                  <p class="cm-pagination-fotter">Showing {{(pagination.pageSize *
-                                      (pagination.pageNumber - 1)) + 1}} to
-                                      {{(this.pagination.pageSize * this.pagination.pageNumber) >
+                                  <p class="cm-pagination-fotter">{{showPaginationCount(((this.pagination.pageSize * (this.pagination.pageNumber - 1)) + 1),
+                                    ((this.pagination.pageSize * this.pagination.pageNumber) >
                                       this.courseListToShow?.length ? this.courseListToShow?.length :
-                                      this.pagination.pageSize * this.pagination.pageNumber}} of
-                                      {{this.courseListToShow?.length}} entries</p>
+                                      this.pagination.pageSize * this.pagination.pageNumber), this.courseListToShow?.length)}}</p>
                               </div>
                               <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                           </div>

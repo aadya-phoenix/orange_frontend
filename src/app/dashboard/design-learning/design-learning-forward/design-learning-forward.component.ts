@@ -89,6 +89,10 @@ export class DesignLearningForwardComponent implements OnInit {
    
   }
 
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
   submit() {
     this.isSubmitted = true;
     if (this.forwardDesignForm.invalid) {

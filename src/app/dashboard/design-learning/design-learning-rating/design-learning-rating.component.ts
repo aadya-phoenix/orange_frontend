@@ -77,6 +77,10 @@ export class DesignLearningRatingComponent implements OnInit {
     }
   }
 
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
   designRatingList() {
     this.commonService.showLoading();
     this.designService.designRatingList(this.objectDetail.id).subscribe(

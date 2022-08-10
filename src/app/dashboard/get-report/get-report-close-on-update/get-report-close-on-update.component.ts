@@ -51,6 +51,10 @@ export class GetReportCloseOnUpdateComponent implements OnInit {
     });
   }
 
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
   publishGetReport() {
     this.isSubmitted = true;
     if (this.publishGetReportForm.invalid) {

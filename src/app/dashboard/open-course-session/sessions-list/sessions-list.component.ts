@@ -71,6 +71,10 @@ export class SessionsListComponent implements OnInit {
     this.refreshSessions();
   }
 
+  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
+    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  }
+
   openModal(session: any) {
     const modalRef = this.modalService.open(SessionHistoryComponent, {
       centered: true,

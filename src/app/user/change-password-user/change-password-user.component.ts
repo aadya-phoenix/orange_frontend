@@ -13,7 +13,7 @@ const passwordRegexp = dataConstant.PasswordPattern;
   styleUrls: ['./change-password-user.component.scss']
 })
 export class ChangePasswordUserComponent implements OnInit {
-  
+  lableConstant: any = { french: {}, english: {} };
   setPassswordForm: FormGroup;
   user_id:any;
   isSubmitted = false;
@@ -24,6 +24,7 @@ export class ChangePasswordUserComponent implements OnInit {
     private userManageServicse:UserManageService,
     private commonService:CommonService,
     private router: Router) { 
+      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.setPassswordForm = this.formBuilder.group({
       password: new FormControl('', [Validators.required,Validators.pattern(passwordRegexp)]),
       confirm_password: new FormControl('', [Validators.required,Validators.pattern(passwordRegexp)]),
@@ -36,6 +37,10 @@ export class ChangePasswordUserComponent implements OnInit {
       const Id = params.get('id');
       this.user_id = Id ? parseInt(Id) : 0;
     });
+  }
+
+  requiredMessage(field:any){
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
   }
 
   setPassword(){

@@ -74,6 +74,10 @@ export class DesignLearningListComponent implements OnInit {
     this.refreshModules();
   }
 
+  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
+    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  }
+
   refreshModules() {
     this.commonService.showLoading();
     this.designService.getModules().subscribe(
