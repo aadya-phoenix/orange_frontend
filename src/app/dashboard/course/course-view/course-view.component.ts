@@ -16,6 +16,7 @@ const urlregex = dataConstant.UrlPattern;
 export class CourseViewComponent implements OnInit {
   lableConstant: any = { french: {}, english: {} };
   id = 0;
+  isStaff = false;
   public publishForm!: FormGroup;
   public learnerGuidelines: any = [];
   public emailPrefferedEmail: any = [];
@@ -60,6 +61,7 @@ export class CourseViewComponent implements OnInit {
         Validators.required
       ]),
     });
+    this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.getRole();
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
@@ -95,7 +97,6 @@ export class CourseViewComponent implements OnInit {
           this.routegetdata['learn_moreByLang'] = this.courseService.getTText(this.routegetdata['learn_more']);
           this.routegetdata['for_whoomByLang'] = this.courseService.getTText(this.routegetdata['for_whoom']);
           this.routegetdata['for_whomByLang'] = this.courseService.getTText(this.routegetdata['for_whom']);
-          this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
           this.status = this.routegetdata.status;
           this.transfer_user_id = this.routegetdata.transfer_user_id;
           if (this.routegetdata.showbuttons) {
@@ -255,6 +256,7 @@ export class CourseViewComponent implements OnInit {
   }
   getRole() {
     this.getUserrole = this.authService.getRolefromlocal();
+    this.isStaff = this.getprofileDetails.data?.staff == 1 ? true : false;
   }
 
   updateCource() {

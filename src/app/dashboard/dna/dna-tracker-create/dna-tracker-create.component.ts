@@ -124,7 +124,7 @@ export class DnaTrackerCreateComponent implements OnInit {
         if (res.status == 1 ){
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('Tracker', 'Successfully Updated.');
-        this.router.navigateByUrl(`/user/dna`);
+        this.router.navigateByUrl(`/dashboard/dna/tracker`);
        }
        else{
         this.commonService.toastErrorMsg('Error',res.message);
@@ -150,12 +150,13 @@ export class DnaTrackerCreateComponent implements OnInit {
       if (result.value) {
         this.commonService.showLoading();
         this.dnaService.deleteTracker({tracker_id : this.tracker_id}).subscribe((res:any)=>{
+          this.commonService.hideLoading();
           Swal.fire(
             'Deleted!',
             'Your request has been deleted.',
             'success'
-          )
-          this.router.navigateByUrl(`/user/dna`);
+            );
+          this.router.navigateByUrl(`/dashboard/dna/tracker`);
         },(err:any)=>{
           this.commonService.hideLoading();
         });

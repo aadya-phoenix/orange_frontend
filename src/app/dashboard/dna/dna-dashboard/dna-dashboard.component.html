@@ -6,7 +6,7 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/3.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="breade_text_span1">Digital learning Needs Analysis</span>
+                        <span class="breade_text_span1">{{lableConstant.digital_learning_needs_analysis}}</span>
                         <span class="divider"></span>
                         <span class="breade_text_span">{{lableConstant.dna_tool_feature}}</span>
                     </div>
@@ -26,7 +26,7 @@
                             <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
-                            <span class="text_white span_dis">DNA</span>
+                            <span class="text_white span_dis">{{lableConstant.dna}}</span>
                         </li>
                     </ol>
                 </div>
@@ -48,7 +48,7 @@
                             <div class="card">
                                 <div class="card-body ">
                                     <div class="hide_button_admin">
-                                        <button [routerLink]="[ '/dashboard/dna/user']" class="btn btn-primary">DNA Roles</button>
+                                        <button [routerLink]="[ '/dashboard/dna/user']" class="btn btn-primary">{{lableConstant.dna_roles}}</button>
                                         </div>
                                     <div class="row">
                                         <div class="col-sm-3 mb-4" *ngFor="let item of trackerObj">
@@ -70,17 +70,15 @@
                                                             <p class="p_text_date_0">{{lableConstant.End_Date}}</p>
                                                         </div>
                                                     </div>
-                                                    <p class="text_white fon_12 font_weight mt-1">Click Start button to see
-                                                        added learning need.</p>
+                                                    <p class="text_white fon_12 font_weight mt-1">{{lableConstant.click_start_button_to_see__added_learning_need}}</p>
                                                     <div class="mb-2 buttonstart_ma">
                                                         <button class="btn btn-primary" *ngIf="item.isStart"
                                                         (click)="addLearning(item)"><span
-                                                        class="fon_12">Start</span></button>
+                                                        class="fon_12">{{lableConstant.start}}</span></button>
                                                         <button class="btn btn-primary" *ngIf="!item.isStart" (click)="viewReport(item)"><span
-                                                            class="fon_12">View</span></button>
+                                                            class="fon_12">{{lableConstant.view}}</span></button>
                                                         <button class="btn btn-secondary ml-1"
-                                                        (click)="managerData(item)"><span class="fon_12">Manager
-                                                                Report</span></button>
+                                                        (click)="managerData(item)"><span class="fon_12">{{lableConstant.manager_report}}</span></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -89,7 +87,7 @@
                                     </div>
                                 </div>
                                 
-                              <div class="row mt-1">
+                              <div class="row mt-1" *ngIf="requestedTrackerList && requestedTrackerList.length > 0">
                                 <div class="col-sm-12 ng_container_header">
                                   
                                    
@@ -97,7 +95,7 @@
                                       
                                         <div class="card-header bac_white">
                                             <div class="d-flex justify_content align-items-center">
-                                                <p class="mb-0 text_balck">PDL & Review</p>
+                                                <p class="mb-0 text_balck">{{lableConstant.pdl_review}}</p>
                                                
                                             </div>
                                         </div>
@@ -115,19 +113,17 @@
                                                                         <img
                                                                             src="../../../../assets/images/worl_co.png">
                                                                     </div>
-                                                                    <a (click)="completeReport(item.id)" class="color_balck fon_12 mt-2">Full
-                                                                        report <i class="fa fa-arrow-right ml-1"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a *ngIf="this.isLearningPartner || this.isRom || this.isDomainExpert || this.isBussinessConsultant" (click)="completeReport(item.id)" class="color_balck fon_12 mt-2">{{lableConstant.full_report}} <i class="fa fa-arrow-right ml-1" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <div class="card-body">
                                                                     <h5 class="fon_14 color_balck mb-1 font_weight">{{item.title}}</h5>
-                                                                    <h5 class="lin_5 fon_13 color_balck">Click 'Start Review' of your regional needs.</h5>
-                                                                    <div class="d-flex end_just">
-                                                                        <button class="btn btn-primary btn_review" (click)=" review(item.id)"><span
-                                                                                class="fon_13">Start
-                                                                                Review</span></button>
+                                                                    <h5 class="lin_5 fon_13 color_balck" *ngIf="this.isLearningPartner || this.isRom || this.isDomainExpert || this.isBussinessConsultant">{{lableConstant.click_start_review_of_your_regional_needs}}</h5>
+                                                                    <div class="d-flex end_just" *ngIf="this.isLearningPartner || this.isRom || this.isDomainExpert || this.isBussinessConsultant">
+                                                                        <button class="btn btn-primary btn_review" (click)="review(item.id)">
+                                                                            <span class="fon_13">{{lableConstant.start_review}}</span>
+                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                             </div>

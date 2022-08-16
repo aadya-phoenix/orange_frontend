@@ -69,7 +69,7 @@
                   </div>
                 </div>
                 <!--coled-->
-                <div class="Course_icon_child" *ngIf="getUserrole.includes(2) || getUserrole.includes(3)">
+                <div class="Course_icon_child" *ngIf="isStaff || getUserrole.includes(3)">
                   <div class="alig_dashicon" (click)="getrecords(courseSessionStatus.submitted)">
                     <div class="sub-child-dashicon">
                       <div class="fa-icons-des bac_puple">
@@ -81,7 +81,7 @@
                   </div>
                 </div>
                 <!--coled-->
-                <div class="Course_icon_child" *ngIf="!getUserrole.includes(2)">
+                <div class="Course_icon_child" *ngIf="!isStaff">
                   <div class="alig_dashicon" (click)="getrecords(courseSessionStatus.pending)">
                     <div class="sub-child-dashicon">
                       <div class="fa-icons-des bac_yellow">
@@ -181,7 +181,7 @@
                        {{lableConstant.Event_Title}}<i class="fa fa-long-arrow-up arrow_css" aria-hidden="true"></i>
                         <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
                       </th>
-                      <th *ngIf="!getUserrole.includes(2)" sortable="sent_to" (sort)="onSort($event)">
+                      <th *ngIf="!isStaff" sortable="sent_to" (sort)="onSort($event)">
                         {{lableConstant.sent_to}}
                         <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                         <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
@@ -212,7 +212,7 @@
                       <td (click)="getRequest(session)">
                         {{ session.title ? (session.title | titlecase) : "- " }}
                       </td>
-                      <td *ngIf="!getUserrole.includes(2)" (click)="getRequest(session)">
+                      <td *ngIf="!isStaff" (click)="getRequest(session)">
                         {{ session.transfer_user_name ? session.transfer_user_name : "- " }}
                       </td>
                       <td (click)="getRequest(session)">{{ session.created_at | date: "short" }}</td>
@@ -233,7 +233,7 @@
                       </td>
                       <td class="text-center">
                         <div class="status_med_di">
-                          <a *ngIf="session.status=='pending' && getUserrole.includes(2)" (click)="copyRequest(session.id)" class="copy_file mr-1"
+                          <a *ngIf="session.status=='pending' && isStaff" (click)="copyRequest(session.id)" class="copy_file mr-1"
                             data-toggle="tooltip" data-placement="top" title="Copy">
                             <i class="fa fa-files-o" aria-hidden="true"></i>
                           </a>
@@ -245,7 +245,7 @@
                             data-toggle="tooltip" data-placement="top" title="Delete">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                           </a>
-                          <a *ngIf="(session.status=='reject' && getUserrole.includes(2)) || (getUserrole.includes(3) &&session.status === 'reject' && session.user_id === getprofileDetails.data.id)" (click)="editRequest(session)" class="copy_file mr-1"
+                          <a *ngIf="(session.status=='reject' && isStaff) || (getUserrole.includes(3) &&session.status === 'reject' && session.user_id === getprofileDetails.data.id)" (click)="editRequest(session)" class="copy_file mr-1"
                             data-toggle="tooltip" data-placement="top" title="Edit">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                           </a>

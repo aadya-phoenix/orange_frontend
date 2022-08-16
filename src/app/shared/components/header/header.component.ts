@@ -19,6 +19,8 @@ export class HeaderComponent implements OnInit {
   lastName: any;
   isRequester = false;
   isAdmin = false;
+  isStaff = false;
+  pdlMember = false;
   Laungauges = dataConstant.Laungauges;
   selectedLaungauge: any = this.Laungauges.EN;
   totalNotification = 0;
@@ -38,6 +40,7 @@ export class HeaderComponent implements OnInit {
     this.getUserrole = this.authService.getRolefromlocal();
     this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+    this.isStaff = this.authService.getUserDetailslocal().staff == 1 ? true : false;
   }
   public showUserMenu: boolean = false;
   getprofileDetails: any;
@@ -76,6 +79,7 @@ export class HeaderComponent implements OnInit {
         this.firstName = this.userName.first_name;
         this.lastName = this.userName.last_name;
         this.isAdmin = this.userName.admin == 1 ? true: false;
+        this.pdlMember = this.userName.pdl_member == 1 ? true : false;
       }
     }, (err: any) => {
       this.commonService.errorHandling(err); 

@@ -44,6 +44,7 @@ export class SessionCompleteReportComponent implements OnInit {
   searchText: any;
  
   selectedStatus = this.courseSessionStatus.total;
+  isStaff = false;
   addDate = false;
   isReviewer = false;
   isPublisher = false;
@@ -64,7 +65,7 @@ export class SessionCompleteReportComponent implements OnInit {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
-
+    this.isStaff = this.getprofileDetails.data?.staff == 1 ? true : false;
     this.filterForm = this.fb.group({
       start_date: new FormControl('', []),
       end_date: new FormControl('', []),

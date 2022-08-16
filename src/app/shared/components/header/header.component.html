@@ -17,11 +17,11 @@
 
                 </a>
             </li> -->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" *ngIf="pdlMember || isAdmin">
                 <a class="nav-link dropdown-toggle arrow_css_toggl" href="#" id="navbarDropdownMenuLink" role="button"
                     data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-dashcube icon_header_desi " aria-hidden="true "></i>
-                    <span class="text_header_desi ">PD&L Only <i class="fa fa-angle-right ml-2 "
+                    <span class="text_header_desi ">{{lableConstant.pdl_only}} <i class="fa fa-angle-right ml-2 "
                             aria-hidden="true "></i></span>
                 </a>
                 <div class="dropdown-menu drop_show dropshow_main-cs " aria-labelledby="navbarDropdownMenuLink">
@@ -29,18 +29,18 @@
 
                         <div class="nav_p ">
                             <div id="myDIV ">
-                                <button class="btn_active" [routerLink]="[ '/pdltools'] ">PD&L Dashboard</button>
-                                <button class="btn_active" [routerLink]="[ '/user'] ">{{lableConstant.user_management}}</button>
+                                <button class="btn_active" *ngIf="pdlMember" [routerLink]="[ '/pdltools'] ">PD&L Dashboard</button>
+                                <button class="btn_active" *ngIf="isAdmin" [routerLink]="[ '/user'] ">{{lableConstant.user_management}}</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </li>
-            <li class="nav-item dropdown" *ngIf="!getUserrole.includes(2)">
+            <li class="nav-item dropdown" *ngIf="pdlMember || isAdmin">
                 <a class="nav-link dropdown-toggle arrow_css_toggl" href="#" id="navbarDropdownMenuLink" role="button"
                     data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-map-o icon_header_desi" aria-hidden="true"></i>
-                    <span class="text_header_desi ">Set backups <i class="fa fa-angle-right ml-2 "
+                    <span class="text_header_desi ">{{lableConstant.set_backups}} <i class="fa fa-angle-right ml-2 "
                             aria-hidden="true "></i></span>
                 </a>
                 <div class="dropdown-menu drop_show dropshow_main-cs" aria-labelledby="navbarDropdownMenuLink">
@@ -74,7 +74,7 @@
                 <a class="nav-link dropdown-toggle arrow_css_toggl" href="#" id="navbarDropdownMenuLink" role="button"
                     data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-question-circle icon_header_desi " aria-hidden="true"></i>
-                    <span class="text_header_desi ">Help Guide<i class="fa fa-angle-right ml-2 "
+                    <span class="text_header_desi ">{{lableConstant.help_guide}}<i class="fa fa-angle-right ml-2 "
                             aria-hidden="true "></i></span>
                 </a>
                 <div class="dropdown-menu drop_show dropshow_main-cs " aria-labelledby="navbarDropdownMenuLink">
@@ -95,7 +95,7 @@
                 <a class="nav-link dropdown-toggle arrow_css_toggl" href="#" id="navbarDropdownMenuLink" role="button"
                     data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-link icon_header_desi" aria-hidden="true"></i>
-                    <span class="text_header_desi ">Useful Links<i class="fa fa-angle-right ml-2 "
+                    <span class="text_header_desi ">{{lableConstant.useful_links}}<i class="fa fa-angle-right ml-2 "
                             aria-hidden="true "></i></span>
                 </a>
                 <div class="dropdown-menu drop_show dropshow_main-cs " aria-labelledby="navbarDropdownMenuLink">
@@ -104,14 +104,12 @@
                         <div class="nav_p ">
                             <div id="myDIV ">
                                 <button class="btn_active  "><a
-                                        href="https://obs-learning-journey.sso.infra.ftgroup/">OBS Learning
-                                        Journey</a></button>
+                                        href="https://obs-learning-journey.sso.infra.ftgroup/">OBS Learning Journey</a></button>
                                 <button class="btn_active "><a
-                                        href="https://plazza.orange.com/login.jspa?referer=%252Fdocs%252FDOC-617886">Get
-                                        to know us @ PD&L</a></button>
+                                        href="https://plazza.orange.com/login.jspa?referer=%252Fdocs%252FDOC-617886">Get to know us @ PD&L</a></button>
                                 <button class="btn_active "><a
-                                        href="https://idpfds.sso.infra.ftgroup/affwebservices/public/saml2sso?SPID=ole-01&ProtocolBinding=urn:oasis:names:tc:SAML:2.0:bindings:HTTP-">Orange
-                                        Learning</a></button>
+                                        href="https://idpfds.sso.infra.ftgroup/affwebservices/public/saml2sso?SPID=ole-01&ProtocolBinding=urn:oasis:names:tc:SAML:2.0:bindings:HTTP-">
+                                        Orange Learning</a></button>
                                 <button class="btn_active ">Contact Us</button>
 
                             </div>
@@ -177,7 +175,7 @@
                 <a class="nav-link dropdown-toggle arrow_css_toggl" href="#" id="navbarDropdownMenuLink" role="button"
                     data-toggle="dropdown" aria-expanded="false">
 
-                    <span class="text_header_desi_logout ">Hello <span class="text_orange">{{firstName + " " +
+                    <span class="text_header_desi_logout ">{{lableConstant.hello}} <span class="text_orange">{{firstName + " " +
                             lastName}}</span>
                         <i class="fa fa-sign-out ml-2 " aria-hidden="true "></i></span>
                 </a>
@@ -221,13 +219,13 @@
                         </div> -->
                     <div class="info_div clearfix ">
                         <div class="image ">
-                            <a href="# ">
-                                <img src="../../../../assets/images/userimg.png " alt="John Doe ">
+                            <a>
+                                <img src="../../../../assets/images/userimg.png " alt="logo">
                             </a>
                         </div>
                         <div class="content_user ">
                             <h5 class="name ">
-                                <a href="# "> {{
+                                <a> {{
                                     getprofileDetails && getprofileDetails.first_name
                                     ? getprofileDetails.first_name
                                     : " "

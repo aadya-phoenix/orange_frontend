@@ -65,6 +65,10 @@ export class AuthenticationService {
     }
   }
 
+  getUserDetailslocal() {
+      return JSON.parse(localStorage.getItem('userName') || '{}');
+  }
+
   getRoles() {
     const url = `/api/${this.apiVersion}/roles`;
     const urllive = `${this.basePath}api/${this.apiVersion}/roles`;

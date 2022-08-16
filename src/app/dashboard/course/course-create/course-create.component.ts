@@ -42,6 +42,7 @@ export class CourseCreateComponent implements OnInit {
   isReviewer = false;
   isPublisher = false;
   isRequester = false;
+  isStaff = false;
   cordinatorsList = [];
   backupCordinatorsList = [];
   vendorType = [];
@@ -95,7 +96,7 @@ export class CourseCreateComponent implements OnInit {
     this.minDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.getUserrole = this.authService.getRolefromlocal();
-
+    this.isStaff = this.getprofileDetails.data?.staff == 1 ? true : false;
     this.isReviewer = this.getUserrole.includes(this.RoleID.CourseReviewer);
     this.isPublisher = this.getUserrole.includes(this.RoleID.CoursePublisher);
     this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);

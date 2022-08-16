@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   isPublisher = false;
   isRequester = false;
   isPdlMember = false;
+  isStaff = false;
   pendingFlag: boolean = true;
   lableConstant: any = { french: {}, english: {} };
   baseUrl = dataConstant.BaseUrl;
@@ -71,6 +72,7 @@ export class DashboardComponent implements OnInit {
     if (this.profileDetails.data?.pdl_member) {
       this.isPdlMember = this.profileDetails.data.pdl_member;
     }
+    this.isStaff = this.profileDetails.data?.staff == 1 ? true : false;
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     if (this.lableConstant) {
       this.modulesArray_tab1 = [
@@ -171,12 +173,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getFavouriteList();
     this.getpendingCourses();
-    if (this.getUserrole.includes(2)) {
-      this.pendingFlag = true;
-    }
-    else {
-      this.pendingFlag = false;
-    }
+    this.pendingFlag = this.isStaff;
     // setTimeout(() => {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     // },1000);

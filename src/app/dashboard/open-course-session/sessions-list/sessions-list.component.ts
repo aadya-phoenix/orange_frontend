@@ -40,6 +40,7 @@ export class SessionsListComponent implements OnInit {
   getUserrole: any;
   searchText: any;
   getprofileDetails: any;
+  isStaff = false;
   
   public compare = (v1: string | number, v2: string | number) =>
     v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
@@ -57,7 +58,7 @@ export class SessionsListComponent implements OnInit {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
-    
+    this.isStaff = this.getprofileDetails.data?.staff == 1 ? true : false;
   }
 
   ngOnInit(): void {

@@ -18,7 +18,7 @@ const urlregex = dataConstant.UrlPattern;
 export class ViewSessionComponent implements OnInit {
   lableConstant: any = { french: {}, english: {} };
   public publishForm!: FormGroup;
-  
+  isStaff = false;
   id = 0;
   status:any;
   status_show:string='';
@@ -45,6 +45,7 @@ export class ViewSessionComponent implements OnInit {
   ) { 
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
+    this.isStaff = this.authService.getUserDetailslocal().staff == 1 ? true : false;
   }
 
   ngOnInit(): void {

@@ -46,11 +46,13 @@ export class CreateSessionComponent implements OnInit {
   pendingRequests: any;
   draftRequests: any = [];
   getUserrole: any;
+  getUserDetails: any;
   closedRequests: any = [];
   rejectedRequests: any = [];
   sessionCopyVal:any;
   vendor: any = [];
   rocObj: any = [];
+  isStaff = false;
   public yesNo: any = [
     { id: 'yes', name: 'Yes' },
     { id: 'no', name: 'No' },
@@ -90,6 +92,8 @@ export class CreateSessionComponent implements OnInit {
     });
 
     this.getUserrole = this.authService.getRolefromlocal();
+    this.getUserDetails = this.authService.getUserDetailslocal();
+    this.isStaff = this.getUserDetails.staff == 1 ? true : false;
   }
 
   ngOnInit(): void {
