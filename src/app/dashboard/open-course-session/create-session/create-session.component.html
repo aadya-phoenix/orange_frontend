@@ -625,14 +625,14 @@
                   </ngb-accordion>
                  
                 </ng-container>
-                        <div class="card-footer1" *ngIf ="getUserrole.id == 2">
+                        <div class="card-footer1" *ngIf ="getUserrole.includes(2)">
                             <button class="btn btn-primary mr-1" type="submit"
                                 (click)="createSession('pending')">{{lableConstant.submit}}</button>
                             <button class="btn btn-secondary" *ngIf=" session_status != 'reject'" (click)="createSession('draft')">
                                 {{lableConstant.Save_as_draft}}
                             </button>
                         </div>
-                         <div class="card-footer1" *ngIf ="getUserrole.id == 3">
+                         <div class="card-footer1" *ngIf ="getUserrole.includes(3)">
                             <button *ngIf="(sessionPub || session_status == 'reject') && session_status !='pending'" class="btn btn-primary mr-1" type="submit"
                             (click)="createSession('pending')">{{lableConstant.submit}}</button>
                             <button *ngIf="(!sessionPub && session_status != 'reject') || session_status == 'pending' " class="btn btn-primary mr-1" data-target="#publishModal" data-toggle="modal">  <i class="fa fa-upload" aria-hidden="true"></i>
@@ -649,7 +649,7 @@
                                         class="pl-1">{{lableConstant.reject}}</span>
                             </button>
                         </div> 
-                        <div class="card-footer1" *ngIf ="getUserrole.id == 9">
+                        <div class="card-footer1" *ngIf ="getUserrole.includes(9)">
                             <button class="btn btn-primary mr-1" type="submit"
                                  data-target="#publishModal" data-toggle="modal">{{lableConstant.publish}}</button>
                                 <button *ngIf="session_id == 0" class="btn btn-secondary" (click)="createSession('draft')">

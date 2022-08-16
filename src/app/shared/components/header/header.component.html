@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item dropdown" *ngIf="getUserrole.id !=2 ">
+            <li class="nav-item dropdown" *ngIf="!getUserrole.includes(2)">
                 <a class="nav-link dropdown-toggle arrow_css_toggl" href="#" id="navbarDropdownMenuLink" role="button"
                     data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-map-o icon_header_desi" aria-hidden="true"></i>
@@ -49,10 +49,10 @@
                             <div class="text-box_div ">
                                 <div class="nav_p ">
                                     <div id="myDIV ">
-                                        <button class="btn_active " *ngIf="getUserrole.id==3 "
+                                        <button class="btn_active " *ngIf="getUserrole.includes(3)"
                                             [routerLink]="[ '/dashboard/set-backup'] ">Set ROC Backup</button>
 
-                                        <button class="btn_active" *ngIf="getUserrole.id==4 "
+                                        <button class="btn_active" *ngIf="getUserrole.includes(4)"
                                             [routerLink]="[ '/dashboard/set-backup'] ">Set Publisher Backup</button>
 
                                         <button class="btn_active " [routerLink]="[ '/dashboard/sctworkflow'] ">Activate

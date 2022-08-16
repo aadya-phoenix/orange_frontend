@@ -63,9 +63,9 @@ export class CreateCarouselComponent implements OnInit {
     this.minDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.getUserrole = this.authService.getRolefromlocal();
-    this.isReviewer = this.getUserrole.id === this.RoleID.CarouselReviewer;
-    this.isPublisher = this.getUserrole.id === this.RoleID.CarouselPublisher;
-    this.isRequester = this.getUserrole.id === this.RoleID.RequesterID;
+    this.isReviewer = this.getUserrole.includes(this.RoleID.CarouselReviewer);
+    this.isPublisher = this.getUserrole.includes(this.RoleID.CarouselPublisher);
+    this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.carousel_id = Id ? parseInt(Id) : 0;

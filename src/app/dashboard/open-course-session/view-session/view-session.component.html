@@ -58,7 +58,7 @@
    
     <div class="content">
         <div class="animated fadeIn">
-             <div class="mb-2" *ngIf ="getUserrole.id == 2 && (status == 'reject' || status == 'draft') || status == 'draft' || (getUserrole.id == 3 && status == 'reject')">
+             <div class="mb-2" *ngIf ="getUserrole.includes(2) && (status == 'reject' || status == 'draft') || status == 'draft' || (getUserrole.includes(3) && status == 'reject')">
               
                     <div class="Requs_btn_inl">
                         <div class="Requs_btn_inl-child">
@@ -69,7 +69,7 @@
                     </div>
                
             </div> 
-            <div *ngIf ="getUserrole.id == 3 && status_show =='pending'" class="mb-2">
+            <div *ngIf ="getUserrole.includes(3) && status_show =='pending'" class="mb-2">
                
                     <div class="Requs_btn_inl">
                         <div class="Requs_btn_inl-child">
@@ -95,7 +95,7 @@
                     </div>
                 
             </div>
-            <div *ngIf ="getUserrole.id == 9 && status =='pending'" class="card">
+            <div *ngIf ="getUserrole.includes(9) && status =='pending'" class="card">
                 <div class="card-body">
                     <div class="Requs_btn_inl">
                         <div class="Requs_btn_inl-child">

@@ -63,9 +63,11 @@ export class DashboardComponent implements OnInit {
     private commonService: CommonService) {
     this.getUserrole = this.authService.getRolefromlocal();
     this.profileDetails = this.authService.getProfileDetailsfromlocal();
-    this.isReviewer = this.getUserrole.includes(this.RoleID.BackOfficeReviewer);
-    this.isPublisher = this.getUserrole.includes(this.RoleID.BackOfficePublisher);
-    this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
+    if(this.getUserrole){
+      this.isReviewer = this.getUserrole.includes(this.RoleID.BackOfficeReviewer);
+      this.isPublisher = this.getUserrole.includes(this.RoleID.BackOfficePublisher);
+      this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
+    }
     if (this.profileDetails.data?.pdl_member) {
       this.isPdlMember = this.profileDetails.data.pdl_member;
     }
