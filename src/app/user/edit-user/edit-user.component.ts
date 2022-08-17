@@ -56,7 +56,7 @@ export class EditUserComponent implements OnInit {
      // confirm_password: new FormControl('', []),
       first_name: new FormControl('', [Validators.required]),
       last_name: new FormControl('', [Validators.required]),
-      role_id: new FormControl('', []),
+      role_id: new FormControl([], []),
       //region_id: new FormControl('', []),
     //  learning_type:new FormControl([''], []),
       pdl_member: new FormControl(false, []),

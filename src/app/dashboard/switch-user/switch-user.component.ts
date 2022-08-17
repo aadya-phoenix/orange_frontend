@@ -14,11 +14,15 @@ import { UserManageService } from 'src/app/shared/services/user-management/user-
 })
 export class SwitchUserComponent implements OnInit {
   lableConstant: any = { french: {}, english: {} };
+  getUserrole: any;
+  userName: any;
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   isSubmitted = false;
   loginForm: FormGroup;
   userList: any = [];
+  isAdmin = false;
+  isROM = false;
   public historyList: any;
   public objectDetail: any;
   public modalType: any;
@@ -32,17 +36,23 @@ export class SwitchUserComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute) {
+    this.userName = this.authService.getProfileDetailsfromlocal();
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
-
+    this.isAdmin = this.userName.admin == 1 ? true : false;
     this.loginForm = this.formBuilder.group({
       uid: new FormControl('', [Validators.required])
     });
   }
   ngOnInit(): void {
-    this.getUsers();
+    if (this.isAdmin) {
+      this.getUsers();
+    }
+    else {
+      this.getROMUsers();
+    }
   }
 
-  requiredMessage(field:any){
+  requiredMessage(field: any) {
     return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
   }
 
@@ -58,6 +68,17 @@ export class SwitchUserComponent implements OnInit {
         this.commonService.toastErrorMsg('Error', err.message);
       }
     );
+  }
+
+  getROMUsers() {
+    this.commonService.showLoading();
+    this.authService.getUserRoles().subscribe((res: any) => {
+      this.commonService.hideLoading();
+      this.userList = res.data[dataConstant.RoleID.Roc];
+    }, (err: any) => {
+      this.commonService.hideLoading();
+      this.commonService.toastErrorMsg('Error', err.message);
+    })
   }
 
   setDialogProps(dialogdata: any) {
@@ -79,12 +100,12 @@ export class SwitchUserComponent implements OnInit {
     this.userManageService.switchUser(body).subscribe(
       (res: any) => {
         if (res && res.status) {
-         const tokenDetails = {
-          access_token: res.data,
-          expires_in: 0,
-          refresh_token: "",
-          token_type: "Bearer"
-         } 
+          const tokenDetails = {
+            access_token: res.data,
+            expires_in: 0,
+            refresh_token: "",
+            token_type: "Bearer"
+          }
           localStorage.setItem('loginDetails', JSON.stringify(tokenDetails));
           this.lastLogin();
           this.authService.getProfileDetails().subscribe((profile) => {
@@ -111,7 +132,7 @@ export class SwitchUserComponent implements OnInit {
           this.commonService.hideLoading();
           this.modalService.close();
         }
-        else{
+        else {
           this.commonService.toastErrorMsg('Error', res.message);
           this.commonService.hideLoading();
         }

@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
   isRequester = false;
   isAdmin = false;
   isStaff = false;
+  isROM = false;
   pdlMember = false;
   Laungauges = dataConstant.Laungauges;
   selectedLaungauge: any = this.Laungauges.EN;
@@ -41,6 +42,7 @@ export class HeaderComponent implements OnInit {
     this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.isStaff = this.authService.getUserDetailslocal().staff == 1 ? true : false;
+    this.isROM = this.getUserrole.includes(this.RoleID.Rom);
   }
   public showUserMenu: boolean = false;
   getprofileDetails: any;
