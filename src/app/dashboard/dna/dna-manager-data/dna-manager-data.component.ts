@@ -14,27 +14,28 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 export class DnaManagerDataComponent implements OnInit {
   lableConstant: any = { french: {}, english: {} };
   RoleID = dataConstant.RoleID;
-  getUserrole: any ;
+  getUserrole: any;
   getprofileDetails: any;
-  userId:any;
+  userId: any;
   dnaStatus = dataConstant.DnaStatus;
   selectedStatus = this.dnaStatus.total;
   dnaList: any = [];
   dnaListToShow: any = [];
-  data:any={};
-  icon:any='';
-  trackerId:number = 0;
-  managerList:TreeNode[]=[];
+  data: any = {};
+  icon: any = '';
+  trackerId: number = 0;
+  managerList: TreeNode[] = [];
   dna_count = {
     total: 0,
     closed: 0,
     close: 0,
     pending: 0,
-    forwarded:0,
-    total_participant:0
+    forwarded: 0,
+    total_participant: 0
   }
-  learningList:any= [];
-  learningListToShow:any= [];
+  isManager = false;
+  learningList: any = [];
+  learningListToShow: any = [];
   searchText: any;
   pagination = {
     page: 1,
@@ -43,94 +44,98 @@ export class DnaManagerDataComponent implements OnInit {
   }
   constructor(
     private route: ActivatedRoute,
-    private authService:AuthenticationService,
+    private authService: AuthenticationService,
     private commonService: CommonService,
-    private dnaService:DnaService,
-  ) { 
+    private dnaService: DnaService,
+  ) {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.userId = this.getprofileDetails.data.id;
+    this.isManager = this.getprofileDetails.data?.manager == 1 ? true : false;
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      const Id = params.get('id');
-      this.trackerId = Id ? parseInt(Id) : 0;
-    }); 
-    this.getManagerData();
+    if (this.isManager) {
+      this.route.paramMap.subscribe((params: ParamMap) => {
+        const Id = params.get('id');
+        this.trackerId = Id ? parseInt(Id) : 0;
+      });
+      this.getManagerData();
+    }
   }
 
-  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
-    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  showPaginationCount(pageStart: any, pageEnd: any, total: any) {
+    return this.commonService.showPaginationCount(pageStart, pageEnd, total, this.lableConstant.showing_number_entries);
   }
 
-  getManagerData(){
+  getManagerData() {
     this.commonService.showLoading();
     this.dnaService.getManagerData(this.userId).subscribe(
       (res: any) => {
-        if(res.status == 1){
-        this.commonService.hideLoading();
-        let managers =  <TreeNode[]>res.data;
-        managers.forEach((x:any)=> {
-          x.label = x.first_name;
-          x.children = [{label:'sub-manager'},{label:'sub-manager2'}]
-          this.managerList.push(x)});
-        console.log("manager",this.managerList)  
+        if (res.status == 1) {
+          this.commonService.hideLoading();
+          let managers = <TreeNode[]>res.data;
+          managers.forEach((x: any) => {
+            x.label = x.first_name;
+            x.children = [{ label: 'sub-manager' }, { label: 'sub-manager2' }]
+            this.managerList.push(x)
+          });
+          console.log("manager", this.managerList)
         }
-        else{
+        else {
           this.commonService.hideLoading();
           this.commonService.toastErrorMsg('Error', res.message);
         }
-      },(err:any)=>{
+      }, (err: any) => {
         this.commonService.hideLoading();
         this.commonService.toastErrorMsg('Error', err.message);
       });
   }
 
-  nodeExpand(event:any){
+  nodeExpand(event: any) {
     if (event.node.expanded) {
       this.icon = '<i class="fa fa-sort-asc" aria-hidden="true">';
     } else {
       this.icon = '<i class="fa fa-sort-asc" aria-hidden="true">';
-    }  
+    }
     return this.icon;
   }
 
-  getExpandedIcon(){
+  getExpandedIcon() {
     let icon: string;
 
- /*    if (this.node.expanded) {
-      icon = this.node.expandedIcon || 'pi-chevron-down'
-    } else {
-      icon = this.node.collapsedIcon || 'pi-chevron-right'
-    }  
-  
-    return icon;*/
+    /*    if (this.node.expanded) {
+         icon = this.node.expandedIcon || 'pi-chevron-down'
+       } else {
+         icon = this.node.collapsedIcon || 'pi-chevron-right'
+       }  
+     
+       return icon;*/
   }
 
-  nodeSelect(event:any){
-    if(event.node.id){
-    let id = event.node.id;
-    this.getLearningList(id);
+  nodeSelect(event: any) {
+    if (event.node.id) {
+      let id = event.node.id;
+      this.getLearningList(id);
     }
   }
 
-  getLearningList(id:number){
+  getLearningList(id: number) {
     this.commonService.showLoading();
     this.dnaService.getUserDigitalLearning(id).subscribe(
       (res: any) => {
-        if(res.status == 1){
-        this.commonService.hideLoading();
-        this.learningList = res.data.digital_learning[this.trackerId];
-        this.dna_count = res.data.all_count[this.trackerId];
-        this.learningListToShow = res.data.digital_learning[this.trackerId];
+        if (res.status == 1) {
+          this.commonService.hideLoading();
+          this.learningList = res.data.digital_learning[this.trackerId];
+          this.dna_count = res.data.all_count[this.trackerId];
+          this.learningListToShow = res.data.digital_learning[this.trackerId];
         }
-        else{
+        else {
           this.commonService.hideLoading();
           this.commonService.toastErrorMsg('Error', res.message);
         }
-      },(err:any)=>{
+      }, (err: any) => {
         this.commonService.hideLoading();
         this.commonService.toastErrorMsg('Error', err.message);
       });

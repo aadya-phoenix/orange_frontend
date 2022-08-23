@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DnaService } from 'src/app/shared/services/dna/dna.service';
 import { GeneralDropdownsService } from 'src/app/shared/services/general-dropdowns/general-dropdowns.service';
@@ -24,7 +25,7 @@ export class DnaViewRptComponent implements OnInit {
 
   learningList:any= [];
   learningListToShow:any= [];
-
+  isManager = false;
   dna_count = {
     total: 0,
     draft: 0,
@@ -55,14 +56,17 @@ export class DnaViewRptComponent implements OnInit {
     private commonService: CommonService,
     private dnaService:DnaService,
     private generalDrpdownsService: GeneralDropdownsService,
+    private authService: AuthenticationService,
     private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router
   ) {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english; 
+    this.isManager = this.authService.getProfileDetailsfromlocal().data?.manager == 1 ? true : false;
    }
 
   ngOnInit(): void {
+    if(this.isManager){
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.trackerId = Id ? parseInt(Id) : 0;
@@ -71,6 +75,7 @@ export class DnaViewRptComponent implements OnInit {
     this.getPriority();
     this. getCountries();
     this.getBusinessUnits();
+  }
   }
 
   showPaginationCount(pageStart:any, pageEnd:any, total:any) {

@@ -40,7 +40,7 @@ export class BackOfficeViewComponent implements OnInit {
       this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
       this.isReviewer = this.getUserrole.includes(this.RoleID.BackOfficeReviewer);
       this.isPublisher = this.getUserrole.includes(this.RoleID.BackOfficePublisher);
-      this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
+      this.isRequester = this.getprofileDetails.data?.staff == 1 ? true : false;
      }
 
   ngOnInit(): void {

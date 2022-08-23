@@ -67,7 +67,7 @@ export class CourseCompleteReportComponent implements OnInit {
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.isReviewer = this.getUserrole.includes(this.RoleID.CourseReviewer);
     this.isPublisher = this.getUserrole.includes(this.RoleID.CoursePublisher);
-    this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
+    this.isRequester = this.getprofileDetails.data?.staff == 1 ? true : false;
     this.filterForm = this.fb.group({
       start_date: new FormControl('', []),
       end_date: new FormControl('', []),

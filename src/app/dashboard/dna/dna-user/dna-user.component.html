@@ -35,36 +35,42 @@
     </div>
     <div class="content">
         <div class="animated fadeIn">
-            <div class="row">
+            <ngb-alert [dismissible]="false" type="warning" *ngIf="!isManager" class="d-block m-3">
+                <span>The DNA tool can be only accessible to a manager who has direct reporting of the employee.</span>
+                <p class="mb-0">Please contact to administrator of this site for more details.</p>
+            </ngb-alert>
+            <div class="row" *ngIf="isManager">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header cm-card-header">
                             <div class="overall_css">
-                              <div>
-                                 <i class="fa fa-table fa_table" aria-hidden="true "></i>
-                                 <span class="card-title card-title-text card_overall">My Request</span>
-                                </div>                                
-                                <div class="filter_dispaly">  
+                                <div>
+                                    <i class="fa fa-table fa_table" aria-hidden="true "></i>
+                                    <span class="card-title card-title-text card_overall">My Request</span>
+                                </div>
+                                <div class="filter_dispaly">
                                     <div class="form-group filter_course mr-1">
-                                      <label class="label_course">Filter by Role</label>
-                                      <select class="form-control  form_width" (change)="getRoleFilterRecords($event.target.value)"
-                                       >
-                                        <option selected='selected' value=''>{{lableConstant.View_All}}</option>
-                                       <option *ngFor="let role of rolesList"
-                                       [value]="role.id">{{role.role}}</option>
-                                      </select>
-                                    </div>                 
-                                    <div _ngcontent-cue-c109=" " class="form-group filter_course mr-1">
-                                      <label _ngcontent-cue-c109=" " class="label_course text_black">Search</label>
-                                      <input _ngcontent-cue-c109=" " type="text " name="search " autocomplete="off "
-                                        [(ngModel)]="searchText" placeholder=" "
-                                        class="form-control ng-untouched ng-pristine ng-valid form_width" ng-reflect-name="search " />
+                                        <label class="label_course">Filter by Role</label>
+                                        <select class="form-control  form_width"
+                                            (change)="getRoleFilterRecords($event.target.value)">
+                                            <option selected='selected' value=''>{{lableConstant.View_All}}</option>
+                                            <option *ngFor="let role of rolesList" [value]="role.id">{{role.role}}
+                                            </option>
+                                        </select>
                                     </div>
-                                    <button class=" btn btn-primary btn_adduser mt-3 mr-2" (click)="navigate()" data-toggle="modal">
+                                    <div _ngcontent-cue-c109=" " class="form-group filter_course mr-1">
+                                        <label _ngcontent-cue-c109=" " class="label_course text_black">Search</label>
+                                        <input _ngcontent-cue-c109=" " type="text " name="search " autocomplete="off "
+                                            [(ngModel)]="searchText" placeholder=" "
+                                            class="form-control ng-untouched ng-pristine ng-valid form_width"
+                                            ng-reflect-name="search " />
+                                    </div>
+                                    <button class=" btn btn-primary btn_adduser mt-3 mr-2" (click)="navigate()"
+                                        data-toggle="modal">
                                         <i class="fa fa-plus mr-1" aria-hidden="true"></i><span>Trackers</span>
-                                      </button>
-                                  </div>                                
-                            </div>                 
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive table_height_scroll">
@@ -73,7 +79,7 @@
                                         <tr class="text-center font-13">
                                             <th sortable="user_name" (sort)="onSort($event)">
                                                 Username
-                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true" ></i>
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true"></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
                                             <th sortable="email" (sort)="onSort($event)">
@@ -116,19 +122,20 @@
                                     <tbody>
                                         <tr *ngFor="let item of userListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber }"
                                             class="text-center bac_hover-table font-12">
-                                            <td (click)="viewRequest(item)" >{{ item && item.name ? item.name :
+                                            <td (click)="viewRequest(item)">{{ item && item.name ? item.name :
                                                 "-" }}</td>
-                                             <td (click)="viewRequest(item)">{{ item && item.email ? item.email :
+                                            <td (click)="viewRequest(item)">{{ item && item.email ? item.email :
                                                 "-" }}</td>
                                             <td (click)="viewRequest(item)">{{ item.first_name }}
                                             </td>
                                             <td (click)="viewRequest(item)">{{ item.last_name }}
                                             </td>
                                             <td (click)="viewRequest(item)">{{ item.role }}</td>
-                                            <td (click)="viewRequest(item)">{{ item.pdl_member == 1 ? 'Yes' : 'No' }}</td>
+                                            <td (click)="viewRequest(item)">{{ item.pdl_member == 1 ? 'Yes' : 'No' }}
+                                            </td>
                                             <td (click)="viewRequest(item)">{{ item.admin == 1 ? 'Yes' : 'No' }}</td>
-                                            <td (click)="viewRequest(item)">{{ item.status == 1 ? 'Yes' : 'No'  }}</td>
-                                          <!--   <td class="text-center">
+                                            <td (click)="viewRequest(item)">{{ item.status == 1 ? 'Yes' : 'No' }}</td>
+                                            <!--   <td class="text-center">
                                                 <a (click)="viewRequest(item)"
                                                     class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                     title="Edit">
@@ -155,5 +162,5 @@
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
 </div>

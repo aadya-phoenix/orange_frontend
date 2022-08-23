@@ -29,7 +29,8 @@
                             <a [routerLink]="['/dashboard/dna']" class="text_white span_dis">{{lableConstant.dna}}</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/dna/tracker']" class="text_white span_dis">{{lableConstant.trackers}}</a>
+                            <a [routerLink]="['/dashboard/dna/tracker']"
+                                class="text_white span_dis">{{lableConstant.trackers}}</a>
                         </li>
                         <li>
                             <span class="text_white span_dis">{{ isCreate ? 'Create Trackers' : 'Edit Trackers'}}</span>
@@ -41,7 +42,11 @@
     </div>
     <div class="content mt-3">
         <div class="animated fadeIn">
-            <form [formGroup]="learningNeedForm">
+            <ngb-alert [dismissible]="false" type="warning" *ngIf="!isManager" class="d-block m-3">
+                <span>The DNA tool can be only accessible to a manager who has direct reporting of the employee.</span>
+                <p class="mb-0">Please contact to administrator of this site for more details.</p>
+            </ngb-alert>
+            <form [formGroup]="learningNeedForm" *ngIf="isManager">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
@@ -56,7 +61,8 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label class="form-control-label">{{lableConstant.tracker_description}}</label>
+                                            <label
+                                                class="form-control-label">{{lableConstant.tracker_description}}</label>
                                             <textarea type="text" class="form-control form_width-textarea"
                                                 formControlName="description">
                                              </textarea>
@@ -88,7 +94,8 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label class="form-control-label">{{lableConstant.training_database}}</label>
+                                            <label
+                                                class="form-control-label">{{lableConstant.training_database}}</label>
                                             <ng-select [items]="trainingDataObj" bindLabel="name" bindValue="id"
                                                 formControlName="training_data" class="w_100">
                                             </ng-select>

@@ -35,7 +35,11 @@
     </div>
     <div class="content mt-1">
         <div class="animated fadeIn">
-            <div class="row">
+            <ngb-alert [dismissible]="false"  type="warning" *ngIf="!isManager" class="d-block m-3">
+                <span>The DNA tool can be only accessible to a manager who has direct reporting of the employee.</span>
+                <p class="mb-0">Please contact to administrator of this site for more details.</p>
+            </ngb-alert>
+            <div class="row" *ngIf="isManager">
                 <div class="col-sm-12">
                     <!-- <div class="card dna_card_data">
                         <div class="card-header dna_card_header">
@@ -48,8 +52,9 @@
                             <div class="card">
                                 <div class="card-body ">
                                     <div class="hide_button_admin">
-                                        <button [routerLink]="[ '/dashboard/dna/user']" class="btn btn-primary">{{lableConstant.dna_roles}}</button>
-                                        </div>
+                                        <button [routerLink]="[ '/dashboard/dna/user']"
+                                            class="btn btn-primary">{{lableConstant.dna_roles}}</button>
+                                    </div>
                                     <div class="row">
                                         <div class="col-sm-3 mb-4" *ngFor="let item of trackerObj">
                                             <div class="card card_seco_dna">
@@ -57,50 +62,58 @@
                                                     <p>{{item.type_name}}</p>
                                                 </div>
                                                 <div class="card_bac_dna">
-                                                    <p class="color_balck fon_16 font_weight mt_13 mb-0" ngbTooltip="{{item.description}}">{{item.title}}</p>
+                                                    <p class="color_balck fon_16 font_weight mt_13 mb-0"
+                                                        ngbTooltip="{{item.description}}">{{item.title}}</p>
                                                     <img src="../../../../assets/images/worl_co.png" class="w_50_dna">
                                                     <div class="date_amin_div d-flex justify-space_around">
                                                         <div class="start-date">
-                                                            <p class="p_text_date">{{item.open_date | date: dateFormate}}</p>
+                                                            <p class="p_text_date">{{item.open_date | date:
+                                                                dateFormate}}</p>
                                                             <p class="p_text_date_0">{{lableConstant.Start_Date}}</p>
                                                         </div>
                                                         <div class="border-betwe"></div>
                                                         <div class="end-date">
-                                                            <p class="p_text_date">{{item.close_date | date: dateFormate}}</p>
+                                                            <p class="p_text_date">{{item.close_date | date:
+                                                                dateFormate}}</p>
                                                             <p class="p_text_date_0">{{lableConstant.End_Date}}</p>
                                                         </div>
                                                     </div>
-                                                    <p class="text_white fon_12 font_weight mt-1">{{lableConstant.click_start_button_to_see__added_learning_need}}</p>
+                                                    <p class="text_white fon_12 font_weight mt-1">
+                                                        {{lableConstant.click_start_button_to_see__added_learning_need}}
+                                                    </p>
                                                     <div class="mb-2 buttonstart_ma">
                                                         <button class="btn btn-primary" *ngIf="item.isStart"
-                                                        (click)="addLearning(item)"><span
-                                                        class="fon_12">{{lableConstant.start}}</span></button>
-                                                        <button class="btn btn-primary" *ngIf="!item.isStart" (click)="viewReport(item)"><span
-                                                            class="fon_12">{{lableConstant.view}}</span></button>
+                                                            (click)="addLearning(item)"><span
+                                                                class="fon_12">{{lableConstant.start}}</span></button>
+                                                        <button class="btn btn-primary" *ngIf="!item.isStart"
+                                                            (click)="viewReport(item)"><span
+                                                                class="fon_12">{{lableConstant.view}}</span></button>
                                                         <button class="btn btn-secondary ml-1"
-                                                        (click)="managerData(item)"><span class="fon_12">{{lableConstant.manager_report}}</span></button>
+                                                            (click)="managerData(item)"><span
+                                                                class="fon_12">{{lableConstant.manager_report}}</span></button>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>                                     
-                                    </div>
+                                        </div>
                                     </div>
                                 </div>
-                                
-                              <div class="row mt-1" *ngIf="requestedTrackerList && requestedTrackerList.length > 0 && (this.isLearningPartner || this.isRom || this.isDomainExpert || this.isBussinessConsultant)">
+                            </div>
+
+                            <div class="row mt-1"
+                                *ngIf="requestedTrackerList && requestedTrackerList.length > 0 && (this.isLearningPartner || this.isRom || this.isDomainExpert || this.isBussinessConsultant)">
                                 <div class="col-sm-12 ng_container_header">
-                                  
-                                   
+
+
                                     <div class="card">
-                                      
+
                                         <div class="card-header bac_white">
                                             <div class="d-flex justify_content align-items-center">
                                                 <p class="mb-0 text_balck">{{lableConstant.pdl_review}}</p>
-                                               
+
                                             </div>
                                         </div>
-                                    
-                                   
+
+
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-sm-4" *ngFor="let item of requestedTrackerList">
@@ -108,21 +121,33 @@
                                                         <div class="row no-gutters">
                                                             <div class="col-md-4">
                                                                 <div class="colection_data  bac_green">
-                                                                    <p class="text_white fon_12 mb-1 lin_5">{{item.title}}</p>
+                                                                    <p class="text_white fon_12 mb-1 lin_5">
+                                                                        {{item.title}}</p>
                                                                     <div>
                                                                         <img
                                                                             src="../../../../assets/images/worl_co.png">
                                                                     </div>
-                                                                    <a *ngIf="this.isLearningPartner || this.isRom || this.isDomainExpert || this.isBussinessConsultant" (click)="completeReport(item.id)" class="color_balck fon_12 mt-2">{{lableConstant.full_report}} <i class="fa fa-arrow-right ml-1" aria-hidden="true"></i></a>
+                                                                    <a *ngIf="this.isLearningPartner || this.isRom || this.isDomainExpert || this.isBussinessConsultant"
+                                                                        (click)="completeReport(item.id)"
+                                                                        class="color_balck fon_12 mt-2">{{lableConstant.full_report}}
+                                                                        <i class="fa fa-arrow-right ml-1"
+                                                                            aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <div class="card-body">
-                                                                    <h5 class="fon_14 color_balck mb-1 font_weight">{{item.title}}</h5>
-                                                                    <h5 class="lin_5 fon_13 color_balck" *ngIf="this.isLearningPartner || this.isRom || this.isDomainExpert || this.isBussinessConsultant">{{lableConstant.click_start_review_of_your_regional_needs}}</h5>
-                                                                    <div class="d-flex end_just" *ngIf="this.isLearningPartner || this.isRom || this.isDomainExpert || this.isBussinessConsultant">
-                                                                        <button class="btn btn-primary btn_review" (click)="review(item.id)">
-                                                                            <span class="fon_13">{{lableConstant.start_review}}</span>
+                                                                    <h5 class="fon_14 color_balck mb-1 font_weight">
+                                                                        {{item.title}}</h5>
+                                                                    <h5 class="lin_5 fon_13 color_balck"
+                                                                        *ngIf="this.isLearningPartner || this.isRom || this.isDomainExpert || this.isBussinessConsultant">
+                                                                        {{lableConstant.click_start_review_of_your_regional_needs}}
+                                                                    </h5>
+                                                                    <div class="d-flex end_just"
+                                                                        *ngIf="this.isLearningPartner || this.isRom || this.isDomainExpert || this.isBussinessConsultant">
+                                                                        <button class="btn btn-primary btn_review"
+                                                                            (click)="review(item.id)">
+                                                                            <span
+                                                                                class="fon_13">{{lableConstant.start_review}}</span>
                                                                         </button>
                                                                     </div>
                                                                 </div>
@@ -132,12 +157,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    
+
                                     </div>
-                             
+
                                 </div>
                             </div>
-                        
+
                         </div>
                     </div>
                 </div>

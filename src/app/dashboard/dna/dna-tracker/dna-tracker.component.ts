@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DnaService } from 'src/app/shared/services/dna/dna.service';
 
@@ -13,11 +14,11 @@ import { DnaService } from 'src/app/shared/services/dna/dna.service';
 })
 export class DnaTrackerComponent implements OnInit {
   lableConstant: any = { french: {}, english: {} };
-  trackerObjList:any=[];
-  searchText : string ='';
-  trainingDataObj:any = [];
-  isSubmitted=false;
-
+  trackerObjList: any = [];
+  searchText: string = '';
+  trainingDataObj: any = [];
+  isSubmitted = false;
+  isManager = false;
   pagination = {
     page: 1,
     pageNumber: 1,
@@ -26,34 +27,38 @@ export class DnaTrackerComponent implements OnInit {
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
   constructor(
-    private dnaService:DnaService,
-    private commonService:CommonService,
-    private router:Router) {
-      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
-     }
+    private dnaService: DnaService,
+    private authService: AuthenticationService,
+    private commonService: CommonService,
+    private router: Router) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+    this.isManager = this.authService.getProfileDetailsfromlocal().data?.manager == 1 ? true : false;
+  }
 
   ngOnInit(): void {
-  this.getTrackerList();
+    if (this.isManager) {
+      this.getTrackerList();
+    }
   }
 
-  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
-    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  showPaginationCount(pageStart: any, pageEnd: any, total: any) {
+    return this.commonService.showPaginationCount(pageStart, pageEnd, total, this.lableConstant.showing_number_entries);
   }
 
-  getTrackerList(){
-    this.dnaService.getTrackerList().subscribe((res:any)=>{
+  getTrackerList() {
+    this.dnaService.getTrackerList().subscribe((res: any) => {
       this.trackerObjList = res.data.tracker;
     },
-    err=>{
-  
-    });
+      err => {
+
+      });
   }
 
-  create(){
-    this.router.navigateByUrl('/dashboard/dna/tracker/create'); 
+  create() {
+    this.router.navigateByUrl('/dashboard/dna/tracker/create');
   }
 
-  editRequest(item :any){
+  editRequest(item: any) {
     if (item && item.id) {
       this.router.navigateByUrl(`/dashboard/dna/tracker/edit/${item.id}`);
     }

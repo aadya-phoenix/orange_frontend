@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
   isRequester = false;
   isPdlMember = false;
   isStaff = false;
+  isManager = false;
   pendingFlag: boolean = true;
   lableConstant: any = { french: {}, english: {} };
   baseUrl = dataConstant.BaseUrl;
@@ -67,12 +68,13 @@ export class DashboardComponent implements OnInit {
     if(this.getUserrole){
       this.isReviewer = this.getUserrole.includes(this.RoleID.BackOfficeReviewer);
       this.isPublisher = this.getUserrole.includes(this.RoleID.BackOfficePublisher);
-      this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
+      this.isRequester = this.profileDetails.data?.staff == 1 ? true : false;
     }
     if (this.profileDetails.data?.pdl_member) {
       this.isPdlMember = this.profileDetails.data.pdl_member;
     }
     this.isStaff = this.profileDetails.data?.staff == 1 ? true : false;
+    this.isManager = this.profileDetails.data?.manager == 1 ? true : false;
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     if (this.lableConstant) {
       this.modulesArray_tab1 = [
@@ -171,6 +173,9 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(!this.isManager){
+      this.modulesArray_tab2 = this.modulesArray_tab2.filter((x: { id: string; }) => x.id != 'dna');
+    }
     this.getFavouriteList();
     this.getpendingCourses();
     this.pendingFlag = this.isStaff;
@@ -199,11 +204,11 @@ export class DashboardComponent implements OnInit {
       this.router.navigateByUrl(`/dashboard/cct?status=${status}`);
     }
     if (module == this.modules.carousel) {
-      const status = this.getUserrole.includes(this.RoleID.RequesterID) ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
+      const status = this.profileDetails.data?.staff == 1 ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
       this.router.navigateByUrl(`/dashboard/olcarousel?status=${status}`);
     }
     if (module == this.modules.backOffice) {
-      const status = this.getUserrole.includes(this.RoleID.RequesterID) ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
+      const status = this.profileDetails.data?.staff == 1 ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
       this.router.navigateByUrl(`/dashboard/back-office?status=${status}`);
     }
     if (module == this.modules.session) {
@@ -215,7 +220,7 @@ export class DashboardComponent implements OnInit {
       this.router.navigateByUrl(`/dashboard/designlearning?status=${status}`);
     }
     if (module == this.modules.getReport) {
-      const status = this.getUserrole.includes(this.RoleID.RequesterID) ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
+      const status = this.profileDetails.data?.staff == 1 ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
       this.router.navigateByUrl(`/dashboard/olreport?status=${status}`);
     }
   }

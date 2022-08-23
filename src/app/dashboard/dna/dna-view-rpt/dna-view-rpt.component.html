@@ -36,7 +36,15 @@
             </div>
         </div>
     </div>
-    <div class="content mt-2">
+    <div class="content mt-2" *ngIf="!isManager">
+        <div class="animated fadeIn">
+            <ngb-alert [dismissible]="false" type="warning" class="d-block m-3">
+                <span>The DNA tool can be only accessible to a manager who has direct reporting of the employee.</span>
+                <p class="mb-0">Please contact to administrator of this site for more details.</p>
+            </ngb-alert>
+        </div>
+    </div>
+    <div class="content mt-2" *ngIf="isManager">
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-12">
@@ -48,7 +56,7 @@
                         </div>
                         <div class="card-body card_course_body">
                             <div class="Course_icon_parent" data-aos="fade-right">
-                                <div class="Course_icon_child" >
+                                <div class="Course_icon_child">
                                     <div class="alig_dashicon" (click)="showRecords(dnaStatus.pending)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des bac_yellow">
@@ -56,8 +64,7 @@
                                             </div>
                                             <p>{{lableConstant.pending}}</p>
                                         </div>
-                                        <span
-                                            class="number_css ">{{dna_count.pending?dna_count.pending:0}}</span>
+                                        <span class="number_css ">{{dna_count.pending?dna_count.pending:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
@@ -68,8 +75,7 @@
                                             </div>
                                             <p>Closed</p>
                                         </div>
-                                        <span
-                                            class="number_css">{{dna_count.close?dna_count.close:0}}</span>
+                                        <span class="number_css">{{dna_count.close?dna_count.close:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
@@ -103,7 +109,7 @@
             </div>
         </div>
     </div>
-    <div class="content">
+    <div class="content" *ngIf="isManager">
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-12">
@@ -112,7 +118,8 @@
                             <div class="overall_css">
                                 <div>
                                     <i class="fa fa-table fa_table" aria-hidden="true "></i>
-                                    <span class="card-title card-title-text card_overall">{{lableConstant.My_Request}}</span>
+                                    <span
+                                        class="card-title card-title-text card_overall">{{lableConstant.My_Request}}</span>
                                 </div>
                                 <div class="filter_dispaly">
                                     <div class="form-group filter_course mr-1">
@@ -143,7 +150,8 @@
                                         </select>
                                     </div>
                                     <div _ngcontent-cue-c109=" " class="form-group filter_course mr-1">
-                                        <label _ngcontent-cue-c109=" " class="label_course text_black">{{lableConstant.Search}}</label>
+                                        <label _ngcontent-cue-c109=" "
+                                            class="label_course text_black">{{lableConstant.Search}}</label>
                                         <input _ngcontent-cue-c109=" " type="text " name="search " autocomplete="off "
                                             [(ngModel)]="searchText" placeholder=" "
                                             class="form-control ng-untouched ng-pristine ng-valid form_width"
@@ -158,7 +166,7 @@
                                 <div class="filter_dispaly">
                                     <button class=" btn btn-primary btn_add_submit" (click)="openModal()"
                                         data-toggle="modal">
-                                       <span class="fon_12">Close Request</span>
+                                        <span class="fon_12">Close Request</span>
                                     </button>
 
                                 </div>
@@ -213,20 +221,22 @@
                                     <tbody>
                                         <tr *ngFor="let item of learningListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber } ; let i = index;"
                                             class="text-center bac_hover-table font-12">
-                                            <td> <input type="checkbox" (click)="selectedItems(item)" [checked]="item.isChecked"
-                                                    [attr.disabled]="item.status == dnaStatus.close ? true : null"
-                                                    >
+                                            <td> <input type="checkbox" (click)="selectedItems(item)"
+                                                    [checked]="item.isChecked"
+                                                    [attr.disabled]="item.status == dnaStatus.close ? true : null">
                                             </td>
                                             <td>{{item.user_email}}</td>
                                             <td>{{item.training_type}}</td>
-                                            <td>{{item.training_provider == 'Orange Business Services' ?'Orange Learning' : 'Other Learning'}}</td>
+                                            <td>{{item.training_provider == 'Orange Business Services' ?'Orange
+                                                Learning' : 'Other Learning'}}</td>
                                             <td>{{item.title}}</td>
                                             <td>{{item.number_of_participant}}</td>
                                             <td>{{item.priority_name}}</td>
                                             <td>{{item.country}}</td>
                                             <td>{{item.management_code}}</td>
                                             <td>{{item.business_unit_name}}</td>
-                                            <td ><span [ngClass]="item.status_show">{{item.status_show | titlecase}}</span></td>
+                                            <td><span [ngClass]="item.status_show">{{item.status_show |
+                                                    titlecase}}</span></td>
                                             <td>{{item.comments}}</td>
                                         </tr>
                                     </tbody>

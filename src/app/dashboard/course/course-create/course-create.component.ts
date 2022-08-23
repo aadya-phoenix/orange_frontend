@@ -99,7 +99,7 @@ export class CourseCreateComponent implements OnInit {
     this.isStaff = this.getprofileDetails.data?.staff == 1 ? true : false;
     this.isReviewer = this.getUserrole.includes(this.RoleID.CourseReviewer);
     this.isPublisher = this.getUserrole.includes(this.RoleID.CoursePublisher);
-    this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
+    this.isRequester = this.getprofileDetails.data?.staff == 1 ? true : false;
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.course_id = Id ? parseInt(Id) : 0;
@@ -1231,7 +1231,7 @@ export class CourseCreateComponent implements OnInit {
   }
 
   isSubmit() {
-    if (!this.isRequester) {
+    if (!this.isRequester || (this.isRequester && (this.isPublisher || this.isReviewer))) {
       return false;
     }
     if (this.course_details?.status === this.CarouselStatus.publish || this.course_details?.status === this.CarouselStatus.expired) {

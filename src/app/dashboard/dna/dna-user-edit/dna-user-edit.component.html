@@ -35,43 +35,46 @@
     </div>
     <div class="content mt-3">
         <div class="animated fadeIn">
-            <form [formGroup]="createUserForm">
+            <ngb-alert [dismissible]="false" type="warning" *ngIf="!isManager" class="d-block m-3">
+                <span>The DNA tool can be only accessible to a manager who has direct reporting of the employee.</span>
+                <p class="mb-0">Please contact to administrator of this site for more details.</p>
+            </ngb-alert>
+            <form [formGroup]="createUserForm" *ngIf="isManager">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="row">                                   
+                                <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="form-control-label">{{lableConstant.role}}</label>
-                                            <ng-select  [items]="rolesList"
-                                                (change)="getSelectedRole($event)" [multiple]="false" bindLabel="role"
-                                                bindValue="id" formControlName="role_id">
+                                            <ng-select [items]="rolesList" (change)="getSelectedRole($event)"
+                                                [multiple]="false" bindLabel="role" bindValue="id"
+                                                formControlName="role_id">
                                             </ng-select>
                                             <div
-                                            *ngIf="(createUserForm.controls['role_id'].invalid && (createUserForm.controls['role_id'].dirty || createUserForm.controls['role_id'].touched)) || isSubmitted">
-                                            <div class="error_message"
-                                             *ngIf="createUserForm.controls['role_id'].errors?.required">
-                                              {{requiredMessage(this.lableConstant.role)}}
-                                                  </div>
-                                             </div>
+                                                *ngIf="(createUserForm.controls['role_id'].invalid && (createUserForm.controls['role_id'].dirty || createUserForm.controls['role_id'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createUserForm.controls['role_id'].errors?.required">
+                                                    {{requiredMessage(this.lableConstant.role)}}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4" *ngIf="isRegion">
                                         <div class="form-group">
                                             <label class="form-control-label">{{lableConstant.region}}</label>
-                                            <ng-select  [items]="regionObj" 
-                                            (change)="getSelectedRegion($event)"
+                                            <ng-select [items]="regionObj" (change)="getSelectedRegion($event)"
                                                 [multiple]="false" bindLabel="region_name" bindValue="id"
                                                 formControlName="region_id">
                                             </ng-select>
                                             <div
-                                            *ngIf="(createUserForm.controls['region_id'].invalid && (createUserForm.controls['region_id'].dirty || createUserForm.controls['region_id'].touched)) || isSubmitted">
-                                            <div class="error_message"
-                                             *ngIf="createUserForm.controls['region_id'].errors?.required">
-                                             {{requiredMessage(this.lableConstant.region)}}
-                                             </div>
-                                             </div>
+                                                *ngIf="(createUserForm.controls['region_id'].invalid && (createUserForm.controls['region_id'].dirty || createUserForm.controls['region_id'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createUserForm.controls['region_id'].errors?.required">
+                                                    {{requiredMessage(this.lableConstant.region)}}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4" *ngIf="isCountry">
@@ -79,8 +82,7 @@
                                             <label class="form-control-label">
                                                 Country
                                             </label>
-                                            <ng-select  [items]="countriesObj"
-                                                 bindLabel="country_name"
+                                            <ng-select [items]="countriesObj" bindLabel="country_name"
                                                 bindValue="country_name" formControlName="country" class="w_100">
                                             </ng-select>
                                         </div>
@@ -88,11 +90,10 @@
                                     <div class="col-sm-4" *ngIf="isDomain">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                                Domain  Training
+                                                Domain Training
                                             </label>
-                                            <ng-select [items]="domainObj"
-                                                 bindLabel="domain_name"
-                                                bindValue="id" formControlName="domain_training_id" class="w_100">
+                                            <ng-select [items]="domainObj" bindLabel="domain_name" bindValue="id"
+                                                formControlName="domain_training_id" class="w_100">
                                             </ng-select>
                                         </div>
                                     </div>
@@ -101,21 +102,19 @@
                                             <label class="form-control-label">
                                                 Business Unit/M1 Level
                                             </label>
-                                            <ng-select  [items]="bussinessUnitObj"
-                                                 bindLabel="team_name"
-                                                bindValue="id" formControlName="business_unit_id" class="w_100">
-                                            </ng-select>     
+                                            <ng-select [items]="bussinessUnitObj" bindLabel="team_name" bindValue="id"
+                                                formControlName="business_unit_id" class="w_100">
+                                            </ng-select>
                                         </div>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="card-footer">
                                 <button class="btn btn-primary mr-1" type="submit" (click)="save()">
                                     <i aria-hidden="true" class="fa fa-upload">
                                     </i> <span class="pl-1">Save</span>
                                 </button>
-                                <button class="btn btn-secondary mr-1" type="button" 
-                                (click)="close()">
+                                <button class="btn btn-secondary mr-1" type="button" (click)="close()">
                                     <i aria-hidden="true" class="fa fa-times">
                                     </i> <span class="pl-1">Close</span>
                                 </button>

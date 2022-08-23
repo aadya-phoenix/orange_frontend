@@ -36,8 +36,11 @@
             </div>
         </div>
     </div>
-
-    <div class="card mb-0">
+    <ngb-alert [dismissible]="false" type="warning" *ngIf="!isManager" class="d-block m-3">
+        <span>The DNA tool can be only accessible to a manager who has direct reporting of the employee.</span>
+        <p class="mb-0">Please contact to administrator of this site for more details.</p>
+    </ngb-alert>
+    <div class="card mb-0" *ngIf="isManager">
         <div class="card-header color-orange">
             <div class="d-flex justify-content-between">
                 <span class="row">
@@ -83,7 +86,7 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label class="form-control-label">
-                               {{lableConstant.number_of_participants}}
+                                {{lableConstant.number_of_participants}}
                             </label>
                             <input type="text" class="form-control form_width" formControlName="number_of_participant">
                             <div

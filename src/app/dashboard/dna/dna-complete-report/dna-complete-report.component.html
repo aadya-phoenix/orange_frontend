@@ -33,7 +33,14 @@
             </div>
         </div>
     </div>
-    <div class="content mt-1">
+    <div class="content mt-1" *ngIf="!isManager">
+        <div class="animated fadeIn">
+    <ngb-alert [dismissible]="false"  type="warning" class="d-block m-3">
+        <span>The DNA tool can be only accessible to a manager who has direct reporting of the employee.</span>
+        <p class="mb-0">Please contact to administrator of this site for more details.</p>
+</ngb-alert>
+        </div></div>
+    <div class="content mt-1" *ngIf="isManager">
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-sm-12">
@@ -466,7 +473,7 @@
             </div>
         </div>
     </div>
-    <div class="content mt-1">
+    <div class="content mt-1" *ngIf="isManager">
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-sm-12">

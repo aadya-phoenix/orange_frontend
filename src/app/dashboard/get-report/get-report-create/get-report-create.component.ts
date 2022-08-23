@@ -90,7 +90,7 @@ export class GetReportCreateComponent implements OnInit {
     this.getUserrole = this.authService.getRolefromlocal();
     this.isRoc = this.getUserrole.includes(this.RoleID.Roc);
     this.isDataAnalyst = this.getUserrole.includes(this.RoleID.DataAnalyst);
-    this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
+    this.isRequester = this.getprofileDetails.data?.staff == 1 ? true : false;
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.report_id = Id ? parseInt(Id) : 0;

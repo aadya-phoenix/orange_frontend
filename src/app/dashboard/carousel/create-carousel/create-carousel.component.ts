@@ -65,7 +65,7 @@ export class CreateCarouselComponent implements OnInit {
     this.getUserrole = this.authService.getRolefromlocal();
     this.isReviewer = this.getUserrole.includes(this.RoleID.CarouselReviewer);
     this.isPublisher = this.getUserrole.includes(this.RoleID.CarouselPublisher);
-    this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
+    this.isRequester = this.getprofileDetails.data?.staff == 1 ? true : false;
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.carousel_id = Id ? parseInt(Id) : 0;

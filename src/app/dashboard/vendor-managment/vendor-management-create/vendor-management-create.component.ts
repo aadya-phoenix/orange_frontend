@@ -82,7 +82,7 @@ export class VendorManagementCreateComponent implements OnInit {
     this.getUserrole = this.authService.getRolefromlocal();
     this.isReviewer = this.getUserrole.includes(this.RoleID.BackOfficeReviewer);
     this.isPublisher = this.getUserrole.includes(this.RoleID.BackOfficePublisher);
-    this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
+    this.isRequester = this.getprofileDetails.data?.staff == 1 ? true : false;
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.vendor_id = Id ? parseInt(Id) : 0;

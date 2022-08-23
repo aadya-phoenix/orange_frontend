@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router) {
     this.getUserrole = this.authService.getRolefromlocal();
-    this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
+    
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.isStaff = this.authService.getUserDetailslocal().staff == 1 ? true : false;
     this.isROM = this.getUserrole.includes(this.RoleID.Rom);
@@ -82,6 +82,7 @@ export class HeaderComponent implements OnInit {
         this.lastName = this.userName.last_name;
         this.isAdmin = this.userName.admin == 1 ? true: false;
         this.pdlMember = this.userName.pdl_member == 1 ? true : false;
+        this.isRequester = this.userName.staff == 1 ? true : false;
       }
     }, (err: any) => {
       this.commonService.errorHandling(err); 

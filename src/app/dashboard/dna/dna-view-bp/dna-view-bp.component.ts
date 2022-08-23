@@ -21,14 +21,15 @@ export class DnaViewBpComponent implements OnInit {
   dnaStatus = dataConstant.DnaStatus;
   selectedStatus = this.dnaStatus.total;
   dnaList: any = [];
+  isManager = false;
   dnaListToShow: any = [];
   priorityObj: any = [];
-  countriesObj:any =[];
-  bussinessUnitObj:any = [];
-  regionsObj:any = [];
+  countriesObj: any = [];
+  bussinessUnitObj: any = [];
+  regionsObj: any = [];
 
-  learningList:any= [];
-  learningListToShow:any= [];
+  learningList: any = [];
+  learningListToShow: any = [];
   isDomainExpert = false;
   isBussinessConsultant = false;
 
@@ -38,20 +39,20 @@ export class DnaViewBpComponent implements OnInit {
     closed: 0,
     close: 0,
     rejected: 0,
-    forwarded:0,
+    forwarded: 0,
     pending: 0,
     submitted: 0,
     transferred: 0,
     expired: 0,
     publish: 0,
-    digital_learning:0
+    digital_learning: 0
   }
   searchText: any;
-  trackerId:number = 0;
+  trackerId: number = 0;
   isDisabled = false;
-  learningIds:any = [];
-  titleList:any=[];
-  isChecked=false;
+  learningIds: any = [];
+  titleList: any = [];
+  isChecked = false;
 
   pagination = {
     page: 1,
@@ -59,10 +60,10 @@ export class DnaViewBpComponent implements OnInit {
     pageSize: 10
   }
   constructor(
-    private authService:AuthenticationService,
+    private authService: AuthenticationService,
     private commonService: CommonService,
     private generalDrpdownsService: GeneralDropdownsService,
-    private dnaService:DnaService,
+    private dnaService: DnaService,
     private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router
@@ -71,102 +72,105 @@ export class DnaViewBpComponent implements OnInit {
     this.getUserrole = this.authService.getRolefromlocal();
     this.isDomainExpert = this.getUserrole.includes(this.RoleID.DomainExpert);
     this.isBussinessConsultant = this.getUserrole.includes(this.RoleID.BussinessConsultant);
-   }
+    this.isManager = this.authService.getProfileDetailsfromlocal().data?.manager == 1 ? true : false;
+  }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      const Id = params.get('id');
-      this.trackerId = Id ? parseInt(Id) : 0;
-      this.getLearningList();
-    });
-    this.getPriority();
-    this. getCountries();
-    this. getRegions();
-    this.getBusinessUnits();
+    if (this.isManager) {
+      this.route.paramMap.subscribe((params: ParamMap) => {
+        const Id = params.get('id');
+        this.trackerId = Id ? parseInt(Id) : 0;
+        this.getLearningList();
+      });
+      this.getPriority();
+      this.getCountries();
+      this.getRegions();
+      this.getBusinessUnits();
+    }
   }
 
-  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
-    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  showPaginationCount(pageStart: any, pageEnd: any, total: any) {
+    return this.commonService.showPaginationCount(pageStart, pageEnd, total, this.lableConstant.showing_number_entries);
   }
 
-  getBUFilterRecords(item:any){
+  getBUFilterRecords(item: any) {
     if (item) {
       this.learningListToShow = [...this.learningList].filter((a, b) => {
         return a.business_unit_id == item
       });
-    }  
-    else{
+    }
+    else {
       this.learningListToShow = this.learningList;
     }
   }
- 
-  getPriorityFilterRecords(item:any){
+
+  getPriorityFilterRecords(item: any) {
     if (item) {
       this.learningListToShow = [...this.learningList].filter((a, b) => {
         return a.priority_id == item
       });
-    }  
-    else{
+    }
+    else {
       this.learningListToShow = this.learningList;
     }
   }
 
-  getRegionFilterRecords(item:any){
+  getRegionFilterRecords(item: any) {
     if (item) {
       this.learningListToShow = [...this.learningList].filter((a, b) => {
         return a.region_id == item
       });
-    }  
-    else{
+    }
+    else {
       this.learningListToShow = this.learningList;
     }
   }
 
-  getCountryFilterRecords(item:any){
+  getCountryFilterRecords(item: any) {
     if (item) {
       this.learningListToShow = [...this.learningList].filter((a, b) => {
         return a.country == item
       });
-    }  
-    else{
+    }
+    else {
       this.learningListToShow = this.learningList;
     }
   }
 
-  selectedItems(item:any){
+  selectedItems(item: any) {
     item.isChecked = !item.isChecked;
-    if(item.isChecked == true){
-      if(this.learningIds.length != 0){
-        this.learningIds.forEach((x:any)=>{
-          if(x != item.id){
+    if (item.isChecked == true) {
+      if (this.learningIds.length != 0) {
+        this.learningIds.forEach((x: any) => {
+          if (x != item.id) {
             this.learningIds.push(item.id);
           }
         });
       }
-      else{
+      else {
         this.learningIds.push(item.id);
       }
     }
-    else{
+    else {
       this.learningIds.pop(item.id);
     }
   }
 
   checkAllOptions() {
-    let newList=[];
-    this.learningIds=[];
+    let newList = [];
+    this.learningIds = [];
     this.titleList = [];
     this.isChecked = !this.isChecked;
-    this.learningList.forEach((val:any) => { val.isChecked = this.isChecked });
-    if(this.isChecked == false){
+    this.learningList.forEach((val: any) => { val.isChecked = this.isChecked });
+    if (this.isChecked == false) {
       return;
     }
-    newList = this.learningList.filter((y:any)=> {
-      if(y.status_show == this.dnaStatus.pending){ 
-      return y;
+    newList = this.learningList.filter((y: any) => {
+      if (y.status_show == this.dnaStatus.pending) {
+        return y;
       }
     });
-    newList.forEach((val:any)=>{
+    newList.forEach((val: any) => {
       this.learningIds.push(val.id);
     });
     this.learningList.forEach((item: any) => {
@@ -177,12 +181,12 @@ export class DnaViewBpComponent implements OnInit {
     });
   }
 
-  viewRequest(item:any){
+  viewRequest(item: any) {
     this.router.navigateByUrl(`/dashboard/dna/update/${this.trackerId}/${item.id}`);
   }
 
   openModal() {
-    if(this.learningIds.length == 0){
+    if (this.learningIds.length == 0) {
       return;
     }
     const modalRef = this.modalService.open(DnaForwardComponent, {
@@ -191,10 +195,10 @@ export class DnaViewBpComponent implements OnInit {
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
-      title:  'Close Request' ,
+      title: 'Close Request',
       data: this.learningIds,
       objectDetail: this.learningList,
-      trackerId:this.trackerId,
+      trackerId: this.trackerId,
       type: 'forward'
     };
     modalRef.componentInstance.passEntry.subscribe((res: any) => {
@@ -202,40 +206,40 @@ export class DnaViewBpComponent implements OnInit {
     });
   }
 
-  getLearningList(){
+  getLearningList() {
     this.commonService.showLoading();
     this.dnaService.getDna().subscribe(
       (res: any) => {
-        if(res.status == 1){
-        this.commonService.hideLoading();
-        this.learningList = res.data.digital_learning[this.trackerId];
-        this.dna_count = res.data.all_count[this.trackerId];
-        this.learningListToShow = res.data.digital_learning[this.trackerId];
-        this.learningList.forEach((x:any)=>{
-          if(x.strategic){
-           if(x.strategic == 'strategic_1'){
-            x.strategic_name = 'Strategic for BU';
-           }
-           if(x.strategic == 'strategic_2'){
-            x.strategic_name = 'Not strategic but action required';
-           }
-           if(x.strategic == 'strategic_3'){
-            x.strategic_name = 'Not a priority or no action required';
-           }
-          }
-         })
+        if (res.status == 1) {
+          this.commonService.hideLoading();
+          this.learningList = res.data.digital_learning[this.trackerId];
+          this.dna_count = res.data.all_count[this.trackerId];
+          this.learningListToShow = res.data.digital_learning[this.trackerId];
+          this.learningList.forEach((x: any) => {
+            if (x.strategic) {
+              if (x.strategic == 'strategic_1') {
+                x.strategic_name = 'Strategic for BU';
+              }
+              if (x.strategic == 'strategic_2') {
+                x.strategic_name = 'Not strategic but action required';
+              }
+              if (x.strategic == 'strategic_3') {
+                x.strategic_name = 'Not a priority or no action required';
+              }
+            }
+          })
         }
-        else{
+        else {
           this.commonService.hideLoading();
           this.commonService.toastErrorMsg('Error', res.message);
         }
-      },(err:any)=>{
+      }, (err: any) => {
         this.commonService.hideLoading();
         this.commonService.toastErrorMsg('Error', err.message);
       });
   }
 
-  getPriority(){
+  getPriority() {
     this.commonService.showLoading();
     this.generalDrpdownsService.getPriority().subscribe(
       (res: any) => {
@@ -249,12 +253,12 @@ export class DnaViewBpComponent implements OnInit {
     );
   }
 
-  getCountries(){
+  getCountries() {
     this.commonService.showLoading();
     this.generalDrpdownsService.getCountries().subscribe(
       (res: any) => {
         this.commonService.hideLoading();
-        this.countriesObj= res.data;
+        this.countriesObj = res.data;
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -263,12 +267,12 @@ export class DnaViewBpComponent implements OnInit {
     );
   }
 
-  getRegions(){
+  getRegions() {
     this.commonService.showLoading();
     this.generalDrpdownsService.getRegions().subscribe(
       (res: any) => {
         this.commonService.hideLoading();
-       this.regionsObj = res.data;
+        this.regionsObj = res.data;
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -277,16 +281,16 @@ export class DnaViewBpComponent implements OnInit {
     );
   }
 
-  getBusinessUnits(){
-    this.generalDrpdownsService.getBusinessUnits().subscribe( (res: any) => {
+  getBusinessUnits() {
+    this.generalDrpdownsService.getBusinessUnits().subscribe((res: any) => {
       this.commonService.hideLoading();
       this.bussinessUnitObj = res.data;
     },
-    (err: any) => {
-      this.commonService.hideLoading();
-      this.commonService.toastErrorMsg('Error', err.message);
-    }
-  );
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    );
   }
 
   showRecords(type: string) {

@@ -15,6 +15,7 @@ export class DnaDashboardComponent implements OnInit {
   dateFormate = dataConstant.dateFormate;
   RoleID = dataConstant.RoleID;
   isRom = false;
+  isManager = false;
   isBussinessConsultant = false;
   isLearningPartner = false;
   isDomainExpert = false;
@@ -39,11 +40,13 @@ export class DnaDashboardComponent implements OnInit {
     this.isLearningPartner = this.getUserrole.includes(this.RoleID.LearningPartner);
     this.isDomainExpert = this.getUserrole.includes(this.RoleID.DomainExpert);
     this.today.setHours(0,0,0,0);
+    this.isManager = this.authService.getProfileDetailsfromlocal().data?.manager == 1 ? true : false;
   }
 
   ngOnInit(): void {
-    this.getTrackerList();
-   
+    if(this.isManager){
+      this.getTrackerList();
+    }
   }
 
   addLearning(item:any){

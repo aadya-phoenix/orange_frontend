@@ -65,7 +65,7 @@ export class GetReportListComponent implements OnInit {
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.isRoc = this.getUserrole.includes(this.RoleID.Roc);
     this.isDataAnalyst = this.getUserrole.includes(this.RoleID.DataAnalyst);
-    this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
+    this.isRequester = this.getprofileDetails.data?.staff == 1 ? true : false;
   }
 
   ngOnInit(): void {

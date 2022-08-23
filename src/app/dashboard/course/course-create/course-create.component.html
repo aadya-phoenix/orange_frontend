@@ -900,85 +900,7 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="w_100">
-                                        <!-- <div class="col-sm-6" *ngIf="isILTAndvILT()">
-                                            <div class="form-group">
-                                                <label class="form-control-label">
-                                                    Free field content
-                                                    <a>
-                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                            data-toggle="tooltip" data-placement="right" ngbTooltip="">
-                                                        </i>
-                                                    </a>
-                                                </label>
-                                                <textarea class="form-control form_width-textarea" rows="3"
-                                                    placeholder="Enter Free field content" maxlength="500"
-                                                    formControlName="free_field_content"></textarea>
-                                            </div>
-                                        </div> -->
-                                        <div class="col-sm-6">
-                                            <div class="d-flex align-items-center">
-                                                <div class="form-group w_100">
-                                                    <label class="form-control-label">
-                                                        {{lableConstant.For_Whom}} <span class="text_red">* </span>
-                                                        <a>
-                                                            <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                                data-toggle="tooltip" data-placement="right"
-                                                                ngbTooltip="{{lableConstant.Define_target_audience}}">
-                                                            </i>
-                                                        </a>
-                                                    </label>
-                                                    <textarea class="form-control form_width-textarea" rows="3"
-                                                        maxlength="500"
-                                                        placeholder="List the target audience for this training course’ (examples: All OBS Employees, All Customer Facing Employees, All Project Managers,…etc)"
-                                                        formControlName="for_whoom_single"></textarea>
-                                                    <div class="error_message"
-                                                        *ngIf="(createCourceForm.controls['for_whoom_single'].invalid && (createCourceForm.controls['for_whoom_single'].dirty || createCourceForm.controls['for_whoom_single'].touched || isSubmitted))">
-                                                        {{requiredMessage(this.lableConstant.For_Whom)}}
-                                                    </div>
-
-                                                </div>
-                                                <div class="">
-                                                    <a (click)="multilaungauge('for_whoom')"
-                                                        class="d-flex flex-column align-items-end">
-                                                        <img src="../../../../assets/images/icon/lang.png"
-                                                            class="langu_css" />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            <div class="d-flex align-items-center">
-                                                <div class="form-group w_100">
-                                                    <label class="form-control-label">
-                                                        {{lableConstant.Learn_more}}
-                                                        <a>
-                                                            <i class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                                data-toggle="tooltip" data-placement="right"
-                                                                ngbTooltip="{{lableConstant.If_you_wish_link_enabling}}">
-                                                            </i>
-                                                        </a>
-                                                    </label>
-                                                    <input type="url" placeholder="Enter Learn more"
-                                                        class="form-control form_width"
-                                                        formControlName="learn_more_single" />
-                                                    <div class="error_message"
-                                                        *ngIf="(createCourceForm.controls['learn_more_single'].invalid && (createCourceForm.controls['learn_more_single'].dirty || createCourceForm.controls['learn_more_single'].touched || isSubmitted))">
-                                                        {{lableConstant.Learn_more}} is not a valid URL</div>
-                                                </div>
-                                                <div class="mt_top_11">
-                                                    <a (click)="multilaungauge('learn_more')"
-                                                        class="d-flex flex-column align-items-end">
-                                                        <img src="../../../../assets/images/icon/lang.png"
-                                                            class="langu_css" />
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                 
                                 </div>
 
                                 <div class="row" *ngIf="isVideoBased()">
@@ -1030,7 +952,6 @@
                                         </div>
                                     </div>
                                 </div>
-
 
                                 <div class="row" *ngIf="isMaterialBased() && materialBased == 'upload'">
                                     <div class="col-sm-6">
@@ -1111,6 +1032,70 @@
                                         </tr>
                                     </thead>
                                 </table>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="d-flex align-items-center">
+                                            <div class="form-group w_100">
+                                                <label class="form-control-label">
+                                                    {{lableConstant.For_Whom}} <span class="text_red">* </span>
+                                                    <a>
+                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                            data-toggle="tooltip" data-placement="right"
+                                                            ngbTooltip="{{lableConstant.Define_target_audience}}">
+                                                        </i>
+                                                    </a>
+                                                </label>
+                                                <textarea class="form-control form_width-textarea" rows="3"
+                                                    maxlength="500"
+                                                    placeholder="List the target audience for this training course’ (examples: All OBS Employees, All Customer Facing Employees, All Project Managers,…etc)"
+                                                    formControlName="for_whoom_single"></textarea>
+                                                <div class="error_message"
+                                                    *ngIf="(createCourceForm.controls['for_whoom_single'].invalid && (createCourceForm.controls['for_whoom_single'].dirty || createCourceForm.controls['for_whoom_single'].touched || isSubmitted))">
+                                                    {{requiredMessage(this.lableConstant.For_Whom)}}
+                                                </div>
+
+                                            </div>
+                                            <div class="">
+                                                <a (click)="multilaungauge('for_whoom')"
+                                                    class="d-flex flex-column align-items-end">
+                                                    <img src="../../../../assets/images/icon/lang.png"
+                                                        class="langu_css" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="d-flex align-items-center">
+                                            <div class="form-group w_100">
+                                                <label class="form-control-label">
+                                                    {{lableConstant.Learn_more}}
+                                                    <a>
+                                                        <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                            data-toggle="tooltip" data-placement="right"
+                                                            ngbTooltip="{{lableConstant.If_you_wish_link_enabling}}">
+                                                        </i>
+                                                    </a>
+                                                </label>
+                                                <input type="url" placeholder="Enter Learn more"
+                                                    class="form-control form_width"
+                                                    formControlName="learn_more_single" />
+                                                <div class="error_message"
+                                                    *ngIf="(createCourceForm.controls['learn_more_single'].invalid && (createCourceForm.controls['learn_more_single'].dirty || createCourceForm.controls['learn_more_single'].touched || isSubmitted))">
+                                                    {{lableConstant.Learn_more}} is not a valid URL</div>
+                                            </div>
+                                            <div class="mt_top_11">
+                                                <a (click)="multilaungauge('learn_more')"
+                                                    class="d-flex flex-column align-items-end">
+                                                    <img src="../../../../assets/images/icon/lang.png"
+                                                        class="langu_css" />
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
 
                                 <table class="table table-bordered" formArrayName="learner_guideline">
                                     <thead>

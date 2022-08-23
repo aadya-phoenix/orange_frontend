@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DnaService } from 'src/app/shared/services/dna/dna.service';
 import { GeneralDropdownsService } from 'src/app/shared/services/general-dropdowns/general-dropdowns.service';
@@ -16,8 +17,8 @@ export class DnaViewComponent implements OnInit {
   selectedStatus = this.dnaStatus.total;
   learningList: any = [];
   learningListToShow: any = [];
-  trackerId:any;
-
+  trackerId: any;
+  isManager = false;
   pagination = {
     page: 1,
     pageNumber: 1,
@@ -25,130 +26,134 @@ export class DnaViewComponent implements OnInit {
   }
 
   priorityObj: any = [];
-  countriesObj:any =[];
-  bussinessUnitObj:any = [];
-  regionsObj:any = [];
+  countriesObj: any = [];
+  bussinessUnitObj: any = [];
+  regionsObj: any = [];
 
-  tracker_details:any;
-  type:number=0;
+  tracker_details: any;
+  type: number = 0;
   isFrance = false;
 
   searchText: any;
   constructor(
     private commonService: CommonService,
-    private dnaService:DnaService,
+    private dnaService: DnaService,
+    private authService: AuthenticationService,
     private generalDrpdownsService: GeneralDropdownsService,
     private route: ActivatedRoute,
     private router: Router
-  ) { 
+  ) {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+    this.isManager = this.authService.getProfileDetailsfromlocal().data?.manager == 1 ? true : false;
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      const Id = params.get('id');
-      this.trackerId = Id ? parseInt(Id) : 0;
-      this.getTrackerDetail();
-    });
-    this.getLearningList();
-    this.getPriority();
-    this. getCountries();
-    this. getRegions();
-    this.getBusinessUnits();
+    if (this.isManager) {
+      this.route.paramMap.subscribe((params: ParamMap) => {
+        const Id = params.get('id');
+        this.trackerId = Id ? parseInt(Id) : 0;
+        this.getTrackerDetail();
+      });
+      this.getLearningList();
+      this.getPriority();
+      this.getCountries();
+      this.getRegions();
+      this.getBusinessUnits();
+    }
   }
 
-  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
-    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  showPaginationCount(pageStart: any, pageEnd: any, total: any) {
+    return this.commonService.showPaginationCount(pageStart, pageEnd, total, this.lableConstant.showing_number_entries);
   }
 
-  redirect(){
+  redirect() {
     this.router.navigateByUrl(`/dashboard/dna/create/${this.trackerId}`);
   }
 
-  getBUFilterRecords(item:any){
+  getBUFilterRecords(item: any) {
     if (item) {
       this.learningListToShow = [...this.learningList].filter((a, b) => {
         return a.business_unit_id == item
       });
-    }  
-    else{
+    }
+    else {
       this.learningListToShow = this.learningList;
     }
   }
- 
-  getPriorityFilterRecords(item:any){
+
+  getPriorityFilterRecords(item: any) {
     if (item) {
       this.learningListToShow = [...this.learningList].filter((a, b) => {
         return a.priority_id == item
       });
-    }  
-    else{
+    }
+    else {
       this.learningListToShow = this.learningList;
     }
   }
 
-  getRegionFilterRecords(item:any){
+  getRegionFilterRecords(item: any) {
     if (item) {
       this.learningListToShow = [...this.learningList].filter((a, b) => {
         return a.region_id == item
       });
-    }  
-    else{
+    }
+    else {
       this.learningListToShow = this.learningList;
     }
   }
 
-  getCountryFilterRecords(item:any){
+  getCountryFilterRecords(item: any) {
     if (item) {
       this.learningListToShow = [...this.learningList].filter((a, b) => {
         return a.country == item
       });
-    }  
-    else{
+    }
+    else {
       this.learningListToShow = this.learningList;
     }
   }
 
-  getLearningList(){
+  getLearningList() {
     this.commonService.showLoading();
     this.dnaService.getDna().subscribe(
       (res: any) => {
-        if(res.status == 1){
-        this.commonService.hideLoading();
-        this.learningList = res.data.digital_learning[this.trackerId];
-        this.learningListToShow = res.data.digital_learning[this.trackerId];
+        if (res.status == 1) {
+          this.commonService.hideLoading();
+          this.learningList = res.data.digital_learning[this.trackerId];
+          this.learningListToShow = res.data.digital_learning[this.trackerId];
         }
-        else{
+        else {
           this.commonService.hideLoading();
           this.commonService.toastErrorMsg('Error', res.message);
         }
-      },(err:any)=>{
+      }, (err: any) => {
         this.commonService.hideLoading();
         this.commonService.toastErrorMsg('Error', err.message);
       });
   }
 
-  getTrackerDetail(){
+  getTrackerDetail() {
     this.commonService.showLoading();
     this.dnaService.getTrackerDetail(this.trackerId).subscribe(
       (res: any) => {
-        if(res.status == 1){
-        this.commonService.hideLoading();
-        this.tracker_details = res.data;
-        this.type = this.tracker_details.type;
-        this.type == 1 ? this.isFrance = true : this.isFrance = false;
+        if (res.status == 1) {
+          this.commonService.hideLoading();
+          this.tracker_details = res.data;
+          this.type = this.tracker_details.type;
+          this.type == 1 ? this.isFrance = true : this.isFrance = false;
         }
-        else{
+        else {
           this.commonService.hideLoading();
           this.commonService.toastErrorMsg('Error', res.message);
         }
-      },err=>{
+      }, err => {
         this.commonService.hideLoading();
         this.commonService.toastErrorMsg('Error', err.message);
       });
   }
 
-  getPriority(){
+  getPriority() {
     this.commonService.showLoading();
     this.generalDrpdownsService.getPriority().subscribe(
       (res: any) => {
@@ -162,12 +167,12 @@ export class DnaViewComponent implements OnInit {
     );
   }
 
-  getCountries(){
+  getCountries() {
     this.commonService.showLoading();
     this.generalDrpdownsService.getCountries().subscribe(
       (res: any) => {
         this.commonService.hideLoading();
-        this.countriesObj= res.data;
+        this.countriesObj = res.data;
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -176,12 +181,12 @@ export class DnaViewComponent implements OnInit {
     );
   }
 
-  getRegions(){
+  getRegions() {
     this.commonService.showLoading();
     this.generalDrpdownsService.getRegions().subscribe(
       (res: any) => {
         this.commonService.hideLoading();
-       this.regionsObj = res.data;
+        this.regionsObj = res.data;
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -190,20 +195,20 @@ export class DnaViewComponent implements OnInit {
     );
   }
 
-  getBusinessUnits(){
-    this.generalDrpdownsService.getBusinessUnits().subscribe( (res: any) => {
+  getBusinessUnits() {
+    this.generalDrpdownsService.getBusinessUnits().subscribe((res: any) => {
       this.commonService.hideLoading();
       this.bussinessUnitObj = res.data;
     },
-    (err: any) => {
-      this.commonService.hideLoading();
-      this.commonService.toastErrorMsg('Error', err.message);
-    }
-  );
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    );
   }
 
   pageChanged(event: any) {
     this.pagination.pageNumber = event;
   }
- 
+
 }

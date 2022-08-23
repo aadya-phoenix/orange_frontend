@@ -65,7 +65,7 @@ export class CarouselViewReportComponent implements OnInit {
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.isReviewer = this.getUserrole.includes(this.RoleID.CarouselReviewer);
     this.isPublisher = this.getUserrole.includes(this.RoleID.CarouselPublisher);
-    this.isRequester = this.getUserrole.includes(this.RoleID.RequesterID);
+    this.isRequester = this.getprofileDetails.data?.staff == 1 ? true : false;
     this.filterForm = this.fb.group({
       start_date: new FormControl('', []),
       end_date: new FormControl('', []),

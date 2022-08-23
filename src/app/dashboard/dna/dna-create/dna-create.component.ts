@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DnaService } from 'src/app/shared/services/dna/dna.service';
 import Swal from 'sweetalert2';
@@ -18,19 +19,25 @@ export class DnaCreateComponent implements OnInit {
   learningList:any=[];
   learningListToShow:any=[];
   searchText:string='';
-  
+  isManager = false;
+
   constructor(
     private commonService: CommonService,
     private dnaService:DnaService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private authService: AuthenticationService,
+    private router: Router) { 
+      this.isManager = this.authService.getProfileDetailsfromlocal().data?.manager == 1 ? true : false;
+    }
 
   ngOnInit(): void {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.trackerId = Id ? parseInt(Id) : 0;
+      if(this.isManager){
       this.getLearningList();
+      }
     });
   }
 
