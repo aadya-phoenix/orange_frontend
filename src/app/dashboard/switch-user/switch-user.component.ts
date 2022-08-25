@@ -22,7 +22,6 @@ export class SwitchUserComponent implements OnInit {
   loginForm: FormGroup;
   userList: any = [];
   isAdmin = false;
-  isROM = false;
   public historyList: any;
   public objectDetail: any;
   public modalType: any;
@@ -72,9 +71,9 @@ export class SwitchUserComponent implements OnInit {
 
   getROMUsers() {
     this.commonService.showLoading();
-    this.authService.getUserRoles().subscribe((res: any) => {
+    this.authService.getROMROCList(this.userName.data.id).subscribe((res: any) => {
       this.commonService.hideLoading();
-      this.userList = res.data[dataConstant.RoleID.Roc];
+      this.userList = res.data;
     }, (err: any) => {
       this.commonService.hideLoading();
       this.commonService.toastErrorMsg('Error', err.message);

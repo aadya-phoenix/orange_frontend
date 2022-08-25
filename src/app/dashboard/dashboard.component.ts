@@ -223,16 +223,10 @@ export class DashboardComponent implements OnInit {
       const status = this.profileDetails.data?.staff == 1 ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
       this.router.navigateByUrl(`/dashboard/olreport?status=${status}`);
     }
-  }
-  
-  navigatetoPendingCarousel() {
-    const status = this.isRequester ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
-    this.router.navigateByUrl(`/dashboard/olcarousel?status=${status}`);
-  }
-
-  navigatetoPendingBackOffice() {
-    const status = this.isRequester ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
-    this.router.navigateByUrl(`/dashboard/back-office?status=${status}`);
+    if (module == this.modules.backOffice) {
+      const status = this.isRequester ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
+      this.router.navigateByUrl(`/dashboard/back-office?status=${status}`);
+    }
   }
 
   setFavourite(item: any) {

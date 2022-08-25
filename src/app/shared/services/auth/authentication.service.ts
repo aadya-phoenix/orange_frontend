@@ -85,6 +85,14 @@ export class AuthenticationService {
       .pipe(catchError(this.Errorhandling));
   }
 
+  getROMROCList(rom_id:any) {
+    const url = `api/${this.apiVersion}/rom/${rom_id}/roc`;
+    const urllive = `${this.basePath}api/${this.apiVersion}/role-users`;
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.Errorhandling));
+  }
+
   lastLogin() {
     const url = `/api/${this.apiVersion}/user/last-login`;
     return this.http.post(url, {}).pipe(catchError(this.Errorhandling));

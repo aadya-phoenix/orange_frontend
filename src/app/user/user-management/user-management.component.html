@@ -41,76 +41,80 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header cm-card-header">
+                        <!-- <div class="card-header cm-card-header">
                             <div class="overall_css">
                                 <div>
                                     <i class="fa fa-table fa_table" aria-hidden="true "></i>
-                                    <span class="card-title card-title-text card_overall">{{lableConstant.My_Request}}</span>
+                                    <span
+                                        class="card-title card-title-text card_overall">{{lableConstant.My_Request}}</span>
                                 </div>
-                                <div class="filter_dispaly">                                  
-                                    <button class=" btn btn-primary btn_adduser mt-3" [routerLink]="['/user/create']" data-toggle="modal" 
-                                    >
-                                        <i class="fa fa-plus mr-1" aria-hidden="true"></i><span>{{lableConstant.add_user}}</span>
-                                      </button>
-                                  </div>      
+                               
                             </div>
-                        </div>
+                        </div> -->
                         <div class="card-header cm-card-header">
                             <div class="overall_css">
                                 <div>
-                                </div>                                  
+                                </div>
                                 <div class="filter_dispaly">
                                     <div class="form-group filter_course mr-1">
-                                        <label class="label_course">{{lableConstant.filter_by_active_inactive_users}}</label>
-                                        <select class="form-control  form_width" (change)="getActiveFilterRecords($event.target.value)"
-                                         >
-                                          <option selected='selected' value=''>{{lableConstant.View_All}}</option>
-                                         <option *ngFor="let status of activeUserList"
-                                         [value]="status.id">{{status.name}}</option>
+                                        <label
+                                            class="label_course">{{lableConstant.filter_by_active_inactive_users}}</label>
+                                        <select class="form-control  form_width"
+                                            (change)="getActiveFilterRecords($event.target.value)">
+                                            <option selected='selected' value=''>{{lableConstant.View_All}}</option>
+                                            <option *ngFor="let status of activeUserList" [value]="status.id">
+                                                {{status.name}}</option>
                                         </select>
-                                      </div>  
-                                      <div class="form-group filter_course mr-1">
+                                    </div>
+                                    <div class="form-group filter_course mr-1">
                                         <label class="label_course">{{lableConstant['filter_by_pd&l_members']}}</label>
-                                        <select class="form-control  form_width" (change)="getPdlFilterRecords($event.target.value)"
-                                         >
-                                          <option selected='selected' value=''>{{lableConstant.View_All}}</option>
-                                         <option value="1">{{lableConstant.pdl_member}}</option>
+                                        <select class="form-control  form_width"
+                                            (change)="getPdlFilterRecords($event.target.value)">
+                                            <option selected='selected' value=''>{{lableConstant.View_All}}</option>
+                                            <option value="1">{{lableConstant.pdl_member}}</option>
                                         </select>
                                     </div>
                                     <div class="form-group filter_course mr-1">
                                         <label class="label_course">{{lableConstant.filter_by_admin}}</label>
-                                        <select class="form-control  form_width" (change)="getAdminFilterRecords($event.target.value)"
-                                         >
-                                          <option selected='selected' value=''>{{lableConstant.View_All}}</option>
-                                         <option value="1">{{lableConstant.admin}}</option>
+                                        <select class="form-control  form_width"
+                                            (change)="getAdminFilterRecords($event.target.value)">
+                                            <option selected='selected' value=''>{{lableConstant.View_All}}</option>
+                                            <option value="1">{{lableConstant.admin}}</option>
                                         </select>
-                                    </div>  
-                                    <div class="form-group filter_course mr-1">
-                                      <label class="label_course">{{lableConstant.filter_by_role}}</label>
-                                      <select class="form-control  form_width" (change)="getRoleFilterRecords($event.target.value)"
-                                       >
-                                        <option selected='selected' value=''>{{lableConstant.View_All}}</option>
-                                       <option *ngFor="let role of rolesList"
-                                       [value]="role.id">{{role.role}}</option>
-                                      </select>
-                                    </div>                 
-                                    <div _ngcontent-cue-c109=" " class="form-group filter_course mr-1">
-                                      <label _ngcontent-cue-c109=" " class="label_course text_black">{{lableConstant.Search}}</label>
-                                      <input _ngcontent-cue-c109=" " type="text " name="search " autocomplete="off "
-                                        [(ngModel)]="searchText" placeholder=" "
-                                        class="form-control ng-untouched ng-pristine ng-valid form_width" ng-reflect-name="search " />
                                     </div>
-                                  </div>                                
-                            </div>                 
+                                    <div class="form-group filter_course mr-1">
+                                        <label class="label_course">{{lableConstant.filter_by_role}}</label>
+                                        <select class="form-control  form_width"
+                                            (change)="getRoleFilterRecords($event.target.value)">
+                                            <option selected='selected' value=''>{{lableConstant.View_All}}</option>
+                                            <option *ngFor="let role of rolesList" [value]="role.id">{{role.role}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div _ngcontent-cue-c109=" " class="form-group filter_course mr-1">
+                                        <label _ngcontent-cue-c109=" "
+                                            class="label_course text_black">{{lableConstant.Search}}</label>
+                                        <input _ngcontent-cue-c109=" " type="text " name="search " autocomplete="off "
+                                            [(ngModel)]="searchText" placeholder=" "
+                                            class="form-control ng-untouched ng-pristine ng-valid form_width"
+                                            ng-reflect-name="search " />
+                                    </div>
+                                    <button class=" btn btn-primary btn_adduser mt-3" [routerLink]="['/user/create']"
+                                        data-toggle="modal">
+                                        <i class="fa fa-plus mr-1"
+                                            aria-hidden="true"></i><span>{{lableConstant.add_user}}</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive table_height_scroll">
+                            <div class="table-responsive">
                                 <table id="bootstrap-data-table-export " class="table table-striped table-bordered">
                                     <thead class="sticky_header">
                                         <tr class="text-center font-13">
                                             <th sortable="user_name" (sort)="onSort($event)">
                                                 {{lableConstant.username}}
-                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true" ></i>
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true"></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
                                             <th sortable="email" (sort)="onSort($event)">
@@ -154,22 +158,22 @@
                                     <tbody>
                                         <tr *ngFor="let item of userListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber }"
                                             class="text-center bac_hover-table font-12">
-                                            <td (click)="viewRequest(item)" >{{ item && item.name ? item.name :
+                                            <td (click)="viewRequest(item)">{{ item && item.name ? item.name :
                                                 "-" }}</td>
-                                             <td (click)="viewRequest(item)">{{ item && item.email ? item.email :
+                                            <td (click)="viewRequest(item)">{{ item && item.email ? item.email :
                                                 "-" }}</td>
                                             <td (click)="viewRequest(item)">{{ item.first_name }}
                                             </td>
                                             <td (click)="viewRequest(item)">{{ item.last_name }}
                                             </td>
                                             <td (click)="viewRequest(item)">{{ item.role }}</td>
-                                            <td (click)="viewRequest(item)">{{ item.pdl_member == 1 ? 'Yes' : 'No' }}</td>
+                                            <td (click)="viewRequest(item)">{{ item.pdl_member == 1 ? 'Yes' : 'No' }}
+                                            </td>
                                             <td (click)="viewRequest(item)">{{ item.admin == 1 ? 'Yes' : 'No' }}</td>
-                                            <td (click)="viewRequest(item)">{{ item.status == 1 ? 'Yes' : 'No'  }}</td>
+                                            <td (click)="viewRequest(item)">{{ item.status == 1 ? 'Yes' : 'No' }}</td>
                                             <td class="text-center">
-                                                <a (click)="viewRequest(item)"
-                                                    class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
-                                                    title="Edit">
+                                                <a (click)="viewRequest(item)" class="copy_file mr-1"
+                                                    data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
                                             </td>

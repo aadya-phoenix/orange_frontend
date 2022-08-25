@@ -304,7 +304,7 @@ export class CreateBackOfficeComponent implements OnInit {
     if (this.back_office_details?.status === this.BackOfficeStatus.publish || this.back_office_details?.status === this.BackOfficeStatus.expired || this.back_office_details?.status === this.BackOfficeStatus.reject) {
       return false;
     }
-    if (this.isRequester || !this.back_office_details.id) {
+    if ((this.isRequester && !this.isReviewer && !this.isPublisher) || !this.back_office_details.id) {
       return false;
     }
     if (this.back_office_details?.status === this.BackOfficeStatus.draft) {

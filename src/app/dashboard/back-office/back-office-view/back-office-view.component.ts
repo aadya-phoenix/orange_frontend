@@ -132,7 +132,7 @@ export class BackOfficeViewComponent implements OnInit {
     if (this.requestdata?.status === this.BackOfficeStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
       return false;  
     }
-    if(this.isRequester){
+    if (this.isRequester && !this.isPublisher && !this.isReviewer) {
       return false;
     }
     if(this.requestdata?.status === this.BackOfficeStatus.draft){

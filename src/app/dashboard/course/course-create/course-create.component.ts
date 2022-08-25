@@ -474,7 +474,8 @@ export class CourseCreateComponent implements OnInit {
         this.createCourceForm.addControl('digital', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('purchase_order', new FormControl(''));
         this.createCourceForm.addControl('who_see_course', new FormControl(''));
-        this.createCourceForm.addControl('external_vendor', new FormControl('', [Validators.required]));
+        this.createCourceForm.removeControl('external_vendor');
+        this.createCourceForm.removeControl('external_vendor_name');
         this.createCourceForm.removeControl('video_link');
         this.createCourceForm.removeControl('delivery_method');
         this.createCourceForm.removeControl('manager_approval');
@@ -513,11 +514,6 @@ export class CourseCreateComponent implements OnInit {
           this.createCourceForm.controls.expiry_date_type.setValue(this.course_details.expiry_date_type);
           if (this.course_details.purchase_order) {
             this.createCourceForm.controls.purchase_order.setValue(this.course_details.purchase_order);
-          }
-          this.createCourceForm.controls.external_vendor.setValue(this.course_details.external_vendor);
-          if (this.course_details.external_vendor == 'yes') {
-            this.externalVendorname = true;
-            this.createCourceForm.addControl('external_vendor_name', new FormControl(this.course_details.external_vendor_name, [Validators.required]));
           }
           if (this.course_details.certification == 'yes') {
             this.showCertificateExpiry = true;

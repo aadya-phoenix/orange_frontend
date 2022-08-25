@@ -113,6 +113,7 @@ export class SmedbCreateComponent implements OnInit {
     });
 
     this.createSmedbForm.get("available")?.valueChanges.subscribe((x: string) => {
+      debugger;
       if (x === 'yes') {
         this.isAvailable = true;
         this.createSmedbForm.addControl('end_date', new FormControl('', [Validators.required]));
@@ -480,7 +481,8 @@ export class SmedbCreateComponent implements OnInit {
     return this.formBuilder.group({
       id: new FormControl(id),
       certification_title: new FormControl(certification_title, [Validators.required]),
-      completion_year: new FormControl(completion_year, [Validators.required]),
+      completion_year: new FormControl(completion_year, [Validators.required,
+        Validators.pattern(dataConstant.NumbersOnlyPattern)]),
     });
   }
 
@@ -519,7 +521,7 @@ export class SmedbCreateComponent implements OnInit {
     if (this.createSmedbForm.invalid) {
       return;
     }
-    if (this.sme_details.domain && this.isProcced) {
+    if (this.sme_details && this.sme_details.domain && this.isProcced) {
       if (this.sme_details.domain.includes('content-support') && this.contentSupportForm.controls["content-support"].invalid) {
         this.selectedTab = this.SMETabs.contecntSupport;
         return;
@@ -568,7 +570,7 @@ export class SmedbCreateComponent implements OnInit {
       if (this.isProcced) {
         body.metadata_update = 1;
         body.metadata = {
-          "professional-certifications": this.professionalCertificationsForm.value["professional-certifications"],
+          "professional-certifications": this.professionalCertificationsForm.controls["professional-certifications"].value,
           "comments": this.commentsForm.value
         }
         if (this.sme_details.domain.includes('content-support')) {
