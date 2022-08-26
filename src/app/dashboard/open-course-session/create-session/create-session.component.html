@@ -408,8 +408,7 @@
                                                                         <td [formGroupName]="idx" class="d-flex">
                                                                             <textarea formControlName="description"
                                                                                 class="form-control form_width-textarea w-100 mr-2"
-                                                                                rows="3"
-                                                                                maxlength="500"
+                                                                                rows="3" maxlength="500"
                                                                                 placeholder="Enter Description"></textarea>
                                                                         </td>
                                                                         <td [formGroupName]="idx"> <input type="time"
@@ -526,7 +525,6 @@
                                                                     {{requiredMessage(this.lableConstant.Registration_Deadline)}}
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                     <!--col-->
@@ -579,7 +577,6 @@
                                                     </div>
                                                     <!--col-->
                                                     <div class="w_100">
-
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label class="form-control-label">
@@ -605,7 +602,6 @@
                                                                         {{requiredMessage(this.lableConstant.External_vendor)}}
                                                                     </div>
                                                                 </div>
-
                                                             </div>
                                                         </div>
                                                         <!--col-->
@@ -671,14 +667,10 @@
                                                         </div>
                                                     </div>
                                                     <!--col-->
-
-
                                                 </div>
                                                 <!--row-->
                                             </div>
                                         </ng-template>
-
-
                                     </ngb-panel>
                                 </div>
                             </div>
@@ -686,50 +678,54 @@
 
                     </ng-container>
                     <div class="card-footer1">
-                        <button class="btn btn-primary mr-1" type="submit" *ngIf="isStaff || (getUserrole.includes(3) && (sessionPub || session_status == 'reject') && session_status !='pending')"
+                        <button class="btn btn-primary mr-1" type="submit"
+                            *ngIf="(isStaff && !getUserrole.includes(9)) || (getUserrole.includes(3) && (sessionPub || session_status == 'reject') && session_status !='pending')"
                             (click)="createSession('pending')">{{lableConstant.submit}}</button>
-                        <button *ngIf="(getUserrole.includes(3) && ((!sessionPub && session_status != 'reject') || session_status == 'pending')) || getUserrole.includes(9)"
+                        <button
+                            *ngIf="(getUserrole.includes(3) && ((!sessionPub && session_status != 'reject') || session_status == 'pending')) || getUserrole.includes(9)"
                             class="btn btn-primary mr-1" data-target="#publishModal" data-toggle="modal"> <i
                                 class="fa fa-upload" aria-hidden="true"></i>
                             <span class="pl-1"> {{lableConstant.publish}}</span>
                         </button>
-                        <button class="btn btn-secondary" *ngIf="(isStaff && session_status != 'reject') || (getUserrole.includes(3) && session_id == 0 || sessionPub && session_status != 'pending' || session_status == 'draft') || (getUserrole.includes(9) && session_id == 0)"
+                        <button class="btn btn-secondary mr-1"
+                            *ngIf="((isStaff && !getUserrole.includes(9)) && session_status != 'reject') || (getUserrole.includes(3) && session_id == 0 || sessionPub && session_status != 'pending' || session_status == 'draft') || (getUserrole.includes(9) && session_id == 0)"
                             (click)="createSession('draft')">
                             {{lableConstant.Save_as_draft}}
                         </button>
-                        <button *ngIf="(getUserrole.includes(3) && (session_id != 0 && session_status == 'pending')) || getUserrole.includes(9)" class="btn btn-secondary"
-                        data-target="#rejectModal" data-toggle="modal">
-                        <i class="fa fa-times" aria-hidden="true"></i> <span
-                            class="pl-1">{{lableConstant.reject}}</span>
-                    </button>
+                        <button
+                            *ngIf="session_id != 0 && ((getUserrole.includes(3) && session_status == 'pending') || getUserrole.includes(9))"
+                            class="btn btn-secondary" data-target="#rejectModal" data-toggle="modal">
+                            <i class="fa fa-times" aria-hidden="true"></i> <span
+                                class="pl-1">{{lableConstant.reject}}</span>
+                        </button>
                     </div>
                     <!-- <div class="card-footer1" *ngIf="getUserrole.includes(3)"> -->
-                        <!-- <button *ngIf="(sessionPub || session_status == 'reject') && session_status !='pending'"
+                    <!-- <button *ngIf="(sessionPub || session_status == 'reject') && session_status !='pending'"
                             class="btn btn-primary mr-1" type="submit"
                             (click)="createSession('pending')">{{lableConstant.submit}}</button> -->
-                        
-                        <!-- <button
+
+                    <!-- <button
                             *ngIf="session_id == 0 || sessionPub && session_status != 'pending' || session_status == 'draft'"
                             class="btn btn-secondary" (click)="createSession('draft')">
                             {{lableConstant.Save_as_draft}}
                         </button> -->
-                        <!-- <button *ngIf="session_id != 0 && (!sessionPub || session_status == 'pending') && (session_status != 'draft' && session_status != 'reject')" class="btn btn-secondary" data-target="#rejectModal" data-toggle="modal" >
+                    <!-- <button *ngIf="session_id != 0 && (!sessionPub || session_status == 'pending') && (session_status != 'draft' && session_status != 'reject')" class="btn btn-secondary" data-target="#rejectModal" data-toggle="modal" >
                                 <i class="fa fa-times" aria-hidden="true"></i> <span
                                         class="pl-1">{{lableConstant.reject}}</span>
                             </button> -->
-                        <!-- <button *ngIf="getUserrole.includes(3) && (session_id != 0 && session_status == 'pending')" class="btn btn-secondary"
+                    <!-- <button *ngIf="getUserrole.includes(3) && (session_id != 0 && session_status == 'pending')" class="btn btn-secondary"
                             data-target="#rejectModal" data-toggle="modal">
                             <i class="fa fa-times" aria-hidden="true"></i> <span
                                 class="pl-1">{{lableConstant.reject}}</span>
                         </button> -->
                     <!-- </div> -->
                     <!-- <div class="card-footer1" *ngIf="getUserrole.includes(9)"> -->
-                        <!-- <button class="btn btn-primary mr-1" type="submit" data-target="#publishModal"
+                    <!-- <button class="btn btn-primary mr-1" type="submit" data-target="#publishModal"
                             data-toggle="modal">{{lableConstant.publish}}</button> -->
-                        <!-- <button *ngIf="session_id == 0" class="btn btn-secondary" (click)="createSession('draft')">
+                    <!-- <button *ngIf="session_id == 0" class="btn btn-secondary" (click)="createSession('draft')">
                             {{lableConstant.Save_as_draft}}
                         </button> -->
-                        <!-- <button *ngIf="session_id != 0" class="btn btn-secondary" data-toggle="modal"
+                    <!-- <button *ngIf="session_id != 0" class="btn btn-secondary" data-toggle="modal"
                             data-target="#rejectModal">
                             <i class="fa fa-times" aria-hidden="true"></i> <span
                                 class="pl-1">{{lableConstant.reject}}</span>

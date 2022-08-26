@@ -42,7 +42,7 @@ export class DesignLearningRatingComponent implements OnInit {
     { id: 'design_start', name: 'Design Started' },
     { id: 'development_start', name: 'Development Started' },
     { id: 'on_hold', name: 'On Hold' },
-    { id: 'close', name: 'Close Request' },
+    { id: 'close', name: this.lableConstant.close_request },
   ];
   constructor(private formBuilder: FormBuilder,
     private modalService: NgbActiveModal,

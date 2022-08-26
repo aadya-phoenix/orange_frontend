@@ -30,7 +30,7 @@ export class DesignLearningForwardComponent implements OnInit {
   public statusObj: any = [
     { id: 'design_start', name: 'Design Started' },
     { id: 'development_start', name: 'Development Started' },
-    { id: 'close', name: 'Close Request' },
+    { id: 'close', name: this.lableConstant.close_request },
   ];
 
 

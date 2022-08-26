@@ -19,7 +19,7 @@ export class GetReportViewComponent implements OnInit {
   id = 0;
   requestdata: any = {};
   getUserrole: any = {};
-  getprofileDetails:any = {};
+  getprofileDetails: any = {};
   public historyList: any;
   dateFormate = dataConstant.dateFormate;
   RoleID = dataConstant.RoleID;
@@ -34,7 +34,7 @@ export class GetReportViewComponent implements OnInit {
     private commonService: CommonService,
     private modalService: NgbModal,
     private router: Router
-  ) { 
+  ) {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
@@ -52,17 +52,17 @@ export class GetReportViewComponent implements OnInit {
     });
   }
 
-  getReportDetails(){
+  getReportDetails() {
     this.commonService.showLoading();
     this.getReportService.getReportDetails(this.id).subscribe(
       (res: any) => {
         this.commonService.hideLoading();
         if (res.status == 1 && res.message == 'Success') {
           this.requestdata = res.data;
-          if(this.requestdata.region_name){
+          if (this.requestdata.region_name) {
             this.requestdata.region_name = JSON.parse(this.requestdata.region_name);
           }
-          if(this.requestdata.attachment){
+          if (this.requestdata.attachment) {
             this.requestdata.attachUrl = `${dataConstant.ImageUrl}/${this.requestdata.attachment}`;
           }
         }
@@ -74,7 +74,7 @@ export class GetReportViewComponent implements OnInit {
     );
   }
 
-  getHistory(){
+  getHistory() {
     this.commonService.showLoading();
     this.getReportService.getReportHistory(this.id).subscribe((res: any) => {
       this.commonService.hideLoading();
@@ -82,10 +82,10 @@ export class GetReportViewComponent implements OnInit {
         this.historyList = res.data;
       }
     },
-    (err: any) => {
-      this.commonService.errorHandling(err);
-      this.commonService.hideLoading();
-    });
+      (err: any) => {
+        this.commonService.errorHandling(err);
+        this.commonService.hideLoading();
+      });
   }
 
   updateRequest() {
@@ -95,109 +95,109 @@ export class GetReportViewComponent implements OnInit {
   }
 
   isUpdate() {
-    if (this.requestdata?.status == this.GetReportStatus.publish || this.requestdata?.status_show == this.GetReportStatus.transferred ||  (this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status == this.GetReportStatus.pending)){
-      return false;  
-    }
-    if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
-      return false;  
-    }
-    if (this.requestdata?.status == this.GetReportStatus.draft){
-      return true;  
-    }
-    if(this.isRequester && (this.requestdata?.status == this.GetReportStatus.publish || this.requestdata?.status == this.GetReportStatus.pending)){
-     return false;
-    }
-    if(!this.requestdata?.transfer_user_id && this.requestdata?.status == this.GetReportStatus.pending && this.isRequester){
+    if (this.requestdata?.status == this.GetReportStatus.publish || this.requestdata?.status_show == this.GetReportStatus.transferred || (this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status == this.GetReportStatus.pending)) {
       return false;
     }
-    if(this.requestdata?.user_id != this.getprofileDetails.data.id && this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isRoc){
+    if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id) {
       return false;
     }
-    if(this.isRoc && (this.requestdata.user_id == this.getprofileDetails.data.id) && (this.requestdata?.status_show == this.GetReportStatus.submitted)){
+    if (this.requestdata?.status == this.GetReportStatus.draft) {
+      return true;
+    }
+    if (this.isRequester && (this.requestdata?.status == this.GetReportStatus.publish || this.requestdata?.status == this.GetReportStatus.pending)) {
       return false;
     }
-    return true;
-  }
-
-  isPublish(){
-    if (this.requestdata?.status == this.GetReportStatus.publish|| this.requestdata?.status == this.GetReportStatus.publish || this.requestdata?.status == this.GetReportStatus.draft || this.requestdata?.status_show == this.GetReportStatus.transferred || this.requestdata?.status == this.GetReportStatus.reject){
-      return false;  
-    }
-  /*   if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
-      return false;  
-    }
-    if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id == this.getprofileDetails.data.id){
-      return false;  
-    } */
-    if(this.isRequester){
+    if (!this.requestdata?.transfer_user_id && this.requestdata?.status == this.GetReportStatus.pending && this.isRequester) {
       return false;
     }
-    if(this.requestdata.user_id === this.getprofileDetails.data.id && this.requestdata?.status_show === this.GetReportStatus.submitted){
+    if (this.requestdata?.user_id != this.getprofileDetails.data.id && this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isRoc) {
       return false;
     }
-    if(this.requestdata?.user_id != this.getprofileDetails.data.id && this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status ){
-      return false;
-    } 
-    if(this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status == this. GetReportStatus.pending){
-      return false;
-    } 
-    return true;
-  }
-
-  isForward(){
-    if (this.requestdata?.status == this.GetReportStatus.publish|| this.requestdata?.status == this.GetReportStatus.expired || this.requestdata?.status == this.GetReportStatus.reject|| this.requestdata?.status == this.GetReportStatus.draft || this.requestdata?.status_show == this.GetReportStatus.transferred){
-      return false;  
-    }
-    if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
-      return false;  
-    }
-    if(!this.isRoc){
-      return false;
-    }
-    if(this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status == this. GetReportStatus.pending){
-      return false;
-    }
-  
-    if(this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isRoc){
-      return false;
-    }
-
-    return true;
-  }
-
-  isReject(){
-    if (this.requestdata?.status == this.GetReportStatus.publish|| this.requestdata?.status == this.GetReportStatus.expired || this.requestdata?.status == this.GetReportStatus.reject || this.requestdata?.status_show == this.GetReportStatus.transferred){
-      return false;  
-    }
-    if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
-      return false;  
-    }
-    if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id == this.getprofileDetails.data.id){
-      return false;  
-    }
-    if(this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status == this. GetReportStatus.pending){
-      return false;
-    }
-    if(this.isRequester){
-      return false;
-    }
-    if(this.requestdata?.status == this.GetReportStatus.draft){
-      return false;
-    }
-    if(this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isRoc){
+    if (this.isRoc && (this.requestdata.user_id == this.getprofileDetails.data.id) && (this.requestdata?.status_show == this.GetReportStatus.submitted)) {
       return false;
     }
     return true;
   }
 
-  isOtherRoc(){
-    if(this.isRoc && this.requestdata?.status_show == this.GetReportStatus.pending){
+  isPublish() {
+    if (this.requestdata?.status == this.GetReportStatus.publish || this.requestdata?.status == this.GetReportStatus.draft || this.requestdata?.status_show == this.GetReportStatus.transferred || this.requestdata?.status == this.GetReportStatus.reject) {
+      return false;
+    }
+    /*   if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
+        return false;  
+      }
+      if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id == this.getprofileDetails.data.id){
+        return false;  
+      } */
+    if (this.isRequester && !this.isRoc && !this.isDataAnalyst) {
+      return false;
+    }
+    if (this.requestdata.user_id === this.getprofileDetails.data.id && this.requestdata?.status_show === this.GetReportStatus.submitted) {
+      return false;
+    }
+    if (this.requestdata?.user_id != this.getprofileDetails.data.id && this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status) {
+      return false;
+    }
+    if (this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status == this.GetReportStatus.pending) {
+      return false;
+    }
+    return true;
+  }
+
+  isForward() {
+    if (!this.isRoc) {
+      return false;
+    }
+    if (this.requestdata?.status == this.GetReportStatus.publish || this.requestdata?.status == this.GetReportStatus.expired || this.requestdata?.status == this.GetReportStatus.reject || this.requestdata?.status == this.GetReportStatus.draft || this.requestdata?.status_show == this.GetReportStatus.transferred) {
+      return false;
+    }
+    if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id) {
+      return false;
+    }
+    if (this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status == this.GetReportStatus.pending) {
+      return false;
+    }
+
+    if (this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isRoc) {
+      return false;
+    }
+
+    return true;
+  }
+
+  isReject() {
+    if (this.requestdata?.status == this.GetReportStatus.publish || this.requestdata?.status == this.GetReportStatus.expired || this.requestdata?.status == this.GetReportStatus.reject || this.requestdata?.status_show == this.GetReportStatus.transferred) {
+      return false;
+    }
+    if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id) {
+      return false;
+    }
+    if (this.requestdata?.status == this.GetReportStatus.reject && this.requestdata?.user_id == this.getprofileDetails.data.id) {
+      return false;
+    }
+    if (this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status == this.GetReportStatus.pending) {
+      return false;
+    }
+    if (this.isRequester && !this.isRoc && !this.isDataAnalyst) {
+      return false;
+    }
+    if (this.requestdata?.status == this.GetReportStatus.draft) {
+      return false;
+    }
+    if (this.requestdata?.transfer_user_id && !this.requestdata?.publisher_status && this.isRoc) {
+      return false;
+    }
+    return true;
+  }
+
+  isOtherRoc() {
+    if (this.isRoc && this.requestdata?.status_show == this.GetReportStatus.pending) {
       return true;
     }
     return false
   }
 
-  transferToOtherRoc(){
+  transferToOtherRoc() {
     const modalRef = this.modalService.open(GetReportTransferToOtherRocComponent, {
       centered: true,
       size: 'lg',
@@ -212,7 +212,7 @@ export class GetReportViewComponent implements OnInit {
   forwardRequest() {
     Swal.fire({
       title: 'Are you sure you want to Transfer to Data Analyst?',
-      text: 'Transfer to Data Analyst',
+      text: this.lableConstant.transfer_to_data_analyst,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, Transfer it!',
@@ -220,7 +220,7 @@ export class GetReportViewComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.commonService.showLoading();
-        this.getReportService.getReportTransfer({report_id :this.id}).subscribe((res:any)=>{
+        this.getReportService.getReportTransfer({ report_id: this.id }).subscribe((res: any) => {
           this.commonService.hideLoading();
           Swal.fire(
             this.lableConstant.transferred,
@@ -228,16 +228,16 @@ export class GetReportViewComponent implements OnInit {
             'success'
           )
           this.router.navigate(['/dashboard/olreport']);
-        },(err:any)=>{
+        }, (err: any) => {
           this.commonService.hideLoading();
           this.commonService.errorHandling(err);
         })
-        
+
       }
     })
-}
+  }
 
-  statusChangeRequest(status:any){
+  statusChangeRequest(status: any) {
     const modalRef = this.modalService.open(GetReportPublishComponent, {
       centered: true,
       size: 'lg',
@@ -246,9 +246,9 @@ export class GetReportViewComponent implements OnInit {
     modalRef.componentInstance.props = {
       title: `Request ${status == this.GetReportStatus.reject ? "Reject" : "Close"}`,
       status: status,
-      status_show: status=='publish' ? 'Close':'Reject',
+      status_show: status == 'publish' ? 'Close' : 'Reject',
       data: this.requestdata.id,
       objectDetail: this.requestdata
     };
-  } 
+  }
 }

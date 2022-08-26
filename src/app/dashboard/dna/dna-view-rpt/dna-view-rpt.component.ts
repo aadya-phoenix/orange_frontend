@@ -186,7 +186,7 @@ export class DnaViewRptComponent implements OnInit {
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
-      title:  'Close Request' ,
+      title:  this.lableConstant.close_request ,
       data: this.learningIds,
       objectDetail: this.learningList,
       trackerId:this.trackerId,
