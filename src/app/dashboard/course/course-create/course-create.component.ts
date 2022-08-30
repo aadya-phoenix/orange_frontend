@@ -1174,7 +1174,7 @@ export class CourseCreateComponent implements OnInit {
 
   createUpdateCoursePublisher() {
     if (this.selectedPublisherId) {
-      this.createUpdateCourse('transfer');
+      this.createUpdateCourse('pending');
     }
   }
 

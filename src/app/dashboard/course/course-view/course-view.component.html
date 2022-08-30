@@ -61,12 +61,12 @@
 
       </div>
     </div>
-    <div class="content">
+    <div class="content" *ngIf="status == 'draft'  || (isStaff && !(getUserrole.includes(3) || getUserrole.includes(4)) && status == 'reject')">
       <div class="animated fadeIn">
         <div class="row">
           <div class="col-md-12">
 
-            <div class="mb-2" *ngIf="status == 'draft'  || (isStaff && status == 'reject')">
+            <div class="mb-2" >
               <div class="">
                 <div class="Requs_btn_inl">
                   <div class="Requs_btn_inl-child">
@@ -87,7 +87,7 @@
       <div class="animated fadeIn">
         <div class="mb-2">
           <div class="Requs_btn_inl"
-            *ngIf="!isStaff && getprofileDetails && showrejectbutton != getprofileDetails.data.id">
+            *ngIf="(!isStaff || (isStaff && (getUserrole.includes(3) || getUserrole.includes(4)))) && getprofileDetails && showrejectbutton != getprofileDetails.data.id">
             <div class="Requs_btn_inl-child">
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#publishModal"
                 *ngIf="getUserrole.includes(4) && status != 'publish' && showrejectbutton != getprofileDetails.data.id">

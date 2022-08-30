@@ -679,7 +679,7 @@
                     </ng-container>
                     <div class="card-footer1">
                         <button class="btn btn-primary mr-1" type="submit"
-                            *ngIf="(isStaff && !getUserrole.includes(9)) || (getUserrole.includes(3) && (sessionPub || session_status == 'reject') && session_status !='pending')"
+                            *ngIf="session_status !='pending' && (isStaff && !(getUserrole.includes(9) || getUserrole.includes(3))) && (sessionPub || session_status == 'reject')"
                             (click)="createSession('pending')">{{lableConstant.submit}}</button>
                         <button
                             *ngIf="(getUserrole.includes(3) && ((!sessionPub && session_status != 'reject') || session_status == 'pending')) || getUserrole.includes(9)"
@@ -688,7 +688,7 @@
                             <span class="pl-1"> {{lableConstant.publish}}</span>
                         </button>
                         <button class="btn btn-secondary mr-1"
-                            *ngIf="((isStaff && !getUserrole.includes(9)) && session_status != 'reject') || (getUserrole.includes(3) && session_id == 0 || sessionPub && session_status != 'pending' || session_status == 'draft') || (getUserrole.includes(9) && session_id == 0)"
+                            *ngIf="session_status == 'draft' || session_id == 0"
                             (click)="createSession('draft')">
                             {{lableConstant.Save_as_draft}}
                         </button>

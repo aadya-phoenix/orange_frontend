@@ -281,7 +281,7 @@ export class CreateCarouselComponent implements OnInit {
     if (this.carousel_details?.status === this.CarouselStatus.publish || this.carousel_details?.status === this.CarouselStatus.expired  || this.carousel_details?.status === this.CarouselStatus.reject) {
       return false;
     }
-    if (this.isRequester || !this.carousel_details.id) {
+    if (!this.isRequester || (this.isRequester && (this.isPublisher || this.isReviewer)) || !this.carousel_details.id) {
       return false;
     }
     if (this.carousel_details?.status === this.CarouselStatus.draft) {
