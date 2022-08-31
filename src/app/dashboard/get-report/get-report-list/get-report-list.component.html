@@ -81,7 +81,7 @@
                                             class="number_css sub_mitted">{{report_count.submitted?report_count.submitted:0}}</span>
                                     </div>
                                 </div>
-                                <div class="Course_icon_child" *ngIf="!isRequester">
+                                <div class="Course_icon_child" *ngIf="isRoc || isDataAnalyst">
                                     <div class="alig_dashicon" (click)="showRecords(reportStatus.pending)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des bac_yellow">
@@ -256,8 +256,8 @@
                                                 {{ item.deadline | date: dateFormate }}
                                             </td>
                                             <td>
-                                                <a *ngIf="item.status_new == reportStatus.closed"
-                                                href="{{attachUrl+'/'+item.attachment}}">
+                                                <a  *ngIf="item.status_new == reportStatus.closed && item.report_attachment" 
+                                                href="{{item.imgUrl}}" (click)="repot(item.imgUrl)">
                                                     <i class="fa fa-download" aria-hidden="true"></i>
                                                 </a>
                                             </td>

@@ -134,6 +134,11 @@ export class GetReportListComponent implements OnInit {
         this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
           this.reportList = res.data.get_report;
+          this.reportList.forEach((x:any)=>{
+            if(x.report_attachment){
+              x.imgUrl = `${dataConstant.ImageUrl}/${x.report_attachment}`;
+            }
+          })
           this.report_count = res.data.get_report_count;
           this.showRecords(this.selectedStatus);
         }
@@ -208,5 +213,9 @@ export class GetReportListComponent implements OnInit {
     if (item && item.id) {
       this.router.navigateByUrl(`/dashboard/olreport/update/${item.id}`);
     }
+  }
+
+  repot(x:any){
+    console.log("x",x);
   }
 }

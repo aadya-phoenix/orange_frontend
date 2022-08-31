@@ -62,8 +62,8 @@ export class GetReportViewComponent implements OnInit {
           if (this.requestdata.region_name) {
             this.requestdata.region_name = JSON.parse(this.requestdata.region_name);
           }
-          if (this.requestdata.attachment) {
-            this.requestdata.attachUrl = `${dataConstant.ImageUrl}/${this.requestdata.attachment}`;
+          if (this.requestdata.report_attachment) {
+            this.requestdata.attachUrl = `${dataConstant.ImageUrl}/${this.requestdata.report_attachment}`;
           }
         }
       },
