@@ -24,6 +24,7 @@ export class ViewSessionComponent implements OnInit {
   status_show:string='';
   sessiondata: any = {};
   getUserrole: any;
+  userDetails:any;
   rejectcomment:string='';
   publishComment:string='';
   closeResult:string = "";
@@ -45,7 +46,8 @@ export class ViewSessionComponent implements OnInit {
   ) { 
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
-    this.isStaff = this.authService.getUserDetailslocal().staff == 1 ? true : false;
+    this.userDetails = this.authService.getUserDetailslocal();
+    this.isStaff = this.userDetails.staff == 1 ? true : false;
   }
 
   ngOnInit(): void {

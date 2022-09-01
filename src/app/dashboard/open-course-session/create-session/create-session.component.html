@@ -696,7 +696,7 @@
                             {{lableConstant.Save_as_draft}}
                         </button>
                         <button
-                            *ngIf="session_id != 0 && ((getUserrole.includes(3) && session_status == 'pending') || getUserrole.includes(9))"
+                            *ngIf="session_id != 0 && session_details.user_id != getUserDetails.id  && ((getUserrole.includes(3) && session_status == 'pending') || getUserrole.includes(9))"
                             class="btn btn-secondary" data-target="#rejectModal" data-toggle="modal">
                             <i class="fa fa-times" aria-hidden="true"></i> <span
                                 class="pl-1">{{lableConstant.reject}}</span>

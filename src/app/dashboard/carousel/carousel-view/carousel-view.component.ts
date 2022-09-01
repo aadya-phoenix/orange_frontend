@@ -134,7 +134,7 @@ export class CarouselViewComponent implements OnInit {
     if (this.requestdata?.status === this.CarouselStatus.reject && this.requestdata?.user_id != this.getprofileDetails.data.id){
       return false;  
     }
-    if (!this.isRequester || (this.isRequester && (this.isPublisher || this.isReviewer))) {
+    if (!this.isRequester || (this.isRequester && !(this.isPublisher || this.isReviewer))) {
       return false;
     }
     if(this.requestdata?.status === this.CarouselStatus.draft){
