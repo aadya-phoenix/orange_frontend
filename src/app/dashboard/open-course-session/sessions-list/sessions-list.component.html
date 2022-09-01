@@ -245,7 +245,7 @@
                             data-toggle="tooltip" data-placement="top" title="Delete">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                           </a>
-                          <a *ngIf="(session.status=='reject' && isStaff) || (getUserrole.includes(3) &&session.status === 'reject' && session.user_id === getprofileDetails.data.id)" (click)="editRequest(session)" class="copy_file mr-1"
+                          <a *ngIf="(session.status=='reject' && isStaff && session.user_id == getprofileDetails.data?.id ) || (getUserrole.includes(3) &&session.status === 'reject' && session.user_id === getprofileDetails.data.id)" (click)="editRequest(session)" class="copy_file mr-1"
                             data-toggle="tooltip" data-placement="top" title="Edit">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                           </a>

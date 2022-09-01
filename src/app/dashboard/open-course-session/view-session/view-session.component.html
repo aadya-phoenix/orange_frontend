@@ -58,7 +58,7 @@
    
     <div class="content">
         <div class="animated fadeIn">
-             <div class="mb-2" *ngIf ="isStaff && (status == 'reject' || status == 'draft') || status == 'draft' || (getUserrole.includes(3) && status == 'reject')">
+             <div class="mb-2" *ngIf ="(isStaff && sessiondata.user_id == userDetails.id) && (status == 'reject' || status == 'draft') || status == 'draft' || (getUserrole.includes(3) && status == 'reject')">
               
                     <div class="Requs_btn_inl">
                         <div class="Requs_btn_inl-child">

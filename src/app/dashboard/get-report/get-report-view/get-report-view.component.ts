@@ -95,6 +95,9 @@ export class GetReportViewComponent implements OnInit {
   }
 
   isUpdate() {
+    if ((this.isRoc || this.isDataAnalyst )&& this.requestdata?.status_show == this.GetReportStatus.pending) {
+      return true;
+    }
     if (this.requestdata?.status == this.GetReportStatus.publish || this.requestdata?.status_show == this.GetReportStatus.transferred || (this.requestdata?.user_id == this.getprofileDetails.data.id && this.requestdata?.status == this.GetReportStatus.pending)) {
       return false;
     }

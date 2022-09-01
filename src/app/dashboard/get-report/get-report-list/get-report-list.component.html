@@ -272,7 +272,7 @@
                                                     <i class="fa fa-files-o" aria-hidden="true"></i>
                                                 </a>
                                                 <a (click)="editRequest(item)"
-                                                    *ngIf="item.status_show === reportStatus.draft || (item.status === reportStatus.reject && item.user_id === getprofileDetails.data.id)"
+                                                    *ngIf="item.status_show === reportStatus.draft || (item.status_show === reportStatus.reject && isRequester && item.user_id === getprofileDetails.data.id) || (item.status_show == reportStatus.pending && (isRoc || isDataAnalyst))"
                                                     class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                     title="Edit">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
