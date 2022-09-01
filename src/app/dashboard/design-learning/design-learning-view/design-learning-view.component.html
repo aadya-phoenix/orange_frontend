@@ -100,9 +100,22 @@
             </div> 
             <div class="row mb-3">
                 <div class="col-sm-12">
-                    <div class="">
-                        <div class="card mb-2" >
-                            <div class="card-header color-orange">
+                    <ngb-accordion #acc="ngbAccordion" activeIds="custom-panel-1" class="d-flex">
+
+                    
+                   <!--  <div class="">
+                        <div class="card mb-2" > -->
+                            <ngb-panel id="custom-panel-1" class="mr-1 w_100  ">
+                                <ng-template ngbPanelTitle>
+                                    <span class="row">
+                                        {{lableConstant.View_History}} <h5 class="card-title ml-1">
+                                            <b class="color-orange"> ({{requestdata.request_id}})</b>
+                                        </h5>
+                                    </span>
+                                </ng-template>
+                            
+                            
+                          <!--   <div class="card-header color-orange">
                                 <div class="d-flex justify-content-between">
                                     <span class="row">
                                         {{lableConstant.View_History}} <h5 class="card-title ml-1">
@@ -110,8 +123,9 @@
                                         </h5>
                                     </span>
                                 </div>
-                            </div>
-                            <div class="card-body">
+                            </div> 
+                            <div class="card-body">-->
+                            <ng-template ngbPanelContent>
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr class="font-14 text-center">
@@ -139,9 +153,12 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
+                            </ng-template>
+                        </ngb-panel>
+                    </ngb-accordion>
+                           <!--  </div>
                         </div>
-                    </div>
+                    </div> -->
                     
                     <div class="card border-radius-0">
                         <div class="card-header card_header_view">

@@ -37,6 +37,7 @@ export class CreateSessionComponent implements OnInit {
     submitted: 0,
     transferred: 0
   };
+  remainingText:any;
   public deliveryMethod: any;
   public preferedInstructor: any;
   newInstructorObj:any=[];
@@ -528,7 +529,8 @@ export class CreateSessionComponent implements OnInit {
     );
   }
 
-  numbersOnly(val: any,sessIndex:number,breakIndex:number) {
+  numbersOnly(event: any,sessIndex:number,breakIndex:number) {
+   let val = event.target.value; 
    this.metaArrayControl= (<FormArray>(<FormGroup>this.metadataArray.controls[sessIndex]).controls.break).at(breakIndex);
   
    let ctrl = this.metaArrayControl.controls['duration'] as FormControl;
@@ -556,6 +558,23 @@ export class CreateSessionComponent implements OnInit {
     if (y > 2400) {
       var durationObj2 = { duration: '' };
       this.metaArrayControl.patchValue(durationObj2);
+    } 
+  }
+
+
+ /*  valueChange() {
+    if (this.createCourceForm.value.description_single) {
+      this.remainingText = 500 - this.createCourceForm.value.description_single.length;
+    }
+    else {
+      this.remainingText = 500;
+    }
+  } */
+
+  valueChange(event:any){
+   let value = event.target.value;
+     if(value != undefined){
+    this.remainingText = 500 - value.length;
     } 
   }
 

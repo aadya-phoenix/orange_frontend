@@ -16,6 +16,7 @@ import { SmedbHistoryComponent } from './smedb-history/smedb-history.component';
 import { SmedbTermsComponent } from './smedb-terms/smedb-terms.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
+import { DigitOnlyModule } from '@uiowa/digit-only';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { NgxAudioPlayerModule } from 'ngx-audio-player';
     RichTextEditorAllModule,
     NgbModule,
     NgxDropzoneModule,
-    NgxAudioPlayerModule
+    NgxAudioPlayerModule,
+    DigitOnlyModule,
   ],
 })
 export class SmedbModule {}

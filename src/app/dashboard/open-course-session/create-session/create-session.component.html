@@ -406,12 +406,15 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td [formGroupName]="idx" class="d-flex">
-                                                                            <textarea formControlName="description"
+                                                                            <textarea maxlength="500" 
+                                                                        formControlName="description"
+                                                                        (input)="valueChange($event)"
                                                                                 class="form-control form_width-textarea w-100 mr-2"
                                                                                 rows="3" maxlength="500"
                                                                                 placeholder="Enter Description"></textarea>
+                                                                                <span class="charcter_limit">{{remainingText}} {{lableConstant.characters_remaining}}</span>
                                                                         </td>
-                                                                        <td [formGroupName]="idx"> <input type="time"
+                                                                        <td [formGroupName]="idx"> <input type="time" 
                                                                                 class="form-control form_width"
                                                                                 formControlName="duration">
                                                                         </td>

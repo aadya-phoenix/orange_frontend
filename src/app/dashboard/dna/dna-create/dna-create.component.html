@@ -49,8 +49,9 @@
                         <input type="text" [(ngModel)]="searchText" class="form-control form_width_dna" placeholder="search..">
                     </div>
                     <div>
-                    <button (click)="createNew()" class="btn btn-primary hei_27 ml-1"><span class="fon_12">Add Learning</span></button>
+                  
                     <button (click)="viewReport()" class="btn btn-primary hei_27 ml-1"><span class="fon_12">List of Employee Learning</span></button>
+                    <button (click)="createNew()" class="btn btn-primary hei_27 ml-1"><span class="fon_12">Add Learning</span></button>
                 </div>
             </div>
                 
@@ -65,9 +66,9 @@
                                 <div class="lear_box">
                              
                                  
-                                        <p class="text_hight_css" ngbTooltip="Priority">{{item.priority_name}}</p>
-                                        <img *ngIf="!item.is_digital" src="../../../../assets/images/icon/calendaro.png" class="calender_css">
-                                        <img *ngIf="item.is_digital" src="../../../../assets/images/icon/laptop.png" class="calender_css">
+                                        <p [ngClass]="item.priority_name" ngbTooltip="Priority">{{item.priority_name}}</p>
+                                        <img ngbTooltip="Learning Type" *ngIf="!item.is_digital" src="../../../../assets/images/icon/calendaro.png" class="calender_css">
+                                        <img ngbTooltip="Learning Type" *ngIf="item.is_digital" src="../../../../assets/images/icon/laptop.png" class="calender_css">
                                   
                                     </div>
                                     <p class="mb-2 fon_12 mt-2 line_hei_one" 
@@ -76,7 +77,7 @@
                              
                                  <div class="d-flex">
                                       <img src="../../../../assets/images/icon/useregroup.png" ngbTooltip="No of Participants" class="img_user_lap ml-1">
-                                      <span>{{item.number_of_participant}}</span>
+                                      <span class="parti_css">{{item.number_of_participant}}</span>
                                 </div>
                                 <div>
                                     <a (click)="update(item)" ngbTooltip="Update Added Learning"> <i class="fa fa-pencil-square-o mr-1" aria-hidden="true"></i></a>

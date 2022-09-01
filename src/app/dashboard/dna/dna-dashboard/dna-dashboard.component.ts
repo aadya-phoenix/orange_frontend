@@ -22,11 +22,14 @@ export class DnaDashboardComponent implements OnInit {
   getUserrole: any = {};
   trackerObj:any = [];
   today = new Date();
+  activeTrackerObj :any=[];
+  expiredTrackerObj :any=[];
   trackerId:number=0;
   learningList:any=[];
   learningListToShow:any=[];
   requestedTrackerList:any = [];
-
+  userName:any;
+  isAdmin = false;
   constructor(
     private authService: AuthenticationService,
     private dnaService:DnaService,
@@ -34,7 +37,11 @@ export class DnaDashboardComponent implements OnInit {
     private router:Router
   ) { 
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+    if (localStorage.getItem('userName')) {
+      this.userName = JSON.parse(localStorage.getItem('userName') as any);
+    }
     this.getUserrole = this.authService.getRolefromlocal();
+    this.isAdmin = this.userName.admin == 1 ? true: false;
     this.isRom = this.getUserrole.includes(this.RoleID.Rom);
     this.isBussinessConsultant = this.getUserrole.includes(this.RoleID.BussinessConsultant);
     this.isLearningPartner = this.getUserrole.includes(this.RoleID.LearningPartner);
@@ -110,9 +117,11 @@ export class DnaDashboardComponent implements OnInit {
       element.close_date = new Date( element.close_date);
       if(element.close_date > this.today){
         element.isStart = true;
+        this.activeTrackerObj.push(element);
       }
       else{
         element.isStart = false;
+        this.expiredTrackerObj.push(element);
       }
     });
     this.getLearningList();

@@ -62,6 +62,7 @@ export class DnaCreateComponent implements OnInit {
             'Your request has been deleted.',
             'success'
           )
+          this.getLearningList();
           this.commonService.hideLoading();
           this.router.navigateByUrl(`/dashboard/dna/create/${this.trackerId}`);
         },(err:any)=>{
