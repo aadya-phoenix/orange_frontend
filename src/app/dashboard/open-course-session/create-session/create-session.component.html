@@ -414,9 +414,11 @@
                                                                                 placeholder="Enter Description"></textarea>
                                                                                 <span class="charcter_limit">{{remainingText}} {{lableConstant.characters_remaining}}</span>
                                                                         </td>
-                                                                        <td [formGroupName]="idx"> <input type="time" 
+                                                                        <td [formGroupName]="idx"> <input type="text" 
                                                                                 class="form-control form_width"
-                                                                                formControlName="duration">
+                                                                                (keyup)="numbersOnly($event,i,idx)"
+                                                                             formControlName="duration"
+                                                                                >
                                                                         </td>
                                                                         <!-- (keyup)="numbersOnly($event,i,idx)" -->
                                                                         <td>

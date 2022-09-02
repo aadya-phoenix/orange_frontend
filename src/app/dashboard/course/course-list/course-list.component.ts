@@ -34,6 +34,7 @@ export class CourseListComponent implements OnInit {
     pageNumber: 1,
     pageSize: 10
   }
+  getUserDetails: any;
   //isReviewer = false;
   //  isPublisher = false;
   //  isRequester = false;
@@ -62,10 +63,12 @@ export class CourseListComponent implements OnInit {
   ) {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
+    this.getUserDetails = this.authService.getUserDetailslocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.isReviewer = this.getUserrole.includes(this.RoleID.Roc);
     this.isPublisher = this.getUserrole.includes(this.RoleID.CoursePublisher);
-    this.isRequester = this.getUserrole.includes(this.RoleID.CourseRequester);
+   // this.isRequester = this.getUserrole.includes(this.RoleID.CourseRequester);
+    this.isRequester = this.getUserDetails.staff == 1 ? true : false;
   }
 
   ngOnInit(): void {
