@@ -199,7 +199,7 @@ export class DashboardComponent implements OnInit {
     return this.modulesArray_tab3.filter((x: { showFavourite: any; }) => x.showFavourite).length > 0 ? true : false
   }
   navigatetoPending(module: any) {
-    if (this.pendingFlag) return;
+    if (this.pendingFlag && this.profileDetails.data.role_id.length == 0) return;
     if (module == this.modules.course) {
       const status = this.getUserrole.includes(this.RoleID.CourseRequester) ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
       this.router.navigateByUrl(`/dashboard/cct?status=${status}`);

@@ -113,7 +113,7 @@ export class SmedbCreateComponent implements OnInit {
     });
 
     this.createSmedbForm.get("available")?.valueChanges.subscribe((x: string) => {
-      debugger;
+      //debugger;
       if (x === 'yes') {
         this.isAvailable = true;
         this.createSmedbForm.addControl('end_date', new FormControl('', [Validators.required]));
@@ -163,7 +163,7 @@ export class SmedbCreateComponent implements OnInit {
     this.files = [];
     const fsize = event.target.files[0].size;
     const file = Math.round((fsize / 1024) / 1024);
-    debugger;
+   // debugger;
     for (let index = 0; index < event.target.files.length; index++) {
       const element = event.target.files[index];
       this.commonService.FileConvertintoBytearray(element, async (f) => {

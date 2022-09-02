@@ -53,6 +53,7 @@ export class CourseCreateComponent implements OnInit {
   entityList = [];
   deliveryMethod = [];
   whocanSee = [];
+  regionsTargetObj = []
   preferedInstructor = [];
   availableLanguages = [];
   learningTypes: any = [];
@@ -124,7 +125,7 @@ export class CourseCreateComponent implements OnInit {
       resource: [''],
       learning_type: new FormControl('', [Validators.required]),
       additional_comment: new FormControl(''),
-      regional_cordinator: new FormControl('', [Validators.required]),
+    //  regional_cordinator: new FormControl('', [Validators.required]),
       learner_guideline: this.formBuilder.array([]),
       curriculum_content: this.formBuilder.array([]),
       materialBased: new FormControl('')
@@ -181,6 +182,7 @@ export class CourseCreateComponent implements OnInit {
             status: 1,
           }
         ];
+        this.createCourceForm.addControl('regional_cordinator', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('delivery_method', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('digital', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('purchase_order', new FormControl(''));
@@ -266,6 +268,7 @@ export class CourseCreateComponent implements OnInit {
         })
       }
       if (this.isVideoBased()) {
+        this.createCourceForm.addControl('regional_cordinator', new FormControl('', [Validators.required]));
         this.createCourceForm.removeControl('delivery_method');
         this.createCourceForm.removeControl('digital');
         this.createCourceForm.removeControl('purchase_order');
@@ -326,6 +329,7 @@ export class CourseCreateComponent implements OnInit {
         }
       }
       if (this.isMaterialBased()) {
+        this.createCourceForm.addControl('regional_cordinator', new FormControl('', [Validators.required]));
         this.createCourceForm.get("materialBased")?.setValue('url');
         this.createCourceForm.removeControl('delivery_method');
         this.createCourceForm.removeControl('digital');
@@ -392,6 +396,7 @@ export class CourseCreateComponent implements OnInit {
         }
       }
       if (this.isCurriculum()) {
+        this.createCourceForm.addControl('regional_cordinator', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('digital', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('manager_approval', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('who_see_course', new FormControl(''));
@@ -471,6 +476,7 @@ export class CourseCreateComponent implements OnInit {
         }
       }
       if (this.isWebBased()) {
+        this.createCourceForm.addControl('regional_cordinator', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('digital', new FormControl('', [Validators.required]));
         this.createCourceForm.addControl('purchase_order', new FormControl(''));
         this.createCourceForm.addControl('who_see_course', new FormControl(''));
@@ -540,6 +546,7 @@ export class CourseCreateComponent implements OnInit {
         }
       }
       if (this.isPlaylist()) {
+        this.createCourceForm.removeControl('regional_cordinator');
         this.createCourceForm.removeControl('training_provided_by');
         this.createCourceForm.removeControl('duration');
         this.createCourceForm.removeControl('objective');
@@ -797,7 +804,10 @@ export class CourseCreateComponent implements OnInit {
     this.commonService.showLoading();
     this.courseService.getNewregionalCordinator().subscribe(
       (res: any) => {
-        this.cordinatorsList = res.data;
+        this.regionsTargetObj = res.data;
+        this.cordinatorsList = res.data.filter((x: {
+          status: number;
+        }) => x.status == 1);
         this.getBackupRegionalCordinator();
       },
       (err: any) => {
@@ -1114,6 +1124,9 @@ export class CourseCreateComponent implements OnInit {
 
   get_learningType(event: any) {
     this.learningType = event.target.value;
+    if(this.learningType == 6){
+      
+    }
     setTimeout(() => {
       // var topOfElement = target.offsetTop;
       // window.scroll({ top: topOfElement, behavior: "smooth" });

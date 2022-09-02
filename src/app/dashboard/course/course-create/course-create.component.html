@@ -506,7 +506,7 @@
                                             </label>
                                             <select class="form-control form_width" formControlName="who_see_course">
                                                 <option value="">Please select</option>
-                                                <option *ngFor="let whosee of cordinatorsList" [value]="whosee.id">
+                                                <option *ngFor="let whosee of regionsTargetObj" [value]="whosee.id">
                                                     {{whosee.name}}</option>
                                             </select>
                                             <div class="error_message"
@@ -1155,7 +1155,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row" *ngIf="isRequester && !(isPublisher || isReviewer)">
+                                <div class="row" *ngIf="isRequester && !(isPublisher || isReviewer) &&!isPlaylist()">
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">

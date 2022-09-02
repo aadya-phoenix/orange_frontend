@@ -81,6 +81,7 @@ export class CreateSessionComponent implements OnInit {
     private route: ActivatedRoute,
     private modalService: NgbModal
   ) {
+    this.getSessionPublisherStatus();
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.minStartDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
 
@@ -95,6 +96,7 @@ export class CreateSessionComponent implements OnInit {
     this.getUserrole = this.authService.getRolefromlocal();
     this.getUserDetails = this.authService.getUserDetailslocal();
     this.isStaff = this.getUserDetails.staff == 1 ? true : false;
+    console.log("get user role",this.getUserrole,this.isStaff,this.sessionPub);
   }
 
   ngOnInit(): void {
@@ -110,7 +112,7 @@ export class CreateSessionComponent implements OnInit {
     this.getCountries();
     this.getPreferedInstructor();
     this.getTimezone();
-    this.getSessionPublisherStatus();
+    
     this.getBackupRegionalCordinator(); 
   }
 
