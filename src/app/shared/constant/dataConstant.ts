@@ -62,6 +62,7 @@ export const dataConstant = {
     DomainExpert: 14,
     Rom: 5,
     Roc: 3,
+    PlayListRole: 18,
     Publisher: 3,
     DataAnalyst: 11,
     DesignTeam: 16,

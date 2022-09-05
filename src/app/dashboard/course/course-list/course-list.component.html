@@ -80,7 +80,7 @@
                                           class="number_css sub_mitted">{{course_count.submitted?course_count.submitted:0}}</span>
                                   </div>
                               </div>
-                              <div class="Course_icon_child" *ngIf="isReviewer || isPublisher">
+                              <div class="Course_icon_child" *ngIf="isReviewer || isPublisher || isPlayListRole">
                                   <div class="alig_dashicon" (click)="showRecords(courseStatus.pending)">
                                       <div class="sub-child-dashicon">
                                           <div class="fa-icons-des bac_yellow">
@@ -92,7 +92,7 @@
                                           class="number_css ">{{course_count.pending?course_count.pending:0}}</span>
                                   </div>
                               </div>
-                              <div class="Course_icon_child" *ngIf="isReviewer">
+                              <div class="Course_icon_child" *ngIf="isReviewer || isPlayListRole">
                                   <div class="alig_dashicon" (click)="showRecords(courseStatus.transferred)">
                                       <div class="sub-child-dashicon">
                                           <div class="fa-icons-des bac_red">

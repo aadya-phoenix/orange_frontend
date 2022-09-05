@@ -29,6 +29,7 @@ export class CourseListComponent implements OnInit {
   isReviewer = false;
   isPublisher = false;
   isRequester = false;
+  isPlayListRole = false;
   pagination = {
     page: 1,
     pageNumber: 1,
@@ -66,6 +67,7 @@ export class CourseListComponent implements OnInit {
     this.getUserDetails = this.authService.getUserDetailslocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
     this.isReviewer = this.getUserrole.includes(this.RoleID.Roc);
+    this.isPlayListRole = this.getUserrole.includes(this.RoleID.PlayListRole);
     this.isPublisher = this.getUserrole.includes(this.RoleID.CoursePublisher);
    // this.isRequester = this.getUserrole.includes(this.RoleID.CourseRequester);
     this.isRequester = this.getUserDetails.staff == 1 ? true : false;
