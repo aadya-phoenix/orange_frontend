@@ -87,7 +87,7 @@
       <div class="animated fadeIn">
         <div class="mb-2">
           <div class="Requs_btn_inl"
-            *ngIf="(!isStaff || (isStaff && (getUserrole.includes(3) || getUserrole.includes(4)))) && getprofileDetails && showrejectbutton != getprofileDetails.data.id">
+            *ngIf="(!isStaff || (isStaff && (getUserrole.includes(3) || getUserrole.includes(4) ||  getUserrole.includes(18) || getUserrole.includes(5)))) && getprofileDetails && showrejectbutton != getprofileDetails.data.id">
             <div class="Requs_btn_inl-child">
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#publishModal"
                 *ngIf="getUserrole.includes(4) && status != 'publish' && showrejectbutton != getprofileDetails.data.id">
@@ -95,7 +95,7 @@
               </button>
 
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-                *ngIf="(getUserrole.includes(3) || getUserrole.includes(18)) && status != 'publish' && showrejectbutton != getprofileDetails.data.id"
+                *ngIf="(getUserrole.includes(3) || getUserrole.includes(18) || getUserrole.includes(5)) && status != 'publish' && showrejectbutton != getprofileDetails.data.id"
                 (click)="getPublisher()">
                 <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1"> {{lableConstant.Transfer_to_Publisher}}</span>
 
@@ -106,7 +106,7 @@
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.Update}}</span>
               </button>
               <button type="button" class="btn btn-secondary ml-2" data-toggle="modal" data-target="#rejectModal"
-                *ngIf="(getUserrole.includes(3) || getUserrole.includes(4) || getUserrole.includes(18)) && status != 'publish' && showrejectbutton != getprofileDetails.data.id"
+                *ngIf="(getUserrole.includes(3) || getUserrole.includes(4) || getUserrole.includes(18) || getUserrole.includes(5)) && status != 'publish' && showrejectbutton != getprofileDetails.data.id"
                 (click)="getPublisher()">
                 <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.reject}}</span>
               </button>

@@ -39,10 +39,9 @@ export class HeaderComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router) {
     this.getUserrole = this.authService.getRolefromlocal();
-    
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
-    this.isStaff = this.authService.getUserDetailslocal().staff == 1 ? true : false;
     this.isROM = this.getUserrole.includes(this.RoleID.Rom);
+    this.isStaff = this.authService.getUserDetailslocal().staff == 1 ? true : false;
   }
   public showUserMenu: boolean = false;
   getprofileDetails: any;

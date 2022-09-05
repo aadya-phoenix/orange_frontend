@@ -44,6 +44,7 @@ export class CourseCreateComponent implements OnInit {
   isRequester = false;
   isPlayListRole = false;
   isStaff = false;
+  isRom = false;
   cordinatorsList = [];
   backupCordinatorsList = [];
   vendorType = [];
@@ -100,6 +101,7 @@ export class CourseCreateComponent implements OnInit {
     this.getUserrole = this.authService.getRolefromlocal();
     this.isStaff = this.getprofileDetails.data?.staff == 1 ? true : false;
     this.isReviewer = this.getUserrole.includes(this.RoleID.CourseReviewer);
+    this.isRom = this.getUserrole.includes(this.RoleID.Rom);
     this.isPublisher = this.getUserrole.includes(this.RoleID.CoursePublisher);
     this.isPlayListRole = this.getUserrole.includes(this.RoleID.PlayListRole);
     this.isRequester = this.getprofileDetails.data?.staff == 1 ? true : false;
@@ -653,6 +655,7 @@ export class CourseCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCordinators();
+    console.log("getProfileDetailsfromlocal",this.getprofileDetails);
   }
 
   requiredMessage(field:any){
@@ -1242,7 +1245,8 @@ export class CourseCreateComponent implements OnInit {
   }
 
   isSubmit() {
-    if (!this.isRequester || (this.isRequester && (this.isPublisher || this.isReviewer || this.isPlayListRole))) {
+    if (!this.isRequester || (this.isRequester && (this.isPublisher || this.isReviewer || this.isPlayListRole || 
+      this.isRom))) {
       return false;
     }
     if (this.course_details?.status === this.CarouselStatus.publish || this.course_details?.status === this.CarouselStatus.expired) {
@@ -1251,6 +1255,9 @@ export class CourseCreateComponent implements OnInit {
     if (this.getprofileDetails.data.id === this.course_details?.user_id && this.course_details?.status === this.CarouselStatus.pending) {
       return false;
     }
+  /*  if (this.course_details?.status === this.CarouselStatus.pending && this.course_details?.status === this.CarouselStatus.pending) {
+      return false;
+    } */
     if (this.getprofileDetails.data.id != this.course_details?.user_id && this.course_details?.transfer_user_id && !this.course_details?.publisher_status && this.isReviewer) {
       return false;
     }

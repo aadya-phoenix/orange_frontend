@@ -455,7 +455,7 @@
                                                     </i>
                                                 </a>
                                             </label>
-                                            <input type="text" [(ngModel)]="showPlaylistEmail"
+                                            <input type="text" 
                                                 placeholder="Enter Email of playlist creator"
                                                 class="form-control form_width" formControlName="email_playlist_creator" />
                                             <div class="error_message"
@@ -1205,7 +1205,7 @@
                                 </button>
                                 <button class="btn btn-primary ml-1" data-toggle="modal"
                                     data-target="#transfertoPublisher" (click)="getPublisher()"
-                                    *ngIf="getUserrole.includes(3) && (showrejectbutton != getprofileDetails.data.id || course_details.status =='draft')">
+                                    *ngIf="(getUserrole.includes(3) || getUserrole.includes(5) || getUserrole.includes(18)) && (showrejectbutton != getprofileDetails.data.id || course_details.status =='draft')">
                                     <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1"> {{lableConstant.Transfer_to_Publisher}}</span>
                                 </button>
 
@@ -1216,7 +1216,7 @@
                                 </button>
                                 <button type="button" class="btn btn-secondary  ml-2" data-toggle="modal"
                                     data-target="#rejectModal"
-                                    *ngIf="(getUserrole.includes(3) || getUserrole.includes(4)) && course_details.user_id != undefined && showrejectbutton != getprofileDetails.data.id"
+                                    *ngIf="(getUserrole.includes(3) || getUserrole.includes(4) || getUserrole.includes(18) || getUserrole.includes(5)) && course_details.user_id != undefined && showrejectbutton != getprofileDetails.data.id"
                                     (click)="getPublisher()">
                                     <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.reject}}</span>
                                 </button>
