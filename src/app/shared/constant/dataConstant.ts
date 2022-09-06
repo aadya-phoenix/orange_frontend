@@ -19,7 +19,7 @@ export const dataConstant = {
   dateTimeFormate: 'dd-MM-yyyy HH:mm a',
   EmailPattren: /^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/,
   UrlPattern: '^(https?:\\/\\/)?' + // protocol
-    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+    '((([-A-Za-z\\d]([-A-Za-z\\d-]*[-A-Za-z\\d])*)\\.)+[A-Za-z]{2,}|' + // domain name
     '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
     '(\\:\\d+)?(\\/[-A-Za-z\\d%_.~+]*)*' + // port and path
     '(\\?[;&A-Za-z\\d%_.:/?~+=-]*)?' + // query string

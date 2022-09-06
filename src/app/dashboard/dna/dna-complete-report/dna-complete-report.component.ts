@@ -4,6 +4,7 @@ import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { DnaService } from 'src/app/shared/services/dna/dna.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dna-complete-report',
@@ -158,5 +159,29 @@ export class DnaCompleteReportComponent implements OnInit {
       this.dnaListToShow = this.dnaList.filter((x: any) => { if (x.status_show === type) { return x } }).map((x: any) => Object.assign({}, x));
     }
     this.selectedStatus = type;
+  }
+
+  exportExcel(){
+    var data =  {type: dataConstant.ExporType.carousel};
+    this.commonService.showLoading();
+    this.commonService.exportAPI(data).subscribe(
+      (res: any) => {
+        if(res.status === 1){
+          window.open(`${dataConstant.ImageUrl}/${res.data.url}`);
+        }
+        else{
+          Swal.fire(
+            'Information!',
+            res.message,
+            'warning'
+          )
+        }
+        this.commonService.hideLoading();
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
+      }
+    );
   }
 }

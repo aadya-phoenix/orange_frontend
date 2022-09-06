@@ -745,6 +745,12 @@ export class CourseCreateComponent implements OnInit {
     return this.createCourceForm.get("objective") as FormArray;
   }
 
+  onOpen(elem:any){
+    if(elem.searchInput.nativeElement.value == ""){
+      elem.close();
+    }
+   }
+
   addMorelearnerGuideline(titleval: string, descriptionval: string) {
     return this.formBuilder.group({
       title: new FormControl(titleval),
