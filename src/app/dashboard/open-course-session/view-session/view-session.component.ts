@@ -83,6 +83,7 @@ export class ViewSessionComponent implements OnInit {
           this.sessiondata = res.data;
           this.status = this.sessiondata.status;
           this.status_show = this.sessiondata.status_show;
+      
 
           this.sessiondata.metadata.forEach((element:any) => {
             element.email = JSON.parse(element.email_participant);
