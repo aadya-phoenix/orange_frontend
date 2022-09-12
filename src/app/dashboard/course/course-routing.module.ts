@@ -10,6 +10,7 @@ import { CourseViewComponent } from './course-view/course-view.component';
 const routes: Routes = [
   { path: '', component: CourseListComponent, canActivate: [AuthenticationServiceGuard] },
   {path:'create',component:CourseCreateComponent,canActivate:[AuthenticationServiceGuard]},
+  {path:'create/designlearning/:design_id',component:CourseCreateComponent,canActivate:[AuthenticationServiceGuard]},
   {path:'update/:id',component:CourseCreateComponent,canActivate:[AuthenticationServiceGuard]},
   {path:'view/:id',component:CourseViewComponent,canActivate:[AuthenticationServiceGuard]},
   {path:'view-complete-report',component:CourseCompleteReportComponent,canActivate:[AuthenticationServiceGuard]},

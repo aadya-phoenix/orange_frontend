@@ -220,6 +220,10 @@ export class DesignLearningListComponent implements OnInit {
     this.router.navigateByUrl(`dashboard/designlearning/view/${item.id}`);
   }
 
+  CCTCreateRequest(id:any){
+    this.router.navigateByUrl(`dashboard/cct/create/designlearning/${id}`);
+  }
+
   onSort({ column, direction }: any) {
     this.headers.forEach((header: { sortable: any; direction: string; }) => {
       if (header.sortable !== column) {

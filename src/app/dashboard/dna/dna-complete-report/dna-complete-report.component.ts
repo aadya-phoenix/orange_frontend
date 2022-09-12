@@ -162,7 +162,7 @@ export class DnaCompleteReportComponent implements OnInit {
   }
 
   exportExcel(){
-    var data =  {type: dataConstant.ExporType.carousel};
+    var data =  {type: dataConstant.ExporType.digital_learning, tracker_id: this.trackerId};
     this.commonService.showLoading();
     this.commonService.exportAPI(data).subscribe(
       (res: any) => {

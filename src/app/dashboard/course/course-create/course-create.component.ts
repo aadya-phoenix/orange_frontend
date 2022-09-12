@@ -106,8 +106,13 @@ export class CourseCreateComponent implements OnInit {
     this.isPlayListRole = this.getUserrole.includes(this.RoleID.PlayListRole);
     this.isRequester = this.getprofileDetails.data?.staff == 1 ? true : false;
     this.route.paramMap.subscribe((params: ParamMap) => {
+      debugger;
       const Id = params.get('id');
       this.course_id = Id ? parseInt(Id) : 0;
+      const design_id = params.get('design_id');
+      if(design_id){
+
+      }
     });
     this.createCourceForm = this.formBuilder.group({
       title_single: new FormControl('', [Validators.required]),

@@ -47,7 +47,7 @@ export const dataConstant = {
   },
   ImageUrl: 'https://orange.mindscroll.info/public/public',
   BaseUrl: 'https://orange.mindscroll.info',
-  ExporType: { course: 'course', session: 'session', carousel: 'carousel', back_office: 'back_office', vendor: 'vendor', vendor_rating: 'vendor_rating', get_report: 'get_report' },
+  ExporType: { course: 'course', session: 'session', digital_learning: 'digital_learning',carousel: 'carousel', back_office: 'back_office', vendor: 'vendor', vendor_rating: 'vendor_rating', get_report: 'get_report' },
   RoleID: {
     RequesterID: 2,
     CourseReviewer: 3,

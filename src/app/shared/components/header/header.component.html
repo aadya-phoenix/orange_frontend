@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item dropdown" *ngIf="pdlMember || isAdmin">
+            <li class="nav-item dropdown" *ngIf="pdlMember || isAdmin || getUserrole.includes(3) || getUserrole.includes(4)|| getUserrole.includes(8) || getUserrole.includes(9)">
                 <a class="nav-link dropdown-toggle arrow_css_toggl" href="#" id="navbarDropdownMenuLink" role="button"
                     data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-map-o icon_header_desi" aria-hidden="true"></i>
@@ -55,13 +55,13 @@
                                         <button class="btn_active" *ngIf="getUserrole.includes(4)"
                                             [routerLink]="[ '/dashboard/set-backup'] ">Set Publisher Backup</button>
 
-                                        <button class="btn_active " [routerLink]="[ '/dashboard/sctworkflow'] ">Activate
+                                        <button class="btn_active "  *ngIf="isAdmin" [routerLink]="[ '/dashboard/sctworkflow'] ">Activate
                                             or Deactivate SCT Workflow</button>
-                                        <button class="btn_active " [routerLink]="[ '/dashboard/sctworkflow'] ">Set CCT
+                                        <button class="btn_active " *ngIf="getUserrole.includes(4)" [routerLink]="[ '/dashboard/sctworkflow'] ">Set CCT
                                             publisher backup</button>
-                                        <button class="btn_active " [routerLink]="[ '/dashboard/sctworkflow'] ">Set
+                                        <button class="btn_active " *ngIf="getUserrole.includes(9)" [routerLink]="[ '/dashboard/sctworkflow'] ">Set
                                             Session Publisher backup</button>
-                                        <button class="btn_active " [routerLink]="[ '/dashboard/sctworkflow'] ">Set OL
+                                        <button class="btn_active " *ngIf="getUserrole.includes(8)" [routerLink]="[ '/dashboard/sctworkflow'] ">Set OL
                                             role publisher backup</button>
                                     </div>
                                 </div>
