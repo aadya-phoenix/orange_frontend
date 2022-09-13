@@ -394,24 +394,27 @@
                                                     <div class="col-sm-12">
                                                         <div class="table-responsive ">
                                                             <table formArrayName="break" class="table table-bordered">
-                                                                <thead
-                                                                    *ngFor="let item of session.controls.break.controls; let idx = index;">
-                                                                    <tr class="white_space">
+                                                                <thead>
+                                                                    <tr >
                                                                         <th scope="col">
                                                                             {{lableConstant.Break_Description}}</th>
-                                                                        <th scope="col">{{lableConstant.Break_Duration}}
+                                                                        <th scope="col">{{lableConstant.Break_Duration}} (HH:MM)
                                                                         </th>
                                                                         <th scope="col" class="w_add">
                                                                             {{lableConstant.Add}}</th>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td [formGroupName]="idx" class="d-flex">
-                                                                            <textarea maxlength="500" 
+                                                                    <tr *ngFor="let item of session.controls.break.controls; let idx = index;">
+                                                                        <td [formGroupName]="idx" >
+                                                                            <input type="text" maxlength="500" class="form-control form_width"
+                                                                         placeholder="Enter Description"
+                                                                         formControlName="description"
+                                                                        (input)="valueChange($event)">
+                                                                            <!-- <textarea maxlength="500" 
                                                                         formControlName="description"
                                                                         (input)="valueChange($event)"
                                                                                 class="form-control form_width-textarea w-100 mr-2"
                                                                                 rows="3" maxlength="500"
-                                                                                placeholder="Enter Description"></textarea>
+                                                                                placeholder="Enter Description"></textarea> -->
                                                                                 <span class="charcter_limit">{{remainingText}} {{lableConstant.characters_remaining}}</span>
                                                                         </td>
                                                                         <td [formGroupName]="idx"> <input type="text" 

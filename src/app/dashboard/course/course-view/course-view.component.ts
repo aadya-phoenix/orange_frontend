@@ -83,7 +83,7 @@ export class CourseViewComponent implements OnInit {
         if (res.status === 1 && res.message === 'Success') {
           this.routegetdata = res.data;
           this.learnerGuidelines = JSON.parse(this.routegetdata['learner_guideline']);
-          this.curriculumContent = JSON.parse(this.routegetdata['learner_guideline']);
+          this.curriculumContent = JSON.parse(this.routegetdata['curriculum_content']);
           if (this.routegetdata['email_preffered_instructor']) {
             try {
               this.emailPrefferedEmail = JSON.parse(this.routegetdata['email_preffered_instructor']);
@@ -273,7 +273,7 @@ export class CourseViewComponent implements OnInit {
       (res: any) => {
         this.commonService.hideLoading();
         if (res) {
-          this.router.navigate(['/dashboard/cct']);
+       //   this.router.navigate(['/dashboard/cct']);
         }
       },
       (err: any) => {
@@ -366,6 +366,7 @@ export class CourseViewComponent implements OnInit {
       if (res && res.status == 1) {
         let history = res.data;
         this.showrejectbutton = history[history.length - 1].action_by;
+      
       }
     })
   }

@@ -96,7 +96,6 @@ export class CreateSessionComponent implements OnInit {
     this.getUserrole = this.authService.getRolefromlocal();
     this.getUserDetails = this.authService.getUserDetailslocal();
     this.isStaff = this.getUserDetails.staff == 1 ? true : false;
-    console.log("get user role",this.getUserrole,this.isStaff,this.sessionPub);
   }
 
   ngOnInit(): void {
@@ -423,7 +422,7 @@ export class CreateSessionComponent implements OnInit {
           });
         }
       }
-      console.log("",this.data);
+      
       let array = [] as any;
       array =
       (<FormArray>this.createSessionForm.controls['metadata']).at(index);
