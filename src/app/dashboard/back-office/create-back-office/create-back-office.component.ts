@@ -29,7 +29,9 @@ export class CreateBackOfficeComponent implements OnInit {
   dateFormate = dataConstant.dateFormate;
   BackOfficeStatus = dataConstant.BackOfficeStatus;
   back_office_id = 0;
+  course_id: number = 0;
   back_office_details: any = {};
+  coursedata: any = {};
   preferedInstructor: any = [];
   termsAndCondition: any = [];
   entityList: any = [];
@@ -82,6 +84,8 @@ export class CreateBackOfficeComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.back_office_id = Id ? parseInt(Id) : 0;
+      const course_id = params.get('course_id')
+      this.course_id = course_id ? parseInt(course_id) : 0;
     });
     this.createBackOfficeForm = this.formBuilder.group({
       email: new FormControl('', [Validators.required]),
@@ -105,7 +109,7 @@ export class CreateBackOfficeComponent implements OnInit {
     this.getTotalCount();
   }
 
-  requiredMessage(field:any){
+  requiredMessage(field: any) {
     return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
   }
 
@@ -142,7 +146,7 @@ export class CreateBackOfficeComponent implements OnInit {
     this.commonService.showLoading();
     this.courseService.getEntitylist().subscribe(
       (res: any) => {
-         this.entityList = res.data;
+        this.entityList = res.data;
         this.getCordinators();
       },
       (err: any) => {
@@ -173,11 +177,36 @@ export class CreateBackOfficeComponent implements OnInit {
         if (this.back_office_id) {
           this.getBackOfficeDetails();
         }
+        else if (this.course_id) {
+          this.getCourseDetails();
+        }
         else {
           if (this.cctLearningRole.length > 0) {
             this.createBackOfficeForm.controls.learning_role.setValue(this.cctLearningRole[0].id);
           }
           this.commonService.hideLoading();
+        }
+      },
+      (err: any) => {
+        this.commonService.errorHandling(err);
+        this.commonService.hideLoading();
+      }
+    );
+  }
+
+  getCourseDetails() {
+    this.commonService.showLoading();
+    this.courseService.courseDetail(this.course_id).subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        if (res.status === 1 && res.message === 'Success') {
+          this.coursedata = res.data;
+          if (this.coursedata.email_preffered_instructor) {
+            const instructor = this.preferedInstructor.find((x: { id: any; }) => x.id == JSON.parse(this.coursedata.email_preffered_instructor));
+            this.createBackOfficeForm.controls.email.setValue(instructor.email_id);
+            this.changeEmail(instructor);
+          }
+          this.createBackOfficeForm.controls.course_deliver.setValue(this.courseService.getTText(this.coursedata['title']));
         }
       },
       (err: any) => {
@@ -214,10 +243,10 @@ export class CreateBackOfficeComponent implements OnInit {
     );
   }
 
-  dateFormat(date:any){
+  dateFormat(date: any) {
     const newdate = new Date(date);
-    const newdate1 =  `${newdate.getFullYear()}-${newdate.getMonth()+1}-${newdate.getDate()}`; 
-    return this.datepipe.transform(newdate1,'yyyy-MM-dd');
+    const newdate1 = `${newdate.getFullYear()}-${newdate.getMonth() + 1}-${newdate.getDate()}`;
+    return this.datepipe.transform(newdate1, 'yyyy-MM-dd');
   }
 
   getBackOfficeDetails() {
@@ -353,7 +382,7 @@ export class CreateBackOfficeComponent implements OnInit {
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
-      title: `Request ${status == this.BackOfficeStatus.reject ? this.lableConstant.reject : this.lableConstant.publish }`,
+      title: `Request ${status == this.BackOfficeStatus.reject ? this.lableConstant.reject : this.lableConstant.publish}`,
       status: status,
       data: this.back_office_details.id,
       objectDetail: this.back_office_details

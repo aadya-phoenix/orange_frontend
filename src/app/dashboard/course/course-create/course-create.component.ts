@@ -6,6 +6,7 @@ import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
+import { DesignLearningService } from 'src/app/shared/services/design-learning/design-learning.service';
 import { brotliCompressSync } from 'zlib';
 import { MultiLaunguageComponent } from '../multi-launguage/multi-launguage.component';
 
@@ -24,6 +25,7 @@ export class CourseCreateComponent implements OnInit {
   selectedPublisherId = null;
   rejectcomment = null;
   today = new Date();
+  requestdata:any = {};
   minDate = {};
   maxDate = {};
   RoleID = dataConstant.RoleID;
@@ -31,6 +33,7 @@ export class CourseCreateComponent implements OnInit {
   CarouselStatus = dataConstant.CarouselStatus;
   LearningType = dataConstant.LearningType;
   course_id = 0;
+  design_id = 0;
   course_details: any = {};
   languageList: any = [];
   getUserrole: any = {};
@@ -94,6 +97,7 @@ export class CourseCreateComponent implements OnInit {
     private route: ActivatedRoute,
     private modalService: NgbModal,
     private authService: AuthenticationService,
+    private designService: DesignLearningService,
     private courseService: CourcesService) {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.minDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
@@ -108,10 +112,9 @@ export class CourseCreateComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.course_id = Id ? parseInt(Id) : 0;
-      const design_id = params.get('design_id');
-      if(design_id){
-
-      }
+      const design_id = params.get('design_id')
+      this.design_id = design_id ? parseInt(design_id) : 0 ;
+     
     });
     this.createCourceForm = this.formBuilder.group({
       title_single: new FormControl('', [Validators.required]),
@@ -662,6 +665,23 @@ export class CourseCreateComponent implements OnInit {
     console.log("getProfileDetailsfromlocal",this.getprofileDetails);
   }
 
+  getLearningDetails() {
+    this.commonService.showLoading();
+    this.designService.detail(this.design_id).subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        if (res.status === 1) {
+          this.requestdata = res.data;
+          this.createCourceForm.controls.title_single.setValue(this.requestdata.project_name);
+          this.createCourceForm.controls.description_single.setValue(this.requestdata.explain_purpose);
+          }
+      },
+      (err: any) => {
+        this.commonService.errorHandling(err);
+        this.commonService.hideLoading();
+      });
+  }
+
   requiredMessage(field:any){
     return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
   }
@@ -1025,6 +1045,9 @@ export class CourseCreateComponent implements OnInit {
         this.cctExpiryType = res.data;
         if (this.course_id) {
           this.getCourseDetails()
+        }
+        else if( this.design_id){
+          this.getLearningDetails();
         }
         else {
           this.commonService.hideLoading();

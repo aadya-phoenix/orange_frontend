@@ -11,6 +11,7 @@ import { BackOfficeViewReportComponent } from './back-office-view-report/back-of
 const routes: Routes = [
   {path:'',component:BackOfficeListComponent,canActivate:[AuthenticationServiceGuard]},
   {path:'create',component:CreateBackOfficeComponent,canActivate:[AuthenticationServiceGuard]},
+  {path:'create/cct/:course_id',component:CreateBackOfficeComponent,canActivate:[AuthenticationServiceGuard]},
   {path:'update/:id',component:CreateBackOfficeComponent,canActivate:[AuthenticationServiceGuard]},
   {path:'view/:id',component:BackOfficeViewComponent,canActivate:[AuthenticationServiceGuard]},
   {path:'view-complete-report',component:BackOfficeViewReportComponent,canActivate:[AuthenticationServiceGuard]},

@@ -26,7 +26,9 @@ export class CreateSessionComponent implements OnInit {
   meridian = true;
   isSubmitted = false;
   session_id :number= 0;
+  course_id: number = 0;
   session_details: any = {};
+  coursedata:any = {};
   session_status:string='';
   session_count = {
     total: 0,
@@ -103,6 +105,8 @@ export class CreateSessionComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.session_id = Id ? parseInt(Id) : 0;
+      const course_id = params.get('course_id')
+      this.course_id = course_id ? parseInt(course_id) : 0 ;
       this.getSessionDetails();
     })
     this.getExternalVendor();
@@ -186,12 +190,14 @@ export class CreateSessionComponent implements OnInit {
   }
 
   getSessionDetails() {
-    this.commonService.showLoading();
-    if(!this.session_id){
-      this.commonService.hideLoading();
+    if(this.course_id){
+      this.getCourseDetails();
+    }
+    else  if(!this.session_id){
       this.addMetadata();
     }
     else{
+      this.commonService.showLoading();
       this.courseSessionService.getSessionDetails(this.session_id).subscribe((res: any) => {
         this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
@@ -226,6 +232,24 @@ export class CreateSessionComponent implements OnInit {
           this.commonService.errorHandling(err);
         });
       }
+  }
+
+  getCourseDetails() {
+    this.commonService.showLoading();
+    this.courseService.courseDetail(this.course_id).subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        if (res.status === 1 && res.message === 'Success') {
+          this.coursedata = res.data;
+          this.createSessionForm.controls.title.setValue(this.courseService.getTText(this.coursedata['title']));
+          this.addMetadata();
+        }
+      },
+      (err: any) => {
+        this.commonService.errorHandling(err);
+        this.commonService.hideLoading();
+      }
+    );
   }
 
   getRegionalCordinator() {

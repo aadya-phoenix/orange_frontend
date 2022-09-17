@@ -24,6 +24,7 @@ export class GetReportCreateComponent implements OnInit {
   selectedStartDate :any={};
   selectedEndDate :any ={};
   report_id:number=0;
+  course_id:number=0;
   get_report_details: any = {};
   reportStatus= dataConstant.GetReportStatus;
   dateFormate = dataConstant.dateFormate;
@@ -36,6 +37,7 @@ export class GetReportCreateComponent implements OnInit {
   regionObj:any =[];
   countryObj:any =[];
   rocObj:any =[];
+  coursedata:any={};
   status_comment:string='';
 
   getUserrole: any = {};
@@ -94,6 +96,8 @@ export class GetReportCreateComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.report_id = Id ? parseInt(Id) : 0;
+      const course_id = params.get('course_id')
+      this.course_id = course_id ? parseInt(course_id) : 0 ;
       this.getReportDetails();
      });
       
@@ -374,7 +378,10 @@ export class GetReportCreateComponent implements OnInit {
   }
 
   getReportDetails() {
-    if(!this.report_id){
+    if(this.course_id){
+      this.getCourseDetails();
+    }
+    else if(!this.report_id){
       return
     }
     else{
@@ -446,6 +453,27 @@ export class GetReportCreateComponent implements OnInit {
       }
     );
     }
+  }
+
+  getCourseDetails() {
+    this.commonService.showLoading();
+    this.courseService.courseDetail(this.course_id).subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        if (res.status === 1 && res.message === 'Success') {
+          this.coursedata = res.data;
+          const selectedType = this.reportTypeObj.find((x: { id: number; }) => x.id == 1);
+          this.changeReportType({id:1});
+          this.getReportForm.controls.report_type.setValue(selectedType.name);
+          this.getReportForm.controls.title.setValue(
+            this.courseService.getTText(this.coursedata['title']));
+        }
+      },
+      (err: any) => {
+        this.commonService.errorHandling(err);
+        this.commonService.hideLoading();
+      }
+    );
   }
 
   valueChange(status:string) {

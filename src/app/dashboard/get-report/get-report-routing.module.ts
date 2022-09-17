@@ -8,6 +8,7 @@ import { GetReportViewComponent } from './get-report-view/get-report-view.compon
 
 const routes: Routes = [ {path:'',component:GetReportListComponent,canActivate:[AuthenticationServiceGuard]},
  {path:'create',component:GetReportCreateComponent,canActivate:[AuthenticationServiceGuard]},
+ {path:'create/cct/:course_id',component:GetReportCreateComponent,canActivate:[AuthenticationServiceGuard]},
 {path:'update/:id',component:GetReportCreateComponent,canActivate:[AuthenticationServiceGuard]}, 
 {path:'view/:id',component:GetReportViewComponent,canActivate:[AuthenticationServiceGuard]},
 {path:'view-complete-report',component:GetReportCompleteReportComponent,canActivate:[AuthenticationServiceGuard]} 

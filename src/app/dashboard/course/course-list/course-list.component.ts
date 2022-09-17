@@ -111,6 +111,22 @@ export class CourseListComponent implements OnInit {
     }
   }
 
+  sctCreateRequest(id:any){
+    this.router.navigateByUrl(`dashboard/sct/create/cct/${id}`);
+  }
+
+  olCarouselCreateRequest(id:any){
+    this.router.navigateByUrl(`dashboard/olcarousel/create/cct/${id}`);
+  }
+
+  backOfficeCreateRequest(id:any){
+    this.router.navigateByUrl(`dashboard/back-office/create/cct/${id}`);
+  }
+
+  getAReportCreateRequest(id:any){
+    this.router.navigateByUrl(`dashboard/olreport/create/cct/${id}`);
+  }
+
   openModal(item: any) {
     const modalRef = this.modalService.open(CourseHistoryComponent, {
       centered: true,

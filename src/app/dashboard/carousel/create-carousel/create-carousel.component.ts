@@ -7,6 +7,7 @@ import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CarouselService } from 'src/app/shared/services/carousel/carousel.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
+import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import Swal from 'sweetalert2';
 import { CarouselForwardComponent } from '../carousel-forward/carousel-forward.component';
 import { CarouselPublishComponent } from '../carousel-publish/carousel-publish.component';
@@ -25,6 +26,8 @@ export class CreateCarouselComponent implements OnInit {
   dateFormate = dataConstant.dateFormate;
   CarouselStatus = dataConstant.CarouselStatus;
   carousel_id = 0;
+  course_id = 0;
+  coursedata: any = {};
   carousel_details: any = {};
   languageList: any = [];
   cctExpiryperiod: any = [];
@@ -58,6 +61,7 @@ export class CreateCarouselComponent implements OnInit {
     private route: ActivatedRoute,
     private modalService: NgbModal,
     private authService: AuthenticationService,
+    private courseService: CourcesService,
     private carouselService: CarouselService) {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.minDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
@@ -69,6 +73,8 @@ export class CreateCarouselComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const Id = params.get('id');
       this.carousel_id = Id ? parseInt(Id) : 0;
+      const course_id = params.get('course_id')
+      this.course_id = course_id ? parseInt(course_id) : 0;
     });
     this.createOlcarouselForm = this.formBuilder.group({
       languages: new FormArray([]),
@@ -85,8 +91,44 @@ export class CreateCarouselComponent implements OnInit {
     this.getTotalCourse();
   }
 
-  requiredMessage(field:any){
+  requiredMessage(field: any) {
     return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
+  getCourseDetails() {
+    this.commonService.showLoading();
+    this.courseService.courseDetail(this.course_id).subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        if (res.status === 1 && res.message === 'Success') {
+          this.coursedata = res.data;
+          this.languageList.forEach((x: { name: string, id: number, slug: string, carousel_show: number, name_original: any }) => {
+            if (x.carousel_show === 1) {
+              if (x.slug === 'english') {
+                this.lauguageFormArray.push(new FormControl(true));
+                const formControl = this.newMetaData(x)
+                formControl.controls.title.setValue(this.courseService.getTText(this.coursedata['title']));
+                formControl.controls.description.setValue(this.courseService.getTText(this.coursedata['description']));
+                this.carouselFormArray.push(formControl);
+              }
+              else {
+                this.lauguageFormArray.push(new FormControl(false));
+              }
+            }
+          });
+          // if (this.coursedata.email_preffered_instructor) {
+          //   const instructor = this.preferedInstructor.find((x: { id: any; }) => x.id == JSON.parse(this.coursedata.email_preffered_instructor));
+          //   this.createBackOfficeForm.controls.email.setValue(instructor.email_id);
+          //   this.changeEmail(instructor);
+          // }
+          // this.createBackOfficeForm.controls.course_deliver.setValue(this.courseService.getTText(this.coursedata['title']));
+        }
+      },
+      (err: any) => {
+        this.commonService.errorHandling(err);
+        this.commonService.hideLoading();
+      }
+    );
   }
 
   getCarouselDetails() {
@@ -102,7 +144,7 @@ export class CreateCarouselComponent implements OnInit {
           // this.createOlcarouselForm.controls.image.setValue(this.carousel_details.image);
           this.carousel_details.imageUrl = `${dataConstant.ImageUrl}/${this.carousel_details.image}`;
           this.carousel_details.image = null;
-          if(this.getprofileDetails.data.id != this.carousel_details.user_id){
+          if (this.getprofileDetails.data.id != this.carousel_details.user_id) {
             this.isCreater = false;
           }
           this.launguageFormBind();
@@ -204,10 +246,11 @@ export class CreateCarouselComponent implements OnInit {
       (res: any) => {
         this.commonService.hideLoading();
         this.cctExpiryperiod = res.data;
-        if (!this.carousel_id) {
+        if (this.course_id) {
+          this.getCourseDetails();
+        } else if (!this.carousel_id) {
           this.launguageFormBind();
-        }
-        else {
+        } else {
           this.getCarouselDetails();
         }
       },
@@ -252,8 +295,8 @@ export class CreateCarouselComponent implements OnInit {
 
   handleFileInput(event: any) {
     const fsize = event.target.files[0].size;
-    const file = Math.round((fsize / 1024)/1024);
-    if(file > dataConstant.maxImageSize){
+    const file = Math.round((fsize / 1024) / 1024);
+    if (file > dataConstant.maxImageSize) {
       Swal.fire(
         'Images!',
         `Image is more than ${dataConstant.maxImageSize} mb. Please select valida file`,
@@ -274,11 +317,11 @@ export class CreateCarouselComponent implements OnInit {
     if (this.getprofileDetails.data.id != this.carousel_details?.user_id && this.carousel_details?.transfer_user_id && !this.carousel_details?.publisher_status && this.isReviewer) {
       return false;
     }
-    return true; 
+    return true;
   }
 
   isReject() {
-    if (this.carousel_details?.status === this.CarouselStatus.publish || this.carousel_details?.status === this.CarouselStatus.expired  || this.carousel_details?.status === this.CarouselStatus.reject) {
+    if (this.carousel_details?.status === this.CarouselStatus.publish || this.carousel_details?.status === this.CarouselStatus.expired || this.carousel_details?.status === this.CarouselStatus.reject) {
       return false;
     }
     if (!this.isRequester || (this.isRequester && !(this.isPublisher || this.isReviewer)) || !this.carousel_details.id) {
@@ -294,7 +337,7 @@ export class CreateCarouselComponent implements OnInit {
   }
 
   isPublish() {
-    if (this.carousel_details?.status === this.CarouselStatus.publish || this.carousel_details?.status === this.CarouselStatus.expired ) {
+    if (this.carousel_details?.status === this.CarouselStatus.publish || this.carousel_details?.status === this.CarouselStatus.expired) {
       return false;
     }
     if (!this.isPublisher) {
@@ -307,7 +350,7 @@ export class CreateCarouselComponent implements OnInit {
   }
 
   isSubmit() {
-    if (this.carousel_details?.status === this.CarouselStatus.publish || this.carousel_details?.status === this.CarouselStatus.expired ) {
+    if (this.carousel_details?.status === this.CarouselStatus.publish || this.carousel_details?.status === this.CarouselStatus.expired) {
       return false;
     }
     if (this.getprofileDetails.data.id === this.carousel_details?.user_id && this.carousel_details?.status === this.CarouselStatus.pending) {
@@ -343,7 +386,7 @@ export class CreateCarouselComponent implements OnInit {
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
-      title: `Request ${status == this.CarouselStatus.reject ? this.lableConstant.reject : this.lableConstant.publish }`,
+      title: `Request ${status == this.CarouselStatus.reject ? this.lableConstant.reject : this.lableConstant.publish}`,
       status: status,
       data: this.carousel_details.id,
       objectDetail: this.carousel_details

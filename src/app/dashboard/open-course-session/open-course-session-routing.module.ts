@@ -8,6 +8,7 @@ import { SessionCompleteReportComponent } from './session-complete-report/sessio
 
 const routes: Routes = [ {path:'',component:SessionsListComponent,canActivate:[AuthenticationServiceGuard]},
 {path:'create',component:CreateSessionComponent,canActivate:[AuthenticationServiceGuard]},
+{path:'create/cct/:course_id',component:CreateSessionComponent,canActivate:[AuthenticationServiceGuard]},
 {path:'update/:id',component:CreateSessionComponent,canActivate:[AuthenticationServiceGuard]},
 {path:'view/:id',component:ViewSessionComponent,canActivate:[AuthenticationServiceGuard]},
 {path:'view-complete-report',component:SessionCompleteReportComponent,canActivate:[AuthenticationServiceGuard]}
