@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CarouselService } from 'src/app/shared/services/carousel/carousel.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 
@@ -12,7 +13,10 @@ export class CarouselHistoryComponent implements OnInit {
 
   @Input() props: any;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
-  constructor(private modalService: NgbActiveModal, private carouselService: CarouselService,  private commonService: CommonService) { }
+  lableConstant: any = { french: {}, english: {} };
+  constructor(private modalService: NgbActiveModal, private carouselService: CarouselService,  private commonService: CommonService) { 
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+  }
   public historyList: any;
   public objectDetail: any;
   public modalType: any;

@@ -71,9 +71,10 @@
                                             <label class="form-control-label">
                                                 {{lableConstant.Email_Address}} <span class="text-danger-ligth">* </span>
                                             </label>
-                                            <ng-select placeholder="Please select email" [items]="preferedInstructor"
+                                            <ng-select placeholder="Please select email" [items]="searchedPreferedInstructor"
                                                 [multiple]="false" bindLabel="email_id" bindValue="email_id"
-                                                (change)="changeEmail($event)" formControlName="email">
+                                                (change)="changeEmail($event)" formControlName="email"
+                                                (search)="searchInstructor($event.term)">
                                             </ng-select>
                                             <div
                                                 *ngIf="(createBackOfficeForm.controls['email'].invalid && (createBackOfficeForm.controls['email'].dirty || createBackOfficeForm.controls['email'].touched)) || isSubmitted">

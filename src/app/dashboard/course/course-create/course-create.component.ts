@@ -60,6 +60,7 @@ export class CourseCreateComponent implements OnInit {
   whocanSee = [];
   regionsTargetObj = []
   preferedInstructor = [];
+  searchedPreferedInstructor = [];
   availableLanguages = [];
   learningTypes: any = [];
   cctExpiryType = [];
@@ -674,6 +675,8 @@ export class CourseCreateComponent implements OnInit {
           this.requestdata = res.data;
           this.createCourceForm.controls.title_single.setValue(this.requestdata.project_name);
           this.createCourceForm.controls.description_single.setValue(this.requestdata.explain_purpose);
+          //
+          this.createCourceForm.controls.description_single.setValue(this.requestdata.explain_purpose);
           }
       },
       (err: any) => {
@@ -769,9 +772,12 @@ export class CourseCreateComponent implements OnInit {
     return this.createCourceForm.get("objective") as FormArray;
   }
 
-  onOpen(elem:any){
-    if(elem.searchInput.nativeElement.value == ""){
-      elem.close();
+  searchInstructor(elem:any){
+    if(elem){
+      this.searchedPreferedInstructor = this.preferedInstructor.filter((x:any) => x.email_id.includes(elem));
+    }
+    else{
+      this.searchedPreferedInstructor = [];
     }
    }
 

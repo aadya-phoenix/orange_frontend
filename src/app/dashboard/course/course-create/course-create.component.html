@@ -684,9 +684,10 @@
                                                 </a>
                                             </label>
                                             <ng-select #elem placeholder="Please select Instructor"
-                                                [items]="preferedInstructor" [multiple]="true" bindLabel="email_id"
+                                                [items]="searchedPreferedInstructor" [multiple]="true" bindLabel="email_id"
                                                 bindValue="email_id" formControlName="email_preffered_instructor"
-                                                (open)="onOpen(elem)">
+                                                (search)="searchInstructor($event.term)"
+                                                >
                                             </ng-select>
                                             <div class="error_message"
                                                 *ngIf="(createCourceForm.controls['email_preffered_instructor'].invalid && (createCourceForm.controls['email_preffered_instructor'].dirty || createCourceForm.controls['email_preffered_instructor'].touched || isSubmitted))">

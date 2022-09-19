@@ -33,6 +33,7 @@ export class CreateBackOfficeComponent implements OnInit {
   back_office_details: any = {};
   coursedata: any = {};
   preferedInstructor: any = [];
+  searchedPreferedInstructor:any = [];
   termsAndCondition: any = [];
   entityList: any = [];
   languageList: any = [];
@@ -202,12 +203,19 @@ export class CreateBackOfficeComponent implements OnInit {
         if (res.status === 1 && res.message === 'Success') {
           this.coursedata = res.data;
           if (this.coursedata.email_preffered_instructor) {
-            const instructor = this.preferedInstructor.find((x: { id: any; }) => x.id == JSON.parse(this.coursedata.email_preffered_instructor));
-            this.createBackOfficeForm.controls.email.setValue(instructor.email_id);
-            this.changeEmail(instructor);
+            const emails = JSON.parse(this.coursedata.email_preffered_instructor);
+            if(emails && emails.length > 0){
+            const instructor = this.preferedInstructor.find((x: { email_id: any; }) => x.email_id == emails[0]);
+            if(instructor){
+              this.createBackOfficeForm.controls.email.setValue(instructor.email_id);
+              this.changeEmail(instructor);
+              }
+            }
           }
           this.createBackOfficeForm.controls.course_deliver.setValue(this.courseService.getTText(this.coursedata['title']));
-          this.createBackOfficeForm.controls.entity.setValue(this.coursedata.entity_business_area);
+          if(this.coursedata.entity_business_area){
+            this.createBackOfficeForm.controls.entity.setValue(parseInt(this.coursedata.entity_business_area));
+          }
         }
       },
       (err: any) => {
@@ -216,6 +224,15 @@ export class CreateBackOfficeComponent implements OnInit {
       }
     );
   }
+
+  searchInstructor(elem:any){
+    if(elem){
+      this.searchedPreferedInstructor = this.preferedInstructor.filter((x:any) => x.email_id.includes(elem));
+    }
+    else{
+      this.searchedPreferedInstructor = [];
+    }
+   }
 
   getCordinators() {
     this.commonService.showLoading();

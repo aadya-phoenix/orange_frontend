@@ -115,7 +115,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-              <div class="col-sm-6">
+              <div class="col-sm-12">
                 <div class="card border-radius-0">
                     <div class="card-header card_header_view">
                         <p>Session Details</p>
@@ -145,8 +145,8 @@
                     </div>
                 </div>
             </div>
-                <div class="col-sm-6">
-                    <ngb-accordion #acc="ngbAccordion" *ngFor="let meta of sessiondata.metadata; let i = index">
+                <div class="col-sm-6" *ngFor="let meta of sessiondata.metadata; let i = index">
+                    <ngb-accordion #acc="ngbAccordion">
                         <ngb-panel>
                             <ng-template ngbPanelTitle>
                                 <span>{{lableConstant.Session}}: {{i+1}}</span>
