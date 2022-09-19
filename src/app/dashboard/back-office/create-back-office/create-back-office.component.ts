@@ -207,6 +207,7 @@ export class CreateBackOfficeComponent implements OnInit {
             this.changeEmail(instructor);
           }
           this.createBackOfficeForm.controls.course_deliver.setValue(this.courseService.getTText(this.coursedata['title']));
+          this.createBackOfficeForm.controls.entity.setValue(this.coursedata.entity_business_area);
         }
       },
       (err: any) => {

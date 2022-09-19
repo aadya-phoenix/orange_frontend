@@ -17,8 +17,11 @@ export class DashboardComponent implements OnInit {
   pendingRequestCount = {
     carousel_pending: 0,
     course_pending: 0,
+    digital_learning: 0,
+    get_report:0,
     session_pending: 0,
-    office_role_pending: 0
+    new_learning: 0,
+    office_role: 0
   };
   getUserrole: any;
   courcesList: any;
@@ -86,6 +89,7 @@ export class DashboardComponent implements OnInit {
           lableConstantCatalog: this.lableConstant.request_course_catalog,
           navigateTo: this.modules.course,
           favourite: false, showFavourite: true,
+          isShowPending: true,
           pendingRequestCount: this.pendingRequestCount.course_pending,
           setFavouriteModule: this.modules.course,
         }, {
@@ -95,6 +99,7 @@ export class DashboardComponent implements OnInit {
           lableConstantCatalog: this.lableConstant.request_create_session,
           navigateTo: this.modules.session,
           favourite: false, showFavourite: true,
+          isShowPending: true,
           pendingRequestCount: this.pendingRequestCount.session_pending,
           setFavouriteModule: this.modules.session,
         }, {
@@ -105,6 +110,7 @@ export class DashboardComponent implements OnInit {
           lableConstantCatalog: this.lableConstant.request_create_entity,
           navigateTo: this.modules.carousel,
           favourite: false, showFavourite: true,
+          isShowPending: true,
           pendingRequestCount: this.pendingRequestCount.carousel_pending,
           setFavouriteModule: this.modules.carousel,
         }, {
@@ -113,8 +119,9 @@ export class DashboardComponent implements OnInit {
           lableConstantModule: this.lableConstant.request_back_office_role,
           lableConstantCatalog: this.lableConstant.request_specific_role,
           navigateTo: this.modules.backOffice,
+          isShowPending: true,
           favourite: false, showFavourite: true,
-          pendingRequestCount: this.pendingRequestCount.office_role_pending,
+          pendingRequestCount: this.pendingRequestCount.office_role,
           setFavouriteModule: this.modules.backOffice,
         }];
 
@@ -126,7 +133,8 @@ export class DashboardComponent implements OnInit {
           lableConstantCatalog: this.lableConstant.request_learning_team,
           navigateTo: this.modules.design,
           favourite: false, showFavourite: true,
-          pendingRequestCount: 0,
+          isShowPending: true,
+          pendingRequestCount: this.pendingRequestCount.digital_learning,
           setFavouriteModule: this.modules.design,
         }, {
           id: 'get_report', name: 'Get a Report',
@@ -135,6 +143,7 @@ export class DashboardComponent implements OnInit {
           lableConstantCatalog: this.lableConstant.request_training_vc_report,
           navigateTo: this.modules.getReport,
           favourite: false, showFavourite: true,
+          isShowPending: true,
           pendingRequestCount: this.pendingRequestCount.course_pending,
           setFavouriteModule: this.modules.getReport,
         }, {
@@ -144,7 +153,8 @@ export class DashboardComponent implements OnInit {
           lableConstantCatalog: this.lableConstant.dna_tool_feature,
           navigateTo:  this.modules.dna,
           favourite: false, showFavourite: true,
-          pendingRequestCount: 0,
+          isShowPending: true,
+          pendingRequestCount: this.pendingRequestCount.new_learning,
           setFavouriteModule: this.modules.dna,
         },
         {
@@ -154,6 +164,7 @@ export class DashboardComponent implements OnInit {
           lableConstantCatalog: this.lableConstant.sme_learning_community_feature,
           navigateTo:  this.modules.sme,
           favourite: false, showFavourite: true,
+          isShowPending: false,
           pendingRequestCount: 0,
           setFavouriteModule: this.modules.sme,
         }
@@ -167,6 +178,7 @@ export class DashboardComponent implements OnInit {
         lableConstantCatalog: this.lableConstant.view_manage_workshops,
         navigateTo:  this.modules.vendor,
         favourite: false, showFavourite: true,
+        isShowPending: false,
         pendingRequestCount: 0,
         setFavouriteModule: this.modules.vendor,
       }]
@@ -225,7 +237,7 @@ export class DashboardComponent implements OnInit {
       this.router.navigateByUrl(`/dashboard/olreport?status=${status}`);
     }
     if (module == this.modules.backOffice) {
-      const status = this.isRequester ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
+      const status = this.profileDetails.data?.staff == 1 ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
       this.router.navigateByUrl(`/dashboard/back-office?status=${status}`);
     }
   }
@@ -372,12 +384,18 @@ export class DashboardComponent implements OnInit {
             element.pendingRequestCount = this.pendingRequestCount.carousel_pending;
           }
           if (element.id == 'back_office') {
-            element.pendingRequestCount = this.pendingRequestCount.office_role_pending;
+            element.pendingRequestCount = this.pendingRequestCount.office_role;
           }
         });
         this.modulesArray_tab2.forEach((element: any) => {
           if (element.id == 'get_report') {
-            element.pendingRequestCount = this.pendingRequestCount.course_pending;
+            element.pendingRequestCount = this.pendingRequestCount.get_report;
+          }
+          if (element.id == 'design') {
+            element.pendingRequestCount = this.pendingRequestCount.digital_learning;
+          }
+          if (element.id == 'dna') {
+            element.pendingRequestCount = this.pendingRequestCount.new_learning;
           }
         });
       },

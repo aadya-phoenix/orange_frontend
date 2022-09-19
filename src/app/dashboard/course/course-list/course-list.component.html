@@ -292,7 +292,34 @@
                                                         (click)="viewRequest(item)" data-placement="top" title="View">
                                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                                     </a>
-                                                    <a *ngIf="item.status_show === courseStatus.closed && item.learning_type == '6' " (click)="sctCreateRequest(item.id)" class="copy_file mr-1"
+                                                    <div class="dropdown" *ngIf="item.status_show === courseStatus.closed">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" data-placement="right" aria-expanded="false">
+                                                            <i class="fa fa-bars" aria-hidden="true"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a *ngIf="item.status_show === courseStatus.closed && item.learning_type == '1' " (click)="sctCreateRequest(item.id)"class="dropdown-item"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="{{lableConstant.open_course_session}}">
+                                                            {{lableConstant.open_course_session}}
+                                                        </a>
+                                                        <a *ngIf="item.status_show === courseStatus.closed" (click)="olCarouselCreateRequest(item.id)"class="dropdown-item"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="{{lableConstant.promote_on_carousel}}">
+                                                            {{lableConstant.promote_on_carousel}}
+                                                        </a>
+                                                        <a *ngIf="item.status_show === courseStatus.closed && item.learning_type == '1'" (click)="backOfficeCreateRequest(item.id)"class="dropdown-item"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="{{lableConstant.request_back_office_role}}">
+                                                            {{lableConstant.request_back_office_role}}
+                                                        </a>
+                                                        <a *ngIf="item.status_show === courseStatus.closed" (click)="getAReportCreateRequest(item.id)"class="dropdown-item"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="{{lableConstant.get_a_report}}">
+                                                            {{lableConstant.get_a_report}}
+                                                        </a>
+                                                        </div>
+                                                      </div>
+                                                    <!-- <a *ngIf="item.status_show === courseStatus.closed && item.learning_type == '6' " (click)="sctCreateRequest(item.id)" class="copy_file mr-1"
                                                         data-toggle="tooltip" data-placement="top"
                                                         title="{{lableConstant.open_course_session}}">
                                                         <i class="fa fa-address-card" aria-hidden="true"></i>
@@ -311,7 +338,7 @@
                                                         data-toggle="tooltip" data-placement="top"
                                                         title="{{lableConstant.get_a_report}}">
                                                         <i class="fa fa-bars" aria-hidden="true"></i>
-                                                    </a>
+                                                    </a> -->
                                                 </div>
                                             </td>
                                         </tr>

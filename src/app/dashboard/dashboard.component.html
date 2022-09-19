@@ -67,7 +67,7 @@
                                 </div>
                             </a>
                             <div class="sec_footer">
-                                <div class="footer_sec_ano" (click)="navigatetoPending(item.navigateTo)">
+                                <div *ngIf="item.isShowPending" class="footer_sec_ano" (click)="navigatetoPending(item.navigateTo)">
                                     <button>
                                         <p class="footer_p"
                                             [ngClass]="{'backgound_green': item.pendingRequestCount === 0}">
@@ -75,7 +75,7 @@
                                     </button>
                                     <span class="text_white">{{lableConstant.pending}}</span>
                                 </div>
-                                <div class="p-2 bd-highlight ">
+                                <div class="p-2 bd-highlight">
                                     <a (click)="sendEmail('item.routerLink')">
                                         <img src="../../assets/images/share.png " class="mr-2 w_22" />
                                     </a>
@@ -110,13 +110,15 @@
                                 </div>
                             </a>
                             <div class="sec_footer">
-                                <div class="footer_sec_ano" (click)="navigatetoPending(item.navigateTo)">
+                                <div class="footer_sec_ano">
+                                <div *ngIf="item.isShowPending" (click)="navigatetoPending(item.navigateTo)">
                                     <button>
                                         <p class="footer_p"
                                             [ngClass]="{'backgound_green': item.pendingRequestCount === 0}">
                                             {{item.pendingRequestCount}}</p>
                                     </button>
                                     <span class="text_white">{{lableConstant.pending}}</span>
+                                </div>
                                 </div>
                                 <div class="p-2 bd-highlight ">
                                     <a (click)="sendEmail('item.routerLink')">
@@ -153,7 +155,8 @@
                                 </div>
                             </a>
                             <div class="sec_footer">
-                                <div class="footer_sec_ano" (click)="navigatetoPending(item.navigateTo)">
+                                <div class="footer_sec_ano">
+                                <div *ngIf="item.isShowPending"  (click)="navigatetoPending(item.navigateTo)">
                                     <button>
                                         <p class="footer_p"
                                             [ngClass]="{'backgound_green': item.pendingRequestCount === 0}">
@@ -161,6 +164,7 @@
                                     </button>
                                     <span class="text_white">{{lableConstant.pending}}</span>
                                 </div>
+                            </div>
                                 <div class="p-2 bd-highlight ">
                                     <a (click)="sendEmail(item.name)">
                                         <img src="../../assets/images/share.png " class="mr-2 w_22" />
