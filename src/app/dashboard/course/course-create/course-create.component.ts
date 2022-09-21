@@ -25,7 +25,7 @@ export class CourseCreateComponent implements OnInit {
   selectedPublisherId = null;
   rejectcomment = null;
   today = new Date();
-  requestdata:any = {};
+  requestdata: any = {};
   minDate = {};
   maxDate = {};
   RoleID = dataConstant.RoleID;
@@ -114,8 +114,8 @@ export class CourseCreateComponent implements OnInit {
       const Id = params.get('id');
       this.course_id = Id ? parseInt(Id) : 0;
       const design_id = params.get('design_id')
-      this.design_id = design_id ? parseInt(design_id) : 0 ;
-     
+      this.design_id = design_id ? parseInt(design_id) : 0;
+
     });
     this.createCourceForm = this.formBuilder.group({
       title_single: new FormControl('', [Validators.required]),
@@ -137,7 +137,7 @@ export class CourseCreateComponent implements OnInit {
       resource: [''],
       learning_type: new FormControl('', [Validators.required]),
       additional_comment: new FormControl(''),
-    //  regional_cordinator: new FormControl('', [Validators.required]),
+      //  regional_cordinator: new FormControl('', [Validators.required]),
       learner_guideline: this.formBuilder.array([]),
       curriculum_content: this.formBuilder.array([]),
       materialBased: new FormControl('')
@@ -335,7 +335,7 @@ export class CourseCreateComponent implements OnInit {
               this.learnerguidelineFormArray.push(this.addMorelearnerGuideline(element.title, element.description));
             });
           }
-        }else{
+        } else {
           this.createCourceForm.controls.learner_guideline = this.formBuilder.array([]);
           this.learnerguidelineFormArray.push(this.addMorelearnerGuideline('', ''));
         }
@@ -402,7 +402,7 @@ export class CourseCreateComponent implements OnInit {
               this.learnerguidelineFormArray.push(this.addMorelearnerGuideline(element.title, element.description));
             });
           }
-        }else{
+        } else {
           this.createCourceForm.controls.learner_guideline = this.formBuilder.array([]);
           this.learnerguidelineFormArray.push(this.addMorelearnerGuideline('', ''));
         }
@@ -552,7 +552,7 @@ export class CourseCreateComponent implements OnInit {
               this.learnerguidelineFormArray.push(this.addMorelearnerGuideline(element.title, element.description));
             });
           }
-        }else{
+        } else {
           this.createCourceForm.controls.learner_guideline = this.formBuilder.array([]);
           this.learnerguidelineFormArray.push(this.addMorelearnerGuideline('', ''));
         }
@@ -637,7 +637,7 @@ export class CourseCreateComponent implements OnInit {
             });
           }
         }
-        else{
+        else {
           this.createCourceForm.controls.learner_guideline = this.formBuilder.array([]);
           this.learnerguidelineFormArray.push(this.addMorelearnerGuideline('', ''));
         }
@@ -663,7 +663,7 @@ export class CourseCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCordinators();
-    console.log("getProfileDetailsfromlocal",this.getprofileDetails);
+    console.log("getProfileDetailsfromlocal", this.getprofileDetails);
   }
 
   getLearningDetails() {
@@ -675,9 +675,11 @@ export class CourseCreateComponent implements OnInit {
           this.requestdata = res.data;
           this.createCourceForm.controls.title_single.setValue(this.requestdata.project_name);
           this.createCourceForm.controls.description_single.setValue(this.requestdata.explain_purpose);
-          //
-          this.createCourceForm.controls.description_single.setValue(this.requestdata.explain_purpose);
+          if (this.requestdata.objective) {
+            this.removeObjectiveContent(0);
+            this.addObjectiveContent(this.requestdata.objective.replace(/<\/?[^>]+(>|$)/g, ""));
           }
+        }
       },
       (err: any) => {
         this.commonService.errorHandling(err);
@@ -685,7 +687,7 @@ export class CourseCreateComponent implements OnInit {
       });
   }
 
-  requiredMessage(field:any){
+  requiredMessage(field: any) {
     return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
   }
 
@@ -772,14 +774,14 @@ export class CourseCreateComponent implements OnInit {
     return this.createCourceForm.get("objective") as FormArray;
   }
 
-  searchInstructor(elem:any){
-    if(elem){
-      this.searchedPreferedInstructor = this.preferedInstructor.filter((x:any) => x.email_id.includes(elem));
+  searchInstructor(elem: any) {
+    if (elem) {
+      this.searchedPreferedInstructor = this.preferedInstructor.filter((x: any) => x.email_id.includes(elem));
     }
-    else{
+    else {
       this.searchedPreferedInstructor = [];
     }
-   }
+  }
 
   addMorelearnerGuideline(titleval: string, descriptionval: string) {
     return this.formBuilder.group({
@@ -1052,7 +1054,7 @@ export class CourseCreateComponent implements OnInit {
         if (this.course_id) {
           this.getCourseDetails()
         }
-        else if( this.design_id){
+        else if (this.design_id) {
           this.getLearningDetails();
         }
         else {
@@ -1169,8 +1171,8 @@ export class CourseCreateComponent implements OnInit {
 
   get_learningType(event: any) {
     this.learningType = event.target.value;
-    if(this.learningType == 6){
-      
+    if (this.learningType == 6) {
+
     }
     setTimeout(() => {
       // var topOfElement = target.offsetTop;
@@ -1259,7 +1261,7 @@ export class CourseCreateComponent implements OnInit {
     if (this.course_details?.status === this.CarouselStatus.publish || this.course_details?.status === this.CarouselStatus.expired || this.course_details?.status === this.CarouselStatus.reject) {
       return false;
     }
-    if (this.isRequester  || this.isPlayListRole || !this.course_details.id) {
+    if (this.isRequester || this.isPlayListRole || !this.course_details.id) {
       return false;
     }
     if (this.course_details?.status === this.CarouselStatus.draft) {
@@ -1285,7 +1287,7 @@ export class CourseCreateComponent implements OnInit {
   }
 
   isSubmit() {
-    if (!this.isRequester || (this.isRequester && (this.isPublisher || this.isReviewer || this.isPlayListRole || 
+    if (!this.isRequester || (this.isRequester && (this.isPublisher || this.isReviewer || this.isPlayListRole ||
       this.isRom))) {
       return false;
     }
@@ -1295,9 +1297,9 @@ export class CourseCreateComponent implements OnInit {
     if (this.getprofileDetails.data.id === this.course_details?.user_id && this.course_details?.status === this.CarouselStatus.pending) {
       return false;
     }
-  /*  if (this.course_details?.status === this.CarouselStatus.pending && this.course_details?.status === this.CarouselStatus.pending) {
-      return false;
-    } */
+    /*  if (this.course_details?.status === this.CarouselStatus.pending && this.course_details?.status === this.CarouselStatus.pending) {
+        return false;
+      } */
     if (this.getprofileDetails.data.id != this.course_details?.user_id && this.course_details?.transfer_user_id && !this.course_details?.publisher_status && this.isReviewer) {
       return false;
     }
