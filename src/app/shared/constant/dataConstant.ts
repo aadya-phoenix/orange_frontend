@@ -175,7 +175,8 @@ export const dataConstant = {
     sme: 'sme',
     vendor: 'vendor',
     getReport: 'get-report',
-    design: 'design'
+    design: 'design',
+    goldTool: 'gold-tool'
   },
   ModuleList: [{
     name: 'Course', id: 'course'

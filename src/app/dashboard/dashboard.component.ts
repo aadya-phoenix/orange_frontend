@@ -127,6 +127,17 @@ export class DashboardComponent implements OnInit {
 
       this.modulesArray_tab2 = [
         {
+          id: 'goldtool', name: 'Gold tool request',
+          routerLink: '/dashboard/gold-tool', image: '../../assets/images/second.jpg',
+          lableConstantModule:'Gold tool request',
+          lableConstantCatalog: this.lableConstant.request_learning_team,
+          navigateTo: this.modules.goldTool,
+          favourite: false, showFavourite: true,
+          isShowPending: true,
+          pendingRequestCount: this.pendingRequestCount.digital_learning,
+          setFavouriteModule: this.modules.goldTool,
+        },
+        {
           id: 'design', name: 'Design learning Module',
           routerLink: '/dashboard/designlearning', image: '../../assets/images/Design learning module.jpg',
           lableConstantModule: this.lableConstant.design_learning_module,
