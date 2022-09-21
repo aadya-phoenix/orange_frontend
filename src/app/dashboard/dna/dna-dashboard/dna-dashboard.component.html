@@ -56,13 +56,58 @@
                                             class="btn btn-primary">{{lableConstant.dna_roles}}</button>
                                     </div>
                                     <div class="row">
+                                        <div class="col-sm-3  mb-4" *ngFor="let item of activeTrackerObj">
+                                            <div class="card card_seco_dna1">
+                                                <div class="bac-blur">
+                                                </div>
+                                                <div>
+                                                <div class="border_top_card_dna">
+                                                    <p>{{item.type_name}}</p>
+                                                </div>
+                                                <div class="card_bac_dna">
+                                                    <p class="text_white fon_17 font_bold mt_13 mb-0 pa-14"
+                                                        ngbTooltip="{{item.description}}">{{item.title}}</p>
+                                                    <img src="../../../../assets/images/worl_co.png" class="w_50_dna">
+                                                    <div class="date_amin_div1 d-flex justify-space_around">
+                                                        <div class="start-date">
+                                                            <p class="p_text_date text_white">{{item.open_date | date:
+                                                                dateFormate}}</p>
+                                                            <p class="p_text_date_0 text_white">{{lableConstant.Start_Date}}</p>
+                                                        </div>
+                                                        <div class="border-betwe1"></div>
+                                                        <div class="end-date">
+                                                            <p class="p_text_date text_white">{{item.close_date | date:
+                                                                dateFormate}}</p>
+                                                            <p class="p_text_date_0 text_white">{{lableConstant.End_Date}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <p class="text_white fon_16 font_weight mt-2 mb-2">
+                                                        {{lableConstant.click_start_button_to_see__added_learning_need}}
+                                                    </p>
+                                                    <div class="mb-0 buttonstart_ma">
+                                                        <button class="btn btn-primary" *ngIf="item.isStart"
+                                                            (click)="addLearning(item)"><span
+                                                                class="fon_12">{{lableConstant.start}}</span></button>
+                                                        <button class="btn btn-primary" *ngIf="!item.isStart"
+                                                            (click)="viewReport(item)"><span
+                                                                class="fon_12">{{lableConstant.view}}</span></button>
+                                                        <button class="btn btn-secondary ml-1"
+                                                            (click)="managerData(item)"><span
+                                                                class="fon_12">{{lableConstant.manager_report}}</span></button>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            </div>
                                         <div class="col-sm-3 mb-4" *ngFor="let item of activeTrackerObj">
+                                            
+                                           
                                             <div class="card card_seco_dna">
                                                 <div class="border_top_card_dna">
                                                     <p>{{item.type_name}}</p>
                                                 </div>
                                                 <div class="card_bac_dna">
-                                                    <p class="text_balck fon_15 font_bold mt_13 mb-0"
+                                                    <p class="text_balck fon_17 font_bold mt_13 mb-0 pa-14"
                                                         ngbTooltip="{{item.description}}">{{item.title}}</p>
                                                     <img src="../../../../assets/images/worl_co.png" class="w_50_dna">
                                                     <div class="date_amin_div d-flex justify-space_around">
@@ -78,10 +123,10 @@
                                                             <p class="p_text_date_0">{{lableConstant.End_Date}}</p>
                                                         </div>
                                                     </div>
-                                                    <p class="text_balck fon_12 font_weight mt-2 mb-2">
+                                                    <p class="text_balck fon_16 font_weight mt-2 mb-2">
                                                         {{lableConstant.click_start_button_to_see__added_learning_need}}
                                                     </p>
-                                                    <div class="mb-2 buttonstart_ma">
+                                                    <div class="mb-0 buttonstart_ma">
                                                         <button class="btn btn-primary" *ngIf="item.isStart"
                                                             (click)="addLearning(item)"><span
                                                                 class="fon_12">{{lableConstant.start}}</span></button>
@@ -123,7 +168,7 @@
                                                     <p>{{item.type_name}}</p>
                                                 </div>
                                                 <div class="card_bac_dna">
-                                                    <p class="text_balck fon_15 font_bold mt_13 mb-0"
+                                                    <p class="text_balck fon_17 font_bold mt_13 mb-0 pa-14"
                                                         ngbTooltip="{{item.description}}">{{item.title}}</p>
                                                     <img src="../../../../assets/images/worl_co.png" class="w_50_dna">
                                                     <div class="date_amin_div d-flex justify-space_around">
@@ -139,7 +184,7 @@
                                                             <p class="p_text_date_0">{{lableConstant.End_Date}}</p>
                                                         </div>
                                                     </div>
-                                                    <p class="text_balck fon_12 font_weight mt-2 mb-2">
+                                                    <p class="text_balck fon_16 font_weight mt-2 mb-2">
                                                         {{lableConstant.click_start_button_to_see__added_learning_need}}
                                                     </p>
                                                     <div class="mb-2 buttonstart_ma">
