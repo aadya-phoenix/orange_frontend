@@ -27,7 +27,7 @@
                 <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
               </li>
               <li>
-                <a class="text_white">Create new Session</a>
+                <a class="text_white">Gold Tool Request</a>
               </li>
             </ol>
           </div>
@@ -45,11 +45,11 @@
                   <span class="card_overall">{{lableConstant.Overall_request_Status}}</span>
                   <div class="cct_button_oversta">
                     <button class="btn btn-secondary" 
-                    [routerLink]="['/dashboard/sct/view-complete-report']">
+                    [routerLink]="['/dashboard/gold-tool/view-complete-report']">
                       <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> 
                       {{lableConstant.View_all_activity_report}}
                     </button>
-                    <button class="btn btn-primary ml-1" [routerLink]="['/dashboard/sct/create']">
+                    <button class="btn btn-primary ml-1" [routerLink]="['/dashboard/gold-tool/create']">
                        {{lableConstant.New_Request}}
                     </button>
                   </div>
@@ -58,7 +58,7 @@
               <div class="card-body card_course_body">
                 <div class="Course_icon_parent" data-aos="fade-right">
                   <div class="Course_icon_child">
-                    <div class="alig_dashicon" (click)="getrecords(courseSessionStatus.draft)">
+                    <div class="alig_dashicon" (click)="getrecords(goldToolStatus.draft)">
                       <div class="sub-child-dashicon">
                         <div class="fa-icons-des bac_blue">
                           <img src="../../../../assets/images/icon/drafts.png" />
@@ -70,7 +70,7 @@
                   </div>
                   <!--coled-->
                   <div class="Course_icon_child">
-                    <div class="alig_dashicon" (click)="getrecords(courseSessionStatus.submitted)">
+                    <div class="alig_dashicon" (click)="getrecords(goldToolStatus.submitted)">
                       <div class="sub-child-dashicon">
                         <div class="fa-icons-des bac_puple">
                           <img src="../../../../assets/images/icon/closed.png" />
@@ -82,7 +82,7 @@
                   </div>
                   <!--coled-->
                   <div class="Course_icon_child">
-                    <div class="alig_dashicon" (click)="getrecords(courseSessionStatus.pending)">
+                    <div class="alig_dashicon" (click)="getrecords(goldToolStatus.pending)">
                       <div class="sub-child-dashicon">
                         <div class="fa-icons-des bac_yellow">
                           <img src="../../../../assets/images/icon/pending.png" />
@@ -95,7 +95,7 @@
                   
                   <!--coled-->
                   <div class="Course_icon_child">
-                    <div class="alig_dashicon" (click)="getrecords(courseSessionStatus.closed)">
+                    <div class="alig_dashicon" (click)="getrecords(goldToolStatus.closed)">
                       <div class="sub-child-dashicon">
                         <div class="fa-icons-des bac_green">
                           <img src="../../../../assets/images/icon/check.png" />
@@ -107,7 +107,7 @@
                   </div>
                   <!--coled-->
                   <div class="Course_icon_child">
-                    <div class="alig_dashicon" (click)="getrecords(courseSessionStatus.rejected)">
+                    <div class="alig_dashicon" (click)="getrecords(goldToolStatus.rejected)">
                       <div class="sub-child-dashicon">
                         <div class="fa-icons-des bac_pink">
                           <img src="../../../../assets/images/icon/reject.png" />
@@ -119,7 +119,7 @@
                   </div>
                   <!--coled-->
                   <div class="Course_icon_child">
-                    <div class="alig_dashicon" (click)="getrecords(courseSessionStatus.total)">
+                    <div class="alig_dashicon" (click)="getrecords(goldToolStatus.total)">
                       <div class="sub-child-dashicon">
                         <div class="fa-icons-des bac_blue1">
                           <img src="../../../../assets/images/icon/viewall.png" />
@@ -268,9 +268,9 @@
                     <p class="cm-pagination-fotter">{{showPaginationCount(((pagination.pageSize *
                       (pagination.pageNumber - 1)) + 1),
                       ((this.pagination.pageSize * this.pagination.pageNumber) >
-                      this.sessionListToView?.length ? this.sessionListToView?.length :
+                      this.goldToolListToView?.length ? this.goldToolListToView?.length :
                       this.pagination.pageSize * this.pagination.pageNumber),
-                      this.sessionListToView?.length)}}</p>
+                      this.goldToolListToView?.length)}}</p>
                   </div>
                   <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                 </div>

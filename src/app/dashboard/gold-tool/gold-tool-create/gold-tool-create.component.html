@@ -26,7 +26,7 @@
                             <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard/sct']" class="text_white">Create new Session</a>
+                            <a [routerLink]="['/dashboard/gold-tool']" class="text_white">Gold Tool Request</a>
                         </li>
                         <li>
                             <a class="text_white">{{lableConstant.New_Request}}</a>
@@ -49,14 +49,11 @@
         </div>
     </div>
 </div>
-<form [formGroup]="createSessionForm" enctype="multipart/form-data">
+<form [formGroup]="createGoldToolForm" enctype="multipart/form-data">
     <div class="content mt-1">
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-12">
-                    <p class="indicate_css"><span class="text_red">*</span>All fields marked by * are mandatory
-
-                    </p>
                     <div class="card">
                         <div class="card-body card_width">
                             <div class="row">
@@ -64,55 +61,42 @@
                                     <div class="form-group">
                                         <label class="form-control-label">
                                             Requester Name<span class="text_red">* </span>
-                                           
                                         </label>
                                         <input type="text" class="form-control form_width"
-                                            placeholder="Enter Event Title" formControlName="title">
+                                            placeholder="Enter Requester Name" formControlName="requester_name">
                                         <div
-                                            *ngIf="(createSessionForm.controls['title'].invalid && (createSessionForm.controls['title'].dirty || createSessionForm.controls['title'].touched)) || isSubmitted">
+                                            *ngIf="(createGoldToolForm.controls['requester_name'].invalid && (createGoldToolForm.controls['requester_name'].dirty || createGoldToolForm.controls['requester_name'].touched)) || isSubmitted">
                                             <div class="error_message"
-                                                *ngIf="createSessionForm.controls['title'].errors?.required">
-                                                {{requiredMessage(this.lableConstant.Event_Title)}}
+                                                *ngIf="createGoldToolForm.controls['requester_name'].errors?.required">
+                                                {{requiredMessage(this.lableConstant.Event_requester_name)}}
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
-                                <!--col-->
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="form-control-label">
-                                            Requester Name<span class="text_red">* </span>
+                                            Requester Email<span class="text_red">* </span>
                                         </label>
-                                        <ng-select placeholder="Please Select Region" [items]="rocObj" bindLabel="name"
-                                            [readonly]="session_status =='pending'" bindValue="id"
-                                            formControlName="region_id" class="w_100">
-                                        </ng-select>
+                                        <input type="text" class="form-control form_width"
+                                        placeholder="Enter Requester Email" formControlName="requester_email">
                                         <div
-                                            *ngIf="(createSessionForm.controls['region_id'].invalid && (createSessionForm.controls['region_id'].dirty || createSessionForm.controls['region_id'].touched)) || isSubmitted">
+                                            *ngIf="(createGoldToolForm.controls['requester_email'].invalid && (createGoldToolForm.controls['requester_email'].dirty || createGoldToolForm.controls['requester_email'].touched)) || isSubmitted">
                                             <div class="error_message"
-                                                *ngIf="createSessionForm.controls['region_id'].errors?.required">
+                                                *ngIf="createGoldToolForm.controls['requester_email'].errors?.required">
                                                 {{requiredMessage(this.lableConstant.Region_Name)}}
                                             </div>
+                                            <div class="error_message"
+                                                *ngIf="createGoldToolForm.controls['requester_email'].errors?.invalid">
+                                                Email is not valid.
+                                            </div>
                                         </div>
-
-                                        <p class="text_black" *ngFor="let item of backupCordinatorsList">
-                                            <b class="text_orange">Note</b>: The training coordinator of {{item.name}}
-                                            region is unavaliable.Therefore, please select the
-                                            <b class="text_orange">{{item.backup_roc_region}}</b>.region from the list,
-                                            who is the backup for {{item.name}} region.
-                                        </p>
                                     </div>
                                 </div>
-                                <!--col-->
                             </div>
                         </div>
-
                     </div>
-
-
                     <ng-container *ngIf="metadataArray.controls.length > 0">
-
                         <ngb-accordion #a="ngbAccordion" formArrayName="metadata"
                             *ngFor="let session of metadataArray.controls; let i = index" activeIds="custom-panel-1">
                             <div class="card">
@@ -122,10 +106,8 @@
                                             <div class="card-header">
                                                 <div class="heeader_button">
                                                     <strong _ngcontent-jet-c125=""> Add following details for each request of required GOLD tool
-
                                                     </strong>
                                                     <div class="button_div d-flex">
-
                                                         <button (click)="copySession(session)"
                                                             class="btn btn-primary btn_creat_session1"><span
                                                                 class="fon_12">+ Copy
@@ -136,10 +118,8 @@
                                                                 class="fon_12">+ Add More
                                                             </span>
                                                         </button>
-                                                       
                                                         <button ngbPanelToggle
                                                             class="btn btn-link btn_minimize p-0"><span>-</span></button>
-                                                        <!-- <a ngbPanelToggle class="btn_minimize p-0"><span>-</span></a> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -357,28 +337,7 @@
                         </ngb-accordion>
 
                     </ng-container>
-                     <!-- <div class="card-footer1">
-                        <button class="btn btn-primary mr-1" type="submit"
-                            *ngIf="session_status !='pending' && (isStaff && !(getUserrole.includes(9) || getUserrole.includes(3))) && (sessionPub || session_status == 'reject')"
-                            (click)="createSession('pending')">{{lableConstant.submit}}</button>
-                        <button
-                            *ngIf="(getUserrole.includes(3) && ((!sessionPub && session_status != 'reject') || session_status == 'pending')) || getUserrole.includes(9)"
-                            class="btn btn-primary mr-1" data-target="#publishModal" data-toggle="modal"> <i
-                                class="fa fa-upload" aria-hidden="true"></i>
-                            <span class="pl-1"> {{lableConstant.publish}}</span>
-                        </button>
-                        <button class="btn btn-secondary mr-1"
-                            *ngIf="session_status == 'draft' || session_id == 0"
-                            (click)="createSession('draft')">
-                            {{lableConstant.Save_as_draft}}
-                        </button>
-                        <button
-                            *ngIf="session_id != 0 && session_details.user_id != getUserDetails.id  && ((getUserrole.includes(3) && session_status == 'pending') || getUserrole.includes(9))"
-                            class="btn btn-secondary" data-target="#rejectModal" data-toggle="modal">
-                            <i class="fa fa-times" aria-hidden="true"></i> <span
-                                class="pl-1">{{lableConstant.reject}}</span>
-                        </button>
-                    </div> --> 
+
                     
                     <div class="card-footer1" *ngIf ="getUserrole.includes(3)">
                         <button  class="btn btn-primary mr-1" type="submit"

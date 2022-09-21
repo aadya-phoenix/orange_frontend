@@ -8,7 +8,7 @@
             <div class="d-flex flex-column ml-3">
               <span class="breade_text_span1">Gold tool Request</span>
               <span class="divider"></span>
-              <span class="breade_text_span">{{lableConstant.request_create_session}}</span>
+              <span class="breade_text_span">{{lableConstant.request_create_goldTool}}</span>
             </div>
           </div>
         </div>
@@ -27,7 +27,10 @@
                 <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
               </li>
               <li>
-                <a class="text_white">Create new Session</a>
+                <a [routerLink]="['/dashboard/gold-tool']" class="text_white">Gold Tool Request</a>
+              </li>
+              <li>
+                <a class="text_white">{{lableConstant.View_all_activity_report}}</a>
               </li>
             </ol>
           </div>
@@ -44,12 +47,12 @@
                 <div class="overall_css">
                   <span class="card_overall">{{lableConstant.Overall_request_Status}}</span>
                   <div class="cct_button_oversta">
-                    <button class="btn btn-secondary" 
+                    <!-- <button class="btn btn-secondary" 
                     [routerLink]="['/dashboard/sct/view-complete-report']">
                       <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> 
                       {{lableConstant.View_all_activity_report}}
-                    </button>
-                    <button class="btn btn-primary ml-1" [routerLink]="['/dashboard/sct/create']">
+                    </button> -->
+                    <button class="btn btn-primary ml-1" [routerLink]="['/dashboard/gold-tool/create']">
                        {{lableConstant.New_Request}}
                     </button>
                   </div>
@@ -58,7 +61,7 @@
               <div class="card-body card_course_body">
                 <div class="Course_icon_parent" data-aos="fade-right">
                   <div class="Course_icon_child">
-                    <div class="alig_dashicon" (click)="getrecords(courseSessionStatus.draft)">
+                    <div class="alig_dashicon" (click)="getrecords(goldToolStatus.draft)">
                       <div class="sub-child-dashicon">
                         <div class="fa-icons-des bac_blue">
                           <img src="../../../../assets/images/icon/drafts.png" />
@@ -70,7 +73,7 @@
                   </div>
                   <!--coled-->
                   <div class="Course_icon_child" *ngIf="isStaff || getUserrole.includes(3)">
-                    <div class="alig_dashicon" (click)="getrecords(courseSessionStatus.submitted)">
+                    <div class="alig_dashicon" (click)="getrecords(goldToolStatus.submitted)">
                       <div class="sub-child-dashicon">
                         <div class="fa-icons-des bac_puple">
                           <img src="../../../../assets/images/icon/closed.png" />
@@ -82,7 +85,7 @@
                   </div>
                   <!--coled-->
                   <div class="Course_icon_child" *ngIf="!isStaff  || getUserrole.includes(3) || getUserrole.includes(9)">
-                    <div class="alig_dashicon" (click)="getrecords(courseSessionStatus.pending)">
+                    <div class="alig_dashicon" (click)="getrecords(goldToolStatus.pending)">
                       <div class="sub-child-dashicon">
                         <div class="fa-icons-des bac_yellow">
                           <img src="../../../../assets/images/icon/pending.png" />
@@ -95,7 +98,7 @@
                   
                   <!--coled-->
                   <div class="Course_icon_child">
-                    <div class="alig_dashicon" (click)="getrecords(courseSessionStatus.closed)">
+                    <div class="alig_dashicon" (click)="getrecords(goldToolStatus.closed)">
                       <div class="sub-child-dashicon">
                         <div class="fa-icons-des bac_green">
                           <img src="../../../../assets/images/icon/check.png" />
@@ -107,7 +110,7 @@
                   </div>
                   <!--coled-->
                   <div class="Course_icon_child">
-                    <div class="alig_dashicon" (click)="getrecords(courseSessionStatus.rejected)">
+                    <div class="alig_dashicon" (click)="getrecords(goldToolStatus.rejected)">
                       <div class="sub-child-dashicon">
                         <div class="fa-icons-des bac_pink">
                           <img src="../../../../assets/images/icon/reject.png" />
@@ -119,7 +122,7 @@
                   </div>
                   <!--coled-->
                   <div class="Course_icon_child">
-                    <div class="alig_dashicon" (click)="getrecords(courseSessionStatus.total)">
+                    <div class="alig_dashicon" (click)="getrecords(goldToolStatus.total)">
                       <div class="sub-child-dashicon">
                         <div class="fa-icons-des bac_blue1">
                           <img src="../../../../assets/images/icon/viewall.png" />
@@ -212,7 +215,7 @@
                     </thead>
                     <tbody>
                       <tr
-                        *ngFor="let session of sessionListToView | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber }"
+                        *ngFor="let goldTool of goldToolListToView | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber }"
                         class="text-center bac_hover-table fon_12">
                         <td  class="re_id"></td>
                         <td>   </td>
@@ -227,38 +230,38 @@
                        
                         
                         <td>
-                          <a *ngIf="session.status=='pending' || session.status=='publish' || session.status=='reject'"
-                            (click)="openModal(session)" class="re_id">
+                          <a *ngIf="goldTool.status=='pending' || goldTool.status=='publish' || goldTool.status=='reject'"
+                            (click)="openModal(goldTool)" class="re_id">
                             {{lableConstant.view}}
                           </a>
                         </td>
                         <td class="text-center">
-                          <span *ngIf="!session.status">
+                          <span *ngIf="!goldTool.status">
                             Pending
                           </span>
-                          <p *ngIf="session.status" [ngClass]="session.status" class="text_yellow">
-                            {{ session.status_new | titlecase }}
+                          <p *ngIf="goldTool.status" [ngClass]="goldTool.status" class="text_yellow">
+                            {{ goldTool.status_new | titlecase }}
                           </p>
                         </td>
                         <td class="text-center">
                           <div class="status_med_di">
-                            <a *ngIf="session.status=='pending' && isStaff" (click)="copyRequest(session.id)" class="copy_file mr-1"
+                            <a *ngIf="goldTool.status=='pending' && isStaff" (click)="copyRequest(goldTool.id)" class="copy_file mr-1"
                               data-toggle="tooltip" data-placement="top" title="Copy">
                               <i class="fa fa-files-o" aria-hidden="true"></i>
                             </a>
-                            <a *ngIf="session.status=='draft'" (click)="editRequest(session)" class="copy_file mr-1"
+                            <a *ngIf="goldTool.status=='draft'" (click)="editRequest(goldTool)" class="copy_file mr-1"
                               data-toggle="tooltip" data-placement="top" title="Edit">
                               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </a>
-                            <a *ngIf="session.status=='draft'" (click)="deleteRequest(session)" class="copy_file mr-1"
+                            <a *ngIf="goldTool.status=='draft'" (click)="deleteRequest(goldTool)" class="copy_file mr-1"
                               data-toggle="tooltip" data-placement="top" title="Delete">
                               <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
-                            <a *ngIf="(session.status=='reject' && isStaff && session.user_id == getprofileDetails.data?.id ) || (getUserrole.includes(3) &&session.status === 'reject' && session.user_id === getprofileDetails.data.id)" (click)="editRequest(session)" class="copy_file mr-1"
+                            <a *ngIf="(goldTool.status=='reject' && isStaff && goldTool.user_id == getprofileDetails.data?.id ) || (getUserrole.includes(3) &&goldTool.status === 'reject' && goldTool.user_id === getprofileDetails.data.id)" (click)="editRequest(goldTool)" class="copy_file mr-1"
                               data-toggle="tooltip" data-placement="top" title="Edit">
                               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </a>
-                            <a class="copy_file mr-1" data-toggle="tooltip" (click)="getRequest(session)" data-placement="top" title="View">
+                            <a class="copy_file mr-1" data-toggle="tooltip" (click)="getRequest(goldTool)" data-placement="top" title="View">
                               <i class="fa fa-eye" aria-hidden="true"></i>
                             </a>
                           </div>
@@ -331,9 +334,9 @@
                     <p class="cm-pagination-fotter">{{showPaginationCount(((pagination.pageSize *
                       (pagination.pageNumber - 1)) + 1),
                       ((this.pagination.pageSize * this.pagination.pageNumber) >
-                      this.sessionListToView?.length ? this.sessionListToView?.length :
+                      this.goldToolListToView?.length ? this.goldToolListToView?.length :
                       this.pagination.pageSize * this.pagination.pageNumber),
-                      this.sessionListToView?.length)}}</p>
+                      this.goldToolListToView?.length)}}</p>
                   </div>
                   <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                 </div>
