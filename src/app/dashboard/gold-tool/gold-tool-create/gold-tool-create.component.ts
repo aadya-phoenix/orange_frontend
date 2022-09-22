@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
+import { GoldToolService } from 'src/app/shared/services/gold-tool/gold-tool.service';
 
 @Component({
   selector: 'app-gold-tool-create',
@@ -12,17 +14,21 @@ import { CommonService } from 'src/app/shared/services/common/common.service';
 export class GoldToolCreateComponent implements OnInit {
   lableConstant: any = { french: {}, english: {} };
   isSubmitted = false;
+  goldtool_id = 0;
   getUserrole: any;
 
   public createGoldToolForm!: FormGroup;
   constructor(private commonService: CommonService,
     private authService:AuthenticationService,
+    private goldToolService: GoldToolService,
+    private router: Router,
     private fb: FormBuilder) {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.createGoldToolForm = this.fb.group({
       requester_name: new FormControl('', [Validators.required]),
       requester_email: new FormControl('', [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
+      comment:  new FormControl(''),
       metadata: this.fb.array([
         
       ]),
@@ -70,6 +76,45 @@ export class GoldToolCreateComponent implements OnInit {
 
   removeMetadata(index: number): void {
     this.metadataArray.removeAt(index);
+  }
+
+  createGoldTool(status: any) {
+    this.isSubmitted = true;
+    if (this.createGoldToolForm.invalid) {
+      return;
+    }
+    const body = this.createGoldToolForm.value;
+    body.status = status;
+    if (!this.goldtool_id) {
+      this.commonService.showLoading();
+      this.goldToolService.create(body).subscribe(
+        (res: any) => {
+          this.commonService.hideLoading();
+          this.commonService.toastSuccessMsg('Gold Tool Request', 'Successfully Saved.');
+          this.router.navigateByUrl(`/dashboard/gold-tool/view/${res.data.id}`);
+        },
+        (err: any) => {
+          this.commonService.hideLoading();
+          this.commonService.errorHandling(err);
+        }
+      );
+    }
+    else {
+      body.goldtool_id = this.goldtool_id;
+      this.commonService.showLoading();
+      this.goldToolService.update(body).subscribe(
+        (res: any) => {
+          this.commonService.hideLoading();
+          this.commonService.toastSuccessMsg('Gold Tool Request', 'Successfully Saved.');
+          this.router.navigateByUrl(`/dashboard/gold-tool/view/${this.goldtool_id}`);
+        },
+        (err: any) => {
+          this.commonService.hideLoading();
+          this.commonService.errorHandling(err);
+        }
+      );
+    }
+   
   }
 
 }
