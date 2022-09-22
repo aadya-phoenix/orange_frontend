@@ -107,24 +107,24 @@ export class CourseListComponent implements OnInit {
 
   viewRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/cct/view/${item.id}`);
+      this.router.navigateByUrl(`/cct/view/${item.id}`);
     }
   }
 
   sctCreateRequest(id:any){
-    this.router.navigateByUrl(`dashboard/sct/create/cct/${id}`);
+    this.router.navigateByUrl(`/sct/create/cct/${id}`);
   }
 
   olCarouselCreateRequest(id:any){
-    this.router.navigateByUrl(`dashboard/olcarousel/create/cct/${id}`);
+    this.router.navigateByUrl(`/olcarousel/create/cct/${id}`);
   }
 
   backOfficeCreateRequest(id:any){
-    this.router.navigateByUrl(`dashboard/back-office/create/cct/${id}`);
+    this.router.navigateByUrl(`/back-office/create/cct/${id}`);
   }
 
   getAReportCreateRequest(id:any){
-    this.router.navigateByUrl(`dashboard/olreport/create/cct/${id}`);
+    this.router.navigateByUrl(`/olreport/create/cct/${id}`);
   }
 
   openModal(item: any) {
@@ -219,7 +219,7 @@ export class CourseListComponent implements OnInit {
 
   editRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/cct/update/${item.id}`);
+      this.router.navigateByUrl(`/cct/update/${item.id}`);
     }
   }
 

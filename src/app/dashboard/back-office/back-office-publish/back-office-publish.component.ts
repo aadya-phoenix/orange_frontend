@@ -69,7 +69,7 @@ export class BackOfficePublishComponent implements OnInit {
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('BackOffice', `Successfully ${this.props.status}.`);
         this.modalService.close();
-        this.router.navigate(['/dashboard/back-office']);
+        this.router.navigate(['/back-office']);
       },
       (err: any) => {
         this.commonService.hideLoading();

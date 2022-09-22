@@ -90,7 +90,7 @@ export class GetReportViewComponent implements OnInit {
 
   updateRequest() {
     if (this.id) {
-      this.router.navigateByUrl(`/dashboard/olreport/update/${this.id}`);
+      this.router.navigateByUrl(`/olreport/update/${this.id}`);
     }
   }
 
@@ -230,7 +230,7 @@ export class GetReportViewComponent implements OnInit {
             'Your request has been Transferred to Data Analyst.',
             'success'
           )
-          this.router.navigate(['/dashboard/olreport']);
+          this.router.navigate(['/olreport']);
         }, (err: any) => {
           this.commonService.hideLoading();
           this.commonService.errorHandling(err);

@@ -409,7 +409,7 @@ export class CreateCarouselComponent implements OnInit {
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Carousel', 'Successfully Saved.');
-          this.router.navigateByUrl(`/dashboard/olcarousel/view/${res.data.id}`);
+          this.router.navigateByUrl(`/olcarousel/view/${res.data.id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();
@@ -424,7 +424,7 @@ export class CreateCarouselComponent implements OnInit {
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Carousel', 'Successfully Saved.');
-          this.router.navigateByUrl(`/dashboard/olcarousel/view/${this.carousel_id}`);
+          this.router.navigateByUrl(`/olcarousel/view/${this.carousel_id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();

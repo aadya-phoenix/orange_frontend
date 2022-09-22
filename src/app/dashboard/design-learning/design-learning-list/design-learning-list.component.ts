@@ -115,7 +115,7 @@ export class DesignLearningListComponent implements OnInit {
 
   editRequest(item: any) {
      if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/designlearning/update/${item.id}`);
+      this.router.navigateByUrl(`/designlearning/update/${item.id}`);
     }
   }
 
@@ -217,11 +217,11 @@ export class DesignLearningListComponent implements OnInit {
   }
 
   viewRequest(item: any){
-    this.router.navigateByUrl(`dashboard/designlearning/view/${item.id}`);
+    this.router.navigateByUrl(`/designlearning/view/${item.id}`);
   }
 
   CCTCreateRequest(id:any){
-    this.router.navigateByUrl(`dashboard/cct/create/designlearning/${id}`);
+    this.router.navigateByUrl(`/cct/create/designlearning/${id}`);
   }
 
   onSort({ column, direction }: any) {

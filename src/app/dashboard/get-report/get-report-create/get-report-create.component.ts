@@ -339,7 +339,7 @@ export class GetReportCreateComponent implements OnInit {
       this.getReportService.createReport(body).subscribe(
         (res: any) => {
           this.commonService.hideLoading();
-          this.router.navigateByUrl(`/dashboard/olreport`);
+          this.router.navigateByUrl(`/olreport`);
         },
         (err: any) => {
           this.commonService.hideLoading();
@@ -354,7 +354,7 @@ export class GetReportCreateComponent implements OnInit {
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Get Report', 'Successfully Saved.');
-          this.router.navigateByUrl(`/dashboard/olreport/view/${this.report_id}`);
+          this.router.navigateByUrl(`/olreport/view/${this.report_id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();
@@ -504,7 +504,7 @@ export class GetReportCreateComponent implements OnInit {
       (res: any) => {
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('GetReport', `Successfully ${status}.`);
-        this.router.navigate(['/dashboard/olreport']);
+        this.router.navigate(['/olreport']);
       },
       (err: any) => {
         this.commonService.hideLoading();

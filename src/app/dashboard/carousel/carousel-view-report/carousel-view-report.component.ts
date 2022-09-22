@@ -87,7 +87,7 @@ export class CarouselViewReportComponent implements OnInit {
 
   viewRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/olcarousel/view/${item.id}`);
+      this.router.navigateByUrl(`/olcarousel/view/${item.id}`);
     }
   }
 

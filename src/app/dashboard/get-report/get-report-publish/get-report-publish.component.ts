@@ -74,7 +74,7 @@ export class GetReportPublishComponent implements OnInit {
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('GetReport', `Successfully ${this.props.status_show}.`);
         this.modalService.close();
-        this.router.navigate(['/dashboard/olreport']);
+        this.router.navigate(['/olreport']);
       },
       (err: any) => {
         this.commonService.hideLoading();

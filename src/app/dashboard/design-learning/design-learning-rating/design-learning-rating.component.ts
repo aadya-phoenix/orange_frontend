@@ -187,7 +187,7 @@ export class DesignLearningRatingComponent implements OnInit {
           this.commonService.toastSuccessMsg('New Learning Module', 'Successfully Closed.');   
         }
         this.modalService.close();
-        this.router.navigate(['/dashboard/designlearning']);
+        this.router.navigate(['/designlearning']);
       },
       (err: any) => {
         this.commonService.hideLoading();

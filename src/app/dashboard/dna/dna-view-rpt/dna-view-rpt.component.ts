@@ -223,7 +223,7 @@ export class DnaViewRptComponent implements OnInit {
             'success'
           )
           this.commonService.hideLoading();
-          this.router.navigateByUrl('dashboard/dna');
+          this.router.navigateByUrl('/dna');
         },(err:any)=>{
           this.commonService.hideLoading();
         });

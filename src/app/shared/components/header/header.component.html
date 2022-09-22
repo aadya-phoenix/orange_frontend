@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light bac_des_css">
-    <a class="logo_main d-flex align-items-end navbar-brand" [routerLink]="[ '/dashboard']">
+    <a class="logo_main d-flex align-items-end navbar-brand" [routerLink]="['/']">
         <img src="../../../../assets/images/Small_Logo_RGB.png" alt="logo" class="header_orange_logo" />
         <span class="pdl_text">PD&L requests</span>
     </a>
@@ -12,7 +12,7 @@
         <ul class="navbar-nav">
 
             <!-- <li class="nav-item">
-                <a class="nav-link arrow_css_toggl" role="button" [routerLink]="[ '/dashboard']" style="margin-top: 3px;">
+                <a class="nav-link arrow_css_toggl" role="button" [routerLink]="[ '/']" style="margin-top: 3px;">
                     <i class=" fa fa-home icon_header_desi " aria-hidden="true "></i>
 
                 </a>
@@ -50,18 +50,18 @@
                                 <div class="nav_p ">
                                     <div id="myDIV ">
                                         <button class="btn_active " *ngIf="getUserrole.includes(3)"
-                                            [routerLink]="[ '/dashboard/set-backup'] ">Set ROC Backup</button>
+                                            [routerLink]="[ '/set-backup'] ">Set ROC Backup</button>
 
                                         <button class="btn_active" *ngIf="getUserrole.includes(4)"
-                                            [routerLink]="[ '/dashboard/set-backup'] ">Set Publisher Backup</button>
+                                            [routerLink]="[ '/set-backup'] ">Set Publisher Backup</button>
 
-                                        <button class="btn_active "  *ngIf="isAdmin" [routerLink]="[ '/dashboard/sctworkflow'] ">Activate
+                                        <button class="btn_active "  *ngIf="isAdmin" [routerLink]="[ '/sctworkflow'] ">Activate
                                             or Deactivate SCT Workflow</button>
-                                        <button class="btn_active " *ngIf="getUserrole.includes(4)" [routerLink]="[ '/dashboard/sctworkflow'] ">Set CCT
+                                        <button class="btn_active " *ngIf="getUserrole.includes(4)" [routerLink]="[ '/sctworkflow'] ">Set CCT
                                             publisher backup</button>
-                                        <button class="btn_active " *ngIf="getUserrole.includes(9)" [routerLink]="[ '/dashboard/sctworkflow'] ">Set
+                                        <button class="btn_active " *ngIf="getUserrole.includes(9)" [routerLink]="[ '/sctworkflow'] ">Set
                                             Session Publisher backup</button>
-                                        <button class="btn_active " *ngIf="getUserrole.includes(8)" [routerLink]="[ '/dashboard/sctworkflow'] ">Set OL
+                                        <button class="btn_active " *ngIf="getUserrole.includes(8)" [routerLink]="[ '/sctworkflow'] ">Set OL
                                             role publisher backup</button>
                                     </div>
                                 </div>
@@ -79,13 +79,10 @@
                 </a>
                 <div class="dropdown-menu drop_show dropshow_main-cs " aria-labelledby="navbarDropdownMenuLink">
                     <div class="text-box_div ">
-
                         <div class="nav_p ">
                             <div id="myDIV ">
-                                <button class="btn_active  ">Requester guide</button>
-                                <button class="btn_active ">Publisher guide</button>
-
-
+                                <button class="btn_active">Requester guide</button>
+                                <button class="btn_active" *ngIf="getUserrole && getUserrole.length > 0">Publisher guide</button>
                             </div>
                         </div>
                     </div>

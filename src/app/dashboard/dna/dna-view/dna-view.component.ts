@@ -67,7 +67,7 @@ export class DnaViewComponent implements OnInit {
   }
 
   redirect() {
-    this.router.navigateByUrl(`/dashboard/dna/create/${this.trackerId}`);
+    this.router.navigateByUrl(`/dna/create/${this.trackerId}`);
   }
 
   getBUFilterRecords(item: any) {

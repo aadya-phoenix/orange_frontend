@@ -55,7 +55,7 @@ export class DesignLearningViewComponent implements OnInit {
 
   update(item:any){
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/designlearning/update/${item.id}`);
+      this.router.navigateByUrl(`/designlearning/update/${item.id}`);
     }
   }
 

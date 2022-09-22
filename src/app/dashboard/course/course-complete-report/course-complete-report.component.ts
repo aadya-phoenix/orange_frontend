@@ -126,7 +126,7 @@ export class CourseCompleteReportComponent implements OnInit {
 
   viewRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/cct/view/${item.id}`);
+      this.router.navigateByUrl(`/cct/view/${item.id}`);
     }
   }
 

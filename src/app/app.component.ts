@@ -22,133 +22,132 @@ export class AppComponent {
         const url = event.url.split('?')[0];
         switch (url.replace(/[0-9]/g, '')) {
           case '/login':
-          case '/':
             pageName = dataConstant.TitleList.login;
             break;
-          case '/dashboard':
+          case '/':
             pageName = dataConstant.TitleList.home;
             break;
-          case '/dashboard/cct':
+          case '/cct':
             pageName = dataConstant.TitleList.cct;
             break;
-          case '/dashboard/cct/create':
+          case '/cct/create':
             pageName = dataConstant.TitleList.cct_create;
             break;
-          case '/dashboard/cct/update/':
+          case '/cct/update/':
             pageName = dataConstant.TitleList.cct_update;
             break;
-          case '/dashboard/cct/view-complete-report':
+          case '/cct/view-complete-report':
             pageName = dataConstant.TitleList.cct_report;
             break;
-          case '/dashboard/cct/view/':
+          case '/cct/view/':
             pageName = dataConstant.TitleList.cct_view;
             break;
-          case '/dashboard/sct':
+          case '/sct':
             pageName = dataConstant.TitleList.sct;
             break;
-          case '/dashboard/sct/create':
+          case '/sct/create':
             pageName = dataConstant.TitleList.sct_create;
             break;
-          case '/dashboard/sct/update/':
+          case '/sct/update/':
             pageName = dataConstant.TitleList.sct_update;
             break;
-          case '/dashboard/sct/view-complete-report':
+          case '/sct/view-complete-report':
             pageName = dataConstant.TitleList.sct_report;
             break;
-          case '/dashboard/sct/view/':
+          case '/sct/view/':
             pageName = dataConstant.TitleList.sct_view;
             break;
-          case '/dashboard/olcarousel':
+          case '/olcarousel':
             pageName = dataConstant.TitleList.olcarousel;
             break;
-          case '/dashboard/olcarousel/create':
+          case '/olcarousel/create':
             pageName = dataConstant.TitleList.olcarousel_create;
             break;
-          case '/dashboard/olcarousel/update/':
+          case '/olcarousel/update/':
             pageName = dataConstant.TitleList.olcarousel_update;
             break;
-          case '/dashboard/olcarousel/view-complete-report':
+          case '/olcarousel/view-complete-report':
             pageName = dataConstant.TitleList.olcarousel_report;
             break;
-          case '/dashboard/olcarousel/view/':
+          case '/olcarousel/view/':
             pageName = dataConstant.TitleList.olcarousel_view;
             break;
-          case '/dashboard/back-office':
+          case '/back-office':
             pageName = dataConstant.TitleList.backOffice;
             break;
-          case '/dashboard/back-office/create':
+          case '/back-office/create':
             pageName = dataConstant.TitleList.backOffice_create;
             break;
-          case '/dashboard/back-office/update/':
+          case '/back-office/update/':
             pageName = dataConstant.TitleList.backOffice_update;
             break;
-          case '/dashboard/back-office/view-complete-report':
+          case '/back-office/view-complete-report':
             pageName = dataConstant.TitleList.backOffice_report;
             break;
-          case '/dashboard/back-office/view/':
+          case '/back-office/view/':
             pageName = dataConstant.TitleList.backOffice_view;
             break;
-          case '/dashboard/designlearning':
+          case '/designlearning':
             pageName = dataConstant.TitleList.designlearning;
             break;
-          case '/dashboard/designlearning/create':
+          case '/designlearning/create':
             pageName = dataConstant.TitleList.designlearning_create;
             break;
-          case '/dashboard/designlearning/update/':
+          case '/designlearning/update/':
             pageName = dataConstant.TitleList.designlearning_update;
             break;
-          case '/dashboard/designlearning/view-complete-report':
+          case '/designlearning/view-complete-report':
             pageName = dataConstant.TitleList.designlearning_report;
             break;
-          case '/dashboard/designlearning/view/':
+          case '/designlearning/view/':
             pageName = dataConstant.TitleList.designlearning_view;
             break;
-          case '/dashboard/olreport':
+          case '/olreport':
             pageName = dataConstant.TitleList.olreport;
             break;
-          case '/dashboard/olreport/create':
+          case '/olreport/create':
             pageName = dataConstant.TitleList.olreport_create;
             break;
-          case '/dashboard/olreport/update/':
+          case '/olreport/update/':
             pageName = dataConstant.TitleList.olreport_update;
             break;
-          case '/dashboard/olreport/view-complete-report':
+          case '/olreport/view-complete-report':
             pageName = dataConstant.TitleList.olreport_report;
             break;
-          case '/dashboard/olreport/view/':
+          case '/olreport/view/':
             pageName = dataConstant.TitleList.olreport_view;
             break;
-          case '/dashboard/smedb':
+          case '/smedb':
             pageName = dataConstant.TitleList.smedb;
             break;
-          case '/dashboard/smedb/create':
+          case '/smedb/create':
             pageName = dataConstant.TitleList.smedb_create;
             break;
-          case '/dashboard/smedb/update/':
+          case '/smedb/update/':
             pageName = dataConstant.TitleList.smedb_update;
             break;
-          case '/dashboard/smedb/view-complete-report':
+          case '/smedb/view-complete-report':
             pageName = dataConstant.TitleList.smedb_report;
             break;
-          case '/dashboard/smedb/view/':
+          case '/smedb/view/':
             pageName = dataConstant.TitleList.smedb_view;
             break;
-          case '/dashboard/vendormanagement':
+          case '/vendormanagement':
             pageName = dataConstant.TitleList.vendormanagement;
             break;
-          case '/dashboard/vendormanagement/create':
+          case '/vendormanagement/create':
             pageName = dataConstant.TitleList.vendormanagement_create;
             break;
-          case '/dashboard/vendormanagement/update/':
+          case '/vendormanagement/update/':
             pageName = dataConstant.TitleList.vendormanagement_update;
             break;
-          case '/dashboard/vendormanagement/report':
+          case '/vendormanagement/report':
             pageName = dataConstant.TitleList.vendormanagement_report;
             break;
-          case '/dashboard/vendormanagement/rating':
+          case '/vendormanagement/rating':
             pageName = dataConstant.TitleList.vendormanagement_rating;
             break;
-          case '/dashboard/vendormanagement/view/':
+          case '/vendormanagement/view/':
             pageName = dataConstant.TitleList.vendormanagement_view;
             break;
           case '/pdltools':
@@ -157,52 +156,52 @@ export class AppComponent {
           case '/user':
             pageName = dataConstant.TitleList.user;
             break;
-          case '/dashboard/sctworkflow':
+          case '/sctworkflow':
             pageName = dataConstant.TitleList.sctworkflow;
             break;
-          case '/dashboard/set-backup':
+          case '/set-backup':
             pageName = dataConstant.TitleList.setBackup;
             break;
-          case '/dashboard/dna':
+          case '/dna':
             pageName = dataConstant.TitleList.dna;
             break;
-          case '/dashboard/dna/create/':
+          case '/dna/create/':
             pageName = dataConstant.TitleList.dna_create;
             break;
-          case '/dashboard/dna/update//':
+          case '/dna/update//':
             pageName = dataConstant.TitleList.dna_update;
             break;
-          case '/dashboard/dna/user':
+          case '/dna/user':
             pageName = dataConstant.TitleList.dna_user;
             break;
-          case '/dashboard/dna/user/edit/':
+          case '/dna/user/edit/':
             pageName = dataConstant.TitleList.dna_userEdit;
             break;
-          case '/dashboard/dna/tracker':
+          case '/dna/tracker':
             pageName = dataConstant.TitleList.dna_tracker;
             break;
-          case '/dashboard/dna/tracker/create':
+          case '/dna/tracker/create':
             pageName = dataConstant.TitleList.dna_trackerCreate;
             break;
-          case '/dashboard/dna/tracker/edit/':
+          case '/dna/tracker/edit/':
             pageName = dataConstant.TitleList.dna_trackerEdit;
             break;
-          case '/dashboard/dna/add-new/':
+          case '/dna/add-new/':
             pageName = dataConstant.TitleList.dna_addNew;
             break;
-          case '/dashboard/dna/managersdata/':
+          case '/dna/managersdata/':
             pageName = dataConstant.TitleList.dna_managersdata;
             break;
-          case '/dashboard/dna/view/':
+          case '/dna/view/':
             pageName = dataConstant.TitleList.dna_view;
             break;
-          case '/dashboard/dna/view-rpt/':
+          case '/dna/view-rpt/':
             pageName = dataConstant.TitleList.dna_viewRPT;
             break;
-          case '/dashboard/dna/view-bp/':
+          case '/dna/view-bp/':
             pageName = dataConstant.TitleList.dna_viewBP;
             break;
-          case '/dashboard/dna/view-complete-report/':
+          case '/dna/view-complete-report/':
             pageName = dataConstant.TitleList.dna_report;
             break;
           default:

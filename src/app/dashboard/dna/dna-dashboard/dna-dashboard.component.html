@@ -18,15 +18,12 @@
                 <div class="page-title d-flex end_just">
                     <ol class="breadcrumb text-right bac_trasparent">
                         <li>
-                            <a [routerLink]="['/dashboard']">
-                                <i class="fa fa-home text_white"></i>
+                            <a [routerLink]="['/']" class="text_white">
+                                <i class="fa fa-home" aria-colcount=""></i> {{lableConstant.home}}
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
-                        </li>
-                        <li>
-                            <span class="text_white span_dis">{{lableConstant.dna}}</span>
+                            <a [routerLink]="['/dna']" class="text_white span_dis">{{lableConstant.dna}}</a>
                         </li>
                     </ol>
                 </div>
@@ -52,7 +49,7 @@
                             <div class="card">
                                 <div class="card-body ">
                                     <div class="hide_button_admin" *ngIf="isAdmin">
-                                        <button [routerLink]="[ '/dashboard/dna/user']"
+                                        <button [routerLink]="[ '/dna/user']"
                                             class="btn btn-primary">{{lableConstant.dna_roles}}</button>
                                     </div>
                                     <div class="row">

@@ -172,7 +172,7 @@ export class VendorManagementRatingReportComponent implements OnInit {
 
   viewRequest(item: any) {
     if (item && item.vendor_id) {
-      this.router.navigateByUrl(`/dashboard/vendormanagement/view/${item.vendor_id}`);
+      this.router.navigateByUrl(`/vendormanagement/view/${item.vendor_id}`);
     }
   }
 
@@ -267,12 +267,12 @@ export class VendorManagementRatingReportComponent implements OnInit {
 
   editRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/vendormanagement/update/${item.id}`);
+      this.router.navigateByUrl(`/vendormanagement/update/${item.id}`);
     }
   }
 
   ratingReport(){
-    this.router.navigateByUrl(`/dashboard/vendormanagement/rating`);
+    this.router.navigateByUrl(`/vendormanagement/rating`);
   }
 
     exportExcel(){

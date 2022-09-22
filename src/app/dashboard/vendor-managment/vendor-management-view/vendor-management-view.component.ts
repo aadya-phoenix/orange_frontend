@@ -76,7 +76,7 @@ export class VendorManagementViewComponent implements OnInit {
 
   updateRequest() {
     if (this.id) {
-      this.router.navigateByUrl(`/dashboard/vendormanagement/update/${this.id}`);
+      this.router.navigateByUrl(`/vendormanagement/update/${this.id}`);
     }
   }
 

@@ -42,7 +42,7 @@ export class DnaCreateComponent implements OnInit {
   }
 
   createNew() {
-    this.router.navigateByUrl(`/dashboard/dna/add-new/${this.trackerId}`);
+    this.router.navigateByUrl(`/dna/add-new/${this.trackerId}`);
   }
 
   delete(item:any){
@@ -64,7 +64,7 @@ export class DnaCreateComponent implements OnInit {
           )
           this.getLearningList();
           this.commonService.hideLoading();
-          this.router.navigateByUrl(`/dashboard/dna/create/${this.trackerId}`);
+          this.router.navigateByUrl(`/dna/create/${this.trackerId}`);
         },(err:any)=>{
           this.commonService.hideLoading();
         });
@@ -74,13 +74,13 @@ export class DnaCreateComponent implements OnInit {
 
   viewReport(){
     if (this.trackerId) {
-      this.router.navigateByUrl(`/dashboard/dna/view/${this.trackerId}`); 
+      this.router.navigateByUrl(`/dna/view/${this.trackerId}`); 
       }
   }
 
   update(item:any){
     if(item){
-    this.router.navigateByUrl(`/dashboard/dna/update/${this.trackerId}/${item.id}`);
+    this.router.navigateByUrl(`/dna/update/${this.trackerId}/${item.id}`);
     }
   }
 

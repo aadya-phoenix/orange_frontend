@@ -55,12 +55,12 @@ export class DnaTrackerComponent implements OnInit {
   }
 
   create() {
-    this.router.navigateByUrl('/dashboard/dna/tracker/create');
+    this.router.navigateByUrl('/dna/tracker/create');
   }
 
   editRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/dna/tracker/edit/${item.id}`);
+      this.router.navigateByUrl(`/dna/tracker/edit/${item.id}`);
     }
   }
 

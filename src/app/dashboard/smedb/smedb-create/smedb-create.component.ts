@@ -553,7 +553,7 @@ export class SmedbCreateComponent implements OnInit {
             this.commonService.toastSuccessMsg('SME Database', res.message);
             this.isProcced = true;
             this.getSMEDatabase();
-            //this.router.navigateByUrl(`/dashboard/smedb/view/${res.data.id}`);
+            //this.router.navigateByUrl(`/smedb/view/${res.data.id}`);
           } else {
             this.commonService.toastErrorMsg('Error', res.message);
           }
@@ -595,7 +595,7 @@ export class SmedbCreateComponent implements OnInit {
           if (res && res.status == 1) {
             this.commonService.toastSuccessMsg('SME Database', res.message);
             if (this.isProcced) {
-              this.router.navigateByUrl(`/dashboard/smedb/view/${this.sme_id}`);
+              this.router.navigateByUrl(`/smedb/view/${this.sme_id}`);
             }
             else {
               this.isProcced = true;
@@ -605,7 +605,7 @@ export class SmedbCreateComponent implements OnInit {
             this.commonService.toastErrorMsg('Error', res.message);
           }
           this.commonService.hideLoading();
-          //this.router.navigateByUrl(`/dashboard/olcarousel/view/${this.carousel_id}`);
+          //this.router.navigateByUrl(`/olcarousel/view/${this.carousel_id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();

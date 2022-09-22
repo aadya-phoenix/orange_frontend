@@ -20,19 +20,12 @@
                 <div class="page-title d-flex end_just">
                     <ol class="breadcrumb text-right bg-transparent">
                         <li>
-                            <a [routerLink]="['/dashboard']">
-                                <i class="fa fa-home text_white"></i>
+                            <a [routerLink]="['/']" class="text_white">
+                                <i class="fa fa-home" aria-colcount=""></i> {{lableConstant.home}}
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
-                        </li>
-                        <li>
-                            <a [routerLink]="['/dashboard/olreport']" class="text_white">{{lableConstant.get_a_report}}</a>
-                        </li>
-                        <li>
-                            <span class="text_white span_dis">{{ report_id === 0 ? lableConstant.New_Request : 'Update
-                                Request'}}</span>
+                            <a [routerLink]="['/olreport']" class="text_white span_dis">{{lableConstant.create_new_get_a_report}}</a>
                         </li>
                     </ol>
                 </div>
@@ -600,7 +593,7 @@
             </div>
             <div class="view-comple-req_div">
                 <button class="btn btn-primary view-comple-req justify-content-center p-1"
-                    [routerLink]="['/dashboard/olreport/view-complete-report']">
+                    [routerLink]="['/olreport/view-complete-report']">
                     <i class="fa fa-database mr-1" aria-hidden="true"></i>{{lableConstant.View_all_activity_report}}
                 </button>
             </div>

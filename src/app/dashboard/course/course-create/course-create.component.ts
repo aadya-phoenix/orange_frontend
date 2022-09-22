@@ -1312,7 +1312,7 @@ export class CourseCreateComponent implements OnInit {
     let statusobj = { course_id: this.course_details.id, status: 'reject', status_comment: this.rejectcomment }
     this.courseService.changeStatus(statusobj).subscribe((res: any) => {
       this.commonService.hideLoading();
-      this.router.navigate(['/dashboard/cct']);
+      this.router.navigate(['/cct']);
     }, (err: any) => {
       this.commonService.hideLoading();
       this.commonService.errorHandling(err);
@@ -1406,7 +1406,7 @@ export class CourseCreateComponent implements OnInit {
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Course', 'Successfully Saved.');
-          this.router.navigateByUrl(`/dashboard/cct/view/${res.data.id}`);
+          this.router.navigateByUrl(`/cct/view/${res.data.id}`);
         },
         (err: any) => {
           this.commonService.errorHandling(err);
@@ -1421,7 +1421,7 @@ export class CourseCreateComponent implements OnInit {
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Course', 'Successfully Saved.');
-          this.router.navigateByUrl(`/dashboard/cct/view/${this.course_id}`);
+          this.router.navigateByUrl(`/cct/view/${this.course_id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();

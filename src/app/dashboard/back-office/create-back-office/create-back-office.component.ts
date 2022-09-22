@@ -440,7 +440,7 @@ export class CreateBackOfficeComponent implements OnInit {
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('BackOffice', 'Successfully Saved.');
-          this.router.navigateByUrl(`/dashboard/back-office/view/${res.data.id}`);
+          this.router.navigateByUrl(`/back-office/view/${res.data.id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();
@@ -455,7 +455,7 @@ export class CreateBackOfficeComponent implements OnInit {
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('BackOffice', 'Successfully Saved.');
-          this.router.navigateByUrl(`/dashboard/back-office/view/${this.back_office_id}`);
+          this.router.navigateByUrl(`/back-office/view/${this.back_office_id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();

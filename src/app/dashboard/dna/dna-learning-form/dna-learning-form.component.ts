@@ -171,7 +171,7 @@ export class DnaLearningFormComponent implements OnInit {
         if (res.status == 1) {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('New Learning', 'Successfully Created.');
-          this.router.navigateByUrl(`/dashboard/dna/create/${this.trackerId}`);
+          this.router.navigateByUrl(`/dna/create/${this.trackerId}`);
         }
         else {
           this.commonService.hideLoading();
@@ -192,7 +192,7 @@ export class DnaLearningFormComponent implements OnInit {
         if (res.status == 1) {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('New Learning', 'Successfully Updated.');
-          this.router.navigateByUrl(`/dashboard/dna/create/${this.trackerId}`);
+          this.router.navigateByUrl(`/dna/create/${this.trackerId}`);
         }
         else {
           this.commonService.hideLoading();
@@ -250,7 +250,7 @@ export class DnaLearningFormComponent implements OnInit {
   }
 
   close() {
-    this.router.navigateByUrl(`/dashboard/dna/create/${this.trackerId}`);
+    this.router.navigateByUrl(`/dna/create/${this.trackerId}`);
   }
 
   createNew = (term: string) => {

@@ -74,7 +74,7 @@ export class CarouselViewComponent implements OnInit {
 
   updateRequest() {
     if (this.id) {
-      this.router.navigateByUrl(`/dashboard/olcarousel/update/${this.id}`);
+      this.router.navigateByUrl(`/olcarousel/update/${this.id}`);
     }
   }
 

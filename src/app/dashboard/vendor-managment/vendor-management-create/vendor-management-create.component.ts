@@ -328,7 +328,7 @@ export class VendorManagementCreateComponent implements OnInit {
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Vendor', 'Successfully Saved.');
-          this.router.navigateByUrl(`/dashboard/vendormanagement/view/${res.data.id}`);
+          this.router.navigateByUrl(`/vendormanagement/view/${res.data.id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();
@@ -343,7 +343,7 @@ export class VendorManagementCreateComponent implements OnInit {
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Vendor', 'Successfully Saved.');
-          this.router.navigateByUrl(`/dashboard/vendormanagement/view/${this.vendor_id}`);
+          this.router.navigateByUrl(`/vendormanagement/view/${this.vendor_id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();

@@ -29,7 +29,7 @@ export class AuthorizationServiceGuard implements CanActivate {
     ) {
       return true;
     } else {
-      this.router.navigate(['/dashboard/cct']);
+      this.router.navigate(['/cct']);
       return false;
     }
   }

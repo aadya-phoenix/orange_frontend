@@ -109,7 +109,7 @@ export class BackOfficeViewReportComponent implements OnInit {
 
   viewRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/back-office/view/${item.id}`);
+      this.router.navigateByUrl(`/back-office/view/${item.id}`);
     }
   }
 

@@ -122,7 +122,7 @@ export class SmedbViewComponent implements OnInit {
 
   updateRequest() {
     if (this.id) {
-      this.router.navigateByUrl(`/dashboard/smedb/update/${this.id}`);
+      this.router.navigateByUrl(`/smedb/update/${this.id}`);
     }
   }
 

@@ -230,7 +230,7 @@ export class DesignLearningCreateComponent implements OnInit {
         if(res.status == 1){
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('New Learning Module', 'Successfully Created.');
-        this.router.navigateByUrl("/dashboard/designlearning");
+        this.router.navigateByUrl("/designlearning");
         }
         else{
           this.commonService.hideLoading();
@@ -250,7 +250,7 @@ export class DesignLearningCreateComponent implements OnInit {
         if(res.status == 1){
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('New Learning Module', 'Successfully Updated.');
-        this.router.navigateByUrl("/dashboard/designlearning");
+        this.router.navigateByUrl("/designlearning");
         }
         else{
           this.commonService.hideLoading();
@@ -279,7 +279,7 @@ export class DesignLearningCreateComponent implements OnInit {
         if(res.status == 1){
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('New Learning Module', 'Successfully Forwarded.');
-        this.router.navigateByUrl("/dashboard/designlearning");
+        this.router.navigateByUrl("/designlearning");
         }
         else{
           this.commonService.hideLoading();
@@ -341,7 +341,7 @@ export class DesignLearningCreateComponent implements OnInit {
         if(res.status == 1){
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('New Learning Module', 'Successfully Forwarded.');
-        this.router.navigateByUrl("/dashboard/designlearning");
+        this.router.navigateByUrl("/designlearning");
         }
         else{
           this.commonService.hideLoading();

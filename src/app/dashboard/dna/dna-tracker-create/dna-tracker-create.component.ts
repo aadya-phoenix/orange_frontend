@@ -130,7 +130,7 @@ export class DnaTrackerCreateComponent implements OnInit {
         if (res.status == 1) {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Tracker', 'Successfully Updated.');
-          this.router.navigateByUrl(`/dashboard/dna/tracker`);
+          this.router.navigateByUrl(`/dna/tracker`);
         }
         else {
           this.commonService.toastErrorMsg('Error', res.message);
@@ -162,7 +162,7 @@ export class DnaTrackerCreateComponent implements OnInit {
             'Your request has been deleted.',
             'success'
           );
-          this.router.navigateByUrl(`/dashboard/dna/tracker`);
+          this.router.navigateByUrl(`/dna/tracker`);
         }, (err: any) => {
           this.commonService.hideLoading();
         });

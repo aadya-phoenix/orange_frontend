@@ -73,7 +73,7 @@ export class GetReportCloseOnUpdateComponent implements OnInit {
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('Get Report', 'Successfully Saved.');
         this.modalService.close();
-        this.router.navigateByUrl(`/dashboard/olreport/view/${body.report_id}`);
+        this.router.navigateByUrl(`/olreport/view/${body.report_id}`);
       },
       (err: any) => {
         this.commonService.hideLoading();

@@ -260,7 +260,7 @@ export class CourseViewComponent implements OnInit {
   }
 
   updateCource() {
-    this.router.navigateByUrl(`/dashboard/cct/update/${this.id}`);
+    this.router.navigateByUrl(`/cct/update/${this.id}`);
   }
 
   PublishRequest() {
@@ -273,7 +273,7 @@ export class CourseViewComponent implements OnInit {
       (res: any) => {
         this.commonService.hideLoading();
         if (res) {
-       //   this.router.navigate(['/dashboard/cct']);
+       //   this.router.navigate(['/cct']);
         }
       },
       (err: any) => {
@@ -287,7 +287,7 @@ export class CourseViewComponent implements OnInit {
     this.commonService.showLoading();
     this.courseService.changeStatus(statusobj).subscribe((res: any) => {
       this.commonService.hideLoading();
-      this.router.navigate(['/dashboard/cct']);
+      this.router.navigate(['/cct']);
     }, (err: any) => {
       this.commonService.hideLoading();
       this.commonService.errorHandling(err);
@@ -334,7 +334,7 @@ export class CourseViewComponent implements OnInit {
       this.commonService.showLoading();
       this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
         this.commonService.hideLoading();
-        this.router.navigate(['/dashboard/cct']);
+        this.router.navigate(['/cct']);
       }, (err: any) => {
         this.commonService.hideLoading();
         this.commonService.errorHandling(err);
@@ -348,7 +348,7 @@ export class CourseViewComponent implements OnInit {
       this.commonService.showLoading();
       this.courseService.courseTransfer(transferobj).subscribe((res: any) => {
         this.commonService.hideLoading();
-        this.router.navigate(['/dashboard/cct']);
+        this.router.navigate(['/cct']);
       }, (err: any) => {
         this.commonService.hideLoading();
         this.commonService.errorHandling(err);

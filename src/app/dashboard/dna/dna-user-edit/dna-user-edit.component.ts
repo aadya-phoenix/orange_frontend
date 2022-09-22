@@ -145,7 +145,7 @@ export class DnaUserEditComponent implements OnInit {
         if (res.status == 1) {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('User', 'Successfully Updated.');
-          this.router.navigateByUrl(`/dashboard/dna/user`);
+          this.router.navigateByUrl(`/dna/user`);
         }
         else {
           this.commonService.toastErrorMsg('Error', res.message);
@@ -160,7 +160,7 @@ export class DnaUserEditComponent implements OnInit {
   }
 
   close() {
-    this.router.navigateByUrl(`/dashboard/dna/user}`);
+    this.router.navigateByUrl(`/dna/user}`);
   }
 
   getUserDetails() {

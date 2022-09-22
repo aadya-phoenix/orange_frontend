@@ -85,7 +85,7 @@ export class GetReportListComponent implements OnInit {
   
   viewRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/olreport/view/${item.id}`);
+      this.router.navigateByUrl(`/olreport/view/${item.id}`);
     }
   }
 
@@ -211,7 +211,7 @@ export class GetReportListComponent implements OnInit {
 
   editRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/olreport/update/${item.id}`);
+      this.router.navigateByUrl(`/olreport/update/${item.id}`);
     }
   }
 

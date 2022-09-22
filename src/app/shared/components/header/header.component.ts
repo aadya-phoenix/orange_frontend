@@ -110,19 +110,19 @@ export class HeaderComponent implements OnInit {
   navigatetoPending(module: any) {
     if (module == this.modules.course) {
       const status = this.isRequester ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
-      this.router.navigateByUrl(`/dashboard/cct?status=${status}`);
+      this.router.navigateByUrl(`/cct?status=${status}`);
     }
     if (module == this.modules.carousel) {
       const status = this.isRequester ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
-      this.router.navigateByUrl(`/dashboard/olcarousel?status=${status}`);
+      this.router.navigateByUrl(`/olcarousel?status=${status}`);
     }
     if (module == this.modules.session) {
       const status = this.isRequester ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
-      this.router.navigateByUrl(`/dashboard/sct?status=${status}`);
+      this.router.navigateByUrl(`/sct?status=${status}`);
     }
     if (module == this.modules.backOffice) {
       const status = this.isRequester ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
-      this.router.navigateByUrl(`/dashboard/back-office?status=${status}`);
+      this.router.navigateByUrl(`/back-office?status=${status}`);
     }
   }
 

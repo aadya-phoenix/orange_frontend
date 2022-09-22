@@ -182,7 +182,7 @@ export class DnaViewBpComponent implements OnInit {
   }
 
   viewRequest(item: any) {
-    this.router.navigateByUrl(`/dashboard/dna/update/${this.trackerId}/${item.id}`);
+    this.router.navigateByUrl(`/dna/update/${this.trackerId}/${item.id}`);
   }
 
   openModal() {

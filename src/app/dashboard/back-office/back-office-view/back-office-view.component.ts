@@ -72,7 +72,7 @@ export class BackOfficeViewComponent implements OnInit {
 
   updateRequest() {
     if (this.id) {
-      this.router.navigateByUrl(`/dashboard/back-office/update/${this.id}`);
+      this.router.navigateByUrl(`/back-office/update/${this.id}`);
     }
   }
 

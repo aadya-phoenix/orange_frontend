@@ -136,13 +136,13 @@ export class SessionsListComponent implements OnInit {
 
   getRequest(session: any) {
     if (session && session.id) {
-      this.router.navigateByUrl(`/dashboard/sct/view/${session.id}`);
+      this.router.navigateByUrl(`/sct/view/${session.id}`);
     }
   }
 
   editRequest(session:any){
     if (session) {
-      this.router.navigateByUrl(`/dashboard/sct/update/${session.id}`);
+      this.router.navigateByUrl(`/sct/update/${session.id}`);
     }
   }
 

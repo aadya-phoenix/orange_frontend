@@ -399,7 +399,7 @@ export class CreateSessionComponent implements OnInit {
           (res: any) => {
             this.commonService.hideLoading();
             this.commonService.toastSuccessMsg('Session', 'Successfully Created.');
-            this.router.navigate(['/dashboard/sct']);
+            this.router.navigate(['/sct']);
           },
           (err: any) => {
             this.commonService.errorHandling(err);
@@ -413,7 +413,7 @@ export class CreateSessionComponent implements OnInit {
           (res: any) => {
             this.commonService.hideLoading();
             this.commonService.toastSuccessMsg('Session', 'Successfully Updated.');
-            this.router.navigate(['/dashboard/sct']);
+            this.router.navigate(['/sct']);
           },
           (err: any) => {
             this.commonService.errorHandling(err);
@@ -524,7 +524,7 @@ export class CreateSessionComponent implements OnInit {
        (res: any) => {
          
          if (res) {
-           this.router.navigate(['/dashboard/sct']);
+           this.router.navigate(['/sct']);
          }
        },
        (err: any) => {
@@ -537,7 +537,7 @@ export class CreateSessionComponent implements OnInit {
     let statusobj = { session_id: this.session_id, status: 'reject', status_comment: this.rejectcomment }
     this.courseSessionService.changeStatusSession(statusobj).subscribe((res: any) => {
       
-      this.router.navigate(['/dashboard/sct']);
+      this.router.navigate(['/sct']);
     }, (err: any) => {
       this.commonService.errorHandling(err);
     })

@@ -141,7 +141,7 @@ export class ViewSessionComponent implements OnInit {
     let statusobj = { session_id: this.id, status: 'reject', status_comment: this.rejectcomment }
     this.courseSessionService.changeStatusSession(statusobj).subscribe((res: any) => {
       
-      this.router.navigate(['/dashboard/sct']);
+      this.router.navigate(['/sct']);
     }, (err: any) => {
       this.commonService.errorHandling(err);
     })
@@ -154,7 +154,7 @@ export class ViewSessionComponent implements OnInit {
         (res: any) => {
           
           if (res) {
-            this.router.navigate(['/dashboard/sct']);
+            this.router.navigate(['/sct']);
           }
         },
         (err: any) => {
@@ -189,7 +189,7 @@ export class ViewSessionComponent implements OnInit {
       let transferobj = { session_id: this.id, status: 'pending', transfer_id: this.selectedotherRoc, status_comment: this.transfercomment};
       this.courseSessionService.courseSessionTransfer(transferobj).subscribe((res: any) => {
         
-        this.router.navigate(['/dashboard/sct']);
+        this.router.navigate(['/sct']);
       }, (err: any) => {
         this.commonService.errorHandling(err);
       })
@@ -197,6 +197,6 @@ export class ViewSessionComponent implements OnInit {
   }
 
   updateSession(){
-    this.router.navigateByUrl(`/dashboard/sct/update/${this.id}`);
+    this.router.navigateByUrl(`/sct/update/${this.id}`);
   }
 }

@@ -123,7 +123,7 @@ export class SwitchUserComponent implements OnInit {
             if (params['redirectURL']) {
               this.router.navigate([params['redirectURL']]);
             } else {
-              this.router.navigate(['/dashboard']).then(() => {
+              this.router.navigate(['/']).then(() => {
                 window.location.reload();
               });
             }

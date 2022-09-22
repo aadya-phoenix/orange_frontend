@@ -69,7 +69,7 @@ export class CarouselPublishComponent implements OnInit {
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('Carousel', `Successfully ${this.props.status}.`);
         this.modalService.close();
-        this.router.navigate(['/dashboard/olcarousel']);
+        this.router.navigate(['/olcarousel']);
       },
       (err: any) => {
         this.commonService.hideLoading();

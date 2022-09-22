@@ -85,7 +85,7 @@ export class CarouselListComponent implements OnInit {
 
   viewRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/olcarousel/view/${item.id}`);
+      this.router.navigateByUrl(`/olcarousel/view/${item.id}`);
     }
   }
 
@@ -151,7 +151,7 @@ export class CarouselListComponent implements OnInit {
 
   editRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/olcarousel/update/${item.id}`);
+      this.router.navigateByUrl(`/olcarousel/update/${item.id}`);
     }
   }
 

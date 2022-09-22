@@ -99,12 +99,12 @@ export class DnaUserComponent implements OnInit {
   }
 
   navigate() {
-    this.router.navigateByUrl('dashboard/dna/tracker');
+    this.router.navigateByUrl('/dna/tracker');
   }
 
   /*  viewRequest(user: any) {
      if (user && user.id) {
-       this.router.navigateByUrl(`dashboard/dna/user/edit/${user.id}`);
+       this.router.navigateByUrl(`/dna/user/edit/${user.id}`);
      }
    } */
 

@@ -9,7 +9,7 @@
                     <div class="d-flex flex-column ml-3">
                         <span class="breade_text_span1">{{lableConstant.create_new_course}}</span>
                         <span class="divider"></span>
-                        <span class="breade_text_span">{{lableConstant.development_customer_service}}</span>
+                        <span class="breade_text_span">{{lableConstant.request_course_catalog}}</span>
                     </div>
                 </div>
             </div>
@@ -20,16 +20,16 @@
                 <div class="page-title d-flex end_just">
                     <ol class="breadcrumb text-right bac_trasparent">
                         <li>
-                            <a [routerLink]="['/dashboard']">
-                                <i class="fa fa-home text_white"></i>
+                            <a [routerLink]="['/']" class="text_white">
+                                <i class="fa fa-home" aria-colcount=""></i> {{lableConstant.home}}
                             </a>
                         </li>
-                        <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
-                        </li>
-                        <li>
-                            <span class="text_white span_dis">{{lableConstant.create_new_course}}</span>
-                        </li>
+                        <!-- <li>
+                            <a [routerLink]="['/']" class="text_white">{{lableConstant.dashboard}}</a>
+                        </li> -->
+                        <!-- <li>
+                            <span class="span_dis">{{lableConstant.create_new_course}}</span>
+                        </li> -->
                     </ol>
                 </div>
             </div>
@@ -46,11 +46,11 @@
                                 <span class="card_overall">{{lableConstant.Overall_request_Status}}</span>
                                 <div class="cct_button_oversta">
                                     <button class="btn btn-secondary"
-                                        [routerLink]="['/dashboard/cct/view-complete-report']">
+                                        [routerLink]="['/cct/view-complete-report']">
                                         <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i>
                                         {{lableConstant.View_all_activity_report}}
                                     </button>
-                                    <button class="btn btn-primary ml-1" [routerLink]="['/dashboard/cct/create']">
+                                    <button class="btn btn-primary ml-1" [routerLink]="['/cct/create']">
                                         <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1">
                                             {{lableConstant.New_Request}}</span>
                                     </button>
@@ -296,7 +296,7 @@
                                                         <button class="btn btn-secondary copy_file p-8" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             <i class="fa fa-bars" aria-hidden="true"></i>
                                                         </button>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <div class="dropdown-menu fon_13" aria-labelledby="dropdownMenuButton">
                                                             <a *ngIf="item.status_show === courseStatus.closed && item.learning_type == '1' " (click)="sctCreateRequest(item.id)"class="dropdown-item"
                                                             data-toggle="tooltip" data-placement="top"
                                                             title="{{lableConstant.open_course_session}}">

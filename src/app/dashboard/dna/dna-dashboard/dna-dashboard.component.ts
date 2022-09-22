@@ -58,34 +58,34 @@ export class DnaDashboardComponent implements OnInit {
 
   addLearning(item:any){
      if (item.id) {
-      this.router.navigateByUrl(`/dashboard/dna/create/${item.id}`);
+      this.router.navigateByUrl(`/dna/create/${item.id}`);
     } 
   }
 
   managerData(item:any){
     if (item.id) {
-      this.router.navigateByUrl(`/dashboard/dna/managersdata/${item.id}`); 
+      this.router.navigateByUrl(`/dna/managersdata/${item.id}`); 
       }
   }
 
   viewReport(item:any){
     if (item.id) {
-      this.router.navigateByUrl(`/dashboard/dna/view/${item.id}`); 
+      this.router.navigateByUrl(`/dna/view/${item.id}`); 
       }
   }
 
   completeReport(itemId:any){
     if(this.isLearningPartner || this.isRom || this.isDomainExpert || this.isBussinessConsultant){
-    this.router.navigateByUrl(`/dashboard/dna/view-complete-report/${itemId}`); 
+    this.router.navigateByUrl(`/dna/view-complete-report/${itemId}`); 
     }
   }
 
   review(itemId:any){
     if(this.isLearningPartner || this.isRom){
-    this.router.navigateByUrl(`/dashboard/dna/view-rpt/${itemId}`); 
+    this.router.navigateByUrl(`/dna/view-rpt/${itemId}`); 
     }
     if(this.isDomainExpert || this.isBussinessConsultant){
-      this.router.navigateByUrl(`/dashboard/dna/view-bp/${itemId}`); 
+      this.router.navigateByUrl(`/dna/view-bp/${itemId}`); 
     }
   }
 

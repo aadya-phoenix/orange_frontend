@@ -13,7 +13,7 @@ import { CourcesService } from '../shared/services/cources/cources.service';
 export class DashboardComponent implements OnInit {
   modules = dataConstant.Modules;
   isFavoutite = false;
-  activeTab = 'pills-home';
+  activeTab = 'pills-profile';
   pendingRequestCount = {
     carousel_pending: 0,
     course_pending: 0,
@@ -84,7 +84,7 @@ export class DashboardComponent implements OnInit {
       this.modulesArray_tab1 = [
         {
           id: 'course', name: 'Create new cource',
-          routerLink: '/dashboard/cct', image: '../../assets/images/first.jpg',
+          routerLink: '/cct', image: '../../assets/images/first.jpg',
           lableConstantModule: this.lableConstant.create_new_course,
           lableConstantCatalog: this.lableConstant.request_course_catalog,
           navigateTo: this.modules.course,
@@ -94,7 +94,7 @@ export class DashboardComponent implements OnInit {
           setFavouriteModule: this.modules.course,
         }, {
           id: 'session', name: 'Open cource session(s)',
-          routerLink: '/dashboard/sct', image: '../../assets/images/Open course session.jpg ',
+          routerLink: '/sct', image: '../../assets/images/Open course session.jpg ',
           lableConstantModule: this.lableConstant.open_course_session,
           lableConstantCatalog: this.lableConstant.request_create_session,
           navigateTo: this.modules.session,
@@ -104,7 +104,7 @@ export class DashboardComponent implements OnInit {
           setFavouriteModule: this.modules.session,
         }, {
           id: 'corousel', name: 'Promote on Carousel',
-          routerLink: '/dashboard/olcarousel',
+          routerLink: '/olcarousel',
           image: '../../assets/images/Promote on Carousel.jpg',
           lableConstantModule: this.lableConstant.promote_on_carousel,
           lableConstantCatalog: this.lableConstant.request_create_entity,
@@ -115,7 +115,7 @@ export class DashboardComponent implements OnInit {
           setFavouriteModule: this.modules.carousel,
         }, {
           id: 'back_office', name: 'Request back-office role',
-          routerLink: '/dashboard/back-office', image: '../../assets/images/4.jpg',
+          routerLink: '/back-office', image: '../../assets/images/4.jpg',
           lableConstantModule: this.lableConstant.request_back_office_role,
           lableConstantCatalog: this.lableConstant.request_specific_role,
           navigateTo: this.modules.backOffice,
@@ -128,7 +128,7 @@ export class DashboardComponent implements OnInit {
       this.modulesArray_tab2 = [
         {
           id: 'design', name: 'Design learning Module',
-          routerLink: '/dashboard/designlearning', image: '../../assets/images/Design learning module.jpg',
+          routerLink: '/designlearning', image: '../../assets/images/Design learning module.jpg',
           lableConstantModule: this.lableConstant.design_learning_module,
           lableConstantCatalog: this.lableConstant.request_learning_team,
           navigateTo: this.modules.design,
@@ -138,7 +138,7 @@ export class DashboardComponent implements OnInit {
           setFavouriteModule: this.modules.design,
         }, {
           id: 'get_report', name: 'Get a Report',
-          routerLink: '/dashboard/olreport', image: '../../assets/images/get a report.jpg',
+          routerLink: '/olreport', image: '../../assets/images/get a report.jpg',
           lableConstantModule: this.lableConstant.get_a_report,
           lableConstantCatalog: this.lableConstant.request_training_vc_report,
           navigateTo: this.modules.getReport,
@@ -148,7 +148,7 @@ export class DashboardComponent implements OnInit {
           setFavouriteModule: this.modules.getReport,
         }, {
           id: 'dna', name: 'Access Learning Needs Tool(DNA)',
-          routerLink: '/dashboard/dna', image: '../../assets/images/Access Learning Needs tool(DNA).jpg',
+          routerLink: '/dna', image: '../../assets/images/Access Learning Needs tool(DNA).jpg',
           lableConstantModule: this.lableConstant.access_learning_tool,
           lableConstantCatalog: this.lableConstant.dna_tool_feature,
           navigateTo:  this.modules.dna,
@@ -159,7 +159,7 @@ export class DashboardComponent implements OnInit {
         },
         {
           id: 'sme', name: 'SME Database',
-          routerLink: '/dashboard/smedb', image: '../../assets/images/SME_DB.jpg',
+          routerLink: '/smedb', image: '../../assets/images/SME_DB.jpg',
           lableConstantModule: this.lableConstant.sme_database,
           lableConstantCatalog: this.lableConstant.sme_learning_community_feature,
           navigateTo:  this.modules.sme,
@@ -172,7 +172,7 @@ export class DashboardComponent implements OnInit {
 
       this.modulesArray_tab3 = [{
         id: 'vendor', name: 'Manage Vendors',
-        routerLink: '/dashboard/vendormanagement',
+        routerLink: '/vendormanagement',
         image: '../../assets/images/manage vendor.jpg',
         lableConstantModule: this.lableConstant.manage_vendors,
         lableConstantCatalog: this.lableConstant.view_manage_workshops,
@@ -208,37 +208,37 @@ export class DashboardComponent implements OnInit {
     return this.modulesArray_tab2.filter((x: { showFavourite: any; }) => x.showFavourite).length > 0 ? true : false;
   }
   isPdlMemberTab() {
-    return this.modulesArray_tab3.filter((x: { showFavourite: any; }) => x.showFavourite).length > 0 ? true : false
+    return this.isPdlMember && this.modulesArray_tab3.filter((x: { showFavourite: any; }) => x.showFavourite).length > 0 ? true : false
   }
   navigatetoPending(module: any) {
     if (this.pendingFlag && this.profileDetails.data.role_id.length == 0) return;
     if (module == this.modules.course) {
       const status = this.getUserrole.includes(this.RoleID.CourseRequester) ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
-      this.router.navigateByUrl(`/dashboard/cct?status=${status}`);
+      this.router.navigateByUrl(`/cct?status=${status}`);
     }
     if (module == this.modules.carousel) {
       const status = this.profileDetails.data?.staff == 1 ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
-      this.router.navigateByUrl(`/dashboard/olcarousel?status=${status}`);
+      this.router.navigateByUrl(`/olcarousel?status=${status}`);
     }
     if (module == this.modules.backOffice) {
       const status = this.profileDetails.data?.staff == 1 ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
-      this.router.navigateByUrl(`/dashboard/back-office?status=${status}`);
+      this.router.navigateByUrl(`/back-office?status=${status}`);
     }
     if (module == this.modules.session) {
       const status = dataConstant.BackOfficeStatus.pending;
-      this.router.navigateByUrl(`/dashboard/sct?status=${status}`);
+      this.router.navigateByUrl(`/sct?status=${status}`);
     }
     if (module == this.modules.design) {
       const status = (this.getUserrole.includes(this.RoleID.DesignTeam) || this.getUserrole.includes(this.RoleID.HeadOfDesign)) ? dataConstant.BackOfficeStatus.pending : dataConstant.BackOfficeStatus.submitted
-      this.router.navigateByUrl(`/dashboard/designlearning?status=${status}`);
+      this.router.navigateByUrl(`/designlearning?status=${status}`);
     }
     if (module == this.modules.getReport) {
       const status = this.profileDetails.data?.staff == 1 ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
-      this.router.navigateByUrl(`/dashboard/olreport?status=${status}`);
+      this.router.navigateByUrl(`/olreport?status=${status}`);
     }
     if (module == this.modules.backOffice) {
       const status = this.profileDetails.data?.staff == 1 ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
-      this.router.navigateByUrl(`/dashboard/back-office?status=${status}`);
+      this.router.navigateByUrl(`/back-office?status=${status}`);
     }
   }
 

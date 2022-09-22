@@ -1,28 +1,32 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthenticationServiceGuard } from './shared/services/guards/authentication.guards';
 
 const routes: Routes = [
   {
     path: '',
+    loadChildren: () =>
+      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+    canActivate:[AuthenticationServiceGuard]
+  },
+  {
+    path: 'login',
     loadChildren: () =>
       import('./auth/authentication.module').then(
         (m) => m.AuthenticationModule
       ),
   },
   {
-    path: 'dashboard',
-    loadChildren: () =>
-      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
-  },
-  {
     path: 'user',
     loadChildren: () =>
       import('./user/user.module').then((m) => m.UserModule),
+    canActivate:[AuthenticationServiceGuard]
   },
   {
     path: 'pdltools',
     loadChildren: () =>
       import('./pdltools/pdltools.module').then((m) => m.PdltoolsModule),
+    canActivate:[AuthenticationServiceGuard]
   }
   // {
   //   path: 'cources',

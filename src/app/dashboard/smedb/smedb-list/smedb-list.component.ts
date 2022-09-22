@@ -77,7 +77,7 @@ export class SmedbListComponent implements OnInit {
 
   viewRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/smedb/view/${item.id}`);
+      this.router.navigateByUrl(`/smedb/view/${item.id}`);
     }
   }
 

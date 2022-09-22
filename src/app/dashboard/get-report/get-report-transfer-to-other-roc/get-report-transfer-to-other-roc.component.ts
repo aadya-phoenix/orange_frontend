@@ -73,7 +73,7 @@ export class GetReportTransferToOtherRocComponent implements OnInit {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Get Report', 'Successfully Transfered.');
           this.modalService.close();
-          this.router.navigate(['/dashboard/olreport']);
+          this.router.navigate(['/olreport']);
         },
         (err: any) => {
           this.commonService.hideLoading();

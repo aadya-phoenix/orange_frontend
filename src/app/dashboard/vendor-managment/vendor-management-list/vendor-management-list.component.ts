@@ -73,7 +73,7 @@ export class VendorManagementListComponent implements OnInit {
 
   viewRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/vendormanagement/view/${item.id}`);
+      this.router.navigateByUrl(`/vendormanagement/view/${item.id}`);
     }
   }
 
@@ -143,7 +143,7 @@ export class VendorManagementListComponent implements OnInit {
 
   editRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/dashboard/vendormanagement/update/${item.id}`);
+      this.router.navigateByUrl(`/vendormanagement/update/${item.id}`);
     }
   }
 
