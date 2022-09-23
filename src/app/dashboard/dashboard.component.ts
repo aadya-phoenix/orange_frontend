@@ -128,7 +128,7 @@ export class DashboardComponent implements OnInit {
       this.modulesArray_tab2 = [
         {
           id: 'goldtool', name: 'Gold tool request',
-          routerLink: '/dashboard/gold-tool', image: '../../assets/images/second.jpg',
+          routerLink: '/gold-tool', image: '../../assets/images/second.jpg',
           lableConstantModule:'Gold tool request',
           lableConstantCatalog: this.lableConstant.request_learning_team,
           navigateTo: this.modules.goldTool,

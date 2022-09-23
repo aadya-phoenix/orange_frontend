@@ -19,15 +19,9 @@
           <div class="page-title d-flex end_just">
             <ol class="breadcrumb text-right">
               <li>
-                <a href="# " class="text_white">
-                  <i class="fa fa-home"></i>
+                <a [routerLink]="['/']" class="text_white">
+                  <i class="fa fa-home" aria-colcount=""></i> {{lableConstant.home}}
                 </a>
-              </li>
-              <li>
-                <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
-              </li>
-              <li>
-                <a class="text_white">Gold Tool Request</a>
               </li>
             </ol>
           </div>
@@ -45,11 +39,11 @@
                   <span class="card_overall">{{lableConstant.Overall_request_Status}}</span>
                   <div class="cct_button_oversta">
                     <button class="btn btn-secondary" 
-                    [routerLink]="['/dashboard/gold-tool/view-complete-report']">
+                    [routerLink]="['/gold-tool/view-complete-report']">
                       <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> 
                       {{lableConstant.View_all_activity_report}}
                     </button>
-                    <button class="btn btn-primary ml-1" [routerLink]="['/dashboard/gold-tool/create']">
+                    <button class="btn btn-primary ml-1" [routerLink]="['/gold-tool/create']">
                        {{lableConstant.New_Request}}
                     </button>
                   </div>

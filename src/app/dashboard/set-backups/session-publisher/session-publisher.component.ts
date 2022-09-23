@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourseSessionService } from 'src/app/shared/services/course_session/course-session.service';
 
@@ -8,11 +9,13 @@ import { CourseSessionService } from 'src/app/shared/services/course_session/cou
   styleUrls: ['./session-publisher.component.scss']
 })
 export class SessionPublisherComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   status:string='';
   onOffFlag:boolean =false;
 
-  constructor(private courseSessionService:CourseSessionService, private commonService: CommonService) { }
+  constructor(private courseSessionService:CourseSessionService, private commonService: CommonService) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+  }
 
   ngOnInit(): void {
    this.getSessionPublisherStatus();

@@ -156,6 +156,11 @@ export class AppComponent {
           case '/user':
             pageName = dataConstant.TitleList.user;
             break;
+          case '/message':
+          case '/message/create':
+          case '/message/update':
+            pageName = dataConstant.TitleList.message;
+            break;
           case '/sctworkflow':
             pageName = dataConstant.TitleList.sctworkflow;
             break;
@@ -168,7 +173,7 @@ export class AppComponent {
           case '/dna/create/':
             pageName = dataConstant.TitleList.dna_create;
             break;
-          case '/dna/update//':
+          case '/dna/update/':
             pageName = dataConstant.TitleList.dna_update;
             break;
           case '/dna/user':

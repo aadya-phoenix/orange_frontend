@@ -60,7 +60,7 @@
 
       </div>
     </div>
-    <div class="content" *ngIf="status == 'draft'  || (isStaff && !(getUserrole.includes(3) || getUserrole.includes(4)) && status == 'reject'  && (showrejectbutton != getprofileDetails.data.id))">
+    <div class="px-3" *ngIf="status == 'draft'  || (isStaff && !(getUserrole.includes(3) || getUserrole.includes(4)) && status == 'reject'  && (showrejectbutton != getprofileDetails.data.id))">
       <div class="animated fadeIn">
         <div class="row">
           <div class="col-md-12">
@@ -82,10 +82,9 @@
       <!-- .content -->
     </div>
 
-    <div class="content">
+    <div class="content py-0">
       <div class="animated fadeIn">
-        <div class="mb-2">
-          <div class="Requs_btn_inl"
+          <div class="Requs_btn_inl mb-2"
             *ngIf="(!isStaff || (isStaff && (getUserrole.includes(3) || getUserrole.includes(4) ||  getUserrole.includes(18) || getUserrole.includes(5)))) && getprofileDetails && showrejectbutton != getprofileDetails.data.id">
             <div class="Requs_btn_inl-child">
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#publishModal"
@@ -117,13 +116,11 @@
               </button>
             </div>
           </div>
-          <div *ngIf="status == 'publish'">
+          <div class="mb-2" *ngIf="status == 'publish'">
             <button type="button" class="btn btn-primary" (click)="beautificationTemplate()">
               <i class="fa fa-linode" aria-hidden="true"></i><span class="pl-1">{{lableConstant.beautification_template}}</span>
             </button>
           </div>
-        </div>
-
         <div class="row">
           <div class="col-md-12">
             <div class="back_img_viewbac">

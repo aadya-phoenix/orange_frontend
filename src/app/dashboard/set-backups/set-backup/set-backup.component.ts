@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
@@ -10,7 +11,7 @@ import { CourcesService } from 'src/app/shared/services/cources/cources.service'
   styleUrls: ['./set-backup.component.scss']
 })
 export class SetBackupComponent implements OnInit {
-
+  lableConstant: any = { french: {}, english: {} };
   public rocObj: any;
   public publisherObj:any;
   userName:any;
@@ -35,6 +36,7 @@ export class SetBackupComponent implements OnInit {
 
   constructor(private courseService: CourcesService,
     private authService: AuthenticationService, private router: Router, private commonService: CommonService ) {
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getProfileDetails();
     this.getRoleUsers();

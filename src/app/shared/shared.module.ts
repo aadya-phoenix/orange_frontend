@@ -13,6 +13,7 @@ import { NgbdSortableHeader } from './directives/sorting.directive';
 import { RouterModule } from '@angular/router';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { SwitchUserComponent } from '../dashboard/switch-user/switch-user.component';
+import { MessageViewComponent } from '../message/message-view/message-view.component';
 
 
 
@@ -23,7 +24,7 @@ import { SwitchUserComponent } from '../dashboard/switch-user/switch-user.compon
     SidebarComponent,
     PriceDirective,
     NgbdSortableHeader,
-    
+    MessageViewComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +36,7 @@ import { SwitchUserComponent } from '../dashboard/switch-user/switch-user.compon
     NgxDropzoneModule,
     NgbModule,
   ],
-  entryComponents:[SwitchUserComponent],
+  entryComponents:[SwitchUserComponent, MessageViewComponent],
   exports: [
     InputfieldDirective,
     HeaderComponent,

@@ -29,14 +29,19 @@
 
                         <div class="nav_p ">
                             <div id="myDIV ">
-                                <button class="btn_active" *ngIf="pdlMember" [routerLink]="[ '/pdltools'] ">PD&L Dashboard</button>
-                                <button class="btn_active" *ngIf="isAdmin" [routerLink]="[ '/user'] ">{{lableConstant.user_management}}</button>
+                                <button class="btn_active" *ngIf="pdlMember" [routerLink]="[ '/pdltools'] ">PD&L
+                                    Dashboard</button>
+                                <button class="btn_active" *ngIf="isAdmin"
+                                    [routerLink]="[ '/user'] ">{{lableConstant.user_management}}</button>
+                                <button class="btn_active" *ngIf="isAdmin"
+                                    [routerLink]="[ '/message'] ">Message</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </li>
-            <li class="nav-item dropdown" *ngIf="pdlMember || isAdmin || getUserrole.includes(3) || getUserrole.includes(4)|| getUserrole.includes(8) || getUserrole.includes(9)">
+            <li class="nav-item dropdown"
+                *ngIf="pdlMember || isAdmin || getUserrole.includes(3) || getUserrole.includes(4)|| getUserrole.includes(8) || getUserrole.includes(9)">
                 <a class="nav-link dropdown-toggle arrow_css_toggl" href="#" id="navbarDropdownMenuLink" role="button"
                     data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-map-o icon_header_desi" aria-hidden="true"></i>
@@ -55,13 +60,17 @@
                                         <button class="btn_active" *ngIf="getUserrole.includes(4)"
                                             [routerLink]="[ '/set-backup'] ">Set Publisher Backup</button>
 
-                                        <button class="btn_active "  *ngIf="isAdmin" [routerLink]="[ '/sctworkflow'] ">Activate
+                                        <button class="btn_active " *ngIf="isAdmin"
+                                            [routerLink]="[ '/sctworkflow'] ">Activate
                                             or Deactivate SCT Workflow</button>
-                                        <button class="btn_active " *ngIf="getUserrole.includes(4)" [routerLink]="[ '/sctworkflow'] ">Set CCT
+                                        <button class="btn_active " *ngIf="getUserrole.includes(4)"
+                                            [routerLink]="[ '/sctworkflow'] ">Set CCT
                                             publisher backup</button>
-                                        <button class="btn_active " *ngIf="getUserrole.includes(9)" [routerLink]="[ '/sctworkflow'] ">Set
+                                        <button class="btn_active " *ngIf="getUserrole.includes(9)"
+                                            [routerLink]="[ '/sctworkflow'] ">Set
                                             Session Publisher backup</button>
-                                        <button class="btn_active " *ngIf="getUserrole.includes(8)" [routerLink]="[ '/sctworkflow'] ">Set OL
+                                        <button class="btn_active " *ngIf="getUserrole.includes(8)"
+                                            [routerLink]="[ '/sctworkflow'] ">Set OL
                                             role publisher backup</button>
                                     </div>
                                 </div>
@@ -82,7 +91,8 @@
                         <div class="nav_p ">
                             <div id="myDIV ">
                                 <button class="btn_active">Requester guide</button>
-                                <button class="btn_active" *ngIf="getUserrole && getUserrole.length > 0">Publisher guide</button>
+                                <button class="btn_active" *ngIf="getUserrole && getUserrole.length > 0">Publisher
+                                    guide</button>
                             </div>
                         </div>
                     </div>
@@ -101,9 +111,11 @@
                         <div class="nav_p ">
                             <div id="myDIV ">
                                 <button class="btn_active  "><a
-                                        href="https://obs-learning-journey.sso.infra.ftgroup/">OBS Learning Journey</a></button>
+                                        href="https://obs-learning-journey.sso.infra.ftgroup/">OBS Learning
+                                        Journey</a></button>
                                 <button class="btn_active "><a
-                                        href="https://plazza.orange.com/login.jspa?referer=%252Fdocs%252FDOC-617886">Get to know us @ PD&L</a></button>
+                                        href="https://plazza.orange.com/login.jspa?referer=%252Fdocs%252FDOC-617886">Get
+                                        to know us @ PD&L</a></button>
                                 <button class="btn_active "><a
                                         href="https://idpfds.sso.infra.ftgroup/affwebservices/public/saml2sso?SPID=ole-01&ProtocolBinding=urn:oasis:names:tc:SAML:2.0:bindings:HTTP-">
                                         Orange Learning</a></button>
@@ -119,7 +131,6 @@
                     data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-bell-o icon_header " aria-hidden="true "></i>
                     <span class="bell_icon_number "><span>{{totalNotification}}</span></span>
-
                 </a>
                 <div class="dropdown-menu drop_show dropshow_main-cs " aria-labelledby="navbarDropdownMenuLink"
                     *ngIf="totalNotification > 0">
@@ -151,6 +162,12 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item dropdown" *ngIf="totalMessages > 0">
+                <a class="nav-link dropdown-toggle arrow_css_toggl" role="button" (click)="openMessages()">
+                    <i class="fa fa-envelope-o icon_header " aria-hidden="true "></i>
+                    <span class="bell_icon_number "><span>{{totalMessages}}</span></span>
+                </a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle arrow_css_toggl" href="#" id="navbarDropdownMenuLink" role="button"
                     data-toggle="dropdown" aria-expanded="false">
@@ -172,7 +189,8 @@
                 <a class="nav-link dropdown-toggle arrow_css_toggl" href="#" id="navbarDropdownMenuLink" role="button"
                     data-toggle="dropdown" aria-expanded="false">
 
-                    <span class="text_header_desi_logout ">{{lableConstant.hello}} <span class="text_orange">{{firstName + " " +
+                    <span class="text_header_desi_logout ">{{lableConstant.hello}} <span class="text_orange">{{firstName
+                            + " " +
                             lastName}}</span>
                         <i class="fa fa-sign-out ml-2 " aria-hidden="true "></i></span>
                 </a>
@@ -239,8 +257,9 @@
                     <div class="text-box_div">
                         <div class="nav_p">
                             <div id="myDIV">
-                                <button class="btn_active" *ngIf="isAdmin || isROM" (click)="switchUser()"><i class="fa fa-exchange mr-3 fon_16"
-                                        aria-hidden="true"></i><span class="fon_16">Switch User</span></button>
+                                <button class="btn_active" *ngIf="isAdmin || isROM" (click)="switchUser()"><i
+                                        class="fa fa-exchange mr-3 fon_16" aria-hidden="true"></i><span
+                                        class="fon_16">Switch User</span></button>
                                 <button class="btn_active" (click)="logout()"><i class=" fa fa-sign-out mr-3 fon_16"
                                         aria-hidden="true "></i><span class="fon_16">Logout</span></button>
                             </div>

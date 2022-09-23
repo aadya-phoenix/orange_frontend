@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SwitchUserComponent } from 'src/app/dashboard/switch-user/switch-user.component';
+import { MessageViewComponent } from 'src/app/message/message-view/message-view.component';
 import { dataConstant } from '../../constant/dataConstant';
 import { AuthenticationService } from '../../services/auth/authentication.service';
 import { CommonService } from '../../services/common/common.service';
@@ -25,6 +26,7 @@ export class HeaderComponent implements OnInit {
   Laungauges = dataConstant.Laungauges;
   selectedLaungauge: any = this.Laungauges.EN;
   totalNotification = 0;
+  totalMessages = 1;
   pendingRequestCount = {
     carousel_pending: 0,
     course_pending: 0,
@@ -140,6 +142,21 @@ export class HeaderComponent implements OnInit {
         centered: true,
         windowClass: 'alert-popup',
       });
+  }
+
+  openMessages() {
+    const modalRef = this.modalService.open(MessageViewComponent, {
+      centered: true,
+      size: 'xl',
+      modalDialogClass: 'large-width',
+      windowClass: 'alert-popup',
+    });
+    // modalRef.componentInstance.props = {
+    //   title: 'View History',
+    //   data: item.id,
+    //   objectDetail: item,
+    //   type: 'viewhistory'
+    // };
   }
 
 }

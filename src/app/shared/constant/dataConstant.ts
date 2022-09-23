@@ -149,6 +149,7 @@ export const dataConstant = {
     vendormanagement_rating: 'Manage Vendors - View Rating Report',
     pdltools: 'Dashboard',
     user: 'User Management',
+    message: 'Message',
     sctworkflow: 'Session Workflow Status',
     setBackup: 'Set Backup',
     dna: 'Digital learning Needs Analysis',

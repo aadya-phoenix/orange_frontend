@@ -23,6 +23,12 @@ const routes: Routes = [
     canActivate:[AuthenticationServiceGuard]
   },
   {
+    path: 'message',
+    loadChildren: () =>
+      import('./message/message.module').then((m) => m.MessageModule),
+    canActivate:[AuthenticationServiceGuard]
+  },
+  {
     path: 'pdltools',
     loadChildren: () =>
       import('./pdltools/pdltools.module').then((m) => m.PdltoolsModule),

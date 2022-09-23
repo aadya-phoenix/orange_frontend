@@ -1,0 +1,105 @@
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-8">
+            <div class="page-header float-left bac_trasparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="breade_text_span1">Messages</span>
+                        <span class="divider_req"></span>
+                        <span class="breade_text_span"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 float-right">
+            <div class="page-header float-right bac_trasparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bac_trasparent">
+                        <li>
+                            <a [routerLink]="['/']" class="text_white">
+                                <i class="fa fa-home" aria-colcount=""></i> {{lableConstant.home}}
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/message']" class="text_white span_dis">Messages</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="animated fadeIn">
+            <form [formGroup]="createMessageForm">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-8">
+                                        <div class="form-group">
+                                            <label class="form-control-label">
+                                                Message</label>
+                                            <ejs-richtexteditor id='message' formControlName="message">
+                                            </ejs-richtexteditor>
+                                            <div
+                                                *ngIf="(createMessageForm.controls['message'].invalid && (createMessageForm.controls['message'].dirty || createMessageForm.controls['message'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createMessageForm.controls['message'].errors?.required">
+                                                    {{requiredMessage(this.lableConstant.First_Name)}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">
+                                                    {{lableConstant.Start_Date}}</label>
+                                                <input type="date" class="form-control form_width"
+                                                    formControlName="start_date" />
+                                                <div
+                                                    *ngIf="(createMessageForm.controls['start_date'].invalid && (createMessageForm.controls['start_date'].dirty || createMessageForm.controls['start_date'].touched)) || isSubmitted">
+                                                    <div class="error_message"
+                                                        *ngIf="createMessageForm.controls['start_date'].errors?.required">
+                                                        {{requiredMessage(this.lableConstant.Start_Date)}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">{{lableConstant.End_Date}} </label>
+                                                <input type="date" class="form-control form_width"
+                                                    formControlName="end_date" />
+                                                <div
+                                                    *ngIf="(createMessageForm.controls['end_date'].invalid && (createMessageForm.controls['end_date'].dirty || createMessageForm.controls['end_date'].touched)) || isSubmitted">
+                                                    <div class="error_message"
+                                                        *ngIf="createMessageForm.controls['end_date'].errors?.required">
+                                                        {{requiredMessage(this.lableConstant.End_Date)}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button *ngIf="isCreate" class="btn btn-primary mr-1" type="submit" (click)="save()">
+                                    {{lableConstant.save}}</button>
+                                <button *ngIf="!isCreate" class="btn btn-primary mr-1" (click)="save()" type="submit">
+                                    <i class="fa fa-edit mr-1" aria-hidden="true"></i>
+                                    {{lableConstant.Update}}
+                                </button>
+                                <button class="btn btn-secondary mr-1" (click)="cancel()">
+                                    {{lableConstant.cancel}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
