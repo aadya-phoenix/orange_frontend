@@ -37,6 +37,7 @@ export const dataConstant = {
   SMEStatus: { total: 'total', contecntSupport: 'content-support', delivery: 'delivery', voiceOver: 'voice-over-learning', active: 'active', deactive: 'deactive', draft: 'draft', pending: 'pending', reject: 'reject', approve: 'approve' },
   BackOfficeStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish', reject: 'reject', expired: 'expired' },
   CourseSessionStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish', reject: 'reject' },
+  GoldToolStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish', reject: 'reject' },
   VendorStatus: { total: 'total', active: 'active', deactive: 'deactive' },
   GetReportStatus: { total: 'total', closed: 'closed', close: 'close', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish', reject: 'reject', expired: 'expired' },
   DnaStatus: {
@@ -175,7 +176,8 @@ export const dataConstant = {
     sme: 'sme',
     vendor: 'vendor',
     getReport: 'get-report',
-    design: 'design'
+    design: 'design',
+    goldTool: 'gold-tool'
   },
   ModuleList: [{
     name: 'Course', id: 'course'

@@ -1,0 +1,277 @@
+<div id="right-panel" class="right-panel">
+  <app-header></app-header>
+  <div class="breadcrumbs cm_breadcums">
+    <div class="col-sm-7">
+      <div class="page-header float-left">
+        <div class="page-title d-flex align-items-center">
+          <img src="../../../../assets/images/second.jpg" class="home_Css_img" />
+          <div class="d-flex flex-column ml-3">
+            <span class="breade_text_span1">Gold tool Request</span>
+            <span class="divider"></span>
+            <span class="breade_text_span">{{lableConstant.request_create_session}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-5 float-right">
+      <div class="page-header float-right">
+        <div class="page-title d-flex end_just">
+          <ol class="breadcrumb text-right">
+            <li>
+              <a href="# " class="text_white">
+                <i class="fa fa-home"></i>
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/dashboard']" class="text_white">{{lableConstant.dashboard}}</a>
+            </li>
+            <li>
+              <a [routerLink]="['/dashboard/gold-tool']" class="text_white">Gold Tool Request</a>
+            </li>
+            <li>
+              <a class="text_white">{{lableConstant.View_Request}}</a>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Button trigger modal -->
+  <div class="content mt-2">
+    <div class="animated fadeIn">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card_header_common">
+              <div class="overall_css">
+                <span class="card_overall">{{lableConstant.Overall_request_Status}}</span>
+                <!-- <div class="cct_button_oversta">
+                  <button class="btn btn-secondary" [routerLink]="['/dashboard/sct/view-complete-report']">
+                    <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i>
+                    {{lableConstant.View_all_activity_report}}
+                  </button>
+                  <button class="btn btn-primary ml-1" [routerLink]="['/dashboard/sct/create']">
+                    {{lableConstant.New_Request}}
+                  </button>
+                </div> -->
+              </div>
+            </div>
+            <div class="card-body card_course_body">
+              <div class="Course_icon_parent" data-aos="fade-right">
+
+
+                <div class="Course_icon_child">
+                  <div class="alig_dashicon">
+                    <div class="sub-child-dashicon">
+                      <div class="fa-icons-des bac_puple">
+                        <img src="../../../../assets/images/icon/closed.png" />
+                      </div>
+                      <p>Permission Granted
+                      </p>
+                    </div>
+                    <span class="number_css">0</span>
+                  </div>
+                </div>
+                <!--coled-->
+                <div class="Course_icon_child">
+                  <div class="alig_dashicon">
+                    <div class="sub-child-dashicon">
+                      <div class="fa-icons-des bac_yellow">
+                        <img src="../../../../assets/images/icon/drafts.png" />
+                      </div>
+                      <p>HRBP Pending
+                      </p>
+                    </div>
+                    <span class="number_css">0</span>
+                  </div>
+                </div>
+                <!--coled-->
+                <div class="Course_icon_child">
+                  <div class="alig_dashicon">
+                    <div class="sub-child-dashicon">
+                      <div class="fa-icons-des bac_yellow">
+                        <img src="../../../../assets/images/icon/pending.png" />
+                      </div>
+                      <p>HRBP approved
+                      </p>
+                    </div>
+                    <span class="number_css">0</span>
+                  </div>
+                </div>
+
+                <!--coled-->
+                <div class="Course_icon_child">
+                  <div class="alig_dashicon" (click)="getrecords(goldToolStatus.closed)">
+                    <div class="sub-child-dashicon">
+                      <div class="fa-icons-des bac_green">
+                        <img src="../../../../assets/images/icon/check.png" />
+                      </div>
+                      <p>HRBP rejected
+                      </p>
+                    </div>
+                    <span class="number_css">0</span>
+                  </div>
+                </div>
+                <!--coled-->
+                <div class="Course_icon_child">
+                  <div class="alig_dashicon">
+                    <div class="sub-child-dashicon">
+                      <div class="fa-icons-des bac_pink">
+                        <img src="../../../../assets/images/icon/reject.png" />
+                      </div>
+                      <p>Total request
+                      </p>
+                    </div>
+                    <span class="number_css">0</span>
+                  </div>
+                </div>
+                <!--coled-->
+                <div class="Course_icon_child">
+                  <div class="alig_dashicon">
+                    <div class="sub-child-dashicon">
+                      <div class="fa-icons-des bac_blue1">
+                        <img src="../../../../assets/images/icon/viewall.png" />
+                      </div>
+                      <p>View All</p>
+                    </div>
+                    <span class="number_css">0</span>
+                  </div>
+                </div>
+                <!--coled-->
+              </div>
+              <!--ROW END-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- .animated -->
+    </div>
+    <!-- .content -->
+  </div>
+  <div class="content">
+    <div class="animated fadeIn">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card_header_common">
+              <div class="overall_css">
+                <div>
+                  <i class="fa fa-table fa_table" aria-hidden="true "></i>
+                  <span class="card-title card-title-text card_overall">Quick View</span>
+                </div>
+
+                <div _ngcontent-cue-c109=" " class="form-group filter_course mr-0">
+                  <label _ngcontent-cue-c109=" " class="label_course color-black ">{{lableConstant.Search}}</label>
+                  <input type="text " name="search " autocomplete="off" [(ngModel)]="searchText"
+                    placeholder="Type to Search" class="form-control ng-untouched ng-pristine ng-valid form_width"
+                    ng-reflect-name="search" />
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+
+              <div class="table-responsive table_height_scroll">
+                <table id="bootstrap-data-table-export " class="table table-striped table-bordered">
+                  <thead class="sticky_header">
+                    <tr class="text-center fon_13">
+                      <th class="text_orange">Request ID</th>
+                      <th class="text_orange">Requester name</th>
+                      <th class="text_orange">Requester email Id</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="text-center bac_hover-table fon_12">
+                      <td></td>
+                      <td></td>
+                      <td></td>
+
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="table-responsive table_height_scroll">
+                <table id="bootstrap-data-table-export " class="table table-striped table-bordered">
+                  <thead class="sticky_header_gold">
+                    <tr class="text-center fon_13">
+                      <th>Action</th>
+                      <th>Name of participants</th>
+                      <th>Email addresses for participants</th>
+                      <th>CUID/FTID</th>
+                      <th>P1</th>
+                      <th>Data scope</th>
+                      <th>Gold level of access </th>
+                      <th>HRBP email</th>
+                      <th>Business justification </th>
+                      <th>HRBP status </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="text-center bac_hover-table fon_12">
+                      <td><input type="checkbox"></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>
+                        <p class="text_green">Approved</p>
+                      </td>
+
+                    </tr>
+                    <tr class="text-center bac_hover-table fon_12">
+                      <td><input type="checkbox"></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>
+                        <p class="text_red">Reject</p>
+                      </td>
+
+                    </tr>
+                    <tr class="text-center bac_hover-table fon_12">
+                      <td><input type="checkbox"></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>
+                        <p class="text_yellow">Pending</p>
+                      </td>
+
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="pagiantio_dispaly">
+                <div class="pagintion_ child">
+                  <p class="cm-pagination-fotter">{{showPaginationCount(((pagination.pageSize *
+                    (pagination.pageNumber - 1)) + 1),
+                    ((this.pagination.pageSize * this.pagination.pageNumber) >
+                    this.goldToolListToView?.length ? this.goldToolListToView?.length :
+                    this.pagination.pageSize * this.pagination.pageNumber),
+                    this.goldToolListToView?.length)}}</p>
+                </div>
+                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- .animated -->
+  </div>
+</div>

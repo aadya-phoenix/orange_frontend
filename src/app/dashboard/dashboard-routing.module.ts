@@ -17,7 +17,8 @@ const routes: Routes = [
 {path:'olreport',loadChildren:()=>import("./get-report/get-report.module").then(m=>m.GetReportModule)},
 {path:'smedb',loadChildren:()=>import("./smedb/smedb.module").then(m=>m.SmedbModule)},
 {path:'set-backup',component:SetBackupComponent},
-{path:'sctworkflow', component:SessionPublisherComponent}
+{path:'sctworkflow', component:SessionPublisherComponent},
+{path:'gold-tool',loadChildren:()=>import("./gold-tool/gold-tool.module").then(m=>m.GoldToolModule)}
 ];
 
 @NgModule({
