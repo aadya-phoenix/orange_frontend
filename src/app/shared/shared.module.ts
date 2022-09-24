@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { SwitchUserComponent } from '../dashboard/switch-user/switch-user.component';
 import { MessageViewComponent } from '../message/message-view/message-view.component';
+import { ContcatUsComponent } from '../dashboard/contcat-us/contcat-us.component';
 
 
 
@@ -36,7 +37,7 @@ import { MessageViewComponent } from '../message/message-view/message-view.compo
     NgxDropzoneModule,
     NgbModule,
   ],
-  entryComponents:[SwitchUserComponent, MessageViewComponent],
+  entryComponents:[SwitchUserComponent, MessageViewComponent, ContcatUsComponent],
   exports: [
     InputfieldDirective,
     HeaderComponent,

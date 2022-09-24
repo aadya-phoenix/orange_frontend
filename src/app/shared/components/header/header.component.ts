@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ContcatUsComponent } from 'src/app/dashboard/contcat-us/contcat-us.component';
 import { SwitchUserComponent } from 'src/app/dashboard/switch-user/switch-user.component';
 import { MessageViewComponent } from 'src/app/message/message-view/message-view.component';
 import { dataConstant } from '../../constant/dataConstant';
@@ -143,6 +144,13 @@ export class HeaderComponent implements OnInit {
         windowClass: 'alert-popup',
       });
   }
+
+  contcatUs(){
+    const modalRef = this.modalService.open(ContcatUsComponent, {
+      centered: true,
+      windowClass: 'alert-popup',
+    });
+}
 
   openMessages() {
     const modalRef = this.modalService.open(MessageViewComponent, {

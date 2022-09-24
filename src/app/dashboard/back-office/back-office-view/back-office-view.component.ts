@@ -70,6 +70,10 @@ export class BackOfficeViewComponent implements OnInit {
     );
   }
 
+  backToList(){
+    this.router.navigate(['/back-office']);
+  }
+
   updateRequest() {
     if (this.id) {
       this.router.navigateByUrl(`/back-office/update/${this.id}`);

@@ -75,6 +75,10 @@ export class CourseViewComponent implements OnInit {
     }
   }
 
+  backToList(){
+    this.router.navigate(['/cct']);
+  }
+
   getCourseDetails() {
     this.commonService.showLoading();
     this.courseService.courseDetail(this.id).subscribe(

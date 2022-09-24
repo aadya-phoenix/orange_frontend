@@ -140,6 +140,10 @@ export class GetReportCreateComponent implements OnInit {
     this.getTotalCount();
   }
 
+  backToList(){
+    this.router.navigate(['/olreport']);
+  }
+
   requiredMessage(field:any){
     return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
   }

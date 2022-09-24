@@ -50,6 +50,10 @@ export class CarouselViewComponent implements OnInit {
     });
   }
 
+  backToList(){
+    this.router.navigate(['/olcarousel']);
+  }
+
   getCarouselDetails() {
     this.commonService.showLoading();
     this.carouselService.getCarouselDetails(this.id).subscribe(

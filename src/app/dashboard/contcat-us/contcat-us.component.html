@@ -1,0 +1,59 @@
+<div class="card mb-0">
+    <a class="btn-close-icon" (click)="closeModal()"><i class="fa fa-times" aria-hidden="true"></i></a>
+    <div class="card-body">
+        <div class="login">
+            <div class="main_box">
+                <h4 class="text-center">
+                    <b>Contact Us</b>
+                </h4>
+                <form [formGroup]="contactUsForm">
+                    <div class="form-group w-100">
+                        <label class="form-control-label">
+                            {{lableConstant.region}} <span class="text_red">*
+                            </span>
+                        </label>
+                        <ng-select placeholder="Please select region" [items]="cordinatorsList" bindLabel="name"
+                            bindValue="id" [multiple]=false class="w_100" formControlName="regional_cordinator">
+                        </ng-select>
+                        <div class="error_message"
+                            *ngIf="(contactUsForm.controls['regional_cordinator'].invalid && (contactUsForm.controls['regional_cordinator'].dirty || contactUsForm.controls['regional_cordinator'].touched || isSubmitted))">
+                            {{requiredMessage(this.lableConstant.region)}}
+                        </div>
+                    </div>
+                    <div class="form-group w-100">
+                        <label class="form-control-label">
+                            {{lableConstant.Subject}} <span class="text_red">* </span>
+                        </label>
+                        <input type="text" placeholder="Enter Subject" class="form-control form_width"
+                            formControlName="subject" />
+                        <div class="error_message"
+                            *ngIf="(contactUsForm.controls['subject'].invalid && (contactUsForm.controls['subject'].dirty || contactUsForm.controls['subject'].touched || isSubmitted))">
+                            {{requiredMessage(this.lableConstant.Subject)}}
+                        </div>
+                    </div>
+                    <div class="form-group w-100">
+                        <label class="form-control-label">
+                            How cab we help you? <span class="text_red">* </span>
+                        </label>
+                        <textarea class="form-control form_width-textarea" minlength="30" rows="3"
+                            placeholder="Enter Description" formControlName="message" maxlength="500">
+                        </textarea>
+                        <div class="error_message"
+                            *ngIf="(contactUsForm.controls['message'].invalid && (contactUsForm.controls['message'].dirty || contactUsForm.controls['message'].touched || isSubmitted))">
+                            <div class="error_message"
+                                *ngIf="contactUsForm.controls['message'].errors?.required">
+                                {{requiredMessage('How cab we help you?')}}
+                            </div>
+                            <div class="error_message"
+                                *ngIf="contactUsForm.controls['message'].errors?.minlength">
+                                Min 30 characters required.
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default btn_login justify-content-center" value="Click Me"
+                        (click)="submit()">{{lableConstant.submit}}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

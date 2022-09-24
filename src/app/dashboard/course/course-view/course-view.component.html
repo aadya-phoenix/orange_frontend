@@ -57,7 +57,9 @@
             <span class="text_orange fon_weight_read">{{lableConstant.Request_Status}} - {{ routegetdata.status_new | titlecase }}</span>
           </p>
         </div>
-
+        <button type="button" class="btn btn-primary btn-sm mr-2" (click)="backToList()">
+          My requests
+      </button>
       </div>
     </div>
     <div class="px-3" *ngIf="status == 'draft'  || (isStaff && !(getUserrole.includes(3) || getUserrole.includes(4)) && status == 'reject'  && (showrejectbutton != getprofileDetails.data.id))">

@@ -74,6 +74,10 @@ export class ViewSessionComponent implements OnInit {
     
   }
 
+  backToList(){
+    this.router.navigate(['/sct']);
+  }
+
   getSessionDetails(){
     this.commonService.showLoading();
     this.courseSessionService.getSessionDetails(this.id).subscribe(

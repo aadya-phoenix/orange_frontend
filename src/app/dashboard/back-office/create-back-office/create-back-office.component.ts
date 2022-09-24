@@ -114,6 +114,10 @@ export class CreateBackOfficeComponent implements OnInit {
     return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
   }
 
+  backToList(){
+    this.router.navigate(['/back-office']);
+  }
+
   //preferred instructor
   getPreferedInstructor() {
     this.commonService.showLoading();

@@ -666,6 +666,10 @@ export class CourseCreateComponent implements OnInit {
     console.log("getProfileDetailsfromlocal", this.getprofileDetails);
   }
 
+  backToList(){
+    this.router.navigate(['/cct']);
+  }
+
   getLearningDetails() {
     this.commonService.showLoading();
     this.designService.detail(this.design_id).subscribe(

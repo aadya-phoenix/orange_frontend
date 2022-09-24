@@ -91,6 +91,10 @@ export class CreateCarouselComponent implements OnInit {
     this.getTotalCourse();
   }
 
+  backToList(){
+    this.router.navigate(['/olcarousel']);
+  }
+
   requiredMessage(field: any) {
     return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
   }

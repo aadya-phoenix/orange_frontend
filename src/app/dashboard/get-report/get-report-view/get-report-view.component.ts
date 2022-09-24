@@ -52,6 +52,11 @@ export class GetReportViewComponent implements OnInit {
     });
   }
 
+  backToList(){
+    this.router.navigate(['/olreport']);
+  }
+
+
   getReportDetails() {
     this.commonService.showLoading();
     this.getReportService.getReportDetails(this.id).subscribe(

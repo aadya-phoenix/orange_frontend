@@ -27,7 +27,8 @@
                             <a [routerLink]="['/']" class="text_white">{{lableConstant.dashboard}}</a>
                         </li> -->
                         <li>
-                            <a [routerLink]="['/designlearning']" class="text_white">{{lableConstant.design_learning_module}}</a>
+                            <a [routerLink]="['/designlearning']"
+                                class="text_white">{{lableConstant.design_learning_module}}</a>
                         </li>
                         <!-- <li>
                             <span class="text_white span_dis">{{ designId === 0 ? lableConstant.New_Request : lableConstant.update_request}}</span>
@@ -38,6 +39,13 @@
             </div>
         </div>
     </div>
+    <div class="card_header_common">
+        <div class="d-flex justify-content-end media_creat_couse_col">
+            <button type="button" class="btn btn-primary btn-sm mr-2" (click)="backToList()">
+                My requests
+            </button>
+        </div>
+    </div>
 
     <form [formGroup]="createDesignForm">
         <div class="content mt-1">
@@ -45,156 +53,164 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                        <div class="col-sm-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <strong _ngcontent-jet-c125=""> {{lableConstant.team_details}} </strong>
-                            </div>
-                            <div class="card-body card_width pb-0">
-                                <div class="row">
-                                    <div class="col-sm-8">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong _ngcontent-jet-c125=""> {{lableConstant.team_details}} </strong>
+                                    </div>
+                                    <div class="card-body card_width pb-0">
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">
-                                                        {{lableConstant.program_project_name}} <span class="text-danger-ligth">* </span>
-                                                    </label>
-                                                    <input type="text" formControlName="project_name"
-                                                        class="form-control form_width" />
-                                                    <div
-                                                        *ngIf="(createDesignForm.controls['project_name'].invalid && (createDesignForm.controls['project_name'].dirty || createDesignForm.controls['project_name'].touched)) || isSubmitted">
-                                                        <div class="error_message"
-                                                            *ngIf="createDesignForm.controls['project_name'].errors?.required">
-                                                            {{requiredMessage(this.lableConstant.program_project_name)}}
+                                            <div class="col-sm-8">
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="form-control-label">
+                                                                {{lableConstant.program_project_name}} <span
+                                                                    class="text-danger-ligth">* </span>
+                                                            </label>
+                                                            <input type="text" formControlName="project_name"
+                                                                class="form-control form_width" />
+                                                            <div
+                                                                *ngIf="(createDesignForm.controls['project_name'].invalid && (createDesignForm.controls['project_name'].dirty || createDesignForm.controls['project_name'].touched)) || isSubmitted">
+                                                                <div class="error_message"
+                                                                    *ngIf="createDesignForm.controls['project_name'].errors?.required">
+                                                                    {{requiredMessage(this.lableConstant.program_project_name)}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="form-control-label">
+                                                                {{lableConstant.key_sponsor}} <span
+                                                                    class="text-danger-ligth">* </span>
+                                                            </label>
+                                                            <input type="text" formControlName="key_sponsor"
+                                                                class="form-control form_width" />
+                                                            <div
+                                                                *ngIf="(createDesignForm.controls['key_sponsor'].invalid && (createDesignForm.controls['key_sponsor'].dirty || createDesignForm.controls['key_sponsor'].touched)) || isSubmitted">
+                                                                <div class="error_message"
+                                                                    *ngIf="createDesignForm.controls['key_sponsor'].errors?.required">
+                                                                    {{requiredMessage(this.lableConstant.key_sponsor)}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="form-control-label">
+                                                                {{lableConstant.requestor}} <span
+                                                                    class="text-danger-ligth">* </span>
+                                                            </label>
+                                                            <input type="text" formControlName="requestor"
+                                                                class="form-control form_width" />
+                                                            <div
+                                                                *ngIf="(createDesignForm.controls['requestor'].invalid && (createDesignForm.controls['requestor'].dirty || createDesignForm.controls['requestor'].touched)) || isSubmitted">
+                                                                <div class="error_message"
+                                                                    *ngIf="createDesignForm.controls['requestor'].errors?.required">
+                                                                    {{requiredMessage(this.lableConstant.requestor)}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="form-control-label">
+                                                                {{lableConstant.requestors_department}} <span
+                                                                    class="text-danger-ligth">* </span>
+                                                            </label>
+                                                            <ng-select [items]="bussinessUnitObj" bindLabel="team_name"
+                                                                bindValue="id" (change)="getOtherBusinessUnit($event)"
+                                                                formControlName="requestor_department" class="w_100">
+                                                            </ng-select>
+                                                            <div
+                                                                *ngIf="(createDesignForm.controls['requestor_department'].invalid && (createDesignForm.controls['requestor_department'].dirty || createDesignForm.controls['requestor_department'].touched)) || isSubmitted">
+                                                                <div class="error_message"
+                                                                    *ngIf="createDesignForm.controls['requestor_department'].errors?.required">
+                                                                    {{requiredMessage(this.lableConstant.requestors_department)}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6" *ngIf="isOtherBU">
+                                                        <div class="form-group">
+                                                            <label class="form-control-label">
+                                                                {{lableConstant.other_requestors_department}}
+                                                            </label>
+                                                            <input type="text" class="form-control form_width"
+                                                                formControlName="other_requestor_department">
+                                                            <div
+                                                                *ngIf="(createDesignForm.controls['other_requestor_department'].invalid && (createDesignForm.controls['other_requestor_department'].dirty || createDesignForm.controls['other_requestor_department'].touched)) || isSubmitted">
+                                                                <div class="error_message"
+                                                                    *ngIf="createDesignForm.controls['other_requestor_department'].errors?.required">
+                                                                    {{requiredMessage(this.lableConstant.other_requestors_department)}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="form-control-label">
+                                                                {{lableConstant.other_main_contributors}}<span
+                                                                    class="text-danger-ligth">*</span>
+                                                            </label>
+                                                            <input type="text" formControlName="contributor"
+                                                                class="form-control form_width" />
+                                                            <div
+                                                                *ngIf="(createDesignForm.controls['contributor'].invalid && (createDesignForm.controls['contributor'].dirty || createDesignForm.controls['contributor'].touched)) || isSubmitted">
+                                                                <div class="error_message"
+                                                                    *ngIf="createDesignForm.controls['contributor'].errors?.required">
+                                                                    {{requiredMessage(this.lableConstant.other_main_contributors)}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="form-control-label">
+                                                                {{lableConstant.budget}}
+                                                            </label>
+                                                            <input type="text" formControlName="budget"
+                                                                class="form-control form_width" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12" *ngIf="isHeadDesigner">
+                                                        <div class="form-group">
+                                                            <label class="form-control-label mb-0 font_bold">
+                                                                {{lableConstant.project_manager}} <span
+                                                                    class="text-danger-ligth">*</span>
+                                                            </label>
+                                                            <ng-select [items]="projectManagerList"
+                                                                bindLabel="user_name" bindValue="id"
+                                                                formControlName="project_manager" class="w_100">
+                                                            </ng-select>
+                                                            <div
+                                                                *ngIf="(createDesignForm.controls['project_manager'].invalid && (createDesignForm.controls['project_manager'].dirty || createDesignForm.controls['project_manager'].touched)) || isSubmitted">
+                                                                <div class="error_message"
+                                                                    *ngIf="createDesignForm.controls['project_manager'].errors?.required">
+                                                                    {{requiredMessage(this.lableConstant.project_manager)}}
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">
-                                                        {{lableConstant.key_sponsor}} <span class="text-danger-ligth">* </span>
-                                                    </label>
-                                                    <input type="text" formControlName="key_sponsor"
-                                                        class="form-control form_width" />
-                                                    <div
-                                                        *ngIf="(createDesignForm.controls['key_sponsor'].invalid && (createDesignForm.controls['key_sponsor'].dirty || createDesignForm.controls['key_sponsor'].touched)) || isSubmitted">
-                                                        <div class="error_message"
-                                                            *ngIf="createDesignForm.controls['key_sponsor'].errors?.required">
-                                                            {{requiredMessage(this.lableConstant.key_sponsor)}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">
-                                                        {{lableConstant.requestor}} <span class="text-danger-ligth">* </span>
-                                                    </label>
-                                                    <input type="text" formControlName="requestor"
-                                                        class="form-control form_width" />
-                                                    <div
-                                                        *ngIf="(createDesignForm.controls['requestor'].invalid && (createDesignForm.controls['requestor'].dirty || createDesignForm.controls['requestor'].touched)) || isSubmitted">
-                                                        <div class="error_message"
-                                                            *ngIf="createDesignForm.controls['requestor'].errors?.required">
-                                                            {{requiredMessage(this.lableConstant.requestor)}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">
-                                                        {{lableConstant.requestors_department}} <span class="text-danger-ligth">* </span>
-                                                    </label>
-                                                    <ng-select [items]="bussinessUnitObj" 
-                                                    bindLabel="team_name" bindValue="id"
-                                                    (change)="getOtherBusinessUnit($event)" formControlName="requestor_department"
-                                                    class="w_100">
-                                                     </ng-select>
-                                                    <div
-                                                        *ngIf="(createDesignForm.controls['requestor_department'].invalid && (createDesignForm.controls['requestor_department'].dirty || createDesignForm.controls['requestor_department'].touched)) || isSubmitted">
-                                                        <div class="error_message"
-                                                            *ngIf="createDesignForm.controls['requestor_department'].errors?.required">
-                                                            {{requiredMessage(this.lableConstant.requestors_department)}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                           <div class="col-sm-6" *ngIf="isOtherBU">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">
-                                                        {{lableConstant.other_requestors_department}}
-                                                    </label>
-                                                    <input type="text" class="form-control form_width" formControlName="other_requestor_department">
-                                                    <div
-                                                        *ngIf="(createDesignForm.controls['other_requestor_department'].invalid && (createDesignForm.controls['other_requestor_department'].dirty || createDesignForm.controls['other_requestor_department'].touched)) || isSubmitted">
-                                                        <div class="error_message"
-                                                            *ngIf="createDesignForm.controls['other_requestor_department'].errors?.required">
-                                                            {{requiredMessage(this.lableConstant.other_requestors_department)}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">
-                                                        {{lableConstant.other_main_contributors}}<span class="text-danger-ligth">*</span>
-                                                    </label>
-                                                    <input type="text" formControlName="contributor"
-                                                        class="form-control form_width" />
-                                                    <div
-                                                        *ngIf="(createDesignForm.controls['contributor'].invalid && (createDesignForm.controls['contributor'].dirty || createDesignForm.controls['contributor'].touched)) || isSubmitted">
-                                                        <div class="error_message"
-                                                            *ngIf="createDesignForm.controls['contributor'].errors?.required">
-                                                            {{requiredMessage(this.lableConstant.other_main_contributors)}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">
-                                                        {{lableConstant.budget}}
-                                                    </label>
-                                                    <input type="text" formControlName="budget"
-                                                        class="form-control form_width" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12" *ngIf ="isHeadDesigner">
-                                                <div class="form-group">
-                                                    <label class="form-control-label mb-0 font_bold">
-                                                        {{lableConstant.project_manager}} <span class="text-danger-ligth">*</span>
-                                                    </label>
-                                                    <ng-select [items]="projectManagerList" 
-                                                    bindLabel="user_name" bindValue="id"
-                                                    formControlName="project_manager"
-                                                    class="w_100">
-                                                     </ng-select>
-                                                     <div
-                                                        *ngIf="(createDesignForm.controls['project_manager'].invalid && (createDesignForm.controls['project_manager'].dirty || createDesignForm.controls['project_manager'].touched)) || isSubmitted">
-                                                        <div class="error_message"
-                                                            *ngIf="createDesignForm.controls['project_manager'].errors?.required">
-                                                            {{requiredMessage(this.lableConstant.project_manager)}}
-                                                        </div>
-                                                    </div>
+                                            <!--colend-->
+                                            <div class="col-sm-4">
+                                                <div class="text-center">
+                                                    <img width="50%"
+                                                        src="../../../../assets/images/design_learn_form.png">
                                                 </div>
                                             </div>
                                         </div>
-                                        </div><!--colend-->
-                                        <div class="col-sm-4">
-                                            <div class="text-center">
-                                                <img width="50%" src="../../../../assets/images/design_learn_form.png">
-                                            </div>
-                                            </div>
-                                    </div><!--row-->
-                               
+                                        <!--row-->
+
+                                    </div>
+                                </div>
+
                             </div>
+
                         </div>
-                       
-                        </div>
-                       
-                            </div>
                         <div class="card">
                             <div class="card-header">
                                 <strong _ngcontent-jet-c125=""> {{lableConstant.details}} </strong>
@@ -206,7 +222,7 @@
                                             <label class="form-control-label">
                                                 {{lableConstant.explain_purpose_project_issue}}
                                             </label><span class="text-danger-ligth">*</span>
-                                            <textarea class="form-control form_width-textarea" maxlength="500" 
+                                            <textarea class="form-control form_width-textarea" maxlength="500"
                                                 formControlName="explain_purpose"></textarea>
                                             <div
                                                 *ngIf="(createDesignForm.controls['explain_purpose'].invalid && (createDesignForm.controls['explain_purpose'].dirty || createDesignForm.controls['explain_purpose'].touched)) || isSubmitted">
@@ -220,11 +236,11 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                               {{lableConstant.mention_the_objectives_of_ls}}
+                                                {{lableConstant.mention_the_objectives_of_ls}}
                                             </label><span class="text-danger-ligth">*</span>
                                             <div class="editControls"></div>
-                                            <ejs-richtexteditor id='defaultRTE' 
-                                                formControlName="objective" [toolbarSettings]='tools'>
+                                            <ejs-richtexteditor id='defaultRTE' formControlName="objective"
+                                                [toolbarSettings]='tools'>
                                             </ejs-richtexteditor>
                                             <div
                                                 *ngIf="(createDesignForm.controls['objective'].invalid && (createDesignForm.controls['objective'].dirty || createDesignForm.controls['objective'].touched)) || isSubmitted">
@@ -238,17 +254,16 @@
                                     <div class="col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
-                                               {{lableConstant.what_level_of_knowledge_ls}}
+                                                {{lableConstant.what_level_of_knowledge_ls}}
                                                 <span class="text-danger-ligth">* </span>
                                                 <a>
-                                                    <i  class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                        data-bs-toggle="tooltip" placement="right"
-                                                        ngbTooltip="Information/overview only to update learners.
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-bs-toggle="tooltip" placement="right" ngbTooltip="Information/overview only to update learners.
                                                         Detailed knowledge transfer to the learners, specific to their roles.
                                                          "></i>
                                                 </a>
                                             </label>
-                                            <textarea class="form-control form_width-textarea" maxlength="500" 
+                                            <textarea class="form-control form_width-textarea" maxlength="500"
                                                 formControlName="knowledge"></textarea>
                                             <div
                                                 *ngIf="(createDesignForm.controls['knowledge'].invalid && (createDesignForm.controls['knowledge'].dirty || createDesignForm.controls['knowledge'].touched)) || isSubmitted">
@@ -265,9 +280,8 @@
                                                 {{lableConstant.what_success_factors_program}}
                                                 <span class="text_red">* </span>
                                                 <a>
-                                                    <i  class="fa fa-info-circle info_circle" aria-hidden="true"
-                                                        data-bs-toggle="tooltip" placement="right"
-                                                        ngbTooltip="(for example, 100% - all identified learners target audience to attend trainings)?
+                                                    <i class="fa fa-info-circle info_circle" aria-hidden="true"
+                                                        data-bs-toggle="tooltip" placement="right" ngbTooltip="(for example, 100% - all identified learners target audience to attend trainings)?
                                                          "></i>
                                                 </a>
                                             </label>
@@ -288,11 +302,9 @@
                                                 {{lableConstant.specify_the_impact_ls}}
                                                 <span class="text_red">* </span>
                                             </label>
-                                            <ng-select [items]="impactObj" 
-                                            bindLabel="name" bindValue="id"
-                                            formControlName="impact"
-                                            class="w_100">
-                                             </ng-select>
+                                            <ng-select [items]="impactObj" bindLabel="name" bindValue="id"
+                                                formControlName="impact" class="w_100">
+                                            </ng-select>
                                             <div
                                                 *ngIf="(createDesignForm.controls['impact'].invalid && (createDesignForm.controls['impact'].dirty || createDesignForm.controls['impact'].touched)) || isSubmitted">
                                                 <div class="error_message"
@@ -443,8 +455,9 @@
                                                 {{lableConstant.Comments}}
                                                 <span class="text_red">* </span>
                                             </label>
-                                            <textarea class="form-control form_width-textarea" formControlName="comment"></textarea>
-                                           
+                                            <textarea class="form-control form_width-textarea"
+                                                formControlName="comment"></textarea>
+
                                             <div
                                                 *ngIf="(createDesignForm.controls['comment'].invalid && (createDesignForm.controls['comment'].dirty || createDesignForm.controls['comment'].touched)) || isSubmitted">
                                                 <div class="error_message"
@@ -453,76 +466,80 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 Attach resource
                                             </label>
-                                            <input type="file" class="form-control form_width"  (change)="handleFileInput($event)"
-                                                formControlName="attachment" />
+                                            <input type="file" class="form-control form_width"
+                                                (change)="handleFileInput($event)" formControlName="attachment" />
                                             <span class="pt-2" *ngIf="design_details.attachUrl">
-                                               <a href="{{design_details.attachUrl}}" target="_blank"
-                                                        style="color:#ff7900">{{lableConstant.Click_here_to_View_resource}}</a>
+                                                <a href="{{design_details.attachUrl}}" target="_blank"
+                                                    style="color:#ff7900">{{lableConstant.Click_here_to_View_resource}}</a>
                                             </span>
                                         </div>
                                     </div>
-                                  
+
                                 </div>
                             </div>
                             <div class="card" *ngIf="isDesigner || isHeadDesigner">
                                 <div class="card-header">
                                     <label class="form-control-label mb-0 font_bold text_balck">
-                                       {{lableConstant.who_will_create_it_deliver_it}}
+                                        {{lableConstant.who_will_create_it_deliver_it}}
                                         <span class="text-danger-ligth">* </span>
-                                     </label>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-sm-12" >
-                                                <div class="form-group">
-                                                    
-                                                    <input type="text" class="form-control form_width"
-                                                        formControlName="who_create" />
-                                                      <div
-                                                      *ngIf="(createDesignForm.controls['who_create'].invalid && (createDesignForm.controls['who_create'].dirty || createDesignForm.controls['who_create'].touched)) || isSubmitted">
-                                                      <div class="error_message"
-                                                       *ngIf="createDesignForm.controls['who_create'].errors?.required">
-                                                       {{requiredMessage(this.lableConstant.who_will_create_it_deliver_it)}}
-                                                        </div>
+                                    </label>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+
+                                                <input type="text" class="form-control form_width"
+                                                    formControlName="who_create" />
+                                                <div
+                                                    *ngIf="(createDesignForm.controls['who_create'].invalid && (createDesignForm.controls['who_create'].dirty || createDesignForm.controls['who_create'].touched)) || isSubmitted">
+                                                    <div class="error_message"
+                                                        *ngIf="createDesignForm.controls['who_create'].errors?.required">
+                                                        {{requiredMessage(this.lableConstant.who_will_create_it_deliver_it)}}
                                                     </div>
                                                 </div>
                                             </div>
-                                            </div>
                                         </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-footer">
-                                <button class="btn btn-primary mr-1" *ngIf="(!isHeadDesigner &&!isDesigner && (design_details_status == designStatus.draft
-                                || design_details_status == designStatus.reject || !design_details_status)) ||(isBusinessConsultant && !design_details_status)"(click)="save(designStatus.pending)" type="submit">
+                                <button class="btn btn-primary mr-1"
+                                    *ngIf="(!isHeadDesigner &&!isDesigner && (design_details_status == designStatus.draft
+                                || design_details_status == designStatus.reject || !design_details_status)) ||(isBusinessConsultant && !design_details_status)"
+                                    (click)="save(designStatus.pending)" type="submit">
                                     <i aria-hidden="true" class="fa fa-upload">
                                     </i> <span class="pl-1">{{lableConstant.submit}}</span>
                                 </button>
                                 <button class="btn btn-primary mr-1" *ngIf="isDesigner"
-                                (click)="openModal(designStatus.forwarded)" type="submit">
+                                    (click)="openModal(designStatus.forwarded)" type="submit">
                                     <i aria-hidden="true" class="fa fa-upload">
                                     </i> <span class="pl-1">{{lableConstant.send_for_approval}}</span>
                                 </button>
-                                <button class="btn btn-primary mr-1" *ngIf="isHeadDesigner"(click)="openModal(designStatus.approve)" type="submit">
+                                <button class="btn btn-primary mr-1" *ngIf="isHeadDesigner"
+                                    (click)="openModal(designStatus.approve)" type="submit">
                                     <i aria-hidden="true" class="fa fa-upload">
                                     </i> <span class="pl-1">{{lableConstant.approve}}</span>
                                 </button>
                                 <button class="btn btn-secondary" *ngIf="isDraft()"
-                                (click)="save(designStatus.draft) ">{{lableConstant.Save_as_draft}}
+                                    (click)="save(designStatus.draft) ">{{lableConstant.Save_as_draft}}
                                 </button>
-                                <button class="btn btn-secondary mr-1" type="submit" 
-                                *ngIf="(this.isDesigner || this.isHeadDesigner) && 
+                                <button class="btn btn-secondary mr-1" type="submit"
+                                    *ngIf="(this.isDesigner || this.isHeadDesigner) && 
                                 (design_details_status == designStatus.pending) && (design_details.head_status != designStatus.reject && design_details.head_status != designStatus.approve)"
-                                (click)="openModal(designStatus.reject)"><i  aria-hidden="true"  class="fa fa-times"></i><span class="pl-1">{{lableConstant.reject}}</span>
+                                    (click)="openModal(designStatus.reject)"><i aria-hidden="true"
+                                        class="fa fa-times"></i><span class="pl-1">{{lableConstant.reject}}</span>
                                 </button>
                             </div>
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
         </div>

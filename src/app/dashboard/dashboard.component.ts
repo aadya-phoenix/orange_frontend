@@ -84,7 +84,7 @@ export class DashboardComponent implements OnInit {
       this.modulesArray_tab1 = [
         {
           id: 'course', name: 'Create new cource',
-          routerLink: '/cct', image: '../../assets/images/first.jpg',
+          routerLink: '/cct/create', image: '../../assets/images/first.jpg',
           lableConstantModule: this.lableConstant.create_new_course,
           lableConstantCatalog: this.lableConstant.request_course_catalog,
           navigateTo: this.modules.course,
@@ -94,7 +94,7 @@ export class DashboardComponent implements OnInit {
           setFavouriteModule: this.modules.course,
         }, {
           id: 'session', name: 'Open cource session(s)',
-          routerLink: '/sct', image: '../../assets/images/Open course session.jpg ',
+          routerLink: '/sct/create', image: '../../assets/images/Open course session.jpg ',
           lableConstantModule: this.lableConstant.open_course_session,
           lableConstantCatalog: this.lableConstant.request_create_session,
           navigateTo: this.modules.session,
@@ -104,7 +104,7 @@ export class DashboardComponent implements OnInit {
           setFavouriteModule: this.modules.session,
         }, {
           id: 'corousel', name: 'Promote on Carousel',
-          routerLink: '/olcarousel',
+          routerLink: '/olcarousel/create',
           image: '../../assets/images/Promote on Carousel.jpg',
           lableConstantModule: this.lableConstant.promote_on_carousel,
           lableConstantCatalog: this.lableConstant.request_create_entity,
@@ -115,7 +115,7 @@ export class DashboardComponent implements OnInit {
           setFavouriteModule: this.modules.carousel,
         }, {
           id: 'back_office', name: 'Request back-office role',
-          routerLink: '/back-office', image: '../../assets/images/4.jpg',
+          routerLink: '/back-office/create', image: '../../assets/images/4.jpg',
           lableConstantModule: this.lableConstant.request_back_office_role,
           lableConstantCatalog: this.lableConstant.request_specific_role,
           navigateTo: this.modules.backOffice,
@@ -139,7 +139,7 @@ export class DashboardComponent implements OnInit {
         },
         {
           id: 'design', name: 'Design learning Module',
-          routerLink: '/designlearning', image: '../../assets/images/Design learning module.jpg',
+          routerLink: '/designlearning/create', image: '../../assets/images/Design learning module.jpg',
           lableConstantModule: this.lableConstant.design_learning_module,
           lableConstantCatalog: this.lableConstant.request_learning_team,
           navigateTo: this.modules.design,
@@ -149,7 +149,7 @@ export class DashboardComponent implements OnInit {
           setFavouriteModule: this.modules.design,
         }, {
           id: 'get_report', name: 'Get a Report',
-          routerLink: '/olreport', image: '../../assets/images/get a report.jpg',
+          routerLink: '/olreport/create', image: '../../assets/images/get a report.jpg',
           lableConstantModule: this.lableConstant.get_a_report,
           lableConstantCatalog: this.lableConstant.request_training_vc_report,
           navigateTo: this.modules.getReport,

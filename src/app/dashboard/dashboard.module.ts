@@ -6,10 +6,11 @@ import { SharedModule } from '../shared/shared.module';
 import { SetBackupComponent } from './set-backups/set-backup/set-backup.component';
 import { SessionPublisherComponent } from './set-backups/session-publisher/session-publisher.component';
 import { SwitchUserComponent } from './switch-user/switch-user.component';
+import { ContcatUsComponent } from './contcat-us/contcat-us.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent, SetBackupComponent, SessionPublisherComponent, SwitchUserComponent],
+  declarations: [DashboardComponent, SetBackupComponent, SessionPublisherComponent, SwitchUserComponent, ContcatUsComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,

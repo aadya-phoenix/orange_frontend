@@ -115,6 +115,10 @@ export class DesignLearningCreateComponent implements OnInit {
     }
   }
 
+  backToList(){
+    this.router.navigate(['/designlearning']);
+  }
+
   requiredMessage(field:any){
     return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
   }

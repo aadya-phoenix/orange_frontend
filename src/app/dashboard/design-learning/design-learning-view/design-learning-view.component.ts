@@ -53,6 +53,10 @@ export class DesignLearningViewComponent implements OnInit {
     });
   }
 
+  backToList(){
+    this.router.navigate(['/designlearning']);
+  }
+
   update(item:any){
     if (item && item.id) {
       this.router.navigateByUrl(`/designlearning/update/${item.id}`);
