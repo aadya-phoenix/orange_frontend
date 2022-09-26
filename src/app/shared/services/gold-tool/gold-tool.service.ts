@@ -17,58 +17,42 @@ export class GoldToolService {
   }
 
   create(data: any) {
-    const url = `/api/${this.apiVersion}/goldTool/create`;
+    const url = `/api/${this.apiVersion}/gold-tool/create`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   update(data: any) {
-    const url = `/api/${this.apiVersion}/goldTool/update`;
+    const url = `/api/${this.apiVersion}/gold-tool/update`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   getGoldTool() {
-    const url = `/api/${this.apiVersion}/goldTool`;
+    const url = `/api/${this.apiVersion}/gold-tool`; 
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.commmonService.Errorhandling));
   }
-
-  getGoldToolReport(data: any) {
-    const url = `/api/${this.apiVersion}/goldTool/filter`;
-    return this.http
-      .post(url, data)
-      .pipe(catchError(this.commmonService.Errorhandling));
-  }
-
-  getGoldToolPublisher() {
-    const url = `/api/${this.apiVersion}/goldTool/publisher-list`;
-    return this.http
-      .get(url, this.http.headers)
-      .pipe(catchError(this.commmonService.Errorhandling));
-  }
-
 
   getGoldToolDetails(id: number) {
-    const url = `/api/${this.apiVersion}/goldTool/${id}/detail`;
+    const url = `/api/${this.apiVersion}/gold-tool/${id}/detail`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
   goldToolHistory(data: any) {
-    const url = `api/${this.apiVersion}/goldTool/${data}/history`;
+    const url = `api/${this.apiVersion}/gold-tool/${data}/history`;
     return this.http.get(url, this.http.headers).pipe(catchError(this.commmonService.Errorhandling))
   }
 
   goldToolDelete(data: any) {
-    const url = `api/${this.apiVersion}/goldTool/delete`;
+    const url = `api/${this.apiVersion}/gold-tool/delete`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  goldToolCopy(data: any) {
-    const url = `api/${this.apiVersion}/goldTool/copy`;
+  goldToolStatus(data: any) {
+    const url = `api/${this.apiVersion}/gold-tool/status`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
-
 
 }
