@@ -7,6 +7,7 @@ import { AuthenticationService } from 'src/app/shared/services/auth/authenticati
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { UserManageService } from 'src/app/shared/services/user-management/user-manage.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contcat-us',
@@ -29,7 +30,7 @@ export class ContcatUsComponent implements OnInit {
     private formBuilder: FormBuilder) {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.contactUsForm = this.formBuilder.group({
-      regional_cordinator: new FormControl('', [Validators.required]),
+      region: new FormControl('', [Validators.required]),
       subject: new FormControl('', [Validators.required]),
       message: new FormControl('', [Validators.required])
     });
@@ -71,51 +72,19 @@ export class ContcatUsComponent implements OnInit {
     }
     const body = this.contactUsForm.value;
     this.commonService.showLoading();
-    // this.userManageService.ContcatUs(body).subscribe(
-    //   (res: any) => {
-    //     if (res && res.status) {
-    //       const tokenDetails = {
-    //         access_token: res.data,
-    //         expires_in: 0,
-    //         refresh_token: "",
-    //         token_type: "Bearer"
-    //       }
-    //       localStorage.setItem('loginDetails', JSON.stringify(tokenDetails));
-    //       this.lastLogin();
-    //       this.authService.getProfileDetails().subscribe((profile) => {
-    //         // this.authService.getRoles().subscribe((res: any) => {
-    //         //   allroles = res.data;
-    //         //   allroles.find((currentrole: any) => {
-    //         //     if (currentrole.id === profile.data.role_id) {
-    //         //       roleObj = currentrole;
-    //         //     }
-    //         //   });
-    //         //   this.commonService.hideLoading();
-    //         //   localStorage.setItem('role', JSON.stringify(roleObj));
-    //         // });
-    //         localStorage.setItem('profileDetails', JSON.stringify(profile));
-    //         let params = this.route.snapshot.queryParams;
-    //         if (params['redirectURL']) {
-    //           this.router.navigate([params['redirectURL']]);
-    //         } else {
-    //           this.router.navigate(['/']).then(() => {
-    //             window.location.reload();
-    //           });
-    //         }
-    //       });
-    //       this.commonService.hideLoading();
-    //       this.modalService.close();
-    //     }
-    //     else {
-    //       this.commonService.toastErrorMsg('Error', res.message);
-    //       this.commonService.hideLoading();
-    //     }
-    //   },
-    //   (err: any) => {
-    //     this.commonService.hideLoading();
-    //     this.commonService.toastErrorMsg('Error', err.message);
-    //   }
-    // );
+    this.userManageService.contcatUs(body).subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        this.modalService.close();
+        Swal.fire(
+          'Message Sent!',
+          'Your message sent to Regional Operation Coordinator.',
+          'success'
+        )
+      }, (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
+      });
   }
 
   lastLogin() {

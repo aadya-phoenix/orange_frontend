@@ -17,11 +17,7 @@ export class MessageListComponent implements OnInit {
   lableConstant: any = { french: {}, english: {} };
   messageList:any=[];
   messageListToShow:any=[];
-  rolesList:any=[];
   searchText:string='';
-  first_name : any;
-  last_name : any;
-  email  : any;
 
   activeMessageList =[{id:1,name:'Active'},{id:0,name:'InActive'}];
 
@@ -35,7 +31,6 @@ export class MessageListComponent implements OnInit {
 
   constructor(
     private messageService:MessageService,
-    private courceService:CourcesService,
     private commonService:CommonService,
     private router: Router) {
       this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
@@ -55,7 +50,7 @@ export class MessageListComponent implements OnInit {
       (res: any) => {
         this.commonService.hideLoading();
         this.messageList = res.data;
-        this. messageListToShow = res.data;
+        this.messageListToShow = res.data;
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -80,19 +75,19 @@ export class MessageListComponent implements OnInit {
       cancelButtonText: 'No, keep it'
     }).then((result) => {
       if (result.value) {
-        // this.commonService.showLoading();
-        // this.messageService.changeUserStatus({status:"0"},userId).subscribe((res:any)=>{
-        //   this.commonService.hideLoading();
-        //   this.getUsers();
-        //   Swal.fire(
-        //     'Deleted!',
-        //     'Your request has been deleted.',
-        //     'success'
-        //   )
-        // },(err:any)=>{
-        //   this.commonService.hideLoading();
-        //   this.commonService.errorHandling(err);
-        // })
+        this.commonService.showLoading();
+        this.messageService.messageDelete({message_id:id}).subscribe((res:any)=>{
+          this.commonService.hideLoading();
+          this.getMessages();
+          Swal.fire(
+            'Deleted!',
+            'Your request has been deleted.',
+            'success'
+          )
+        },(err:any)=>{
+          this.commonService.hideLoading();
+          this.commonService.errorHandling(err);
+        })
         
       }
     })
@@ -115,17 +110,5 @@ export class MessageListComponent implements OnInit {
 
   pageChanged(event: any) {
     this.pagination.pageNumber = event;
-  }
-
-  getRole(){
-   this.courceService.getRole().subscribe(
-     res=>{
-      let roles = res.data;
-      this.rolesList = roles.filter((a:any) => {
-        return a.status == 1
-      });
-     },err=>{
-      this.commonService.errorHandling(err);
-    });
   }
 }

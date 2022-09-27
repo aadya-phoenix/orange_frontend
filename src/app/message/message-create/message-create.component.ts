@@ -23,8 +23,12 @@ export class MessageCreateComponent implements OnInit {
   createMessageForm: FormGroup;
   message_id: any;
   message_details: any;
+  minDate = {};
+  maxDate = {};
+  today = new Date();
   isCreate = false;
   isSubmitted = false;
+  statusList = [{name:'Active', id:'active'},{name:'Deactive', id:'deactive'}]
 
   constructor(private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -32,11 +36,15 @@ export class MessageCreateComponent implements OnInit {
     private commonService: CommonService,
     private router: Router,) {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+    this.minDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
     this.createMessageForm = this.formBuilder.group({
       message: new FormControl('', [Validators.required]),
       start_date: new FormControl('', [Validators.required]),
       end_date: new FormControl('', [Validators.required]),
       status: new FormControl('active', []),
+    });
+    this.createMessageForm.get("start_date")?.valueChanges.subscribe((x: {}) => {
+      this.maxDate = x;
     });
   }
 
@@ -65,10 +73,11 @@ export class MessageCreateComponent implements OnInit {
         this.commonService.hideLoading();
         if (res.status === 1) {
           this.message_details = res.data;
-          this.createMessageForm.controls.message.setValue(this.message_details.message);
-          this.createMessageForm.controls.start_date.setValue(this.message_details.start_date);
-          this.createMessageForm.controls.end_date.setValue(this.message_details.end_date);
-          this.createMessageForm.controls.status.setValue(this.message_details.status);
+          const start_date = new Date(this.message_details.start_date);
+          const end_date = new Date(this.message_details.end_date);
+          this.message_details.start_date = `${start_date.getFullYear()}-${("0" + (start_date.getMonth() + 1)).slice(-2)}-${("0" + start_date.getDate()).slice(-2)}`;
+          this.message_details.end_date = `${end_date.getFullYear()}-${("0" + (end_date.getMonth() + 1)).slice(-2)}-${("0" + end_date.getDate()).slice(-2)}`;
+          this.createMessageForm.patchValue(this.message_details);
         }
         else {
           this.commonService.toastErrorMsg('Error', res.message);

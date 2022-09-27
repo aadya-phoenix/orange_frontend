@@ -17,27 +17,32 @@ export class MessageService {
   }
 
   createMessage(data:any){
-    const url = `api/${this.apiVersion}/user/create`;
+    const url = `api/${this.apiVersion}/message/create`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling)); 
   }
 
   getMessage(){
-    const url = `/api/${this.apiVersion}/users`;
+    const url = `/api/${this.apiVersion}/message`;
     return this.http
     .get(url, this.http.headers)
     .pipe(catchError(this.commmonService.Errorhandling));
   }
 
   updateMessage(data:any,id:number){
-    const url = `api/${this.apiVersion}/user/${id}/update`;
+    const url = `api/${this.apiVersion}/message/${id}/update`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling)); 
   }
 
   getMessageDetails(id:number){
-    const url = `/api/${this.apiVersion}/user/${id}/detail`;
+    const url = `/api/${this.apiVersion}/message/${id}/detail`;
     return this.http
     .get(url, this.http.headers)
     .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  messageDelete(data: any) {
+    const url = `api/${this.apiVersion}/message/delete`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
 }

@@ -15,8 +15,14 @@ export class GoldToolCreateComponent implements OnInit {
   lableConstant: any = { french: {}, english: {} };
   isSubmitted = false;
   gold_tool_id = 0;
+  gold_tool_details: any = {};
   getUserrole: any;
   getprofileDetails: any = {};
+  goldLevelAccess = [{
+    id: 'Confidential', name: 'Confidential'
+  }, {
+    id: 'Non-confidential', name: 'Non-confidential'
+  }]
 
   public createGoldToolForm!: FormGroup;
   constructor(private commonService: CommonService,
@@ -46,6 +52,8 @@ export class GoldToolCreateComponent implements OnInit {
     if (this.gold_tool_id) {
       this.getGoldToolDetails();
     } else {
+      this.createGoldToolForm.controls.requester_name.setValue(`${this.getprofileDetails.data.first_name} ${this.getprofileDetails.data.last_name}`);
+      this.createGoldToolForm.controls.requester_email.setValue(`${this.getprofileDetails.data.email}`);
       this.addMetadata();
     }
   }
@@ -60,7 +68,6 @@ export class GoldToolCreateComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       email_for_participant: new FormControl('', [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
       cuid_ftid: new FormControl('', [Validators.required]),
-      email_participant: new FormControl('', [Validators.required]),
       p1: new FormControl('', [Validators.required]),
       data_scope: new FormControl('', [Validators.required]),
       gold_level_access: new FormControl('', [Validators.required]),
@@ -77,6 +84,34 @@ export class GoldToolCreateComponent implements OnInit {
     this.metadataArray.push(this.metaDataGroup());
   }
 
+  copyMetadata(data:any): void {
+    this.metadataArray.push(this.fb.group({
+      id: '',
+      name: new FormControl(data.name, [Validators.required]),
+      email_for_participant: new FormControl(data.email_for_participant, [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
+      cuid_ftid: new FormControl(data.cuid_ftid, [Validators.required]),
+      p1: new FormControl(data.p1, [Validators.required]),
+      data_scope: new FormControl(data.data_scope, [Validators.required]),
+      gold_level_access: new FormControl(data.gold_level_access, [Validators.required]),
+      hrbp_email: new FormControl(data.hrbp_email, [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
+      business_justification: new FormControl(data.business_justification, [Validators.required]),
+    }));
+  }
+
+  updateMetadata(data: any): FormGroup {
+    return this.fb.group({
+      id: data.id,
+      name: new FormControl(data.name, [Validators.required]),
+      email_for_participant: new FormControl(data.email_for_participant, [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
+      cuid_ftid: new FormControl(data.cuid_ftid, [Validators.required]),
+      p1: new FormControl(data.p1, [Validators.required]),
+      data_scope: new FormControl(data.data_scope, [Validators.required]),
+      gold_level_access: new FormControl(data.gold_level_access, [Validators.required]),
+      hrbp_email: new FormControl(data.hrbp_email, [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
+      business_justification: new FormControl(data.business_justification, [Validators.required]),
+    });
+  }
+
   removeMetadata(index: number): void {
     this.metadataArray.removeAt(index);
   }
@@ -86,31 +121,14 @@ export class GoldToolCreateComponent implements OnInit {
     this.goldToolService.getGoldToolDetails(this.gold_tool_id).subscribe((res: any) => {
       this.commonService.hideLoading();
       if (res.status === 1 && res.message === 'Success') {
-        // this.session_details = res.data;
-        // this.session_status = this.session_details.status;
-
-        // this.createSessionForm.controls.title.setValue(this.session_details.title);
-        // this.createSessionForm.controls.region_id.setValue(this.session_details.region_id);
-        // const metadata = this.session_details.metadata;
-        // for (let meta of metadata) {
-        //   this.breaksArray = [];
-
-        //   meta.delivery_method_id = JSON.parse(meta.delivery_method);
-        //   meta.country_id = JSON.parse(meta.country);
-        //   meta.email = JSON.parse(meta.email_participant);
-
-        //   if (meta.break != null) {
-        //     meta.break_data = JSON.parse(meta.break)
-        //     for (let item of meta.break_data) {
-        //       this.breaksArray.push(this.fb.group({ description: item.description, duration: item.duration }));
-        //     }
-        //     meta.breakArray = this.breaksArray;
-        //   }
-        //   else {
-        //     meta.breakArray = [];
-        //   }
-        //   this.metadataArray.push(this.updateMetadata(meta));
-        // }
+        this.gold_tool_details = res.data;
+        this.createGoldToolForm.controls.requester_name.setValue(this.gold_tool_details.requester_name);
+        this.createGoldToolForm.controls.requester_email.setValue(this.gold_tool_details.requester_email);
+        this.createGoldToolForm.controls.additional_comment.setValue(this.gold_tool_details.additional_comment);
+        const metadata = this.gold_tool_details.metadata;
+        metadata.forEach((meta: any) => {
+          this.metadataArray.push(this.updateMetadata(meta));
+        });
       }
     }, err => {
       this.commonService.hideLoading();
@@ -131,7 +149,7 @@ export class GoldToolCreateComponent implements OnInit {
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Gold Tool Request', 'Successfully Saved.');
-          this.router.navigateByUrl(`/dashboard/gold-tool/view/${res.data.id}`);
+          this.router.navigateByUrl(`/gold-tool/view/${res.data.id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();
@@ -146,7 +164,7 @@ export class GoldToolCreateComponent implements OnInit {
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Gold Tool Request', 'Successfully Saved.');
-          this.router.navigateByUrl(`/dashboard/gold-tool/view/${this.gold_tool_id}`);
+          this.router.navigateByUrl(`/gold-tool/view/${this.gold_tool_id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();

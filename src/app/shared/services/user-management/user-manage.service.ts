@@ -54,4 +54,8 @@ export class UserManageService {
     const url = `api/${this.apiVersion}/user/switch`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
+  contcatUs(data: any){
+    const url = `api/${this.apiVersion}/contact-us/send`;
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
 }

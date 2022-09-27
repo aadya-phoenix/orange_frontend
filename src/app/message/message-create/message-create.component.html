@@ -59,7 +59,7 @@
                                                 <label class="form-control-label">
                                                     {{lableConstant.Start_Date}}</label>
                                                 <input type="date" class="form-control form_width"
-                                                    formControlName="start_date" />
+                                                    formControlName="start_date"  min="{{minDate}}" />
                                                 <div
                                                     *ngIf="(createMessageForm.controls['start_date'].invalid && (createMessageForm.controls['start_date'].dirty || createMessageForm.controls['start_date'].touched)) || isSubmitted">
                                                     <div class="error_message"
@@ -73,7 +73,7 @@
                                             <div class="form-group">
                                                 <label class="form-control-label">{{lableConstant.End_Date}} </label>
                                                 <input type="date" class="form-control form_width"
-                                                    formControlName="end_date" />
+                                                    formControlName="end_date" min="{{maxDate}}" />
                                                 <div
                                                     *ngIf="(createMessageForm.controls['end_date'].invalid && (createMessageForm.controls['end_date'].dirty || createMessageForm.controls['end_date'].touched)) || isSubmitted">
                                                     <div class="error_message"
@@ -81,6 +81,28 @@
                                                         {{requiredMessage(this.lableConstant.End_Date)}}
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">
+                                                    Status<span class="text_red">*
+                                                    </span>
+                                                </label>
+                                                <ng-select
+                                                    placeholder="Please select status"
+                                                    [items]="statusList" bindLabel="name"
+                                                    bindValue="id" formControlName="status"
+                                                    class="w_100">
+                                                </ng-select>
+                                                <div
+                                                *ngIf="(createMessageForm.controls['status'].invalid && (createMessageForm.controls['status'].dirty || createMessageForm.controls['status'].touched)) || isSubmitted">
+                                                <div class="error_message"
+                                                    *ngIf="createMessageForm.controls['status'].errors?.required">
+                                                        {{requiredMessage('Status')}}
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
