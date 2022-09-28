@@ -23,7 +23,7 @@ export class MessageViewComponent implements OnInit {
 
   setDialogProps(dialogdata: any) {
     this.commonService.showLoading();
-    this.messageService.getMessage().subscribe((res: any) => {
+    this.messageService.getActiveMessage().subscribe((res: any) => {
       this.commonService.hideLoading();
       if (res && res.status == 1) {
         this.messageList = res.data;

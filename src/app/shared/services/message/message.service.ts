@@ -28,8 +28,16 @@ export class MessageService {
     .pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  updateMessage(data:any,id:number){
-    const url = `api/${this.apiVersion}/message/${id}/update`;
+  getActiveMessage(){
+    const url = `/api/${this.apiVersion}/message/active`;
+    return this.http
+    .get(url, this.http.headers)
+    .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+
+  updateMessage(data:any){
+    const url = `api/${this.apiVersion}/message/update`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling)); 
   }
 

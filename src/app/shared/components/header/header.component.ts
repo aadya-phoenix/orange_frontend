@@ -7,6 +7,7 @@ import { MessageViewComponent } from 'src/app/message/message-view/message-view.
 import { dataConstant } from '../../constant/dataConstant';
 import { AuthenticationService } from '../../services/auth/authentication.service';
 import { CommonService } from '../../services/common/common.service';
+import { MessageService } from '../../services/message/message.service';
 
 @Component({
   selector: 'app-header',
@@ -27,7 +28,7 @@ export class HeaderComponent implements OnInit {
   Laungauges = dataConstant.Laungauges;
   selectedLaungauge: any = this.Laungauges.EN;
   totalNotification = 0;
-  totalMessages = 1;
+  totalMessages = 0;
   pendingRequestCount = {
     carousel_pending: 0,
     course_pending: 0,
@@ -39,6 +40,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authService: AuthenticationService,
     private commonService: CommonService,
+    private messageSerice: MessageService,
     private modalService: NgbModal,
     private router: Router) {
     this.getUserrole = this.authService.getRolefromlocal();
@@ -52,6 +54,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.getUserprofile();
     this.getPendingCount();
+    this.getActiveMessage();
     if (localStorage.getItem('userName')) {
       this.userName = JSON.parse(localStorage.getItem('userName') as any);
     }
@@ -102,6 +105,20 @@ export class HeaderComponent implements OnInit {
           (this.pendingRequestCount.course_pending ? this.pendingRequestCount.course_pending : 0) +
           (this.pendingRequestCount.office_role_pending ? this.pendingRequestCount.office_role_pending : 0) +
           (this.pendingRequestCount.session_pending ? this.pendingRequestCount.session_pending : 0)
+      },
+      (err: any) => {
+        this.commonService.errorHandling(err);
+        this.commonService.hideLoading();
+      }
+    );
+  }
+
+  getActiveMessage() {
+    this.commonService.showLoading();
+    this.messageSerice.getActiveMessage().subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        this.totalMessages = res.data?.length;
       },
       (err: any) => {
         this.commonService.errorHandling(err);

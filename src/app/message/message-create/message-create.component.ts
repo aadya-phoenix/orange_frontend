@@ -127,7 +127,8 @@ export class MessageCreateComponent implements OnInit {
 
   update(body: any) {
     this.commonService.showLoading();
-    this.messageService.updateMessage(body, this.message_id).subscribe(
+    body.message_id = this.message_id;
+    this.messageService.updateMessage(body).subscribe(
       (res: any) => {
         if (res.status == 1) {
           this.commonService.hideLoading();

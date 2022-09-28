@@ -2,10 +2,8 @@
     <a class="btn-close-icon" (click)="closeModal()"><i class="fa fa-times" aria-hidden="true"></i></a>
     <div class="card-body">
         <div class="login">
-            <div class="main_body">
-                <div class="main_box">
-                 
-                </div>
+            <div class="message-alert" *ngFor="let item of messageList">
+                <div [innerHTML]="item.message"></div>
             </div>
         </div>
     </div>
