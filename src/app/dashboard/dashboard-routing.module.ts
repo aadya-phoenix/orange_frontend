@@ -18,7 +18,8 @@ const routes: Routes = [
 {path:'smedb',loadChildren:()=>import("./smedb/smedb.module").then(m=>m.SmedbModule)},
 {path:'set-backup',component:SetBackupComponent},
 {path:'sctworkflow', component:SessionPublisherComponent},
-{path:'gold-tool',loadChildren:()=>import("./gold-tool/gold-tool.module").then(m=>m.GoldToolModule)}
+{path:'gold-tool',loadChildren:()=>import("./gold-tool/gold-tool.module").then(m=>m.GoldToolModule)},
+{path:'oltest',loadChildren:()=>import("./ol-test/ol-test.module").then(m=>m.OlTestModule)}
 ];
 
 @NgModule({

@@ -165,7 +165,8 @@ export const dataConstant = {
     dna_addNew: 'Digital learning Needs Analysis - Add New Learning',
     dna_managersdata: 'Digital learning Needs Analysis - Managers',
     dna_viewRPT: 'Digital learning Needs Analysis - View',
-    dna_viewBP: 'Digital learning Needs Analysis - View'
+    dna_viewBP: 'Digital learning Needs Analysis - View',
+    oltest: 'OL-Test',
   },
 
   Modules: {
