@@ -10,6 +10,8 @@ import { OlTestCreateComponent } from './ol-test-create/ol-test-create.component
 import { OlTestCreateModelComponent } from './ol-test-create-model/ol-test-create-model.component';
 import { OlTestCreateScormComponent } from './ol-test-create-scorm/ol-test-create-scorm.component';
 import { OlTestViewComponent } from './ol-test-view/ol-test-view.component';
+import { OlTestQuestionCreateComponent } from './ol-test-question-create/ol-test-question-create.component';
+import { OlTestSectionCreateComponent } from './ol-test-section-create/ol-test-section-create.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { OlTestViewComponent } from './ol-test-view/ol-test-view.component';
     OlTestCreateComponent,
     OlTestCreateModelComponent,
     OlTestCreateScormComponent,
-    OlTestViewComponent],
+    OlTestViewComponent,
+    OlTestQuestionCreateComponent,
+    OlTestSectionCreateComponent],
   providers: [DatePipe],
   entryComponents: [OlTestCreateModelComponent],
   imports: [

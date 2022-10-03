@@ -8,8 +8,8 @@ import { OlTestViewComponent } from './ol-test-view/ol-test-view.component';
 
 const routes: Routes = [
    { path: '', component: OlTestListComponent, canActivate: [AuthenticationServiceGuard] },
-   { path: 'create/orange', component: OlTestCreateComponent, canActivate: [AuthenticationServiceGuard] },
-   { path: 'create/scorm', component: OlTestCreateScormComponent, canActivate: [AuthenticationServiceGuard] },
+   { path: 'create/:test_type', component: OlTestCreateComponent, canActivate: [AuthenticationServiceGuard] },
+   { path: 'update/:id', component: OlTestCreateComponent, canActivate: [AuthenticationServiceGuard] },
    { path: 'view/:id', component: OlTestViewComponent, canActivate: [AuthenticationServiceGuard] },
 ];
 
