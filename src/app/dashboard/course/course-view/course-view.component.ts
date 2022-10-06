@@ -135,7 +135,7 @@ export class CourseViewComponent implements OnInit {
   beautificationTemplate(item: any) {
     const modalRef = this.modalService.open(CourseBeautificationTemplateComponent, {
       centered: true,
-      // size: 'xl',
+      size: 'xl',
       modalDialogClass: 'large-width',
       windowClass: 'alert-popup',
     });

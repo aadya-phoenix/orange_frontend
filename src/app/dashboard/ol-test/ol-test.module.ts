@@ -8,7 +8,6 @@ import { OlTestListComponent } from './ol-test-list/ol-test-list.component';
 import { OlTestRoutingModule } from './ol-test-routing.module';
 import { OlTestCreateComponent } from './ol-test-create/ol-test-create.component';
 import { OlTestCreateModelComponent } from './ol-test-create-model/ol-test-create-model.component';
-import { OlTestCreateScormComponent } from './ol-test-create-scorm/ol-test-create-scorm.component';
 import { OlTestViewComponent } from './ol-test-view/ol-test-view.component';
 import { OlTestQuestionCreateComponent } from './ol-test-question-create/ol-test-question-create.component';
 import { OlTestSectionCreateComponent } from './ol-test-section-create/ol-test-section-create.component';
@@ -18,7 +17,6 @@ import { OlTestSectionCreateComponent } from './ol-test-section-create/ol-test-s
     OlTestListComponent,
     OlTestCreateComponent,
     OlTestCreateModelComponent,
-    OlTestCreateScormComponent,
     OlTestViewComponent,
     OlTestQuestionCreateComponent,
     OlTestSectionCreateComponent],

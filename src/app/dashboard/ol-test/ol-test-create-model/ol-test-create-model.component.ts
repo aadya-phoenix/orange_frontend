@@ -17,7 +17,6 @@ export class OlTestCreateModelComponent implements OnInit {
   constructor(private modalService: NgbActiveModal,  private commonService: CommonService,private router: Router) { 
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
   }
-  
 
   ngOnInit(): void {
   }
@@ -27,13 +26,21 @@ export class OlTestCreateModelComponent implements OnInit {
   }
 
   openOrangeTest(){
-    this.router.navigateByUrl(`/oltest/create/orange`);
+    this.router.navigateByUrl(`/oltest/create/${dataConstant.OLTestType.Online}`);
     this.closeModal();
   }
 
   openOrangeScorm(){
-    this.router.navigateByUrl(`/oltest/create/scorm`);
+    this.router.navigateByUrl(`/oltest/create/${dataConstant.OLTestType.Scorm}`);
     this.closeModal();
+  }
+
+  openOrangeTestTemplate(){
+    window.open(dataConstant.OLTestTemplateUrl.Online, '_blank');
+  }
+
+  openOrangeScormTemplate(){
+    window.open(dataConstant.OLTestTemplateUrl.Scorm, '_blank');
   }
 
 }
