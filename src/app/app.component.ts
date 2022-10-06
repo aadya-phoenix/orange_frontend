@@ -209,6 +209,9 @@ export class AppComponent {
           case '/dna/view-complete-report/':
             pageName = dataConstant.TitleList.dna_report;
             break;
+          case '/oltest':
+            pageName = dataConstant.TitleList.oltest;
+            break;
           default:
             pageName = '';
             break;
