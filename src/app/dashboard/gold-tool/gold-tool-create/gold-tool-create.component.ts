@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
+import { CourcesService } from 'src/app/shared/services/cources/cources.service';
+import { GeneralDropdownsService } from 'src/app/shared/services/general-dropdowns/general-dropdowns.service';
 import { GoldToolService } from 'src/app/shared/services/gold-tool/gold-tool.service';
+import { GoldToolAgreeComponent } from '../gold-tool-agree/gold-tool-agree.component';
 
 @Component({
   selector: 'app-gold-tool-create',
@@ -14,6 +18,13 @@ import { GoldToolService } from 'src/app/shared/services/gold-tool/gold-tool.ser
 export class GoldToolCreateComponent implements OnInit {
   lableConstant: any = { french: {}, english: {} };
   isSubmitted = false;
+  preferedInstructor: any = [];
+  searchedPreferedInstructor: any = [];
+  regionDnaObj: any = [];
+  regions: any = [];
+  countriesObj: any = [];
+  countries: any = [];
+  bussinessUnitObj: any = [];
   gold_tool_id = 0;
   gold_tool_details: any = {};
   getUserrole: any;
@@ -22,14 +33,19 @@ export class GoldToolCreateComponent implements OnInit {
     id: 'Confidential', name: 'Confidential'
   }, {
     id: 'Non-confidential', name: 'Non-confidential'
+  }, {
+    id: 'YLJ-hubs-PO', name: 'YLJ hubs PO'
   }]
 
   public createGoldToolForm!: FormGroup;
   constructor(private commonService: CommonService,
     private authService: AuthenticationService,
+    private modalService: NgbModal,
     private goldToolService: GoldToolService,
     private route: ActivatedRoute,
+    private generalDrpdownsService: GeneralDropdownsService,
     private router: Router,
+    private courseService: CourcesService,
     private fb: FormBuilder) {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
@@ -43,12 +59,12 @@ export class GoldToolCreateComponent implements OnInit {
       requester_email: new FormControl(''),
       additional_comment: new FormControl(''),
       metadata: this.fb.array([
-
       ]),
     });
   }
 
   ngOnInit(): void {
+    this.getPreferedInstructor();
     if (this.gold_tool_id) {
       this.getGoldToolDetails();
     } else {
@@ -58,10 +74,6 @@ export class GoldToolCreateComponent implements OnInit {
     }
   }
 
-  requiredMessage(field: any) {
-    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
-  }
-
   private metaDataGroup(): FormGroup {
     return this.fb.group({
       id: '',
@@ -69,10 +81,12 @@ export class GoldToolCreateComponent implements OnInit {
       email_for_participant: new FormControl('', [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
       cuid_ftid: new FormControl('', [Validators.required]),
       p1: new FormControl('', [Validators.required]),
-      data_scope: new FormControl('', [Validators.required]),
+      region_id: new FormControl('', [Validators.required]),
+      country: new FormControl('', [Validators.required]),
       gold_level_access: new FormControl('', [Validators.required]),
       hrbp_email: new FormControl('', [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
       business_justification: new FormControl('', [Validators.required]),
+      agree:new FormControl(false, [Validators.requiredTrue])
     });
   }
 
@@ -80,11 +94,105 @@ export class GoldToolCreateComponent implements OnInit {
     return <FormArray>this.createGoldToolForm.get('metadata');
   }
 
+  //preferred instructor
+  getPreferedInstructor() {
+    this.commonService.showLoading();
+    this.courseService.getpreferedInstructor().subscribe(
+      (res: any) => {
+        this.preferedInstructor = res.data;
+        this.getRegions();
+      },
+      (err: any) => {
+        this.commonService.errorHandling(err);
+        this.commonService.hideLoading();
+      }
+    );
+  }
+
+  searchInstructor(elem: any) {
+    if (elem) {
+      this.searchedPreferedInstructor = this.preferedInstructor.filter((x: any) => x.email_id.includes(elem));
+    }
+    else {
+      this.searchedPreferedInstructor = [];
+    }
+  }
+
+  changeEmail(item: any, i: any) {
+    if (item) {
+      this.metadataArray.at(i)?.get('name')?.setValue(`${item.first_name} ${item.last_name}`);
+      this.metadataArray.at(i)?.get('cuid_ftid')?.setValue(item.department_manager_cuid);
+    }
+  }
+
+
+  getRegions() {
+    this.commonService.showLoading();
+    this.generalDrpdownsService.getRegions().subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        this.regionDnaObj = res.data;
+        this.getCountries();
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    );
+  }
+
+  getCountries() {
+    this.commonService.showLoading();
+    this.generalDrpdownsService.getCountries().subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        this.countriesObj = res.data;
+        this.getBusinessUnits();
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    );
+  }
+
+  getSelectedRegion(event: any, i:any) {
+    this.countries[i] = this.countriesObj.filter((x: any) => x.region_id === event.id);
+  }
+
+  getBusinessUnits() {
+    this.generalDrpdownsService.getBusinessUnits().subscribe((res: any) => {
+      this.commonService.hideLoading();
+      this.bussinessUnitObj = res.data;
+    },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.toastErrorMsg('Error', err.message);
+      }
+    );
+  }
+
+  agreeChange(event:any) {
+    if (event.agree.value) {
+      this.modalService.open(GoldToolAgreeComponent, {
+        centered: true,
+        size:'xl',
+        windowClass: 'alert-popup',
+      });
+    }
+  }
+
+  requiredMessage(field: any) {
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
+
+
   addMetadata(): void {
     this.metadataArray.push(this.metaDataGroup());
   }
 
-  copyMetadata(data:any): void {
+  copyMetadata(data: any): void {
     this.metadataArray.push(this.fb.group({
       id: '',
       name: new FormControl(data.name, [Validators.required]),
@@ -148,7 +256,7 @@ export class GoldToolCreateComponent implements OnInit {
       this.goldToolService.create(body).subscribe(
         (res: any) => {
           this.commonService.hideLoading();
-          this.commonService.toastSuccessMsg('Gold Tool Request', 'Successfully Saved.');
+          this.commonService.toastSuccessMsg('Gold access request', 'Successfully Saved.');
           this.router.navigateByUrl(`/gold-tool/view/${res.data.id}`);
         },
         (err: any) => {
@@ -163,7 +271,7 @@ export class GoldToolCreateComponent implements OnInit {
       this.goldToolService.update(body).subscribe(
         (res: any) => {
           this.commonService.hideLoading();
-          this.commonService.toastSuccessMsg('Gold Tool Request', 'Successfully Saved.');
+          this.commonService.toastSuccessMsg('Gold access request', 'Successfully Saved.');
           this.router.navigateByUrl(`/gold-tool/view/${this.gold_tool_id}`);
         },
         (err: any) => {

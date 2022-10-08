@@ -279,6 +279,7 @@ export class EditUserComponent implements OnInit {
         if (res.status === 1 ) {
           this.user_details = res.data;
           this.createUserForm.controls.email.setValue(this.user_details.email);
+          this.createUserForm.controls.manager_email.setValue(this.user_details.manager_email);
           this.createUserForm.controls.first_name.setValue(this.user_details.first_name);
           this.createUserForm.controls.last_name.setValue(this.user_details.last_name);
           this.createUserForm.controls.role_id.setValue(this.user_details.role_id);

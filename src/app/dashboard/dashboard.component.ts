@@ -127,9 +127,9 @@ export class DashboardComponent implements OnInit {
 
       this.modulesArray_tab2 = [
         // {
-        //   id: 'goldtool', name: 'Gold tool request',
+        //   id: 'goldtool', name: 'Gold access request',
         //   routerLink: '/gold-tool', image: '../../assets/images/second.jpg',
-        //   lableConstantModule:'Gold tool request',
+        //   lableConstantModule:'Gold access request',
         //   lableConstantCatalog: this.lableConstant.request_learning_team,
         //   navigateTo: this.modules.goldTool,
         //   favourite: false, showFavourite: true,
