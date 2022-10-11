@@ -2,20 +2,20 @@ import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
+import { GetReportHistoryComponent } from 'src/app/dashboard/get-report/get-report-history/get-report-history.component';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { GetReportService } from 'src/app/shared/services/get-report/get-report.service';
 import Swal from 'sweetalert2';
-import { GetReportHistoryComponent } from '../../get-report/get-report-history/get-report-history.component';
 
 @Component({
-  selector: 'app-vendor-training-dashboard',
-  templateUrl: './vendor-training-dashboard.component.html',
-  styleUrls: ['./vendor-training-dashboard.component.scss']
+  selector: 'app-vendor-training-list',
+  templateUrl: './vendor-training-list.component.html',
+  styleUrls: ['./vendor-training-list.component.scss']
 })
-export class VendorTrainingDashboardComponent implements OnInit {
+export class VendorTrainingListComponent implements OnInit {
 
   lableConstant: any = { french: {}, english: {} };
   report_id:number=0;

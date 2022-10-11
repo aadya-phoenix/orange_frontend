@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit {
     this.getUserrole = this.authService.getRolefromlocal();
     this.profileDetails = this.authService.getProfileDetailsfromlocal();
     if(this.getUserrole){
-      //console.log("user role",this.getUserrole);
+      console.log("user role",this.getUserrole);
       this.isReviewer = this.getUserrole.includes(this.RoleID.BackOfficeReviewer);
       this.isPublisher = this.getUserrole.includes(this.RoleID.BackOfficePublisher);
       this.isRequester = this.profileDetails.data?.staff == 1 ? true : false;
@@ -178,6 +178,17 @@ export class DashboardComponent implements OnInit {
           isShowPending: false,
           pendingRequestCount: 0,
           setFavouriteModule: this.modules.sme,
+        },
+        {
+          id: 'vendortraining', name: 'External Vendor Training Module',
+          routerLink: '/vendortraining/create', image: '../../assets/images/Design learning module.jpg',
+          lableConstantModule: 'External Vendor Training Module',
+          lableConstantCatalog: this.lableConstant.request_learning_team,
+          navigateTo: '',
+          favourite: false, showFavourite: true,
+          isShowPending: true,
+          pendingRequestCount: this.pendingRequestCount.digital_learning,
+          setFavouriteModule: this.modules.design,
         }
       ];
 
@@ -240,7 +251,7 @@ export class DashboardComponent implements OnInit {
       this.router.navigateByUrl(`/sct?status=${status}`);
     }
     if (module == this.modules.design) {
-      const status = (this.getUserrole.includes(this.RoleID.DesignTeam) || this.getUserrole.includes(this.RoleID.HeadOfDesign)) ? dataConstant.BackOfficeStatus.pending : dataConstant.BackOfficeStatus.submitted
+      const status = (this.getUserrole.includes(this.RoleID.DesignTeam) || this.getUserrole.includes(this.RoleID.HeadOfDesign)) ? dataConstant.BackOfficeStatus.pending : dataConstant.BackOfficeStatus.submitted;
       this.router.navigateByUrl(`/designlearning?status=${status}`);
     }
     if (module == this.modules.getReport) {
