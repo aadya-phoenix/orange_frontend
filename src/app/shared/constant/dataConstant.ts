@@ -201,6 +201,9 @@ export const dataConstant = {
   SMETabs: { contecntSupport: 'content-support', delivery: 'delivery', voiceOver: 'voice-over-learning', professionalCertifications: 'professional-certifications', comments: 'comments' },
   OLTestType:{
     Online: 'Online', Scorm:'Scorm'
+  },
+  OLTestTemplateUrl:{
+    Online: 'https://www.google.com/', Scorm:'https://www.google.com/'
   }
 }
 

@@ -524,7 +524,9 @@
                                                                 </a>
                                                             </label>
                                                             <input type="date" class="form-control form_width"
-                                                                formControlName="registration_deadline">
+                                                                formControlName="registration_deadline"
+                                                                [max]="metadataArray.controls[i].controls['end_date'].value"
+                                                                [min]="metadataArray.controls[i].controls['start_date'].value">
                                                             <div
                                                                 *ngIf="(metadataArray.controls[i].controls['registration_deadline'].invalid && (metadataArray.controls[i].controls['registration_deadline'].dirty || metadataArray.controls[i].controls['registration_deadline'].touched)) || isSubmitted">
                                                                 <div class="error_message"

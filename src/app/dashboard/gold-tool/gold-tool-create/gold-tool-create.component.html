@@ -6,7 +6,7 @@
                 <div class="page-title d-flex align-items-center">
                     <img src="../../../../assets/images/second.jpg" class="home_Css_img" />
                     <div class="d-flex flex-column ml-3">
-                        <span class="breade_text_span1">Gold tool request</span>
+                        <span class="breade_text_span1">Gold access request</span>
                         <span class="divider"></span>
                         <span class="breade_text_span">{{lableConstant.request_create_session}}</span>
                     </div>
@@ -23,7 +23,7 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/gold-tool']" class="text_white">Gold Tool Request</a>
+                            <a [routerLink]="['/gold-tool']" class="text_white">Gold access request</a>
                         </li>
                     </ol>
                 </div>
@@ -57,13 +57,6 @@
                                 </label>
                                 <input type="text" class="form-control form_width" placeholder="Enter Requester Name"
                                     formControlName="requester_name" disabled>
-                                <!-- <div
-                                            *ngIf="(createGoldToolForm.controls['requester_name'].invalid && (createGoldToolForm.controls['requester_name'].dirty || createGoldToolForm.controls['requester_name'].touched)) || isSubmitted">
-                                            <div class="error_message"
-                                                *ngIf="createGoldToolForm.controls['requester_name'].errors?.required">
-                                                {{requiredMessage(this.lableConstant.Event_requester_name)}}
-                                            </div>
-                                        </div> -->
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -73,56 +66,69 @@
                                 </label>
                                 <input type="text" class="form-control form_width" placeholder="Enter Requester Email"
                                     formControlName="requester_email" disabled>
-                                <!-- <div
-                                            *ngIf="(createGoldToolForm.controls['requester_email'].invalid && (createGoldToolForm.controls['requester_email'].dirty || createGoldToolForm.controls['requester_email'].touched)) || isSubmitted">
-                                            <div class="error_message"
-                                                *ngIf="createGoldToolForm.controls['requester_email'].errors?.required">
-                                                {{requiredMessage(this.lableConstant.Region_Name)}}
-                                            </div>
-                                            <div class="error_message"
-                                                *ngIf="createGoldToolForm.controls['requester_email'].errors?.invalid">
-                                                Email is not valid.
-                                            </div>
-                                        </div> -->
                             </div>
                         </div>
                     </div>
-                    <!-- </div>
-                    </div> -->
-                    <strong _ngcontent-jet-c125=""> Add following details for each
-                        request of required GOLD tool
-                    </strong>
-                    <div class="mt-3 px-0">
+                    <div class="px-0">
                         <ng-container *ngIf="metadataArray.controls.length > 0">
                             <ngb-accordion #a="ngbAccordion" formArrayName="metadata"
-                                *ngFor="let tool of metadataArray.controls; let i = index"
-                                activeIds="custom-panel-1">
+                                *ngFor="let tool of metadataArray.controls; let i = index" activeIds="custom-panel-1">
                                 <div class="card">
                                     <div class="ng_container_header">
                                         <ngb-panel id="custom-panel-1">
                                             <ng-template ngbPanelHeader>
                                                 <div class="card-header">
-                                                    <div class="heeader_button justify-content-end">
-                                                        <div class="button_div d-flex">
-                                                            <button (click)="copyMetadata(tool.value)"
-                                                                class="btn btn-primary btn_creat_session1"><span
-                                                                    class="fon_12">+ Copy
-                                                                </span>
-                                                            </button>
-                                                            <button (click)="addMetadata()"
-                                                                class="btn btn-success btn_creat_session1"><span
-                                                                    class="fon_12">+ Add More
-                                                                </span>
-                                                            </button>
-                                                            <button ngbPanelToggle
-                                                                class="btn btn-link btn_minimize p-0"><span>-</span></button>
+                                                    <div class="justify-content-between row">
+                                                        <strong class="request-detail"> Provide new GOLD user
+                                                            information
+                                                        </strong>
+                                                        <div class="heeader_button justify-content-end">
+                                                            <div class="button_div d-flex">
+                                                                <button (click)="copyMetadata(tool.value)"
+                                                                    class="btn btn-primary btn_creat_session1"><span
+                                                                        class="fon_12">+ Copy
+                                                                    </span>
+                                                                </button>
+                                                                <button (click)="addMetadata()"
+                                                                    class="btn btn-success btn_creat_session1"><span
+                                                                        class="fon_12">+ Add More
+                                                                    </span>
+                                                                </button>
+                                                                <!-- <button ngbPanelToggle
+                                                                    class="btn btn-link btn_minimize p-0"><span>-</span></button> -->
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </ng-template>
-                                            <ng-template ngbPanelContent>
-                                                <div [formGroupName]="i" class="card-body card_width">
+                                            <ng-template ngbPanelContent class="m-0">
+                                                <div [formGroupName]="i" class="card-body card_width m-0">
                                                     <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group">
+                                                                <label class="form-control-label">
+                                                                    {{lableConstant.Email_Address}} <span
+                                                                        class="text_red">*
+                                                                    </span>
+                                                                </label>
+                                                                <ng-select placeholder="Please select email"
+                                                                    [items]="searchedPreferedInstructor"
+                                                                    [multiple]="false" bindLabel="email_id"
+                                                                    bindValue="email_id"
+                                                                    (change)="changeEmail($event, i)"
+                                                                    formControlName="email_for_participant"
+                                                                    (search)="searchInstructor($event.term)">
+                                                                </ng-select>
+                                                                <div
+                                                                    *ngIf="(metadataArray.controls[i].controls['email_for_participant'].invalid && (metadataArray.controls[i].controls['email_for_participant'].dirty || metadataArray.controls[i].controls['email_for_participant'].touched)) || isSubmitted">
+                                                                    <div class="error_message"
+                                                                        *ngIf="metadataArray.controls[i].controls['email_for_participant'].errors?.required">
+                                                                        {{requiredMessage(this.lableConstant.Email_Address)}}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--col-->
                                                         <div class="col-sm-4">
                                                             <div class="form-group">
                                                                 <label class="form-control-label">
@@ -138,30 +144,6 @@
                                                                     </div>
                                                                 </div>
 
-                                                            </div>
-                                                        </div>
-                                                        <!--col-->
-                                                        <div class="col-sm-4">
-                                                            <div class="form-group">
-                                                                <label class="form-control-label">
-                                                                    Email addresses for participants<span
-                                                                        class="text_red">*
-                                                                    </span>
-                                                                </label>
-                                                                <input type="text" class="form-control form_width"
-                                                                    placeholder="Enter Location"
-                                                                    formControlName="email_for_participant">
-                                                                <div
-                                                                    *ngIf="(metadataArray.controls[i].controls['email_for_participant'].invalid && (metadataArray.controls[i].controls['email_for_participant'].dirty || metadataArray.controls[i].controls['email_for_participant'].touched)) || isSubmitted">
-                                                                    <div class="error_message"
-                                                                        *ngIf="metadataArray.controls[i].controls['email_for_participant'].errors?.required">
-                                                                        {{requiredMessage('Email addresses for participants')}}
-                                                                    </div>
-                                                                    <div class="error_message"
-                                                                        *ngIf="metadataArray.controls[i].controls['email_for_participant'].errors?.pattern">
-                                                                        Email is not valid.
-                                                                    </div>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                         <!--col-->
@@ -184,43 +166,76 @@
                                                             </div>
                                                         </div>
                                                         <!--col-->
-                                                        <div class="col-sm-4">
-                                                            <div class="form-group">
-                                                                <label class="form-control-label">
-                                                                    PI<span class="text_red">* </span>
-                                                                </label>
-                                                                <input type="text" class="form-control form_width"
-                                                                    placeholder="Enter PI" formControlName="p1">
-                                                                <div
-                                                                    *ngIf="(metadataArray.controls[i].controls['p1'].invalid && (metadataArray.controls[i].controls['p1'].dirty || metadataArray.controls[i].controls['p1'].touched)) || isSubmitted">
-                                                                    <div class="error_message"
-                                                                        *ngIf="metadataArray.controls[i].controls['p1'].errors?.required">
-                                                                        {{requiredMessage('PI')}}
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <strong>GOLD data perimeter</strong>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            <label class="form-control-label">
+                                                                                {{lableConstant.business_unit_m1_level}}
+                                                                            </label>
+                                                                            <ng-select [items]="bussinessUnitObj"
+                                                                                bindLabel="team_name"
+                                                                                bindValue="id" formControlName="p1"
+                                                                                class="w_100">
+                                                                            </ng-select>
+                                                                            <div
+                                                                                *ngIf="(metadataArray.controls[i].controls['p1'].invalid && (metadataArray.controls[i].controls['p1'].dirty || metadataArray.controls[i].controls['p1'].touched)) || isSubmitted">
+                                                                                <div class="error_message"
+                                                                                    *ngIf="metadataArray.controls[i].controls['p1'].errors?.required">
+                                                                                    {{requiredMessage('PI')}}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            <label
+                                                                                class="form-control-label">{{lableConstant.region}}</label>
+                                                                            <ng-select [items]="regionDnaObj"
+                                                                                (change)="getSelectedRegion($event, i)"
+                                                                                [multiple]="false"
+                                                                                bindLabel="region_name" bindValue="id"
+                                                                                formControlName="region_id">
+                                                                            </ng-select>
+                                                                            <div
+                                                                                *ngIf="(metadataArray.controls[i].controls['region_id'].invalid && (metadataArray.controls[i].controls['region_id'].dirty || metadataArray.controls[i].controls['region_id'].touched)) || isSubmitted">
+                                                                                <div class="error_message"
+                                                                                    *ngIf="metadataArray.controls[i].controls['region_id'].errors?.required">
+                                                                                    {{requiredMessage(this.lableConstant.region)}}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            <label class="form-control-label">
+                                                                                {{lableConstant.Country}}
+                                                                            </label>
+                                                                            <ng-select [items]="countries[i]"
+                                                                                bindLabel="country_name"
+                                                                                bindValue="country_name"
+                                                                                formControlName="country" class="w_100">
+                                                                            </ng-select>
+                                                                            <div
+                                                                                *ngIf="(metadataArray.controls[i].controls['country'].invalid && (metadataArray.controls[i].controls['country'].dirty || metadataArray.controls[i].controls['country'].touched)) || isSubmitted">
+                                                                                <div class="error_message"
+                                                                                    *ngIf="metadataArray.controls[i].controls['country'].errors?.required">
+                                                                                    {{requiredMessage(this.lableConstant.Country)}}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
                                                         </div>
-                                                        <!--col-->
-                                                        <div class="col-sm-4">
-                                                            <div class="form-group">
-                                                                <label class="form-control-label">
-                                                                    Data scope<span class="text_red">* </span>
-                                                                </label>
-                                                                <input type="text" class="form-control form_width"
-                                                                    placeholder="Enter Data scope"
-                                                                    formControlName="data_scope">
-                                                                <div
-                                                                    *ngIf="(metadataArray.controls[i].controls['data_scope'].invalid && (metadataArray.controls[i].controls['data_scope'].dirty || metadataArray.controls[i].controls['data_scope'].touched)) || isSubmitted">
-                                                                    <div class="error_message"
-                                                                        *ngIf="metadataArray.controls[i].controls['data_scope'].errors?.required">
-                                                                        {{requiredMessage('Data scope')}}
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                        <!--col-->
+                                                    </div>
+                                                    <div class="row">
                                                         <div class="col-sm-4">
                                                             <div class="form-group">
                                                                 <label class="form-control-label">
@@ -237,10 +252,10 @@
                                                                     *ngIf="(metadataArray.controls[i].controls['gold_level_access'].invalid && (metadataArray.controls[i].controls['gold_level_access'].dirty || metadataArray.controls[i].controls['gold_level_access'].touched)) || isSubmitted">
                                                                     <div class="error_message"
                                                                         *ngIf="metadataArray.controls[i].controls['gold_level_access'].errors?.required">
-                                                                        {{requiredMessage('Gold level of access')}}
+                                                                        {{requiredMessage('Gold level of
+                                                                        access')}}
                                                                     </div>
                                                                 </div>
-
                                                             </div>
                                                         </div>
                                                         <!--col-->
@@ -281,11 +296,25 @@
                                                                         {{requiredMessage('Business justification')}}
                                                                     </div>
                                                                 </div>
-
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <!--row-->
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <label (change)="agreeChange($event)">
+                                                                <input type="checkbox" formControlName="agree">
+                                                                <span class="mr-1 ml-1 font-13">I agree with the data protection policy</span>
+                                                            </label>
+                                                            <div
+                                                                *ngIf="(metadataArray.controls[i].controls['agree'].invalid && (metadataArray.controls[i].controls['agree'].dirty || metadataArray.controls[i].controls['agree'].touched)) || isSubmitted">
+                                                                <div class="error_message"
+                                                                    *ngIf="metadataArray.controls[i].controls['agree'].errors">
+                                                                    {{requiredMessage('I agree with the data protection policy')}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </ng-template>
                                         </ngb-panel>
@@ -304,16 +333,14 @@
                                     formControlName="additional_comment"></textarea>
                             </div>
                         </div>
-                        <!--col-->
-                    </div>
-                    <div class="card-footer1">
-                        <button class="btn btn-primary mr-1" type="submit"
-                            (click)="createGoldTool('pending')">{{lableConstant.submit}}</button>
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary mr-1" type="submit"
+                                (click)="createGoldTool('pending')">{{lableConstant.submit}}</button>
 
-                        <button class="btn btn-secondary" (click)="createGoldTool('draft')">
-                            {{lableConstant.Save_as_draft}}
-                        </button>
-
+                            <button class="btn btn-secondary" (click)="createGoldTool('draft')">
+                                {{lableConstant.Save_as_draft}}
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

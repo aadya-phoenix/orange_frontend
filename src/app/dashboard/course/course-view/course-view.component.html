@@ -393,8 +393,9 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">{{lableConstant.Resources}}</label>
                         <div class="d-flex align-items-center">
-                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled>
-                            Click here to <a href="{{imgUrl}}" target="_blank" class="text_orange">View</a>
+                          <span class="form_data" onkeyup="textAreaAdjust(this)" disabled >
+                            <span *ngIf="imgUrl">Click here to <a href="{{imgUrl}}" target="_blank" class="text_orange">View</a></span>
+                            <span *ngIf="!imgUrl">-</span>
                             <!-- {{
                                                          routegetdata.resource
                                                            ? routegetdata.resource
@@ -1246,15 +1247,24 @@
                       <div class="form-group">
                         <label for="exampleInputEmail1">{{lableConstant.Curriculum_Content}}</label>
                         <div class="d-flex align-items-center">
-                          <span class="form_data d-flex flex_direction" onkeyup="textAreaAdjust(this)" disabled>
-                            <span *ngFor="let curr of curriculumContent">
+                          <span class="form_data pl-3 overflow-auto">
+                            <ul>
+                              <li *ngFor="let data of curriculumContent"
+                                class="justify-content-between mb-2">
+                                <span>{{data.description}}</span>
+                                <a *ngIf="getUserrole.includes(4)" class="pull-right mt-1" data-toggle="tooltip"
+                                  data-placement="top" (click)="copyToClipBoard(data.description)" title="Copy Text">
+                                  <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                              </li>
+                            </ul>
+                            <!-- <span *ngFor="let curr of curriculumContent">
                               {{
                               curr.description
                               }}
-                            </span>
+                            </span> -->
                           </span>
-                          <a *ngIf="getUserrole.includes(4)" data-toggle="tooltip" data-placement="top" title="Copy Text">
-                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a>
+                          <!-- <a *ngIf="getUserrole.includes(4)" data-toggle="tooltip" data-placement="top" title="Copy Text">
+                            <img src="../../../../assets/images/icon/copy.png" class="copy_icon"></a> -->
                         </div>
 
                       </div>

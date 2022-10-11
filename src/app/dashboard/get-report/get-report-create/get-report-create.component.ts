@@ -122,7 +122,7 @@ export class GetReportCreateComponent implements OnInit {
         deadline: new FormControl('', [Validators.required]),
         attachment: new FormControl('', []),
         additional_comment: new FormControl('', []),
-        regional_cordinator: new FormControl('', []),
+        regional_cordinator: new FormControl('', [Validators.required]),
         additional_attachment:new FormControl('',[]),
         status_comment:new FormControl('',[])
      });

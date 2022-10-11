@@ -108,6 +108,9 @@ export class AuthenticationService {
   }
 
   Errorhandling(err: HttpErrorResponse) {
+    if(err.status === 401){
+      this.router.navigate(['/login']);
+    }
     if (err.error instanceof ErrorEvent) {
       console.error(err.error.message);
     } else {

@@ -70,6 +70,9 @@ export class GetReportViewComponent implements OnInit {
           if (this.requestdata.report_attachment) {
             this.requestdata.attachUrl = `${dataConstant.ImageUrl}/${this.requestdata.report_attachment}`;
           }
+          if (this.requestdata.attachment) {
+            this.requestdata.attachUrl = `${dataConstant.ImageUrl}/${this.requestdata.attachment}`;
+          }
         }
       },
       (err: any) => {

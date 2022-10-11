@@ -287,8 +287,9 @@
                                         <label for="exampleInputEmail1">{{lableConstant.Attachments}}</label>
                                         <div class="d-flex align-items-center">
                                             <span class="form_data">
-                                                <a class="text_orange" href="{{requestdata.attachUrl}}"
-                                                    target="_blank">{{lableConstant.Click_here_to_View_resource}}</a>.
+                                                <a *ngIf="requestdata.attachUrl" class="text_orange" href="{{requestdata.attachUrl}}"
+                                                    target="_blank">{{lableConstant.Click_here_to_View_resource}}.</a>
+                                                <span *ngIf="!requestdata.attachUrl">-</span>
                                             </span>
                                         </div>
                                     </div>

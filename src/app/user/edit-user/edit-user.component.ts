@@ -28,6 +28,7 @@ export class EditUserComponent implements OnInit {
   regionDnaObj:any=[];
   domainObj: any = [];
   countriesObj:any =[];
+  regions:any = [];
   bussinessUnitObj:any = [];
   isRegion = false;
   isDnaRegion = false;
@@ -52,6 +53,7 @@ export class EditUserComponent implements OnInit {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.createUserForm = this.formBuilder.group({
       email: new FormControl('', [Validators.required,Validators.pattern(emailregexp)]),
+      manager_email: new FormControl('', [Validators.required,Validators.pattern(emailregexp)]),
      // password: new FormControl('', []),
      // confirm_password: new FormControl('', []),
       first_name: new FormControl('', [Validators.required]),
@@ -79,6 +81,7 @@ export class EditUserComponent implements OnInit {
       }
       else{
         this.isCreate = true;
+        this.getCountries();
         this.createUserForm.addControl('password', new FormControl(null, [Validators.required, Validators.pattern(passwordRegexp)]));
         this.createUserForm.addControl('confirm_password', new FormControl(null, [Validators.required, Validators.pattern(passwordRegexp)]));
       }
@@ -276,6 +279,7 @@ export class EditUserComponent implements OnInit {
         if (res.status === 1 ) {
           this.user_details = res.data;
           this.createUserForm.controls.email.setValue(this.user_details.email);
+          this.createUserForm.controls.manager_email.setValue(this.user_details.manager_email);
           this.createUserForm.controls.first_name.setValue(this.user_details.first_name);
           this.createUserForm.controls.last_name.setValue(this.user_details.last_name);
           this.createUserForm.controls.role_id.setValue(this.user_details.role_id);
@@ -303,6 +307,8 @@ export class EditUserComponent implements OnInit {
           }
           if(this.user_details.role_id.includes(13) ){
             this.isCountry = true;
+            this.regionId = this.user_details.region_id;
+            this.getCountries();
             this.createUserForm.addControl('country', new FormControl(null, [Validators.required]));
             this.createUserForm.controls.country.setValue(this.user_details.country);
           }
@@ -359,12 +365,14 @@ export class EditUserComponent implements OnInit {
         let roles = res.data;
         this.rolesList = [];
         roles.forEach((module: any) => {
+          if(module.roles){
           module.roles.forEach((element: any) => {
             if(element.status){
               element.module = module.module;
               this.rolesList.push(element);
             }
           });
+        }
         });
       },err=>{
         this.commonService.errorHandling(err);
@@ -399,14 +407,19 @@ export class EditUserComponent implements OnInit {
    this.generalDrpdownsService.getCountries().subscribe(
      (res: any) => {
        this.commonService.hideLoading();
-       let regions = res.data;
-       this.countriesObj = regions.filter((x:any)=>x.region_id === this.regionId);
+       this.regions = res.data;
+       this.countriesObj = this.regions.filter((x:any)=>x.region_id === this.regionId);
      },
      (err: any) => {
        this.commonService.hideLoading();
        this.commonService.toastErrorMsg('Error', err.message);
      }
    );
+  }
+
+  getSelectedRegion(event:any){
+    this.regionId = event.id;
+    this.countriesObj = this.regions.filter((x:any)=>x.region_id === this.regionId);
   }
  
   getBusinessUnits(){

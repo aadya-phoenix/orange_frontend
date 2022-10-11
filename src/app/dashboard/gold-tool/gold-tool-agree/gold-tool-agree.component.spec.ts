@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OlTestCreateScormComponent } from './ol-test-create-scorm.component';
+import { GoldToolAgreeComponent } from './gold-tool-agree.component';
 
-describe('OlTestCreateScormComponent', () => {
-  let component: OlTestCreateScormComponent;
-  let fixture: ComponentFixture<OlTestCreateScormComponent>;
+describe('GoldToolAgreeComponent', () => {
+  let component: GoldToolAgreeComponent;
+  let fixture: ComponentFixture<GoldToolAgreeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OlTestCreateScormComponent ]
+      declarations: [ GoldToolAgreeComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OlTestCreateScormComponent);
+    fixture = TestBed.createComponent(GoldToolAgreeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

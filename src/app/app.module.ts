@@ -15,7 +15,6 @@ import { NgxSpinnerModule } from "ngx-spinner";
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, NgxSpinnerModule, HttpClientModule, ToastrModule.forRoot()
-    //  NgxDropzoneModule
   ],
   providers: [Title,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
