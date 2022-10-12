@@ -12,6 +12,8 @@ import { DnaService } from 'src/app/shared/services/dna/dna.service';
 })
 export class DnaDashboardComponent implements OnInit {
   lableConstant: any = { french: {}, english: {} };
+  Country = 'Country';
+  France = 'France';
   dateFormate = dataConstant.dateFormate;
   RoleID = dataConstant.RoleID;
   isRom = false;
