@@ -22,8 +22,7 @@ export class AuthenticationService {
 
 
   register(data: any) {
-    const url = `/api/${this.apiVersion}/register`;
-    const urllive = `${this.basePath}register`;
+    const url = `${this.basePath}api/${this.apiVersion}/register`;
     return this.http.post(url, data);
   }
 
@@ -44,8 +43,7 @@ export class AuthenticationService {
   }
 
   getProfileDetails() {
-    const url = `api/${this.apiVersion}/profile`;
-    const urllive = `${this.basePath}api/${this.apiVersion}/profile`;
+    const url = `${this.basePath}api/${this.apiVersion}/profile`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
@@ -70,15 +68,14 @@ export class AuthenticationService {
   }
 
   getRoles() {
-    const url = `/api/${this.apiVersion}/roles`;
-    const urllive = `${this.basePath}api/${this.apiVersion}/roles`;
+    const url = `${this.basePath}api/${this.apiVersion}/roles`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
   getUserRoles() {
-    const url = `/api/${this.apiVersion}/role-users`;
+    const url = `${this.basePath}api/${this.apiVersion}/role-users`;
     const urllive = `${this.basePath}api/${this.apiVersion}/role-users`;
     return this.http
       .get(url, this.http.headers)
@@ -86,15 +83,14 @@ export class AuthenticationService {
   }
 
   getROMROCList(rom_id:any) {
-    const url = `api/${this.apiVersion}/rom/${rom_id}/roc`;
-    const urllive = `${this.basePath}api/${this.apiVersion}/role-users`;
+    const url = `${this.basePath}api/${this.apiVersion}/role-users`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
   lastLogin() {
-    const url = `/api/${this.apiVersion}/user/last-login`;
+    const url = `${this.basePath}api/${this.apiVersion}/user/last-login`;
     return this.http.post(url, {}).pipe(catchError(this.Errorhandling));
   }
 

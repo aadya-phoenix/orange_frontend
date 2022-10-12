@@ -20,55 +20,52 @@ export class CourcesService {
   }
 
   getCources() {
-    const url = `/api/${this.apiVersion}/course`;
-    const urllive = `${this.basePath}api/${this.apiVersion}/course`;
+    const url = `${this.basePath}api/${this.apiVersion}/course`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
   createCource(data: any) {
-    const url = `/api/${this.apiVersion}/course/create`;
-    const urllive = `${this.basePath}api/${this.apiVersion}/course/create`;
+    const url = `${this.basePath}api/${this.apiVersion}/course/create`;
     return this.http.post(url, data).pipe(catchError(this.Errorhandling));
   }
   courceStatus(data: any) {
-    const url = `/api/${this.apiVersion}/course/status`;
-    const urllive = `${this.basePath}api/${this.apiVersion}/course/create`;
+    const url = `${this.basePath}api/${this.apiVersion}/course/status`;
     return this.http.post(url, data).pipe(catchError(this.Errorhandling));
   }
   updateCourse(data: any) {
-    const url = `api/${this.apiVersion}/course/update`;
+    const url = `${this.basePath}api/${this.apiVersion}/course/update`;
     return this.http.post(url, data).pipe(catchError(this.Errorhandling));
   }
 
   changeStatus(data: any) {
-    const url = `api/${this.apiVersion}/course/status`;
+    const url = `${this.basePath}api/${this.apiVersion}/course/status`;
     return this.http.post(url, data).pipe(catchError(this.Errorhandling));
   }
 
   courseTransfer(data: any) {
-    const url = `api/${this.apiVersion}/course/transfer`;
+    const url = `${this.basePath}api/${this.apiVersion}/course/transfer`;
     return this.http.post(url, data).pipe(catchError(this.Errorhandling));
   }
 
   deleteCourse(data:any){
-    const url =`api/${this.apiVersion}/course/delete`;
+    const url =`${this.basePath}api/${this.apiVersion}/course/delete`;
     return this.http.post(url, data).pipe(catchError(this.Errorhandling));
   }
 
   copyCourse(data:any){
-    const url =`api/${this.apiVersion}/course/copy`;
+    const url =`${this.basePath}api/${this.apiVersion}/course/copy`;
     return this.http.post(url, data).pipe(catchError(this.Errorhandling));
   }
 
   courseDetail(data:any){
-    const url =`api/${this.apiVersion}/course/${data}/detail`;
+    const url =`${this.basePath}api/${this.apiVersion}/course/${data}/detail`;
     return this.http.get(url,this.http.headers).pipe(catchError(this.Errorhandling))
   }
 
   courseHistory(data:any){
-    const url =`api/${this.apiVersion}/course/${data}/history`;
+    const url =`${this.basePath}api/${this.apiVersion}/course/${data}/history`;
     return this.http.get(url,this.http.headers).pipe(catchError(this.Errorhandling))
   }
 
@@ -80,14 +77,14 @@ export class CourcesService {
   // /api/v4/cct-entity-list
 
   getcctLevel() {
-    const url = `/api/${this.apiVersion}/cct-level`;
+    const url = `${this.basePath}api/${this.apiVersion}/cct-level`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
   getVendortype() {
-    const url = `/api/${this.apiVersion}/cct-vendor-type`;
+    const url = `${this.basePath}api/${this.apiVersion}/cct-vendor-type`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
@@ -95,35 +92,35 @@ export class CourcesService {
 
 
   getVendor() {
-    const url = `/api/${this.apiVersion}/cct-vendor`;
+    const url = `${this.basePath}api/${this.apiVersion}/cct-vendor`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
   getSubjects() {
-    const url = `/api/${this.apiVersion}/cct-subject`;
+    const url = `${this.basePath}api/${this.apiVersion}/cct-subject`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
   getTemplate() {
-    const url = `/api/${this.apiVersion}/cct-template`;
+    const url = `${this.basePath}api/${this.apiVersion}/cct-template`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
   getEntitylist() {
-    const url = `/api/${this.apiVersion}/cct-entity-list`;
+    const url = `${this.basePath}api/${this.apiVersion}/cct-entity-list`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
   getValidityperiod() {
-    const url = `/api/${this.apiVersion}/cct-validity-period`;
+    const url = `${this.basePath}api/${this.apiVersion}/cct-validity-period`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
@@ -131,7 +128,7 @@ export class CourcesService {
 
   //who can see course
   whoSeeCourse() {
-    const url = `api/${this.apiVersion}/cct-see-course`;
+    const url = `${this.basePath}api/${this.apiVersion}/cct-see-course`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
@@ -139,7 +136,7 @@ export class CourcesService {
 
   //learningType
   getLearningType() {
-    const url = `api/${this.apiVersion}/cct-learning-type`;
+    const url = `${this.basePath}api/${this.apiVersion}/cct-learning-type`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
@@ -147,7 +144,7 @@ export class CourcesService {
 
   //languages
   getLanguages() {
-    const url = `api/${this.apiVersion}/cct-language`;
+    const url = `${this.basePath}api/${this.apiVersion}/cct-language`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
@@ -155,7 +152,7 @@ export class CourcesService {
 
   //prefered instructor
   getpreferedInstructor() {
-    const url = `api/${this.apiVersion}/cct-prefered-instructor`;
+    const url = `${this.basePath}api/${this.apiVersion}/cct-prefered-instructor`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
@@ -163,7 +160,7 @@ export class CourcesService {
 
   //delivery method
   getDeliveryMethod() {
-    const url = `api/${this.apiVersion}/cct-delivery-method`;
+    const url = `${this.basePath}api/${this.apiVersion}/cct-delivery-method`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
@@ -171,7 +168,7 @@ export class CourcesService {
 
   //get expiry
   getExpiryType() {
-    const url = `api/${this.apiVersion}/cct-expiry-type`;
+    const url = `${this.basePath}api/${this.apiVersion}/cct-expiry-type`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
@@ -179,7 +176,7 @@ export class CourcesService {
 
   //regional cordinator
   getregionalCordinator() {
-    const url = `/api/${this.apiVersion}/cct-regional-cordinator`;
+    const url = `${this.basePath}api/${this.apiVersion}/cct-regional-cordinator`;
     const urllive = `${this.basePath}api/${this.apiVersion}/cct-regional-cordinator`;
     return this.http
       .get(url, this.http.headers)
@@ -187,7 +184,7 @@ export class CourcesService {
   }
     //role
     getRole(){
-      const url = `/api/${this.apiVersion}/roles`;
+      const url = `${this.basePath}api/${this.apiVersion}/roles`;
       const urllive = `${this.basePath}api/${this.apiVersion}/roles`;
       return this.http
         .get(url, this.http.headers)
@@ -196,7 +193,7 @@ export class CourcesService {
   
      //role module
      getModuleRole(){
-      const url = `/api/${this.apiVersion}/module`;
+      const url = `${this.basePath}api/${this.apiVersion}/module`;
       const urllive = `${this.basePath}api/${this.apiVersion}/module`;
       return this.http
         .get(url, this.http.headers)
@@ -206,7 +203,7 @@ export class CourcesService {
 
     //role-users
      getRoleUsers(){
-      const url = `/api/${this.apiVersion}/role-users`;
+      const url = `${this.basePath}api/${this.apiVersion}/role-users`;
       const urllive = `${this.basePath}api/${this.apiVersion}/role-users`;
       return this.http
         .get(url, this.http.headers)
@@ -214,19 +211,19 @@ export class CourcesService {
      }
    //complete-report-filter
      getCourseFilter(data:any){
-      const url = `/api/${this.apiVersion}/course/filter`;
+      const url = `${this.basePath}api/${this.apiVersion}/course/filter`;
       const urllive = `${this.basePath}api/${this.apiVersion}/course/filter`;
       return this.http.post(url, data).pipe(catchError(this.Errorhandling));  
      }
    //complete-report-filter
    getCourseWithoutFilter(){
-    const url = `/api/${this.apiVersion}/course/filter`;
+    const url = `${this.basePath}api/${this.apiVersion}/course/filter`;
     const urllive = `${this.basePath}api/${this.apiVersion}/course/filter`;
     return this.http.post(url, {}).pipe(catchError(this.Errorhandling));  
    }
      //departments
      getDepartments(){
-      const url = `/api/${this.apiVersion}/department_description`;
+      const url = `${this.basePath}api/${this.apiVersion}/department_description`;
       const urllive = `${this.basePath}api/${this.apiVersion}/department_description`;
       return this.http
         .get(url, this.http.headers)
@@ -235,19 +232,19 @@ export class CourcesService {
   
      //assign backup
      assignBackup(id:any){
-      const url = `/api/${this.apiVersion}/user/transfer`;
+      const url = `${this.basePath}api/${this.apiVersion}/user/transfer`;
       const urllive = `${this.basePath}api/${this.apiVersion}/user/transfer`;
       return this.http.post(url, id).pipe(catchError(this.Errorhandling));  
      }
      //remove backup
      removeBackup(){
-      const url = `/api/${this.apiVersion}/user/transfer/reset`;
+      const url = `${this.basePath}api/${this.apiVersion}/user/transfer/reset`;
       const urllive = `${this.basePath}api/${this.apiVersion}/user/transfer/reset`;
       return this.http.post(url,{}).pipe(catchError(this.Errorhandling));  
      }
      //newregionalCordinator
      getNewregionalCordinator(){
-      const url = `/api/${this.apiVersion}/regional-cordinator`;
+      const url = `${this.basePath}api/${this.apiVersion}/regional-cordinator`;
       const urllive = `${this.basePath}api/${this.apiVersion}/regional-cordinator`;
       return this.http
         .get(url, this.http.headers)
@@ -256,7 +253,7 @@ export class CourcesService {
 
      //favouriteModules
      getFavourites(){
-      const url = `/api/${this.apiVersion}/user/wishlist`;
+      const url = `${this.basePath}api/${this.apiVersion}/user/wishlist`;
       return this.http.get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));;  
      }
@@ -264,13 +261,13 @@ export class CourcesService {
 
      //favouriteModules
      setFavourites(data:any){
-      const url = `/api/${this.apiVersion}/user/wishlist`;
+      const url = `${this.basePath}api/${this.apiVersion}/user/wishlist`;
       return this.http.post(url,data).pipe(catchError(this.Errorhandling));  
      }
 
       //getBackupRegionalCordinator
       getBackupRegionalCordinator(){
-        const url = `/api/${this.apiVersion}/backup/regional-cordinator`;
+        const url = `${this.basePath}api/${this.apiVersion}/backup/regional-cordinator`;
         const urllive = `${this.basePath}api/${this.apiVersion}/backup/regional-cordinator`;
         return this.http
           .get(url, this.http.headers)
@@ -279,27 +276,27 @@ export class CourcesService {
 
       //newPublisher
      getNewPublisher(){
-      const url = `/api/${this.apiVersion}/transfer/publisher-list`;
+      const url = `${this.basePath}api/${this.apiVersion}/transfer/publisher-list`;
       const urllive = `${this.basePath}api/${this.apiVersion}/transfer/publisher-list`;
       return this.http.post(url,{}).pipe(catchError(this.Errorhandling)); 
      }
        // getNewPublisherByLearningType
        getNewPublisherByLearningType(learning_type: number){
-        const url = `/api/${this.apiVersion}/transfer/publisher-list`;
+        const url = `${this.basePath}api/${this.apiVersion}/transfer/publisher-list`;
         const urllive = `${this.basePath}api/${this.apiVersion}/transfer/publisher-list`;
         const body = {learning_type};
         return this.http.post(url,body).pipe(catchError(this.Errorhandling)); 
        }
      //newPublisherWithId
      getNewPublisherId(id:any){
-      const url = `/api/${this.apiVersion}/transfer/publisher-list`;
+      const url = `${this.basePath}api/${this.apiVersion}/transfer/publisher-list`;
       const urllive = `${this.basePath}api/${this.apiVersion}/transfer/publisher-list`;
       return this.http.post(url,id).pipe(catchError(this.Errorhandling)); 
      }
 
      //country
      getCountries(){
-      const url = `/api/${this.apiVersion}/cct-country`;
+      const url = `${this.basePath}api/${this.apiVersion}/cct-country`;
       const urllive = `${this.basePath}api/${this.apiVersion}/cct-country`;
       return this.http
         .get(url, this.http.headers)
@@ -308,7 +305,7 @@ export class CourcesService {
 
      //timezone
      getTimezone(){
-      const url = `/api/${this.apiVersion}/cct-timezone`;
+      const url = `${this.basePath}api/${this.apiVersion}/cct-timezone`;
       const urllive = `${this.basePath}api/${this.apiVersion}/cct-timezone`;
       return this.http
         .get(url, this.http.headers)

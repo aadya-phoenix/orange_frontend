@@ -175,10 +175,10 @@
                 <div class="dropdown-menu drop_show dropshow_main-cs1 " aria-labelledby="navbarDropdownMenuLink ">
                     <div class="nav_p ">
                         <div id="myDIV ">
-                            <button class="btn_active1"
-                                (click)="changeLaungauge(Laungauges.EN)">{{Laungauges.EN}}</button>
-                            <button class="btn_active1"
-                                (click)="changeLaungauge(Laungauges.FR)">{{Laungauges.FR}}</button>
+                            <button class="btn_active1" *ngFor="let item of Laungauges"
+                                (click)="changeLaungauge(item.slug)">{{item.short_name}}</button>
+                            <!-- <button class="btn_active1"
+                                (click)="changeLaungauge(Laungauges.FR)">{{Laungauges.FR}}</button> -->
                         </div>
                     </div>
                 </div>

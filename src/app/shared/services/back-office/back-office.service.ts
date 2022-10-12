@@ -17,33 +17,33 @@ export class BackOfficeService {
   }
 
   create(data: any) {
-    const url = `/api/${this.apiVersion}/back_office_role/create`;
+    const url = `${this.basePath}api/${this.apiVersion}/back_office_role/create`;
     //const urllive = `${this.basePath}api/${this.apiVersion}/back_office_role/create`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   update(data: any) {
-    const url = `/api/${this.apiVersion}/back_office_role/update`;
+    const url = `${this.basePath}api/${this.apiVersion}/back_office_role/update`;
     //const urllive = `${this.basePath}api/${this.apiVersion}/back_office_role/create`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   getCCTLearningRole(){
-    const url = `/api/${this.apiVersion}/cct-learning-role`;
+    const url = `${this.basePath}api/${this.apiVersion}/cct-learning-role`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
   getCCTDeliveryPerimeter(){
-    const url = `/api/${this.apiVersion}/cct-delivery-perimeter`;
+    const url = `${this.basePath}api/${this.apiVersion}/cct-delivery-perimeter`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
   getBackOffice() {
-    const url = `/api/${this.apiVersion}/back_office_role`;
+    const url = `${this.basePath}api/${this.apiVersion}/back_office_role`;
     //const urllive = `${this.basePath}api/${this.apiVersion}/back_office_role`;
     return this.http
       .get(url, this.http.headers)
@@ -51,21 +51,21 @@ export class BackOfficeService {
   }
 
   getBackOfficeReport(data: any) {
-    const url = `/api/${this.apiVersion}/back_office_role/filter`;
+    const url = `${this.basePath}api/${this.apiVersion}/back_office_role/filter`;
     return this.http
       .post(url, data)
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
   getBackOfficePublisher() {
-    const url = `/api/${this.apiVersion}/back_office_role/publisher-list`;
+    const url = `${this.basePath}api/${this.apiVersion}/back_office_role/publisher-list`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
   getCCTTermCondition() {
-    const url = `/api/${this.apiVersion}/cct-term-condition`;
+    const url = `${this.basePath}api/${this.apiVersion}/cct-term-condition`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.commmonService.Errorhandling));
@@ -73,7 +73,7 @@ export class BackOfficeService {
 
 
   getBackOfficeDetails(id: number) {
-    const url = `/api/${this.apiVersion}/back_office_role/${id}/detail`;
+    const url = `${this.basePath}api/${this.apiVersion}/back_office_role/${id}/detail`;
     //const urllive = `${this.basePath}api/${this.apiVersion}/back_office_role/${id}/detail`;
     return this.http
       .get(url, this.http.headers)
@@ -81,27 +81,27 @@ export class BackOfficeService {
   }
 
   backOfficeHistory(data: any) {
-    const url = `api/${this.apiVersion}/back_office_role/${data}/history`;
+    const url = `${this.basePath}api/${this.apiVersion}/back_office_role/${data}/history`;
     return this.http.get(url, this.http.headers).pipe(catchError(this.commmonService.Errorhandling))
   }
 
   backOfficeDelete(data: any) {
-    const url = `api/${this.apiVersion}/back_office_role/delete`;
+    const url = `${this.basePath}api/${this.apiVersion}/back_office_role/delete`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   backOfficeCopy(data: any) {
-    const url = `api/${this.apiVersion}/back_office_role/copy`;
+    const url = `${this.basePath}api/${this.apiVersion}/back_office_role/copy`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   backOfficeStatus(data: any) {
-    const url = `api/${this.apiVersion}/back_office_role/status`;
+    const url = `${this.basePath}api/${this.apiVersion}/back_office_role/status`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   backOfficeTransfer(data: any) {
-    const url = `api/${this.apiVersion}/back_office_role/transfer`;
+    const url = `${this.basePath}api/${this.apiVersion}/back_office_role/transfer`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 

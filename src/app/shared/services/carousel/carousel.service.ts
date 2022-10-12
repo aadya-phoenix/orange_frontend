@@ -17,19 +17,19 @@ export class CarouselService {
   }
 
   create(data: any) {
-    const url = `/api/${this.apiVersion}/carousel/create`;
+    const url = `${this.basePath}api/${this.apiVersion}/carousel/create`;
     //const urllive = `${this.basePath}api/${this.apiVersion}/carousel/create`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   update(data: any) {
-    const url = `/api/${this.apiVersion}/carousel/update`;
+    const url = `${this.basePath}api/${this.apiVersion}/carousel/update`;
     //const urllive = `${this.basePath}api/${this.apiVersion}/carousel/create`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   getCarousel() {
-    const url = `/api/${this.apiVersion}/carousel`;
+    const url = `${this.basePath}api/${this.apiVersion}/carousel`;
     //const urllive = `${this.basePath}api/${this.apiVersion}/carousel`;
     return this.http
       .get(url, this.http.headers)
@@ -37,14 +37,14 @@ export class CarouselService {
   }
 
   getCarouselReport(data: any) {
-    const url = `/api/${this.apiVersion}/carousel/filter`;
+    const url = `${this.basePath}api/${this.apiVersion}/carousel/filter`;
     return this.http
       .post(url, data)
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
   getCarouselPublisher() {
-    const url = `/api/${this.apiVersion}/carousel/publisher-list`;
+    const url = `${this.basePath}api/${this.apiVersion}/carousel/publisher-list`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.commmonService.Errorhandling));
@@ -52,7 +52,7 @@ export class CarouselService {
 
 
   getCarouselDetails(id: number) {
-    const url = `/api/${this.apiVersion}/carousel/${id}/detail`;
+    const url = `${this.basePath}api/${this.apiVersion}/carousel/${id}/detail`;
     //const urllive = `${this.basePath}api/${this.apiVersion}/carousel/${id}/detail`;
     return this.http
       .get(url, this.http.headers)
@@ -60,27 +60,27 @@ export class CarouselService {
   }
 
   carouselHistory(data: any) {
-    const url = `api/${this.apiVersion}/carousel/${data}/history`;
+    const url = `${this.basePath}api/${this.apiVersion}/carousel/${data}/history`;
     return this.http.get(url, this.http.headers).pipe(catchError(this.commmonService.Errorhandling))
   }
 
   carouselDelete(data: any) {
-    const url = `api/${this.apiVersion}/carousel/delete`;
+    const url = `${this.basePath}api/${this.apiVersion}/carousel/delete`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   carouselCopy(data: any) {
-    const url = `api/${this.apiVersion}/carousel/copy`;
+    const url = `${this.basePath}api/${this.apiVersion}/carousel/copy`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   carouselStatus(data: any) {
-    const url = `api/${this.apiVersion}/carousel/status`;
+    const url = `${this.basePath}api/${this.apiVersion}/carousel/status`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   carouselTransfer(data: any) {
-    const url = `api/${this.apiVersion}/carousel/transfer`;
+    const url = `${this.basePath}api/${this.apiVersion}/carousel/transfer`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 

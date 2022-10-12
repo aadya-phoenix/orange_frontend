@@ -97,15 +97,24 @@ export class CommonService {
 
   //languages
   getLanguages() {
-    const url = `api/${this.apiVersion}/cct-language`;
+    const url = `${environment.baseUrl}api/${this.apiVersion}/cct-language`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
+
+   //Set languages
+   setLanguages(data:any) {
+    const url = `${environment.baseUrl}api/${this.apiVersion}/user/language`;
+    return this.http
+      .post(url, data)
+      .pipe(catchError(this.Errorhandling));
+  }
+
     //language Translation
     getLanguageTranslation() {
-      const url = `api/${this.apiVersion}/cct-language-translation`;
+      const url = `${environment.baseUrl}api/${this.apiVersion}/cct-language-translation`;
       return this.http
         .get(url, this.http.headers)
         .pipe(catchError(this.Errorhandling));
@@ -114,21 +123,21 @@ export class CommonService {
 
   //ExpiryDateType
   getExpiryDateType() {
-    const url = `api/${this.apiVersion}/cct-expiry-date-type`;
+    const url = `${environment.baseUrl}api/${this.apiVersion}/cct-expiry-date-type`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
   dashboardCount() {
-    const url = `api/${this.apiVersion}/dashboard`;
+    const url = `${environment.baseUrl}api/${this.apiVersion}/dashboard`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
   exportAPI(data:any) {
-    const url = `api/${this.apiVersion}/export`;
+    const url = `${environment.baseUrl}api/${this.apiVersion}/export`;
     return this.http
       .post(url, data)
       .pipe(catchError(this.Errorhandling));

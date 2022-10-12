@@ -1,3 +1,5 @@
+import { environment } from "src/environments/environment";
+
 export const dataConstant = {
   StatusCode: {
     //Success
@@ -46,8 +48,8 @@ export const dataConstant = {
   DesignStatus: {
     total: 'total', closed: 'closed', close: 'close', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', reject: 'reject', forwarded: 'forwarded', digital_learning: 'digital_learning', forward: 'forward', approve: 'approve', feedback: 'feedback', change: 'change', onHold: 'on_hold'
   },
-  ImageUrl: 'https://orange.mindscroll.info/public/public',
-  BaseUrl: 'https://orange.mindscroll.info',
+  ImageUrl: `${environment.baseUrl}public/public`,
+  BaseUrl: environment.baseUrl,
   ExporType: { course: 'course', session: 'session', digital_learning: 'digital_learning',carousel: 'carousel', back_office: 'back_office', vendor: 'vendor', vendor_rating: 'vendor_rating', get_report: 'get_report' },
   RoleID: {
     RequesterID: 2,
@@ -67,7 +69,8 @@ export const dataConstant = {
     Publisher: 3,
     DataAnalyst: 11,
     DesignTeam: 16,
-    HeadOfDesign: 17
+    HeadOfDesign: 17,
+    GoldTeam:19
   },
   LearningType: [
     {
@@ -101,7 +104,7 @@ export const dataConstant = {
       "description": "A playlist is a collection of learning content, selected either from the Orange Learning catalogue or from other platforms and available via a shared link in Orange Learning. This form enables you to request the conversion of a private playlist into a public playlist in order to easily share the knowledge with learners in a path-like structure. Public playlists are available to their target audience in the Orange Learning catalogue."
     }
   ],
-  Laungauges: { EN: 'EN', FR: 'FR' },
+  Laungauges: { EN: 'english', FR: 'french' },
   TitlePrefix: 'PD&L Tools',
   TitleList: {
     login: 'Login',

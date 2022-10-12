@@ -6,6 +6,7 @@ import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
+import { environment } from 'src/environments/environment';
 import { CourseBeautificationTemplateComponent } from '../course-beautification-template/course-beautification-template.component';
 const urlregex = dataConstant.UrlPattern;
 @Component({
@@ -362,7 +363,7 @@ export class CourseViewComponent implements OnInit {
 
 
   getImageUrl(): void {
-    this.imgUrl = `https://orange.mindscroll.info/public/public/${this.routegetdata.resource}`;
+    this.imgUrl = `${environment.baseUrl}public/public/${this.routegetdata.resource}`;
     return this.imgUrl;
   }
   setrejectbutton(id: any) {

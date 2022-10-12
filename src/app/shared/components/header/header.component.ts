@@ -25,8 +25,8 @@ export class HeaderComponent implements OnInit {
   isStaff = false;
   isROM = false;
   pdlMember = false;
-  Laungauges = dataConstant.Laungauges;
-  selectedLaungauge: any = this.Laungauges.EN;
+  Laungauges = [];
+  selectedLaungauge: any = dataConstant.Laungauges.EN;
   totalNotification = 0;
   totalMessages = 0;
   pendingRequestCount = {
@@ -55,6 +55,7 @@ export class HeaderComponent implements OnInit {
     this.getUserprofile();
     this.getPendingCount();
     this.getActiveMessage();
+    this.getLanguageList();
     if (localStorage.getItem('userName')) {
       this.userName = JSON.parse(localStorage.getItem('userName') as any);
     }
@@ -62,13 +63,34 @@ export class HeaderComponent implements OnInit {
       this.firstName = this.userName.first_name;
       this.lastName = this.userName.last_name;
     }
-    this.selectedLaungauge = localStorage.getItem('laungauge') ? localStorage.getItem('laungauge') : this.Laungauges.EN;
+    this.selectedLaungauge = localStorage.getItem('laungauge') && localStorage.getItem('laungauge') == dataConstant.Laungauges.FR ? 'FR' : 'EN' ;
+  }
+
+  getLanguageList() {
+    this.commonService.showLoading();
+    this.commonService.getLanguages().subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        this.Laungauges = res.data.filter((x: { is_translate: number; }) => x.is_translate === 1);
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
+      }
+    );
   }
 
   changeLaungauge(laungauge: any) {
-    localStorage.setItem('laungauge', laungauge);
-    this.selectedLaungauge = laungauge;
-    location.reload();
+    this.commonService.showLoading();
+    this.commonService.setLanguages({ language: laungauge }).subscribe((res: any) => {
+      this.commonService.hideLoading();
+      localStorage.setItem('laungauge', laungauge);
+      this.selectedLaungauge = laungauge;
+      location.reload();
+    }, (err: any) => {
+      this.commonService.errorHandling(err);
+      this.commonService.hideLoading();
+    });
   }
 
   getUserprofile() {
@@ -78,6 +100,10 @@ export class HeaderComponent implements OnInit {
       if (res != undefined) {
         this.getprofileDetails = res.data;
         localStorage.setItem('userName', JSON.stringify(this.getprofileDetails));
+        if(this.getprofileDetails.language){
+          localStorage.setItem('laungauge', this.getprofileDetails.language);
+          this.selectedLaungauge = localStorage.getItem('laungauge') && localStorage.getItem('laungauge') == dataConstant.Laungauges.FR ? 'FR' : 'EN' ;
+        }
       }
       if (localStorage.getItem('userName')) {
         this.userName = JSON.parse(localStorage.getItem('userName') as any);
@@ -85,12 +111,12 @@ export class HeaderComponent implements OnInit {
       if (this.userName) {
         this.firstName = this.userName.first_name;
         this.lastName = this.userName.last_name;
-        this.isAdmin = this.userName.admin == 1 ? true: false;
+        this.isAdmin = this.userName.admin == 1 ? true : false;
         this.pdlMember = this.userName.pdl_member == 1 ? true : false;
         this.isRequester = this.userName.staff == 1 ? true : false;
       }
     }, (err: any) => {
-      this.commonService.errorHandling(err); 
+      this.commonService.errorHandling(err);
       this.commonService.hideLoading();
     });
   }
@@ -155,19 +181,19 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('userName');
   }
 
-  switchUser(){
-      const modalRef = this.modalService.open(SwitchUserComponent, {
-        centered: true,
-        windowClass: 'alert-popup',
-      });
+  switchUser() {
+    const modalRef = this.modalService.open(SwitchUserComponent, {
+      centered: true,
+      windowClass: 'alert-popup',
+    });
   }
 
-  contcatUs(){
+  contcatUs() {
     const modalRef = this.modalService.open(ContcatUsComponent, {
       centered: true,
       windowClass: 'alert-popup',
     });
-}
+  }
 
   openMessages() {
     const modalRef = this.modalService.open(MessageViewComponent, {

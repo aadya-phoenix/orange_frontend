@@ -17,19 +17,19 @@ export class MessageService {
   }
 
   createMessage(data:any){
-    const url = `api/${this.apiVersion}/message/create`;
+    const url = `${this.basePath}api/${this.apiVersion}/message/create`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling)); 
   }
 
   getMessage(){
-    const url = `/api/${this.apiVersion}/message`;
+    const url = `${this.basePath}api/${this.apiVersion}/message`;
     return this.http
     .get(url, this.http.headers)
     .pipe(catchError(this.commmonService.Errorhandling));
   }
 
   getActiveMessage(){
-    const url = `/api/${this.apiVersion}/message/active`;
+    const url = `${this.basePath}api/${this.apiVersion}/message/active`;
     return this.http
     .get(url, this.http.headers)
     .pipe(catchError(this.commmonService.Errorhandling));
@@ -37,19 +37,19 @@ export class MessageService {
 
 
   updateMessage(data:any){
-    const url = `api/${this.apiVersion}/message/update`;
+    const url = `${this.basePath}api/${this.apiVersion}/message/update`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling)); 
   }
 
   getMessageDetails(id:number){
-    const url = `/api/${this.apiVersion}/message/${id}/detail`;
+    const url = `${this.basePath}api/${this.apiVersion}/message/${id}/detail`;
     return this.http
     .get(url, this.http.headers)
     .pipe(catchError(this.commmonService.Errorhandling));
   }
 
   messageDelete(data: any) {
-    const url = `api/${this.apiVersion}/message/delete`;
+    const url = `${this.basePath}api/${this.apiVersion}/message/delete`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 

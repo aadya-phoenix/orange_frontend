@@ -17,41 +17,41 @@ export class OlTestService {
   }
 
   create(data: any) {
-    const url = `/api/${this.apiVersion}/ol-test/create`;
+    const url = `${this.basePath}api/${this.apiVersion}/ol-test/create`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   update(data: any) {
-    const url = `/api/${this.apiVersion}/ol-test/update`;
+    const url = `${this.basePath}api/${this.apiVersion}/ol-test/update`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   getOlTest() {
-    const url = `/api/${this.apiVersion}/ol-test`; 
+    const url = `${this.basePath}api/${this.apiVersion}/ol-test`; 
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
   getOlTestDetails(id: number) {
-    const url = `/api/${this.apiVersion}/ol-test/${id}/detail`;
+    const url = `${this.basePath}api/${this.apiVersion}/ol-test/${id}/detail`;
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
   OlTestHistory(data: any) {
-    const url = `api/${this.apiVersion}/ol-test/${data}/history`;
+    const url = `${this.basePath}api/${this.apiVersion}/ol-test/${data}/history`;
     return this.http.get(url, this.http.headers).pipe(catchError(this.commmonService.Errorhandling))
   }
 
   OlTestDelete(data: any) {
-    const url = `api/${this.apiVersion}/ol-test/delete`;
+    const url = `${this.basePath}api/${this.apiVersion}/ol-test/delete`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   OlTestStatus(data: any) {
-    const url = `api/${this.apiVersion}/ol-test/status`;
+    const url = `${this.basePath}api/${this.apiVersion}/ol-test/status`;
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 

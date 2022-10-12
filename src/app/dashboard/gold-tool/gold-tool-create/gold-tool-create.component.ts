@@ -19,6 +19,7 @@ export class GoldToolCreateComponent implements OnInit {
   lableConstant: any = { french: {}, english: {} };
   isSubmitted = false;
   preferedInstructor: any = [];
+  hrbpEmails:any = [];
   searchedPreferedInstructor: any = [];
   regionDnaObj: any = [];
   regions: any = [];
@@ -65,6 +66,7 @@ export class GoldToolCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPreferedInstructor();
+    this.getHRBPEmail();
     if (this.gold_tool_id) {
       this.getGoldToolDetails();
     } else {
@@ -80,11 +82,11 @@ export class GoldToolCreateComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       email_for_participant: new FormControl('', [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
       cuid_ftid: new FormControl('', [Validators.required]),
-      p1: new FormControl('', [Validators.required]),
-      region_id: new FormControl('', [Validators.required]),
+      business_unit_id: new FormControl('', [Validators.required]),
+      region: new FormControl('', [Validators.required]),
       country: new FormControl('', [Validators.required]),
       gold_level_access: new FormControl('', [Validators.required]),
-      hrbp_email: new FormControl('', [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
+      hrbp_email: new FormControl('', [Validators.required]),
       business_justification: new FormControl('', [Validators.required]),
       agree:new FormControl(false, [Validators.requiredTrue])
     });
@@ -100,6 +102,22 @@ export class GoldToolCreateComponent implements OnInit {
     this.courseService.getpreferedInstructor().subscribe(
       (res: any) => {
         this.preferedInstructor = res.data;
+        this.getRegions();
+      },
+      (err: any) => {
+        this.commonService.errorHandling(err);
+        this.commonService.hideLoading();
+      }
+    );
+  }
+
+
+   //preferred instructor
+   getHRBPEmail() {
+    this.commonService.showLoading();
+    this.goldToolService.getHRBPEmail().subscribe(
+      (res: any) => {
+        this.hrbpEmails = res.data;
         this.getRegions();
       },
       (err: any) => {
@@ -195,14 +213,16 @@ export class GoldToolCreateComponent implements OnInit {
   copyMetadata(data: any): void {
     this.metadataArray.push(this.fb.group({
       id: '',
-      name: new FormControl(data.name, [Validators.required]),
-      email_for_participant: new FormControl(data.email_for_participant, [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
-      cuid_ftid: new FormControl(data.cuid_ftid, [Validators.required]),
-      p1: new FormControl(data.p1, [Validators.required]),
-      data_scope: new FormControl(data.data_scope, [Validators.required]),
+      name: new FormControl('', [Validators.required]),
+      email_for_participant: new FormControl('', [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
+      cuid_ftid: new FormControl('', [Validators.required]),
+      business_unit_id: new FormControl(data.business_unit_id, [Validators.required]),
+      region: new FormControl(data.region, [Validators.required]),
+      country: new FormControl(data.country, [Validators.required]),
       gold_level_access: new FormControl(data.gold_level_access, [Validators.required]),
-      hrbp_email: new FormControl(data.hrbp_email, [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
+      hrbp_email: new FormControl(data.hrbp_email, [Validators.required]),
       business_justification: new FormControl(data.business_justification, [Validators.required]),
+      agree:new FormControl(data.agree, [Validators.requiredTrue])
     }));
   }
 
@@ -212,11 +232,13 @@ export class GoldToolCreateComponent implements OnInit {
       name: new FormControl(data.name, [Validators.required]),
       email_for_participant: new FormControl(data.email_for_participant, [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
       cuid_ftid: new FormControl(data.cuid_ftid, [Validators.required]),
-      p1: new FormControl(data.p1, [Validators.required]),
-      data_scope: new FormControl(data.data_scope, [Validators.required]),
+      business_unit_id: new FormControl(data.business_unit_id, [Validators.required]),
+      region: new FormControl(data.region, [Validators.required]),
+      country: new FormControl(data.country, [Validators.required]),
       gold_level_access: new FormControl(data.gold_level_access, [Validators.required]),
-      hrbp_email: new FormControl(data.hrbp_email, [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
+      hrbp_email: new FormControl(data.hrbp_email, [Validators.required]),
       business_justification: new FormControl(data.business_justification, [Validators.required]),
+      agree:new FormControl(data.agree, [Validators.requiredTrue])
     });
   }
 

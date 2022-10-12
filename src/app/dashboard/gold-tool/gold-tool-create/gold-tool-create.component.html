@@ -181,13 +181,13 @@
                                                                             </label>
                                                                             <ng-select [items]="bussinessUnitObj"
                                                                                 bindLabel="team_name"
-                                                                                bindValue="id" formControlName="p1"
+                                                                                bindValue="id" formControlName="business_unit_id"
                                                                                 class="w_100">
                                                                             </ng-select>
                                                                             <div
-                                                                                *ngIf="(metadataArray.controls[i].controls['p1'].invalid && (metadataArray.controls[i].controls['p1'].dirty || metadataArray.controls[i].controls['p1'].touched)) || isSubmitted">
+                                                                                *ngIf="(metadataArray.controls[i].controls['business_unit_id'].invalid && (metadataArray.controls[i].controls['business_unit_id'].dirty || metadataArray.controls[i].controls['business_unit_id'].touched)) || isSubmitted">
                                                                                 <div class="error_message"
-                                                                                    *ngIf="metadataArray.controls[i].controls['p1'].errors?.required">
+                                                                                    *ngIf="metadataArray.controls[i].controls['business_unit_id'].errors?.required">
                                                                                     {{requiredMessage('PI')}}
                                                                                 </div>
                                                                             </div>
@@ -200,13 +200,13 @@
                                                                             <ng-select [items]="regionDnaObj"
                                                                                 (change)="getSelectedRegion($event, i)"
                                                                                 [multiple]="false"
-                                                                                bindLabel="region_name" bindValue="id"
-                                                                                formControlName="region_id">
+                                                                                bindLabel="region_name" bindValue="region_name"
+                                                                                formControlName="region">
                                                                             </ng-select>
                                                                             <div
-                                                                                *ngIf="(metadataArray.controls[i].controls['region_id'].invalid && (metadataArray.controls[i].controls['region_id'].dirty || metadataArray.controls[i].controls['region_id'].touched)) || isSubmitted">
+                                                                                *ngIf="(metadataArray.controls[i].controls['region'].invalid && (metadataArray.controls[i].controls['region'].dirty || metadataArray.controls[i].controls['region'].touched)) || isSubmitted">
                                                                                 <div class="error_message"
-                                                                                    *ngIf="metadataArray.controls[i].controls['region_id'].errors?.required">
+                                                                                    *ngIf="metadataArray.controls[i].controls['region'].errors?.required">
                                                                                     {{requiredMessage(this.lableConstant.region)}}
                                                                                 </div>
                                                                             </div>
@@ -264,9 +264,14 @@
                                                                 <label class="form-control-label">
                                                                     HRBP email<span class="text_red">* </span>
                                                                 </label>
-                                                                <input type="text" class="form-control form_width"
+                                                                <ng-select [items]="hrbpEmails"
+                                                                                bindLabel="email"
+                                                                                bindValue="email"
+                                                                                formControlName="hrbp_email" class="w_100">
+                                                                            </ng-select>
+                                                                <!-- <input type="text" class="form-control form_width"
                                                                     placeholder="Enter HRBP email"
-                                                                    formControlName="hrbp_email">
+                                                                    formControlName="hrbp_email"> -->
                                                                 <div
                                                                     *ngIf="(metadataArray.controls[i].controls['hrbp_email'].invalid && (metadataArray.controls[i].controls['hrbp_email'].dirty || metadataArray.controls[i].controls['hrbp_email'].touched)) || isSubmitted">
                                                                     <div class="error_message"
