@@ -105,6 +105,10 @@ export class DnaLearningFormComponent implements OnInit {
     return this.type == 1;
   }
 
+  requiredMessage(field: any) {
+    return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
   getEvent(region: any) {
     this.regionId = region.id;
     if (region.region_name == 'Global') {
@@ -113,6 +117,7 @@ export class DnaLearningFormComponent implements OnInit {
     }
     else {
       this.isCountry = true;
+      this.createDnaForm.addControl('country',new FormControl('', [Validators.required]));
       this.getCountries();
     }
   }

@@ -32,7 +32,7 @@
     </div>
     <div class="content mt-1">
         <div class="animated fadeIn">
-            <ngb-alert [dismissible]="false"  type="warning" *ngIf="!isManager" class="d-block m-3">
+            <ngb-alert [dismissible]="false" type="warning" *ngIf="!isManager" class="d-block m-3">
                 <span>The DNA tool can be only accessible to a manager who has direct reporting of the employee.</span>
                 <p class="mb-0">Please contact to administrator of this site for more details.</p>
             </ngb-alert>
@@ -54,52 +54,53 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-3  mb-4" *ngFor="let item of activeTrackerObj">
-                                            <div class="card card_seco_dna1">
-                                                <div class="bac-blur">
+                                            <div *ngIf="item.type_name == Country" class="card card_seco_dna1">
+                                                <div  class="bac-blur">
                                                 </div>
                                                 <div>
-                                                <div class="border_top_card_dna">
-                                                    <p>{{item.type_name}}</p>
-                                                </div>
-                                                <div class="card_bac_dna">
-                                                    <p class="text_white fon_17 font_bold mt_13 mb-0 pa-14"
-                                                        ngbTooltip="{{item.description}}">{{item.title}}</p>
-                                                    <img src="../../../../assets/images/worl_co.png" class="w_50_dna">
-                                                    <div class="date_amin_div1 d-flex justify-space_around">
-                                                        <div class="start-date">
-                                                            <p class="p_text_date text_white">{{item.open_date | date:
-                                                                dateFormate}}</p>
-                                                            <p class="p_text_date_0 text_white">{{lableConstant.Start_Date}}</p>
+                                                    <div class="border_top_card_dna">
+                                                        <p>{{item.type_name}}</p>
+                                                    </div>
+                                                    <div class="card_bac_dna">
+                                                        <p class="text_white fon_17 font_bold mt_13 mb-0 pa-14"
+                                                            ngbTooltip="{{item.description}}">{{item.title}}</p>
+                                                        <img src="../../../../assets/images/worl_co.png"
+                                                            class="w_50_dna">
+                                                        <div class="date_amin_div1 d-flex justify-space_around">
+                                                            <div class="start-date">
+                                                                <p class="p_text_date text_white">{{item.open_date |
+                                                                    date:
+                                                                    dateFormate}}</p>
+                                                                <p class="p_text_date_0 text_white">
+                                                                    {{lableConstant.Start_Date}}</p>
+                                                            </div>
+                                                            <div class="border-betwe1"></div>
+                                                            <div class="end-date">
+                                                                <p class="p_text_date text_white">{{item.close_date |
+                                                                    date:
+                                                                    dateFormate}}</p>
+                                                                <p class="p_text_date_0 text_white">
+                                                                    {{lableConstant.End_Date}}</p>
+                                                            </div>
                                                         </div>
-                                                        <div class="border-betwe1"></div>
-                                                        <div class="end-date">
-                                                            <p class="p_text_date text_white">{{item.close_date | date:
-                                                                dateFormate}}</p>
-                                                            <p class="p_text_date_0 text_white">{{lableConstant.End_Date}}</p>
+                                                        <p class="text_white fon_16 font_weight mt-2 mb-2">
+                                                            {{lableConstant.click_start_button_to_see__added_learning_need}}
+                                                        </p>
+                                                        <div class="mb-0 buttonstart_ma">
+                                                            <button class="btn btn-primary" *ngIf="item.isStart"
+                                                                (click)="addLearning(item)"><span
+                                                                    class="fon_12">{{lableConstant.start}}</span></button>
+                                                            <button class="btn btn-primary" *ngIf="!item.isStart"
+                                                                (click)="viewReport(item)"><span
+                                                                    class="fon_12">{{lableConstant.view}}</span></button>
+                                                            <button class="btn btn-secondary ml-1"
+                                                                (click)="managerData(item)"><span
+                                                                    class="fon_12">{{lableConstant.manager_report}}</span></button>
                                                         </div>
                                                     </div>
-                                                    <p class="text_white fon_16 font_weight mt-2 mb-2">
-                                                        {{lableConstant.click_start_button_to_see__added_learning_need}}
-                                                    </p>
-                                                    <div class="mb-0 buttonstart_ma">
-                                                        <button class="btn btn-primary" *ngIf="item.isStart"
-                                                            (click)="addLearning(item)"><span
-                                                                class="fon_12">{{lableConstant.start}}</span></button>
-                                                        <button class="btn btn-primary" *ngIf="!item.isStart"
-                                                            (click)="viewReport(item)"><span
-                                                                class="fon_12">{{lableConstant.view}}</span></button>
-                                                        <button class="btn btn-secondary ml-1"
-                                                            (click)="managerData(item)"><span
-                                                                class="fon_12">{{lableConstant.manager_report}}</span></button>
-                                                    </div>
-                                                </div>
                                                 </div>
                                             </div>
-                                            </div>
-                                        <div class="col-sm-3 mb-4" *ngFor="let item of activeTrackerObj">
-                                            
-                                           
-                                            <div class="card card_seco_dna">
+                                            <div *ngIf="item.type_name == France" class="card card_seco_dna">
                                                 <div class="border_top_card_dna">
                                                     <p>{{item.type_name}}</p>
                                                 </div>
@@ -137,6 +138,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- <div class="col-sm-3 mb-4" *ngFor="let item of activeTrackerObj">
+                                           
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -145,20 +149,23 @@
                                 <div class="card-header cm-card-header">
                                     <div class="d-flex just_spa p-2 align-items-center">
                                         <p class="mb-0  text_balck">Archive</p>
-                                        
-                                    <div class="mb-0" id="headingOne">
-                                     
-                                          <button class="btn btn-link btn-block text-left p-0" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"  ngbTooltip="Collapse">
-                                            <i class="fa fa-minus text_balck" aria-hidden="true"></i>
-                                          </button>
-                                       
-                                      </div>
-                                   </div>
+
+                                        <div class="mb-0" id="headingOne">
+
+                                            <button class="btn btn-link btn-block text-left p-0" type="button"
+                                                data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne" ngbTooltip="Collapse">
+                                                <i class="fa fa-minus text_balck" aria-hidden="true"></i>
+                                            </button>
+
+                                        </div>
                                     </div>
-                               
+                                </div>
+
                                 <div class="card-body car_body_padd">
-                                    
-                                    <div id="collapseOne" class="row collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+
+                                    <div id="collapseOne" class="row collapse show" aria-labelledby="headingOne"
+                                        data-parent="#accordionExample">
                                         <div class="col-sm-3 mb-4" *ngFor="let item of expiredTrackerObj">
                                             <div class="card card_seco_dna">
                                                 <div class="border_top_card_dna">

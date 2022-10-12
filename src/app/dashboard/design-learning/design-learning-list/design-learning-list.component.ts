@@ -69,6 +69,7 @@ export class DesignLearningListComponent implements OnInit {
       if(params?.status){
         this.selectedStatus = params?.status;
       }
+      console.log("status",this.selectedStatus)
     }
   );
     this.refreshModules();
