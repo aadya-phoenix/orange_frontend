@@ -114,39 +114,6 @@ export class GoldToolCompleteReportComponent implements OnInit {
     this.selectedStatus = type;
   }
 
-  editRequest(item: any) {
-    if (item && item.id) {
-      this.router.navigateByUrl(`/gold-tool/update/${item.id}`);
-    }
-  }
-
-  deleteRequest(gold_tool_id: number) {
-    Swal.fire({
-      title: 'Are you sure want to remove?',
-      text: 'You will not be able to recover this request!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, keep it'
-    }).then((result) => {
-      if (result.value) {
-        this.commonService.showLoading();
-        this.goldToolService.goldToolDelete({ gold_tool_id: gold_tool_id }).subscribe((res: any) => {
-          this.commonService.hideLoading();
-          this.refreshGoldTools();
-          Swal.fire(
-            'Deleted!',
-            'Your request has been deleted.',
-            'success'
-          )
-        }, (err: any) => {
-          this.commonService.hideLoading();
-          this.commonService.errorHandling(err);
-        })
-
-      }
-    })
-  }
 
   openModal(item: any) {
     const modalRef = this.modalService.open(GoldToolHistoryComponent, {
