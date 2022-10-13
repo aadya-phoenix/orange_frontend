@@ -179,17 +179,17 @@ export class DashboardComponent implements OnInit {
           pendingRequestCount: 0,
           setFavouriteModule: this.modules.sme,
         },
-        {
-          id: 'vendortraining', name: 'External Vendor Training Module',
-          routerLink: '/vendortraining/create', image: '../../assets/images/Design learning module.jpg',
-          lableConstantModule: 'External Vendor Training Module',
-          lableConstantCatalog: this.lableConstant.request_learning_team,
-          navigateTo: '',
-          favourite: false, showFavourite: true,
-          isShowPending: true,
-          pendingRequestCount: this.pendingRequestCount.digital_learning,
-          setFavouriteModule: this.modules.design,
-        }
+        // {
+        //   id: 'vendortraining', name: 'External Vendor Training Module',
+        //   routerLink: '/vendortraining/create', image: '../../assets/images/Design learning module.jpg',
+        //   lableConstantModule: 'External Vendor Training Module',
+        //   lableConstantCatalog: this.lableConstant.request_learning_team,
+        //   navigateTo: '',
+        //   favourite: false, showFavourite: true,
+        //   isShowPending: true,
+        //   pendingRequestCount: this.pendingRequestCount.digital_learning,
+        //   setFavouriteModule: this.modules.design,
+        // }
       ];
 
       this.modulesArray_tab3 = [{
