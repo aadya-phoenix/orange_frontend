@@ -99,6 +99,7 @@ export class SmedbCreateComponent implements OnInit {
     this.deliveryForm = this.formBuilder.group({ 'delivery': this.formBuilder.array([]) });
     // this.addDelivery(0, '', '', '', '', '', true, false);
     this.voiceOverLearningForm = this.formBuilder.group({
+      id: new FormControl(''),
       language: new FormControl('', [Validators.required]),
       other_language: new FormControl(''),
       gender_voice: new FormControl('', [Validators.required]),
@@ -113,7 +114,6 @@ export class SmedbCreateComponent implements OnInit {
     });
 
     this.createSmedbForm.get("available")?.valueChanges.subscribe((x: string) => {
-      //debugger;
       if (x === 'yes') {
         this.isAvailable = true;
         this.createSmedbForm.addControl('end_date', new FormControl('', [Validators.required]));
@@ -163,7 +163,6 @@ export class SmedbCreateComponent implements OnInit {
     this.files = [];
     const fsize = event.target.files[0].size;
     const file = Math.round((fsize / 1024) / 1024);
-   // debugger;
     for (let index = 0; index < event.target.files.length; index++) {
       const element = event.target.files[index];
       this.commonService.FileConvertintoBytearray(element, async (f) => {
@@ -371,6 +370,7 @@ export class SmedbCreateComponent implements OnInit {
         if (this.sme_details.metadata && this.sme_details.metadata["voice-over-learning"]?.length > 0) {
           this.voiceOverLearningForm.controls["voice-over-learning"] = this.formBuilder.array([]);
           this.sme_details.metadata["voice-over-learning"].forEach((x: any) => {
+            this.voiceOverLearningForm.controls.id.setValue(x.id);
             this.voiceOverLearningForm.controls.language.setValue(JSON.parse(x.language));
             this.voiceOverLearningForm.controls.other_language.setValue(x.other_language);
             this.voiceOverLearningForm.controls.gender_voice.setValue(x.gender_voice);
@@ -382,7 +382,6 @@ export class SmedbCreateComponent implements OnInit {
             if (x.voice_recording) {
               const voice_recording = JSON.parse(x.voice_recording);
               voice_recording.forEach((element: any) => {
-                
                 const msaapPlaylist = [
                   {
                     title: x.language,
@@ -462,15 +461,17 @@ export class SmedbCreateComponent implements OnInit {
       title: new FormControl(title, [Validators.required]),
       level: new FormControl(level, [Validators.required]),
       previous_experience: new FormControl(previous_experience, [Validators.required]),
-      need_help: new FormControl(need_help, [Validators.required]),
+      need_help: new FormControl(need_help, isPrevious ? []: [Validators.required]),
       comment: new FormControl(comment, [Validators.required]),
       isPrevious: isPrevious,
       isNeedHelp: isNeedHelp
     });
+
   }
 
   addDelivery(id: number, titleval: string, descriptionval: string, previous_experience: string, need_help: string, comment: string, isPrevious: boolean, isNeedHelp: boolean) {
     return this.deliveryFormArray.push(this.addMoreDelivery(id, titleval, descriptionval, previous_experience, need_help, comment, isPrevious, isNeedHelp));
+
   }
 
   removeDelivery(i: any) {

@@ -9,53 +9,53 @@ import { HttpService } from '../http/http.service';
 })
 export class UserManageService {
 
-  public basePath = environment.baseUrl;
-  public apiVersion = environment.apiVersion;
+  basePath: any = environment.baseUrl;
+  apiVersion: any = environment.apiVersion;
   public headers = new Headers({});
   constructor(private http: HttpService, private commmonService: CommonService) {
     this.headers.append('Access-Control-Allow-Origin', '*');
   }
 
-  createUser(data:any){
-    const url = `${this.basePath}api/${this.apiVersion}/user/create`;
-    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling)); 
+  createUser(data: any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/user/create';
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  getUsers(){
-    const url = `${this.basePath}api/${this.apiVersion}/users`;
+  getUsers() {
+    const url = this.basePath + 'api/' + this.apiVersion + '/users';
     return this.http
-    .get(url, this.http.headers)
-    .pipe(catchError(this.commmonService.Errorhandling));
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  updateUser(data:any,id:number){
-    const url = `${this.basePath}api/${this.apiVersion}/user/${id}/update`;
-    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling)); 
+  updateUser(data: any, id: number) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/user/'+id+'/update';
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  getUserDetails(id:number){
-    const url = `${this.basePath}api/${this.apiVersion}/user/${id}/detail`;
+  getUserDetails(id: number) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/user/'+id+'/detail';
     return this.http
-    .get(url, this.http.headers)
-    .pipe(catchError(this.commmonService.Errorhandling));
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  changeUserStatus(data: any,id:any) {
-    const url = `${this.basePath}api/${this.apiVersion}/user/${id}/status`;
+  changeUserStatus(data: any, id: any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/user/'+id+'/status';
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  changePassword(data: any,id:number){
-    const url = `${this.basePath}api/${this.apiVersion}/user/${id}/password`;
+  changePassword(data: any, id: number) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/user/'+id+'/password';
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  switchUser(data: any){
-    const url = `${this.basePath}api/${this.apiVersion}/user/switch`;
+  switchUser(data: any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/user/switch';
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
-  contcatUs(data: any){
-    const url = `${this.basePath}api/${this.apiVersion}/contact-us/send`;
+  contcatUs(data: any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/contact-us/send';
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 }

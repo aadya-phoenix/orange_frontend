@@ -262,16 +262,34 @@
                                                         <div class="col-sm-4">
                                                             <div class="form-group">
                                                                 <label class="form-control-label">
+                                                                    HRBP name<span class="text_red">* </span>
+                                                                </label>
+                                                                <input type="text" class="form-control form_width"
+                                                                    placeholder="Enter HRBP name"
+                                                                    formControlName="hrbp_name">
+                                                                <div
+                                                                    *ngIf="(metadataArray.controls[i].controls['hrbp_name'].invalid && (metadataArray.controls[i].controls['hrbp_name'].dirty || metadataArray.controls[i].controls['hrbp_name'].touched)) || isSubmitted">
+                                                                    <div class="error_message"
+                                                                        *ngIf="metadataArray.controls[i].controls['hrbp_name'].errors?.required">
+                                                                        {{requiredMessage('HRBP name')}}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--col-->
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group">
+                                                                <label class="form-control-label">
                                                                     HRBP email<span class="text_red">* </span>
                                                                 </label>
-                                                                <ng-select [items]="hrbpEmails"
+                                                                <!-- <ng-select [items]="hrbpEmails"
                                                                                 bindLabel="email"
                                                                                 bindValue="email"
                                                                                 formControlName="hrbp_email" class="w_100">
-                                                                            </ng-select>
-                                                                <!-- <input type="text" class="form-control form_width"
+                                                                            </ng-select> -->
+                                                                <input type="text" class="form-control form_width"
                                                                     placeholder="Enter HRBP email"
-                                                                    formControlName="hrbp_email"> -->
+                                                                    formControlName="hrbp_email">
                                                                 <div
                                                                     *ngIf="(metadataArray.controls[i].controls['hrbp_email'].invalid && (metadataArray.controls[i].controls['hrbp_email'].dirty || metadataArray.controls[i].controls['hrbp_email'].touched)) || isSubmitted">
                                                                     <div class="error_message"
@@ -286,7 +304,7 @@
                                                             </div>
                                                         </div>
                                                         <!--col-->
-                                                        <div class="col-sm-4">
+                                                        <div class="col-sm-12">
                                                             <div class="form-group">
                                                                 <label class="form-control-label">
                                                                     Business justification <span class="text_red">*

@@ -9,56 +9,56 @@ import { HttpService } from '../http/http.service';
 })
 export class GoldToolService {
 
-  public basePath = environment.baseUrl;
-  public apiVersion = environment.apiVersion;
+  basePath: any = environment.baseUrl;
+  apiVersion: any = environment.apiVersion;
   public headers = new Headers({});
   constructor(private http: HttpService, private commmonService: CommonService) {
     this.headers.append('Access-Control-Allow-Origin', '*');
   }
 
   create(data: any) {
-    const url = `${this.basePath}api/${this.apiVersion}/gold-tool/create`;
+    const url = this.basePath + 'api/' + this.apiVersion + '/gold-tool/create';
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   update(data: any) {
-    const url = `${this.basePath}api/${this.apiVersion}/gold-tool/update`;
+    const url = this.basePath + 'api/' + this.apiVersion + '/gold-tool/update';
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   getGoldTool() {
-    const url = `${this.basePath}api/${this.apiVersion}/gold-tool`; 
+    const url = this.basePath + 'api/' + this.apiVersion + '/gold-tool';
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
   getHRBPEmail() {
-    const url = `${this.basePath}api/${this.apiVersion}/user/hrbp`; 
+    const url = this.basePath + 'api/' + this.apiVersion + '/user/hrbp';
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
   getGoldToolDetails(id: number) {
-    const url = `${this.basePath}api/${this.apiVersion}/gold-tool/${id}/detail`;
+    const url = this.basePath + 'api/' + this.apiVersion + '/gold-tool/' + id + '/detail';
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
   goldToolHistory(data: any) {
-    const url = `${this.basePath}api/${this.apiVersion}/gold-tool/${data}/history`;
+    const url = this.basePath + 'api/' + this.apiVersion + '/gold-tool/' + data + '/history';
     return this.http.get(url, this.http.headers).pipe(catchError(this.commmonService.Errorhandling))
   }
 
   goldToolDelete(data: any) {
-    const url = `${this.basePath}api/${this.apiVersion}/gold-tool/delete`;
+    const url = this.basePath + 'api/' + this.apiVersion + '/gold-tool/delete';
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
   goldToolStatus(data: any) {
-    const url = `${this.basePath}api/${this.apiVersion}/gold-tool/status`;
+    const url = this.basePath + 'api/' + this.apiVersion + '/gold-tool/status';
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 

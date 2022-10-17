@@ -11,10 +11,10 @@ import { HttpService } from '../http/http.service';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  public basePath = environment.baseUrl;
-  public apiVersion = environment.apiVersion;
-  public clientId = environment.clientId;
-  public clientSecret = environment.clientSecret;
+  basePath: any = environment.baseUrl;
+  apiVersion: any = environment.apiVersion;
+  clientId: any = environment.clientId;
+  clientSecret: any = environment.clientSecret;
 
 
 
@@ -22,7 +22,7 @@ export class AuthenticationService {
 
 
   register(data: any) {
-    const url = `${this.basePath}api/${this.apiVersion}/register`;
+    const url = this.basePath + 'api/' + this.apiVersion + '/register';
     return this.http.post(url, data);
   }
 
@@ -33,8 +33,7 @@ export class AuthenticationService {
     };
     let grantObj = { grant_type: 'password' };
     let totalObj = { ...grantObj, ...clienSecret, ...data };
-    const url = `/oauth/token`;
-    const urllive = `${this.basePath}oauth/token`;
+    const url = this.basePath + '/oauth/token';
     return this.http.post(url, totalObj);
   }
 
@@ -43,7 +42,7 @@ export class AuthenticationService {
   }
 
   getProfileDetails() {
-    const url = `${this.basePath}api/${this.apiVersion}/profile`;
+    const url = this.basePath + 'api/' + this.apiVersion + '/profile';
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
@@ -64,33 +63,32 @@ export class AuthenticationService {
   }
 
   getUserDetailslocal() {
-      return JSON.parse(localStorage.getItem('userName') || '{}');
+    return JSON.parse(localStorage.getItem('userName') || '{}');
   }
 
   getRoles() {
-    const url = `${this.basePath}api/${this.apiVersion}/roles`;
+    const url = this.basePath + 'api/' + this.apiVersion + '/roles';
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
   getUserRoles() {
-    const url = `${this.basePath}api/${this.apiVersion}/role-users`;
-    const urllive = `${this.basePath}api/${this.apiVersion}/role-users`;
+    const url = this.basePath + 'api/' + this.apiVersion + '/role-users';
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
-  getROMROCList(rom_id:any) {
-    const url = `${this.basePath}api/${this.apiVersion}/role-users`;
+  getROMROCList(rom_id: any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/role-users';
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
   lastLogin() {
-    const url = `${this.basePath}api/${this.apiVersion}/user/last-login`;
+    const url = this.basePath + 'api/' + this.apiVersion + '/user/last-login';
     return this.http.post(url, {}).pipe(catchError(this.Errorhandling));
   }
 
@@ -104,7 +102,7 @@ export class AuthenticationService {
   }
 
   Errorhandling(err: HttpErrorResponse) {
-    if(err.status === 401){
+    if (err.status === 401) {
       this.router.navigate(['/login']);
     }
     if (err.error instanceof ErrorEvent) {

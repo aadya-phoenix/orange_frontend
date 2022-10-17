@@ -9,47 +9,47 @@ import { HttpService } from '../http/http.service';
 })
 export class MessageService {
 
-  public basePath = environment.baseUrl;
-  public apiVersion = environment.apiVersion;
+  basePath: any = environment.baseUrl;
+  apiVersion: any = environment.apiVersion;
   public headers = new Headers({});
   constructor(private http: HttpService, private commmonService: CommonService) {
     this.headers.append('Access-Control-Allow-Origin', '*');
   }
 
-  createMessage(data:any){
-    const url = `${this.basePath}api/${this.apiVersion}/message/create`;
-    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling)); 
+  createMessage(data: any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/message/create';
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  getMessage(){
-    const url = `${this.basePath}api/${this.apiVersion}/message`;
+  getMessage() {
+    const url = this.basePath + 'api/' + this.apiVersion + '/message';
     return this.http
-    .get(url, this.http.headers)
-    .pipe(catchError(this.commmonService.Errorhandling));
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  getActiveMessage(){
-    const url = `${this.basePath}api/${this.apiVersion}/message/active`;
+  getActiveMessage() {
+    const url = this.basePath + 'api/' + this.apiVersion + '/message/active';
     return this.http
-    .get(url, this.http.headers)
-    .pipe(catchError(this.commmonService.Errorhandling));
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
   }
 
 
-  updateMessage(data:any){
-    const url = `${this.basePath}api/${this.apiVersion}/message/update`;
-    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling)); 
+  updateMessage(data: any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/message/update';
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
-  getMessageDetails(id:number){
-    const url = `${this.basePath}api/${this.apiVersion}/message/${id}/detail`;
+  getMessageDetails(id: number) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/message/'+id+'/detail';
     return this.http
-    .get(url, this.http.headers)
-    .pipe(catchError(this.commmonService.Errorhandling));
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
   }
 
   messageDelete(data: any) {
-    const url = `${this.basePath}api/${this.apiVersion}/message/delete`;
+    const url = this.basePath + 'api/' + this.apiVersion + '/message/delete';
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 

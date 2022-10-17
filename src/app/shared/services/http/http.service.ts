@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class HttpService {
-  public headers = new HttpHeaders({});
+  public headers = new HttpHeaders({'Access-Control-Allow-Origin' : '*'});
   public params = new HttpParams({});
 
   constructor(private httpClient: HttpClient) {}

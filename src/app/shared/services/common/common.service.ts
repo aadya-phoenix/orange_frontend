@@ -12,10 +12,10 @@ import { HttpService } from '../http/http.service';
   providedIn: 'root'
 })
 export class CommonService {
-
-  public apiVersion = environment.apiVersion;
+  basePath: any = environment.baseUrl;
+  apiVersion: any = environment.apiVersion;
   public headers = new Headers({});
-  public laungaugesData = {french: {},english: {} };
+  public laungaugesData = { french: {}, english: {} };
 
   constructor(private http: HttpService,
     private toastr: ToastrService,
@@ -35,21 +35,21 @@ export class CommonService {
     this.toastr.warning(message, title, timeOut);
   }
 
-  public errorHandling(error:any){
-    if(error?.error){
-    this.toastErrorMsg(error?.error?.error, error?.error?.message);
-    }else{
-      this.toastErrorMsg(error,'');
+  public errorHandling(error: any) {
+    if (error?.error) {
+      this.toastErrorMsg(error?.error?.error, error?.error?.message);
+    } else {
+      this.toastErrorMsg(error, '');
     }
   }
 
-  public LastFewYearsList(){
+  public LastFewYearsList() {
     let yearsList = [];
     var date = new Date();
     date.getFullYear();
     for (let index = 0; index < 20; index++) {
-        const year = date.getFullYear()-index
-        yearsList.push({name:year, id : year});      
+      const year = date.getFullYear() - index
+      yearsList.push({ name: year, id: year });
     }
     return yearsList;
   }
@@ -97,53 +97,53 @@ export class CommonService {
 
   //languages
   getLanguages() {
-    const url = `${environment.baseUrl}api/${this.apiVersion}/cct-language`;
+    const url = this.basePath + 'api/' + this.apiVersion + '/cct-language';
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
 
-   //Set languages
-   setLanguages(data:any) {
-    const url = `${environment.baseUrl}api/${this.apiVersion}/user/language`;
+  //Set languages
+  setLanguages(data: any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/user/language';
     return this.http
       .post(url, data)
       .pipe(catchError(this.Errorhandling));
   }
 
-    //language Translation
-    getLanguageTranslation() {
-      const url = `${environment.baseUrl}api/${this.apiVersion}/cct-language-translation`;
-      return this.http
-        .get(url, this.http.headers)
-        .pipe(catchError(this.Errorhandling));
-    }
-  
+  //language Translation
+  getLanguageTranslation() {
+    const url = this.basePath + 'api/' + this.apiVersion + '/cct-language-translation';
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.Errorhandling));
+  }
+
 
   //ExpiryDateType
   getExpiryDateType() {
-    const url = `${environment.baseUrl}api/${this.apiVersion}/cct-expiry-date-type`;
+    const url = this.basePath + 'api/' + this.apiVersion + '/cct-expiry-date-type';
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
   dashboardCount() {
-    const url = `${environment.baseUrl}api/${this.apiVersion}/dashboard`;
+    const url = this.basePath + 'api/' + this.apiVersion + '/dashboard';
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));
   }
 
-  exportAPI(data:any) {
-    const url = `${environment.baseUrl}api/${this.apiVersion}/export`;
+  exportAPI(data: any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/export';
     return this.http
       .post(url, data)
       .pipe(catchError(this.Errorhandling));
   }
 
-  showPaginationCount(pageStart:any, pageEnd:any, total:any, lableString:any){
+  showPaginationCount(pageStart: any, pageEnd: any, total: any, lableString: any) {
     return lableString.replace('<number>', pageStart).replace('<number>', pageEnd).replace('<number>', total).replace('<nombre>', pageStart).replace('<nombre>', pageEnd).replace('<nombre>', total);
   }
 

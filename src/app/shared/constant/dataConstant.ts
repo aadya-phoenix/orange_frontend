@@ -48,8 +48,8 @@ export const dataConstant = {
   DesignStatus: {
     total: 'total', closed: 'closed', close: 'close', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', reject: 'reject', forwarded: 'forwarded', digital_learning: 'digital_learning', forward: 'forward', approve: 'approve', feedback: 'feedback', change: 'change', onHold: 'on_hold'
   },
-  ImageUrl: `${environment.baseUrl}public/public`,
-  BaseUrl: environment.baseUrl,
+  ImageUrl: `${environment.apiUrl}public/public`,
+  BaseUrl: environment.apiUrl,
   ExporType: { course: 'course', session: 'session', digital_learning: 'digital_learning',carousel: 'carousel', back_office: 'back_office', vendor: 'vendor', vendor_rating: 'vendor_rating', get_report: 'get_report' },
   RoleID: {
     RequesterID: 2,

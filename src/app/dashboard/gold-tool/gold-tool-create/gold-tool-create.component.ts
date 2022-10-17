@@ -86,7 +86,8 @@ export class GoldToolCreateComponent implements OnInit {
       region: new FormControl('', [Validators.required]),
       country: new FormControl('', [Validators.required]),
       gold_level_access: new FormControl('', [Validators.required]),
-      hrbp_email: new FormControl('', [Validators.required]),
+      hrbp_email: new FormControl('', [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
+      hrbp_name: new FormControl('', [Validators.required]),
       business_justification: new FormControl('', [Validators.required]),
       agree:new FormControl(false, [Validators.requiredTrue])
     });
@@ -220,7 +221,8 @@ export class GoldToolCreateComponent implements OnInit {
       region: new FormControl(data.region, [Validators.required]),
       country: new FormControl(data.country, [Validators.required]),
       gold_level_access: new FormControl(data.gold_level_access, [Validators.required]),
-      hrbp_email: new FormControl(data.hrbp_email, [Validators.required]),
+      hrbp_email: new FormControl(data.hrbp_email, [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
+      hrbp_name: new FormControl(data.hrbp_name, [Validators.required]),
       business_justification: new FormControl(data.business_justification, [Validators.required]),
       agree:new FormControl(data.agree, [Validators.requiredTrue])
     }));
@@ -236,7 +238,8 @@ export class GoldToolCreateComponent implements OnInit {
       region: new FormControl(data.region, [Validators.required]),
       country: new FormControl(data.country, [Validators.required]),
       gold_level_access: new FormControl(data.gold_level_access, [Validators.required]),
-      hrbp_email: new FormControl(data.hrbp_email, [Validators.required]),
+      hrbp_email: new FormControl(data.hrbp_email, [Validators.required, Validators.pattern(dataConstant.EmailPattren)]),
+      hrbp_name: new FormControl(data.hrbp_name, [Validators.required]),
       business_justification: new FormControl(data.business_justification, [Validators.required]),
       agree:new FormControl(data.agree, [Validators.requiredTrue])
     });

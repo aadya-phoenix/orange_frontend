@@ -214,9 +214,9 @@
                         <p [ngClass]="item.hrbp_status" *ngIf="!isHRBP">
                           {{ item.hrbp_status | titlecase }}
                         </p>
-                        <select class="form-control form_width" *ngIf="isHRBP" [(ngModel)]="item.hrbp_status">
-                          <option value="pending">Pening</option>
-                          <option value="approve">Approved</option>
+                        <select class="form-control form_width" *ngIf="isHRBP" [disabled]="item.status != 'pending'" [(ngModel)]="item.hrbp_status">
+                          <option value="pending" disabled>Pening</option>
+                          <option value="approve">Approve</option>
                           <option value="reject">Reject</option>
                         </select>
                       </td>
@@ -224,9 +224,15 @@
                         <p [ngClass]="item.status" *ngIf="!isGoldTeam">
                           {{ item.status | titlecase }}
                         </p>
-                        <select class="form-control form_width" *ngIf="isGoldTeam" [disabled]="item.hrbp_status != 'approve'" [(ngModel)]="item.status">
-                          <option value="pending">Pening</option>
-                          <option value="grant">Grant Permission</option>
+                        <p [ngClass]="pending" *ngIf="isGoldTeam && item.hrbp_status == 'pending'">
+                          Awaited approval from HRBP
+                        </p>
+                        <p [ngClass]="reject" *ngIf="isGoldTeam && item.hrbp_status == 'reject'">
+                          No action required
+                        </p>
+                        <select class="form-control form_width" *ngIf="isGoldTeam && item.hrbp_status == 'approve'" [(ngModel)]="item.status">
+                          <option value="pending" disabled>Pening</option>
+                          <option value="grant">Approve</option>
                           <option value="reject">Reject</option>
                         </select>
                       </td>
