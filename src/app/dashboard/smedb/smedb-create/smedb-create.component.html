@@ -449,6 +449,10 @@
                                                         <textarea class="form-control form_width-textarea" rows="3"
                                                             placeholder="Enter brief of experience" maxlength="500"
                                                             formControlName="comment"></textarea>
+                                                        <div class="error_message"
+                                                            *ngIf="(voiceOverLearningForm.controls['comment'].invalid && (voiceOverLearningForm.controls['comment'].dirty || voiceOverLearningForm.controls['comment'].touched || isSubmitted))">
+                                                            {{requiredMessage('Provice a brief of experience')}}
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="flex col-md-12 col-sm-12">

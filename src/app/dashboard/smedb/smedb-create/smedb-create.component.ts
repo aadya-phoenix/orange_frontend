@@ -375,6 +375,7 @@ export class SmedbCreateComponent implements OnInit {
             this.voiceOverLearningForm.controls.other_language.setValue(x.other_language);
             this.voiceOverLearningForm.controls.gender_voice.setValue(x.gender_voice);
             this.voiceOverLearningForm.controls.previous_experience.setValue(x.previous_experience);
+            this.voiceOverLearningForm.removeControl('comment');
             if(x.previous_experience == 'yes'){
               this.previous_voice = true;
               this.voiceOverLearningForm.addControl('comment', new FormControl(x.comment, [Validators.required]));
