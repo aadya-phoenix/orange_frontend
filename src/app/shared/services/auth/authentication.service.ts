@@ -33,7 +33,7 @@ export class AuthenticationService {
     };
     let grantObj = { grant_type: 'password' };
     let totalObj = { ...grantObj, ...clienSecret, ...data };
-    const url = this.basePath + '/oauth/token';
+    const url = this.basePath + 'oauth/token';
     return this.http.post(url, totalObj);
   }
 

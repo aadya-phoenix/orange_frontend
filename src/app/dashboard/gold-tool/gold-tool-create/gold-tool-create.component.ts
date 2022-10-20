@@ -192,7 +192,7 @@ export class GoldToolCreateComponent implements OnInit {
   }
 
   agreeChange(event:any) {
-    if (event.agree.value) {
+    if (event.value) {
       this.modalService.open(GoldToolAgreeComponent, {
         centered: true,
         size:'xl',

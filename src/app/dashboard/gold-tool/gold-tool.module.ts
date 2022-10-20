@@ -11,6 +11,7 @@ import { GoldToolViewComponent } from './gold-tool-view/gold-tool-view.component
 import { GoldToolCompleteReportComponent } from './gold-tool-complete-report/gold-tool-complete-report.component';
 import { GoldToolHistoryComponent } from './gold-tool-history/gold-tool-history.component';
 import { GoldToolAgreeComponent } from './gold-tool-agree/gold-tool-agree.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { GoldToolAgreeComponent } from './gold-tool-agree/gold-tool-agree.compon
     NgxPaginationModule,
     NgSelectModule,
     NgbModule,
+    PdfViewerModule
   ]
 })
 export class GoldToolModule { }

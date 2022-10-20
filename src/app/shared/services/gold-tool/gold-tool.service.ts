@@ -33,6 +33,13 @@ export class GoldToolService {
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  getGoldToolReport() {
+    const url = this.basePath + 'api/' + this.apiVersion + '/gold-tool/report';
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
   getHRBPEmail() {
     const url = this.basePath + 'api/' + this.apiVersion + '/user/hrbp';
     return this.http

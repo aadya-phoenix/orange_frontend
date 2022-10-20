@@ -27,11 +27,15 @@ export class GoldToolListComponent implements OnInit {
     page: 1,
     pageNumber: 1,
     pageSize: 10
-  }
+  };
   gold_tool_count = {
-    total: 0,
-    draft: 0
-  }
+    close: 0,
+    draft: 0,
+    pending: 0,
+    reject: 0,
+    submit: 0,
+    total: 0
+  };
 
   constructor(private commonService: CommonService,
     private goldToolService: GoldToolService,
@@ -44,11 +48,11 @@ export class GoldToolListComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams
       .subscribe(params => {
-        if(params?.status){
+        if (params?.status) {
           this.selectedStatus = params?.status;
         }
       }
-    );
+      );
     this.refreshGoldTools();
   }
 
@@ -59,7 +63,7 @@ export class GoldToolListComponent implements OnInit {
         this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
           this.goldToolList = res.data.gold_tool;
-          //this.gold_tool_count = res.data.carousel_count;
+          this.gold_tool_count = res.data.gold_tool_count;
           this.getrecords(this.selectedStatus);
         }
       },
@@ -76,8 +80,8 @@ export class GoldToolListComponent implements OnInit {
     }
   }
 
-  showPaginationCount(pageStart:any, pageEnd:any, total:any) {
-    return this.commonService.showPaginationCount(pageStart,pageEnd,total, this.lableConstant.showing_number_entries);
+  showPaginationCount(pageStart: any, pageEnd: any, total: any) {
+    return this.commonService.showPaginationCount(pageStart, pageEnd, total, this.lableConstant.showing_number_entries);
   }
 
   pageChanged(event: any) {
@@ -114,32 +118,32 @@ export class GoldToolListComponent implements OnInit {
     }
   }
 
-  deleteRequest(gold_tool_id: number){
-      Swal.fire({
-        title: 'Are you sure want to remove?',
-        text: 'You will not be able to recover this request!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, keep it'
-      }).then((result) => {
-        if (result.value) {
-          this.commonService.showLoading();
-          this.goldToolService.goldToolDelete({gold_tool_id :gold_tool_id}).subscribe((res:any)=>{
-            this.commonService.hideLoading();
-            this.refreshGoldTools();
-            Swal.fire(
-              'Deleted!',
-              'Your request has been deleted.',
-              'success'
-            )
-          },(err:any)=>{
-            this.commonService.hideLoading();
-            this.commonService.errorHandling(err);
-          })
-          
-        }
-      })
+  deleteRequest(gold_tool_id: number) {
+    Swal.fire({
+      title: 'Are you sure want to remove?',
+      text: 'You will not be able to recover this request!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.commonService.showLoading();
+        this.goldToolService.goldToolDelete({ gold_tool_id: gold_tool_id }).subscribe((res: any) => {
+          this.commonService.hideLoading();
+          this.refreshGoldTools();
+          Swal.fire(
+            'Deleted!',
+            'Your request has been deleted.',
+            'success'
+          )
+        }, (err: any) => {
+          this.commonService.hideLoading();
+          this.commonService.errorHandling(err);
+        })
+
+      }
+    })
   }
 
   openModal(item: any) {

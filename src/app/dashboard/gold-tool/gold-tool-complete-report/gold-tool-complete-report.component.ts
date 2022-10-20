@@ -29,11 +29,15 @@ export class GoldToolCompleteReportComponent implements OnInit {
     page: 1,
     pageNumber: 1,
     pageSize: 10
-  }
+  };
   gold_tool_count = {
-    total: 0,
-    draft: 0
-  }
+    close: 0,
+    draft: 0,
+    pending: 0,
+    reject: 0,
+    submit: 0,
+    total: 0
+  };
 
   constructor(private commonService: CommonService,
     private goldToolService: GoldToolService,
@@ -60,12 +64,12 @@ export class GoldToolCompleteReportComponent implements OnInit {
 
   refreshGoldTools() {
     this.commonService.showLoading();
-    this.goldToolService.getGoldTool().subscribe(
+    this.goldToolService.getGoldToolReport().subscribe(
       (res: any) => {
         this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
           this.goldToolList = res.data.gold_tool;
-          //this.gold_tool_count = res.data.carousel_count;
+          this.gold_tool_count = res.data.gold_tool_count;
           this.getrecords(this.selectedStatus);
         }
       },
