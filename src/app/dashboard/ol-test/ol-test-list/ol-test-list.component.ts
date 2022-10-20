@@ -17,37 +17,7 @@ import { OlTestCreateModelComponent } from '../ol-test-create-model/ol-test-crea
 export class OlTestListComponent implements OnInit {
   layoutGrid = true;
   lableConstant: any = { french: {}, english: {} };
-  oltestList: any = [
-    {
-      id: 1,
-      request_id: 'PDLTest01',
-      name: 'My Quiz 1',
-      description: 'Online Test',
-      created_at: "2022-02-24 12:38:01",
-      created_by: "Jignesh K",
-      questions:10,
-      status: 'pending'
-    },
-    {
-      id: 2,
-      request_id: 'PDLTest02',
-      name: 'My Quiz 2',
-      description: 'Online Test',
-      created_at: "2022-02-24 12:38:01",
-      created_by: "Jignesh K",
-      questions:10,
-      status: 'submitted'
-    }, {
-      id: 3,
-      name: 'My Quiz 3',
-      request_id: 'PDLTest03',
-      description: 'Online Test',
-      created_at: "2022-02-24 12:38:01",
-      created_by: "Jignesh K",
-      questions:10,
-      status: 'draft'
-    }
-  ];
+  oltestList: any = [];
 
   pagination = {
     page: 1,
@@ -95,7 +65,7 @@ export class OlTestListComponent implements OnInit {
 
   editRequest(oltest: any) {
     if (oltest && oltest.id) {
-      this.router.navigateByUrl(`/oltest/edit/${oltest.id}`);
+      this.router.navigateByUrl(`/oltest/update/${oltest.id}`);
     }
   }
 
@@ -110,7 +80,7 @@ export class OlTestListComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.commonService.showLoading();
-        this.olTestService.OlTestDelete({ oltest_id: id }).subscribe((res: any) => {
+        this.olTestService.OlTestDelete({ ol_test_id: id }).subscribe((res: any) => {
           this.commonService.hideLoading();
           this.getTest();
           Swal.fire(

@@ -18,7 +18,7 @@ export class GoldToolViewComponent implements OnInit {
   goldToolStatus = dataConstant.GoldToolStatus;
   id = 0;
   getUserrole: any = {};
-  getprofileDetails:any = {};
+  getprofileDetails: any = {};
   RoleID = dataConstant.RoleID;
   selectedStatus = this.goldToolStatus.total;
   lableConstant: any = { french: {}, english: {} };
@@ -30,11 +30,12 @@ export class GoldToolViewComponent implements OnInit {
   isGoldTeam = false;
   isRequester = false;
   goldTool_count = {
+    grant: 0,
     hrbp_approve: 0,
-    hrbp_pending: 1,
+    hrbp_pending: 0,
     hrbp_reject: 0,
-    permission_grant: 0,
-    permission_reject: 0,
+    pending: 0,
+    reject: 0,
     total: 0
   }
 
@@ -42,7 +43,7 @@ export class GoldToolViewComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthenticationService,
     private goldToolService: GoldToolService
-    ) {
+  ) {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.getUserrole = this.authService.getRolefromlocal();
     this.getprofileDetails = this.authService.getProfileDetailsfromlocal();
@@ -57,7 +58,7 @@ export class GoldToolViewComponent implements OnInit {
       this.id = Id ? parseInt(Id) : 0;
       this.getGoldToolDetails();
     });
-    
+
   }
 
   getGoldToolDetails() {
@@ -77,7 +78,7 @@ export class GoldToolViewComponent implements OnInit {
     );
   }
 
-  statusChange(){
+  statusChange() {
     Swal.fire({
       title: 'Are you sure want to chnage status?',
       icon: 'warning',
@@ -88,23 +89,23 @@ export class GoldToolViewComponent implements OnInit {
       if (result.value) {
         this.commonService.showLoading();
         var data = {
-          gold_tool_id : this.requestdata.id,
-          metadata_id : _.map(this.requestdata.metadata, (x:any) => {
-            return {id: x.id, status: this.isHRBP ? x.hrbp_status : x.status}
+          gold_tool_id: this.requestdata.id,
+          metadata_id: _.map(this.requestdata.metadata, (x: any) => {
+            return { id: x.id, status: this.isHRBP ? x.hrbp_status : x.status }
           })
         }
-        this.goldToolService.goldToolStatus(data).subscribe((res:any)=>{
+        this.goldToolService.goldToolStatus(data).subscribe((res: any) => {
           this.commonService.hideLoading();
           Swal.fire(
             'Updated!',
             'Status Updated.',
             'success'
           )
-        },(err:any)=>{
+        }, (err: any) => {
           this.commonService.hideLoading();
           this.commonService.errorHandling(err);
         })
-        
+
       }
     })
   }
