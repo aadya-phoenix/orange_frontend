@@ -5,6 +5,8 @@ import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { OlTestService } from 'src/app/shared/services/ol-test/ol-test.service';
+import { OlTestQuestionCreateComponent } from '../ol-test-question-create/ol-test-question-create.component';
+import { OlTestSectionCreateComponent } from '../ol-test-section-create/ol-test-section-create.component';
 
 @Component({
   selector: 'app-ol-test-view',
@@ -15,8 +17,10 @@ export class OlTestViewComponent implements OnInit {
   lableConstant: any = { french: {}, english: {} };
   id = 0;
   requestdata: any = {};
+  OLTestType = dataConstant.OLTestType;
   getUserrole: any = {};
   getprofileDetails: any = {};
+  searchText: any;
   constructor(
     private route: ActivatedRoute,
     private authService: AuthenticationService,
@@ -52,6 +56,51 @@ export class OlTestViewComponent implements OnInit {
         this.commonService.hideLoading();
       }
     );
+  }
+
+  createSection() {
+    const modalRef = this.modalService.open(OlTestSectionCreateComponent, {
+      centered: true,
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      objectDetail: {},
+    };
+    modalRef.componentInstance.passEntry.subscribe((res: any) => {
+      //body.publisher_id = res;
+      //this.saveData(body);
+    });
+  }
+
+  createQuestion() {
+    const modalRef = this.modalService.open(OlTestQuestionCreateComponent, {
+      centered: true,
+      size: 'xl',
+      windowClass: 'alert-popup',
+    });
+    modalRef.componentInstance.props = {
+      objectDetail: {},
+    };
+    modalRef.componentInstance.passEntry.subscribe((res: any) => {
+      //body.publisher_id = res;
+      //this.saveData(body);
+    });
+  }
+
+  exportTest() {
+
+  }
+  previewTest() {
+
+  }
+  copyRequest() {
+
+  }
+  editRequest() {
+
+  }
+  deleteRequest() {
+
   }
 
 }

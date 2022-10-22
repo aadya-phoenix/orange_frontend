@@ -1,1 +1,207 @@
-<p>ol-test-question-create works!</p>
+<div class="card mb-0">
+    <div class="card-header color-orange">
+        <div class="d-flex justify-content-between">
+            <h4 class="mb-0 mr-2 color-black fon_16">Create new Question </h4>
+            <a (click)="closeModal()"><i class="fa fa-times color-black" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <div class="card-body">
+        <!-- <h5 class="card-title" style="font-size: 0.9rem;">
+            <b class="color-orange">({{objectDetail.request_id}})</b>
+        </h5> -->
+        <form [formGroup]="createQuestionForm">
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="d-flex align-items-center">
+                        <div class="form-group w-100">
+                            <label class="form-control-label color-black">
+                                Section name <span class="text_red">* </span>
+                                <a>
+                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
+                                        placement="right" ngbTooltip=""></i>
+                                </a>
+                            </label>
+                            <ng-select placeholder="Please select subject" formControlName="subject" class="w_100">
+                            </ng-select>
+
+                            <div class="error_message">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="d-flex align-items-center">
+                        <div class="form-group w-100">
+                            <label class="form-control-label color-black">
+                                Question<span class="text_red">* </span>
+                                <a>
+                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
+                                        placement="right" ngbTooltip=""></i>
+                                </a>
+                            </label>
+                            <textarea placeholder="Please select subject" class="form_width-textarea">
+                          </textarea>
+
+                            <div class="error_message">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="d-flex align-items-center">
+                        <div class="form-group w-100">
+                            <label class="form-control-label color-black">
+                                Choose one of the following
+                                <span class="text_red">* </span>
+                                <a>
+                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
+                                        placement="right" ngbTooltip=""></i>
+                                </a>
+                            </label>
+                            <ng-select placeholder="Please select subject" formControlName="subject" class="w_100">
+                            </ng-select>
+
+                            <div class="error_message">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="d-flex align-items-center">
+                        <div class="form-group w-100">
+                            <label class="form-control-label color-black">
+                                Correct Answer
+                                <span class="text_red">* </span>
+                                <a>
+                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
+                                        placement="right" ngbTooltip=""></i>
+                                </a>
+                            </label>
+                            <ng-select placeholder="Please select subject" formControlName="subject" class="w_100">
+                            </ng-select>
+
+                            <div class="error_message">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="d-flex align-items-center">
+                        <div class="form-group w-100">
+                            <label class="form-control-label color-black">
+                                Correct Answer
+                                <span class="text_red">* </span>
+                                <a>
+                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
+                                        placement="right" ngbTooltip=""></i>
+                                </a>
+                            </label>
+                            <input type="file" class="form-control form_width" formControlName="start_date" />
+
+                            <div class="error_message">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="d-flex align-items-center">
+                        <div class="form-group w-100">
+                            <label class="form-control-label color-black">
+                                Feedback(Answer Explanation)
+                                <span class="text_red">* </span>
+                                <a>
+                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
+                                        placement="right" ngbTooltip=""></i>
+                                </a>
+                            </label>
+                            <input type="text" class="form-control form_width" formControlName="start_date" />
+
+                            <div class="error_message">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="d-flex align-items-center">
+                        <div class="form-group w-100">
+                            <label class="form-control-label color-black">
+                                Correct feedback
+                                <span class="text_red">* </span>
+                                <a>
+                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
+                                        placement="right" ngbTooltip=""></i>
+                                </a>
+                            </label>
+                            <input type="text" class="form-control form_width" formControlName="start_date" />
+
+                            <div class="error_message">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="d-flex align-items-center">
+                        <div class="form-group w-100">
+                            <label class="form-control-label color-black">
+                                Incorrect feedback
+                                <span class="text_red">* </span>
+                                <a>
+                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
+                                        placement="right" ngbTooltip=""></i>
+                                </a>
+                            </label>
+                            <input type="text" class="form-control form_width" formControlName="start_date" />
+
+                            <div class="error_message">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="d-flex align-items-center">
+                        <div class="form-group w-100">
+                            <label class="form-control-label color-black">
+                                Try again feedback
+                                <span class="text_red">* </span>
+                                <a>
+                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
+                                        placement="right" ngbTooltip=""></i>
+                                </a>
+                            </label>
+                            <input type="text" class="form-control form_width" formControlName="start_date" />
+
+                            <div class="error_message">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-primary mr-1" type="submit" (click)="createSection()">{{lableConstant.submit}}</button>
+        <button class="btn btn-secondary" type="submit" (click)="closeModal()">{{lableConstant.cancel}}</button>
+    </div>
+</div>

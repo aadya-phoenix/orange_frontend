@@ -45,6 +45,18 @@
                                     titlecase}}</span></h4>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <button class="btn btn-primary">Review and Submit </button>
+                            <div class="d-flex" *ngIf="requestdata.test_type == OLTestType.Scorm">
+                                <button class="btn btn-secondary" (click)="exportTest()"><i class="fa fa-download mr-2"
+                                        aria-hidden="true"></i>Export </button>
+                                <button class="btn btn-secondary ml-2" (click)="previewTest()"><i
+                                        class="fa fa-play mr-2" aria-hidden="true"></i>Preview test
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-header cm-card-header">
                             <div class="overall_css d-flex m-1 justify_content align-items-center">
@@ -52,34 +64,69 @@
                                     <h4 class="mb-0 mr-2 color-black fon_16">Question list </h4>
                                 </div>
                                 <div>
-                                    <button class="btn btn-secondary mr-1"><i class="fa fa-plus mr-2"></i>Add Section
+                                    <button class="btn btn-secondary mr-1" (click)="createSection()"><i
+                                            class="fa fa-plus mr-2"></i>Add Section
                                     </button>
-                                    <button class="btn btn-secondary "><i class="fa fa-plus mr-2"></i>Add Question
+                                    <button class="btn btn-secondary" (click)="createQuestion()"><i
+                                            class="fa fa-plus mr-2"></i>Add Question
                                     </button>
                                 </div>
 
                             </div>
                         </div>
                         <div class="card-body card_course_body mt-2">
+                            <div class="filter_dispaly">
+                                <div class="d-flex" *ngIf="requestdata.test_type == OLTestType.Scorm">
+                                    <input type="checkbox" class="mr-2"><label>Shuffle questions in the test</label>
+                                </div>
+                                <div class="form-group filter_course">
+                                    <input type="text " name="search " autocomplete="off" [(ngModel)]="searchText"
+                                        placeholder="Type to Search"
+                                        class="form-control ng-untouched ng-pristine ng-valid form_width"
+                                        ng-reflect-name="search" />
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="table-responsive table_height_scroll">
-                                        <table class="table table-bordered ">
-                                            <thead>
-                                                <tr class="fon_15 text-center sticky_header">
-                                                    <th scope="col">Order </th>
-                                                    <th>SECTIONS AND QUESTIONS </th>
-                                                    <th>Display</th>
-                                                    <th>Time</th>
+                                        <table id="bootstrap-data-table-export "
+                                            class="table table-striped table-bordered">
+                                            <thead class="sticky_header">
+                                                <tr class="text-center font-13">
+                                                    <th scope="col">Order</th>
+                                                    <th scope="col">SECTIONS AND QUESTIONS </th>
+                                                    <th *ngIf="requestdata.test_type == OLTestType.Scorm">Random Selection</th>
+                                                    <th scope="col">Display </th>
+                                                    <th scope="col">Type </th>
+                                                    <th scope="col">Action </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                <tr class="text-center font-14">
+                                                    <td>1 </td>
+                                                    <td>Section 1 name
+                                                    </td>
+                                                    <td *ngIf="requestdata.test_type == OLTestType.Scorm"> <input type="checkbox" class="mr-2"></td>
+                                                    <td><select class="form-control form_width">
+                                                        </select>
+                                                    </td>
+                                                    <td>Multiple Choice – MA</td>
+                                                    <td>
+                                                        <a (click)="copyRequest()" class="copy_file mr-1"
+                                                            data-toggle="tooltip" data-placement="top" title="Copy">
+                                                            <i class="fa fa-files-o" aria-hidden="true"></i>
+                                                        </a>
+                                                        <a (click)="editRequest()" class="copy_file mr-1"
+                                                            data-toggle="tooltip" data-placement="top" title="Edit">
+                                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                        </a>
+                                                        <a (click)="deleteRequest()" class="copy_file mr-1"
+                                                            data-toggle="tooltip" data-placement="top" title="Delete">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
+
                                             </tbody>
                                         </table>
                                     </div>

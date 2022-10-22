@@ -1,1 +1,36 @@
-<p>ol-test-section-create works!</p>
+<div class="card mb-0">
+    <div class="card-header color-orange">
+        <div class="d-flex justify-content-between">
+            Section
+            <a (click)="closeModal()"><i class="fa fa-times color-black" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <div class="card-body">
+        <!-- <h5 class="card-title" style="font-size: 0.9rem;">
+            <b class="color-orange">({{objectDetail.request_id}})</b>
+        </h5> -->
+        <form [formGroup]="createSectionForm">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label class="form-control-label">
+                        Section Name <span class="text-danger-ligth">* </span>
+                    </label>
+                    <input type="text" class="form-control form_width"
+                    placeholder="Enter section name"
+                    formControlName="section_name">
+                    <div
+                        *ngIf="(createSectionForm.controls['publisher_id'].invalid && (createSectionForm.controls['publisher_id'].dirty || createSectionForm.controls['publisher_id'].touched)) || isSubmitted">
+                        <div class="error_message"
+                            *ngIf="createSectionForm.controls['publisher_id'].errors?.required">
+                            {{requiredMessage('Section Name')}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-primary mr-1" type="submit" (click)="createSection()">{{lableConstant.submit}}</button>
+        <button class="btn btn-secondary" type="submit" (click)="closeModal()">{{lableConstant.cancel}}</button>
+    </div>
+</div>

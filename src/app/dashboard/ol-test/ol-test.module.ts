@@ -21,7 +21,7 @@ import { OlTestSectionCreateComponent } from './ol-test-section-create/ol-test-s
     OlTestQuestionCreateComponent,
     OlTestSectionCreateComponent],
   providers: [DatePipe],
-  entryComponents: [OlTestCreateModelComponent],
+  entryComponents: [OlTestCreateModelComponent, OlTestSectionCreateComponent, OlTestQuestionCreateComponent],
   imports: [
     CommonModule,
     OlTestRoutingModule,
