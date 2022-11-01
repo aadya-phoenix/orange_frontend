@@ -1,6 +1,5 @@
 <div id="right-panel" class="right-panel">
     <app-header></app-header>
-
     <div class="breadcrumbs cm_breadcums">
         <div class="col-sm-8">
             <div class="page-header float-left bac_trasparent">
@@ -13,9 +12,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
         <div class="col-sm-4 float-right">
             <div class="page-header float-right bac_trasparent">
                 <div class="page-title d-flex end_just">
@@ -30,41 +27,40 @@
             </div>
         </div>
     </div>
-    <!-- Button trigger modal -->
     <div class="content mt-2">
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header cm-card-header">
-                            <div class="overall_css">
+                            <!-- <div class="overall_css">
                                 <span class="card_overall">{{lableConstant.Overall_request_Status}}</span>
                                 <div class="cct_button_oversta">
-                                    <button class="btn btn-secondary" [routerLink]="['/olreport/view-complete-report']">
+                                    <button class="btn btn-secondary" [routerLink]="['/vendortraining/view-complete-report']">
                                         <i class="fa fa-bar-chart mr-1" aria-hidden="true "></i> {{lableConstant.View_all_activity_report}}
                                       </button>
                                     <button class="btn btn-primary ml-1"
-                                        [routerLink]="['/olreport/create']">
+                                        [routerLink]="['/vendortraining/create']">
                                         <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1"> {{lableConstant.New_Request}}</span>
                                     </button>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="card-body card_course_body">
                             <div class="Course_icon_parent" data-aos="fade-right">
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(reportStatus.draft)">
+                                    <div class="alig_dashicon" (click)="showRecords(vendorStatus.draft)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-draft">
                                                 <img src="../../../../assets/images/icon/drafts.png" />
                                             </div>
                                             <p>{{lableConstant.Draft}}</p>
                                         </div>
-                                        <span class="number_css">{{report_count.draft?report_count.draft:0}}</span>
+                                        <span class="number_css">{{vendor_count.draft?vendor_count.draft:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(reportStatus.submitted)">
+                                    <div class="alig_dashicon" (click)="showRecords(vendorStatus.submitted)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-submit">
                                                 <img src="../../../../assets/images/icon/closed.png" />
@@ -72,23 +68,22 @@
                                             <p>{{lableConstant.Submitted}}</p>
                                         </div>
                                         <span
-                                            class="number_css sub_mitted">{{report_count.submitted?report_count.submitted:0}}</span>
+                                            class="number_css sub_mitted">{{vendor_count.submitted?vendor_count.submitted:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child" *ngIf="isRoc || isDataAnalyst">
-                                    <div class="alig_dashicon" (click)="showRecords(reportStatus.pending)">
+                                    <div class="alig_dashicon" (click)="showRecords(vendorStatus.pending)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des bac_yellow">
                                                 <img src="../../../../assets/images/icon/pending.png" />
                                             </div>
                                             <p>{{lableConstant.pending}}</p>
                                         </div>
-                                        <span
-                                            class="number_css ">{{report_count.pending?report_count.pending:0}}</span>
+                                        <span class="number_css ">{{vendor_count.pending?vendor_count.pending:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child" *ngIf="isRoc">
-                                    <div class="alig_dashicon" (click)="showRecords(reportStatus.transferred)">
+                                    <div class="alig_dashicon" (click)="showRecords(vendorStatus.transferred)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des bac_red">
                                                 <img src="../../../../assets/images/icon/transfer.png" />
@@ -96,11 +91,11 @@
                                             <p>{{lableConstant.forwarded}}</p>
                                         </div>
                                         <span
-                                            class="number_css forwoded_left">{{report_count.transferred?report_count.transferred:0}}</span>
+                                            class="number_css forwoded_left">{{vendor_count.transferred?vendor_count.transferred:0}}</span>
                                     </div>
                                 </div>
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(reportStatus.closed)">
+                                    <div class="alig_dashicon" (click)="showRecords(vendorStatus.closed)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-learning">
                                                 <img src="../../../../assets/images/icon/check.png" />
@@ -108,13 +103,11 @@
                                             <p>Closed</p>
                                         </div>
                                         <span
-                                            class="number_css pub_lished">{{report_count.closed?report_count.closed:0}}</span>
+                                            class="number_css pub_lished">{{vendor_count.closed?vendor_count.closed:0}}</span>
                                     </div>
                                 </div>
-                               
-                               
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(reportStatus.rejected)">
+                                    <div class="alig_dashicon" (click)="showRecords(vendorStatus.rejected)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-reject">
                                                 <img src="../../../../assets/images/icon/reject.png" />
@@ -122,12 +115,11 @@
                                             <p>{{lableConstant.Rejected}}</p>
                                         </div>
                                         <span
-                                            class="number_css reject_left">{{report_count.rejected?report_count.rejected:0}}</span>
+                                            class="number_css reject_left">{{vendor_count.rejected?vendor_count.rejected:0}}</span>
                                     </div>
                                 </div>
-                               
                                 <div class="Course_icon_child">
-                                    <div class="alig_dashicon" (click)="showRecords(reportStatus.total)">
+                                    <div class="alig_dashicon" (click)="showRecords(vendorStatus.total)">
                                         <div class="sub-child-dashicon">
                                             <div class="fa-icons-des cm-all">
                                                 <img src="../../../../assets/images/icon/viewall.png" />
@@ -135,7 +127,7 @@
 
                                             <p>{{lableConstant.View_All}}</p>
                                         </div>
-                                        <span class="number_css">{{report_count.total?report_count.total:0}}</span>
+                                        <span class="number_css">{{vendor_count.total?vendor_count.total:0}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -143,20 +135,58 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-3  mb-4">
+                    <div class="card card_seco_dna">
+                        <div class="border_top_card_dna">
+                            <p>vendor training</p>
+                        </div>
+                        <div class="card_bac_dna">
+                            <p class="text_balck fon_16 font_weight mt-2 mb-2">title</p>
+                            <img src="../../../../assets/images/worl_co.png" class="w_50_dna">
+                            <p class="text_balck fon_17 font_bold mt_13 mb-0 pa-14">
+                                External Training/ Certification/ 360 Assessment
+                            </p>
+                            <div class="mb-0 buttonstart_ma">
+                                <button routerLink="/vendortraining/create" class="btn btn-primary"><span
+                                        class="fon_12">New Request</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4  mb-4">
+                    <div class="card card_seco_dna">
+                        <div class="border_top_card_dna">
+                            <p>vendor training</p>
+                        </div>
+                        <div class="card_bac_dna">
+                            <p class="text_balck fon_16 font_weight mt-2 mb-2">title</p>
+                            <img src="../../../../assets/images/worl_co.png" class="w_50_dna">
+
+                            <p class="text_balck fon_17 font_bold mt_13 mb-0 pa-14">
+                                Exam Voucher
+                            </p>
+                            <div class="mb-0 buttonstart_ma">
+                                <button class="btn btn-primary" ><span class="fon_12">New
+                                        Request</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
     <div class="content">
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-12">
-
                     <div class="card">
                         <div class="card-header cm-card-header">
                             <div class="overall_css">
                                 <div>
                                     <i class="fa fa-table fa_table" aria-hidden="true "></i>
-                                    <span class="card-title card-title-text card_overall">{{lableConstant.My_Request}}</span>
+                                    <span
+                                        class="card-title card-title-text card_overall">{{lableConstant.My_Request}}</span>
                                 </div>
                                 <div class="filter_dispaly">
                                     <div class="form-group filter_course">
@@ -180,17 +210,18 @@
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
                                             <th sortable="training_title" (sort)="onSort($event)">
+                                                {{lableConstant.requester_name}}
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
+                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
+                                            </th>
+                                            <th sortable="training_title" (sort)="onSort($event)">
                                                 {{lableConstant.Training_Title}}
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
                                             <th sortable="report_type" (sort)="onSort($event)">
-                                                {{lableConstant.Report_Type}}
-                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
-                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
-                                            </th>
-                                            <th sortable="requester_name" (sort)="onSort($event)">
-                                                {{lableConstant.requester_name}}
+                                                <!--   {{lableConstant.Report_Type}} -->
+                                                Request Type
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
@@ -201,17 +232,11 @@
                                             </th>
                                             <th sortable="requested_date" (sort)="onSort($event)">
                                                 Requested Date
-                                                <i class="fa fa-long-arrow-up arrow_css"
-                                                    aria-hidden="true"></i>
+                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true"></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true"></i>
                                             </th>
                                             <th sortable="deadline" (sort)="onSort($event)">
-                                                {{lableConstant.Deadline}}
-                                                <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
-                                                <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
-                                            </th>
-                                            <th sortable="download_report" (sort)="onSort($event)">
-                                                Download Report
+                                                {{lableConstant.last_modified}}
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
                                             </th>
@@ -219,62 +244,75 @@
                                                 History
                                                 <i class="fa fa-long-arrow-up arrow_css" aria-hidden="true "></i>
                                                 <i class="fa fa-long-arrow-down arrow_css" aria-hidden="true "></i>
-                                            </th>                                           
+                                            </th>
                                             <th class="text-center">{{lableConstant.actions}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let item of reportListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber }"
+                                        <tr *ngFor="let item of trainingListToShow | filter: searchText  | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber }"
                                             class="text-center bac_hover-table font-12">
                                             <td class="request_id" (click)="viewRequest(item)">
                                                 {{ item.request_id }}
                                             </td>
-                                            <td  (click)="viewRequest(item)">
-                                                {{ item.title | titlecase }}
-                                            </td>
-                                            <td  (click)="viewRequest(item)">
-                                                {{ item.report_type }}
+                                            <td (click)="viewRequest(item)">
+                                                {{ item.requester_name | titlecase }}
                                             </td>
                                             <td (click)="viewRequest(item)">
-                                                {{ item && item.user_name ? item.user_name :
-                                                "-" }}
+                                                {{ item.training_name | titlecase }}
                                             </td>
-                                            <td class="text-center">
+                                            <td (click)="viewRequest(item)">
+                                                {{ item.report_type }}
+                                            </td>
+                                            <!--  <td class="text-center">
                                                 <p [ngClass]="item.status">
                                                     {{ (item.status_new ? item.status_new : 'Pending') | titlecase }}
                                                 </p>
+                                            </td> -->
+                                            <td class="text-center">
+                                                <p [ngClass]="item.status">
+                                                    {{ (item.status ? item.status : 'Pending') | titlecase }}
+                                                </p>
                                             </td>
-                                            <td (click)="viewRequest(item)">{{ item.created_at | date: dateTimeFormate }}
+                                            <td (click)="viewRequest(item)">{{ item.created_at | date: dateTimeFormate
+                                                }}
                                             </td>
                                             <td (click)="viewRequest(item)">
-                                                {{ item.deadline | date: dateFormate }}
+                                                {{ item.updated_at | date: dateFormate }}
                                             </td>
+
                                             <td>
-                                                <a  *ngIf="item.status_new == reportStatus.closed && item.report_attachment" 
-                                                href="{{item.imgUrl}}" (click)="repot(item.imgUrl)">
-                                                    <i class="fa fa-download" aria-hidden="true"></i>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <a *ngIf="item.status !== reportStatus.draft" (click)="openModal(item)" class="re_id">
+                                                <a *ngIf="item.status !== vendorStatus.draft" (click)="openModal(item)"
+                                                    class="re_id">
                                                     {{lableConstant.view}}
                                                 </a>
                                             </td>
                                             <td class="text-center">
-                                                <a (click)="copyRequest(item.id)" class="copy_file mr-1" *ngIf="item.status_show === reportStatus.submitted"
+                                                <a (click)="copyRequest(item.id)" class="copy_file mr-1"
+                                                    *ngIf="item.status=== vendorStatus.submitted"
                                                     data-toggle="tooltip" data-placement="top" title="Copy">
                                                     <i class="fa fa-files-o" aria-hidden="true"></i>
                                                 </a>
+                                                <!--  <a (click)="editRequest(item)"
+                                                    *ngIf="item.status_show === vendorStatus.draft || (item.status_show === vendorStatus.reject && isRequester && item.user_id === getprofileDetails.data.id) || (item.status_show == vendorStatus.pending && (isRoc || isDataAnalyst))"
+                                                    class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
+                                                    title="Edit">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                </a> -->
+                                                <!--  <a (click)="deleteRequest(item.id)"
+                                                    *ngIf="item.status_show === vendorStatus.draft"
+                                                    class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
+                                                    title="Delete">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </a> -->
                                                 <a (click)="editRequest(item)"
-                                                    *ngIf="item.status_show === reportStatus.draft || (item.status_show === reportStatus.reject && isRequester && item.user_id === getprofileDetails.data.id) || (item.status_show == reportStatus.pending && (isRoc || isDataAnalyst))"
+                                                    *ngIf="item.status === vendorStatus.draft || (item.status === vendorStatus.reject && isRequester && item.user_id === getprofileDetails.data.id) || (item.status== vendorStatus.pending && (isRoc || isDataAnalyst))"
                                                     class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
                                                     title="Edit">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
                                                 <a (click)="deleteRequest(item.id)"
-                                                    *ngIf="item.status_show === reportStatus.draft"
-                                                    class="copy_file mr-1" data-toggle="tooltip" data-placement="top"
-                                                    title="Delete">
+                                                    *ngIf="item.status === vendorStatus.draft" class="copy_file mr-1"
+                                                    data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </a>
                                                 <a class="copy_file mr-1" data-toggle="tooltip"
@@ -291,9 +329,9 @@
                                     <p class="cm-pagination-fotter">{{showPaginationCount(((pagination.pageSize *
                                         (pagination.pageNumber - 1)) + 1),
                                         ((this.pagination.pageSize * this.pagination.pageNumber) >
-                                        this.reportListToShow?.length ? this.reportListToShow?.length :
+                                        this.trainingListToShow?.length ? this.trainingListToShow?.length :
                                         this.pagination.pageSize * this.pagination.pageNumber),
-                                        this.reportListToShow?.length)}}</p>
+                                        this.trainingListToShow?.length)}}</p>
                                 </div>
                                 <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                             </div>

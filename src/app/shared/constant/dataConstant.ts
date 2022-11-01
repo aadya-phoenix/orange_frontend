@@ -42,6 +42,7 @@ export const dataConstant = {
   GoldToolStatus: { total: 'total', closed: 'closed', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish', reject: 'reject' },
   VendorStatus: { total: 'total', active: 'active', deactive: 'deactive' },
   GetReportStatus: { total: 'total', closed: 'closed', close: 'close', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish', reject: 'reject', expired: 'expired' },
+  VendorTrainingStatus: { total: 'total', closed: 'closed', close: 'close', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', publish: 'publish', reject: 'reject', expired: 'expired' },
   DnaStatus: {
     total: 'total', closed: 'closed', close: 'close', draft: 'draft', pending: 'pending', rejected: 'rejected', submitted: 'submitted', transferred: 'transferred', forwarded: 'forwarded', digital_learning: 'digital_learning'
   },
