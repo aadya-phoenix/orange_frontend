@@ -65,6 +65,7 @@ export class OlTestViewComponent implements OnInit {
     });
     modalRef.componentInstance.props = {
       objectDetail: {},
+      test_id :this.id 
     };
     modalRef.componentInstance.passEntry.subscribe((res: any) => {
       //body.publisher_id = res;

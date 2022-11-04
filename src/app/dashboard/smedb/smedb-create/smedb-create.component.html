@@ -205,6 +205,16 @@
                                             <a class="nav-link" id="id-voice-over" data-toggle="pill" href="#voice-over" [ngClass]="{'active': selectedTab == SMETabs.voiceOver}"
                                                 role="tab" aria-controls="voice-over" aria-selected="false"  (click)="changeTab(SMETabs.voiceOver)">{{lableConstant.voice_over_for_elearning}}</a>
                                         </li>
+                                        <li class="nav-item" role="presentation"
+                                            *ngIf="sme_details.domain.includes('domain-expert')">
+                                            <a class="nav-link" id="id-voice-over" data-toggle="pill" href="#domain-expert" [ngClass]="{'active': selectedTab == SMETabs.domainExpert}"
+                                                role="tab" aria-controls="voice-over" aria-selected="false"  (click)="changeTab(SMETabs.domainExpert)">Domain expert</a>
+                                        </li>
+                                        <li class="nav-item" role="presentation"
+                                            *ngIf="sme_details.domain.includes('facilitation-expert')">
+                                            <a class="nav-link" id="id-voice-over" data-toggle="pill" href="#facilitation-expert" [ngClass]="{'active': selectedTab == SMETabs.facilitationExpert}"
+                                                role="tab" aria-controls="voice-over" aria-selected="false"  (click)="changeTab(SMETabs.facilitationExpert)">Facilitation expert</a>
+                                        </li>
                                         <li class="nav-item" role="presentation">
                                             <a class="nav-link" id="id-professional-certi" data-toggle="pill"
                                                 href="#professional-certi" role="tab" aria-controls="professional-certi" [ngClass]="{'active': selectedTab == SMETabs.professionalCertifications}"
@@ -494,6 +504,120 @@
                                                             <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
                                                         </ngx-dropzone-video-preview>
                                                     </div> -->
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade"  [ngClass]="{'show active': selectedTab == SMETabs.facilitationExpert}" id="facilitation-expert" role="tabpanel"
+                                        aria-labelledby="id-facilitation-expert"
+                                        *ngIf="sme_details.domain.includes('facilitation-expert')">
+                                        <form [formGroup]="facilitationExpertForm" enctype="multipart/form-data">
+                                            <div formArrayName="facilitation-expert">
+                                                
+                                                <div class="row"
+                                                    *ngFor="let contentSup of facilitationExpertFormArray.controls; let i = index">
+                                                    <div class="col-md-5 col-sm-12" [formGroupName]="i">
+
+                                                        <div class="form-group w-100">
+                                                            <label class="form-control-label">
+                                                                {{lableConstant.Title}} <span class="text_red">*
+                                                                </span>
+                                                            </label>
+                                                            <ng-select placeholder="Please select title"
+                                                                [items]="CCTDomainSkills" bindLabel="expertise"
+                                                                bindValue="expertise" groupBy="domain"
+                                                                formControlName="title" [multiple]=false class="w_100">
+                                                            </ng-select>
+                                                            <div class="error_message"
+                                                                *ngIf="(facilitationExpertFormArray.controls[i].controls['title'].invalid && (facilitationExpertFormArray.controls[i].controls['title'].dirty || facilitationExpertFormArray.controls[i].controls['title'].touched || isSubmitted))">
+                                                                {{requiredMessage(this.lableConstant.Title)}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5 col-sm-12" [formGroupName]="i">
+                                                        <div class="form-group w-100">
+                                                            <label class="form-control-label">
+                                                                {{lableConstant.Level}} <span class="text_red">*
+                                                                </span>
+                                                            </label>
+                                                            <ng-select placeholder="Please select level"
+                                                                [items]="CCTLevel" bindLabel="sme_level"
+                                                                bindValue="sme_level" formControlName="level"
+                                                                [multiple]=false class="w_100">
+                                                            </ng-select>
+                                                            <div class="error_message"
+                                                                *ngIf="(facilitationExpertFormArray.controls[i].controls['level'].invalid && (facilitationExpertFormArray.controls[i].controls['level'].dirty || facilitationExpertFormArray.controls[i].controls['level'].touched || isSubmitted))">
+                                                                {{requiredMessage(this.lableConstant.Level)}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-12 mt-35" [formGroupName]="i">
+                                                        <button class="btn btn-success mr-2"
+                                                            (click)="addFacilitationExpert(0)">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                        <button class="btn btn-danger" (click)="removeFacilitationExpert(i)"
+                                                            *ngIf="i > 0">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade"  [ngClass]="{'show active': selectedTab == SMETabs.domainExpert}" id="domain-expert" role="tabpanel"
+                                        aria-labelledby="id-domain-expert"
+                                        *ngIf="sme_details.domain.includes('domain-expert')">
+                                        <form [formGroup]="domainExpertForm" enctype="multipart/form-data">
+                                            <div formArrayName="domain-expert">
+                                                
+                                                <div class="row"
+                                                    *ngFor="let contentSup of domainExpertFormArray.controls; let i = index">
+                                                    <div class="col-md-5 col-sm-12" [formGroupName]="i">
+
+                                                        <div class="form-group w-100">
+                                                            <label class="form-control-label">
+                                                                {{lableConstant.Title}} <span class="text_red">*
+                                                                </span>
+                                                            </label>
+                                                            <ng-select placeholder="Please select title"
+                                                                [items]="CCTDomainSkills" bindLabel="expertise"
+                                                                bindValue="expertise" groupBy="domain"
+                                                                formControlName="title" [multiple]=false class="w_100">
+                                                            </ng-select>
+                                                            <div class="error_message"
+                                                                *ngIf="(domainExpertFormArray.controls[i].controls['title'].invalid && (domainExpertFormArray.controls[i].controls['title'].dirty || domainExpertFormArray.controls[i].controls['title'].touched || isSubmitted))">
+                                                                {{requiredMessage(this.lableConstant.Title)}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5 col-sm-12" [formGroupName]="i">
+                                                        <div class="form-group w-100">
+                                                            <label class="form-control-label">
+                                                                {{lableConstant.Level}} <span class="text_red">*
+                                                                </span>
+                                                            </label>
+                                                            <ng-select placeholder="Please select level"
+                                                                [items]="CCTLevel" bindLabel="sme_level"
+                                                                bindValue="sme_level" formControlName="level"
+                                                                [multiple]=false class="w_100">
+                                                            </ng-select>
+                                                            <div class="error_message"
+                                                                *ngIf="(domainExpertFormArray.controls[i].controls['level'].invalid && (domainExpertFormArray.controls[i].controls['level'].dirty || domainExpertFormArray.controls[i].controls['level'].touched || isSubmitted))">
+                                                                {{requiredMessage(this.lableConstant.Level)}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-12 mt-35" [formGroupName]="i">
+                                                        <button class="btn btn-success mr-2"
+                                                            (click)="addDomainExpert(0)">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                        <button class="btn btn-danger" (click)="removeDomainExpert(i)"
+                                                            *ngIf="i > 0">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>

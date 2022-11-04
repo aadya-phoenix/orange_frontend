@@ -201,7 +201,7 @@ export const dataConstant = {
   }, {
     name: 'SME Database', id: 'sme'
   }],
-  SMETabs: { contecntSupport: 'content-support', delivery: 'delivery', voiceOver: 'voice-over-learning', professionalCertifications: 'professional-certifications', comments: 'comments' },
+  SMETabs: { contecntSupport: 'content-support', delivery: 'delivery', voiceOver: 'voice-over-learning', domainExpert: 'domain-expert', facilitationExpert: 'facilitation-expert', professionalCertifications: 'professional-certifications', comments: 'comments' },
   OLTestType:{
     Online: 'Online', Scorm:'Scorm'
   },

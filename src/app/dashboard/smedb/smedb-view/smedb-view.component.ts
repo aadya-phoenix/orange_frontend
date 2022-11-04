@@ -31,6 +31,8 @@ export class SmedbViewComponent implements OnInit {
   contentSupportData = [];
   deliveryData = [];
   professionalCertificationsData = [];
+  domainExpertData = [];
+  facilitationExpertData = [];
   commentsData = [];
   voiceOverLearningData:any= [];
   msaapDisplayTitle = false;
@@ -74,6 +76,14 @@ export class SmedbViewComponent implements OnInit {
             if (this.requestdata.metadata["content-support"]) {
               this.contentSupportData = this.requestdata.metadata["content-support"];
               // this.activeIds.push(`panel-content-support`);
+            }
+            if (this.requestdata.metadata["domain-expert"]) {
+              this.domainExpertData = this.requestdata.metadata["domain-expert"];
+              // this.activeIds.push(`panel-domain-expert`);
+            }
+            if (this.requestdata.metadata["facilitation-expert"]) {
+              this.facilitationExpertData = this.requestdata.metadata["facilitation-expert"];
+              // this.activeIds.push(`panel-facilitation-expert`);
             }
             if (this.requestdata.metadata["delivery"]) {
               this.deliveryData = this.requestdata.metadata["delivery"];
