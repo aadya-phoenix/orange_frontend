@@ -5,6 +5,7 @@ import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { OlTestService } from 'src/app/shared/services/ol-test/ol-test.service';
+import Swal from 'sweetalert2';
 import { OlTestQuestionCreateComponent } from '../ol-test-question-create/ol-test-question-create.component';
 import { OlTestSectionCreateComponent } from '../ol-test-section-create/ol-test-section-create.component';
 
@@ -65,7 +66,7 @@ export class OlTestViewComponent implements OnInit {
     });
     modalRef.componentInstance.props = {
       objectDetail: {},
-      test_id :this.id 
+      test_id: this.id
     };
     modalRef.componentInstance.passEntry.subscribe((res: any) => {
       //body.publisher_id = res;
@@ -80,7 +81,7 @@ export class OlTestViewComponent implements OnInit {
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
-      objectDetail: {},
+      objectDetail: this.requestdata,
     };
     modalRef.componentInstance.passEntry.subscribe((res: any) => {
       //body.publisher_id = res;
@@ -102,6 +103,60 @@ export class OlTestViewComponent implements OnInit {
   }
   deleteRequest() {
 
+  }
+  deleteSection(id: any) {
+    Swal.fire({
+      title: 'Are you sure want to remove?',
+      text: 'You will not be able to recover this section!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.commonService.showLoading();
+        this.olTestService.deleteSection({ section_id: id }, this.id).subscribe((res: any) => {
+          this.commonService.hideLoading();
+          this.getDetails();
+          Swal.fire(
+            'Deleted!',
+            'Your request has been deleted.',
+            'success'
+          )
+        }, (err: any) => {
+          this.commonService.hideLoading();
+          this.commonService.errorHandling(err);
+        })
+
+      }
+    })
+  }
+  deleteQuestion(id: any) {
+    Swal.fire({
+      title: 'Are you sure want to remove?',
+      text: 'You will not be able to recover this question!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.commonService.showLoading();
+        this.olTestService.deleteQuestion({ question_id: id }, this.id).subscribe((res: any) => {
+          this.commonService.hideLoading();
+          this.getDetails();
+          Swal.fire(
+            'Deleted!',
+            'Your request has been deleted.',
+            'success'
+          )
+        }, (err: any) => {
+          this.commonService.hideLoading();
+          this.commonService.errorHandling(err);
+        })
+
+      }
+    })
   }
 
 }

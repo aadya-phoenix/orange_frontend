@@ -1,4 +1,4 @@
-import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
@@ -18,7 +18,7 @@ export class AuthenticationService {
 
 
 
-  constructor(private http: HttpService, private router: Router, private encrypt: EncryptionService) { }
+  constructor(private http: HttpService, private router: Router, private encrypt: EncryptionService, private httpClient: HttpClient) { }
 
 
   register(data: any) {
@@ -34,7 +34,10 @@ export class AuthenticationService {
     let grantObj = { grant_type: 'password' };
     let totalObj = { ...grantObj, ...clienSecret, ...data };
     const url = this.basePath + 'oauth/token';
-    return this.http.post(url, totalObj);
+    return this.httpClient.post(url, totalObj,{
+      headers: new HttpHeaders({
+      })
+    });
   }
 
   getLoginDetails() {

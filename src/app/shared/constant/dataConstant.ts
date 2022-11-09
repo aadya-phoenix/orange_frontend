@@ -205,6 +205,25 @@ export const dataConstant = {
   OLTestType:{
     Online: 'Online', Scorm:'Scorm'
   },
+  OLTestQuestion:[{
+    id:'yes_no', name:'Yes/No'
+  },{
+    id:'true_false', name:'True/False'
+  },{
+    id:'multi_choice_single', name:'Multiple Choise - Single Answer'
+  },{
+    id:'multi_choice_multiple', name:'Multiple Choise - Multiple Answer'
+  },{
+    id:'free_form', name:'Free Form (Easy)'
+  },{
+    id:'matching', name:'Match the following'
+  },{
+    id:'drag_drop', name:'Sequence drag and drop'
+  },{
+    id:'fill_blank', name:'Fill in the blank'
+  },{
+    id:'drag_word', name:'Drag the words'
+  }],
   OLTestTemplateUrl:{
     Online: 'https://www.google.com/', Scorm:'https://www.google.com/'
   }

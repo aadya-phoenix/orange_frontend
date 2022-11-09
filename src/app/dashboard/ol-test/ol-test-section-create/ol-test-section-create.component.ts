@@ -22,57 +22,61 @@ export class OlTestSectionCreateComponent implements OnInit {
     private olTestService: OlTestService,
     private commonService: CommonService,
     private router: Router) {
-      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.createSectionForm = this.formBuilder.group({
       section: new FormControl('', [Validators.required]),
     });
   }
   objectDetail: any;
   title: any;
-  test_id  = 0;
-  backOfficePublisher: any = [];
-  copyDeletecourse: any;
+  test_id = 0;
+  id = 0;
+  requestData: any  = {}
   ngOnInit(): void {
     this.objectDetail = this.props.objectDetail ? this.props.objectDetail : '';
     this.test_id = this.props.test_id;
+    this.id = this.props.section_id;
     this.title = this.props.title;
-    //this.getBackOfficePublisher();
+    if (this.id) {
+      this.getSectionDetails();
+    }
   }
 
-  requiredMessage(field:any){
+  requiredMessage(field: any) {
     return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
   }
 
-  // getBackOfficePublisher() {
-  //   this.commonService.showLoading();
-  //   this.backOfficeService.getBackOfficePublisher().subscribe(
-  //     (res: any) => {
-  //       this.commonService.hideLoading();
-  //       this.backOfficePublisher = res.data;
-  //     },
-  //     (err: any) => {
-  //       this.commonService.hideLoading();
-  //       this.commonService.errorHandling(err);
-  //     }
-  //   );
-  // }
+  getSectionDetails() {
+    this.commonService.showLoading();
+    this.olTestService.getSectionDetails(this.test_id, this.id).subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        this.requestData = res.data;
+        this.createSectionForm.patchValue(this.requestData);
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
+      }
+    );
+  }
 
   createSection() {
     this.isSubmitted = true;
     if (this.createSectionForm.invalid) {
       return;
     }
-    if (!this.props.objectDetail.id) {
-      var data = {
+    if (!this.id) {
+      const data = {
         section: this.createSectionForm.value.section
       };
       this.commonService.showLoading();
       this.olTestService.createSection(data, this.test_id).subscribe(
         (res: any) => {
           this.commonService.hideLoading();
-          this.commonService.toastSuccessMsg('BackOffice', 'Successfully Transfered.');
+          this.commonService.toastSuccessMsg('Section', 'Successfully Added.');
           this.modalService.close();
-          this.router.navigate(['/back-office']);
+          this.router.navigateByUrl(`/oltest/view/${this.test_id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();
@@ -81,8 +85,23 @@ export class OlTestSectionCreateComponent implements OnInit {
       );
     }
     else {
-      this.passEntry.next(this.createSectionForm.value.publisher_id);
-      this.modalService.close();
+      const data = {
+        section: this.createSectionForm.value.section,
+        section_id: this.id
+      };
+      this.commonService.showLoading();
+      this.olTestService.createSection(data, this.test_id).subscribe(
+        (res: any) => {
+          this.commonService.hideLoading();
+          this.commonService.toastSuccessMsg('Section', 'Successfully Updated.');
+          this.modalService.close();
+          this.router.navigateByUrl(`/oltest/view/${this.test_id}`);
+        },
+        (err: any) => {
+          this.commonService.hideLoading();
+          this.commonService.errorHandling(err);
+        }
+      );
     }
   }
 
