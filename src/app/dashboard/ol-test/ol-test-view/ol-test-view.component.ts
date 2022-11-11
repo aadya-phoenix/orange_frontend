@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as _ from 'lodash';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
@@ -21,6 +22,7 @@ export class OlTestViewComponent implements OnInit {
   OLTestType = dataConstant.OLTestType;
   getUserrole: any = {};
   getprofileDetails: any = {};
+  questionList = dataConstant.OLTestQuestion;
   searchText: any;
   constructor(
     private route: ActivatedRoute,
@@ -50,6 +52,12 @@ export class OlTestViewComponent implements OnInit {
         this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
           this.requestdata = res.data;
+          if (this.requestdata.section && this.requestdata.question) {
+            this.requestdata.section.forEach((section: any) => {
+              section.question = _.filter(this.requestdata.question, ['section_id', section.id]);
+            });
+          }
+          this.requestdata.questionWithoutSection = _.filter(this.requestdata.question, ['section_id', null]);
         }
       },
       (err: any) => {
@@ -87,6 +95,15 @@ export class OlTestViewComponent implements OnInit {
       //body.publisher_id = res;
       //this.saveData(body);
     });
+  }
+
+  getQuestionType(type: any) {
+    const questionType: any = _.find(this.questionList, (x: any) => {
+      if (x.id == type) {
+        return x;
+      }
+    })
+    return questionType ? questionType.name : '';
   }
 
   exportTest() {
