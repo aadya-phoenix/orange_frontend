@@ -25,6 +25,8 @@ export class SmedbCreateComponent implements OnInit {
   lableConstant: any = { french: {}, english: {} };
   createSmedbForm: FormGroup;
   contentSupportForm: FormGroup;
+  domainExpertForm:FormGroup;
+  facilitationExpertForm:FormGroup;
   deliveryForm: FormGroup;
   voiceOverLearningForm: FormGroup;
   professionalCertificationsForm: FormGroup;
@@ -94,6 +96,8 @@ export class SmedbCreateComponent implements OnInit {
     });
 
     this.contentSupportForm = this.formBuilder.group({ 'content-support': this.formBuilder.array([]) });
+    this.domainExpertForm = this.formBuilder.group({ 'domain-expert': this.formBuilder.array([]) });
+    this.facilitationExpertForm = this.formBuilder.group({ 'facilitation-expert': this.formBuilder.array([]) });
     // this.addLearnerGuideline(0, '', '');
 
     this.deliveryForm = this.formBuilder.group({ 'delivery': this.formBuilder.array([]) });
@@ -356,6 +360,29 @@ export class SmedbCreateComponent implements OnInit {
           this.addLearnerGuideline(0, '', '');
         }
       }
+      if (this.sme_details.domain.includes('domain-expert')) {
+        this.domainExpertForm.controls["domain-expert"] = this.formBuilder.array([]);
+        if (this.sme_details.metadata && this.sme_details.metadata["domain-expert"]?.length > 0) {
+          this.sme_details.metadata["domain-expert"].forEach((x: any) => {
+            this.addDomainExpert(x.id, x.title, x.level);
+          })
+        }
+        else {
+          this.addDomainExpert(0, '', '');
+        }
+      }
+      if (this.sme_details.domain.includes('facilitation-expert')) {
+        this.facilitationExpertForm.controls["facilitation-expert"] = this.formBuilder.array([]);
+        if (this.sme_details.metadata && this.sme_details.metadata["facilitation-expert"]?.length > 0) {
+          this.sme_details.metadata["facilitation-expert"].forEach((x: any) => {
+            this.addFacilitationExpert(x.id, x.title, x.level);
+          })
+        }
+        else {
+          this.addFacilitationExpert(0, '', '');
+        }
+      }
+
       if (this.sme_details.domain.includes('delivery')) {
         this.deliveryForm.controls["delivery"] = this.formBuilder.array([]);
         if (this.sme_details.metadata && this.sme_details.metadata["delivery"]?.length > 0) {
@@ -431,6 +458,15 @@ export class SmedbCreateComponent implements OnInit {
     return this.contentSupportForm.get("content-support") as FormArray;
   }
 
+  get domainExpertFormArray(): FormArray {
+    return this.domainExpertForm.get("domain-expert") as FormArray;
+  }
+
+  get facilitationExpertFormArray(): FormArray {
+    return this.facilitationExpertForm.get("facilitation-expert") as FormArray;
+  }
+
+
   get deliveryFormArray(): FormArray {
     return this.deliveryForm.get("delivery") as FormArray;
   }
@@ -454,6 +490,22 @@ export class SmedbCreateComponent implements OnInit {
 
   removeContentSupport(i: any) {
     this.contentSupportFormArray.removeAt(i);
+  }
+
+  addDomainExpert(id: number, titleval: string, descriptionval: string) {
+    return this.domainExpertFormArray.push(this.addMoreContentSupport(id, titleval, descriptionval));
+  }
+
+  removeDomainExpert(i: any) {
+    this.domainExpertFormArray.removeAt(i);
+  }
+
+  addFacilitationExpert(id: number, titleval: string, descriptionval: string) {
+    return this.facilitationExpertFormArray.push(this.addMoreContentSupport(id, titleval, descriptionval));
+  }
+
+  removeFacilitationExpert(i: any) {
+    this.facilitationExpertFormArray.removeAt(i);
   }
 
   addMoreDelivery(id: number, title: string, level: string, previous_experience: string, need_help: string, comment: string, isPrevious: boolean, isNeedHelp: boolean) {
@@ -536,6 +588,14 @@ export class SmedbCreateComponent implements OnInit {
         this.selectedTab = this.SMETabs.voiceOver;
         return;
       }
+      if (this.sme_details.domain.includes('domain-expert') && this.domainExpertForm.controls["domain-expert"].invalid) {
+        this.selectedTab = this.SMETabs.domainExpert;
+        return;
+      }
+      if (this.sme_details.domain.includes('facilitation-expert') && this.facilitationExpertForm.controls["facilitation-expert"].invalid) {
+        this.selectedTab = this.SMETabs.facilitationExpert;
+        return;
+      }
       if (this.sme_id && this.professionalCertificationsForm.controls["professional-certifications"].invalid) {
         this.selectedTab = this.SMETabs.professionalCertifications;
         return;
@@ -577,6 +637,12 @@ export class SmedbCreateComponent implements OnInit {
         }
         if (this.sme_details.domain.includes('content-support')) {
           body.metadata["content-support"] = this.contentSupportForm.controls["content-support"].value;
+        }
+        if (this.sme_details.domain.includes('domain-expert')) {
+          body.metadata["domain-expert"] = this.domainExpertForm.controls["domain-expert"].value;
+        }
+        if (this.sme_details.domain.includes('facilitation-expert')) {
+          body.metadata["facilitation-expert"] = this.facilitationExpertForm.controls["facilitation-expert"].value;
         }
         if (this.sme_details.domain.includes('delivery')) {
           body.metadata["delivery"] =  this.deliveryForm.controls["delivery"].value;

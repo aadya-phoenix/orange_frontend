@@ -55,4 +55,63 @@ export class OlTestService {
     return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  createSection(data: any, id:any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/ol-test/'+ id +'/section/create';
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  updateSection(data: any, id:any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/ol-test/'+ id +'/section/update';
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  getSection(id:any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/ol-test/'+ id +'/section';
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  getSectionDetails(testid:any, id:any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/ol-test/'+ testid +'/section/' + id+ '/detail';
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  deleteSection(data: any, id:any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/ol-test/'+ id +'/section/delete';
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  createQuestion(data: any, id:any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/ol-test/'+ id +'/question/create';
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  updateQuestion(data: any, id:any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/ol-test/'+ id +'/question/update';
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  getQuestionDetails(testid:any, id:any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/ol-test/'+ testid +'/question/' + id+ '/detail';
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  getQuestion(id:any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/ol-test/'+ id +'/question';
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+  deleteQuestion(data: any, id:any) {
+    const url = this.basePath + 'api/' + this.apiVersion + '/ol-test/'+ id +'/question/delete';
+    return this.http.post(url, data).pipe(catchError(this.commmonService.Errorhandling));
+  }
+
+
 }

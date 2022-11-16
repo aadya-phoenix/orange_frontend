@@ -95,38 +95,93 @@
                                                 <tr class="text-center font-13">
                                                     <th scope="col">Order</th>
                                                     <th scope="col">SECTIONS AND QUESTIONS </th>
-                                                    <th *ngIf="requestdata.test_type == OLTestType.Scorm">Random Selection</th>
+                                                    <th *ngIf="requestdata.test_type == OLTestType.Scorm">Random
+                                                        Selection</th>
                                                     <th scope="col">Display </th>
                                                     <th scope="col">Type </th>
                                                     <th scope="col">Action </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="text-center font-14">
-                                                    <td>1 </td>
-                                                    <td>Section 1 name
-                                                    </td>
-                                                    <td *ngIf="requestdata.test_type == OLTestType.Scorm"> <input type="checkbox" class="mr-2"></td>
-                                                    <td><select class="form-control form_width">
-                                                        </select>
-                                                    </td>
-                                                    <td>Multiple Choice – MA</td>
-                                                    <td>
-                                                        <a (click)="copyRequest()" class="copy_file mr-1"
-                                                            data-toggle="tooltip" data-placement="top" title="Copy">
-                                                            <i class="fa fa-files-o" aria-hidden="true"></i>
-                                                        </a>
-                                                        <a (click)="editRequest()" class="copy_file mr-1"
-                                                            data-toggle="tooltip" data-placement="top" title="Edit">
-                                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                        </a>
-                                                        <a (click)="deleteRequest()" class="copy_file mr-1"
-                                                            data-toggle="tooltip" data-placement="top" title="Delete">
-                                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
+                                                <ng-container
+                                                    *ngFor="let item of requestdata.section | filter: searchText ;let i = index">
+                                                    <tr class="text-center font-14">
+                                                        <td>{{i+1}}</td>
+                                                        <td>{{item.section}}
+                                                        </td>
+                                                        <td *ngIf="requestdata.test_type == OLTestType.Scorm"> <input
+                                                                type="checkbox" class="mr-2"></td>
+                                                        <td>
+                                                            <select class="form-control form_width">
+                                                            </select>
+                                                        </td>
+                                                        <td></td>
+                                                        <td>
+                                                            <a (click)="editRequest()" class="copy_file mr-1"
+                                                                data-toggle="tooltip" data-placement="top" title="Edit">
+                                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                            </a>
+                                                            <a (click)="deleteSection(item.id)" class="copy_file mr-1"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                title="Delete">
+                                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="text-center font-14"
+                                                        *ngFor="let question of item.question ;let j = index">
+                                                        <td>{{j+1}}</td>
+                                                        <td>{{question.question}}
+                                                        </td>
+                                                        <td *ngIf="requestdata.test_type == OLTestType.Scorm"> </td>
+                                                        <td>
+                                                        </td>
+                                                        <td>{{getQuestionType(question.type)}}</td>
+                                                        <td>
+                                                            <a (click)="copyRequest()" class="copy_file mr-1"
+                                                                data-toggle="tooltip" data-placement="top" title="Copy">
+                                                                <i class="fa fa-files-o" aria-hidden="true"></i>
+                                                            </a>
+                                                            <a (click)="editRequest()" class="copy_file mr-1"
+                                                                data-toggle="tooltip" data-placement="top" title="Edit">
+                                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                            </a>
+                                                            <a (click)="deleteQuestion(question.id)" class="copy_file mr-1"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                title="Delete">
+                                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </ng-container>
+                                                <ng-container
+                                                    *ngFor="let question of requestdata.questionWithoutSection | filter: searchText ;let i = index">
 
+                                                    <tr class="text-center font-14">
+                                                        <td>{{i+1}}</td>
+                                                        <td>{{question.question}}
+                                                        </td>
+                                                        <td *ngIf="requestdata.test_type == OLTestType.Scorm"> </td>
+                                                        <td>
+                                                        </td>
+                                                        <td>{{getQuestionType(question.type)}}</td>
+                                                        <td>
+                                                            <a (click)="copyRequest()" class="copy_file mr-1"
+                                                                data-toggle="tooltip" data-placement="top" title="Copy">
+                                                                <i class="fa fa-files-o" aria-hidden="true"></i>
+                                                            </a>
+                                                            <a (click)="editRequest()" class="copy_file mr-1"
+                                                                data-toggle="tooltip" data-placement="top" title="Edit">
+                                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                            </a>
+                                                            <a (click)="deleteQuestion(question.id)" class="copy_file mr-1"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                title="Delete">
+                                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </ng-container>
                                             </tbody>
                                         </table>
                                     </div>

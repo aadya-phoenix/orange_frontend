@@ -17,19 +17,12 @@
                         <div class="form-group w-100">
                             <label class="form-control-label color-black">
                                 Section name <span class="text_red">* </span>
-                                <a>
-                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
-                                        placement="right" ngbTooltip=""></i>
-                                </a>
                             </label>
-                            <ng-select placeholder="Please select subject" formControlName="subject" class="w_100">
+                            <ng-select placeholder="Please select subject" formControlName="subject" class="w_100"
+                            [items]="sectionList" bindLabel="section"
+                                bindValue="id" >
                             </ng-select>
-
-                            <div class="error_message">
-
-                            </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -38,16 +31,16 @@
                         <div class="form-group w-100">
                             <label class="form-control-label color-black">
                                 Question<span class="text_red">* </span>
-                                <a>
-                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
-                                        placement="right" ngbTooltip=""></i>
-                                </a>
                             </label>
-                            <textarea placeholder="Please select subject" class="form_width-textarea">
+                            <textarea placeholder="Please select subject" formControlName="question"
+                                class="form_width-textarea">
                           </textarea>
-
-                            <div class="error_message">
-
+                            <div
+                                *ngIf="(createQuestionForm.controls['question'].invalid && (createQuestionForm.controls['question'].dirty || createQuestionForm.controls['question'].touched)) || isSubmitted">
+                                <div class="error_message"
+                                    *ngIf="createQuestionForm.controls['question'].errors?.required">
+                                    {{requiredMessage('Question')}}
+                                </div>
                             </div>
                         </div>
 
@@ -65,11 +58,15 @@
                                         placement="right" ngbTooltip=""></i>
                                 </a>
                             </label>
-                            <ng-select placeholder="Please select subject" formControlName="subject" class="w_100">
+                            <ng-select placeholder="Please select type" [items]="questionList" bindLabel="name"
+                                bindValue="id" formControlName="type" class="w_100">
                             </ng-select>
 
-                            <div class="error_message">
-
+                            <div
+                                *ngIf="(createQuestionForm.controls['type'].invalid && (createQuestionForm.controls['type'].dirty || createQuestionForm.controls['type'].touched)) || isSubmitted">
+                                <div class="error_message" *ngIf="createQuestionForm.controls['type'].errors?.required">
+                                    {{requiredMessage('Type')}}
+                                </div>
                             </div>
                         </div>
 
@@ -86,11 +83,17 @@
                                         placement="right" ngbTooltip=""></i>
                                 </a>
                             </label>
-                            <ng-select placeholder="Please select subject" formControlName="subject" class="w_100">
+                            <ng-select placeholder="Please select subject" [items]="questionList" bindLabel="name"
+                            bindValue="id" formControlName="correct_answer"
+                                class="w_100">
                             </ng-select>
 
-                            <div class="error_message">
-
+                            <div
+                                *ngIf="(createQuestionForm.controls['correct_answer'].invalid && (createQuestionForm.controls['correct_answer'].dirty || createQuestionForm.controls['correct_answer'].touched)) || isSubmitted">
+                                <div class="error_message"
+                                    *ngIf="createQuestionForm.controls['correct_answer'].errors?.required">
+                                    {{requiredMessage('Correct answer')}}
+                                </div>
                             </div>
                         </div>
 
@@ -116,87 +119,46 @@
 
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6" *ngIf="isOLTest">
                     <div class="d-flex align-items-center">
                         <div class="form-group w-100">
                             <label class="form-control-label color-black">
                                 Feedback(Answer Explanation)
-                                <span class="text_red">* </span>
-                                <a>
-                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
-                                        placement="right" ngbTooltip=""></i>
-                                </a>
                             </label>
-                            <input type="text" class="form-control form_width" formControlName="start_date" />
-
-                            <div class="error_message">
-
-                            </div>
+                            <input type="text" class="form-control form_width" formControlName="feedback" />
                         </div>
-
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6" *ngIf="!isOLTest">
                     <div class="d-flex align-items-center">
                         <div class="form-group w-100">
                             <label class="form-control-label color-black">
                                 Correct feedback
-                                <span class="text_red">* </span>
-                                <a>
-                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
-                                        placement="right" ngbTooltip=""></i>
-                                </a>
                             </label>
-                            <input type="text" class="form-control form_width" formControlName="start_date" />
-
-                            <div class="error_message">
-
-                            </div>
+                            <input type="text" class="form-control form_width" formControlName="correct_feedback" />
                         </div>
-
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6" *ngIf="!isOLTest">
                     <div class="d-flex align-items-center">
                         <div class="form-group w-100">
                             <label class="form-control-label color-black">
                                 Incorrect feedback
-                                <span class="text_red">* </span>
-                                <a>
-                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
-                                        placement="right" ngbTooltip=""></i>
-                                </a>
                             </label>
-                            <input type="text" class="form-control form_width" formControlName="start_date" />
-
-                            <div class="error_message">
-
-                            </div>
+                            <input type="text" class="form-control form_width" formControlName="incorrect_feedback" />
                         </div>
-
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6" *ngIf="!isOLTest">
                     <div class="d-flex align-items-center">
                         <div class="form-group w-100">
                             <label class="form-control-label color-black">
                                 Try again feedback
-                                <span class="text_red">* </span>
-                                <a>
-                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
-                                        placement="right" ngbTooltip=""></i>
-                                </a>
                             </label>
-                            <input type="text" class="form-control form_width" formControlName="start_date" />
-
-                            <div class="error_message">
-
-                            </div>
+                            <input type="text" class="form-control form_width" formControlName="try_again_feedback" />
                         </div>
-
                     </div>
                 </div>
-
             </div>
         </form>
     </div>

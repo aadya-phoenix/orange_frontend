@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as _ from 'lodash';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { OlTestService } from 'src/app/shared/services/ol-test/ol-test.service';
+import Swal from 'sweetalert2';
 import { OlTestQuestionCreateComponent } from '../ol-test-question-create/ol-test-question-create.component';
 import { OlTestSectionCreateComponent } from '../ol-test-section-create/ol-test-section-create.component';
 
@@ -20,6 +22,7 @@ export class OlTestViewComponent implements OnInit {
   OLTestType = dataConstant.OLTestType;
   getUserrole: any = {};
   getprofileDetails: any = {};
+  questionList = dataConstant.OLTestQuestion;
   searchText: any;
   constructor(
     private route: ActivatedRoute,
@@ -49,6 +52,12 @@ export class OlTestViewComponent implements OnInit {
         this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
           this.requestdata = res.data;
+          if (this.requestdata.section && this.requestdata.question) {
+            this.requestdata.section.forEach((section: any) => {
+              section.question = _.filter(this.requestdata.question, ['section_id', section.id]);
+            });
+          }
+          this.requestdata.questionWithoutSection = _.filter(this.requestdata.question, ['section_id', null]);
         }
       },
       (err: any) => {
@@ -65,6 +74,7 @@ export class OlTestViewComponent implements OnInit {
     });
     modalRef.componentInstance.props = {
       objectDetail: {},
+      test_id: this.id
     };
     modalRef.componentInstance.passEntry.subscribe((res: any) => {
       //body.publisher_id = res;
@@ -79,12 +89,21 @@ export class OlTestViewComponent implements OnInit {
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
-      objectDetail: {},
+      objectDetail: this.requestdata,
     };
     modalRef.componentInstance.passEntry.subscribe((res: any) => {
       //body.publisher_id = res;
       //this.saveData(body);
     });
+  }
+
+  getQuestionType(type: any) {
+    const questionType: any = _.find(this.questionList, (x: any) => {
+      if (x.id == type) {
+        return x;
+      }
+    })
+    return questionType ? questionType.name : '';
   }
 
   exportTest() {
@@ -101,6 +120,60 @@ export class OlTestViewComponent implements OnInit {
   }
   deleteRequest() {
 
+  }
+  deleteSection(id: any) {
+    Swal.fire({
+      title: 'Are you sure want to remove?',
+      text: 'You will not be able to recover this section!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.commonService.showLoading();
+        this.olTestService.deleteSection({ section_id: id }, this.id).subscribe((res: any) => {
+          this.commonService.hideLoading();
+          this.getDetails();
+          Swal.fire(
+            'Deleted!',
+            'Your request has been deleted.',
+            'success'
+          )
+        }, (err: any) => {
+          this.commonService.hideLoading();
+          this.commonService.errorHandling(err);
+        })
+
+      }
+    })
+  }
+  deleteQuestion(id: any) {
+    Swal.fire({
+      title: 'Are you sure want to remove?',
+      text: 'You will not be able to recover this question!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.commonService.showLoading();
+        this.olTestService.deleteQuestion({ question_id: id }, this.id).subscribe((res: any) => {
+          this.commonService.hideLoading();
+          this.getDetails();
+          Swal.fire(
+            'Deleted!',
+            'Your request has been deleted.',
+            'success'
+          )
+        }, (err: any) => {
+          this.commonService.hideLoading();
+          this.commonService.errorHandling(err);
+        })
+
+      }
+    })
   }
 
 }

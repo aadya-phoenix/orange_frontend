@@ -5,6 +5,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
 import { BackOfficeService } from 'src/app/shared/services/back-office/back-office.service';
 import { CommonService } from 'src/app/shared/services/common/common.service';
+import { OlTestService } from 'src/app/shared/services/ol-test/ol-test.service';
 
 @Component({
   selector: 'app-ol-test-question-create',
@@ -18,38 +19,56 @@ export class OlTestQuestionCreateComponent implements OnInit {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   createQuestionForm: FormGroup;
   isSubmitted = false;
+  isOLTest = true;
+  questionList = dataConstant.OLTestQuestion;
   constructor(private formBuilder: FormBuilder,
     private modalService: NgbActiveModal,
-    private backOfficeService: BackOfficeService,
+    private olTestService: OlTestService,
     private commonService: CommonService,
     private router: Router) {
-      this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
+    this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.createQuestionForm = this.formBuilder.group({
-      publisher_id: new FormControl('', [Validators.required]),
+      section_id: new FormControl('', []),
+      question: new FormControl('', [Validators.required]),
+      type: new FormControl('', [Validators.required]),
+      correct_answer: new FormControl('', [Validators.required]),
+      option: new FormControl('', []),
+      file: new FormControl('', []),
+      feedback: new FormControl('', []),
+      correct_feedback: new FormControl('', []),
+      incorrect_feedback: new FormControl('', []),
+      try_again_feedback: new FormControl('', []),
+      active: new FormControl('', []),
+      none: new FormControl(false, []),
+      all: new FormControl(false, []),
     });
   }
-  public historyList: any;
-  public objectDetail: any;
-  public modalType: any;
-  public title: any;
-  backOfficePublisher: any = [];
-  copyDeletecourse: any;
+  objectDetail: any = {};
+  title = '';
+  id = 0;
+  sectionList: any = [];
+  requestData: any = {};
   ngOnInit(): void {
     this.objectDetail = this.props.objectDetail ? this.props.objectDetail : '';
     this.title = this.props.title;
-    this.getBackOfficePublisher();
+    this.isOLTest = this.objectDetail.test_type == dataConstant.OLTestType.Online ? true : false;
+    this.id = this.props.question_id;
+    if (this.id) {
+      this.getQuestionDetails();
+    }
   }
 
-  requiredMessage(field:any){
+  requiredMessage(field: any) {
     return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
   }
 
-  getBackOfficePublisher() {
+  getQuestionDetails() {
     this.commonService.showLoading();
-    this.backOfficeService.getBackOfficePublisher().subscribe(
+    this.olTestService.getQuestionDetails(this.objectDetail.id, this.id).subscribe(
       (res: any) => {
         this.commonService.hideLoading();
-        this.backOfficePublisher = res.data;
+        this.requestData = res.data;
+        this.createQuestionForm.patchValue(this.requestData);
       },
       (err: any) => {
         this.commonService.hideLoading();
@@ -63,18 +82,15 @@ export class OlTestQuestionCreateComponent implements OnInit {
     if (this.createQuestionForm.invalid) {
       return;
     }
-    if (this.props.objectDetail.id) {
-      var data = {
-        back_office_id: this.props.objectDetail.id,
-        transfer_id: this.createQuestionForm.value.publisher_id
-      };
+    if (!this.id) {
+      const data = this.createQuestionForm.value;
       this.commonService.showLoading();
-      this.backOfficeService.backOfficeTransfer(data).subscribe(
+      this.olTestService.createQuestion(data, this.objectDetail.id).subscribe(
         (res: any) => {
           this.commonService.hideLoading();
-          this.commonService.toastSuccessMsg('BackOffice', 'Successfully Transfered.');
+          this.commonService.toastSuccessMsg('Question', 'Successfully created.');
           this.modalService.close();
-          this.router.navigate(['/back-office']);
+          this.router.navigateByUrl(`/oltest/view/${this.objectDetail.id}`);
         },
         (err: any) => {
           this.commonService.hideLoading();
@@ -83,8 +99,21 @@ export class OlTestQuestionCreateComponent implements OnInit {
       );
     }
     else {
-      this.passEntry.next(this.createQuestionForm.value.publisher_id);
-      this.modalService.close();
+      let data = this.createQuestionForm.value;
+      data.question_id = this.id;
+      this.commonService.showLoading();
+      this.olTestService.updateQuestion(data, this.objectDetail.id).subscribe(
+        (res: any) => {
+          this.commonService.hideLoading();
+          this.commonService.toastSuccessMsg('Question', 'Successfully updated.');
+          this.modalService.close();
+          this.router.navigateByUrl(`/oltest/view/${this.objectDetail.id}`);
+        },
+        (err: any) => {
+          this.commonService.hideLoading();
+          this.commonService.errorHandling(err);
+        }
+      );
     }
   }
 
