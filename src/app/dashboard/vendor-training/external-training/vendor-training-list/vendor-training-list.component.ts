@@ -1,14 +1,14 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import * as _ from 'lodash';
-import { GetReportHistoryComponent } from 'src/app/dashboard/get-report/get-report-history/get-report-history.component';
 import { dataConstant } from 'src/app/shared/constant/dataConstant';
+import { CommonService } from 'src/app/shared/services/common/common.service';
 import { NgbdSortableHeader } from 'src/app/shared/directives/sorting.directive';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
-import { CommonService } from 'src/app/shared/services/common/common.service';
-import { GetReportService } from 'src/app/shared/services/get-report/get-report.service';
+import { VendorTrainingService } from 'src/app/shared/services/vendor-training/vendor-training.service';
+import { VendorTrainingHistoryComponent } from '../vendor-training-history/vendor-training-history.component';
 import Swal from 'sweetalert2';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-vendor-training-list',
@@ -18,14 +18,14 @@ import Swal from 'sweetalert2';
 export class VendorTrainingListComponent implements OnInit {
 
   lableConstant: any = { french: {}, english: {} };
-  report_id:number=0;
-  reportStatus= dataConstant.GetReportStatus;
+  vendor_id:number=0;
+  vendorStatus= dataConstant.VendorTrainingStatus;
   attachUrl = dataConstant.ImageUrl;
-  reportList:any = [];
-  reportListToShow:any = [];
-  selectedStatus = this.reportStatus.total;
+  trainingList:any = [];
+  trainingListToShow:any = [];
+  selectedStatus = this.vendorStatus.total;
   RoleID = dataConstant.RoleID;
-  report_count = {
+  vendor_count = {
     total: 0,
     draft: 0,
     closed: 0,
@@ -52,7 +52,7 @@ export class VendorTrainingListComponent implements OnInit {
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
   constructor(
-    private getReportService:GetReportService,
+    private vendorTrainingService:VendorTrainingService,
     private commonService: CommonService,
     private authService: AuthenticationService,
     private modalService: NgbModal,
@@ -76,7 +76,7 @@ export class VendorTrainingListComponent implements OnInit {
       }
     }
   );
-    this.refreshReports();
+    this.getTrainingList();
   }
 
   showPaginationCount(pageStart:any, pageEnd:any, total:any) {
@@ -85,12 +85,12 @@ export class VendorTrainingListComponent implements OnInit {
   
   viewRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/olreport/view/${item.id}`);
+      this.router.navigateByUrl(`/vendortraining/view/${item.id}`);
     }
   }
 
   openModal(item: any) {
-    const modalRef = this.modalService.open(GetReportHistoryComponent, {
+    const modalRef = this.modalService.open(VendorTrainingHistoryComponent, {
       centered: true,
       size: 'xl',
       windowClass: 'alert-popup',
@@ -111,7 +111,7 @@ export class VendorTrainingListComponent implements OnInit {
      });
  
      if (direction && column) {
-       this.reportListToShow = _.orderBy(this.reportListToShow, column, direction);
+       this.trainingListToShow = _.orderBy(this.trainingListToShow, column, direction);
      }
      else {
        this.showRecords(this.selectedStatus);
@@ -119,27 +119,22 @@ export class VendorTrainingListComponent implements OnInit {
   }
 
   showRecords(type:string){
-    if (type === this.reportStatus.total) {
-      this.reportListToShow = this.reportList.map((x: any) => Object.assign({}, x));
+    if (type === this.vendorStatus.total) {
+      this.trainingListToShow = this.trainingList.map((x: any) => Object.assign({}, x));
     } else {
-      this.reportListToShow = this.reportList.filter((x: any) => { if (x.status_show === type) { return x } }).map((x: any) => Object.assign({}, x));
+      this.trainingListToShow = this.trainingList.filter((x: any) => { if (x.status_show === type) { return x } }).map((x: any) => Object.assign({}, x));
     }
     this.selectedStatus = type;
   }
 
-  refreshReports() {
+  getTrainingList() {
     this.commonService.showLoading();
-    this.getReportService.getReportList().subscribe(
+    this.vendorTrainingService.getTrainingList().subscribe(
       (res: any) => {
         this.commonService.hideLoading();
         if (res.status === 1 && res.message === 'Success') {
-          this.reportList = res.data.get_report;
-          this.reportList.forEach((x:any)=>{
-            if(x.report_attachment){
-              x.imgUrl = `${dataConstant.ImageUrl}/${x.report_attachment}`;
-            }
-          })
-          this.report_count = res.data.get_report_count;
+          this.trainingList = res.data.external_vendor;
+       /*    this.vendor_count = res.data.external_vendor_count; */
           this.showRecords(this.selectedStatus);
         }
       },
@@ -154,7 +149,7 @@ export class VendorTrainingListComponent implements OnInit {
     this.pagination.pageNumber = event;
   }
 
-  deleteRequest(report_id: number){
+  deleteRequest(id: number){
     Swal.fire({
       title: 'Are you sure want to remove?',
       text: 'You will not be able to recover this request!',
@@ -165,8 +160,8 @@ export class VendorTrainingListComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.commonService.showLoading();
-        this.getReportService.reportDelete({report_id :report_id}).subscribe((res:any)=>{
-          this.refreshReports();
+        this.vendorTrainingService.delete({external_vendor_id :id}).subscribe((res:any)=>{
+          this.getTrainingList();
           Swal.fire(
             'Deleted!',
             'Your request has been deleted.',
@@ -181,7 +176,7 @@ export class VendorTrainingListComponent implements OnInit {
     })
   }
 
-  copyRequest(report_id: number) {
+ /*  copyRequest(vendor_id: number) {
       Swal.fire({
         title: 'Are you sure you want to copy?',
         text: 'You will copy this request',
@@ -192,9 +187,9 @@ export class VendorTrainingListComponent implements OnInit {
       }).then((result) => {
         if (result.value) {
           this.commonService.showLoading();
-          this.getReportService.reportCopy({report_id :report_id}).subscribe((res:any)=>{
+          this.vendorTrainingService.copy({vendor_id :vendor_id}).subscribe((res:any)=>{
             this.commonService.hideLoading();
-            this.refreshReports();
+            this.getTrainingList();
             Swal.fire(
               'Copied!',
               'Your request has been copyed.',
@@ -207,15 +202,11 @@ export class VendorTrainingListComponent implements OnInit {
           
         }
       })
-  }
+  } */
 
   editRequest(item: any) {
     if (item && item.id) {
-      this.router.navigateByUrl(`/olreport/update/${item.id}`);
+      this.router.navigateByUrl(`/vendortraining/update/${item.id}`);
     }
-  }
-
-  repot(x:any){
-    console.log("x",x);
   }
 }

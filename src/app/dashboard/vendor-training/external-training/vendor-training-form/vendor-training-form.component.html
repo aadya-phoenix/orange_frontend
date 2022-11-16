@@ -18,16 +18,14 @@
                 <div class="page-title d-flex end_just">
                     <ol class="breadcrumb text-right bac_trasparent">
                         <li>
-                            <a [routerLink]="['/dashboard']">
-                                <i class="fa fa-home text_white"></i>
+                            <a [routerLink]="['/']" class="text_white">
+                                <i class="fa fa-home" aria-colcount=""></i> {{lableConstant.home}}
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/dashboard']" class="text_white">label</a>
+                            <a [routerLink]="['/vendortraining/list']" class="text_white">External Vendor Module</a>
                         </li>
-                        <li>
-                            <span class="text_white span_dis">label</span>
-                        </li>
+                        
                     </ol>
                 </div>
             </div>
@@ -53,8 +51,8 @@
                                                                 ngbTooltip=""></i>
                                                         </a>
                                                     </label>
-                                                    <input type="text" placeholder="Enter Title"
-                                                        class="form-control form_width" formControlName="name" />
+                                                    <input type="text" 
+                                                        class="form-control form_width" formControlName="training_name" />
                                                     <div class="error_message">
                                                     </div>
                                                 </div>
@@ -72,9 +70,10 @@
                                                                 ngbTooltip=""></i>
                                                         </a>
                                                     </label>
-                                                    <ng-select placeholder="Please select subject"
-                                                        formControlName="region" class="w_100">
-                                                    </ng-select>
+                                                    <ng-select [items]="regionObj" 
+                                                    (change)="getRegionName($event)" bindLabel="name" bindValue="id"
+                                                    formControlName="region" class="w_100">
+                                                     </ng-select>
                                                     <div class="error_message">
                                                     </div>
                                                 </div>
@@ -82,7 +81,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6" *ngIf="isSpecificCountry">
                                             <div class="d-flex align-items-center">
                                                 <div class="form-group w-100">
                                                     <label class="form-control-label">
@@ -93,9 +92,10 @@
                                                                 ngbTooltip=""></i>
                                                         </a>
                                                     </label>
-                                                    <ng-select placeholder="Please select subject"
-                                                        formControlName="country" class="w_100">
-                                                    </ng-select>
+                                                    <ng-select [items]="countryObj"
+                                                     bindLabel="country_name" bindValue="country_name" formControlName="country"
+                                                     class="w_100">
+                                                   </ng-select>
                                                     <div class="error_message">
                                                     </div>
                                                 </div>
@@ -113,7 +113,7 @@
                                                                 ngbTooltip=""></i>
                                                         </a>
                                                     </label>
-                                                    <ng-select placeholder="Please select subject"
+                                                    <ng-select 
                                                         formControlName="location" class="w_100">
                                                     </ng-select>
                                                     <div class="error_message">
@@ -133,7 +133,7 @@
                                                                 ngbTooltip=""></i>
                                                         </a>
                                                     </label>
-                                                    <input type="text" placeholder="Enter Title"
+                                                    <input type="date" 
                                                         class="form-control form_width"
                                                         formControlName="training_date" />
                                                     <div class="error_message">
@@ -153,8 +153,8 @@
                                                                 ngbTooltip=""></i>
                                                         </a>
                                                     </label>
-                                                    <input type="text" placeholder="Enter Title"
-                                                        class="form-control form_width" formControlName="time_zone" />
+                                                    <input type="time" 
+                                                        class="form-control form_width" formControlName="preferred_time" />
                                                     <div class="error_message">
                                                     </div>
                                                 </div>
@@ -171,8 +171,8 @@
                                                                 ngbTooltip=""></i>
                                                         </a>
                                                     </label>
-                                                    <ng-select placeholder="Please select subject"
-                                                        formControlName="training_type" class="w_100">
+                                                    <ng-select  
+                                                    [items]="training_type_obj"  bindLabel="name" bindValue="name" formControlName="training_type" class="w_100">
                                                     </ng-select>
                                                     <div class="error_message">
                                                     </div>
@@ -190,8 +190,9 @@
                                                                 ngbTooltip=""></i>
                                                         </a>
                                                     </label>
-                                                    <ng-select placeholder="Please select subject"
-                                                        formControlName="participant_detail" class="w_100">
+                                                    <ng-select 
+                                                        formControlName="participant_detail"  
+                                                        [items]="participant_detail_obj"  bindLabel="name" bindValue="name" class="w_100">
                                                     </ng-select>
                                                     <div class="error_message">
                                                     </div>
@@ -211,8 +212,8 @@
                                                                 ngbTooltip=""></i>
                                                         </a>
                                                     </label>
-                                                    <input type="text" placeholder="Enter Title"
-                                                        class="form-control form_width" formControlName="email" />
+                                                    <input type="text" 
+                                                        class="form-control form_width" formControlName="email_for_participant" />
                                                     <div class="error_message">
                                                     </div>
                                                 </div>
@@ -230,7 +231,7 @@
                                                                 ngbTooltip=""></i>
                                                         </a>
                                                     </label>
-                                                    <input type="text" placeholder="Enter Title"
+                                                    <input type="text"
                                                         class="form-control form_width" formControlName="budget" />
                                                     <div class="error_message">
                                                     </div>
@@ -248,8 +249,8 @@
                                                                 ngbTooltip=""></i>
                                                         </a>
                                                     </label>
-                                                    <input type="text" placeholder="Enter Title"
-                                                        class="form-control form_width" formControlName="code" />
+                                                    <input type="text"
+                                                        class="form-control form_width" formControlName="management_code" />
                                                     <div class="error_message">
                                                     </div>
                                                 </div>
@@ -267,8 +268,9 @@
                                                                 ngbTooltip=""></i>
                                                         </a>
                                                     </label>
-                                                    <input type="text" placeholder="Enter Title"
-                                                        class="form-control form_width" formControlName="quote" />
+                                                    <ng-select 
+                                                    [items]="yes_no_obj"  bindLabel="name" bindValue="name" formControlName="quote" class="w_100">
+                                                   </ng-select>
                                                     <div class="error_message">
                                                     </div>
                                                 </div>
@@ -278,7 +280,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="form-group w-100">
                                                     <label class="form-control-label">
-                                                        Do you already have a quote<span class="text_red">*
+                                                        Attach quote if available<span class="text_red">*
                                                         </span>
                                                         <a>
                                                             <i class="fa fa-info-circle info_circle" aria-hidden="true"
@@ -287,7 +289,7 @@
                                                         </a>
                                                     </label>
                                                     <input type="file" id="exampleInputFile"
-                                                        class="form-control form_width">
+                                                    formControlName="attach_quote" (change)="handleFileInput($event)"   class="form-control form_width">
                                                     <div class="error_message">
                                                     </div>
                                                 </div>
@@ -306,8 +308,8 @@
                                                                 ngbTooltip=""></i>
                                                         </a>
                                                     </label>
-                                                    <ng-select placeholder="Please select subject"
-                                                        formControlName="preference" class="w_100">
+                                                    <ng-select  
+                                                    [items]="preferenceObj"  bindLabel="name" bindValue="name"             formControlName="preference_course" class="w_100">
                                                     </ng-select>
                                                     <div class="error_message">
                                                     </div>
@@ -328,8 +330,8 @@
                                                                 ngbTooltip=""></i>
                                                         </a>
                                                     </label>
-                                                    <input type="text" placeholder="Enter Title"
-                                                        class="form-control form_width" formControlName="contacts" />
+                                                    <input type="text" 
+                                                        class="form-control form_width" formControlName="additional_contact" />
                                                     <div class="error_message">
                                                     </div>
                                                 </div>
@@ -347,8 +349,8 @@
                                                                 ngbTooltip=""></i>
                                                         </a>
                                                     </label>
-                                                    <input type="text" placeholder="Enter Title"
-                                                        class="form-control form_width" formControlName="details" />
+                                                    <input type="text" 
+                                                        class="form-control form_width" formControlName="additional_detail" />
                                                     <div class="error_message">
                                                     </div>
                                                 </div>
@@ -367,21 +369,28 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="form-group w-100">
                                                     <label class="form-control-label">
-                                                        Training Hours / Duration <span class="text_red">* </span>
+                                                        Requeter Email <span class="text_red">* </span>
                                                         <a>
                                                             <i class="fa fa-info-circle info_circle" aria-hidden="true"
                                                                 data-bs-toggle="tooltip" placement="right"
                                                                 ngbTooltip=""></i>
                                                         </a>
                                                     </label>
-                                                    <input type="text" placeholder="Enter Title"
+                                                    <input type="text" 
                                                         class="form-control form_width" formControlName="duration" />
                                                     <div class="error_message">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <button class="btn btn-primary ml-2">Submit</button>
+                                        <button *ngIf="isSubmit()" type="button" (click)="save(vendorStatus.pending)" class="btn btn-primary ml-2">Submit</button>
+                                        <button *ngIf="isPublish()" type="button" routerLink="/vendortraining/add" class="btn btn-primary ml-2">Add Vendor</button>
+                                        <button *ngIf="isDraft()" class="btn btn-secondary"
+                                         (click)="save(vendorStatus.draft)">
+                                            {{lableConstant.Save_as_draft}}</button>
+                                        <button *ngIf="isReject()" class="btn btn-secondary"
+                                           (click)="save(vendorStatus.reject)">
+                                          {{lableConstant.Save_as_draft}}</button>
                                     </div>
                                 </div>
                             </div>
