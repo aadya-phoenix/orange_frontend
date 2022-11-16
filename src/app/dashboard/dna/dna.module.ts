@@ -20,6 +20,7 @@ import { DnaViewBpComponent } from './dna-view-bp/dna-view-bp.component';
 import { DnaForwardComponent } from './dna-forward/dna-forward.component';
 import { DnaTrackerComponent } from './dna-tracker/dna-tracker.component';
 import { DnaTrackerCreateComponent } from './dna-tracker-create/dna-tracker-create.component';
+import { DigitOnlyModule } from '@uiowa/digit-only';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { DnaTrackerCreateComponent } from './dna-tracker-create/dna-tracker-crea
     SharedModule,
     NgxPaginationModule,
     NgSelectModule,
+    DigitOnlyModule, 
     NgbModule,
     TreeModule
   ]
