@@ -110,7 +110,7 @@ export class DnaTrackerCreateComponent implements OnInit {
       if (res.status == 1) {
         this.commonService.hideLoading();
         this.commonService.toastSuccessMsg('New Tracker', 'Successfully Created.');
-        this.router.navigateByUrl(`/user/dna`);
+        this.router.navigateByUrl(`/dna/tracker`);
       }
       else {
         this.commonService.hideLoading();

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { VendorTrainingRoutingModule } from './vendor-training-routing.module';
 import { VendorTrainingDashboardComponent } from './vendor-training-dashboard/vendor-training-dashboard.component';
@@ -14,10 +14,15 @@ import { VendorTrainingAddVendorComponent } from './external-training/vendor-tra
 import { VendorTrainingEvaluationComponent } from './external-training/vendor-training-evaluation/vendor-training-evaluation.component';
 import { VendorTrainingPoCreationComponent } from './external-training/vendor-training-po-creation/vendor-training-po-creation.component';
 import { VendorTrainingPoApprovalComponent } from './external-training/vendor-training-po-approval/vendor-training-po-approval.component';
+import { VendorTrainingHistoryComponent } from './external-training/vendor-training-history/vendor-training-history.component';
 
 
 @NgModule({
-  declarations: [VendorTrainingDashboardComponent, VendorTrainingFormComponent, VendorTrainingViewComponent, VendorTrainingListComponent, VendorTrainingAddVendorComponent, VendorTrainingEvaluationComponent, VendorTrainingPoCreationComponent, VendorTrainingPoApprovalComponent],
+  declarations: [VendorTrainingDashboardComponent, VendorTrainingFormComponent, VendorTrainingViewComponent, VendorTrainingListComponent, VendorTrainingAddVendorComponent, VendorTrainingEvaluationComponent, VendorTrainingPoCreationComponent, VendorTrainingPoApprovalComponent, VendorTrainingHistoryComponent],
+  providers:[DatePipe],
+  entryComponents: [
+    VendorTrainingHistoryComponent
+  ],
   imports: [
     CommonModule,
     VendorTrainingRoutingModule,

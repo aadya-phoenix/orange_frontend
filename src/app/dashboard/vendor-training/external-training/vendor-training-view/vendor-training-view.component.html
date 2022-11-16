@@ -1,1 +1,347 @@
-<p>vendor-training-view works!</p>
+<div id="right-panel" class="right-panel">
+    <app-header></app-header>
+    <div class="breadcrumbs cm_breadcums">
+        <div class="col-sm-7">
+            <div class="page-header float-left bg-transparent">
+                <div class="page-title d-flex align-items-center">
+                    <img src="../../../../assets/images/4.jpg" class="home_Css_img" />
+                    <div class="d-flex flex-column ml-3">
+                        <span class="font-20 text_white">External Vendor Training Module</span>
+                        <span class="divider1"></span>
+                        <span class="title-detail mt-6"> {{lableConstant.request_training_vc_report}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-5 float-right">
+            <div class="page-header float-right bg-transparent">
+                <div class="page-title d-flex end_just">
+                    <ol class="breadcrumb text-right bg-transparent">
+                        <li>
+                            <a [routerLink]="['/']" class="text_white">
+                                <i class="fa fa-home" aria-colcount=""></i> {{lableConstant.home}}
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/vendortraining']" class="text_white span_dis">{{lableConstant.create_new_get_a_report}}</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center justify_content card_header_common">
+        <div class="d-flex">
+            <img src="../../../../assets/images/formm.png" class="ml-2 form_img_req" />
+            <p class="mt-2 ml-2 mb-2 view-re_css">
+                <span>View External Vendor Training Request</span>
+                <span class="cc-text_css"> ({{ requestdata.request_id }}) -
+                </span>
+                <span spellcheck="text_orange" class="text_orange">{{lableConstant.Request_Status}} - {{ requestdata.status_new | titlecase
+                    }}</span>
+            </p>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm mr-2" (click)="backToList()">
+            {{lableConstant.My_Request}}
+        </button>
+    </div>
+  
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="mb-2" *ngIf="isUpdate() || isPublish() || isForward() || isReject()">
+                <div class="Requs_btn_inl">
+                    <div class="Requs_btn_inl-child">
+                        
+                        <button type="button" class="btn btn-primary mr-2" *ngIf="isPublish()"
+                            (click)="statusChangeRequest(vendorStatus.publish)">
+                            <i class="fa fa-upload" aria-hidden="true"></i><span class="pl-1">{{lableConstant.close_request}}</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary  mr-2" *ngIf="isForward()"
+                            (click)="forwardRequest()">
+                            <i aria-hidden="true" class="fa fa-upload"></i><span class="pl-1">{{lableConstant.transfer_to_data_analyst}}</span>
+                        </button>
+                        <button type="button" class="btn mr-2" *ngIf="isUpdate()"
+                            [ngClass]="(isPublish() || isForward()) ?  'btn-secondary'  : 'btn-primary'"
+                            (click)="updateRequest()">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i><span class="pl-1">{{lableConstant.Update}}</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary  mr-2" *ngIf="isReject()"
+                            (click)="statusChangeRequest(vendorStatus.reject)">
+                            <i class="fa fa-times" aria-hidden="true"></i> <span class="pl-1">{{lableConstant.reject}}</span>
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-secondary" *ngIf="isOtherRoc()" (click)="transferToOtherRoc()">
+                        <i class="fa fa-exchange" aria-hidden="true"></i><span class="pl-1">{{lableConstant.Transfer_to_other_Regional_Training_Coordinator}}</span>
+                    </button>
+                </div>
+
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <div class="card border-radius-0">
+                        <div class="card-header card_header_view">
+                            <p>External Vendor Training Details</p>
+                            <div *ngIf="requestdata.status_new == vendorStatus.closed && requestdata.report_attachment">
+                                <a href="{{requestdata.attachUrl}}" class="text_white">
+                                 Download Report <i class="fa fa-download text_orange ml-1" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">                      
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">{{lableConstant.requester_name}}</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{requestdata.requester_name}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">{{lableConstant.Training_Title}}</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{requestdata.training_name | titlecase}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Region</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.region
+                                                }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6" *ngIf="requestdata.country">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Country</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.country}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">City - Location of training</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.certification_vendor}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Estimated Training Date</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.training_date | date: dateFormate }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Preferred Time</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.preferred_time
+                                                }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Training type</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{requestdata.training_type }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>                           
+  
+                                                          
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Participant detail</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.participant_detail}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6" >
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email addresses for participants</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.email_for_participant  }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6" >
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Budget available for training/Estimated cost </label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.budget}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>                                                 
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Management code</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.management_code   }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>                            
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Do you already have a quote</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.quote }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>                           
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Attach quote if available</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.end_date | date: dateFormate }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>                            
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Preference for Public/Private course</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.preference_course}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>                          
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Additional contacts to be notified</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.additional_contact}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>                           
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Additional details</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.additional_detail }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>                           
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">{{lableConstant.Attachments}}</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                <a *ngIf="requestdata.attachUrl" class="text_orange" href="{{requestdata.attachUrl}}"
+                                                    target="_blank">{{lableConstant.Click_here_to_View_resource}}.</a>
+                                                <span *ngIf="!requestdata.attachUrl">-</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>                          
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">{{lableConstant.Additional_Comments}}</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.additional_comment}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>                           
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Regional Training Coordinator</label>
+                                        <div class="d-flex align-items-center">
+                                            <span class="form_data">
+                                                {{ requestdata.regional_cordinator_name}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <!-- <div class="">
+                        <div class="card mb-0" >
+                            <div class="card-header color-orange">
+                                <div class="d-flex justify-content-between">
+                                    <span class="row">
+                                        {{lableConstant.View_History}}<h5 class="card-title ml-1">
+                                            <b class="color-orange"> ({{requestdata.request_id}})</b>
+                                        </h5>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr class="font-14 text-center">
+                                            <th scope="col">{{lableConstant.sr_no}}</th>
+                                            <th scope="col">{{lableConstant.submitted_by}}</th>
+                                            <th scope="col">{{lableConstant.sent_to}}</th>
+                                            <th scope="col">{{lableConstant.last_modified}}</th>
+                                            <th scope="col">{{lableConstant.Status}}</th>
+                                            <th scope="col">{{lableConstant.Comments}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let history of historyList;let i = index" class="text-center font-13">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{ history && history.transfer_by_name ? history.transfer_by_name : history.action_by_name}}
+                                            </td>
+                                            <td>{{history && history.transfer_by_name ? history.transfer_to_name : '-'}}</td>
+                                            <td>{{ history.updated_at | date: "short"}}</td>
+                                            <td>
+                                                {{history.status | titlecase}}
+                                            </td>
+                                            <td>
+                                                <p style="width: 154px; overflow-y: auto;font-size: 12px;">{{history.status_comment}}</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
