@@ -76,7 +76,7 @@ export class OlTestSectionCreateComponent implements OnInit {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Section', 'Successfully Added.');
           this.modalService.close();
-          this.router.navigateByUrl(`/oltest/view/${this.test_id}`);
+          this.passEntry.next();
         },
         (err: any) => {
           this.commonService.hideLoading();
@@ -90,12 +90,12 @@ export class OlTestSectionCreateComponent implements OnInit {
         section_id: this.id
       };
       this.commonService.showLoading();
-      this.olTestService.createSection(data, this.test_id).subscribe(
+      this.olTestService.updateSection(data, this.test_id).subscribe(
         (res: any) => {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Section', 'Successfully Updated.');
           this.modalService.close();
-          this.router.navigateByUrl(`/oltest/view/${this.test_id}`);
+          this.passEntry.next();
         },
         (err: any) => {
           this.commonService.hideLoading();

@@ -206,23 +206,23 @@ export const dataConstant = {
     Online: 'Online', Scorm:'Scorm'
   },
   OLTestQuestion:[{
-    id:'yes_no', name:'Yes/No'
+    id:'yes_no', name:'Yes/No', isSCORM: true
   },{
-    id:'true_false', name:'True/False'
+    id:'true_false', name:'True/False', isSCORM: true
   },{
-    id:'multi_choice_single', name:'Multiple Choise - Single Answer'
+    id:'multi_choice_single', name:'Multiple Choise - Single Answer', isSCORM: true
   },{
-    id:'multi_choice_multiple', name:'Multiple Choise - Multiple Answer'
+    id:'multi_choice_multiple', name:'Multiple Choise - Multiple Answer', isSCORM: true
   },{
-    id:'free_form', name:'Free Form (Easy)'
+    id:'free_form', name:'Free Form (Easy)', isSCORM: false
   },{
-    id:'matching', name:'Match the following'
+    id:'matching', name:'Match the following', isSCORM: true
   },{
-    id:'drag_drop', name:'Sequence drag and drop'
+    id:'drag_drop', name:'Sequence drag and drop', isSCORM: true
   },{
-    id:'fill_blank', name:'Fill in the blank'
+    id:'fill_blank', name:'Fill in the blank', isSCORM: true
   },{
-    id:'drag_word', name:'Drag the words'
+    id:'drag_word', name:'Drag the words', isSCORM: true
   }],
   OLTestTemplateUrl:{
     Online: 'https://www.google.com/', Scorm:'https://www.google.com/'

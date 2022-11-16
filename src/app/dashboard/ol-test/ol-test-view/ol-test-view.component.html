@@ -64,10 +64,10 @@
                                     <h4 class="mb-0 mr-2 color-black fon_16">Question list </h4>
                                 </div>
                                 <div>
-                                    <button class="btn btn-secondary mr-1" (click)="createSection()"><i
+                                    <button class="btn btn-secondary mr-1" (click)="createSection(0)"><i
                                             class="fa fa-plus mr-2"></i>Add Section
                                     </button>
-                                    <button class="btn btn-secondary" (click)="createQuestion()"><i
+                                    <button class="btn btn-secondary" (click)="createQuestion(0)"><i
                                             class="fa fa-plus mr-2"></i>Add Question
                                     </button>
                                 </div>
@@ -117,7 +117,7 @@
                                                         </td>
                                                         <td></td>
                                                         <td>
-                                                            <a (click)="editRequest()" class="copy_file mr-1"
+                                                            <a (click)="createSection(item.id)" class="copy_file mr-1"
                                                                 data-toggle="tooltip" data-placement="top" title="Edit">
                                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                             </a>
@@ -138,11 +138,11 @@
                                                         </td>
                                                         <td>{{getQuestionType(question.type)}}</td>
                                                         <td>
-                                                            <a (click)="copyRequest()" class="copy_file mr-1"
+                                                            <a (click)="copyQuestion(question.id)" class="copy_file mr-1"
                                                                 data-toggle="tooltip" data-placement="top" title="Copy">
                                                                 <i class="fa fa-files-o" aria-hidden="true"></i>
                                                             </a>
-                                                            <a (click)="editRequest()" class="copy_file mr-1"
+                                                            <a (click)="createQuestion(question.id)" class="copy_file mr-1"
                                                                 data-toggle="tooltip" data-placement="top" title="Edit">
                                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                             </a>
@@ -166,11 +166,11 @@
                                                         </td>
                                                         <td>{{getQuestionType(question.type)}}</td>
                                                         <td>
-                                                            <a (click)="copyRequest()" class="copy_file mr-1"
+                                                            <a (click)="copyQuestion(question.id)" class="copy_file mr-1"
                                                                 data-toggle="tooltip" data-placement="top" title="Copy">
                                                                 <i class="fa fa-files-o" aria-hidden="true"></i>
                                                             </a>
-                                                            <a (click)="editRequest()" class="copy_file mr-1"
+                                                            <a (click)="createQuestion(question.id)" class="copy_file mr-1"
                                                                 data-toggle="tooltip" data-placement="top" title="Edit">
                                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                             </a>

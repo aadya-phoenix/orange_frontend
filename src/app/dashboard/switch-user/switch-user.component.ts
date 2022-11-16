@@ -37,12 +37,13 @@ export class SwitchUserComponent implements OnInit {
     private route: ActivatedRoute) {
     this.userName = this.authService.getProfileDetailsfromlocal();
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
-    this.isAdmin = this.userName.admin == 1 ? true : false;
+    this.isAdmin = this.userName.data.admin == 1 ? true : false;
     this.loginForm = this.formBuilder.group({
       uid: new FormControl('', [Validators.required])
     });
   }
   ngOnInit(): void {
+    debugger;
     if (this.isAdmin) {
       this.getUsers();
     }

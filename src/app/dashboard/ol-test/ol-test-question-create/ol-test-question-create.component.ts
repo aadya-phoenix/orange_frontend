@@ -19,6 +19,7 @@ export class OlTestQuestionCreateComponent implements OnInit {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   createQuestionForm: FormGroup;
   isSubmitted = false;
+  selectedQuestion = '';
   isOLTest = true;
   questionList = dataConstant.OLTestQuestion;
   constructor(private formBuilder: FormBuilder,
@@ -42,6 +43,9 @@ export class OlTestQuestionCreateComponent implements OnInit {
       none: new FormControl(false, []),
       all: new FormControl(false, []),
     });
+    this.createQuestionForm.get("type")?.valueChanges.subscribe(x => {
+      this.selectedQuestion = x;
+    });
   }
   objectDetail: any = {};
   title = '';
@@ -53,13 +57,30 @@ export class OlTestQuestionCreateComponent implements OnInit {
     this.title = this.props.title;
     this.isOLTest = this.objectDetail.test_type == dataConstant.OLTestType.Online ? true : false;
     this.id = this.props.question_id;
-    if (this.id) {
-      this.getQuestionDetails();
-    }
+    this.questionList = this.isOLTest ? this.questionList.filter(x =>{x.isSCORM == false}) : this.questionList.filter(x =>{x.isSCORM == true});
+    this.getsectionList();
+    
   }
 
   requiredMessage(field: any) {
     return this.lableConstant.form_fieldname_cannot_be_blank.replace('<form fieldname>', field).replace('<nom du champ>', field);
+  }
+
+  getsectionList() {
+    this.commonService.showLoading();
+    this.olTestService.getSection(this.objectDetail.id).subscribe(
+      (res: any) => {
+        this.commonService.hideLoading();
+        this.sectionList = res.data;
+        if (this.id) {
+          this.getQuestionDetails();
+        }
+      },
+      (err: any) => {
+        this.commonService.hideLoading();
+        this.commonService.errorHandling(err);
+      }
+    );
   }
 
   getQuestionDetails() {
@@ -68,6 +89,7 @@ export class OlTestQuestionCreateComponent implements OnInit {
       (res: any) => {
         this.commonService.hideLoading();
         this.requestData = res.data;
+        this.requestData.correct_answer = this.requestData.correct_answer ? JSON.parse(this.requestData.correct_answer): '';
         this.createQuestionForm.patchValue(this.requestData);
       },
       (err: any) => {
@@ -90,7 +112,7 @@ export class OlTestQuestionCreateComponent implements OnInit {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Question', 'Successfully created.');
           this.modalService.close();
-          this.router.navigateByUrl(`/oltest/view/${this.objectDetail.id}`);
+          this.passEntry.next();
         },
         (err: any) => {
           this.commonService.hideLoading();
@@ -107,7 +129,7 @@ export class OlTestQuestionCreateComponent implements OnInit {
           this.commonService.hideLoading();
           this.commonService.toastSuccessMsg('Question', 'Successfully updated.');
           this.modalService.close();
-          this.router.navigateByUrl(`/oltest/view/${this.objectDetail.id}`);
+          this.passEntry.next();
         },
         (err: any) => {
           this.commonService.hideLoading();

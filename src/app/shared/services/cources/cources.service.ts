@@ -202,7 +202,6 @@ export class CourcesService {
   //role-users
   getRoleUsers() {
     const url = this.basePath + 'api/' + this.apiVersion + '/role-users';
-    const urllive = this.basePath + 'api/' + this.apiVersion + '/role-users';
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));

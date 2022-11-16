@@ -67,22 +67,22 @@ export class OlTestViewComponent implements OnInit {
     );
   }
 
-  createSection() {
+  createSection(id:any) {
     const modalRef = this.modalService.open(OlTestSectionCreateComponent, {
       centered: true,
       windowClass: 'alert-popup',
     });
     modalRef.componentInstance.props = {
       objectDetail: {},
-      test_id: this.id
+      test_id: this.id,
+      section_id: id
     };
     modalRef.componentInstance.passEntry.subscribe((res: any) => {
-      //body.publisher_id = res;
-      //this.saveData(body);
+      this.getDetails();
     });
   }
 
-  createQuestion() {
+  createQuestion(id:any) {
     const modalRef = this.modalService.open(OlTestQuestionCreateComponent, {
       centered: true,
       size: 'xl',
@@ -90,10 +90,10 @@ export class OlTestViewComponent implements OnInit {
     });
     modalRef.componentInstance.props = {
       objectDetail: this.requestdata,
+      question_id: id
     };
     modalRef.componentInstance.passEntry.subscribe((res: any) => {
-      //body.publisher_id = res;
-      //this.saveData(body);
+      this.getDetails();
     });
   }
 
@@ -112,14 +112,32 @@ export class OlTestViewComponent implements OnInit {
   previewTest() {
 
   }
-  copyRequest() {
 
-  }
-  editRequest() {
-
-  }
-  deleteRequest() {
-
+  copyQuestion(id:any) {
+    Swal.fire({
+      title: 'Are you sure you want to copy?',
+      text: 'You will copy this request',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, copy it!',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        // this.commonService.showLoading();
+        // this.olTestService.copyQuestion({ section_id: id }, this.id).subscribe((res: any) => {
+        //   this.commonService.hideLoading();
+        //   this.getDetails();
+        //   Swal.fire(
+        //     'Copied!',
+        //     'Your request has been copyed.',
+        //     'success'
+        //   )
+        // }, (err: any) => {
+        //   this.commonService.hideLoading();
+        //   this.commonService.errorHandling(err);
+        // })
+      }
+    })
   }
   deleteSection(id: any) {
     Swal.fire({

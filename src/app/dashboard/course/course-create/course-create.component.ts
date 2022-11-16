@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -99,6 +99,7 @@ export class CourseCreateComponent implements OnInit {
     private modalService: NgbModal,
     private authService: AuthenticationService,
     private designService: DesignLearningService,
+    private el: ElementRef,
     private courseService: CourcesService) {
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.minDate = `${this.today.getFullYear()}-${("0" + (this.today.getMonth() + 1)).slice(-2)}-${("0" + this.today.getDate()).slice(-2)}`;
@@ -1326,6 +1327,8 @@ export class CourseCreateComponent implements OnInit {
   createUpdateCourse(status: string) {
     this.isSubmitted = true;
     if (this.createCourceForm.invalid) {
+      this.createCourceForm.markAllAsTouched();
+      this.scrollToFirstInvalidControl();
       return;
     }
     const body = this.createCourceForm.value;
@@ -1433,5 +1436,13 @@ export class CourseCreateComponent implements OnInit {
         }
       );
     }
+  }
+
+  private scrollToFirstInvalidControl() {
+    const firstInvalidControl: HTMLElement = this.el.nativeElement.querySelector(
+      "form .ng-invalid"
+    );
+
+    firstInvalidControl.focus(); //without smooth behavior
   }
 }

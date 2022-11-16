@@ -84,7 +84,7 @@ export class AuthenticationService {
   }
 
   getROMROCList(rom_id: any) {
-    const url = this.basePath + 'api/' + this.apiVersion + '/role-users';
+    const url = this.basePath + 'api/' + this.apiVersion + '/rom/'+rom_id+'/roc';
     return this.http
       .get(url, this.http.headers)
       .pipe(catchError(this.Errorhandling));

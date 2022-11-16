@@ -18,7 +18,7 @@
                             <label class="form-control-label color-black">
                                 Section name <span class="text_red">* </span>
                             </label>
-                            <ng-select placeholder="Please select subject" formControlName="subject" class="w_100"
+                            <ng-select placeholder="Please select subject" formControlName="section_id" class="w_100"
                             [items]="sectionList" bindLabel="section"
                                 bindValue="id" >
                             </ng-select>
@@ -53,10 +53,6 @@
                             <label class="form-control-label color-black">
                                 Choose one of the following
                                 <span class="text_red">* </span>
-                                <a>
-                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
-                                        placement="right" ngbTooltip=""></i>
-                                </a>
                             </label>
                             <ng-select placeholder="Please select type" [items]="questionList" bindLabel="name"
                                 bindValue="id" formControlName="type" class="w_100">
@@ -76,17 +72,29 @@
                     <div class="d-flex align-items-center">
                         <div class="form-group w-100">
                             <label class="form-control-label color-black">
-                                Correct Answer
+                                Correct Answer 
                                 <span class="text_red">* </span>
-                                <a>
-                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
-                                        placement="right" ngbTooltip=""></i>
-                                </a>
                             </label>
-                            <ng-select placeholder="Please select subject" [items]="questionList" bindLabel="name"
+                            <!-- <ng-select placeholder="Please select subject" [items]="questionList" bindLabel="name"
                             bindValue="id" formControlName="correct_answer"
-                                class="w_100">
-                            </ng-select>
+                                class="w_100" *ngIf="selectedQuestion != 'yes_no'">
+                            </ng-select> -->
+                            <div *ngIf="selectedQuestion == 'yes_no'">
+                                <input type="radio" id="Yes" formControlName="correct_answer"
+                                    value="Yes" class="mr-1" />
+                                <label for="Yes" class="mr-2">Yes</label>
+                                <input type="radio" id="No" formControlName="correct_answer"
+                                    value="No" class="mr-1" />
+                                <label for="No" class="mr-2">No</label>
+                            </div>
+                            <div *ngIf="selectedQuestion == 'true_false'">
+                                <input type="radio" id="True" formControlName="correct_answer"
+                                    value="True" class="mr-1" />
+                                <label for="True" class="mr-2">True</label>
+                                <input type="radio" id="False" formControlName="correct_answer"
+                                    value="False" class="mr-1" />
+                                <label for="False" class="mr-2">False</label>
+                            </div>
 
                             <div
                                 *ngIf="(createQuestionForm.controls['correct_answer'].invalid && (createQuestionForm.controls['correct_answer'].dirty || createQuestionForm.controls['correct_answer'].touched)) || isSubmitted">
@@ -104,19 +112,9 @@
                         <div class="form-group w-100">
                             <label class="form-control-label color-black">
                                 Correct Answer
-                                <span class="text_red">* </span>
-                                <a>
-                                    <i class="fa fa-info-circle info_circle" aria-hidden="true" data-bs-toggle="tooltip"
-                                        placement="right" ngbTooltip=""></i>
-                                </a>
                             </label>
-                            <input type="file" class="form-control form_width" formControlName="start_date" />
-
-                            <div class="error_message">
-
-                            </div>
+                            <input type="file" class="form-control form_width" formControlName="file" />
                         </div>
-
                     </div>
                 </div>
                 <div class="col-sm-6" *ngIf="isOLTest">
@@ -156,6 +154,13 @@
                                 Try again feedback
                             </label>
                             <input type="text" class="form-control form_width" formControlName="try_again_feedback" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="d-flex align-items-center">
+                        <div class="form-group w-100">
+                            <label class="mb-0 mr-1">Active</label> <input type="checkbox" formControlName="active" class="mr-1 w-h-21">
                         </div>
                     </div>
                 </div>
