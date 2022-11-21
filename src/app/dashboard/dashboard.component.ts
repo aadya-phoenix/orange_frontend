@@ -145,7 +145,7 @@ export class DashboardComponent implements OnInit {
           navigateTo: this.modules.design,
           favourite: false, showFavourite: true,
           isShowPending: true,
-          pendingRequestCount: this.pendingRequestCount.digital_learning,
+          pendingRequestCount: this.pendingRequestCount.new_learning,
           setFavouriteModule: this.modules.design,
         }, {
           id: 'get_report', name: 'Get a Report',
@@ -165,7 +165,7 @@ export class DashboardComponent implements OnInit {
           navigateTo:  this.modules.dna,
           favourite: false, showFavourite: true,
           isShowPending: true,
-          pendingRequestCount: this.pendingRequestCount.new_learning,
+          pendingRequestCount: this.pendingRequestCount.digital_learning,
           setFavouriteModule: this.modules.dna,
         },
         {
@@ -233,7 +233,8 @@ export class DashboardComponent implements OnInit {
     return this.isPdlMember && this.modulesArray_tab3.filter((x: { showFavourite: any; }) => x.showFavourite).length > 0 ? true : false
   }
   navigatetoPending(module: any) {
-    if (this.pendingFlag && this.profileDetails.data.role_id.length == 0) return;
+    // debugger;
+    // if (this.pendingFlag && this.profileDetails.data.role_id.length == 0) return;
     if (module == this.modules.course) {
       const status = this.getUserrole.includes(this.RoleID.CourseRequester) ? dataConstant.CarouselStatus.submitted : dataConstant.CarouselStatus.pending
       this.router.navigateByUrl(`/cct?status=${status}`);
@@ -258,9 +259,9 @@ export class DashboardComponent implements OnInit {
       const status = this.profileDetails.data?.staff == 1 ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
       this.router.navigateByUrl(`/olreport?status=${status}`);
     }
-    if (module == this.modules.backOffice) {
+    if (module == this.modules.dna) {
       const status = this.profileDetails.data?.staff == 1 ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
-      this.router.navigateByUrl(`/back-office?status=${status}`);
+      this.router.navigateByUrl(`/dna`);
     }
   }
 
@@ -414,10 +415,10 @@ export class DashboardComponent implements OnInit {
             element.pendingRequestCount = this.pendingRequestCount.get_report;
           }
           if (element.id == 'design') {
-            element.pendingRequestCount = this.pendingRequestCount.digital_learning;
+            element.pendingRequestCount = this.pendingRequestCount.new_learning;
           }
           if (element.id == 'dna') {
-            element.pendingRequestCount = this.pendingRequestCount.new_learning;
+            element.pendingRequestCount = this.pendingRequestCount.digital_learning;
           }
         });
       },

@@ -135,25 +135,39 @@
                     <div class="text-box_div ">
                         <div class="nav_p ">
                             <div id="myDIV">
-                                <button class="btn_active notifi_nowrap" *ngIf="pendingRequestCount.course_pending > 0"
+                                <button class="btn_active notifi_nowrap" *ngIf="pendingRequestCount.course_notify > 0"
                                     (click)="navigatetoPending(modules.course)">
-                                    You have {{pendingRequestCount.course_pending}} pending request in Create New Course
+                                    You have {{pendingRequestCount.course_notify}} pending request in Create New Course
                                 </button>
-                                <button class="btn_active notifi_nowrap" *ngIf="pendingRequestCount.session_pending > 0"
+                                <button class="btn_active notifi_nowrap" *ngIf="pendingRequestCount.session_notify > 0"
                                     (click)="navigatetoPending(modules.session)">
-                                    You have {{pendingRequestCount.session_pending}} pending request in Open Course
+                                    You have {{pendingRequestCount.session_notify}} pending request in Open Course
                                     Session
                                 </button>
                                 <button class="btn_active notifi_nowrap"
-                                    *ngIf="pendingRequestCount.carousel_pending > 0"
+                                    *ngIf="pendingRequestCount.carousel_notify > 0"
                                     (click)="navigatetoPending(modules.carousel)">
-                                    You have {{pendingRequestCount.carousel_pending}} pending request in Carousel
+                                    You have {{pendingRequestCount.carousel_notify}} pending request in Carousel
                                 </button>
                                 <button class="btn_active notifi_nowrap"
-                                    *ngIf="pendingRequestCount.office_role_pending > 0"
+                                    *ngIf="pendingRequestCount.office_role_notify > 0"
                                     (click)="navigatetoPending(modules.backOffice)">
-                                    You have {{pendingRequestCount.office_role_pending}} pending request in Back Office
+                                    You have {{pendingRequestCount.office_role_notify}} pending request in Back Office
                                     Role
+                                </button>
+                                <button class="btn_active notifi_nowrap" *ngIf="pendingRequestCount.digital_learning_notify > 0"
+                                    (click)="navigatetoPending(modules.dna)">
+                                    You have {{pendingRequestCount.digital_learning_notify}} pending request in Access Learning Needs tool(DNA)
+                                </button>
+                                <button class="btn_active notifi_nowrap"    
+                                    *ngIf="pendingRequestCount.get_report_notify > 0"
+                                    (click)="navigatetoPending(modules.getReport)">
+                                    You have {{pendingRequestCount.get_report_notify}} pending request in Get a Report
+                                </button>
+                                <button class="btn_active notifi_nowrap"
+                                    *ngIf="pendingRequestCount.new_learning_notify > 0"
+                                    (click)="navigatetoPending(modules.design)">
+                                    You have {{pendingRequestCount.new_learning_notify}} pending request in Design Learning Module
                                 </button>
                             </div>
                         </div>
