@@ -9,6 +9,7 @@ import { AuthenticationService } from 'src/app/shared/services/auth/authenticati
 import { CommonService } from 'src/app/shared/services/common/common.service';
 import { CourcesService } from 'src/app/shared/services/cources/cources.service';
 import { CourseSessionService } from 'src/app/shared/services/course_session/course-session.service';
+import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
 
 const numbersOnlyregexp = dataConstant.NumbersOnlyPattern;  
@@ -429,6 +430,7 @@ export class CreateSessionComponent implements OnInit {
       return;
     }
   }
+  
 
   onFileChange(event:any,index:number){
     const target = event.target;
@@ -442,19 +444,31 @@ export class CreateSessionComponent implements OnInit {
 
       const ws:XLSX.WorkSheet = wb.Sheets[wsname];
       this.data = (XLSX.utils.sheet_to_json(ws,{header:1}));
-
+      let array = [] as any;
       for(let item of this.data){
         for(let newitem of item){
-          this.newInstructorObj.push({
-            email_id:newitem, 
-          });
+          if(newitem != 'email_id'){
+            if(dataConstant.EmailPattren.test(newitem)){
+              array.push(newitem);
+            }
+            else{
+              Swal.fire(
+                'Invalid Data!',
+                'Please verify the file data. Some of the data is not valid.',
+                'error'
+              );
+              return;
+            }
+          }
+          // this.newInstructorObj.push({
+          //   email_id:newitem, 
+          // });
         }
       }
-      
-      let array = [] as any;
-      array =
-      (<FormArray>this.createSessionForm.controls['metadata']).at(index);
-      array['controls'].email_participant?.setValue(this.data);
+      this.metadataArray.at(index)?.get('email_participant')?.setValue(array);
+      // array =
+      // (<FormArray>this.createSessionForm.controls['metadata']).at(index);
+      // array['controls'].email_participant?.setValue(this.data);
      // this.newEmailParticipants(this.newdata);
       /* this.data.map((e:any)=>{
           e.email_id=e;

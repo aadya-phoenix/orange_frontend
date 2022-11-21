@@ -217,12 +217,12 @@ export class AppComponent {
             break;
         }
         this.titleService.setTitle(`${dataConstant.TitlePrefix} ${pageName ? ` - ${pageName} - ` : ` - `} ${laungauge ? laungauge : dataConstant.Laungauges.EN}`)
-        try {
-          var windows = window as any;
-          windows.utag.track('view', event.url, event.urlAfterRedirects);
-        } catch (e) {
-          console.error('utag object does not exist on this page');
-        }
+        // try {
+        //   var windows = window as any;
+        //   windows.utag.track('view', event.url, event.urlAfterRedirects);
+        // } catch (e) {
+        //   console.error('utag object does not exist on this page');
+        // }
       }
     });
   }

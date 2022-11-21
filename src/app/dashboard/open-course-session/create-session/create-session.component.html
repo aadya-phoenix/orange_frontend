@@ -246,7 +246,7 @@
                                                         </div>
                                                     </div>
                                                     <!--  *ngIf="!metadataArray.controls[i].controls['attachment'].value" -->
-                                                    <div class="col-sm-12">
+                                                    <div class="col-sm-10">
                                                         <div class="form-group">
                                                             <label class="form-control-label">
                                                                 {{lableConstant.Email_ID_of_participants}} <span
@@ -268,7 +268,8 @@
 
                                                         </div>
                                                     </div>
-                                                    <!--   <div class="col-sm-8" *ngIf="metadataArray.controls[i].controls['attachment'].value">
+                                                    <!--   <div class="col-sm-8" *ngIf="metadataArray.controls[i].controls['attachment'].value">-->
+                                                    <!-- <div>
                                         <div class="form-group">
                                             <label class="form-control-label">
                                                 {{lableConstant.Email_ID_of_participants}} 
@@ -277,16 +278,18 @@
                                             <input type="text" class="form-control form_width"
                                             formControlName="email_participant">                                            
                                         </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label class="form-control-label">
-                                               Upload Excel 
-                                            </label>
-                                            <input type="file" id="attachment" class="form-control form_width" formControlName="attachment"
-                                            (change)="onFileChange($event,i)" />
-                                        </div>
                                     </div> -->
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label class="form-control-label">
+                                                                <!-- Upload Excel -->
+                                                            </label>
+                                                            <input type="file" id="attachment"
+                                                                class="form-control form_width"
+                                                                formControlName="attachment"
+                                                                (change)="onFileChange($event,i)" />
+                                                        </div>
+                                                    </div>
                                                     <!--col-->
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
@@ -394,33 +397,37 @@
                                                         <div class="table-responsive ">
                                                             <table formArrayName="break" class="table table-bordered">
                                                                 <thead>
-                                                                    <tr >
+                                                                    <tr>
                                                                         <th scope="col">
                                                                             {{lableConstant.Break_Description}}</th>
-                                                                        <th scope="col">{{lableConstant.Break_Duration}} (HH:MM)
+                                                                        <th scope="col">{{lableConstant.Break_Duration}}
+                                                                            (HH:MM)
                                                                         </th>
                                                                         <th scope="col" class="w_add">
                                                                             {{lableConstant.Add}}</th>
                                                                     </tr>
-                                                                    <tr *ngFor="let item of session.controls.break.controls; let idx = index;">
-                                                                        <td [formGroupName]="idx" >
-                                                                            <input type="text" maxlength="500" class="form-control form_width"
-                                                                         placeholder="Enter Description"
-                                                                         formControlName="description"
-                                                                        (input)="valueChange($event)">
+                                                                    <tr
+                                                                        *ngFor="let item of session.controls.break.controls; let idx = index;">
+                                                                        <td [formGroupName]="idx">
+                                                                            <input type="text" maxlength="500"
+                                                                                class="form-control form_width"
+                                                                                placeholder="Enter Description"
+                                                                                formControlName="description"
+                                                                                (input)="valueChange($event)">
                                                                             <!-- <textarea maxlength="500" 
                                                                         formControlName="description"
                                                                         (input)="valueChange($event)"
                                                                                 class="form-control form_width-textarea w-100 mr-2"
                                                                                 rows="3" maxlength="500"
                                                                                 placeholder="Enter Description"></textarea> -->
-                                                                                <span class="charcter_limit">{{remainingText}} {{lableConstant.characters_remaining}}</span>
+                                                                            <span
+                                                                                class="charcter_limit">{{remainingText}}
+                                                                                {{lableConstant.characters_remaining}}</span>
                                                                         </td>
-                                                                        <td [formGroupName]="idx"> <input type="text" 
+                                                                        <td [formGroupName]="idx"> <input type="text"
                                                                                 class="form-control form_width"
                                                                                 (keyup)="numbersOnly($event,i,idx)"
-                                                                             formControlName="duration"
-                                                                                >
+                                                                                formControlName="duration">
                                                                         </td>
                                                                         <!-- (keyup)="numbersOnly($event,i,idx)" -->
                                                                         <td>
@@ -686,7 +693,7 @@
                         </ngb-accordion>
 
                     </ng-container>
-                     <!-- <div class="card-footer1">
+                    <!-- <div class="card-footer1">
                         <button class="btn btn-primary mr-1" type="submit"
                             *ngIf="session_status !='pending' && (isStaff && !(getUserrole.includes(9) || getUserrole.includes(3))) && (sessionPub || session_status == 'reject')"
                             (click)="createSession('pending')">{{lableConstant.submit}}</button>
@@ -707,38 +714,47 @@
                             <i class="fa fa-times" aria-hidden="true"></i> <span
                                 class="pl-1">{{lableConstant.reject}}</span>
                         </button>
-                    </div> --> 
-                    <div class="card-footer1" *ngIf ="(isStaff && !(getUserrole.includes(9) || getUserrole.includes(3)))">
+                    </div> -->
+                    <div class="card-footer1"
+                        *ngIf="(isStaff && !(getUserrole.includes(9) || getUserrole.includes(3)))">
                         <button class="btn btn-primary mr-1" type="submit"
                             (click)="createSession('pending')">{{lableConstant.submit}}</button>
-                        <button class="btn btn-secondary" *ngIf=" session_status != 'reject'" (click)="createSession('draft')">
+                        <button class="btn btn-secondary" *ngIf=" session_status != 'reject'"
+                            (click)="createSession('draft')">
                             {{lableConstant.Save_as_draft}}
                         </button>
                     </div>
-                    <div class="card-footer1" *ngIf ="getUserrole.includes(3)">
-                        <button *ngIf="(sessionPub || session_status == 'reject') && session_status !='pending'" class="btn btn-primary mr-1" type="submit"
-                        (click)="createSession('pending')">{{lableConstant.submit}}</button>
-                        <button *ngIf="(!sessionPub && session_status != 'reject') || session_status == 'pending' " class="btn btn-primary mr-1" data-target="#publishModal" data-toggle="modal">  <i class="fa fa-upload" aria-hidden="true"></i>
-                            <span class="pl-1">  {{lableConstant.publish}}</span></button>
-                        <button *ngIf="session_id == 0 || sessionPub && session_status != 'pending' || session_status == 'draft'" class="btn btn-secondary" (click)="createSession('draft')">
+                    <div class="card-footer1" *ngIf="getUserrole.includes(3)">
+                        <button *ngIf="(sessionPub || session_status == 'reject') && session_status !='pending'"
+                            class="btn btn-primary mr-1" type="submit"
+                            (click)="createSession('pending')">{{lableConstant.submit}}</button>
+                        <button *ngIf="(!sessionPub && session_status != 'reject') || session_status == 'pending' "
+                            class="btn btn-primary mr-1" data-target="#publishModal" data-toggle="modal"> <i
+                                class="fa fa-upload" aria-hidden="true"></i>
+                            <span class="pl-1"> {{lableConstant.publish}}</span></button>
+                        <button
+                            *ngIf="session_id == 0 || sessionPub && session_status != 'pending' || session_status == 'draft'"
+                            class="btn btn-secondary" (click)="createSession('draft')">
                             {{lableConstant.Save_as_draft}}
                         </button>
-                        <button *ngIf="(session_id != 0 && session_status == 'pending')" class="btn btn-secondary" data-target="#rejectModal" data-toggle="modal" >
+                        <button *ngIf="(session_id != 0 && session_status == 'pending')" class="btn btn-secondary"
+                            data-target="#rejectModal" data-toggle="modal">
                             <i class="fa fa-times" aria-hidden="true"></i> <span
-                                    class="pl-1">{{lableConstant.reject}}</span>
+                                class="pl-1">{{lableConstant.reject}}</span>
                         </button>
-                    </div> 
-                    <div class="card-footer1" *ngIf ="getUserrole.includes(9)">
-                        <button class="btn btn-primary mr-1" type="submit"
-                             data-target="#publishModal" data-toggle="modal">{{lableConstant.publish}}</button>
-                            <button *ngIf="session_id == 0" class="btn btn-secondary" (click)="createSession('draft')">
-                                {{lableConstant.Save_as_draft}}
-                            </button>
-                        <button *ngIf="session_id != 0" class="btn btn-secondary" data-toggle="modal" data-target="#rejectModal">
+                    </div>
+                    <div class="card-footer1" *ngIf="getUserrole.includes(9)">
+                        <button class="btn btn-primary mr-1" type="submit" data-target="#publishModal"
+                            data-toggle="modal">{{lableConstant.publish}}</button>
+                        <button *ngIf="session_id == 0" class="btn btn-secondary" (click)="createSession('draft')">
+                            {{lableConstant.Save_as_draft}}
+                        </button>
+                        <button *ngIf="session_id != 0" class="btn btn-secondary" data-toggle="modal"
+                            data-target="#rejectModal">
                             <i class="fa fa-times" aria-hidden="true"></i> <span
-                                    class="pl-1">{{lableConstant.reject}}</span>
+                                class="pl-1">{{lableConstant.reject}}</span>
                         </button>
-                    </div> 
+                    </div>
                     <!-- <div class="card-footer1" *ngIf="getUserrole.includes(3)"> -->
                     <!-- <button *ngIf="(sessionPub || session_status == 'reject') && session_status !='pending'"
                             class="btn btn-primary mr-1" type="submit"
