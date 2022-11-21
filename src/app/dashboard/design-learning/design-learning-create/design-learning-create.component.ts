@@ -34,6 +34,7 @@ export class DesignLearningCreateComponent implements OnInit {
   designAttachment = { file: '', ext: '' };
   isDesigner = false;
   isHeadDesigner = false;
+  isProjectmanager = false;
   isBusinessConsultant = false;
   getUserrole: any = {};
   getprofileDetails: any = {};
@@ -178,6 +179,7 @@ export class DesignLearningCreateComponent implements OnInit {
           this.createDesignForm.controls.comment.setValue(this.design_details.comment);
           this.createDesignForm.controls.learn_target_audience.setValue(this.design_details.learn_target_audience);
           if(this.design_details.project_manager){
+            this.isProjectmanager = true;
             this.createDesignForm.addControl('project_manager', new FormControl(null, []));
             this.createDesignForm.controls.project_manager.setValue(this.design_details.project_manager);
           }

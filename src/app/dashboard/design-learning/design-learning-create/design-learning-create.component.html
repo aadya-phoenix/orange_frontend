@@ -174,7 +174,7 @@
                                                                 class="form-control form_width" />
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 col-sm-12" *ngIf="isHeadDesigner">
+                                                    <div class="col-md-6 col-sm-12" *ngIf="isHeadDesigner || isProjectmanager">
                                                         <div class="form-group">
                                                             <label class="form-control-label mb-0 font_bold">
                                                                 {{lableConstant.project_manager}} <span
@@ -512,12 +512,12 @@
                             <div class="card-footer">
                                 <button class="btn btn-primary mr-1"
                                     *ngIf="(!isHeadDesigner &&!isDesigner && (design_details_status == designStatus.draft
-                                || design_details_status == designStatus.reject || !design_details_status)) ||(isBusinessConsultant && !design_details_status)"
+                                || design_details_status == designStatus.reject || !design_details_status)) ||(isBusinessConsultant && !design_details_status) || ( isDesigner && design_details.head_status == designStatus.approve)"
                                     (click)="save(designStatus.pending)" type="submit">
                                     <i aria-hidden="true" class="fa fa-upload">
                                     </i> <span class="pl-1">{{lableConstant.submit}}</span>
                                 </button>
-                                <button class="btn btn-primary mr-1" *ngIf="isDesigner"
+                                <button class="btn btn-primary mr-1" *ngIf="isDesigner  && design_details.head_status != designStatus.approve"
                                     (click)="openModal(designStatus.forwarded)" type="submit">
                                     <i aria-hidden="true" class="fa fa-upload">
                                     </i> <span class="pl-1">{{lableConstant.send_for_approval}}</span>
