@@ -118,7 +118,8 @@ export class DnaLearningFormComponent implements OnInit {
     else {
       this.isCountry = true;
       this.createDnaForm.addControl('country',new FormControl('', [Validators.required]));
-      this.getCountries();
+      this.createDnaForm.controls.country.setValue('');
+      this.getCountries(this.regionId);
     }
   }
 
@@ -312,13 +313,13 @@ export class DnaLearningFormComponent implements OnInit {
     );
   }
 
-  getCountries() {
+  getCountries(regionid:any) {
     this.commonService.showLoading();
-    this.generalDrpdownsService.getCountries().subscribe(
+    this.generalDrpdownsService.getCountriesByRegion(regionid).subscribe(
       (res: any) => {
         this.commonService.hideLoading();
-        let regions = res.data;
-        this.countriesObj = regions.filter((x: any) => x.region_id === this.regionId);
+        this.countriesObj = res.data;
+       // this.countriesObj = regions.filter((x: any) => x.region_id === this.regionId);
       },
       (err: any) => {
         this.commonService.hideLoading();

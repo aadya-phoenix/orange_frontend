@@ -81,7 +81,7 @@ export class EditUserComponent implements OnInit {
       }
       else{
         this.isCreate = true;
-        this.getCountries();
+       // this.getCountries();
         this.createUserForm.addControl('password', new FormControl(null, [Validators.required, Validators.pattern(passwordRegexp)]));
         this.createUserForm.addControl('confirm_password', new FormControl(null, [Validators.required, Validators.pattern(passwordRegexp)]));
       }
@@ -125,7 +125,7 @@ export class EditUserComponent implements OnInit {
      this.createUserForm.removeControl('domain_training_id');
      this.createUserForm.removeControl('country');
     }
-    else if(this.roleId.includes(5) || this.roleId.includes(13)){
+    else if(this.roleId.includes(5)){
       this.isDnaRegion = true;
       this.isRegion = false;
       this.isLearningType = false;
@@ -152,11 +152,13 @@ export class EditUserComponent implements OnInit {
       this.createUserForm.removeControl('country');
      }
      else if(this.roleId.includes(13)){
+      this.isDnaRegion = true;
       this.isCountry = true;
       this.isLearningType = false;
       this.isDomain = false;
       this.isRegion = false;
       this.isBussinessUnit = false;
+      this.createUserForm.addControl('region_id', new FormControl(null, [Validators.required]));
       this.createUserForm.addControl('country', new FormControl(null, [Validators.required]));
       this.createUserForm.removeControl('business_unit_id');
       this.createUserForm.removeControl('learning_type');
@@ -295,7 +297,7 @@ export class EditUserComponent implements OnInit {
               this.createUserForm.controls.learning_type.setValue(JSON.parse(this.user_details.learning_type));
             }
           }
-          if(this.user_details.role_id.includes(5) || this.user_details.role_id.includes(13) ){
+          if(this.user_details.role_id.includes(5) ){
             this.isDnaRegion = true;
             this.createUserForm.addControl('region_id', new FormControl(null, [Validators.required]));
             this.createUserForm.controls.region_id.setValue(this.user_details.region_id);
@@ -306,11 +308,14 @@ export class EditUserComponent implements OnInit {
             this.createUserForm.controls.business_unit_id.setValue(this.user_details.business_unit_id);
           }
           if(this.user_details.role_id.includes(13) ){
+            this.isDnaRegion = true;
             this.isCountry = true;
             this.regionId = this.user_details.region_id;
-            this.getCountries();
+            this.getCountries(this.regionId);
+            this.createUserForm.addControl('region_id', new FormControl(null, [Validators.required]));
             this.createUserForm.addControl('country', new FormControl(null, [Validators.required]));
             this.createUserForm.controls.country.setValue(this.user_details.country);
+            this.createUserForm.controls.region_id.setValue(this.user_details.region_id);
           }
           if(this.user_details.role_id.includes(14) ){
             this.isDomain = true;
@@ -402,13 +407,13 @@ export class EditUserComponent implements OnInit {
     );
   }
 
-  getCountries(){
+  getCountries(regionid:any){
    this.commonService.showLoading();
-   this.generalDrpdownsService.getCountries().subscribe(
+   this.generalDrpdownsService.getCountriesByRegion(regionid).subscribe(
      (res: any) => {
        this.commonService.hideLoading();
-       this.regions = res.data;
-       this.countriesObj = this.regions.filter((x:any)=>x.region_id === this.regionId);
+       this.countriesObj = res.data;
+       //this.countriesObj = this.regions.filter((x:any)=>x.region_id === this.regionId);
      },
      (err: any) => {
        this.commonService.hideLoading();
@@ -419,6 +424,16 @@ export class EditUserComponent implements OnInit {
 
   getSelectedRegion(event:any){
     this.regionId = event.id;
+    if (event.region_name == 'Global') {
+      this.isCountry = false;
+      this.createUserForm.removeControl('country');
+    }
+    else {
+      this.isCountry = true;
+      this.createUserForm.addControl('country',new FormControl('', [Validators.required]));
+      this.createUserForm.controls.country.setValue('');
+      this.getCountries(this.regionId);
+    }
     this.countriesObj = this.regions.filter((x:any)=>x.region_id === this.regionId);
   }
  

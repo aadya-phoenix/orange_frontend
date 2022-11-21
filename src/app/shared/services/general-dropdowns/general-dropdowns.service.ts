@@ -79,4 +79,11 @@ export class GeneralDropdownsService {
       .pipe(catchError(this.commmonService.Errorhandling));
   }
 
+  getCountriesByRegion(id:any){
+    const url = this.basePath + 'api/' + this.apiVersion + '/cct-learning-tracker-regions/' + id + '/country';
+    return this.http
+      .get(url, this.http.headers)
+      .pipe(catchError(this.commmonService.Errorhandling));
+  }
+
 }
