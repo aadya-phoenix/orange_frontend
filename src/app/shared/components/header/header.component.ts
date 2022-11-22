@@ -29,11 +29,15 @@ export class HeaderComponent implements OnInit {
   selectedLaungauge: any = dataConstant.Laungauges.EN;
   totalNotification = 0;
   totalMessages = 0;
+  profileDetails: any;
   pendingRequestCount = {
-    carousel_pending: 0,
-    course_pending: 0,
-    session_pending: 0,
-    office_role_pending: 0
+    carousel_notify: 0,
+    course_notify: 0,
+    digital_learning_notify: 0,
+    get_report_notify: 0,
+    office_role_notify:0,
+    session_notify:0,
+    new_learning_notify: 0
   };
   RoleID = dataConstant.RoleID;
   lableConstant: any = { french: {}, english: {} };
@@ -44,6 +48,7 @@ export class HeaderComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router) {
     this.getUserrole = this.authService.getRolefromlocal();
+    this.profileDetails = this.authService.getProfileDetailsfromlocal();
     this.lableConstant = localStorage.getItem('laungauge') === dataConstant.Laungauges.FR ? this.commonService.laungaugesData.french : this.commonService.laungaugesData.english;
     this.isROM = this.getUserrole.includes(this.RoleID.Rom);
     this.isStaff = this.authService.getUserDetailslocal().staff == 1 ? true : false;
@@ -127,10 +132,13 @@ export class HeaderComponent implements OnInit {
       (res: any) => {
         this.commonService.hideLoading();
         this.pendingRequestCount = res.data;
-        this.totalNotification = (this.pendingRequestCount.carousel_pending ? this.pendingRequestCount.carousel_pending : 0) +
-          (this.pendingRequestCount.course_pending ? this.pendingRequestCount.course_pending : 0) +
-          (this.pendingRequestCount.office_role_pending ? this.pendingRequestCount.office_role_pending : 0) +
-          (this.pendingRequestCount.session_pending ? this.pendingRequestCount.session_pending : 0)
+        this.totalNotification = (this.pendingRequestCount.carousel_notify ? this.pendingRequestCount.carousel_notify : 0) +
+          (this.pendingRequestCount.course_notify ? this.pendingRequestCount.course_notify : 0) +
+          (this.pendingRequestCount.digital_learning_notify ? this.pendingRequestCount.digital_learning_notify : 0) +
+          (this.pendingRequestCount.get_report_notify ? this.pendingRequestCount.get_report_notify : 0) +
+          (this.pendingRequestCount.new_learning_notify ? this.pendingRequestCount.new_learning_notify : 0) +
+          (this.pendingRequestCount.office_role_notify ? this.pendingRequestCount.office_role_notify : 0) +
+          (this.pendingRequestCount.session_notify ? this.pendingRequestCount.session_notify : 0)
       },
       (err: any) => {
         this.commonService.errorHandling(err);
@@ -169,6 +177,18 @@ export class HeaderComponent implements OnInit {
     if (module == this.modules.backOffice) {
       const status = this.isRequester ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
       this.router.navigateByUrl(`/back-office?status=${status}`);
+    }
+    if (module == this.modules.design) {
+      const status = (this.getUserrole.includes(this.RoleID.DesignTeam) || this.getUserrole.includes(this.RoleID.HeadOfDesign)) ? dataConstant.BackOfficeStatus.pending : dataConstant.BackOfficeStatus.submitted;
+      this.router.navigateByUrl(`/designlearning?status=${status}`);
+    }
+    if (module == this.modules.getReport) {
+      const status = this.profileDetails.data?.staff == 1 ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
+      this.router.navigateByUrl(`/olreport?status=${status}`);
+    }
+    if (module == this.modules.dna) {
+      const status = this.profileDetails.data?.staff == 1 ? dataConstant.BackOfficeStatus.submitted : dataConstant.BackOfficeStatus.pending
+      this.router.navigateByUrl(`/dna`);
     }
   }
 
