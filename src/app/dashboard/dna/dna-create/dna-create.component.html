@@ -30,31 +30,36 @@
             </div>
         </div>
     </div>
-    <ngb-alert [dismissible]="false"  type="warning" *ngIf="!isManager" class="d-block m-3">
+    <ngb-alert [dismissible]="false" type="warning" *ngIf="!isManager" class="d-block m-3">
         <span>The DNA tool can be only accessible to a manager who has direct reporting of the employee.</span>
         <p class="mb-0">Please contact to administrator of this site for more details.</p>
     </ngb-alert>
     <div class="card bac_grey" *ngIf="isManager">
         <div class="card-header cm-card-header">
             <div class="learing_head">
-               
-                    <div>
+
+                <div>
                     <span class="card_overall color-black fon_12">Click the Add Learning button to Begin</span>
-                    </div>
-                    <div class="learn_head_sub">
-                  
+                </div>
+                <div class="learn_head_sub">
+
                     <div>
-                  
-                    
-                    <button (click)="createNew()" class="btn btn-primary hei_27 ml-1"><span class="fon_12">Add Learning</span></button>
-                    <button (click)="viewReport()" class="btn btn-primary hei_27 ml-1"><span class="fon_12">List of Employee Learning</span></button>
-                   </div>
-                   <div class="form-group mb-0">
-                    <input type="text" [(ngModel)]="searchText" class="form-control form_width_dna" placeholder="search..">
+
+
+                        <button (click)="createNew()" class="btn btn-primary hei_27 ml-1"><span class="fon_12"> <span class="mr-1 add-sign">+</span>
+                           Add
+                                Learning</span></button>
+                        <button (click)="viewReport()" class="btn btn-primary hei_27 ml-1 mr-1"><img src="../../../../assets/images/icon/useregroup.png"
+                            class="img_user_lap mr-1"><span class="fon_12 list-of"> List of
+                                Employee Learning</span></button>
+                    </div>
+                    <div class="form-group mb-0">
+                        <input type="text" [(ngModel)]="searchText" class="form-control form_width_dna"
+                            placeholder="search..">
+                    </div>
+
                 </div>
 
-            </div>
-                
             </div>
         </div>
         <div class="card-body">
@@ -64,28 +69,36 @@
                         <div class="col-sm-3 mb-4" *ngFor="let item of learningListToShow | filter: searchText">
                             <div class="main_box_lear">
                                 <div class="lear_box">
-                             
-                                 
-                                        <p [ngClass]="item.priority_name" ngbTooltip="Priority">{{item.priority_name}}</p>
-                                        <img ngbTooltip="{{item.training_type}}" *ngIf="!item.is_digital" src="../../../../assets/images/icon/calendaro.png" class="calender_css">
-                                        <img ngbTooltip="Learning Type" *ngIf="item.is_digital" src="../../../../assets/images/icon/laptop.png" class="calender_css">
-                                  
-                                    </div>
-                                    <p class="mb-2 fon_12 mt-2 line_hei_one" 
-                                    ngbTooltip="{{item.learning_training_data ? item.learning_training_data.training_description : item.description}}">{{item.title}}</p>
-                                    <div class="lear_box">
-                             
-                                 <div class="d-flex">
-                                      <img src="../../../../assets/images/icon/useregroup.png" ngbTooltip="No of Participants" class="img_user_lap ml-1">
-                                      <span class="parti_css">{{item.number_of_participant}}</span>
+
+
+                                    <p [ngClass]="item.priority_name" ngbTooltip="Priority">{{item.priority_name}}</p>
+                                    <img ngbTooltip="{{item.training_type}}" *ngIf="!item.is_digital"
+                                        src="../../../../assets/images/icon/calendaro.png" class="calender_css">
+                                    <img ngbTooltip="Learning Type" *ngIf="item.is_digital"
+                                        src="../../../../assets/images/icon/laptop.png" class="calender_css">
+
                                 </div>
-                                <div>
-                                    <a (click)="update(item)" ngbTooltip="Update Added Learning"> <i class="fa fa-pencil-square-o mr-1" aria-hidden="true"></i></a>
-                                    <a (click)="delete(item)" ngbTooltip="Delete Added Learning"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                <p class="mb-2 fon_12 mt-2 line_hei_one"
+                                    ngbTooltip="{{item.learning_training_data ? item.learning_training_data.training_description : item.description}}">
+                                    {{item.title}}</p>
+                                <div class="lear_box">
+
+                                    <div class="d-flex">
+                                        <img src="../../../../assets/images/icon/useregroup.png"
+                                            ngbTooltip="No of Participants" class="img_user_lap ml-1">
+                                        <span class="parti_css">{{item.number_of_participant}}</span>
+                                    </div>
+                                    <div>
+                                        <a (click)="update(item)" ngbTooltip="Update Added Learning"> <i
+                                                class="fa fa-pencil-square-o mr-1" aria-hidden="true"></i></a>
+                                        <a (click)="delete(item)" ngbTooltip="Delete Added Learning"><i
+                                                class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
                             </div>
-                                  </div>
-                                  </div><!--lear-->
-                            </div><!--colend-->
+                            <!--lear-->
+                        </div>
+                        <!--colend-->
                         <!-- <div class="col-sm-3" *ngFor="let item of learningListToShow | filter: searchText">
                            <div class="digital_learning">
                             <h4 class="bus_h4 text_orange" ngbTooltip="{{item.learning_training_data ? item.learning_training_data.training_description : item.description}}">{{item.title}}</h4>
@@ -110,7 +123,7 @@
                     </div>
                 </div>
 
-             <!--    <div class="col-sm-3">
+                <!--    <div class="col-sm-3">
                     <div class="main_box_lear">
                         <div class="lear_box">
                      
